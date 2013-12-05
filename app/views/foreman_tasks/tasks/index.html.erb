@@ -1,0 +1,42 @@
+<% title _("Tasks") %>
+<table class="table table-bordered table-striped table-two-pane">
+  <tr>
+    <th><%= _("Uuid") %></th>
+    <th><%= _("Type") %></th>
+    <th><%= _("Label") %></th>
+    <th><%= _("Started at") %></th>
+    <th><%= _("Ended at") %></th>
+    <th><%= _("State") %></th>
+    <th><%= _("Result") %></th>
+    <th><%= _("Progress") %></th>
+    <th><%= _("External_id") %></th>
+    <th><%= _("User id") %></th>
+    <th><%= _("Input") %></th>
+    <th><%= _("Output") %></th>
+    <th><%= _("Humanized name") %></th>
+    <th><%= _("Humanized input") %></th>
+    <th><%= _("Humanized output") %></th>
+    <th><%= _("CLI example") %></th>
+  </tr>
+  <% for task in @tasks %>
+    <tr>
+      <td><%= task.uuid %></td>
+      <td><%= task.type %></td>
+      <td><%= task.label %></td>
+      <td><%= task.started_at %></td>
+      <td><%= task.ended_at %></td>
+      <td><%= task.state %></td>
+      <td><%= task.result %></td>
+      <td><%= task.progress %></td>
+      <td><%= task.external_id %></td>
+      <td><%= "user id" %></td>
+      <td><%= "input" %></td>
+      <td><%= "output" %></td>
+      <td><%= "humanized name" %></td>
+      <td><%= "humanized input" %></td>
+      <td><%= "humanized output" %></td>
+      <td><%= "CLI example" %></td>
+    </tr>
+  <% end %>
+</table>
+

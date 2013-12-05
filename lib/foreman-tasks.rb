@@ -1,0 +1,1 @@
+require 'foreman_tasks'
