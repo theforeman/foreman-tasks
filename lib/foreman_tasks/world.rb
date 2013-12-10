@@ -1,10 +1,20 @@
 module ForemanTasks
   class World < Dynflow::World
-    def trigger(action, *args, &block)
-      dynflow_task = super(action, *args, &block)
-      ::Katello::Lock.owner!(User.current, dynflow_task.id)
-      ::Katello::Task.create!(uuid: dynflow_task.id, action: action.name)
-      return dynflow_task
+    def initialize
+      db_config            = ActiveRecord::Base.configurations[Rails.env]
+      db_config['adapter'] = 'postgres' if db_config['adapter'] == 'postgresql'
+      world_options        = { logger_adapter:      Dynflow::LoggerAdapters::Delegator.new(Rails.logger, Rails.logger),
+                               executor_class:      Dynflow::Executors::Parallel, # TODO configurable Parallel or Remote
+                               pool_size:           5,
+                               persistence_adapter: ForemanTasks::DynflowPersistence.new(db_config),
+                               transaction_adapter: Dynflow::TransactionAdapters::ActiveRecord.new }
+      super(world_options)
+      world = self
+      ActionDispatch::Reloader.to_prepare do
+        ForemanTasks.eager_load!
+        world.reload!
+      end
+      at_exit { world.terminate! }
     end
   end
 end

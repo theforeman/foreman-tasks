@@ -2,6 +2,7 @@ require 'foreman_tasks/version'
 require 'foreman_tasks/engine'
 require 'foreman_tasks/world'
 require 'foreman_tasks/dynflow_persistence'
+require 'foreman_tasks/action_helpers/lock'
 
 module ForemanTasks
 
@@ -10,24 +11,7 @@ module ForemanTasks
   end
 
   def self.dynflow_initialize
-    return if @world
-    db_config            = ActiveRecord::Base.configurations[Rails.env]
-    db_config['adapter'] = 'postgres' if db_config['adapter'] == 'postgresql'
-    world_options        = {
-        logger_adapter:      Dynflow::LoggerAdapters::Delegator.new(Logging.logger['action'],
-                                                                    Logging.logger['dynflow']),
-        executor_class:      Dynflow::Executors::Parallel, # TODO configurable Parallel or Remote
-        pool_size:           5,
-        persistence_adapter: ForemanTasks::DynflowPersistence.new(db_config),
-        transaction_adapter: Dynflow::TransactionAdapters::ActiveRecord.new }
-
-    @world = ForemanTasks::World.new(world_options).tap do |world|
-      ActionDispatch::Reloader.to_prepare do
-        ForemanTasks.eager_load!
-        world.reload!
-      end
-      at_exit { @world.terminate! }
-    end
+    @world ||= ForemanTasks::World.new
   end
 
   def self.world
