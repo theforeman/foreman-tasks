@@ -29,13 +29,13 @@
       <td><%= task.result %></td>
       <td><%= task.progress %></td>
       <td><%= task.external_id %></td>
-      <td><%= "user id" %></td>
-      <td><%= "input" %></td>
-      <td><%= "output" %></td>
-      <td><%= "humanized name" %></td>
-      <td><%= "humanized input" %></td>
-      <td><%= "humanized output" %></td>
-      <td><%= "CLI example" %></td>
+      <td><%= task.username %></td>
+      <td><pre style="white-space: pre; word-break: normal"><%= task.input.pretty_inspect %></pre></td>
+      <td><pre style="white-space: pre; word-break: normal"><%= task.output.pretty_inspect %></pre></td>
+      <td><%= task.humanized[:action] %></td>
+      <td><pre style="white-space: pre; word-break: normal"><%= task.humanized[:input].pretty_inspect %></pre></td>
+      <td><pre style="white-space: pre; word-break: normal"><%= task.humanized[:output].pretty_inspect %></pre></td>
+      <td><pre style="white-space: pre; word-break: normal"><%= task.cli_example %></pre></td>
     </tr>
   <% end %>
 </table>

@@ -4,6 +4,12 @@ Foreman::Application.routes.draw do
   namespace :foreman_tasks do
     resources :tasks, :only => :index
 
+    namespace :api do
+      resources :tasks, :only => [] do
+        post :bulk_search, :on => :collection
+      end
+    end
+
     if ForemanTasks.dynflow_initialized?
       dynflow_console = Dynflow::WebConsole.setup do
         before do
