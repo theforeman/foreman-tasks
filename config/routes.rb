@@ -2,7 +2,7 @@ require 'dynflow/web_console'
 
 Foreman::Application.routes.draw do
   namespace :foreman_tasks do
-    resources :tasks, :only => :index do
+    resources :tasks, :only => [:index, :show] do
       collection do
         get 'auto_complete_search'
       end

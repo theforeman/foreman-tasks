@@ -1,42 +1,48 @@
 <% title _("Tasks") %>
 <% title_actions help_path%>
+
+<style>
+  .task-id {
+    white-space: nowrap;
+  }
+  .param-name {
+    display: inline-block;
+    width: 10em;
+  }
+
+  .task-details pre {
+    white-space: pre;
+    word-break: normal;
+  }
+</style>
+
+<script>
+$(document).on('click', ".table-two-pane td.two-pane-link", function(e) {
+  var item = $(this).find("a");
+  if(item.length){
+    e.preventDefault();
+    two_pane_open(item);
+  }
+});
+
+</script>
 <table class="table table-bordered table-striped table-two-pane">
   <tr>
     <th><%= _("Id") %></th>
-    <th><%= _("Type") %></th>
-    <th><%= _("Label") %></th>
-    <th><%= _("Started at") %></th>
-    <th><%= _("Ended at") %></th>
+    <th><%= _("Action") %></th>
     <th><%= _("State") %></th>
     <th><%= _("Result") %></th>
-    <th><%= _("Progress") %></th>
-    <th><%= _("External_id") %></th>
-    <th><%= _("User id") %></th>
-    <th><%= _("Input") %></th>
-    <th><%= _("Output") %></th>
-    <th><%= _("Humanized name") %></th>
-    <th><%= _("Humanized input") %></th>
-    <th><%= _("Humanized output") %></th>
-    <th><%= _("CLI example") %></th>
+    <th><%= _("Started at") %></th>
+    <th><%= _("User") %></th>
   </tr>
   <% for task in @tasks %>
     <tr>
-      <td><%= task.id %></td>
-      <td><%= task.type %></td>
-      <td><%= task.label %></td>
-      <td><%= task.started_at %></td>
-      <td><%= task.ended_at %></td>
+      <td class="task-id two-pane-link"><%= link_to_if_authorized(h(task.id), hash_for_foreman_tasks_task_path(:id => task)) %></td>
+      <td><%= task.humanized[:action] %> <%= format_task_input(task.humanized[:input]) %></td>
       <td><%= task.state %></td>
       <td><%= task.result %></td>
-      <td><%= task.progress %></td>
-      <td><%= task.external_id %></td>
+      <td><%= task.started_at %></td>
       <td><%= task.username %></td>
-      <td><pre style="white-space: pre; word-break: normal"><%= task.input.pretty_inspect %></pre></td>
-      <td><pre style="white-space: pre; word-break: normal"><%= task.output.pretty_inspect %></pre></td>
-      <td><%= task.humanized[:action] %></td>
-      <td><pre style="white-space: pre; word-break: normal"><%= task.humanized[:input].pretty_inspect %></pre></td>
-      <td><pre style="white-space: pre; word-break: normal"><%= task.humanized[:output].pretty_inspect %></pre></td>
-      <td><pre style="white-space: pre; word-break: normal"><%= task.cli_example %></pre></td>
     </tr>
   <% end %>
 </table>
