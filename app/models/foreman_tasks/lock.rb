@@ -19,7 +19,7 @@ module ForemanTasks
       end
     end
 
-    belongs_to :task, foreign_key: :task_uuid
+    belongs_to :task
 
     belongs_to :resource, polymorphic: true
 
@@ -27,7 +27,7 @@ module ForemanTasks
       joins(:task).where('foreman_tasks_tasks.state != ?', :stopped)
     end
 
-    validates :task_uuid, :name, :resource_id, :resource_type, presence: true
+    validates :task_id, :name, :resource_id, :resource_type, presence: true
 
     validate do
       unless available?
@@ -42,7 +42,7 @@ module ForemanTasks
 
     # returns a scope of the locks coliding with this one
     def coliding_locks
-      coliding_locks_scope = Lock.active.where('foreman_tasks_locks.task_uuid != ?', task_uuid)
+      coliding_locks_scope = Lock.active.where('foreman_tasks_locks.task_id != ?', task_id)
       coliding_locks_scope = coliding_locks_scope.where(name:          name,
                                                         resource_id:  resource_id,
                                                         resource_type: resource_type)
@@ -152,7 +152,7 @@ module ForemanTasks
       end
 
       def build(uuid, resource, lock_name, exclusive)
-        self.new(task_uuid:     uuid,
+        self.new(task_id:       uuid,
                  name:          lock_name,
                  resource_type: resource.class.name,
                  resource_id:   resource.id,

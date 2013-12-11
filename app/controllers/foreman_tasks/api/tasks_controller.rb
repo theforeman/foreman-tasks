@@ -90,7 +90,7 @@ module ForemanTasks
           if search_params[:task_id].blank?
             raise HttpErrors::BadRequest, _("Task search_params requires task_id to be specified")
           end
-          scope.where(uuid: search_params[:task_id])
+          scope.where(id: search_params[:task_id])
         else
           raise HttpErrors::BadRequest, _("Search_Params %s not supported") % search_params[:type]
         end
@@ -115,16 +115,16 @@ module ForemanTasks
       end
 
       def task_hash(task)
-        return @tasks[task.uuid] if @tasks[task.uuid]
+        return @tasks[task.id] if @tasks[task.id]
         task_hash = Rabl.render(task, 'show', :view_path => "#{ForemanTasks::Engine.root}/app/views/foreman_tasks/api/tasks", :format => :hash, :scope => self)
-        @tasks[task.uuid] = task_hash
+        @tasks[task.id] = task_hash
         return task_hash
       end
 
       private
 
       def find_task
-        @task = Task.find_by_uuid(params[:id])
+        @task = Task.find_by_id(params[:id])
       end
     end
   end

@@ -1,7 +1,7 @@
 class CreateForemanTasks < ActiveRecord::Migration
   def change
     create_table :foreman_tasks_tasks, :id => false do |t|
-      t.string :uuid, index: true, null: false
+      t.string :id, primary_key: true
       t.string :type, index: true, null: false
       t.string :label, index: true
       t.datetime :started_at, index: true

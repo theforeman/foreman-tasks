@@ -1,7 +1,8 @@
 <% title _("Tasks") %>
+<% title_actions help_path%>
 <table class="table table-bordered table-striped table-two-pane">
   <tr>
-    <th><%= _("Uuid") %></th>
+    <th><%= _("Id") %></th>
     <th><%= _("Type") %></th>
     <th><%= _("Label") %></th>
     <th><%= _("Started at") %></th>
@@ -20,7 +21,7 @@
   </tr>
   <% for task in @tasks %>
     <tr>
-      <td><%= task.uuid %></td>
+      <td><%= task.id %></td>
       <td><%= task.type %></td>
       <td><%= task.label %></td>
       <td><%= task.started_at %></td>
@@ -39,4 +40,5 @@
     </tr>
   <% end %>
 </table>
-
+<%= page_entries_info @tasks %>
+<%= will_paginate @tasks %>

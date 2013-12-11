@@ -3,11 +3,24 @@ require 'uuidtools'
 module ForemanTasks
   class Task < ActiveRecord::Base
 
-    self.primary_key = :uuid
+    self.primary_key = :id
+    before_create :generate_id
 
-    before_create :generate_uuid
+    has_many :locks
 
-    has_many :locks, foreign_key: :task_uuid
+    # in fact, the task has only one owner but Rails don't let you to
+    # specify has_one relation though has_many relation
+    has_many :owners, :through => :locks, :source => :resource, :source_type => 'User'
+
+    scoped_search :on => :id, :complete_value => false
+    scoped_search :on => :label, :complete_value => true
+    scoped_search :on => :state, :complete_value => true
+    scoped_search :on => :result, :complete_value => true
+    scoped_search :in => :locks,  :on => :resource_type, :complete_value => true, :rename => "resource_type", :ext_method => :search_by_generic_resource
+    scoped_search :in => :locks,  :on => :resource_id, :complete_value => false, :rename => "resource_id", :ext_method => :search_by_generic_resource
+    scoped_search :in => :owners,  :on => :login, :complete_value => true, :rename => "owner.login", :ext_method => :search_by_owner
+    scoped_search :in => :owners,  :on => :firstname, :complete_value => true, :rename => "owner.firstname", :ext_method => :search_by_owner
+
 
     scope :active, -> {  where('state != ?', :stopped) }
 
@@ -19,9 +32,12 @@ module ForemanTasks
       {}
     end
 
+    def owner
+      self.owners.first
+    end
+
     def username
-      # TODO: search in user locks
-      nil
+      self.owner.try(:login)
     end
 
     def humanized
@@ -39,11 +55,31 @@ module ForemanTasks
       self.state != 'stopped'
     end
 
-    protected
+    def self.search_by_generic_resource(key, operator, value)
+      key_name = self.connection.quote_column_name(key.sub(/^.*\./,''))
+      condition = sanitize_sql_for_conditions(["foreman_tasks_locks.#{key_name} #{operator} ?", value])
 
-    def generate_uuid
-      self.uuid ||= UUIDTools::UUID.random_create.to_s
+      return {:conditions => condition, :joins => :locks }
     end
 
+    def self.search_by_owner(key, operator, value)
+      key_name = self.connection.quote_column_name(key.sub(/^.*\./,''))
+      joins = <<-JOINS
+      INNER JOIN foreman_tasks_locks AS foreman_tasks_locks_owner
+                 ON (foreman_tasks_locks_owner.task_id = foreman_tasks_tasks.id AND
+                     foreman_tasks_locks_owner.resource_type = 'User' AND
+                     foreman_tasks_locks_owner.name = '#{Lock::OWNER_LOCK_NAME}')
+      INNER JOIN users
+                 ON (users.id = foreman_tasks_locks_owner.resource_id)
+      JOINS
+      condition = sanitize_sql_for_conditions(["users.#{key_name} #{operator} ?", value])
+      return {:conditions => condition, :joins => joins }
+    end
+
+    protected
+
+    def generate_id
+      self.id ||= UUIDTools::UUID.random_create.to_s
+    end
   end
 end
