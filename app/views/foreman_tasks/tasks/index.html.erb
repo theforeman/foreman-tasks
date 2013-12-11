@@ -32,7 +32,7 @@ $(document).on('click', ".table-two-pane td.two-pane-link", function(e) {
     <th><%= _("Action") %></th>
     <th><%= _("State") %></th>
     <th><%= _("Result") %></th>
-    <th><%= _("Started at") %></th>
+    <th><%= sort :started_at, :as => _("Started at") %></th>
     <th><%= _("User") %></th>
   </tr>
   <% for task in @tasks %>

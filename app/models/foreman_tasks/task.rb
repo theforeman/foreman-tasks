@@ -16,6 +16,7 @@ module ForemanTasks
     scoped_search :on => :label, :complete_value => true
     scoped_search :on => :state, :complete_value => true
     scoped_search :on => :result, :complete_value => true
+    scoped_search :on => :started_at, :complete_value => false
     scoped_search :in => :locks,  :on => :resource_type, :complete_value => true, :rename => "resource_type", :ext_method => :search_by_generic_resource
     scoped_search :in => :locks,  :on => :resource_id, :complete_value => false, :rename => "resource_id", :ext_method => :search_by_generic_resource
     scoped_search :in => :owners,  :on => :login, :complete_value => true, :rename => "owner.login", :ext_method => :search_by_owner

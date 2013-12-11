@@ -7,6 +7,7 @@ module ForemanTasks
     end
 
     def index
+      params[:order] ||= "started_at DESC"
       @tasks = Task.search_for(params[:search], :order => params[:order]).paginate(:page => params[:page])
     end
 
