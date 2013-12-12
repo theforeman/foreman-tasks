@@ -49,7 +49,9 @@ module ForemanTasks
     end
 
     def cli_example
-      main_action.respond_to?(:cli_example) && main_action.cli_example
+      if main_action.respond_to?(:cli_example)
+        main_action.cli_example
+      end
     end
 
     protected

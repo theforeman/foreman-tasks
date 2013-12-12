@@ -43,12 +43,14 @@
           <div class="bar" style="width: <%= 100 * @task.progress %>%;"></div>
         </div>
     </div>
-    <div>
-      <span class="param-name"><%= _("CLI Example") %>:</span>
-      <span class="param-value">
-        <pre><%= @task.cli_example %></pre>
-      </span>
-    </div>
+    <% if @task.cli_example %>
+      <div>
+        <span class="param-name"><%= _("CLI Example") %>:</span>
+        <span class="param-value">
+          <pre><%= @task.cli_example %></pre>
+        </span>
+      </div>
+    <% end %>
     <div>
       <span class="param-name"><%= _("Output") %>:</span>
       <span class="param-value">
