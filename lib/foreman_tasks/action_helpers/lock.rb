@@ -30,7 +30,7 @@ module ForemanTasks
 
         # @see Lock.lock!
         def lock!(resource, *lock_names)
-          ::ForemanTasks::Lock.lock!(resource, task.id, *lock_names)
+          ::ForemanTasks::Lock.lock!(resource, task.id, *lock_names.flatten)
         end
 
         # @see Lock.link!

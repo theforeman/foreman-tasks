@@ -129,7 +129,9 @@ module ForemanTasks
 
       def build_locks(resource, lock_names, uuid = nil)
         locks = []
-        lock_names = all_lock_names(resource) if lock_names.empty?
+        if lock_names.empty? || lock_names == [:all]
+          lock_names = all_lock_names(resource)
+        end
         lock_names.map do |lock_name|
           locks << build(uuid, resource, lock_name, true)
         end
