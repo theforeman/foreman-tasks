@@ -28,6 +28,11 @@ module ForemanTasks
     world.trigger action, *args, &block
   end
 
+  def self.async_task(action, *args, &block)
+    run = trigger(action, *args, &block)
+    ForemanTasks::Task::DynflowTask.find_by_external_id(run.id)
+  end
+
   def self.eager_load_paths
     @eager_load_paths ||= []
   end
