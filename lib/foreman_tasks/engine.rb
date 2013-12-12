@@ -11,9 +11,6 @@ module ForemanTasks
       end
     end
 
-    initializer "foreman_tasks.dynflow_initialize" do |app|
-      ForemanTasks.dynflow_initialize
-    end
 
     initializer "foreman_tasks.register_paths" do |app|
       ForemanTasks.eager_load_paths.concat(%W[#{ForemanTasks::Engine.root}/app/lib/actions])
@@ -21,6 +18,18 @@ module ForemanTasks
 
     initializer "foreman_tasks.load_app_instance_data" do |app|
       app.config.paths['db/migrate'] += ForemanTasks::Engine.paths['db/migrate'].existent
+    end
+
+    # to enable async Foreman operations using Dynflow
+    if ENV['FOREMAN_TASKS_MONKEYS'] == 'true'
+      initializer "foreman_tasks.dynflow_initialize" do |app|
+        ForemanTasks.dynflow_initialize
+      end
+
+      config.to_prepare do
+        ::Api::V2::HostsController.send :include, ForemanTasks::Concerns::HostsControllerExtension
+        ::Host::Base.send :include, ForemanTasks::Concerns::HostActionSubject
+      end
     end
   end
 
