@@ -16,6 +16,9 @@ module ForemanTasks
 
       before_filter :find_task, :only => [:show]
 
+      def show
+      end
+
       api :POST, "/tasks/bulk_search", "List dynflow tasks for uuids"
       param :searches, Array, :desc => 'List of uuids to fetch info about' do
         param :search_id, String, :desc => <<-DESC

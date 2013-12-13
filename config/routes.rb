@@ -9,7 +9,7 @@ Foreman::Application.routes.draw do
     end
 
     namespace :api do
-      resources :tasks, :only => [] do
+      resources :tasks, :only => [:show] do
         post :bulk_search, :on => :collection
       end
     end
