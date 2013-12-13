@@ -48,7 +48,7 @@ module Actions
           when String, Numeric, true, false, nil
             object
           else
-            raise "Don't know how to convert #{object.inspect} into serialized value"
+            object.to_s
           end
         end
 
