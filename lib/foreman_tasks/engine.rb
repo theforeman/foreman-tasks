@@ -29,6 +29,7 @@ module ForemanTasks
       config.to_prepare do
         ::Api::V2::HostsController.send :include, ForemanTasks::Concerns::HostsControllerExtension
         ::Host::Base.send :include, ForemanTasks::Concerns::HostActionSubject
+        ::Architecture.send :include, ForemanTasks::Concerns::ArchitectureActionSubject
       end
     end
   end
