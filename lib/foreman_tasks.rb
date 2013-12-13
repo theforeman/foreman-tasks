@@ -2,7 +2,6 @@ require 'foreman_tasks/version'
 require 'foreman_tasks/engine'
 require 'foreman_tasks/world'
 require 'foreman_tasks/dynflow_persistence'
-require 'foreman_tasks/action_helpers/lock'
 
 module ForemanTasks
 

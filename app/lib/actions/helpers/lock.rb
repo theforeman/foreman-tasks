@@ -1,5 +1,5 @@
-module ForemanTasks
-  module ActionHelpers
+module Actions
+  module Helpers
     module Lock
       def self.included(base)
         base.extend(ClassMethods)
