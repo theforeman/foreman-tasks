@@ -3,6 +3,7 @@ module ForemanTasks
     def initialize
       db_config            = ActiveRecord::Base.configurations[Rails.env]
       db_config['adapter'] = 'postgres' if db_config['adapter'] == 'postgresql'
+      db_config['adapter'] = 'sqlite'   if db_config['adapter'] == 'sqlite3'
       world_options        = { logger_adapter:      Dynflow::LoggerAdapters::Delegator.new(Rails.logger, Rails.logger),
                                executor_class:      Dynflow::Executors::Parallel, # TODO configurable Parallel or Remote
                                pool_size:           5,
