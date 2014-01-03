@@ -1,6 +1,6 @@
 require 'foreman_tasks/version'
 require 'foreman_tasks/engine'
-require 'foreman_tasks/world'
+require 'foreman_tasks/dynflow_configuration'
 require 'foreman_tasks/dynflow_persistence'
 
 module ForemanTasks
@@ -10,7 +10,27 @@ module ForemanTasks
   end
 
   def self.dynflow_initialize
-    @world ||= ForemanTasks::World.new
+    return @world if @world
+    dynflow_configuration.initialize_world.tap do |world|
+      @world = world
+
+      ActionDispatch::Reloader.to_prepare do
+        ForemanTasks.eager_load!
+        world.reload!
+      end
+
+      at_exit { world.terminate.wait }
+
+      # for now, we can check the consistency only when there
+      # is no remote executor. We should be able to check the consistency
+      # every time the new world is created when there is a register
+      # of executors
+      world.consistency_check unless dynflow_configuration.remote?
+    end
+  end
+
+  def self.dynflow_configuration
+    @configuration ||= ForemanTasks::DynflowConfiguration.new
   end
 
   def self.world
