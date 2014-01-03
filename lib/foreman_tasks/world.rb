@@ -15,7 +15,7 @@ module ForemanTasks
         ForemanTasks.eager_load!
         world.reload!
       end
-      at_exit { world.terminate! }
+      at_exit { world.terminate.wait }
     end
   end
 end
