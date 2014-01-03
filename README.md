@@ -77,7 +77,7 @@ it would be:
 
 ```ruby
 initializer "your_engine.dynflow_initialize" do |app|
-  ForemanTasks.dynflow_initialize
+  ForemanTasks.dynflow.require!
 end
 ```
 

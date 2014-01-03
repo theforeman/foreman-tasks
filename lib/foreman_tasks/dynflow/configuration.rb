@@ -1,5 +1,5 @@
 module ForemanTasks
-  class DynflowConfiguration
+  class Dynflow::Configuration
 
     # for logging action related info (such as exceptions raised in side
     # the actions' methods
@@ -27,6 +27,8 @@ module ForemanTasks
     # based adapter, expecting ActiveRecord is used as ORM in the application
     attr_accessor :transaction_adapter
 
+    attr_accessor :eager_load_paths
+
     def initialize
       self.action_logger       = Rails.logger
       self.dynflow_logger      = Rails.logger
@@ -34,10 +36,11 @@ module ForemanTasks
       self.remote              = false
       self.remote_socket_path  = File.join(Rails.root, "tmp", "dynflow_socket")
       self.persistence_adapter = default_persistence_adapter
-      self.transaction_adapter = Dynflow::TransactionAdapters::ActiveRecord.new
+      self.transaction_adapter = ::Dynflow::TransactionAdapters::ActiveRecord.new
+      self.eager_load_paths    = []
     end
 
-    def initialize_world(world_class = Dynflow::World)
+    def initialize_world(world_class = ::Dynflow::World)
       world_class.new(world_options) do |world|
         { executor: self.initialize_executor(world) }
       end
@@ -47,8 +50,8 @@ module ForemanTasks
 
     # generates the options hash consumable by the Dynflow's world
     def world_options
-      { logger_adapter:      Dynflow::LoggerAdapters::Delegator.new(action_logger, dynflow_logger),
-        executor_class:      Dynflow::Executors::Parallel, # TODO configurable Parallel or Remote
+      { logger_adapter:      ::Dynflow::LoggerAdapters::Delegator.new(action_logger, dynflow_logger),
+        executor_class:      ::Dynflow::Executors::Parallel, # TODO configurable Parallel or Remote
         pool_size:           5,
         persistence_adapter: persistence_adapter,
         transaction_adapter: transaction_adapter }
@@ -56,7 +59,7 @@ module ForemanTasks
 
 
     def default_persistence_adapter
-      ForemanTasks::DynflowPersistence.new(default_sequel_adatper_options)
+      ForemanTasks::Dynflow::Persistence.new(default_sequel_adatper_options)
     end
 
     def default_sequel_adatper_options
@@ -68,9 +71,9 @@ module ForemanTasks
 
     def initialize_executor(world)
       if self.remote?
-        Dynflow::Executors::RemoteViaSocket.new(world, self.remote_socket_path)
+        ::Dynflow::Executors::RemoteViaSocket.new(world, self.remote_socket_path)
       else
-        Dynflow::Executors::Parallel.new(world, self.pool_size)
+        ::Dynflow::Executors::Parallel.new(world, self.pool_size)
       end
     end
 
