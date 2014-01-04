@@ -51,7 +51,6 @@ module ForemanTasks
     # generates the options hash consumable by the Dynflow's world
     def world_options
       { logger_adapter:      ::Dynflow::LoggerAdapters::Delegator.new(action_logger, dynflow_logger),
-        executor_class:      ::Dynflow::Executors::Parallel, # TODO configurable Parallel or Remote
         pool_size:           5,
         persistence_adapter: persistence_adapter,
         transaction_adapter: transaction_adapter }
