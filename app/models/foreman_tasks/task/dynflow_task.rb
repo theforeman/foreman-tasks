@@ -25,7 +25,7 @@ module ForemanTasks
     end
 
     def execution_plan
-      @execution_plan ||= ForemanTasks.world.persistence.load_execution_plan(external_id)
+      @execution_plan ||= ForemanTasks.dynflow.world.persistence.load_execution_plan(external_id)
     end
 
     def main_action

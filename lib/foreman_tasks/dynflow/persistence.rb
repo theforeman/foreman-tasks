@@ -4,7 +4,7 @@ module ForemanTasks
   # in the Task model. This is probably a temporary solution and
   # Dynflow will probably get more events-based API but it should be enought
   # for start, until the requiements on the API are clear enough.
-  class DynflowPersistence < Dynflow::PersistenceAdapters::Sequel
+  class Dynflow::Persistence < ::Dynflow::PersistenceAdapters::Sequel
 
     def save_execution_plan(execution_plan_id, value)
       super.tap do
