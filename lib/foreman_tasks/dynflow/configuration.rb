@@ -11,7 +11,7 @@ module ForemanTasks
     # the number of threads in the pool handling the execution
     attr_accessor :pool_size
 
-    # set true if the executor runs externally
+    # set true if the executor runs externally (by default true in procution, othewise false)
     attr_accessor :remote
     alias_method :remote?, :remote
 
@@ -33,7 +33,7 @@ module ForemanTasks
       self.action_logger       = Rails.logger
       self.dynflow_logger      = Rails.logger
       self.pool_size           = 5
-      self.remote              = false
+      self.remote              = Rails.env.production?
       self.remote_socket_path  = File.join(Rails.root, "tmp", "dynflow_socket")
       self.persistence_adapter = default_persistence_adapter
       self.transaction_adapter = ::Dynflow::TransactionAdapters::ActiveRecord.new
@@ -44,6 +44,12 @@ module ForemanTasks
       world_class.new(world_options) do |world|
         { executor: self.initialize_executor(world) }
       end
+    end
+
+    # No matter what config.remote says, when the process is marked as executor,
+    # it can't be remote
+    def remote?
+      !ForemanTasks.dynflow.executor? && @remote
     end
 
     protected
