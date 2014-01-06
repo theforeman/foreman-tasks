@@ -33,9 +33,10 @@ module ForemanTasks
       end
     end
 
-    config.after_initialize do
+    initializer "foreman_tasks.initialize_dynflow", :after=> :finisher_hook do
       ForemanTasks.dynflow.initialize!
     end
+
   end
 
   def self.table_name_prefix
