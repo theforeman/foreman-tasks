@@ -19,6 +19,11 @@ module Actions
             state          = host.importFacts(input[:facts])
             output[:state] = state
           end
+        rescue ::Foreman::Exception => e
+          # This error is what is thrown by Host#ImportHostAndFacts when
+          # the Host is in the build state. This can be refactored once
+          # issue #3959 is fixed.
+          raise e unless e.code == 'ERF51-9911'
         end
 
         def humanized_name
