@@ -14,6 +14,12 @@ module ForemanTasks
   module Api
     class TasksController < ::Api::V2::BaseController
 
+      # Foreman right now doesn't have mechanism to
+      # cause general BadRequest handling, resuing the Apipie::ParamError
+      # for now http://projects.theforeman.org/issues/3957
+      class BadRequest < Apipie::ParamError
+      end
+
       before_filter :find_task, :only => [:show]
 
       def show
@@ -76,7 +82,7 @@ module ForemanTasks
           scope
         when 'user'
           if search_params[:user_id].blank?
-            raise HttpErrors::BadRequest, _("User search_params requires user_id to be specified")
+            raise BadRequest, _("User search_params requires user_id to be specified")
           end
           scope.joins(:locks).where(foreman_tasks_locks:
                                     { name: ::ForemanTasks::Lock::OWNER_LOCK_NAME,
@@ -84,18 +90,18 @@ module ForemanTasks
                                       resource_id:   search_params[:user_id] })
         when 'resource'
           if search_params[:resource_type].blank? || search_params[:resource_id].blank?
-            raise HttpErrors::BadRequest, _("Resource search_params requires resource_type and resource_id to be specified")
+            raise BadRequest, _("Resource search_params requires resource_type and resource_id to be specified")
           end
           scope.joins(:locks).where(foreman_tasks_locks:
                                     { resource_type: search_params[:resource_type],
                                       resource_id:   search_params[:resource_id] })
         when 'task'
           if search_params[:task_id].blank?
-            raise HttpErrors::BadRequest, _("Task search_params requires task_id to be specified")
+            raise BadRequest, _("Task search_params requires task_id to be specified")
           end
           scope.where(id: search_params[:task_id])
         else
-          raise HttpErrors::BadRequest, _("Search_Params %s not supported") % search_params[:type]
+          raise BadRequest, _("Search_Params %s not supported") % search_params[:type]
         end
       end
 
