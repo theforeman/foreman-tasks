@@ -24,10 +24,11 @@ module ForemanTasks
       if data[:state] == :pending
         task = ::ForemanTasks::Task::DynflowTask.new
         task.update_from_dynflow(data, false)
-        Lock.owner!(::User.current, task.id)
+        Lock.owner!(::User.current, task.id) if ::User.current
       elsif data[:state] != :planning
-        task = ::ForemanTasks::Task::DynflowTask.find_by_external_id(execution_plan_id)
-        task.update_from_dynflow(data, true)
+        if task = ::ForemanTasks::Task::DynflowTask.find_by_external_id(execution_plan_id)
+          task.update_from_dynflow(data, true)
+        end
       end
     end
 
