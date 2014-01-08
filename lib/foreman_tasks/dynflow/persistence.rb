@@ -11,9 +11,9 @@ module ForemanTasks
         begin
           on_execution_plan_save(execution_plan_id, value)
         rescue => e
-          ForemanTasks.world.logger.error('Error on on_execution_plan_save event')
-          ForemanTasks.world.logger.error(e.message)
-          ForemanTasks.world.logger.error(e.backtrace.join("\n"))
+          ForemanTasks.dynflow.world.logger.error('Error on on_execution_plan_save event')
+          ForemanTasks.dynflow.world.logger.error(e.message)
+          ForemanTasks.dynflow.world.logger.error(e.backtrace.join("\n"))
         end
       end
     end
@@ -24,10 +24,11 @@ module ForemanTasks
       if data[:state] == :pending
         task = ::ForemanTasks::Task::DynflowTask.new
         task.update_from_dynflow(data, false)
-        Lock.owner!(::User.current, task.id)
+        Lock.owner!(::User.current, task.id) if ::User.current
       elsif data[:state] != :planning
-        task = ::ForemanTasks::Task::DynflowTask.find_by_external_id(execution_plan_id)
-        task.update_from_dynflow(data, true)
+        if task = ::ForemanTasks::Task::DynflowTask.find_by_external_id(execution_plan_id)
+          task.update_from_dynflow(data, true)
+        end
       end
     end
 
