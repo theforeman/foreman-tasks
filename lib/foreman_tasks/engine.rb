@@ -3,11 +3,13 @@ module ForemanTasks
     engine_name "foreman_tasks"
 
     initializer 'foreman_tasks.register_plugin', :after=> :finisher_hook do |app|
-      Foreman::Plugin.register :tasks do
-        menu :admin_menu, :tasks,
-            :url_hash => {:controller => 'foreman_tasks/tasks', :action => :index},
-            :caption => _('Tasks'),
-            :parent => :administer_menu
+      Foreman::Plugin.register :"foreman-tasks" do
+        requires_foreman '> 1.3'
+        divider :top_menu, :parent => :monitor_menu, :after => :audits
+        menu :top_menu, :tasks,
+          :url_hash => {:controller => 'foreman_tasks/tasks', :action => :index},
+          :caption  => N_('Tasks'),
+          :parent   => :monitor_menu
       end
     end
 
