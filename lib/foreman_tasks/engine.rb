@@ -39,6 +39,9 @@ module ForemanTasks
       ForemanTasks.dynflow.initialize!
     end
 
+    rake_tasks do
+      load File.expand_path('../tasks/dynflow.rake', __FILE__)
+    end
   end
 
   def self.table_name_prefix

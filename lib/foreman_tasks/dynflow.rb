@@ -3,12 +3,14 @@ module ForemanTasks
   class Dynflow
     require 'foreman_tasks/dynflow/configuration'
     require 'foreman_tasks/dynflow/persistence'
-
-    attr_reader :config
+    require 'foreman_tasks/dynflow/daemon'
 
     def initialize
-      @config = ForemanTasks::Dynflow::Configuration.new
       @required = false
+    end
+
+    def config
+      @config ||= ForemanTasks::Dynflow::Configuration.new
     end
 
     # call this method if your engine uses Dynflow
@@ -31,14 +33,31 @@ module ForemanTasks
           world.reload!
         end
 
-        at_exit { world.terminate.wait }
+        unless config.remote?
+          at_exit { world.terminate.wait }
 
-        # for now, we can check the consistency only when there
-        # is no remote executor. We should be able to check the consistency
-        # every time the new world is created when there is a register
-        # of executors
-        world.consistency_check unless config.remote?
+          # for now, we can check the consistency only when there
+          # is no remote executor. We should be able to check the consistency
+          # every time the new world is created when there is a register
+          # of executors
+          world.consistency_check
+        end
       end
+    end
+
+    # Mark that the process is executor. This prevents the remote setting from
+    # applying. Needs to be set up before the world is being initialized
+    def executor!
+      @executor = true
+    end
+
+    def executor?
+      @executor
+    end
+
+    def reinitialize!
+      @world = nil
+      self.initialize!
     end
 
     def world

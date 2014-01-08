@@ -101,6 +101,21 @@ show the task.
 
 The Dynflow console is accessible on `/foreman_tasks/dynflow` path.
 
+## Production mode
+
+In development mode, the Dynflow executor is part of the web server
+process. However, in production, it's more than suitable to have the
+web server process separated from the async executor. Therefore,
+Dynflow is set to use external process in production mode by default
+(can be changed with `ForemanTasks.dynflow.config.remote = false`).
+
+The executor process needs to be executed before the web server. You
+can run it by:
+
+```ruby
+RAILS_ENV=production bundle exec rake foreman_tasks:dynflow:executor
+```
+
 Documentation
 -------------
 
