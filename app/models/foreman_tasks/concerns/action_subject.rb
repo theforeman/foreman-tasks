@@ -4,6 +4,13 @@ module ForemanTasks
 
       extend ActiveSupport::Concern
 
+      included do
+        after_create :plan_create_action
+        after_update :plan_update_action
+        after_destroy :plan_destroy_action
+        after_commit :execute_planned_action
+      end
+
       module ClassMethods
         def available_locks
           [:read, :write]
@@ -45,6 +52,51 @@ module ForemanTasks
         return result
       end
 
+      def create_action
+      end
+
+      def update_action
+      end
+
+      def destroy_action
+      end
+
+      def plan_create_action
+        plan_action(create_action, self) if create_action
+        return true
+      end
+
+      def plan_update_action
+        plan_action(update_action, self) if update_action
+        return true
+      end
+
+      def plan_destroy_action
+        plan_action(destroy_action, self) if destroy_action
+        return true
+      end
+
+      # Perform planning phase of the action tied with the model event.
+      # We do it separately from the execution phase, because the transaction
+      # of planning phase is expected to be commited when execution occurs. Also
+      # we want to be able to rollback the whole db operation when planning fails.
+      def plan_action(action_class, *args)
+        @execution_plan = ::ForemanTasks.dynflow.world.plan(action_class, *args)
+        planned         = @execution_plan.state == :planned
+        unless planned
+          errors = @execution_plan.steps.values.map(&:error).compact
+          # we raise error so that the whole transaction is rollbacked
+          raise errors.map(&:message).join('; ')
+        end
+      end
+
+      # Execute the prepared execution plan after the db transaction was commited
+      def execute_planned_action
+        if @execution_plan
+          ::ForemanTasks.dynflow.world.execute(@execution_plan.id)
+        end
+        return true
+      end
     end
   end
 end
