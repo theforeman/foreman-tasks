@@ -1,6 +1,7 @@
 module ForemanTasks
   module Concerns
     module ArchitectureActionSubject
+      extend ActiveSupport::Concern
       include ForemanTasks::Concerns::ActionSubject
 
       def create_action
