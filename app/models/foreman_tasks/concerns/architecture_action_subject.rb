@@ -1,27 +1,19 @@
 module ForemanTasks
   module Concerns
     module ArchitectureActionSubject
-      extend ActiveSupport::Concern
       include ForemanTasks::Concerns::ActionSubject
 
-      included do
-        after_create :trigger_create_action
-        after_update :trigger_update_action
-        after_destroy :trigger_destroy_action
+      def create_action
+        ::Actions::Foreman::Architecture::Create
       end
 
-      def trigger_create_action
-        ForemanTasks.trigger(::Actions::Foreman::Architecture::Create, self)
+      def update_action
+        ::Actions::Foreman::Architecture::Update
       end
 
-      def trigger_update_action
-        ForemanTasks.trigger(::Actions::Foreman::Architecture::Update, self)
+      def destroy_action
+        ::Actions::Foreman::Architecture::Destroy
       end
-
-      def trigger_destroy_action
-        ForemanTasks.trigger(::Actions::Foreman::Architecture::Destroy, self)
-      end
-
     end
   end
 end
