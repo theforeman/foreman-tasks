@@ -13,6 +13,10 @@ module ForemanTasks
       end
     end
 
+    initializer 'foreman_tasks.ignore_dynflow_tables' do |app|
+      # Ignore Dynflow tables when schema-dumping. Dynflow tables are handled automatically by Dynflow.
+      ActiveRecord::SchemaDumper.ignore_tables << /^dynflow_.*$/
+    end
 
     initializer "foreman_tasks.register_paths" do |app|
       ForemanTasks.dynflow.config.eager_load_paths.concat(%W[#{ForemanTasks::Engine.root}/app/lib/actions])
