@@ -2,17 +2,21 @@ module ForemanTasks
   class Engine < ::Rails::Engine
     engine_name "foreman_tasks"
 
-    initializer 'foreman_tasks.register_plugin', :after=> :finisher_hook do |app|
+    initializer 'foreman_tasks.register_plugin', :after => :finisher_hook do |app|
       Foreman::Plugin.register :"foreman-tasks" do
         requires_foreman '> 1.3'
         divider :top_menu, :parent => :monitor_menu, :after => :audits
         menu :top_menu, :tasks,
-          :url_hash => {:controller => 'foreman_tasks/tasks', :action => :index},
-          :caption  => N_('Tasks'),
-          :parent   => :monitor_menu
+             :url_hash => { :controller => 'foreman_tasks/tasks', :action => :index },
+             :caption  => N_('Tasks'),
+             :parent   => :monitor_menu
       end
     end
 
+    initializer 'foreman_tasks.ignore_dynflow_tables' do |app|
+      # Ignore Dynflow tables when schema-dumping. Dynflow tables are handled automatically by Dynflow.
+      ActiveRecord::SchemaDumper.ignore_tables << /^dynflow_.*$/
+    end
 
     initializer "foreman_tasks.register_paths" do |app|
       ForemanTasks.dynflow.config.eager_load_paths.concat(%W[#{ForemanTasks::Engine.root}/app/lib/actions])
@@ -35,8 +39,8 @@ module ForemanTasks
       end
     end
 
-    initializer "foreman_tasks.initialize_dynflow", :after=> :finisher_hook do
-      ForemanTasks.dynflow.initialize!
+    initializer "foreman_tasks.initialize_dynflow", :after => :finisher_hook do
+      ForemanTasks.dynflow.initialize! unless ForemanTasks.dynflow.config.lazy_initialization
     end
 
     rake_tasks do
