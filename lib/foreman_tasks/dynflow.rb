@@ -61,13 +61,16 @@ module ForemanTasks
     end
 
     def world
-      if @world
-        return @world
-      else
-        raise "The Dynflow world was not initialized yet. "\
-            "If your plugin uses it, make sure to call ForemanTasks.dynflow.require! "\
-            "in some initializer"
+      return @world if @world
+
+      initialize! if config.lazy_initialization
+      unless @world
+        raise 'The Dynflow world was not initialized yet. '\
+              'If your plugin uses it, make sure to call ForemanTasks.dynflow.require! '\
+              'in some initializer'
       end
+
+      return @world
     end
 
     def web_console
@@ -78,7 +81,7 @@ module ForemanTasks
         end
 
         set(:world) { ForemanTasks.dynflow.world }
-       end
+      end
     end
 
     def eager_load_actions!

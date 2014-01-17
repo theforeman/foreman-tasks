@@ -29,6 +29,8 @@ module ForemanTasks
 
     attr_accessor :eager_load_paths
 
+    attr_accessor :lazy_initialization
+
     def initialize
       self.action_logger       = Rails.logger
       self.dynflow_logger      = Rails.logger
@@ -38,6 +40,7 @@ module ForemanTasks
       self.persistence_adapter = default_persistence_adapter
       self.transaction_adapter = ::Dynflow::TransactionAdapters::ActiveRecord.new
       self.eager_load_paths    = []
+      self.lazy_initialization = !Rails.env.production?
     end
 
     def initialize_world(world_class = ::Dynflow::World)
@@ -70,7 +73,7 @@ module ForemanTasks
     def default_sequel_adatper_options
       db_config            = ActiveRecord::Base.configurations[Rails.env].dup
       db_config['adapter'] = 'postgres' if db_config['adapter'] == 'postgresql'
-      db_config['adapter'] = 'sqlite'   if db_config['adapter'] == 'sqlite3'
+      db_config['adapter'] = 'sqlite' if db_config['adapter'] == 'sqlite3'
       return db_config
     end
 
