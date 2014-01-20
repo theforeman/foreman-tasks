@@ -110,9 +110,13 @@ Dynflow is set to use external process in production mode by default
 The executor process needs to be executed before the web server. You
 can run it by:
 
-```ruby
+```
 RAILS_ENV=production bundle exec rake foreman_tasks:dynflow:executor
 ```
+
+Also, there is a possibility to run the executor in daemonized mode
+using the `dynflow-executor`. It expects to be executed from Foreman
+rails root directory. See `-h` for more details and options
 
 Documentation
 -------------
