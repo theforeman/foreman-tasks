@@ -24,4 +24,7 @@ DESC
 
   s.add_dependency "rails", "~> 3.2.15"
   s.add_dependency "uuidtools"
+  s.add_dependency "dynflow"
+  s.add_dependency "sequel" # for Dynflow process persistence
+  s.add_dependency "sinatra" # for Dynflow web console
 end

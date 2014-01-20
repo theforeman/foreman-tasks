@@ -1,3 +1,5 @@
+require 'dynflow'
+
 module ForemanTasks
   # Class for configuring and preparing the Dynflow runtime environment.
   class Dynflow
