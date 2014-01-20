@@ -19,10 +19,10 @@ to resources. The locking allows dealing with preventing multiple colliding task
 same resource. It also optionally provides Dynflow infrastructure for using it for managing the tasks.
 DESC
 
-  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,bin,config,db,lib}/**/*", "MIT-LICENSE", "README.md"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", "~> 3.2.15"
+  s.add_dependency "rails", "~> 3.2.0"
   s.add_dependency "uuidtools"
   s.add_dependency "dynflow"
   s.add_dependency "sequel" # for Dynflow process persistence
