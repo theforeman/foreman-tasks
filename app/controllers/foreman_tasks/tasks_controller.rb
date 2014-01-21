@@ -11,8 +11,7 @@ module ForemanTasks
       @tasks = Task.search_for(params[:search], :order => params[:order]).paginate(:page => params[:page])
     end
 
-    protected
-
+    # we need do this to make the Foreman helpers working properly
     def controller_name
       "foreman_tasks_tasks"
     end
