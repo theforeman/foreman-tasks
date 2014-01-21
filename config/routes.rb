@@ -12,7 +12,7 @@ Foreman::Application.routes.draw do
       end
     end
 
-    if ForemanTasks.dynflow.initialized?
+    if ForemanTasks.dynflow.required?
       require 'dynflow/web_console'
       mount ForemanTasks.dynflow.web_console => "/dynflow"
     end

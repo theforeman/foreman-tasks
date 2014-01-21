@@ -20,6 +20,10 @@ module ForemanTasks
       @required = true
     end
 
+    def required?
+      @required
+    end
+
     def initialized?
       !@world.nil?
     end
