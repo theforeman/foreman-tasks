@@ -36,7 +36,7 @@ module ForemanTasks
       self.dynflow_logger      = Rails.logger
       self.pool_size           = 5
       self.remote              = Rails.env.production?
-      self.remote_socket_path  = File.join(Rails.root, "tmp", "dynflow_socket")
+      self.remote_socket_path  = File.join(Rails.root, "tmp", "sockets", "dynflow_socket")
       self.persistence_adapter = default_persistence_adapter
       self.transaction_adapter = ::Dynflow::TransactionAdapters::ActiveRecord.new
       self.eager_load_paths    = []

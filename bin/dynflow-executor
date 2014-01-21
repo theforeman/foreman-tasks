@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+
+options = { foreman_root: Dir.pwd }
+
+opts = OptionParser.new do |opts|
+  opts.banner = <<BANNER
+Run Dynflow executor for Foreman tasks.
+
+Usage: #{File.basename($0)} [options] ACTION"
+
+ACTION can be one of:
+
+  * start   - start the executor on background. It creates these files
+              in tmp/pid directory:
+
+                * dynflow_executor_monitor.pid - pid of monitor ensuring
+                                                 the executor keeps running
+                * dynflow_executor.pid         - pid of the executor itself
+                * dynflow_executor.output      - stdout of the executor
+  * stop    - stops the running executor
+  * restart - restarts the running executor
+  * run     - run the executor in foreground
+
+BANNER
+
+  opts.on('-h', '--help', 'Show this message') do
+    puts opts
+    exit 1
+  end
+  opts.on('-f', '--foreman-root=PATH', "Path to Foreman Rails root path. By default '#{options[:foreman_root]}'") do |path|
+    options[:foreman_root] = path
+  end
+end
+
+args = opts.parse!(ARGV)
+command = args.first || 'run'
+
+app_file = File.expand_path('./config/application', options[:foreman_root])
+require app_file
+
+ForemanTasks::Dynflow::Daemon.new.run_background(command, options)

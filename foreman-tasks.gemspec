@@ -27,4 +27,5 @@ DESC
   s.add_dependency "dynflow"
   s.add_dependency "sequel" # for Dynflow process persistence
   s.add_dependency "sinatra" # for Dynflow web console
+  s.add_dependency "daemons" # for running remote executor
 end
