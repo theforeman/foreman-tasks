@@ -44,9 +44,7 @@ module ForemanTasks
     end
 
     def initialize_world(world_class = ::Dynflow::World)
-      world_class.new(world_options) do |world|
-        { executor: self.initialize_executor(world) }
-      end
+      world_class.new(world_options)
     end
 
     # No matter what config.remote says, when the process is marked as executor,
@@ -62,15 +60,15 @@ module ForemanTasks
       { logger_adapter:      ::Dynflow::LoggerAdapters::Delegator.new(action_logger, dynflow_logger),
         pool_size:           5,
         persistence_adapter: persistence_adapter,
-        transaction_adapter: transaction_adapter }
+        transaction_adapter: transaction_adapter,
+        executor:            -> world { initialize_executor world } }
     end
-
 
     def default_persistence_adapter
-      ForemanTasks::Dynflow::Persistence.new(default_sequel_adatper_options)
+      ForemanTasks::Dynflow::Persistence.new(default_sequel_adapter_options)
     end
 
-    def default_sequel_adatper_options
+    def default_sequel_adapter_options
       db_config            = ActiveRecord::Base.configurations[Rails.env].dup
       db_config['adapter'] = 'postgres' if db_config['adapter'] == 'postgresql'
       db_config['adapter'] = 'sqlite' if db_config['adapter'] == 'sqlite3'
@@ -84,6 +82,5 @@ module ForemanTasks
         ::Dynflow::Executors::Parallel.new(world, self.pool_size)
       end
     end
-
   end
 end
