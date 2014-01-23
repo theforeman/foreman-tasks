@@ -35,13 +35,13 @@ function tag() {
     fi
 
     # bump the version in gemspec
-    sed -i "s|\(version = \)\"[0-9.]*\"$|\1\"$NEW_VERSION\"|" *.gemspec 
+    sed -i "s|\(VERSION = \)\"[0-9.]*\"$|\1\"$NEW_VERSION\"|" lib/foreman_tasks/version.rb
     # bump the version in RPM spec
     sed -i "s|^\(Version: \)[0-9.]*$|\1$NEW_VERSION|" *.spec 
     # reset the release number; tito tag --keep-version doesn't do it for us
     sed -i "s|^\(Release: \)[0-9.]*|\11|" *.spec 
 
-    git add *.gemspec *.spec
+    git add lib/foreman_tasks/version.rb *.spec
 
     # use the version we just specified in the RPM spec
     tito tag --keep-version
