@@ -8,7 +8,7 @@
 
 Summary: Tasks support for Foreman with Dynflow integration
 Name: %{?scl_prefix}rubygem-%{gem_name}
-Version: 0.1.0
+Version: 0.1.1
 Release: 1%{?dist}
 Group: Development/Libraries
 License: GPLv2
@@ -95,6 +95,9 @@ GEMFILE
 %doc %{gem_instdir}/README.md
 
 %changelog
+* Mon Jan 27 2014 Ivan Nečas <inecas@redhat.com> 0.1.1-1
+- Use separate database when running on sqlite3 (inecas@redhat.com)
+
 * Thu Jan 23 2014 Ivan Nečas <inecas@redhat.com> 0.1.0-1
 - new package built with tito
 
