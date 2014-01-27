@@ -71,7 +71,16 @@ module ForemanTasks
     def default_sequel_adapter_options
       db_config            = ActiveRecord::Base.configurations[Rails.env].dup
       db_config['adapter'] = 'postgres' if db_config['adapter'] == 'postgresql'
-      db_config['adapter'] = 'sqlite' if db_config['adapter'] == 'sqlite3'
+
+      if db_config['adapter'] == 'sqlite3'
+        db_config['adapter'] = 'sqlite'
+        database = db_config['database']
+        unless database == ':memory:'
+          # We need to create separate database for sqlite
+          # to avoid lock conflicts on the database
+          db_config['database'] = "#{File.dirname(database)}/dynflow-#{File.basename(database)}"
+        end
+      end
       return db_config
     end
 
