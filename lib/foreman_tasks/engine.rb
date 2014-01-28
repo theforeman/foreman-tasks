@@ -28,7 +28,7 @@ module ForemanTasks
 
     # to enable async Foreman operations using Dynflow
     if ENV['FOREMAN_TASKS_MONKEYS'] == 'true'
-      initializer "foreman_tasks.dynflow_initialize" do |app|
+      initializer "foreman_tasks.require_dynflow", :before => "foreman_tasks.initialize_dynflow" do |app|
         ForemanTasks.dynflow.require!
       end
 
@@ -39,7 +39,7 @@ module ForemanTasks
       end
     end
 
-    initializer "foreman_tasks.initialize_dynflow", :after => :finisher_hook do
+    initializer "foreman_tasks.initialize_dynflow" do
       ForemanTasks.dynflow.initialize! unless ForemanTasks.dynflow.config.lazy_initialization
     end
 
