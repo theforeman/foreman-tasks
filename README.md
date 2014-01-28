@@ -74,7 +74,7 @@ code somewhere in Rails initialization process. In case of an engine,
 it would be:
 
 ```ruby
-initializer "your_engine.dynflow_initialize" do |app|
+initializer "your_engine.require_dynflow", :before => "foreman_tasks.initialize_dynflow" do |app|
   ForemanTasks.dynflow.require!
 end
 ```
