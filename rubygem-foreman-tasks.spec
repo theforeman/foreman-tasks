@@ -8,7 +8,7 @@
 
 Summary: Tasks support for Foreman with Dynflow integration
 Name: %{?scl_prefix}rubygem-%{gem_name}
-Version: 0.1.1
+Version: 0.1.2
 Release: 1%{?dist}
 Group: Development/Libraries
 License: GPLv2
@@ -95,6 +95,8 @@ GEMFILE
 %doc %{gem_instdir}/README.md
 
 %changelog
+* Wed Jan 29 2014 Ivan Nečas <inecas@redhat.com> 0.1.2-1
+- Delay world initialization when using PhusionPassenger (inecas@redhat.com)
 * Mon Jan 27 2014 Ivan Nečas <inecas@redhat.com> 0.1.1-1
 - Use separate database when running on sqlite3 (inecas@redhat.com)
 
