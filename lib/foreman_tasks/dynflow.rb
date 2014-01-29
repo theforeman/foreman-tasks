@@ -31,6 +31,10 @@ module ForemanTasks
     def initialize!
       return unless @required
       return @world if @world
+
+      if config.lazy_initialization && defined? PhusionPassenger
+        config.dynflow_logger.warn("ForemanTasks: lazy loading with PhusionPassenger might lead to unexpected results")
+      end
       config.initialize_world.tap do |world|
         @world = world
 

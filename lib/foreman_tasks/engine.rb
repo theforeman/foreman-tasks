@@ -40,7 +40,17 @@ module ForemanTasks
     end
 
     initializer "foreman_tasks.initialize_dynflow" do
-      ForemanTasks.dynflow.initialize! unless ForemanTasks.dynflow.config.lazy_initialization
+      unless ForemanTasks.dynflow.config.lazy_initialization
+        if defined?(PhusionPassenger)
+          PhusionPassenger.on_event(:starting_worker_process) do |forked|
+            if forked
+              ForemanTasks.dynflow.initialize!
+            end
+          end
+        else
+          ForemanTasks.dynflow.initialize!
+        end
+      end
     end
 
     rake_tasks do
