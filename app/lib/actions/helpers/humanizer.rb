@@ -3,12 +3,14 @@ module Actions
 
     class Humanizer
 
-      PARTS_ORDER = [:repository,
+      PARTS_ORDER = [:user,
+                     :repository,
                      :product,
                      :system,
                      :organization]
       # Just to get the trings into pot file
-      PARTS_TRANSLATIONS = [N_('repository'),
+      PARTS_TRANSLATIONS = [N_('user'),
+                            N_('repository'),
                             N_('product'),
                             N_('system'),
                             N_('organization')]
