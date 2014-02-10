@@ -38,11 +38,6 @@ module ForemanTasks
       config.initialize_world.tap do |world|
         @world = world
 
-        ActionDispatch::Reloader.to_prepare do
-          ForemanTasks.dynflow.eager_load_actions!
-          world.reload!
-        end
-
         unless config.remote?
           at_exit { world.terminate.wait }
 
@@ -100,6 +95,7 @@ module ForemanTasks
           require_dependency file
         end
       end
+      @world.reload! if @world
     end
   end
 end

@@ -40,6 +40,11 @@ module ForemanTasks
     end
 
     initializer "foreman_tasks.initialize_dynflow" do
+      ForemanTasks.dynflow.eager_load_actions!
+      ActionDispatch::Reloader.to_prepare do
+        ForemanTasks.dynflow.eager_load_actions!
+      end
+
       unless ForemanTasks.dynflow.config.lazy_initialization
         if defined?(PhusionPassenger)
           PhusionPassenger.on_event(:starting_worker_process) do |forked|
