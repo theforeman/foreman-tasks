@@ -19,7 +19,9 @@ to resources. The locking allows dealing with preventing multiple colliding task
 same resource. It also optionally provides Dynflow infrastructure for using it for managing the tasks.
 DESC
 
-  s.files = Dir["{app,bin,config,db,lib}/**/*", "MIT-LICENSE", "README.md"]
+  s.files = Dir["{app,bin,config,db,lib}/**/*", "MIT-LICENSE", "README.md"].reject do |file|
+    file.start_with? "lib/foreman_tasks/hammer"
+  end
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 3.2.0"
