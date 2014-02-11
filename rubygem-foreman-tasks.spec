@@ -8,7 +8,7 @@
 
 Summary: Tasks support for Foreman with Dynflow integration
 Name: %{?scl_prefix}rubygem-%{gem_name}
-Version: 0.1.4
+Version: 0.1.5
 Release: 1%{?dist}
 Group: Development/Libraries
 License: GPLv2
@@ -95,6 +95,9 @@ GEMFILE
 %doc %{gem_instdir}/README.md
 
 %changelog
+* Tue Feb 11 2014 Ivan Nečas <inecas@redhat.com> 0.1.5-1
+- Make sure the pid and socket directories exist (inecas@redhat.com)
+
 * Tue Feb 11 2014 Ivan Nečas <inecas@redhat.com> 0.1.4-1
 - Fix action triggering (inecas@redhat.com)
 - Support sync actions when hooking into Foreman model with Dynflow
