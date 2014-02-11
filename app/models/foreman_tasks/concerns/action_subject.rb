@@ -5,6 +5,10 @@ module ForemanTasks
       extend ActiveSupport::Concern
 
       included do
+        before_create :before_plan_action
+        before_update :before_plan_action
+        before_destroy :before_plan_action
+
         after_create :plan_create_action
         after_update :plan_update_action
         after_destroy :plan_destroy_action
@@ -52,6 +56,17 @@ module ForemanTasks
         return result
       end
 
+      # dynflow actions are async by default
+      def before_plan_action
+        @dynflow_sync_action = false
+        return true
+      end
+
+      # to make the triggered action synchronous
+      def sync_action!
+        @dynflow_sync_action = true
+      end
+
       def create_action
       end
 
@@ -93,7 +108,8 @@ module ForemanTasks
       # Execute the prepared execution plan after the db transaction was commited
       def execute_planned_action
         if @execution_plan
-          ::ForemanTasks.dynflow.world.execute(@execution_plan.id)
+          run = ::ForemanTasks.dynflow.world.execute(@execution_plan.id)
+          run.finished.wait if @dynflow_sync_action
         end
         return true
       end

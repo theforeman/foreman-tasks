@@ -7,7 +7,7 @@ module ForemanTasks
     end
 
     def trigger(action, *args, &block)
-      foreman_tasks.world.trigger action, *args, &block
+      foreman_tasks.dynflow.world.trigger action, *args, &block
     end
 
     def trigger_task(async, action, *args, &block)
