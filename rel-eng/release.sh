@@ -65,7 +65,7 @@ MESSAGE
 
 function release() {
     # Publish phase
-    GEM_FILE=$(gem build *.gemspec | grep -io '[a-z0-9.-]*\.gem$')
+    GEM_FILE=$(gem build foreman-tasks.gemspec | grep -io '[a-z0-9.-]*\.gem$')
     git push origin HEAD && git push origin --tags
     tito release koji
     gem push $GEM_FILE
