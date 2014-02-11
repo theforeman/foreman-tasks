@@ -8,7 +8,7 @@
 
 Summary: Tasks support for Foreman with Dynflow integration
 Name: %{?scl_prefix}rubygem-%{gem_name}
-Version: 0.1.3
+Version: 0.1.4
 Release: 1%{?dist}
 Group: Development/Libraries
 License: GPLv2
@@ -95,6 +95,14 @@ GEMFILE
 %doc %{gem_instdir}/README.md
 
 %changelog
+* Tue Feb 11 2014 Ivan Nečas <inecas@redhat.com> 0.1.4-1
+- Fix action triggering (inecas@redhat.com)
+- Support sync actions when hooking into Foreman model with Dynflow
+  (inecas@redhat.com)
+- Fix eager loading with lazy world initialization (inecas@redhat.com)
+- Add ForemanTasks::Triggers module to include trigger methods where needed
+  (git@pitr.ch)
+
 * Wed Jan 29 2014 Ivan Nečas <inecas@redhat.com> 0.1.3-1
 - enforce local executor in rake tasks (inecas@redhat.com)
 
