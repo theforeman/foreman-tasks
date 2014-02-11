@@ -1,3 +1,5 @@
+require 'fileutils'
+
 module ForemanTasks
   class Dynflow::Daemon
 
@@ -25,6 +27,7 @@ module ForemanTasks
                           wait_attempts: 300,
                           wait_sleep: 1 }
       options = default_options.merge(options)
+      FileUtils.mkdir_p(options[:pid_dir])
       begin
         require 'daemons'
       rescue LoadError
@@ -68,7 +71,8 @@ module ForemanTasks
     protected
 
     def listener
-       ::Dynflow::Listeners::Socket.new(world, socket_path)
+      FileUtils.mkdir_p(File.dirname(socket_path))
+      ::Dynflow::Listeners::Socket.new(world, socket_path)
     end
 
     def socket_path
