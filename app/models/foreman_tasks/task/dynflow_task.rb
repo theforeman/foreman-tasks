@@ -28,12 +28,6 @@ module ForemanTasks
       @execution_plan ||= ForemanTasks.dynflow.world.persistence.load_execution_plan(external_id)
     end
 
-    def main_action
-      return @main_action if @main_action
-      main_action_id = execution_plan.root_plan_step.action_id
-      @main_action = execution_plan.actions.find { |action| action.id == main_action_id }
-    end
-
     def input
       main_action.respond_to?(:task_input) && main_action.task_input
     end
