@@ -13,7 +13,7 @@ module ForemanTasks
         # load extra data, there is place for optimization on Dynflow side
         # if needed (getting more keys into the data value)
         unless self.label
-          self.label = main_action.action_class.name
+          self.label = main_action.class.name
         end
         update_progress
       end
