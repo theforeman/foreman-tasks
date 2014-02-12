@@ -45,7 +45,7 @@ module Actions
               raise "Serialized model has to repond to :to_action_input method"
             end
             object.to_action_input
-          when String, Numeric, true, false, nil
+          when String, Numeric, true, false, nil, Dynflow::ExecutionPlan::OutputReference
             object
           else
             object.to_s
