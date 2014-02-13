@@ -13,7 +13,7 @@ module ForemanTasks
         # load extra data, there is place for optimization on Dynflow side
         # if needed (getting more keys into the data value)
         unless self.label
-          self.label = main_action.action_class.name
+          self.label = main_action.class.name
         end
         update_progress
       end
@@ -26,12 +26,6 @@ module ForemanTasks
 
     def execution_plan
       @execution_plan ||= ForemanTasks.dynflow.world.persistence.load_execution_plan(external_id)
-    end
-
-    def main_action
-      return @main_action if @main_action
-      main_action_id = execution_plan.root_plan_step.action_id
-      @main_action = execution_plan.actions.find { |action| action.id == main_action_id }
     end
 
     def input
