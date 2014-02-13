@@ -5,6 +5,7 @@ require 'foreman_tasks/triggers'
 
 module ForemanTasks
   extend Algebrick::TypeCheck
+  extend Algebrick::Matching
 
   def self.dynflow
     @dynflow ||= ForemanTasks::Dynflow.new
@@ -17,9 +18,15 @@ module ForemanTasks
   def self.trigger_task(async, action, *args, &block)
     Match! async, true, false
 
-    run = trigger(action, *args, &block)
-    run.finished.wait if async == false
-    ForemanTasks::Task::DynflowTask.find_by_external_id!(run.id)
+    match trigger(action, *args, &block),
+          (on ::Dynflow::World::PlaningFailed.(error: ~any) |
+                  ::Dynflow::World::ExecutionFailed.(error: ~any) do |error|
+            raise error
+          end),
+          (on ::Dynflow::World::Triggered.(id: ~any, finished: ~any) do |id, finished|
+            finished.wait if async == false
+            ForemanTasks::Task::DynflowTask.find_by_external_id!(id)
+          end)
   end
 
   def self.async_task(action, *args, &block)
