@@ -1,42 +1,26 @@
 module Actions
   module Helpers
     module Lock
-      def self.included(base)
-        base.extend(ClassMethods)
+      def task
+        ::ForemanTasks::Task::DynflowTask.find_by_external_id!(execution_plan_id)
       end
 
-      module ClassMethods
-
-        def generate_phase(phase_module)
-          super.tap do |phase_class|
-            if phase_module == Dynflow::Action::PlanPhase
-              phase_class.send(:include, PlanMethods)
-            end
-          end
-        end
-
+      # @see Lock.exclusive!
+      def exclusive_lock!(resource)
+        phase! Dynflow::Action::Plan
+        ::ForemanTasks::Lock.exclusive!(resource, task.id)
       end
 
-      module PlanMethods
+      # @see Lock.lock!
+      def lock!(resource, *lock_names)
+        phase! Dynflow::Action::Plan
+        ::ForemanTasks::Lock.lock!(resource, task.id, *lock_names.flatten)
+      end
 
-        def task
-          ::ForemanTasks::Task::DynflowTask.find_by_external_id!(execution_plan_id)
-        end
-
-        # @see Lock.exclusive!
-        def exclusive_lock!(resource)
-          ::ForemanTasks::Lock.exclusive!(resource, task.id)
-        end
-
-        # @see Lock.lock!
-        def lock!(resource, *lock_names)
-          ::ForemanTasks::Lock.lock!(resource, task.id, *lock_names.flatten)
-        end
-
-        # @see Lock.link!
-        def link!(resource)
-          ::ForemanTasks::Lock.link!(resource, task.id)
-        end
+      # @see Lock.link!
+      def link!(resource)
+        phase! Dynflow::Action::Plan
+        ::ForemanTasks::Lock.link!(resource, task.id)
       end
     end
   end
