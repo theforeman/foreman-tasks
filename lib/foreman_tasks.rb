@@ -23,7 +23,7 @@ module ForemanTasks
                   ::Dynflow::World::ExecutionFailed.(error: ~any) do |error|
             raise error
           end),
-          (on ::Dynflow::World::Triggered.(id: ~any, finished: ~any) do |id, finished|
+          (on ::Dynflow::World::Triggered.(execution_plan_id: ~any, future: ~any) do |id, finished|
             finished.wait if async == false
             ForemanTasks::Task::DynflowTask.find_by_external_id!(id)
           end)

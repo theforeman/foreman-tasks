@@ -1,10 +1,6 @@
 module Actions
   module Helpers
     module ArgsSerialization
-      def self.included(base)
-        base.extend(ClassMethods)
-      end
-
       class Builder
         attr_reader :hash
         def initialize(*objects)
@@ -22,7 +18,7 @@ module Actions
             unless object.respond_to?(:action_input_key)
               raise "Serialized model has to repond to :action_input_key method"
             end
-            key = object.action_input_key
+            key   = object.action_input_key
             value = object_to_value(object)
             add(key, value)
           when Hash
@@ -66,24 +62,9 @@ module Actions
         end
       end
 
-      module ClassMethods
-
-        def generate_phase(phase_module)
-          super.tap do |phase_class|
-            if phase_module == Dynflow::Action::PlanPhase
-              phase_class.send(:include, PlanMethods)
-            end
-          end
-        end
-
-      end
-
-      module PlanMethods
-
-        def serialize_args(*objects)
-          Builder.new(*objects).hash
-        end
-
+      def serialize_args(*objects)
+        phase! Dynflow::Action::Plan
+        Builder.new(*objects).hash
       end
     end
   end
