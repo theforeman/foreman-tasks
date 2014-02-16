@@ -10,8 +10,8 @@ Installation
 Put the following to your Foreman's bundle.d/Gemfile.local.rb:
 
 ```ruby
-gem 'dynflow', :git => 'git@github.com:iNecas/dynflow.git'
-gem 'foreman-tasks', :git => 'git@github.com:iNecas/foreman-tasks.git'
+gem 'dynflow',       :git => 'https://github.com/iNecas/dynflow.git'
+gem 'foreman-tasks', :git => 'https://github.com/iNecas/foreman-tasks.git'
 ```
 
 Run:
