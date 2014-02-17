@@ -8,7 +8,7 @@
 
 Summary: Tasks support for Foreman with Dynflow integration
 Name: %{?scl_prefix}rubygem-%{gem_name}
-Version: 0.1.5
+Version: 0.2.0
 Release: 1%{?dist}
 Group: Development/Libraries
 License: GPLv2
@@ -95,6 +95,14 @@ GEMFILE
 %doc %{gem_instdir}/README.md
 
 %changelog
+* Mon Feb 17 2014 Ivan Nečas <inecas@redhat.com> 0.2.0-1
+- Extract the hammer plugin to separate repo. (inecas@redhat.com)
+- Fix ArgsSerialization and Lock to use new unified Action phases (git@pitr.ch)
+- Update ForemanTasks.trigger to new World#trigger API (git@pitr.ch)
+- Support references in action_subject (inecas@redhat.com)
+- update to dynflow with unified actions (git@pitr.ch)
+- Fix Triggers module to only delegate to ForemanTasks (git@pitr.ch)
+
 * Tue Feb 11 2014 Ivan Nečas <inecas@redhat.com> 0.1.5-1
 - Make sure the pid and socket directories exist (inecas@redhat.com)
 
