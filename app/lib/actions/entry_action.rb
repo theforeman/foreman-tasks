@@ -18,7 +18,7 @@ module Actions
       :all
     end
 
-    # Peforms all that's needed to connect the action to the resource.
+    # Performs all that's needed to connect the action to the resource.
     # It converts the resource (and it's relatives defined in +related_resources+
     # to serialized form (using +to_action_input+).
     #

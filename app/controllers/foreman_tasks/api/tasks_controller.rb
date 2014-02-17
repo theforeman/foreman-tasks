@@ -28,22 +28,22 @@ module ForemanTasks
       api :POST, "/tasks/bulk_search", "List dynflow tasks for uuids"
       param :searches, Array, :desc => 'List of uuids to fetch info about' do
         param :search_id, String, :desc => <<-DESC
-        Arbitraty value for client to identify the the request parts with results.
-        It's passed in the results to be able to pair the requests and responses properly.
-      DESC
+          Arbitraty value for client to identify the the request parts with results.
+          It's passed in the results to be able to pair the requests and responses properly.
+        DESC
         param :type, %w[user resource task]
         param :task_id, String, :desc => <<-DESC
-        In case :type = 'task', find the task by the uuid
-      DESC
+          In case :type = 'task', find the task by the uuid
+        DESC
         param :user_id, String, :desc => <<-DESC
-        In case :type = 'user', find tasks for the user
-      DESC
+          In case :type = 'user', find tasks for the user
+        DESC
         param :resource_type, String, :desc => <<-DESC
-        In case :type = 'resource', what resource type we're searching the tasks for
-      DESC
+          In case :type = 'resource', what resource type we're searching the tasks for
+        DESC
         param :resource_type, String, :desc => <<-DESC
-        In case :type = 'resource', what resource id we're searching the tasks for
-      DESC
+          In case :type = 'resource', what resource id we're searching the tasks for
+        DESC
         param :active_only, :bool
         param :page, String
         param :per_page, String
@@ -56,11 +56,11 @@ module ForemanTasks
       DESC
       def bulk_search
         searches = Array(params[:searches])
-        @tasks = {}
+        @tasks   = {}
 
         ret = searches.map do |search_params|
           { search_params: search_params,
-            results: search_tasks(search_params) }
+            results:       search_tasks(search_params) }
         end
         render :json => ret
       end
@@ -85,16 +85,17 @@ module ForemanTasks
             raise BadRequest, _("User search_params requires user_id to be specified")
           end
           scope.joins(:locks).where(foreman_tasks_locks:
-                                    { name: ::ForemanTasks::Lock::OWNER_LOCK_NAME,
-                                      resource_type: 'User',
-                                      resource_id:   search_params[:user_id] })
+                                        { name:          ::ForemanTasks::Lock::OWNER_LOCK_NAME,
+                                          resource_type: 'User',
+                                          resource_id:   search_params[:user_id] })
         when 'resource'
           if search_params[:resource_type].blank? || search_params[:resource_id].blank?
-            raise BadRequest, _("Resource search_params requires resource_type and resource_id to be specified")
+            raise BadRequest,
+                  _("Resource search_params requires resource_type and resource_id to be specified")
           end
           scope.joins(:locks).where(foreman_tasks_locks:
-                                    { resource_type: search_params[:resource_type],
-                                      resource_id:   search_params[:resource_id] })
+                                        { resource_type: search_params[:resource_type],
+                                          resource_id:   search_params[:resource_id] })
         when 'task'
           if search_params[:task_id].blank?
             raise BadRequest, _("Task search_params requires task_id to be specified")
@@ -116,7 +117,7 @@ module ForemanTasks
       def pagination_scope(scope, search_params)
         page     = search_params[:page] || 1
         per_page = search_params[:per_page] || 10
-        scope = scope.limit(per_page).offset((page - 1) * per_page)
+        scope    = scope.limit(per_page).offset((page - 1) * per_page)
       end
 
       def ordering_scope(scope, search_params)
@@ -125,7 +126,11 @@ module ForemanTasks
 
       def task_hash(task)
         return @tasks[task.id] if @tasks[task.id]
-        task_hash = Rabl.render(task, 'show', :view_path => "#{ForemanTasks::Engine.root}/app/views/foreman_tasks/api/tasks", :format => :hash, :scope => self)
+        task_hash       = Rabl.render(
+            task, 'show',
+            view_path: "#{ForemanTasks::Engine.root}/app/views/foreman_tasks/api/tasks",
+            format:    :hash,
+            scope:     self)
         @tasks[task.id] = task_hash
         return task_hash
       end
