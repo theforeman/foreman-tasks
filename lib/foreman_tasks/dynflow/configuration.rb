@@ -19,10 +19,6 @@ module ForemanTasks
     # between this process and the external executor
     attr_accessor :remote_socket_path
 
-    # what persistence adapater should be used, by default, it uses Sequlel
-    # adapter based on Rails app database.yml configuration
-    attr_accessor :persistence_adapter
-
     # what transaction adapater should be used, by default, it uses the ActiveRecord
     # based adapter, expecting ActiveRecord is used as ORM in the application
     attr_accessor :transaction_adapter
@@ -37,7 +33,6 @@ module ForemanTasks
       self.pool_size           = 5
       self.remote              = Rails.env.production?
       self.remote_socket_path  = File.join(Rails.root, "tmp", "sockets", "dynflow_socket")
-      self.persistence_adapter = default_persistence_adapter
       self.transaction_adapter = ::Dynflow::TransactionAdapters::ActiveRecord.new
       self.eager_load_paths    = []
       self.lazy_initialization = !Rails.env.production?
@@ -59,13 +54,9 @@ module ForemanTasks
     def world_options
       { logger_adapter:      ::Dynflow::LoggerAdapters::Delegator.new(action_logger, dynflow_logger),
         pool_size:           5,
-        persistence_adapter: persistence_adapter,
+        persistence_adapter: initialize_persistence,
         transaction_adapter: transaction_adapter,
         executor:            -> world { initialize_executor world } }
-    end
-
-    def default_persistence_adapter
-      ForemanTasks::Dynflow::Persistence.new(default_sequel_adapter_options)
     end
 
     def default_sequel_adapter_options
@@ -90,6 +81,11 @@ module ForemanTasks
       else
         ::Dynflow::Executors::Parallel.new(world, self.pool_size)
       end
+    end
+
+    # Sequel adapter based on Rails app database.yml configuration
+    def initialize_persistence
+      ForemanTasks::Dynflow::Persistence.new(default_sequel_adapter_options)
     end
   end
 end
