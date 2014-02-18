@@ -27,13 +27,10 @@ module Actions
     # The additional args can include more resources and/or a hash
     # with more data describing the action that should appear in the
     # action's input.
-    def action_subject(resource, *additional_args)
-      if resource.respond_to?(:related_resources_recursive)
-        related_resources = resource.related_resources_recursive
-      else
-        related_resources = []
-      end
-      plan_self(serialize_args(resource, *related_resources, *additional_args))
+    def action_subject(resource, *additional_args) # TODO redo as a middleware
+      Type! resource, ForemanTasks::Concerns::ActionSubject
+      input.update serialize_args(resource, *resource.all_related_resources, *additional_args)
+
       if resource.is_a? ActiveRecord::Base
         if resource_locks == :exclusive
           exclusive_lock!(resource)
