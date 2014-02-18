@@ -15,9 +15,9 @@ module Actions
       self.output
     end
 
-    # This method should return humanized description of the action, e.g. "Install Package"
+    # This method should return humanized description of the action, e.g. "Install package"
     def humanized_name
-      self.class.name[/\w+$/].gsub(/([a-z])([A-Z])/) { "#{$1} #{$2}" }
+      self.class.name.demodulize.underscore.humanize
     end
 
     # This method should return String of Array<String> describing input for the task

@@ -21,7 +21,7 @@ module ForemanTasks
       end
 
       def action_input_key
-        self.class.name.underscore[/\w*\Z/]
+        self.class.name.demodulize.underscore
       end
 
       def to_action_input
