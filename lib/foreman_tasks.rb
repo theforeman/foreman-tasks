@@ -1,4 +1,5 @@
 require 'foreman_tasks/version'
+require 'foreman_tasks/task_error'
 require 'foreman_tasks/engine'
 require 'foreman_tasks/dynflow'
 require 'foreman_tasks/triggers'
@@ -34,8 +35,8 @@ module ForemanTasks
   end
 
   def self.sync_task(action, *args, &block)
-    # TODO raise aggregation error when there are failed run-steps
-    trigger_task false, action, *args, &block
+    trigger_task(false, action, *args, &block).tap do |task|
+      raise TaskError.new(task) if task.execution_plan.error?
+    end
   end
-
 end

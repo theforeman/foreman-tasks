@@ -12,7 +12,6 @@ module ForemanTasks
         after_create :plan_create_action
         after_update :plan_update_action
         after_destroy :plan_destroy_action
-        after_commit :execute_planned_action
       end
 
       module ClassMethods
@@ -97,19 +96,40 @@ module ForemanTasks
       # we want to be able to rollback the whole db operation when planning fails.
       def plan_action(action_class, *args)
         @execution_plan = ::ForemanTasks.dynflow.world.plan(action_class, *args)
-        planned         = @execution_plan.state == :planned
-        unless planned
-          errors = @execution_plan.steps.values.map(&:error).compact
-          # we raise error so that the whole transaction is rollbacked
-          raise errors.map(&:message).join('; ')
-        end
+        raise @execution_plan.errors.first if @execution_plan.error?
+      end
+
+      # We can't user after_commit filters because they don't allow to raise
+      # exceptions in there, so we would not be able to report that something
+      # went wrong when running a sync_task.:
+      #
+      #   http://guides.rubyonrails.org/v3.2.14/active_record_validations_callbacks.html#transaction-callbacks
+      #
+      # That's why we need to override save and destroy methods instead.
+      # Another reason why one should avoid callbacks for orchestration.
+      def save(*)
+        super.tap { execute_planned_action }
+      end
+
+      def save!(*)
+        super.tap { execute_planned_action }
+      end
+
+      def destroy
+        super.tap { execute_planned_action }
       end
 
       # Execute the prepared execution plan after the db transaction was commited
       def execute_planned_action
         if @execution_plan
           run = ::ForemanTasks.dynflow.world.execute(@execution_plan.id)
-          run.finished.wait if @dynflow_sync_action
+          if @dynflow_sync_action
+            run.wait
+            if run.value.error?
+              task = ForemanTasks::Task::DynflowTask.find_by_external_id!(@execution_plan.id)
+              raise ForemanTasks::TaskError.new(task)
+            end
+          end
         end
         return true
       end
