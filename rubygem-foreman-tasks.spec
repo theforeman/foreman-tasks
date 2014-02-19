@@ -8,7 +8,7 @@
 
 Summary: Tasks support for Foreman with Dynflow integration
 Name: %{?scl_prefix}rubygem-%{gem_name}
-Version: 0.2.0
+Version: 0.2.1
 Release: 1%{?dist}
 Group: Development/Libraries
 License: GPLv2
@@ -95,6 +95,10 @@ GEMFILE
 %doc %{gem_instdir}/README.md
 
 %changelog
+* Wed Feb 19 2014 Ivan Nečas <inecas@redhat.com> 0.2.1-1
+- Postpone the initialization of persistence (inecas@redhat.com)
+- Update the links to products and repositories (inecas@redhat.com)
+
 * Mon Feb 17 2014 Ivan Nečas <inecas@redhat.com> 0.2.0-1
 - Extract the hammer plugin to separate repo. (inecas@redhat.com)
 - Fix ArgsSerialization and Lock to use new unified Action phases (git@pitr.ch)
