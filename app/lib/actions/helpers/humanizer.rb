@@ -43,13 +43,15 @@ module Actions
          link: link_to_resource(type, data, other_data) }
       end
 
+      # TODO: this probably is not the best place for this logic, find
+      # out where to put this
       def link_to_resource(type, data, other_data)
         case type
         when :product
-          "#/products/#{data[:cp_id]}/info" if data[:cp_id]
+          "#/products/#{data[:id]}/info" if data[:id]
         when :repository
-          if other_data[:product] && other_data[:product][:cp_id] && data[:id]
-            "#/products/#{other_data[:product][:cp_id]}/repositories/#{data[:id]}"
+          if other_data[:product] && other_data[:product][:id] && data[:id]
+            "#/products/#{other_data[:product][:id]}/repositories/#{data[:id]}"
           end
         when :system
           if data[:uuid]
@@ -57,7 +59,7 @@ module Actions
           end
         when :organization
           if data[:label]
-            "/katello/organizations#/!=&panel=organization_#{data[:label]}&!="
+            "/organizations/#{data[:id]}/edit"
           end
         end
       end
