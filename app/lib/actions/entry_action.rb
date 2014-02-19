@@ -44,5 +44,13 @@ module Actions
       Helpers::Humanizer.new(self).input
     end
 
+    def humanized_name
+      _(super)
+    end
+
+    def self.all_action_names
+      subclasses.map { |k| k.allocate.humanized_name }
+    end
+
   end
 end
