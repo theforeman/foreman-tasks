@@ -99,6 +99,19 @@ module ForemanTasks
         raise @execution_plan.errors.first if @execution_plan.error?
       end
 
+      def save(*)
+        dynflow_task_wrap(:save) { super }
+      end
+
+      def save!(*)
+        dynflow_task_wrap(:save) { super }
+      end
+
+      def destroy
+        dynflow_task_wrap(:destroy) { super }
+      end
+
+      # Makes sure the execution plan is executed AFTER the transaction is commited.
       # We can't user after_commit filters because they don't allow to raise
       # exceptions in there, so we would not be able to report that something
       # went wrong when running a sync_task.:
@@ -107,16 +120,27 @@ module ForemanTasks
       #
       # That's why we need to override save and destroy methods instead.
       # Another reason why one should avoid callbacks for orchestration.
-      def save(*)
-        super.tap { execute_planned_action }
-      end
-
-      def save!(*)
-        super.tap { execute_planned_action }
-      end
-
-      def destroy
-        super.tap { execute_planned_action }
+      #
+      # Also, it makes sure the save is not run inside other transaction because
+      # we would start the execution phase inside this transaction which would lead
+      # to unexpected results.
+      def dynflow_task_wrap(method)
+        action = case method
+                 when :save
+                   self.new_record? ? create_action : update_action
+                 when :destroy
+                   destroy_action
+                 else
+                   raise 'unexpected method'
+                 end
+        if action
+          if self.class.connection.open_transactions > 0
+            raise "Executing dynflow action inside a transaction is not a good idea"
+          end
+          yield.tap { |result| execute_planned_action if result }
+        else
+          yield
+        end
       end
 
       # Execute the prepared execution plan after the db transaction was commited
