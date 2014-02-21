@@ -8,7 +8,7 @@
 
 Summary: Tasks support for Foreman with Dynflow integration
 Name: %{?scl_prefix}rubygem-%{gem_name}
-Version: 0.2.1
+Version: 0.2.2
 Release: 1%{?dist}
 Group: Development/Libraries
 License: GPLv2
@@ -95,6 +95,11 @@ GEMFILE
 %doc %{gem_instdir}/README.md
 
 %changelog
+* Fri Feb 21 2014 Ivan Nečas <inecas@redhat.com> 0.2.2-1
+- Make sure the action hooked into ActiveRecord is not run inside other
+  transaction (inecas@redhat.com)
+- Raise errors for sync tasks (inecas@redhat.com)
+
 * Wed Feb 19 2014 Ivan Nečas <inecas@redhat.com> 0.2.1-1
 - Postpone the initialization of persistence (inecas@redhat.com)
 - Update the links to products and repositories (inecas@redhat.com)
