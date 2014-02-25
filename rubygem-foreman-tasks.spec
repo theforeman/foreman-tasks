@@ -11,7 +11,7 @@ Name: %{?scl_prefix}rubygem-%{gem_name}
 Version: 0.2.2
 Release: 1%{?dist}
 Group: Development/Libraries
-License: GPLv2
+License: GPLv3
 URL: http://github.com/iNecas/foreman-tasks
 Source0: http://rubygems.org/downloads/%{gem_name}-%{version}.gem
 Requires: foreman
@@ -85,13 +85,13 @@ GEMFILE
 %exclude %{gem_cache}
 %{gem_spec}
 %{foreman_bundlerd_dir}/foreman-tasks.rb
-%doc %{gem_instdir}/MIT-LICENSE
+%doc %{gem_instdir}/LICENSE
 
 %exclude %{gem_instdir}/test
 %exclude %{gem_dir}/cache/%{gem_name}-%{version}.gem
 
 %files doc
-%doc %{gem_instdir}/MIT-LICENSE
+%doc %{gem_instdir}/LICENSE
 %doc %{gem_instdir}/README.md
 
 %changelog
