@@ -11,6 +11,7 @@ module Actions
         def plan(host_type, host_name, facts, certname, proxy_id)
           host = ::Host::Base.importHost(host_name, certname, proxy_id)
           action_subject(host, :facts => facts)
+          plan_self
         end
 
         def run

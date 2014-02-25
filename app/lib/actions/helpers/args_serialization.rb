@@ -2,7 +2,6 @@ module Actions
   module Helpers
     module ArgsSerialization
       class Builder
-        attr_reader :hash
         def initialize(*objects)
           @hash = {}.with_indifferent_access
           objects.each do |object|
@@ -10,17 +9,16 @@ module Actions
           end
         end
 
+        def to_h
+          @hash
+        end
+
         private
 
         def add_object(object)
           case object
-          when ActiveRecord::Base
-            unless object.respond_to?(:action_input_key)
-              raise "Serialized model has to repond to :action_input_key method"
-            end
-            key   = object.action_input_key
-            value = object_to_value(object)
-            add(key, value)
+          when ForemanTasks::Concerns::ActionSubject
+            add(object.action_input_key, object_to_value(object))
           when Hash
             add_hash(object_to_value(object))
           else
@@ -36,10 +34,7 @@ module Actions
             object.reduce({}) do |new_hash, (key, value)|
               new_hash.update(key => object_to_value(value))
             end
-          when ActiveRecord::Base
-            unless object.respond_to?(:to_action_input)
-              raise "Serialized model has to repond to :to_action_input method"
-            end
+          when ForemanTasks::Concerns::ActionSubject
             object.to_action_input
           when String, Numeric, true, false, nil, Dynflow::ExecutionPlan::OutputReference
             object
@@ -49,22 +44,20 @@ module Actions
         end
 
         def add_hash(hash)
-          hash.each do |key, value|
-            add(key, value)
-          end
+          hash.each { |key, value| add(key, value) }
         end
 
         def add(key, value)
-          if hash.has_key?(key)
-            raise "Conflict while serializing action args in key #{key}"
+          if @hash.key?(key)
+            raise KeyError, "Conflict while serializing action args in key #{key}"
           end
-          hash.update(key => value)
+          @hash.update(key => value)
         end
       end
 
       def serialize_args(*objects)
         phase! Dynflow::Action::Plan
-        Builder.new(*objects).hash
+        Builder.new(*objects).to_h
       end
     end
   end

@@ -7,13 +7,15 @@ module ForemanTasks
     end
 
     def index
-      params[:order] ||= "started_at DESC"
-      @tasks = Task.search_for(params[:search], :order => params[:order]).paginate(:page => params[:page])
+      params[:order] ||= 'started_at DESC'
+      @tasks         = Task.
+          search_for(params[:search], :order => params[:order]).
+          paginate(:page => params[:page])
     end
 
     # we need do this to make the Foreman helpers working properly
     def controller_name
-      "foreman_tasks_tasks"
+      'foreman_tasks_tasks'
     end
   end
 end

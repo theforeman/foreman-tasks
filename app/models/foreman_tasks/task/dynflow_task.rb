@@ -52,8 +52,7 @@ module ForemanTasks
 
     def main_action
       return @main_action if @main_action
-      main_action_id = execution_plan.root_plan_step.action_id
-      @main_action = execution_plan.actions.find { |action| action.id == main_action_id }
+      execution_plan.root_plan_step.action execution_plan
     end
   end
 end

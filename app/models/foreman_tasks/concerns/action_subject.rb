@@ -1,6 +1,6 @@
 module ForemanTasks
   module Concerns
-    module ActionSubject
+    module ActionSubject # TODO slit to two modules: auto planning, acting as action subject
 
       extend ActiveSupport::Concern
 
@@ -21,13 +21,12 @@ module ForemanTasks
       end
 
       def action_input_key
-        self.class.name.underscore[/\w*\Z/]
+        self.class.name.demodulize.underscore
       end
 
       def to_action_input
-        if self.new_record?
-          raise "The resource needs to be saved first"
-        end
+        raise 'The resource needs to be saved first' if self.new_record?
+
         { id: id, name: name }.tap do |hash|
           hash.update(label: label) if self.respond_to? :label
         end
@@ -40,19 +39,18 @@ module ForemanTasks
       # It's used to link a task running on top of this resource to it's related objects,
       # so that is't possible to see all the sync tasks for a product etc.
       def related_resources
+        []
       end
 
       # Recursively searches for related resources of this one, avoiding cycles
-      def related_resources_recursive(result = [])
-        Array(related_resources).each do |related_resource|
-          unless result.include?(related_resource)
-            result << related_resource
-            if related_resource.respond_to?(:related_resources_recursive)
-              related_resource.related_resources_recursive(result)
-            end
-          end
+      def all_related_resources
+        mine = Set.new Array(related_resources)
+
+        get_all_related_resources = -> resource do
+          resource.is_a?(ActionSubject) ? resource.all_related_resources : []
         end
-        return result
+
+        mine + mine.reduce(Set.new) { |s, resource| s + get_all_related_resources.(resource) }
       end
 
       # dynflow actions are async by default

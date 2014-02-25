@@ -18,7 +18,7 @@ module Actions
       :all
     end
 
-    # Peforms all that's needed to connect the action to the resource.
+    # Performs all that's needed to connect the action to the resource.
     # It converts the resource (and it's relatives defined in +related_resources+
     # to serialized form (using +to_action_input+).
     #
@@ -27,13 +27,10 @@ module Actions
     # The additional args can include more resources and/or a hash
     # with more data describing the action that should appear in the
     # action's input.
-    def action_subject(resource, *additional_args)
-      if resource.respond_to?(:related_resources_recursive)
-        related_resources = resource.related_resources_recursive
-      else
-        related_resources = []
-      end
-      plan_self(serialize_args(resource, *related_resources, *additional_args))
+    def action_subject(resource, *additional_args) # TODO redo as a middleware
+      Type! resource, ForemanTasks::Concerns::ActionSubject
+      input.update serialize_args(resource, *resource.all_related_resources, *additional_args)
+
       if resource.is_a? ActiveRecord::Base
         if resource_locks == :exclusive
           exclusive_lock!(resource)
@@ -45,6 +42,14 @@ module Actions
 
     def humanized_input
       Helpers::Humanizer.new(self).input
+    end
+
+    def humanized_name
+      _(super)
+    end
+
+    def self.all_action_names
+      subclasses.map { |k| k.allocate.humanized_name }
     end
 
   end
