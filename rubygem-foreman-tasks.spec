@@ -8,7 +8,7 @@
 
 Summary: Tasks support for Foreman with Dynflow integration
 Name: %{?scl_prefix}rubygem-%{gem_name}
-Version: 0.3.0
+Version: 0.3.1
 Release: 1%{?dist}
 Group: Development/Libraries
 License: GPLv3
@@ -95,6 +95,9 @@ GEMFILE
 %doc %{gem_instdir}/README.md
 
 %changelog
+* Tue Feb 25 2014 Ivan Nečas <inecas@redhat.com> 0.3.1-1
+- Require dynflow >= 0.5.0 (inecas@redhat.com)
+
 * Tue Feb 25 2014 Ivan Nečas <inecas@redhat.com> 0.3.0-1
 - Update license (inecas@redhat.com)
 - Use class names for translated humanized_name (git@pitr.ch)
