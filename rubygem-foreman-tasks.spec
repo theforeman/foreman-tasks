@@ -8,7 +8,7 @@
 
 Summary: Tasks support for Foreman with Dynflow integration
 Name: %{?scl_prefix}rubygem-%{gem_name}
-Version: 0.2.2
+Version: 0.3.0
 Release: 1%{?dist}
 Group: Development/Libraries
 License: GPLv3
@@ -95,6 +95,15 @@ GEMFILE
 %doc %{gem_instdir}/README.md
 
 %changelog
+* Tue Feb 25 2014 Ivan Nečas <inecas@redhat.com> 0.3.0-1
+- Update license (inecas@redhat.com)
+- Use class names for translated humanized_name (git@pitr.ch)
+- Do not call #plan_self in #action_subject (git@pitr.ch)
+- use new step#action API to retrieve actions in Present phase (git@pitr.ch)
+- Do not override hash method, other minor improvements (git@pitr.ch)
+- Use active support inflections instead of ad-hoc implementations
+  (git@pitr.ch)
+
 * Fri Feb 21 2014 Ivan Nečas <inecas@redhat.com> 0.2.2-1
 - Make sure the action hooked into ActiveRecord is not run inside other
   transaction (inecas@redhat.com)
