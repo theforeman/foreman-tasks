@@ -118,6 +118,11 @@ Also, there is a possibility to run the executor in daemonized mode
 using the `dynflow-executor`. It expects to be executed from Foreman
 rails root directory. See `-h` for more details and options
 
+Issues
+------
+
+The issues are tracked [here](http://projects.theforeman.org/projects/foreman-tasks/issues)
+
 Documentation
 -------------
 
