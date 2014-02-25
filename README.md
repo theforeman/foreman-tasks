@@ -131,7 +131,7 @@ TBD
 License
 -------
 
-MIT
+GPLv3
 
 Author
 ------
