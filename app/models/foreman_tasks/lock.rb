@@ -164,8 +164,8 @@ module ForemanTasks
       # recursively search for related resources of the resource (using
       # the +related_resources+ method, avoiding the cycles
       def related_resources(resource)
-        if resource.respond_to?(:related_resources_recursive)
-          return resource.related_resources_recursive
+        if resource.respond_to?(:all_related_resources)
+          return resource.all_related_resources
         else
           return []
         end
