@@ -92,10 +92,17 @@ module ForemanTasks
     def eager_load_actions!
       config.eager_load_paths.each do |load_path|
         Dir.glob("#{load_path}/**/*.rb").sort.each do |file|
-          require_dependency file
+          unless loaded_paths.include?(file)
+            require_dependency file
+            loaded_paths << file
+          end
         end
       end
       @world.reload! if @world
+    end
+
+    def loaded_paths
+      @loaded_paths ||= Set.new
     end
   end
 end
