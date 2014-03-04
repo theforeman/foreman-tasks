@@ -132,12 +132,18 @@ module ForemanTasks
                    raise 'unexpected method'
                  end
         if action
-          if self.class.connection.open_transactions > 0
-            raise "Executing dynflow action inside a transaction is not a good idea"
-          end
+          ensure_not_in_transaction!
           yield.tap { |result| execute_planned_action if result }
         else
           yield
+        end
+      end
+
+      # we don't want to start executing the task calling to external services
+      # when inside some other transaction. Might lead to unexpected results
+      def ensure_not_in_transaction!
+        if self.class.connection.open_transactions > 0
+          raise "Executing dynflow action inside a transaction is not a good idea"
         end
       end
 
