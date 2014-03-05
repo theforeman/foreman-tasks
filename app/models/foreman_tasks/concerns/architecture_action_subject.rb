@@ -3,6 +3,7 @@ module ForemanTasks
     module ArchitectureActionSubject
       extend ActiveSupport::Concern
       include ForemanTasks::Concerns::ActionSubject
+      include ForemanTasks::Concerns::ActionTriggering
 
       def create_action
         ::Actions::Foreman::Architecture::Create
