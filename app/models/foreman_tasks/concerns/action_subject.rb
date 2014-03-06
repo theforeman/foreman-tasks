@@ -5,10 +5,6 @@ module ForemanTasks
       extend ActiveSupport::Concern
 
       included do
-        before_create :before_plan_action
-        before_update :before_plan_action
-        before_destroy :before_plan_action
-
         after_create :plan_create_action
         after_update :plan_update_action
         after_destroy :plan_destroy_action
@@ -53,15 +49,13 @@ module ForemanTasks
         mine + mine.reduce(Set.new) { |s, resource| s + get_all_related_resources.(resource) }
       end
 
-      # dynflow actions are async by default
-      def before_plan_action
-        @dynflow_sync_action = false
-        return true
-      end
-
       # to make the triggered action synchronous
       def sync_action!
         @dynflow_sync_action = true
+      end
+
+      def sync_action_flag_reset!
+        @dynflow_sync_action = false
       end
 
       def create_action
@@ -133,7 +127,10 @@ module ForemanTasks
                  end
         if action
           ensure_not_in_transaction!
-          yield.tap { |result| execute_planned_action if result }
+          yield.tap do |result|
+            execute_planned_action if result
+            sync_action_flag_reset!
+          end
         else
           yield
         end
