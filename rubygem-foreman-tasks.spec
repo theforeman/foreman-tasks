@@ -8,7 +8,7 @@
 
 Summary: Tasks support for Foreman with Dynflow integration
 Name: %{?scl_prefix}rubygem-%{gem_name}
-Version: 0.3.5
+Version: 0.3.6
 Release: 1%{?dist}
 Group: Development/Libraries
 License: GPLv3
@@ -95,6 +95,10 @@ GEMFILE
 %doc %{gem_instdir}/README.md
 
 %changelog
+* Mon Mar 10 2014 Ivan Nečas <inecas@redhat.com> 0.3.6-1
+- Additional scopes for searching getting tasks for actions and resources
+  (inecas@redhat.com)
+
 * Thu Mar 06 2014 Ivan Nečas <inecas@redhat.com> 0.3.5-1
 - The ActionSubject#sync_action! has not caused waiting for the task
   (inecas@redhat.com)
