@@ -1,6 +1,8 @@
 module ForemanTasks
   class Task::DynflowTask < ForemanTasks::Task
 
+    scope :for_action, ->(action_class) { where(label: action_class.name) }
+
     def update_from_dynflow(data, planned)
       self.external_id = data[:id]
       self.started_at  = data[:started_at]
@@ -47,8 +49,6 @@ module ForemanTasks
         main_action.cli_example
       end
     end
-
-    protected
 
     def main_action
       return @main_action if @main_action

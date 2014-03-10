@@ -22,8 +22,12 @@ module ForemanTasks
     scoped_search :in => :owners,  :on => :login, :complete_value => true, :rename => "owner.login", :ext_method => :search_by_owner
     scoped_search :in => :owners,  :on => :firstname, :complete_value => true, :rename => "owner.firstname", :ext_method => :search_by_owner
 
-
     scope :active, -> {  where('state != ?', :stopped) }
+    scope :for_resource,
+        (lambda do |resource|
+           joins(:locks).where(:"foreman_tasks_locks.resource_id" => resource.id,
+                               :"foreman_tasks_locks.resource_type" => resource.class.name)
+         end)
 
     def input
       {}
