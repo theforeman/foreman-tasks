@@ -40,8 +40,13 @@
       <span class="param-name"><%= _("Progress") %>:</span>
       <span class="param-value">
         <div class="progress progress-striped">
-          <div class="bar" style="width: <%= 100 * @task.progress %>%;"></div>
+          <% progress = 100 * @task.progress %>
+          <div class="progress-bar" role="progressbar" aria-valuenow="<%= progress %>"
+               aria-valuemin="0" aria-valuemax="100" style="width: <%= progress %>%">
+            <span class="sr-only"><%= progress %>% Complete</span>
+          </div>
         </div>
+      </span>
     </div>
     <% if @task.cli_example %>
       <div>
