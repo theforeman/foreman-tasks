@@ -1,6 +1,8 @@
 module ForemanTasks
   class Task::DynflowTask < ForemanTasks::Task
 
+    include Algebrick::TypeCheck
+
     scope :for_action, ->(action_class) { where(label: action_class.name) }
 
     def update_from_dynflow(data, planned)
@@ -38,9 +40,9 @@ module ForemanTasks
     end
 
     def humanized
-      { action: main_action.respond_to?(:humanized_name) && main_action.humanized_name,
-        input:  main_action.respond_to?(:humanized_input) && main_action.humanized_input,
-        output: main_action.respond_to?(:humanized_output) && main_action.humanized_output }
+      { action: get_humanized(:humanized_name),
+        input:  get_humanized(:humanized_input),
+        output: get_humanized(:humanized_output) }
     end
 
     def cli_example
@@ -52,6 +54,17 @@ module ForemanTasks
     def main_action
       return @main_action if @main_action
       execution_plan.root_plan_step.action execution_plan
+    end
+
+    def get_humanized(method)
+      Match! method, :humanized_name, :humanized_input, :humanized_output
+      if main_action.respond_to? method
+        begin
+          main_action.send method
+        rescue => error
+          "#{error.message} (#{error.class})\n#{error.backtrace.join "\n"}"
+        end
+      end
     end
   end
 end

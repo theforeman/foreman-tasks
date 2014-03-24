@@ -13,7 +13,7 @@ module ForemanTasks
     class LockConflict < StandardError
       attr_reader :required_lock, :conflicting_locks
       def initialize(required_lock, conflicting_locks)
-        super()
+        super("required lock: #{required_lock} conflicts wiht #{conflicting_locks.inspect}")
         @required_lock     = required_lock
         @conflicting_locks = conflicting_locks
       end

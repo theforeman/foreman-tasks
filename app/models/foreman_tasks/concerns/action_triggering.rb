@@ -22,16 +22,24 @@ module ForemanTasks
       def destroy_action
       end
 
-      def save(*)
-        dynflow_task_wrap(:save) { super }
+      def save(*args)
+        dynflow_task_wrap(:save) { super(*args) }
       end
 
-      def save!(*)
-        dynflow_task_wrap(:save) { super }
+      def save!(*args)
+        dynflow_task_wrap(:save) { super(*args) }
       end
 
       def destroy
         dynflow_task_wrap(:destroy) { super }
+      end
+
+      def update_attributes(*args)
+        dynflow_task_wrap(:save) { super(*args) }
+      end
+
+      def update_attributes!(*args)
+        dynflow_task_wrap(:save) { super(*args) }
       end
 
       protected
@@ -83,6 +91,9 @@ module ForemanTasks
       # we would start the execution phase inside this transaction which would lead
       # to unexpected results.
       def dynflow_task_wrap(method)
+        return yield if @_dynflow_task_wrapped
+        @_dynflow_task_wrapped = true
+
         action = case method
                  when :save
                    self.new_record? ? create_action : update_action
@@ -100,13 +111,15 @@ module ForemanTasks
         else
           yield
         end
+      ensure
+        @_dynflow_task_wrapped = false
       end
 
       # we don't want to start executing the task calling to external services
       # when inside some other transaction. Might lead to unexpected results
       def ensure_not_in_transaction!
         if self.class.connection.open_transactions > 0
-          raise "Executing dynflow action inside a transaction is not a good idea"
+          raise 'Executing dynflow action inside a transaction is not a good idea'
         end
       end
 
