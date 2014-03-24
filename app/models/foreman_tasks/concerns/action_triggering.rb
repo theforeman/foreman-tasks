@@ -22,12 +22,12 @@ module ForemanTasks
       def destroy_action
       end
 
-      def save(*)
-        dynflow_task_wrap(:save) { super }
+      def save(*args)
+        dynflow_task_wrap(:save) { super(*args) }
       end
 
-      def save!(*)
-        dynflow_task_wrap(:save) { super }
+      def save!(*args)
+        dynflow_task_wrap(:save) { super(*args) }
       end
 
       def destroy
