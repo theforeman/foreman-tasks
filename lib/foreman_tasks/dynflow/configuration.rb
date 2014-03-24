@@ -27,15 +27,19 @@ module ForemanTasks
 
     attr_accessor :lazy_initialization
 
+    # what rake tasks should run their own executor, not depending on the external one
+    attr_accessor :rake_tasks_with_executor
+
     def initialize
-      self.action_logger       = Rails.logger
-      self.dynflow_logger      = Rails.logger
-      self.pool_size           = 5
-      self.remote              = Rails.env.production?
-      self.remote_socket_path  = File.join(Rails.root, "tmp", "sockets", "dynflow_socket")
-      self.transaction_adapter = ::Dynflow::TransactionAdapters::ActiveRecord.new
-      self.eager_load_paths    = []
-      self.lazy_initialization = !Rails.env.production?
+      self.action_logger            = Rails.logger
+      self.dynflow_logger           = Rails.logger
+      self.pool_size                = 5
+      self.remote                   = Rails.env.production?
+      self.remote_socket_path       = File.join(Rails.root, "tmp", "sockets", "dynflow_socket")
+      self.transaction_adapter      = ::Dynflow::TransactionAdapters::ActiveRecord.new
+      self.eager_load_paths         = []
+      self.lazy_initialization      = !Rails.env.production?
+      self.rake_tasks_with_executor = %w[db:migrate db:seed]
     end
 
     def initialize_world(world_class = ::Dynflow::World)
@@ -45,7 +49,15 @@ module ForemanTasks
     # No matter what config.remote says, when the process is marked as executor,
     # it can't be remote
     def remote?
-      !ForemanTasks.dynflow.executor? && @remote
+      !ForemanTasks.dynflow.executor? &&
+          !rake_task_with_executor? &&
+          @remote
+    end
+
+    def rake_task_with_executor?
+      Rake.application.top_level_tasks.any? do |rake_task|
+        rake_tasks_with_executor.include?(rake_task)
+      end
     end
 
     protected
