@@ -17,13 +17,12 @@ module ForemanTasks
         unless self.label
           self.label = main_action.class.name
         end
-        update_progress
       end
       self.save!
     end
 
-    def update_progress
-      self.progress = execution_plan.progress
+    def progress
+      execution_plan.progress
     end
 
     def execution_plan

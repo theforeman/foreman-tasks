@@ -27,7 +27,9 @@ module ForemanTasks
         Lock.owner!(::User.current, task.id) if ::User.current
       elsif data[:state] != :planning
         if task = ::ForemanTasks::Task::DynflowTask.find_by_external_id(execution_plan_id)
-          task.update_from_dynflow(data, true)
+	  unless task.state.to_s == data[:state].to_s
+            task.update_from_dynflow(data, true)
+	  end
         end
       end
     end

@@ -81,6 +81,17 @@ module ForemanTasks
       return {:conditions => condition, :joins => joins }
     end
 
+    def progress
+      case self.state.to_s
+      when "running", "paused"
+        0.5
+      when "stopped"
+        1
+      else
+        0
+      end
+    end
+
     protected
 
     def generate_id
