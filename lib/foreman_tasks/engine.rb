@@ -59,8 +59,6 @@ module ForemanTasks
     end
 
     rake_tasks do
-      # enforce local executor in rake tasks
-      ForemanTasks.dynflow.executor!
       load File.expand_path('../tasks/dynflow.rake', __FILE__)
     end
   end
