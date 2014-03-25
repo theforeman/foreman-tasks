@@ -22,7 +22,7 @@ Requires:       %{?scl_prefix}ruby(release)
 Requires: %{?scl_prefix}ruby(abi) = 1.9.1
 %endif
 
-Requires: %{?scl_prefix}rubygem(dynflow) >= 0.5.0
+Requires: %{?scl_prefix}rubygem(dynflow) >= 0.6.0
 Requires: %{?scl_prefix}rubygem(sequel)
 Requires: %{?scl_prefix}rubygem(sinatra)
 Requires: %{?scl_prefix}rubygem(daemons)
