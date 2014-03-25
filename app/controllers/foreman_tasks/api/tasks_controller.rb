@@ -14,6 +14,12 @@ module ForemanTasks
   module Api
     class TasksController < ::Api::V2::BaseController
 
+      resource_description do
+        resource_id 'foreman_tasks'
+        api_version 'v2'
+        api_base_url "/foreman_tasks/api"
+      end
+
       # Foreman right now doesn't have mechanism to
       # cause general BadRequest handling, resuing the Apipie::ParamError
       # for now http://projects.theforeman.org/issues/3957
@@ -22,6 +28,8 @@ module ForemanTasks
 
       before_filter :find_task, :only => [:show]
 
+      api :GET, "/tasks/:id", "Show task details"
+      param :id, :identifier, desc: "UUID of the task"
       def show
       end
 

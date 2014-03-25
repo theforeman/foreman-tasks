@@ -18,6 +18,15 @@ module ForemanTasks
       ActiveRecord::SchemaDumper.ignore_tables << /^dynflow_.*$/
     end
 
+    initializer "foreman_tasks.apipie" do
+      # this condition is here for compatibility reason to work with Foreman 1.4.x
+      if Apipie.configuration.api_controllers_matcher.is_a?(Array) &&
+            Apipie.configuration.respond_to?(:checksum_path)
+        Apipie.configuration.api_controllers_matcher << "#{ForemanTasks::Engine.root}/app/controllers/foreman_tasks/api/*.rb"
+        Apipie.configuration.checksum_path += ['/foreman_tasks/api/']
+      end
+    end
+
     initializer "foreman_tasks.register_paths" do |app|
       ForemanTasks.dynflow.config.eager_load_paths.concat(%W[#{ForemanTasks::Engine.root}/app/lib/actions])
     end
