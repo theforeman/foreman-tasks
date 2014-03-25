@@ -8,7 +8,7 @@
 
 Summary: Tasks support for Foreman with Dynflow integration
 Name: %{?scl_prefix}rubygem-%{gem_name}
-Version: 0.4.0
+Version: 0.5.0
 Release: 1%{?dist}
 Group: Development/Libraries
 License: GPLv3
@@ -95,6 +95,21 @@ GEMFILE
 %doc %{gem_instdir}/README.md
 
 %changelog
+* Tue Mar 25 2014 Ivan Nečas <inecas@redhat.com> 0.5.0-1
+- Update dependencies (inecas@redhat.com)
+- Merge pull request #41 from iNecas/apipie-bindings (inecas@redhat.com)
+- Set up Apipie documentation (inecas@redhat.com)
+- Merge pull request #40 from iNecas/limit-rake-executor (inecas@redhat.com)
+- Merge pull request #39 from pitr-ch/master (inecas@redhat.com)
+- Run separate executor just for selected rake tasks (inecas@redhat.com)
+- Better message for LockConflict error (git@pitr.ch)
+- Fix update_attributes to work with ActionTriggering (git@pitr.ch)
+- Add variable names to be able to debug it (git@pitr.ch)
+- Do not propagate error from humanized methods (git@pitr.ch)
+- Do not raise when Rake::Task['gettext:find'] is missing (git@pitr.ch)
+- Don't precalculate the progress in persistence (inecas@redhat.com)
+- Modularize the humanizer (inecas@redhat.com)
+
 * Wed Mar 12 2014 Ivan Nečas <inecas@redhat.com> 0.4.0-1
 - Update progress bar to use bootstrap 3.0 (git@pitr.ch)
 - Extracting ActionTriggering form ActionSubject module (git@pitr.ch)
