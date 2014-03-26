@@ -55,6 +55,8 @@ module ForemanTasks
     end
 
     def rake_task_with_executor?
+      return false unless defined?(Rake)
+
       Rake.application.top_level_tasks.any? do |rake_task|
         rake_tasks_with_executor.include?(rake_task)
       end
