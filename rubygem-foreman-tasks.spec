@@ -8,7 +8,7 @@
 
 Summary: Tasks support for Foreman with Dynflow integration
 Name: %{?scl_prefix}rubygem-%{gem_name}
-Version: 0.5.0
+Version: 0.5.1
 Release: 1%{?dist}
 Group: Development/Libraries
 License: GPLv3
@@ -95,6 +95,9 @@ GEMFILE
 %doc %{gem_instdir}/README.md
 
 %changelog
+* Tue Apr 01 2014 Ivan Nečas <inecas@redhat.com> 0.5.1-1
+- Fix issue if rake is not explicitly in Gemfile (mhulan@redhat.com)
+
 * Tue Mar 25 2014 Ivan Nečas <inecas@redhat.com> 0.5.0-1
 - Update dependencies (inecas@redhat.com)
 - Merge pull request #41 from iNecas/apipie-bindings (inecas@redhat.com)
