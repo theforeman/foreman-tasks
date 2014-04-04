@@ -20,9 +20,8 @@ Version: 0.5.1
 Release: 1%{?dist}
 Group: Development/Libraries
 License: GPLv3
-URL: http://github.com/iNecas/foreman-tasks
-#Source0: http://rubygems.org/downloads/%{gem_name}-%{version}.gem
-Source0: %{gem_name}-0.5.1.gem
+URL: http://github.com/theforeman/foreman-tasks
+Source0: http://rubygems.org/downloads/%{gem_name}-%{version}.gem
 Requires: foreman
 
 %if 0%{?fedora} > 18
