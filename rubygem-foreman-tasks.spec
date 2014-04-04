@@ -1,10 +1,18 @@
 %{?scl:%scl_package rubygem-%{gem_name}}
 %{!?scl:%global pkg_name %{name}}
 
+%if "%{?scl}" == "ruby193"
+    %global scl_ruby /usr/bin/ruby193-ruby
+%else
+    %global scl_ruby /usr/bin/ruby
+%endif
+
 %global gem_name foreman-tasks
 
 %define rubyabi 1.9.1
 %global foreman_bundlerd_dir /usr/share/foreman/bundler.d
+%global confdir deploy
+%global jobs_name foreman-tasks
 
 Summary: Tasks support for Foreman with Dynflow integration
 Name: %{?scl_prefix}rubygem-%{gem_name}
@@ -13,7 +21,8 @@ Release: 1%{?dist}
 Group: Development/Libraries
 License: GPLv3
 URL: http://github.com/iNecas/foreman-tasks
-Source0: http://rubygems.org/downloads/%{gem_name}-%{version}.gem
+#Source0: http://rubygems.org/downloads/%{gem_name}-%{version}.gem
+Source0: %{gem_name}-0.5.1.gem
 Requires: foreman
 
 %if 0%{?fedora} > 18
@@ -63,6 +72,7 @@ gem install --local --install-dir .%{gem_dir} \
 %{?scl:"}
 
 %build
+sed -ri '1sX(/usr/bin/ruby|/usr/bin/env ruby)X%{scl_ruby}X' %{_builddir}/%{pkg_name}-%{version}/%{gem_instdir}/bin/%{jobs_name}
 
 %install
 mkdir -p %{buildroot}%{gem_dir}
@@ -74,6 +84,32 @@ cat <<GEMFILE > %{buildroot}%{foreman_bundlerd_dir}/foreman-tasks.rb
 gem 'foreman-tasks'
 GEMFILE
 
+#copy init scripts and sysconfigs
+%if 0%{?fedora} > 18
+install -Dp -m0644 %{buildroot}%{gem_dir}/gems/%{gem_name}-%{version}/%{confdir}/%{jobs_name}.sysconfig %{buildroot}%{_sysconfdir}/sysconfig/%{jobs_name}
+install -Dp -m0755 %{buildroot}%{gem_dir}/gems/%{gem_name}-%{version}/%{confdir}/%{jobs_name}.service %{buildroot}%{_libdir}/systemd/system/%{jobs_name}.service
+mkdir -p %{buildroot}%{_bindir}
+ln -sv %{gem_instdir}/bin/%{jobs_name} %{buildroot}%{_bindir}/%{jobs_name}
+%else
+install -Dp -m0644 %{buildroot}%{gem_dir}/gems/%{gem_name}-%{version}/%{confdir}/%{jobs_name}.sysconfig %{buildroot}%{_root_sysconfdir}/sysconfig/%{jobs_name}
+mkdir -p %{buildroot}%{_root_bindir}
+ln -sv %{gem_instdir}/bin/%{jobs_name} %{buildroot}%{_root_bindir}/%{jobs_name}
+%if 0%{?rhel} == 6
+install -Dp -m0755 %{buildroot}%{gem_dir}/gems/%{gem_name}-%{version}/%{confdir}/%{jobs_name}.init %{buildroot}%{_root_initddir}/%{jobs_name}
+%else
+install -Dp -m0755 %{buildroot}%{gem_dir}/gems/%{gem_name}-%{version}/%{confdir}/%{jobs_name}.service %{buildroot}%{_root_libdir}/systemd/system/%{jobs_name}.service
+%endif
+%endif
+
+%post
+#Add /etc/rc*.d link
+/sbin/chkconfig --add %{jobs_name}
+
+%preun
+if [ $1 -eq 0 ] ; then
+    /sbin/service %{jobs_name} stop >/dev/null 2>&1
+    /sbin/chkconfig --del %{jobs_name}
+fi
 
 %files
 %dir %{gem_instdir}
@@ -87,6 +123,22 @@ GEMFILE
 %{foreman_bundlerd_dir}/foreman-tasks.rb
 %doc %{gem_instdir}/LICENSE
 
+%if 0%{?fedora} > 18
+%{_libdir}/systemd/system/%{jobs_name}.service
+%{_sysconfdir}/sysconfig/%{jobs_name}
+%{_bindir}/%{jobs_name}
+%else
+%{_root_bindir}/%{jobs_name}
+%if 0%{?rhel} == 6
+%{_root_sysconfdir}/rc.d/init.d/%{jobs_name}
+%else
+%{_root_libdir}/systemd/system/%{jobs_name}.service
+%endif
+%{_root_sysconfdir}/sysconfig/%{jobs_name}
+%endif
+
+
+%exclude %{gem_instdir}/deploy
 %exclude %{gem_instdir}/test
 %exclude %{gem_dir}/cache/%{gem_name}-%{version}.gem
 
