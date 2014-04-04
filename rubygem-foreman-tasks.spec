@@ -16,7 +16,7 @@
 
 Summary: Tasks support for Foreman with Dynflow integration
 Name: %{?scl_prefix}rubygem-%{gem_name}
-Version: 0.5.1
+Version: 0.5.2
 Release: 1%{?dist}
 Group: Development/Libraries
 License: GPLv3
@@ -146,6 +146,9 @@ fi
 %doc %{gem_instdir}/README.md
 
 %changelog
+* Fri Apr 04 2014 Ivan Nečas <inecas@redhat.com> 0.5.2-1
+- Add init scripts and foreman-tasks daemon controller (mhulan@redhat.com)
+
 * Tue Apr 01 2014 Ivan Nečas <inecas@redhat.com> 0.5.1-1
 - Fix issue if rake is not explicitly in Gemfile (mhulan@redhat.com)
 
