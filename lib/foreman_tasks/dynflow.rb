@@ -81,8 +81,9 @@ module ForemanTasks
     def web_console
       ::Dynflow::WebConsole.setup do
         before do
-          # TODO: propper authentication
-          User.current = User.first
+          if !Setting[:dynflow_enable_console]
+            redirect('dashboard')
+          end
         end
 
         set(:world) { ForemanTasks.dynflow.world }
