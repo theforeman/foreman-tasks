@@ -2,6 +2,10 @@ module ForemanTasks
   class Engine < ::Rails::Engine
     engine_name "foreman_tasks"
 
+    initializer 'foreman_tasks.load_default_settings', :before => :load_config_initializers do
+      require_dependency File.expand_path("../../../app/models/setting/dynflow.rb", __FILE__) if (Setting.table_exists? rescue(false))
+    end
+
     initializer 'foreman_tasks.register_plugin', :after => :finisher_hook do |app|
       Foreman::Plugin.register :"foreman-tasks" do
         requires_foreman '> 1.3'
