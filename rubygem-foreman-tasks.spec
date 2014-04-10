@@ -100,10 +100,6 @@ install -Dp -m0755 %{buildroot}%{gem_dir}/gems/%{gem_name}-%{version}/%{confdir}
 %endif
 %endif
 
-%post
-#Add /etc/rc*.d link
-/sbin/chkconfig --add %{jobs_name}
-
 %preun
 if [ $1 -eq 0 ] ; then
     /sbin/service %{jobs_name} stop >/dev/null 2>&1
