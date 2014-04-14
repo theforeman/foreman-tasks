@@ -82,8 +82,12 @@ module ForemanTasks
         build_locks(resource, lock_names, uuid).each(&:save!)
       end
 
-      def lock?(resource, uuid, *lock_names)
+      def lockable?(resource, uuid, *lock_names)
         build_locks(resource, lock_names, uuid).all?(&:available?)
+      end
+
+      def locked?(resource, uuid, *lock_names)
+        not lockable?(resource, uuid, *lock_names)
       end
 
       # Assigns the resource to the task to easily track the task in context of
