@@ -1,12 +1,12 @@
 module ForemanTasks
   class Lock < ActiveRecord::Base
 
-    LINK_LOCK_NAME = :link_resource
+    LINK_LOCK_NAME  = :link_resource
     OWNER_LOCK_NAME = :task_owner
 
     # not really intedet to be created in database, but it's used for
     # explicitly stating that the all the locks for resource should be used
-    ALL_LOCK_NAME = :all
+    ALL_LOCK_NAME   = :all
 
     RESERVED_LOCK_NAMES = [LINK_LOCK_NAME, OWNER_LOCK_NAME, ALL_LOCK_NAME]
 
@@ -31,25 +31,25 @@ module ForemanTasks
 
     validate do
       unless available?
-        raise LockConflict.new(self, coliding_locks)
+        raise LockConflict.new(self, colliding_locks)
       end
     end
 
     # returns true if it's possible to aquire this kind of lock
     def available?
-      return true unless coliding_locks.any?
+      not colliding_locks.any?
     end
 
-    # returns a scope of the locks coliding with this one
-    def coliding_locks
-      coliding_locks_scope = Lock.active.where('foreman_tasks_locks.task_id != ?', task_id)
-      coliding_locks_scope = coliding_locks_scope.where(name:          name,
-                                                        resource_id:  resource_id,
-                                                        resource_type: resource_type)
+    # returns a scope of the locks colliding with this one
+    def colliding_locks
+      colliding_locks_scope = Lock.active.where(Lock.arel_table[:task_id].not_eq(task_id))
+      colliding_locks_scope = colliding_locks_scope.where(name:          name,
+                                                          resource_id:   resource_id,
+                                                          resource_type: resource_type)
       unless self.exclusive?
-        coliding_locks_scope = coliding_locks_scope.where(:exclusive => true)
+        colliding_locks_scope = colliding_locks_scope.where(:exclusive => true)
       end
-      return coliding_locks_scope
+      return colliding_locks_scope
     end
 
     class << self
@@ -63,7 +63,7 @@ module ForemanTasks
       end
 
       def exclusive?(resource)
-        build_exclusive_locks(resource).all?(:available?)
+        build_exclusive_locks(resource).all?(&:available?)
       end
 
 
@@ -82,8 +82,17 @@ module ForemanTasks
         build_locks(resource, lock_names, uuid).each(&:save!)
       end
 
-      def lock?(resource, uuid, *lock_names)
+      def lockable?(resource, uuid, *lock_names)
         build_locks(resource, lock_names, uuid).all?(&:available?)
+      end
+
+      def locked?(resource, uuid, *lock_names)
+        not lockable?(resource, uuid, *lock_names)
+      end
+
+      def colliding_locks(resource, uuid, *lock_names)
+        build_locks(resource, lock_names, uuid).
+            inject([]) { |collisions, lock| collisions.concat lock.colliding_locks.to_a }
       end
 
       # Assigns the resource to the task to easily track the task in context of
@@ -111,7 +120,7 @@ module ForemanTasks
       def all_lock_names(resource, include_links = false)
         lock_names = []
         if resource.class.respond_to?(:available_locks) &&
-              resource.class.available_locks.any?
+            resource.class.available_locks.any?
           lock_names.concat(resource.class.available_locks)
         else
           raise "The resource #{resource.class.name} doesn't define any available lock"
