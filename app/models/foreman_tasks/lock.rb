@@ -31,25 +31,25 @@ module ForemanTasks
 
     validate do
       unless available?
-        raise LockConflict.new(self, coliding_locks)
+        raise LockConflict.new(self, colliding_locks)
       end
     end
 
     # returns true if it's possible to aquire this kind of lock
     def available?
-      not coliding_locks.any?
+      not colliding_locks.any?
     end
 
-    # returns a scope of the locks coliding with this one
-    def coliding_locks
-      coliding_locks_scope = Lock.active.where('foreman_tasks_locks.task_id != ?', task_id)
-      coliding_locks_scope = coliding_locks_scope.where(name:          name,
-                                                        resource_id:  resource_id,
+    # returns a scope of the locks colliding with this one
+    def colliding_locks
+      colliding_locks_scope = Lock.active.where('foreman_tasks_locks.task_id != ?', task_id)
+      colliding_locks_scope = colliding_locks_scope.where(name:          name,
+                                                        resource_id:   resource_id,
                                                         resource_type: resource_type)
       unless self.exclusive?
-        coliding_locks_scope = coliding_locks_scope.where(:exclusive => true)
+        colliding_locks_scope = colliding_locks_scope.where(:exclusive => true)
       end
-      return coliding_locks_scope
+      return colliding_locks_scope
     end
 
     class << self
@@ -90,7 +90,7 @@ module ForemanTasks
         not lockable?(resource, uuid, *lock_names)
       end
 
-      def coliding_locks(resource, uuid, *lock_names)
+      def colliding_locks(resource, uuid, *lock_names)
         build_locks(resource, lock_names, uuid).
             inject([]) { |arr, lock| arr + lock.colliding_locks.to_a }
       end
