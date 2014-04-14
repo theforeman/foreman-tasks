@@ -63,7 +63,7 @@ module ForemanTasks
       end
 
       def exclusive?(resource)
-        build_exclusive_locks(resource).all?(:available?)
+        build_exclusive_locks(resource).all?(&:available?)
       end
 
 
