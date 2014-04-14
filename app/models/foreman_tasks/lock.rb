@@ -1,12 +1,12 @@
 module ForemanTasks
   class Lock < ActiveRecord::Base
 
-    LINK_LOCK_NAME = :link_resource
+    LINK_LOCK_NAME  = :link_resource
     OWNER_LOCK_NAME = :task_owner
 
     # not really intedet to be created in database, but it's used for
     # explicitly stating that the all the locks for resource should be used
-    ALL_LOCK_NAME = :all
+    ALL_LOCK_NAME   = :all
 
     RESERVED_LOCK_NAMES = [LINK_LOCK_NAME, OWNER_LOCK_NAME, ALL_LOCK_NAME]
 
@@ -120,7 +120,7 @@ module ForemanTasks
       def all_lock_names(resource, include_links = false)
         lock_names = []
         if resource.class.respond_to?(:available_locks) &&
-              resource.class.available_locks.any?
+            resource.class.available_locks.any?
           lock_names.concat(resource.class.available_locks)
         else
           raise "The resource #{resource.class.name} doesn't define any available lock"
