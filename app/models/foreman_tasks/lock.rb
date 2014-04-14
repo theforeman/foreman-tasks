@@ -92,7 +92,7 @@ module ForemanTasks
 
       def colliding_locks(resource, uuid, *lock_names)
         build_locks(resource, lock_names, uuid).
-            inject([]) { |arr, lock| arr + lock.colliding_locks.to_a }
+            inject([]) { |collisions, lock| collisions.concat lock.colliding_locks.to_a }
       end
 
       # Assigns the resource to the task to easily track the task in context of
