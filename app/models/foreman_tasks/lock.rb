@@ -42,10 +42,10 @@ module ForemanTasks
 
     # returns a scope of the locks colliding with this one
     def colliding_locks
-      colliding_locks_scope = Lock.active.where('foreman_tasks_locks.task_id != ?', task_id)
+      colliding_locks_scope = Lock.active.where(Lock.arel_table[:task_id].not_eq(task_id))
       colliding_locks_scope = colliding_locks_scope.where(name:          name,
-                                                        resource_id:   resource_id,
-                                                        resource_type: resource_type)
+                                                          resource_id:   resource_id,
+                                                          resource_type: resource_type)
       unless self.exclusive?
         colliding_locks_scope = colliding_locks_scope.where(:exclusive => true)
       end
