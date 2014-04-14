@@ -37,7 +37,7 @@ module ForemanTasks
 
     # returns true if it's possible to aquire this kind of lock
     def available?
-      return true unless coliding_locks.any?
+      not coliding_locks.any?
     end
 
     # returns a scope of the locks coliding with this one
