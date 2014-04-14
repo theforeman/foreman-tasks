@@ -90,6 +90,11 @@ module ForemanTasks
         not lockable?(resource, uuid, *lock_names)
       end
 
+      def coliding_locks(resource, uuid, *lock_names)
+        build_locks(resource, lock_names, uuid).
+            inject([]) { |arr, lock| arr + lock.colliding_locks.to_a }
+      end
+
       # Assigns the resource to the task to easily track the task in context of
       # the resource. This doesn't prevent other actions to lock the resource
       # and should be used only for actions that tolerate other actions to be
