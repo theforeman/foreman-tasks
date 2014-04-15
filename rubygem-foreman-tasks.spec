@@ -16,7 +16,7 @@
 
 Summary: Tasks support for Foreman with Dynflow integration
 Name: %{?scl_prefix}rubygem-%{gem_name}
-Version: 0.5.2
+Version: 0.5.3
 Release: 1%{?dist}
 Group: Development/Libraries
 License: GPLv3
@@ -142,6 +142,16 @@ fi
 %doc %{gem_instdir}/README.md
 
 %changelog
+* Tue Apr 15 2014 Ivan Nečas <inecas@redhat.com> 0.5.3-1
+- stupid-simple auto-reloading task show page (git@pitr.ch)
+- fix path to setting definition (git@pitr.ch)
+- Ensure that it works when task_id nil (git@pitr.ch)
+- Add class method .coliding_locks (git@pitr.ch)
+- rename .lock? to .lockable? and add .locked? (git@pitr.ch)
+- Remove automatic chkconfig after installation (mhulan@redhat.com)
+- Fixes #4449, add setting to enable/disable dynflow console.
+  (walden@redhat.com)
+
 * Fri Apr 04 2014 Ivan Nečas <inecas@redhat.com> 0.5.2-1
 - Add init scripts and foreman-tasks daemon controller (mhulan@redhat.com)
 
