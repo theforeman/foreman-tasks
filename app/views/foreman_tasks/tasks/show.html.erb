@@ -1,3 +1,18 @@
+<script>
+  $(document).ready(function () {
+    var reload = function () {
+      $.ajax({
+        url: "",
+        context: document.body,
+        success: function (s, x) {
+          $(this).html(s);
+        }
+      });
+    };
+    setTimeout(reload, 5000);
+  });
+</script>
+
 <div class="task-details">
   <%= form_for @task, :url => "#" do %>
     <div>
