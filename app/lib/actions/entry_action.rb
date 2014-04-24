@@ -14,6 +14,8 @@ module Actions
     #  * `:exclusive`:  same as `:all` + doesn't allow even linking to the resoruce.
     #                   typical example is deleting a container, preventing all actions
     #                   heppening on it's sub-resources (such a system).
+    #  * `:link`:       only link the task to the resource, not locking
+    #                   anything except exclusive locks
     def resource_locks
       :all
     end
@@ -34,6 +36,8 @@ module Actions
       if resource.is_a? ActiveRecord::Base
         if resource_locks == :exclusive
           exclusive_lock!(resource)
+        elsif resource_locks == :link
+          link!(resource)
         else
           lock!(resource, resource_locks)
         end
