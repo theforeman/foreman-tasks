@@ -16,7 +16,7 @@
 
 Summary: Tasks support for Foreman with Dynflow integration
 Name: %{?scl_prefix}rubygem-%{gem_name}
-Version: 0.5.3
+Version: 0.5.4
 Release: 1%{?dist}
 Group: Development/Libraries
 License: GPLv3
@@ -142,6 +142,10 @@ fi
 %doc %{gem_instdir}/README.md
 
 %changelog
+* Thu May 15 2014 Ivan Nečas <inecas@redhat.com> 0.5.4-1
+- Add Resume, Stop, Unlock action buttons to Task detail (git@pitr.ch)
+- Support linking of entry action to task without locking (inecas@redhat.com)
+
 * Tue Apr 15 2014 Ivan Nečas <inecas@redhat.com> 0.5.3-1
 - stupid-simple auto-reloading task show page (git@pitr.ch)
 - fix path to setting definition (git@pitr.ch)
