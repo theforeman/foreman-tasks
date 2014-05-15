@@ -4,6 +4,11 @@ Foreman::Application.routes.draw do
       collection do
         get 'auto_complete_search'
       end
+      member do
+        post :stop
+        post :resume
+        post :force_stop
+      end
     end
 
     namespace :api do

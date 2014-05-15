@@ -3,6 +3,8 @@ require 'uuidtools'
 module ForemanTasks
   class Task < ActiveRecord::Base
 
+    # TODO missing validation of states
+
     self.primary_key = :id
     before_create :generate_id
 
