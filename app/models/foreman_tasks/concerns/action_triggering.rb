@@ -102,14 +102,10 @@ module ForemanTasks
                  else
                    raise 'unexpected method'
                  end
-        if action
-          ensure_not_in_transaction!
-          yield.tap do |result|
-            execute_planned_action if result
-            sync_action_flag_reset!
-          end
-        else
-          yield
+        ensure_not_in_transaction! if action
+        yield.tap do |result|
+          execute_planned_action if result
+          sync_action_flag_reset!
         end
       ensure
         @_dynflow_task_wrapped = false
