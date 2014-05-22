@@ -106,6 +106,9 @@ if [ $1 -eq 0 ] ; then
     /sbin/chkconfig --del %{jobs_name}
 fi
 
+%post
+foreman-selinux-relabel 2>&1 >/dev/null || true
+
 %files
 %dir %{gem_instdir}
 %{gem_instdir}/app
