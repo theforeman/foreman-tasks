@@ -14,6 +14,10 @@ module ForemanTasks
     @dynflow ||= ForemanTasks::Dynflow.new
   end
 
+  def self.viewer
+    @viewer ||= ForemanTasks::EmptyDynflow.new
+  end
+
   def self.trigger(action, *args, &block)
     dynflow.world.trigger action, *args, &block
   end

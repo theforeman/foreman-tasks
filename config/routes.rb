@@ -1,3 +1,4 @@
+
 Foreman::Application.routes.draw do
   namespace :foreman_tasks do
     resources :recurring_logics, :only => [:index, :show] do
@@ -31,15 +32,28 @@ Foreman::Application.routes.draw do
         collection do
           post :bulk_search
           post :bulk_resume
-          get :summary
+          get  :summary
           post :callback
+          post :index
+        end
+
+        member do
+          post 'skip'
+          post 'resume'
         end
       end
+
+      resource :viewer, :only => [:show, :destroy]
     end
 
     if ForemanTasks.dynflow.required?
       require 'dynflow/web'
       mount ForemanTasks.dynflow.web_console => '/dynflow'
+    end
+
+    if ForemanTasks.viewer.required? && ! Rails.env.production?
+      require 'dynflow/web_console'
+      mount ForemanTasks.viewer.web_console => "/viewer"
     end
   end
 end

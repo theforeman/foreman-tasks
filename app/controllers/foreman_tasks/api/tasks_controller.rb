@@ -16,7 +16,51 @@ module ForemanTasks
       class BadRequest < Apipie::ParamError
       end
 
-      before_action :find_task, :only => [:show]
+      before_action :find_task, :only => [:show, :skip, :resume]
+      before_filter :load_tasks, :only => [:index]
+
+      api :POST, "/tasks", "List tasks"
+      param :states, ::ForemanTasks::Task.states, :desc => "List of states to show"
+      def index
+        tasks = @tasks if params['states'].nil?
+        tasks ||= @tasks.select { |_id, task| params['states'].include? task[:state] }
+        render json: tasks.values
+      end
+
+      api :POST, "/tasks/:id/resume", "Resume task"
+      error :code => 404, :desc => "Task not found"
+      error :code => 400, :desc => "Task stopped or already running"
+      param :id, :identifier, desc: "UUID of the task", :required => true
+      def resume
+        begin
+          raise KeyError.new if @task.nil?
+          ForemanTasks.dynflow.world.execute(@task.external_id)
+          head :ok
+        rescue KeyError => e
+          head :not_found
+        rescue ::Dynflow::Error => e
+          render json: error_hash(e), :status => 400
+        end
+      end
+
+      api :POST, "/tasks/:id/skip", "Skip all error actions"
+      error :code => 404, :desc => "Task not found"
+      error :code => 400, :desc => "No steps to skip"
+      param :id, :identifier, desc: "UUID of the task", :required => true
+      def skip
+        begin
+          raise KeyError.new if @task.nil?
+          plan = ForemanTasks.dynflow.world.persistence.load_execution_plan(@task.external_id)
+          to_skip = plan.steps.each_value.select { |step| step.state == :error }
+          raise ::Dynflow::Error.new("Plan #{@task.external_id} has no steps to skip") if to_skip.empty?
+          to_skip.each { |step| plan.skip(step) }
+          head :ok
+        rescue KeyError => e
+          head :not_found
+        rescue ::Dynflow::Error => e
+          render json: error_hash(e), :status => 400
+        end
+      end
 
       api :GET, '/tasks/summary', 'Show task summary'
       def summary
@@ -260,6 +304,21 @@ module ForemanTasks
         else
           super
         end
+
+      private
+
+      def load_tasks
+        @tasks = {}
+        Task.all.map { |task| task_hash(task) }
+      end
+
+      def error_hash(exception)
+        {
+          error: {
+            type: exception.class.inspect,
+            message: exception.message
+          }
+        }
       end
     end
   end
