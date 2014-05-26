@@ -1,15 +1,56 @@
 <script>
-  $(document).ready(function () {
-    var reload = function () {
+  task_progress_reloader = {
+    timeoutId: null,
+    reload: function () {
       $.ajax({
         url: "",
         context: document.body,
         success: function (s, x) {
           $(this).html(s);
+          task_progress_reloader.start();
         }
       });
-    };
-    setTimeout(reload, 5000);
+    },
+
+    start: function () {
+      if (!this.timeoutId) {
+        this.timeoutId = setTimeout(this.reload, 5000);
+        var button = $('.reload-button');
+        button.html('<span class="glyphicon glyphicon-refresh spin"></span> <%= _('Stop auto-reloading') %>');
+        button.show();
+      }
+    },
+
+    stop: function () {
+      if (this.timeoutId) {
+        clearTimeout(this.timeoutId);
+        this.timeoutId = null;
+        var button = $('.reload-button');
+        button.html('<span class="glyphicon glyphicon-refresh"></span> <%= _('Start auto-reloading') %>');
+        button.show();
+      }
+    },
+
+    toggle: function () {
+      if (this.timeoutId) {
+        this.stop();
+      } else {
+        this.start();
+      }
+    }
+  };
+
+  $(document).ready(function () {
+    $('.reload-button').click(function (event) {
+      task_progress_reloader.toggle();
+      event.preventDefault();
+    });
+
+    $('.reload-button-stop').click(function (event) {
+      task_progress_reloader.stop();
+    });
+
+    task_progress_reloader.start();
   });
 </script>
 
@@ -18,9 +59,11 @@
   <%= form_for @task, :url => "#" do %>
 
     <p>
+      <%= link_to(_('Auto Reload'), '', class: %w(btn btn-sm btn-default reload-button hidden)) %>
+
       <%= link_to(_('Dynflow console'),
                   format('/foreman_tasks/dynflow/%s', @task.external_id),
-                  class: %w(btn btn-sm btn-info)) if Setting['dynflow_enable_console'] %>
+                  class: %w(btn btn-sm btn-default)) if Setting['dynflow_enable_console'] %>
 
       <%= link_to(_('Resume'),
                   resume_foreman_tasks_task_path(@task),
@@ -29,13 +72,13 @@
 
       <%= link_to(_('Stop'),
                   '',
-                  class:         ['btn', 'btn-sm', 'btn-warning', ('disabled' unless @task.state == 'paused')].compact,
+                  class:         ['btn', 'btn-sm', 'btn-warning', 'reload-button-stop', ('disabled' unless @task.state == 'paused')].compact,
                   :'data-toggle' => "modal",
                   :'data-target' => "#stop_modal") %>
 
       <%= link_to(_('Force Stop'),
                   '',
-                  class:         %w(btn btn-sm btn-danger),
+                  class:         ['btn', 'btn-sm', 'btn-danger', 'reload-button-stop', ('disabled' if @task.state == 'stopped')].compact,
                   :'data-toggle' => "modal",
                   :'data-target' => "#force_stop_modal") %>
     </p>
