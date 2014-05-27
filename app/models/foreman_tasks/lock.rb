@@ -13,7 +13,21 @@ module ForemanTasks
     class LockConflict < StandardError
       attr_reader :required_lock, :conflicting_locks
       def initialize(required_lock, conflicting_locks)
-        super("required lock: #{required_lock} conflicts wiht #{conflicting_locks.inspect}")
+        header = <<-TXT.gsub(/^ *\|/, '')
+          |Required lock is already taken by other running tasks.
+          |Please inspect their state, fix their errors nad resume them.
+          |
+          |Required lock: #{required_lock.name}
+          |Conflicts with tasks:
+        TXT
+        url_helpers       = Rails.application.routes.url_helpers
+        conflicting_tasks = conflicting_locks.
+            map(&:task).
+            uniq.
+            map { |task| "- #{Setting['foreman_url'] + url_helpers.foreman_tasks_task_path(task)}" }.
+            join("\n")
+
+        super header + conflicting_tasks
         @required_lock     = required_lock
         @conflicting_locks = conflicting_locks
       end
