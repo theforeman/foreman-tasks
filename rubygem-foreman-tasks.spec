@@ -16,7 +16,7 @@
 
 Summary: Tasks support for Foreman with Dynflow integration
 Name: %{?scl_prefix}rubygem-%{gem_name}
-Version: 0.5.5
+Version: 0.5.6
 Release: 1%{?dist}
 Group: Development/Libraries
 License: GPLv3
@@ -145,6 +145,10 @@ foreman-selinux-relabel 2>&1 >/dev/null || true
 %doc %{gem_instdir}/README.md
 
 %changelog
+* Tue May 27 2014 Ivan Nečas <inecas@redhat.com> 0.5.6-1
+- better LockConflict message (git@pitr.ch)
+- Add Start/stop auto-refresh button (git@pitr.ch)
+
 * Thu May 22 2014 Ivan Nečas <inecas@redhat.com> 0.5.5-1
 - File contexts relabelled after installation (lzap+git@redhat.com)
 - Fixes #5778 - make sure that we always execute the planned tasks
