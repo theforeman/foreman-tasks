@@ -16,7 +16,7 @@
 
 Summary: Tasks support for Foreman with Dynflow integration
 Name: %{?scl_prefix}rubygem-%{gem_name}
-Version: 0.5.6
+Version: 0.5.7
 Release: 1%{?dist}
 Group: Development/Libraries
 License: GPLv3
@@ -145,6 +145,12 @@ type foreman-selinux-relabel >/dev/null 2>&1 && foreman-selinux-relabel 2>&1 >/d
 %doc %{gem_instdir}/README.md
 
 %changelog
+* Wed May 28 2014 Ivan Nečas <inecas@redhat.com> 0.5.7-1
+- Refs #5961 - dynflow world init hooks (inecas@redhat.com)
+- Fixes #5950 - don't show empty output as {} in humanized form
+  (inecas@redhat.com)
+- Fixes #5961 - Call SELinux relabel only when present (lzap+git@redhat.com)
+
 * Tue May 27 2014 Ivan Nečas <inecas@redhat.com> 0.5.6-1
 - better LockConflict message (git@pitr.ch)
 - Add Start/stop auto-refresh button (git@pitr.ch)
