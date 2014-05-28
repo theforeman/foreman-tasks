@@ -107,7 +107,7 @@ if [ $1 -eq 0 ] ; then
 fi
 
 %post
-foreman-selinux-relabel 2>&1 >/dev/null || true
+type foreman-selinux-relabel >/dev/null 2>&1 && foreman-selinux-relabel 2>&1 >/dev/null || true
 
 %files
 %dir %{gem_instdir}
