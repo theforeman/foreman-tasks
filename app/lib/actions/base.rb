@@ -22,14 +22,22 @@ module Actions
 
     # This method should return String of Array<String> describing input for the task
     def humanized_input
-      task_input.pretty_inspect
+      if task_input.blank?
+        ""
+      else
+        task_input.pretty_inspect
+      end
     end
 
     # This method should return String describing output for the task.
     # It should aggregate the data from subactions as well and it's used for humanized
     # description of restuls of the action
     def humanized_output
-      task_output.pretty_inspect
+      if task_output.blank?
+        ""
+      else
+        task_output.pretty_inspect
+      end
     end
 
   end
