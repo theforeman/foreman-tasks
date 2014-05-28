@@ -40,10 +40,18 @@ module ForemanTasks
       self.eager_load_paths         = []
       self.lazy_initialization      = !Rails.env.production?
       self.rake_tasks_with_executor = %w[db:migrate db:seed]
+
+      @on_init = []
+    end
+
+    def on_init(&block)
+      @on_init << block
     end
 
     def initialize_world(world_class = ::Dynflow::World)
-      world_class.new(world_options)
+      world_class.new(world_options).tap do |world|
+        @on_init.each { |init| init.call(world) }
+      end
     end
 
     # No matter what config.remote says, when the process is marked as executor,
