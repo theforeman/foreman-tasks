@@ -36,6 +36,7 @@ Requires: %{?scl_prefix}rubygem(sinatra)
 Requires: %{?scl_prefix}rubygem(daemons)
 Requires: %{?scl_prefix}rubygems
 BuildRequires: %{?scl_prefix}rubygems-devel
+Requires(post): foreman-selinux
 
 %if 0%{?fedora} > 18
 BuildRequires:       %{?scl_prefix}ruby(release)
