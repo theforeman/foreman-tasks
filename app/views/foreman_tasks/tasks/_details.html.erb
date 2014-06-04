@@ -1,0 +1,121 @@
+<p>
+  <%= link_to(_('Auto Reload'), '', class: %w(btn btn-sm btn-default reload-button hidden)) %>
+
+  <%= link_to(_('Dynflow console'),
+              format('/foreman_tasks/dynflow/%s', @task.external_id),
+              class: %w(btn btn-sm btn-default)) if Setting['dynflow_enable_console'] %>
+
+  <%= link_to(_('Resume'),
+              resume_foreman_tasks_task_path(@task),
+              class:  ['btn', 'btn-sm', 'btn-primary', ('disabled' unless @task.state == 'paused')].compact,
+              method: :post) %>
+
+  <%= link_to(_('Stop'),
+              '',
+              class:         ['btn', 'btn-sm', 'btn-warning', 'reload-button-stop', ('disabled' unless @task.state == 'paused')].compact,
+              :'data-toggle' => "modal",
+              :'data-target' => "#stop_modal") %>
+
+  <%= link_to(_('Force Stop'),
+              '',
+              class:         ['btn', 'btn-sm', 'btn-danger', 'reload-button-stop', ('disabled' if @task.state == 'stopped')].compact,
+              :'data-toggle' => "modal",
+              :'data-target' => "#force_stop_modal") %>
+</p>
+
+<div class="modal fade" id="stop_modal" tabindex="-1" role="dialog" aria-labelledby="Deploy" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h2 class="modal-title" id="deploy_modal_label">
+          <span class="glyphicon glyphicon-warning-sign"></span>
+          <%= _("Stop") %>
+        </h2>
+      </div>
+      <div class="modal-body">
+        <%= _("This will stop the task and unlock the resources. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed") %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><%= _("Cancel") %></button>
+        <%= link_to(_("Stop"), stop_foreman_tasks_task_path(@task), method: :post, class: 'btn btn-warning') %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="force_stop_modal" tabindex="-1" role="dialog" aria-labelledby="Deploy" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h2 class="modal-title" id="deploy_modal_label">
+          <span class="glyphicon glyphicon-exclamation-sign"></span>
+          <%= _("Force Stop") %>
+        </h2>
+      </div>
+      <div class="modal-body">
+        <%= _("Resources will be unlocked and will not prevent other tasks from being run. As the task might be still running, it should be avoided to use this unless you are really sure the task got stuck") %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><%= _("Cancel") %></button>
+        <%= link_to(_("Force Stop"), force_stop_foreman_tasks_task_path(@task), method: :post, class: 'btn btn-danger') %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <span class="param-name"><%= _("Id") %>:</span>
+  <span class="param-value"><%= @task.id %></span>
+</div>
+<div>
+  <span class="param-name"><%= _("Label") %>:</span>
+  <span class="param-value"><%= @task.label %></span>
+</div>
+<div>
+  <span class="param-name"><%= _("Name") %>:</span>
+  <span class="param-value"><%= @task.humanized[:action] %></span>
+</div>
+<div>
+  <span class="param-name"><%= _("Owner") %>:</span>
+  <span class="param-value"><%= @task.username %></span>
+</div>
+<div>
+  <span class="param-name"><%= _("Started at") %>:</span>
+  <span class="param-value"><%= @task.started_at %></span>
+</div>
+<div>
+  <span class="param-name"><%= _("Ended at") %>:</span>
+  <span class="param-value"><%= @task.ended_at %></span>
+</div>
+<div>
+  <span class="param-name"><%= _("State") %>:</span>
+  <span class="param-value"><%= @task.state %></span>
+</div>
+<div>
+  <span class="param-name"><%= _("Result") %>:</span>
+  <span class="param-value"><%= @task.result %></span>
+</div>
+<div>
+  <span class="param-name"><%= _("Params") %>:</span>
+  <span class="param-value"><%= format_task_input(@task) %></span>
+</div>
+<div>
+  <span class="param-name"><%= _("Progress") %>:</span>
+  <span class="param-value">
+    <div class="progress progress-striped">
+      <% progress = 100 * @task.progress %>
+      <div class="progress-bar" role="progressbar" aria-valuenow="<%= progress %>"
+           aria-valuemin="0" aria-valuemax="100" style="width: <%= progress %>%">
+        <span class="sr-only"><%= progress %>% Complete</span>
+      </div>
+    </div>
+  </span>
+</div>
+<div>
+  <span class="param-name"><%= _("Output") %>:</span>
+  <span class="param-value">
+    <pre><%= @task.humanized[:output] %></pre>
+  </span>
+</div>

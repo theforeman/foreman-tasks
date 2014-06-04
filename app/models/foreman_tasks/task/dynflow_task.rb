@@ -39,6 +39,10 @@ module ForemanTasks
       main_action.respond_to?(:task_output) && main_action.task_output
     end
 
+    def failed_steps
+      execution_plan.steps_in_state(:skipped, :skipping, :error)
+    end
+
     def humanized
       { action: get_humanized(:humanized_name),
         input:  get_humanized(:humanized_input),
