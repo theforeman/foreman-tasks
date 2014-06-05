@@ -1,0 +1,36 @@
+<% if @task.is_a? ForemanTasks::Task::DynflowTask %>
+  <div>
+    <% running_steps = @task.running_steps %>
+    <% if running_steps.empty? %>
+      <%= _("No running steps") %>
+    <% else %>
+      <% running_steps.each do |step| %>
+        <% action = step.action(@task.execution_plan) %>
+        <div class="alert alert-warning">
+          <p>
+            <% if @task.cancellable_action?(action) %>
+              <%= link_to(_('Cancel'),
+                          cancel_step_foreman_tasks_task_path(@task, :step_id => step.id),
+                          class:  ['btn', 'btn-sm', 'btn-primary'].compact,
+                          method: :post) %>
+            <% end %>
+          </p>
+          <p>
+          <span class="param-name"><%= _("Action") %>:</span>
+          <span class="param-value">
+            <pre><%= action.class %></pre>
+          </span>
+          <span class="param-name"><%= _("Input") %>:</span>
+          <span class="param-value">
+            <pre><%= action.input.pretty_inspect %></pre>
+          </span>
+          <span class="param-name"><%= _("Output") %>:</span>
+          <span class="param-value">
+            <pre><%= action.output.pretty_inspect %></pre>
+          </span>
+        </div>
+        <% end %>
+          </p>
+    <% end %>
+  </div>
+<% end %>

@@ -27,6 +27,10 @@ module ForemanTasks
       execution_plan.state == :paused
     end
 
+    def cancellable_action?(action)
+      action.is_a?(::Dynflow::Action::Cancellable)
+    end
+
     def progress
       execution_plan.progress
     end
@@ -45,6 +49,10 @@ module ForemanTasks
 
     def failed_steps
       execution_plan.steps_in_state(:skipped, :skipping, :error)
+    end
+
+    def running_steps
+      execution_plan.steps_in_state(:running, :suspended)
     end
 
     def humanized
