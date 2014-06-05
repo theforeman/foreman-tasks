@@ -10,48 +10,48 @@
               class:  ['btn', 'btn-sm', 'btn-primary', ('disabled' unless @task.resumable?)].compact,
               method: :post) %>
 
-  <%= link_to(_('Stop'),
+  <%= link_to(_('Unlock'),
               '',
               class:         ['btn', 'btn-sm', 'btn-warning', 'reload-button-stop', ('disabled' unless @task.state == 'paused')].compact,
               :'data-toggle' => "modal",
-              :'data-target' => "#stop_modal") %>
+              :'data-target' => "#unlock_modal") %>
 
-  <%= link_to(_('Force Stop'),
+  <%= link_to(_('Force Unlock'),
               '',
               class:         ['btn', 'btn-sm', 'btn-danger', 'reload-button-stop', ('disabled' if @task.state == 'stopped')].compact,
               :'data-toggle' => "modal",
-              :'data-target' => "#force_stop_modal") %>
+              :'data-target' => "#force_unlock_modal") %>
 </p>
 
-<div class="modal fade" id="stop_modal" tabindex="-1" role="dialog" aria-labelledby="Deploy" aria-hidden="true">
+<div class="modal fade" id="unlock_modal" tabindex="-1" role="dialog" aria-labelledby="Deploy" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h2 class="modal-title" id="deploy_modal_label">
           <span class="glyphicon glyphicon-warning-sign"></span>
-          <%= _("Stop") %>
+          <%= _("Unlock") %>
         </h2>
       </div>
       <div class="modal-body">
-        <%= _("This will stop the task and unlock the resources. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed") %>
+        <%= _("This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed") %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal"><%= _("Cancel") %></button>
-        <%= link_to(_("Stop"), stop_foreman_tasks_task_path(@task), method: :post, class: 'btn btn-warning') %>
+        <%= link_to(_("Unlock"), unlock_foreman_tasks_task_path(@task), method: :post, class: 'btn btn-warning') %>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="force_stop_modal" tabindex="-1" role="dialog" aria-labelledby="Deploy" aria-hidden="true">
+<div class="modal fade" id="force_unlock_modal" tabindex="-1" role="dialog" aria-labelledby="Deploy" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h2 class="modal-title" id="deploy_modal_label">
           <span class="glyphicon glyphicon-exclamation-sign"></span>
-          <%= _("Force Stop") %>
+          <%= _("Force Unlock") %>
         </h2>
       </div>
       <div class="modal-body">
@@ -59,7 +59,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal"><%= _("Cancel") %></button>
-        <%= link_to(_("Force Stop"), force_stop_foreman_tasks_task_path(@task), method: :post, class: 'btn btn-danger') %>
+        <%= link_to(_("Force Unlock"), force_unlock_foreman_tasks_task_path(@task), method: :post, class: 'btn btn-danger') %>
       </div>
     </div>
   </div>

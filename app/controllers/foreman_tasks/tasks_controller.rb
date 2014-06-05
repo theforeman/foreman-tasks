@@ -24,23 +24,23 @@ module ForemanTasks
       redirect_to foreman_tasks_task_path(task)
     end
 
-    def stop
+    def unlock
       task = find_task
       if task.paused?
         task.state = :stopped
         task.save!
-        flash[:notice] = _('The execution was stopped.')
+        flash[:notice] = _('The task resrouces were unlocked.')
       else
         flash[:warning] =  _('The execution has to be paused.')
       end
       redirect_to foreman_tasks_task_path(task)
     end
 
-    def force_stop
+    def force_unlock
       task       = find_task
       task.state = :stopped
       task.save!
-      flash[:notice] = _('The task was stopped with force.')
+      flash[:notice] = _('The task resources were unlocked with force.')
       redirect_to foreman_tasks_task_path(task)
     end
 
