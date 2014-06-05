@@ -50,7 +50,7 @@
       task_progress_reloader.stop();
     });
 
-  <% if @task.pending %>
+  <% if @task.state == 'running' %>
     task_progress_reloader.start();
   <% else %>
     task_progress_reloader.stop();

@@ -23,6 +23,10 @@ module ForemanTasks
       self.save!
     end
 
+    def resumable?
+      execution_plan.state == :paused
+    end
+
     def progress
       execution_plan.progress
     end
