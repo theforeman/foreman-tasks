@@ -40,5 +40,10 @@ module Actions
       end
     end
 
+    def humanized_error
+      execution_plan.steps_in_state(:skipped, :skipping, :error).map do |step|
+        step.error.message
+      end.join("\n")
+    end
   end
 end
