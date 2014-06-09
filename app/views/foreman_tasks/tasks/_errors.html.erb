@@ -1,0 +1,36 @@
+<% if @task.is_a? ForemanTasks::Task::DynflowTask %>
+  <div>
+    <% failed_steps = @task.failed_steps %>
+    <% if failed_steps.empty? %>
+      <div class="alert alert-success">
+        <%= _("No errors") %>
+      </div>
+    <% else %>
+      <% failed_steps.each do |step| %>
+        <div class="alert alert-danger">
+          <% action = step.action(@task.execution_plan) %>
+          <span class="param-name"><%= _("Action") %>:</span>
+          <span class="param-value">
+            <pre><%= action.class %></pre>
+          </span>
+          <span class="param-name"><%= _("Input") %>:</span>
+          <span class="param-value">
+            <pre><%= action.input.pretty_inspect %></pre>
+          </span>
+          <span class="param-name"><%= _("Output") %>:</span>
+          <span class="param-value">
+            <pre><%= action.output.pretty_inspect %></pre>
+          </span>
+          <span class="param-name"><%= _("Exception") %>:</span>
+          <span class="param-value">
+            <pre><%= step.error.exception_class %>: <%= step.error.message %></pre>
+          </span>
+          <span class="param-name"><%= _("Backtrace") %>:</span>
+          <span class="param-value">
+            <pre><%= step.error.backtrace.join("\n") %></pre>
+          </span>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

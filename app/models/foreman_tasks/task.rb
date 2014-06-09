@@ -62,6 +62,14 @@ module ForemanTasks
       self.state != 'stopped'
     end
 
+    def resumable?
+      false
+    end
+
+    def paused?
+      self.state == 'paused'
+    end
+
     def self.search_by_generic_resource(key, operator, value)
       key_name = self.connection.quote_column_name(key.sub(/^.*\./,''))
       condition = sanitize_sql_for_conditions(["foreman_tasks_locks.#{key_name} #{operator} ?", value])

@@ -1,0 +1,16 @@
+<div>
+  <span class="param-name"><%= _("Raw input") %>:</span>
+  <span class="param-value">
+    <pre><%= @task.input.pretty_inspect %></pre>
+  </span>
+</div>
+<div>
+  <span class="param-name"><%= _("Raw output") %>:</span>
+  <span class="param-value">
+    <pre><%= @task.output.pretty_inspect %></pre>
+  </span>
+</div>
+<div>
+  <span class="param-name"><%= _("External Id") %>:</span>
+  <span class="param-value"><%= @task.external_id %></span>
+</div>

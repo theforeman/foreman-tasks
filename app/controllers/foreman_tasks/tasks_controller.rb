@@ -14,24 +14,33 @@ module ForemanTasks
     end
 
     def resume
-      paused_task_action _('The execution was resumed.') do |task|
+      task = find_task
+      if task.resumable?
         ForemanTasks.dynflow.world.execute(task.execution_plan.id)
+        flash[:notice] = _('The execution was resumed.')
+      else
+        flash[:warning] = _('The execution has to be resumable.')
       end
+      redirect_to foreman_tasks_task_path(task)
     end
 
-    def stop
-      paused_task_action _('The execution was stopped.') do |task|
-        # FIXME also stop dynflow execution plan
+    def unlock
+      task = find_task
+      if task.paused?
         task.state = :stopped
         task.save!
+        flash[:notice] = _('The task resrouces were unlocked.')
+      else
+        flash[:warning] =  _('The execution has to be paused.')
       end
+      redirect_to foreman_tasks_task_path(task)
     end
 
-    def force_stop
+    def force_unlock
       task       = find_task
       task.state = :stopped
       task.save!
-      flash[:notice] = _('The task was stopped with force.')
+      flash[:notice] = _('The task resources were unlocked with force.')
       redirect_to foreman_tasks_task_path(task)
     end
 
@@ -41,18 +50,6 @@ module ForemanTasks
     end
 
     private
-
-    def paused_task_action(success_message)
-      task = find_task
-      if task.state != 'paused'
-        flash[:warning] = _('The execution has to be paused.')
-      else
-        yield task
-        flash[:notice] = success_message
-      end
-
-      redirect_to foreman_tasks_task_path(task)
-    end
 
     def find_task
       ForemanTasks::Task::DynflowTask.find(params[:id])

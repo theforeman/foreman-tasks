@@ -23,6 +23,10 @@ module ForemanTasks
       self.save!
     end
 
+    def resumable?
+      execution_plan.state == :paused
+    end
+
     def progress
       execution_plan.progress
     end
@@ -37,6 +41,10 @@ module ForemanTasks
 
     def output
       main_action.respond_to?(:task_output) && main_action.task_output
+    end
+
+    def failed_steps
+      execution_plan.steps_in_state(:skipped, :skipping, :error)
     end
 
     def humanized

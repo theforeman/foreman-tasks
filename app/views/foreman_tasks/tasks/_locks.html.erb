@@ -1,0 +1,13 @@
+<div>
+  <ul>
+    <% @task.locks.each do |lock| %>
+      <li>
+        name: <%= lock.name %>
+        <br/>
+        resource: <%= format('%s id:%s', lock.resource_type, lock.resource_id) %>
+        <br/>
+        exclusive: <%= lock.exclusive %>
+      </li>
+    <% end %>
+  </ul>
+</div>

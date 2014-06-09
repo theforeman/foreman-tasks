@@ -5,9 +5,9 @@ Foreman::Application.routes.draw do
         get 'auto_complete_search'
       end
       member do
-        post :stop
         post :resume
-        post :force_stop
+        post :unlock
+        post :force_unlock
       end
     end
 
