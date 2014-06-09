@@ -1,5 +1,5 @@
 <script>
-  task_progress_reloader = {
+  var taskProgressReloader = {
     timeoutId: null,
     reload: function () {
       $.ajax({
@@ -7,7 +7,7 @@
         context: document.body,
         success: function (s, x) {
           $(this).html(s);
-          task_progress_reloader.start();
+          taskProgressReloader.start();
         }
       });
     },
@@ -42,18 +42,22 @@
 
   $(document).ready(function () {
     $('.reload-button').click(function (event) {
-      task_progress_reloader.toggle();
+      taskProgressReloader.toggle();
       event.preventDefault();
     });
 
     $('.reload-button-stop').click(function (event) {
-      task_progress_reloader.stop();
+      taskProgressReloader.stop();
+    });
+
+    $('ul.nav-tabs a' ).click(function (event) {
+      taskProgressReloader.stop();
     });
 
   <% if @task.state == 'running' %>
-    task_progress_reloader.start();
+    taskProgressReloader.start();
   <% else %>
-    task_progress_reloader.stop();
+    taskProgressReloader.stop();
   <% end %>
   });
 </script>
@@ -64,6 +68,7 @@
 
   <ul class="nav nav-tabs" data-tabs="tabs">
     <li class="active"><a href="#primary" data-toggle="tab"><%= _("Task") %></a></li>
+    <li><a href="#running-steps" data-toggle="tab"><%= _("Running Steps") %></a></li>
     <li><a href="#errors" data-toggle="tab"><%= _("Errors") %></a></li>
     <li><a href="#locks" data-toggle="tab"><%= _("Locks") %></a></li>
     <li><a href="#raw" data-toggle="tab"><%= _("Raw") %></a></li>
@@ -72,6 +77,9 @@
   <div class="tab-content">
     <div class="tab-pane active" id="primary">
       <%= render :partial => 'details' %>
+    </div>
+    <div class="tab-pane" id="running-steps">
+      <%= render :partial => 'running_steps' %>
     </div>
     <div class="tab-pane" id="errors">
       <%= render :partial => 'errors' %>

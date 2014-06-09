@@ -8,6 +8,7 @@ Foreman::Application.routes.draw do
         post :resume
         post :unlock
         post :force_unlock
+        post :cancel_step
       end
     end
 
