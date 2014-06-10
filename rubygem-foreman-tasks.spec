@@ -16,7 +16,7 @@
 
 Summary: Tasks support for Foreman with Dynflow integration
 Name: %{?scl_prefix}rubygem-%{gem_name}
-Version: 0.5.7
+Version: 0.6.0
 Release: 1%{?dist}
 Group: Development/Libraries
 License: GPLv3
@@ -145,6 +145,16 @@ type foreman-selinux-relabel >/dev/null 2>&1 && foreman-selinux-relabel 2>&1 >/d
 %doc %{gem_instdir}/README.md
 
 %changelog
+* Tue Jun 10 2014 Ivan Nečas <inecas@redhat.com> 0.6.0-1
+- Update dependencies (inecas@redhat.com)
+- Fixes #5719 - show the currently running steps and allow canceling when
+  possible (inecas@redhat.com)
+- Refs #6072 - use unlock words instead of stop to don't give false assumptions
+  (inecas@redhat.com)
+- Refs #6072 - allow to resume after stopping the task (inecas@redhat.com)
+- Refs #6072 - provide more debug information for the task (inecas@redhat.com)
+- Refs #4748 - Include error details in humanized output (inecas@redhat.com)
+
 * Wed May 28 2014 Ivan Nečas <inecas@redhat.com> 0.5.7-1
 - Refs #5961 - dynflow world init hooks (inecas@redhat.com)
 - Fixes #5950 - don't show empty output as {} in humanized form
