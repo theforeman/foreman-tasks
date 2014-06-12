@@ -11,6 +11,9 @@ module ForemanTasks
     # the number of threads in the pool handling the execution
     attr_accessor :pool_size
 
+    # the size of db connection pool
+    attr_accessor :db_pool_size
+
     # set true if the executor runs externally (by default true in procution, othewise false)
     attr_accessor :remote
     alias_method :remote?, :remote
@@ -34,6 +37,7 @@ module ForemanTasks
       self.action_logger            = Rails.logger
       self.dynflow_logger           = Rails.logger
       self.pool_size                = 5
+      self.db_pool_size             = pool_size + 5
       self.remote                   = Rails.env.production?
       self.remote_socket_path       = File.join(Rails.root, "tmp", "sockets", "dynflow_socket")
       self.transaction_adapter      = ::Dynflow::TransactionAdapters::ActiveRecord.new
@@ -84,6 +88,7 @@ module ForemanTasks
     def default_sequel_adapter_options
       db_config            = ActiveRecord::Base.configurations[Rails.env].dup
       db_config['adapter'] = 'postgres' if db_config['adapter'] == 'postgresql'
+      db_config['max_connections'] = db_config['pool'] if db_config['pool']
 
       if db_config['adapter'] == 'sqlite3'
         db_config['adapter'] = 'sqlite'
@@ -107,7 +112,20 @@ module ForemanTasks
 
     # Sequel adapter based on Rails app database.yml configuration
     def initialize_persistence
+      unless remote?
+        increase_db_pool_size
+      end
       ForemanTasks::Dynflow::Persistence.new(default_sequel_adapter_options)
+    end
+
+    # To avoid pottential timeouts on db connection pool, make sure
+    # we have the pool bigger than the thread pool
+    def increase_db_pool_size
+      ActiveRecord::Base.connection_pool.disconnect!
+
+      config = ActiveRecord::Base.configurations[Rails.env]
+      config['pool'] = db_pool_size if config['pool'].to_i < db_pool_size
+      ActiveRecord::Base.establish_connection(config)
     end
   end
 end
