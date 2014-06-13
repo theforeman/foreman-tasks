@@ -16,7 +16,7 @@
 
 Summary: Tasks support for Foreman with Dynflow integration
 Name: %{?scl_prefix}rubygem-%{gem_name}
-Version: 0.6.0
+Version: 0.6.1
 Release: 1%{?dist}
 Group: Development/Libraries
 License: GPLv3
@@ -145,6 +145,14 @@ type foreman-selinux-relabel >/dev/null 2>&1 && foreman-selinux-relabel 2>&1 >/d
 %doc %{gem_instdir}/README.md
 
 %changelog
+* Fri Jun 13 2014 Ivan Nečas <inecas@redhat.com> 0.6.1-1
+- Refs #6193 - execute planned actions in case the execution was not picked up
+  for some reason (inecas@redhat.com)
+- Fixes #6193 - increase the database pool to avoid connection timeouts
+  (inecas@redhat.com)
+- Fixes #6166 - ensure we don't execute the same execution plan twice in a row
+  (inecas@redhat.com)
+
 * Tue Jun 10 2014 Ivan Nečas <inecas@redhat.com> 0.6.0-1
 - Update dependencies (inecas@redhat.com)
 - Fixes #5719 - show the currently running steps and allow canceling when
