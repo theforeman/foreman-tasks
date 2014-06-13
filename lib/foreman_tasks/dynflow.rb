@@ -46,6 +46,7 @@ module ForemanTasks
           # every time the new world is created when there is a register
           # of executors
           world.consistency_check
+          world.execute_planned_execution_plans
         end
       end
     end
