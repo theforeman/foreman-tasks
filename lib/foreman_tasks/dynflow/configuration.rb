@@ -112,7 +112,7 @@ module ForemanTasks
 
     # Sequel adapter based on Rails app database.yml configuration
     def initialize_persistence
-      unless remote?
+      if !remote && !Rails.env.test?
         increase_db_pool_size
       end
       ForemanTasks::Dynflow::Persistence.new(default_sequel_adapter_options)
