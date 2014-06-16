@@ -16,7 +16,7 @@ module ForemanTasks
     def cancel_step
       task = find_task
       flash[:notice] = _("Trying to cancel step %s") % params[:step_id]
-      ForemanTasks.dynflow.world.event(task.external_id, params[:step_id].to_i, ::Dynflow::Action::Cancellable::Cancel)
+      ForemanTasks.dynflow.world.event(task.external_id, params[:step_id].to_i, ::Dynflow::Action::Cancellable::Cancel).wait
       redirect_to foreman_tasks_task_path(task)
     end
 
