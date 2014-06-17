@@ -74,6 +74,18 @@ module ForemanTasks
       end
     end
 
+    # To avoid pottential timeouts on db connection pool, make sure
+    # we have the pool bigger than the thread pool
+    def increase_db_pool_size
+      if ForemanTasks.dynflow.required? && !remote? && !Rails.env.test?
+        ActiveRecord::Base.connection_pool.disconnect!
+
+        config = ActiveRecord::Base.configurations[Rails.env]
+        config['pool'] = db_pool_size if config['pool'].to_i < db_pool_size
+        ActiveRecord::Base.establish_connection(config)
+      end
+    end
+
     protected
 
     # generates the options hash consumable by the Dynflow's world
@@ -88,7 +100,7 @@ module ForemanTasks
     def default_sequel_adapter_options
       db_config            = ActiveRecord::Base.configurations[Rails.env].dup
       db_config['adapter'] = 'postgres' if db_config['adapter'] == 'postgresql'
-      db_config['max_connections'] = db_config['pool'] if db_config['pool']
+      db_config['max_connections'] = db_pool_size
 
       if db_config['adapter'] == 'sqlite3'
         db_config['adapter'] = 'sqlite'
@@ -112,20 +124,8 @@ module ForemanTasks
 
     # Sequel adapter based on Rails app database.yml configuration
     def initialize_persistence
-      if !remote && !Rails.env.test?
-        increase_db_pool_size
-      end
       ForemanTasks::Dynflow::Persistence.new(default_sequel_adapter_options)
     end
 
-    # To avoid pottential timeouts on db connection pool, make sure
-    # we have the pool bigger than the thread pool
-    def increase_db_pool_size
-      ActiveRecord::Base.connection_pool.disconnect!
-
-      config = ActiveRecord::Base.configurations[Rails.env]
-      config['pool'] = db_pool_size if config['pool'].to_i < db_pool_size
-      ActiveRecord::Base.establish_connection(config)
-    end
   end
 end

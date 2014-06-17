@@ -58,6 +58,8 @@ module ForemanTasks
         ForemanTasks.dynflow.eager_load_actions!
       end
 
+      ForemanTasks.dynflow.config.increase_db_pool_size
+
       unless ForemanTasks.dynflow.config.lazy_initialization
         if defined?(PhusionPassenger)
           PhusionPassenger.on_event(:starting_worker_process) do |forked|
