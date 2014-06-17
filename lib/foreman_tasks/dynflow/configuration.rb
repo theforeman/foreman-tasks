@@ -74,10 +74,14 @@ module ForemanTasks
       end
     end
 
+    def increase_db_pool_size?
+       ForemanTasks.dynflow.required? && !remote? && !Rails.env.test?
+    end
+
     # To avoid pottential timeouts on db connection pool, make sure
     # we have the pool bigger than the thread pool
     def increase_db_pool_size
-      if ForemanTasks.dynflow.required? && !remote? && !Rails.env.test?
+      if increase_db_pool_size?
         ActiveRecord::Base.connection_pool.disconnect!
 
         config = ActiveRecord::Base.configurations[Rails.env]
@@ -100,7 +104,7 @@ module ForemanTasks
     def default_sequel_adapter_options
       db_config            = ActiveRecord::Base.configurations[Rails.env].dup
       db_config['adapter'] = 'postgres' if db_config['adapter'] == 'postgresql'
-      db_config['max_connections'] = db_pool_size
+      db_config['max_connections'] = db_pool_size if increase_db_pool_size?
 
       if db_config['adapter'] == 'sqlite3'
         db_config['adapter'] = 'sqlite'
