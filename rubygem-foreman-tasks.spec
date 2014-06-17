@@ -16,7 +16,7 @@
 
 Summary: Tasks support for Foreman with Dynflow integration
 Name: %{?scl_prefix}rubygem-%{gem_name}
-Version: 0.6.2
+Version: 0.6.3
 Release: 1%{?dist}
 Group: Development/Libraries
 License: GPLv3
@@ -145,6 +145,13 @@ type foreman-selinux-relabel >/dev/null 2>&1 && foreman-selinux-relabel 2>&1 >/d
 %doc %{gem_instdir}/README.md
 
 %changelog
+* Tue Jun 17 2014 Ivan Nečas <inecas@redhat.com> 0.6.3-1
+- Fixes #6193 - increase the db poll size only for executor (inecas@redhat.com)
+- Merge pull request #69 from iNecas/issue/5719 (inecas@redhat.com)
+- Fixes #6193 - make sure we increase the AR db pool soon enough
+  (inecas@redhat.com)
+- Refs #5719 - wait for the cancel event being processed (inecas@redhat.com)
+
 * Mon Jun 16 2014 Ivan Nečas <inecas@redhat.com> 0.6.2-1
 - Fixes #6224: Prevent increasing db pool size in test environment.
   (ericdhelms@gmail.com)
