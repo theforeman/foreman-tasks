@@ -101,17 +101,33 @@
   <span class="param-name"><%= _("Params") %>:</span>
   <span class="param-value"><%= format_task_input(@task) %></span>
 </div>
-<div>
-  <span class="param-name"><%= _("Progress") %>:</span>
-  <span class="param-value">
-    <div class="progress progress-striped">
+<div class="row">
+  <div class="col-xs-11">
+    <div class="progress progress-striped <%= 'active' if @task.state == 'running' %>">
       <% progress = 100 * @task.progress %>
-      <div class="progress-bar" role="progressbar" aria-valuenow="<%= progress %>"
-           aria-valuemin="0" aria-valuemax="100" style="width: <%= progress %>%">
+      <% classes = ['progress-bar',
+                    case @task.result
+                    when 'success'
+                      'progress-bar-success'
+                    when 'error'
+                      'progress-bar-danger'
+                    else
+                      nil
+                    end]
+      %>
+      <div class="<%= classes.join ' ' %>"
+           role="progressbar"
+           aria-valuenow="<%= progress %>"
+           aria-valuemin="0"
+           aria-valuemax="100"
+           style="width: <%= progress %>%;">
         <span class="sr-only"><%= progress %>% Complete</span>
       </div>
     </div>
-  </span>
+  </div>
+  <div class="col-xs-1">
+    <%= progress.round %>%
+  </div>
 </div>
 <div>
   <span class="param-name"><%= _("Output") %>:</span>
