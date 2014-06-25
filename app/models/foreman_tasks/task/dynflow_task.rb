@@ -58,7 +58,8 @@ module ForemanTasks
     def humanized
       { action: get_humanized(:humanized_name),
         input:  get_humanized(:humanized_input),
-        output: [get_humanized(:humanized_output), get_humanized(:humanized_error)].reject(&:blank?).join("\n") }
+        output: get_humanized(:humanized_output),
+        errors: get_humanized(:humanized_errors) }
     end
 
     def cli_example
@@ -73,7 +74,7 @@ module ForemanTasks
     end
 
     def get_humanized(method)
-      Match! method, :humanized_name, :humanized_input, :humanized_output, :humanized_error
+      Match! method, :humanized_name, :humanized_input, :humanized_output, :humanized_errors
       if main_action.respond_to? method
         begin
           main_action.send method
