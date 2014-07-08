@@ -2,7 +2,7 @@
   <%= link_to(_('Auto Reload'), '', class: %w(btn btn-sm btn-default reload-button hidden)) %>
 
   <%= link_to(_('Dynflow console'),
-              format('/foreman_tasks/dynflow/%s', @task.external_id),
+              format((defined?(Rails) ? request.script_name : '') + '/foreman_tasks/dynflow/%s', @task.external_id),
               class: %w(btn btn-sm btn-default)) if Setting['dynflow_enable_console'] %>
 
   <%= link_to(_('Resume'),
