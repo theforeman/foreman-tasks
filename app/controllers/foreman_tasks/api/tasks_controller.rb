@@ -52,6 +52,9 @@ module ForemanTasks
         param :resource_type, String, :desc => <<-DESC
           In case :type = 'resource', what resource id we're searching the tasks for
         DESC
+        param :action_types, [String], :desc => <<-DESC
+          Return just tasks of given action type, e.g. ["Actions::Katello::Repository::Synchronize"]
+        DESC
         param :active_only, :bool
         param :page, String
         param :per_page, String
@@ -80,6 +83,7 @@ module ForemanTasks
         scope = ordering_scope(scope, search_params)
         scope = search_scope(scope, search_params)
         scope = active_scope(scope, search_params)
+        scope = action_types_scope(scope, search_params)
         scope = pagination_scope(scope, search_params)
         scope.all.map { |task| task_hash(task) }
       end
@@ -117,6 +121,14 @@ module ForemanTasks
       def active_scope(scope, search_params)
         if search_params[:active_only]
           scope.active
+        else
+          scope
+        end
+      end
+
+      def action_types_scope(scope, search_params)
+        if action_types = search_params[:action_types]
+          scope.for_action_types(action_types)
         else
           scope
         end

@@ -20,7 +20,7 @@ module Actions
       self.class.name.demodulize.underscore.humanize
     end
 
-    # This method should return String of Array<String> describing input for the task
+    # This method should return String or Array<String> describing input for the task
     def humanized_input
       if task_input.blank?
         ""
@@ -40,10 +40,11 @@ module Actions
       end
     end
 
-    def humanized_error
+    # This method should return String or Array<String> describing the errors during the action
+    def humanized_errors
       execution_plan.steps_in_state(:skipped, :skipping, :error).map do |step|
-        step.error.message
-      end.join("\n")
+        step.error.message if step.error
+      end.compact
     end
   end
 end

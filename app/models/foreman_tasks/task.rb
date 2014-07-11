@@ -30,6 +30,7 @@ module ForemanTasks
            joins(:locks).where(:"foreman_tasks_locks.resource_id" => resource.id,
                                :"foreman_tasks_locks.resource_type" => resource.class.name)
          end)
+    scope :for_action_types, (lambda { |action_types| where('label IN (?)', Array(action_types)) })
 
     def input
       {}
