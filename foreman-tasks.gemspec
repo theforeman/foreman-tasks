@@ -26,7 +26,7 @@ DESC
 
   s.add_dependency "rails", "~> 3.2.0"
   s.add_dependency "uuidtools"
-  s.add_dependency "dynflow", '>= 0.7.0'
+  s.add_dependency "dynflow", '>= 0.7.2'
   s.add_dependency "sequel" # for Dynflow process persistence
   s.add_dependency "sinatra" # for Dynflow web console
   s.add_dependency "daemons" # for running remote executor
