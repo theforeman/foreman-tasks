@@ -5,21 +5,13 @@ module ForemanTasks
 
     scope :for_action, ->(action_class) { where(label: action_class.name) }
 
-    def update_from_dynflow(data, planned)
+    def update_from_dynflow(data)
       self.external_id = data[:id]
       self.started_at  = data[:started_at]
       self.ended_at    = data[:ended_at]
       self.state       = data[:state].to_s
       self.result      = data[:result].to_s
-
-      if planned
-        # for now, this part needs to laod the execution_plan to
-        # load extra data, there is place for optimization on Dynflow side
-        # if needed (getting more keys into the data value)
-        unless self.label
-          self.label = main_action.class.name
-        end
-      end
+      self.label       ||= main_action.class.name
       self.save!
     end
 

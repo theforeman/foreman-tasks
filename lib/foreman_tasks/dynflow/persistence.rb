@@ -21,14 +21,14 @@ module ForemanTasks
     def on_execution_plan_save(execution_plan_id, data)
       # We can load the data unless the execution plan was properly planned and saved
       # including its steps
-      if data[:state] == :pending
+      if data[:state] == :planning
         task = ::ForemanTasks::Task::DynflowTask.new
-        task.update_from_dynflow(data, false)
+        task.update_from_dynflow(data)
         Lock.owner!(::User.current, task.id) if ::User.current
-      elsif data[:state] != :planning
+      elsif data[:state] != :pending
         if task = ::ForemanTasks::Task::DynflowTask.find_by_external_id(execution_plan_id)
           unless task.state.to_s == data[:state].to_s
-            task.update_from_dynflow(data, true)
+            task.update_from_dynflow(data)
           end
         end
       end
