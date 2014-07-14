@@ -16,7 +16,7 @@
 
 Summary: Tasks support for Foreman with Dynflow integration
 Name: %{?scl_prefix}rubygem-%{gem_name}
-Version: 0.6.4
+Version: 0.6.5
 Release: 1%{?dist}
 Group: Development/Libraries
 License: GPLv3
@@ -145,6 +145,20 @@ type foreman-selinux-relabel >/dev/null 2>&1 && foreman-selinux-relabel 2>&1 >/d
 %doc %{gem_instdir}/README.md
 
 %changelog
+* Mon Jul 14 2014 Ivan Nečas <inecas@redhat.com> 0.6.5-1
+- Bump required dynflow version (inecas@redhat.com)
+- Refs #6180 - make sure the task label is set before the planning starts
+  (inecas@redhat.com)
+- Merge pull request #73 from iNecas/issue/6310 (inecas@redhat.com)
+- Merge pull request #75 from iNecas/issue/6296 (inecas@redhat.com)
+- Support sub-uri deployments (mhulan@redhat.com)
+- Refs #6296 - support for searching for subset of action types
+  (inecas@redhat.com)
+- Refs #6296 - return humanized task errors in separate field
+  (inecas@redhat.com)
+- Fixes #6310 - Fix typo and make the lock error message localized
+  (inecas@redhat.com)
+
 * Fri Jun 20 2014 Ivan Nečas <inecas@redhat.com> 0.6.4-1
 - UX improvements (git@pitr.ch)
 
