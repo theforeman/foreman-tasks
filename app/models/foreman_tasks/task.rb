@@ -25,6 +25,7 @@ module ForemanTasks
     scoped_search :in => :owners,  :on => :firstname, :complete_value => true, :rename => "owner.firstname", :ext_method => :search_by_owner
 
     scope :active, -> {  where('state != ?', :stopped) }
+    scope :running, -> {  where("state NOT IN ('stopped', 'paused')") }
     scope :for_resource,
         (lambda do |resource|
            joins(:locks).where(:"foreman_tasks_locks.resource_id" => resource.id,

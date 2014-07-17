@@ -46,5 +46,10 @@ module Actions
         step.error.message if step.error
       end.compact
     end
+
+    def already_running?
+      ForemanTasks::Task::DynflowTask.for_action(self.class).
+        running.where('external_id != ?', execution_plan_id).any?
+    end
   end
 end
