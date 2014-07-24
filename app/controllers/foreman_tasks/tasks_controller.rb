@@ -36,7 +36,7 @@ module ForemanTasks
       if task.paused?
         task.state = :stopped
         task.save!
-        flash[:notice] = _('The task resrouces were unlocked.')
+        flash[:notice] = _('The task resources were unlocked.')
       else
         flash[:warning] =  _('The execution has to be paused.')
       end
