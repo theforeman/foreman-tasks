@@ -16,7 +16,7 @@
 
 Summary: Tasks support for Foreman with Dynflow integration
 Name: %{?scl_prefix}rubygem-%{gem_name}
-Version: 0.6.5
+Version: 0.6.6
 Release: 1%{?dist}
 Group: Development/Libraries
 License: GPLv3
@@ -145,6 +145,11 @@ type foreman-selinux-relabel >/dev/null 2>&1 && foreman-selinux-relabel 2>&1 >/d
 %doc %{gem_instdir}/README.md
 
 %changelog
+* Thu Jul 24 2014 Ivan Nečas <inecas@redhat.com> 0.6.6-1
+- Fix typo (kontakt@pitr.ch)
+- Ref #6656 - allow actions to determine if task is already running
+  (dtsang@redhat.com)
+
 * Mon Jul 14 2014 Ivan Nečas <inecas@redhat.com> 0.6.5-1
 - Bump required dynflow version (inecas@redhat.com)
 - Refs #6180 - make sure the task label is set before the planning starts
