@@ -21,14 +21,16 @@
           <span class="param-value">
             <pre><%= action.output.pretty_inspect %></pre>
           </span>
-          <span class="param-name"><%= _("Exception") %>:</span>
-          <span class="param-value">
-            <pre><%= step.error.exception_class %>: <%= step.error.message %></pre>
-          </span>
-          <span class="param-name"><%= _("Backtrace") %>:</span>
-          <span class="param-value">
-            <pre><%= step.error.backtrace.join("\n") %></pre>
-          </span>
+          <% if step.error %>
+            <span class="param-name"><%= _("Exception") %>:</span>
+            <span class="param-value">
+              <pre><%= step.error.exception_class %>: <%= step.error.message %></pre>
+            </span>
+            <span class="param-name"><%= _("Backtrace") %>:</span>
+            <span class="param-value">
+              <pre><%= step.error.backtrace.join("\n") %></pre>
+            </span>
+          <% end %>
         </div>
       <% end %>
     <% end %>
