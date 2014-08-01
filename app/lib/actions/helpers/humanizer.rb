@@ -91,6 +91,22 @@ module Actions
         end
       end
 
+      class ActivationKeyResource < Resource
+        def name
+          :activation_key
+        end
+
+        def humanized_name
+          _('activation key')
+        end
+
+        def link(data)
+          if ackey_id = fetch_data(data, :activation_key, :id)
+            "/activation_keys/#{ackey_id}/info"
+          end
+        end
+      end
+
       class UserResource < Resource
         def name
           :user
