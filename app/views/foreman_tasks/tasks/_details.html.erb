@@ -95,7 +95,7 @@
 </div>
 <div>
   <span class="param-name"><%= _("Result") %>:</span>
-  <span class="param-value"><%= @task.result %></span>
+  <span class="param-value"><%= @task.state == 'running' ? '-' : @task.result %></span>
 </div>
 <div>
   <span class="param-name"><%= _("Params") %>:</span>
