@@ -82,7 +82,13 @@ module ForemanTasks
     def web_console
       ::Dynflow::WebConsole.setup do
         before do
-          if !Setting[:dynflow_enable_console]
+          rack_request = Rack::Request.new(env)
+          user_id, expires_at = rack_request.session.
+            values_at('user', 'expires_at')
+          if Setting[:dynflow_console_require_auth] &&
+              (!Setting[:dynflow_enable_console] ||
+               (user_id.nil? || !User.find(user_id).admin) ||
+               Time.now.to_i > expires_at)
             redirect('dashboard')
           end
         end
