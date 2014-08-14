@@ -73,6 +73,7 @@ module ForemanTasks
     end
 
     def self.search_by_generic_resource(key, operator, value)
+      key =  "resource_type" if key.blank?
       key_name = self.connection.quote_column_name(key.sub(/^.*\./,''))
       condition = sanitize_sql_for_conditions(["foreman_tasks_locks.#{key_name} #{operator} ?", value])
 
@@ -89,7 +90,12 @@ module ForemanTasks
       INNER JOIN users
                  ON (users.id = foreman_tasks_locks_owner.resource_id)
       JOINS
-      condition = sanitize_sql_for_conditions(["users.#{key_name} #{operator} ?", value])
+
+      condition = if key.blank?
+                    sanitize_sql_for_conditions(["users.login #{operator} ? or users.firstname #{operator} ? ", value, value])
+                  else
+                    sanitize_sql_for_conditions(["users.#{key_name} #{operator} ?", value])
+                  end
       return {:conditions => condition, :joins => joins }
     end
 
