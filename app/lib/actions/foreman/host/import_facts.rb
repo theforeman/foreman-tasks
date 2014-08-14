@@ -17,7 +17,7 @@ module Actions
         def run
           ::User.as :admin do
             host           = ::Host.find(input[:host][:id])
-            state          = host.importFacts(input[:facts])
+            state          = host.import_facts(input[:facts])
             output[:state] = state
           end
         rescue ::Foreman::Exception => e
