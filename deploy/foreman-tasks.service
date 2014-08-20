@@ -5,6 +5,8 @@ After=network.target remote-fs.target nss-lookup.target
 
 [Service]
 Type=forking
+User=foreman
+TimeoutSec=600
 WorkingDirectory=/usr/share/foreman
 ExecStart=/usr/bin/foreman-tasks start 
 ExecStop=/usr/bin/foreman-tasks stop
