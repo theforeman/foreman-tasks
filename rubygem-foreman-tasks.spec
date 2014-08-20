@@ -16,7 +16,7 @@
 
 Summary: Tasks support for Foreman with Dynflow integration
 Name: %{?scl_prefix}rubygem-%{gem_name}
-Version: 0.6.8
+Version: 0.6.9
 Release: 1%{?dist}
 Group: Development/Libraries
 License: GPLv3
@@ -145,6 +145,9 @@ type foreman-selinux-relabel >/dev/null 2>&1 && foreman-selinux-relabel 2>&1 >/d
 %doc %{gem_instdir}/README.md
 
 %changelog
+* Wed Aug 20 2014 Ivan Nečas <inecas@redhat.com> 0.6.9-1
+- Refs #6297 - fix systemd script (inecas@redhat.com)
+
 * Tue Aug 19 2014 Ivan Nečas <inecas@redhat.com> 0.6.8-1
 - Fixes BZ1108645 - Dynflow is available only to admin user
   (aruzicka@redhat.com)
