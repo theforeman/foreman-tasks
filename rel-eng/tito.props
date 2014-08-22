@@ -8,8 +8,9 @@ changelog_format = %s (%ae)
 disttag = .el6
 scl = ruby193
 
-[katello-thirdparty-fedora19]
-disttag = .fc19
+[katello-thirdparty-rhel7]
+disttag = .el7
+scl = ruby193
 
 [requirements]
 tito=0.4.12
