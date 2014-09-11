@@ -8,9 +8,13 @@ module ForemanTasks
 
     def index
       params[:order] ||= 'started_at DESC'
-      @tasks         = Task.
-          search_for(params[:search], :order => params[:order]).
-          paginate(:page => params[:page])
+      @tasks         = filter(Task)
+    end
+
+    def sub_tasks
+      task   = Task.find(params[:id])
+      @tasks = filter(task.sub_tasks)
+      render :index
     end
 
     def cancel_step
@@ -60,6 +64,11 @@ module ForemanTasks
 
     def find_task
       ForemanTasks::Task::DynflowTask.find(params[:id])
+    end
+
+    def filter(scope)
+      scope.search_for(params[:search], :order => params[:order]).
+          paginate(:page => params[:page])
     end
 
   end

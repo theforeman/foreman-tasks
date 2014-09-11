@@ -5,6 +5,7 @@ Foreman::Application.routes.draw do
         get 'auto_complete_search'
       end
       member do
+        get :sub_tasks
         post :resume
         post :unlock
         post :force_unlock

@@ -101,6 +101,16 @@
   <span class="param-name"><%= _("Params") %>:</span>
   <span class="param-value"><%= format_task_input(@task) %></span>
 </div>
+<% if @task.parent_task %>
+<div>
+  <span class="param-name"><%= link_to(_("Parent task"), foreman_tasks_task_path(@task.parent_task)) %></span>
+</div>
+<% end %>
+<% if @task.sub_tasks.any? %>
+<div>
+  <span class="param-name"><%= link_to(_("Sub tasks"), sub_tasks_foreman_tasks_task_path(@task)) %></span>
+</div>
+<% end %>
 <div class="row">
   <div class="col-xs-11">
     <div class="progress progress-striped <%= 'active' if @task.state == 'running' %>">

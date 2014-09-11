@@ -1,10 +1,6 @@
 module Actions
   module Helpers
     module Lock
-      def task
-        ::ForemanTasks::Task::DynflowTask.find_by_external_id!(execution_plan_id)
-      end
-
       # @see Lock.exclusive!
       def exclusive_lock!(resource)
         phase! Dynflow::Action::Plan

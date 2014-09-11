@@ -8,6 +8,8 @@ module ForemanTasks
     self.primary_key = :id
     before_create :generate_id
 
+    belongs_to :parent_task, :class_name => 'ForemanTasks::Task'
+    has_many :sub_tasks, :class_name => 'ForemanTasks::Task', :foreign_key => :parent_task_id
     has_many :locks
 
     # in fact, the task has only one owner but Rails don't let you to
