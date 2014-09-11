@@ -16,7 +16,7 @@
 
 Summary: Tasks support for Foreman with Dynflow integration
 Name: %{?scl_prefix}rubygem-%{gem_name}
-Version: 0.6.9
+Version: 0.6.10
 Release: 1%{?dist}
 Group: Development/Libraries
 License: GPLv3
@@ -145,6 +145,10 @@ type foreman-selinux-relabel >/dev/null 2>&1 && foreman-selinux-relabel 2>&1 >/d
 %doc %{gem_instdir}/README.md
 
 %changelog
+* Thu Sep 11 2014 Ivan Nečas <inecas@redhat.com> 0.6.10-1
+- Fixes #7301 - infrastructure for bulk actions via dynflow (inecas@redhat.com)
+- updating for el7 builds (jsherril@redhat.com)
+
 * Wed Aug 20 2014 Ivan Nečas <inecas@redhat.com> 0.6.9-1
 - Refs #6297 - fix systemd script (inecas@redhat.com)
 
