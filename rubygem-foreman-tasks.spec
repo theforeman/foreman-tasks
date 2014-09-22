@@ -12,7 +12,7 @@
 %define rubyabi 1.9.1
 %global foreman_bundlerd_dir /usr/share/foreman/bundler.d
 %global confdir deploy
-%global jobs_name foreman-tasks
+%global service_name foreman-tasks
 
 Summary: Tasks support for Foreman with Dynflow integration
 Name: %{?scl_prefix}rubygem-%{gem_name}
@@ -35,6 +35,16 @@ Requires: %{?scl_prefix}rubygem(sequel)
 Requires: %{?scl_prefix}rubygem(sinatra)
 Requires: %{?scl_prefix}rubygem(daemons)
 Requires: %{?scl_prefix}rubygems
+%if 0%{?rhel} == 6
+Requires(post): chkconfig
+Requires(preun): chkconfig
+Requires(preun): initscripts
+%else
+Requires(post): systemd-sysv
+Requires(post): systemd-units
+Requires(preun): systemd-units
+BuildRequires: systemd-units
+%endif
 BuildRequires: %{?scl_prefix}rubygems-devel
 
 %if 0%{?fedora} > 18
@@ -71,7 +81,7 @@ gem install --local --install-dir .%{gem_dir} \
 %{?scl:"}
 
 %build
-sed -ri '1sX(/usr/bin/ruby|/usr/bin/env ruby)X%{scl_ruby}X' %{_builddir}/%{pkg_name}-%{version}/%{gem_instdir}/bin/%{jobs_name}
+sed -ri '1sX(/usr/bin/ruby|/usr/bin/env ruby)X%{scl_ruby}X' %{_builddir}/%{pkg_name}-%{version}/%{gem_instdir}/bin/%{service_name}
 
 %install
 mkdir -p %{buildroot}%{gem_dir}
@@ -85,29 +95,42 @@ GEMFILE
 
 #copy init scripts and sysconfigs
 %if 0%{?fedora} > 18
-install -Dp -m0644 %{buildroot}%{gem_dir}/gems/%{gem_name}-%{version}/%{confdir}/%{jobs_name}.sysconfig %{buildroot}%{_sysconfdir}/sysconfig/%{jobs_name}
-install -Dp -m0755 %{buildroot}%{gem_dir}/gems/%{gem_name}-%{version}/%{confdir}/%{jobs_name}.service %{buildroot}%{_libdir}/systemd/system/%{jobs_name}.service
+install -Dp -m0644 %{buildroot}%{gem_dir}/gems/%{gem_name}-%{version}/%{confdir}/%{service_name}.sysconfig %{buildroot}%{_sysconfdir}/sysconfig/%{service_name}
+install -Dp -m0755 %{buildroot}%{gem_dir}/gems/%{gem_name}-%{version}/%{confdir}/%{service_name}.service %{buildroot}%{_libdir}/systemd/system/%{service_name}.service
 mkdir -p %{buildroot}%{_bindir}
-ln -sv %{gem_instdir}/bin/%{jobs_name} %{buildroot}%{_bindir}/%{jobs_name}
+ln -sv %{gem_instdir}/bin/%{service_name} %{buildroot}%{_bindir}/%{service_name}
 %else
-install -Dp -m0644 %{buildroot}%{gem_dir}/gems/%{gem_name}-%{version}/%{confdir}/%{jobs_name}.sysconfig %{buildroot}%{_root_sysconfdir}/sysconfig/%{jobs_name}
+install -Dp -m0644 %{buildroot}%{gem_dir}/gems/%{gem_name}-%{version}/%{confdir}/%{service_name}.sysconfig %{buildroot}%{_root_sysconfdir}/sysconfig/%{service_name}
 mkdir -p %{buildroot}%{_root_bindir}
-ln -sv %{gem_instdir}/bin/%{jobs_name} %{buildroot}%{_root_bindir}/%{jobs_name}
+ln -sv %{gem_instdir}/bin/%{service_name} %{buildroot}%{_root_bindir}/%{service_name}
 %if 0%{?rhel} == 6
-install -Dp -m0755 %{buildroot}%{gem_dir}/gems/%{gem_name}-%{version}/%{confdir}/%{jobs_name}.init %{buildroot}%{_root_initddir}/%{jobs_name}
+install -Dp -m0755 %{buildroot}%{gem_dir}/gems/%{gem_name}-%{version}/%{confdir}/%{service_name}.init %{buildroot}%{_root_initddir}/%{service_name}
 %else
-install -Dp -m0755 %{buildroot}%{gem_dir}/gems/%{gem_name}-%{version}/%{confdir}/%{jobs_name}.service %{buildroot}%{_root_libdir}/systemd/system/%{jobs_name}.service
+install -Dp -m0755 %{buildroot}%{gem_dir}/gems/%{gem_name}-%{version}/%{confdir}/%{service_name}.service %{buildroot}%{_root_libdir}/systemd/system/%{service_name}.service
 %endif
+%endif
+
+%post
+type foreman-selinux-relabel >/dev/null 2>&1 && foreman-selinux-relabel 2>&1 >/dev/null || true
+%if 0%{?rhel} == 6
+  /sbin/chkconfig --add %{service_name}
+  exit 0
+%else
+  if [ $1 -eq 1 ]; then
+    /bin/systemctl daemon-reload >/dev/null 2>&1 || :
+  fi
 %endif
 
 %preun
 if [ $1 -eq 0 ] ; then
-    /sbin/service %{jobs_name} stop >/dev/null 2>&1
-    /sbin/chkconfig --del %{jobs_name}
+  %if 0%{?rhel} == 6
+    /sbin/service %{service_name} stop >/dev/null 2>&1
+    /sbin/chkconfig --del %{service_name}
+  %else
+    /bin/systemctl --no-reload disable %{service_name}.service >/dev/null 2>&1 || :
+    /bin/systemctl stop %{service_name}.service >/dev/null 2>&1 || :
+  %endif
 fi
-
-%post
-type foreman-selinux-relabel >/dev/null 2>&1 && foreman-selinux-relabel 2>&1 >/dev/null || true
 
 %files
 %dir %{gem_instdir}
@@ -122,17 +145,17 @@ type foreman-selinux-relabel >/dev/null 2>&1 && foreman-selinux-relabel 2>&1 >/d
 %doc %{gem_instdir}/LICENSE
 
 %if 0%{?fedora} > 18
-%{_libdir}/systemd/system/%{jobs_name}.service
-%{_sysconfdir}/sysconfig/%{jobs_name}
-%{_bindir}/%{jobs_name}
+%{_libdir}/systemd/system/%{service_name}.service
+%{_sysconfdir}/sysconfig/%{service_name}
+%{_bindir}/%{service_name}
 %else
-%{_root_bindir}/%{jobs_name}
+%{_root_bindir}/%{service_name}
 %if 0%{?rhel} == 6
-%{_root_sysconfdir}/rc.d/init.d/%{jobs_name}
+%{_root_sysconfdir}/rc.d/init.d/%{service_name}
 %else
-%{_root_libdir}/systemd/system/%{jobs_name}.service
+%{_root_libdir}/systemd/system/%{service_name}.service
 %endif
-%{_root_sysconfdir}/sysconfig/%{jobs_name}
+%{_root_sysconfdir}/sysconfig/%{service_name}
 %endif
 
 
