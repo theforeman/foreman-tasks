@@ -10,7 +10,7 @@ module ForemanTasks
           part.to_s
         end
       end.join('; ')
-      h(parts.join(" "))
+      parts.join(" ")
     end
   end
 end

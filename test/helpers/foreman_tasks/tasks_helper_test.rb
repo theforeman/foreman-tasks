@@ -12,10 +12,8 @@ module ForemanTasks
       end
 
       it 'formats the task input properly' do
-        expects(:h).with("user 'Anonymous Admin'")
-        format_task_input(@task)
-        expects(:h).with("Create user 'Anonymous Admin'")
-        format_task_input(@task, true)
+        format_task_input(@task).must_equal("user 'Anonymous Admin'")
+        format_task_input(@task, true).must_equal("Create user 'Anonymous Admin'")
       end
 
     end
@@ -38,10 +36,8 @@ module ForemanTasks
 
       it 'formats the task input properly' do
         response = "product 'product-2'; organization 'test-0'"
-        expects(:h).with(response)
-        format_task_input(@task)
-        expects(:h).with("Create #{response}")
-        format_task_input(@task, true)
+        format_task_input(@task).must_equal(response)
+        format_task_input(@task, true).must_equal("Create #{response}")
       end
     end
   end
