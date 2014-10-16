@@ -75,6 +75,7 @@ module ForemanTasks
 
     rake_tasks do
       load File.expand_path('../tasks/dynflow.rake', __FILE__)
+      load File.expand_path('../tasks/test.rake', __FILE__)
     end
   end
 
