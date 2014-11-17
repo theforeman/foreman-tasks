@@ -14,6 +14,12 @@ module ForemanTasks
              :url_hash => { :controller => 'foreman_tasks/tasks', :action => :index },
              :caption  => N_('Tasks'),
              :parent   => :monitor_menu
+
+        security_block :foreman_tasks do |map|
+          permission :view_tasks, {:'foreman_tasks/tasks' => [:auto_complete_search, :sub_tasks, :index, :show], :resource_type => 'ForemanTasks::Task'}
+          permission :view_tasks, {:'foreman_tasks/api/tasks' => [:bulk_search, :show], :resource_type => 'ForemanTasks::Task'}
+          permission :edit_tasks, {:'foreman_tasks/tasks' => [:resume, :unlock, :force_unlock, :cancel_step], :resource_type => 'ForemanTasks::Task'}
+        end
       end
     end
 
