@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.version     = ForemanTasks::VERSION
   s.authors     = ["Ivan Nečas"]
   s.email       = ["inecas@redhat.com"]
-  s.homepage    = "https://github.com/iNecas/foreman-tasks"
+  s.homepage    = "https://github.com/theforeman/foreman-tasks"
   s.summary     = "Foreman plugin for showing tasks information for resoruces and users"
   s.description = <<DESC
 The goal of this plugin is to unify the way of showing task statuses across the Foreman instance.
