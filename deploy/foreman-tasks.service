@@ -1,6 +1,6 @@
 [Unit]
 Description=Foreman jobs daemon
-Documentation=https://github.com/iNecas/foreman-tasks
+Documentation=https://github.com/theforeman/foreman-tasks
 After=network.target remote-fs.target nss-lookup.target
 
 [Service]
