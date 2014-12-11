@@ -62,6 +62,17 @@ module ForemanTasks
 
     private
 
+    def action_permission
+      case params[:action]
+      when 'sub_tasks'
+        :view
+      when 'resume', 'unlock', 'force_unlock', 'cancel_step'
+        :edit
+      else
+        super
+      end
+    end
+
     def find_task
       ForemanTasks::Task::DynflowTask.find(params[:id])
     end

@@ -157,6 +157,15 @@ module ForemanTasks
 
       private
 
+      def action_permission
+        case params[:action]
+        when 'bulk_search'
+          :view
+        else
+          super
+        end
+      end
+
       def find_task
         @task = Task.find_by_id(params[:id])
       end
