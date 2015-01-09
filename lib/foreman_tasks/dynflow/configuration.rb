@@ -33,6 +33,11 @@ module ForemanTasks
     # what rake tasks should run their own executor, not depending on the external one
     attr_accessor :rake_tasks_with_executor
 
+    # if true, the ForemanTasks::Concerns::ActionTriggering will make
+    # no effect. Useful for testing, where we mignt not want to execute
+    # the orchestration tied to the models.
+    attr_accessor :disable_active_record_actions
+
     def initialize
       self.action_logger            = Rails.logger
       self.dynflow_logger           = Rails.logger

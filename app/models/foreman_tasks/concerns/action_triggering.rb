@@ -73,6 +73,7 @@ module ForemanTasks
       # of planning phase is expected to be commited when execution occurs. Also
       # we want to be able to rollback the whole db operation when planning fails.
       def plan_action(action_class, *args)
+        return if ForemanTasks.dynflow.config.disable_active_record_actions
         @execution_plan = ::ForemanTasks.dynflow.world.plan(action_class, *args)
         raise @execution_plan.errors.first if @execution_plan.error?
       end
@@ -91,7 +92,10 @@ module ForemanTasks
       # we would start the execution phase inside this transaction which would lead
       # to unexpected results.
       def dynflow_task_wrap(method)
-        return yield if @_dynflow_task_wrapped
+        if ForemanTasks.dynflow.config.disable_active_record_actions ||
+              @_dynflow_task_wrapped
+          return yield
+        end
         @_dynflow_task_wrapped = true
 
         action = case method
