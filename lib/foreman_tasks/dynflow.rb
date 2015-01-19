@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'dynflow'
 
 module ForemanTasks
@@ -6,6 +7,7 @@ module ForemanTasks
     require 'foreman_tasks/dynflow/configuration'
     require 'foreman_tasks/dynflow/persistence'
     require 'foreman_tasks/dynflow/daemon'
+    require 'foreman_tasks/dynflow/console_authorizer'
 
     def initialize
       @required = false
@@ -82,14 +84,9 @@ module ForemanTasks
     def web_console
       ::Dynflow::WebConsole.setup do
         before do
-          rack_request = Rack::Request.new(env)
-          user_id, expires_at = rack_request.session.
-            values_at('user', 'expires_at')
-          if Setting[:dynflow_console_require_auth] &&
-              (!Setting[:dynflow_enable_console] ||
-               (user_id.nil? || !User.find(user_id).admin) ||
-               Time.now.to_i > expires_at)
-            redirect('dashboard')
+          if !Setting[:dynflow_enable_console] ||
+                (Setting[:dynflow_console_require_auth] && !ConsoleAuthorizer.new(env).allow?)
+            halt 403, 'Access forbidden'
           end
         end
 

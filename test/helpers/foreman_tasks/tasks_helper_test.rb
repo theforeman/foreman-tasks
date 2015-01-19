@@ -5,7 +5,7 @@ module ForemanTasks
 
     describe 'when formatting simple input' do
       before do
-        @task = FactoryGirl.build(:user_create_task)
+        @task = FactoryGirl.build(:dynflow_task, :user_create_task)
         humanized = {:action=>"Create", :input=>[[:user, {:text=>"user 'Anonymous Admin'", :link=>nil}]], :output=>"", :errors=>[]}
         @task.stubs(:input).returns({"user"=>{"id"=>1, "name"=>"Anonymous Admin"}, "locale"=>"en"})
         @task.stubs(:humanized).returns(humanized)
@@ -22,7 +22,7 @@ module ForemanTasks
 
     describe 'when formatting input' do
       before do
-        @task = FactoryGirl.build(:product_create_task)
+        @task = FactoryGirl.build(:dynflow_task, :product_create_task)
         humanized = {:action=>"Create",
                      :input=>[[:product, {:text=>"product 'product-2'", :link=>"#/products/3/info"}], [:organization, {:text=>"organization 'test-0'", :link=>"/organizations/3/edit"}]],
                      :output=>"",

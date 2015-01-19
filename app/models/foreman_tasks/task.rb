@@ -2,6 +2,7 @@ require 'uuidtools'
 
 module ForemanTasks
   class Task < ActiveRecord::Base
+    include Authorizable
 
     # TODO missing validation of states
 
@@ -14,7 +15,8 @@ module ForemanTasks
 
     # in fact, the task has only one owner but Rails don't let you to
     # specify has_one relation though has_many relation
-    has_many :owners, :through => :locks, :source => :resource, :source_type => 'User'
+    has_many :owners, :through => :locks, :source => :resource, :source_type => 'User',
+        :conditions => ["foreman_tasks_locks.name = ?", Lock::OWNER_LOCK_NAME]
 
     scoped_search :on => :id, :complete_value => false
     scoped_search :on => :label, :complete_value => true
@@ -23,6 +25,7 @@ module ForemanTasks
     scoped_search :on => :started_at, :complete_value => false
     scoped_search :in => :locks,  :on => :resource_type, :complete_value => true, :rename => "resource_type", :ext_method => :search_by_generic_resource
     scoped_search :in => :locks,  :on => :resource_id, :complete_value => false, :rename => "resource_id", :ext_method => :search_by_generic_resource
+    scoped_search :in => :owners,  :on => :id, :complete_value => true, :rename => "owner.id", :ext_method => :search_by_owner
     scoped_search :in => :owners,  :on => :login, :complete_value => true, :rename => "owner.login", :ext_method => :search_by_owner
     scoped_search :in => :owners,  :on => :firstname, :complete_value => true, :rename => "owner.firstname", :ext_method => :search_by_owner
 
@@ -83,18 +86,28 @@ module ForemanTasks
     end
 
     def self.search_by_owner(key, operator, value)
+      return { :conditions => '0 = 1' } if value == 'current_user' && User.current.nil?
+
       key_name = self.connection.quote_column_name(key.sub(/^.*\./,''))
-      joins = <<-JOINS
+      joins = <<-SQL
       INNER JOIN foreman_tasks_locks AS foreman_tasks_locks_owner
                  ON (foreman_tasks_locks_owner.task_id = foreman_tasks_tasks.id AND
                      foreman_tasks_locks_owner.resource_type = 'User' AND
                      foreman_tasks_locks_owner.name = '#{Lock::OWNER_LOCK_NAME}')
-      INNER JOIN users
-                 ON (users.id = foreman_tasks_locks_owner.resource_id)
-      JOINS
-
+      SQL
+      if key !~ /\.id\Z/
+        joins << <<-SQL
+        INNER JOIN users
+                   ON (users.id = foreman_tasks_locks_owner.resource_id)
+        SQL
+      end
       condition = if key.blank?
                     sanitize_sql_for_conditions(["users.login #{operator} ? or users.firstname #{operator} ? ", value, value])
+                  elsif key =~ /\.id\Z/
+                    if value == 'current_user'
+                      value = User.current.id
+                    end
+                    sanitize_sql_for_conditions(["foreman_tasks_locks_owner.resource_id #{operator} ?", value])
                   else
                     sanitize_sql_for_conditions(["users.#{key_name} #{operator} ?", value])
                   end
@@ -110,6 +123,11 @@ module ForemanTasks
       else
         0
       end
+    end
+
+    def self.authorized_resource_name
+      # We don't want STI subclasses to have separate permissions
+      'ForemanTasks::Task'
     end
 
     protected

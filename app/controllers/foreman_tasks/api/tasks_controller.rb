@@ -26,7 +26,7 @@ module ForemanTasks
       class BadRequest < Apipie::ParamError
       end
 
-      before_filter :find_task, :only => [:show]
+      before_filter :find_resource, :only => [:show]
 
       api :GET, "/tasks/:id", "Show task details"
       param :id, :identifier, desc: "UUID of the task"
@@ -79,7 +79,7 @@ module ForemanTasks
       private
 
       def search_tasks(search_params)
-        scope = ::ForemanTasks::Task.select('DISTINCT foreman_tasks_tasks.*')
+        scope = resource_scope_for_index.select('DISTINCT foreman_tasks_tasks.*')
         scope = ordering_scope(scope, search_params)
         scope = search_scope(scope, search_params)
         scope = active_scope(scope, search_params)
@@ -157,8 +157,17 @@ module ForemanTasks
 
       private
 
-      def find_task
-        @task = Task.find_by_id(params[:id])
+      def resource_scope(options = {})
+        @resource_scope ||= ForemanTasks::Task.authorized("#{action_permission}_foreman_tasks")
+      end
+
+      def action_permission
+        case params[:action]
+        when 'bulk_search'
+          :view
+        else
+          super
+        end
       end
     end
   end

@@ -1,26 +1,27 @@
 <p>
   <%= link_to(_('Auto Reload'), '', class: %w(btn btn-sm btn-default reload-button hidden)) %>
+  <% if authorized_for(:permission => :edit_foreman_tasks, :auth_object => @task) %>
+    <%= link_to(_('Dynflow console'),
+                format((defined?(Rails) ? request.script_name : '') + '/foreman_tasks/dynflow/%s', @task.external_id),
+                class: %w(btn btn-sm btn-default)) if Setting['dynflow_enable_console'] %>
 
-  <%= link_to(_('Dynflow console'),
-              format((defined?(Rails) ? request.script_name : '') + '/foreman_tasks/dynflow/%s', @task.external_id),
-              class: %w(btn btn-sm btn-default)) if Setting['dynflow_enable_console'] %>
+    <%= link_to(_('Resume'),
+                resume_foreman_tasks_task_path(@task),
+                class:  ['btn', 'btn-sm', 'btn-primary', ('disabled' unless @task.resumable?)].compact,
+                method: :post) %>
 
-  <%= link_to(_('Resume'),
-              resume_foreman_tasks_task_path(@task),
-              class:  ['btn', 'btn-sm', 'btn-primary', ('disabled' unless @task.resumable?)].compact,
-              method: :post) %>
+    <%= link_to(_('Unlock'),
+                '',
+                class:         ['btn', 'btn-sm', 'btn-warning', 'reload-button-stop', ('disabled' unless @task.state == 'paused')].compact,
+                :'data-toggle' => "modal",
+                :'data-target' => "#unlock_modal") %>
 
-  <%= link_to(_('Unlock'),
-              '',
-              class:         ['btn', 'btn-sm', 'btn-warning', 'reload-button-stop', ('disabled' unless @task.state == 'paused')].compact,
-              :'data-toggle' => "modal",
-              :'data-target' => "#unlock_modal") %>
-
-  <%= link_to(_('Force Unlock'),
-              '',
-              class:         ['btn', 'btn-sm', 'btn-danger', 'reload-button-stop', ('disabled' if @task.state == 'stopped')].compact,
-              :'data-toggle' => "modal",
-              :'data-target' => "#force_unlock_modal") %>
+    <%= link_to(_('Force Unlock'),
+                '',
+                class:         ['btn', 'btn-sm', 'btn-danger', 'reload-button-stop', ('disabled' if @task.state == 'stopped')].compact,
+                :'data-toggle' => "modal",
+                :'data-target' => "#force_unlock_modal") %>
+  <% end %>
 </p>
 
 <div class="modal fade" id="unlock_modal" tabindex="-1" role="dialog" aria-labelledby="Deploy" aria-hidden="true">

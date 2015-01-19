@@ -3,6 +3,7 @@ require 'foreman_tasks/task_error'
 require 'foreman_tasks/engine'
 require 'foreman_tasks/dynflow'
 require 'foreman_tasks/triggers'
+require 'foreman_tasks/authorizer_ext'
 
 module ForemanTasks
   extend Algebrick::TypeCheck
