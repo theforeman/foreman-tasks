@@ -24,7 +24,6 @@ DESC
   end
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", "~> 3.2.0"
   s.add_dependency "uuidtools"
   s.add_dependency "dynflow", '>= 0.7.2'
   s.add_dependency "sequel" # for Dynflow process persistence
