@@ -1,25 +1,42 @@
 Foreman Tasks
 =============
 
-Tasks management engine for Foreman. Gives you and overview of what's
-happening/happened in your Foreman instance.
+Tasks management engine for Foreman. Gives you an overview of what's
+happening/happened in your Foreman instance. A framework for asynchronous tasks in Foreman.
+
+* Website: [TheForeman.org](http://theforeman.org)
+* ServerFault tag: [Foreman](http://serverfault.com/questions/tagged/foreman)
+* Issues: [foreman-tasks Redmine](http://projects.theforeman.org/projects/foreman-tasks)
+* Wiki: [Foreman wiki](http://projects.theforeman.org/projects/foreman/wiki/About)
+* Community and support: #theforeman for general support, #theforeman-dev for development chat in [Freenode](irc.freenode.net)
+* Mailing lists:
+    * [foreman-users](https://groups.google.com/forum/?fromgroups#!forum/foreman-users)
+    * [foreman-dev](https://groups.google.com/forum/?fromgroups#!forum/foreman-dev)
 
 Installation
 ------------
 
-Put the following to your Foreman's bundle.d/Gemfile.local.rb:
+Please see the Foreman manual for appropriate instructions:
 
-```ruby
-gem 'dynflow',       :git => 'https://github.com/Dynflow/dynflow.git'
-gem 'foreman-tasks', :git => 'https://github.com/theforeman/foreman-tasks.git'
-```
+* [Foreman: How to Install a Plugin](http://theforeman.org/manuals/latest/index.html#6.1InstallaPlugin)
 
-Run:
+### Red Hat, CentOS, Fedora, Scientific Linux (rpm)
 
-```bash
-bundle install
-rake db:migrate
-```
+Set up the repo as explained in the link above, then run
+
+    # yum install ruby193-rubygem-foreman-tasks
+
+### Bundle (gem)
+
+Add the following to bundler.d/Gemfile.local.rb in your Foreman installation directory (/usr/share/foreman by default)
+
+    $ gem 'foreman-tasks'
+
+Then run `bundle install` and `foreman-rake db:migrate` from the same directory
+
+--------------
+
+To verify that the installation was successful, go to Foreman, top bar **Administer > About** and check 'foreman-tasks' shows up in the **System Status** menu under the Plugins tab. You should also see a **'Tasks'** button under the **Monitor** menu in the top bar.
 
 Usage
 -----
