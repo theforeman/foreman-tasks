@@ -1,4 +1,4 @@
-require 'uuidtools'
+require 'securerandom'
 
 module ForemanTasks
   class Task < ActiveRecord::Base
@@ -133,7 +133,7 @@ module ForemanTasks
     protected
 
     def generate_id
-      self.id ||= UUIDTools::UUID.random_create.to_s
+      self.id ||= SecureRandom.uuid
     end
   end
 end
