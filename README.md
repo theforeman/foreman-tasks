@@ -129,12 +129,72 @@ The executor process needs to be executed before the web server. You
 can run it by:
 
 ```
-RAILS_ENV=production bundle exec rake foreman_tasks:dynflow:executor
+foreman-rake foreman_tasks:dynflow:executor
 ```
 
 Also, there is a possibility to run the executor in daemonized mode
 using the `dynflow-executor`. It expects to be executed from Foreman
 rails root directory. See `-h` for more details and options
+
+Tasks cleanup
+-------------
+
+Although, the history of tasks has an auditing value, some kinds of
+tasks can grow up in number quite soon. Therefore there is a mechanism
+how to clean the tasks, using a rake command. When running without
+any arguments, the tasks are deleted based on the default parameters
+defined in the code.
+
+```
+foreman-rake foreman_tasks:cleanup
+```
+
+To see what tasks would be deleted, without actually deleting the records, you can run
+
+```
+foreman-rake foreman_tasks:cleanup NOOP=true
+```
+
+By default, only the actions explicitly defined with expiration time
+in the code, will get cleaned. One can configure new actions, or
+override the default configuration inside the configuration
+`config/settings.plugins.d/foreman_tasks.yaml`, such as:
+
+
+```
+:foreman-tasks:
+  :cleanup:
+# the period after witch to delete all the tasks (by default all tasks are not being deleted after some period)
+    :after: 365d
+# per action settings to override the default defined in the actions (cleanup_after method)
+    :actions:
+      - :name: Actions::Foreman::Host::ImportFacts
+        :after: 10d
+
+```
+
+The `foreman_tasks:cleanup` script also accepts additional parameters
+to specify the search criteria for the cleanup manually:
+
+* `FILTER`: scoped search filter (example: 'label = "Actions::Foreman::Host::ImportFacts"')
+* `AFTER`: delete tasks created after `AFTER` period. Expected format
+  is a number followed by the time unit (`s`, `h`, `m`, `y`), such as
+  `10d` for 10 days (applicable only when the `FILTER` option is specified)
+* `STATES`: comma separated list of task states to touch with the
+  cleanup, by default only stopped tasks are affected
+  (applicable only when the `FILTER` option is specified)
+* `NOOP`: set to "true" if the task should not actuall perform the
+  deletion, only report the actions the script would perform
+* `VERBOSE`: set to "true" for more verbose output
+* `BATCH_SIZE`: the size of batches the tasks get processed in (1000 by default)
+
+To see the current configuration (what actions get cleaned
+automatically and what is their `after` period), this script can be
+used:
+
+```
+foreman-rake foreman_tasks:cleanup:config
+```
 
 Issues
 ------

@@ -35,6 +35,11 @@ module Actions
           input[:host] && input[:host][:name]
         end
 
+        # default value for cleaning up the tasks, it can be overriden by settings
+        def self.cleanup_after
+          '30d'
+        end
+
       end
     end
   end
