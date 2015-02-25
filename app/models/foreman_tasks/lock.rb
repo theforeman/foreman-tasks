@@ -57,7 +57,8 @@ module ForemanTasks
 
     # returns a scope of the locks colliding with this one
     def colliding_locks
-      colliding_locks_scope = Lock.active.where(Lock.arel_table[:task_id].not_eq(task_id))
+      task_ids = task.with_parents.map(&:id)
+      colliding_locks_scope = Lock.active.where(Lock.arel_table[:task_id].not_in(task_ids))
       colliding_locks_scope = colliding_locks_scope.where(name:          name,
                                                           resource_id:   resource_id,
                                                           resource_type: resource_type)

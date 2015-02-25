@@ -3,6 +3,7 @@ module Actions
   class Actions::ActionWithSubPlans < Actions::EntryAction
 
     middleware.use Actions::Middleware::KeepCurrentUser
+    middleware.use Actions::Middleware::SetCurrentTaskId
 
     SubPlanFinished = Algebrick.type do
       fields! :execution_plan_id => String,
@@ -78,7 +79,6 @@ module Actions
       planned, failed = sub_plans.partition(&:planned?)
 
       sub_plan_ids = ((planned + failed).map(&:execution_plan_id))
-      set_parent_task_id(sub_plan_ids)
 
       output[:total_count] = sub_plan_ids.size
       output[:failed_count] = failed.size
@@ -137,12 +137,6 @@ module Actions
 
     def counts_set?
       output[:total_count] && output[:success_count] && output[:failed_count]
-    end
-
-    def set_parent_task_id(sub_plan_ids)
-      ForemanTasks::Task::DynflowTask.
-          where(external_id: sub_plan_ids).
-          update_all(parent_task_id: task.id)
     end
 
     def check_targets!(targets)
