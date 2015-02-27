@@ -25,7 +25,11 @@ module Actions
     end
 
     def humanized_name
-      _("Bulk action")
+      if task.sub_tasks.first
+         task.sub_tasks.first.humanized[:action]
+      else
+        _("Bulk action")
+      end
     end
 
     def humanized_input
