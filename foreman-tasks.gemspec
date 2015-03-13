@@ -21,6 +21,7 @@ DESC
 
   s.files = Dir["{app,bin,config,db,deploy,lib}/**/*", "LICENSE", "README.md"].reject do |file|
     file.start_with? "lib/foreman_tasks/hammer"
+    file.end_with? "test.rake"
   end
   s.test_files = Dir["test/**/*"]
 

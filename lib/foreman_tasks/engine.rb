@@ -87,8 +87,10 @@ module ForemanTasks
 
 
     rake_tasks do
-      load File.expand_path('../tasks/dynflow.rake', __FILE__)
-      load File.expand_path('../tasks/test.rake', __FILE__)
+      %w[dynflow.rake test.rake].each do |rake_file|
+        full_path = File.expand_path("../tasks/#{rake_file}", __FILE__)
+        load full_path if File.exists?(full_path)
+      end
     end
   end
 
