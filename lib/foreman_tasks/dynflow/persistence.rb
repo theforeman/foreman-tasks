@@ -23,6 +23,7 @@ module ForemanTasks
       # including its steps
       if data[:state] == :planning
         task = ::ForemanTasks::Task::DynflowTask.new
+        task.parent_task_id = Thread.current[:current_task_id]
         task.update_from_dynflow(data)
         Lock.owner!(::User.current, task.id) if ::User.current
       elsif data[:state] != :pending
