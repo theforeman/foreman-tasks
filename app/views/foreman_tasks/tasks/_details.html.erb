@@ -145,9 +145,21 @@
     <%= progress.round %>%
   </div>
 </div>
+
+<% unless @task.humanized[:output].blank? %>
 <div>
   <span class="param-name"><%= _("Output") %>:</span>
   <span class="param-value">
     <pre><%= @task.humanized[:output] %></pre>
   </span>
 </div>
+<% end %>
+
+<% unless @task.humanized[:errors].blank? %>
+<div>
+  <span class="param-name"><%= _("Errors") %>:</span>
+  <span class="param-value">
+    <pre><%= @task.humanized[:errors].join("\n") %></pre>
+  </span>
+</div>
+<% end %>
