@@ -6,12 +6,17 @@ module ForemanTasks
     scope :for_action, ->(action_class) { where(label: action_class.name) }
 
     def update_from_dynflow(data)
-      self.external_id = data[:id]
-      self.started_at  = data[:started_at]
-      self.ended_at    = data[:ended_at]
-      self.state       = data[:state].to_s
-      self.result      = data[:result].to_s
-      self.label       ||= main_action.class.name
+      self.external_id    = data[:id]
+      self.started_at     = data[:started_at]
+      self.ended_at       = data[:ended_at]
+      self.state          = data[:state].to_s
+      self.result         = data[:result].to_s
+      self.parent_task_id ||= begin
+                                if main_action.caller_execution_plan_id
+                                  DynflowTask.find_by_external_id!(main_action.caller_execution_plan_id).id
+                                end
+                              end
+      self.label          ||= main_action.class.name
       self.save!
     end
 

@@ -77,6 +77,14 @@ module ForemanTasks
       self.state == 'paused'
     end
 
+    def self_and_parents
+      [self].tap do |ret|
+        if parent_task
+          ret.concat(parent_task.self_and_parents)
+        end
+      end
+    end
+
     def self.search_by_generic_resource(key, operator, value)
       key =  "resource_type" if key.blank?
       key_name = self.connection.quote_column_name(key.sub(/^.*\./,''))
