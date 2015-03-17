@@ -2,9 +2,6 @@
 <% title_actions help_path%>
 
 <style>
-  .task-id {
-    white-space: nowrap;
-  }
   .param-name {
     display: inline-block;
     width: 10em;
@@ -37,7 +34,7 @@ $(document).on('click', ".table-two-pane td.two-pane-link", function(e) {
   <% for task in @tasks %>
     <tr>
       <td class="task-id two-pane-link">
-        <%= link_to_if_authorized(format_task_input(task, true),
+        <%= link_to_if_authorized(trunc_with_tooltip(format_task_input(task, true), 80),
         hash_for_foreman_tasks_task_path(:id => task)) %>
       </td>
       <td><%= task.state %></td>
