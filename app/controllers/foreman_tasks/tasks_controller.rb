@@ -2,6 +2,8 @@ module ForemanTasks
   class TasksController < ::ApplicationController
     include Foreman::Controller::AutoCompleteSearch
 
+    before_filter :restrict_dangerous_actions, :only => [:unlock, :force_unlock]
+
     def show
       @task = find_resource
     end
@@ -61,6 +63,10 @@ module ForemanTasks
     end
 
     private
+
+    def restrict_dangerous_actions
+      render_403 unless Setting['dynflow_allow_dangerous_actions']
+    end
 
     def controller_permission
       'foreman_tasks'

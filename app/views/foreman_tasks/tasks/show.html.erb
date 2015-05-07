@@ -41,6 +41,22 @@
   };
 
   $(document).ready(function () {
+    $('.modal-submit').click(function(e){
+      if($(this).hasClass('disabled')){
+        e.preventDefault();
+      }
+    });
+    $('.disable-unlock').click(function() {
+      var button = $(this).parents('.modal').find('.modal-submit');
+
+      if($(this).is(':checked')){
+        button.removeClass('disabled')
+      }
+      else{
+        button.addClass('disabled')
+      }
+    });
+
     $('.reload-button').click(function (event) {
       taskProgressReloader.toggle();
       event.preventDefault();

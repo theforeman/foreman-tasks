@@ -9,18 +9,19 @@
                 resume_foreman_tasks_task_path(@task),
                 class:  ['btn', 'btn-sm', 'btn-primary', ('disabled' unless @task.resumable?)].compact,
                 method: :post) %>
+    <% if Setting['dynflow_allow_dangerous_actions'] %>
+      <%= link_to(_('Unlock'),
+                  '',
+                  class:         ['btn', 'btn-sm', 'btn-warning', 'reload-button-stop', ('disabled' unless @task.state == 'paused')].compact,
+                  :'data-toggle' => "modal",
+                  :'data-target' => "#unlock_modal") %>
 
-    <%= link_to(_('Unlock'),
-                '',
-                class:         ['btn', 'btn-sm', 'btn-warning', 'reload-button-stop', ('disabled' unless @task.state == 'paused')].compact,
-                :'data-toggle' => "modal",
-                :'data-target' => "#unlock_modal") %>
-
-    <%= link_to(_('Force Unlock'),
-                '',
-                class:         ['btn', 'btn-sm', 'btn-danger', 'reload-button-stop', ('disabled' if @task.state == 'stopped')].compact,
-                :'data-toggle' => "modal",
-                :'data-target' => "#force_unlock_modal") %>
+      <%= link_to(_('Force Unlock'),
+                  '',
+                  class:         ['btn', 'btn-sm', 'btn-danger', 'reload-button-stop', ('disabled' if @task.state == 'stopped')].compact,
+                  :'data-toggle' => "modal",
+                  :'data-target' => "#force_unlock_modal") %>
+    <% end %>
   <% end %>
 </p>
 
@@ -35,11 +36,15 @@
         </h2>
       </div>
       <div class="modal-body">
-        <%= _("This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed") %>
+        <%= _("This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed.") %>
+        <div>
+          <input class="disable-unlock" type="checkbox"/>
+          <%= _("I understand that this may cause harm and have working database backups of all backend services.") %>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal"><%= _("Cancel") %></button>
-        <%= link_to(_("Unlock"), unlock_foreman_tasks_task_path(@task), method: :post, class: 'btn btn-warning') %>
+        <%= link_to(_("Unlock"), unlock_foreman_tasks_task_path(@task), method: :post, class: 'btn btn-warning modal-submit disabled') %>
       </div>
     </div>
   </div>
@@ -57,10 +62,14 @@
       </div>
       <div class="modal-body">
         <%= _("Resources will be unlocked and will not prevent other tasks from being run. As the task might be still running, it should be avoided to use this unless you are really sure the task got stuck") %>
+        <div>
+          <input class="disable-unlock" type="checkbox"/>
+          <%= _("I understand that this may cause harm and have working database backups of all backend services.") %>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal"><%= _("Cancel") %></button>
-        <%= link_to(_("Force Unlock"), force_unlock_foreman_tasks_task_path(@task), method: :post, class: 'btn btn-danger') %>
+        <%= link_to(_("Force Unlock"), force_unlock_foreman_tasks_task_path(@task), method: :post, class: 'btn btn-danger modal-submit disabled') %>
       </div>
     </div>
   </div>
