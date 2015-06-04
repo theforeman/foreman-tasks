@@ -16,6 +16,10 @@ module Actions
                 :args => args)
     end
 
+    def run(event = nil)
+      super unless event == Dynflow::Action::Skip
+    end
+
     def humanized_name
       if task.sub_tasks.first
          task.sub_tasks.first.humanized[:action]
