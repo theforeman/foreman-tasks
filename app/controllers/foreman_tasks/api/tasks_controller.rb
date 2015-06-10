@@ -76,6 +76,86 @@ module ForemanTasks
         render :json => ret
       end
 
+      api :POST, '/tasks/bulk_resume', N_('Resume all paused error tasks')
+      param :search, String, :desc => N_('Resume tasks matching search string')
+      param :task_ids, Array, :desc => N_('Resume specific tasks by id')
+      def bulk_resume
+        scope = resource_scope
+        scope = scope.search_for(params[:search]) if params[:search]
+        scope = scope.select('DISTINCT foreman_tasks_tasks.*')
+        if params[:search].nil? && params[:task_ids].nil?
+          scope = scope.where(:state => :paused)
+          scope = scope.where(:result => :error)
+        end
+        scope = scope.where(:id => params[:task_ids]) if params[:task_ids]
+
+        resumed = []
+        failed = []
+        skipped = []
+        scope.find_each do |task|
+          if task.resumable?
+            begin
+              ForemanTasks.dynflow.world.execute(task.execution_plan.id)
+              resumed  << task_hash(task)
+            rescue RuntimeError => e
+              failed << task_hash(task)
+            end
+          else
+            skipped << task_hash(task)
+          end
+        end
+
+        render :json => {
+                          total: resumed.length + failed.length + skipped.length,
+                          resumed: resumed,
+                          failed: failed,
+                          skipped: skipped
+                        }
+      end
+
+      api :GET, '/tasks', N_("List tasks")
+      param :search, String, :desc => N_("Search string")
+      param :page, :number, :desc => N_("Page number, starting at 1")
+      param :per_page,  :number, :desc => N_("Number of results per page to return")
+      param :order, String, :desc => N_("Sort field and order, eg. 'name DESC'")
+      param :sort, Hash, :desc => N_("Hash version of 'order' param") do
+        param :by, String, :desc => N_("Field to sort the results on")
+        param :order, String, :desc => N_("How to order the sorted results (e.g. ASC for ascending)")
+      end
+      def index
+        scope =resource_scope.search_for(params[:search]).select('DISTINCT foreman_tasks_tasks.*')
+        total = scope.count
+
+        ordering_params =  {
+                             sort_by: params[:sort_by] || 'started_at',
+                             sort_order: params[:sort_order] || 'DESC'
+                           }
+        scope = ordering_scope(scope, ordering_params)
+
+
+        pagination_params = {
+                              page: params[:page] || 1,
+                              per_page: params[:per_page] || 20
+                            }
+        scope = pagination_scope(scope, pagination_params)
+        results = []
+        scope.find_each do |task|
+          results << task_hash(task)
+        end
+
+        render :json => {
+                          total: total,
+                          subtotal: results.count,
+                          page: pagination_params[:page],
+                          per_page: pagination_params[:per_page],
+                          sort: {
+                                  by: ordering_params[:sort_by],
+                                  order: ordering_params[:sort_order]
+                                },
+                          results: results
+                        }
+      end
+
       private
 
       def search_tasks(search_params)
@@ -85,7 +165,11 @@ module ForemanTasks
         scope = active_scope(scope, search_params)
         scope = action_types_scope(scope, search_params)
         scope = pagination_scope(scope, search_params)
-        scope.all.map { |task| task_hash(task) }
+        results = []
+        scope.find_each do |task|
+          results << task_hash(task)
+        end
+        results
       end
 
       def search_scope(scope, search_params)
@@ -127,7 +211,8 @@ module ForemanTasks
       end
 
       def action_types_scope(scope, search_params)
-        if action_types = search_params[:action_types]
+        action_types = search_params[:action_types]
+        if action_types
           scope.for_action_types(action_types)
         else
           scope
@@ -137,21 +222,23 @@ module ForemanTasks
       def pagination_scope(scope, search_params)
         page     = search_params[:page] || 1
         per_page = search_params[:per_page] || 10
-        scope    = scope.limit(per_page).offset((page - 1) * per_page)
+        scope    = scope.limit(per_page).offset((page.to_i - 1) * per_page.to_i)
       end
 
-      def ordering_scope(scope, search_params)
-        scope.order('started_at DESC')
+      def ordering_scope(scope, ordering_params)
+        sort_by = ordering_params[:sort_by] || 'started_at'
+        sort_order = ordering_params[:sort_order] || 'DESC'
+        scope.order("#{sort_by} #{sort_order}")
       end
 
       def task_hash(task)
-        return @tasks[task.id] if @tasks[task.id]
+        return @tasks[task.id] if @tasks && @tasks[task.id]
         task_hash       = Rabl.render(
             task, 'show',
             view_path: "#{ForemanTasks::Engine.root}/app/views/foreman_tasks/api/tasks",
             format:    :hash,
             scope:     self)
-        @tasks[task.id] = task_hash
+        @tasks[task.id] = task_hash if @tasks
         return task_hash
       end
 
@@ -165,6 +252,8 @@ module ForemanTasks
         case params[:action]
         when 'bulk_search'
           :view
+        when 'bulk_resume'
+          :edit
         else
           super
         end

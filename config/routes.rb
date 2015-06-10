@@ -14,8 +14,9 @@ Foreman::Application.routes.draw do
     end
 
     namespace :api do
-      resources :tasks, :only => [:show] do
+      resources :tasks, :only => [:show, :index] do
         post :bulk_search, :on => :collection
+        post :bulk_resume, :on => :collection
       end
     end
 

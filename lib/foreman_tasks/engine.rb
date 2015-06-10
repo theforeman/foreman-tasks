@@ -17,8 +17,9 @@ module ForemanTasks
 
         security_block :foreman_tasks do |map|
           permission :view_foreman_tasks, {:'foreman_tasks/tasks' => [:auto_complete_search, :sub_tasks, :index, :show],
-                                           :'foreman_tasks/api/tasks' => [:bulk_search, :show] }, :resource_type => ForemanTasks::Task.name
-          permission :edit_foreman_tasks, {:'foreman_tasks/tasks' => [:resume, :unlock, :force_unlock, :cancel_step]}, :resource_type => ForemanTasks::Task.name
+                                           :'foreman_tasks/api/tasks' => [:bulk_search, :show, :index] }, :resource_type => ForemanTasks::Task.name
+          permission :edit_foreman_tasks, {:'foreman_tasks/tasks' => [:resume, :unlock, :force_unlock, :cancel_step],
+                                           :'foreman_tasks/api/tasks' => [:bulk_resume]}, :resource_type => ForemanTasks::Task.name
         end
 
         role "Tasks Manager", [:view_foreman_tasks, :edit_foreman_tasks]
