@@ -45,13 +45,7 @@ module ForemanTasks
 
           # don't try to do any rescuing until the tables are properly migrated
           if !Foreman.in_rake?('db:migrate') && (ForemanTasks::Task.table_exists? rescue(false))
-            # for now, we can check the consistency only when there
-            # is no remote executor. We should be able to check the consistency
-            # every time the new world is created when there is a register
-            # of executors
-            world.consistency_check
-            world.execute_planned_execution_plans
-
+            world.auto_execute
             ForemanTasks::Task::DynflowTask.consistency_check
           end
         end
@@ -87,7 +81,7 @@ module ForemanTasks
     end
 
     def web_console
-      ::Dynflow::WebConsole.setup do
+      ::Dynflow::Web.setup do
         before do
           if !Setting[:dynflow_enable_console] ||
                 (Setting[:dynflow_console_require_auth] && !ConsoleAuthorizer.new(env).allow?)

@@ -18,10 +18,6 @@ module ForemanTasks
     attr_accessor :remote
     alias_method :remote?, :remote
 
-    # if remote set to true, use this path for socket communication
-    # between this process and the external executor
-    attr_accessor :remote_socket_path
-
     # what transaction adapater should be used, by default, it uses the ActiveRecord
     # based adapter, expecting ActiveRecord is used as ORM in the application
     attr_accessor :transaction_adapter
@@ -44,7 +40,6 @@ module ForemanTasks
       self.pool_size                = 5
       self.db_pool_size             = pool_size + 5
       self.remote                   = Rails.env.production?
-      self.remote_socket_path       = File.join(Rails.root, "tmp", "sockets", "dynflow_socket")
       self.transaction_adapter      = ::Dynflow::TransactionAdapters::ActiveRecord.new
       self.eager_load_paths         = []
       self.lazy_initialization      = !Rails.env.production?
@@ -58,7 +53,7 @@ module ForemanTasks
     end
 
     def initialize_world(world_class = ::Dynflow::World)
-      world_class.new(world_options).tap do |world|
+      world_class.new(world_config).tap do |world|
         @on_init.each { |init| init.call(world) }
       end
     end
@@ -98,12 +93,19 @@ module ForemanTasks
     protected
 
     # generates the options hash consumable by the Dynflow's world
-    def world_options
-      { logger_adapter:      ::Dynflow::LoggerAdapters::Delegator.new(action_logger, dynflow_logger),
-        pool_size:           5,
-        persistence_adapter: initialize_persistence,
-        transaction_adapter: transaction_adapter,
-        executor:            -> world { initialize_executor world } }
+    def world_config
+      ::Dynflow::Config.new.tap do |config|
+        config.auto_rescue         = true
+        config.logger_adapter      = ::Dynflow::LoggerAdapters::Delegator.new(action_logger, dynflow_logger)
+        config.pool_size           = 5
+        config.persistence_adapter = initialize_persistence
+        config.transaction_adapter = transaction_adapter
+        config.executor            = ->(world, _) { initialize_executor(world) }
+        config.connector           = ->(world, _) { initialize_connector(world) }
+
+        # we can't do any operation until the ForemanTasks.dynflow.world is set
+        config.auto_execute        = false
+      end
     end
 
     def default_sequel_adapter_options
@@ -125,10 +127,14 @@ module ForemanTasks
 
     def initialize_executor(world)
       if self.remote?
-        ::Dynflow::Executors::RemoteViaSocket.new(world, self.remote_socket_path)
+        false
       else
         ::Dynflow::Executors::Parallel.new(world, self.pool_size)
       end
+    end
+
+    def initialize_connector(world)
+      ::Dynflow::Connectors::Database.new(world)
     end
 
     # Sequel adapter based on Rails app database.yml configuration

@@ -16,6 +16,8 @@ module ForemanTasks
           ForemanTasks.dynflow.world.logger.error(e.backtrace.join("\n"))
         end
       end
+    ensure
+      ::ActiveRecord::Base.clear_active_connections!
     end
 
     def on_execution_plan_save(execution_plan_id, data)

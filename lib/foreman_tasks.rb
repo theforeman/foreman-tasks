@@ -22,8 +22,7 @@ module ForemanTasks
     Match! async, true, false
 
     match trigger(action, *args, &block),
-          (on ::Dynflow::World::PlaningFailed.(error: ~any) |
-                  ::Dynflow::World::ExecutionFailed.(error: ~any) do |error|
+          (on ::Dynflow::World::PlaningFailed.(error: ~any) do |error|
             raise error
           end),
           (on ::Dynflow::World::Triggered.(execution_plan_id: ~any, future: ~any) do |id, finished|
