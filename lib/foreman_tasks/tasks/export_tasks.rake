@@ -5,6 +5,7 @@
 # Run "foreman-rake export_tasks" to export tasks whcih are not listed
 # as successful.
 # To export all tasks "foreman-rake export_tasks tasks=all"
+#   to specify the number of days of tasks to gather:  days=60 (defaults to 60)
 
 namespace :foreman_tasks do
   desc 'Export Dynflow Tasks'
@@ -216,9 +217,11 @@ namespace :foreman_tasks do
       tasks = ForemanTasks::Task.where("result != 'success'")
     end
 
+    days = ENV['days'].try(:to_i) || 60
+    tasks = tasks.where('started_at > ?', days.days.ago)
     export_filename = ENV['export'] || "/tmp/task-export-#{DateTime.now.to_i}.tar.gz"
 
-
+    puts _("Gathering last #{days} days of tasks.")
     Dir.mktmpdir('task-export') do |tmp_dir|
       PageHelper.copy_assets(tmp_dir)
 
