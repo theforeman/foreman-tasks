@@ -92,7 +92,7 @@ module ForemanTasks
         resumed = []
         failed = []
         skipped = []
-        scope.find_each do |task|
+        scope.each do |task|
           if task.resumable?
             begin
               ForemanTasks.dynflow.world.execute(task.execution_plan.id)
@@ -138,10 +138,7 @@ module ForemanTasks
                               per_page: params[:per_page] || 20
                             }
         scope = pagination_scope(scope, pagination_params)
-        results = []
-        scope.find_each do |task|
-          results << task_hash(task)
-        end
+        results = scope.map { |task| task_hash(task) }
 
         render :json => {
                           total: total,
