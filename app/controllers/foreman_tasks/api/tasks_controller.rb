@@ -28,6 +28,11 @@ module ForemanTasks
 
       before_filter :find_resource, :only => [:show]
 
+      api :GET, "/tasks/summary", "Show task summary"
+      def summary
+        render :json => ForemanTasks::Task::Summarizer.new.summarize_by_status
+      end
+
       api :GET, "/tasks/:id", "Show task details"
       param :id, :identifier, desc: "UUID of the task"
       def show

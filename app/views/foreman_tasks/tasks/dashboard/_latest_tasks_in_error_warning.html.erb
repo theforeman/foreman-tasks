@@ -1,0 +1,15 @@
+<h4><%= link_to _("Latest Warning/Error Tasks "), foreman_tasks_tasks_path(:order=>'started_at DESC') %></h4>
+<table class="table table-striped">
+  <tr>
+    <th><%= _("Name") %></th>
+    <th><%= _("State") %></th>
+    <th><%= _("Result") %></th>
+  </tr>
+  <% ForemanTasks::Task::Summarizer.new.latest_tasks_in_errors_warning.each do |task| %>
+    <tr class="<%= ForemanTasks::Task::StatusExplicator.new.is_erroneous(task) ? 'text-danger' : '' %>">
+      <td><%= link_to task.humanized[:action], defined?(main_app) ? main_app.foreman_tasks_task_path(task.id) : foreman_tasks_task_path(task.id) %></td>
+      <td><%= task.state %></td>
+      <td><%= task.result %></td>
+    </tr>
+  <% end %>
+</table>
