@@ -34,4 +34,21 @@ class TasksTest < ActiveSupport::TestCase
       assert auth.can?(permission.name.to_sym, task)
     end
   end
+
+  describe 'consistency check' do
+
+    let(:consistent_task) { FactoryGirl.create(:dynflow_task) }
+    let(:inconsistent_task) { FactoryGirl.create(:dynflow_task, :inconsistent_dynflow_task) }
+
+    it 'ensures the tasks marked as running are really running in Dynflow' do
+      consistent_task.state.must_equal 'planned'
+      inconsistent_task.state.must_equal 'running'
+
+      fixed_count = ForemanTasks::Task::DynflowTask.consistency_check
+
+      fixed_count.must_equal 1
+      consistent_task.reload.state.must_equal 'planned'
+      inconsistent_task.reload.state.must_equal 'planned'
+    end
+  end
 end

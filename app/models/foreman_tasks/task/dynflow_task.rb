@@ -17,7 +17,9 @@ module ForemanTasks
                                 end
                               end
       self.label          ||= main_action.class.name
+      changes             = self.changes
       self.save!
+      return changes
     end
 
     def resumable?
@@ -79,6 +81,22 @@ module ForemanTasks
           "#{error.message} (#{error.class})\n#{error.backtrace.join "\n"}"
         end
       end
+    end
+
+    def self.consistency_check
+      fixed_count = 0
+      self.running.each do |task|
+        begin
+          changes = task.update_from_dynflow(task.execution_plan.to_hash)
+          unless changes.empty?
+            fixed_count += 1
+            Rails.logger.warn("Task %s updated at consistency check: %s" % [task.id, changes.inspect])
+          end
+        rescue => e
+          Rails.logger.warn("Failed at consistency check for task %s: %s\n %s" % [task.id, e.message, e.backtrace.join("\n")])
+        end
+      end
+      return fixed_count
     end
   end
 end

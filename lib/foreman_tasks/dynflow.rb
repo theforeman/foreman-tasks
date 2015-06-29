@@ -49,6 +49,8 @@ module ForemanTasks
           # of executors
           world.consistency_check
           world.execute_planned_execution_plans
+
+          Task::DynflowTask.consistency_check
         end
       end
     end

@@ -23,10 +23,10 @@ FactoryGirl.define do
       parent_task_id nil
 
       after(:build) do |task|
-        dynflow_task = ForemanTasks.dynflow.world.plan(Support::DummyDynflowAction)
+        execution_plan = ForemanTasks.dynflow.world.plan(Support::DummyDynflowAction)
         # remove the task created automatically by the persistence
-        ForemanTasks::Task.where(:external_id => dynflow_task.id).delete_all
-        task.external_id = dynflow_task.id
+        ForemanTasks::Task.where(:external_id => execution_plan.id).delete_all
+        task.update_from_dynflow(execution_plan.to_hash)
       end
 
       trait :user_create_task do
@@ -35,6 +35,12 @@ FactoryGirl.define do
 
       trait :product_create_task do
         label "Actions::Katello::Product::Create"
+      end
+
+      trait :inconsistent_dynflow_task do
+        after(:build) do |task|
+          task.update_attributes!(:state => 'running')
+        end
       end
     end
   end
