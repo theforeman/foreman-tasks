@@ -46,7 +46,9 @@ module ForemanTasks
     end
 
     initializer "foreman_tasks.load_app_instance_data" do |app|
-      app.config.paths['db/migrate'] += ForemanTasks::Engine.paths['db/migrate'].existent
+      ForemanTasks::Engine.paths['db/migrate'].existent.each do |path|
+        app.config.paths['db/migrate'] << path
+      end
     end
 
     # to enable async Foreman operations using Dynflow
