@@ -47,6 +47,7 @@ module ForemanTasks
                        :log_output => true,
                        :ARGV => [command]) do |*args|
         begin
+          ::Logging.reopen
           run(options[:foreman_root])
         rescue => e
           STDERR.puts e.message

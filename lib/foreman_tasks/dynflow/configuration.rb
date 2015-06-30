@@ -35,8 +35,8 @@ module ForemanTasks
     attr_accessor :disable_active_record_actions
 
     def initialize
-      self.action_logger            = Rails.logger
-      self.dynflow_logger           = Rails.logger
+      self.action_logger            = Foreman::Logging.logger('foreman-tasks/action')
+      self.dynflow_logger           = Foreman::Logging.logger('foreman-tasks/dynflow')
       self.pool_size                = 5
       self.db_pool_size             = pool_size + 5
       self.remote                   = Rails.env.production?

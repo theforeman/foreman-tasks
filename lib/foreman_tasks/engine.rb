@@ -4,6 +4,11 @@ module ForemanTasks
 
     initializer 'foreman_tasks.load_default_settings', :before => :load_config_initializers do
       require_dependency File.expand_path('../../../app/models/setting/foreman_tasks.rb', __FILE__) if (Setting.table_exists? rescue(false))
+      logging = Foreman::Plugin::Logging.new('foreman-tasks')
+      logging.configure(:loggers => {
+                          'dynflow' => { :enabled => true },
+                          'action'  => { :enabled => true }
+                        })
     end
 
     initializer 'foreman_tasks.register_plugin', :after => :finisher_hook do |app|
