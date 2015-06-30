@@ -167,11 +167,7 @@ module ForemanTasks
         scope = active_scope(scope, search_params)
         scope = action_types_scope(scope, search_params)
         scope = pagination_scope(scope, search_params)
-        results = []
-        scope.find_each do |task|
-          results << task_hash(task)
-        end
-        results
+        scope.all.map { |task| task_hash(task) }
       end
 
       def search_scope(scope, search_params)
