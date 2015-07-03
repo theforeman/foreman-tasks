@@ -43,14 +43,17 @@ module ForemanTasks
         unless config.remote?
           at_exit { world.terminate.wait }
 
-          # for now, we can check the consistency only when there
-          # is no remote executor. We should be able to check the consistency
-          # every time the new world is created when there is a register
-          # of executors
-          world.consistency_check
-          world.execute_planned_execution_plans
+          # don't try to do any rescuing until the tables are properly migrated
+          if !Foreman.in_rake?('db:migrate') && (ForemanTasks::Task.table_exists? rescue(false))
+            # for now, we can check the consistency only when there
+            # is no remote executor. We should be able to check the consistency
+            # every time the new world is created when there is a register
+            # of executors
+            world.consistency_check
+            world.execute_planned_execution_plans
 
-          Task::DynflowTask.consistency_check
+            ForemanTasks::Task::DynflowTask.consistency_check
+          end
         end
       end
     end
