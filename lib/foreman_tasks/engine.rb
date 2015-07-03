@@ -8,7 +8,7 @@ module ForemanTasks
 
     initializer 'foreman_tasks.register_plugin', :after => :finisher_hook do |app|
       Foreman::Plugin.register :"foreman-tasks" do
-        requires_foreman '> 1.3'
+        requires_foreman '>= 1.6'
         divider :top_menu, :parent => :monitor_menu, :after => :audits
         menu :top_menu, :tasks,
              :url_hash => { :controller => 'foreman_tasks/tasks', :action => :index },
@@ -24,6 +24,9 @@ module ForemanTasks
 
         role "Tasks Manager", [:view_foreman_tasks, :edit_foreman_tasks]
         role "Tasks Reader", [:view_foreman_tasks]
+
+        widget 'foreman_tasks/tasks/dashboard/tasks_status', :sizex=>6, :sizey=>1, :name=> N_('Tasks Status table')
+        widget 'foreman_tasks/tasks/dashboard/latest_tasks_in_error_warning', :sizex=>6, :sizey=>1,:name=> N_('Tasks in Error/Warning')
       end
     end
 
@@ -78,10 +81,6 @@ module ForemanTasks
           ForemanTasks.dynflow.initialize!
         end
       end
-    end
-
-    initializer "foreman_tasks.initialize_dynflow", :after => 'foreman_tasks.initializer'  do
-      ::ForemanTasks::WidgetManager.register_widgets
     end
 
     config.to_prepare do
