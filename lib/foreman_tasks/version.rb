@@ -1,3 +1,3 @@
 module ForemanTasks
-  VERSION = "0.6.15"
+  VERSION = "0.7.0"
 end
