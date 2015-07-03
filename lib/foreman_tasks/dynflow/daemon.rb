@@ -3,7 +3,7 @@ require 'fileutils'
 module ForemanTasks
   class Dynflow::Daemon
 
-    # load the Rails environment and initialize the executor and listener
+    # load the Rails environment and initialize the executor
     # in this thread.
     def run(foreman_root = Dir.pwd)
       STDERR.puts("Starting Rails environment")
@@ -13,10 +13,10 @@ module ForemanTasks
       end
       ForemanTasks.dynflow.executor!
       require foreman_env_file
-      STDERR.puts("Starting listener")
-      daemon = ::Dynflow::Daemon.new(listener, world, lock_file)
       STDERR.puts("Everything ready")
-      daemon.run
+      sleep
+    ensure
+      STDERR.puts("Exiting")
     end
 
     # run the executor as a daemon
@@ -54,34 +54,9 @@ module ForemanTasks
           exit 1
         end
       end
-      if command == "start" || command == "restart"
-        STDERR.puts('Waiting for the executor to be ready...')
-        options[:wait_attempts].times do |i|
-          STDERR.print('.')
-          if File.exists?(lock_file)
-            STDERR.puts('executor started successfully')
-            break
-          else
-            sleep options[:wait_sleep]
-          end
-        end
-      end
     end
 
     protected
-
-    def listener
-      FileUtils.mkdir_p(File.dirname(socket_path))
-      ::Dynflow::Listeners::Socket.new(world, socket_path)
-    end
-
-    def socket_path
-      ForemanTasks.dynflow.config.remote_socket_path
-    end
-
-    def lock_file
-      File.join(Rails.root, 'tmp', 'dynflow_executor.lock')
-    end
 
     def world
        ForemanTasks.dynflow.world
