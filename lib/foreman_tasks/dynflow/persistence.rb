@@ -7,6 +7,8 @@ module ForemanTasks
   class Dynflow::Persistence < ::Dynflow::PersistenceAdapters::Sequel
 
     def save_execution_plan(execution_plan_id, value)
+      # clear connection only if not running in some active record transaction already
+      clear_connections = ActiveRecord::Base.connection.open_transactions == 0
       super.tap do
         begin
           on_execution_plan_save(execution_plan_id, value)
@@ -17,7 +19,7 @@ module ForemanTasks
         end
       end
     ensure
-      ::ActiveRecord::Base.clear_active_connections!
+      ::ActiveRecord::Base.clear_active_connections! if clear_connections
     end
 
     def on_execution_plan_save(execution_plan_id, data)
