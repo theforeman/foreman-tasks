@@ -4,16 +4,11 @@ module ForemanTasks
 
     initializer 'foreman_tasks.load_default_settings', :before => :load_config_initializers do
       require_dependency File.expand_path('../../../app/models/setting/foreman_tasks.rb', __FILE__) if (Setting.table_exists? rescue(false))
-      logging = Foreman::Plugin::Logging.new('foreman-tasks')
-      logging.configure(:loggers => {
-                          'dynflow' => { :enabled => true },
-                          'action'  => { :enabled => true }
-                        })
     end
 
     initializer 'foreman_tasks.register_plugin', :after => :finisher_hook do |app|
       Foreman::Plugin.register :"foreman-tasks" do
-        requires_foreman '>= 1.6'
+        requires_foreman '>= 1.9.0'
         divider :top_menu, :parent => :monitor_menu, :after => :audits
         menu :top_menu, :tasks,
              :url_hash => { :controller => 'foreman_tasks/tasks', :action => :index },
@@ -26,6 +21,9 @@ module ForemanTasks
           permission :edit_foreman_tasks, {:'foreman_tasks/tasks' => [:resume, :unlock, :force_unlock, :cancel_step],
                                            :'foreman_tasks/api/tasks' => [:bulk_resume]}, :resource_type => ForemanTasks::Task.name
         end
+
+        logger :dynflow, :enabled => true
+        logger :action, :enabled => true
 
         role "Tasks Manager", [:view_foreman_tasks, :edit_foreman_tasks]
         role "Tasks Reader", [:view_foreman_tasks]

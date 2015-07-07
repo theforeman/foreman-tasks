@@ -1,13 +1,6 @@
 module ForemanTasks
   class Dynflow::Configuration
 
-    # for logging action related info (such as exceptions raised in side
-    # the actions' methods
-    attr_accessor :action_logger
-
-    # for logging dynflow related info about the progress of the execution etc.
-    attr_accessor :dynflow_logger
-
     # the number of threads in the pool handling the execution
     attr_accessor :pool_size
 
@@ -35,8 +28,6 @@ module ForemanTasks
     attr_accessor :disable_active_record_actions
 
     def initialize
-      self.action_logger            = Foreman::Logging.logger('foreman-tasks/action')
-      self.dynflow_logger           = Foreman::Logging.logger('foreman-tasks/dynflow')
       self.pool_size                = 5
       self.db_pool_size             = pool_size + 5
       self.remote                   = Rails.env.production?
@@ -46,6 +37,17 @@ module ForemanTasks
       self.rake_tasks_with_executor = %w[db:migrate db:seed]
 
       @on_init = []
+    end
+
+    # for logging action related info (such as exceptions raised in side
+    # the actions' methods
+    def action_logger
+      Foreman::Logging.logger('foreman-tasks/action')
+    end
+
+    # for logging dynflow related info about the progress of the execution etc.
+    def dynflow_logger
+      Foreman::Logging.logger('foreman-tasks/dynflow')
     end
 
     def on_init(&block)

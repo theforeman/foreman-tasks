@@ -94,7 +94,7 @@ module ForemanTasks
             logger.warn("Task %s updated at consistency check: %s" % [task.id, changes.inspect])
           end
         rescue => e
-          logger.warn("Failed at consistency check for task %s: %s\n %s" % [task.id, e.message, e.backtrace.join("\n")])
+          Foreman::Logging.exception("Failed at consistency check for task #{task.id}", e, :logger => logger)
         end
       end
       return fixed_count

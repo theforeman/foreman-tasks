@@ -51,7 +51,7 @@ module ForemanTasks
           run(options[:foreman_root])
         rescue => e
           STDERR.puts e.message
-          Rails.logger.fatal e
+          Foreman::Logging.exception("", e)
           exit 1
         end
       end
