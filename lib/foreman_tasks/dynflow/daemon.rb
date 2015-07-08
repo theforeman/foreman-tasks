@@ -51,7 +51,7 @@ module ForemanTasks
           run(options[:foreman_root])
         rescue => e
           STDERR.puts e.message
-          Foreman::Logging.exception("", e)
+          Foreman::Logging.exception("Failed running foreman-tasks daemon", e)
           exit 1
         end
       end
