@@ -93,7 +93,7 @@ it would be:
 ```ruby
 initializer "your_engine.require_dynflow", :before => "foreman_tasks.initialize_dynflow" do |app|
   ForemanTasks.dynflow.require!
-  ForemanTasks.dynflow.config.eager_load_paths.concat(YourEngine::Engine.root, 'app/lib/actions')
+  ForemanTasks.dynflow.config.eager_load_paths << File.join(YourEngine::Engine.root, 'app/lib/actions')
 end
 ```
 
