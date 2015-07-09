@@ -24,6 +24,7 @@ module ForemanTasks
       default_options = { foreman_root: Dir.pwd,
                           process_name: 'dynflow_executor',
                           pid_dir: "#{Rails.root}/tmp/pids",
+                          log_dir: File.join(Rails.root, 'log'),
                           wait_attempts: 300,
                           wait_sleep: 1 }
       options = default_options.merge(options)
@@ -42,6 +43,7 @@ module ForemanTasks
 
       Daemons.run_proc(options[:process_name],
                        :dir => options[:pid_dir],
+                       :log_dir => options[:log_dir],
                        :dir_mode => :normal,
                        :monitor => true,
                        :log_output => true,
