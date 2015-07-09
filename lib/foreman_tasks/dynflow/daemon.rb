@@ -49,10 +49,11 @@ module ForemanTasks
                        :log_output => true,
                        :ARGV => [command]) do |*args|
         begin
+          ::Logging.reopen
           run(options[:foreman_root])
         rescue => e
           STDERR.puts e.message
-          Rails.logger.fatal e
+          Foreman::Logging.exception("Failed running foreman-tasks daemon", e)
           exit 1
         end
       end

@@ -85,15 +85,16 @@ module ForemanTasks
 
     def self.consistency_check
       fixed_count = 0
+      logger = Foreman::Logging.logger('foreman-tasks')
       self.running.each do |task|
         begin
           changes = task.update_from_dynflow(task.execution_plan.to_hash)
           unless changes.empty?
             fixed_count += 1
-            Rails.logger.warn("Task %s updated at consistency check: %s" % [task.id, changes.inspect])
+            logger.warn("Task %s updated at consistency check: %s" % [task.id, changes.inspect])
           end
         rescue => e
-          Rails.logger.warn("Failed at consistency check for task %s: %s\n %s" % [task.id, e.message, e.backtrace.join("\n")])
+          Foreman::Logging.exception("Failed at consistency check for task #{task.id}", e, :logger => logger)
         end
       end
       return fixed_count
