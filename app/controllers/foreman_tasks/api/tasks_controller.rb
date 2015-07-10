@@ -14,6 +14,9 @@ module ForemanTasks
   module Api
     class TasksController < ::Api::V2::BaseController
 
+      include ::Foreman::Controller::SmartProxyAuth
+      add_smart_proxy_filters :callback, :features => 'Dynflow'
+
       resource_description do
         resource_id 'foreman_tasks'
         api_version 'v2'
@@ -156,6 +159,20 @@ module ForemanTasks
                                 },
                           results: results
                         }
+      end
+
+      api :POST, '/tasks/callback', N_("Send data to the task from external executor (such as smart_proxy_dynflow)")
+      param :callback, Hash do
+        param :task_id, :identifier, :desc => N_("UUID of the task")
+        param :step_id, String, :desc => N_("The id of the step inside the execution plan to send the event to ")
+      end
+      param :data, Hash, :desc => N_("Data to be sent to the action")
+      def callback
+        task = ForemanTasks::Task::DynflowTask.find(params[:callback][:task_id])
+        ForemanTasks.dynflow.world.event(task.external_id,
+                                         params[:callback][:step_id].to_i,
+                                         ::Actions::ProxyAction::CallbackData.new(params[:data]))
+        render :json => { :message => 'processing' }.to_json
       end
 
       private

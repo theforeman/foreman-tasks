@@ -19,6 +19,7 @@ Foreman::Application.routes.draw do
           post :bulk_search
           post :bulk_resume
           get :summary
+          post :callback
         end
       end
     end

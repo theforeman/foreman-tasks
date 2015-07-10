@@ -9,15 +9,43 @@ module ForemanTasks
         User.current = User.where(:login => 'apiadmin').first
         @request.env['HTTP_ACCEPT'] = 'application/json'
         @request.env['CONTENT_TYPE'] = 'application/json'
-        @task = FactoryGirl.create(:dynflow_task, :user_create_task)
       end
 
-      it 'searches for task on GET' do
-        get(:show, :id => @task.id)
-        assert_response :success
-        assert_template 'api/tasks/show'
+      describe 'GET /api/tasks/show' do
+        it 'searches for task' do
+          task = FactoryGirl.create(:dynflow_task, :user_create_task)
+          get(:show, :id => task.id)
+          assert_response :success
+          assert_template 'api/tasks/show'
+        end
       end
 
+      describe 'POST /tasks/callback' do
+        self.use_transactional_fixtures = false
+
+        it 'passes the data to the corresponding action' do
+          Support::DummyProxyAction.reset
+
+          triggered = ForemanTasks.trigger(Support::DummyProxyAction, Support::DummyProxyAction.proxy, 'foo' => 'bar')
+          Support::DummyProxyAction.proxy.task_triggered.wait(5)
+
+          task = ForemanTasks::Task.find_by_external_id(triggered.id)
+          task.state.must_equal 'running'
+          task.result.must_equal 'pending'
+
+          callback = Support::DummyProxyAction.proxy.log[:trigger_task].first[1][:callback]
+          post(:callback, 'callback' => callback, 'data' => {'result' => 'success'})
+          triggered.finished.wait(5)
+
+          task.reload
+          task.state.must_equal 'stopped'
+          task.result.must_equal 'success'
+          task.main_action.output.must_equal({ "proxy_task_id" => "123",
+                                               "proxy_output"  => { "result" => "success" }})
+        end
+      end
     end
   end
 end
+
+
