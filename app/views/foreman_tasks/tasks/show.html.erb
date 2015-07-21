@@ -2,14 +2,12 @@
   var taskProgressReloader = {
     timeoutId: null,
     reload: function () {
-      $.ajax({
-        url: "",
-        context: document.body,
-        success: function (s, x) {
-          $(this).html(s);
-          taskProgressReloader.start();
-        }
-      });
+      // we need different reload mechanism for two-pane and non-two-pane
+      if (typeof currentTwoPaneTask !== 'undefined') {
+        two_pane_open(currentTwoPaneTask);
+      } else {
+        document.location.reload();
+      }
     },
 
     start: function () {

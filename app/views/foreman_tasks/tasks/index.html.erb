@@ -14,11 +14,14 @@
 </style>
 
 <script>
+
+var currentTwoPaneTask;
+
 $(document).on('click', ".table-two-pane td.two-pane-link", function(e) {
-  var item = $(this).find("a");
-  if(item.length){
+  currentTwoPaneTask = $(this).find("a");
+  if(currentTwoPaneTask.length){
     e.preventDefault();
-    two_pane_open(item);
+    two_pane_open(currentTwoPaneTask);
   }
 });
 
