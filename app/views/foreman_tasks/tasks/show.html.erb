@@ -1,44 +1,45 @@
 <script>
-  var taskProgressReloader = {
-    timeoutId: null,
-    reload: function () {
-      $.ajax({
-        url: "",
-        context: document.body,
-        success: function (s, x) {
-          $(this).html(s);
-          taskProgressReloader.start();
+  if (typeof taskProgressReloader === 'undefined') {
+    var taskProgressReloader = {
+      timeoutId: null,
+      reload: function () {
+        // we need different reload mechanism for two-pane and non-two-pane
+        if (typeof currentTwoPaneTask !== 'undefined') {
+          taskProgressReloader.timeoutId = null;
+          two_pane_open(currentTwoPaneTask);
+        } else {
+          document.location.reload();
         }
-      });
-    },
+      },
 
-    start: function () {
-      if (!this.timeoutId) {
-        this.timeoutId = setTimeout(this.reload, 5000);
-      }
-     var button = $('.reload-button');
-     button.html('<span class="glyphicon glyphicon-refresh spin"></span> <%= _('Stop auto-reloading') %>');
-     button.show();
-    },
+      start: function () {
+        if (!taskProgressReloader.timeoutId) {
+          taskProgressReloader.timeoutId = setTimeout(this.reload, 5000);
+        }
+        var button = $('.reload-button');
+        button.html('<span class="glyphicon glyphicon-refresh spin"></span> <%= _('Stop auto-reloading') %>');
+        button.show();
+      },
 
-    stop: function () {
-      if (this.timeoutId) {
-        clearTimeout(this.timeoutId);
-      }
-      this.timeoutId = null;
-      var button = $('.reload-button');
-      button.html('<span class="glyphicon glyphicon-refresh"></span> <%= _('Start auto-reloading') %>');
-      button.show();
-    },
+      stop: function () {
+        if (taskProgressReloader.timeoutId) {
+          clearTimeout(taskProgressReloader.timeoutId);
+        }
+        taskProgressReloader.timeoutId = null;
+        var button = $('.reload-button');
+        button.html('<span class="glyphicon glyphicon-refresh"></span> <%= _('Start auto-reloading') %>');
+        button.show();
+      },
 
-    toggle: function () {
-      if (this.timeoutId) {
-        this.stop();
-      } else {
-        this.start();
+      toggle: function () {
+        if (taskProgressReloader.timeoutId) {
+          this.stop();
+        } else {
+          this.start();
+        }
       }
-    }
-  };
+    };
+  }
 
   $(document).ready(function () {
     $('.modal-submit').click(function(e){
