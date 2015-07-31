@@ -94,7 +94,7 @@ module ForemanTasks
 
 
     rake_tasks do
-      %w[dynflow.rake test.rake export_tasks.rake].each do |rake_file|
+      %w[dynflow.rake test.rake export_tasks.rake cleanup.rake].each do |rake_file|
         full_path = File.expand_path("../tasks/#{rake_file}", __FILE__)
         load full_path if File.exists?(full_path)
       end

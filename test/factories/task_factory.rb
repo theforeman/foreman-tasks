@@ -22,11 +22,18 @@ FactoryGirl.define do
       result "success"
       parent_task_id nil
 
-      after(:build) do |task|
+      transient do
+        sync_with_dynflow false
+      end
+
+      after(:build) do |task, evaluator|
         execution_plan = ForemanTasks.dynflow.world.plan(Support::DummyDynflowAction)
         # remove the task created automatically by the persistence
         ForemanTasks::Task.where(:external_id => execution_plan.id).delete_all
-        task.update_from_dynflow(execution_plan.to_hash)
+        task.update_attributes!(:external_id => execution_plan.id)
+        if evaluator.sync_with_dynflow
+          task.update_from_dynflow(execution_plan.to_hash)
+        end
       end
 
       trait :user_create_task do

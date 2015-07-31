@@ -37,7 +37,7 @@ class TasksTest < ActiveSupport::TestCase
 
   describe 'consistency check' do
 
-    let(:consistent_task) { FactoryGirl.create(:dynflow_task) }
+    let(:consistent_task) { FactoryGirl.create(:dynflow_task, :sync_with_dynflow => true) }
     let(:inconsistent_task) { FactoryGirl.create(:dynflow_task, :inconsistent_dynflow_task) }
 
     it 'ensures the tasks marked as running are really running in Dynflow' do
