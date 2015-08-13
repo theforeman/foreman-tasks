@@ -6,6 +6,7 @@ Foreman::Application.routes.draw do
       end
       member do
         get :sub_tasks
+        post :cancel
         post :resume
         post :unlock
         post :force_unlock
