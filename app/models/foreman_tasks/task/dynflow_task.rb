@@ -22,6 +22,14 @@ module ForemanTasks
       return changes
     end
 
+    def cancellable?
+      execution_plan.cancellable?
+    end
+
+    def cancel
+      execution_plan.cancel.any?
+    end
+
     def resumable?
       execution_plan.state == :paused
     end

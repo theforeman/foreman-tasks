@@ -18,7 +18,7 @@ module ForemanTasks
         security_block :foreman_tasks do |map|
           permission :view_foreman_tasks, {:'foreman_tasks/tasks' => [:auto_complete_search, :sub_tasks, :index, :show],
                                            :'foreman_tasks/api/tasks' => [:bulk_search, :show, :index, :summary] }, :resource_type => ForemanTasks::Task.name
-          permission :edit_foreman_tasks, {:'foreman_tasks/tasks' => [:resume, :unlock, :force_unlock, :cancel_step],
+          permission :edit_foreman_tasks, {:'foreman_tasks/tasks' => [:resume, :unlock, :force_unlock, :cancel_step, :cancel],
                                            :'foreman_tasks/api/tasks' => [:bulk_resume]}, :resource_type => ForemanTasks::Task.name
         end
 
@@ -49,6 +49,12 @@ module ForemanTasks
 
     initializer "foreman_tasks.register_paths" do |app|
       ForemanTasks.dynflow.config.eager_load_paths.concat(%W[#{ForemanTasks::Engine.root}/app/lib/actions])
+    end
+
+    initializer "foreman_tasks.test_exceptions" do |app|
+      if defined? ActiveSupport::TestCase
+        require 'foreman_tasks/test_extensions'
+      end
     end
 
     initializer "foreman_tasks.load_app_instance_data" do |app|

@@ -71,7 +71,7 @@
       taskProgressReloader.stop();
     });
 
-  <% if @task.state == 'running' %>
+  <% if @task.state != 'stopped' %>
     taskProgressReloader.start();
   <% else %>
     taskProgressReloader.stop();

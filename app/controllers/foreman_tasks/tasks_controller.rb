@@ -26,6 +26,16 @@ module ForemanTasks
       redirect_to foreman_tasks_task_path(task)
     end
 
+    def cancel
+      task = find_dynflow_task
+      if task.cancel
+        flash[:notice] = _('Trying to cancel the task')
+      else
+        flash[:warning] = _('The task is not cancellable at the moment.')
+      end
+      redirect_to :back
+    end
+
     def resume
       task = find_dynflow_task
       if task.resumable?
@@ -34,7 +44,7 @@ module ForemanTasks
       else
         flash[:warning] = _('The execution has to be resumable.')
       end
-      redirect_to foreman_tasks_task_path(task)
+      redirect_to :back
     end
 
     def unlock
@@ -46,7 +56,7 @@ module ForemanTasks
       else
         flash[:warning] =  _('The execution has to be paused.')
       end
-      redirect_to foreman_tasks_task_path(task)
+      redirect_to :back
     end
 
     def force_unlock
@@ -54,7 +64,7 @@ module ForemanTasks
       task.state = :stopped
       task.save!
       flash[:notice] = _('The task resources were unlocked with force.')
-      redirect_to foreman_tasks_task_path(task)
+      redirect_to :back
     end
 
     # we need do this to make the Foreman helpers working properly
@@ -76,7 +86,7 @@ module ForemanTasks
       case params[:action]
       when 'sub_tasks'
         :view
-      when 'resume', 'unlock', 'force_unlock', 'cancel_step'
+      when 'resume', 'unlock', 'force_unlock', 'cancel_step', 'cancel'
         :edit
       else
         super
