@@ -14,7 +14,7 @@ class TasksTest < ActiveSupport::TestCase
                          FactoryGirl.create(:dynflow_task, :product_create_task)]
       cleaner.delete
       ForemanTasks::Task.where(id: tasks_to_delete).must_be_empty
-      ForemanTasks::Task.where(id: tasks_to_keep).must_equal tasks_to_keep
+      ForemanTasks::Task.where(id: tasks_to_keep).order(:id).map(&:id).must_equal tasks_to_keep.map(&:id).sort
 
       ForemanTasks.dynflow.world.persistence.
           find_execution_plans(filters: {'uuid' => tasks_to_delete.map(&:external_id)}).size.must_equal 0

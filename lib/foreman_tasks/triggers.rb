@@ -21,5 +21,9 @@ module ForemanTasks
     def sync_task(action, *args, &block)
       foreman_tasks.sync_task(action, *args, &block)
     end
+
+    def delay(action, delay_options, *args)
+      foreman_tasks.delay(action, delay_options, *args)
+    end
   end
 end

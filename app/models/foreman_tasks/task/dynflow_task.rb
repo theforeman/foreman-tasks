@@ -11,6 +11,8 @@ module ForemanTasks
       self.ended_at       = data[:ended_at]
       self.state          = data[:state].to_s
       self.result         = data[:result].to_s
+      self.start_at       = data[:start_at] if data[:start_at]
+      self.start_before   = data[:start_before] if data[:start_before]
       self.parent_task_id ||= begin
                                 if main_action.caller_execution_plan_id
                                   DynflowTask.find_by_external_id!(main_action.caller_execution_plan_id).id
@@ -106,6 +108,12 @@ module ForemanTasks
         end
       end
       return fixed_count
+    end
+
+    def self.new_for_execution_plan(execution_plan_id, data)
+      self.new(:external_id => execution_plan_id,
+               :state => data[:state].to_s,
+               :result => data[:result].to_s)
     end
   end
 end

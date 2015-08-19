@@ -44,7 +44,7 @@ module Actions
 
     def cancel_proxy_task
       if output[:cancel_sent]
-        error! _("Cancel enforced: the task might be still running on the proxy")
+        error! ForemanTasks::Task::TaskCancelledException.new(_("Cancel enforced: the task might be still running on the proxy"))
       else
         proxy.cancel_task(output[:proxy_task_id])
         output[:cancel_sent] = true

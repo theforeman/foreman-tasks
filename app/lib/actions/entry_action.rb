@@ -56,5 +56,9 @@ module Actions
       subclasses.map { |k| k.allocate.humanized_name }
     end
 
+    def delay(_schedule_options, *args)
+      Serializers::ActiveRecordSerializer.new args
+    end
+
   end
 end
