@@ -13,7 +13,7 @@ module ForemanTasks
         begin
           on_execution_plan_save(execution_plan_id, value)
         rescue => e
-          Foreman::Logging.exception("Error on on_execution_plan_save event", e, :logger => Foreman::Logging.logger('foreman-tasks/dynflow'))
+          Foreman::Logging.exception("Error on on_execution_plan_save event", e, :logger => 'foreman-tasks/dynflow')
         end
       end
     ensure

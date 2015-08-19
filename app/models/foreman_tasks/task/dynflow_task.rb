@@ -102,7 +102,7 @@ module ForemanTasks
             logger.warn("Task %s updated at consistency check: %s" % [task.id, changes.inspect])
           end
         rescue => e
-          Foreman::Logging.exception("Failed at consistency check for task #{task.id}", e, :logger => logger)
+          Foreman::Logging.exception("Failed at consistency check for task #{task.id}", e, :logger => 'foreman-tasks')
         end
       end
       return fixed_count
