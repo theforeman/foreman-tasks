@@ -11,6 +11,8 @@ module Actions
       end
     end
 
+    class Timeout; end
+
     def plan(proxy, options)
       plan_self(options.merge(:proxy_url => proxy.url))
     end
@@ -30,6 +32,8 @@ module Actions
         cancel_proxy_task
       when CallbackData
         on_data(event.data)
+      when Timeout
+        check_task_status
       else
         raise "Unexpected event #{event.inspect}"
       end
@@ -40,6 +44,11 @@ module Actions
                                     input.merge(:callback => { :task_id => task.id,
                                                                :step_id => run_step_id }))
       output[:proxy_task_id] = response["task_id"]
+    end
+
+    # @override to put custom logic on event handling
+    def check_task_status
+      # do nothing
     end
 
     def cancel_proxy_task
