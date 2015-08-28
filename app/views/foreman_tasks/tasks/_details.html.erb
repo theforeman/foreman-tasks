@@ -97,11 +97,11 @@
 </div>
 <div>
   <span class="param-name"><%= _("Started at") %>:</span>
-  <span class="param-value"><%= @task.started_at %></span>
+  <span class="param-value"><%= @task.started_at.try(:in_time_zone) %></span>
 </div>
 <div>
   <span class="param-name"><%= _("Ended at") %>:</span>
-  <span class="param-value"><%= @task.ended_at %></span>
+  <span class="param-value"><%= @task.ended_at.try(:in_time_zone) %></span>
 </div>
 <div>
   <span class="param-name"><%= _("State") %>:</span>

@@ -42,7 +42,7 @@ $(document).on('click', ".table-two-pane td.two-pane-link", function(e) {
       </td>
       <td><%= task.state %></td>
       <td><%= task.result %></td>
-      <td><%= task.started_at %></td>
+      <td><%= task.started_at.try(:in_time_zone) %></td>
       <td><%= task.username %></td>
     </tr>
   <% end %>
