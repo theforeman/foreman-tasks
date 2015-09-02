@@ -130,7 +130,7 @@ module ForemanTasks
           if @dynflow_sync_action
             run.wait
             if run.value.error?
-              task = ForemanTasks::Task::DynflowTask.find_by_external_id!(@execution_plan.id)
+              task = ForemanTasks::Task::DynflowTask.find_by!(:external_id => @execution_plan.id)
               raise ForemanTasks::TaskError.new(task)
             end
           end

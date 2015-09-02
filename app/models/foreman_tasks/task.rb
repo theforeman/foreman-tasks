@@ -15,8 +15,9 @@ module ForemanTasks
 
     # in fact, the task has only one owner but Rails don't let you to
     # specify has_one relation though has_many relation
-    has_many :owners, :through => :locks, :source => :resource, :source_type => 'User',
-        :conditions => ["foreman_tasks_locks.name = ?", Lock::OWNER_LOCK_NAME]
+    has_many :owners, ->{ where("foreman_tasks_locks.name = #{Lock::OWNER_LOCK_NAME}") }, 
+                      :through => :locks, :source => :resource, :source_type => 'User'
+                       
 
     scoped_search :on => :id, :complete_value => false
     scoped_search :on => :label, :complete_value => true
