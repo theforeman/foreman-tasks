@@ -54,10 +54,10 @@ module Actions
 
     def check_targets!(targets)
       if targets.empty?
-        fail _("Empty bulk action")
+        fail ::Foreman::Exception.new(N_("Empty bulk action"))
       end
       if targets.map(&:class).uniq.length > 1
-        fail _("The targets are of different types")
+        fail ::Foreman::Exception.new(N_("The targets are of different types"))
       end
     end
 
