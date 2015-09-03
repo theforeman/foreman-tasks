@@ -32,6 +32,7 @@ $(document).on('click', ".table-two-pane td.two-pane-link", function(e) {
     <th><%= _("State") %></th>
     <th><%= _("Result") %></th>
     <th><%= sort :started_at, :as => _("Started at") %></th>
+    <th><%= sort :ended_at, :as => _("Ended at") %></th>
     <th><%= _("User") %></th>
   </tr>
   <% for task in @tasks %>
@@ -43,6 +44,7 @@ $(document).on('click', ".table-two-pane td.two-pane-link", function(e) {
       <td><%= task.state %></td>
       <td><%= task.result %></td>
       <td><%= task.started_at.try(:in_time_zone) %></td>
+      <td><%= task.ended_at.try(:in_time_zone) %></td>
       <td><%= task.username %></td>
     </tr>
   <% end %>
