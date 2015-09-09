@@ -2,6 +2,7 @@ module Actions
   class ProxyAction < Base
 
     include ::Dynflow::Action::Cancellable
+    include ::Dynflow::Action::Timeouts
 
     class CallbackData
       attr_reader :data
@@ -11,44 +12,61 @@ module Actions
       end
     end
 
-    class Timeout; end
-
     def plan(proxy, options)
+      options[:connection_options] ||= {}
+      default_connection_options.each { |key, value| options[:connection_options][key] ||= value }
       plan_self(options.merge(:proxy_url => proxy.url))
     end
 
     def run(event = nil)
-      case event
-      when nil
-        if output[:proxy_task_id]
-          on_resume
+      with_connection_error_handling(event) do |event|
+        case event
+        when nil
+          if output[:proxy_task_id]
+            on_resume
+          else
+            trigger_proxy_task
+          end
+          suspend
+        when ::Dynflow::Action::Skip
+          # do nothing
+        when ::Dynflow::Action::Cancellable::Cancel
+          cancel_proxy_task
+        when CallbackData
+          on_data(event.data)
+        when ::Dynflow::Action::Timeouts::Timeout
+          check_task_status
         else
-          trigger_proxy_task
+          raise "Unexpected event #{event.inspect}"
         end
-        suspend
-      when ::Dynflow::Action::Skip
-        # do nothing
-      when ::Dynflow::Action::Cancellable::Cancel
-        cancel_proxy_task
-      when CallbackData
-        on_data(event.data)
-      when Timeout
-        check_task_status
-      else
-        raise "Unexpected event #{event.inspect}"
       end
     end
 
     def trigger_proxy_task
-      response = proxy.trigger_task(proxy_action_name,
-                                    input.merge(:callback => { :task_id => task.id,
-                                                               :step_id => run_step_id }))
-      output[:proxy_task_id] = response["task_id"]
+      suspend do |_suspended_action|
+        set_timeout! unless timeout_set?
+        response = proxy.trigger_task(proxy_action_name,
+                                      input.merge(:callback => { :task_id => task.id,
+                                                                 :step_id => run_step_id }))
+        output[:proxy_task_id] = response["task_id"]
+      end
     end
 
-    # @override to put custom logic on event handling
     def check_task_status
-      # do nothing
+      if output[:proxy_task_id]
+        response = proxy.status_of_task(output[:proxy_task_id])
+        if response['state'] == 'stopped'
+          if response['result'] == 'error'
+            raise ::Foreman::Exception, _("The smart proxy task '#{output[:proxy_task_id]}' failed.")
+          else
+            on_data(response['actions'].find { |block_action| block_action['class'] == proxy_action_name }['output'])
+          end
+        else
+          cancel_proxy_task
+        end
+      else
+        process_timeout
+      end
     end
 
     def cancel_proxy_task
@@ -86,6 +104,66 @@ module Actions
 
     def proxy_output=(output)
       output[:proxy_output] = output
+    end
+
+    def metadata
+      output[:metadata] ||= {}
+      output[:metadata]
+    end
+
+    def metadata=(thing)
+      output[:metadata] ||= {}
+      output[:metadata] = thing
+    end
+
+    def timeout_set?
+      !metadata[:timeout].nil?
+    end
+
+    def set_timeout!
+      time = Time.now + input[:connection_options][:timeout]
+      schedule_timeout(time)
+      metadata[:timeout] = time.to_s
+    end
+
+    def default_connection_options
+      # Fails if the plan is not finished within 60 seconds from the first task trigger attempt on the smart proxy
+      # If the triggering fails, it retries 3 more times with 15 second delays
+      { :retry_interval => 15, :retry_count => 4, :timeout => 60 }
+    end
+
+    private
+
+    def with_connection_error_handling(event = nil)
+      yield event
+    rescue ::RestClient::Exception, Errno::ECONNREFUSED, Errno::EHOSTUNREACH, Errno::ETIMEDOUT => e
+      if event.class == CallbackData || event == ::Dynflow::Action::Timeouts::Timeout
+        raise e
+      else
+        handle_connection_exception(e, event)
+      end
+    end
+
+    def format_exception(exception)
+      { output[:proxy_task_id] =>
+            { :exception_class => exception.class.name,
+              :execption_message => exception.message } }
+    end
+
+    def handle_connection_exception(exception, event = nil)
+      metadata[:failed_proxy_tasks] ||= []
+      options = input[:connection_options]
+      metadata[:failed_proxy_tasks] << format_exception(exception)
+      output[:proxy_task_id] = nil
+      if metadata[:failed_proxy_tasks].count < options[:retry_count]
+        suspend do |suspended_action|
+          @world.clock.ping suspended_action,
+                            Time.now + options[:retry_interval],
+                            event
+        end
+      else
+        raise exception
+      end
     end
   end
 end

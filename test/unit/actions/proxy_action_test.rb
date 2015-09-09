@@ -17,6 +17,7 @@ module ForemanTasks
           proxy_call = Support::DummyProxyAction.proxy.log[:trigger_task].first
           proxy_call.must_equal(["Proxy::DummyAction",
                                  { "foo" => "bar",
+                                   "connection_options" => { "retry_interval" => 15, "retry_count" => 4, "timeout" => 60 },
                                    "proxy_url" => "proxy.example.com",
                                    "callback" => { "task_id" => "123", "step_id" => @action.run_step_id }}])
         end
@@ -61,6 +62,23 @@ module ForemanTasks
         action = run_action(@action, ::Actions::ProxyAction::CallbackData.new('result' => 'success'))
         action.output[:proxy_output].must_equal({'result' => 'success'})
       end
+
+      it 'handles connection errors' do
+        action = create_and_plan_action(Support::DummyProxyAction, Support::DummyProxyAction.proxy, { :foo => 'bar' })
+        run_stubbed_action = lambda do |lambda_action|
+          run_action lambda_action do |block_action|
+            block_action.expects(:trigger_proxy_task).raises(Errno::ECONNREFUSED.new('Connection refused'))
+          end
+        end
+        action = run_stubbed_action.call action
+        action.state.must_equal :suspended
+        action.world.clock.pending_pings.length.must_equal 1
+        action.output[:metadata][:failed_proxy_tasks].length.must_equal 1
+        2.times { action.output[:metadata][:failed_proxy_tasks] << {} }
+        proc { action = run_stubbed_action.call action }.must_raise(Errno::ECONNREFUSED)
+        action.state.must_equal :error
+      end
+
     end
 
   end
