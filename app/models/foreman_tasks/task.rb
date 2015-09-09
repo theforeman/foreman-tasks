@@ -66,9 +66,10 @@ module ForemanTasks
     end
 
     # returns true if the task is running or waiting to be run
-    def pending
+    def pending?
       self.state != 'stopped'
     end
+    alias_method :pending, :pending?
 
     def resumable?
       false
