@@ -22,9 +22,13 @@ module ProxyAPI
         MultiJson.load(Task.new(@args).send(:post, payload))
       end
 
-      # Initiate the command
+      # Cancel the command
       def cancel_task(proxy_task_id)
         MultiJson.load(Task.new(@args).send(:post, "", "#{ proxy_task_id }/cancel"))
+      end
+
+      def status_of_task(proxy_task_id)
+        MultiJson.load(Task.new(@args).send(:get, "#{ proxy_task_id }/status"))
       end
     end
   end
