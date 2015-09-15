@@ -15,11 +15,23 @@ module ForemanTasks
              :caption  => N_('Tasks'),
              :parent   => :monitor_menu
 
+        menu :top_menu, :recurring_logics, :after => :tasks,
+             :url_hash => { :controller => 'foreman_tasks/recurring_logics', :action => :index },
+             :caption  => N_('Recurring logics'),
+             :parent   => :monitor_menu
+
         security_block :foreman_tasks do |map|
           permission :view_foreman_tasks, {:'foreman_tasks/tasks' => [:auto_complete_search, :sub_tasks, :index, :show],
                                            :'foreman_tasks/api/tasks' => [:bulk_search, :show, :index, :summary] }, :resource_type => ForemanTasks::Task.name
           permission :edit_foreman_tasks, {:'foreman_tasks/tasks' => [:resume, :unlock, :force_unlock, :cancel_step, :cancel],
                                            :'foreman_tasks/api/tasks' => [:bulk_resume]}, :resource_type => ForemanTasks::Task.name
+
+          permission :create_recurring_logics, { }, :resource_type => ForemanTasks::RecurringLogic
+
+          permission :view_recurring_logics, { :'foreman_tasks/recurring_logics' => [:index, :show] }, :resource_type => ForemanTasks::RecurringLogic
+
+          permission :edit_recurring_logics, { :'foreman_tasks/recurring_logics' => [:cancel] }, :resource_type => ForemanTasks::RecurringLogic
+                                                                                                                                 
         end
 
         logger :dynflow, :enabled => true

@@ -1,0 +1,7 @@
+<legend><%= N_('Task group common') %></legend>
+<%= render 'foreman_tasks/task_groups/common', :task_group => task_group %>
+<legend><%= task_group.humanized_name %> specific</legend>
+<div>
+  <%= begin; render task_group.to_partial_path.dup, :task_group => task_group; rescue ActionView::MissingTemplate => e; end %>
+</div>
+

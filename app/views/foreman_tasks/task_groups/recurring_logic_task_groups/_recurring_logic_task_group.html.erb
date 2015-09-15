@@ -1,0 +1,39 @@
+<% recurring_logic = task_group.recurring_logic -%>
+<table class='table table-condensed'>
+  <tr>
+    <th>ID</th>
+    <td><%= link_to(recurring_logic.id, recurring_logic) %></td>
+  </tr>
+  <tr>
+    <th><%= N_("Cronline") %></th>
+    <td><%= recurring_logic.cron_line %></td>
+  </tr>
+  <tr>
+    <th><%= N_("Action") %></th>
+    <td><%= format_task_input(recurring_logic.tasks.first, true) %></td>
+  </tr>
+  <tr>
+    <th><%= N_("Last occurrence") %></th>
+    <td><%= recurring_logic.tasks.order(:started_at).where('started_at IS NOT NULL').last.try(:started_at) || N_('-') %></td>
+  </tr>
+  <tr>
+    <th><%= N_("Next occurrence") %></th>
+    <td><%= recurring_logic_next_occurrence recurring_logic %></td>
+  </tr>
+  <tr>
+    <th><%= N_("Current iteration") %></th>
+    <td><%= recurring_logic.iteration %></td>
+  </tr>
+  <tr>
+    <th><%= N_("Iteration limit") %></th>
+    <td><%= format_recurring_logic_limit recurring_logic.max_iteration %></td>
+  </tr>
+  <tr>
+    <th><%= N_("Repeat until") %></th>
+    <td><%= format_recurring_logic_limit recurring_logic.end_time.try(:in_time_zone) %></td>
+  </tr>
+  <tr>
+    <th><%= N_("State") %></th>
+    <td><%= recurring_logic_state(recurring_logic) %></td>
+  </tr>
+</table>

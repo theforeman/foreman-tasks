@@ -1,0 +1,17 @@
+<div>
+  <legend><%= _("Associated resources") %></legend>
+  <ul>
+    <% source.task_groups.pluck(:type).uniq.each do |type| %>
+      <% next if type == source.task_group.type %>
+      <% groups = source.task_groups.where(:type => type) %>
+      <% begin %>
+        <%= render groups.first.to_partial_path.pluralize.dup, :source => source, :task_groups => groups %>
+      <% rescue ActionView::MissingTemplate => _ %>
+        <% groups.each do |group| %>
+          <%= render 'foreman_tasks/task_groups/common', :source => source, :task_group => group %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
+

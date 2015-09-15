@@ -13,6 +13,10 @@ module ForemanTasks
     has_many :sub_tasks, :class_name => 'ForemanTasks::Task', :foreign_key => :parent_task_id
     has_many :locks
 
+    has_many :task_group_members
+    has_many :task_groups, :through => :task_group_members
+    has_many :recurring_logic_task_groups, :through => :task_group_members, :conditions => { :type => 'ForemanTasks::TaskGroups::RecurringLogicTaskGroup' }, :source => :task_group
+
     # in fact, the task has only one owner but Rails don't let you to
     # specify has_one relation though has_many relation
     has_many :owners, :through => :locks, :source => :resource, :source_type => 'User',
@@ -30,6 +34,7 @@ module ForemanTasks
     scoped_search :in => :owners,  :on => :id, :complete_value => true, :rename => "owner.id", :ext_method => :search_by_owner
     scoped_search :in => :owners,  :on => :login, :complete_value => true, :rename => "owner.login", :ext_method => :search_by_owner
     scoped_search :in => :owners,  :on => :firstname, :complete_value => true, :rename => "owner.firstname", :ext_method => :search_by_owner
+    scoped_search :in => :task_groups, :on => :id, :complete_value => true, :rename => "task_group.id"
 
     scope :active, -> {  where('foreman_tasks_tasks.state != ?', :stopped) }
     scope :running, -> {  where("foreman_tasks_tasks.state NOT IN ('stopped', 'paused')") }
@@ -139,6 +144,11 @@ module ForemanTasks
     def self.authorized_resource_name
       # We don't want STI subclasses to have separate permissions
       'ForemanTasks::Task'
+    end
+
+    def add_missing_task_groups(groups)
+      groups = [groups] unless groups.is_a? Array
+      (groups - task_groups).each { |group| task_groups << group }
     end
 
     protected

@@ -1,0 +1,12 @@
+<% title N_('Recurring logic') %>
+
+<% title_actions(button_group(recurring_logic_action_buttons(@recurring_logic))) %>
+
+<div class="tab-content col-md-6">
+  <legend><%= _('Details') %></legend>
+  <%= render @recurring_logic.task_group, :task_group => @recurring_logic.task_group %>
+</div>
+
+<div class="tab-content col-md-6">
+  <%= render 'tab_related', :source => @recurring_logic %>
+</div>

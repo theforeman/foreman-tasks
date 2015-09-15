@@ -55,5 +55,9 @@ module Actions
       ForemanTasks::Task::DynflowTask.for_action(self.class).
         running.where('external_id != ?', execution_plan_id).any?
     end
+
+    def serializer_class
+      ::Actions::Serializers::ActiveRecordSerializer
+    end
   end
 end

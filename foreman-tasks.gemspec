@@ -25,8 +25,9 @@ DESC
   end
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "dynflow", '~> 0.8.6'
+  s.add_dependency "dynflow", '~> 0.8.8'
   s.add_dependency "sequel" # for Dynflow process persistence
   s.add_dependency "sinatra" # for Dynflow web console
   s.add_dependency "daemons" # for running remote executor
+  s.add_dependency "parse-cron", '~> 0.1.4'
 end
