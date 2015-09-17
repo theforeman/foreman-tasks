@@ -96,6 +96,18 @@
   <span class="param-value"><%= @task.username %></span>
 </div>
 <div>
+  <span class="param-name"><%= _("Execution type") %>:</span>
+  <span class="param-value"><%= @task.start_at.nil? ? _('Immediate') : _('Delayed') %></span>
+</div>
+<div>
+  <span class="param-name"><%= _("Start at") %>:</span>
+  <span class="param-value"><%= @task.start_at.nil? ? '-' : @task.start_at %></span>
+</div>
+<div>
+  <span class="param-name"><%= _("Start before") %>:</span>
+  <span class="param-value"><%= @task.start_before.nil? ? '-' : @task.start_before %></span>
+</div>
+<div>
   <span class="param-name"><%= _("Started at") %>:</span>
   <span class="param-value"><%= @task.started_at.try(:in_time_zone) %></span>
 </div>

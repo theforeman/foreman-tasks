@@ -40,4 +40,9 @@ module ForemanTasks
       raise TaskError.new(task) if task.execution_plan.error?
     end
   end
+
+  def self.delay(action, delay_options, *args)
+    result = dynflow.world.delay action, delay_options, *args
+    ForemanTasks::Task::DynflowTask.find_by_external_id!(result.id)
+  end
 end
