@@ -108,9 +108,11 @@ module Actions
 
     def metadata
       output[:metadata] ||= {}
+      output[:metadata]
     end
 
     def metadata=(thing)
+      output[:metadata] ||= {}
       output[:metadata] = thing
     end
 
