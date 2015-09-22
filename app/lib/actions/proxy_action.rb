@@ -55,14 +55,14 @@ module Actions
     def check_task_status
       if output[:proxy_task_id]
         response = proxy.status_of_task(output[:proxy_task_id])
-        if response['state'] == 'stopped'
+        if %w(stopped paused).include? response['state']
           if response['result'] == 'error'
             raise ::Foreman::Exception, _("The smart proxy task '#{output[:proxy_task_id]}' failed.")
           else
             on_data(response['actions'].find { |block_action| block_action['class'] == proxy_action_name }['output'])
           end
         else
-          cancel_proxy_task
+          suspend
         end
       else
         process_timeout
@@ -129,7 +129,9 @@ module Actions
     def default_connection_options
       # Fails if the plan is not finished within 60 seconds from the first task trigger attempt on the smart proxy
       # If the triggering fails, it retries 3 more times with 15 second delays
-      { :retry_interval => 15, :retry_count => 4, :timeout => 60 }
+      { :retry_interval => Setting['foreman_tasks_proxy_action_retry_interval'] || 15,
+        :retry_count    => Setting['foreman_tasks_proxy_action_retry_count' ]   || 4,
+        :timeout        => Setting['foreman_tasks_proxy_action_start_timeout']  || 60 }
     end
 
     private
