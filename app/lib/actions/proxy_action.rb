@@ -147,9 +147,10 @@ module Actions
     end
 
     def format_exception(exception)
-      { output[:proxy_task_id] =>
-            { :exception_class => exception.class.name,
-              :execption_message => exception.message } }
+      { :proxy_task_id => output[:proxy_task_id],
+        :exception_class => exception.class.name,
+        :exception_message => exception.message,
+        :timestamp => Time.now.to_f }
     end
 
     def handle_connection_exception(exception, event = nil)
