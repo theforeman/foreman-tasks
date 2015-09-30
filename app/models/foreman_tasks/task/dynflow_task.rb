@@ -83,14 +83,20 @@ module ForemanTasks
     end
 
     def get_humanized(method)
-      Match! method, :humanized_name, :humanized_input, :humanized_output, :humanized_errors
-      if main_action.respond_to? method
-        begin
-          main_action.send method
-        rescue => error
-          "#{error.message} (#{error.class})\n#{error.backtrace.join "\n"}"
-        end
+      @humanized_cache ||= {}
+      if [:name, :input, :output, :error].include?(method)
+        method = "humanized_#{method}".to_sym
       end
+      Match! method, :humanized_name, :humanized_input, :humanized_output, :humanized_errors
+      @humanized_cache[method] ||= begin
+                                     if main_action.respond_to? method
+                                       begin
+                                         main_action.send method
+                                       rescue Exception => error # rubocop:disable Lint/RescueException
+                                         "#{error.message} (#{error.class})\n#{error.backtrace.join "\n"}"
+                                       end
+                                     end
+                                   end
     end
 
     def self.consistency_check
