@@ -27,7 +27,7 @@ namespace :foreman_tasks do
 
       def render_task(task)
         @plan = task.execution_plan
-        erb('show', {})
+        erb('show')
       end
 
       def world
@@ -38,7 +38,7 @@ namespace :foreman_tasks do
         File.join(Gem::Specification.find_by_name("dynflow").gem_dir, 'web', 'views', "#{filename}.erb")
       end
 
-      def erb(file, options)
+      def erb(file, options = {})
         unless @cache[file]
           @cache[file] = Tilt.new(template(file))
         end
