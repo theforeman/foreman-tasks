@@ -27,6 +27,10 @@ module Actions
           raise e unless e.code == 'ERF51-9911'
         end
 
+        def rescue_strategy
+          ::Dynflow::Action::Rescue::Skip
+        end
+
         def humanized_name
           _("Import facts")
         end
