@@ -103,6 +103,8 @@ module ForemanTasks
 
       config.to_prepare do
         ::Api::V2::HostsController.send :include, ForemanTasks::Concerns::HostsControllerExtension
+        ::PuppetclassesController.send :include, ForemanTasks::Concerns::EnvironmentsExtension
+        ::EnvironmentsController.send :include, ForemanTasks::Concerns::EnvironmentsExtension
         ::Host::Base.send :include, ForemanTasks::Concerns::HostActionSubject
         ::Architecture.send :include, ForemanTasks::Concerns::ArchitectureActionSubject
       end
