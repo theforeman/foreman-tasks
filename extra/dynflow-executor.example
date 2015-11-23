@@ -1,0 +1,77 @@
+# Author: Riley Shott
+# https://gist.github.com/Ginja/fb123759d48b04b5f338
+# dynflow-executor - starts or stops the Dynflow executor for Foreman tasks
+#
+# chkconfig:   345 99 20
+# description: dynflow-executor is a rake task that comes with \
+#              the foreman-tasks gem
+# processname: dynflow-executor
+# pidfile:     /usr/local/foreman/tmp/pids/dynflow_executor_monitor.pid
+# pidfile:     /usr/local/foreman/tmp/pids/dynflow_executor.pid
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+foreman_user='foreman'
+rvm='/usr/local/.rvm/bin/rvm'
+gemset='ruby-2.1.5@foreman-1.9.1'
+foreman_app_path='/usr/local/foreman'
+dynflow_executor="$(cd $foreman_app_path && $rvm $gemset do bundle show foreman-tasks)/bin/dynflow-executor"
+rvm_do_dynflow="RAILS_ENV=production ${rvm} ${gemset} do ${dynflow_executor}"
+prog=$(basename $dynflow_executor)
+
+[ -f /etc/sysconfig/dynflow-executor ] && . /etc/sysconfig/dynflow-executor
+
+start() {
+  [ -x $dynflow_executor ] || exit 5
+  echo -n $"Starting $prog: "
+  su - $foreman_user -c "cd ${foreman_app_path} && ${rvm_do_dynflow} start"
+  RETVAL=$?
+  if [ $RETVAL -eq 0 ]
+    then success
+    else failure
+  fi
+  echo
+  return $RETVAL
+}
+
+stop() {
+  echo -n $"Stopping $prog: "
+  cd "${foreman_app_path}"
+  su - $foreman_user -c "cd ${foreman_app_path} && ${rvm_do_dynflow} stop"
+  RETVAL=$?
+  if [ $RETVAL -eq 0 ]
+    then success
+    else failure
+  fi
+  echo
+  return $RETVAL
+}
+
+status() {
+  pgrep -f -u $foreman_user dynflow_executor -l
+}
+
+restart() {
+  stop
+  sleep 2
+  start
+}
+
+case "$1" in
+  start)
+    $1
+    ;;
+  stop)
+    $1
+    ;;
+  status)
+    $1
+    ;;
+  restart)
+    $1
+    ;;
+  *)
+    echo $"Usage: $0 {start|stop|status|restart}"
+    exit 2
+esac
