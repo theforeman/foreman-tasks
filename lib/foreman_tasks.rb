@@ -27,7 +27,7 @@ module ForemanTasks
           end),
           (on ::Dynflow::World::Triggered.(execution_plan_id: ~any, future: ~any) do |id, finished|
             finished.wait if async == false
-            ForemanTasks::Task::DynflowTask.find_by_external_id!(id)
+            ForemanTasks::Task::DynflowTask.find_by!(:external_id => id)
           end)
   end
 
