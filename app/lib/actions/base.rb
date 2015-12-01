@@ -2,7 +2,7 @@ module Actions
   class Base < Dynflow::Action
 
     def task
-      @task ||= ::ForemanTasks::Task::DynflowTask.find_by_external_id!(execution_plan_id)
+      @task ||= ::ForemanTasks::Task::DynflowTask.find_by!(:external_id => execution_plan_id)
     end
 
     # This method says what data form input gets into the task details in Rest API
