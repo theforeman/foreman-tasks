@@ -57,7 +57,11 @@ module Actions
     end
 
     def delay(_schedule_options, *args)
-      Serializers::ActiveRecordSerializer.new args
+      self.serializer_class.new args
+    end
+
+    def self.serializer_class
+      Serializers::ActiveRecordSerializer
     end
 
   end

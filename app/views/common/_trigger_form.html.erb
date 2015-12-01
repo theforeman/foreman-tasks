@@ -1,0 +1,14 @@
+<div class="form-group trigger_mode">
+  <% javascript 'trigger_form' %>
+  <%= javascript_tag do %>
+  $(function() { trigger_form_selector_binds('<%= f.options[:html][:id] %>','<%= f.object_name %>') });
+  <% end %>
+  <%= fields_for :triggering, triggering do |trigger_fields| %>
+  <legend><%= _('Schedule Job') %></legend>
+  <%= radio_button_f trigger_fields, :mode, :class => 'trigger_mode_selector', :value => 'immediate', :text => _("Execute now") %>
+  <%= radio_button_f trigger_fields, :mode, :class => 'trigger_mode_selector', :value => 'future',    :text => _("Schedule future execution") %>
+  <%= radio_button_f trigger_fields, :mode, :class => 'trigger_mode_selector', :value => 'recurring', :text => _("Set up recurring execution") %>
+  <%= future_mode_fieldset trigger_fields, triggering %>
+  <%= recurring_mode_fieldset trigger_fields, triggering %>
+  <% end %>
+</div>

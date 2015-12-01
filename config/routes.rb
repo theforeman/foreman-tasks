@@ -1,5 +1,11 @@
 Foreman::Application.routes.draw do
   namespace :foreman_tasks do
+    resources :recurring_logics, :only => [:index, :show] do
+      member do
+        post :cancel
+      end
+    end
+
     resources :tasks, :only => [:index, :show] do
       collection do
         get 'auto_complete_search'

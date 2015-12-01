@@ -12,5 +12,13 @@ module ForemanTasks
       end.join('; ')
       parts.join(" ")
     end
+
+    def format_recurring_logic_limit(thing)
+      if thing.nil?
+        content_tag(:i, N_('Unlimited'))
+      else
+        thing
+      end
+    end
   end
 end

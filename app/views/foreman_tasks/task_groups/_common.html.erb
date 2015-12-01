@@ -1,0 +1,12 @@
+<div>
+  <table class='table table-condensed'>
+    <tr>
+      <th><%= N_('ID') %></th>
+      <td><%= link_to(task_group.id, foreman_tasks_task_group_url(task_group)) %></td>
+    </tr>
+    <tr>
+      <th><%= N_('Task count') %></th>
+      <td><%= link_to(task_group.tasks.count, foreman_tasks_tasks_url(:search => "task_group.id = #{task_group.id}")) %></td>
+    </tr>
+  </table>
+</div>
