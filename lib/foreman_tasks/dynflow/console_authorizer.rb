@@ -4,7 +4,7 @@ module ForemanTasks
     def initialize(env)
       @rack_request          = Rack::Request.new(env)
       @user_id, @expires_at = @rack_request.session.values_at('user', 'expires_at')
-      @user                 = User.find_by_id(@user_id) unless session_expired?
+      @user                 = User.find_by(:id => @user_id) unless session_expired?
     end
 
     def allow?
