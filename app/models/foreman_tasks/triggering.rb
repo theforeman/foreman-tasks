@@ -41,7 +41,7 @@ module ForemanTasks
     def self.new_from_params(params = {})
       self.new(params).tap do |targeting|
         targeting.mode = params.fetch(:mode, :immediate).to_sym
-        targeting.input_type = params.fetch(:input_type, :cronline).to_sym
+        targeting.input_type = params.fetch(:input_type, :daily).to_sym
         targeting.end_time_limited = params[:end_time_limited] == "true"
         targeting.start_at_raw = Time.now.strftime(TIME_FORMAT)
       end
