@@ -64,7 +64,7 @@ module ForemanTasks
     def future_mode_fieldset(f, triggering)
       tags = []
       tags << text_f(f, :start_at_raw, :label => _('Start at'), :placeholder => 'YYYY-mm-dd HH:MM')
-      tags << text_f(f, :start_before_raw, :label => _('Start before'), :placeholder => 'YYYY-mm-dd HH:MM')
+      tags << text_f(f, :start_before_raw, :label => _('Start before'), :placeholder => 'YYYY-mm-dd HH:MM', :help_inline => popover(_('Explanation'), _('Indicates that the action should be cancelled if it cannot be started before this time.')))
       content_tag(:fieldset, nil, :id => "trigger_mode_future", :class => "trigger_mode_form #{'hidden' unless triggering.future?}") do
         tags.join.html_safe
       end
