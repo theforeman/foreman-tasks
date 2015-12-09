@@ -29,7 +29,7 @@ module ForemanTasks
       class BadRequest < Apipie::ParamError
       end
 
-      before_filter :find_resource, :only => [:show]
+      before_filter :find_task, :only => [:show]
 
       api :GET, "/tasks/summary", "Show task summary"
       def summary
@@ -258,6 +258,10 @@ module ForemanTasks
       end
 
       private
+
+      def find_task
+        @task = Task.find(params[:id])
+      end
 
       def resource_scope(options = {})
         @resource_scope ||= ForemanTasks::Task.authorized("#{action_permission}_foreman_tasks")
