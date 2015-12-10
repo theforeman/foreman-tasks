@@ -116,10 +116,9 @@ module ForemanTasks
 
     def self.cronline_hash(recurring_type, time_hash, days_of_week_hash)
       hash = Hash[[:years, :months, :days, :hours, :minutes].zip(time_hash.values)]
-      
       hash.update :days_of_week => days_of_week_hash
-                                  .select { |value, index| value == "1" }
-                                  .values.join(',')
+                                  .select { |key, value| value == "1" }
+                                  .keys.join(',')
       allowed_keys = case recurring_type
                      when :monthly
                        [:minutes, :hours, :days]

@@ -36,6 +36,22 @@ class RecurringLogicsTest < ActiveSupport::TestCase
       parser.next_occurrence_time(reference_time).must_equal Time.new(year, month + 1, 5)
     end
 
+    it 'creates correct cronline hash' do
+      minutes = '52'
+      hours = '12'
+      days = '11'
+      days_of_week = { '1' => '1', '2' => '0', '3' => '0', '4' => '1', '5' => '0', '6' => '1', '7' => '0' }
+      time_hash = { '0' => '2015', '1' => '12', '2' => '11', '3' => hours, '4' => minutes }
+      expected_result_hourly  = { :minutes => minutes }
+      expected_result_daily   = { :minutes => minutes, :hours => hours }
+      expected_result_weekly  = { :minutes => minutes, :hours => hours, :days_of_week => '1,4,6' }
+      expected_result_monthly = { :minutes => minutes, :hours => hours, :days => days }
+      ForemanTasks::RecurringLogic.cronline_hash(:hourly,  time_hash, days_of_week).must_equal expected_result_hourly
+      ForemanTasks::RecurringLogic.cronline_hash(:daily,   time_hash, days_of_week).must_equal expected_result_daily
+      ForemanTasks::RecurringLogic.cronline_hash(:weekly,  time_hash, days_of_week).must_equal expected_result_weekly
+      ForemanTasks::RecurringLogic.cronline_hash(:monthly, time_hash, days_of_week).must_equal expected_result_monthly
+    end
+
     it 'can have limited number of repeats' do
       parser = ForemanTasks::RecurringLogic.new_from_cronline('* * * * *')
       parser.state = 'active'
