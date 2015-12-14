@@ -22,8 +22,8 @@ module ForemanTasks
           hostname.try(:downcase!)
           certname.try(:downcase!)
 
-          host = certname.present? ? Host.find_by_certname(certname) : nil
-          host ||= Host.find_by_name hostname
+          host = certname.present? ? Host.where(:certname => certname).first : nil
+          host ||= Host.where(:name => hostname).first
           host ||= Host.new(:name => hostname, :certname => certname) if Setting[:create_new_host_when_facts_are_uploaded]
           if host
             # if we were given a certname but found the Host by hostname we should update the certname

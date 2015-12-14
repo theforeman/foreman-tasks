@@ -26,11 +26,11 @@ module ForemanTasks
           permission :edit_foreman_tasks, {:'foreman_tasks/tasks' => [:resume, :unlock, :force_unlock, :cancel_step, :cancel],
                                            :'foreman_tasks/api/tasks' => [:bulk_resume]}, :resource_type => ForemanTasks::Task.name
 
-          permission :create_recurring_logics, { }, :resource_type => ForemanTasks::RecurringLogic
+          permission :create_recurring_logics, { }, :resource_type => ForemanTasks::RecurringLogic.name
 
-          permission :view_recurring_logics, { :'foreman_tasks/recurring_logics' => [:index, :show] }, :resource_type => ForemanTasks::RecurringLogic
+          permission :view_recurring_logics, { :'foreman_tasks/recurring_logics' => [:index, :show] }, :resource_type => ForemanTasks::RecurringLogic.name
 
-          permission :edit_recurring_logics, { :'foreman_tasks/recurring_logics' => [:cancel] }, :resource_type => ForemanTasks::RecurringLogic
+          permission :edit_recurring_logics, { :'foreman_tasks/recurring_logics' => [:cancel] }, :resource_type => ForemanTasks::RecurringLogic.name
                                                                                                                                  
         end
 
@@ -70,7 +70,9 @@ module ForemanTasks
     end
 
     initializer "foreman_tasks.load_app_instance_data" do |app|
-      app.config.paths['db/migrate'] += ForemanTasks::Engine.paths['db/migrate'].existent
+      ForemanTasks::Engine.paths['db/migrate'].existent.each do |path|
+        app.config.paths['db/migrate'] << path
+      end
     end
 
     # to enable async Foreman operations using Dynflow

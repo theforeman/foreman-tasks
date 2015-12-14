@@ -15,7 +15,7 @@ module ForemanTasks
       self.start_before   = data[:start_before] if data[:start_before]
       self.parent_task_id ||= begin
                                 if main_action.caller_execution_plan_id
-                                  DynflowTask.find_by_external_id!(main_action.caller_execution_plan_id).id
+                                  DynflowTask.where(:external_id => main_action.caller_execution_plan_id).first!.id
                                 end
                               end
       self.label          ||= main_action.class.name

@@ -5,7 +5,7 @@ module ForemanTasks
     before_filter :restrict_dangerous_actions, :only => [:unlock, :force_unlock]
 
     def show
-      @task = find_resource
+      @task = Task.find(params[:id])
     end
 
     def index
@@ -14,7 +14,7 @@ module ForemanTasks
     end
 
     def sub_tasks
-      task   = find_resource
+      task   = Task.find(params[:id])
       @tasks = filter(task.sub_tasks)
       render :index
     end

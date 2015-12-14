@@ -31,15 +31,15 @@ module ForemanTasks
         raise Foreman::Exception.new('Plan is delayed but the delay record is missing') if delayed_plan.nil?
         # TODO: Rework this
         delayed_plan = ::Dynflow::DelayedPlan.new_from_hash(ForemanTasks.dynflow.world, delayed_plan)
-        task = ::ForemanTasks::Task::DynflowTask.find_by_external_id(execution_plan_id)
+        task = ::ForemanTasks::Task::DynflowTask.where(:external_id => execution_plan_id).first
         task.update_from_dynflow(data.merge(:start_at => delayed_plan.start_at,
                                             :start_before => delayed_plan.start_before))
       when :planning
-        task = ::ForemanTasks::Task::DynflowTask.find_by_external_id(execution_plan_id)
+        task = ::ForemanTasks::Task::DynflowTask.where(:external_id => execution_plan_id).first
         task.update_from_dynflow(data)
         Lock.owner!(::User.current, task.id) if ::User.current
       else
-        if task = ::ForemanTasks::Task::DynflowTask.find_by_external_id(execution_plan_id)
+        if task = ::ForemanTasks::Task::DynflowTask.where(:external_id => execution_plan_id).first
           unless task.state.to_s == data[:state].to_s
             task.update_from_dynflow(data)
           end

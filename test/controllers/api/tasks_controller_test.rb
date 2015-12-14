@@ -29,7 +29,7 @@ module ForemanTasks
           triggered = ForemanTasks.trigger(Support::DummyProxyAction, Support::DummyProxyAction.proxy, 'foo' => 'bar')
           Support::DummyProxyAction.proxy.task_triggered.wait(5)
 
-          task = ForemanTasks::Task.find_by_external_id(triggered.id)
+          task = ForemanTasks::Task.where(:external_id => triggered.id).first
           task.state.must_equal 'running'
           task.result.must_equal 'pending'
 
