@@ -27,7 +27,7 @@ module ForemanTasks
           end),
           (on ::Dynflow::World::Triggered.(execution_plan_id: ~any, future: ~any) do |id, finished|
             finished.wait if async == false
-            ForemanTasks::Task::DynflowTask.find_by!(:external_id => id)
+            ForemanTasks::Task::DynflowTask.where(:external_id => id).first!
           end)
   end
 
@@ -43,6 +43,6 @@ module ForemanTasks
 
   def self.delay(action, delay_options, *args)
     result = dynflow.world.delay action, delay_options, *args
-    ForemanTasks::Task::DynflowTask.find_by_external_id!(result.id)
+    ForemanTasks::Task::DynflowTask.where(:external_id => result.id).first!
   end
 end

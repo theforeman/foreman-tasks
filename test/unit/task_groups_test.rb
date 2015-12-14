@@ -51,7 +51,7 @@ module ForemanTasks
           triggered = ForemanTasks.trigger(action_class, *args)
           raise triggered.error if triggered.respond_to?(:error)
           triggered.finished.wait
-          ForemanTasks::Task.find_by_external_id(triggered.id)
+          ForemanTasks::Task.where(:external_id => triggered.id).first
         end
       end
 
