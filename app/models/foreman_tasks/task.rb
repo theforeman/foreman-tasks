@@ -15,13 +15,19 @@ module ForemanTasks
 
     has_many :task_group_members
     has_many :task_groups, :through => :task_group_members
-    has_many :recurring_logic_task_groups, -> { where :type => 'ForemanTasks::TaskGroups::RecurringLogicTaskGroup' }, 
-      :through => :task_group_members, :source => :task_group
+    if Rails::VERSION::MAJOR < 4
+      has_many :recurring_logic_task_groups, :through => :task_group_members, :conditions => { :type => 'ForemanTasks::TaskGroups::RecurringLogicTaskGroup' }, :source => :task_group
+      has_many :owners, :through => :locks, :source => :resource, :source_type => 'User',
+               :conditions => ["foreman_tasks_locks.name = ?", Lock::OWNER_LOCK_NAME]
+    else
+      has_many :recurring_logic_task_groups, -> { where :type => 'ForemanTasks::TaskGroups::RecurringLogicTaskGroup' },
+               :through => :task_group_members, :source => :task_group
+      # in fact, the task has only one owner but Rails don't let you to
+      # specify has_one relation though has_many relation
+      has_many :owners, lambda {where(["foreman_tasks_locks.name = ?", Lock::OWNER_LOCK_NAME])},
+               :through => :locks, :source => :resource, :source_type => 'User'
+    end
 
-    # in fact, the task has only one owner but Rails don't let you to
-    # specify has_one relation though has_many relation
-    has_many :owners, lambda {where(["foreman_tasks_locks.name = ?", Lock::OWNER_LOCK_NAME])},
-                      :through => :locks, :source => :resource, :source_type => 'User'
 
     scoped_search :on => :id, :complete_value => false
     scoped_search :on => :label, :complete_value => true

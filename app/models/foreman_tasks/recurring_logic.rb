@@ -9,7 +9,11 @@ module ForemanTasks
     belongs_to :triggering
 
     has_many :tasks, :through => :task_group
-    has_many :task_groups, -> { uniq }, :through => :tasks
+    if Rails::VERSION::MAJOR < 4
+      has_many :task_groups, :through => :tasks, :uniq => true
+    else
+      has_many :task_groups, -> { uniq }, :through => :tasks
+    end
 
     validates :cron_line, :presence => true
 

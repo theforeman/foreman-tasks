@@ -40,7 +40,7 @@ module ForemanTasks
         triggered = ForemanTasks.trigger(ParentAction, user)
         raise triggered.error if triggered.respond_to?(:error)
         triggered.finished.wait(2)
-        ForemanTasks::Task.find_by_external_id(triggered.id)
+        ForemanTasks::Task.where(:external_id => triggered.id).first
       end
 
       specify "the sub-plan stores the information about its parent" do
