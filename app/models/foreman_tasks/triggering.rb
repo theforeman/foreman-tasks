@@ -1,9 +1,10 @@
 module ForemanTasks
   class Triggering < ActiveRecord::Base
-
-    attr_accessor :start_at_raw, :start_before_raw, :max_iteration, :input_type,
-                  :cronline, :days, :days_of_week, :time, :end_time_limited,
-                  :end_time
+    PARAMS = [:start_at_raw, :start_before_raw, :max_iteration, :input_type,
+              :cronline, :days, :days_of_week, :time, :end_time_limited,
+              :end_time]
+    attr_accessor *PARAMS
+    attr_accessible *PARAMS
 
     before_save do
       if future?
@@ -39,11 +40,11 @@ module ForemanTasks
     validate :correct_cronline, :if => Proc.new { |t| t.recurring? && t.input_type == :cronline }
 
     def self.new_from_params(params = {})
-      self.new(params).tap do |targeting|
-        targeting.mode = params.fetch(:mode, :immediate).to_sym
-        targeting.input_type = params.fetch(:input_type, :daily).to_sym
-        targeting.end_time_limited = params[:end_time_limited] == "true"
-        targeting.start_at_raw = Time.now.strftime(TIME_FORMAT)
+      self.new(params.except(:mode, :start_at, :start_before)).tap do |triggering|
+        triggering.mode = params.fetch(:mode, :immediate).to_sym
+        triggering.input_type = params.fetch(:input_type, :daily).to_sym
+        triggering.end_time_limited = params[:end_time_limited] == "true"
+        triggering.start_at_raw ||= Time.now.strftime(TIME_FORMAT)
       end
     end
 
