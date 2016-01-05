@@ -4,7 +4,8 @@ module ForemanTasks
       def setup
         super
         if defined?(AccessPermissionsTest) && self.class == AccessPermissionsTest
-          skip 'used by proxy only' if __name__.include?('foreman_tasks/api/tasks/callback')
+          test_name = @method_name || @NAME
+          skip 'used by proxy only' if test_name.include?('foreman_tasks/api/tasks/callback')
         end
       end
     end
