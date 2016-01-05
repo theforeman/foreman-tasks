@@ -10,6 +10,8 @@ module ForemanTasks
       if future?
         parse_start_at!
         parse_start_before!
+      else
+        self.start_at ||= Time.now
       end
     end
 

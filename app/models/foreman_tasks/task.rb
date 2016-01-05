@@ -34,6 +34,7 @@ module ForemanTasks
     scoped_search :on => :state, :complete_value => true
     scoped_search :on => :result, :complete_value => true
     scoped_search :on => :started_at, :complete_value => false
+    scoped_search :on => :start_at, :complete_value => false
     scoped_search :on => :ended_at, :complete_value => false
     scoped_search :on => :parent_task_id, :complete_value => true
     scoped_search :in => :locks,  :on => :resource_type, :complete_value => true, :rename => "resource_type", :ext_method => :search_by_generic_resource
