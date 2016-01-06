@@ -6,6 +6,24 @@ module ForemanTasks
       require_dependency File.expand_path('../../../app/models/setting/foreman_tasks.rb', __FILE__) if (Setting.table_exists? rescue(false))
     end
 
+    # Precompile any JS or CSS files under app/assets/
+    # If requiring files from each other, list them explicitly here to avoid precompiling the same
+    # content twice.
+    assets_to_precompile =
+      Dir.chdir(root) do
+        Dir['app/assets/javascripts/**/*', 'app/assets/stylesheets/**/*'].map do |f|
+          f.split(File::SEPARATOR, 4).last.gsub(/\.scss\Z/, '')
+        end
+      end
+
+    initializer 'foreman_tasks.assets.precompile' do |app|
+      app.config.assets.precompile += assets_to_precompile
+    end
+
+    initializer 'foreman_tasks.configure_assets', group: :assets do
+      SETTINGS[:foreman_tasks] = { :assets => { :precompile => assets_to_precompile } }
+    end
+
     initializer 'foreman_tasks.register_plugin', :after => :finisher_hook do |app|
       Foreman::Plugin.register :"foreman-tasks" do
         requires_foreman '>= 1.9.0'
