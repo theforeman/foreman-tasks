@@ -2,9 +2,10 @@
 module ForemanTasks
   class Dynflow::ConsoleAuthorizer
     def initialize(env)
-      @rack_request          = Rack::Request.new(env)
-      @user_id, @expires_at = @rack_request.session.values_at('user', 'expires_at')
-      @user                 = User.where(:id => @user_id).first unless session_expired?
+      @rack_request = Rack::Request.new(env)
+      @user_id = @rack_request.session[:user]
+      @expires_at = @rack_request.session[:expires_at]
+      @user = User.where(:id => @user_id).first unless session_expired?
     end
 
     def allow?
