@@ -21,6 +21,12 @@ Foreman::Application.routes.draw do
     end
 
     namespace :api do
+      resources :recurring_logics, :only => [:index, :show] do
+        member do
+          post :cancel
+        end
+      end
+
       resources :tasks, :only => [:show, :index] do
         collection do
           post :bulk_search

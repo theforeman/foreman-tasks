@@ -46,10 +46,12 @@ module ForemanTasks
 
           permission :create_recurring_logics, { }, :resource_type => ForemanTasks::RecurringLogic.name
 
-          permission :view_recurring_logics, { :'foreman_tasks/recurring_logics' => [:index, :show] }, :resource_type => ForemanTasks::RecurringLogic.name
+          permission :view_recurring_logics, { :'foreman_tasks/recurring_logics' => [:index, :show],
+                                               :'foreman_tasks/api/recurring_logics' => [:index, :show] }, :resource_type => ForemanTasks::RecurringLogic.name
 
-          permission :edit_recurring_logics, { :'foreman_tasks/recurring_logics' => [:cancel] }, :resource_type => ForemanTasks::RecurringLogic.name
-                                                                                                                                 
+          permission :edit_recurring_logics, { :'foreman_tasks/recurring_logics' => [:cancel],
+                                               :'foreman_tasks/api/recurring_logics' => [:cancel] }, :resource_type => ForemanTasks::RecurringLogic.name
+
         end
 
         logger :dynflow, :enabled => true
