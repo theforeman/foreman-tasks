@@ -25,7 +25,9 @@ module ForemanTasks
       # including its steps
       case data[:state]
       when :pending
-        ForemanTasks::Task::DynflowTask.new_for_execution_plan(execution_plan_id, data).save!
+        task = ForemanTasks::Task::DynflowTask.new_for_execution_plan(execution_plan_id, data)
+        task.start_at ||= Time.now
+        task.save!
       when :scheduled
         delayed_plan = load_delayed_plan(execution_plan_id)
         raise Foreman::Exception.new('Plan is delayed but the delay record is missing') if delayed_plan.nil?
