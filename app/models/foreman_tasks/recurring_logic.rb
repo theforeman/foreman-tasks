@@ -112,7 +112,7 @@ module ForemanTasks
                    ::ForemanTasks::RecurringLogic.assemble_cronline(cronline_hash triggering.input_type, triggering.time, triggering.days_of_week)
                  end
       ::ForemanTasks::RecurringLogic.new_from_cronline(cronline).tap do |manager|
-        manager.end_time = Time.new(*recurring_options.end_time.values) if triggering.end_time_limited
+        manager.end_time = triggering.end_time unless triggering.end_time_limited.blank?
         manager.max_iteration = triggering.max_iteration unless triggering.max_iteration.blank?
         manager.triggering = triggering
       end

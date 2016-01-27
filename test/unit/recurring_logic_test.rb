@@ -85,6 +85,11 @@ class RecurringLogicsTest < ActiveSupport::TestCase
       recurring_logic.expects(:save!).twice
       recurring_logic.start(::Support::DummyDynflowAction)
     end
-  end
 
+    it 'can be created from triggering' do
+      triggering = FactoryGirl.create(:triggering, :recurring, :end_time_limited)
+      logic = ForemanTasks::RecurringLogic.new_from_triggering(triggering)
+      logic.end_time.must_equal triggering.end_time
+    end
+  end
 end
