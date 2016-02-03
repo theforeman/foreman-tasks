@@ -9,3 +9,7 @@ test/dummy/.sass-cache
 Gemfile.lock
 .idea
 .*.sw?
+locale/*.mo
+locale/*/*.pox
+locale/*/*.edit.po
+locale/*/*.po.time_stamp

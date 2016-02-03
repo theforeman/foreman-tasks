@@ -5,7 +5,7 @@
     <td><%= link_to(recurring_logic.id, recurring_logic) %></td>
   </tr>
   <tr>
-    <th><%= N_("Cronline") %></th>
+    <th><%= N_("Cron line") %></th>
     <td><%= recurring_logic.cron_line %></td>
   </tr>
   <tr>
@@ -14,7 +14,7 @@
   </tr>
   <tr>
     <th><%= N_("Last occurrence") %></th>
-    <td><%= recurring_logic.tasks.order(:started_at).where('started_at IS NOT NULL').last.try(:started_at) || N_('-') %></td>
+    <td><%= recurring_logic.tasks.order(:started_at).where('started_at IS NOT NULL').last.try(:started_at) || '-' %></td>
   </tr>
   <tr>
     <th><%= N_("Next occurrence") %></th>

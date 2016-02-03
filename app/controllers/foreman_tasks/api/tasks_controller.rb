@@ -86,7 +86,7 @@ module ForemanTasks
 
       api :POST, '/tasks/bulk_resume', N_('Resume all paused error tasks')
       param :search, String, :desc => N_('Resume tasks matching search string')
-      param :task_ids, Array, :desc => N_('Resume specific tasks by id')
+      param :task_ids, Array, :desc => N_('Resume specific tasks by ID')
       def bulk_resume
         scope = resource_scope
         scope = scope.search_for(params[:search]) if params[:search]
@@ -125,7 +125,7 @@ module ForemanTasks
       param :search, String, :desc => N_("Search string")
       param :page, :number, :desc => N_("Page number, starting at 1")
       param :per_page,  :number, :desc => N_("Number of results per page to return")
-      param :order, String, :desc => N_("Sort field and order, eg. 'name DESC'")
+      param :order, String, :desc => N_("Sort field and order, e.g. 'name DESC'")
       param :sort, Hash, :desc => N_("Hash version of 'order' param") do
         param :by, String, :desc => N_("Field to sort the results on")
         param :order, String, :desc => N_("How to order the sorted results (e.g. ASC for ascending)")
@@ -164,7 +164,7 @@ module ForemanTasks
       api :POST, '/tasks/callback', N_("Send data to the task from external executor (such as smart_proxy_dynflow)")
       param :callback, Hash do
         param :task_id, :identifier, :desc => N_("UUID of the task")
-        param :step_id, String, :desc => N_("The id of the step inside the execution plan to send the event to ")
+        param :step_id, String, :desc => N_("The ID of the step inside the execution plan to send the event to")
       end
       param :data, Hash, :desc => N_("Data to be sent to the action")
       def callback
@@ -213,7 +213,7 @@ module ForemanTasks
           end
           scope.where(id: search_params[:task_id])
         else
-          raise BadRequest, _("Search_Params %s not supported") % search_params[:type]
+          raise BadRequest, _("Type %s for search_params is not supported") % search_params[:type]
         end
       end
 
