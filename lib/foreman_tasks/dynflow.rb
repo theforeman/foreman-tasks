@@ -41,8 +41,6 @@ module ForemanTasks
         @world = world
 
         unless config.remote?
-          at_exit { world.terminate.wait }
-
           # don't try to do any rescuing until the tables are properly migrated
           if !Foreman.in_rake?('db:migrate') && (ForemanTasks::Task.table_exists? rescue(false))
             world.auto_execute
