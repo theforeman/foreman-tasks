@@ -25,7 +25,7 @@ module ForemanTasks
 
     def recurring_logic_next_occurrence(recurring_logic)
       if %w(finished cancelled).include? recurring_logic.state
-        N_('-')
+        '-'
       else
         recurring_logic.next_occurrence_time
       end
@@ -87,15 +87,20 @@ module ForemanTasks
 
     def cronline_fieldset(f, triggering)
       options = [
+        # TRANSLATORS: this translation is referring to an option which is a time interval
         _('is minute (range: 0-59)'),
+        # TRANSLATORS: this translation is referring to an option which is a time interval
         _('is hour (range: 0-23)'),
+        # TRANSLATORS: this translation is referring to an option which is a time interval
         _('is day of month (range: 1-31)'),
+        # TRANSLATORS: this translation is referring to an option which is a time interval
         _('is month (range: 1-12)'),
+        # TRANSLATORS: this translation is referring to an option which is a time interval
         _('is day of week (range: 0-6)')
       ].map { |opt| content_tag(:li, opt) }.join
       help = content_tag(:span, nil, :class => 'help-inline') do
         popover(_('Explanation'),
-                _("Cron line format 'a b c d e', where:<br><ol type=\"a\">#{options}</ol>"))
+                _("Cron line format 'a b c d e', where: %s") % ("<br><ol type=\"a\">#{options}</ol>"))
       end
       content_tag(:fieldset, nil, :class => "input_type_form #{'hidden' unless triggering.input_type == :cronline}", :id => "input_type_cronline") do
         text_f f, :cronline, :label => _('Cron line'), :placeholder => '* * * * *', :help_inline => help
@@ -128,11 +133,13 @@ module ForemanTasks
     def time_picker_fieldset(f, triggering)
       tags = []
       tags << content_tag(:fieldset, nil, :id => 'time_picker', :class => "input_type_form #{'hidden' if triggering.input_type == :cronline}") do
+        # TRANSLATORS: Time widget for when a task should start
         time_f(f, :time, { :label => _("At"), :id => 'something' }, { :time_separator => '' })
       end
       tags << number_f(f, :max_iteration, :label => _('Repeat N times'), :min => 1, :placeholder => 'N')
       tags << field(f, :end_time_limit_select, :label => _("Ends"), :control_group_id => "end_time_limit_select") do
         radio_button_f(f, :end_time_limited, :value => false, :checked=> true, :text => _("Never"), :class => 'end_time_limit_selector') +
+        # TRANSLATORS: Button text for saying when a task should end
         radio_button_f(f, :end_time_limited, :value => true, :text => _("On"), :class => 'end_time_limit_selector')
       end
       tags << content_tag(:fieldset, nil, :id => 'end_time_limit_form', :class => "input_type_form #{'hidden' unless triggering.end_time_limited}") do

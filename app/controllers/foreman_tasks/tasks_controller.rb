@@ -31,7 +31,7 @@ module ForemanTasks
       if task.cancel
         flash[:notice] = _('Trying to cancel the task')
       else
-        flash[:warning] = _('The task is not cancellable at the moment.')
+        flash[:warning] = _('The task cannot be cancelled at the moment.')
       end
       redirect_to :back
     end

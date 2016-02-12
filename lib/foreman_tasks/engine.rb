@@ -1,3 +1,6 @@
+require 'fast_gettext'
+require 'gettext_i18n_rails'
+
 module ForemanTasks
   class Engine < ::Rails::Engine
     engine_name "foreman_tasks"
@@ -22,6 +25,13 @@ module ForemanTasks
 
     initializer 'foreman_tasks.configure_assets', group: :assets do
       SETTINGS[:foreman_tasks] = { :assets => { :precompile => assets_to_precompile } }
+    end
+
+    initializer 'foreman_tasks.register_gettext', :after => :load_config_initializers do
+      locale_dir = File.join(File.expand_path('../../..', __FILE__), 'locale')
+      locale_domain = 'foreman_tasks'
+
+      Foreman::Gettext::Support.add_text_domain locale_domain, locale_dir
     end
 
     initializer 'foreman_tasks.register_plugin', :after => :finisher_hook do |app|

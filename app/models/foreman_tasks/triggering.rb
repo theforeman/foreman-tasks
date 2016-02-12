@@ -96,7 +96,7 @@ module ForemanTasks
     def correct_cronline
       ForemanTasks::RecurringLogic.new_from_cronline(cronline).next_occurrence_time
     rescue ArgumentError => _
-      self.errors.add(:cronline, _("#{cronline} is not valid format of cronline"))
+      self.errors.add(:cronline, _("%s is not valid format of cron line")) % (cronline)
     end
   end
 end

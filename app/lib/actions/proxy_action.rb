@@ -57,7 +57,7 @@ module Actions
         response = proxy.status_of_task(output[:proxy_task_id])
         if %w(stopped paused).include? response['state']
           if response['result'] == 'error'
-            raise ::Foreman::Exception, _("The smart proxy task '#{output[:proxy_task_id]}' failed.")
+            raise ::Foreman::Exception, _("The smart proxy task %s failed.") % (output[:proxy_task_id])
           else
             on_data(response['actions'].find { |block_action| block_action['class'] == proxy_action_name }['output'])
           end
