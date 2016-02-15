@@ -37,16 +37,18 @@ module ForemanTasks
     initializer 'foreman_tasks.register_plugin', :after => :finisher_hook do |app|
       Foreman::Plugin.register :"foreman-tasks" do
         requires_foreman '>= 1.9.0'
-        divider :top_menu, :parent => :monitor_menu, :after => :audits
+        divider :top_menu, :parent => :monitor_menu, :last => true
         menu :top_menu, :tasks,
              :url_hash => { :controller => 'foreman_tasks/tasks', :action => :index },
              :caption  => N_('Tasks'),
-             :parent   => :monitor_menu
+             :parent   => :monitor_menu,
+             :last     => true
 
-        menu :top_menu, :recurring_logics, :after => :tasks,
+        menu :top_menu, :recurring_logics,
              :url_hash => { :controller => 'foreman_tasks/recurring_logics', :action => :index },
              :caption  => N_('Recurring logics'),
-             :parent   => :monitor_menu
+             :parent   => :monitor_menu,
+             :last     => true
 
         security_block :foreman_tasks do |map|
           permission :view_foreman_tasks, {:'foreman_tasks/tasks' => [:auto_complete_search, :sub_tasks, :index, :show],
