@@ -19,11 +19,12 @@ to resources. The locking allows dealing with preventing multiple colliding task
 same resource. It also optionally provides Dynflow infrastructure for using it for managing the tasks.
 DESC
 
-  s.files = Dir["{app,bin,config,db,deploy,lib}/**/*", "LICENSE", "README.md"].reject do |file|
-    file.start_with? "lib/foreman_tasks/hammer"
+  s.files = `git ls-files`.split("\n").reject do |file|
     file.end_with? "test.rake"
   end
-  s.test_files = Dir["test/**/*"]
+
+  s.test_files = `git ls-files test`.split("\n")
+  s.extra_rdoc_files = Dir['README*', 'LICENSE']
 
   s.add_dependency "dynflow", '~> 0.8.8'
   s.add_dependency "sequel" # for Dynflow process persistence
