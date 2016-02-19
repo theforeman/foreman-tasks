@@ -15,26 +15,29 @@ module ForemanTasks
       module ClassMethods
         # TODO: This should get into the Foreman core, extracting the
         # +importHostAndFacts+ method into two
-        def importHost(hostname, certname, proxy_id = nil)
+        def import_host(hostname, certname, facts, proxy_id = nil)
+          raise(::Foreman::Exception.new("Invalid Facts, must be a Hash")) unless facts.is_a?(Hash)
           raise(::Foreman::Exception.new("Invalid Hostname, must be a String")) unless hostname.is_a?(String)
 
           # downcase everything
           hostname.try(:downcase!)
           certname.try(:downcase!)
 
-          host = certname.present? ? Host.where(:certname => certname).first : nil
-          host ||= Host.where(:name => hostname).first
+          host = certname.present? ? Host.find_by_certname(certname) : nil
+          host ||= Host.find_by_name hostname
           host ||= Host.new(:name => hostname, :certname => certname) if Setting[:create_new_host_when_facts_are_uploaded]
-          if host
-            # if we were given a certname but found the Host by hostname we should update the certname
-            host.certname = certname if certname.present?
-            # if proxy authentication is enabled and we have no puppet proxy set, use it.
+
+          return Host.new if host.nil?
+          # if we were given a certname but found the Host by hostname we should update the certname
+          host.certname = certname if certname.present?
+          # if proxy authentication is enabled and we have no puppet proxy set and the upload came from puppet,
+          # use it as puppet proxy.
+          if facts['_type'].blank? || facts['_type'] == 'puppet'
             host.puppet_proxy_id ||= proxy_id
-            host.save(:validate => false)
-            return host
-          else
-            return
           end
+
+          host.save(:validate => false) if host.new_record?
+          host
         end
       end
     end
