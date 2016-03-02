@@ -5,8 +5,12 @@
       reload: function () {
         // we need different reload mechanism for two-pane and non-two-pane
         if (typeof currentTwoPaneTask !== 'undefined') {
-          taskProgressReloader.timeoutId = null;
-          two_pane_open(currentTwoPaneTask);
+          if($('.two-pane-right').length) {
+            taskProgressReloader.timeoutId = null;
+            two_pane_open(currentTwoPaneTask);
+          } else {
+            taskProgressReloader.stop();
+          }
         } else {
           document.location.reload();
         }
