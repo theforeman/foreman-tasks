@@ -88,6 +88,7 @@ module ForemanTasks
         method = "humanized_#{method}".to_sym
       end
       Match! method, :humanized_name, :humanized_input, :humanized_output, :humanized_errors
+      return N_('N/A') if method != :humanized_name && main_action.execution_plan.state == :scheduled
       @humanized_cache[method] ||= begin
                                      if main_action.respond_to? method
                                        begin
