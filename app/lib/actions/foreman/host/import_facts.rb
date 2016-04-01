@@ -9,9 +9,14 @@ module Actions
         end
 
         def plan(host_type, host_name, facts, certname, proxy_id)
-          host = ::Host::Base.importHost(host_name, certname, proxy_id)
+          facts['domain'].try(:downcase!)
+          host = ::Host::Base.import_host(host_name, certname, facts, proxy_id)
           action_subject(host, :facts => facts)
-          plan_self
+          if host.build?
+            ::Foreman::Logging.logger('foreman-tasks').info "Skipping importing of facts for #{host.name} because it's in build mode"
+          else
+            plan_self
+          end
         end
 
         def run
