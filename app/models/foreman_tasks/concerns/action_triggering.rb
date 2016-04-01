@@ -8,6 +8,8 @@ module ForemanTasks
         after_create :plan_create_action
         after_update :plan_update_action
         after_destroy :plan_destroy_action
+
+        alias_method_chain :save, :dynflow_task_wrap
       end
 
       # @override
@@ -22,8 +24,9 @@ module ForemanTasks
       def destroy_action
       end
 
-      def save(*args)
-        dynflow_task_wrap(:save) { super(*args) }
+
+      def save_with_dynflow_task_wrap(*args)
+        dynflow_task_wrap(:save) { save_without_dynflow_task_wrap(*args) }
       end
 
       def save!(*args)
