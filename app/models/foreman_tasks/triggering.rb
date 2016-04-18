@@ -46,6 +46,7 @@ module ForemanTasks
         triggering.mode = params.fetch(:mode, :immediate).to_sym
         triggering.input_type = params.fetch(:input_type, :daily).to_sym
         triggering.end_time_limited = params[:end_time_limited] == "true"
+        triggering.end_time = Time.local(*params[:end_time].values.map(&:to_i)) if triggering.end_time_limited
         triggering.start_at_raw ||= Time.now.strftime(TIME_FORMAT)
       end
     end
