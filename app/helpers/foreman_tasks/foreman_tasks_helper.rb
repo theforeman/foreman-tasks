@@ -1,3 +1,4 @@
+# coding: utf-8
 module ForemanTasks
   module ForemanTasksHelper
 
@@ -39,10 +40,26 @@ module ForemanTasks
       end
     end
 
+    def date_f(f, attr, field_options = {}, date_options = {}, html_options = {})
+      f.fields_for attr do |fields|
+        field(fields, attr, field_options) do
+          fields.date_select attr, date_options, html_options
+        end
+      end
+    end
+
     def datetime_f(f, attr, field_options = {}, datetime_options = {}, html_options = {})
       f.fields_for attr do |fields|
         field(fields, attr, field_options) do
-          fields.datetime_select attr, datetime_options, html_options
+          [
+            content_tag(:span, nil, :class => 'date', :style => 'white-space: nowrap;') do
+              fields.date_select(attr, datetime_options, html_options)
+            end,
+            ' &mdash; ',
+            content_tag(:span, nil, :class => 'time', :style => 'white-space: nowrap;') do
+              fields.time_select(attr, datetime_options.merge(:ignore_date => true), html_options)
+            end
+          ].join
         end
       end
     end

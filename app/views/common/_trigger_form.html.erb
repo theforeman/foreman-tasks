@@ -12,11 +12,12 @@
       <%= radio_button_f trigger_fields, :mode, :class => 'trigger_mode_selector', :value => 'immediate', :text => _("Execute now") %>
       <%= radio_button_f trigger_fields, :mode, :class => 'trigger_mode_selector', :value => 'future',    :text => _("Schedule future execution") %>
       <%= radio_button_f trigger_fields, :mode, :class => 'trigger_mode_selector', :value => 'recurring', :text => _("Set up recurring execution") %>
-
-      <div class="trigger_fields">
-        <%= future_mode_fieldset trigger_fields, triggering %>
-        <%= recurring_mode_fieldset trigger_fields, triggering %>
-      </div>
-    <% end %>
   </div>
 </div>
+
+<div class="trigger_fields">
+  <%= future_mode_fieldset trigger_fields, triggering %>
+  <%= recurring_mode_fieldset trigger_fields, triggering %>
+</div>
+<% end %>
+
