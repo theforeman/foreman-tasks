@@ -1,3 +1,4 @@
+# coding: utf-8
 module ForemanTasks
   module ForemanTasksHelper
 
@@ -54,7 +55,7 @@ module ForemanTasks
             content_tag(:span, nil, :class => 'date', :style => 'white-space: nowrap;') do
               fields.date_select(attr, datetime_options, html_options)
             end,
-            " — ",
+            ' &mdash; ',
             content_tag(:span, nil, :class => 'time', :style => 'white-space: nowrap;') do
               fields.time_select(attr, datetime_options.merge(:ignore_date => true), html_options)
             end
