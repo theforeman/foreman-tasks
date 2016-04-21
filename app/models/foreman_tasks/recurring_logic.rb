@@ -17,6 +17,8 @@ module ForemanTasks
 
     validates :cron_line, :presence => true
 
+    validate :can_start?, :on => :create
+
     scoped_search :on => :id, :complete_value => false
     scoped_search :on => :max_iteration, :complete_value => false, :rename => :iteration_limit
     scoped_search :on => :iteration, :complete_value => false
@@ -69,10 +71,13 @@ module ForemanTasks
       }
     end
 
-    def can_continue?(time = Time.now)
-      self.state == 'active' &&
-        (end_time.nil? || next_occurrence_time(time) < end_time) &&
+    def can_start?(time = Time.now)
+      (end_time.nil? || next_occurrence_time(time) < end_time) &&
         (max_iteration.nil? || iteration < max_iteration)
+    end
+
+    def can_continue?(time = Time.now)
+      self.state == 'active' && can_start?
     end
 
     def finished?

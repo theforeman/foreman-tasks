@@ -39,7 +39,8 @@ module ForemanTasks
                         :message => _("%{value} is wrong format"), :allow_blank => true
     validates_format_of :days, :with => DAYS_REGEXP,
                         :if => Proc.new { |t| t.recurring? && t.input_type == :monthly }
-    validate :correct_cronline, :if => Proc.new { |t| t.recurring? && t.input_type == :cronline }
+    validate :can_start_recurring, :if => :recurring?
+    validate :can_start_future, :if => :future?
 
     def self.new_from_params(params = {})
       self.new(params.except(:mode, :start_at, :start_before)).tap do |triggering|
@@ -47,6 +48,7 @@ module ForemanTasks
         triggering.input_type = params.fetch(:input_type, :daily).to_sym
         triggering.end_time_limited = params[:end_time_limited] == "true"
         triggering.start_at_raw ||= Time.now.strftime(TIME_FORMAT)
+        triggering.recurring_logic = ::ForemanTasks::RecurringLogic.new_from_triggering(triggering) if triggering.recurring?
       end
     end
 
@@ -59,8 +61,7 @@ module ForemanTasks
                              delay_options,
                              *args
       when :recurring
-        ::ForemanTasks::RecurringLogic.new_from_triggering(self)
-        .start(action, *args)
+        recurring_logic.start(action, *args)
       end
     end
 
@@ -93,10 +94,16 @@ module ForemanTasks
 
     private
 
-    def correct_cronline
-      ForemanTasks::RecurringLogic.new_from_cronline(cronline).next_occurrence_time
+    def can_start_recurring
+      self.errors.add(:input_type, _('No task could be started')) unless recurring_logic.can_start?
     rescue ArgumentError => _
-      self.errors.add(:cronline, _("%s is not valid format of cron line")) % (cronline)
+      self.errors.add(:cronline, _('%s is not valid format of cron line') % (cronline))
+    end
+
+    def can_start_future
+      parse_start_before!
+      parse_start_at!
+      self.errors.add(:start_before_raw, _('The task could not be started')) if start_before < start_at
     end
   end
 end
