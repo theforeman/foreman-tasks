@@ -15,8 +15,6 @@ module ForemanTasks
       has_many :task_groups, -> { uniq }, :through => :tasks
     end
 
-    validates :cron_line, :presence => true
-
     scoped_search :on => :id, :complete_value => false
     scoped_search :on => :max_iteration, :complete_value => false, :rename => :iteration_limit
     scoped_search :on => :iteration, :complete_value => false
@@ -69,10 +67,23 @@ module ForemanTasks
       }
     end
 
-    def can_continue?(time = Time.now)
-      self.state == 'active' &&
-        (end_time.nil? || next_occurrence_time(time) < end_time) &&
+    def valid?(*_)
+      cron_line.present? && valid_cronline? && !self.state.nil? || can_start?
+    end
+
+    def valid_cronline?
+      !!next_occurrence_time
+    rescue ArgumentError => _
+      false
+    end
+
+    def can_start?(time = Time.now)
+      (end_time.nil? || next_occurrence_time(time) < end_time) &&
         (max_iteration.nil? || iteration < max_iteration)
+    end
+
+    def can_continue?(time = Time.now)
+      self.state == 'active' && can_start?(time)
     end
 
     def finished?

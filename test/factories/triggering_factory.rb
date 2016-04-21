@@ -13,6 +13,7 @@ FactoryGirl.define do
       mode :recurring
       input_type :cronline
       cronline '* * * * *'
+      after(:build) { |triggering| triggering.recurring_logic = build(:recurring_logic) }
     end
 
     trait :end_time_limited do
