@@ -87,9 +87,34 @@ class RecurringLogicsTest < ActiveSupport::TestCase
     end
 
     it 'can be created from triggering' do
-      triggering = FactoryGirl.create(:triggering, :recurring, :end_time_limited)
+      triggering = FactoryGirl.build(:triggering, :recurring, :end_time_limited)
       logic = ForemanTasks::RecurringLogic.new_from_triggering(triggering)
       logic.end_time.must_equal triggering.end_time
+    end
+
+    describe 'validation' do
+      let(:logic) { FactoryGirl.build(:recurring_logic) }
+
+      it 'is valid by default' do
+        logic.must_be :valid?
+      end
+
+      it 'is invalid when end time in past' do
+        logic.end_time = (Time.now - 120)
+        logic.wont_be :valid?
+      end
+
+      it 'is invalid when iteration limit < 1' do
+        logic.max_iteration = 0
+        logic.wont_be :valid?
+      end
+
+      it 'is valid when in active state' do
+        logic.end_time = (Time.now - 120)
+        logic.wont_be :valid?
+        logic.state = 'active'
+        logic.must_be :valid?
+      end
     end
   end
 end

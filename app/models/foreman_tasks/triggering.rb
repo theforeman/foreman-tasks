@@ -15,10 +15,6 @@ module ForemanTasks
       end
     end
 
-    after_find do |triggering|
-      triggering.mode = triggering.mode.to_sym
-    end
-
     ALLOWED_MODES = [:immediate, :future, :recurring]
     ALLOWED_INPUT_TYPES = [:cronline, :monthly, :weekly, :daily, :hourly]
 
@@ -50,6 +46,14 @@ module ForemanTasks
         triggering.start_at_raw ||= Time.now.strftime(TIME_FORMAT)
         triggering.recurring_logic = ::ForemanTasks::RecurringLogic.new_from_triggering(triggering) if triggering.recurring?
       end
+    end
+
+    def mode
+      read_attribute(:mode).to_sym
+    end
+
+    def mode=(mod)
+      write_attribute :mode, mod.downcase.to_sym
     end
 
     def trigger(action, *args)
@@ -95,15 +99,15 @@ module ForemanTasks
     private
 
     def can_start_recurring
-      self.errors.add(:input_type, _('No task could be started')) unless recurring_logic.can_start?
-    rescue ArgumentError => _
-      self.errors.add(:cronline, _('%s is not valid format of cron line') % (cronline))
+      recurring_logic.next_occurrence_time
+      self.errors.add(:input_type, _('No task could be started')) unless recurring_logic.valid?
+      self.errors.add(:cronline, _('%s is not valid format of cron line') % (cronline)) unless recurring_logic.valid_cronline?
     end
 
     def can_start_future
       parse_start_before!
       parse_start_at!
-      self.errors.add(:start_before_raw, _('The task could not be started')) if start_before < start_at
+      self.errors.add(:start_before_raw, _('The task could not be started')) if !start_before.nil? && start_before < start_at
     end
   end
 end
