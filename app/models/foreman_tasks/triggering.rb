@@ -99,7 +99,6 @@ module ForemanTasks
     private
 
     def can_start_recurring
-      recurring_logic.next_occurrence_time
       self.errors.add(:input_type, _('No task could be started')) unless recurring_logic.valid?
       self.errors.add(:cronline, _('%s is not valid format of cron line') % (cronline)) unless recurring_logic.valid_cronline?
     end
