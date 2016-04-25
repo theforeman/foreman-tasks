@@ -49,11 +49,15 @@ module ForemanTasks
     end
 
     def mode
-      read_attribute(:mode).to_sym
+      super.to_sym
     end
 
     def mode=(mod)
-      write_attribute :mode, mod.downcase.to_sym
+      if (mod.is_a?(String) || mod.is_a?(Symbol)) && ALLOWED_MODES.map(&:to_s).include?(mod.downcase.to_s)
+        super(mod.downcase.to_sym)
+      else
+        raise ArgumentError, _('mode has to be one of %{allowed_modes}') % { :allowed_modes => ALLOWED_MODES.join(', ') }
+      end
     end
 
     def trigger(action, *args)

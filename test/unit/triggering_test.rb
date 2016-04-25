@@ -21,4 +21,11 @@ class TriggeringTest < ActiveSupport::TestCase
       triggering.wont_be :valid?
     end
   end
+
+  it 'cannot have mode set to arbitrary value' do
+    triggering = FactoryGirl.build(:triggering)
+    triggering.must_be :valid?
+    proc { triggering.mode = 'bogus' }.must_raise ArgumentError
+    proc { triggering.mode = 27 }.must_raise ArgumentError
+  end
 end
