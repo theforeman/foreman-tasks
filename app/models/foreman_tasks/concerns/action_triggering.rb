@@ -45,6 +45,25 @@ module ForemanTasks
         dynflow_task_wrap(:save) { super(*args) }
       end
 
+      # this can be used when HostActionSubject is used for orchestration but you want to avoid
+      # triggering more tasks by ActiveRecord callbacks within run/finalize phase of your task
+      # e.g. host.disable_dynflow_hooks { |h| h.save }
+      def disable_dynflow_hooks(&block)
+        @_disable_dynflow_hooks = true
+
+        if block_given?
+          begin
+            block.call(self)
+          ensure
+            @_disable_dynflow_hooks = false
+          end
+        end
+      end
+
+      def enable_dynflow_hooks
+        @_disable_dynflow_hooks = false
+      end
+
       protected
 
       def sync_action_flag_reset!
@@ -96,6 +115,7 @@ module ForemanTasks
       # to unexpected results.
       def dynflow_task_wrap(method)
         if ForemanTasks.dynflow.config.disable_active_record_actions ||
+              @_disable_dynflow_hooks ||
               @_dynflow_task_wrapped
           return yield
         end
