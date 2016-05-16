@@ -54,10 +54,12 @@ module ForemanTasks
       @on_init << block
     end
 
+    def run_on_init_hooks(world)
+      @on_init.each { |init| init.call(world) }
+    end
+
     def initialize_world(world_class = ::Dynflow::World)
-      world_class.new(world_config).tap do |world|
-        @on_init.each { |init| init.call(world) }
-      end
+      world_class.new(world_config)
     end
 
     # No matter what config.remote says, when the process is marked as executor,
