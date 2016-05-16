@@ -2,15 +2,31 @@
 # export_tasks.rake is a debugging tool to extract tasks from the
 # current foreman instance.
 #
-# Run "foreman-rake export_tasks" to export tasks whcih are not listed
-# as successful.
-# To export all tasks "foreman-rake export_tasks tasks=all"
-#   to specify the number of days of tasks to gather:  days=60 (defaults to 60)
+# Run "foreman-rake foreman_tasks:export_tasks" to export tasks
+
+require 'csv'
 
 namespace :foreman_tasks do
-  desc 'Export Dynflow Tasks'
+  desc <<DESC
+Export dynflow tasks based on filter. ENV variables:
 
+  * TASK_SEARCH     : scoped search filter (example: 'label = "Actions::Foreman::Host::ImportFacts"')
+  * TASK_FILE       : file to export to
+  * TASK_FORMAT     : format to use for the export (either html or csv)
+  * TASK_DAYS       : number of days to go back
+
+If TASK_SEARCH is not defined, it defaults to all tasks in the past 7 days and
+all unsuccessful tasks in the past 60 days. The default TASK_FORMAT is html
+which requires a tar.gz file extension.
+DESC
   task :export_tasks => :environment do
+    deprecated_options = {:tasks => "TASK_SEARCH",
+                          :days => "TASK_DAYS",
+                          :export => "TASK_FILE"
+    }
+    deprecated_options.each do |option, new_option|
+      fail "The #{option} option is deprecated. Please use #{new_option} instead" if ENV.include?(option.to_s)
+    end
 
     class TaskRender
       def initialize
@@ -218,35 +234,50 @@ namespace :foreman_tasks do
       end
     end
 
-
-    if ENV['tasks'] == 'all'
-      tasks = ForemanTasks::Task
+    if ENV['TASK_SEARCH'].nil? && ENV['TASK_DAYS'].nil?
+      filter = "started_at > \"#{7.days.ago.to_s(:db)}\" || " \
+        "(result != success && started_at > \"#{60.days.ago.to_s(:db)})\""
     else
-      tasks = ForemanTasks::Task.where("result != 'success'")
+      filter = ENV['TASK_SEARCH'] || ''
     end
 
-    days = ENV['days'].try(:to_i) || 60
-    tasks = tasks.where('started_at > ?', days.days.ago)
-    export_filename = ENV['export'] || "/tmp/task-export-#{DateTime.now.to_i}.tar.gz"
+    if (days = ENV['TASK_DAYS'])
+      filter += " && " unless filter == ''
+      filter += "started_at > \"#{days.to_i.days.ago.to_s(:db)}\""
+    end
 
-    puts _("Gathering last #{days} days of tasks.")
-    Dir.mktmpdir('task-export') do |tmp_dir|
-      PageHelper.copy_assets(tmp_dir)
+    format = ENV['TASK_FORMAT'] || 'html'
+    export_filename = ENV['TASK_FILE'] || "/tmp/task-export-#{DateTime.now.to_i}.#{format == 'csv' ? 'csv' : 'tar.gz'}"
+
+    tasks = ForemanTasks::Task.search_for(filter)
+
+    puts _("Gathering #{tasks.count} tasks.")
+    if format == 'html'
+      Dir.mktmpdir('task-export') do |tmp_dir|
+        PageHelper.copy_assets(tmp_dir)
 
 
-      renderer = TaskRender.new
-      count = 1
-      total = tasks.count
+        renderer = TaskRender.new
+        total = tasks.count
 
-      tasks.all.each do |task|
-        File.open(File.join(tmp_dir, "#{task.id}.html"), 'w') {|file| file.write(PageHelper.pagify(renderer.render_task(task)))}
-        puts "#{count}/#{total}"
-        count += 1
+        tasks.each_with_index do |task, count|
+          File.open(File.join(tmp_dir, "#{task.id}.html"), 'w') {|file| file.write(PageHelper.pagify(renderer.render_task(task)))}
+          puts "#{count + 1}/#{total}"
+          count += 1
+        end
+
+        File.open(File.join(tmp_dir, "index.html"), 'w') {|file| file.write(PageHelper.pagify(PageHelper.generate_index(tasks)))}
+
+        sh("tar cvzf #{export_filename} #{tmp_dir} > /dev/null")
       end
-
-      File.open(File.join(tmp_dir, "index.html"), 'w') {|file| file.write(PageHelper.pagify(PageHelper.generate_index(tasks)))}
-
-      sh("tar cvzf #{export_filename} #{tmp_dir} > /dev/null")
+    elsif format == 'csv'
+      CSV.open(export_filename, 'wb') do |csv|
+        csv << ['id', 'state', 'type', 'label', 'result', 'parent_task_id', 'started_at', 'ended_at']
+        tasks.each do |task|
+          csv << [task.id, task.state, task.type, task.label, task.result,
+                  task.parent_task_id, task.started_at, task.ended_at]
+        end
+      end
     end
 
     puts "Created #{export_filename}"
