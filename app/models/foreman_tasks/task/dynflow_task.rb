@@ -6,13 +6,14 @@ module ForemanTasks
     scope :for_action, ->(action_class) { where(label: action_class.name) }
 
     def update_from_dynflow(data)
+      utc_zone = ActiveSupport::TimeZone.new('UTC')
       self.external_id    = data[:id]
-      self.started_at     = data[:started_at]
-      self.ended_at       = data[:ended_at]
+      self.started_at     = utc_zone.parse(data[:started_at]) unless data[:started_at].nil?
+      self.ended_at       = utc_zone.parse(data[:ended_at]) unless data[:ended_at].nil?
       self.state          = data[:state].to_s
       self.result         = data[:result].to_s
-      self.start_at       = data[:start_at] if data[:start_at]
-      self.start_before   = data[:start_before] if data[:start_before]
+      self.start_at       = utc_zone.parse(data[:start_at]) if data[:start_at]
+      self.start_before   = utc_zone.parse(data[:start_before]) if data[:start_before]
       self.parent_task_id ||= begin
                                 if main_action.caller_execution_plan_id
                                   DynflowTask.where(:external_id => main_action.caller_execution_plan_id).first!.id
