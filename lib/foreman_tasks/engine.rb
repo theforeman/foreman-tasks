@@ -122,8 +122,13 @@ module ForemanTasks
       end
     end
 
-    initializer "foreman_tasks.initialize_dynflow" do
+    config.to_prepare do
+      ForemanTasks.dynflow.eager_load_actions! if ForemanTasks.dynflow.initialized?
 
+      Authorizer.send(:include, AuthorizerExt)
+    end
+
+    config.after_initialize do
       ForemanTasks.dynflow.eager_load_actions!
       ForemanTasks.dynflow.config.increase_db_pool_size
 
@@ -139,13 +144,6 @@ module ForemanTasks
         end
       end
     end
-
-    config.to_prepare do
-      ForemanTasks.dynflow.eager_load_actions!
-
-      Authorizer.send(:include, AuthorizerExt)
-    end
-
 
     rake_tasks do
       %w[dynflow.rake test.rake export_tasks.rake cleanup.rake].each do |rake_file|
