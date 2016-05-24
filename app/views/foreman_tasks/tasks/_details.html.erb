@@ -184,7 +184,7 @@
 <div>
   <span class="param-name"><%= _("Errors") %>:</span>
   <span class="param-value">
-    <pre><%= @task.humanized[:errors].join("\n") %></pre>
+    <pre><%=Array(@task.humanized[:errors]).join("\n") %></pre>
   </span>
 </div>
 <% end %>
