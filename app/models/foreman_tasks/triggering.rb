@@ -11,7 +11,7 @@ module ForemanTasks
         parse_start_at!
         parse_start_before!
       else
-        self.start_at ||= Time.now
+        self.start_at ||= Time.zone.now
       end
     end
 
@@ -43,7 +43,7 @@ module ForemanTasks
         triggering.mode = params.fetch(:mode, :immediate).to_sym
         triggering.input_type = params.fetch(:input_type, :daily).to_sym
         triggering.end_time_limited = params[:end_time_limited] == "true"
-        triggering.start_at_raw ||= Time.now.strftime(TIME_FORMAT)
+        triggering.start_at_raw ||= Time.zone.now.strftime(TIME_FORMAT)
         triggering.recurring_logic = ::ForemanTasks::RecurringLogic.new_from_triggering(triggering) if triggering.recurring?
       end
     end
@@ -75,8 +75,8 @@ module ForemanTasks
 
     def delay_options
       {
-        :start_at => start_at,
-        :start_before => start_before
+        :start_at => start_at.utc,
+        :start_before => start_before.try(:utc)
       }
     end
 
@@ -93,11 +93,11 @@ module ForemanTasks
     end
 
     def parse_start_at!
-      self.start_at ||= Time.strptime(start_at_raw, TIME_FORMAT)
+      self.start_at ||= Time.zone.parse(start_at_raw)
     end
 
     def parse_start_before!
-      self.start_before ||= Time.strptime(start_before_raw, TIME_FORMAT) unless start_before_raw.blank?
+      self.start_before ||= Time.zone.parse(start_before_raw) unless start_before_raw.blank?
     end
 
     private
