@@ -44,12 +44,6 @@ module ForemanTasks
              :parent   => :monitor_menu,
              :last     => true
 
-        menu :top_menu, :recurring_logics,
-             :url_hash => { :controller => 'foreman_tasks/recurring_logics', :action => :index },
-             :caption  => N_('Recurring logics'),
-             :parent   => :monitor_menu,
-             :last     => true
-
         security_block :foreman_tasks do |map|
           permission :view_foreman_tasks, {:'foreman_tasks/tasks' => [:auto_complete_search, :sub_tasks, :index, :show],
                                            :'foreman_tasks/api/tasks' => [:bulk_search, :show, :index, :summary] }, :resource_type => ForemanTasks::Task.name
