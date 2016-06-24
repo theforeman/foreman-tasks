@@ -1,6 +1,7 @@
 module ForemanTasks
   module TasksHelper
     def format_task_input(task, include_action = false)
+      return '-' unless task
       parts = []
       parts << task.get_humanized(:name) if include_action
       parts << Array(task.get_humanized(:input)).map do |part|
