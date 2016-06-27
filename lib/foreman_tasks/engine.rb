@@ -34,7 +34,7 @@ module ForemanTasks
       Foreman::Gettext::Support.add_text_domain locale_domain, locale_dir
     end
 
-    initializer 'foreman_tasks.register_plugin', :after => :finisher_hook do |app|
+    initializer 'foreman_tasks.register_plugin', :before => :finisher_hook do |app|
       Foreman::Plugin.register :"foreman-tasks" do
         requires_foreman '>= 1.9.0'
         divider :top_menu, :parent => :monitor_menu, :last => true
