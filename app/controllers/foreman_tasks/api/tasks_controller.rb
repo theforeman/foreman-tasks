@@ -29,7 +29,7 @@ module ForemanTasks
       class BadRequest < Apipie::ParamError
       end
 
-      before_filter :find_task, :only => [:show]
+      before_filter :find_task, :only => [:show, :plan]
 
       api :GET, "/tasks/summary", "Show task summary"
       def summary
@@ -39,6 +39,11 @@ module ForemanTasks
       api :GET, "/tasks/:id", "Show task details"
       param :id, :identifier, desc: "UUID of the task"
       def show
+      end
+
+      api :GET, "/tasks/:id/plan", "Show task plan including sub-tasks"
+      param :id, :identifier, desc: "UUID of the task"
+      def plan
       end
 
       api :POST, "/tasks/bulk_search", "List dynflow tasks for uuids"

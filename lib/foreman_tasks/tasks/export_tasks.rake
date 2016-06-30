@@ -208,10 +208,10 @@ namespace :foreman_tasks do
            end
        end
 
-      def self.generate_index(tasks)
+      def self.generate_index(tasks, json = false)
         html = "<div><table class=\"table\">"
         tasks.order("started_at desc").all.each do |task|
-          html << "<tr><td><a href=\"#{task.id}.html\">#{task.label}</a></td><td>#{task.started_at}</td>\
+          html << "<tr><td><a href=\"#{task.id}.#{json ? 'html' : 'json'}\">#{task.label}</a></td><td>#{task.started_at}</td>\
                    <td>#{task.state}</td><td>#{task.result}</td></tr>"
         end
         html << "</table></div>"
@@ -231,20 +231,35 @@ namespace :foreman_tasks do
 
     puts _("Gathering last #{days} days of tasks.")
     Dir.mktmpdir('task-export') do |tmp_dir|
-      PageHelper.copy_assets(tmp_dir)
-
-
-      renderer = TaskRender.new
       count = 1
       total = tasks.count
 
-      tasks.all.each do |task|
-        File.open(File.join(tmp_dir, "#{task.id}.html"), 'w') {|file| file.write(PageHelper.pagify(renderer.render_task(task)))}
-        puts "#{count}/#{total}"
-        count += 1
-      end
+      if !ENV['json']
+        PageHelper.copy_assets(tmp_dir)
 
-      File.open(File.join(tmp_dir, "index.html"), 'w') {|file| file.write(PageHelper.pagify(PageHelper.generate_index(tasks)))}
+        renderer = TaskRender.new
+
+        tasks.all.each do |task|
+          File.open(File.join(tmp_dir, "#{task.id}.html"), 'w') {|file| file.write(PageHelper.pagify(renderer.render_task(task)))}
+          puts "#{count}/#{total}"
+          count += 1
+        end
+
+        File.open(File.join(tmp_dir, "index.html"), 'w') {|file| file.write(PageHelper.pagify(PageHelper.generate_index(tasks)))}
+      else
+        tasks.all.each do |task|
+          File.open(File.join(tmp_dir, "#{task.id}.json"), 'w') do |file|
+            file.write(ForemanTasks::ExecutionPlanPresenter.new(task).plan.to_json)
+          end
+
+          puts "#{count}/#{total}"
+          count += 1
+        end
+
+        File.open(File.join(tmp_dir, "index.html"), 'w') do |file|
+          file.write(PageHelper.pagify(PageHelper.generate_index(tasks)))
+        end
+      end
 
       sh("tar cvzf #{export_filename} #{tmp_dir} > /dev/null")
     end

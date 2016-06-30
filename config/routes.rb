@@ -34,6 +34,9 @@ Foreman::Application.routes.draw do
           get :summary
           post :callback
         end
+        member do
+          get :plan
+        end
       end
     end
 
