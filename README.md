@@ -32,7 +32,9 @@ Add the following to bundler.d/Gemfile.local.rb in your Foreman installation dir
 
     $ gem 'foreman-tasks'
 
-Then run `bundle install` and `foreman-rake db:migrate` from the same directory
+Then run `bundle install` and `foreman-rake db:migrate` from the same directory. Note that you must start the
+dynflow executor (background processor) manually. You can find example service script in 
+extra/dynflow-executor.example in this repository.
 
 --------------
 
