@@ -15,6 +15,9 @@ module ForemanTasks
         format_task_input(@task, true).must_equal("Create user 'Anonymous Admin'")
       end
 
+      it 'displays the dash if task is nil' do
+	format_task_input(nil, true).must_equal('-')
+      end
     end
 
     describe 'when formatting input' do
@@ -37,5 +40,7 @@ module ForemanTasks
         format_task_input(@task, true).must_equal("Create #{response}")
       end
     end
+
+   end 
   end
 end
