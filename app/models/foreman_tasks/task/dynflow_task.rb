@@ -123,5 +123,11 @@ module ForemanTasks
                :state => data[:state].to_s,
                :result => data[:result].to_s)
     end
+
+    private
+
+    def self.model_name
+      superclass.model_name
+    end
   end
 end
