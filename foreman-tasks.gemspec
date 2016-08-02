@@ -26,7 +26,7 @@ DESC
   s.test_files = `git ls-files test`.split("\n")
   s.extra_rdoc_files = Dir['README*', 'LICENSE']
 
-  s.add_dependency "dynflow", '~> 0.8.8'
+  s.add_dependency "dynflow", '~> 0.8.13'
   s.add_dependency "sequel" # for Dynflow process persistence
   s.add_dependency "sinatra" # for Dynflow web console
   s.add_dependency "daemons" # for running remote executor
