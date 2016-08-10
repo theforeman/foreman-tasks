@@ -178,13 +178,15 @@ override the default configuration inside the configuration
 The `foreman_tasks:cleanup` script also accepts additional parameters
 to specify the search criteria for the cleanup manually:
 
-* `FILTER`: scoped search filter (example: 'label = "Actions::Foreman::Host::ImportFacts"')
+* `TASK_SEARCH`: scoped search filter (example: 'label =
+  "Actions::Foreman::Host::ImportFacts"')
 * `AFTER`: delete tasks created after `AFTER` period. Expected format
   is a number followed by the time unit (`s`, `h`, `m`, `y`), such as
-  `10d` for 10 days (applicable only when the `FILTER` option is specified)
+  `10d` for 10 days (applicable only when the `TASK_SEARCH` option is
+  specified)
 * `STATES`: comma separated list of task states to touch with the
   cleanup, by default only stopped tasks are affected
-  (applicable only when the `FILTER` option is specified)
+  (applicable only when the `TASK_SEARCH` option is specified)
 * `NOOP`: set to "true" if the task should not actuall perform the
   deletion, only report the actions the script would perform
 * `VERBOSE`: set to "true" for more verbose output
