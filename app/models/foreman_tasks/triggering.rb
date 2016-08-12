@@ -4,7 +4,6 @@ module ForemanTasks
               :cronline, :days, :days_of_week, :time, :end_time_limited,
               :end_time]
     attr_accessor *PARAMS
-    attr_accessible *PARAMS
 
     before_save do
       if future?
