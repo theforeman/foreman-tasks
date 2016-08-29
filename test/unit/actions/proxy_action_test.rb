@@ -8,18 +8,24 @@ module ForemanTasks
 
       before do
         Support::DummyProxyAction.reset
-        @action = create_and_plan_action(Support::DummyProxyAction, Support::DummyProxyAction.proxy, 'foo' => 'bar')
+        @action = create_and_plan_action(Support::DummyProxyAction,
+                                         Support::DummyProxyAction.proxy,
+                                         'Proxy::DummyAction',
+                                         'foo' => 'bar')
         @action = run_action(@action)
       end
 
       describe 'first run' do
         it 'triggers the corresponding action on the proxy' do
           proxy_call = Support::DummyProxyAction.proxy.log[:trigger_task].first
-          proxy_call.must_equal(["Proxy::DummyAction",
-                                 { "foo" => "bar",
-                                   "connection_options" => { "retry_interval" => 15, "retry_count" => 4, "timeout" => 60 },
-                                   "proxy_url" => "proxy.example.com",
-                                   "callback" => { "task_id" => "123", "step_id" => @action.run_step_id }}])
+          expected_call = ['Proxy::DummyAction',
+                           { 'foo' => 'bar',
+                             'connection_options' =>
+                                 { 'retry_interval' => 15, 'retry_count' => 4, 'timeout' => 60 },
+                             'proxy_url' => 'proxy.example.com',
+                             'proxy_action_name'=>'Proxy::DummyAction',
+                             'callback' => { 'task_id' => '123', 'step_id' => @action.run_step_id } }]
+          proxy_call.must_equal(expected_call)
         end
       end
 
@@ -64,7 +70,10 @@ module ForemanTasks
       end
 
       it 'handles connection errors' do
-        action = create_and_plan_action(Support::DummyProxyAction, Support::DummyProxyAction.proxy, { :foo => 'bar' })
+        action = create_and_plan_action(Support::DummyProxyAction,
+                                        Support::DummyProxyAction.proxy,
+                                         'Proxy::DummyAction',
+                                        { :foo => 'bar' })
         run_stubbed_action = lambda do |lambda_action|
           run_action lambda_action do |block_action|
             block_action.expects(:trigger_proxy_task).raises(Errno::ECONNREFUSED.new('Connection refused'))

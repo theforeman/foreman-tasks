@@ -1,3 +1,4 @@
+require 'foreman_tasks_core'
 require 'fast_gettext'
 require 'gettext_i18n_rails'
 
@@ -107,12 +108,24 @@ module ForemanTasks
       end
     end
 
+    initializer "foreman_tasks.require_dynflow", :before => "foreman_tasks.initialize_dynflow" do |app|
+      ForemanTasks.dynflow.require!
+      ::ForemanTasks.dynflow.config.on_init do |world|
+        ForemanTasksCore.dynflow_setup(world)
+      end
+    end
+
+    initializer 'foreman_tasks.set_core_settings' do
+      ForemanTasksCore::SettingsLoader.settings_registry.keys.each do |settings_keys|
+        settings = settings_keys.inject({}) do |h, settings_key|
+          h.merge(SETTINGS[settings_key] || {})
+        end
+        ForemanTasksCore::SettingsLoader.setup_settings(settings_keys.first, settings)
+      end
+    end
+
     # to enable async Foreman operations using Dynflow
     if ENV['FOREMAN_TASKS_MONKEYS'] == 'true'
-      initializer "foreman_tasks.require_dynflow", :before => "foreman_tasks.initialize_dynflow" do |app|
-        ForemanTasks.dynflow.require!
-      end
-
       config.to_prepare do
         ::Api::V2::HostsController.send :include, ForemanTasks::Concerns::HostsControllerExtension
         ::PuppetclassesController.send :include, ForemanTasks::Concerns::EnvironmentsExtension

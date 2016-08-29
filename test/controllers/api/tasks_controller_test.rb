@@ -26,7 +26,10 @@ module ForemanTasks
         it 'passes the data to the corresponding action' do
           Support::DummyProxyAction.reset
 
-          triggered = ForemanTasks.trigger(Support::DummyProxyAction, Support::DummyProxyAction.proxy, 'foo' => 'bar')
+          triggered = ForemanTasks.trigger(Support::DummyProxyAction,
+                                           Support::DummyProxyAction.proxy,
+                                           'Proxy::DummyAction',
+                                           'foo' => 'bar')
           Support::DummyProxyAction.proxy.task_triggered.wait(5)
 
           task = ForemanTasks::Task.where(:external_id => triggered.id).first

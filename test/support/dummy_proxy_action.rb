@@ -24,12 +24,14 @@ module Support
       end
     end
 
-    def proxy
-      self.class.proxy
+    class ProxySelector < ::ForemanTasks::ProxySelector
+      def available_proxies
+        { :global => [DummyProxyAction.proxy] }
+      end
     end
 
-    def proxy_action_name
-      'Proxy::DummyAction'
+    def proxy
+      self.class.proxy
     end
 
     def task
