@@ -37,7 +37,7 @@ module ForemanTasks
 
   def self.sync_task(action, *args, &block)
     trigger_task(false, action, *args, &block).tap do |task|
-      raise TaskError.new(task) if task.execution_plan.error?
+      raise TaskError.new(task) if task.execution_plan.error? || task.execution_plan.result == :warning
     end
   end
 
