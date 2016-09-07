@@ -50,7 +50,7 @@ DESC
     desc 'Show the current configuration for auto-cleanup'
     task :config => 'environment' do
       if ForemanTasks::Cleaner.cleanup_settings[:after]
-        puts _('The tasks will be deleted after %{after}') % ForemanTasks::Cleaner.cleanup_settings[:after]
+        puts _('The tasks will be deleted after %{after}') % { :after => ForemanTasks::Cleaner.cleanup_settings[:after] }
       else
         puts _('Global period for cleaning up tasks is not set')
       end
