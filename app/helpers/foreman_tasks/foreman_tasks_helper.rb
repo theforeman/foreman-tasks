@@ -16,6 +16,41 @@ module ForemanTasks
       content_tag(:i, '&nbsp'.html_safe, :class => "glyphicon #{icon}") + content_tag(:span, recurring_logic.humanized_state, :class => status)
     end
 
+    def task_result_icon_class(task)
+      return 'task-status pficon-help' if task.state != 'stopped'
+
+      icon_class = case task.result
+                     when 'success'
+                       'pficon-ok'
+                     when 'error'
+                       'pficon-error-circle-o'
+                     when 'warning'
+                       'pficon-ok status-warn'
+                     else
+                       'pficon-help'
+                   end
+
+      "task-status #{icon_class}"
+    end
+
+    def time_in_words_span(time)
+      if time.nil?
+        _('N/A')
+      else
+        content_tag :span, (time > Time.now.utc ? _('in %s') : _('%s ago')) % time_ago_in_words(time),
+                    { :'data-original-title' => time.try(:in_time_zone), :rel => 'twipsy' }
+      end
+    end
+
+    def duration_in_words_span(start, finish)
+      if start.nil?
+        _('N/A')
+      else
+        content_tag :span, distance_of_time_in_words(start, finish),
+                    { :'data-original-title' => number_with_delimiter((finish - start).to_i) + _(' seconds'), :rel => 'twipsy' }
+      end
+    end
+
     def recurring_logic_action_buttons(recurring_logic)
       buttons = []
       if authorized_for(:permission => :edit_recurring_logics, :auth_object => recurring_logic)
