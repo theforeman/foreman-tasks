@@ -1,17 +1,6 @@
 <% title _("Tasks") %>
 <% title_actions SETTINGS[:version].short <= '1.13' ? help_path : help_button %>
-
-<style>
-  .param-name {
-    display: inline-block;
-    width: 10em;
-  }
-
-  .task-details pre {
-    white-space: pre;
-    word-break: normal;
-  }
-</style>
+<% stylesheet 'foreman_tasks/tasks' %>
 
 <script>
 

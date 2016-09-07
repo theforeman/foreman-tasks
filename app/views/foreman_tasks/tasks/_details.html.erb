@@ -13,6 +13,12 @@
                 cancel_foreman_tasks_task_path(@task),
                 class:  ['btn', 'btn-sm', 'btn-primary', ('disabled' unless @task.cancellable?)].compact,
                 method: :post) %>
+    <% if @task.parent_task %>
+      <%= link_to(_("Parent task"), foreman_tasks_task_path(@task.parent_task), class: ['btn', 'btn-sm', 'btn-default']) %>
+    <% end %>
+    <% if @task.sub_tasks.any? %>
+      <%= link_to(_("Sub tasks"), sub_tasks_foreman_tasks_task_path(@task), class: ['btn', 'btn-sm', 'btn-default']) %>
+  <% end %>
     <% if Setting['dynflow_allow_dangerous_actions'] %>
       <%= link_to(_('Unlock'),
                   '',
@@ -79,72 +85,68 @@
   </div>
 </div>
 
-<div>
-  <span class="param-name"><%= _("Id") %>:</span>
-  <span class="param-value"><%= @task.id %></span>
-</div>
-<div>
-  <span class="param-name"><%= _("Label") %>:</span>
-  <span class="param-value"><%= @task.label %></span>
-</div>
-<div>
-  <span class="param-name"><%= _("Name") %>:</span>
-  <span class="param-value"><%= @task.humanized[:action] %></span>
-</div>
-<div>
-  <span class="param-name"><%= _("Owner") %>:</span>
-  <span class="param-value"><%= @task.username %></span>
-</div>
-<div>
-  <span class="param-name"><%= _("Execution type") %>:</span>
-  <span class="param-value"><%= @task.start_at.nil? ? _('Immediate') : _('Delayed') %></span>
-</div>
-<div>
-  <span class="param-name"><%= _("Start at") %>:</span>
-  <span class="param-value"><%= @task.start_at.nil? ? '-' : @task.start_at %></span>
-</div>
-<div>
-  <span class="param-name"><%= _("Start before") %>:</span>
-  <span class="param-value"><%= @task.start_before.nil? ? '-' : @task.start_before %></span>
-</div>
-<div>
-  <span class="param-name"><%= _("Started at") %>:</span>
-  <span class="param-value"><%= @task.started_at.try(:in_time_zone) %></span>
-</div>
-<div>
-  <span class="param-name"><%= _("Ended at") %>:</span>
-  <span class="param-value"><%= @task.ended_at.try(:in_time_zone) %></span>
-</div>
-<div>
-  <span class="param-name"><%= _("State") %>:</span>
-  <span class="param-value"><%= @task.state %></span>
-</div>
-<div>
-  <span class="param-name"><%= _("Result") %>:</span>
-  <span class="param-value"><%= @task.state == 'running' ? '-' : @task.result %></span>
-</div>
-<div>
-  <span class="param-name"><%= _("Params") %>:</span>
-  <span class="param-value"><%= format_task_input(@task) %></span>
-</div>
-<% if @task.parent_task %>
-<div>
-  <span class="param-name"><%= link_to(_("Parent task"), foreman_tasks_task_path(@task.parent_task)) %></span>
-</div>
-<% end %>
-<% if @task.sub_tasks.any? %>
-<div>
-  <span class="param-name"><%= link_to(_("Sub tasks"), sub_tasks_foreman_tasks_task_path(@task)) %></span>
-</div>
-<% end %>
 <div class="row">
-  <div class="col-xs-11">
-    <div class="progress progress-striped <%= 'active' if @task.state == 'running' %>">
-      <% progress = 100 * @task.progress %>
-      <% progress_class = if @task.state == 'running'
-                            nil
-                          else
-                            case @task.result
+  <div class="col-md-6">
+    <div>
+      <span class="param-name list-group-item-heading"><%= _("Name") %>:</span>
+      <% task_label = format_task_input(@task, true) %>
+      <span class="param-value" data-original-title="<%= task_label %>" rel="twipsy"> <%= truncate(task_label, :length => 50) %></span>
+    </div>
+    <div>
+      <span class="param-name list-group-item-heading"><%= _("Result") %>:</span>
+      <span class="param-value">
+        <% if @task.state != 'stopped' %>
+          <%= content_tag(:i, '&nbsp'.html_safe, :class => 'task-status pficon-help') %>
+        <% else %>
+          <%= content_tag(:i, '&nbsp'.html_safe, :class => task_result_icon_class(@task)) + content_tag(:span, @task.result) %>
+        <% end %>
+      </span>
+    </div>
+    <div>
+      <span class="param-name list-group-item-heading"><%= _("Triggered by") %>:</span>
+      <span class="param-value">
+        <% if @task.owner.present? && @task.username != User::ANONYMOUS_API_ADMIN && @task.username != User::ANONYMOUS_ADMIN %>
+          <%= link_to_if_authorized(@task.username, hash_for_edit_user_path(@task.owner)) %>
+        <% else %>
+          <%= @task.username %>
+        <% end %>
+      </span>
+    </div>
+    <div>
+      <span class="param-name list-group-item-heading"><%= _("Execution type") %>:</span>
+      <span class="param-value"><%= _(@task.execution_type) %></span>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div>
+      <span class="param-name list-group-item-heading"><%= _("Start at") %>:</span>
+      <span class="param-value"><%= @task.start_at.nil? ? '-' : time_in_words_span(@task.start_at) %></span>
+    </div>
+    <div>
+      <span class="param-name list-group-item-heading"><%= _("Started at") %>:</span>
+      <span class="param-value"><%= time_in_words_span @task.started_at.try(:in_time_zone) %></span>
+    </div>
+    <div>
+      <span class="param-name list-group-item-heading"><%= _("Ended at") %>:</span>
+      <span class="param-value"><%= time_in_words_span @task.ended_at.try(:in_time_zone) %></span>
+    </div>
+    <div>
+      <span class="param-name list-group-item-heading"><%= _("Start before") %>:</span>
+      <span class="param-value"><%= @task.start_before.nil? ? '-' : time_in_words_span(@task.start_before) %></span>
+    </div>
+  </div>
+</div>
+
+<br />
+
+<div class="row">
+  <div class="col-xs-12">
+    <% progress = 100 * @task.progress %>
+    <% progress_class = if @task.state == 'running'
+                          nil
+                        else
+                          case @task.result
                             when 'success'
                               'progress-bar-success'
                             when 'error'
@@ -153,27 +155,28 @@
                               'progress-bar-warning'
                             else
                               nil
-                            end
-                          end %>
-      <% classes = ['progress-bar', progress_class] %>
-      <div class="<%= classes.join ' ' %>"
+                          end
+                        end %>
+
+    <div class="progress-description <%= 'active' if @task.state == 'running' %>">
+      <span class="list-group-item-heading">State:</span>  <%= @task.state %>
+    </div>
+    <div class="progress progress-striped progress-label-top-right">
+      <div class="progress-bar <%= progress_class %>"
            role="progressbar"
            aria-valuenow="<%= progress %>"
            aria-valuemin="0"
            aria-valuemax="100"
            style="width: <%= progress %>%;">
-        <span class="sr-only"><%= progress %>% Complete</span>
+        <span><%= progress %>% Complete</span>
       </div>
     </div>
-  </div>
-  <div class="col-xs-1">
-    <%= progress.round %>%
   </div>
 </div>
 
 <% unless @task.humanized[:output].blank? %>
 <div>
-  <span class="param-name"><%= _("Output") %>:</span>
+  <span class="param-name list-group-item-heading"><%= _("Output") %>:</span>
   <span class="param-value">
     <pre><%= @task.humanized[:output] %></pre>
   </span>

@@ -69,6 +69,10 @@ module ForemanTasks
       self.owner.try(:login)
     end
 
+    def execution_type
+      self.start_at.to_i == self.started_at.to_i ? N_('Immediate') : N_('Delayed')
+    end
+
     def humanized
       { action: label,
         input:  "",
