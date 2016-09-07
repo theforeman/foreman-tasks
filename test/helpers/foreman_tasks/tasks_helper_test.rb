@@ -40,7 +40,5 @@ module ForemanTasks
         format_task_input(@task, true).must_equal("Create #{response}")
       end
     end
-
-   end 
   end
 end

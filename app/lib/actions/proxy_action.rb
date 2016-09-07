@@ -1,6 +1,5 @@
 module Actions
   class ProxyAction < Base
-
     include ::Dynflow::Action::Cancellable
     include ::Dynflow::Action::Timeouts
 
@@ -12,10 +11,10 @@ module Actions
       end
     end
 
-    def plan(proxy, options)
+    def plan(proxy, klass, options)
       options[:connection_options] ||= {}
       default_connection_options.each { |key, value| options[:connection_options][key] ||= value }
-      plan_self(options.merge(:proxy_url => proxy.url))
+      plan_self(options.merge(:proxy_url => proxy.url, :proxy_action_name => klass.to_s))
     end
 
     def run(event = nil)
@@ -91,15 +90,31 @@ module Actions
 
     # @override String name of an action to be triggered on server
     def proxy_action_name
-      raise NotImplemented
+      input[:proxy_action_name]
     end
 
     def proxy
       ProxyAPI::ForemanDynflow::DynflowProxy.new(:url => input[:proxy_url])
     end
 
-    def proxy_output
-      output[:proxy_output]
+    def proxy_output(live = false)
+      if output.key?(:proxy_output)
+        output.fetch(:proxy_output) || {}
+      elsif live && output[:proxy_task_id]
+        proxy_data = proxy.status_of_task(output[:proxy_task_id])['actions'].detect { |action| action['class'] == proxy_action_name }
+        proxy_data.fetch('output', {})
+      else
+        {}
+      end
+    end
+
+    # The proxy action is able to contribute to continuous output
+    def fill_continuous_output(continuous_output)
+      failed_proxy_tasks.each do |failure_data|
+        message = _('Initialization error: %s') %
+            "#{failure_data[:exception_class]} - #{failure_data[:exception_message]}"
+        continuous_output.add_output(message, 'debug', failure_data[:timestamp])
+      end
     end
 
     def proxy_output=(output)
@@ -136,6 +151,10 @@ module Actions
 
     private
 
+    def failed_proxy_tasks
+      metadata[:failed_proxy_tasks] ||= []
+    end
+
     def with_connection_error_handling(event = nil)
       yield event
     rescue ::RestClient::Exception, Errno::ECONNREFUSED, Errno::EHOSTUNREACH, Errno::ETIMEDOUT => e
@@ -154,11 +173,10 @@ module Actions
     end
 
     def handle_connection_exception(exception, event = nil)
-      metadata[:failed_proxy_tasks] ||= []
       options = input[:connection_options]
-      metadata[:failed_proxy_tasks] << format_exception(exception)
+      failed_proxy_tasks << format_exception(exception)
       output[:proxy_task_id] = nil
-      if metadata[:failed_proxy_tasks].count < options[:retry_count]
+      if failed_proxy_tasks.count < options[:retry_count]
         suspend do |suspended_action|
           @world.clock.ping suspended_action,
                             Time.now + options[:retry_interval],

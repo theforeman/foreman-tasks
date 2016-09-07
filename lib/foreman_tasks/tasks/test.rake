@@ -4,6 +4,7 @@ namespace :test do
       t.libs << ["test", "#{ForemanTasks::Engine.root}/test"]
       t.test_files = ["#{ForemanTasks::Engine.root}/test/**/*_test.rb"]
       t.verbose = true
+      t.warning = false
     end
 
     Rake::Task[test_task.name].invoke
