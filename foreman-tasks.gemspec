@@ -20,7 +20,9 @@ same resource. It also optionally provides Dynflow infrastructure for using it f
 DESC
 
   s.files = `git ls-files`.split("\n").reject do |file|
-    file.end_with? "test.rake"
+    file.end_with?("test.rake") ||
+        file.start_with?('lib/foreman_tasks_core') ||
+        file == 'foreman-tasks-core.gemspec'
   end
 
   s.test_files = `git ls-files test`.split("\n")
