@@ -16,5 +16,6 @@ Gem::Specification.new do |s|
 Common code used both at Forman and Foreman proxy regarding tasks
 DESC
 
-  s.files = Dir['lib/foreman_tasks_core/**/*'] + ['lib/foreman_tasks_core.rb']
+  s.files = Dir['lib/foreman_tasks_core/**/*'] +
+            ['lib/foreman_tasks_core.rb', 'LICENSE']
 end
