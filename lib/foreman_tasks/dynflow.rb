@@ -44,8 +44,11 @@ module ForemanTasks
           # don't try to do any rescuing until the tables are properly migrated
           if !Foreman.in_rake?('db:migrate') && (ForemanTasks::Task.table_exists? rescue(false))
             config.run_on_init_hooks(world)
-            world.auto_execute
-            ForemanTasks::Task::DynflowTask.consistency_check
+            # leave this just for long-running executors
+            unless config.rake_task_with_executor?
+              world.auto_execute
+              ForemanTasks::Task::DynflowTask.consistency_check
+            end
           end
         end
       end
