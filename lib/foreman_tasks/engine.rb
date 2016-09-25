@@ -73,8 +73,8 @@ module ForemanTasks
         role "Tasks Manager", [:view_foreman_tasks, :edit_foreman_tasks]
         role "Tasks Reader", [:view_foreman_tasks]
 
-        widget 'foreman_tasks/tasks/dashboard/tasks_status', :sizex=>6, :sizey=>1, :name=> N_('Tasks Status table')
-        widget 'foreman_tasks/tasks/dashboard/latest_tasks_in_error_warning', :sizex=>6, :sizey=>1,:name=> N_('Tasks in Error/Warning')
+        widget 'foreman_tasks/tasks/dashboard/tasks_status', :sizex=>6, :sizey=>1, :name=> N_('Task Status')
+        widget 'foreman_tasks/tasks/dashboard/latest_tasks_in_error_warning', :sizex=>6, :sizey=>1,:name=> N_('Latest Warning/Error Tasks')
       end
     end
 
