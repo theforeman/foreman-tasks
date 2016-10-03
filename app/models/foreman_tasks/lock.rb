@@ -52,7 +52,7 @@ module ForemanTasks
 
     # returns true if it's possible to aquire this kind of lock
     def available?
-      not colliding_locks.any?
+      not colliding_locks.exists?
     end
 
     # returns a scope of the locks colliding with this one
