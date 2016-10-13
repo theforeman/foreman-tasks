@@ -1,5 +1,5 @@
 <% title _("Tasks") %>
-<% title_actions help_path%>
+<% title_actions SETTINGS[:version].short <= '1.13' ? help_path : help_button %>
 
 <style>
   .param-name {
