@@ -12,11 +12,7 @@ module ForemanTasks
     let(:foreign_task) { FactoryGirl.create(:dynflow_task) }
 
     let(:edit_foreman_tasks_permission) do
-      FactoryGirl.build(:permission).tap do |permission|
-        permission.name = :edit_foreman_tasks
-        permission.resource_type = ForemanTasks::Task.name
-        permission.save!
-      end
+      Permission.where(:name => :edit_foreman_tasks).first
     end
 
     def dynflow_console_authorized?(task = nil)
