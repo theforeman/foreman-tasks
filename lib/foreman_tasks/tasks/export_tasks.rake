@@ -28,212 +28,6 @@ DESC
       fail "The #{option} option is deprecated. Please use #{new_option} instead" if ENV.include?(option.to_s)
     end
 
-    class TaskRender
-      def initialize
-        @cache = {}
-      end
-
-      def h(foo)
-        foo
-      end
-
-      def url(foo)
-        foo
-      end
-
-      def render_task(task)
-        @plan = task.execution_plan
-        erb('show')
-      end
-
-      def world
-        ForemanTasks.dynflow.world
-      end
-
-      def template(filename)
-        File.join(Gem::Specification.find_by_name("dynflow").gem_dir, 'web', 'views', "#{filename}.erb")
-      end
-
-      def erb(file, options = {})
-        unless @cache[file]
-          @cache[file] = Tilt.new(template(file))
-        end
-        @cache[file].render(self, options[:locals])
-      end
-
-      def prettify_value(value)
-        YAML.dump(value)
-      end
-
-      def prettyprint(value)
-        value = prettyprint_references(value)
-        if value
-          pretty_value = prettify_value(value)
-          <<-HTML
-            <pre class="prettyprint lang-yaml">#{h(pretty_value)}</pre>
-          HTML
-        else
-          ""
-        end
-      end
-
-      def prettyprint_references(value)
-        case value
-        when Hash
-          value.reduce({}) do |h, (key, val)|
-            h.update(key => prettyprint_references(val))
-          end
-        when Array
-          value.map { |val| prettyprint_references(val) }
-        when Dynflow::ExecutionPlan::OutputReference
-          value.inspect
-        else
-          value
-        end
-      end
-
-      def duration_to_s(duration)
-        h("%0.2fs" % duration)
-      end
-
-      def load_action(step)
-        world.persistence.load_action_for_presentation(@plan, step.action_id, step)
-      end
-
-      def step_error(step)
-        if step.error
-          ['<pre>',
-           "#{h(step.error.message)} (#{h(step.error.exception_class)})\n",
-           h(step.error.backtrace.join("\n")),
-           '</pre>'].join
-        end
-      end
-
-      def show_world(world_id)
-        if registered_world = world.coordinator.find_worlds(false, id: world_id).first
-          "%{world_id} %{world_meta}" % { world_id: world_id, world_meta: registered_world.meta.inspect }
-        else
-          world_id
-        end
-      end
-
-      def show_action_data(label, value)
-        value_html = prettyprint(value)
-        if !value_html.empty?
-          <<-HTML
-            <p>
-              <b>#{h(label)}</b>
-          #{value_html}
-            </p>
-          HTML
-        else
-          ""
-        end
-      end
-
-      def atom_css_classes(atom)
-        classes = ["atom"]
-        step    = @plan.steps[atom.step_id]
-        case step.state
-        when :success
-          classes << "success"
-        when :error
-          classes << "error"
-        when :skipped, :skipping
-          classes << "skipped"
-        end
-        return classes.join(" ")
-      end
-
-      def flow_css_classes(flow, sub_flow = nil)
-        classes = []
-        case flow
-        when Dynflow::Flows::Sequence
-          classes << "sequence"
-        when Dynflow::Flows::Concurrence
-          classes << "concurrence"
-        when Dynflow::Flows::Atom
-          classes << atom_css_classes(flow)
-        else
-          raise "Unknown run plan #{run_plan.inspect}"
-        end
-        classes << atom_css_classes(sub_flow) if sub_flow.is_a? Dynflow::Flows::Atom
-        return classes.join(" ")
-      end
-
-      def step_css_class(step)
-        case step.state
-        when :success
-          "success"
-        when :error
-          "important"
-        end
-      end
-
-      def progress_width(step)
-        if step.state == :error
-          100 # we want to show the red bar in full width
-        else
-          step.progress_done * 100
-        end
-      end
-
-      def step(step_id)
-        @plan.steps[step_id]
-      end
-
-
-      def updated_url(new_params)
-        url("?" + Rack::Utils.build_nested_query(params.merge(new_params.stringify_keys)))
-      end
-
-
-    end
-
-    class PageHelper
-      def self.pagify(template)
-       pre =  <<-HTML
-       <html>
-       <head>
-       <title>Dynflow Console</title>
-       <script src="jquery.js"></script>
-       <link rel="stylesheet" type="text/css" href="bootstrap.css">
-       <link rel="stylesheet" type="text/css" href="application.css">
-       <script src="bootstrap.js"></script>
-       <script src="run_prettify.js"></script>
-       <script src="application.js"></script>
-       </head>
-       <body>
-          #{template}
-       <body>
-       </html>
-         HTML
-       end
-
-       def self.copy_assets(tmp_dir)
-           ['vendor/bootstrap/js/bootstrap.js',
-            'vendor/google-code-prettify/run_prettify.js',
-            'vendor/jquery/jquery.js',
-            'vendor/jquery/jquery.js',
-            'javascripts/application.js',
-            'vendor/bootstrap/css/bootstrap.css',
-            'stylesheets/application.css'].each do |file|
-
-             filename = File.join(Gem::Specification.find_by_name("dynflow").gem_dir, 'web', 'assets', file)
-             FileUtils.copy_file(filename, File.join(tmp_dir, File.basename(file)))
-           end
-       end
-
-      def self.generate_index(tasks)
-        html = "<div><table class=\"table\">"
-        tasks.order("started_at desc").all.each do |task|
-          html << "<tr><td><a href=\"#{task.id}.html\">#{task.label}</a></td><td>#{task.started_at}</td>\
-                   <td>#{task.state}</td><td>#{task.result}</td></tr>"
-        end
-        html << "</table></div>"
-      end
-    end
-
     if ENV['TASK_SEARCH'].nil? && ENV['TASK_DAYS'].nil?
       filter = "started_at > \"#{7.days.ago.to_s(:db)}\" || " \
         "(result != success && started_at > \"#{60.days.ago.to_s(:db)})\""
@@ -250,35 +44,29 @@ DESC
     export_filename = ENV['TASK_FILE'] || "/tmp/task-export-#{DateTime.now.to_i}.#{format == 'csv' ? 'csv' : 'tar.gz'}"
 
     tasks = ForemanTasks::Task.search_for(filter)
+    plans = tasks.map(&:external_task)
 
     puts _("Gathering #{tasks.count} tasks.")
-    if format == 'html'
-      Dir.mktmpdir('task-export') do |tmp_dir|
-        PageHelper.copy_assets(tmp_dir)
-
-
-        renderer = TaskRender.new
-        total = tasks.count
-
-        tasks.each_with_index do |task, count|
-          File.open(File.join(tmp_dir, "#{task.id}.html"), 'w') {|file| file.write(PageHelper.pagify(renderer.render_task(task)))}
-          puts "#{count + 1}/#{total}"
-          count += 1
-        end
-
-        File.open(File.join(tmp_dir, "index.html"), 'w') {|file| file.write(PageHelper.pagify(PageHelper.generate_index(tasks)))}
-
-        sh("tar cvzf #{export_filename} #{tmp_dir} > /dev/null")
-      end
-    elsif format == 'csv'
-      CSV.open(export_filename, 'wb') do |csv|
-        csv << ['id', 'state', 'type', 'label', 'result', 'parent_task_id', 'started_at', 'ended_at']
-        tasks.each do |task|
-          csv << [task.id, task.state, task.type, task.label, task.result,
-                  task.parent_task_id, task.started_at, task.ended_at]
-        end
-      end
-    end
+    content = case format
+              when 'html'
+                ::Dynflow::Exporters::Tar.full_html_export plans
+              when 'json'
+                ::Dynflow::Exporters::Tar.full_html_export plans
+              when 'csv'
+              else
+                raise "Unknown export format '#{format}'"
+              end
+    File.write(export_filename, content)
+      
+        # elsif format == 'csv'
+    #   CSV.open(export_filename, 'wb') do |csv|
+    #     csv << ['id', 'state', 'type', 'label', 'result', 'parent_task_id', 'started_at', 'ended_at']
+    #     tasks.each do |task|
+    #       csv << [task.id, task.state, task.type, task.label, task.result,
+    #               task.parent_task_id, task.started_at, task.ended_at]
+    #     end
+    #   end
+    # end
 
     puts "Created #{export_filename}"
 
