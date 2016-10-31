@@ -4,8 +4,6 @@
 #
 # Run "foreman-rake foreman_tasks:export_tasks" to export tasks
 
-require 'csv'
-
 namespace :foreman_tasks do
   desc <<DESC
 Export dynflow tasks based on filter. ENV variables:
@@ -20,55 +18,24 @@ all unsuccessful tasks in the past 60 days. The default TASK_FORMAT is html
 which requires a tar.gz file extension.
 DESC
   task :export_tasks => :environment do
-    deprecated_options = {:tasks => "TASK_SEARCH",
-                          :days => "TASK_DAYS",
+    deprecated_options = {:tasks  => "TASK_SEARCH",
+                          :days   => "TASK_DAYS",
                           :export => "TASK_FILE"
     }
+
     deprecated_options.each do |option, new_option|
       fail "The #{option} option is deprecated. Please use #{new_option} instead" if ENV.include?(option.to_s)
     end
 
-    if ENV['TASK_SEARCH'].nil? && ENV['TASK_DAYS'].nil?
-      filter = "started_at > \"#{7.days.ago.to_s(:db)}\" || " \
-        "(result != success && started_at > \"#{60.days.ago.to_s(:db)})\""
+    utils = ForemanTasks::ExportUtils.new
+
+    puts _("Gathering #{utils.plans.count} tasks.")
+    if utils.plans.count.zero?
+      puts "Nothing to export"
     else
-      filter = ENV['TASK_SEARCH'] || ''
+      utils.export
+      puts _("Created #{utils.export_filename}")
     end
-
-    if (days = ENV['TASK_DAYS'])
-      filter += " && " unless filter == ''
-      filter += "started_at > \"#{days.to_i.days.ago.to_s(:db)}\""
-    end
-
-    format = ENV['TASK_FORMAT'] || 'html'
-    export_filename = ENV['TASK_FILE'] || "/tmp/task-export-#{DateTime.now.to_i}.#{format == 'csv' ? 'csv' : 'tar.gz'}"
-
-    tasks = ForemanTasks::Task.search_for(filter)
-    plans = tasks.map(&:external_task)
-
-    puts _("Gathering #{tasks.count} tasks.")
-    content = case format
-              when 'html'
-                ::Dynflow::Exporters::Tar.full_html_export plans
-              when 'json'
-                ::Dynflow::Exporters::Tar.full_html_export plans
-              when 'csv'
-              else
-                raise "Unknown export format '#{format}'"
-              end
-    File.write(export_filename, content)
-      
-        # elsif format == 'csv'
-    #   CSV.open(export_filename, 'wb') do |csv|
-    #     csv << ['id', 'state', 'type', 'label', 'result', 'parent_task_id', 'started_at', 'ended_at']
-    #     tasks.each do |task|
-    #       csv << [task.id, task.state, task.type, task.label, task.result,
-    #               task.parent_task_id, task.started_at, task.ended_at]
-    #     end
-    #   end
-    # end
-
-    puts "Created #{export_filename}"
 
   end
 end
