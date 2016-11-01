@@ -92,7 +92,7 @@ module ForemanTasks
         end
 
         set(:custom_navigation) do
-          { "Back to Foreman" => "/#{ForemanTasks::TasksController.controller_path}" }
+          { _("Back to tasks") => "/#{ForemanTasks::TasksController.controller_path}" }
         end
         set(:world) { ForemanTasks.dynflow.world }
       end
