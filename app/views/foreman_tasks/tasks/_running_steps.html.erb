@@ -5,7 +5,7 @@
       <%= _("No running steps") %>
     <% else %>
       <% running_steps.each do |step| %>
-        <% action = ForemanTasks.dynflow.world.persistence.load_action(step) %>
+        <% action = step.action(@task.execution_plan) %>
         <div class="alert alert-warning">
           <p>
             <% if @task.cancellable_action?(action) %>
