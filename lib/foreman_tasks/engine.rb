@@ -131,7 +131,6 @@ module ForemanTasks
         ::PuppetclassesController.send :include, ForemanTasks::Concerns::EnvironmentsExtension
         ::EnvironmentsController.send :include, ForemanTasks::Concerns::EnvironmentsExtension
         ::Host::Base.send :include, ForemanTasks::Concerns::HostActionSubject
-        ::Architecture.send :include, ForemanTasks::Concerns::ArchitectureActionSubject
       end
     end
 
