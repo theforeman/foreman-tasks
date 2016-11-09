@@ -94,8 +94,6 @@ module ForemanTasks
       end
     end
 
-    protected
-
     # generates the options hash consumable by the Dynflow's world
     def world_config
       ::Dynflow::Config.new.tap do |config|
@@ -111,6 +109,8 @@ module ForemanTasks
         config.auto_execute        = false
       end
     end
+
+    protected
 
     def default_sequel_adapter_options
       db_config            = ActiveRecord::Base.configurations[Rails.env].dup

@@ -82,6 +82,10 @@ module ForemanTasks
       return @world
     end
 
+    def world=(world)
+      @world = world
+    end
+
     def web_console
       ::Dynflow::Web.setup do
         before do
