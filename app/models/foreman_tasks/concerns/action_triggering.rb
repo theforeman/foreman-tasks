@@ -141,6 +141,11 @@ module ForemanTasks
       # we don't want to start executing the task calling to external services
       # when inside some other transaction. Might lead to unexpected results
       def ensure_not_in_transaction!
+        # we don't care about transactions when using InThreadWorld
+        if defined?(::Dynflow::Testing::InThreadWorld) &&
+              ForemanTasks.dynflow.world.is_a?(::Dynflow::Testing::InThreadWorld)
+          return
+        end
         if self.class.connection.open_transactions > 0
           raise 'Executing dynflow action inside a transaction is not a good idea'
         end
