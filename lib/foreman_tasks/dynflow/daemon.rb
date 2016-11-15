@@ -26,7 +26,8 @@ module ForemanTasks
                           pid_dir: "#{Rails.root}/tmp/pids",
                           log_dir: File.join(Rails.root, 'log'),
                           wait_attempts: 300,
-                          wait_sleep: 1 }
+                          wait_sleep: 1,
+                          executors_count: (ENV['EXECUTORS_COUNT'] || 1).to_i }
       options = default_options.merge(options)
       FileUtils.mkdir_p(options[:pid_dir])
       begin
@@ -41,20 +42,23 @@ module ForemanTasks
 
       STDERR.puts("Dynflow Executor: #{command} in progress")
 
-      Daemons.run_proc(options[:process_name],
+      options[:executors_count].times do
+        Daemons.run_proc(options[:process_name],
+                       :multiple => true,
                        :dir => options[:pid_dir],
                        :log_dir => options[:log_dir],
                        :dir_mode => :normal,
                        :monitor => true,
                        :log_output => true,
                        :ARGV => [command]) do |*args|
-        begin
-          ::Logging.reopen
-          run(options[:foreman_root])
-        rescue => e
-          STDERR.puts e.message
-          Foreman::Logging.exception("Failed running foreman-tasks daemon", e)
-          exit 1
+          begin
+            ::Logging.reopen
+            run(options[:foreman_root])
+          rescue => e
+            STDERR.puts e.message
+            Foreman::Logging.exception("Failed running foreman-tasks daemon", e)
+            exit 1
+          end
         end
       end
     end
