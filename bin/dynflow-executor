@@ -32,6 +32,9 @@ BANNER
   opts.on('-f', '--foreman-root=PATH', "Path to Foreman Rails root path. By default '#{options[:foreman_root]}'") do |path|
     options[:foreman_root] = path
   end
+  opts.on('-c', '--executors-count=COUNT', 'Number of parallel executors to spawn. Overrides EXECUTORS_COUNT environment varaible.') do |count|
+    options[:executors_count] = count.to_i
+  end
 end
 
 args = opts.parse!(ARGV)
