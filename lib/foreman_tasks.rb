@@ -5,7 +5,6 @@ require 'foreman_tasks/dynflow'
 require 'foreman_tasks/triggers'
 require 'foreman_tasks/authorizer_ext'
 require 'foreman_tasks/cleaner'
-require 'foreman_tasks/export_utils'
 
 module ForemanTasks
   extend Algebrick::TypeCheck

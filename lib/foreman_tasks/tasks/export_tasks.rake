@@ -17,25 +17,38 @@ If TASK_SEARCH is not defined, it defaults to all tasks in the past 7 days and
 all unsuccessful tasks in the past 60 days. The default TASK_FORMAT is html
 which requires a tar.gz file extension.
 DESC
-  task :export_tasks => :environment do
-    deprecated_options = {:tasks  => "TASK_SEARCH",
-                          :days   => "TASK_DAYS",
-                          :export => "TASK_FILE"
-    }
 
-    deprecated_options.each do |option, new_option|
-      fail "The #{option} option is deprecated. Please use #{new_option} instead" if ENV.include?(option.to_s)
-    end
+  def filter(task)
+    filter = ''
 
-    utils = ForemanTasks::ExportUtils.new
-
-    puts _("Gathering #{utils.plans.count} tasks.")
-    if utils.plans.count.zero?
-      puts "Nothing to export"
+    if task.task_search.nil? && task.task_days.nil?
+      filter = "started_at > \"#{7.days.ago.to_s(:db)}\" || " \
+               "(result != success && started_at > \"#{60.days.ago.to_s(:db)}\")"
     else
-      utils.export
-      puts _("Created #{utils.export_filename}")
+      filter = task.task_search || ''
     end
 
+    if (days = task.task_days)
+      filter += " && " unless filter == ''
+      filter += "started_at > \"#{days.to_i.days.ago.to_s(:db)}\""
+    end
+
+    filter
+  end
+
+  def plans(world, filter)
+    puts "Retrieveing plans!"
+    ids = ForemanTasks::Task.search_for(filter).pluck(:external_id)
+    world.persistence.find_execution_plans(:filters => { :uuid => ids })
+  end
+
+  task :export_tasks => :environment do
+
+    export_task = ::Dynflow::Tasks::Export.new do |t|
+      t.world = ForemanTasks.dynflow.world
+      t.plans = plans(t.world, filter(t))
+    end
+
+    Rake::Task[export_task.name].invoke
   end
 end
