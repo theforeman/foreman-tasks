@@ -9,8 +9,9 @@ module ForemanTasks
     require 'foreman_tasks/dynflow/daemon'
     require 'foreman_tasks/dynflow/console_authorizer'
 
-    def initialize
+    def initialize(world_class = nil)
       @required = false
+      @world_class = world_class
     end
 
     def config
@@ -37,7 +38,7 @@ module ForemanTasks
       if config.lazy_initialization && defined?(PhusionPassenger)
         config.dynflow_logger.warn('ForemanTasks: lazy loading with PhusionPassenger might lead to unexpected results')
       end
-      config.initialize_world.tap do |world|
+      init_world.tap do |world|
         @world = world
 
         unless config.remote?
@@ -118,6 +119,13 @@ module ForemanTasks
 
     def loaded_paths
       @loaded_paths ||= Set.new
+    end
+
+    private
+
+    def init_world
+      return config.initialize_world(@world_class) if @world_class
+      config.initialize_world
     end
   end
 end
