@@ -17,146 +17,89 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "\n"
 
-msgid "List recurring logics"
+msgid " seconds"
 msgstr ""
 
-msgid "Show recurring logic details"
+msgid "%s ago"
 msgstr ""
 
-msgid "Cancel recurring logic"
+msgid "%s is not valid format of cron line"
 msgstr ""
 
-msgid "Resume all paused error tasks"
+msgid "%{total} task(s), %{success} success, %{failed} fail"
 msgstr ""
 
-msgid "Resume tasks matching search string"
+msgid "%{value} is not allowed input type"
 msgstr ""
 
-msgid "Resume specific tasks by ID"
+msgid "%{value} is not allowed triggering mode"
 msgstr ""
 
-msgid "List tasks"
+msgid "%{value} is wrong format"
 msgstr ""
 
-msgid "Search string"
+msgid "Action"
 msgstr ""
 
-msgid "Page number, starting at 1"
+msgid "Action with sub plans"
 msgstr ""
 
-msgid "Number of results per page to return"
-msgstr ""
-
-msgid "Sort field and order, e.g. 'name DESC'"
-msgstr ""
-
-msgid "Hash version of 'order' param"
-msgstr ""
-
-msgid "Field to sort the results on"
-msgstr ""
-
-msgid "How to order the sorted results (e.g. ASC for ascending)"
-msgstr ""
-
-msgid "Send data to the task from external executor (such as smart_proxy_dynflow)"
-msgstr ""
-
-msgid "UUID of the task"
-msgstr ""
-
-msgid "The ID of the step inside the execution plan to send the event to"
-msgstr ""
-
-msgid "Data to be sent to the action"
-msgstr ""
-
-msgid "User search_params requires user_id to be specified"
-msgstr ""
-
-msgid "Resource search_params requires resource_type and resource_id to be specified"
-msgstr ""
-
-msgid "Task search_params requires task_id to be specified"
-msgstr ""
-
-msgid "Type %s for search_params is not supported"
+msgid "Active"
 msgstr ""
 
 msgid "Added import task to queue, it will be run shortly"
 msgstr ""
 
-msgid "Failed to add task to queue: %s"
+msgid "All proxies with the required feature are unavailable at the moment"
 msgstr ""
 
-msgid "Trying to cancel step %s"
+msgid "Allow unlocking actions which can have dangerous consequences."
 msgstr ""
 
-msgid "Trying to cancel the task"
+msgid "Associated resources"
 msgstr ""
 
-msgid "The task cannot be cancelled at the moment."
+#. TRANSLATORS: Time widget for when a task should start
+msgid "At"
 msgstr ""
 
-msgid "The execution was resumed."
+msgid "Auto Reload"
 msgstr ""
 
-msgid "The execution has to be resumable."
+msgid "Back to tasks"
 msgstr ""
 
-msgid "The task resources were unlocked."
+msgid "Backtrace"
 msgstr ""
 
-msgid "The execution has to be paused."
-msgstr ""
-
-msgid "The task resources were unlocked with force."
+msgid "Bulk action"
 msgstr ""
 
 msgid "Cancel"
 msgstr ""
 
-msgid "Start at"
+msgid "Cancel enforced: the task might be still running on the proxy"
 msgstr ""
 
-msgid "Start before"
+msgid "Cancel recurring logic"
 msgstr ""
 
-msgid ""
-"Indicates that the action should be cancelled if it cannot be started before t"
-"his time."
+msgid "Cancelled"
 msgstr ""
 
-msgid "Explanation"
+msgid "Conflicts with tasks:"
 msgstr ""
 
-msgid "Repeats"
-msgstr ""
-
-#. TRANSLATORS: this translation is referring to an option which is a time interval
-msgid "is minute (range: 0-59)"
-msgstr ""
-
-#. TRANSLATORS: this translation is referring to an option which is a time interval
-msgid "is hour (range: 0-23)"
-msgstr ""
-
-#. TRANSLATORS: this translation is referring to an option which is a time interval
-msgid "is day of month (range: 1-31)"
-msgstr ""
-
-#. TRANSLATORS: this translation is referring to an option which is a time interval
-msgid "is month (range: 1-12)"
-msgstr ""
-
-#. TRANSLATORS: this translation is referring to an option which is a time interval
-msgid "is day of week (range: 0-6)"
+msgid "Cron line"
 msgstr ""
 
 msgid "Cron line format 'a b c d e', where: %s"
 msgstr ""
 
-msgid "Cron line"
+msgid "Current iteration"
+msgstr ""
+
+msgid "Data to be sent to the action"
 msgstr ""
 
 msgid "Days"
@@ -165,304 +108,176 @@ msgstr ""
 msgid "Days of week"
 msgstr ""
 
-msgid "Mon"
+msgid "Delayed"
 msgstr ""
 
-msgid "Tue"
+msgid "Details"
 msgstr ""
 
-msgid "Wed"
+msgid "Duration"
 msgstr ""
 
-msgid "Thu"
+msgid "Dynflow console"
 msgstr ""
 
-msgid "Fri"
+msgid "Empty bulk action"
 msgstr ""
 
-msgid "Sat"
+msgid "Enable the dynflow console (/foreman_tasks/dynflow) for debugging"
 msgstr ""
 
-msgid "Sun"
-msgstr ""
-
-#. TRANSLATORS: Time widget for when a task should start
-msgid "At"
-msgstr ""
-
-msgid "Repeat N times"
+msgid "Ended at"
 msgstr ""
 
 msgid "Ends"
 msgstr ""
 
+msgid "Ends at"
+msgstr ""
+
+msgid "Errors"
+msgstr ""
+
+msgid "Exception"
+msgstr ""
+
+msgid "Execute now"
+msgstr ""
+
+msgid "Execution type"
+msgstr ""
+
+msgid "Explanation"
+msgstr ""
+
+msgid "External Id"
+msgstr ""
+
+msgid "Failed to add task to queue: %s"
+msgstr ""
+
+msgid "Failed to initialize"
+msgstr ""
+
+msgid "Field to sort the results on"
+msgstr ""
+
+msgid "Finished"
+msgstr ""
+
+msgid "Force Unlock"
+msgstr ""
+
+msgid "Fri"
+msgstr ""
+
+msgid "Hash version of 'order' param"
+msgstr ""
+
+msgid "How to order the sorted results (e.g. ASC for ascending)"
+msgstr ""
+
+msgid "I understand that this may cause harm and have working database backups of all backend services."
+msgstr ""
+
+msgid "ID"
+msgstr ""
+
+msgid "Id"
+msgstr ""
+
+msgid "Immediate"
+msgstr ""
+
+msgid "Import Puppet classes"
+msgstr ""
+
+msgid "Import facts"
+msgstr ""
+
+msgid "Indicates that the action should be cancelled if it cannot be started before this time."
+msgstr ""
+
+msgid "Initialization error: %s"
+msgstr ""
+
+msgid "Input"
+msgstr ""
+
+msgid "Iteration limit"
+msgstr ""
+
+msgid "Label"
+msgstr ""
+
+msgid "Last occurrence"
+msgstr ""
+
+msgid "Latest Warning/Error Tasks"
+msgstr ""
+
+msgid "List recurring logics"
+msgstr ""
+
+msgid "List tasks"
+msgstr ""
+
+msgid "Locks"
+msgstr ""
+
+msgid "Mon"
+msgstr ""
+
+msgid "N/A"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
 msgid "Never"
+msgstr ""
+
+msgid "Next occurrence"
+msgstr ""
+
+msgid "No errors"
+msgstr ""
+
+msgid "No proxy defined for execution"
+msgstr ""
+
+msgid "No running steps"
+msgstr ""
+
+msgid "No task could be started"
+msgstr ""
+
+msgid "No. of Tasks"
+msgstr ""
+
+msgid "Number of attempts to start a task on the smart proxy before failing"
+msgstr ""
+
+msgid "Number of results per page to return"
 msgstr ""
 
 #. TRANSLATORS: Button text for saying when a task should end
 msgid "On"
 msgstr ""
 
-msgid "Ends at"
+msgid "Output"
 msgstr ""
 
-msgid "Unlimited"
-msgstr ""
-
-msgid "%{total} task(s), %{success} success, %{failed} fail"
-msgstr ""
-
-msgid "Bulk action"
-msgstr ""
-
-msgid "Empty bulk action"
-msgstr ""
-
-msgid "The targets are of different types"
-msgstr ""
-
-msgid "Create architecture"
-msgstr ""
-
-msgid "Delete architecture"
-msgstr ""
-
-msgid "Update architecture"
-msgstr ""
-
-msgid "Import facts"
-msgstr ""
-
-msgid "Import Puppet classes"
-msgstr ""
-
-msgid "activation key"
-msgstr ""
-
-msgid "user"
-msgstr ""
-
-msgid "repository"
-msgstr ""
-
-msgid "content view version"
-msgstr ""
-
-msgid "content view"
-msgstr ""
-
-msgid "product"
-msgstr ""
-
-msgid "system"
-msgstr ""
-
-msgid "organization"
-msgstr ""
-
-msgid "The smart proxy task %s failed."
-msgstr ""
-
-msgid "Cancel enforced: the task might be still running on the proxy"
-msgstr ""
-
-msgid "Required lock is already taken by other running tasks."
-msgstr ""
-
-msgid "Please inspect their state, fix their errors and resume them."
-msgstr ""
-
-msgid "Required lock: %s"
-msgstr ""
-
-msgid "Conflicts with tasks:"
-msgstr ""
-
-msgid "Active"
-msgstr ""
-
-msgid "Cancelled"
-msgstr ""
-
-msgid "Finished"
-msgstr ""
-
-msgid "N/A"
-msgstr ""
-
-msgid "Recurring logic"
-msgstr ""
-
-msgid "%{value} is not allowed triggering mode"
-msgstr ""
-
-msgid "%{value} is not allowed input type"
-msgstr ""
-
-msgid "%{value} is wrong format"
-msgstr ""
-
-msgid "%s is not valid format of cron line"
-msgstr ""
-
-msgid "Allow unlocking actions which can have dangerous consequences."
-msgstr ""
-
-msgid "Enable the dynflow console (/foreman_tasks/dynflow) for debugging"
-msgstr ""
-
-msgid ""
-"Require user to be authenticated as user with admin rights when accessing dynf"
-"low console"
-msgstr ""
-
-msgid "Number of attempts to start a task on the smart proxy before failing"
-msgstr ""
-
-msgid "Time in seconds between retries"
-msgstr ""
-
-msgid "Time in second during which a task has to be started on the proxy"
-msgstr ""
-
-msgid "Schedule"
-msgstr ""
-
-msgid "Execute now"
-msgstr ""
-
-msgid "Schedule future execution"
-msgstr ""
-
-msgid "Set up recurring execution"
-msgstr ""
-
-msgid "Recurring logics"
-msgstr ""
-
-msgid "Task count"
-msgstr ""
-
-msgid "Action"
-msgstr ""
-
-msgid "Last occurrence"
-msgstr ""
-
-msgid "Next occurrence"
-msgstr ""
-
-msgid "Current iteration"
-msgstr ""
-
-msgid "Iteration limit"
-msgstr ""
-
-msgid "Repeat until"
-msgstr ""
-
-msgid "State"
-msgstr ""
-
-msgid "Details"
-msgstr ""
-
-msgid "ID"
-msgstr ""
-
-msgid "Task group common"
-msgstr ""
-
-msgid "Associated resources"
-msgstr ""
-
-msgid "Auto Reload"
-msgstr ""
-
-msgid "Dynflow console"
-msgstr ""
-
-msgid "Resume"
-msgstr ""
-
-msgid "Unlock"
-msgstr ""
-
-msgid "Force Unlock"
-msgstr ""
-
-msgid ""
-"This will unlock the resources that the task is running against. Please note t"
-"hat this might lead to inconsistent state and should be used with caution, aft"
-"er making sure that the task can't be resumed."
-msgstr ""
-
-msgid ""
-"I understand that this may cause harm and have working database backups of all"
-" backend services."
-msgstr ""
-
-msgid ""
-"Resources will be unlocked and will not prevent other tasks from being run. As"
-" the task might be still running, it should be avoided to use this unless you "
-"are really sure the task got stuck"
-msgstr ""
-
-msgid "Id"
-msgstr ""
-
-msgid "Label"
-msgstr ""
-
-msgid "Name"
-msgstr ""
-
-msgid "Owner"
-msgstr ""
-
-msgid "Execution type"
-msgstr ""
-
-msgid "Immediate"
-msgstr ""
-
-msgid "Delayed"
-msgstr ""
-
-msgid "Started at"
-msgstr ""
-
-msgid "Ended at"
-msgstr ""
-
-msgid "Result"
-msgstr ""
-
-msgid "Params"
+msgid "Page number, starting at 1"
 msgstr ""
 
 msgid "Parent task"
 msgstr ""
 
-msgid "Sub tasks"
+msgid "Please inspect their state, fix their errors and resume them."
 msgstr ""
 
-msgid "Output"
-msgstr ""
-
-msgid "Errors"
-msgstr ""
-
-msgid "No errors"
-msgstr ""
-
-msgid "Input"
-msgstr ""
-
-msgid "Exception"
-msgstr ""
-
-msgid "Backtrace"
+msgid "Raw"
 msgstr ""
 
 msgid "Raw input"
@@ -471,50 +286,247 @@ msgstr ""
 msgid "Raw output"
 msgstr ""
 
-msgid "External Id"
+msgid "Recurring Logics"
 msgstr ""
 
-msgid "No running steps"
+msgid "Recurring logic"
 msgstr ""
 
-msgid "Latest Warning/Error Tasks"
+msgid "Recurring logics"
 msgstr ""
 
-msgid "Task Status"
+msgid "Repeat N times"
 msgstr ""
 
-msgid "No. of Tasks"
+msgid "Repeat until"
 msgstr ""
 
-msgid "Tasks"
+msgid "Repeats"
 msgstr ""
 
-msgid "User"
+msgid "Require user to be authenticated as user with admin rights when accessing dynflow console"
 msgstr ""
 
-msgid "Stop auto-reloading"
+msgid "Required lock is already taken by other running tasks."
 msgstr ""
 
-msgid "Start auto-reloading"
+msgid "Required lock: %s"
 msgstr ""
 
-msgid "Task"
+msgid "Resource search_params requires resource_type and resource_id to be specified"
+msgstr ""
+
+msgid "Resources will be unlocked and will not prevent other tasks from being run. As the task might be still running, it should be avoided to use this unless you are really sure the task got stuck"
+msgstr ""
+
+msgid "Result"
+msgstr ""
+
+msgid "Resume"
+msgstr ""
+
+msgid "Resume all paused error tasks"
+msgstr ""
+
+msgid "Resume specific tasks by ID"
+msgstr ""
+
+msgid "Resume tasks matching search string"
 msgstr ""
 
 msgid "Running Steps"
 msgstr ""
 
-msgid "Locks"
+msgid "Sat"
 msgstr ""
 
-msgid "Raw"
+msgid "Schedule"
 msgstr ""
 
-msgid "Tasks Status table"
+msgid "Schedule future execution"
 msgstr ""
 
-msgid "Tasks in Error/Warning"
+msgid "Search string"
 msgstr ""
 
-msgid "Action with sub plans"
+msgid "Send data to the task from external executor (such as smart_proxy_dynflow)"
+msgstr ""
+
+msgid "Set up recurring execution"
+msgstr ""
+
+msgid "Show recurring logic details"
+msgstr ""
+
+msgid "Sort field and order, e.g. 'name DESC'"
+msgstr ""
+
+msgid "Start at"
+msgstr ""
+
+msgid "Start auto-reloading"
+msgstr ""
+
+msgid "Start before"
+msgstr ""
+
+msgid "Started at"
+msgstr ""
+
+msgid "State"
+msgstr ""
+
+msgid "Stop auto-reloading"
+msgstr ""
+
+msgid "Sub tasks"
+msgstr ""
+
+msgid "Sun"
+msgstr ""
+
+msgid "Task"
+msgstr ""
+
+msgid "Task Status"
+msgstr ""
+
+msgid "Task count"
+msgstr ""
+
+msgid "Task group common"
+msgstr ""
+
+msgid "Task search_params requires task_id to be specified"
+msgstr ""
+
+msgid "Tasks"
+msgstr ""
+
+msgid "The ID of the step inside the execution plan to send the event to"
+msgstr ""
+
+msgid "The execution has to be paused."
+msgstr ""
+
+msgid "The execution has to be resumable."
+msgstr ""
+
+msgid "The execution was resumed."
+msgstr ""
+
+msgid "The smart proxy task %s failed."
+msgstr ""
+
+msgid "The targets are of different types"
+msgstr ""
+
+msgid "The task cannot be cancelled at the moment."
+msgstr ""
+
+msgid "The task could not be started"
+msgstr ""
+
+msgid "The task resources were unlocked with force."
+msgstr ""
+
+msgid "The task resources were unlocked."
+msgstr ""
+
+msgid "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed."
+msgstr ""
+
+msgid "Thu"
+msgstr ""
+
+msgid "Time in second during which a task has to be started on the proxy"
+msgstr ""
+
+msgid "Time in seconds between retries"
+msgstr ""
+
+msgid "Triggered by"
+msgstr ""
+
+msgid "Trying to cancel step %s"
+msgstr ""
+
+msgid "Trying to cancel the task"
+msgstr ""
+
+msgid "Tue"
+msgstr ""
+
+msgid "Type %s for search_params is not supported"
+msgstr ""
+
+msgid "UUID of the task"
+msgstr ""
+
+msgid "Unlimited"
+msgstr ""
+
+msgid "Unlock"
+msgstr ""
+
+msgid "User"
+msgstr ""
+
+msgid "User search_params requires user_id to be specified"
+msgstr ""
+
+msgid "Wed"
+msgstr ""
+
+msgid "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource"
+msgstr ""
+
+msgid "activation key"
+msgstr ""
+
+msgid "content view"
+msgstr ""
+
+msgid "content view version"
+msgstr ""
+
+msgid "in %s"
+msgstr ""
+
+#. TRANSLATORS: this translation is referring to an option which is a time interval
+msgid "is day of month (range: 1-31)"
+msgstr ""
+
+#. TRANSLATORS: this translation is referring to an option which is a time interval
+msgid "is day of week (range: 0-6)"
+msgstr ""
+
+#. TRANSLATORS: this translation is referring to an option which is a time interval
+msgid "is hour (range: 0-23)"
+msgstr ""
+
+#. TRANSLATORS: this translation is referring to an option which is a time interval
+msgid "is minute (range: 0-59)"
+msgstr ""
+
+#. TRANSLATORS: this translation is referring to an option which is a time interval
+msgid "is month (range: 1-12)"
+msgstr ""
+
+msgid "mode has to be one of %{allowed_modes}"
+msgstr ""
+
+msgid "organization"
+msgstr ""
+
+msgid "product"
+msgstr ""
+
+msgid "repository"
+msgstr ""
+
+msgid "system"
+msgstr ""
+
+msgid "user"
 msgstr ""

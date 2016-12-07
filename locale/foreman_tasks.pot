@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_tasks 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-08 09:30-0500\n"
-"PO-Revision-Date: 2016-02-08 09:30-0500\n"
+"POT-Creation-Date: 2016-12-07 19:25+0100\n"
+"PO-Revision-Date: 2016-12-07 19:25+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -146,137 +146,156 @@ msgstr ""
 msgid "The task resources were unlocked with force."
 msgstr ""
 
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:21
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:38
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:47
+#: ../app/models/foreman_tasks/recurring_logic.rb:102
+#: ../app/models/foreman_tasks/task/dynflow_task.rb:92
+msgid "N/A"
+msgstr ""
+
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:40
+msgid "%s ago"
+msgstr ""
+
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:40
+msgid "in %s"
+msgstr ""
+
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:50
+msgid " seconds"
+msgstr ""
+
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:57
 #: ../app/views/foreman_tasks/tasks/_details.html.erb:12
-#: ../app/views/foreman_tasks/tasks/_details.html.erb:50
-#: ../app/views/foreman_tasks/tasks/_details.html.erb:75
+#: ../app/views/foreman_tasks/tasks/_details.html.erb:56
+#: ../app/views/foreman_tasks/tasks/_details.html.erb:81
 #: ../app/views/foreman_tasks/tasks/_running_steps.html.erb:12
 msgid "Cancel"
 msgstr ""
 
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:66
-#: ../app/views/foreman_tasks/tasks/_details.html.erb:103
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:118
+#: ../app/views/foreman_tasks/tasks/_details.html.erb:123
 msgid "Start at"
 msgstr ""
 
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:67
-#: ../app/views/foreman_tasks/tasks/_details.html.erb:107
-msgid "Start before"
-msgstr ""
-
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:67
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:119
 msgid ""
 "Indicates that the action should be cancelled if it cannot be started before t"
 "his time."
 msgstr ""
 
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:67
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:102
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:119
+#: ../app/views/foreman_tasks/tasks/_details.html.erb:135
+msgid "Start before"
+msgstr ""
+
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:119
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:154
 msgid "Explanation"
 msgstr ""
 
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:75
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:127
 msgid "Repeats"
 msgstr ""
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:91
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:143
 msgid "is minute (range: 0-59)"
 msgstr ""
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:93
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:145
 msgid "is hour (range: 0-23)"
 msgstr ""
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:95
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:147
 msgid "is day of month (range: 1-31)"
 msgstr ""
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:97
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:149
 msgid "is month (range: 1-12)"
 msgstr ""
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:99
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:151
 msgid "is day of week (range: 0-6)"
 msgstr ""
 
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:103
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:155
 msgid "Cron line format 'a b c d e', where: %s"
 msgstr ""
 
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:106
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:158
 #: ../app/views/foreman_tasks/recurring_logics/index.html.erb:6
 #: ../app/views/foreman_tasks/task_groups/recurring_logic_task_groups/_recurring_logic_task_group.html.erb:8
 msgid "Cron line"
 msgstr ""
 
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:112
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:164
 msgid "Days"
 msgstr ""
 
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:121
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:173
 msgid "Days of week"
 msgstr ""
 
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:122
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:174
 msgid "Mon"
 msgstr ""
 
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:123
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:175
 msgid "Tue"
 msgstr ""
 
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:124
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:176
 msgid "Wed"
 msgstr ""
 
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:125
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:177
 msgid "Thu"
 msgstr ""
 
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:126
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:178
 msgid "Fri"
 msgstr ""
 
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:127
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:179
 msgid "Sat"
 msgstr ""
 
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:128
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:180
 msgid "Sun"
 msgstr ""
 
 #. TRANSLATORS: Time widget for when a task should start
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:137
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:189
 msgid "At"
 msgstr ""
 
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:139
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:191
 msgid "Repeat N times"
 msgstr ""
 
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:140
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:192
 msgid "Ends"
 msgstr ""
 
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:141
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:193
 msgid "Never"
 msgstr ""
 
 #. TRANSLATORS: Button text for saying when a task should end
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:143
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:195
 msgid "On"
 msgstr ""
 
-#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:146
+#: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:198
 msgid "Ends at"
 msgstr ""
 
-#: ../app/helpers/foreman_tasks/tasks_helper.rb:18
+#: ../app/helpers/foreman_tasks/tasks_helper.rb:19
 msgid "Unlimited"
 msgstr ""
 
@@ -296,23 +315,11 @@ msgstr ""
 msgid "The targets are of different types"
 msgstr ""
 
-#: ../app/lib/actions/foreman/architecture/create.rb:11 action_names.rb:4
-msgid "Create architecture"
-msgstr ""
-
-#: ../app/lib/actions/foreman/architecture/destroy.rb:11 action_names.rb:7
-msgid "Delete architecture"
-msgstr ""
-
-#: ../app/lib/actions/foreman/architecture/update.rb:11 action_names.rb:6
-msgid "Update architecture"
-msgstr ""
-
-#: ../app/lib/actions/foreman/host/import_facts.rb:35 action_names.rb:5
+#: ../app/lib/actions/foreman/host/import_facts.rb:40 action_names.rb:3
 msgid "Import facts"
 msgstr ""
 
-#: ../app/lib/actions/foreman/puppetclass/import.rb:18 action_names.rb:3
+#: ../app/lib/actions/foreman/puppetclass/import.rb:18 action_names.rb:2
 msgid "Import Puppet classes"
 msgstr ""
 
@@ -348,12 +355,28 @@ msgstr ""
 msgid "organization"
 msgstr ""
 
-#: ../app/lib/actions/proxy_action.rb:60
+#: ../app/lib/actions/helpers/with_continuous_output.rb:20
+msgid "Failed to initialize"
+msgstr ""
+
+#: ../app/lib/actions/helpers/with_delegated_action.rb:10
+msgid "No proxy defined for execution"
+msgstr ""
+
+#: ../app/lib/actions/helpers/with_delegated_action.rb:15
+msgid "All proxies with the required feature are unavailable at the moment"
+msgstr ""
+
+#: ../app/lib/actions/proxy_action.rb:59
 msgid "The smart proxy task %s failed."
 msgstr ""
 
-#: ../app/lib/actions/proxy_action.rb:74
+#: ../app/lib/actions/proxy_action.rb:73
 msgid "Cancel enforced: the task might be still running on the proxy"
+msgstr ""
+
+#: ../app/lib/actions/proxy_action.rb:114
+msgid "Initialization error: %s"
 msgstr ""
 
 #: ../app/models/foreman_tasks/lock.rb:16
@@ -372,20 +395,24 @@ msgstr ""
 msgid "Conflicts with tasks:"
 msgstr ""
 
-#: ../app/models/foreman_tasks/recurring_logic.rb:85
+#: ../app/models/foreman_tasks/recurring_logic.rb:96
 msgid "Active"
 msgstr ""
 
-#: ../app/models/foreman_tasks/recurring_logic.rb:87
+#: ../app/models/foreman_tasks/recurring_logic.rb:98
 msgid "Cancelled"
 msgstr ""
 
-#: ../app/models/foreman_tasks/recurring_logic.rb:89
+#: ../app/models/foreman_tasks/recurring_logic.rb:100
 msgid "Finished"
 msgstr ""
 
-#: ../app/models/foreman_tasks/recurring_logic.rb:91
-msgid "N/A"
+#: ../app/models/foreman_tasks/task.rb:73
+msgid "Immediate"
+msgstr ""
+
+#: ../app/models/foreman_tasks/task.rb:73
+msgid "Delayed"
 msgstr ""
 
 #: ../app/models/foreman_tasks/task_groups/recurring_logic_task_group.rb:10
@@ -393,21 +420,33 @@ msgstr ""
 msgid "Recurring logic"
 msgstr ""
 
-#: ../app/models/foreman_tasks/triggering.rb:32
+#: ../app/models/foreman_tasks/triggering.rb:27
 msgid "%{value} is not allowed triggering mode"
 msgstr ""
 
-#: ../app/models/foreman_tasks/triggering.rb:35
+#: ../app/models/foreman_tasks/triggering.rb:30
 msgid "%{value} is not allowed input type"
 msgstr ""
 
-#: ../app/models/foreman_tasks/triggering.rb:37
-#: ../app/models/foreman_tasks/triggering.rb:39
+#: ../app/models/foreman_tasks/triggering.rb:32
+#: ../app/models/foreman_tasks/triggering.rb:34
 msgid "%{value} is wrong format"
 msgstr ""
 
-#: ../app/models/foreman_tasks/triggering.rb:99
+#: ../app/models/foreman_tasks/triggering.rb:58
+msgid "mode has to be one of %{allowed_modes}"
+msgstr ""
+
+#: ../app/models/foreman_tasks/triggering.rb:105
+msgid "No task could be started"
+msgstr ""
+
+#: ../app/models/foreman_tasks/triggering.rb:106
 msgid "%s is not valid format of cron line"
+msgstr ""
+
+#: ../app/models/foreman_tasks/triggering.rb:112
+msgid "The task could not be started"
 msgstr ""
 
 #: ../app/models/setting/foreman_tasks.rb:9
@@ -453,7 +492,6 @@ msgid "Set up recurring execution"
 msgstr ""
 
 #: ../app/views/foreman_tasks/recurring_logics/index.html.erb:1
-#: ../lib/foreman_tasks/engine.rb:48
 msgid "Recurring logics"
 msgstr ""
 
@@ -466,7 +504,7 @@ msgstr ""
 #: ../app/views/foreman_tasks/task_groups/recurring_logic_task_groups/_recurring_logic_task_group.html.erb:12
 #: ../app/views/foreman_tasks/tasks/_errors.html.erb:12
 #: ../app/views/foreman_tasks/tasks/_running_steps.html.erb:19
-#: ../app/views/foreman_tasks/tasks/index.html.erb:31
+#: ../app/views/foreman_tasks/tasks/index.html.erb:20
 msgid "Action"
 msgstr ""
 
@@ -497,11 +535,10 @@ msgstr ""
 
 #: ../app/views/foreman_tasks/recurring_logics/index.html.erb:14
 #: ../app/views/foreman_tasks/task_groups/recurring_logic_task_groups/_recurring_logic_task_group.html.erb:36
-#: ../app/views/foreman_tasks/tasks/_details.html.erb:119
 #: ../app/views/foreman_tasks/tasks/_running_steps.html.erb:24
 #: ../app/views/foreman_tasks/tasks/dashboard/_latest_tasks_in_error_warning.html.erb:5
 #: ../app/views/foreman_tasks/tasks/dashboard/_tasks_status.html.erb:4
-#: ../app/views/foreman_tasks/tasks/index.html.erb:32
+#: ../app/views/foreman_tasks/tasks/index.html.erb:21
 msgid "State"
 msgstr ""
 
@@ -534,44 +571,44 @@ msgid "Resume"
 msgstr ""
 
 #: ../app/views/foreman_tasks/tasks/_details.html.erb:17
-#: ../app/views/foreman_tasks/tasks/_details.html.erb:39
-#: ../app/views/foreman_tasks/tasks/_details.html.erb:51
-msgid "Unlock"
+msgid "Parent task"
+msgstr ""
+
+#: ../app/views/foreman_tasks/tasks/_details.html.erb:20
+msgid "Sub tasks"
 msgstr ""
 
 #: ../app/views/foreman_tasks/tasks/_details.html.erb:23
-#: ../app/views/foreman_tasks/tasks/_details.html.erb:64
-#: ../app/views/foreman_tasks/tasks/_details.html.erb:76
+#: ../app/views/foreman_tasks/tasks/_details.html.erb:45
+#: ../app/views/foreman_tasks/tasks/_details.html.erb:57
+msgid "Unlock"
+msgstr ""
+
+#: ../app/views/foreman_tasks/tasks/_details.html.erb:29
+#: ../app/views/foreman_tasks/tasks/_details.html.erb:70
+#: ../app/views/foreman_tasks/tasks/_details.html.erb:82
 msgid "Force Unlock"
 msgstr ""
 
-#: ../app/views/foreman_tasks/tasks/_details.html.erb:43
+#: ../app/views/foreman_tasks/tasks/_details.html.erb:49
 msgid ""
 "This will unlock the resources that the task is running against. Please note t"
 "hat this might lead to inconsistent state and should be used with caution, aft"
 "er making sure that the task can't be resumed."
 msgstr ""
 
-#: ../app/views/foreman_tasks/tasks/_details.html.erb:46
-#: ../app/views/foreman_tasks/tasks/_details.html.erb:71
+#: ../app/views/foreman_tasks/tasks/_details.html.erb:52
+#: ../app/views/foreman_tasks/tasks/_details.html.erb:77
 msgid ""
 "I understand that this may cause harm and have working database backups of all"
 " backend services."
 msgstr ""
 
-#: ../app/views/foreman_tasks/tasks/_details.html.erb:68
+#: ../app/views/foreman_tasks/tasks/_details.html.erb:74
 msgid ""
 "Resources will be unlocked and will not prevent other tasks from being run. As"
 " the task might be still running, it should be avoided to use this unless you "
 "are really sure the task got stuck"
-msgstr ""
-
-#: ../app/views/foreman_tasks/tasks/_details.html.erb:83
-msgid "Id"
-msgstr ""
-
-#: ../app/views/foreman_tasks/tasks/_details.html.erb:87
-msgid "Label"
 msgstr ""
 
 #: ../app/views/foreman_tasks/tasks/_details.html.erb:91
@@ -579,59 +616,39 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: ../app/views/foreman_tasks/tasks/_details.html.erb:95
-msgid "Owner"
-msgstr ""
-
-#: ../app/views/foreman_tasks/tasks/_details.html.erb:99
-msgid "Execution type"
-msgstr ""
-
-#: ../app/views/foreman_tasks/tasks/_details.html.erb:100
-msgid "Immediate"
-msgstr ""
-
-#: ../app/views/foreman_tasks/tasks/_details.html.erb:100
-msgid "Delayed"
-msgstr ""
-
-#: ../app/views/foreman_tasks/tasks/_details.html.erb:111
-#: ../app/views/foreman_tasks/tasks/index.html.erb:34
-msgid "Started at"
-msgstr ""
-
-#: ../app/views/foreman_tasks/tasks/_details.html.erb:115
-#: ../app/views/foreman_tasks/tasks/index.html.erb:35
-msgid "Ended at"
-msgstr ""
-
-#: ../app/views/foreman_tasks/tasks/_details.html.erb:123
+#: ../app/views/foreman_tasks/tasks/_details.html.erb:96
 #: ../app/views/foreman_tasks/tasks/dashboard/_latest_tasks_in_error_warning.html.erb:6
 #: ../app/views/foreman_tasks/tasks/dashboard/_tasks_status.html.erb:5
-#: ../app/views/foreman_tasks/tasks/index.html.erb:33
+#: ../app/views/foreman_tasks/tasks/index.html.erb:22
 msgid "Result"
 msgstr ""
 
+#: ../app/views/foreman_tasks/tasks/_details.html.erb:106
+msgid "Triggered by"
+msgstr ""
+
+#: ../app/views/foreman_tasks/tasks/_details.html.erb:116
+msgid "Execution type"
+msgstr ""
+
 #: ../app/views/foreman_tasks/tasks/_details.html.erb:127
-msgid "Params"
+#: ../app/views/foreman_tasks/tasks/index.html.erb:23
+msgid "Started at"
 msgstr ""
 
-#: ../app/views/foreman_tasks/tasks/_details.html.erb:132
-msgid "Parent task"
+#: ../app/views/foreman_tasks/tasks/_details.html.erb:131
+#: ../app/views/foreman_tasks/tasks/index.html.erb:24
+msgid "Ended at"
 msgstr ""
 
-#: ../app/views/foreman_tasks/tasks/_details.html.erb:137
-msgid "Sub tasks"
-msgstr ""
-
-#: ../app/views/foreman_tasks/tasks/_details.html.erb:176
+#: ../app/views/foreman_tasks/tasks/_details.html.erb:179
 #: ../app/views/foreman_tasks/tasks/_errors.html.erb:20
 #: ../app/views/foreman_tasks/tasks/_running_steps.html.erb:31
 msgid "Output"
 msgstr ""
 
-#: ../app/views/foreman_tasks/tasks/_details.html.erb:185
-#: ../app/views/foreman_tasks/tasks/show.html.erb:89
+#: ../app/views/foreman_tasks/tasks/_details.html.erb:188
+#: ../app/views/foreman_tasks/tasks/show.html.erb:95
 msgid "Errors"
 msgstr ""
 
@@ -652,15 +669,36 @@ msgstr ""
 msgid "Backtrace"
 msgstr ""
 
-#: ../app/views/foreman_tasks/tasks/_raw.html.erb:2
-msgid "Raw input"
+#: ../app/views/foreman_tasks/tasks/_locks.html.erb:2
+msgid ""
+"You can find resource locks on this page. Exclusive lock marked with locked ic"
+"on means that no other task can use locked resource while this task is running"
+". Non-exclusive lock marked with unlocked icon means other tasks can access th"
+"e resource freely, it is only used to indicate the relation of this task with "
+"the resource"
 msgstr ""
 
-#: ../app/views/foreman_tasks/tasks/_raw.html.erb:8
-msgid "Raw output"
+#: ../app/views/foreman_tasks/tasks/_raw.html.erb:2
+msgid "Id"
+msgstr ""
+
+#: ../app/views/foreman_tasks/tasks/_raw.html.erb:6
+msgid "Label"
+msgstr ""
+
+#: ../app/views/foreman_tasks/tasks/_raw.html.erb:10
+msgid "Duration"
 msgstr ""
 
 #: ../app/views/foreman_tasks/tasks/_raw.html.erb:14
+msgid "Raw input"
+msgstr ""
+
+#: ../app/views/foreman_tasks/tasks/_raw.html.erb:20
+msgid "Raw output"
+msgstr ""
+
+#: ../app/views/foreman_tasks/tasks/_raw.html.erb:26
 msgid "External Id"
 msgstr ""
 
@@ -670,10 +708,12 @@ msgstr ""
 
 #:
 #: ../app/views/foreman_tasks/tasks/dashboard/_latest_tasks_in_error_warning.html.erb:1
+#: ../lib/foreman_tasks/engine.rb:77
 msgid "Latest Warning/Error Tasks"
 msgstr ""
 
 #: ../app/views/foreman_tasks/tasks/dashboard/_tasks_status.html.erb:1
+#: ../lib/foreman_tasks/engine.rb:76
 msgid "Task Status"
 msgstr ""
 
@@ -682,46 +722,46 @@ msgid "No. of Tasks"
 msgstr ""
 
 #: ../app/views/foreman_tasks/tasks/index.html.erb:1
-#: ../lib/foreman_tasks/engine.rb:43
+#: ../lib/foreman_tasks/engine.rb:44
 msgid "Tasks"
 msgstr ""
 
-#: ../app/views/foreman_tasks/tasks/index.html.erb:36
+#: ../app/views/foreman_tasks/tasks/index.html.erb:25
 msgid "User"
 msgstr ""
 
-#: ../app/views/foreman_tasks/tasks/show.html.erb:20
+#: ../app/views/foreman_tasks/tasks/show.html.erb:26
 msgid "Stop auto-reloading"
 msgstr ""
 
-#: ../app/views/foreman_tasks/tasks/show.html.erb:30
+#: ../app/views/foreman_tasks/tasks/show.html.erb:36
 msgid "Start auto-reloading"
 msgstr ""
 
-#: ../app/views/foreman_tasks/tasks/show.html.erb:87
+#: ../app/views/foreman_tasks/tasks/show.html.erb:93
 msgid "Task"
 msgstr ""
 
-#: ../app/views/foreman_tasks/tasks/show.html.erb:88
+#: ../app/views/foreman_tasks/tasks/show.html.erb:94
 msgid "Running Steps"
 msgstr ""
 
-#: ../app/views/foreman_tasks/tasks/show.html.erb:90
+#: ../app/views/foreman_tasks/tasks/show.html.erb:96
 msgid "Locks"
 msgstr ""
 
-#: ../app/views/foreman_tasks/tasks/show.html.erb:91
+#: ../app/views/foreman_tasks/tasks/show.html.erb:97
 msgid "Raw"
 msgstr ""
 
-#: ../lib/foreman_tasks/engine.rb:73
-msgid "Tasks Status table"
+#: ../lib/foreman_tasks/dynflow.rb:99
+msgid "Back to tasks"
 msgstr ""
 
-#: ../lib/foreman_tasks/engine.rb:74
-msgid "Tasks in Error/Warning"
+#: ../lib/foreman_tasks/engine.rb:50
+msgid "Recurring Logics"
 msgstr ""
 
-#: action_names.rb:2
+#: action_names.rb:4
 msgid "Action with sub plans"
 msgstr ""
