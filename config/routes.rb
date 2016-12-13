@@ -1,6 +1,6 @@
 Foreman::Application.routes.draw do
   namespace :foreman_tasks do
-    resources :recurring_logics, :only => [:index, :show] do
+    resources :task_schedules, :only => [:index, :show] do
       member do
         post :cancel
       end
@@ -22,6 +22,12 @@ Foreman::Application.routes.draw do
 
     namespace :api do
       resources :recurring_logics, :only => [:index, :show] do
+        member do
+          post :cancel
+        end
+      end
+
+      resources :task_schedules, :only => [:index, :show] do
         member do
           post :cancel
         end

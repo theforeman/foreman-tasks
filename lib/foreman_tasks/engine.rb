@@ -49,9 +49,9 @@ module ForemanTasks
              :parent   => :monitor_menu,
              :last     => true
 
-        menu :top_menu, :recurring_logics,
-             :url_hash => { :controller => 'foreman_tasks/recurring_logics', :action => :index },
-             :caption  => N_('Recurring Logics'),
+        menu :top_menu, :task_schedules,
+             :url_hash => { :controller => 'foreman_tasks/task_schedules', :action => :index },
+             :caption  => N_('Task Schedules'),
              :parent   => :monitor_menu,
              :last     => true
 
@@ -64,10 +64,12 @@ module ForemanTasks
           permission :create_recurring_logics, {}, :resource_type => ForemanTasks::RecurringLogic.name
 
           permission :view_recurring_logics, { :'foreman_tasks/recurring_logics' => [:index, :show],
-                                               :'foreman_tasks/api/recurring_logics' => [:index, :show] }, :resource_type => ForemanTasks::RecurringLogic.name
+                                               :'foreman_tasks/api/recurring_logics' => [:index, :show],
+                                               :'foreman_tasks/api/task_schedules' => [:index, :show]}, :resource_type => ForemanTasks::RecurringLogic.name
 
           permission :edit_recurring_logics, { :'foreman_tasks/recurring_logics' => [:cancel],
-                                               :'foreman_tasks/api/recurring_logics' => [:cancel] }, :resource_type => ForemanTasks::RecurringLogic.name
+                                               :'foreman_tasks/api/recurring_logics' => [:cancel],
+                                               :'foreman_tasks/api/task_schedules' => [:cancel] }, :resource_type => ForemanTasks::RecurringLogic.name
         end
 
         logger :dynflow, :enabled => true

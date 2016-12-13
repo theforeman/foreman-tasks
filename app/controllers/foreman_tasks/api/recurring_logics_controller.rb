@@ -9,6 +9,8 @@ module ForemanTasks
         api_base_url '/foreman_tasks/api'
       end
 
+      before_action :deprecated
+
       before_action :find_resource, :only => %w(show cancel destroy)
 
       api :GET, '/recurring_logics', N_('List recurring logics')
@@ -37,6 +39,10 @@ module ForemanTasks
         else
           super
         end
+      end
+
+      def deprecated
+        Foreman::Deprecation.api_deprecation_warning("The resources /recurring_logics were moved to /task_schedules. Please use the new path instead")
       end
     end
   end
