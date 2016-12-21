@@ -22,10 +22,10 @@ module ForemanTasks
     Match! async, true, false
 
     match trigger(action, *args, &block),
-          (on ::Dynflow::World::PlaningFailed.(error: ~any) do |error|
+          (on ::Dynflow::World::PlaningFailed.call(error: ~any) do |error|
             raise error
           end),
-          (on ::Dynflow::World::Triggered.(execution_plan_id: ~any, future: ~any) do |id, finished|
+          (on ::Dynflow::World::Triggered.call(execution_plan_id: ~any, future: ~any) do |id, finished|
             finished.wait if async == false
             ForemanTasks::Task::DynflowTask.where(:external_id => id).first!
           end)
@@ -37,7 +37,7 @@ module ForemanTasks
 
   def self.sync_task(action, *args, &block)
     trigger_task(false, action, *args, &block).tap do |task|
-      raise TaskError.new(task) if task.execution_plan.error? || task.execution_plan.result == :warning
+      raise TaskError, task if task.execution_plan.error? || task.execution_plan.result == :warning
     end
   end
 

@@ -8,7 +8,7 @@ module ForemanTasksCore
     end
 
     def add_raw_output(raw_output)
-      missing_args = %w[output_type output timestamp] - raw_output.keys
+      missing_args = %w(output_type output timestamp) - raw_output.keys
       unless missing_args.empty?
         raise ArgumentError, "Missing args for raw output: #{missing_args.inspect}"
       end

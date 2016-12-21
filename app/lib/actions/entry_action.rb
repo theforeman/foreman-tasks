@@ -1,5 +1,4 @@
 module Actions
-
   class EntryAction < Actions::Base
     include Helpers::ArgsSerialization
     include Helpers::Lock
@@ -57,12 +56,11 @@ module Actions
     end
 
     def delay(_schedule_options, *args)
-      self.serializer_class.new args
+      serializer_class.new args
     end
 
     def self.serializer_class
       Serializers::ActiveRecordSerializer
     end
-
   end
 end

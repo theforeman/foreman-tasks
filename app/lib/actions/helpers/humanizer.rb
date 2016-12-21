@@ -1,8 +1,6 @@
 module Actions
   module Helpers
-
     class Humanizer
-
       def initialize(action)
         @action = action
         @input  = action.respond_to?(:task_input) ? action.task_input : action.input
@@ -20,7 +18,7 @@ module Actions
       end
 
       def self.default_parts
-        self.resource_classes_order.map { |klass| klass.new.name }
+        resource_classes_order.map { |klass| klass.new.name }
       end
 
       # Registers the resource class to the humanizer. Usually, this
@@ -29,25 +27,23 @@ module Actions
       # The `register_resource` can be run more times for the same class,
       # effectively moving the resource to the end of the humanized form.
       def self.register_resource(resource_class)
-        self.resource_classes_order.delete_if { |klass| klass.name == resource_class.name }
-        self.resource_classes_order << resource_class
+        resource_classes_order.delete_if { |klass| klass.name == resource_class.name }
+        resource_classes_order << resource_class
       end
 
       def input(*parts)
-        if parts.empty?
-          parts = self.class.default_parts
-        end
+        parts = self.class.default_parts if parts.empty?
         included_parts(parts, @input).map do |part|
           [part, humanize_resource(part, @input)]
         end
       end
 
       def included_parts(parts, data)
-        parts.select { |part| data.has_key?(part) }
+        parts.select { |part| data.key?(part) }
       end
 
       def humanize_resource(name, data)
-        if resource = self.class.resource(name)
+        if (resource = self.class.resource(name))
           { text: "#{resource.humanized_name} '#{resource.humanized_value(data)}'",
             link: resource.link(data) }
         end
@@ -62,13 +58,12 @@ module Actions
           name
         end
 
-        def link(data)
-        end
+        def link(data); end
 
         def humanized_value(data)
           fetch_data(data, name, :name) ||
-              fetch_data(data, name, :label) ||
-              fetch_data(data, name, :id)
+            fetch_data(data, name, :label) ||
+            fetch_data(data, name, :id)
         end
 
         def self.inherited(klass)
@@ -79,10 +74,10 @@ module Actions
 
         def fetch_data(data, *subkeys)
           if subkeys.empty?
-            return data
+            data
           else
             head, *tail = subkeys
-            if data.is_a?(Hash) && data.has_key?(head)
+            if data.is_a?(Hash) && data.key?(head)
               return fetch_data(data[head], *tail)
             else
               return nil
@@ -101,7 +96,7 @@ module Actions
         end
 
         def link(data)
-          if ackey_id = fetch_data(data, :activation_key, :id)
+          if (ackey_id = fetch_data(data, :activation_key, :id))
             "/activation_keys/#{ackey_id}/info"
           end
         end
@@ -156,7 +151,7 @@ module Actions
         end
 
         def link(data)
-          if content_view_id = fetch_data(data, :content_view, :id)
+          if (content_view_id = fetch_data(data, :content_view, :id))
             "#/content_views/#{content_view_id}/versions"
           end
         end
@@ -172,7 +167,7 @@ module Actions
         end
 
         def link(data)
-          if product_id = fetch_data(data, :product, :id)
+          if (product_id = fetch_data(data, :product, :id))
             "#/products/#{product_id}/info"
           end
         end
@@ -188,7 +183,7 @@ module Actions
         end
 
         def link(data)
-          if system_uuid = fetch_data(data, :system, :uuid)
+          if (system_uuid = fetch_data(data, :system, :uuid))
             "#/systems/#{system_uuid}/info"
           end
         end
@@ -204,7 +199,7 @@ module Actions
         end
 
         def link(data)
-          if org_id = fetch_data(data, :organization, :id)
+          if (org_id = fetch_data(data, :organization, :id))
             "/organizations/#{org_id}/edit"
           end
         end

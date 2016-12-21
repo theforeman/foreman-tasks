@@ -1,6 +1,5 @@
 module ForemanTasks
   class ProxySelector
-
     attr_reader :offline
 
     def initialize
@@ -12,7 +11,7 @@ module ForemanTasks
       [:subnet, :fallback, :global]
     end
 
-    def available_proxies(*args)
+    def available_proxies(*_args)
       raise NotImplementedError
     end
 
@@ -34,8 +33,8 @@ module ForemanTasks
     def select_by_jobs_count(proxies)
       exclude = @tasks.keys + @offline
       @tasks.merge!(get_counts(proxies - exclude))
-      next_proxy = @tasks.select { |proxy, _| proxies.include?(proxy) }.
-          min_by { |_, job_count| job_count }.try(:first)
+      next_proxy = @tasks.select { |proxy, _| proxies.include?(proxy) }
+                         .min_by { |_, job_count| job_count }.try(:first)
       @tasks[next_proxy] += 1 if next_proxy.present?
       next_proxy
     end
@@ -43,7 +42,7 @@ module ForemanTasks
     private
 
     def get_counts(proxies)
-      proxies.inject({}) do |result, proxy|
+      proxies.each_with_object({}) do |proxy, result|
         begin
           proxy_api = ProxyAPI::ForemanDynflow::DynflowProxy.new(:url => proxy.url)
           result[proxy] = proxy_api.tasks_count('running')

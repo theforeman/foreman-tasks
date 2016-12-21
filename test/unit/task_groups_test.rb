@@ -1,4 +1,4 @@
-require "foreman_tasks_test_helper"
+require 'foreman_tasks_test_helper'
 
 module ForemanTasks
   class TaskGroupsTest < ActiveSupport::TestCase
@@ -15,7 +15,6 @@ module ForemanTasks
     end
 
     class ParentAction < Actions::ActionWithSubPlans
-
       middleware.use ::Actions::Middleware::InheritTaskGroups
 
       def plan(count)
@@ -25,9 +24,9 @@ module ForemanTasks
         task.add_missing_task_groups(task_group)
         plan_self :count => count
       end
-      
+
       def create_sub_plans
-        input[:count].times.map { |i| trigger InheritingChildAction, i + 2 }
+        Array.new(input[:count]) { |i| trigger InheritingChildAction, i + 2 }
       end
     end
 

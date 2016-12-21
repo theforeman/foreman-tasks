@@ -2,7 +2,7 @@ module ForemanTasks
   class TasksController < ::ApplicationController
     include Foreman::Controller::AutoCompleteSearch
 
-    before_filter :restrict_dangerous_actions, :only => [:unlock, :force_unlock]
+    before_action :restrict_dangerous_actions, :only => [:unlock, :force_unlock]
 
     def show
       @task = Task.find(params[:id])
@@ -10,7 +10,7 @@ module ForemanTasks
 
     def index
       params[:order] ||= 'started_at DESC'
-      @tasks         = filter(resource_base)
+      @tasks = filter(resource_base)
     end
 
     def sub_tasks
@@ -21,7 +21,7 @@ module ForemanTasks
 
     def cancel_step
       task = find_dynflow_task
-      flash[:notice] = _("Trying to cancel step %s") % params[:step_id]
+      flash[:notice] = _('Trying to cancel step %s') % params[:step_id]
       ForemanTasks.dynflow.world.event(task.external_id, params[:step_id].to_i, ::Dynflow::Action::Cancellable::Cancel).wait
       redirect_to foreman_tasks_task_path(task)
     end
@@ -54,7 +54,7 @@ module ForemanTasks
         task.save!
         flash[:notice] = _('The task resources were unlocked.')
       else
-        flash[:warning] =  _('The execution has to be paused.')
+        flash[:warning] = _('The execution has to be paused.')
       end
       redirect_to :back
     end
@@ -93,7 +93,7 @@ module ForemanTasks
       end
     end
 
-    def resource_scope(options = {})
+    def resource_scope(_options = {})
       @resource_scope ||= ForemanTasks::Task.authorized("#{action_permission}_foreman_tasks")
     end
 
@@ -102,9 +102,8 @@ module ForemanTasks
     end
 
     def filter(scope)
-      scope.search_for(params[:search], :order => params[:order]).
-          paginate(:page => params[:page]).select('DISTINCT foreman_tasks_tasks.*')
+      scope.search_for(params[:search], :order => params[:order])
+           .paginate(:page => params[:page]).select('DISTINCT foreman_tasks_tasks.*')
     end
-
   end
 end

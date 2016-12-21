@@ -4,10 +4,14 @@ require 'gettext_i18n_rails'
 
 module ForemanTasks
   class Engine < ::Rails::Engine
-    engine_name "foreman_tasks"
+    engine_name 'foreman_tasks'
 
     initializer 'foreman_tasks.load_default_settings', :before => :load_config_initializers do
-      require_dependency File.expand_path('../../../app/models/setting/foreman_tasks.rb', __FILE__) if (Setting.table_exists? rescue(false))
+      require_dependency File.expand_path('../../../app/models/setting/foreman_tasks.rb', __FILE__) if begin
+                                                                                                          Setting.table_exists?
+                                                                                                        rescue
+                                                                                                          (false)
+                                                                                                        end
     end
 
     # Precompile any JS or CSS files under app/assets/
@@ -35,7 +39,7 @@ module ForemanTasks
       Foreman::Gettext::Support.add_text_domain locale_domain, locale_dir
     end
 
-    initializer 'foreman_tasks.register_plugin', :before => :finisher_hook do |app|
+    initializer 'foreman_tasks.register_plugin', :before => :finisher_hook do |_app|
       Foreman::Plugin.register :"foreman-tasks" do
         requires_foreman '>= 1.9.0'
         divider :top_menu, :parent => :monitor_menu, :last => true
@@ -51,64 +55,63 @@ module ForemanTasks
              :parent   => :monitor_menu,
              :last     => true
 
-        security_block :foreman_tasks do |map|
-          permission :view_foreman_tasks, {:'foreman_tasks/tasks' => [:auto_complete_search, :sub_tasks, :index, :show],
-                                           :'foreman_tasks/api/tasks' => [:bulk_search, :show, :index, :summary] }, :resource_type => ForemanTasks::Task.name
-          permission :edit_foreman_tasks, {:'foreman_tasks/tasks' => [:resume, :unlock, :force_unlock, :cancel_step, :cancel],
-                                           :'foreman_tasks/api/tasks' => [:bulk_resume]}, :resource_type => ForemanTasks::Task.name
+        security_block :foreman_tasks do |_map|
+          permission :view_foreman_tasks, { :'foreman_tasks/tasks' => [:auto_complete_search, :sub_tasks, :index, :show],
+                                            :'foreman_tasks/api/tasks' => [:bulk_search, :show, :index, :summary] }, :resource_type => ForemanTasks::Task.name
+          permission :edit_foreman_tasks, { :'foreman_tasks/tasks' => [:resume, :unlock, :force_unlock, :cancel_step, :cancel],
+                                            :'foreman_tasks/api/tasks' => [:bulk_resume] }, :resource_type => ForemanTasks::Task.name
 
-          permission :create_recurring_logics, { }, :resource_type => ForemanTasks::RecurringLogic.name
+          permission :create_recurring_logics, {}, :resource_type => ForemanTasks::RecurringLogic.name
 
           permission :view_recurring_logics, { :'foreman_tasks/recurring_logics' => [:index, :show],
                                                :'foreman_tasks/api/recurring_logics' => [:index, :show] }, :resource_type => ForemanTasks::RecurringLogic.name
 
           permission :edit_recurring_logics, { :'foreman_tasks/recurring_logics' => [:cancel],
                                                :'foreman_tasks/api/recurring_logics' => [:cancel] }, :resource_type => ForemanTasks::RecurringLogic.name
-
         end
 
         logger :dynflow, :enabled => true
         logger :action, :enabled => true
 
-        role "Tasks Manager", [:view_foreman_tasks, :edit_foreman_tasks]
-        role "Tasks Reader", [:view_foreman_tasks]
+        role 'Tasks Manager', [:view_foreman_tasks, :edit_foreman_tasks]
+        role 'Tasks Reader', [:view_foreman_tasks]
 
-        widget 'foreman_tasks/tasks/dashboard/tasks_status', :sizex=>6, :sizey=>1, :name=> N_('Task Status')
-        widget 'foreman_tasks/tasks/dashboard/latest_tasks_in_error_warning', :sizex=>6, :sizey=>1,:name=> N_('Latest Warning/Error Tasks')
+        widget 'foreman_tasks/tasks/dashboard/tasks_status', :sizex => 6, :sizey => 1, :name => N_('Task Status')
+        widget 'foreman_tasks/tasks/dashboard/latest_tasks_in_error_warning', :sizex => 6, :sizey => 1, :name => N_('Latest Warning/Error Tasks')
       end
     end
 
-    initializer 'foreman_tasks.ignore_dynflow_tables' do |app|
+    initializer 'foreman_tasks.ignore_dynflow_tables' do |_app|
       # Ignore Dynflow tables when schema-dumping. Dynflow tables are handled automatically by Dynflow.
       ActiveRecord::SchemaDumper.ignore_tables << /^dynflow_.*$/
     end
 
-    initializer "foreman_tasks.apipie" do
+    initializer 'foreman_tasks.apipie' do
       # this condition is here for compatibility reason to work with Foreman 1.4.x
       if Apipie.configuration.api_controllers_matcher.is_a?(Array) &&
-            Apipie.configuration.respond_to?(:checksum_path)
+         Apipie.configuration.respond_to?(:checksum_path)
         Apipie.configuration.api_controllers_matcher << "#{ForemanTasks::Engine.root}/app/controllers/foreman_tasks/api/*.rb"
         Apipie.configuration.checksum_path += ['/foreman_tasks/api/']
       end
     end
 
-    initializer "foreman_tasks.register_paths" do |app|
-      ForemanTasks.dynflow.config.eager_load_paths.concat(%W[#{ForemanTasks::Engine.root}/app/lib/actions])
+    initializer 'foreman_tasks.register_paths' do |_app|
+      ForemanTasks.dynflow.config.eager_load_paths.concat(%W(#{ForemanTasks::Engine.root}/app/lib/actions))
     end
 
-    initializer "foreman_tasks.test_exceptions" do |app|
+    initializer 'foreman_tasks.test_exceptions' do |_app|
       if defined? ActiveSupport::TestCase
         require 'foreman_tasks/test_extensions'
       end
     end
 
-    initializer "foreman_tasks.load_app_instance_data" do |app|
+    initializer 'foreman_tasks.load_app_instance_data' do |app|
       ForemanTasks::Engine.paths['db/migrate'].existent.each do |path|
         app.config.paths['db/migrate'] << path
       end
     end
 
-    initializer "foreman_tasks.require_dynflow", :before => "foreman_tasks.initialize_dynflow" do |app|
+    initializer 'foreman_tasks.require_dynflow', :before => 'foreman_tasks.initialize_dynflow' do |_app|
       ForemanTasks.dynflow.require!
       ::ForemanTasks.dynflow.config.on_init do |world|
         ForemanTasksCore.dynflow_setup(world)
@@ -145,9 +148,7 @@ module ForemanTasks
       unless ForemanTasks.dynflow.config.lazy_initialization
         if defined?(PhusionPassenger)
           PhusionPassenger.on_event(:starting_worker_process) do |forked|
-            if forked
-              ForemanTasks.dynflow.initialize!
-            end
+            ForemanTasks.dynflow.initialize! if forked
           end
         else
           ForemanTasks.dynflow.initialize!
@@ -156,15 +157,15 @@ module ForemanTasks
     end
 
     rake_tasks do
-      %w[dynflow.rake test.rake export_tasks.rake cleanup.rake].each do |rake_file|
+      %w(dynflow.rake test.rake export_tasks.rake cleanup.rake).each do |rake_file|
         full_path = File.expand_path("../tasks/#{rake_file}", __FILE__)
-        load full_path if File.exists?(full_path)
+        load full_path if File.exist?(full_path)
       end
     end
   end
 
   def self.table_name_prefix
-    "foreman_tasks_"
+    'foreman_tasks_'
   end
 
   def use_relative_model_naming

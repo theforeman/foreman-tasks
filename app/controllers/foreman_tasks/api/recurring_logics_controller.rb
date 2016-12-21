@@ -9,7 +9,7 @@ module ForemanTasks
         api_base_url '/foreman_tasks/api'
       end
 
-      before_filter :find_resource, :only => %w{show cancel destroy}
+      before_action :find_resource, :only => %w(show cancel destroy)
 
       api :GET, '/recurring_logics', N_('List recurring logics')
       def index
@@ -17,9 +17,8 @@ module ForemanTasks
       end
 
       api :GET, '/recurring_logics/:id', N_('Show recurring logic details')
-      param :id, :identifier, desc: "ID of the recurring logic", required: true
-      def show
-      end
+      param :id, :identifier, desc: 'ID of the recurring logic', required: true
+      def show; end
 
       api :POST, '/recurring_logics/:id/cancel', N_('Cancel recurring logic')
       param :id, :identifier, desc: 'ID of the recurring logic', required: true

@@ -1,0 +1,20 @@
+# TODO: remove this file by either moving cops here or fixing code
+inherit_from:
+  - .rubocop_todo.yml
+
+AllCops:
+  Include:
+    - 'Rakefile'
+    - 'app/views/foreman_tasks/api/**/*.rabl'
+    - lib/**/*.rake
+
+Rails:
+  Enabled: true
+
+# Don't enforce documentation
+Style/Documentation:
+  Enabled: false
+
+# Support both ruby19 and hash_rockets
+Style/HashSyntax:
+  Enabled: false

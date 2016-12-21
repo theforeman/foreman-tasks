@@ -3,8 +3,8 @@ module ForemanTasksCore
     class Dispatcher
       def self.instance
         return @instance if @instance
-        @instance = self.new(ForemanTasksCore.dynflow_world.clock,
-                             ForemanTasksCore.dynflow_world.logger)
+        @instance = new(ForemanTasksCore.dynflow_world.clock,
+                        ForemanTasksCore.dynflow_world.logger)
       end
 
       class RunnerActor < ::Dynflow::Actor
@@ -34,7 +34,7 @@ module ForemanTasksCore
 
         def refresh_runner
           @logger.debug("refresh runner #{@runner.id}")
-          if update = @runner.run_refresh
+          if (update = @runner.run_refresh)
             @suspended_action << update
             finish if update.exit_status
           end
@@ -68,7 +68,7 @@ module ForemanTasksCore
         def plan_next_refresh
           if !@finishing && !@refresh_planned
             @logger.debug("planning to refresh #{@runner.id}")
-            @clock.ping(reference, Time.now + @refresh_interval, :refresh_runner)
+            @clock.ping(reference, Time.zone.now + @refresh_interval, :refresh_runner)
             @refresh_planned = true
           end
         end
@@ -137,7 +137,7 @@ module ForemanTasksCore
       def _finish(runner_id)
         runner_actor = @runner_actors.delete(runner_id)
         return unless runner_actor
-        @logger.debug("closing session for command [#{runner_id}]," +
+        @logger.debug("closing session for command [#{runner_id}]," \
                       "#{@runner_actors.size} actors left ")
         runner_actor.tell([:start_termination, Concurrent.future])
       ensure
@@ -149,7 +149,7 @@ module ForemanTasksCore
                       "#{exception.class} #{exception.message}:\n #{exception.backtrace.join("\n")}")
         suspended_action = @runner_suspended_actions[runner_id]
         if suspended_action
-          suspended_action << Runner::Update.encode_exception("Runner error", exception, fatal)
+          suspended_action << Runner::Update.encode_exception('Runner error', exception, fatal)
         end
         _finish(runner_id) if fatal
       end

@@ -10,7 +10,7 @@ module ForemanTasks
 
     def resource_name_with_authorized_resource_name(klass)
       if klass.respond_to?(:authorized_resource_name)
-        return klass.authorized_resource_name
+        klass.authorized_resource_name
       else
         resource_name_without_authorized_resource_name(klass)
       end

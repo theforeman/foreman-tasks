@@ -17,8 +17,8 @@ module Actions
       plan_self(options.merge(:proxy_url => proxy.url, :proxy_action_name => klass.to_s))
     end
 
-    def run(event = nil)
-      with_connection_error_handling(event) do |event|
+    def run(an_event = nil)
+      with_connection_error_handling(an_event) do |event|
         case event
         when nil
           if output[:proxy_task_id]
@@ -47,7 +47,7 @@ module Actions
         response = proxy.trigger_task(proxy_action_name,
                                       input.merge(:callback => { :task_id => task.id,
                                                                  :step_id => run_step_id }))
-        output[:proxy_task_id] = response["task_id"]
+        output[:proxy_task_id] = response['task_id']
       end
     end
 
@@ -56,7 +56,7 @@ module Actions
         response = proxy.status_of_task(output[:proxy_task_id])
         if %w(stopped paused).include? response['state']
           if response['result'] == 'error'
-            raise ::Foreman::Exception, _("The smart proxy task %s failed.") % (output[:proxy_task_id])
+            raise ::Foreman::Exception, _('The smart proxy task %s failed.') % output[:proxy_task_id]
           else
             on_data(response['actions'].find { |block_action| block_action['class'] == proxy_action_name }['output'])
           end
@@ -70,7 +70,7 @@ module Actions
 
     def cancel_proxy_task
       if output[:cancel_sent]
-        error! ForemanTasks::Task::TaskCancelledException.new(_("Cancel enforced: the task might be still running on the proxy"))
+        error! ForemanTasks::Task::TaskCancelledException.new(_('Cancel enforced: the task might be still running on the proxy'))
       else
         proxy.cancel_task(output[:proxy_task_id])
         output[:cancel_sent] = true
@@ -112,7 +112,7 @@ module Actions
     def fill_continuous_output(continuous_output)
       failed_proxy_tasks.each do |failure_data|
         message = _('Initialization error: %s') %
-            "#{failure_data[:exception_class]} - #{failure_data[:exception_message]}"
+                  "#{failure_data[:exception_class]} - #{failure_data[:exception_message]}"
         continuous_output.add_output(message, 'debug', failure_data[:timestamp])
       end
     end
@@ -136,7 +136,7 @@ module Actions
     end
 
     def set_timeout!
-      time = Time.now + input[:connection_options][:timeout]
+      time = Time.zone.now + input[:connection_options][:timeout]
       schedule_timeout(time)
       metadata[:timeout] = time.to_s
     end
@@ -145,8 +145,8 @@ module Actions
       # Fails if the plan is not finished within 60 seconds from the first task trigger attempt on the smart proxy
       # If the triggering fails, it retries 3 more times with 15 second delays
       { :retry_interval => Setting['foreman_tasks_proxy_action_retry_interval'] || 15,
-        :retry_count    => Setting['foreman_tasks_proxy_action_retry_count' ]   || 4,
-        :timeout        => Setting['foreman_tasks_proxy_action_start_timeout']  || 60 }
+        :retry_count    => Setting['foreman_tasks_proxy_action_retry_count'] || 4,
+        :timeout        => Setting['foreman_tasks_proxy_action_start_timeout'] || 60 }
     end
 
     private
@@ -179,7 +179,7 @@ module Actions
       if failed_proxy_tasks.count < options[:retry_count]
         suspend do |suspended_action|
           @world.clock.ping suspended_action,
-                            Time.now + options[:retry_interval],
+                            Time.zone.now + options[:retry_interval],
                             event
         end
       else

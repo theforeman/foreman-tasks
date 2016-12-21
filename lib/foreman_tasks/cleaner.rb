@@ -1,10 +1,9 @@
 module ForemanTasks
   # Represents the cleanup mechanism for tasks
   class Cleaner
-
     def self.run(options)
       if options.key?(:filter)
-        self.new(options).delete
+        new(options).delete
       else
         [:after, :states].each do |invalid_option|
           if options.key?(invalid_option)
@@ -12,10 +11,10 @@ module ForemanTasks
           end
         end
         if cleanup_settings[:after]
-          self.new(options.merge(:filter => "", :after  => cleanup_settings[:after])).delete
+          new(options.merge(:filter => '', :after => cleanup_settings[:after])).delete
         end
         actions_with_default_cleanup.each do |action_class, period|
-          self.new(options.merge(:filter => "label = #{action_class.name}", :after  => period)).delete
+          new(options.merge(:filter => "label = #{action_class.name}", :after => period)).delete
         end
       end
     end
@@ -37,7 +36,7 @@ module ForemanTasks
           actions_with_periods[action_class] = action_class.cleanup_after
         end
       end
-      return actions_with_periods
+      actions_with_periods
     end
 
     def self.cleanup_settings
@@ -45,7 +44,7 @@ module ForemanTasks
       @cleanup_settings = SETTINGS[:'foreman-tasks'] && SETTINGS[:'foreman-tasks'][:cleanup] || {}
     end
 
-    attr_reader :filter, :after , :states, :verbose, :batch_size, :noop, :full_filter
+    attr_reader :filter, :after, :states, :verbose, :batch_size, :noop, :full_filter
 
     # @param filter [String] scoped search matching the tasks to be deleted
     # @param after [String|nil] delete the tasks after they are older
@@ -57,7 +56,7 @@ module ForemanTasks
                           :verbose      => false,
                           :batch_size   => 1000,
                           :noop         => false,
-                          :states       => ["stopped"] }
+                          :states       => ['stopped'] }
       options         = default_options.merge(options)
 
       @filter         = options[:filter]
@@ -69,7 +68,7 @@ module ForemanTasks
 
       raise ArgumentError, 'filter not speficied' if @filter.nil?
 
-      @full_filter    = prepare_filter
+      @full_filter = prepare_filter
     end
 
     # Delete the filtered tasks, including the dynflow execution plans
@@ -102,14 +101,15 @@ module ForemanTasks
 
     def prepare_filter
       filter_parts = [filter]
-      filter_parts << %{started_at < "#{after.ago.to_s(:db)}"} if after > 0
-      filter_parts << states.map { |s| "state = #{s}" }.join(" OR ") if states.any?
+      filter_parts << %(started_at < "#{after.ago.to_s(:db)}") if after > 0
+      filter_parts << states.map { |s| "state = #{s}" }.join(' OR ') if states.any?
       filter_parts.select(&:present?).join(' AND ')
     end
 
     def start_tracking_progress
       if verbose
-        @current, @total = 0, tasks.size
+        @current = 0
+        @total = tasks.size
         say "#{@current}/#{@total}", false
       end
     end
@@ -123,13 +123,11 @@ module ForemanTasks
 
     def say(message, log = true)
       puts message
-      if log
-        Foreman::Logging.logger('foreman-tasks').info(message)
-      end
+      Foreman::Logging.logger('foreman-tasks').info(message) if log
     end
 
     def parse_time_interval(string)
-      matched_string = string.gsub(' ','').match(/\A(\d+)(\w)\Z/)
+      matched_string = string.delete(' ').match(/\A(\d+)(\w)\Z/)
       unless matched_string
         raise ArgumentError, "String #{string} isn't an expected specification of time in format of \"{number}{time_unit}\""
       end
@@ -146,7 +144,7 @@ module ForemanTasks
               else
                 raise ArgumentError, "Unexpected time unit in #{string}, expected one of [s,h,d,y]"
               end
-      return value
+      value
     end
   end
 end

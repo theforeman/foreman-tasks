@@ -1,5 +1,4 @@
 module Actions
-
   class BulkAction < Actions::ActionWithSubPlans
     # == Parameters:
     # actions_class::
@@ -22,9 +21,9 @@ module Actions
 
     def humanized_name
       if task.sub_tasks.first
-         task.sub_tasks.first.humanized[:action]
+        task.sub_tasks.first.humanized[:action]
       else
-        _("Bulk action")
+        _('Bulk action')
       end
     end
 
@@ -36,7 +35,7 @@ module Actions
       a_sub_task = task.sub_tasks.first
       if a_sub_task
         [a_sub_task.humanized[:action].to_s.downcase] +
-            Array(a_sub_task.humanized[:input]) + ['...']
+          Array(a_sub_task.humanized[:input]) + ['...']
       end
     end
 
@@ -53,13 +52,10 @@ module Actions
     end
 
     def check_targets!(targets)
-      if targets.empty?
-        fail ::Foreman::Exception.new(N_("Empty bulk action"))
-      end
+      raise Foreman::Exception, N_('Empty bulk action') if targets.empty?
       if targets.map(&:class).uniq.length > 1
-        fail ::Foreman::Exception.new(N_("The targets are of different types"))
+        raise Foreman::Exception, N_('The targets are of different types')
       end
     end
-
   end
 end

@@ -1,8 +1,8 @@
 module ForemanTasks
   class Task::DynflowTask < ForemanTasks::Task
-
     include Algebrick::TypeCheck
 
+    delegate :cancellable?, :progress, to: :execution_plan
     scope :for_action, ->(action_class) { where(label: action_class.name) }
 
     def update_from_dynflow(data)
@@ -20,13 +20,9 @@ module ForemanTasks
                                 end
                               end
       self.label          ||= main_action.class.name
-      changes             = self.changes
-      self.save!
-      return changes
-    end
-
-    def cancellable?
-      execution_plan.cancellable?
+      changes = self.changes
+      save!
+      changes
     end
 
     def cancel
@@ -39,10 +35,6 @@ module ForemanTasks
 
     def cancellable_action?(action)
       action.is_a?(::Dynflow::Action::Cancellable)
-    end
-
-    def progress
-      execution_plan.progress
     end
 
     def execution_plan
@@ -73,9 +65,7 @@ module ForemanTasks
     end
 
     def cli_example
-      if main_action.respond_to?(:cli_example)
-        main_action.cli_example
-      end
+      main_action.cli_example if main_action.respond_to?(:cli_example)
     end
 
     def main_action
@@ -104,28 +94,27 @@ module ForemanTasks
     def self.consistency_check
       fixed_count = 0
       logger = Foreman::Logging.logger('foreman-tasks')
-      self.running.each do |task|
+      running.each do |task|
         begin
           changes = task.update_from_dynflow(task.execution_plan.to_hash)
           unless changes.empty?
             fixed_count += 1
-            logger.warn("Task %s updated at consistency check: %s" % [task.id, changes.inspect])
+            logger.warn('Task %s updated at consistency check: %s' % [task.id, changes.inspect])
           end
         rescue => e
           Foreman::Logging.exception("Failed at consistency check for task #{task.id}", e, :logger => 'foreman-tasks')
         end
       end
-      return fixed_count
+      fixed_count
     end
 
     def self.new_for_execution_plan(execution_plan_id, data)
-      self.new(:external_id => execution_plan_id,
-               :state => data[:state].to_s,
-               :result => data[:result].to_s)
+      new(:external_id => execution_plan_id,
+          :state => data[:state].to_s,
+          :result => data[:result].to_s)
     end
 
-    private
-
+    private_class_method :model_name
     def self.model_name
       superclass.model_name
     end

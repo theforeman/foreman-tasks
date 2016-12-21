@@ -21,7 +21,7 @@ module ForemanTasks
     def unlimited_edit?
       return true if @user.admin?
       # users with unlimited edit_foreman_tasks can operate with the
-      # console no matter what task it is…
+      # console no matter what task it is...
       edit_permission = Permission.where(:name => :edit_foreman_tasks, :resource_type => ForemanTasks::Task.name).first
       if @user.filters.joins(:filterings).unlimited.where('filterings.permission_id' => edit_permission).first
         return true
@@ -29,7 +29,7 @@ module ForemanTasks
     end
 
     def authorized_for_task?
-      if task = extract_task
+      if (task = extract_task)
         begin
           original_user = User.current
           User.current = @user
@@ -38,16 +38,15 @@ module ForemanTasks
           User.current = original_user
         end
       else
-        return false
+        false
       end
     end
 
     def extract_task
-      dynflow_id = @rack_request.path_info[/^\/([\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12})/,1]
+      dynflow_id = @rack_request.path_info[/^\/([\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12})/, 1]
       unless dynflow_id.empty?
         ForemanTasks::Task::DynflowTask.where(:external_id => dynflow_id).first
       end
     end
-
   end
 end

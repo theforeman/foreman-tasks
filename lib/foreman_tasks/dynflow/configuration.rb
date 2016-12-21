@@ -1,6 +1,5 @@
 module ForemanTasks
   class Dynflow::Configuration
-
     # the number of threads in the pool handling the execution
     attr_accessor :pool_size
 
@@ -9,7 +8,7 @@ module ForemanTasks
 
     # set true if the executor runs externally (by default true in procution, othewise false)
     attr_accessor :remote
-    alias_method :remote?, :remote
+    alias remote? remote
 
     # what transaction adapater should be used, by default, it uses the ActiveRecord
     # based adapter, expecting ActiveRecord is used as ORM in the application
@@ -34,7 +33,7 @@ module ForemanTasks
       self.transaction_adapter      = ::Dynflow::TransactionAdapters::ActiveRecord.new
       self.eager_load_paths         = []
       self.lazy_initialization      = !Rails.env.production?
-      self.rake_tasks_with_executor = %w[db:migrate db:seed]
+      self.rake_tasks_with_executor = %w(db:migrate db:seed)
 
       @on_init = []
     end
@@ -66,8 +65,8 @@ module ForemanTasks
     # it can't be remote
     def remote?
       !ForemanTasks.dynflow.executor? &&
-          !rake_task_with_executor? &&
-          @remote
+        !rake_task_with_executor? &&
+        @remote
     end
 
     def rake_task_with_executor?
@@ -79,7 +78,7 @@ module ForemanTasks
     end
 
     def increase_db_pool_size?
-       ForemanTasks.dynflow.required? && !remote? && !Rails.env.test?
+      ForemanTasks.dynflow.required? && !remote? && !Rails.env.test?
     end
 
     # To avoid pottential timeouts on db connection pool, make sure
@@ -126,14 +125,14 @@ module ForemanTasks
           db_config['database'] = "#{File.dirname(database)}/dynflow-#{File.basename(database)}"
         end
       end
-      return db_config
+      db_config
     end
 
     def initialize_executor(world)
-      if self.remote?
+      if remote?
         false
       else
-        ::Dynflow::Executors::Parallel.new(world, self.pool_size)
+        ::Dynflow::Executors::Parallel.new(world, pool_size)
       end
     end
 
@@ -145,6 +144,5 @@ module ForemanTasks
     def initialize_persistence
       ForemanTasks::Dynflow::Persistence.new(default_sequel_adapter_options)
     end
-
   end
 end
