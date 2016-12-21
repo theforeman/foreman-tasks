@@ -17,8 +17,8 @@ module Actions
       plan_self(options.merge(:proxy_url => proxy.url, :proxy_action_name => klass.to_s))
     end
 
-    def run(event = nil)
-      with_connection_error_handling(event) do |event|
+    def run(an_event = nil)
+      with_connection_error_handling(an_event) do |event|
         case event
         when nil
           if output[:proxy_task_id]
