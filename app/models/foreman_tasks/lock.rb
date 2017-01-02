@@ -4,7 +4,7 @@ module ForemanTasks
     LINK_LOCK_NAME  = :link_resource
     OWNER_LOCK_NAME = :task_owner
 
-    # not really intedet to be created in database, but it's used for
+    # not really intended to be created in database, but it's used for
     # explicitly stating that the all the locks for resource should be used
     ALL_LOCK_NAME   = :all
 
