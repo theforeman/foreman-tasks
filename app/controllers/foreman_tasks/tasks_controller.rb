@@ -103,8 +103,7 @@ module ForemanTasks
 
     def filter(scope)
       scope.search_for(params[:search], :order => params[:order]).
-          paginate(:page => params[:page]).select('DISTINCT foreman_tasks_tasks.*')
+          paginate(:page => params[:page])
     end
-
   end
 end

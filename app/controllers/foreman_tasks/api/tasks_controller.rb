@@ -90,7 +90,6 @@ module ForemanTasks
       def bulk_resume
         scope = resource_scope
         scope = scope.search_for(params[:search]) if params[:search]
-        scope = scope.select('DISTINCT foreman_tasks_tasks.*')
         if params[:search].nil? && params[:task_ids].nil?
           scope = scope.where(:state => :paused)
           scope = scope.where(:result => :error)
@@ -131,7 +130,7 @@ module ForemanTasks
         param :order, String, :desc => N_("How to order the sorted results (e.g. ASC for ascending)")
       end
       def index
-        scope =resource_scope.search_for(params[:search]).select('DISTINCT foreman_tasks_tasks.*')
+        scope = resource_scope.search_for(params[:search])
         total = scope.count
 
         ordering_params =  {
@@ -178,7 +177,7 @@ module ForemanTasks
       private
 
       def search_tasks(search_params)
-        scope = resource_scope_for_index.select('DISTINCT foreman_tasks_tasks.*')
+        scope = resource_scope_for_index
         scope = ordering_scope(scope, search_params)
         scope = search_scope(scope, search_params)
         scope = active_scope(scope, search_params)

@@ -17,6 +17,31 @@ class TasksTest < ActiveSupport::TestCase
     end
   end
 
+  describe 'task with multiple locks on the same resource_type' do
+    setup do
+      @user = FactoryGirl.create(:user)
+      task = FactoryGirl.create(:some_task, :set_owner => @user)
+      task.locks.first.dup.save!
+    end
+
+    test 'searching on resource_type does not return duplicates' do
+      assert_equal 1, ForemanTasks::Task.search_for("resource_type = User").count
+    end
+
+    test 'searching on resource_type and id does not return duplicates' do
+      assert_equal 1, ForemanTasks::Task.search_for("resource_type = User and resource_id = #{@user.id}").count
+    end
+
+    test 'only find correct task when searching on resource_type and resource_id' do
+      task_two = FactoryGirl.create(:some_task, :set_owner => @user)
+      lock = task_two.locks.first
+      lock.resource_type = 'Host'
+      lock.save!
+      assert_equal 2, ForemanTasks::Task.search_for("resource_id = #{@user.id}").count
+      assert_equal 1, ForemanTasks::Task.search_for("resource_type = User and resource_id = #{@user.id}").count
+    end
+  end
+
   describe 'authorization filtering' do
     it 'can filter by the task subject' do
       user_role  = FactoryGirl.create(:user_user_role)
