@@ -11,6 +11,10 @@ AllCops:
 Rails:
   Enabled: true
 
+# KWargs are not present in actionpack < 5
+Rails/HttpPositionalArguments:
+  Enabled: false
+
 # Don't enforce documentation
 Style/Documentation:
   Enabled: false

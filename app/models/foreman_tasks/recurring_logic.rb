@@ -54,7 +54,7 @@ module ForemanTasks
     end
 
     def next_occurrence_time(time = Time.zone.now)
-      @parser ||= CronParser.new(cron_line)
+      @parser ||= CronParser.new(cron_line, Time.zone)
       @parser.next(time)
     end
 

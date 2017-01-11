@@ -23,19 +23,19 @@ class RecurringLogicsTest < ActiveSupport::TestCase
       day = 29
       hour = 15
       minute = 0
-      reference_time = Time.new.in_time_zone(year, month, day, hour, minute)
+      reference_time = Time.utc(year, month, day, hour, minute)
       parser = ForemanTasks::RecurringLogic.new_from_cronline('* * * * *')
-      parser.next_occurrence_time(reference_time).must_equal Time.new.in_time_zone(year, month, day, hour, minute + 1)
+      parser.next_occurrence_time(reference_time).must_equal Time.utc(year, month, day, hour, minute + 1)
       parser = ForemanTasks::RecurringLogic.new_from_cronline('*/2 * * * *')
-      parser.next_occurrence_time(reference_time).must_equal Time.new.in_time_zone(year, month, day, hour, minute + 2)
+      parser.next_occurrence_time(reference_time).must_equal Time.utc(year, month, day, hour, minute + 2)
       parser = ForemanTasks::RecurringLogic.new_from_cronline('*/2 18,19 * * *')
-      parser.next_occurrence_time(reference_time).must_equal Time.new.in_time_zone(year, month, day, 18)
+      parser.next_occurrence_time(reference_time).must_equal Time.utc(year, month, day, 18)
       parser = ForemanTasks::RecurringLogic.new_from_cronline('*/2 18,19 10 * *')
-      parser.next_occurrence_time(reference_time).must_equal Time.new.in_time_zone(year, month + 1, 10, 18, minute)
+      parser.next_occurrence_time(reference_time).must_equal Time.utc(year, month + 1, 10, 18, minute)
       parser = ForemanTasks::RecurringLogic.new_from_cronline('*/2 18,19 10 11,12 *')
-      parser.next_occurrence_time(reference_time).must_equal Time.new.in_time_zone(year, 11, 10, 18, 0)
+      parser.next_occurrence_time(reference_time).must_equal Time.utc(year, 11, 10, 18, 0)
       parser = ForemanTasks::RecurringLogic.new_from_cronline('* * * * 1')
-      parser.next_occurrence_time(reference_time).must_equal Time.new.in_time_zone(year, month + 1, 5)
+      parser.next_occurrence_time(reference_time).must_equal Time.utc(year, month + 1, 5)
     end
 
     it 'creates correct cronline hash' do
@@ -62,7 +62,7 @@ class RecurringLogicsTest < ActiveSupport::TestCase
       parser.expects(:iteration).twice.returns(5)
       parser.wont_be :can_continue?
       parser.max_iteration = nil
-      time = Time.new.in_time_zone(2015, 9, 29, 15, 0)
+      time = Time.utc(2015, 9, 29, 15, 0)
       parser.end_time = time
       parser.wont_be :can_continue?, time
       parser.end_time = time + 120
@@ -74,7 +74,7 @@ class RecurringLogicsTest < ActiveSupport::TestCase
     it 'generates delay options' do
       parser = ForemanTasks::RecurringLogic.new_from_cronline('* * * * *')
       parser.stubs(:id).returns(1)
-      reference_time = Time.new.in_time_zone(2015, 9, 29, 15)
+      reference_time = Time.utc(2015, 9, 29, 15)
       expected_hash = { :start_at => reference_time + 60, :start_before => nil, :recurring_logic_id => parser.id }
       parser.generate_delay_options(reference_time).must_equal expected_hash
       parser.generate_delay_options(reference_time, 'start_before' => reference_time + 3600)
