@@ -15,7 +15,7 @@ module ForemanTasks
       has_many :task_groups, -> { uniq }, :through => :tasks
     end
 
-    scoped_search :on => :id, :complete_value => false
+    scoped_search :on => :id, :complete_value => false, :only_explicit => true
     scoped_search :on => :max_iteration, :complete_value => false, :rename => :iteration_limit
     scoped_search :on => :iteration, :complete_value => false
     scoped_search :on => :cron_line, :complete_value => true
