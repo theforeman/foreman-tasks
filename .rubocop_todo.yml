@@ -59,6 +59,9 @@ Rails/Exit:
     - 'lib/**/*.rake'
     - 'lib/foreman_tasks/dynflow/daemon.rb'
 
+Rails/HttpPositionalArguments:
+  Enabled: false
+
 # Configuration parameters: Include.
 # Include: app/**/*.rb, config/**/*.rb, db/**/*.rb, lib/**/*.rb
 Rails/Output:

@@ -11,8 +11,8 @@ AllCops:
 Rails:
   Enabled: true
 
-# KWargs are not present in actionpack < 5
-Rails/HttpPositionalArguments:
+# Don't prefer is_a? over kind_of?
+Style/ClassCheck:
   Enabled: false
 
 # Don't enforce documentation
@@ -21,4 +21,12 @@ Style/Documentation:
 
 # Support both ruby19 and hash_rockets
 Style/HashSyntax:
+  Enabled: false
+
+# Both double and single quotes are OK
+Style/StringLiterals:
+  Enabled: false
+
+# Don't enforce frozen string literals
+Style/FrozenStringLiteralComment:
   Enabled: false
