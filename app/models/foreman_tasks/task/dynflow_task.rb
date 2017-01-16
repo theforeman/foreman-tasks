@@ -114,7 +114,6 @@ module ForemanTasks
           :result => data[:result].to_s)
     end
 
-    private_class_method :model_name
     def self.model_name
       superclass.model_name
     end

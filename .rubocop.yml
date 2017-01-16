@@ -8,6 +8,9 @@ AllCops:
     - 'app/views/foreman_tasks/api/**/*.rabl'
     - lib/**/*.rake
 
+Lint/ShadowingOuterLocalVariable:
+  Enabled: false
+
 Rails:
   Enabled: true
 

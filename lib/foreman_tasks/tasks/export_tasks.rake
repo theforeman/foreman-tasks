@@ -54,7 +54,7 @@ DESC
       end
 
       def erb(file, options = {})
-        @cache[file] = Tilt.new(template(file)) unless @cache[file]
+        @cache[file] ||= Tilt.new(template(file))
         @cache[file].render(self, options[:locals])
       end
 
