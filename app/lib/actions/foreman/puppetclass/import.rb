@@ -15,7 +15,7 @@ module Actions
         end
 
         def humanized_name
-          _("Import Puppet classes")
+          _('Import Puppet classes')
         end
 
         # default value for cleaning up the tasks, it can be overriden by settings

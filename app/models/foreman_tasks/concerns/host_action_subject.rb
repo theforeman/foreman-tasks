@@ -5,7 +5,7 @@ module ForemanTasks
       include ForemanTasks::Concerns::ActionSubject
 
       def action_input_key
-        "host"
+        'host'
       end
 
       def available_locks
@@ -16,15 +16,15 @@ module ForemanTasks
         # TODO: This should get into the Foreman core, extracting the
         # +importHostAndFacts+ method into two
         def import_host(hostname, certname, facts, proxy_id = nil)
-          raise(::Foreman::Exception.new("Invalid Facts, must be a Hash")) unless facts.is_a?(Hash)
-          raise(::Foreman::Exception.new("Invalid Hostname, must be a String")) unless hostname.is_a?(String)
+          raise Foreman::Exception, 'Invalid Facts, must be a Hash' unless facts.is_a?(Hash)
+          raise Foreman::Exception, 'Invalid Hostname, must be a String' unless hostname.is_a?(String)
 
           # downcase everything
           hostname.try(:downcase!)
           certname.try(:downcase!)
 
-          host = certname.present? ? Host.find_by_certname(certname) : nil
-          host ||= Host.find_by_name hostname
+          host = certname.present? ? Host.find_by(certname: certname) : nil
+          host ||= Host.find_by name: hostname
           host ||= Host.new(:name => hostname, :certname => certname) if Setting[:create_new_host_when_facts_are_uploaded]
 
           return Host.new if host.nil?

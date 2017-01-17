@@ -14,7 +14,7 @@ module ForemanTasksCore
       def self.encode_exception(context, exception, fatal = true)
         continuous_output = ::ForemanTasksCore::ContinuousOutput.new
         continuous_output.add_exception(context, exception)
-        return self.new(continuous_output, fatal ? 'EXCEPTION' : nil)
+        new(continuous_output, fatal ? 'EXCEPTION' : nil)
       end
     end
   end

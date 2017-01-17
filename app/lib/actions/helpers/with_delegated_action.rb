@@ -7,12 +7,12 @@ module Actions
         case proxy
         when :not_defined
           if klass.is_a?(String)
-            raise ::Foreman::Exception.new(_('No proxy defined for execution'))
+            raise Foreman::Exception, _('No proxy defined for execution')
           else
             delegated_action = plan_action(klass, options)
           end
         when :not_available
-          raise ::Foreman::Exception.new(_('All proxies with the required feature are unavailable at the moment'))
+          raise Foreman::Exception, _('All proxies with the required feature are unavailable at the moment')
         when ::SmartProxy
           delegated_action = plan_action(::Actions::ProxyAction, proxy, klass, options)
         end

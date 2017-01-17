@@ -1,7 +1,6 @@
 require 'foreman_tasks_test_helper'
 
 class TriggeringTest < ActiveSupport::TestCase
-
   describe 'validation' do
     it 'is valid when immediate' do
       FactoryGirl.build(:triggering).must_be :valid?

@@ -4,7 +4,7 @@ module ForemanTasks
   class Task < ActiveRecord::Base
     include Authorizable
 
-    # TODO missing validation of states
+    # TODO: missing validation of states
 
     self.primary_key = :id
     before_create :generate_id
@@ -18,16 +18,15 @@ module ForemanTasks
     if Rails::VERSION::MAJOR < 4
       has_many :recurring_logic_task_groups, :through => :task_group_members, :conditions => { :type => 'ForemanTasks::TaskGroups::RecurringLogicTaskGroup' }, :source => :task_group
       has_many :owners, :through => :locks, :source => :resource, :source_type => 'User',
-               :conditions => ["foreman_tasks_locks.name = ?", Lock::OWNER_LOCK_NAME]
+                        :conditions => ['foreman_tasks_locks.name = ?', Lock::OWNER_LOCK_NAME]
     else
       has_many :recurring_logic_task_groups, -> { where :type => 'ForemanTasks::TaskGroups::RecurringLogicTaskGroup' },
                :through => :task_group_members, :source => :task_group
       # in fact, the task has only one owner but Rails don't let you to
       # specify has_one relation though has_many relation
-      has_many :owners, lambda {where(["foreman_tasks_locks.name = ?", Lock::OWNER_LOCK_NAME])},
+      has_many :owners, -> { where(['foreman_tasks_locks.name = ?', Lock::OWNER_LOCK_NAME]) },
                :through => :locks, :source => :resource, :source_type => 'User'
     end
-
 
     scoped_search :on => :id, :complete_value => false
     scoped_search :on => :label, :complete_value => true
@@ -37,21 +36,21 @@ module ForemanTasks
     scoped_search :on => :start_at, :complete_value => false
     scoped_search :on => :ended_at, :complete_value => false
     scoped_search :on => :parent_task_id, :complete_value => true
-    scoped_search :in => :locks,  :on => :resource_type, :complete_value => true, :rename => "resource_type", :ext_method => :search_by_generic_resource
-    scoped_search :in => :locks,  :on => :resource_id, :complete_value => false, :rename => "resource_id", :ext_method => :search_by_generic_resource
-    scoped_search :in => :owners,  :on => :id, :complete_value => true, :rename => "owner.id", :ext_method => :search_by_owner
-    scoped_search :in => :owners,  :on => :login, :complete_value => true, :rename => "owner.login", :ext_method => :search_by_owner
-    scoped_search :in => :owners,  :on => :firstname, :complete_value => true, :rename => "owner.firstname", :ext_method => :search_by_owner
-    scoped_search :in => :task_groups, :on => :id, :complete_value => true, :rename => "task_group.id"
+    scoped_search :in => :locks,  :on => :resource_type, :complete_value => true, :rename => 'resource_type', :ext_method => :search_by_generic_resource
+    scoped_search :in => :locks,  :on => :resource_id, :complete_value => false, :rename => 'resource_id', :ext_method => :search_by_generic_resource
+    scoped_search :in => :owners,  :on => :id, :complete_value => true, :rename => 'owner.id', :ext_method => :search_by_owner
+    scoped_search :in => :owners,  :on => :login, :complete_value => true, :rename => 'owner.login', :ext_method => :search_by_owner
+    scoped_search :in => :owners,  :on => :firstname, :complete_value => true, :rename => 'owner.firstname', :ext_method => :search_by_owner
+    scoped_search :in => :task_groups, :on => :id, :complete_value => true, :rename => 'task_group.id'
 
     scope :active, -> {  where('foreman_tasks_tasks.state != ?', :stopped) }
-    scope :running, -> {  where("foreman_tasks_tasks.state NOT IN ('stopped', 'paused')") }
+    scope :running, -> { where("foreman_tasks_tasks.state NOT IN ('stopped', 'paused')") }
     scope :for_resource,
-        (lambda do |resource|
-           joins(:locks).where(:"foreman_tasks_locks.resource_id" => resource.id,
-                               :"foreman_tasks_locks.resource_type" => resource.class.name)
-         end)
-    scope :for_action_types, (lambda { |action_types| where('foreman_tasks_tasks.label IN (?)', Array(action_types)) })
+          (lambda do |resource|
+             joins(:locks).where(:"foreman_tasks_locks.resource_id" => resource.id,
+                                 :"foreman_tasks_locks.resource_type" => resource.class.name)
+           end)
+    scope :for_action_types, (->(action_types) { where('foreman_tasks_tasks.label IN (?)', Array(action_types)) })
 
     def input
       {}
@@ -62,61 +61,59 @@ module ForemanTasks
     end
 
     def owner
-      self.owners.first
+      owners.first
     end
 
     def username
-      self.owner.try(:login)
+      owner.try(:login)
     end
 
     def execution_type
-      self.start_at.to_i == self.started_at.to_i ? N_('Immediate') : N_('Delayed')
+      start_at.to_i == started_at.to_i ? N_('Immediate') : N_('Delayed')
     end
 
     def humanized
       { action: label,
-        input:  "",
-        output: "" }
+        input:  '',
+        output: '' }
     end
 
     def cli_example
-      ""
+      ''
     end
 
     # returns true if the task is running or waiting to be run
     def pending?
-      self.state != 'stopped'
+      state != 'stopped'
     end
-    alias_method :pending, :pending?
+    alias pending pending?
 
     def resumable?
       false
     end
 
     def paused?
-      self.state == 'paused'
+      state == 'paused'
     end
 
     def self_and_parents
       [self].tap do |ret|
-        if parent_task
-          ret.concat(parent_task.self_and_parents)
-        end
+        ret.concat(parent_task.self_and_parents) if parent_task
       end
     end
 
     def self.search_by_generic_resource(key, operator, value)
-      key =  "resource_type" if key.blank?
-      key_name = self.connection.quote_column_name(key.sub(/^.*\./,''))
+      key = 'resource_type' if key.blank?
+      key_name = connection.quote_column_name(key.sub(/^.*\./, ''))
       condition = sanitize_sql_for_conditions(["foreman_tasks_locks.#{key_name} #{operator} ?", value])
 
-      return {:conditions => condition, :joins => :locks }
+      { :conditions => condition, :joins => :locks }
     end
 
     def self.search_by_owner(key, operator, value)
       return { :conditions => '0 = 1' } if value == 'current_user' && User.current.nil?
 
-      key_name = self.connection.quote_column_name(key.sub(/^.*\./,''))
+      key_name = connection.quote_column_name(key.sub(/^.*\./, ''))
       joins = <<-SQL
       INNER JOIN foreman_tasks_locks AS foreman_tasks_locks_owner
                  ON (foreman_tasks_locks_owner.task_id = foreman_tasks_tasks.id AND
@@ -132,21 +129,19 @@ module ForemanTasks
       condition = if key.blank?
                     sanitize_sql_for_conditions(["users.login #{operator} ? or users.firstname #{operator} ? ", value, value])
                   elsif key =~ /\.id\Z/
-                    if value == 'current_user'
-                      value = User.current.id
-                    end
+                    value = User.current.id if value == 'current_user'
                     sanitize_sql_for_conditions(["foreman_tasks_locks_owner.resource_id #{operator} ?", value])
                   else
                     sanitize_sql_for_conditions(["users.#{key_name} #{operator} ?", value])
                   end
-      return {:conditions => condition, :joins => joins }
+      { :conditions => condition, :joins => joins }
     end
 
     def progress
-      case self.state.to_s
-      when "running", "paused"
+      case state.to_s
+      when 'running', 'paused'
         0.5
-      when "stopped"
+      when 'stopped'
         1
       else
         0

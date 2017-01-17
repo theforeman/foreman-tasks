@@ -8,7 +8,7 @@ opts = OptionParser.new do |opts|
   opts.banner = <<BANNER
 Run Dynflow executor for Foreman tasks.
 
-Usage: #{File.basename($0)} [options] ACTION"
+Usage: #{File.basename($PROGRAM_NAME)} [options] ACTION"
 
 ACTION can be one of:
 

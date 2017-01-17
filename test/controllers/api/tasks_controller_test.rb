@@ -1,4 +1,4 @@
-require "foreman_tasks_test_helper"
+require 'foreman_tasks_test_helper'
 
 module ForemanTasks
   class Api::TasksControllerTest < ActionController::TestCase
@@ -14,7 +14,7 @@ module ForemanTasks
       describe 'GET /api/tasks/show' do
         it 'searches for task' do
           task = FactoryGirl.create(:dynflow_task, :user_create_task)
-          get(:show, :id => task.id)
+          get :show, :id => task.id
           assert_response :success
           assert_template 'api/tasks/show'
         end
@@ -37,18 +37,16 @@ module ForemanTasks
           task.result.must_equal 'pending'
 
           callback = Support::DummyProxyAction.proxy.log[:trigger_task].first[1][:callback]
-          post(:callback, 'callback' => callback, 'data' => {'result' => 'success'})
+          post :callback, 'callback' => callback, 'data' => { 'result' => 'success' }
           triggered.finished.wait(5)
 
           task.reload
           task.state.must_equal 'stopped'
           task.result.must_equal 'success'
-          task.main_action.output['proxy_task_id'].must_equal "123"
-          task.main_action.output['proxy_output'].must_equal({ 'result' => 'success' })
+          task.main_action.output['proxy_task_id'].must_equal '123'
+          task.main_action.output['proxy_output'].must_equal('result' => 'success')
         end
       end
     end
   end
 end
-
-

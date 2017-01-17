@@ -19,7 +19,7 @@ module ForemanTasksCore
     def self.register_settings(names, object)
       names = [names] unless names.is_a? Array
       names.each do |name|
-        raise "settings name has to be a symbol" unless name.is_a? Symbol
+        raise 'settings name has to be a symbol' unless name.is_a? Symbol
         raise "settings #{name} already registered" if SettingsLoader.settings_registered?(name)
         name_to_settings[name] = object
       end
@@ -47,7 +47,7 @@ module ForemanTasksCore
     end
 
     def validate_settings!
-      raise "Only symbols expected in keys" unless @settings.keys.all? { |key| key.is_a? Symbol }
+      raise 'Only symbols expected in keys' unless @settings.keys.all? { |key| key.is_a? Symbol }
     end
   end
 end

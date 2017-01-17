@@ -1,7 +1,6 @@
 module Actions
   module Middleware
     class RecurringLogic < ::Dynflow::Middleware
-
       # ::Actions::Middleware::RecurringLogic
       #
       # A middleware designed to make action repeatable.

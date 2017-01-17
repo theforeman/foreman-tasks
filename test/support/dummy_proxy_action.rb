@@ -1,6 +1,5 @@
 module Support
   class DummyProxyAction < Actions::ProxyAction
-
     class DummyProxy
       attr_reader :log, :task_triggered
 
@@ -12,7 +11,7 @@ module Support
       def trigger_task(*args)
         @log[:trigger_task] << args
         @task_triggered.success(true)
-        {"task_id" => "123"}
+        { 'task_id' => '123' }
       end
 
       def cancel_task(*args)
@@ -40,8 +39,8 @@ module Support
       ForemanTasks::Task::DynflowTask.new.tap { |task| task.id = '123' }
     end
 
-    def self.proxy
-      @proxy
+    class << self
+      attr_reader :proxy
     end
 
     def self.reset

@@ -1,6 +1,5 @@
 module Actions
   class Base < Dynflow::Action
-
     def task
       @task ||= ::ForemanTasks::Task::DynflowTask.where(:external_id => execution_plan_id).first!
     end
@@ -8,7 +7,7 @@ module Actions
     # This method says what data form input gets into the task details in Rest API
     # By default, it sends the whole input there.
     def task_input
-      self.input
+      input
     end
 
     # This method says what data form output gets into the task details in Rest API
@@ -16,7 +15,7 @@ module Actions
     # perhaps also aggraget data from subactions if needed (using +all_actions+) method
     # of Dynflow::Action::Presenter
     def task_output
-      self.output
+      output
     end
 
     # This method should return humanized description of the action, e.g. "Install package"
@@ -27,7 +26,7 @@ module Actions
     # This method should return String or Array<String> describing input for the task
     def humanized_input
       if task_input.blank?
-        ""
+        ''
       else
         task_input.pretty_inspect
       end
@@ -38,7 +37,7 @@ module Actions
     # description of restuls of the action
     def humanized_output
       if task_output.blank?
-        ""
+        ''
       else
         task_output.pretty_inspect
       end
@@ -52,8 +51,8 @@ module Actions
     end
 
     def already_running?
-      ForemanTasks::Task::DynflowTask.for_action(self.class).
-        running.where('external_id != ?', execution_plan_id).any?
+      ForemanTasks::Task::DynflowTask.for_action(self.class)
+                                     .running.where('external_id != ?', execution_plan_id).any?
     end
 
     def serializer_class

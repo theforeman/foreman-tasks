@@ -5,15 +5,15 @@ class TasksTest < ActiveSupport::TestCase
     before { @original_current_user = User.current }
     after  { User.current = @original_current_user }
 
-    test "can search the tasks by current_user" do
+    test 'can search the tasks by current_user' do
       user_one = FactoryGirl.create(:user)
       user_two = FactoryGirl.create(:user)
 
       task_one = FactoryGirl.create(:some_task, :set_owner => user_one)
-      task_two = FactoryGirl.create(:some_task, :set_owner => user_two)
+      FactoryGirl.create(:some_task, :set_owner => user_two)
 
       User.current = user_one
-      assert_equal [task_one], ForemanTasks::Task.search_for("owner.id = current_user")
+      assert_equal [task_one], ForemanTasks::Task.search_for('owner.id = current_user')
     end
   end
 
@@ -30,13 +30,12 @@ class TasksTest < ActiveSupport::TestCase
       User.current = user
       task = FactoryGirl.create(:dynflow_task)
 
-      auth       = Authorizer.new(user)
+      auth = Authorizer.new(user)
       assert auth.can?(permission.name.to_sym, task)
     end
   end
 
   describe 'consistency check' do
-
     let(:consistent_task) { FactoryGirl.create(:dynflow_task, :sync_with_dynflow => true) }
     let(:inconsistent_task) { FactoryGirl.create(:dynflow_task, :inconsistent_dynflow_task) }
 

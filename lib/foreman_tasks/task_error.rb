@@ -1,6 +1,5 @@
 module ForemanTasks
   class TaskError < StandardError
-
     attr_reader :task
     attr_reader :errors
 
@@ -12,8 +11,7 @@ module ForemanTasks
 
     def aggregated_message
       "Task #{task.id}: " +
-          errors.map { |e| "#{e.exception_class}: #{e.message}" }.join('; ')
+        errors.map { |e| "#{e.exception_class}: #{e.message}" }.join('; ')
     end
-
   end
 end

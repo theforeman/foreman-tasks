@@ -11,7 +11,7 @@ module ForemanTasks
           part.to_s
         end
       end.join('; ')
-      parts.join(" ")
+      parts.join(' ')
     end
 
     def format_recurring_logic_limit(thing)

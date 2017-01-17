@@ -14,12 +14,12 @@ FactoryGirl.define do
     end
 
     factory :dynflow_task, :class => ForemanTasks::Task::DynflowTask do
-      label "Support::DummyDynflowAction"
-      type "ForemanTasks::Task::DynflowTask"
-      started_at "2014-10-01 11:15:55"
-      ended_at "2014-10-01 11:15:57"
-      state "stopped"
-      result "success"
+      label 'Support::DummyDynflowAction'
+      type 'ForemanTasks::Task::DynflowTask'
+      started_at '2014-10-01 11:15:55'
+      ended_at '2014-10-01 11:15:57'
+      state 'stopped'
+      result 'success'
       parent_task_id nil
 
       transient do
@@ -37,11 +37,11 @@ FactoryGirl.define do
       end
 
       trait :user_create_task do
-        label "Actions::User::Create"
+        label 'Actions::User::Create'
       end
 
       trait :product_create_task do
-        label "Actions::Katello::Product::Create"
+        label 'Actions::Katello::Product::Create'
       end
 
       trait :inconsistent_dynflow_task do

@@ -1,18 +1,17 @@
 # coding: utf-8
 module ForemanTasks
   module ForemanTasksHelper
-
     def recurring_logic_state(recurring_logic)
       icon, status = case recurring_logic.state
-             when 'active'
-               'glyphicon-info-sign'
-             when 'finished'
-               ['glyphicon-ok-sign', 'status-ok']
-             when 'cancelled'
-               ['glyphicon-warning-sign', 'status-error']
-             else
-               'glyphicon-question-sign'
-             end
+                     when 'active'
+                       'glyphicon-info-sign'
+                     when 'finished'
+                       ['glyphicon-ok-sign', 'status-ok']
+                     when 'cancelled'
+                       ['glyphicon-warning-sign', 'status-error']
+                     else
+                       'glyphicon-question-sign'
+                     end
       content_tag(:i, '&nbsp'.html_safe, :class => "glyphicon #{icon}") + content_tag(:span, recurring_logic.humanized_state, :class => status)
     end
 
@@ -20,14 +19,14 @@ module ForemanTasks
       return 'task-status pficon-help' if task.state != 'stopped'
 
       icon_class = case task.result
-                     when 'success'
-                       'pficon-ok'
-                     when 'error'
-                       'pficon-error-circle-o'
-                     when 'warning'
-                       'pficon-ok status-warn'
-                     else
-                       'pficon-help'
+                   when 'success'
+                     'pficon-ok'
+                   when 'error'
+                     'pficon-error-circle-o'
+                   when 'warning'
+                     'pficon-ok status-warn'
+                   else
+                     'pficon-help'
                    end
 
       "task-status #{icon_class}"
@@ -38,7 +37,7 @@ module ForemanTasks
         _('N/A')
       else
         content_tag :span, (time > Time.now.utc ? _('in %s') : _('%s ago')) % time_ago_in_words(time),
-                    { :'data-original-title' => time.try(:in_time_zone), :rel => 'twipsy' }
+                    :'data-original-title' => time.try(:in_time_zone), :rel => 'twipsy'
       end
     end
 
@@ -47,14 +46,14 @@ module ForemanTasks
         _('N/A')
       else
         content_tag :span, distance_of_time_in_words(start, finish),
-                    { :'data-original-title' => number_with_delimiter((finish - start).to_i) + _(' seconds'), :rel => 'twipsy' }
+                    :'data-original-title' => number_with_delimiter((finish - start).to_i) + _(' seconds'), :rel => 'twipsy'
       end
     end
 
     def recurring_logic_action_buttons(recurring_logic)
       buttons = []
       if authorized_for(:permission => :edit_recurring_logics, :auth_object => recurring_logic)
-        buttons << link_to(N_("Cancel"), cancel_foreman_tasks_recurring_logic_path(recurring_logic), :method => :post, :class => 'btn btn-danger') unless %w(cancelled finished).include? recurring_logic.state
+        buttons << link_to(N_('Cancel'), cancel_foreman_tasks_recurring_logic_path(recurring_logic), :method => :post, :class => 'btn btn-danger') unless %w(cancelled finished).include? recurring_logic.state
       end
       button_group buttons
     end
@@ -107,7 +106,7 @@ module ForemanTasks
       end
     end
 
-    def trigger_selector(f, triggering = Triggering.new, options = {})
+    def trigger_selector(f, triggering = Triggering.new, _options = {})
       render :partial => 'common/trigger_form', :locals => { :f => f, :triggering => triggering }
     end
 
@@ -117,14 +116,14 @@ module ForemanTasks
       tags = []
       tags << text_f(f, :start_at_raw, :label => _('Start at'), :placeholder => 'YYYY-mm-dd HH:MM')
       tags << text_f(f, :start_before_raw, :label => _('Start before'), :placeholder => 'YYYY-mm-dd HH:MM', :help_inline => popover(_('Explanation'), _('Indicates that the action should be cancelled if it cannot be started before this time.')))
-      content_tag(:fieldset, nil, :id => "trigger_mode_future", :class => "trigger_mode_form #{'hidden' unless triggering.future?}") do
+      content_tag(:fieldset, nil, :id => 'trigger_mode_future', :class => "trigger_mode_form #{'hidden' unless triggering.future?}") do
         tags.join.html_safe
       end
     end
 
     def recurring_mode_fieldset(f, triggering)
       tags = []
-      tags << selectable_f(f, :input_type, %w(cronline monthly weekly daily hourly), {}, :label => _("Repeats"), :id => 'input_type_selector')
+      tags << selectable_f(f, :input_type, %w(cronline monthly weekly daily hourly), {}, :label => _('Repeats'), :id => 'input_type_selector')
       tags += [
         cronline_fieldset(f, triggering),
         monthly_fieldset(f, triggering),
@@ -152,15 +151,15 @@ module ForemanTasks
       ].map { |opt| content_tag(:li, opt) }.join
       help = content_tag(:span, nil, :class => 'help-inline') do
         popover(_('Explanation'),
-                _("Cron line format 'a b c d e', where: %s") % ("<br><ol type=\"a\">#{options}</ol>"))
+                _("Cron line format 'a b c d e', where: %s") % "<br><ol type=\"a\">#{options}</ol>")
       end
-      content_tag(:fieldset, nil, :class => "input_type_form #{'hidden' unless triggering.input_type == :cronline}", :id => "input_type_cronline") do
+      content_tag(:fieldset, nil, :class => "input_type_form #{'hidden' unless triggering.input_type == :cronline}", :id => 'input_type_cronline') do
         text_f f, :cronline, :label => _('Cron line'), :placeholder => '* * * * *', :help_inline => help
       end
     end
 
     def monthly_fieldset(f, triggering)
-      content_tag(:fieldset, nil, :id => "input_type_monthly", :class => "input_type_form #{'hidden' unless triggering.input_type == :monthly}") do
+      content_tag(:fieldset, nil, :id => 'input_type_monthly', :class => "input_type_form #{'hidden' unless triggering.input_type == :monthly}") do
         text_f(f, :days, :label => _('Days'), :placeholder => '1,2...')
       end
     end
@@ -170,14 +169,14 @@ module ForemanTasks
         f.fields_for :days_of_week do |days_of_week|
           inline_checkboxes_f(days_of_week,
                               :weekday,
-                              { :label => _("Days of week") },
-                              { 1 => _("Mon"),
-                                2 => _("Tue"),
-                                3 => _("Wed"),
-                                4 => _("Thu"),
-                                5 => _("Fri"),
-                                6 => _("Sat"),
-                                7 => _("Sun") })
+                              { :label => _('Days of week') },
+                              1 => _('Mon'),
+                              2 => _('Tue'),
+                              3 => _('Wed'),
+                              4 => _('Thu'),
+                              5 => _('Fri'),
+                              6 => _('Sat'),
+                              7 => _('Sun'))
         end
       end
     end
@@ -186,16 +185,16 @@ module ForemanTasks
       tags = []
       tags << content_tag(:fieldset, nil, :id => 'time_picker', :class => "input_type_form #{'hidden' if triggering.input_type == :cronline}") do
         # TRANSLATORS: Time widget for when a task should start
-        time_f(f, :time, { :label => _("At"), :id => 'something' }, { :time_separator => '' })
+        time_f(f, :time, { :label => _('At'), :id => 'something' }, :time_separator => '')
       end
       tags << number_f(f, :max_iteration, :label => _('Repeat N times'), :min => 1, :placeholder => 'N')
-      tags << field(f, :end_time_limit_select, :label => _("Ends"), :control_group_id => "end_time_limit_select") do
-        radio_button_f(f, :end_time_limited, :value => false, :checked=> true, :text => _("Never"), :class => 'end_time_limit_selector') +
-        # TRANSLATORS: Button text for saying when a task should end
-        radio_button_f(f, :end_time_limited, :value => true, :text => _("On"), :class => 'end_time_limit_selector')
+      tags << field(f, :end_time_limit_select, :label => _('Ends'), :control_group_id => 'end_time_limit_select') do
+        radio_button_f(f, :end_time_limited, :value => false, :checked => true, :text => _('Never'), :class => 'end_time_limit_selector') +
+          # TRANSLATORS: Button text for saying when a task should end
+          radio_button_f(f, :end_time_limited, :value => true, :text => _('On'), :class => 'end_time_limit_selector')
       end
       tags << content_tag(:fieldset, nil, :id => 'end_time_limit_form', :class => "input_type_form #{'hidden' unless triggering.end_time_limited}") do
-        datetime_f f, :end_time, { :label => _("Ends at") }, { :use_month_numbers => true, :use_two_digit_numbers => true, :time_separator => '' }
+        datetime_f f, :end_time, { :label => _('Ends at') }, :use_month_numbers => true, :use_two_digit_numbers => true, :time_separator => ''
       end
       tags.join.html_safe
     end

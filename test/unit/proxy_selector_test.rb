@@ -1,4 +1,4 @@
-require "foreman_tasks_test_helper"
+require 'foreman_tasks_test_helper'
 
 describe ForemanTasks::ProxySelector do
   let(:proxy_selector) { ForemanTasks::ProxySelector.new }
@@ -10,8 +10,8 @@ describe ForemanTasks::ProxySelector do
   describe '#select_by_jobs_count' do
     it 'load balances' do
       count = 3
-      ProxyAPI::ForemanDynflow::DynflowProxy.any_instance.expects(:tasks_count).raises.
-          then.times(count - 1).returns(0)
+      ProxyAPI::ForemanDynflow::DynflowProxy.any_instance.expects(:tasks_count).raises
+                                            .then.times(count - 1).returns(0)
       proxies = FactoryGirl.create_list(:smart_proxy, count)
 
       available = proxies.reduce([]) do |found, _|

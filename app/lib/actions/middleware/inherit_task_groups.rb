@@ -1,18 +1,17 @@
 module Actions
   module Middleware
     class InheritTaskGroups < Dynflow::Middleware
-
       def delay(*args)
-        pass *args
+        pass(*args)
       end
 
       def plan(*args)
         inherit_task_groups
-        pass *args
+        pass(*args)
       end
 
       def run(*args)
-        pass *args
+        pass(*args)
         collect_children_task_groups
       end
 
@@ -36,4 +35,3 @@ module Actions
     end
   end
 end
-

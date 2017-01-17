@@ -1,14 +1,12 @@
 module Actions
   module Foreman
     module Host
-
       class ImportFacts < Actions::EntryAction
-
         def resource_locks
           :import_facts
         end
 
-        def plan(host_type, host_name, facts, certname, proxy_id)
+        def plan(_host_type, host_name, facts, certname, proxy_id)
           facts['domain'].try(:downcase!)
           host = ::Host::Base.import_host(host_name, certname, facts, proxy_id)
           action_subject(host, :facts => facts)
@@ -37,7 +35,7 @@ module Actions
         end
 
         def humanized_name
-          _("Import facts")
+          _('Import facts')
         end
 
         def humanized_input
@@ -48,7 +46,6 @@ module Actions
         def self.cleanup_after
           '30d'
         end
-
       end
     end
   end

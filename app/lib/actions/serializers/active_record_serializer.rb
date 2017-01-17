@@ -1,6 +1,5 @@
 module Actions
   module Serializers
-
     class ActiveRecordSerializer < ::Dynflow::Serializers::Noop
       def serialize(arg)
         if arg.is_a? ActiveRecord::Base
@@ -20,7 +19,5 @@ module Actions
         end
       end
     end
-
   end
 end
-

@@ -1,7 +1,6 @@
 module ForemanTasks
   module Concerns
     module ActionSubject
-
       extend ActiveSupport::Concern
 
       module ClassMethods
@@ -15,10 +14,10 @@ module ForemanTasks
       end
 
       def to_action_input
-        raise 'The resource needs to be saved first' if self.new_record?
+        raise 'The resource needs to be saved first' if new_record?
 
         { id: id, name: name }.tap do |hash|
-          hash.update(label: label) if self.respond_to? :label
+          hash.update(label: label) if respond_to? :label
         end
       end
 
@@ -36,13 +35,12 @@ module ForemanTasks
       def all_related_resources
         mine = Set.new Array(related_resources)
 
-        get_all_related_resources = -> resource do
+        get_all_related_resources = lambda do |resource|
           resource.is_a?(ActionSubject) ? resource.all_related_resources : []
         end
 
-        mine + mine.reduce(Set.new) { |s, resource| s + get_all_related_resources.(resource) }
+        mine + mine.reduce(Set.new) { |s, resource| s + get_all_related_resources.call(resource) }
       end
-
     end
   end
 end

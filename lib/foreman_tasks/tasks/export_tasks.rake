@@ -20,12 +20,11 @@ all unsuccessful tasks in the past 60 days. The default TASK_FORMAT is html
 which requires a tar.gz file extension.
 DESC
   task :export_tasks => :environment do
-    deprecated_options = {:tasks => "TASK_SEARCH",
-                          :days => "TASK_DAYS",
-                          :export => "TASK_FILE"
-    }
+    deprecated_options = { :tasks => 'TASK_SEARCH',
+                           :days => 'TASK_DAYS',
+                           :export => 'TASK_FILE' }
     deprecated_options.each do |option, new_option|
-      fail "The #{option} option is deprecated. Please use #{new_option} instead" if ENV.include?(option.to_s)
+      raise "The #{option} option is deprecated. Please use #{new_option} instead" if ENV.include?(option.to_s)
     end
 
     class TaskRender
@@ -51,13 +50,11 @@ DESC
       end
 
       def template(filename)
-        File.join(Gem::Specification.find_by_name("dynflow").gem_dir, 'web', 'views', "#{filename}.erb")
+        File.join(Gem::Specification.find_by(name: 'dynflow').gem_dir, 'web', 'views', "#{filename}.erb")
       end
 
       def erb(file, options = {})
-        unless @cache[file]
-          @cache[file] = Tilt.new(template(file))
-        end
+        @cache[file] ||= Tilt.new(template(file))
         @cache[file].render(self, options[:locals])
       end
 
@@ -73,7 +70,7 @@ DESC
             <pre class="prettyprint lang-yaml">#{h(pretty_value)}</pre>
           HTML
         else
-          ""
+          ''
         end
       end
 
@@ -93,7 +90,7 @@ DESC
       end
 
       def duration_to_s(duration)
-        h("%0.2fs" % duration)
+        h('%0.2fs' % duration)
       end
 
       def load_action(step)
@@ -110,8 +107,8 @@ DESC
       end
 
       def show_world(world_id)
-        if registered_world = world.coordinator.find_worlds(false, id: world_id).first
-          "%{world_id} %{world_meta}" % { world_id: world_id, world_meta: registered_world.meta.inspect }
+        if (registered_world = world.coordinator.find_worlds(false, id: world_id).first)
+          '%{world_id} %{world_meta}' % { world_id: world_id, world_meta: registered_world.meta.inspect }
         else
           world_id
         end
@@ -127,46 +124,46 @@ DESC
             </p>
           HTML
         else
-          ""
+          ''
         end
       end
 
       def atom_css_classes(atom)
-        classes = ["atom"]
+        classes = ['atom']
         step    = @plan.steps[atom.step_id]
         case step.state
         when :success
-          classes << "success"
+          classes << 'success'
         when :error
-          classes << "error"
+          classes << 'error'
         when :skipped, :skipping
-          classes << "skipped"
+          classes << 'skipped'
         end
-        return classes.join(" ")
+        classes.join(' ')
       end
 
       def flow_css_classes(flow, sub_flow = nil)
         classes = []
         case flow
         when Dynflow::Flows::Sequence
-          classes << "sequence"
+          classes << 'sequence'
         when Dynflow::Flows::Concurrence
-          classes << "concurrence"
+          classes << 'concurrence'
         when Dynflow::Flows::Atom
           classes << atom_css_classes(flow)
         else
           raise "Unknown run plan #{run_plan.inspect}"
         end
         classes << atom_css_classes(sub_flow) if sub_flow.is_a? Dynflow::Flows::Atom
-        return classes.join(" ")
+        classes.join(' ')
       end
 
       def step_css_class(step)
         case step.state
         when :success
-          "success"
+          'success'
         when :error
-          "important"
+          'important'
         end
       end
 
@@ -182,17 +179,14 @@ DESC
         @plan.steps[step_id]
       end
 
-
       def updated_url(new_params)
-        url("?" + Rack::Utils.build_nested_query(params.merge(new_params.stringify_keys)))
+        url('?' + Rack::Utils.build_nested_query(params.merge(new_params.stringify_keys)))
       end
-
-
     end
 
     class PageHelper
       def self.pagify(template)
-       pre =  <<-HTML
+        pre = <<-HTML
        <html>
        <head>
        <title>Dynflow Console</title>
@@ -208,41 +202,41 @@ DESC
        <body>
        </html>
          HTML
-       end
+      end
 
-       def self.copy_assets(tmp_dir)
-           ['vendor/bootstrap/js/bootstrap.js',
-            'vendor/google-code-prettify/run_prettify.js',
-            'vendor/jquery/jquery.js',
-            'vendor/jquery/jquery.js',
-            'javascripts/application.js',
-            'vendor/bootstrap/css/bootstrap.css',
-            'stylesheets/application.css'].each do |file|
+      def self.copy_assets(tmp_dir)
+        ['vendor/bootstrap/js/bootstrap.js',
+         'vendor/google-code-prettify/run_prettify.js',
+         'vendor/jquery/jquery.js',
+         'vendor/jquery/jquery.js',
+         'javascripts/application.js',
+         'vendor/bootstrap/css/bootstrap.css',
+         'stylesheets/application.css'].each do |file|
 
-             filename = File.join(Gem::Specification.find_by_name("dynflow").gem_dir, 'web', 'assets', file)
-             FileUtils.copy_file(filename, File.join(tmp_dir, File.basename(file)))
-           end
-       end
+          filename = File.join(Gem::Specification.find_by(name: 'dynflow').gem_dir, 'web', 'assets', file)
+          FileUtils.copy_file(filename, File.join(tmp_dir, File.basename(file)))
+        end
+      end
 
       def self.generate_index(tasks)
-        html = "<div><table class=\"table\">"
-        tasks.order("started_at desc").all.each do |task|
+        html = '<div><table class="table">'
+        tasks.order('started_at desc').all.each do |task|
           html << "<tr><td><a href=\"#{task.id}.html\">#{task.label}</a></td><td>#{task.started_at}</td>\
                    <td>#{task.state}</td><td>#{task.result}</td></tr>"
         end
-        html << "</table></div>"
+        html << '</table></div>'
       end
     end
 
-    if ENV['TASK_SEARCH'].nil? && ENV['TASK_DAYS'].nil?
-      filter = "started_at > \"#{7.days.ago.to_s(:db)}\" || " \
-        "(result != success && started_at > \"#{60.days.ago.to_s(:db)})\""
-    else
-      filter = ENV['TASK_SEARCH'] || ''
-    end
+    filter = if ENV['TASK_SEARCH'].nil? && ENV['TASK_DAYS'].nil?
+               "started_at > \"#{7.days.ago.to_s(:db)}\" || " \
+                 "(result != success && started_at > \"#{60.days.ago.to_s(:db)})\""
+             else
+               ENV['TASK_SEARCH'] || ''
+             end
 
     if (days = ENV['TASK_DAYS'])
-      filter += " && " unless filter == ''
+      filter += ' && ' unless filter == ''
       filter += "started_at > \"#{days.to_i.days.ago.to_s(:db)}\""
     end
 
@@ -256,23 +250,22 @@ DESC
       Dir.mktmpdir('task-export') do |tmp_dir|
         PageHelper.copy_assets(tmp_dir)
 
-
         renderer = TaskRender.new
         total = tasks.count
 
         tasks.each_with_index do |task, count|
-          File.open(File.join(tmp_dir, "#{task.id}.html"), 'w') {|file| file.write(PageHelper.pagify(renderer.render_task(task)))}
+          File.open(File.join(tmp_dir, "#{task.id}.html"), 'w') { |file| file.write(PageHelper.pagify(renderer.render_task(task))) }
           puts "#{count + 1}/#{total}"
           count += 1
         end
 
-        File.open(File.join(tmp_dir, "index.html"), 'w') {|file| file.write(PageHelper.pagify(PageHelper.generate_index(tasks)))}
+        File.open(File.join(tmp_dir, 'index.html'), 'w') { |file| file.write(PageHelper.pagify(PageHelper.generate_index(tasks))) }
 
         sh("tar cvzf #{export_filename} #{tmp_dir} > /dev/null")
       end
     elsif format == 'csv'
       CSV.open(export_filename, 'wb') do |csv|
-        csv << ['id', 'state', 'type', 'label', 'result', 'parent_task_id', 'started_at', 'ended_at']
+        csv << %w(id state type label result parent_task_id started_at ended_at)
         tasks.each do |task|
           csv << [task.id, task.state, task.type, task.label, task.result,
                   task.parent_task_id, task.started_at, task.ended_at]
@@ -281,6 +274,5 @@ DESC
     end
 
     puts "Created #{export_filename}"
-
   end
 end

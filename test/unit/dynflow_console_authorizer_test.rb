@@ -1,7 +1,7 @@
-require "foreman_tasks_test_helper"
+require 'foreman_tasks_test_helper'
 
 module ForemanTasks
-  class DynflowConsoleAuthorizerTest <  ActiveSupport::TestCase
+  class DynflowConsoleAuthorizerTest < ActiveSupport::TestCase
     include Rack::Test::Methods
 
     before do
@@ -18,8 +18,8 @@ module ForemanTasks
     def dynflow_console_authorized?(task = nil)
       dynflow_path = '/'
       dynflow_path += task.external_id.to_s if task
-      dynflow_rack_env = { "rack.session" => { "user" => user.id, "expires_at" => Time.now + 100 },
-                           "PATH_INFO"     => dynflow_path}.with_indifferent_access
+      dynflow_rack_env = { 'rack.session' => { 'user' => user.id, 'expires_at' => Time.zone.now + 100 },
+                           'PATH_INFO' => dynflow_path }.with_indifferent_access
       ForemanTasks::Dynflow::ConsoleAuthorizer.new(dynflow_rack_env).allow?
     end
 

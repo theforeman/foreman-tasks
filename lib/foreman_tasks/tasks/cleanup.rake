@@ -16,32 +16,20 @@ DESC
     task :run => 'environment' do
       options = {}
 
-      if ENV['TASK_SEARCH']
-        options[:filter] = ENV['TASK_SEARCH']
-      end
+      options[:filter] = ENV['TASK_SEARCH'] if ENV['TASK_SEARCH']
 
-      if ENV['AFTER']
-        options[:after] = ENV['AFTER']
-      end
+      options[:after] = ENV['AFTER'] if ENV['AFTER']
 
-      if ENV['STATES']
-        options[:states] = ENV['STATES'].to_s.split(',')
-      end
+      options[:states] = ENV['STATES'].to_s.split(',') if ENV['STATES']
 
-      if ENV['NOOP']
-        options[:noop] = true
-      end
+      options[:noop] = true if ENV['NOOP']
 
-      if ENV['VERBOSE']
-        options[:verbose] = true
-      end
+      options[:verbose] = true if ENV['VERBOSE']
 
-      if ENV['BATCH_SIZE']
-        options[:batch_size] = ENV['BATCH_SIZE'].to_i
-      end
+      options[:batch_size] = ENV['BATCH_SIZE'].to_i if ENV['BATCH_SIZE']
 
       if ENV['FILTER']
-        fail "FILTER has been deprecated. Please use TASK_SEARCH instead."
+        raise 'FILTER has been deprecated. Please use TASK_SEARCH instead.'
       end
 
       ForemanTasks::Cleaner.run(options)

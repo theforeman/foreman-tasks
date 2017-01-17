@@ -13,9 +13,7 @@
 
 module Actions
   module Middleware
-
     class KeepCurrentUser < Dynflow::Middleware
-
       def delay(*args)
         pass(*args).tap { store_current_user }
       end
@@ -54,7 +52,6 @@ module Actions
       ensure
         User.current = nil
       end
-
     end
   end
 end

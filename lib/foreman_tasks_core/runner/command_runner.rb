@@ -17,7 +17,7 @@ module ForemanTasksCore
           else
             close_io
             Process.wait(@command_pid)
-            publish_exit_status($?.exitstatus)
+            publish_exit_status($CHILD_STATUS.exitstatus)
           end
           publish_data(lines, 'stdout') if lines && !lines.empty?
         end

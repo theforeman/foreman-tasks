@@ -1,7 +1,6 @@
 module ForemanTasks
   module Concerns
     module ActionTriggering
-
       extend ActiveSupport::Concern
 
       included do
@@ -13,17 +12,13 @@ module ForemanTasks
       end
 
       # @override
-      def create_action
-      end
+      def create_action; end
 
       # @override
-      def update_action
-      end
+      def update_action; end
 
       # @override
-      def destroy_action
-      end
-
+      def destroy_action; end
 
       def save_with_dynflow_task_wrap(*args)
         dynflow_task_wrap(:save) { save_without_dynflow_task_wrap(*args) }
@@ -48,12 +43,12 @@ module ForemanTasks
       # this can be used when HostActionSubject is used for orchestration but you want to avoid
       # triggering more tasks by ActiveRecord callbacks within run/finalize phase of your task
       # e.g. host.disable_dynflow_hooks { |h| h.save }
-      def disable_dynflow_hooks(&block)
+      def disable_dynflow_hooks
         @_disable_dynflow_hooks = true
 
         if block_given?
           begin
-            block.call(self)
+            yield(self)
           ensure
             @_disable_dynflow_hooks = false
           end
@@ -77,17 +72,17 @@ module ForemanTasks
 
       def plan_create_action
         plan_action(create_action, self) if create_action
-        return true
+        true
       end
 
       def plan_update_action
         plan_action(update_action, self) if update_action
-        return true
+        true
       end
 
       def plan_destroy_action
         plan_action(destroy_action, self) if destroy_action
-        return true
+        true
       end
 
       # Perform planning phase of the action tied with the model event.
@@ -115,15 +110,15 @@ module ForemanTasks
       # to unexpected results.
       def dynflow_task_wrap(method)
         if ForemanTasks.dynflow.config.disable_active_record_actions ||
-              @_disable_dynflow_hooks ||
-              @_dynflow_task_wrapped
+           @_disable_dynflow_hooks ||
+           @_dynflow_task_wrapped
           return yield
         end
         @_dynflow_task_wrapped = true
 
         action = case method
                  when :save
-                   self.new_record? ? create_action : update_action
+                   new_record? ? create_action : update_action
                  when :destroy
                    destroy_action
                  else
@@ -143,7 +138,7 @@ module ForemanTasks
       def ensure_not_in_transaction!
         # we don't care about transactions when using InThreadWorld
         if defined?(::Dynflow::Testing::InThreadWorld) &&
-              ForemanTasks.dynflow.world.is_a?(::Dynflow::Testing::InThreadWorld)
+           ForemanTasks.dynflow.world.is_a?(::Dynflow::Testing::InThreadWorld)
           return
         end
         if self.class.connection.open_transactions > 0
@@ -159,7 +154,7 @@ module ForemanTasks
             run.wait
             if run.value.error?
               task = ForemanTasks::Task::DynflowTask.where(:external_id => @execution_plan.id).first!
-              raise ForemanTasks::TaskError.new(task)
+              raise ForemanTasks::TaskError, task
             end
           end
         end

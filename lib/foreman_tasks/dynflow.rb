@@ -35,14 +35,18 @@ module ForemanTasks
       return @world if @world
 
       if config.lazy_initialization && defined?(PhusionPassenger)
-        config.dynflow_logger.warn("ForemanTasks: lazy loading with PhusionPassenger might lead to unexpected results")
+        config.dynflow_logger.warn('ForemanTasks: lazy loading with PhusionPassenger might lead to unexpected results')
       end
       config.initialize_world.tap do |world|
         @world = world
 
         unless config.remote?
           # don't try to do any rescuing until the tables are properly migrated
-          if !Foreman.in_rake?('db:migrate') && (ForemanTasks::Task.table_exists? rescue(false))
+          if !Foreman.in_rake?('db:migrate') && (begin
+                                                   ForemanTasks::Task.table_exists?
+                                                 rescue
+                                                   (false)
+                                                 end)
             config.run_on_init_hooks(world)
             # leave this just for long-running executors
             unless config.rake_task_with_executor?
@@ -66,7 +70,7 @@ module ForemanTasks
 
     def reinitialize!
       @world = nil
-      self.initialize!
+      initialize!
     end
 
     def world
@@ -79,24 +83,22 @@ module ForemanTasks
               'in some initializer'
       end
 
-      return @world
+      @world
     end
 
-    def world=(world)
-      @world = world
-    end
+    attr_writer :world
 
     def web_console
       ::Dynflow::Web.setup do
         before do
           if !Setting[:dynflow_enable_console] ||
-                (Setting[:dynflow_console_require_auth] && !ConsoleAuthorizer.new(env).allow?)
+             (Setting[:dynflow_console_require_auth] && !ConsoleAuthorizer.new(env).allow?)
             halt 403, 'Access forbidden'
           end
         end
 
         set(:custom_navigation) do
-          { _("Back to tasks") => "/#{ForemanTasks::TasksController.controller_path}" }
+          { _('Back to tasks') => "/#{ForemanTasks::TasksController.controller_path}" }
         end
         set(:world) { ForemanTasks.dynflow.world }
       end

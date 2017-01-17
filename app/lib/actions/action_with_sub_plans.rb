@@ -1,21 +1,19 @@
 module Actions
-
   class Actions::ActionWithSubPlans < Actions::EntryAction
-
     middleware.use Actions::Middleware::KeepCurrentUser
 
     include Dynflow::Action::WithSubPlans
 
-    def plan(*args)
+    def plan(*_args)
       raise NotImplementedError
     end
 
     def humanized_output
       return unless counts_set?
-      _("%{total} task(s), %{success} success, %{failed} fail") %
-          { total:   output[:total_count],
-            success: output[:success_count],
-            failed:  output[:failed_count] }
+      _('%{total} task(s), %{success} success, %{failed} fail') %
+        { total:   output[:total_count],
+          success: output[:success_count],
+          failed:  output[:failed_count] }
     end
 
     def run_progress
@@ -25,6 +23,5 @@ module Actions
         0.1
       end
     end
-
   end
 end

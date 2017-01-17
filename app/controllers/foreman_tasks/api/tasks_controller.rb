@@ -1,26 +1,13 @@
-#
-# Copyright 2013 Red Hat, Inc.
-#
-# This software is licensed to you under the GNU General Public
-# License as published by the Free Software Foundation; either version
-# 2 of the License (GPLv2) or (at your option) any later version.
-# There is NO WARRANTY for this software, express or implied,
-# including the implied warranties of MERCHANTABILITY,
-# NON-INFRINGEMENT, or FITNESS FOR A PARTICULAR PURPOSE. You should
-# have received a copy of GPLv2 along with this software; if not, see
-# http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt.
-
 module ForemanTasks
   module Api
     class TasksController < ::Api::V2::BaseController
-
       include ::Foreman::Controller::SmartProxyAuth
       add_smart_proxy_filters :callback, :features => 'Dynflow'
 
       resource_description do
         resource_id 'foreman_tasks'
         api_version 'v2'
-        api_base_url "/foreman_tasks/api"
+        api_base_url '/foreman_tasks/api'
       end
 
       # Foreman right now doesn't have mechanism to
@@ -29,25 +16,24 @@ module ForemanTasks
       class BadRequest < Apipie::ParamError
       end
 
-      before_filter :find_task, :only => [:show]
+      before_action :find_task, :only => [:show]
 
-      api :GET, "/tasks/summary", "Show task summary"
+      api :GET, '/tasks/summary', 'Show task summary'
       def summary
         render :json => ForemanTasks::Task::Summarizer.new.summarize_by_status
       end
 
-      api :GET, "/tasks/:id", "Show task details"
-      param :id, :identifier, desc: "UUID of the task"
-      def show
-      end
+      api :GET, '/tasks/:id', 'Show task details'
+      param :id, :identifier, desc: 'UUID of the task'
+      def show; end
 
-      api :POST, "/tasks/bulk_search", "List dynflow tasks for uuids"
+      api :POST, '/tasks/bulk_search', 'List dynflow tasks for uuids'
       param :searches, Array, :desc => 'List of uuids to fetch info about' do
         param :search_id, String, :desc => <<-DESC
           Arbitraty value for client to identify the the request parts with results.
           It's passed in the results to be able to pair the requests and responses properly.
         DESC
-        param :type, %w[user resource task]
+        param :type, %w(user resource task)
         param :task_id, String, :desc => <<-DESC
           In case :type = 'task', find the task by the uuid
         DESC
@@ -104,8 +90,8 @@ module ForemanTasks
           if task.resumable?
             begin
               ForemanTasks.dynflow.world.execute(task.execution_plan.id)
-              resumed  << task_hash(task)
-            rescue RuntimeError => e
+              resumed << task_hash(task)
+            rescue RuntimeError
               failed << task_hash(task)
             end
           else
@@ -114,59 +100,58 @@ module ForemanTasks
         end
 
         render :json => {
-                          total: resumed.length + failed.length + skipped.length,
-                          resumed: resumed,
-                          failed: failed,
-                          skipped: skipped
-                        }
+          total: resumed.length + failed.length + skipped.length,
+          resumed: resumed,
+          failed: failed,
+          skipped: skipped
+        }
       end
 
-      api :GET, '/tasks', N_("List tasks")
-      param :search, String, :desc => N_("Search string")
-      param :page, :number, :desc => N_("Page number, starting at 1")
-      param :per_page,  :number, :desc => N_("Number of results per page to return")
+      api :GET, '/tasks', N_('List tasks')
+      param :search, String, :desc => N_('Search string')
+      param :page, :number, :desc => N_('Page number, starting at 1')
+      param :per_page, :number, :desc => N_('Number of results per page to return')
       param :order, String, :desc => N_("Sort field and order, e.g. 'name DESC'")
       param :sort, Hash, :desc => N_("Hash version of 'order' param") do
-        param :by, String, :desc => N_("Field to sort the results on")
-        param :order, String, :desc => N_("How to order the sorted results (e.g. ASC for ascending)")
+        param :by, String, :desc => N_('Field to sort the results on')
+        param :order, String, :desc => N_('How to order the sorted results (e.g. ASC for ascending)')
       end
       def index
-        scope =resource_scope.search_for(params[:search]).select('DISTINCT foreman_tasks_tasks.*')
+        scope = resource_scope.search_for(params[:search]).select('DISTINCT foreman_tasks_tasks.*')
         total = scope.count
 
-        ordering_params =  {
-                             sort_by: params[:sort_by] || 'started_at',
-                             sort_order: params[:sort_order] || 'DESC'
-                           }
+        ordering_params = {
+          sort_by: params[:sort_by] || 'started_at',
+          sort_order: params[:sort_order] || 'DESC'
+        }
         scope = ordering_scope(scope, ordering_params)
 
-
         pagination_params = {
-                              page: params[:page] || 1,
-                              per_page: params[:per_page] || 20
-                            }
+          page: params[:page] || 1,
+          per_page: params[:per_page] || 20
+        }
         scope = pagination_scope(scope, pagination_params)
         results = scope.map { |task| task_hash(task) }
 
         render :json => {
-                          total: total,
-                          subtotal: results.count,
-                          page: pagination_params[:page],
-                          per_page: pagination_params[:per_page],
-                          sort: {
-                                  by: ordering_params[:sort_by],
-                                  order: ordering_params[:sort_order]
-                                },
-                          results: results
-                        }
+          total: total,
+          subtotal: results.count,
+          page: pagination_params[:page],
+          per_page: pagination_params[:per_page],
+          sort: {
+            by: ordering_params[:sort_by],
+            order: ordering_params[:sort_order]
+          },
+          results: results
+        }
       end
 
-      api :POST, '/tasks/callback', N_("Send data to the task from external executor (such as smart_proxy_dynflow)")
+      api :POST, '/tasks/callback', N_('Send data to the task from external executor (such as smart_proxy_dynflow)')
       param :callback, Hash do
-        param :task_id, :identifier, :desc => N_("UUID of the task")
-        param :step_id, String, :desc => N_("The ID of the step inside the execution plan to send the event to")
+        param :task_id, :identifier, :desc => N_('UUID of the task')
+        param :step_id, String, :desc => N_('The ID of the step inside the execution plan to send the event to')
       end
-      param :data, Hash, :desc => N_("Data to be sent to the action")
+      param :data, Hash, :desc => N_('Data to be sent to the action')
       def callback
         task = ForemanTasks::Task::DynflowTask.find(params[:callback][:task_id])
         ForemanTasks.dynflow.world.event(task.external_id,
@@ -193,7 +178,7 @@ module ForemanTasks
           scope
         when 'user'
           if search_params[:user_id].blank?
-            raise BadRequest, _("User search_params requires user_id to be specified")
+            raise BadRequest, _('User search_params requires user_id to be specified')
           end
           scope.joins(:locks).where(foreman_tasks_locks:
                                         { name:          ::ForemanTasks::Lock::OWNER_LOCK_NAME,
@@ -202,18 +187,18 @@ module ForemanTasks
         when 'resource'
           if search_params[:resource_type].blank? || search_params[:resource_id].blank?
             raise BadRequest,
-                  _("Resource search_params requires resource_type and resource_id to be specified")
+                  _('Resource search_params requires resource_type and resource_id to be specified')
           end
           scope.joins(:locks).where(foreman_tasks_locks:
                                         { resource_type: search_params[:resource_type],
                                           resource_id:   search_params[:resource_id] })
         when 'task'
           if search_params[:task_id].blank?
-            raise BadRequest, _("Task search_params requires task_id to be specified")
+            raise BadRequest, _('Task search_params requires task_id to be specified')
           end
           scope.where(id: search_params[:task_id])
         else
-          raise BadRequest, _("Type %s for search_params is not supported") % search_params[:type]
+          raise BadRequest, _('Type %s for search_params is not supported') % search_params[:type]
         end
       end
 
@@ -237,7 +222,7 @@ module ForemanTasks
       def pagination_scope(scope, search_params)
         page     = search_params[:page] || 1
         per_page = search_params[:per_page] || 10
-        scope    = scope.limit(per_page).offset((page.to_i - 1) * per_page.to_i)
+        scope.limit(per_page).offset((page.to_i - 1) * per_page.to_i)
       end
 
       def ordering_scope(scope, ordering_params)
@@ -248,22 +233,21 @@ module ForemanTasks
 
       def task_hash(task)
         return @tasks[task.id] if @tasks && @tasks[task.id]
-        task_hash       = Rabl.render(
-            task, 'show',
-            view_path: "#{ForemanTasks::Engine.root}/app/views/foreman_tasks/api/tasks",
-            format:    :hash,
-            scope:     self)
+        task_hash = Rabl.render(
+          task, 'show',
+          view_path: "#{ForemanTasks::Engine.root}/app/views/foreman_tasks/api/tasks",
+          format:    :hash,
+          scope:     self
+        )
         @tasks[task.id] = task_hash if @tasks
-        return task_hash
+        task_hash
       end
-
-      private
 
       def find_task
         @task = Task.find(params[:id])
       end
 
-      def resource_scope(options = {})
+      def resource_scope(_options = {})
         @resource_scope ||= ForemanTasks::Task.authorized("#{action_permission}_foreman_tasks")
       end
 

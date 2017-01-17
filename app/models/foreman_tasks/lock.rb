@@ -1,6 +1,5 @@
 module ForemanTasks
   class Lock < ActiveRecord::Base
-
     LINK_LOCK_NAME  = :link_resource
     OWNER_LOCK_NAME = :task_owner
 
@@ -8,25 +7,25 @@ module ForemanTasks
     # explicitly stating that the all the locks for resource should be used
     ALL_LOCK_NAME   = :all
 
-    RESERVED_LOCK_NAMES = [LINK_LOCK_NAME, OWNER_LOCK_NAME, ALL_LOCK_NAME]
+    RESERVED_LOCK_NAMES = [LINK_LOCK_NAME, OWNER_LOCK_NAME, ALL_LOCK_NAME].freeze
 
     class LockConflict < StandardError
       attr_reader :required_lock, :conflicting_locks
       def initialize(required_lock, conflicting_locks)
-        header = _("Required lock is already taken by other running tasks.")
+        header = _('Required lock is already taken by other running tasks.')
         header << "\n"
-        header << _("Please inspect their state, fix their errors and resume them.")
+        header << _('Please inspect their state, fix their errors and resume them.')
         header << "\n\n"
-        header << _("Required lock: %s") % required_lock.name
+        header << _('Required lock: %s') % required_lock.name
         header << "\n"
-        header << _("Conflicts with tasks:")
+        header << _('Conflicts with tasks:')
         header << "\n"
         url_helpers       = Rails.application.routes.url_helpers
-        conflicting_tasks = conflicting_locks.
-            map(&:task).
-            uniq.
-            map { |task| "- #{Setting['foreman_url'] + url_helpers.foreman_tasks_task_path(task)}" }.
-            join("\n")
+        conflicting_tasks = conflicting_locks
+                            .map(&:task)
+                            .uniq
+                            .map { |task| "- #{Setting['foreman_url'] + url_helpers.foreman_tasks_task_path(task)}" }
+                            .join("\n")
 
         super header + conflicting_tasks
         @required_lock     = required_lock
@@ -38,21 +37,17 @@ module ForemanTasks
 
     belongs_to :resource, polymorphic: true
 
-    scope :active, -> do
-      joins(:task).where('foreman_tasks_tasks.state != ?', :stopped)
-    end
+    scope :active, -> { joins(:task).where('foreman_tasks_tasks.state != ?', :stopped) }
 
     validates :task_id, :name, :resource_id, :resource_type, presence: true
 
     validate do
-      unless available?
-        raise LockConflict.new(self, colliding_locks)
-      end
+      raise LockConflict.new(self, colliding_locks) unless available?
     end
 
     # returns true if it's possible to aquire this kind of lock
     def available?
-      not colliding_locks.exists?
+      !colliding_locks.exists?
     end
 
     # returns a scope of the locks colliding with this one
@@ -62,14 +57,13 @@ module ForemanTasks
       colliding_locks_scope = colliding_locks_scope.where(name:          name,
                                                           resource_id:   resource_id,
                                                           resource_type: resource_type)
-      unless self.exclusive?
+      unless exclusive?
         colliding_locks_scope = colliding_locks_scope.where(:exclusive => true)
       end
-      return colliding_locks_scope
+      colliding_locks_scope
     end
 
     class << self
-
       # Locks the resource so that no other task can lock it while running.
       # No other task related to the resource is not allowed (even not-locking ones)
       # A typical usecase is resource deletion, where it's good idea to make sure
@@ -81,7 +75,6 @@ module ForemanTasks
       def exclusive?(resource)
         build_exclusive_locks(resource).all?(&:available?)
       end
-
 
       # Locks the resource so that no other task can lock it while running.
       # Other not-locking tasks are tolerated.
@@ -103,12 +96,12 @@ module ForemanTasks
       end
 
       def locked?(resource, uuid, *lock_names)
-        not lockable?(resource, uuid, *lock_names)
+        !lockable?(resource, uuid, *lock_names)
       end
 
       def colliding_locks(resource, uuid, *lock_names)
-        build_locks(resource, lock_names, uuid).
-            inject([]) { |collisions, lock| collisions.concat lock.colliding_locks.to_a }
+        build_locks(resource, lock_names, uuid)
+          .inject([]) { |collisions, lock| collisions.concat lock.colliding_locks.to_a }
       end
 
       # Assigns the resource to the task to easily track the task in context of
@@ -136,7 +129,7 @@ module ForemanTasks
       def all_lock_names(resource, include_links = false)
         lock_names = []
         if resource.class.respond_to?(:available_locks) &&
-            resource.class.available_locks.any?
+           resource.class.available_locks.any?
           lock_names.concat(resource.class.available_locks)
         else
           raise "The resource #{resource.class.name} doesn't define any available lock"
@@ -145,7 +138,7 @@ module ForemanTasks
           raise "Lock name #{lock_name} is reserved"
         end
         lock_names.concat([LINK_LOCK_NAME, OWNER_LOCK_NAME]) if include_links
-        return lock_names
+        lock_names
       end
 
       def build_exclusive_locks(resource, uuid = nil)
@@ -161,7 +154,7 @@ module ForemanTasks
           locks << build(uuid, resource, lock_name, true)
         end
         locks.concat(build_links(resource, uuid))
-        return locks
+        locks
       end
 
       def build_links(resource, uuid = nil)
@@ -179,23 +172,22 @@ module ForemanTasks
       end
 
       def build(uuid, resource, lock_name, exclusive)
-        self.new(task_id:       uuid,
-                 name:          lock_name,
-                 resource_type: resource.class.name,
-                 resource_id:   resource.id,
-                 exclusive:     !!exclusive)
+        new(task_id:       uuid,
+            name:          lock_name,
+            resource_type: resource.class.name,
+            resource_id:   resource.id,
+            exclusive:     !!exclusive)
       end
 
       # recursively search for related resources of the resource (using
       # the +related_resources+ method, avoiding the cycles
       def related_resources(resource)
         if resource.respond_to?(:all_related_resources)
-          return resource.all_related_resources
+          resource.all_related_resources
         else
-          return []
+          []
         end
       end
     end
-
   end
 end

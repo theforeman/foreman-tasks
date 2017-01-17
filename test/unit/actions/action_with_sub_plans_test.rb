@@ -1,7 +1,7 @@
-require "foreman_tasks_test_helper"
+require 'foreman_tasks_test_helper'
 
 module ForemanTasks
-  class ActionWithSubPlansTest <  ActiveSupport::TestCase
+  class ActionWithSubPlansTest < ActiveSupport::TestCase
     self.use_transactional_fixtures = false
 
     before do
@@ -30,8 +30,8 @@ module ForemanTasks
         action_subject(user)
         plan_self(user_id: user.id)
       end
-      def run
-      end
+
+      def run; end
     end
 
     describe Actions::ActionWithSubPlans do
@@ -43,7 +43,7 @@ module ForemanTasks
         ForemanTasks::Task.where(:external_id => triggered.id).first
       end
 
-      specify "the sub-plan stores the information about its parent" do
+      specify 'the sub-plan stores the information about its parent' do
         task.sub_tasks.size.must_equal 1
         task.sub_tasks.first.label.must_equal ChildAction.name
       end
@@ -53,6 +53,5 @@ module ForemanTasks
         assert(child_task.locks.any? { |lock| lock.name == 'write' }, "it's locks don't conflict with parent's")
       end
     end
-
   end
 end

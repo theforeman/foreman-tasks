@@ -6,7 +6,7 @@ module ForemanTasksCore
       attr_reader :id
       attr_accessor :logger
 
-      def initialize(*args)
+      def initialize(*_args)
         @id = SecureRandom.uuid
         @continuous_output = ::ForemanTasksCore::ContinuousOutput.new
       end
@@ -16,7 +16,7 @@ module ForemanTasksCore
       end
 
       def run_refresh
-        logger.debug("refreshing runner")
+        logger.debug('refreshing runner')
         refresh
         new_data = @continuous_output
         @continuous_output = ForemanTasksCore::ContinuousOutput.new
