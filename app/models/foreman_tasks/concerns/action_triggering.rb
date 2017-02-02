@@ -4,13 +4,14 @@ module ForemanTasks
       extend ActiveSupport::Concern
 
       included do
-        after_create :plan_create_action
-        after_update :plan_update_action
-        after_destroy :plan_destroy_action
+        after_create :plan_hook_action
+        after_update :plan_hook_action
+        after_destroy :plan_hook_action
 
         alias_method_chain :save, :dynflow_task_wrap
       end
 
+      # These three *_action methods are called before the save/destroy actually occurs
       # @override
       def create_action; end
 
@@ -70,18 +71,8 @@ module ForemanTasks
         @dynflow_sync_action = true
       end
 
-      def plan_create_action
-        plan_action(create_action, self) if create_action
-        true
-      end
-
-      def plan_update_action
-        plan_action(update_action, self) if update_action
-        true
-      end
-
-      def plan_destroy_action
-        plan_action(destroy_action, self) if destroy_action
+      def plan_hook_action
+        plan_action(@_dynflow_hook_action, self) if @_dynflow_hook_action
         true
       end
 
@@ -116,7 +107,7 @@ module ForemanTasks
         end
         @_dynflow_task_wrapped = true
 
-        action = case method
+        @_dynflow_hook_action = case method
                  when :save
                    new_record? ? create_action : update_action
                  when :destroy
@@ -124,12 +115,13 @@ module ForemanTasks
                  else
                    raise 'unexpected method'
                  end
-        ensure_not_in_transaction! if action
+        ensure_not_in_transaction! if @_dynflow_hook_action
         yield.tap do |result|
           execute_planned_action if result
           sync_action_flag_reset!
         end
       ensure
+        @_dynflow_hook_action = nil
         @_dynflow_task_wrapped = false
       end
 
