@@ -50,7 +50,7 @@ DESC
       end
 
       def template(filename)
-        File.join(Gem::Specification.find_by(name: 'dynflow').gem_dir, 'web', 'views', "#{filename}.erb")
+        File.join(Gem::Specification.find_by_name('dynflow').gem_dir, 'web', 'views', "#{filename}.erb") # rubocop:disable Rails/DynamicFindBy
       end
 
       def erb(file, options = {})
@@ -213,7 +213,7 @@ DESC
          'vendor/bootstrap/css/bootstrap.css',
          'stylesheets/application.css'].each do |file|
 
-          filename = File.join(Gem::Specification.find_by(name: 'dynflow').gem_dir, 'web', 'assets', file)
+          filename = File.join(Gem::Specification.find_by_name('dynflow').gem_dir, 'web', 'assets', file) # rubocop:disable Rails/DynamicFindBy
           FileUtils.copy_file(filename, File.join(tmp_dir, File.basename(file)))
         end
       end
