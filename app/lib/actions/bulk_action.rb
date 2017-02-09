@@ -44,7 +44,7 @@ module Actions
     def create_sub_plans
       action_class = input[:action_class].constantize
       target_class = input[:target_class].constantize
-      targets = target_class.where(:id => input[:target_ids])
+      targets = target_class.where(:id => current_batch)
 
       targets.map do |target|
         trigger(action_class, target, *input[:args])
@@ -56,6 +56,14 @@ module Actions
       if targets.map(&:class).uniq.length > 1
         raise Foreman::Exception, N_('The targets are of different types')
       end
+    end
+
+    def entries(from, size)
+      input[:target_ids].slice(from, size)
+    end
+
+    def total_count
+      input[:target_ids].count
     end
   end
 end
