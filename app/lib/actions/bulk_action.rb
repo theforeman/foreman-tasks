@@ -58,7 +58,7 @@ module Actions
       end
     end
 
-    def entries(from, size)
+    def batch(from, size)
       input[:target_ids].slice(from, size)
     end
 
