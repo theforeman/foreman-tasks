@@ -36,12 +36,12 @@ module ForemanTasks
     scoped_search :on => :start_at, :complete_value => false
     scoped_search :on => :ended_at, :complete_value => false
     scoped_search :on => :parent_task_id, :complete_value => true
-    scoped_search :in => :locks,  :on => :resource_type, :complete_value => true, :rename => 'resource_type', :ext_method => :search_by_generic_resource
-    scoped_search :in => :locks,  :on => :resource_id, :complete_value => false, :rename => 'resource_id', :ext_method => :search_by_generic_resource
-    scoped_search :in => :owners,  :on => :id, :complete_value => true, :rename => 'owner.id', :ext_method => :search_by_owner
-    scoped_search :in => :owners,  :on => :login, :complete_value => true, :rename => 'owner.login', :ext_method => :search_by_owner
-    scoped_search :in => :owners,  :on => :firstname, :complete_value => true, :rename => 'owner.firstname', :ext_method => :search_by_owner
-    scoped_search :in => :task_groups, :on => :id, :complete_value => true, :rename => 'task_group.id'
+    scoped_search :relation => :locks,  :on => :resource_type, :complete_value => true, :rename => 'resource_type', :ext_method => :search_by_generic_resource
+    scoped_search :relation => :locks,  :on => :resource_id, :complete_value => false, :rename => 'resource_id', :ext_method => :search_by_generic_resource
+    scoped_search :relation => :owners,  :on => :id, :complete_value => true, :rename => 'owner.id', :ext_method => :search_by_owner
+    scoped_search :relation => :owners,  :on => :login, :complete_value => true, :rename => 'owner.login', :ext_method => :search_by_owner
+    scoped_search :relation => :owners,  :on => :firstname, :complete_value => true, :rename => 'owner.firstname', :ext_method => :search_by_owner
+    scoped_search :relation => :task_groups, :on => :id, :complete_value => true, :rename => 'task_group.id'
 
     scope :active, -> {  where('foreman_tasks_tasks.state != ?', :stopped) }
     scope :running, -> { where("foreman_tasks_tasks.state NOT IN ('stopped', 'paused')") }
