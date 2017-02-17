@@ -152,7 +152,7 @@ module ForemanTasks
           run = ::ForemanTasks.dynflow.world.execute(@execution_plan.id)
           if @dynflow_sync_action
             run.wait
-            if run.value.error?
+            if run.value.try(:error?)
               task = ForemanTasks::Task::DynflowTask.where(:external_id => @execution_plan.id).first!
               raise ForemanTasks::TaskError, task
             end
