@@ -49,6 +49,7 @@ module ForemanTasks
                          :dir_mode => :normal,
                          :monitor => true,
                          :log_output => true,
+                         :log_output_syslog => true,
                          :ARGV => [command]) do |*_args|
           begin
             ::Logging.reopen
