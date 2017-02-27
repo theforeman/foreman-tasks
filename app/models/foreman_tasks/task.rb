@@ -158,6 +158,30 @@ module ForemanTasks
       (groups - task_groups).each { |group| task_groups << group }
     end
 
+    def cancelled?
+      execution_plan.errors.map(&:exception).any? { |exception| exception.class == ::ForemanTasks::Task::TaskCancelledException }
+    end
+
+    # If the precise flag is true, this method will differentiate between cancelled and failed tasks
+    def sub_tasks_counts(precise = true)
+      success = sub_tasks.where(:result => 'success').count
+      pending = sub_tasks.where(:result => 'pending').count
+      unsuccessful = sub_tasks.where(:result => %w(error warning))
+      if precise
+        cancelled, failed = unsuccessful.partition(&:cancelled?).map(&:count)
+      else
+        cancelled = 0
+        failed = unsuccessful.count
+      end
+      {
+        :cancelled => cancelled,
+        :failed    => failed,
+        :pending   => pending,
+        :success   => success,
+        :total     => cancelled + failed + pending + success
+      }
+    end
+
     protected
 
     def generate_id
