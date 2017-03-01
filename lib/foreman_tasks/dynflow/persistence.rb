@@ -1,5 +1,5 @@
 module ForemanTasks
-  # wrap the dynflow persistence to reflect the changes to execution plan
+  # Wrap the Dynflow persistence to reflect the changes to execution plan
   # in the Task model. This is probably a temporary solution and
   # Dynflow will probably get more events-based API but it should be enought
   # for start, until the requiements on the API are clear enough.
@@ -11,7 +11,8 @@ module ForemanTasks
         begin
           on_execution_plan_save(execution_plan_id, value)
         rescue => e
-          Foreman::Logging.exception('Error on on_execution_plan_save event', e, :logger => 'foreman-tasks/dynflow')
+          Foreman::Logging.exception('Error on on_execution_plan_save event', e,
+                                     :logger => 'dynflow')
         end
       end
     ensure

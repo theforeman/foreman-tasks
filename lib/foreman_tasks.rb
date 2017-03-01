@@ -2,6 +2,7 @@ require 'foreman_tasks/version'
 require 'foreman_tasks/task_error'
 require 'foreman_tasks/engine'
 require 'foreman_tasks/dynflow'
+require 'foreman_tasks/dynflow/configuration'
 require 'foreman_tasks/triggers'
 require 'foreman_tasks/authorizer_ext'
 require 'foreman_tasks/cleaner'
@@ -11,7 +12,7 @@ module ForemanTasks
   extend Algebrick::Matching
 
   def self.dynflow
-    @dynflow ||= ForemanTasks::Dynflow.new
+    @dynflow ||= ForemanTasks::Dynflow.new(nil, ForemanTasks::Dynflow::Configuration.new)
   end
 
   def self.trigger(action, *args, &block)

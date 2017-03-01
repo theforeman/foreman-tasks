@@ -57,7 +57,6 @@ Metrics/PerceivedComplexity:
 Rails/Exit:
   Exclude:
     - 'lib/**/*.rake'
-    - 'lib/foreman_tasks/dynflow/daemon.rb'
 
 Rails/HttpPositionalArguments:
   Enabled: false
@@ -84,7 +83,6 @@ Style/ClassAndModuleChildren:
     - 'app/models/setting/foreman_tasks.rb'
     - 'lib/foreman_tasks/dynflow/configuration.rb'
     - 'lib/foreman_tasks/dynflow/console_authorizer.rb'
-    - 'lib/foreman_tasks/dynflow/daemon.rb'
     - 'lib/foreman_tasks/dynflow/persistence.rb'
     - 'test/controllers/api/recurring_logics_controller_test.rb'
     - 'test/controllers/api/tasks_controller_test.rb'
