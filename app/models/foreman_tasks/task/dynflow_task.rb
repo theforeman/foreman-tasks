@@ -15,11 +15,11 @@ module ForemanTasks
       self.start_at       = string_to_time(utc_zone, data[:start_at]) if data[:start_at]
       self.start_before   = string_to_time(utc_zone, data[:start_before]) if data[:start_before]
       self.parent_task_id ||= begin
-                                if main_action.caller_execution_plan_id
+                                if main_action.present? && main_action.caller_execution_plan_id
                                   DynflowTask.where(:external_id => main_action.caller_execution_plan_id).first!.id
                                 end
                               end
-      self.label          ||= main_action && main_action.class.name
+      self.label          ||= label
       changes = self.changes
       save!
       changes
@@ -69,12 +69,19 @@ module ForemanTasks
       execution_plan(false)
     end
 
+    def label
+      return execution_plan_action.input['job_class'] if active_job?
+      return main_action.class.name if main_action.present?
+      self[:label]
+    end
+
     def input
-      main_action.respond_to?(:task_input) && main_action.task_input
+      return execution_plan_action.input['job_arguments'] if active_job?
+      main_action.task_input if main_action.respond_to?(:task_input)
     end
 
     def output
-      main_action.respond_to?(:task_output) && main_action.task_output
+      main_action.task_output if main_action.respond_to?(:task_output)
     end
 
     def failed_steps
@@ -98,17 +105,47 @@ module ForemanTasks
 
     def main_action
       return @main_action if defined?(@main_action)
-      @main_action = execution_plan && execution_plan.root_plan_step.try(:action, execution_plan)
+      if active_job?
+        action = execution_plan_action
+        active_job_action(action.input['job_class'], action.input['job_arguments'])
+      else
+        @main_action = execution_plan && execution_plan.root_plan_step.try(:action, execution_plan)
+      end
+    end
+
+    # The class for ActiveJob jobs in Dynflow, JobWrapper is not expected to
+    # implement any humanized actions. Individual jobs are expected to implement
+    # humanized_* methods for foreman-tasks integration.
+    def active_job_action(klass, args)
+      return if klass.blank?
+      klass.constantize.new(*args)
+    end
+
+    def active_job?
+      return false unless execution_plan.present? &&
+                          execution_plan.root_plan_step.present?
+      execution_plan_action.class == ::Dynflow::ActiveJob::QueueAdapters::JobWrapper
+    end
+
+    def execution_plan_action
+      execution_plan.root_plan_step.action(execution_plan)
+    end
+
+    def execution_scheduled?
+      main_action.nil? || main_action.respond_to?(:execution_plan) &&
+        main_action.execution_plan.state == :scheduled ||
+        execution_plan.state == :scheduled
     end
 
     def get_humanized(method)
       @humanized_cache ||= {}
-      if [:name, :input, :output, :error].include?(method)
-        method = "humanized_#{method}".to_sym
-      end
+      method = find_humanize_method_kind(method)
       Match! method, :humanized_name, :humanized_input, :humanized_output, :humanized_errors
-      return N_('N/A') if method != :humanized_name && (main_action.nil? || main_action.execution_plan.state == :scheduled)
-      return N_(label) if method == :humanized_name && main_action.nil?
+      if method != :humanized_name && execution_scheduled?
+        return N_('N/A')
+      elsif method == :humanized_name && main_action.nil?
+        return N_(label)
+      end
       @humanized_cache[method] ||= begin
                                      if main_action.respond_to? method
                                        begin
@@ -118,6 +155,13 @@ module ForemanTasks
                                        end
                                      end
                                    end
+    end
+
+    def find_humanize_method_kind(method)
+      return method if /humanized_.*/ =~ method
+      if [:name, :input, :output, :error].include?(method)
+        "humanized_#{method}".to_sym
+      end
     end
 
     def self.consistency_check

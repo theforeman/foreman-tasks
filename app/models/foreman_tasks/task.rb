@@ -210,7 +210,8 @@ module ForemanTasks
     end
 
     def action
-      super || to_label
+      return to_label if super.blank?
+      super
     end
 
     def to_label
