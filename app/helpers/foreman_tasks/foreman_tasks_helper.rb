@@ -115,7 +115,8 @@ module ForemanTasks
     def future_mode_fieldset(f, triggering)
       tags = []
       tags << text_f(f, :start_at_raw, :label => _('Start at'), :placeholder => 'YYYY-mm-dd HH:MM')
-      tags << text_f(f, :start_before_raw, :label => _('Start before'), :placeholder => 'YYYY-mm-dd HH:MM', :help_inline => popover(_('Explanation'), _('Indicates that the action should be cancelled if it cannot be started before this time.')))
+      tags << text_f(f, :start_before_raw, :label => _('Start before'), :placeholder => 'YYYY-mm-dd HH:MM',
+                     :label_help => _('Indicates that the action should be cancelled if it cannot be started before this time.'))
       content_tag(:fieldset, nil, :id => 'trigger_mode_future', :class => "trigger_mode_form #{'hidden' unless triggering.future?}") do
         tags.join.html_safe
       end
@@ -149,12 +150,10 @@ module ForemanTasks
         # TRANSLATORS: this translation is referring to an option which is a time interval
         _('is day of week (range: 0-6)')
       ].map { |opt| content_tag(:li, opt) }.join
-      help = content_tag(:span, nil, :class => 'help-inline') do
-        popover(_('Explanation'),
-                _("Cron line format 'a b c d e', where: %s") % "<br><ol type=\"a\">#{options}</ol>")
-      end
+
+      help = _("Cron line format 'a b c d e', where: %s") % "<br><ol type=\"a\">#{options}</ol>".html_safe
       content_tag(:fieldset, nil, :class => "input_type_form #{'hidden' unless triggering.input_type == :cronline}", :id => 'input_type_cronline') do
-        text_f f, :cronline, :label => _('Cron line'), :placeholder => '* * * * *', :help_inline => help
+        text_f f, :cronline, :label => _('Cron line'), :placeholder => '* * * * *', :label_help => help
       end
     end
 
