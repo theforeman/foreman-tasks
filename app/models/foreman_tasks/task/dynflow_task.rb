@@ -2,8 +2,14 @@ module ForemanTasks
   class Task::DynflowTask < ForemanTasks::Task
     include Algebrick::TypeCheck
 
+    after_commit :pull_update_from_dynflow
+
     delegate :cancellable?, :progress, to: :execution_plan
     scope :for_action, ->(action_class) { where(label: action_class.name) }
+
+    def pull_update_from_dynflow
+      execution_plan.save unless (state == execution_plan.state.to_s)
+    end
 
     def update_from_dynflow(data)
       utc_zone = ActiveSupport::TimeZone.new('UTC')
