@@ -159,22 +159,17 @@ module ForemanTasks
     end
 
     def sub_tasks_counts
-      success   = sub_tasks.where(:result => 'success').count
-      pending   = sub_tasks.where(:result => 'pending').count
-      failed    = sub_tasks.where(:result => %w(error warning)).count
-      cancelled = sub_tasks.where(:result => 'cancelled').count
-      total     = if main_action.respond_to?(:total_count)
-                    main_action.total_count
-                  else
-                    success + pending + failed + cancelled
-                  end
-      {
-        :cancelled => cancelled,
-        :failed    => failed,
-        :pending   => pending,
-        :success   => success,
-        :total     => total
-      }
+      result = %w(cancelled error pending success warning).zip([0].cycle).to_h
+      result.update sub_tasks.group(:result).count
+      sum = result.values.reduce(:+)
+      if main_action.respond_to?(:total_count)
+        result[:total] = main_action.total_count
+        key = state == :stopped ? 'cancelled' : 'pending'
+        result[key] += result[:total] - sum
+      else
+        result[:total] = sum
+      end
+      result.symbolize_keys
     end
 
     protected
