@@ -162,9 +162,9 @@ module ForemanTasks
       result = %w(cancelled error pending success warning).zip([0].cycle).to_h
       result.update sub_tasks.group(:result).count
       sum = result.values.reduce(:+)
-      if main_action.respond_to?(:total_count)
+      if respond_to?(:main_action) && main_action.respond_to?(:total_count)
         result[:total] = main_action.total_count
-        key = state == :stopped ? 'cancelled' : 'pending'
+        key = state == 'stopped' ? 'cancelled' : 'pending'
         result[key] += result[:total] - sum
       else
         result[:total] = sum
