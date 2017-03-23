@@ -164,6 +164,10 @@ module ForemanTasks
       sum = result.values.reduce(:+)
       if respond_to?(:main_action) && main_action.respond_to?(:total_count)
         result[:total] = main_action.total_count
+        # In case of batch planning there might be some plans still unplanned (not present in database).
+        # To get correct counts we need to add them to either:
+        #   cancelled when the parent is stopped
+        #   pending when the parent is still running.
         key = state == 'stopped' ? 'cancelled' : 'pending'
         result[key] += result[:total] - sum
       else
