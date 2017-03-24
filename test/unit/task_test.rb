@@ -95,6 +95,28 @@ class TasksTest < ActiveSupport::TestCase
         task.sub_tasks_counts.must_equal expected_result
       end
     end
+  end
 
+  describe 'recurring task' do
+    let(:logic) { FactoryGirl.build(:recurring_logic) }
+    let(:task) { FactoryGirl.create(:some_task) }
+
+    it 'can indicate it is recurring' do
+      refute task.recurring?
+      task.add_missing_task_groups(logic.task_group)
+      assert task.recurring?
+    end
+  end
+
+  describe 'delayed task' do
+    let(:task) { FactoryGirl.create(:some_task) }
+
+    it 'can indicate it is delayed' do
+      refute task.delayed?
+      task.execution_type.must_equal 'Immediate'
+      task.start_at = Time.now.utc + 100
+      assert task.delayed?
+      task.execution_type.must_equal 'Delayed'
+    end
   end
 end
