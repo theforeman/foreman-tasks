@@ -51,4 +51,50 @@ class TasksTest < ActiveSupport::TestCase
       inconsistent_task.reload.state.must_equal 'planned'
     end
   end
+
+  describe 'subtask count querying' do
+    let(:result_base) do
+      {
+        :error     => 0,
+        :warning   => 0,
+        :total     => 0,
+        :success   => 0,
+        :cancelled => 0,
+        :pending   => 0
+      }
+    end
+    let(:task) { FactoryGirl.create(:dynflow_task) }
+
+    describe 'without sub tasks' do
+      it 'calculates the progress report correctly' do
+        task.sub_tasks_counts.must_equal result_base
+      end
+    end
+
+    describe 'with sub tasks' do
+      let(:failed) { FactoryGirl.create(:dynflow_task).tap { |t| t.result = :error } }
+      let(:success) { FactoryGirl.create(:dynflow_task).tap { |t| t.result = :success } }
+      before { task.sub_tasks = [success, failed] }
+
+      it 'calculate the progress report correctly' do
+        expected_result = result_base.merge(:success => 1, :error => 1, :total => 2)
+        task.sub_tasks_counts.must_equal expected_result
+      end
+
+      it 'calculates the progress report correctly when using batch planning' do
+        result_base = result_base.merge(:success => 1, :error => 1, :total => 25)
+        fake_action = OpenStruct.new(:total_count => 25)
+        task.stubs(:main_action).returns(fake_action)
+
+        task.state = 'stopped'
+        expected_result = result_base.merge(:cancelled => 23)
+        task.sub_tasks_counts.must_equal expected_result
+
+        task.state = 'pending'
+        expected_result = result_base.merge(:pending => 23)
+        task.sub_tasks_counts.must_equal expected_result
+      end
+    end
+
+  end
 end

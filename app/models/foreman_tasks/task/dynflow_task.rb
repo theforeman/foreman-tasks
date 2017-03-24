@@ -11,7 +11,7 @@ module ForemanTasks
       self.started_at     = utc_zone.parse(data[:started_at]) unless data[:started_at].nil?
       self.ended_at       = utc_zone.parse(data[:ended_at]) unless data[:ended_at].nil?
       self.state          = data[:state].to_s
-      self.result         = data[:result].to_s
+      self.result         = map_result(data[:result])
       self.start_at       = utc_zone.parse(data[:start_at]) if data[:start_at]
       self.start_before   = utc_zone.parse(data[:start_before]) if data[:start_before]
       self.parent_task_id ||= begin
@@ -116,6 +116,17 @@ module ForemanTasks
 
     def self.model_name
       superclass.model_name
+    end
+
+    private
+
+    def map_result(result)
+      result = :cancelled if result == :error && cancelled?
+      result.to_s
+    end
+
+    def cancelled?
+      execution_plan.errors.map(&:exception).any? { |exception| exception.class == ::ForemanTasks::Task::TaskCancelledException }
     end
   end
 end

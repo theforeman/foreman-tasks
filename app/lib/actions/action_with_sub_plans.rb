@@ -3,6 +3,7 @@ module Actions
     middleware.use Actions::Middleware::KeepCurrentUser
 
     include Dynflow::Action::WithSubPlans
+    include Dynflow::Action::WithBulkSubPlans
 
     def plan(*_args)
       raise NotImplementedError
