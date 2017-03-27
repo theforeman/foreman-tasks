@@ -69,7 +69,7 @@ module ForemanTasks
     end
 
     def execution_type
-      start_at.to_i == started_at.to_i ? N_('Immediate') : N_('Delayed')
+      delayed? ? N_('Delayed') : N_('Immediate')
     end
 
     def humanized
@@ -94,6 +94,14 @@ module ForemanTasks
 
     def paused?
       state == 'paused'
+    end
+
+    def recurring?
+      !recurring_logic_task_group_ids.empty?
+    end
+
+    def delayed?
+      start_at.to_i != started_at.to_i
     end
 
     def self_and_parents
