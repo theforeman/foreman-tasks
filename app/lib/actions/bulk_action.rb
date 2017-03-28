@@ -1,5 +1,8 @@
 module Actions
   class BulkAction < Actions::ActionWithSubPlans
+
+    include Dynflow::Action::WithBulkSubPlans
+
     # == Parameters:
     # actions_class::
     #   Class of action to trigger on targets
