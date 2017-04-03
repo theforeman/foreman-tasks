@@ -52,6 +52,23 @@ class TasksTest < ActiveSupport::TestCase
     end
   end
 
+  describe 'task without valid execution plan' do
+    let(:task) do
+      FactoryGirl.create(:dynflow_task).tap do |task|
+        task.external_id = 'missing-task'
+      end
+    end
+
+    it 'handles the error while loading the task and does not propagate errors unless necessary' do
+      task.cancellable?
+      task.resumable?
+      task.main_action
+      assert_equal 'Support::DummyDynflowAction', task.get_humanized(:humanized_name)
+      assert_equal 0, task.progress
+      assert_raises(KeyError) { task.cancel }
+    end
+  end
+
   describe 'subtask count querying' do
     let(:result_base) do
       {
@@ -82,7 +99,7 @@ class TasksTest < ActiveSupport::TestCase
       end
 
       it 'calculates the progress report correctly when using batch planning' do
-        result_base = result_base.merge(:success => 1, :error => 1, :total => 25)
+        result_base = self.result_base.merge(:success => 1, :error => 1, :total => 25)
         fake_action = OpenStruct.new(:total_count => 25)
         task.stubs(:main_action).returns(fake_action)
 

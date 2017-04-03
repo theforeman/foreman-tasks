@@ -1,7 +1,11 @@
 <% if @task.is_a? ForemanTasks::Task::DynflowTask %>
   <div>
     <% failed_steps = @task.failed_steps %>
-    <% if failed_steps.empty? %>
+    <% if @task.execution_plan.nil? %>
+      <div class="alert alert-danger">
+        <%= _("Execution plan data not available ") %>
+      </div>
+    <% elsif failed_steps.empty? %>
       <div class="alert alert-success">
         <%= _("No errors") %>
       </div>
