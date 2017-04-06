@@ -46,7 +46,14 @@ module ForemanTasks
 
     def execution_plan(silence_exception = true)
       return @execution_plan if defined?(@execution_plan)
-      @execution_plan = ForemanTasks.dynflow.world.persistence.load_execution_plan(external_id)
+      execution_plan = ForemanTasks.dynflow.world.persistence.load_execution_plan(external_id)
+      # don't use invalid execution plans for our purposes
+      if execution_plan.respond_to?(:valid?) && !execution_plan.valid?
+        raise executor_plan.exception
+      else
+        @execution_plan = execution_plan
+      end
+      @execution_plan
     rescue => e
       Foreman::Logging.exception("Could not load execution plan #{external_id} for task #{id}", e, :logger => 'foreman-tasks')
       raise e unless silence_exception
