@@ -34,26 +34,19 @@ Foreman::Application.routes.draw do
           post :bulk_resume
           get  :summary
           post :callback
-          post :index
+          post :bulk_export
         end
 
         member do
-          post 'skip'
-          post 'resume'
+          get  :export
+          post :resume
         end
       end
-
-      resource :viewer, :only => [:show, :destroy]
     end
 
     if ForemanTasks.dynflow.required?
       require 'dynflow/web'
       mount ForemanTasks.dynflow.web_console => '/dynflow'
-    end
-
-    if ForemanTasks.viewer.required? && ! Rails.env.production?
-      require 'dynflow/web_console'
-      mount ForemanTasks.viewer.web_console => "/viewer"
     end
   end
 end

@@ -115,10 +115,6 @@ module ForemanTasks
       end
     end
 
-    def self.states
-      ['pending', 'planning', 'planned', 'running', 'paused', 'stopped']
-    end
-
     def self.search_by_generic_resource(key, operator, value)
       key = 'resource_type' if key.blank?
       key_name = connection.quote_column_name(key.sub(/^.*\./, ''))
