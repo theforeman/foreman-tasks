@@ -18,39 +18,10 @@ module ForemanTasks
 
       before_action :find_task, :only => [:show, :export]
 
-      def_param_group :bulk_search_params do
-        param :searches, Array, :desc => 'List of uuids to fetch info about' do
-          param :search_id, String, :desc => <<-DESC
-          Arbitraty value for client to identify the the request parts with results.
-          It's passed in the results to be able to pair the requests and responses properly.
-          DESC
-          param :type, %w(user resource task)
-          param :task_id, String, :desc => <<-DESC
-          In case :type = 'task', find the task by the uuid
-          DESC
-          param :user_id, String, :desc => <<-DESC
-          In case :type = 'user', find tasks for the user
-          DESC
-          param :resource_type, String, :desc => <<-DESC
-          In case :type = 'resource', what resource type we're searching the tasks for
-          DESC
-          param :resource_type, String, :desc => <<-DESC
-          In case :type = 'resource', what resource id we're searching the tasks for
-          DESC
-          param :action_types, [String], :desc => <<-DESC
-          Return just tasks of given action type, e.g. ["Actions::Katello::Repository::Synchronize"]
-          DESC
-          param :active_only, :bool
-          param :page, String
-          param :per_page, String
-        end
-      end
-
       api :POST, "/tasks/bulk_export" "List tasks"
-      param_group :bulk_search_params
+      param :search, String, :desc => 'Scoped search query to search for'
       def bulk_export
-        ids = Array(params[:searches]).map { |search_params| search_tasks(search_params) }
-                                      .flatten.uniq.map { |task| task[:external_id] }
+        ids = resource_scope.search_for(params[:search]).pluck(:external_id).compact.uniq
         ::Dynflow::Exporters::ExportManager.new(ForemanTasks.dynflow.world,
                                                 ::Dynflow::Exporters::JSON.new,
                                                 response.stream)
@@ -74,7 +45,31 @@ module ForemanTasks
       def show; end
 
       api :POST, '/tasks/bulk_search', 'List dynflow tasks for uuids'
-      param_group :bulk_search_params
+      param :searches, Array, :desc => 'List of uuids to fetch info about' do
+        param :search_id, String, :desc => <<-DESC
+          Arbitraty value for client to identify the the request parts with results.
+          It's passed in the results to be able to pair the requests and responses properly.
+        DESC
+        param :type, %w(user resource task)
+        param :task_id, String, :desc => <<-DESC
+          In case :type = 'task', find the task by the uuid
+        DESC
+        param :user_id, String, :desc => <<-DESC
+          In case :type = 'user', find tasks for the user
+        DESC
+        param :resource_type, String, :desc => <<-DESC
+          In case :type = 'resource', what resource type we're searching the tasks for
+        DESC
+        param :resource_type, String, :desc => <<-DESC
+          In case :type = 'resource', what resource id we're searching the tasks for
+        DESC
+        param :action_types, [String], :desc => <<-DESC
+          Return just tasks of given action type, e.g. ["Actions::Katello::Repository::Synchronize"]
+        DESC
+        param :active_only, :bool
+        param :page, String
+        param :per_page, String
+      end
       desc <<-DESC
         For every search it returns the list of tasks that satisfty the condition.
         The reason for supporting multiple searches is the UI that might be ending
