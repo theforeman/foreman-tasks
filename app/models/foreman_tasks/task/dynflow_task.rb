@@ -49,7 +49,7 @@ module ForemanTasks
       execution_plan = ForemanTasks.dynflow.world.persistence.load_execution_plan(external_id)
       # don't use invalid execution plans for our purposes
       if execution_plan.respond_to?(:valid?) && !execution_plan.valid?
-        raise executor_plan.exception
+        raise execution_plan.exception
       else
         @execution_plan = execution_plan
       end
