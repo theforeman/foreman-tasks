@@ -2,7 +2,6 @@ module ForemanTasks
   class Task::DynflowTask < ForemanTasks::Task
     include Algebrick::TypeCheck
 
-    delegate :cancellable?, :progress, to: :execution_plan
     scope :for_action, ->(action_class) { where(label: action_class.name) }
 
     def update_from_dynflow(data)
@@ -19,26 +18,50 @@ module ForemanTasks
                                   DynflowTask.where(:external_id => main_action.caller_execution_plan_id).first!.id
                                 end
                               end
-      self.label          ||= main_action.class.name
+      self.label          ||= main_action && main_action.class.name
       changes = self.changes
       save!
       changes
     end
 
+    def cancellable?
+      execution_plan.try(:cancellable?)
+    end
+
     def cancel
-      execution_plan.cancel.any?
+      execution_plan!.cancel.any?
     end
 
     def resumable?
-      execution_plan.state == :paused
+      execution_plan.try(:state) == :paused
     end
 
     def cancellable_action?(action)
       action.is_a?(::Dynflow::Action::Cancellable)
     end
 
-    def execution_plan
-      @execution_plan ||= ForemanTasks.dynflow.world.persistence.load_execution_plan(external_id)
+    def progress
+      execution_plan.try(:progress) || 0
+    end
+
+    def execution_plan(silence_exception = true)
+      return @execution_plan if defined?(@execution_plan)
+      execution_plan = ForemanTasks.dynflow.world.persistence.load_execution_plan(external_id)
+      # don't use invalid execution plans for our purposes
+      if execution_plan.respond_to?(:valid?) && !execution_plan.valid?
+        raise execution_plan.exception
+      else
+        @execution_plan = execution_plan
+      end
+      @execution_plan
+    rescue => e
+      Foreman::Logging.exception("Could not load execution plan #{external_id} for task #{id}", e, :logger => 'foreman-tasks')
+      raise e unless silence_exception
+      nil
+    end
+
+    def execution_plan!
+      execution_plan(false)
     end
 
     def input
@@ -50,11 +73,11 @@ module ForemanTasks
     end
 
     def failed_steps
-      execution_plan.steps_in_state(:skipped, :skipping, :error)
+      execution_plan.try(:steps_in_state, :skipped, :skipping, :error) || []
     end
 
     def running_steps
-      execution_plan.steps_in_state(:running, :suspended)
+      execution_plan.try(:steps_in_state, :running, :suspended) || []
     end
 
     def humanized
@@ -69,8 +92,8 @@ module ForemanTasks
     end
 
     def main_action
-      return @main_action if @main_action
-      execution_plan.root_plan_step.action execution_plan
+      return @main_action if defined?(@main_action)
+      @main_action = execution_plan && execution_plan.root_plan_step.try(:action, execution_plan)
     end
 
     def get_humanized(method)
@@ -79,7 +102,8 @@ module ForemanTasks
         method = "humanized_#{method}".to_sym
       end
       Match! method, :humanized_name, :humanized_input, :humanized_output, :humanized_errors
-      return N_('N/A') if method != :humanized_name && main_action.execution_plan.state == :scheduled
+      return N_('N/A') if method != :humanized_name && (main_action.nil? || main_action.execution_plan.state == :scheduled)
+      return N_(label) if method == :humanized_name && main_action.nil?
       @humanized_cache[method] ||= begin
                                      if main_action.respond_to? method
                                        begin
@@ -102,6 +126,10 @@ module ForemanTasks
             logger.warn('Task %s updated at consistency check: %s' % [task.id, changes.inspect])
           end
         rescue => e
+          # if we fail updating the data from dynflow, it usually means there is something
+          # odd with the data consistency and at this point it is not possible to resume, switching
+          # the task to stopped/error
+          task.update_attributes(:state => 'stopped', :result => 'error')
           Foreman::Logging.exception("Failed at consistency check for task #{task.id}", e, :logger => 'foreman-tasks')
         end
       end
