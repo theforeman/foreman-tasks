@@ -110,6 +110,13 @@ module ForemanTasks
     initializer 'foreman_tasks.load_app_instance_data' do |app|
       ForemanTasks::Engine.paths['db/migrate'].existent.each do |path|
         app.config.paths['db/migrate'] << path
+        # when calling rake db:create db:migrate, the migration_paths
+        # get initialized before the environment is loaded, therefore
+        # we need to ensure it's there if it already was initialized
+        if defined?(ActiveRecord::Tasks::DatabaseTasks) &&
+           !ActiveRecord::Tasks::DatabaseTasks.migrations_paths.include?(path)
+          ActiveRecord::Tasks::DatabaseTasks.migrations_paths << path
+        end
       end
     end
 
