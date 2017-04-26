@@ -172,7 +172,9 @@ module ForemanTasks
     end
 
     def sub_tasks_counts
-      result = %w(cancelled error pending success warning).zip([0].cycle).to_h
+      result = %w(cancelled error pending success warning).inject({}) do |hash, state|
+        hash.update(state => 0)
+      end
       result.update sub_tasks.group(:result).count
       sum = result.values.reduce(:+)
       if respond_to?(:main_action) && main_action.respond_to?(:total_count)
