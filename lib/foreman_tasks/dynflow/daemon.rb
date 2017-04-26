@@ -19,6 +19,7 @@ module ForemanTasks
     end
 
     # run the executor as a daemon
+    # rubocop:disable Metrics/MethodLength
     def run_background(command = 'start', options = {})
       default_options = { foreman_root: Dir.pwd,
                           process_name: 'dynflow_executor',
