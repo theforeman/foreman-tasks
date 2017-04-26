@@ -38,10 +38,10 @@ module ForemanTasks
     scoped_search :on => :parent_task_id, :complete_value => true
     scoped_search :relation => :locks,  :on => :resource_type, :complete_value => true, :rename => 'resource_type', :ext_method => :search_by_generic_resource
     scoped_search :relation => :locks,  :on => :resource_id, :complete_value => false, :rename => 'resource_id', :ext_method => :search_by_generic_resource
-    scoped_search :relation => :owners,  
-                  :on => :id, 
-                  :complete_value => true, 
-                  :rename => 'owner.id', 
+    scoped_search :relation => :owners,
+                  :on => :id,
+                  :complete_value => true,
+                  :rename => 'owner.id',
                   :ext_method => :search_by_owner,
                   :validator => ->(value) { ScopedSearch::Validators::INTEGER.call(value) || value == 'current_user' }
     scoped_search :relation => :owners,  :on => :login, :complete_value => true, :rename => 'owner.login', :ext_method => :search_by_owner

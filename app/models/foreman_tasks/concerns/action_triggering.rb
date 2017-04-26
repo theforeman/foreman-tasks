@@ -108,13 +108,13 @@ module ForemanTasks
         @_dynflow_task_wrapped = true
 
         @_dynflow_hook_action = case method
-                 when :save
-                   new_record? ? create_action : update_action
-                 when :destroy
-                   destroy_action
-                 else
-                   raise 'unexpected method'
-                 end
+                                when :save
+                                  new_record? ? create_action : update_action
+                                when :destroy
+                                  destroy_action
+                                else
+                                  raise 'unexpected method'
+                                end
         ensure_not_in_transaction! if @_dynflow_hook_action
         yield.tap do |result|
           execute_planned_action if result

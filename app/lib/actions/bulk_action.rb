@@ -1,6 +1,5 @@
 module Actions
   class BulkAction < Actions::ActionWithSubPlans
-
     include Dynflow::Action::WithBulkSubPlans
 
     # == Parameters:

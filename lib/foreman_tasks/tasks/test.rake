@@ -16,9 +16,9 @@ namespace :foreman_tasks do
     begin
       require 'rubocop/rake_task'
       RuboCop::RakeTask.new(:rubocop_foreman_tasks) do |task|
-	task.patterns = ["#{ForemanTasks::Engine.root}/app/**/*.rb",
-		  "#{ForemanTasks::Engine.root}/lib/**/*.rb",
-		  "#{ForemanTasks::Engine.root}/test/**/*.rb"]
+        task.patterns = ["#{ForemanTasks::Engine.root}/app/**/*.rb",
+                         "#{ForemanTasks::Engine.root}/lib/**/*.rb",
+                         "#{ForemanTasks::Engine.root}/test/**/*.rb"]
       end
     rescue
       puts 'Rubocop not loaded.'
