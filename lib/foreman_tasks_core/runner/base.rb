@@ -50,6 +50,19 @@ module ForemanTasksCore
       def timeout_interval
         # A number of seconds after which the runner should receive a #timeout
         #   or nil for no timeout
+        1
+      end
+
+      def external_event(_event)
+        new_data = @continuous_output
+        @continuous_output = ForemanTasksCore::ContinuousOutput.new
+        if !new_data.empty? || @exit_status
+          return Runner::Update.new(new_data, @exit_status, false)
+        end
+      end
+
+      def refresh_interval
+        1
       end
 
       def publish_data(data, type)

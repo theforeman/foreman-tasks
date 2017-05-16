@@ -18,7 +18,7 @@ module ForemanTasksCore
           @suspended_action = suspended_action
           @runner = runner
           @finishing = false
-          @refresh_interval = options[:refresh_interval] || 1
+          @refresh_interval = options[:refresh_interval] || runner.refresh_interval
         end
 
         def on_envelope(*args)
@@ -72,6 +72,13 @@ module ForemanTasksCore
           super
           @runner.close
           finish_termination
+        end
+
+        def external_event(event)
+          if (update = @runner.external_event(event))
+            @suspended_action << update
+            finish if update.exit_status
+          end
         end
 
         private
@@ -144,6 +151,13 @@ module ForemanTasksCore
           rescue => exception
             _handle_command_exception(runner_id, exception, false)
           end
+        end
+      end
+
+      def external_event(runner_id, external_event)
+        synchronize do
+          runner_actor = @runner_actors[runner_id]
+          runner_actor.tell([:external_event, external_event]) if runner_actor
         end
       end
 
