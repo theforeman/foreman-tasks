@@ -154,7 +154,7 @@ module ForemanTasks
     end
 
     def cancelled?
-      execution_plan.errors.map(&:exception).any? { |exception| exception.class == ::ForemanTasks::Task::TaskCancelledException }
+      execution_plan.errors.any? { |error| error.exception_class == ::ForemanTasks::Task::TaskCancelledException }
     end
   end
 end
