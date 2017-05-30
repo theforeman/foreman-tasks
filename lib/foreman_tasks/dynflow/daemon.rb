@@ -48,7 +48,6 @@ module ForemanTasks
     end
 
     # run the executor as a daemon
-    # rubocop:disable Metrics/MethodLength
     def run_background(command = 'start', options = {})
       options = default_options.merge(options)
       FileUtils.mkdir_p(options[:pid_dir])
