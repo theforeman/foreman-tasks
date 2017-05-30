@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_tasks 1.0.0\n"
+"Project-Id-Version: foreman_tasks 0.1.2\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-03 09:55-0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -45,9 +45,6 @@ msgid "Action with sub plans"
 msgstr ""
 
 msgid "Active"
-msgstr ""
-
-msgid "Added import task to queue, it will be run shortly"
 msgstr ""
 
 msgid "All proxies with the required feature are unavailable at the moment"
@@ -144,16 +141,13 @@ msgstr ""
 msgid "Execute now"
 msgstr ""
 
+msgid "Execution plan data not available "
+msgstr ""
+
 msgid "Execution type"
 msgstr ""
 
-msgid "Explanation"
-msgstr ""
-
 msgid "External Id"
-msgstr ""
-
-msgid "Failed to add task to queue: %s"
 msgstr ""
 
 msgid "Failed to initialize"
@@ -293,6 +287,9 @@ msgid "Recurring logic"
 msgstr ""
 
 msgid "Recurring logics"
+msgstr ""
+
+msgid "Remote action:"
 msgstr ""
 
 msgid "Repeat N times"
