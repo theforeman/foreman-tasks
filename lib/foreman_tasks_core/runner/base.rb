@@ -42,7 +42,7 @@ module ForemanTasksCore
       end
 
       def publish_data(data, type)
-        @continuous_output.add_output(data, type)
+        @continuous_output.add_output(data.force_encoding('UTF-8'), type)
       end
 
       def publish_exception(context, exception, fatal = true)
