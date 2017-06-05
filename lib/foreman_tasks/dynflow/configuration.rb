@@ -33,7 +33,7 @@ module ForemanTasks
       self.transaction_adapter      = ::Dynflow::TransactionAdapters::ActiveRecord.new
       self.eager_load_paths         = []
       self.lazy_initialization      = !Rails.env.production?
-      self.rake_tasks_with_executor = %w(db:migrate db:seed)
+      self.rake_tasks_with_executor = %w[db:migrate db:seed]
 
       @on_init = []
     end

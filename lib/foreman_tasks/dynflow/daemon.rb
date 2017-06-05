@@ -57,7 +57,7 @@ module ForemanTasks
         raise "You need to add gem 'daemons' to your Gemfile if you wish to use it."
       end
 
-      unless %w(start stop restart run).include?(command)
+      unless %w[start stop restart run].include?(command)
         raise "Command exptected to be 'start', 'stop', 'restart', 'run', was #{command.inspect}"
       end
 

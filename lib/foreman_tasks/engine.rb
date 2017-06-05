@@ -98,7 +98,7 @@ module ForemanTasks
     end
 
     initializer 'foreman_tasks.register_paths' do |_app|
-      ForemanTasks.dynflow.config.eager_load_paths.concat(%W(#{ForemanTasks::Engine.root}/app/lib/actions))
+      ForemanTasks.dynflow.config.eager_load_paths.concat(%W[#{ForemanTasks::Engine.root}/app/lib/actions])
     end
 
     initializer 'foreman_tasks.test_exceptions' do |_app|
@@ -159,7 +159,7 @@ module ForemanTasks
     end
 
     rake_tasks do
-      %w(dynflow.rake test.rake export_tasks.rake cleanup.rake).each do |rake_file|
+      %w[dynflow.rake test.rake export_tasks.rake cleanup.rake].each do |rake_file|
         full_path = File.expand_path("../tasks/#{rake_file}", __FILE__)
         load full_path if File.exist?(full_path)
       end

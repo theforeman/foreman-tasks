@@ -33,7 +33,7 @@ module ForemanTasks
           Arbitraty value for client to identify the the request parts with results.
           It's passed in the results to be able to pair the requests and responses properly.
         DESC
-        param :type, %w(user resource task)
+        param :type, %w[user resource task]
         param :task_id, String, :desc => <<-DESC
           In case :type = 'task', find the task by the uuid
         DESC

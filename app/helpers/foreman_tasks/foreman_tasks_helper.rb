@@ -1,4 +1,5 @@
 # coding: utf-8
+
 module ForemanTasks
   module ForemanTasksHelper
     def recurring_logic_state(recurring_logic)
@@ -53,13 +54,13 @@ module ForemanTasks
     def recurring_logic_action_buttons(recurring_logic)
       buttons = []
       if authorized_for(:permission => :edit_recurring_logics, :auth_object => recurring_logic)
-        buttons << link_to(N_('Cancel'), cancel_foreman_tasks_recurring_logic_path(recurring_logic), :method => :post, :class => 'btn btn-danger') unless %w(cancelled finished).include? recurring_logic.state
+        buttons << link_to(N_('Cancel'), cancel_foreman_tasks_recurring_logic_path(recurring_logic), :method => :post, :class => 'btn btn-danger') unless %w[cancelled finished].include? recurring_logic.state
       end
       button_group buttons
     end
 
     def recurring_logic_next_occurrence(recurring_logic)
-      if %w(finished cancelled).include? recurring_logic.state
+      if %w[finished cancelled].include? recurring_logic.state
         '-'
       else
         recurring_logic.next_occurrence_time
@@ -124,7 +125,7 @@ module ForemanTasks
 
     def recurring_mode_fieldset(f, triggering)
       tags = []
-      tags << selectable_f(f, :input_type, %w(cronline monthly weekly daily hourly), {}, :label => _('Repeats'), :id => 'input_type_selector')
+      tags << selectable_f(f, :input_type, %w[cronline monthly weekly daily hourly], {}, :label => _('Repeats'), :id => 'input_type_selector')
       tags += [
         cronline_fieldset(f, triggering),
         monthly_fieldset(f, triggering),

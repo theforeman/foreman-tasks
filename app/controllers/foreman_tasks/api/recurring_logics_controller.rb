@@ -9,7 +9,7 @@ module ForemanTasks
         api_base_url '/foreman_tasks/api'
       end
 
-      before_action :find_resource, :only => %w(show cancel destroy)
+      before_action :find_resource, :only => %w[show cancel destroy]
 
       api :GET, '/recurring_logics', N_('List recurring logics')
       def index

@@ -172,7 +172,7 @@ module ForemanTasks
     end
 
     def sub_tasks_counts
-      result = %w(cancelled error pending success warning).inject({}) do |hash, state|
+      result = %w[cancelled error pending success warning].inject({}) do |hash, state|
         hash.update(state => 0)
       end
       result.update sub_tasks.group(:result).count

@@ -21,7 +21,7 @@ module ForemanTasks
       proxy = nil
 
       strategies.each do |strategy|
-        next unless available_proxies[strategy].present?
+        next if available_proxies[strategy].blank?
         proxy = select_by_jobs_count(available_proxies[strategy])
         break if proxy
       end
