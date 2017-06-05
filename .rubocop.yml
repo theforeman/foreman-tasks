@@ -33,3 +33,44 @@ Style/StringLiterals:
 # Don't enforce frozen string literals
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+Style/FormatStringToken:
+  EnforcedStyle: template
+
+Rails/SkipsModelValidations:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: false
+
+# for compatibility with Foreman 1.15
+Rails/ApplicationRecord:
+  Enabled: false
+
+Style/FormatString:
+  Enabled: false
+
+Rails/Present:
+  Exclude:
+    - lib/foreman_tasks_core/**/*
+
+Rails/FilePath:
+  Enabled: false
+
+Rails/ReversibleMigration:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - lib/foreman_tasks/tasks/**/*
+
+Style/FileName:
+  Exclude:
+    - '*.gemspec'
+    - Gemfile
+    - db/seeds.d/*
+    - lib/foreman-tasks.rb
+
+Layout/IndentHeredoc:
+  Exclude:
+    - '*.gemspec'

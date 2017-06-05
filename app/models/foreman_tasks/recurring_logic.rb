@@ -24,7 +24,7 @@ module ForemanTasks
     end
 
     def self.allowed_states
-      %w(active finished cancelled failed)
+      %w[active finished cancelled failed]
     end
 
     def start(action_class, *args)
@@ -122,8 +122,8 @@ module ForemanTasks
                    ::ForemanTasks::RecurringLogic.assemble_cronline(cronline_hash(triggering.input_type, triggering.time, triggering.days_of_week))
                  end
       ::ForemanTasks::RecurringLogic.new_from_cronline(cronline).tap do |manager|
-        manager.end_time = triggering.end_time unless triggering.end_time_limited.blank?
-        manager.max_iteration = triggering.max_iteration unless triggering.max_iteration.blank?
+        manager.end_time = triggering.end_time if triggering.end_time_limited.present?
+        manager.max_iteration = triggering.max_iteration if triggering.max_iteration.present?
         manager.triggering = triggering
       end
     end

@@ -54,7 +54,7 @@ module Actions
     def check_task_status
       if output[:proxy_task_id]
         response = proxy.status_of_task(output[:proxy_task_id])
-        if %w(stopped paused).include? response['state']
+        if %w[stopped paused].include? response['state']
           if response['result'] == 'error'
             raise ::Foreman::Exception, _('The smart proxy task %s failed.') % output[:proxy_task_id]
           else

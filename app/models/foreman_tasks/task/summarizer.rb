@@ -7,7 +7,7 @@ module ForemanTasks
     end
 
     def latest_tasks_in_errors_warning(limit = 5)
-      ::ForemanTasks::Task.where('result in (?)', %w(error warning)).order('started_at DESC').limit(limit)
+      ::ForemanTasks::Task.where('result in (?)', %w[error warning]).order('started_at DESC').limit(limit)
     end
   end
 end

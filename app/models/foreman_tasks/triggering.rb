@@ -96,7 +96,7 @@ module ForemanTasks
     end
 
     def parse_start_before!
-      self.start_before ||= Time.zone.parse(start_before_raw) unless start_before_raw.blank?
+      self.start_before ||= Time.zone.parse(start_before_raw) if start_before_raw.present?
     end
 
     private

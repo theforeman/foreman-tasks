@@ -7,18 +7,18 @@
 require 'csv'
 
 namespace :foreman_tasks do
-  desc <<DESC
-Export dynflow tasks based on filter. ENV variables:
+  desc <<-DESC.strip_heredoc
+    Export dynflow tasks based on filter. ENV variables:
 
-  * TASK_SEARCH     : scoped search filter (example: 'label = "Actions::Foreman::Host::ImportFacts"')
-  * TASK_FILE       : file to export to
-  * TASK_FORMAT     : format to use for the export (either html or csv)
-  * TASK_DAYS       : number of days to go back
+      * TASK_SEARCH     : scoped search filter (example: 'label = "Actions::Foreman::Host::ImportFacts"')
+      * TASK_FILE       : file to export to
+      * TASK_FORMAT     : format to use for the export (either html or csv)
+      * TASK_DAYS       : number of days to go back
 
-If TASK_SEARCH is not defined, it defaults to all tasks in the past 7 days and
-all unsuccessful tasks in the past 60 days. The default TASK_FORMAT is html
-which requires a tar.gz file extension.
-DESC
+    If TASK_SEARCH is not defined, it defaults to all tasks in the past 7 days and
+    all unsuccessful tasks in the past 60 days. The default TASK_FORMAT is html
+    which requires a tar.gz file extension.
+  DESC
   task :export_tasks => :environment do
     deprecated_options = { :tasks => 'TASK_SEARCH',
                            :days => 'TASK_DAYS',
@@ -265,7 +265,7 @@ DESC
       end
     elsif format == 'csv'
       CSV.open(export_filename, 'wb') do |csv|
-        csv << %w(id state type label result parent_task_id started_at ended_at)
+        csv << %w[id state type label result parent_task_id started_at ended_at]
         tasks.each do |task|
           csv << [task.id, task.state, task.type, task.label, task.result,
                   task.parent_task_id, task.started_at, task.ended_at]

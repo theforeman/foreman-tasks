@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-$:.push File.expand_path("../lib", __FILE__)
+$LOAD_PATH.push File.expand_path("../lib", __FILE__)
 
 # Maintain your gem's version:
 require "foreman_tasks/version"
@@ -12,17 +12,17 @@ Gem::Specification.new do |s|
   s.email       = ["inecas@redhat.com"]
   s.homepage    = "https://github.com/theforeman/foreman-tasks"
   s.summary     = "Foreman plugin for showing tasks information for resoruces and users"
-  s.description = <<DESC
+  s.description = <<-DESC
 The goal of this plugin is to unify the way of showing task statuses across the Foreman instance.
 It defines Task model for keeping the information about the tasks and Lock for assigning the tasks
 to resources. The locking allows dealing with preventing multiple colliding tasks to be run on the
 same resource. It also optionally provides Dynflow infrastructure for using it for managing the tasks.
-DESC
+  DESC
 
   s.files = `git ls-files`.split("\n").reject do |file|
     file.end_with?("test.rake") ||
-        file.start_with?('lib/foreman_tasks_core') ||
-        file == 'foreman-tasks-core.gemspec'
+      file.start_with?('lib/foreman_tasks_core') ||
+      file == 'foreman-tasks-core.gemspec'
   end
 
   s.test_files = `git ls-files test`.split("\n")
