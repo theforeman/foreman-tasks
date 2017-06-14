@@ -26,6 +26,7 @@ module ForemanTasksCore
 
         def start_runner
           @logger.debug("start runner #{@runner.id}")
+          set_timeout if @runner.timeout_interval
           @runner.start
           refresh_runner
         ensure
@@ -41,6 +42,13 @@ module ForemanTasksCore
         ensure
           @refresh_planned = false
           plan_next_refresh
+        end
+
+        def timeout_runner
+          @logger.debug("timeout runner #{@runner.id}")
+          @runner.timeout
+        rescue => e
+          handle_exception(e, false)
         end
 
         def kill
@@ -64,6 +72,12 @@ module ForemanTasksCore
         end
 
         private
+
+        def set_timeout
+          timeout_time = Time.now.getlocal + @runner.timeout_interval
+          @logger.debug("setting timeout for #{@runner.id} to #{timeout_time}")
+          @clock.ping(reference, timeout_time, :timeout_runner)
+        end
 
         def plan_next_refresh
           if !@finishing && !@refresh_planned

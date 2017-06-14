@@ -41,6 +41,16 @@ module ForemanTasksCore
         # if cleanup is needed
       end
 
+      def timeout
+        # Override when timeouts and regular kills should be handled differently
+        kill
+      end
+
+      def timeout_interval
+        # A number of seconds after which the runner should receive a #timeout
+        #   or nil for no timeout
+      end
+
       def publish_data(data, type)
         @continuous_output.add_output(data, type)
       end
