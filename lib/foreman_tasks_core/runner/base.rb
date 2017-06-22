@@ -43,6 +43,7 @@ module ForemanTasksCore
 
       def timeout
         # Override when timeouts and regular kills should be handled differently
+        publish_data('Timeout for execution passed, trying to stop the job', 'debug')
         kill
       end
 
