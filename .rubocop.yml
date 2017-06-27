@@ -74,3 +74,5 @@ Style/FileName:
 Layout/IndentHeredoc:
   Exclude:
     - '*.gemspec'
+    - bin/*
+
