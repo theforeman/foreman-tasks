@@ -4,6 +4,16 @@ module ForemanTasks
   class Task < ActiveRecord::Base
     include Authorizable
 
+    def check_permissions_after_save
+      # there's no create_tasks permission, tasks are created as a result of internal actions, in such case we
+      # don't do authorization, that should have been performed on wrapping action level
+      if id_changed?
+        true
+      else
+        super
+      end
+    end
+
     # TODO: missing validation of states
 
     self.primary_key = :id
