@@ -3,7 +3,7 @@
   <% if authorized_for(:permission => :edit_foreman_tasks, :auth_object => @task) %>
     <%= link_to(_('Dynflow console'),
                 format((defined?(Rails) ? request.script_name : '') + '/foreman_tasks/dynflow/%s', @task.external_id),
-                class: %w(btn btn-sm btn-default)) if Setting['dynflow_enable_console'] %>
+                class: %w(btn btn-sm btn-default), target: '_blank') if Setting['dynflow_enable_console'] %>
 
     <%= link_to(_('Resume'),
                 resume_foreman_tasks_task_path(@task),
