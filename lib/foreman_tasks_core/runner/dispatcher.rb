@@ -10,9 +10,9 @@ module ForemanTasksCore
       end
 
       class RunnerActor < ::Dynflow::Actor
-        def initialize(dispatcher, suspended_action, runner, clock, logger, ticker, options = {})
+        def initialize(dispatcher, suspended_action, runner, logger, ticker, options = {})
           @dispatcher = dispatcher
-          @clock = clock
+          @clock = ticker.clock
           @ticker = ticker
           @logger = logger
           @suspended_action = suspended_action
