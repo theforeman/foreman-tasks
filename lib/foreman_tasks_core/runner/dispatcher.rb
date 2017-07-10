@@ -1,3 +1,5 @@
+require 'foreman_tasks_core/ticker'
+
 module ForemanTasksCore
   module Runner
     class Dispatcher
@@ -8,9 +10,10 @@ module ForemanTasksCore
       end
 
       class RunnerActor < ::Dynflow::Actor
-        def initialize(dispatcher, suspended_action, runner, clock, logger, options = {})
+        def initialize(dispatcher, suspended_action, runner, logger, ticker, options = {})
           @dispatcher = dispatcher
-          @clock = clock
+          @clock = ticker.clock
+          @ticker = ticker
           @logger = logger
           @suspended_action = suspended_action
           @runner = runner
@@ -82,7 +85,7 @@ module ForemanTasksCore
         def plan_next_refresh
           if !@finishing && !@refresh_planned
             @logger.debug("planning to refresh #{@runner.id}")
-            @clock.ping(reference, Time.now.getlocal + @refresh_interval, :refresh_runner)
+            @ticker.tell([:add_event, reference, :refresh_runner])
             @refresh_planned = true
           end
         end
@@ -93,9 +96,10 @@ module ForemanTasksCore
       end
 
       def initialize(clock, logger)
-        @mutex = Mutex.new
-        @clock = clock
+        @mutex  = Mutex.new
+        @clock  = clock
         @logger = logger
+        @ticker = ::ForemanTasksCore::Ticker.spawn('dispatcher-ticker', @clock, @logger)
         @runner_actors = {}
         @runner_suspended_actions = {}
       end
@@ -109,7 +113,7 @@ module ForemanTasksCore
           begin
             raise "Actor with runner id #{runner.id} already exists" if @runner_actors[runner.id]
             runner.logger = @logger
-            runner_actor = RunnerActor.spawn("runner-actor-#{runner.id}", self, suspended_action, runner, @clock, @logger)
+            runner_actor = RunnerActor.spawn("runner-actor-#{runner.id}", self, suspended_action, runner, @clock, @logger, @ticker)
             @runner_actors[runner.id] = runner_actor
             @runner_suspended_actions[runner.id] = suspended_action
             runner_actor.tell(:start_runner)
