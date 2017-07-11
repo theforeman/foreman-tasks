@@ -10,10 +10,10 @@ module ForemanTasksCore
       end
 
       class RunnerActor < ::Dynflow::Actor
-        def initialize(dispatcher, suspended_action, runner, logger, ticker, options = {})
+        def initialize(dispatcher, suspended_action, runner, clock, logger, options = {})
           @dispatcher = dispatcher
-          @clock = ticker.clock
-          @ticker = ticker
+          @clock = clock
+          @ticker = dispatcher.ticker
           @logger = logger
           @suspended_action = suspended_action
           @runner = runner
@@ -95,6 +95,7 @@ module ForemanTasksCore
         end
       end
 
+      attr_reader :ticker
       def initialize(clock, logger)
         @mutex  = Mutex.new
         @clock  = clock
@@ -113,7 +114,7 @@ module ForemanTasksCore
           begin
             raise "Actor with runner id #{runner.id} already exists" if @runner_actors[runner.id]
             runner.logger = @logger
-            runner_actor = RunnerActor.spawn("runner-actor-#{runner.id}", self, suspended_action, runner, @clock, @logger, @ticker)
+            runner_actor = RunnerActor.spawn("runner-actor-#{runner.id}", self, suspended_action, runner, @clock, @logger)
             @runner_actors[runner.id] = runner_actor
             @runner_suspended_actions[runner.id] = suspended_action
             runner_actor.tell(:start_runner)
