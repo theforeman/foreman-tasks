@@ -1,12 +1,14 @@
 module ForemanTasksCore
   class Ticker < ::Dynflow::Actor
+
+    REFRESH_INTERVAL = 1
+
     attr_reader :clock
 
     def initialize(clock, logger)
       @clock = clock
       @logger = logger
       @events = []
-      @refresh_interval = 1
       plan_next_tick
     end
 
@@ -37,7 +39,7 @@ module ForemanTasksCore
 
     def plan_next_tick
       if !@planned && !@events.empty?
-        @clock.ping(reference, Time.now.getlocal + @refresh_interval, :tick)
+        @clock.ping(reference, Time.now.getlocal + REFRESH_INTERVAL, :tick)
         @planned = true
       end
     end

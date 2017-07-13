@@ -92,7 +92,11 @@ module ForemanTasksCore
         def plan_next_refresh
           if !@finishing && !@refresh_planned
             @logger.debug("planning to refresh #{@runner.id}")
-            @ticker.tell([:add_event, reference, :refresh_runner])
+            if Ticker::REFRESH_INTERVAL == @refresh_interval
+              @ticker.tell([:add_event, reference, :refresh_runner])
+            else
+              @clock.ping(reference, Time.now.getlocal + @refresh_interval, :refresh_runner)
+            end
             @refresh_planned = true
           end
         end
