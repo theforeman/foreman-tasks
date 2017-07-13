@@ -32,6 +32,10 @@ module ForemanTasks
       execution_plan!.cancel.any?
     end
 
+    def abort
+      execution_plan!.cancel(true).any?
+    end
+
     def resumable?
       execution_plan.try(:state) == :paused
     end
