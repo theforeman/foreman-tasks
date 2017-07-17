@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'dynflow/testing'
 
 class DaemonTest < ActiveSupport::TestCase
   setup do
@@ -16,40 +17,37 @@ class DaemonTest < ActiveSupport::TestCase
     @dynflow = ForemanTasks::Dynflow.new(@world_class)
     ForemanTasks.stubs(:dynflow).returns(@dynflow)
     @dynflow.require!
+    @daemon.stubs(:sleep).returns(true) # don't pause the execution
+    @current_folder = File.expand_path('../', __FILE__)
+  end
+
+  test 'run command works withou memory_limit option specified' do
+    @daemon.run(@current_folder)
+    @dynflow.initialize!
   end
 
   test 'run command creates a watcher if memory_limit option specified' do
-    current_folder = File.expand_path('../', __FILE__)
-
     @dynflow_memory_watcher.expects(:new).with do |_world, memory_limit, _watcher_options|
       memory_limit == 1000
     end
-    @daemon.stubs(:sleep).returns(true) # don't pause the execution
 
-    @daemon.run(current_folder, memory_limit: 1000)
-    # initialization should be performed inside the foreman environment,
-    # which is mocked here
+    @daemon.run(@current_folder, memory_limit: 1000)
     @dynflow.initialize!
   end
 
   test 'run command sets parameters to watcher' do
-    current_folder = File.expand_path('../', __FILE__)
-
     @dynflow_memory_watcher.expects(:new).with do |_world, memory_limit, watcher_options|
       memory_limit == 1000 &&
         watcher_options[:polling_interval] == 100 &&
         watcher_options[:initial_wait] == 200
     end
-    @daemon.stubs(:sleep).returns(true) # don't pause the execution
 
     @daemon.run(
-      current_folder,
+      @current_folder,
       memory_limit: 1000,
       memory_polling_interval: 100,
       memory_init_delay: 200
     )
-    # initialization should be performed inside the foreman environment,
-    # which is mocked here
     @dynflow.initialize!
   end
 
