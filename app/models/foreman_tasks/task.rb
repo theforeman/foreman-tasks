@@ -7,11 +7,8 @@ module ForemanTasks
     def check_permissions_after_save
       # there's no create_tasks permission, tasks are created as a result of internal actions, in such case we
       # don't do authorization, that should have been performed on wrapping action level
-      if id_changed?
-        true
-      else
-        super
-      end
+      # the same applies for updating
+      true
     end
 
     # TODO: missing validation of states
