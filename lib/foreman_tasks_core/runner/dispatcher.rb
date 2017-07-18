@@ -74,11 +74,8 @@ module ForemanTasksCore
           finish_termination
         end
 
-        def external_event(event)
-          if (update = @runner.external_event(event))
-            @suspended_action << update
-            finish if update.exit_status
-          end
+        def external_event(_event)
+          refresh_runner
         end
 
         private

@@ -60,26 +60,12 @@ module ForemanTasksCore
       end
 
       def process_update(update)
-        merge_outputs(update.continuous_output.raw_outputs, update.incremental)
+        output[:result].concat(update.continuous_output.raw_outputs)
         if update.exit_status
           finish_run(update)
         else
           suspend
         end
-      end
-
-      def merge_outputs(outputs, incremental)
-        # No need to do anything if there are no inputs or if the "new" outputs are older than the already saved ones
-        return if outputs.empty? || (!output[:result].empty? && outputs.first['timestamp'] < output[:result].last['timestamp'])
-        unless incremental
-          # The new output is complete, we need to remove the already known outputs from it
-          # Also since it's complete output, there's only one
-          new = outputs.first
-          known = output[:result].select { |out| out['timestamp'] < outputs.first['timestamp'] }
-                                 .map { |out| out['output'] }.join
-          new['output'].gsub!(/\A#{known}/, '')
-        end
-        output[:result].concat(outputs)
       end
 
       def failed_run?
