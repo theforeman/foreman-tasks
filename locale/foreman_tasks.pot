@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_tasks 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-26 13:27+0200\n"
-"PO-Revision-Date: 2017-06-26 13:27+0200\n"
+"POT-Creation-Date: 2017-07-19 17:30+0200\n"
+"PO-Revision-Date: 2017-07-19 17:30+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -146,11 +146,12 @@ msgid "N/A"
 msgstr ""
 
 #: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:40
-msgid "%s ago"
+msgid "in %s"
 msgstr ""
 
 #: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:40
-msgid "in %s"
+#: ../app/views/foreman_tasks/tasks/dashboard/_latest_tasks_in_error_warning.html.erb:14
+msgid "%s ago"
 msgstr ""
 
 #: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:50
@@ -302,7 +303,7 @@ msgstr ""
 msgid "The targets are of different types"
 msgstr ""
 
-#: ../app/lib/actions/foreman/host/import_facts.rb:38 action_names.rb:5
+#: ../app/lib/actions/foreman/host/import_facts.rb:38 action_names.rb:3
 msgid "Import facts"
 msgstr ""
 
@@ -394,11 +395,11 @@ msgstr ""
 msgid "Finished"
 msgstr ""
 
-#: ../app/models/foreman_tasks/task.rb:77
+#: ../app/models/foreman_tasks/task.rb:84
 msgid "Delayed"
 msgstr ""
 
-#: ../app/models/foreman_tasks/task.rb:77
+#: ../app/models/foreman_tasks/task.rb:84
 msgid "Immediate"
 msgstr ""
 
@@ -703,6 +704,11 @@ msgstr ""
 msgid "Latest Warning/Error Tasks"
 msgstr ""
 
+#:
+#: ../app/views/foreman_tasks/tasks/dashboard/_latest_tasks_in_error_warning.html.erb:7
+msgid "Started"
+msgstr ""
+
 #: ../app/views/foreman_tasks/tasks/dashboard/_tasks_status.html.erb:1
 #: ../lib/foreman_tasks/engine.rb:81
 msgid "Task Status"
@@ -754,13 +760,13 @@ msgid "Recurring Logics"
 msgstr ""
 
 #: action_names.rb:2
-msgid "Play Ansible roles"
+msgid "Action with sub plans"
 msgstr ""
 
-#: action_names.rb:3
+#: action_names.rb:5
 msgid "Remote action:"
 msgstr ""
 
 #: action_names.rb:6
-msgid "Action with sub plans"
+msgid "Play Ansible roles"
 msgstr ""

@@ -370,6 +370,9 @@ msgstr ""
 msgid "Start before"
 msgstr ""
 
+msgid "Started"
+msgstr ""
+
 msgid "Started at"
 msgstr ""
 
