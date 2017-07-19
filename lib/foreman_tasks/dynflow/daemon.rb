@@ -30,7 +30,7 @@ module ForemanTasks
 
       ForemanTasks.dynflow.executor!
 
-      if options[:memory_limit] > 0
+      if options[:memory_limit].to_i > 0
         ForemanTasks.dynflow.config.on_init do |world|
           memory_watcher = initialize_memory_watcher(world, options[:memory_limit], options)
           world.terminated.on_completion do
