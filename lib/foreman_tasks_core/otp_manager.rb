@@ -15,7 +15,7 @@ module ForemanTasksCore
       end
 
       def authenticate(hash)
-        plain = Base64.decode(hash)
+        plain = Base64.decode64(hash)
         username, otp = plain.split(':', 2)
         drop_otp(username, otp)
       end
