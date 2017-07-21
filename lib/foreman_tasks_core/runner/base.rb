@@ -53,14 +53,6 @@ module ForemanTasksCore
         1
       end
 
-      def external_event(_event)
-        new_data = @continuous_output
-        @continuous_output = ForemanTasksCore::ContinuousOutput.new
-        if !new_data.empty? || @exit_status
-          return Runner::Update.new(new_data, @exit_status, false)
-        end
-      end
-
       def publish_data(data, type)
         @continuous_output.add_output(data, type)
       end

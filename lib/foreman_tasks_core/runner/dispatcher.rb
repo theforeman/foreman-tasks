@@ -73,6 +73,10 @@ module ForemanTasksCore
           finish_termination
         end
 
+        def external_event(_event)
+          refresh_runner
+        end
+
         private
 
         def set_timeout
@@ -143,6 +147,13 @@ module ForemanTasksCore
           rescue => exception
             _handle_command_exception(runner_id, exception, false)
           end
+        end
+      end
+
+      def external_event(runner_id, external_event)
+        synchronize do
+          runner_actor = @runner_actors[runner_id]
+          runner_actor.tell([:external_event, external_event]) if runner_actor
         end
       end
 
