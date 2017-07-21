@@ -18,7 +18,6 @@ module ForemanTasksCore
           @suspended_action = suspended_action
           @runner = runner
           @finishing = false
-          @refresh_interval = options[:refresh_interval] || runner.refresh_interval
         end
 
         def on_envelope(*args)
@@ -74,10 +73,6 @@ module ForemanTasksCore
           finish_termination
         end
 
-        def external_event(_event)
-          refresh_runner
-        end
-
         private
 
         def set_timeout
@@ -89,11 +84,7 @@ module ForemanTasksCore
         def plan_next_refresh
           if !@finishing && !@refresh_planned
             @logger.debug("planning to refresh #{@runner.id}")
-            if Ticker::REFRESH_INTERVAL == @refresh_interval
-              @ticker.tell([:add_event, reference, :refresh_runner])
-            else
-              @clock.ping(reference, Time.now.getlocal + @refresh_interval, :refresh_runner)
-            end
+            @ticker.tell([:add_event, reference, :refresh_runner])
             @refresh_planned = true
           end
         end
@@ -108,7 +99,7 @@ module ForemanTasksCore
         @mutex  = Mutex.new
         @clock  = clock
         @logger = logger
-        @ticker = ::ForemanTasksCore::Ticker.spawn('dispatcher-ticker', @clock, @logger)
+        @ticker = ::ForemanTasksCore::Ticker.spawn('dispatcher-ticker', @clock, @logger, refresh_interval)
         @runner_actors = {}
         @runner_suspended_actions = {}
       end
@@ -155,15 +146,12 @@ module ForemanTasksCore
         end
       end
 
-      def external_event(runner_id, external_event)
-        synchronize do
-          runner_actor = @runner_actors[runner_id]
-          runner_actor.tell([:external_event, external_event]) if runner_actor
-        end
-      end
-
       def handle_command_exception(*args)
         synchronize { _handle_command_exception(*args) }
+      end
+
+      def refresh_interval
+        1
       end
 
       private

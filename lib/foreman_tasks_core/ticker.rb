@@ -5,10 +5,11 @@ module ForemanTasksCore
 
     attr_reader :clock
 
-    def initialize(clock, logger)
+    def initialize(clock, logger, refresh_interval)
       @clock = clock
       @logger = logger
       @events = []
+      @refresh_interval = refresh_interval
       plan_next_tick
     end
 
@@ -39,7 +40,7 @@ module ForemanTasksCore
 
     def plan_next_tick
       if !@planned && !@events.empty?
-        @clock.ping(reference, Time.now.getlocal + REFRESH_INTERVAL, :tick)
+        @clock.ping(reference, Time.now.getlocal + @refresh_interval, :tick)
         @planned = true
       end
     end

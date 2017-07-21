@@ -61,10 +61,6 @@ module ForemanTasksCore
         end
       end
 
-      def refresh_interval
-        1
-      end
-
       def publish_data(data, type)
         @continuous_output.add_output(data, type)
       end
