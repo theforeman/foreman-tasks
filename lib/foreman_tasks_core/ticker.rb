@@ -1,8 +1,6 @@
 module ForemanTasksCore
   class Ticker < ::Dynflow::Actor
 
-    REFRESH_INTERVAL = 1
-
     attr_reader :clock
 
     def initialize(clock, logger, refresh_interval)
