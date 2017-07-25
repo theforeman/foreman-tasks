@@ -1,3 +1,5 @@
+require 'csv'
+
 module ForemanTasks
   # Represents the cleanup mechanism for tasks
   class Cleaner
@@ -111,8 +113,22 @@ module ForemanTasks
 
     def delete_tasks(chunk, backup_dir = ForemanTasks.dynflow.world.persistence.current_backup_dir)
       tasks = ForemanTasks::Task.where(:id => chunk.map(&:id))
-      ForemanTasks.dynflow.world.persistence.adapter.backup_to_csv(tasks, backup_dir, 'foreman_tasks.csv') if backup_dir
+      tasks_to_csv(tasks, backup_dir, 'foreman_tasks.csv') if backup_dir
       tasks.delete_all
+    end
+
+    def tasks_to_csv(dataset, backup_dir, file_name)
+      FileUtils.mkdir_p(backup_dir) unless File.directory?(backup_dir)
+      csv_file = File.join(backup_dir, file_name)
+      appending = File.exist?(csv_file)
+      columns = ForemanTasks::Task.attribute_names
+      File.open(csv_file, 'a') do |csv|
+        csv << columns unless appending
+        dataset.each do |row|
+          csv << row.attributes.values
+        end
+      end
+      dataset
     end
 
     def delete_dynflow_plans(chunk, backup_dir = ForemanTasks.dynflow.world.persistence.current_backup_dir)
