@@ -123,9 +123,9 @@ module ForemanTasks
       appending = File.exist?(csv_file)
       columns = ForemanTasks::Task.attribute_names
       File.open(csv_file, 'a') do |csv|
-        csv << columns unless appending
+        csv << columns.to_csv unless appending
         dataset.each do |row|
-          csv << row.attributes.values
+          csv << row.attributes.values.to_csv
         end
       end
       dataset
