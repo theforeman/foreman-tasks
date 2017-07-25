@@ -50,7 +50,6 @@ module ForemanTasksCore
       def timeout_interval
         # A number of seconds after which the runner should receive a #timeout
         #   or nil for no timeout
-        1
       end
 
       def publish_data(data, type)
