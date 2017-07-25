@@ -9,6 +9,10 @@
 #     :action:
 #       :enabled: true
 
+  :backup:
+    :backup_deleted_tasks: true
+    :backup_dir: /var/lib/foreman/tasks-backup
+
 
 # Cleaning configuration: how long should the actions be kept before deleted
 # by `rake foreman_tasks:clean` task
