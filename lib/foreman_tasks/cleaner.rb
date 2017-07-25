@@ -96,9 +96,10 @@ module ForemanTasks
         say "[noop] #{ForemanTasks::Task.search_for(full_filter).size} tasks would be deleted"
       else
         start_tracking_progress
+        backup_dir = ForemanTasks.dynflow.world.persistence.current_backup_dir
         while (chunk = ForemanTasks::Task.search_for(full_filter).limit(batch_size)).any?
-          delete_tasks(chunk)
-          delete_dynflow_plans(chunk)
+          delete_tasks(chunk, backup_dir)
+          delete_dynflow_plans(chunk, backup_dir)
           report_progress(chunk)
         end
       end
@@ -108,13 +109,15 @@ module ForemanTasks
       ForemanTasks::Task.search_for(full_filter).select('DISTINCT foreman_tasks_tasks.id, foreman_tasks_tasks.type, foreman_tasks_tasks.external_id')
     end
 
-    def delete_tasks(chunk)
-      ForemanTasks::Task.where(:id => chunk.map(&:id)).delete_all
+    def delete_tasks(chunk, backup_dir = ForemanTasks.dynflow.world.persistence.current_backup_dir)
+      tasks = ForemanTasks::Task.where(:id => chunk.map(&:id))
+      ForemanTasks.dynflow.world.persistence.adapter.backup_to_csv(tasks, backup_dir, 'foreman_tasks.csv') if backup_dir
+      tasks.delete_all
     end
 
-    def delete_dynflow_plans(chunk)
+    def delete_dynflow_plans(chunk, backup_dir = ForemanTasks.dynflow.world.persistence.current_backup_dir)
       dynflow_ids = chunk.find_all { |task| task.is_a? Task::DynflowTask }.map(&:external_id)
-      ForemanTasks.dynflow.world.persistence.delete_execution_plans({ 'uuid' => dynflow_ids }, batch_size)
+      ForemanTasks.dynflow.world.persistence.delete_execution_plans({ 'uuid' => dynflow_ids }, batch_size, backup_dir)
     end
 
     def prepare_filter
