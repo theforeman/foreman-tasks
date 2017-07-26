@@ -7,7 +7,7 @@ module ForemanTasksCore
       def generate_otp(username)
         otp = SecureRandom.hex
         @passwords ||= {}
-        @passwords[username] = otp
+        @passwords[username] = otp.to_s
       end
 
       def drop_otp(username, password)
