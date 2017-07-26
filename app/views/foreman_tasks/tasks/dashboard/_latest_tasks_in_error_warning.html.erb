@@ -11,7 +11,7 @@
       <td class="ellipsis"><%= link_to task.humanized[:action], defined?(main_app) ? main_app.foreman_tasks_task_path(task.id) : foreman_tasks_task_path(task.id) %></td>
       <td><%= task.state %></td>
       <td><%= task.result %></td>
-      <td><%= _('%s ago') % time_ago_in_words(task.started_at) %></td>
+      <td><%= task.started_at ? (_('%s ago') % time_ago_in_words(task.started_at)) : _('N/A') %></td>
     </tr>
   <% end %>
 </table>
