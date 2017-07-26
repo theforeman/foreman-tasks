@@ -76,7 +76,8 @@ module ForemanTasks
                           :verbose      => false,
                           :batch_size   => 1000,
                           :noop         => false,
-                          :states       => ['stopped'] }
+                          :states       => ['stopped'],
+                          :backup_dir   => ForemanTasks.dynflow.world.persistence.current_backup_dir }
       options         = default_options.merge(options)
 
       @filter         = options[:filter]
@@ -85,6 +86,7 @@ module ForemanTasks
       @verbose        = options[:verbose]
       @batch_size     = options[:batch_size]
       @noop           = options[:noop]
+      @backup_dir     = options[:backup_dir]
 
       raise ArgumentError, 'filter not speficied' if @filter.nil?
 
@@ -98,10 +100,9 @@ module ForemanTasks
         say "[noop] #{ForemanTasks::Task.search_for(full_filter).size} tasks would be deleted"
       else
         start_tracking_progress
-        backup_dir = ForemanTasks.dynflow.world.persistence.current_backup_dir
         while (chunk = ForemanTasks::Task.search_for(full_filter).limit(batch_size)).any?
-          delete_tasks(chunk, backup_dir)
-          delete_dynflow_plans(chunk, backup_dir)
+          delete_tasks(chunk)
+          delete_dynflow_plans(chunk, @backup_dir)
           report_progress(chunk)
         end
       end
@@ -111,9 +112,9 @@ module ForemanTasks
       ForemanTasks::Task.search_for(full_filter).select('DISTINCT foreman_tasks_tasks.id, foreman_tasks_tasks.type, foreman_tasks_tasks.external_id')
     end
 
-    def delete_tasks(chunk, backup_dir = ForemanTasks.dynflow.world.persistence.current_backup_dir)
+    def delete_tasks(chunk)
       tasks = ForemanTasks::Task.where(:id => chunk.map(&:id))
-      tasks_to_csv(tasks, backup_dir, 'foreman_tasks.csv') if backup_dir
+      tasks_to_csv(tasks, @backup_dir, 'foreman_tasks.csv') if @backup_dir
       tasks.delete_all
     end
 
