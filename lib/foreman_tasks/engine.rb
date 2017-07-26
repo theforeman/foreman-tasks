@@ -20,7 +20,7 @@ module ForemanTasks
     assets_to_precompile =
       Dir.chdir(root) do
         Dir['app/assets/javascripts/**/*', 'app/assets/stylesheets/**/*'].map do |f|
-          f.split(File::SEPARATOR, 4).last.gsub(/\.scss\Z/, '')
+          f.split(File::SEPARATOR, 4).last
         end
       end
 
