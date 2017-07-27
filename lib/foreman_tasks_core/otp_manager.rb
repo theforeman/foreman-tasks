@@ -6,12 +6,15 @@ module ForemanTasksCore
     class << self
       def generate_otp(username)
         otp = SecureRandom.hex
-        @passwords ||= {}
-        @passwords[username] = otp.to_s
+        passwords[username] = otp.to_s
       end
 
       def drop_otp(username, password)
-        @passwords.delete(username) if @passwords[username] == password
+        passwords.delete(username) if passwords[username] == password
+      end
+
+      def passwords
+        @password ||= {}
       end
 
       def authenticate(hash)
