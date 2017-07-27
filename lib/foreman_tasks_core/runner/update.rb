@@ -17,5 +17,12 @@ module ForemanTasksCore
         new(continuous_output, fatal ? 'EXCEPTION' : nil)
       end
     end
+
+    class ExternalEvent
+      attr_reader :data
+      def initialize(data = {})
+        @data = data
+      end
+    end
   end
 end

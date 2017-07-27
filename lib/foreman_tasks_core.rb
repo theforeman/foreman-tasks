@@ -2,6 +2,7 @@
 # that can be shared by the Foreman server and Foreman proxy
 
 require 'foreman_tasks_core/settings_loader'
+require 'foreman_tasks_core/otp_manager'
 
 module ForemanTasksCore
   def self.dynflow_world

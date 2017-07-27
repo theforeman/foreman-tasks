@@ -2,11 +2,11 @@ module ForemanTasksCore
   class Ticker < ::Dynflow::Actor
     attr_reader :clock
 
-    def initialize(clock, logger)
+    def initialize(clock, logger, refresh_interval)
       @clock = clock
       @logger = logger
       @events = []
-      @refresh_interval = 1
+      @refresh_interval = refresh_interval
       plan_next_tick
     end
 
