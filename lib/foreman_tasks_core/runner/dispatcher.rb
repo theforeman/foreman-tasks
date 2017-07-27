@@ -10,7 +10,7 @@ module ForemanTasksCore
       end
 
       class RunnerActor < ::Dynflow::Actor
-        def initialize(dispatcher, suspended_action, runner, clock, logger, options = {})
+        def initialize(dispatcher, suspended_action, runner, clock, logger, _options = {})
           @dispatcher = dispatcher
           @clock = clock
           @ticker = dispatcher.ticker
@@ -18,7 +18,6 @@ module ForemanTasksCore
           @suspended_action = suspended_action
           @runner = runner
           @finishing = false
-          @refresh_interval = options[:refresh_interval] || 1
         end
 
         def on_envelope(*args)
@@ -74,6 +73,10 @@ module ForemanTasksCore
           finish_termination
         end
 
+        def external_event(_event)
+          refresh_runner
+        end
+
         private
 
         def set_timeout
@@ -100,7 +103,7 @@ module ForemanTasksCore
         @mutex  = Mutex.new
         @clock  = clock
         @logger = logger
-        @ticker = ::ForemanTasksCore::Ticker.spawn('dispatcher-ticker', @clock, @logger)
+        @ticker = ::ForemanTasksCore::Ticker.spawn('dispatcher-ticker', @clock, @logger, refresh_interval)
         @runner_actors = {}
         @runner_suspended_actions = {}
       end
@@ -147,8 +150,19 @@ module ForemanTasksCore
         end
       end
 
+      def external_event(runner_id, external_event)
+        synchronize do
+          runner_actor = @runner_actors[runner_id]
+          runner_actor.tell([:external_event, external_event]) if runner_actor
+        end
+      end
+
       def handle_command_exception(*args)
         synchronize { _handle_command_exception(*args) }
+      end
+
+      def refresh_interval
+        1
       end
 
       private

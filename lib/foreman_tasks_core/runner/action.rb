@@ -10,6 +10,8 @@ module ForemanTasksCore
           init_run
         when Runner::Update
           process_update(event)
+        when Runner::ExternalEvent
+          process_external_event(event)
         when ::Dynflow::Action::Cancellable::Cancel
           kill_run
         else
@@ -50,6 +52,11 @@ module ForemanTasksCore
 
       def finish_run(update)
         output[:exit_status] = update.exit_status
+      end
+
+      def process_external_event(event)
+        runner_dispatcher.external_event(output[:runner_id], event)
+        suspend
       end
 
       def process_update(update)
