@@ -84,7 +84,7 @@ module ForemanTasks
         start_tracking_progress
         while (chunk = ForemanTasks::Task.search_for(full_filter).limit(batch_size)).any?
           delete_tasks(chunk)
-          delete_dynflow_plans(chunk, @backup_dir)
+          delete_dynflow_plans(chunk)
           report_progress(chunk)
         end
       end
@@ -114,9 +114,9 @@ module ForemanTasks
       dataset
     end
 
-    def delete_dynflow_plans(chunk, backup_dir = ForemanTasks.dynflow.world.persistence.current_backup_dir)
+    def delete_dynflow_plans(chunk)
       dynflow_ids = chunk.find_all { |task| task.is_a? Task::DynflowTask }.map(&:external_id)
-      ForemanTasks.dynflow.world.persistence.delete_execution_plans({ 'uuid' => dynflow_ids }, batch_size, backup_dir)
+      ForemanTasks.dynflow.world.persistence.delete_execution_plans({ 'uuid' => dynflow_ids }, batch_size, @backup_dir)
     end
 
     def prepare_filter
