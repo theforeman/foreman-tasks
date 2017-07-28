@@ -3,7 +3,6 @@ require 'foreman_tasks_core/otp_manager'
 
 module ForemanTasksCore
   class OtpManagerTest < ActiveSupport::TestCase
-
     class TestOtpManager < OtpManager
       def self.reset!
         @passwords = nil
