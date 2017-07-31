@@ -17,6 +17,10 @@ module ForemanTasks
       'foreman_tasks_recurring_logics'
     end
 
+    def resource_class
+      ::ForemanTasks::RecurringLogic
+    end
+
     private
 
     def find_recurring_logic
