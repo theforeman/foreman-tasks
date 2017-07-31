@@ -72,6 +72,10 @@ module ForemanTasks
       'foreman_tasks_tasks'
     end
 
+    def resource_class
+      ForemanTasks::Task
+    end
+
     private
 
     def restrict_dangerous_actions
