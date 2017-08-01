@@ -153,8 +153,8 @@ module ForemanTasks
     private
 
     def map_result(data)
-      if state_result_transitioned?(['planned', 'pending'], ['stopped', 'error'], data) ||
-          (data[:result] == :error && cancelled?)
+      if state_result_transitioned?(%w[planned pending], %w[stopped error], data) ||
+         (data[:result] == :error && cancelled?)
         :cancelled
       else
         data[:result]
