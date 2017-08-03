@@ -9,8 +9,8 @@ module ForemanTasks
       self.external_id    = data[:id]
       self.started_at     = utc_zone.parse(data[:started_at]) unless data[:started_at].nil?
       self.ended_at       = utc_zone.parse(data[:ended_at]) unless data[:ended_at].nil?
+      self.result         = map_result(data).to_s
       self.state          = data[:state].to_s
-      self.result         = map_result(data[:result])
       self.start_at       = utc_zone.parse(data[:start_at]) if data[:start_at]
       self.start_before   = utc_zone.parse(data[:start_before]) if data[:start_before]
       self.parent_task_id ||= begin
@@ -30,6 +30,10 @@ module ForemanTasks
 
     def cancel
       execution_plan!.cancel.any?
+    end
+
+    def abort
+      execution_plan!.cancel(true).any?
     end
 
     def resumable?
@@ -148,9 +152,20 @@ module ForemanTasks
 
     private
 
-    def map_result(result)
-      result = :cancelled if result == :error && cancelled?
-      result.to_s
+    def map_result(data)
+      if state_result_transitioned?(%w[planned pending], %w[stopped error], data) ||
+         (data[:result] == :error && cancelled?)
+        :cancelled
+      else
+        data[:result]
+      end
+    end
+
+    def state_result_transitioned?(from, to, data)
+      oldstate, oldresult = from
+      newstate, newresult = to
+      state == oldstate && data[:state].to_s == newstate &&
+        result == oldresult && data[:result].to_s == newresult
     end
 
     def cancelled?

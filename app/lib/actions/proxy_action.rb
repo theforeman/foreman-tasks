@@ -31,6 +31,8 @@ module Actions
           # do nothing
         when ::Dynflow::Action::Cancellable::Cancel
           cancel_proxy_task
+        when ::Dynflow::Action::Cancellable::Abort
+          abort_proxy_task
         when CallbackData
           on_data(event.data)
         when ::Dynflow::Action::Timeouts::Timeout
@@ -76,6 +78,11 @@ module Actions
         output[:cancel_sent] = true
         suspend
       end
+    end
+
+    def abort_proxy_task
+      proxy.cancel_task(output[:proxy_task_id])
+      error! ForemanTasks::Task::TaskCancelledException.new(_('Task aborted: the task might be still running on the proxy'))
     end
 
     def on_resume
