@@ -38,5 +38,4 @@ $(document).on('click', ".table-two-pane td.two-pane-link", function(e) {
     </tr>
   <% end %>
 </table>
-<%= page_entries_info @tasks %>
-<%= will_paginate @tasks %>
+<%= will_paginate_with_info @tasks %>
