@@ -36,6 +36,16 @@ module ForemanTasks
       redirect_to :back
     end
 
+    def abort
+      task = find_dynflow_task
+      if task.abort
+        flash[:notice] = _('Trying to abort the task')
+      else
+        flash[:warning] = _('The task cannot be aborted at the moment.')
+      end
+      redirect_to :back
+    end
+
     def resume
       task = find_dynflow_task
       if task.resumable?
@@ -90,7 +100,7 @@ module ForemanTasks
       case params[:action]
       when 'sub_tasks'
         :view
-      when 'resume', 'unlock', 'force_unlock', 'cancel_step', 'cancel'
+      when 'resume', 'unlock', 'force_unlock', 'cancel_step', 'cancel', 'abort'
         :edit
       else
         super
