@@ -9,7 +9,7 @@ module ForemanTasks
     def world_config
       super.tap do |config|
         config.backup_deleted_plans = backup_settings[:backup_deleted_plans]
-        config.backup_dir          = backup_settings[:backup_dir]
+        config.backup_dir           = backup_settings[:backup_dir]
       end
     end
 
