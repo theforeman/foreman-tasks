@@ -1,6 +1,11 @@
 require 'foreman_tasks_test_helper'
 
 class TasksTest < ActiveSupport::TestCase
+  before do
+    # To stop dynflow from backing up actions, execution_plans and steps
+    ForemanTasks.dynflow.world.persistence.adapter.stubs(:backup_to_csv)
+  end
+
   describe ForemanTasks::Cleaner do
     it 'is able to delete tasks (including the dynflow plans) based on filter' do
       cleaner = ForemanTasks::Cleaner.new(:filter => 'label = "Actions::User::Create"', :after => '10d')
@@ -12,6 +17,7 @@ class TasksTest < ActiveSupport::TestCase
                            task.save
                          end,
                          FactoryGirl.create(:dynflow_task, :product_create_task)]
+      cleaner.expects(:tasks_to_csv)
       cleaner.delete
       ForemanTasks::Task.where(id: tasks_to_delete).must_be_empty
       ForemanTasks::Task.where(id: tasks_to_keep).order(:id).map(&:id).must_equal tasks_to_keep.map(&:id).sort
@@ -32,6 +38,7 @@ class TasksTest < ActiveSupport::TestCase
                          end]
 
       tasks_to_keep   = [FactoryGirl.create(:dynflow_task, :product_create_task)]
+      cleaner.expects(:tasks_to_csv)
       cleaner.delete
       ForemanTasks::Task.where(id: tasks_to_delete).must_be_empty
       ForemanTasks::Task.where(id: tasks_to_keep).must_equal tasks_to_keep
@@ -46,9 +53,29 @@ class TasksTest < ActiveSupport::TestCase
                            task.started_at = task.ended_at = Time.zone.now
                            task.save
                          end]
+      cleaner.expects(:tasks_to_csv)
       cleaner.delete
       ForemanTasks::Task.where(id: tasks_to_delete).must_be_empty
       ForemanTasks::Task.where(id: tasks_to_keep).must_equal tasks_to_keep
+    end
+
+    it 'backs tasks up before deleting' do
+      dir = '/tmp'
+      cleaner = ForemanTasks::Cleaner.new(:filter => '', :after => '10d', :backup_dir => dir)
+      tasks_to_delete = [FactoryGirl.create(:dynflow_task, :user_create_task),
+                         FactoryGirl.create(:dynflow_task, :product_create_task)]
+
+      r, w = IO.pipe
+      cleaner.expects(:with_backup_file)
+             .with(dir, 'foreman_tasks.csv')
+             .yields(w, false)
+      cleaner.delete
+      w.close
+      header, *data = r.readlines.map(&:chomp)
+      header.must_equal ForemanTasks::Task.attribute_names.join(',')
+      data.must_equal tasks_to_delete.map { |task| task.attributes.values.join(',') }
+
+      ForemanTasks::Task.where(id: tasks_to_delete).must_be_empty
     end
 
     class ActionWithCleanup < Actions::Base

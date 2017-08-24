@@ -119,17 +119,21 @@ module ForemanTasks
     end
 
     def tasks_to_csv(dataset, backup_dir, file_name)
-      FileUtils.mkdir_p(backup_dir) unless File.directory?(backup_dir)
-      csv_file = File.join(backup_dir, file_name)
-      appending = File.exist?(csv_file)
-      columns = ForemanTasks::Task.attribute_names
-      File.open(csv_file, 'a') do |csv|
-        csv << columns.to_csv unless appending
+      with_backup_file(backup_dir, file_name) do |csv, appending|
+        csv << ForemanTasks::Task.attribute_names.to_csv unless appending
         dataset.each do |row|
           csv << row.attributes.values.to_csv
         end
       end
       dataset
+    end
+
+    def with_backup_file(backup_dir, file_name)
+      FileUtils.mkdir_p(backup_dir) unless File.directory?(backup_dir)
+      appending = File.exist?(csv_file)
+      File.open(File.join(backup_dir, file_name), 'a') do |f|
+        yield f, appending
+      end
     end
 
     def delete_dynflow_plans(chunk)
