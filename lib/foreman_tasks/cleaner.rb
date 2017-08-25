@@ -130,8 +130,9 @@ module ForemanTasks
 
     def with_backup_file(backup_dir, file_name)
       FileUtils.mkdir_p(backup_dir) unless File.directory?(backup_dir)
+      csv_file = File.join(backup_dir, file_name)
       appending = File.exist?(csv_file)
-      File.open(File.join(backup_dir, file_name), 'a') do |f|
+      File.open(csv_file, 'a') do |f|
         yield f, appending
       end
     end
