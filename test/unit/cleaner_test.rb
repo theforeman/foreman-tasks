@@ -73,7 +73,7 @@ class TasksTest < ActiveSupport::TestCase
       w.close
       header, *data = r.readlines.map(&:chomp)
       header.must_equal ForemanTasks::Task.attribute_names.join(',')
-      data.must_equal tasks_to_delete.map { |task| task.attributes.values.join(',') }
+      data.must_equal(tasks_to_delete.map { |task| task.attributes.values.join(',') })
 
       ForemanTasks::Task.where(id: tasks_to_delete).must_be_empty
     end
