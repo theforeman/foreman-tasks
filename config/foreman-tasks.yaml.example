@@ -9,10 +9,18 @@
 #     :action:
 #       :enabled: true
 
-  :backup:
-    :backup_deleted_tasks: true
-    :backup_dir: /var/lib/foreman/tasks-backup
-
+# Task backup configuration can be changed by uncommenting the backup
+# section
+#
+#   :backup:
+#
+# Whether to back up tasks when they are removed
+#
+#     :backup_deleted_tasks: true
+#
+# Where to put the tasks which were backed up
+#
+#     :backup_dir: /var/lib/foreman/tasks-backup
 
 # Cleaning configuration: how long should the actions be kept before deleted
 # by `rake foreman_tasks:clean` task
