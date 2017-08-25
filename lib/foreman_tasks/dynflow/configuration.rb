@@ -24,7 +24,7 @@ module ForemanTasks
     end
 
     def default_backup_dir
-      "./backup"
+      File.join(Rails.root, 'tmp', 'task-backup')
     end
 
     def initialize_persistence
