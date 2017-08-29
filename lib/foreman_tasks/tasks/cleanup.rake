@@ -52,6 +52,24 @@ namespace :foreman_tasks do
           printf("%-50s %s\n", action.name, after)
         end
       end
+      puts
+      by_rules = ForemanTasks::Cleaner.actions_by_rules(ForemanTasks::Cleaner.actions_with_default_cleanup)
+      if by_rules.empty?
+        puts _('No cleanup rules are configured')
+      else
+        printf("%-50s %-15s %s\n", _('states'), _('delete after'), _('filter'))
+        by_rules.each do |hash|
+          state = case hash[:states]
+                  when []
+                    _('ANY')
+                  when nil
+                    'stopped'
+                  else
+                    hash[:states]
+                  end
+          printf("%-50s %-15s %s\n", state, hash[:after], hash[:filter])
+        end
+      end
     end
   end
 

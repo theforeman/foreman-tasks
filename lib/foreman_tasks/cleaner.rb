@@ -53,12 +53,13 @@ module ForemanTasks
     def self.actions_by_rules(actions_with_periods)
       disable_actions_with_periods = "label !^ (#{actions_with_periods.keys.join(', ') })"
       cleanup_settings.fetch(:rules, []).map do |hash|
+        return nil if hash[:after].nil?
         conditions = []
         conditions << disable_actions_with_periods unless hash[:avoid_actions]
         conditions << hash[:filter] if hash[:filter]
         hash[:filter] = conditions.map { |condition| "(#{condition})" }.join(' AND ')
         hash
-      end
+      end.compact
     end
 
     attr_reader :filter, :after, :states, :verbose, :batch_size, :noop, :full_filter
