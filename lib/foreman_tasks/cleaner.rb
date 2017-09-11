@@ -51,7 +51,7 @@ module ForemanTasks
     end
 
     def self.actions_by_rules(actions_with_periods)
-      disable_actions_with_periods = "label !^ (#{actions_with_periods.keys.join(', ') })"
+      disable_actions_with_periods = "label !^ (#{actions_with_periods.keys.join(', ')})"
       cleanup_settings.fetch(:rules, []).map do |hash|
         return nil if hash[:after].nil?
         conditions = []
