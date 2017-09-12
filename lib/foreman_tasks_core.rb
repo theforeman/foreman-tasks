@@ -3,6 +3,7 @@
 
 require 'foreman_tasks_core/settings_loader'
 require 'foreman_tasks_core/otp_manager'
+require 'foreman_tasks_core/ticker'
 
 module ForemanTasksCore
   def self.dynflow_world
@@ -16,5 +17,9 @@ module ForemanTasksCore
 
   def self.dynflow_setup(dynflow_world)
     @dynflow_world = dynflow_world
+  end
+
+  def self.silent_dead_letter_matchers
+    [::Dynflow::DeadLetterHandler::Matcher.new(ForemanTasksCore::Ticker)]
   end
 end
