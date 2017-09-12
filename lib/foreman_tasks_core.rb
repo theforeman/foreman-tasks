@@ -20,6 +20,6 @@ module ForemanTasksCore
   end
 
   def self.silent_dead_letter_matchers
-    [ ::Dynflow::DeadLetterHandler::Matcher.new(ForemanTasksCore::Ticker) ]
+    [::Dynflow::DeadLetterHandler::Matcher.new(ForemanTasksCore::Ticker)]
   end
 end
