@@ -3,8 +3,11 @@
 # This file provides additional debug information for foreman-debug tool and is
 # symlinked as /usr/share/foreman/script/foreman-debug.d/60-dynflow_debug
 
+GET_DB_CONFIG_SCRIPT='db = YAML.load_file("/etc/foreman/database.yml")["production"];puts %(PGPASSWORD="#{db["password"]}" psql -U #{db["username"]} -h "#{db["host"]||"localhost"}" -p #{db["port"]||"5432"} -d #{db["database"]})'
+FOREMAN_PSQL_COMMAND=`ruby -ryaml -e "$GET_DB_CONFIG_SCRIPT"`
+
 export_csv() {
-  echo "COPY ($1) TO STDOUT WITH CSV;" | su - postgres -c '/usr/bin/psql -d foreman' > $2
+  echo "COPY ($1) TO STDOUT WITH CSV;" | eval $FOREMAN_PSQL_COMMAND > $2
 }
 
 add_files /var/log/foreman/dynflow_executor*.log*
