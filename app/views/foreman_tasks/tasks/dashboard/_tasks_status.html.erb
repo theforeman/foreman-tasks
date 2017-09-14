@@ -11,7 +11,7 @@
       <td><%= result.state %></td>
       <td><%= result.result %></td>
       <td><%= link_to result.count, main_app.foreman_tasks_tasks_path(:search => "state=#{result.state}&result=#{result.result}") %></td>
-      <td><%= result.started_at ? (_('%s ago') % time_ago_in_words(result.started_at)) : _('N/A') %></td>
+      <td><%= result.started_at ? (_(date_time_relative(result.started_at))) : _('N/A') %></td>
     </tr>
   <% end %>
 </table>
