@@ -122,6 +122,7 @@ class TasksTest < ActiveSupport::TestCase
     it 'can indicate it is recurring' do
       refute task.recurring?
       task.add_missing_task_groups(logic.task_group)
+      task.reload
       assert task.recurring?
     end
   end
