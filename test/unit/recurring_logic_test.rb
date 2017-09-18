@@ -91,7 +91,7 @@ class RecurringLogicsTest < ActiveSupport::TestCase
     it 'can be created from triggering' do
       triggering = FactoryGirl.build(:triggering, :recurring, :end_time_limited)
       logic = ForemanTasks::RecurringLogic.new_from_triggering(triggering)
-      # Mysql coreces the times a bit
+      # Mysql coerces the times a bit
       logic.end_time.to_i.must_equal triggering.end_time.to_i
     end
 
