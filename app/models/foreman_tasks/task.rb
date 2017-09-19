@@ -176,6 +176,7 @@ module ForemanTasks
     def add_missing_task_groups(groups)
       groups = [groups] unless groups.is_a? Array
       (groups - task_groups).each { |group| task_groups << group }
+      save!
     end
 
     def sub_tasks_counts
