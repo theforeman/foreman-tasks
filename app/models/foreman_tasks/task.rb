@@ -51,7 +51,7 @@ module ForemanTasks
                   :rename => 'owner.id',
                   :ext_method => :search_by_owner,
                   :validator => ->(value) { ScopedSearch::Validators::INTEGER.call(value) || value == 'current_user' }
-    scoped_search :relation => :owners,  :on => :login, :complete_value => true, :rename => 'owner.login', :ext_method => :search_by_owner
+    scoped_search :relation => :owners,  :on => :login, :complete_value => true, :rename => 'owner.login', :ext_method => :search_by_owner, :aliases => [:user]
     scoped_search :relation => :owners,  :on => :firstname, :complete_value => true, :rename => 'owner.firstname', :ext_method => :search_by_owner
     scoped_search :relation => :task_groups, :on => :id, :complete_value => true, :rename => 'task_group.id', :validator => ScopedSearch::Validators::INTEGER
 
@@ -133,6 +133,7 @@ module ForemanTasks
     def self.search_by_owner(key, operator, value)
       return { :conditions => '0 = 1' } if value == 'current_user' && User.current.nil?
 
+      key = 'owners.login' if key == 'user'
       key_name = connection.quote_column_name(key.sub(/^.*\./, ''))
       joins = <<-SQL
       INNER JOIN foreman_tasks_locks AS foreman_tasks_locks_owner
