@@ -9,6 +9,7 @@ namespace :foreman_tasks do
         * NOOP        : set to "true" if the task should not actuall perform the deletion
         * VERBOSE     : set to "true" for more verbose output
         * BATCH_SIZE  : the size of batches the tasks get processed in (1000 by default)
+        * TASK_BACKUP : the path where to place backup of cleaned tasks (set to empty to disable)
 
       If none of TASK_SEARCH, BEFORE, STATES is specified, the tasks will be cleaned based
       configuration in settings
@@ -28,6 +29,11 @@ namespace :foreman_tasks do
       options[:verbose] = true if ENV['VERBOSE']
 
       options[:batch_size] = ENV['BATCH_SIZE'].to_i if ENV['BATCH_SIZE']
+
+      backup_dir = ENV['BACKUP_DIR']
+      unless backup_dir.nil?
+        options[:backup_dir] = backup_dir.empty? ? nil : backup_dir
+      end
 
       if ENV['FILTER']
         raise 'FILTER has been deprecated. Please use TASK_SEARCH instead.'
