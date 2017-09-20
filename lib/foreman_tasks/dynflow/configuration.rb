@@ -14,17 +14,27 @@ module ForemanTasks
     end
 
     def backup_settings
+      return @backup_settings if @backup_settings
       backup_options = {
         :backup_deleted_plans => true,
         :backup_dir => default_backup_dir
       }
       settings = SETTINGS[:'foreman-tasks'] && SETTINGS[:'foreman-tasks'][:backup]
       backup_options.merge!(settings) if settings
-      backup_options
+      env_var = ENV['TASK_BACKUP']
+      unless env_var.nil?
+        backup_options[:backup_deleted_plans] = environment_override(env_var)
+      end
+      @backup_settings = backup_options
     end
 
     def default_backup_dir
       File.join(Rails.root, 'tmp', 'task-backup')
+    end
+
+    def environment_override(env_var)
+      # Everything except 0, n, no, false is considered to be a truthy value
+      !%w[0 n no false].include?(env_var.downcase)
     end
 
     def initialize_persistence
