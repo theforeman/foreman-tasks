@@ -68,6 +68,30 @@ class TasksTest < ActiveSupport::TestCase
                                      { :actions => [{ :name => ActionWithCleanup.name, :after => '5d' }] })
         ForemanTasks::Cleaner.actions_with_default_cleanup[ActionWithCleanup].must_equal '5d'
       end
+
+      it 'deprecates the usage of :after' do
+        Foreman::Deprecation.expects(:deprecation_warning)
+        ForemanTasks::Cleaner.any_instance.expects(:delete)
+        ForemanTasks::Cleaner.stubs(:cleanup_settings =>
+                                    { :after => '1d' })
+        ForemanTasks::Cleaner.stubs(:actions_with_default_cleanup).returns({})
+        ForemanTasks::Cleaner.run({})
+      end
+
+      it 'generates filters from rules properly' do
+        actions_with_default = { 'action1' => nil, 'action2' => nil }
+        rules = [{ :after => nil, :avoid_actions => true },
+                 { :after => '10d', :filter => 'label = something', :states => %w(stopped paused) },
+                 { :after => '15d', :filter => 'label = something_else',
+                   :avoid_actions => true, :states => [] }
+                ]
+        ForemanTasks::Cleaner.stubs(:cleanup_settings).returns(:rules => rules)
+        r1, r2 = ForemanTasks::Cleaner.actions_by_rules actions_with_default
+        r1[:filter].must_equal '(label !^ (action1, action2)) AND (label = something)'
+        r1[:states].must_equal %w(stopped paused)
+        r2[:filter].must_equal '(label = something_else)'
+        r2[:states].must_equal []
+      end
     end
   end
 end

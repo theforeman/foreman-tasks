@@ -11,8 +11,7 @@ module ForemanTasks
           end
         end
         if cleanup_settings[:after]
-          # TODO: Mention version in which this will be removed completely
-          ActiveSupport::Deprecation.warn('You are using legacy interface, please migrate from using :after to cleanup rules')
+          Foreman::Deprecation.deprecation_warning('1.18', _(':after setting in tasks cleanup section is deprecated, use :after in :rules section to set the value. to cleanup rules'))
           new(options.merge(:filter => '', :after => cleanup_settings[:after])).delete
         end
         with_periods = actions_with_default_cleanup
@@ -53,7 +52,7 @@ module ForemanTasks
     def self.actions_by_rules(actions_with_periods)
       disable_actions_with_periods = "label !^ (#{actions_with_periods.keys.join(', ')})"
       cleanup_settings.fetch(:rules, []).map do |hash|
-        return nil if hash[:after].nil?
+        next if hash[:after].nil?
         conditions = []
         conditions << disable_actions_with_periods unless hash[:avoid_actions]
         conditions << hash[:filter] if hash[:filter]

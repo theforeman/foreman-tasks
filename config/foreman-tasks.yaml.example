@@ -16,7 +16,7 @@
   :cleanup:
 #
 # the period after which to delete all the tasks (by default all tasks are not being deleted after some period)
-# will be deprecated (TODO: mention when) and the use of rules is recommended
+# will be deprecated in Foreman 1.18 and the use of rules is recommended.
 #
 #     :after: 30d
 #
