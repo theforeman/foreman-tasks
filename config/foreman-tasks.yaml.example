@@ -28,7 +28,7 @@
 #
 # Rules defined in this section by default don't operate
 # on tasks specified in the actions section. This behavior
-# can be overriden by setting the avoid_actions to false
+# can be overriden by setting the override_actions to true
    :rules:
      # Delete successful tasks after a month
      - :filter: result = success
@@ -36,4 +36,4 @@
      # Delete everything (any action, any state) after one year
      - :states: []
        :after: 1y
-       :avoid_actions: false
+       :override_actions: true

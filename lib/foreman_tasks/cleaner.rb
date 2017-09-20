@@ -54,7 +54,7 @@ module ForemanTasks
       cleanup_settings.fetch(:rules, []).map do |hash|
         next if hash[:after].nil?
         conditions = []
-        conditions << disable_actions_with_periods if hash[:avoid_actions].nil? || hash[:avoid_actions]
+        conditions << disable_actions_with_periods unless hash[:override_actions]
         conditions << hash[:filter] if hash[:filter]
         hash[:filter] = conditions.map { |condition| "(#{condition})" }.join(' AND ')
         hash

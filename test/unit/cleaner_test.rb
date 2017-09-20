@@ -83,7 +83,7 @@ class TasksTest < ActiveSupport::TestCase
         rules = [{ :after => nil },
                  { :after => '10d', :filter => 'label = something', :states => %w[stopped paused] },
                  { :after => '15d', :filter => 'label = something_else',
-                   :avoid_actions => false, :states => [] }]
+                   :override_actions => false, :states => [] }]
         ForemanTasks::Cleaner.stubs(:cleanup_settings).returns(:rules => rules)
         r1, r2 = ForemanTasks::Cleaner.actions_by_rules actions_with_default
         r1[:filter].must_equal '(label !^ (action1, action2)) AND (label = something)'
