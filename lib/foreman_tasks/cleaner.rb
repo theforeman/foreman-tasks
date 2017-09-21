@@ -56,6 +56,7 @@ module ForemanTasks
         conditions = []
         conditions << disable_actions_with_periods unless hash[:override_actions]
         conditions << hash[:filter] if hash[:filter]
+        hash[:states] = [] if hash[:states] == 'all'
         hash[:filter] = conditions.map { |condition| "(#{condition})" }.join(' AND ')
         hash
       end.compact

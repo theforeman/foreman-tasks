@@ -34,6 +34,6 @@
      - :filter: result = success
        :after: 30d
      # Delete everything (any action, any state) after one year
-     - :states: []
+     - :states: all # Either list of state names or all
        :after: 1y
        :override_actions: true

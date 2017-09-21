@@ -5,7 +5,7 @@ namespace :foreman_tasks do
 
         * TASK_SEARCH : scoped search filter (example: 'label = "Actions::Foreman::Host::ImportFacts"')
         * AFTER       : delete tasks created after *AFTER* period. Expected format is a number followed by the time unit (s,h,m,y), such as '10d' for 10 days
-        * STATES      : comma separated list of task states to touch with the cleanup, by default only stopped tasks are covered
+        * STATES      : comma separated list of task states to touch with the cleanup, by default only stopped tasks are covered, special value all can be used to clean the tasks, disregarding their states
         * NOOP        : set to "true" if the task should not actuall perform the deletion
         * VERBOSE     : set to "true" for more verbose output
         * BATCH_SIZE  : the size of batches the tasks get processed in (1000 by default)
@@ -21,6 +21,7 @@ namespace :foreman_tasks do
       options[:after] = ENV['AFTER'] if ENV['AFTER']
 
       options[:states] = ENV['STATES'].to_s.split(',') if ENV['STATES']
+      options[:states] = [] if options[:states] == ['all']
 
       options[:noop] = true if ENV['NOOP']
 
