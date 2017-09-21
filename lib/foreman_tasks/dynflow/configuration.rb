@@ -103,6 +103,8 @@ module ForemanTasks
         config.transaction_adapter = transaction_adapter
         config.executor            = ->(world, _) { initialize_executor(world) }
         config.connector           = ->(world, _) { initialize_connector(world) }
+        config.backup_deleted_plans = backup_settings[:backup_deleted_plans]
+        config.backup_dir           = backup_settings[:backup_dir]
 
         # we can't do any operation until the ForemanTasks.dynflow.world is set
         config.auto_execute        = false
@@ -143,6 +145,30 @@ module ForemanTasks
     # Sequel adapter based on Rails app database.yml configuration
     def initialize_persistence
       ForemanTasks::Dynflow::Persistence.new(default_sequel_adapter_options)
+    end
+
+    def backup_settings
+      return @backup_settings if @backup_settings
+      backup_options = {
+        :backup_deleted_plans => true,
+        :backup_dir => default_backup_dir
+      }
+      settings = SETTINGS[:'foreman-tasks'] && SETTINGS[:'foreman-tasks'][:backup]
+      backup_options.merge!(settings) if settings
+      @backup_settings = with_environment_override backup_options
+    end
+
+    def default_backup_dir
+      File.join(Rails.root, 'tmp', 'task-backup')
+    end
+
+    def with_environment_override(options)
+      env_var = ENV['TASK_BACKUP']
+      unless env_var.nil?
+        # Everything except 0, n, no, false is considered to be a truthy value
+        options[:backup_deleted_plans] = !%w[0 n no false].include?(env_var.downcase)
+      end
+      options
     end
   end
 end

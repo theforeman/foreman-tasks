@@ -1,3 +1,5 @@
+require 'csv'
+
 module ForemanTasks
   # Represents the cleanup mechanism for tasks
   class Cleaner
@@ -74,7 +76,8 @@ module ForemanTasks
                           :verbose      => false,
                           :batch_size   => 1000,
                           :noop         => false,
-                          :states       => ['stopped'] }
+                          :states       => ['stopped'],
+                          :backup_dir   => ForemanTasks.dynflow.world.persistence.current_backup_dir }
       options         = default_options.merge(options)
 
       @filter         = options[:filter]
@@ -83,6 +86,7 @@ module ForemanTasks
       @verbose        = options[:verbose]
       @batch_size     = options[:batch_size]
       @noop           = options[:noop]
+      @backup_dir     = options[:backup_dir]
 
       raise ArgumentError, 'filter not speficied' if @filter.nil?
 
@@ -109,12 +113,33 @@ module ForemanTasks
     end
 
     def delete_tasks(chunk)
-      ForemanTasks::Task.where(:id => chunk.map(&:id)).delete_all
+      tasks = ForemanTasks::Task.where(:id => chunk.map(&:id))
+      tasks_to_csv(tasks, @backup_dir, 'foreman_tasks.csv') if @backup_dir
+      tasks.delete_all
+    end
+
+    def tasks_to_csv(dataset, backup_dir, file_name)
+      with_backup_file(backup_dir, file_name) do |csv, appending|
+        csv << ForemanTasks::Task.attribute_names.to_csv unless appending
+        dataset.each do |row|
+          csv << row.attributes.values.to_csv
+        end
+      end
+      dataset
+    end
+
+    def with_backup_file(backup_dir, file_name)
+      FileUtils.mkdir_p(backup_dir) unless File.directory?(backup_dir)
+      csv_file = File.join(backup_dir, file_name)
+      appending = File.exist?(csv_file)
+      File.open(csv_file, 'a') do |f|
+        yield f, appending
+      end
     end
 
     def delete_dynflow_plans(chunk)
       dynflow_ids = chunk.find_all { |task| task.is_a? Task::DynflowTask }.map(&:external_id)
-      ForemanTasks.dynflow.world.persistence.delete_execution_plans({ 'uuid' => dynflow_ids }, batch_size)
+      ForemanTasks.dynflow.world.persistence.delete_execution_plans({ 'uuid' => dynflow_ids }, batch_size, @backup_dir)
     end
 
     def prepare_filter
