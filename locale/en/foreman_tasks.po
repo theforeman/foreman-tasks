@@ -38,6 +38,9 @@ msgstr ""
 msgid "%{value} is wrong format"
 msgstr ""
 
+msgid ":after setting in tasks cleanup section is deprecated, use :after in :rules section to set the value. to cleanup rules"
+msgstr ""
+
 msgid "Action"
 msgstr ""
 
@@ -207,6 +210,9 @@ msgstr ""
 msgid "Last occurrence"
 msgstr ""
 
+msgid "Last start time"
+msgstr ""
+
 msgid "Latest Warning/Error Tasks"
 msgstr ""
 
@@ -266,9 +272,6 @@ msgid "Page number, starting at 1"
 msgstr ""
 
 msgid "Parent task"
-msgstr ""
-
-msgid "Play Ansible roles"
 msgstr ""
 
 msgid "Please inspect their state, fix their errors and resume them."
@@ -394,6 +397,9 @@ msgstr ""
 msgid "Task Status"
 msgstr ""
 
+msgid "Task aborted: the task might be still running on the proxy"
+msgstr ""
+
 msgid "Task count"
 msgstr ""
 
@@ -424,6 +430,9 @@ msgstr ""
 msgid "The targets are of different types"
 msgstr ""
 
+msgid "The task cannot be aborted at the moment."
+msgstr ""
+
 msgid "The task cannot be cancelled at the moment."
 msgstr ""
 
@@ -449,6 +458,9 @@ msgid "Time in seconds between retries"
 msgstr ""
 
 msgid "Triggered by"
+msgstr ""
+
+msgid "Trying to abort the task"
 msgstr ""
 
 msgid "Trying to cancel step %s"

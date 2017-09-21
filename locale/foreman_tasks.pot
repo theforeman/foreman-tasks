@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_tasks 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-19 17:30+0200\n"
-"PO-Revision-Date: 2017-07-19 17:30+0200\n"
+"POT-Creation-Date: 2017-09-21 20:56+0200\n"
+"PO-Revision-Date: 2017-09-21 20:56+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -90,19 +90,19 @@ msgstr ""
 msgid "Data to be sent to the action"
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:181
+#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:182
 msgid "User search_params requires user_id to be specified"
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:190
+#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:191
 msgid "Resource search_params requires resource_type and resource_id to be specified"
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:197
+#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:198
 msgid "Task search_params requires task_id to be specified"
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:201
+#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:202
 msgid "Type %s for search_params is not supported"
 msgstr ""
 
@@ -118,30 +118,40 @@ msgstr ""
 msgid "The task cannot be cancelled at the moment."
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/tasks_controller.rb:43
+#: ../app/controllers/foreman_tasks/tasks_controller.rb:42
+msgid "Trying to abort the task"
+msgstr ""
+
+#: ../app/controllers/foreman_tasks/tasks_controller.rb:44
+msgid "The task cannot be aborted at the moment."
+msgstr ""
+
+#: ../app/controllers/foreman_tasks/tasks_controller.rb:53
 msgid "The execution was resumed."
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/tasks_controller.rb:45
+#: ../app/controllers/foreman_tasks/tasks_controller.rb:55
 msgid "The execution has to be resumable."
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/tasks_controller.rb:55
+#: ../app/controllers/foreman_tasks/tasks_controller.rb:65
 msgid "The task resources were unlocked."
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/tasks_controller.rb:57
+#: ../app/controllers/foreman_tasks/tasks_controller.rb:67
 msgid "The execution has to be paused."
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/tasks_controller.rb:66
+#: ../app/controllers/foreman_tasks/tasks_controller.rb:76
 msgid "The task resources were unlocked with force."
 msgstr ""
 
 #: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:38
 #: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:47
 #: ../app/models/foreman_tasks/recurring_logic.rb:101
-#: ../app/models/foreman_tasks/task/dynflow_task.rb:105
+#: ../app/models/foreman_tasks/task/dynflow_task.rb:109
+#: ../app/views/foreman_tasks/tasks/dashboard/_latest_tasks_in_error_warning.html.erb:14
+#: ../app/views/foreman_tasks/tasks/dashboard/_tasks_status.html.erb:14
 msgid "N/A"
 msgstr ""
 
@@ -151,6 +161,7 @@ msgstr ""
 
 #: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:40
 #: ../app/views/foreman_tasks/tasks/dashboard/_latest_tasks_in_error_warning.html.erb:14
+#: ../app/views/foreman_tasks/tasks/dashboard/_tasks_status.html.erb:14
 msgid "%s ago"
 msgstr ""
 
@@ -303,11 +314,11 @@ msgstr ""
 msgid "The targets are of different types"
 msgstr ""
 
-#: ../app/lib/actions/foreman/host/import_facts.rb:38 action_names.rb:3
+#: ../app/lib/actions/foreman/host/import_facts.rb:38 action_names.rb:5
 msgid "Import facts"
 msgstr ""
 
-#: ../app/lib/actions/foreman/puppetclass/import.rb:18 action_names.rb:4
+#: ../app/lib/actions/foreman/puppetclass/import.rb:18 action_names.rb:3
 msgid "Import Puppet classes"
 msgstr ""
 
@@ -355,15 +366,19 @@ msgstr ""
 msgid "All proxies with the required feature are unavailable at the moment"
 msgstr ""
 
-#: ../app/lib/actions/proxy_action.rb:59
+#: ../app/lib/actions/proxy_action.rb:61
 msgid "The smart proxy task %s failed."
 msgstr ""
 
-#: ../app/lib/actions/proxy_action.rb:73
+#: ../app/lib/actions/proxy_action.rb:75
 msgid "Cancel enforced: the task might be still running on the proxy"
 msgstr ""
 
-#: ../app/lib/actions/proxy_action.rb:114
+#: ../app/lib/actions/proxy_action.rb:85
+msgid "Task aborted: the task might be still running on the proxy"
+msgstr ""
+
+#: ../app/lib/actions/proxy_action.rb:121
 msgid "Initialization error: %s"
 msgstr ""
 
@@ -718,6 +733,10 @@ msgstr ""
 msgid "No. of Tasks"
 msgstr ""
 
+#: ../app/views/foreman_tasks/tasks/dashboard/_tasks_status.html.erb:7
+msgid "Last start time"
+msgstr ""
+
 #: ../app/views/foreman_tasks/tasks/index.html.erb:1
 #: ../lib/foreman_tasks/engine.rb:48
 msgid "Tasks"
@@ -751,7 +770,13 @@ msgstr ""
 msgid "Raw"
 msgstr ""
 
-#: ../lib/foreman_tasks/dynflow.rb:102
+#: ../lib/foreman_tasks/cleaner.rb:16
+msgid ""
+":after setting in tasks cleanup section is deprecated, use :after in :rules se"
+"ction to set the value. to cleanup rules"
+msgstr ""
+
+#: ../lib/foreman_tasks/dynflow.rb:19
 msgid "Back to tasks"
 msgstr ""
 
@@ -763,10 +788,6 @@ msgstr ""
 msgid "Action with sub plans"
 msgstr ""
 
-#: action_names.rb:5
+#: action_names.rb:4
 msgid "Remote action:"
-msgstr ""
-
-#: action_names.rb:6
-msgid "Play Ansible roles"
 msgstr ""
