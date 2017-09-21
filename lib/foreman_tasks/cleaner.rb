@@ -11,10 +11,15 @@ module ForemanTasks
           end
         end
         if cleanup_settings[:after]
+          Foreman::Deprecation.deprecation_warning('1.18', _(':after setting in tasks cleanup section is deprecated, use :after in :rules section to set the value. to cleanup rules'))
           new(options.merge(:filter => '', :after => cleanup_settings[:after])).delete
         end
-        actions_with_default_cleanup.each do |action_class, period|
+        with_periods = actions_with_default_cleanup
+        with_periods.each do |action_class, period|
           new(options.merge(:filter => "label = #{action_class.name}", :after => period)).delete
+        end
+        actions_by_rules(with_periods).each do |hash|
+          new(options.merge(hash)).delete
         end
       end
     end
@@ -42,6 +47,19 @@ module ForemanTasks
     def self.cleanup_settings
       return @cleanup_settings if @cleanup_settings
       @cleanup_settings = SETTINGS[:'foreman-tasks'] && SETTINGS[:'foreman-tasks'][:cleanup] || {}
+    end
+
+    def self.actions_by_rules(actions_with_periods)
+      disable_actions_with_periods = "label !^ (#{actions_with_periods.keys.join(', ')})"
+      cleanup_settings.fetch(:rules, []).map do |hash|
+        next if hash[:after].nil?
+        conditions = []
+        conditions << disable_actions_with_periods unless hash[:override_actions]
+        conditions << hash[:filter] if hash[:filter]
+        hash[:states] = [] if hash[:states] == 'all'
+        hash[:filter] = conditions.map { |condition| "(#{condition})" }.join(' AND ')
+        hash
+      end.compact
     end
 
     attr_reader :filter, :after, :states, :verbose, :batch_size, :noop, :full_filter
