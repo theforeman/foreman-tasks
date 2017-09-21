@@ -13,14 +13,27 @@
 # Cleaning configuration: how long should the actions be kept before deleted
 # by `rake foreman_tasks:clean` task
 #
-#  :cleanup:
+  :cleanup:
 #
 # the period after which to delete all the tasks (by default all tasks are not being deleted after some period)
+# will be deprecated in Foreman 1.18 and the use of rules is recommended.
 #
-#    :after: 365d
+#     :after: 30d
 #
 # per action settings to override the default defined in the actions (self.cleanup_after method)
 #
 #    :actions:
 #      - :name: Actions::Foreman::Host::ImportFacts
 #        :after: 10d
+#
+# Rules defined in this section by default don't operate
+# on tasks specified in the actions section. This behavior
+# can be overriden by setting the override_actions to true
+   :rules:
+     # Delete successful tasks after a month
+     - :filter: result = success
+       :after: 30d
+     # Delete everything (any action, any state) after one year
+     - :states: all # Either list of state names or all
+       :after: 1y
+       :override_actions: true
