@@ -1,6 +1,4 @@
-# Require foreman's lib directory which contains foreman/dynflow/configuration
-lib_foreman = File.expand_path('lib/foreman', Rails.root)
-require lib_foreman if Dir.exist?(lib_foreman)
+require File.expand_path('lib/foreman/dynflow/configuration', Rails.root)
 require 'foreman_tasks/dynflow/persistence'
 
 module ForemanTasks
