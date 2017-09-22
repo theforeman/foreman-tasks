@@ -1,6 +1,7 @@
 # The goal of ForemanTasksCore is to collect parts of foreman-tasks
 # that can be shared by the Foreman server and Foreman proxy
 
+require 'dynflow'
 require 'foreman_tasks_core/settings_loader'
 require 'foreman_tasks_core/otp_manager'
 require 'foreman_tasks_core/ticker'
