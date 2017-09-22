@@ -2,18 +2,24 @@ require 'foreman_tasks_test_helper'
 
 class TasksTest < ActiveSupport::TestCase
   describe 'filtering by current user' do
-    before { @original_current_user = User.current }
-    after  { User.current = @original_current_user }
+    before do
+      @original_current_user = User.current
+      @user_one = FactoryGirl.create(:user)
+      @user_two = FactoryGirl.create(:user)
+
+      @task_one = FactoryGirl.create(:some_task, :set_owner => @user_one)
+      FactoryGirl.create(:some_task, :set_owner => @user_two)
+
+      User.current = @user_one
+    end
+    after { User.current = @original_current_user }
 
     test 'can search the tasks by current_user' do
-      user_one = FactoryGirl.create(:user)
-      user_two = FactoryGirl.create(:user)
+      assert_equal [@task_one], ForemanTasks::Task.search_for('owner.id = current_user')
+    end
 
-      task_one = FactoryGirl.create(:some_task, :set_owner => user_one)
-      FactoryGirl.create(:some_task, :set_owner => user_two)
-
-      User.current = user_one
-      assert_equal [task_one], ForemanTasks::Task.search_for('owner.id = current_user')
+    test 'can search the tasks by current_user in combination with implicit search' do
+      assert_equal [@task_one], ForemanTasks::Task.search_for("owner.id = current_user AND #{@task_one.label}")
     end
   end
 
