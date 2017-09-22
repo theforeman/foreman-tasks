@@ -134,26 +134,28 @@ module ForemanTasks
       return { :conditions => '0 = 1' } if value == 'current_user' && User.current.nil?
 
       key = 'owners.login' if key == 'user'
+      # using uniq suffix to avoid colisions when searching by two different owners via ScopedSearch
+      uniq_suffix = SecureRandom.hex(3)
       key_name = connection.quote_column_name(key.sub(/^.*\./, ''))
       joins = <<-SQL
-      INNER JOIN foreman_tasks_locks AS foreman_tasks_locks_owner
-                 ON (foreman_tasks_locks_owner.task_id = foreman_tasks_tasks.id AND
-                     foreman_tasks_locks_owner.resource_type = 'User' AND
-                     foreman_tasks_locks_owner.name = '#{Lock::OWNER_LOCK_NAME}')
+      INNER JOIN foreman_tasks_locks AS foreman_tasks_locks_owner#{uniq_suffix}
+                 ON (foreman_tasks_locks_owner#{uniq_suffix}.task_id = foreman_tasks_tasks.id AND
+                     foreman_tasks_locks_owner#{uniq_suffix}.resource_type = 'User' AND
+                     foreman_tasks_locks_owner#{uniq_suffix}.name = '#{Lock::OWNER_LOCK_NAME}')
       SQL
       if key !~ /\.id\Z/
         joins << <<-SQL
-        INNER JOIN users
-                   ON (users.id = foreman_tasks_locks_owner.resource_id)
+        INNER JOIN users as users#{uniq_suffix}
+                   ON (users#{uniq_suffix}.id = foreman_tasks_locks_owner#{uniq_suffix}.resource_id)
         SQL
       end
       condition = if key.blank?
-                    sanitize_sql_for_conditions(["users.login #{operator} ? or users.firstname #{operator} ? ", value, value])
+                    sanitize_sql_for_conditions(["users#{uniq_suffix}.login #{operator} ? or users#{uniq_suffix}.firstname #{operator} ? ", value, value])
                   elsif key =~ /\.id\Z/
                     value = User.current.id if value == 'current_user'
-                    sanitize_sql_for_conditions(["foreman_tasks_locks_owner.resource_id #{operator} ?", value])
+                    sanitize_sql_for_conditions(["foreman_tasks_locks_owner#{uniq_suffix}.resource_id #{operator} ?", value])
                   else
-                    sanitize_sql_for_conditions(["users.#{key_name} #{operator} ?", value])
+                    sanitize_sql_for_conditions(["users#{uniq_suffix}.#{key_name} #{operator} ?", value])
                   end
       { :conditions => condition, :joins => joins }
     end
