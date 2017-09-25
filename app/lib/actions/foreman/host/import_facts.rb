@@ -12,7 +12,7 @@ module Actions
                    ::Host::Base.import_host(host_name, certname, proxy_id)
                  else
                    # backwards compatibility
-                   ::Host::Managed.import_host(host_name, certname, facts, proxy_id)
+                   ::Host::Managed.import_host(host_name, facts['_type'], certname, proxy_id)
                  end
           host.save(:validate => false) if host.new_record?
           action_subject(host, :facts => facts)
