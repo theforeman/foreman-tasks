@@ -1,5 +1,7 @@
 module Actions
   class Base < Dynflow::Action
+    middleware.use ::Actions::Middleware::RailsExecutorWrap if Rails::VERSION::MAJOR > 4
+
     def task
       @task ||= ::ForemanTasks::Task::DynflowTask.where(:external_id => execution_plan_id).first!
     end

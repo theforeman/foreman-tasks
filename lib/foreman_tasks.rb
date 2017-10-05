@@ -20,16 +20,27 @@ module ForemanTasks
   end
 
   def self.trigger_task(async, action, *args, &block)
-    Match! async, true, false
+    rails_safe_trigger_task do
+      Match! async, true, false
+      match trigger(action, *args, &block),
+            (on ::Dynflow::World::PlaningFailed.call(error: ~any) do |error|
+              raise error
+            end),
+            (on ::Dynflow::World::Triggered.call(execution_plan_id: ~any, future: ~any) do |id, finished|
+              finished.wait if async == false
+              ForemanTasks::Task::DynflowTask.where(:external_id => id).first!
+            end)
+    end
+  end
 
-    match trigger(action, *args, &block),
-          (on ::Dynflow::World::PlaningFailed.call(error: ~any) do |error|
-            raise error
-          end),
-          (on ::Dynflow::World::Triggered.call(execution_plan_id: ~any, future: ~any) do |id, finished|
-            finished.wait if async == false
-            ForemanTasks::Task::DynflowTask.where(:external_id => id).first!
-          end)
+  def self.rails_safe_trigger_task
+    if Rails::VERSION::MAJOR > 4
+      ActiveSupport::Dependencies.interlock.permit_concurrent_loads do
+        yield
+      end
+    else
+      yield
+    end
   end
 
   def self.async_task(action, *args, &block)
