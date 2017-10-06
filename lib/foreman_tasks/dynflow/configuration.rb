@@ -4,6 +4,13 @@ require 'foreman_tasks/dynflow/persistence'
 module ForemanTasks
   # Import all Dynflow configuration from Foreman, and add our own for Tasks
   class Dynflow::Configuration < ::Foreman::Dynflow::Configuration
+    def initialize
+      super
+      self.pool_size = SETTINGS.fetch(:'foreman-tasks', {})
+                               .fetch(:pool_size, pool_size)
+      self.db_pool_size = pool_size + 5
+    end
+
     def world_config
       super.tap do |config|
         config.backup_deleted_plans = backup_settings[:backup_deleted_plans]

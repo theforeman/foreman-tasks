@@ -9,6 +9,11 @@
 #     :action:
 #       :enabled: true
 
+#
+# Configure how many workers should be used to handle incoming requests.
+#
+#   :pool_size: 5
+
   # Task backup configuration can be changed by altering the values in
   # the backup section
   #
