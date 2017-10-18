@@ -15,26 +15,26 @@ $(document).on('click', ".table-two-pane td.two-pane-link", function(e) {
 });
 
 </script>
-<table class="table table-bordered table-striped table-two-pane">
+<table class="<%= table_css_classes('table-fixed table-two-pane') %>">
   <tr>
-    <th><%= _("Action") %></th>
-    <th><%= _("State") %></th>
-    <th><%= _("Result") %></th>
-    <th><%= sort :started_at, :as => _("Started at") %></th>
-    <th><%= sort :ended_at, :as => _("Ended at") %></th>
-    <th><%= _("User") %></th>
+    <th class="col-md-4"><%= _("Action") %></th>
+    <th class="col-md-1"><%= _("State") %></th>
+    <th class="col-md-1"><%= _("Result") %></th>
+    <th class="col-md-2"><%= sort :started_at, :as => _("Started at") %></th>
+    <th class="col-md-2"><%= sort :ended_at, :as => _("Ended at") %></th>
+    <th class="col-md-2"><%= _("User") %></th>
   </tr>
   <% for task in @tasks %>
     <tr>
-      <td class="task-id two-pane-link">
-        <%= link_to_if_authorized(trunc_with_tooltip(format_task_input(task, true), 80),
+      <td class="task-id two-pane-link ellipsis">
+        <%= link_to_if_authorized(format_task_input(task, true),
         hash_for_foreman_tasks_task_path(:id => task)) %>
       </td>
-      <td><%= task.state %></td>
-      <td><%= task.result %></td>
-      <td><%= task.started_at.try(:in_time_zone) %></td>
-      <td><%= task.ended_at.try(:in_time_zone) %></td>
-      <td><%= task.username %></td>
+      <td class="ellipsis"><%= task.state %></td>
+      <td class="ellipsis"><%= task.result %></td>
+      <td class="ellipsis"><%= task.started_at.try(:in_time_zone) %></td>
+      <td class="ellipsis"><%= task.ended_at.try(:in_time_zone) %></td>
+      <td class="ellipsis"><%= task.username %></td>
     </tr>
   <% end %>
 </table>
