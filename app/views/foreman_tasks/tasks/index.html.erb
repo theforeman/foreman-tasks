@@ -1,5 +1,5 @@
 <% title _("Tasks") %>
-<% title_actions SETTINGS[:version].short <= '1.13' ? help_path : help_button %>
+<% title_actions csv_link, help_button %>
 <% stylesheet 'foreman_tasks/tasks' %>
 
 <script>
@@ -27,7 +27,7 @@ $(document).on('click', ".table-two-pane td.two-pane-link", function(e) {
   <% for task in @tasks %>
     <tr>
       <td class="task-id two-pane-link ellipsis">
-        <%= link_to_if_authorized(format_task_input(task, true),
+        <%= link_to_if_authorized(task.to_label,
         hash_for_foreman_tasks_task_path(:id => task)) %>
       </td>
       <td class="ellipsis"><%= task.state %></td>

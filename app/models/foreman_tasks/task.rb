@@ -202,6 +202,19 @@ module ForemanTasks
       result.symbolize_keys
     end
 
+    def to_label
+      parts = []
+      parts << get_humanized(:name)
+      parts << Array(get_humanized(:input)).map do |part|
+        if part.is_a? Array
+          part[1][:text]
+        else
+          part.to_s
+        end
+      end.join('; ')
+      parts.join(' ')
+    end
+
     protected
 
     def generate_id

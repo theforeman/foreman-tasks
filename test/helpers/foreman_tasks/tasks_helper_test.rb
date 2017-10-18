@@ -11,12 +11,11 @@ module ForemanTasks
       end
 
       it 'formats the task input properly' do
-        format_task_input(@task).must_equal("user 'Anonymous Admin'")
-        format_task_input(@task, true).must_equal("Create user 'Anonymous Admin'")
+        format_task_input(@task).must_equal("Create user 'Anonymous Admin'")
       end
 
       it 'displays the dash if task is nil' do
-        format_task_input(nil, true).must_equal('-')
+        format_task_input(nil).must_equal('-')
       end
     end
 
@@ -36,8 +35,7 @@ module ForemanTasks
 
       it 'formats the task input properly' do
         response = "product 'product-2'; organization 'test-0'"
-        format_task_input(@task).must_equal(response)
-        format_task_input(@task, true).must_equal("Create #{response}")
+        format_task_input(@task).must_equal("Create #{response}")
       end
     end
   end

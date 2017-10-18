@@ -1,6 +1,7 @@
 module ForemanTasks
   class TasksController < ::ApplicationController
     include Foreman::Controller::AutoCompleteSearch
+    include Foreman::Controller::CsvResponder
 
     before_action :restrict_dangerous_actions, :only => [:unlock, :force_unlock]
 
@@ -11,6 +12,14 @@ module ForemanTasks
     def index
       params[:order] ||= 'started_at DESC'
       @tasks = filter(resource_base)
+      respond_to do |format|
+        format.html do
+          render :index
+        end
+        format.csv do
+          csv_response(@tasks, [:to_label, :state, :result, 'started_at.in_time_zone', 'ended_at.in_time_zone', :username], ['Action', 'State', 'Result', 'Started At', 'Ended At', 'User'])
+        end
+      end
     end
 
     def sub_tasks
