@@ -4,7 +4,7 @@ module ForemanTasks
   class TasksHelperTest < ActionView::TestCase
     describe 'when formatting simple input' do
       before do
-        @task = FactoryGirl.build(:dynflow_task, :user_create_task)
+        @task = FactoryBot.build(:dynflow_task, :user_create_task)
         humanized = { :humanized_name => 'Create', :humanized_input => [[:user, { :text => "user 'Anonymous Admin'", :link => nil }]] }
         @task.instance_variable_set('@humanized_cache', humanized)
         @task.stubs(:input).returns('user' => { 'id' => 1, 'name' => 'Anonymous Admin' }, 'locale' => 'en')
@@ -22,7 +22,7 @@ module ForemanTasks
 
     describe 'when formatting input' do
       before do
-        @task = FactoryGirl.build(:dynflow_task, :product_create_task)
+        @task = FactoryBot.build(:dynflow_task, :product_create_task)
         humanized = { :humanized_name => 'Create',
                       :humanized_input => [[:product, { :text => "product 'product-2'", :link => '#/products/3/info' }], [:organization, { :text => "organization 'test-0'", :link => '/organizations/3/edit' }]] }
         @task.instance_variable_set('@humanized_cache', humanized)
