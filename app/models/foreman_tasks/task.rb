@@ -17,10 +17,10 @@ module ForemanTasks
     before_create :generate_id
 
     belongs_to :parent_task, :class_name => 'ForemanTasks::Task'
-    has_many :sub_tasks, :class_name => 'ForemanTasks::Task', :foreign_key => :parent_task_id
-    has_many :locks
+    has_many :sub_tasks, :class_name => 'ForemanTasks::Task', :foreign_key => :parent_task_id, :dependent => :nullify
+    has_many :locks, :dependent => :destroy
 
-    has_many :task_group_members
+    has_many :task_group_members, :dependent => :destroy
     has_many :task_groups, :through => :task_group_members
     if Rails::VERSION::MAJOR < 4
       has_many :recurring_logic_task_groups, :through => :task_group_members, :conditions => { :type => 'ForemanTasks::TaskGroups::RecurringLogicTaskGroup' }, :source => :task_group
