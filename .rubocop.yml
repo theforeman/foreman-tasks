@@ -76,3 +76,5 @@ Layout/IndentHeredoc:
     - '*.gemspec'
     - bin/*
 
+Lint/RescueWithoutErrorClass:
+  Enabled: false
