@@ -36,6 +36,7 @@ module ForemanTasks
     end
 
     scoped_search :on => :id, :complete_value => false
+    scoped_search :on => :action, :complete_value => false
     scoped_search :on => :label, :complete_value => true
     scoped_search :on => :state, :complete_value => true
     scoped_search :on => :result, :complete_value => true
@@ -202,9 +203,9 @@ module ForemanTasks
       result.symbolize_keys
     end
 
-    def to_label
+    def format_input(include_action = false)
       parts = []
-      parts << get_humanized(:name)
+      parts << get_humanized(:name) if include_action
       parts << Array(get_humanized(:input)).map do |part|
         if part.is_a? Array
           part[1][:text]
