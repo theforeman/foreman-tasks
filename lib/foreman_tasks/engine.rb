@@ -121,7 +121,7 @@ module ForemanTasks
     end
 
     initializer 'foreman_tasks.set_core_settings' do
-      ForemanTasksCore::SettingsLoader.settings_registry.keys.each do |settings_keys|
+      ForemanTasksCore::SettingsLoader.settings_registry.each_key do |settings_keys|
         settings = settings_keys.inject({}) do |h, settings_key|
           h.merge(SETTINGS[settings_key] || {})
         end
