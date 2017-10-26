@@ -241,7 +241,7 @@ namespace :foreman_tasks do
     end
 
     format = ENV['TASK_FORMAT'] || 'html'
-    export_filename = ENV['TASK_FILE'] || "/tmp/task-export-#{DateTime.now.to_i}.#{format == 'csv' ? 'csv' : 'tar.gz'}"
+    export_filename = ENV['TASK_FILE'] || "/tmp/task-export-#{Time.now.to_i}.#{format == 'csv' ? 'csv' : 'tar.gz'}"
 
     tasks = ForemanTasks::Task.search_for(filter)
 
