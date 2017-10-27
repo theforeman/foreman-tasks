@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 module ForemanTasks
   class Dynflow::ConsoleAuthorizer
     def initialize(env)

@@ -21,7 +21,7 @@ module ForemanTasks
     TIME_REGEXP = /\A\d{4}-\d{2}-\d{2} \d{2}:\d{2}\Z/
     DAYS_REGEXP = /\A(\s*\d{1,2}\s*)(,\s*\d{1,2}\s*)*\Z/
 
-    has_one :recurring_logic, :foreign_key => :triggering_id
+    has_one :recurring_logic, :foreign_key => :triggering_id, :dependent => :nullify
 
     validates :mode, :inclusion => { :in => ALLOWED_MODES,
                                      :message => _('%{value} is not allowed triggering mode') }

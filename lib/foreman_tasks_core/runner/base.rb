@@ -4,7 +4,7 @@ module ForemanTasksCore
     # provide update data on refresh call.
     class Base
       attr_reader :id
-      attr_accessor :logger
+      attr_writer :logger
 
       def initialize(*_args)
         @id = SecureRandom.uuid

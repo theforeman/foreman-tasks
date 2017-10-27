@@ -105,7 +105,6 @@ class TasksTest < ActiveSupport::TestCase
       end
 
       it 'calculates the progress report correctly when using batch planning' do
-        # rubocop:disable Style/RedundantSelf - not redundant, as otherwise it conflicts with local variable
         result_base = self.result_base.merge(:success => 1, :error => 1, :total => 25)
         fake_action = OpenStruct.new(:total_count => 25)
         task.stubs(:main_action).returns(fake_action)

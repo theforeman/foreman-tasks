@@ -28,7 +28,8 @@ module Actions
     # The additional args can include more resources and/or a hash
     # with more data describing the action that should appear in the
     # action's input.
-    def action_subject(resource, *additional_args) # TODO redo as a middleware
+    # TODO redo as a middleware
+    def action_subject(resource, *additional_args)
       Type! resource, ForemanTasks::Concerns::ActionSubject
       input.update serialize_args(resource, *resource.all_related_resources, *additional_args)
 

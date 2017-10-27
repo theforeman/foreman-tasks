@@ -1,7 +1,7 @@
 module ForemanTasks
   module TaskGroups
     class RecurringLogicTaskGroup < ::ForemanTasks::TaskGroup
-      has_one :recurring_logic, :foreign_key => :task_group_id
+      has_one :recurring_logic, :foreign_key => :task_group_id, :dependent => :nullify
 
       alias resource recurring_logic
 

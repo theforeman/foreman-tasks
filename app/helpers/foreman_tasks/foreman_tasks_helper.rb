@@ -1,5 +1,3 @@
-# coding: utf-8
-
 module ForemanTasks
   module ForemanTasksHelper
     def recurring_logic_state(recurring_logic)
