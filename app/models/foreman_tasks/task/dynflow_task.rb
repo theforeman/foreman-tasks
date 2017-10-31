@@ -19,7 +19,7 @@ module ForemanTasks
                                 end
                               end
       self.label          ||= main_action && main_action.class.name
-      self.action         = format_input(true)
+      self.action = format_input(true)
       changes = self.changes
       save!
       changes

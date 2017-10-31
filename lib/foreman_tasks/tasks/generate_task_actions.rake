@@ -14,7 +14,7 @@ namespace :foreman_tasks do
       def initialize(count, message = nil)
         @count = count
         @processed = 0
-        puts message % {:count => count} unless message.nil?
+        puts message % { :count => count } unless message.nil?
       end
 
       def progress(count)
