@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :some_task, :class => ForemanTasks::Task do
     sequence(:label) { |n| "task#{n}" }
     type 'ForemanTasks::Task'

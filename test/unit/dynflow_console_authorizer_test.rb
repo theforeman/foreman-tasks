@@ -8,8 +8,8 @@ module ForemanTasks
       User.current = User.where(:login => 'apiadmin').first
     end
 
-    let(:own_task)     { FactoryGirl.create(:dynflow_task, :set_owner => user) }
-    let(:foreign_task) { FactoryGirl.create(:dynflow_task) }
+    let(:own_task)     { FactoryBot.create(:dynflow_task, :set_owner => user) }
+    let(:foreign_task) { FactoryBot.create(:dynflow_task) }
 
     let(:edit_foreman_tasks_permission) do
       Permission.where(:name => :edit_foreman_tasks).first
@@ -24,7 +24,7 @@ module ForemanTasks
     end
 
     describe 'admin user' do
-      let(:user) { FactoryGirl.create(:user, :admin) }
+      let(:user) { FactoryBot.create(:user, :admin) }
       it 'can see all tasks' do
         assert dynflow_console_authorized?
         assert dynflow_console_authorized?(own_task)
@@ -34,9 +34,9 @@ module ForemanTasks
 
     describe 'user with unlimited edit_foreman_tasks permissions' do
       let(:user) do
-        user_role = FactoryGirl.create(:user_user_role)
-        FactoryGirl.create(:filter,
-                           :role => user_role.role, :permissions => [edit_foreman_tasks_permission])
+        user_role = FactoryBot.create(:user_user_role)
+        FactoryBot.create(:filter,
+                          :role => user_role.role, :permissions => [edit_foreman_tasks_permission])
         user_role.owner
       end
 
@@ -49,10 +49,10 @@ module ForemanTasks
 
     describe 'user with limited edit_foreman_tasks permissions' do
       let(:user) do
-        user_role = FactoryGirl.create(:user_user_role)
-        FactoryGirl.create(:filter,
-                           :search => 'owner.id = current_user',
-                           :role => user_role.role, :permissions => [edit_foreman_tasks_permission])
+        user_role = FactoryBot.create(:user_user_role)
+        FactoryBot.create(:filter,
+                          :search => 'owner.id = current_user',
+                          :role => user_role.role, :permissions => [edit_foreman_tasks_permission])
         user_role.owner
       end
 
@@ -64,7 +64,7 @@ module ForemanTasks
     end
 
     describe 'user without edit_foreman_tasks permissions' do
-      let(:user) { FactoryGirl.create(:user) }
+      let(:user) { FactoryBot.create(:user) }
       it 'can not see any tasks' do
         refute dynflow_console_authorized?
         refute dynflow_console_authorized?(own_task)

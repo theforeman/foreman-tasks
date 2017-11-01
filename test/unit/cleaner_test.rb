@@ -10,13 +10,13 @@ class TasksTest < ActiveSupport::TestCase
     it 'is able to delete tasks (including the dynflow plans) based on filter' do
       cleaner = ForemanTasks::Cleaner.new(:filter => 'label = "Actions::User::Create"', :after => '10d')
 
-      tasks_to_delete = [FactoryGirl.create(:dynflow_task, :user_create_task),
-                         FactoryGirl.create(:dynflow_task, :user_create_task)]
-      tasks_to_keep   = [FactoryGirl.create(:dynflow_task, :user_create_task) do |task|
+      tasks_to_delete = [FactoryBot.create(:dynflow_task, :user_create_task),
+                         FactoryBot.create(:dynflow_task, :user_create_task)]
+      tasks_to_keep   = [FactoryBot.create(:dynflow_task, :user_create_task) do |task|
                            task.started_at = task.ended_at = Time.zone.now
                            task.save
                          end,
-                         FactoryGirl.create(:dynflow_task, :product_create_task)]
+                         FactoryBot.create(:dynflow_task, :product_create_task)]
       cleaner.expects(:tasks_to_csv)
       cleaner.delete
       ForemanTasks::Task.where(id: tasks_to_delete).must_be_empty
@@ -31,13 +31,13 @@ class TasksTest < ActiveSupport::TestCase
 
     it 'deletes all tasks matching the filter when the time limit is not specified' do
       cleaner = ForemanTasks::Cleaner.new(:filter => 'label = "Actions::User::Create"')
-      tasks_to_delete = [FactoryGirl.create(:dynflow_task, :user_create_task),
-                         FactoryGirl.create(:dynflow_task, :user_create_task) do |task|
+      tasks_to_delete = [FactoryBot.create(:dynflow_task, :user_create_task),
+                         FactoryBot.create(:dynflow_task, :user_create_task) do |task|
                            task.started_at = task.ended_at = Time.zone.now
                            task.save
                          end]
 
-      tasks_to_keep   = [FactoryGirl.create(:dynflow_task, :product_create_task)]
+      tasks_to_keep   = [FactoryBot.create(:dynflow_task, :product_create_task)]
       cleaner.expects(:tasks_to_csv)
       cleaner.delete
       ForemanTasks::Task.where(id: tasks_to_delete).must_be_empty
@@ -46,10 +46,10 @@ class TasksTest < ActiveSupport::TestCase
 
     it 'supports passing empty filter (just delete all)' do
       cleaner = ForemanTasks::Cleaner.new(:filter => '', :after => '10d')
-      tasks_to_delete = [FactoryGirl.create(:dynflow_task, :user_create_task),
-                         FactoryGirl.create(:dynflow_task, :product_create_task)]
+      tasks_to_delete = [FactoryBot.create(:dynflow_task, :user_create_task),
+                         FactoryBot.create(:dynflow_task, :product_create_task)]
 
-      tasks_to_keep   = [FactoryGirl.create(:dynflow_task, :user_create_task) do |task|
+      tasks_to_keep   = [FactoryBot.create(:dynflow_task, :user_create_task) do |task|
                            task.started_at = task.ended_at = Time.zone.now
                            task.save
                          end]
@@ -62,8 +62,8 @@ class TasksTest < ActiveSupport::TestCase
     it 'backs tasks up before deleting' do
       dir = '/tmp'
       cleaner = ForemanTasks::Cleaner.new(:filter => '', :after => '10d', :backup_dir => dir)
-      tasks_to_delete = [FactoryGirl.create(:dynflow_task, :user_create_task),
-                         FactoryGirl.create(:dynflow_task, :product_create_task)]
+      tasks_to_delete = [FactoryBot.create(:dynflow_task, :user_create_task),
+                         FactoryBot.create(:dynflow_task, :product_create_task)]
 
       r, w = IO.pipe
       cleaner.expects(:with_backup_file)

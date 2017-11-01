@@ -12,7 +12,7 @@ describe ForemanTasks::ProxySelector do
       count = 3
       ProxyAPI::ForemanDynflow::DynflowProxy.any_instance.expects(:tasks_count).raises
                                             .then.times(count - 1).returns(0)
-      proxies = FactoryGirl.create_list(:smart_proxy, count)
+      proxies = FactoryBot.create_list(:smart_proxy, count)
 
       available = proxies.reduce([]) do |found, _|
         found << proxy_selector.select_by_jobs_count(proxies)
@@ -40,14 +40,14 @@ describe ForemanTasks::ProxySelector do
       count = 3
       ProxyAPI::ForemanDynflow::DynflowProxy.any_instance.expects(:tasks_count).times(count).raises
       proxy_selector.stubs(:available_proxies =>
-                           { :global => FactoryGirl.create_list(:smart_proxy, count) })
+                           { :global => FactoryBot.create_list(:smart_proxy, count) })
       proxy_selector.determine_proxy.must_equal :not_available
     end
 
     it 'returns first available proxy, prioritizing by strategy' do
       ProxyAPI::ForemanDynflow::DynflowProxy.any_instance.expects(:tasks_count).returns(0)
-      fallback_proxy = FactoryGirl.build(:smart_proxy)
-      global_proxy = FactoryGirl.build(:smart_proxy)
+      fallback_proxy = FactoryBot.build(:smart_proxy)
+      global_proxy = FactoryBot.build(:smart_proxy)
       ForemanTasks::ProxySelector.any_instance.stubs(:available_proxies =>
                                                      { :fallback => [fallback_proxy],
                                                        :global => [global_proxy] })
