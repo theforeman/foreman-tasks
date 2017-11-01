@@ -1,8 +1,8 @@
 module ForemanTasks
   module TasksHelper
-    def format_task_input(task, include_action = false)
+    def format_task_input(task)
       return '-' unless task
-      task.action || task.format_input(include_action)
+      task.action
     end
 
     def format_recurring_logic_limit(thing)

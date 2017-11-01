@@ -203,9 +203,13 @@ module ForemanTasks
       result.symbolize_keys
     end
 
-    def format_input(include_action = false)
+    def action
+      super || format_input
+    end
+
+    def format_input
       parts = []
-      parts << get_humanized(:name) if include_action
+      parts << get_humanized(:name)
       parts << Array(get_humanized(:input)).map do |part|
         if part.is_a? Array
           part[1][:text]

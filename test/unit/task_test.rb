@@ -58,9 +58,11 @@ class TasksTest < ActiveSupport::TestCase
 
   describe 'task without valid execution plan' do
     let(:task) do
-      FactoryBot.create(:dynflow_task).tap do |task|
+      task = FactoryBot.create(:dynflow_task).tap do |task|
         task.external_id = 'missing-task'
+        task.save
       end
+      ForemanTasks::Task.find(task.id)
     end
 
     it 'handles the error while loading the task and does not propagate errors unless necessary' do

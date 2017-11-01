@@ -27,8 +27,8 @@ $(document).on('click', ".table-two-pane td.two-pane-link", function(e) {
   <% for task in @tasks %>
     <tr>
       <td class="task-id two-pane-link ellipsis">
-        <%= link_to_if_authorized(task.to_label,
-        hash_for_foreman_tasks_task_path(:id => task)) %>
+        <%= link_to_if_authorized(format_task_input(task),
+                                  hash_for_foreman_tasks_task_path(:id => task)) %>
       </td>
       <td class="ellipsis"><%= task.state %></td>
       <td class="ellipsis"><%= task.result %></td>
