@@ -13,6 +13,8 @@ module Actions
       end
     end
 
+    class ProxyActionMissing; end
+
     def plan(proxy, klass, options)
       options[:connection_options] ||= {}
       default_connection_options.each { |key, value| options[:connection_options][key] ||= value }
@@ -39,6 +41,8 @@ module Actions
           on_data(event.data)
         when ::Dynflow::Action::Timeouts::Timeout
           check_task_status
+        when ProxyActionMissing
+          on_proxy_action_missing
         else
           raise "Unexpected event #{event.inspect}"
         end
@@ -101,6 +105,10 @@ module Actions
     def wipe_secrets!
       input.delete(:secrets)
       output.delete(:secrets)
+    end
+
+    def on_proxy_action_missing
+      error! 'Proxy task gone missing from the smart proxy'
     end
 
     # @override String name of an action to be triggered on server
