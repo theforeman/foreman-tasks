@@ -14,6 +14,7 @@ module Actions
     end
 
     class ProxyActionMissing; end
+    class ProxyActionStopped; end
 
     def plan(proxy, klass, options)
       options[:connection_options] ||= {}
@@ -43,6 +44,8 @@ module Actions
           check_task_status
         when ProxyActionMissing
           on_proxy_action_missing
+        when ProxyActionStopped
+          on_proxy_action_stopped
         else
           raise "Unexpected event #{event.inspect}"
         end
@@ -108,7 +111,11 @@ module Actions
     end
 
     def on_proxy_action_missing
-      error! 'Proxy task gone missing from the smart proxy'
+      error! _('Proxy task gone missing from the smart proxy')
+    end
+
+    def on_proxy_action_stopped
+      check_task_status
     end
 
     # @override String name of an action to be triggered on server
