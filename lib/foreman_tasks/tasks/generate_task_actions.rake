@@ -31,7 +31,7 @@ namespace :foreman_tasks do
     reporter = ProgressReporter.new count, _('Generating action for %{count} tasks.')
     scope.find_in_batches(:batch_size => BATCH_SIZE) do |group|
       group.each do |task|
-        task.action = task.format_input
+        task.action = task.to_label
         task.save!
       end
       reporter.progress group.size

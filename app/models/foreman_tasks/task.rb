@@ -204,10 +204,10 @@ module ForemanTasks
     end
 
     def action
-      super || format_input
+      super || to_label
     end
 
-    def format_input
+    def to_label
       parts = []
       parts << get_humanized(:name)
       parts << Array(get_humanized(:input)).map do |part|

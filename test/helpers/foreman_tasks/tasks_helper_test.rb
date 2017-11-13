@@ -8,7 +8,7 @@ module ForemanTasks
         humanized = { :humanized_name => 'Create', :humanized_input => [[:user, { :text => "user 'Anonymous Admin'", :link => nil }]] }
         @task.instance_variable_set('@humanized_cache', humanized)
         @task.stubs(:input).returns('user' => { 'id' => 1, 'name' => 'Anonymous Admin' }, 'locale' => 'en')
-        @task.stubs(:action).returns(@task.format_input)
+        @task.stubs(:action).returns(@task.to_label)
       end
 
       it 'formats the task input properly' do
@@ -32,7 +32,7 @@ module ForemanTasks
                   'cp_id' => '1412251033866',
                   'locale' => 'en' }
         @task.stubs(:input).returns(input)
-        @task.stubs(:action).returns(@task.format_input)
+        @task.stubs(:action).returns(@task.to_label)
       end
 
       it 'formats the task input properly' do

@@ -154,7 +154,7 @@ module ForemanTasks
     private
 
     def set_action_field
-      self.action = format_input
+      self.action = to_label
     end
 
     def map_result(data)
