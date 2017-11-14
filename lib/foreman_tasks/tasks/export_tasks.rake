@@ -206,7 +206,6 @@ namespace :foreman_tasks do
 
       def self.copy_assets(tmp_dir)
         ['vendor/bootstrap/js/bootstrap.js',
-         'vendor/google-code-prettify/run_prettify.js',
          'vendor/jquery/jquery.js',
          'vendor/jquery/jquery.js',
          'javascripts/application.js',
