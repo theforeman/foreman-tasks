@@ -3,6 +3,8 @@ module Actions
     include ::Dynflow::Action::Cancellable
     include ::Dynflow::Action::Timeouts
 
+    middleware.use ::Actions::Middleware::HideSecrets
+
     class CallbackData
       attr_reader :data
 
@@ -93,6 +95,12 @@ module Actions
     # @override to put custom logic on event handling
     def on_data(data)
       output[:proxy_output] = data
+      wipe_secrets!
+    end
+
+    def wipe_secrets!
+      input.delete(:secrets)
+      output.delete(:secrets)
     end
 
     # @override String name of an action to be triggered on server
