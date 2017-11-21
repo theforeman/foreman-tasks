@@ -116,6 +116,7 @@ module ForemanTasks
     initializer 'foreman_tasks.require_dynflow', :before => 'foreman_tasks.initialize_dynflow' do |_app|
       ForemanTasks.dynflow.require!
       ::ForemanTasks.dynflow.config.on_init do |world|
+        world.middleware.use Actions::Middleware::KeepCurrentUser
         ForemanTasksCore.dynflow_setup(world)
       end
     end

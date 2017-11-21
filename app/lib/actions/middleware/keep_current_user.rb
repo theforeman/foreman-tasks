@@ -47,7 +47,7 @@ module Actions
       end
 
       def restore_curent_user
-        User.current = User.unscoped.find(action.input[:current_user_id])
+        User.current = User.unscoped.find(action.input[:current_user_id]) if action.input[:current_user_id].present?
         yield
       ensure
         User.current = nil
