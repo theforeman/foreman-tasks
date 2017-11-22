@@ -1,4 +1,4 @@
-class CreateForemanTasks < ActiveRecord::Migration
+class CreateForemanTasks < ActiveRecord::Migration[4.2]
   def change
     create_table :foreman_tasks_tasks, :id => false, :primary_key => :id do |t|
       t.string :id, null: false

@@ -1,4 +1,4 @@
-class CreateForemanTasksLocks < ActiveRecord::Migration
+class CreateForemanTasksLocks < ActiveRecord::Migration[4.2]
   def change
     create_table :foreman_tasks_locks do |t|
       t.string :task_id, index: true, null: false
