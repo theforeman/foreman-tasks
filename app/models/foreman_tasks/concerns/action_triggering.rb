@@ -4,11 +4,13 @@ module ForemanTasks
       extend ActiveSupport::Concern
 
       included do
-        after_create :plan_hook_action
-        after_update :plan_hook_action
-        after_destroy :plan_hook_action
+        raise "Use 'prepend' instead of 'include' for ForemanTasks::Concerns::ActionTriggering"
+      end
 
-        alias_method_chain :save, :dynflow_task_wrap
+      def self.prepended(base)
+        base.after_create :plan_hook_action
+        base.after_update :plan_hook_action
+        base.after_destroy :plan_hook_action
       end
 
       # These three *_action methods are called before the save/destroy actually occurs
@@ -21,8 +23,8 @@ module ForemanTasks
       # @override
       def destroy_action; end
 
-      def save_with_dynflow_task_wrap(*args)
-        dynflow_task_wrap(:save) { save_without_dynflow_task_wrap(*args) }
+      def save(*args)
+        dynflow_task_wrap(:save) { super(*args) }
       end
 
       def save!(*args)
