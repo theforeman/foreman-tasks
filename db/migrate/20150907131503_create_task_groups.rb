@@ -1,4 +1,4 @@
-class CreateTaskGroups < ActiveRecord::Migration
+class CreateTaskGroups < ActiveRecord::Migration[4.2]
   def up
     create_table :foreman_tasks_task_groups do |t|
       t.string :type, index: true, null: false

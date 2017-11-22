@@ -1,4 +1,4 @@
-class CreateRecurringLogic < ActiveRecord::Migration
+class CreateRecurringLogic < ActiveRecord::Migration[4.2]
   def change
     create_table :foreman_tasks_recurring_logics do |t|
       t.string :cron_line, :null => false

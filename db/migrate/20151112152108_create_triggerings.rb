@@ -1,4 +1,4 @@
-class CreateTriggerings < ActiveRecord::Migration
+class CreateTriggerings < ActiveRecord::Migration[4.2]
   def up
     create_table :foreman_tasks_triggerings do |t|
       t.string :mode, null: false

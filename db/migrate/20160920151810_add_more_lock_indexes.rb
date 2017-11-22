@@ -1,4 +1,4 @@
-class AddMoreLockIndexes < ActiveRecord::Migration
+class AddMoreLockIndexes < ActiveRecord::Migration[4.2]
   def change
     add_index(:foreman_tasks_tasks, [:id, :state],
               :name => 'index_foreman_tasks_id_state')

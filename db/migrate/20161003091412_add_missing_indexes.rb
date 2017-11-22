@@ -1,4 +1,4 @@
-class AddMissingIndexes < ActiveRecord::Migration
+class AddMissingIndexes < ActiveRecord::Migration[4.2]
   # since this is just making sure the indexes we defined before are
   # really added we don't define the down direction here.
   # The support for defining index at column definition was added in Rails here

@@ -1,4 +1,4 @@
-class ChangeTasksWidgetNames < ActiveRecord::Migration
+class ChangeTasksWidgetNames < ActiveRecord::Migration[4.2]
   def up
     Widget.where(:name => 'Tasks Status table')\
           .update_all(:name => 'Task Status')
