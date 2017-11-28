@@ -5,12 +5,17 @@ module ForemanTasks
     describe Actions::ProxyAction do
       include ::Dynflow::Testing
 
+      let(:secrets) do
+        { 'logins' => { 'admin' => 'changeme', 'root' => 'toor' } }
+      end
+
       before do
         Support::DummyProxyAction.reset
         @action = create_and_plan_action(Support::DummyProxyAction,
                                          Support::DummyProxyAction.proxy,
                                          'Proxy::DummyAction',
-                                         'foo' => 'bar')
+                                         'foo' => 'bar',
+                                         'secrets' => secrets)
         @action = run_action(@action)
       end
 
@@ -19,6 +24,7 @@ module ForemanTasks
           proxy_call = Support::DummyProxyAction.proxy.log[:trigger_task].first
           expected_call = ['Proxy::DummyAction',
                            { 'foo' => 'bar',
+                             'secrets' => secrets,
                              'connection_options' =>
                                  { 'retry_interval' => 15, 'retry_count' => 4, 'timeout' => 60 },
                              'proxy_url' => 'proxy.example.com',
@@ -85,6 +91,24 @@ module ForemanTasks
         2.times { action.output[:metadata][:failed_proxy_tasks] << {} }
         proc { action = run_stubbed_action.call action }.must_raise(Errno::ECONNREFUSED)
         action.state.must_equal :error
+      end
+
+      it 'hides secrets' do
+        Support::DummyProxyAction.reset
+        triggered = ForemanTasks.dynflow.world.trigger(Support::DummyProxyAction,
+                                                       Support::DummyProxyAction.proxy,
+                                                       'Proxy::DummyAction',
+                                                       'foo' => 'bar',
+                                                       'secrets' => secrets)
+        task = ForemanTasks::Task.where(:external_id => triggered.id).first
+        task.input[:secrets].must_equal 'Secrets hidden'
+      end
+
+      it 'wipes secrets' do
+        Support::DummyProxyAction.reset
+        @action.input[:secrets].must_equal secrets
+        action = run_action(@action, ::Actions::ProxyAction::CallbackData.new('result' => 'success'))
+        refute action.input.key?(:secrets)
       end
     end
   end
