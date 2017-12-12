@@ -1,7 +1,6 @@
 module Actions
   module Middleware
     class WatchDelegatedProxySubTasks < ::Dynflow::Middleware
-
       class CheckOnProxyActions; end
       POLL_INTERVAL = 30
 
@@ -33,7 +32,7 @@ module Actions
           notify(event, missing.map { |action| action[:action] })
         end
 
-        stopped = present.select { |action| %w(stopped paused).include? action[:result]['state'] }
+        stopped = present.select { |action| %w[stopped paused].include? action[:result]['state'] }
         if stopped.any?
           event = ::Actions::ProxyAction::ProxyActionStopped.new
           notify(event, stopped.map { |a| a[:action] })
@@ -49,12 +48,12 @@ module Actions
       end
 
       def delegated_actions
-        action.sub_plans('state' => %w(running))
-          .map(&:entry_action)
-          .select { |action| action.input.key? :delegated_action_id }
-          .map do |action|
-            action.planned_actions.find { |planned| planned.id == action.input[:delegated_action_id] }
-          end
+        action.sub_plans('state' => %w[running])
+              .map(&:entry_action)
+              .select { |action| action.input.key? :delegated_action_id }
+              .map do |action|
+                action.planned_actions.find { |planned| planned.id == action.input[:delegated_action_id] }
+              end
       end
 
       def delegated_actions_by_proxy
