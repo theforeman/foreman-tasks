@@ -20,4 +20,3 @@ module ForemanTasks
     end
   end
 end
-
