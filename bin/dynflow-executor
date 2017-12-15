@@ -64,7 +64,7 @@ end
 if $PROGRAM_NAME == __FILE__
   parser = ArgvParser.new(ARGV, $PROGRAM_NAME)
 
-  Dir.chdir(options[:foreman_root])
+  Dir.chdir(parser.options[:foreman_root])
   app_file = File.expand_path('./config/application', parser.options[:foreman_root])
   require app_file
 
