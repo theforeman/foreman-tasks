@@ -64,7 +64,7 @@ Metrics/BlockLength:
   Exclude:
     - lib/foreman_tasks/tasks/**/*
 
-Style/FileName:
+Naming/FileName:
   Exclude:
     - '*.gemspec'
     - Gemfile

@@ -7,11 +7,11 @@ module ForemanTasks
       basic_pagination_per_page_test
       basic_pagination_rendered_test
 
-      # rubocop:disable Style/AccessorMethodName
+      # rubocop:disable Naming/AccessorMethodName
       def get_factory_name
         :dynflow_task
       end
-      # rubocop:enable Style/AccessorMethodName
+      # rubocop:enable Naming/AccessorMethodName
     end
   end
 end
