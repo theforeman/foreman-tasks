@@ -76,5 +76,26 @@ Layout/IndentHeredoc:
     - '*.gemspec'
     - bin/*
 
-Lint/RescueWithoutErrorClass:
+Style/RescueStandardError:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/NumericPredicate:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/SafeNavigation:
+  Enabled: false
+
+Performance/RegexpMatch:
+  Enabled: false
+
+Rails/InverseOf:
+  Enabled: false
+
+Style/FormatStringToken:
   Enabled: false
