@@ -46,13 +46,11 @@ class TasksTest < ActiveSupport::TestCase
     let(:inconsistent_task) { FactoryBot.create(:dynflow_task, :inconsistent_dynflow_task) }
 
     it 'ensures the tasks marked as running are really running in Dynflow' do
-      running_task_count = ForemanTasks::Task::DynflowTask.running.count
       consistent_task.state.must_equal 'planned'
       inconsistent_task.state.must_equal 'running'
 
-      fixed_count = ForemanTasks::Task::DynflowTask.consistency_check
+      ForemanTasks::Task::DynflowTask.consistency_check
 
-      fixed_count.must_equal running_task_count + 1
       consistent_task.reload.state.must_equal 'planned'
       inconsistent_task.reload.state.must_equal 'planned'
     end
