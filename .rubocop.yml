@@ -64,7 +64,7 @@ Metrics/BlockLength:
   Exclude:
     - lib/foreman_tasks/tasks/**/*
 
-Naming/FileName:
+Style/FileName:
   Exclude:
     - '*.gemspec'
     - Gemfile
@@ -75,9 +75,6 @@ Layout/IndentHeredoc:
   Exclude:
     - '*.gemspec'
     - bin/*
-
-Style/RescueStandardError:
-  Enabled: false
 
 Style/IfUnlessModifier:
   Enabled: false
@@ -92,9 +89,6 @@ Style/SafeNavigation:
   Enabled: false
 
 Performance/RegexpMatch:
-  Enabled: false
-
-Rails/InverseOf:
   Enabled: false
 
 Style/FormatStringToken:
