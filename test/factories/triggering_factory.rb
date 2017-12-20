@@ -1,4 +1,4 @@
-FactoryBot.define do
+FactoryGirl.define do
   factory :triggering, :class => ForemanTasks::Triggering do
     mode :immediate
 

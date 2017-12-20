@@ -13,7 +13,7 @@ module ForemanTasks
 
       describe 'GET /api/tasks/show' do
         it 'searches for task' do
-          task = FactoryBot.create(:dynflow_task, :user_create_task)
+          task = FactoryGirl.create(:dynflow_task, :user_create_task)
           get :show, :id => task.id
           assert_response :success
           assert_template 'api/tasks/show'

@@ -34,7 +34,7 @@ module ForemanTasks
 
     describe Actions::ActionWithSubPlans do
       let(:task) do
-        user = FactoryBot.create(:user)
+        user = FactoryGirl.create(:user)
         triggered = ForemanTasks.trigger(ParentAction, user)
         raise triggered.error if triggered.respond_to?(:error)
         triggered.finished.wait(2)
