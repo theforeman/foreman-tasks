@@ -89,14 +89,14 @@ class RecurringLogicsTest < ActiveSupport::TestCase
     end
 
     it 'can be created from triggering' do
-      triggering = FactoryBot.build(:triggering, :recurring, :end_time_limited)
+      triggering = FactoryGirl.build(:triggering, :recurring, :end_time_limited)
       logic = ForemanTasks::RecurringLogic.new_from_triggering(triggering)
       # Mysql coerces the times a bit
       logic.end_time.must_be_close_to(triggering.end_time, 1.second)
     end
 
     describe 'validation' do
-      let(:logic) { FactoryBot.build(:recurring_logic) }
+      let(:logic) { FactoryGirl.build(:recurring_logic) }
 
       it 'is valid by default' do
         logic.must_be :valid?

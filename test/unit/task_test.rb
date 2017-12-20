@@ -4,11 +4,11 @@ class TasksTest < ActiveSupport::TestCase
   describe 'filtering by current user' do
     before do
       @original_current_user = User.current
-      @user_one = FactoryBot.create(:user)
-      @user_two = FactoryBot.create(:user)
+      @user_one = FactoryGirl.create(:user)
+      @user_two = FactoryGirl.create(:user)
 
-      @task_one = FactoryBot.create(:some_task, :set_owner => @user_one)
-      FactoryBot.create(:some_task, :set_owner => @user_two)
+      @task_one = FactoryGirl.create(:some_task, :set_owner => @user_one)
+      FactoryGirl.create(:some_task, :set_owner => @user_two)
 
       User.current = @user_one
     end
@@ -25,16 +25,16 @@ class TasksTest < ActiveSupport::TestCase
 
   describe 'authorization filtering' do
     it 'can filter by the task subject' do
-      user_role  = FactoryBot.create(:user_user_role)
+      user_role  = FactoryGirl.create(:user_user_role)
       user       = user_role.owner
       role       = user_role.role
-      permission = FactoryBot.build(:permission)
+      permission = FactoryGirl.build(:permission)
       permission.resource_type = 'ForemanTasks::Task'
       permission.save!
-      FactoryBot.create(:filter, :role => role, :permissions => [permission])
+      FactoryGirl.create(:filter, :role => role, :permissions => [permission])
 
       User.current = user
-      task = FactoryBot.create(:dynflow_task)
+      task = FactoryGirl.create(:dynflow_task)
 
       auth = Authorizer.new(user)
       assert auth.can?(permission.name.to_sym, task)
@@ -42,8 +42,8 @@ class TasksTest < ActiveSupport::TestCase
   end
 
   describe 'consistency check' do
-    let(:consistent_task) { FactoryBot.create(:dynflow_task, :sync_with_dynflow => true) }
-    let(:inconsistent_task) { FactoryBot.create(:dynflow_task, :inconsistent_dynflow_task) }
+    let(:consistent_task) { FactoryGirl.create(:dynflow_task, :sync_with_dynflow => true) }
+    let(:inconsistent_task) { FactoryGirl.create(:dynflow_task, :inconsistent_dynflow_task) }
 
     it 'ensures the tasks marked as running are really running in Dynflow' do
       running_task_count = ForemanTasks::Task::DynflowTask.running.count
@@ -60,7 +60,7 @@ class TasksTest < ActiveSupport::TestCase
 
   describe 'task without valid execution plan' do
     let(:task) do
-      FactoryBot.create(:dynflow_task).tap do |task|
+      FactoryGirl.create(:dynflow_task).tap do |task|
         task.external_id = 'missing-task'
       end
     end
@@ -86,7 +86,7 @@ class TasksTest < ActiveSupport::TestCase
         :pending   => 0
       }
     end
-    let(:task) { FactoryBot.create(:dynflow_task) }
+    let(:task) { FactoryGirl.create(:dynflow_task) }
 
     describe 'without sub tasks' do
       it 'calculates the progress report correctly' do
@@ -95,8 +95,8 @@ class TasksTest < ActiveSupport::TestCase
     end
 
     describe 'with sub tasks' do
-      let(:failed) { FactoryBot.create(:dynflow_task).tap { |t| t.result = :error } }
-      let(:success) { FactoryBot.create(:dynflow_task).tap { |t| t.result = :success } }
+      let(:failed) { FactoryGirl.create(:dynflow_task).tap { |t| t.result = :error } }
+      let(:success) { FactoryGirl.create(:dynflow_task).tap { |t| t.result = :success } }
       before { task.sub_tasks = [success, failed] }
 
       it 'calculate the progress report correctly' do
@@ -121,8 +121,8 @@ class TasksTest < ActiveSupport::TestCase
   end
 
   describe 'recurring task' do
-    let(:logic) { FactoryBot.build(:recurring_logic) }
-    let(:task) { FactoryBot.create(:some_task) }
+    let(:logic) { FactoryGirl.build(:recurring_logic) }
+    let(:task) { FactoryGirl.create(:some_task) }
 
     it 'can indicate it is recurring' do
       refute task.recurring?
@@ -133,7 +133,7 @@ class TasksTest < ActiveSupport::TestCase
   end
 
   describe 'delayed task' do
-    let(:task) { FactoryBot.create(:some_task) }
+    let(:task) { FactoryGirl.create(:some_task) }
 
     it 'can indicate it is delayed' do
       refute task.delayed?

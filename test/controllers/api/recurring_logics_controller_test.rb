@@ -9,7 +9,7 @@ module ForemanRecurringLogic
         User.current = User.where(:login => 'apiadmin').first
         @request.env['HTTP_ACCEPT'] = 'application/json'
         @request.env['CONTENT_TYPE'] = 'application/json'
-        @recurring_logic = FactoryBot.create(:recurring_logic)
+        @recurring_logic = FactoryGirl.create(:recurring_logic)
       end
 
       describe 'GET /api/recurring_logics' do
