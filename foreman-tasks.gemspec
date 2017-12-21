@@ -28,7 +28,7 @@ same resource. It also optionally provides Dynflow infrastructure for using it f
   s.test_files = `git ls-files test`.split("\n")
   s.extra_rdoc_files = Dir['README*', 'LICENSE']
 
-  s.add_dependency "foreman-tasks-core"
+  s.add_dependency "foreman-tasks-core", '~> 0.1.8'
   s.add_dependency "dynflow", '~> 0.8.29'
   s.add_dependency "sequel" # for Dynflow process persistence
   s.add_dependency "sinatra" # for Dynflow web console
