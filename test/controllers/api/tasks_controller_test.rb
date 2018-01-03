@@ -21,8 +21,6 @@ module ForemanTasks
       end
 
       describe 'POST /tasks/callback' do
-        self.use_transactional_fixtures = false
-
         it 'passes the data to the corresponding action' do
           Support::DummyProxyAction.reset
 

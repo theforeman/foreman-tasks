@@ -2,8 +2,6 @@ require 'foreman_tasks_test_helper'
 
 module ForemanTasks
   class ActionWithSubPlansTest < ActiveSupport::TestCase
-    self.use_transactional_fixtures = false
-
     before do
       User.current = User.where(:login => 'apiadmin').first
     end

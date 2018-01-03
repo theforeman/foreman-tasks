@@ -2,7 +2,6 @@ require 'foreman_tasks_test_helper'
 
 module ForemanTasks
   class TaskGroupsTest < ActiveSupport::TestCase
-    self.use_transactional_fixtures = false
     include ::Dynflow::Testing
 
     before do
