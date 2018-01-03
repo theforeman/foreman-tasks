@@ -1,7 +1,7 @@
 module ForemanTasks
   require 'parse-cron'
 
-  class RecurringLogic < ActiveRecord::Base
+  class RecurringLogic < ApplicationRecord
     include Authorizable
 
     belongs_to :task_group

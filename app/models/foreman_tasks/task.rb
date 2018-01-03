@@ -1,7 +1,7 @@
 require 'securerandom'
 
 module ForemanTasks
-  class Task < ActiveRecord::Base
+  class Task < ApplicationRecord
     include Authorizable
 
     def check_permissions_after_save

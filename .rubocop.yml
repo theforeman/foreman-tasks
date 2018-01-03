@@ -43,10 +43,6 @@ Rails/SkipsModelValidations:
 Style/SymbolArray:
   Enabled: false
 
-# for compatibility with Foreman 1.15
-Rails/ApplicationRecord:
-  Enabled: false
-
 Style/FormatString:
   Enabled: false
 

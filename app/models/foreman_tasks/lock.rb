@@ -1,5 +1,5 @@
 module ForemanTasks
-  class Lock < ActiveRecord::Base
+  class Lock < ApplicationRecord
     LINK_LOCK_NAME  = :link_resource
     OWNER_LOCK_NAME = :task_owner
 

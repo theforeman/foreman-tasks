@@ -1,5 +1,5 @@
 module ForemanTasks
-  class Triggering < ActiveRecord::Base
+  class Triggering < ApplicationRecord
     PARAMS = [:start_at_raw, :start_before_raw, :max_iteration, :input_type,
               :cronline, :days, :days_of_week, :time, :end_time_limited,
               :end_time].freeze

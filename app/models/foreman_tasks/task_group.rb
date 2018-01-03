@@ -1,5 +1,5 @@
 module ForemanTasks
-  class TaskGroup < ActiveRecord::Base
+  class TaskGroup < ApplicationRecord
     has_many :task_group_members, :dependent => :destroy
     has_many :tasks, :through => :task_group_members, :dependent => :nullify
 
