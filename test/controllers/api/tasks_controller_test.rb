@@ -14,7 +14,7 @@ module ForemanTasks
       describe 'GET /api/tasks/show' do
         it 'searches for task' do
           task = FactoryBot.create(:dynflow_task, :user_create_task)
-          get :show, :id => task.id
+          get :show, params: { :id => task.id }
           assert_response :success
           assert_template 'api/tasks/show'
         end
@@ -35,7 +35,7 @@ module ForemanTasks
           task.result.must_equal 'pending'
 
           callback = Support::DummyProxyAction.proxy.log[:trigger_task].first[1][:callback]
-          post :callback, 'callback' => callback, 'data' => { 'result' => 'success' }
+          post :callback, params: { 'callback' => callback, 'data' => { 'result' => 'success' } }
           triggered.finished.wait(5)
 
           task.reload

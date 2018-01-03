@@ -58,9 +58,6 @@ Rails/Exit:
   Exclude:
     - 'lib/**/*.rake'
 
-Rails/HttpPositionalArguments:
-  Enabled: false
-
 # Configuration parameters: Include.
 # Include: app/**/*.rb, config/**/*.rb, db/**/*.rb, lib/**/*.rb
 Rails/Output:
