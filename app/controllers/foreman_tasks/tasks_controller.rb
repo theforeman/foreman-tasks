@@ -42,7 +42,7 @@ module ForemanTasks
       else
         flash[:warning] = _('The task cannot be cancelled at the moment.')
       end
-      redirect_to :back
+      redirect_back(:fallback_location => foreman_tasks_task_path(task))
     end
 
     def abort
@@ -52,7 +52,7 @@ module ForemanTasks
       else
         flash[:warning] = _('The task cannot be aborted at the moment.')
       end
-      redirect_to :back
+      redirect_back(:fallback_location => foreman_tasks_task_path(task))
     end
 
     def resume
@@ -63,7 +63,7 @@ module ForemanTasks
       else
         flash[:warning] = _('The execution has to be resumable.')
       end
-      redirect_to :back
+      redirect_back(:fallback_location => foreman_tasks_task_path(task))
     end
 
     def unlock
@@ -75,7 +75,7 @@ module ForemanTasks
       else
         flash[:warning] = _('The execution has to be paused.')
       end
-      redirect_to :back
+      redirect_back(:fallback_location => foreman_tasks_task_path(task))
     end
 
     def force_unlock
@@ -83,7 +83,7 @@ module ForemanTasks
       task.state = :stopped
       task.save!
       flash[:notice] = _('The task resources were unlocked with force.')
-      redirect_to :back
+      redirect_back(:fallback_location => foreman_tasks_task_path(task))
     end
 
     # we need do this to make the Foreman helpers working properly
