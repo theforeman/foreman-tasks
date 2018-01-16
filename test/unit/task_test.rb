@@ -122,13 +122,27 @@ class TasksTest < ActiveSupport::TestCase
 
   describe 'recurring task' do
     let(:logic) { FactoryBot.build(:recurring_logic) }
-    let(:task) { FactoryBot.create(:some_task) }
+    let(:task) { FactoryBot.create(:dynflow_task) }
 
     it 'can indicate it is recurring' do
       refute task.recurring?
       task.add_missing_task_groups(logic.task_group)
       task.reload
       assert task.recurring?
+    end
+
+    it 'triggers next repeat on cancel if possible' do
+      task.state = 'scheduled'
+      task.start_at = Time.zone.now + 1000
+      task.execution_plan.stubs(:state).returns(:scheduled)
+      task.execution_plan.expects(:delay_record).twice.returns(OpenStruct.new(:args => [1, 2, 3]))
+      task.expects(:task_groups).returns([logic.task_group])
+      logic.task_group.stubs(:recurring_logic).returns(logic)
+      logic.expects(:trigger_repeat_after) do |time, action_class, *args|
+        time == task.start_at &&
+          args == [1, 2, 3]
+      end
+      task.cancel
     end
   end
 
