@@ -30,6 +30,15 @@ module ForemanTasks
     end
 
     def cancel
+      if execution_plan.state == :scheduled
+        task_group = task_groups.find { |tg| tg.is_a? ::ForemanTasks::TaskGroups::RecurringLogicTaskGroup }
+        if task_group # A scheduled execution plan may have been a non-recurring one
+          task_group.recurring_logic
+                    .trigger_repeat_after(self.start_at,
+                                          execution_plan.entry_action.class,
+                                          *execution_plan.delay_record.args)
+        end
+      end
       execution_plan!.cancel.any?
     end
 

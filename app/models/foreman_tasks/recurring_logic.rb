@@ -33,18 +33,23 @@ module ForemanTasks
       trigger_repeat(action_class, *args)
     end
 
-    def trigger_repeat(action_class, *args)
-      if can_continue?
+    def trigger_repeat_after(time, action_class, *args)
+      return if cancelled?
+      if can_continue?(time)
         self.iteration += 1
         save!
         ::ForemanTasks.delay action_class,
-                             generate_delay_options,
+                             generate_delay_options(time),
                              *args
       else
         self.state = 'finished'
         save!
         nil
       end
+    end
+
+    def trigger_repeat(action_class, *args)
+      trigger_repeat_after(Time.zone.now, action_class, *args)
     end
 
     def cancel
@@ -87,6 +92,10 @@ module ForemanTasks
 
     def finished?
       state == 'finished'
+    end
+
+    def cancelled?
+      state == 'cancelled'
     end
 
     def humanized_state
