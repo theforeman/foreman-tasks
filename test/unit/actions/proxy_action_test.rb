@@ -94,7 +94,6 @@ module ForemanTasks
       end
 
       it 'hides secrets' do
-        Support::DummyProxyAction.reset
         triggered = ForemanTasks.dynflow.world.trigger(Support::DummyProxyAction,
                                                        Support::DummyProxyAction.proxy,
                                                        'Proxy::DummyAction',
@@ -105,7 +104,6 @@ module ForemanTasks
       end
 
       it 'wipes secrets' do
-        Support::DummyProxyAction.reset
         @action.input[:secrets].must_equal secrets
         action = run_action(@action, ::Actions::ProxyAction::CallbackData.new('result' => 'success'))
         refute action.input.key?(:secrets)
