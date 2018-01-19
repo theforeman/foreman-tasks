@@ -11,7 +11,7 @@ module ForemanTasks
     if Rails::VERSION::MAJOR < 4
       has_many :task_groups, :through => :tasks, :uniq => true
     else
-      has_many :task_groups, -> { uniq }, :through => :tasks
+      has_many :task_groups, -> { distinct }, :through => :tasks
     end
 
     scoped_search :on => :id, :complete_value => false, :validator => ScopedSearch::Validators::INTEGER

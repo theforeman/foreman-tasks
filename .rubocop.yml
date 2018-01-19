@@ -58,6 +58,9 @@ Rails/ReversibleMigration:
 
 Metrics/BlockLength:
   Exclude:
+    - config/routes.rb
+    - lib/foreman_remote_execution/engine.rb
+    - test/**/*
     - lib/foreman_tasks/tasks/**/*
 
 Naming/FileName:
