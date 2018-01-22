@@ -101,6 +101,7 @@ module ForemanTasks
                                                        'secrets' => secrets)
         task = ForemanTasks::Task.where(:external_id => triggered.id).first
         task.input[:secrets].must_equal 'Secrets hidden'
+        triggered.future.wait # Wait for the task to get triggered before leaving the test
       end
 
       it 'wipes secrets' do
