@@ -88,6 +88,17 @@ class RecurringLogicsTest < ActiveSupport::TestCase
       recurring_logic.start(::Support::DummyDynflowAction)
     end
 
+    it 'has a task group associated to all tasks that were created as part of the recurring logic' do
+      recurring_logic = ForemanTasks::RecurringLogic.new_from_cronline('* * * * *')
+      recurring_logic.save
+      recurring_logic.task_group.must_be_kind_of ForemanTasks::TaskGroups::RecurringLogicTaskGroup
+      task = FactoryBot.build(:dynflow_task, :user_create_task)
+      task.task_groups << Support::DummyTaskGroup.new
+      task.save!
+      recurring_logic.task_group.tasks << task
+      recurring_logic.task_groups.must_include(*task.task_groups)
+    end
+
     it 'can be created from triggering' do
       triggering = FactoryBot.build(:triggering, :recurring, :end_time_limited)
       logic = ForemanTasks::RecurringLogic.new_from_triggering(triggering)

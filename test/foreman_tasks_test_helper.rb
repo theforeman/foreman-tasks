@@ -1,6 +1,7 @@
 require 'test_helper'
 require_relative './support/dummy_dynflow_action'
 require_relative './support/dummy_proxy_action'
+require_relative './support/dummy_task_group'
 
 require 'dynflow/testing'
 
