@@ -26,7 +26,7 @@ namespace :foreman_tasks do
       end
     end
 
-    scope = ::ForemanTasks::Task.where(:action => nil)
+    scope = ::ForemanTasks::Task.where(:action => nil).order(:started_at => :desc)
     count = scope.count
     reporter = ProgressReporter.new count, _('Generating action for %{count} tasks.')
     scope.find_in_batches(:batch_size => BATCH_SIZE) do |group|
