@@ -1,5 +1,5 @@
 <div>
-  <table class='table table-condensed'>
+  <table class='<%= table_css_classes('table-condensed') %>'>
     <tr>
       <th><%= N_('ID') %></th>
       <td><%= link_to(task_group.id, foreman_tasks_task_group_url(task_group)) %></td>
