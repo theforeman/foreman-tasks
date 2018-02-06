@@ -1,4 +1,4 @@
-class AddTaskAction < ActiveRecord::Migration
+class AddTaskAction < ActiveRecord::Migration[4.2]
   def up
     add_column :foreman_tasks_tasks, :action, :string
   end
