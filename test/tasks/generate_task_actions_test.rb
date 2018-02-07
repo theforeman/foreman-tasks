@@ -2,7 +2,6 @@ require 'rake'
 require 'foreman_tasks_test_helper'
 
 class GenerateTaskActionsTest < ActiveSupport::TestCase
-
   TASK_NAME = 'foreman_tasks:generate_task_actions'.freeze
 
   setup do
