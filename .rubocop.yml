@@ -98,3 +98,6 @@ Rails/InverseOf:
 
 Style/FormatStringToken:
   Enabled: false
+
+Style/RegexpLiteral:
+  Enabled: false

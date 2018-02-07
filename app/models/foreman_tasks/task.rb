@@ -36,6 +36,7 @@ module ForemanTasks
     end
 
     scoped_search :on => :id, :complete_value => false
+    scoped_search :on => :action, :complete_value => false
     scoped_search :on => :label, :complete_value => true
     scoped_search :on => :state, :complete_value => true
     scoped_search :on => :result, :complete_value => true
@@ -200,6 +201,10 @@ module ForemanTasks
         result[:total] = sum
       end
       result.symbolize_keys
+    end
+
+    def action
+      super || to_label
     end
 
     def to_label

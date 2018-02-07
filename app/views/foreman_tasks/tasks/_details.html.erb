@@ -89,7 +89,8 @@
   <div class="col-md-6">
     <div>
       <span class="param-name list-group-item-heading"><%= _("Name") %>:</span>
-      <span class="param-value" data-original-title="<%= @task.to_label %>" rel="twipsy"> <%= truncate(@task.to_label, :length => 50) %></span>
+      <% task_label = format_task_input(@task) %>
+      <span class="param-value" data-original-title="<%= task_label %>" rel="twipsy"> <%= truncate(task_label, :length => 50) %></span>
     </div>
     <div>
       <span class="param-name list-group-item-heading"><%= _("Result") %>:</span>

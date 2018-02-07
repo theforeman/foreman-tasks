@@ -17,7 +17,7 @@ module ForemanTasks
           render :index
         end
         format.csv do
-          csv_response(@tasks, [:to_label, :state, :result, 'started_at.in_time_zone', 'ended_at.in_time_zone', :username], ['Action', 'State', 'Result', 'Started At', 'Ended At', 'User'])
+          csv_response(@tasks, [:action_label, :state, :result, 'started_at.in_time_zone', 'ended_at.in_time_zone', :username], ['Action', 'State', 'Result', 'Started At', 'Ended At', 'User'])
         end
       end
     end

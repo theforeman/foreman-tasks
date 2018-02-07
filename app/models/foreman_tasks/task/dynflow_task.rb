@@ -3,6 +3,7 @@ module ForemanTasks
     include Algebrick::TypeCheck
 
     scope :for_action, ->(action_class) { where(label: action_class.name) }
+    after_validation :set_action_field
 
     def update_from_dynflow(data)
       utc_zone = ActiveSupport::TimeZone.new('UTC')
@@ -151,6 +152,10 @@ module ForemanTasks
     end
 
     private
+
+    def set_action_field
+      self.action = to_label
+    end
 
     def map_result(data)
       if state_result_transitioned?(%w[planned pending], %w[stopped error], data) ||
