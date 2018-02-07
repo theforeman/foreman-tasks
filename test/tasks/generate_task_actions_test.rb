@@ -3,7 +3,7 @@ require 'foreman_tasks_test_helper'
 
 class GenerateTaskActionsTest < ActiveSupport::TestCase
 
-  TASK_NAME = 'foreman_tasks:generate_task_actions'
+  TASK_NAME = 'foreman_tasks:generate_task_actions'.freeze
 
   setup do
     Rake.application.rake_require 'foreman_tasks/tasks/generate_task_actions'
@@ -26,9 +26,9 @@ class GenerateTaskActionsTest < ActiveSupport::TestCase
       Rake.application.invoke_task TASK_NAME
     end
 
-    assert_match(/Generating action for #{tasks.count} tasks/, stdout)
+    assert_match(%r{Generating action for #{tasks.count} tasks}, stdout)
     ForemanTasks::Task.where(:action => label).count.must_equal tasks.count
-    assert_match(/Processed #{tasks.count}\/#{tasks.count} tasks/, stdout)
+    assert_match(%r{Processed #{tasks.count}/#{tasks.count} tasks}, stdout)
   end
 
   it 'fixes only tasks with missing action' do
@@ -39,6 +39,6 @@ class GenerateTaskActionsTest < ActiveSupport::TestCase
       Rake.application.invoke_task TASK_NAME
     end
 
-    assert_match(/Generating action for 0 tasks/, stdout)
+    assert_match(%r{Generating action for 0 tasks}, stdout)
   end
 end
