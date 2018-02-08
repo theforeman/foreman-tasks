@@ -26,7 +26,7 @@ module Actions
       with_connection_error_handling(event) do |event|
         case event
         when nil
-          if output[:proxy_task_id]
+          if remote_task
             on_resume
           else
             trigger_proxy_task
@@ -52,12 +52,18 @@ module Actions
       end
     end
 
+    def remote_task
+      @remote_task ||= RemoteTask.where(:execution_plan_id => execution_plan_id, :step_id => run_step_id).first!
+    end
+
     def trigger_proxy_task
       suspend do |_suspended_action|
         set_timeout! unless timeout_set?
         response = proxy.trigger_task(proxy_action_name,
                                       input.merge(:callback => { :task_id => task.id,
                                                                  :step_id => run_step_id }))
+        RemoteTask.new(:remote_task_id => response['task_id'], :execution_plan_id => execution_plan_id,
+                       :state => 'triggered', :proxy_url => input[:proxy_url]).save!
         output[:proxy_task_id] = response['task_id']
       end
     end
@@ -67,6 +73,7 @@ module Actions
         response = proxy.status_of_task(output[:proxy_task_id])
         if %w[stopped paused].include? response['state']
           if response['result'] == 'error'
+            remote_task.destroy!
             raise ::Foreman::Exception, _('The smart proxy task %s failed.') % output[:proxy_task_id]
           else
             on_data(response['actions'].find { |block_action| block_action['class'] == proxy_action_name }['output'])
@@ -81,6 +88,7 @@ module Actions
 
     def cancel_proxy_task
       if output[:cancel_sent]
+        remote_task.destroy!
         error! ForemanTasks::Task::TaskCancelledException.new(_('Cancel enforced: the task might be still running on the proxy'))
       else
         proxy.cancel_task(output[:proxy_task_id])
@@ -91,6 +99,7 @@ module Actions
 
     def abort_proxy_task
       proxy.cancel_task(output[:proxy_task_id])
+      remote_task.destroy!
       error! ForemanTasks::Task::TaskCancelledException.new(_('Task aborted: the task might be still running on the proxy'))
     end
 
@@ -102,6 +111,7 @@ module Actions
     # @override to put custom logic on event handling
     def on_data(data)
       output[:proxy_output] = data
+      remote_task.destroy!
       wipe_secrets!
     end
 
@@ -111,6 +121,7 @@ module Actions
     end
 
     def on_proxy_action_missing
+      remote_task.destroy!
       error! _('Proxy task gone missing from the smart proxy')
     end
 
@@ -169,6 +180,11 @@ module Actions
       time = Time.zone.now + input[:connection_options][:timeout]
       schedule_timeout(time)
       metadata[:timeout] = time.to_s
+    end
+
+    def process_timeout
+      remote_task.destroy!
+      super
     end
 
     def default_connection_options
