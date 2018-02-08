@@ -53,7 +53,7 @@ module Actions
     end
 
     def remote_task
-      @remote_task ||= RemoteTask.where(:execution_plan_id => execution_plan_id, :step_id => run_step_id).first!
+      @remote_task ||= ForemanTasks::RemoteTask.where(:execution_plan_id => execution_plan_id, :step_id => run_step_id).first
     end
 
     def trigger_proxy_task
@@ -62,8 +62,8 @@ module Actions
         response = proxy.trigger_task(proxy_action_name,
                                       input.merge(:callback => { :task_id => task.id,
                                                                  :step_id => run_step_id }))
-        RemoteTask.new(:remote_task_id => response['task_id'], :execution_plan_id => execution_plan_id,
-                       :state => 'triggered', :proxy_url => input[:proxy_url]).save!
+        ::ForemanTasks::RemoteTask.new(:remote_task_id => response['task_id'], :execution_plan_id => execution_plan_id,
+                                       :state => 'triggered', :proxy_url => input[:proxy_url], :step_id => run_step_id).save!
         output[:proxy_task_id] = response['task_id']
       end
     end

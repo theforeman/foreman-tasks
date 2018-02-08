@@ -2,13 +2,13 @@ module Actions
   module Middleware
     class WatchDelegatedProxySubTasks < ::Dynflow::Middleware
       class CheckOnProxyActions; end
-      POLL_INTERVAL = 30
+      POLL_INTERVAL = 10
 
       def run(event = nil)
         if event.nil?
           set_clock
         elsif event == CheckOnProxyActions
-          poll_proxy_tasks
+          check_triggered
           set_clock
           action.send(:suspend)
         end
@@ -23,49 +23,41 @@ module Actions
                                 CheckOnProxyActions
       end
 
-      def poll_proxy_tasks
-        results = delegated_actions_by_proxy.map { |(url, actions)| poll_proxy_actions(url, actions) }.flatten
+      def check_triggered
+        tasks = remote_tasks.triggered.group_by(&:proxy_url)
+                      .map { |(url, tasks)| poll_proxy_tasks(url, tasks) }.flatten
 
-        missing, present = results.partition { |result| result[:result].nil? }
+        missing, present = tasks.partition { |task| task.result.nil? }
         if missing.any?
           event = ::Actions::ProxyAction::ProxyActionMissing.new
-          notify(event, missing.map { |action| action[:action] })
+          notify event, missing
         end
 
         stopped = present.select { |action| %w[stopped paused].include? action[:result]['state'] }
         if stopped.any?
           event = ::Actions::ProxyAction::ProxyActionStopped.new
-          notify(event, stopped.map { |a| a[:action] })
+          notify event, stopped
         end
       end
 
-      def notify(event, actions)
-        actions.each do |action|
-          action.world.event action.execution_plan_id,
-                             action.run_step_id,
+      def notify(event, tasks)
+        tasks.each do |task|
+          action.world.event task.execution_plan_id,
+                             task.step_id,
                              event
         end
       end
 
-      def delegated_actions
-        action.sub_plans('state' => %w[running])
-              .map(&:entry_action)
-              .select { |action| action.input.key? :delegated_action_id }
-              .map do |action|
-                action.planned_actions.find { |planned| planned.id == action.input[:delegated_action_id] }
-              end
+      def remote_tasks
+        action.task.remote_sub_tasks
       end
 
-      def delegated_actions_by_proxy
-        delegated_actions.select { |action| action.output.key?(:proxy_task_id) }
-                         .group_by { |action| action.input[:proxy_url] }
-      end
-
-      def poll_proxy_actions(url, actions)
+      def poll_proxy_tasks(url, tasks)
         proxy = ProxyAPI::ForemanDynflow::DynflowProxy.new(:url => url)
-        results = proxy.task_states(actions.map { |action| action.output[:proxy_task_id] })
-        actions.map do |action|
-          { :action => action, :result => results[action.output[:proxy_task_id]] }
+        results = proxy.task_states(tasks.map(&:remote_task_id))
+        tasks.map do |task|
+          task.result = results[task.remote_task_id]
+          task
         end
       end
     end

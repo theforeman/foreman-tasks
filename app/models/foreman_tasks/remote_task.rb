@@ -1,10 +1,13 @@
 module ForemanTasks
   class RemoteTask < ActiveRecord::Base
 
-    belongs_to :task, :class_name => 'ForemanTasks::Task',
-      :primary_key => :external_id,
-      :foreign_key => :execution_plan_id
+    attr_accessor :result
 
-    enum :status => [:new, :running]
+    belongs_to :task, :class_name => 'ForemanTasks::Task',
+               :primary_key => :external_id,
+               :foreign_key => :execution_plan_id,
+               :inverse_of => :remote_tasks
+
+    scope :triggered, -> {  where(:state => 'triggered') }
   end
 end
