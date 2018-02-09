@@ -33,7 +33,7 @@ module Actions
           notify event, missing
         end
 
-        stopped = present.select { |action| %w[stopped paused].include? action[:result]['state'] }
+        stopped = present.select { |task| %w[stopped paused].include? task.result['state'] }
         if stopped.any?
           event = ::Actions::ProxyAction::ProxyActionStopped.new
           notify event, stopped
