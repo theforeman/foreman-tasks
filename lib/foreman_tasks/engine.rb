@@ -98,7 +98,7 @@ module ForemanTasks
     end
 
     initializer 'foreman_tasks.register_paths' do |_app|
-      ForemanTasks.dynflow.config.eager_load_paths.concat(%W[#{ForemanTasks::Engine.root}/app/lib/actions])
+      ForemanTasks.dynflow.config.eager_load_paths.concat(%W[#{ForemanTasks::Engine.root}/app/lib/actions #{ForemanTasks::Engine.root}/app/lib/hooks])
     end
 
     initializer 'foreman_tasks.test_exceptions' do |_app|
