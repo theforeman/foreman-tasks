@@ -6,6 +6,7 @@ module Actions
     middleware.use ::Actions::Middleware::HideSecrets
 
     execution_plan_hooks.use Hooks::DestroyRemoteTask, :on => :stopped
+    execution_plan_hooks.use Hooks::WipeSecrets, :on => :stopped
 
     class CallbackData
       attr_reader :data
@@ -110,7 +111,6 @@ module Actions
     # @override to put custom logic on event handling
     def on_data(data)
       output[:proxy_output] = data
-      wipe_secrets!
     end
 
     def wipe_secrets!
