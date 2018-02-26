@@ -48,8 +48,8 @@ module ForemanTasks
     scoped_search :on => :start_at, :complete_value => false
     scoped_search :on => :ended_at, :complete_value => false
     scoped_search :on => :parent_task_id, :complete_value => true
-    scoped_search :relation => :locks,  :on => :location_id, :complete_value => false, :rename => 'location_id', :ext_method => :search_by_taxonomy
-    scoped_search :relation => :locks,  :on => :organization_id, :complete_value => false, :rename => 'organization_id', :ext_method => :search_by_taxonomy
+    scoped_search :relation => :locks,  :on => :resource_id, :complete_value => false, :rename => 'location_id', :ext_method => :search_by_taxonomy, :only_explicit => true
+    scoped_search :relation => :locks,  :on => :resource_id, :complete_value => false, :rename => 'organization_id', :ext_method => :search_by_taxonomy, :only_explicit => true
     scoped_search :relation => :locks,  :on => :resource_type, :complete_value => true, :rename => 'resource_type', :ext_method => :search_by_generic_resource
     scoped_search :relation => :locks,  :on => :resource_id, :complete_value => false, :rename => 'resource_id', :ext_method => :search_by_generic_resource
     scoped_search :relation => :owners,
