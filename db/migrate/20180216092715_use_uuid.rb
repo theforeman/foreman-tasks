@@ -39,6 +39,6 @@ class UseUuid < ActiveRecord::Migration[5.0]
   private
 
   def on_postgresql?
-    ActiveRecord::Base.connection.instance_of?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter)
+    ActiveRecord::Base.connection.adapter_name == 'PostgreSQL'
   end
 end
