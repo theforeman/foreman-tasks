@@ -41,7 +41,7 @@ module ForemanTasks
           task.reload
           task.state.must_equal 'stopped'
           task.result.must_equal 'success'
-          task.main_action.output['proxy_task_id'].must_equal '123'
+          task.main_action.output['proxy_task_id'].must_equal Support::DummyProxyAction.proxy.uuid
           task.main_action.output['proxy_output'].must_equal('result' => 'success')
         end
       end

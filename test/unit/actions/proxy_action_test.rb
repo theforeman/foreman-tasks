@@ -29,7 +29,7 @@ module ForemanTasks
                                  { 'retry_interval' => 15, 'retry_count' => 4, 'timeout' => 60 },
                              'proxy_url' => 'proxy.example.com',
                              'proxy_action_name' => 'Proxy::DummyAction',
-                             'callback' => { 'task_id' => '123', 'step_id' => @action.run_step_id } }]
+                             'callback' => { 'task_id' => Support::DummyProxyAction.proxy.uuid, 'step_id' => @action.run_step_id } }]
           proxy_call.must_equal(expected_call)
         end
       end
@@ -52,7 +52,7 @@ module ForemanTasks
       describe 'cancel' do
         it 'sends the cancel event to the proxy when the cancel event is sent for the first time' do
           action = run_action(@action, ::Dynflow::Action::Cancellable::Cancel)
-          Support::DummyProxyAction.proxy.log[:cancel_task].first.must_equal ['123']
+          Support::DummyProxyAction.proxy.log[:cancel_task].first.must_equal [Support::DummyProxyAction.proxy.uuid]
           action.state.must_equal :suspended
         end
 

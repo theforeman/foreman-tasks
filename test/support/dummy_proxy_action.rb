@@ -1,17 +1,20 @@
+require 'securerandom'
+
 module Support
   class DummyProxyAction < Actions::ProxyAction
     class DummyProxy
-      attr_reader :log, :task_triggered
+      attr_reader :log, :task_triggered, :uuid
 
       def initialize
         @log = Hash.new { |h, k| h[k] = [] }
         @task_triggered = Concurrent.future
+        @uuid = SecureRandom.uuid
       end
 
       def trigger_task(*args)
         @log[:trigger_task] << args
         @task_triggered.success(true)
-        { 'task_id' => '123' }
+        { 'task_id' => @uuid }
       end
 
       def cancel_task(*args)
@@ -36,7 +39,7 @@ module Support
     def task
       super
     rescue ActiveRecord::RecordNotFound
-      ForemanTasks::Task::DynflowTask.new.tap { |task| task.id = '123' }
+      ForemanTasks::Task::DynflowTask.new.tap { |task| task.id = proxy.uuid }
     end
 
     class << self
