@@ -10,7 +10,7 @@ module Actions
     # Hook to be called when a repetition needs to be triggered. This either happens when the plan goes into planned state
     #   or when it fails.
     def trigger_repeat(execution_plan)
-      if (execution_plan.state == :planned || execution_plan.result == :error) && execution_plan.delay_record && recurring_logic_task_group
+      if execution_plan.delay_record && recurring_logic_task_group
         args = execution_plan.delay_record.args
         logic = recurring_logic_task_group.recurring_logic
         logic.trigger_repeat_after(task.start_at, self.class, *args)
