@@ -144,21 +144,6 @@ module ForemanTasks
       Authorizer.send(:prepend, AuthorizerExt)
     end
 
-    config.after_initialize do
-      ForemanTasks.dynflow.eager_load_actions!
-      ForemanTasks.dynflow.config.increase_db_pool_size
-
-      unless ForemanTasks.dynflow.config.lazy_initialization
-        if defined?(PhusionPassenger)
-          PhusionPassenger.on_event(:starting_worker_process) do |forked|
-            ForemanTasks.dynflow.initialize! if forked
-          end
-        else
-          ForemanTasks.dynflow.initialize!
-        end
-      end
-    end
-
     rake_tasks do
       %w[dynflow.rake test.rake export_tasks.rake cleanup.rake].each do |rake_file|
         full_path = File.expand_path("../tasks/#{rake_file}", __FILE__)
