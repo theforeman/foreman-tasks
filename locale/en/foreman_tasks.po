@@ -87,9 +87,6 @@ msgstr ""
 msgid "Cancelled"
 msgstr ""
 
-msgid "Conflicts with tasks:"
-msgstr ""
-
 msgid "Cron line"
 msgstr ""
 
@@ -274,9 +271,6 @@ msgstr ""
 msgid "Parent task"
 msgstr ""
 
-msgid "Please inspect their state, fix their errors and resume them."
-msgstr ""
-
 msgid "Raw"
 msgstr ""
 
@@ -295,9 +289,6 @@ msgstr ""
 msgid "Recurring logics"
 msgstr ""
 
-msgid "Remote action:"
-msgstr ""
-
 msgid "Repeat N times"
 msgstr ""
 
@@ -308,12 +299,6 @@ msgid "Repeats"
 msgstr ""
 
 msgid "Require user to be authenticated as user with admin rights when accessing dynflow console"
-msgstr ""
-
-msgid "Required lock is already taken by other running tasks."
-msgstr ""
-
-msgid "Required lock: %s"
 msgstr ""
 
 msgid "Resource search_params requires resource_type and resource_id to be specified"

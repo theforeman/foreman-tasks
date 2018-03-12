@@ -2,5 +2,3 @@
 _("Action with sub plans")
 _("Import facts")
 _("Import Puppet classes")
-_("Remote action:")
-_("Play Ansible roles")
