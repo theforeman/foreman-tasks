@@ -35,8 +35,8 @@ module ForemanTasks
       options
     end
 
-    def initialize_persistence
-      ForemanTasks::Dynflow::Persistence.new(default_sequel_adapter_options)
+    def persistence_class
+      ForemanTasks::Dynflow::Persistence
     end
   end
 end
