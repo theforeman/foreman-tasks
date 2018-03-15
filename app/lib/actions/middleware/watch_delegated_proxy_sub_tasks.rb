@@ -2,7 +2,9 @@ module Actions
   module Middleware
     class WatchDelegatedProxySubTasks < ::Dynflow::Middleware
       class CheckOnProxyActions; end
-      POLL_INTERVAL = 10
+      # Poll the proxy every 10 minutes
+      POLL_INTERVAL = 600
+      BATCH_SIZE = 1000
 
       def run(event = nil)
         if event.nil?
@@ -24,20 +26,22 @@ module Actions
       end
 
       def check_triggered
-        tasks = remote_tasks.triggered.group_by(&:proxy_url)
-                      .map { |(url, tasks)| poll_proxy_tasks(url, tasks) }.flatten
-
-        missing, present = tasks.partition { |task| task.result.nil? }
-        if missing.any?
-          event = ::Actions::ProxyAction::ProxyActionMissing.new
-          notify event, missing
+        # Sort by proxy_url so there are less requests per proxy
+        source = remote_tasks.triggered.order(:proxy_url, :id)
+        source.find_in_batches(:batch_size => BATCH_SIZE) do |batch|
+          tasks = batch.group_by(&:proxy_url)
+                       .map { |(url, tasks)| poll_proxy_tasks(url, tasks) }
+                       .flatten
+          process_task_results tasks
         end
+      end
+
+      def process_task_results(tasks)
+        missing, present = tasks.partition { |task| task.result.nil? }
+        notify ::Actions::ProxyAction::ProxyActionMissing.new, missing if missing.any?
 
         stopped = present.select { |task| %w[stopped paused].include? task.result['state'] }
-        if stopped.any?
-          event = ::Actions::ProxyAction::ProxyActionStopped.new
-          notify event, stopped
-        end
+        notify ::Actions::ProxyAction::ProxyActionStopped.new, stopped if stopped.any?
       end
 
       def notify(event, tasks)
@@ -59,6 +63,9 @@ module Actions
           task.result = results[task.remote_task_id]
           task
         end
+      rescue RestClient::Exception => _
+        # We could not reach the remote task, we assume it's gone
+        tasks
       end
     end
   end
