@@ -1,7 +1,6 @@
 require 'foreman_tasks_test_helper'
 
 class RecurringLogicsTest < ActiveSupport::TestCase
-  # rubocop:disable Metrics/BlockLength
   describe 'generating times' do
     it 'assembles cronline' do
       hash = {}
@@ -138,6 +137,5 @@ class RecurringLogicsTest < ActiveSupport::TestCase
         logic.must_be :valid?
       end
     end
-    # rubocop:enable Metrics/BlockLength
   end
 end

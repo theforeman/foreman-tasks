@@ -1,7 +1,7 @@
 require 'foreman_tasks_test_helper'
 
 module ForemanTasks
-  class RecurringActionTest <  ActiveSupport::TestCase
+  class RecurringActionTest < ActiveSupport::TestCase
     class HookedAction < Actions::EntryAction
       include Actions::RecurringAction
 
@@ -18,12 +18,11 @@ module ForemanTasks
       include ::Dynflow::Testing
 
       let(:preset) do
-        t = Time.now
         {
           :minutes => 0,
           :hours => 12,
           :days => 1,
-          :months => (Time.now.month + 1) % 12
+          :months => (Time.zone.now.month + 1) % 12
         }
       end
 
