@@ -5,8 +5,8 @@ module Actions
 
     middleware.use ::Actions::Middleware::HideSecrets
 
-    execution_plan_hooks.use Hooks::DestroyRemoteTask, :on => :stopped
-    execution_plan_hooks.use Hooks::WipeSecrets, :on => :stopped
+    execution_plan_hooks.use :clean_remote_task, :on => :stopped
+    execution_plan_hooks.use :wipe_secrets, :on => :stopped
 
     class CallbackData
       attr_reader :data
@@ -113,9 +113,11 @@ module Actions
       output[:proxy_output] = data
     end
 
-    def wipe_secrets!
+    # Removes the :secrets key from the action's input and output and saves the action
+    def wipe_secrets!()
       input.delete(:secrets)
       output.delete(:secrets)
+      world.persistence.save_action(execution_plan_id, self)
     end
 
     def on_proxy_action_missing
@@ -189,6 +191,10 @@ module Actions
       { :retry_interval => Setting['foreman_tasks_proxy_action_retry_interval'] || 15,
         :retry_count    => Setting['foreman_tasks_proxy_action_retry_count'] || 4,
         :timeout        => Setting['foreman_tasks_proxy_action_start_timeout'] || 60 }
+    end
+
+    def clean_remote_task(*_args)
+      remote_task.destroy!
     end
 
     private
