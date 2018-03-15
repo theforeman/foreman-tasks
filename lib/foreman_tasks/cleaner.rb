@@ -100,6 +100,7 @@ module ForemanTasks
         with_batches(source, name) do |chunk|
           delete_tasks chunk
           delete_dynflow_plans chunk
+          delete_remote_tasks(chunk)
         end
       end
       delete_orphaned_dynflow_tasks
@@ -113,6 +114,10 @@ module ForemanTasks
       tasks = ForemanTasks::Task.where(:id => chunk.map(&:id))
       tasks_to_csv(tasks, @backup_dir, 'foreman_tasks.csv') if @backup_dir
       tasks.delete_all
+    end
+
+    def delete_remote_tasks(chunk)
+      ForemanTasls::RemoteTask.where(:execution_plan_id => chunk.map(&:external_id)).delete_all
     end
 
     def tasks_to_csv(dataset, backup_dir, file_name)
