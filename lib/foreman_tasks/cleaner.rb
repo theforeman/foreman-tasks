@@ -161,7 +161,12 @@ module ForemanTasks
     end
 
     def with_batches(source, name)
-      start_tracking_progress(name, source.count)
+      count = source.count
+      if count.zero?
+        say("No #{name}s found, skipping.")
+        return
+      end
+      start_tracking_progress(name, count)
       while (chunk = source.limit(batch_size)).any?
         yield chunk
         report_progress(chunk)
@@ -184,18 +189,14 @@ module ForemanTasks
 
     def start_tracking_progress(name, total = tasks.size)
       say "About to remove #{total} #{name}(s)"
-      if verbose
-        @current = 0
-        @total = total
-        say "#{@current}/#{@total}", false
-      end
+      @current = 0
+      @total = total
+      say "#{@current}/#{@total}", false if verbose
     end
 
     def report_progress(chunk)
-      if verbose
-        @current += chunk.count
-        say "#{@current}/#{@total}", false
-      end
+      @current += chunk.count
+      say "#{@current}/#{@total}", false if verbose
     end
 
     def report_done(name)
