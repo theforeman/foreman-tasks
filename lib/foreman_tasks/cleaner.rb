@@ -95,17 +95,14 @@ module ForemanTasks
 
     # Delete the filtered tasks, including the dynflow execution plans
     def delete
-      if noop
-        say "[noop] deleting all tasks matching filter #{full_filter}"
-        say "[noop] #{ForemanTasks::Task.search_for(full_filter).size} tasks would be deleted"
-      else
-        start_tracking_progress
-        while (chunk = ForemanTasks::Task.search_for(full_filter).limit(batch_size)).any?
-          delete_tasks(chunk)
-          delete_dynflow_plans(chunk)
-          report_progress(chunk)
+      message = "deleting all tasks matching filter #{full_filter}"
+      with_noop(ForemanTasks::Task.search_for(full_filter), 'task', message) do |source, name|
+        with_batches(source, name) do |chunk|
+          delete_tasks chunk
+          delete_dynflow_plans chunk
         end
       end
+      delete_orphaned_dynflow_tasks
     end
 
     def tasks
@@ -138,8 +135,44 @@ module ForemanTasks
     end
 
     def delete_dynflow_plans(chunk)
-      dynflow_ids = chunk.find_all { |task| task.is_a? Task::DynflowTask }.map(&:external_id)
-      ForemanTasks.dynflow.world.persistence.delete_execution_plans({ 'uuid' => dynflow_ids }, batch_size, @backup_dir)
+      delete_dynflow_plans_by_uuid chunk.find_all { |task| task.is_a? Task::DynflowTask }.map(&:external_id)
+    end
+
+    def delete_dynflow_plans_by_uuid(uuids)
+      ForemanTasks.dynflow.world.persistence.delete_execution_plans({ 'uuid' => uuids }, batch_size, @backup_dir)
+    end
+
+    def delete_orphaned_dynflow_tasks
+      with_noop(orphaned_dynflow_tasks, 'orphaned execution plan') do |source, name|
+        with_batches(source, name) do |chunk|
+          delete_dynflow_plans_by_uuid chunk.select_map(:uuid)
+        end
+      end
+    end
+
+    # source must respond to :count and :limit
+    def with_noop(source, name, noop_message = nil)
+      if noop
+        say '[noop] ' + noop_message if noop_message
+        say "[noop] #{source.count} #{name}(s) would be deleted"
+      else
+        yield source, name
+      end
+    end
+
+    def with_batches(source, name)
+      start_tracking_progress(name, source.count)
+      while (chunk = source.limit(batch_size)).any?
+        yield chunk
+        report_progress(chunk)
+      end
+      report_done(name)
+    end
+
+    def orphaned_dynflow_tasks
+      db = ForemanTasks.dynflow.world.persistence.adapter.db
+      uuid_select = Sequel.lit(ForemanTasks::Task.select(:external_id).to_sql)
+      db[:dynflow_execution_plans].filter(:uuid => [uuid_select]).invert
     end
 
     def prepare_filter
@@ -149,19 +182,24 @@ module ForemanTasks
       filter_parts.select(&:present?).join(' AND ')
     end
 
-    def start_tracking_progress
+    def start_tracking_progress(name, total = tasks.size)
+      say "About to remove #{total} #{name}(s)"
       if verbose
         @current = 0
-        @total = tasks.size
+        @total = total
         say "#{@current}/#{@total}", false
       end
     end
 
     def report_progress(chunk)
       if verbose
-        @current += chunk.size
+        @current += chunk.count
         say "#{@current}/#{@total}", false
       end
+    end
+
+    def report_done(name)
+      say "Deleted #{@current} #{name}(s)"
     end
 
     def say(message, log = true)
