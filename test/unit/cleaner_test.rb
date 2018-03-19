@@ -5,6 +5,8 @@ class TasksTest < ActiveSupport::TestCase
     # To stop dynflow from backing up actions, execution_plans and steps
     ForemanTasks.dynflow.world.persistence.adapter.stubs(:backup_to_csv)
     ForemanTasks::Cleaner.any_instance.stubs(:say) # Make the tests silent
+    # Hack to make the tests pass due to ActiveRecord shenanigans
+    ForemanTasks::Cleaner.any_instance.stubs(:delete_orphaned_dynflow_tasks)
   end
 
   describe ForemanTasks::Cleaner do
@@ -19,8 +21,6 @@ class TasksTest < ActiveSupport::TestCase
                          end,
                          FactoryBot.create(:dynflow_task, :product_create_task)]
       cleaner.expects(:tasks_to_csv)
-      # Hack to make the tests pass due to ActiveRecord shenanigans
-      cleaner.expects(:delete_orphaned_dynflow_tasks)
       cleaner.delete
       ForemanTasks::Task.where(id: tasks_to_delete).must_be_empty
       ForemanTasks::Task.where(id: tasks_to_keep).order(:id).map(&:id).must_equal tasks_to_keep.map(&:id).sort
