@@ -96,7 +96,7 @@ module ForemanTasks
     # Delete the filtered tasks, including the dynflow execution plans
     def delete
       message = "deleting all tasks matching filter #{full_filter}"
-      with_noop(ForemanTasks::Task.search_for(full_filter), 'task', message) do |source, name|
+      with_noop(ForemanTasks::Task.search_for(full_filter), 'tasks matching filter', message) do |source, name|
         with_batches(source, name) do |chunk|
           delete_tasks chunk
           delete_dynflow_plans chunk
@@ -143,7 +143,7 @@ module ForemanTasks
     end
 
     def delete_orphaned_dynflow_tasks
-      with_noop(orphaned_dynflow_tasks, 'orphaned execution plan') do |source, name|
+      with_noop(orphaned_dynflow_tasks, 'orphaned execution plans') do |source, name|
         with_batches(source, name) do |chunk|
           delete_dynflow_plans_by_uuid chunk.select_map(:uuid)
         end
@@ -154,7 +154,7 @@ module ForemanTasks
     def with_noop(source, name, noop_message = nil)
       if noop
         say '[noop] ' + noop_message if noop_message
-        say "[noop] #{source.count} #{name}(s) would be deleted"
+        say "[noop] #{source.count} #{name} would be deleted"
       else
         yield source, name
       end
@@ -163,7 +163,7 @@ module ForemanTasks
     def with_batches(source, name)
       count = source.count
       if count.zero?
-        say("No #{name}s found, skipping.")
+        say("No #{name} found, skipping.")
         return
       end
       start_tracking_progress(name, count)
@@ -189,7 +189,7 @@ module ForemanTasks
     end
 
     def start_tracking_progress(name, total = tasks.size)
-      say "About to remove #{total} #{name}(s)"
+      say "About to remove #{total} #{name}"
       @current = 0
       @total = total
       say "#{@current}/#{@total}", false if verbose
@@ -201,7 +201,7 @@ module ForemanTasks
     end
 
     def report_done(name)
-      say "Deleted #{@current} #{name}(s)"
+      say "Deleted #{@current} #{name}"
     end
 
     def say(message, log = true)
