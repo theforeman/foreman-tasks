@@ -56,7 +56,7 @@ module Actions
     end
 
     def remote_task
-      @remote_task ||= ForemanTasks::RemoteTask.where(:execution_plan_id => execution_plan_id, :step_id => run_step_id).first
+      @remote_task ||= ForemanTasks::RemoteTask.find_by(:execution_plan_id => execution_plan_id, :step_id => run_step_id)
     end
 
     def trigger_proxy_task
