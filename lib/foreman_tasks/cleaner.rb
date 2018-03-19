@@ -168,8 +168,9 @@ module ForemanTasks
       end
       start_tracking_progress(name, count)
       while (chunk = source.limit(batch_size)).any?
+        chunk_size = chunk.count
         yield chunk
-        report_progress(chunk)
+        report_progress(chunk_size)
       end
       report_done(name)
     end
@@ -194,8 +195,8 @@ module ForemanTasks
       say "#{@current}/#{@total}", false if verbose
     end
 
-    def report_progress(chunk)
-      @current += chunk.count
+    def report_progress(count)
+      @current += count
       say "#{@current}/#{@total}", false if verbose
     end
 
