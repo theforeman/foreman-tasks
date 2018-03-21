@@ -18,8 +18,8 @@ module ForemanTasksCore
 
     private
 
-    def with_callback?
-      !!input[:task_id]
+    def on_proxy?
+      defined?(SmartProxyDynflowCore::Callback)
     end
   end
 end
