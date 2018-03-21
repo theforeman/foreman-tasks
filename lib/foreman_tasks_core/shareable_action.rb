@@ -15,5 +15,11 @@ module ForemanTasksCore
         plan_action(SmartProxyDynflowCore::Callback::Action, callback, planned_action.output)
       end
     end
+
+    private
+
+    def with_callback?
+      !!input[:task_id]
+    end
   end
 end
