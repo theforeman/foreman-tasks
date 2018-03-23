@@ -22,7 +22,7 @@ module Actions
       private
 
       def with_current_taxonomies
-        if has_current_taxonomies?
+        if current_taxonomies?
           yield
         else
           restore_current_taxonomies { yield }
@@ -43,9 +43,9 @@ module Actions
         Location.current = nil
       end
 
-      def has_current_taxonomies?
+      def current_taxonomies?
         (Organization.current || action.input[:current_organization_id].nil?) &&
-        (Location.current || action.input[:current_location_id].nil?)
+          (Location.current || action.input[:current_location_id].nil?)
       end
     end
   end
