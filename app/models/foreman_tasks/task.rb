@@ -109,10 +109,16 @@ module ForemanTasks
       state == 'paused'
     end
 
+    # returns true if the task is *CURRENTLY* waiting to be executed in the future
+    def scheduled?
+      state == 'scheduled'
+    end
+
     def recurring?
       !recurring_logic_task_group_ids.empty?
     end
 
+    # returns true if the task was planned to execute in the future
     def delayed?
       start_at.to_i != started_at.to_i
     end
