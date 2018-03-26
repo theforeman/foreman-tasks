@@ -8,12 +8,12 @@ module ForemanTasks
     def update_from_dynflow(data)
       utc_zone = ActiveSupport::TimeZone.new('UTC')
       self.external_id    = data[:id]
-      self.started_at     = utc_zone.parse(data[:started_at]) unless data[:started_at].nil?
-      self.ended_at       = utc_zone.parse(data[:ended_at]) unless data[:ended_at].nil?
       self.result         = map_result(data).to_s
       self.state          = data[:state].to_s
-      self.start_at       = utc_zone.parse(data[:start_at]) if data[:start_at]
-      self.start_before   = utc_zone.parse(data[:start_before]) if data[:start_before]
+      self.started_at     = string_to_time(utc_zone, data[:started_at]) unless data[:started_at].nil?
+      self.ended_at       = string_to_time(utc_zone, data[:ended_at]) unless data[:ended_at].nil?
+      self.start_at       = string_to_time(utc_zone, data[:start_at]) if data[:start_at]
+      self.start_before   = string_to_time(utc_zone, data[:start_before]) if data[:start_before]
       self.parent_task_id ||= begin
                                 if main_action.caller_execution_plan_id
                                   DynflowTask.where(:external_id => main_action.caller_execution_plan_id).first!.id
@@ -175,6 +175,11 @@ module ForemanTasks
 
     def cancelled?
       execution_plan.errors.any? { |error| error.exception_class == ::ForemanTasks::Task::TaskCancelledException }
+    end
+
+    def string_to_time(zone, time)
+      return time if time.is_a?(Time)
+      zone.parse(time)
     end
   end
 end
