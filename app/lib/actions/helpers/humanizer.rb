@@ -126,7 +126,7 @@ module Actions
           product_id = fetch_data(data, :product, :id)
           repo_id = fetch_data(data, :repo, :id)
           if product_id && repo_id
-            "#/products/#{product_id}/repositories/#{repo_id}"
+            "/products/#{product_id}/repositories/#{repo_id}"
           end
         end
       end
@@ -152,7 +152,7 @@ module Actions
 
         def link(data)
           if (content_view_id = fetch_data(data, :content_view, :id))
-            "#/content_views/#{content_view_id}/versions"
+            "/content_views/#{content_view_id}/versions"
           end
         end
       end
@@ -168,7 +168,7 @@ module Actions
 
         def link(data)
           if (product_id = fetch_data(data, :product, :id))
-            "#/products/#{product_id}/info"
+            "/products/#{product_id}/"
           end
         end
       end
