@@ -106,7 +106,7 @@ module Actions
     end
 
     # Removes the :secrets key from the action's input and output and saves the action
-    def wipe_secrets!()
+    def wipe_secrets!
       input.delete(:secrets)
       output.delete(:secrets)
       world.persistence.save_action(execution_plan_id, self)
