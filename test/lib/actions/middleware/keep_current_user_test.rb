@@ -34,7 +34,7 @@ module Actions
           User.stubs(:current)
         end
 
-        test 'with current taxonomies as input' do
+        test 'with current user as input' do
           User.unscoped.class.any_instance.expects(:find).with(@user.id).returns(@user)
 
           User.expects(:current=).with(@user)
