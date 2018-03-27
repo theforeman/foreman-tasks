@@ -58,11 +58,11 @@ module ForemanTasks
     end
 
     def recurring_logic_next_occurrence(recurring_logic)
-      if %w[finished cancelled].include? recurring_logic.state
-        '-'
-      else
-        recurring_logic.next_occurrence_time
-      end
+      default = '-'
+      return default if %w[finished cancelled].include? recurring_logic.state
+
+      last_task = recurring_logic.tasks.order(:start_at).last
+      last_task ? last_task.start_at : default
     end
 
     def time_f(f, attr, field_options = {}, time_options = {}, html_options = {})

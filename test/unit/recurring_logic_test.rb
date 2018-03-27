@@ -106,6 +106,13 @@ class RecurringLogicsTest < ActiveSupport::TestCase
       logic.end_time.must_be_close_to(triggering.end_time, 1.second)
     end
 
+    it 'cannot trigger tasks when cancelled' do
+      recurring_logic = ForemanTasks::RecurringLogic.new_from_cronline('* * * * *')
+      recurring_logic.state = 'cancelled'
+      recurring_logic.expects(:can_continue?).never
+      recurring_logic.trigger_repeat('this is not important', 'neither is this')
+    end
+
     describe 'validation' do
       let(:logic) { FactoryBot.build(:recurring_logic) }
 

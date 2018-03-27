@@ -122,7 +122,7 @@ class TasksTest < ActiveSupport::TestCase
 
   describe 'recurring task' do
     let(:logic) { FactoryBot.build(:recurring_logic) }
-    let(:task) { FactoryBot.create(:some_task) }
+    let(:task) { FactoryBot.create(:dynflow_task) }
 
     it 'can indicate it is recurring' do
       refute task.recurring?
