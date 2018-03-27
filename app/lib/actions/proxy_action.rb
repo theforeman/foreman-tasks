@@ -1,7 +1,6 @@
 module Actions
   class ProxyAction < Base
     include ::Dynflow::Action::Cancellable
-    include ::Dynflow::Action::Timeouts
 
     middleware.use ::Actions::Middleware::HideSecrets
 
@@ -43,8 +42,6 @@ module Actions
           abort_proxy_task
         when CallbackData
           on_data(event.data)
-        when ::Dynflow::Action::Timeouts::Timeout
-          check_task_status
         when ProxyActionMissing
           on_proxy_action_missing
         when ProxyActionStopped
@@ -61,7 +58,6 @@ module Actions
 
     def trigger_proxy_task
       suspend do |_suspended_action|
-        set_timeout! unless timeout_set?
         response = proxy.trigger_task(proxy_action_name,
                                       input.merge(:callback => { :task_id => task.id,
                                                                  :step_id => run_step_id }))
@@ -72,19 +68,15 @@ module Actions
     end
 
     def check_task_status
-      if output[:proxy_task_id]
-        response = proxy.status_of_task(output[:proxy_task_id])
-        if %w[stopped paused].include? response['state']
-          if response['result'] == 'error'
-            raise ::Foreman::Exception, _('The smart proxy task %s failed.') % output[:proxy_task_id]
-          else
-            on_data(response['actions'].find { |block_action| block_action['class'] == proxy_action_name }['output'])
-          end
+      response = proxy.status_of_task(output[:proxy_task_id])
+      if %w[stopped paused].include? response['state']
+        if response['result'] == 'error'
+          raise ::Foreman::Exception, _('The smart proxy task %s failed.') % output[:proxy_task_id]
         else
-          suspend
+          on_data(response['actions'].find { |block_action| block_action['class'] == proxy_action_name }['output'])
         end
       else
-        process_timeout
+        suspend
       end
     end
 
@@ -171,26 +163,11 @@ module Actions
       output[:metadata] = thing
     end
 
-    def timeout_set?
-      !metadata[:timeout].nil?
-    end
-
-    def set_timeout!
-      time = Time.zone.now + input[:connection_options][:timeout]
-      schedule_timeout(time)
-      metadata[:timeout] = time.to_s
-    end
-
-    def process_timeout
-      super
-    end
-
     def default_connection_options
       # Fails if the plan is not finished within 60 seconds from the first task trigger attempt on the smart proxy
       # If the triggering fails, it retries 3 more times with 15 second delays
       { :retry_interval => Setting['foreman_tasks_proxy_action_retry_interval'] || 15,
-        :retry_count    => Setting['foreman_tasks_proxy_action_retry_count'] || 4,
-        :timeout        => Setting['foreman_tasks_proxy_action_start_timeout'] || 60 }
+        :retry_count    => Setting['foreman_tasks_proxy_action_retry_count'] || 4 }
     end
 
     def clean_remote_task(*_args)
@@ -206,7 +183,7 @@ module Actions
     def with_connection_error_handling(event = nil)
       yield event
     rescue ::RestClient::Exception, Errno::ECONNREFUSED, Errno::EHOSTUNREACH, Errno::ETIMEDOUT => e
-      if event.class == CallbackData || event == ::Dynflow::Action::Timeouts::Timeout
+      if event.class == CallbackData
         raise e
       else
         handle_connection_exception(e, event)
