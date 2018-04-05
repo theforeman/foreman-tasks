@@ -5,7 +5,7 @@ module Actions
     middleware.use ::Actions::Middleware::HideSecrets
 
     execution_plan_hooks.use :clean_remote_task, :on => :stopped
-    execution_plan_hooks.use :wipe_secrets, :on => :stopped
+    execution_plan_hooks.use :wipe_secrets!, :on => :stopped
 
     class CallbackData
       attr_reader :data
@@ -15,7 +15,12 @@ module Actions
       end
     end
 
-    class ProxyActionMissing; end
+    class ProxyActionMissing < Exception
+      def backtrace
+        []
+      end
+    end
+
     class ProxyActionStopped; end
 
     def plan(proxy, klass, options)
@@ -106,14 +111,14 @@ module Actions
     end
 
     # Removes the :secrets key from the action's input and output and saves the action
-    def wipe_secrets!
+    def wipe_secrets!(_execution_plan)
       input.delete(:secrets)
       output.delete(:secrets)
       world.persistence.save_action(execution_plan_id, self)
     end
 
     def on_proxy_action_missing
-      error! _('Proxy task gone missing from the smart proxy')
+      error! ProxyActionMissing.new(_('Proxy task gone missing from the smart proxy'))
     end
 
     def on_proxy_action_stopped
@@ -130,8 +135,8 @@ module Actions
     end
 
     def proxy_output(live = false)
-      if output.key?(:proxy_output)
-        output.fetch(:proxy_output) || {}
+      if output.key?(:proxy_output) || state == :error
+        output.fetch(:proxy_output, {})
       elsif live && output[:proxy_task_id]
         proxy_data = proxy.status_of_task(output[:proxy_task_id])['actions'].detect { |action| action['class'] == proxy_action_name }
         proxy_data.fetch('output', {})
