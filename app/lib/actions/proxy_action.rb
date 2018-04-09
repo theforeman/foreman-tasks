@@ -15,7 +15,7 @@ module Actions
       end
     end
 
-    class ProxyActionMissing < Exception
+    class ProxyActionMissing < RuntimeError
       def backtrace
         []
       end
