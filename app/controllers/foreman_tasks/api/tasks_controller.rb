@@ -118,7 +118,9 @@ module ForemanTasks
       end
       def index
         scope = resource_scope.search_for(params[:search]).select('DISTINCT foreman_tasks_tasks.*')
-        total = scope.count
+
+        total = resource_scope.count
+        subtotal = scope.count
 
         ordering_params = {
           sort_by: params[:sort_by] || 'started_at',
@@ -128,14 +130,14 @@ module ForemanTasks
 
         pagination_params = {
           page: params[:page] || 1,
-          per_page: params[:per_page] || 20
+          per_page: params[:per_page] || Setting[:entries_per_page] || 20
         }
         scope = pagination_scope(scope, pagination_params)
         results = scope.map { |task| task_hash(task) }
 
         render :json => {
           total: total,
-          subtotal: results.count,
+          subtotal: subtotal,
           page: pagination_params[:page],
           per_page: pagination_params[:per_page],
           sort: {
