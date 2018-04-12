@@ -5,7 +5,7 @@ module ForemanTasksCore
   module Runner
     class CommandRunner < Runner::Base
       def initialize_command(*command)
-        @command_out, @command_in, @command_pid = PTY.spawn(*command)
+        @command_out, @command_in, @command_pid = PTY.spawn(*command, :in => input_stream)
       end
 
       def refresh
@@ -23,6 +23,14 @@ module ForemanTasksCore
         end
       end
 
+      # @override
+      # by default, we pass the null input stream to the sub-process, as
+      # we don't expect to run in interactive mode. Override if different behaviour
+      # is expected
+      def input_stream
+        @input_stream ||= File.open(File::NULL, "r")
+      end
+
       def close
         close_io
       end
@@ -30,11 +38,10 @@ module ForemanTasksCore
       private
 
       def close_io
-        @command_out.close if @command_out && !@command_out.closed?
-        @command_out = nil
-
-        @command_in.close if @command_in && !@command_in.closed?
-        @command_in = nil
+        [@command_out, @command_in, @input_stream].each do |stream|
+          stream.close if stream && !stream.closed?
+        end
+        @command_out = @command_in = @input_stream = nil
       end
     end
   end
