@@ -117,7 +117,7 @@ module ForemanTasks
     end
 
     def delete_remote_tasks(chunk)
-      ForemanTasls::RemoteTask.where(:execution_plan_id => chunk.map(&:external_id)).delete_all
+      ForemanTasks::RemoteTask.where(:execution_plan_id => chunk.map(&:external_id)).delete_all
     end
 
     def tasks_to_csv(dataset, backup_dir, file_name)
