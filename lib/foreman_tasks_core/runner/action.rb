@@ -24,7 +24,6 @@ module ForemanTasksCore
 
       def finalize
         # To mark the task as a whole as failed
-        require 'pry'; binding.pry
         error! 'Script execution failed' if on_proxy? && failed_run?
       end
 
