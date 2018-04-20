@@ -19,7 +19,7 @@ module ForemanTasks
                                   DynflowTask.where(:external_id => main_action.caller_execution_plan_id).first!.id
                                 end
                               end
-      self.label          ||= label
+      self[:label]        ||= label
       changes = self.changes
       save!
       changes
