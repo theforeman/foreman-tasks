@@ -133,7 +133,7 @@ module ForemanTasks
     # to enable async Foreman operations using Dynflow
     if ENV['FOREMAN_TASKS_MONKEYS'] == 'true'
       config.to_prepare do
-        ::Api::V2::HostsController.send :include, ForemanTasks::Concerns::HostsControllerExtension
+        ::Api::V2::HostsController.send :prepend, ForemanTasks::Concerns::HostsControllerExtension
         ::Host::Base.send :include, ForemanTasks::Concerns::HostActionSubject
       end
     end
