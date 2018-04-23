@@ -63,8 +63,9 @@ module Actions
           task.result = results[task.remote_task_id]
           task
         end
-      rescue RestClient::Exception => _
+      rescue => e
         # We could not reach the remote task, we assume it's gone
+        action.action_logger.warn(_('Failed to check on tasks on proxy at %{url}: %{exception}') % { :url => url, :exception => e.message })
         tasks
       end
     end
