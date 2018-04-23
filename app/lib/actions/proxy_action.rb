@@ -176,7 +176,7 @@ module Actions
     end
 
     def clean_remote_task(*_args)
-      remote_task.destroy!
+      remote_task.destroy! if remote_task
     end
 
     private
