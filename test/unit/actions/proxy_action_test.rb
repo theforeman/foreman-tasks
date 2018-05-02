@@ -26,7 +26,7 @@ module ForemanTasks
                            { 'foo' => 'bar',
                              'secrets' => secrets,
                              'connection_options' =>
-                                 { 'retry_interval' => 15, 'retry_count' => 4, 'timeout' => 60 },
+                                 { 'retry_interval' => 15, 'retry_count' => 4 },
                              'proxy_url' => 'proxy.example.com',
                              'proxy_action_name' => 'Proxy::DummyAction',
                              'callback' => { 'task_id' => Support::DummyProxyAction.proxy.uuid, 'step_id' => @action.run_step_id } }]
@@ -107,6 +107,13 @@ module ForemanTasks
       it 'wipes secrets' do
         @action.input[:secrets].must_equal secrets
         action = run_action(@action, ::Actions::ProxyAction::CallbackData.new('result' => 'success'))
+
+        # #wipe_secrets! gets called as a hook, hooks are not triggered when using action testing helpers
+        persistence = mock
+        persistence.stubs(:save_action)
+        action.world.stubs(:persistence).returns(persistence)
+        action.wipe_secrets!(nil)
+
         refute action.input.key?(:secrets)
       end
     end

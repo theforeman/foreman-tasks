@@ -34,6 +34,11 @@ module ProxyAPI
       def tasks_count(state)
         MultiJson.load(Task.new(@args).send(:get, "count?state=#{state}"))['count'].to_i
       end
+
+      def task_states(ids)
+        payload = MultiJson.dump(:task_ids => ids)
+        MultiJson.load(Task.new(@args).send(:post, payload, 'status'))
+      end
     end
   end
 end

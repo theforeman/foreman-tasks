@@ -17,7 +17,12 @@ module Actions
 
       def fill_planning_errors_to_continuous_output(continuous_output)
         execution_plan.errors.map do |e|
-          continuous_output.add_exception(_('Failed to initialize'), e, task.started_at)
+          case e.exception
+          when ::Actions::ProxyAction::ProxyActionMissing
+            continuous_output.add_output(e.message, 'debug', task.started_at)
+          else
+            continuous_output.add_exception(_('Failed to initialize'), e.exception, task.started_at)
+          end
         end
       end
     end

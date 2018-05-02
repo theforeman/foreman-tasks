@@ -20,6 +20,10 @@ module ForemanTasks
     has_many :sub_tasks, :class_name => 'ForemanTasks::Task', :foreign_key => :parent_task_id, :dependent => :nullify
     has_many :locks, :dependent => :destroy
 
+    has_many :remote_sub_tasks, :class_name => 'ForemanTasks::RemoteTask', :through => :sub_tasks, :source => :remote_tasks
+
+    has_many :remote_tasks, :class_name => 'ForemanTasks::RemoteTask', :primary_key => :external_id, :foreign_key => :execution_plan_id, :dependent => :destroy
+
     has_many :task_group_members, :dependent => :destroy
     has_many :task_groups, :through => :task_group_members
     if Rails::VERSION::MAJOR < 4
