@@ -109,7 +109,7 @@ module ForemanTasks
         action = run_action(@action, ::Actions::ProxyAction::CallbackData.new('result' => 'success'))
 
         # #wipe_secrets! gets called as a hook, hooks are not triggered when using action testing helpers
-        persistence = mock()
+        persistence = mock
         persistence.stubs(:save_action)
         action.world.stubs(:persistence).returns(persistence)
         action.wipe_secrets!(nil)
