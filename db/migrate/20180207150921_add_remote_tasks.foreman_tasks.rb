@@ -8,7 +8,6 @@ class AddRemoteTasks < ActiveRecord::Migration[5.0]
       t.string :proxy_url, :null => false
       t.string :remote_task_id
 
-      t.index :execution_plan_id
       t.index [:execution_plan_id, :step_id], :name => 'index_foreman_tasks_plan_id_and_step_id'
 
       t.datetime :created_at
