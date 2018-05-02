@@ -11,7 +11,7 @@ class AddRemoteTasks < ActiveRecord::Migration[5.0]
       t.index :execution_plan_id
       t.index [:execution_plan_id, :step_id], :name => 'index_foreman_tasks_plan_id_and_step_id'
 
-      t.datetime :created_at, default: -> { 'CURRENT_TIMESTAMP' }
+      t.datetime :created_at
     end
   end
 end
