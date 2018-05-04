@@ -18,6 +18,33 @@ module ForemanTasks
           assert_response :success
           assert_template 'api/tasks/show'
         end
+
+        test_attributes :pid => 'a2a81ca2-63c4-47f5-9314-5852f5e2617f'
+        it 'search for non-existent task' do
+          get :show, params: { :id => 'abc123' }
+          assert_response :missing
+          assert_includes @response.body, 'Resource task not found by id'
+        end
+      end
+
+      describe 'GET /api/tasks/summary' do
+        class DummyTestSummaryAction < Support::DummyDynflowAction
+          # a dummy test action that do nothing
+          def run
+            # a dummy run method
+          end
+        end
+
+        test_attributes :pid => 'bdcab413-a25d-4fe1-9db4-b50b5c31ebce'
+        it 'get tasks summary' do
+          ForemanTasks.trigger(DummyTestSummaryAction)
+          get :summary
+          assert_response :success
+          response = JSON.parse(@response.body)
+          assert_kind_of Array, response
+          refute response.empty?
+          assert_kind_of Hash, response[0]
+        end
       end
 
       describe 'POST /tasks/callback' do
