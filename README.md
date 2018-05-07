@@ -163,7 +163,7 @@ override the default configuration inside the configuration
 `config/settings.plugins.d/foreman_tasks.yaml`, such as:
 
 
-```
+```yaml
 :foreman-tasks:
   :cleanup:
 # the period after witch to delete all the tasks (by default all tasks are not being deleted after some period)
