@@ -131,7 +131,7 @@ The executor process needs to be executed before the web server. You
 can run it by:
 
 ```
-foreman-rake foreman_tasks:dynflow:executor
+foreman-rake dynflow:executor
 ```
 
 Also, there is a possibility to run the executor in daemonized mode
