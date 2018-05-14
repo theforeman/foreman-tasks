@@ -24,7 +24,7 @@ Please see the Foreman manual for appropriate instructions:
 
 Set up the repo as explained in the link above, then run
 
-    # yum install ruby193-rubygem-foreman-tasks
+    # yum install tfm-rubygem-foreman-tasks
 
 ### Bundle (gem)
 
