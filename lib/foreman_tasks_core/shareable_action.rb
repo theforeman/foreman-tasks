@@ -11,9 +11,15 @@ module ForemanTasksCore
 
       planned_action = plan_self(input)
       # code only applicable, when run with SmartProxyDynflowCore in place
-      if defined?(SmartProxyDynflowCore::Callback) && callback
+      if on_proxy? && callback
         plan_action(SmartProxyDynflowCore::Callback::Action, callback, planned_action.output)
       end
+    end
+
+    private
+
+    def on_proxy?
+      defined?(SmartProxyDynflowCore::Callback)
     end
   end
 end
