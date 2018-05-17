@@ -17,10 +17,10 @@ module ForemanTasks
         FactoryBot.create(:some_task).tap { |t| ForemanTasks::Lock.link!(resource, t.id) }
       end
 
-      def in_taxonomy_scope(organization, location = nil, &block)
+      def in_taxonomy_scope(organization, location = nil)
         Organization.current = organization
         Location.current = location unless location.nil?
-        block.call organization, location
+        yield organization, location
         Organization.current = Location.current = nil
       end
 
