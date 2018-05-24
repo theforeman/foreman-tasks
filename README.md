@@ -13,6 +13,16 @@ happening/happened in your Foreman instance. A framework for asynchronous tasks 
     * [foreman-users](https://groups.google.com/forum/?fromgroups#!forum/foreman-users)
     * [foreman-dev](https://groups.google.com/forum/?fromgroups#!forum/foreman-dev)
 
+## Compatibility
+
+| Foreman Version | Plugin Version |
+| --------------- | -------------- |
+| >= 1.15         | ~> 0.9.0       |
+| >= 1.16         | ~> 0.10.0      |
+| >= 1.17         | ~> 0.11.0      |
+| >= 1.18         | ~> 0.12.0      |
+| >= 1.19         | ~> 0.13.0      |
+
 Installation
 ------------
 
