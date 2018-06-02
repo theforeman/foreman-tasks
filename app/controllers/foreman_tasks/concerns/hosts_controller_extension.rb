@@ -1,13 +1,7 @@
 module ForemanTasks
   module Concerns
     module HostsControllerExtension
-      extend ActiveSupport::Concern
-
-      included do
-        alias_method_chain :facts, :dynflow
-      end
-
-      def facts_with_dynflow
+      def facts
         task = ForemanTasks.async_task(::Actions::Foreman::Host::ImportFacts,
                                        detect_host_type,
                                        params[:name],
