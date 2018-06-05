@@ -30,7 +30,7 @@ module ForemanTasks
     def start(action_class, *args)
       self.state = 'active'
       save!
-      trigger_repeat(action_class, *args)
+      self.task_group.tasks << trigger_repeat(action_class, *args)
     end
 
     def trigger_repeat_after(time, action_class, *args)
