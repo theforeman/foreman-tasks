@@ -103,6 +103,7 @@ module ForemanTasks
           delete_remote_tasks(chunk)
         end
       end
+      delete_orphaned_locks
       delete_orphaned_dynflow_tasks
     end
 
@@ -145,6 +146,15 @@ module ForemanTasks
 
     def delete_dynflow_plans_by_uuid(uuids)
       ForemanTasks.dynflow.world.persistence.delete_execution_plans({ 'uuid' => uuids }, batch_size, @backup_dir)
+    end
+
+    def delete_orphaned_locks
+      orphaned_locks = ForemanTasks::Lock.left_outer_joins(:task).where(:'foreman_tasks_tasks.id' => nil)
+      with_noop(orphaned_locks, 'orphaned task locks') do |source, name|
+        with_batches(source, name) do |chunk|
+          ForemanTasks::Lock.where(id: chunk.map(&:id)).delete_all
+        end
+      end
     end
 
     def delete_orphaned_dynflow_tasks
