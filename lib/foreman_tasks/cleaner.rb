@@ -152,7 +152,7 @@ module ForemanTasks
       orphaned_locks = ForemanTasks::Lock.left_outer_joins(:task).where(:'foreman_tasks_tasks.id' => nil)
       with_noop(orphaned_locks, 'orphaned task locks') do |source, name|
         with_batches(source, name) do |chunk|
-          ForemanTasks::Lock.where(id: chunk.map(&:id)).delete_all
+          ForemanTasks::Lock.where(id: chunk.pluck(:id)).delete_all
         end
       end
     end
