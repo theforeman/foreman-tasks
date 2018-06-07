@@ -24,9 +24,13 @@ module ForemanTasks
     end
 
     def start(action_class, *args)
+      start_after(action_class, Time.zone.now, *args)
+    end
+
+    def start_after(action_class, time, *args)
       self.state = 'active'
       save!
-      trigger_repeat(action_class, *args)
+      trigger_repeat_after(time, action_class, *args)
     end
 
     def trigger_repeat_after(time, action_class, *args)
