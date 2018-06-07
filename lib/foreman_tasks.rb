@@ -34,11 +34,7 @@ module ForemanTasks
   end
 
   def self.rails_safe_trigger_task
-    if Rails::VERSION::MAJOR > 4
-      ActiveSupport::Dependencies.interlock.permit_concurrent_loads do
-        yield
-      end
-    else
+    ActiveSupport::Dependencies.interlock.permit_concurrent_loads do
       yield
     end
   end

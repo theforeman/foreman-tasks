@@ -8,11 +8,7 @@ module ForemanTasks
     belongs_to :triggering
 
     has_many :tasks, :through => :task_group
-    if Rails::VERSION::MAJOR < 4
-      has_many :task_groups, :through => :tasks, :uniq => true
-    else
-      has_many :task_groups, -> { distinct }, :through => :tasks
-    end
+    has_many :task_groups, -> { distinct }, :through => :tasks
 
     scoped_search :on => :id, :complete_value => false, :validator => ScopedSearch::Validators::INTEGER
     scoped_search :on => :max_iteration, :complete_value => false, :rename => :iteration_limit
