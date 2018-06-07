@@ -39,12 +39,18 @@ class TasksTest < ActiveSupport::TestCase
                            task.started_at = task.ended_at = Time.zone.now
                            task.save
                          end]
+      lock_to_delete = tasks_to_delete.first.locks.create(:name => 'read', :resource => User.current)
 
-      tasks_to_keep   = [FactoryBot.create(:dynflow_task, :product_create_task)]
+      tasks_to_keep = [FactoryBot.create(:dynflow_task, :product_create_task)]
+      lock_to_keep = tasks_to_keep.first.locks.create(:name => 'read', :resource => User.current)
+
       cleaner.expects(:tasks_to_csv)
       cleaner.delete
       ForemanTasks::Task.where(id: tasks_to_delete).must_be_empty
       ForemanTasks::Task.where(id: tasks_to_keep).must_equal tasks_to_keep
+
+      ForemanTasks::Lock.find_by(id: lock_to_delete.id).must_be_nil
+      ForemanTasks::Lock.find_by(id: lock_to_keep.id).wont_be_nil
     end
 
     it 'supports passing empty filter (just delete all)' do
