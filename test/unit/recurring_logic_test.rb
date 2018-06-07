@@ -88,6 +88,15 @@ class RecurringLogicsTest < ActiveSupport::TestCase
       recurring_logic.start(::Support::DummyDynflowAction)
     end
 
+    it 'can start at' do
+      recurring_logic = ForemanTasks::RecurringLogic.new_from_cronline('* * * * *')
+
+      future_time = Time.zone.now + 1.week
+      recurring_logic.start_after(::Support::DummyRecurringDynflowAction, future_time)
+
+      assert_equal future_time.change(:min => future_time.min + 1, :sec => 0), recurring_logic.tasks.first.start_at
+    end
+
     it 'has a task group associated to all tasks that were created as part of the recurring logic' do
       recurring_logic = ForemanTasks::RecurringLogic.new_from_cronline('* * * * *')
       recurring_logic.save
