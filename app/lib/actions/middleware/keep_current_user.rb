@@ -19,6 +19,11 @@ module Actions
         restore_curent_user { pass }
       end
 
+      # Run all execution plan lifecycle hooks as the original user
+      def hook(*args)
+        restore_curent_user { pass(*args) }
+      end
+
       private
 
       def with_current_user

@@ -19,6 +19,10 @@ module Actions
         restore_current_taxonomies { pass }
       end
 
+      def hook(*args)
+        restore_current_taxonomies { pass(*args) }
+      end
+
       private
 
       def with_current_taxonomies
