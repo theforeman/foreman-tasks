@@ -12,6 +12,7 @@ module ForemanTasks
       before_action :find_resource, :only => %w[show cancel]
 
       api :GET, '/recurring_logics', N_('List recurring logics')
+      param_group :search_and_pagination, ::Api::V2::BaseController
       def index
         @recurring_logics = resource_scope_for_index
       end
