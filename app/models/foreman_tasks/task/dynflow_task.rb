@@ -15,7 +15,7 @@ module ForemanTasks
       self.start_at       = string_to_time(utc_zone, data[:start_at]) if data[:start_at]
       self.start_before   = string_to_time(utc_zone, data[:start_before]) if data[:start_before]
       self.parent_task_id ||= begin
-                                if main_action.present? && main_action.caller_execution_plan_id
+                                if main_action.try(:caller_execution_plan_id)
                                   DynflowTask.where(:external_id => main_action.caller_execution_plan_id).first!.id
                                 end
                               end
