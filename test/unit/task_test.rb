@@ -56,6 +56,15 @@ class TasksTest < ActiveSupport::TestCase
     end
   end
 
+  describe 'active job task' do
+    it 'when scheduled to the future, the label and action is set properly' do
+      job = Support::DummyActiveJob.set(:wait => 12.hours).perform_later
+      task = ForemanTasks::Task.find_by!(:external_id => job.provider_job_id)
+      task.action.must_equal "Dummy action"
+      task.label.must_equal "Support::DummyActiveJob"
+    end
+  end
+
   describe 'task without valid execution plan' do
     let(:task) do
       task = FactoryBot.create(:dynflow_task).tap do |task|

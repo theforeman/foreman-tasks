@@ -238,7 +238,7 @@ module ForemanTasks
           part.to_s
         end
       end.join('; ')
-      parts.join(' ')
+      parts.join(' ').strip
     end
 
     protected

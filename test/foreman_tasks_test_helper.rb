@@ -1,4 +1,5 @@
 require 'test_helper'
+require_relative './support/dummy_active_job'
 require_relative './support/dummy_dynflow_action'
 require_relative './support/dummy_recurring_dynflow_action'
 require_relative './support/dummy_proxy_action'
