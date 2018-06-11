@@ -70,7 +70,6 @@ module ForemanTasks
     end
 
     def label
-      return execution_plan_action.input['job_class'] if active_job?
       return main_action.class.name if main_action.present?
       self[:label]
     end
@@ -106,8 +105,12 @@ module ForemanTasks
     def main_action
       return @main_action if defined?(@main_action)
       if active_job?
-        action = execution_plan_action
-        active_job_action(action.input['job_class'], action.input['job_arguments'])
+        args = if execution_plan.delay_record
+                 execution_plan.delay_record.args.first
+               else
+                 execution_plan_action.input
+               end
+        @main_action = active_job_action(args['job_class'], args['job_arguments'])
       else
         @main_action = execution_plan && execution_plan.root_plan_step.try(:action, execution_plan)
       end
@@ -144,7 +147,7 @@ module ForemanTasks
       method = find_humanize_method_kind(method)
       Match! method, :humanized_name, :humanized_input, :humanized_output, :humanized_errors
       if method != :humanized_name && execution_scheduled?
-        return N_('N/A')
+        return
       elsif method == :humanized_name && main_action.nil?
         return N_(label)
       end

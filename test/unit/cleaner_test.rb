@@ -82,7 +82,7 @@ class TasksTest < ActiveSupport::TestCase
       w.close
       header, *data = r.readlines.map(&:chomp)
       header.must_equal ForemanTasks::Task.attribute_names.join(',')
-      expected_lines = tasks_to_delete.map { |task| task.attributes.values.join(',') }
+      expected_lines = tasks_to_delete.map { |task| task.attributes.values.to_csv.chomp }
       data.count.must_equal expected_lines.count
       expected_lines.each { |line| data.must_include line }
       ForemanTasks::Task.where(id: tasks_to_delete).must_be_empty
