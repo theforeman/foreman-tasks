@@ -126,7 +126,7 @@ module ForemanTasks
 
     def filter(scope)
       search = current_taxonomy_search
-      search = [search, params[:search]].join(' AND ') if params[:search].present?
+      search = [search, params[:search]].select(&:present?).join(' AND ')
       scope.search_for(search, :order => params[:order])
            .paginate(:page => params[:page], :per_page => params[:per_page]).distinct
     end
