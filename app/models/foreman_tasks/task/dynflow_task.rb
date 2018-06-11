@@ -118,7 +118,9 @@ module ForemanTasks
     # humanized_* methods for foreman-tasks integration.
     def active_job_action(klass, args)
       return if klass.blank?
-      klass.constantize.new(*args)
+      if (active_job_class = klass.safe_constantize)
+        active_job_class.new(*args)
+      end
     end
 
     def active_job?
