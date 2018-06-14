@@ -1,5 +1,4 @@
 module ForemanTasks
-  # rubocop:disable Metrics/ClassLength
   module Api
     class TasksController < ::Api::V2::BaseController
       include ::Foreman::Controller::SmartProxyAuth
@@ -109,44 +108,25 @@ module ForemanTasks
       end
 
       api :GET, '/tasks', N_('List tasks')
-      param :search, String, :desc => N_('Search string')
-      param :page, :number, :desc => N_('Page number, starting at 1')
-      param :per_page, :number, :desc => N_('Number of results per page to return')
-      param :order, String, :desc => N_("Sort field and order, e.g. 'name DESC'")
-      param :sort, Hash, :desc => N_("Hash version of 'order' param") do
-        param :by, String, :desc => N_('Field to sort the results on')
-        param :order, String, :desc => N_('How to order the sorted results (e.g. ASC for ascending)')
-      end
       def index
-        scope = resource_scope.search_for(params[:search]).select('DISTINCT foreman_tasks_tasks.*')
+        @tasks = resource_scope_for_index.select('DISTINCT foreman_tasks_tasks.*')
+      end
 
-        total = resource_scope.count
-        subtotal = scope.count
+      def search_options
+        if params[:sort_by] || params[:sort_order]
+          Foreman::Deprecation.api_deprecation_warning(
+            "The sort params sort_by and sort_order are deprecated.
+            Please use the order param instead as one string 'order=started_at desc'"
+          )
 
-        ordering_params = {
-          sort_by: params[:sort_by] || 'started_at',
-          sort_order: params[:sort_order] || 'DESC'
-        }
-        scope = ordering_scope(scope, ordering_params)
+          ordering_params = {
+            sort_by: params[:sort_by] || 'started_at',
+            sort_order: params[:sort_order] || 'DESC'
+          }
+          params[:order] = "#{ordering_params[:sort_by]} #{ordering_params[:sort_order]}"
+        end
 
-        pagination_params = {
-          page: params[:page] || 1,
-          per_page: params[:per_page] || Setting[:entries_per_page] || 20
-        }
-        scope = pagination_scope(scope, pagination_params)
-        results = scope.map { |task| task_hash(task) }
-
-        render :json => {
-          total: total,
-          subtotal: subtotal,
-          page: pagination_params[:page],
-          per_page: pagination_params[:per_page],
-          sort: {
-            by: ordering_params[:sort_by],
-            order: ordering_params[:sort_order]
-          },
-          results: results
-        }
+        [params[:search], { order: params[:order] }]
       end
 
       api :POST, '/tasks/callback', N_('Send data to the task from external executor (such as smart_proxy_dynflow)')
@@ -267,5 +247,4 @@ module ForemanTasks
       end
     end
   end
-  # rubocop:enable Metrics/ClassLength
 end

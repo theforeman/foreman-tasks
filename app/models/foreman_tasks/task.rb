@@ -33,6 +33,8 @@ module ForemanTasks
     has_many :owners, -> { where(['foreman_tasks_locks.name = ?', Lock::OWNER_LOCK_NAME]) },
              :through => :locks, :source => :resource, :source_type => 'User'
 
+    default_scope -> { order(start_at: :desc) }
+
     scoped_search :on => :id, :complete_value => false
     scoped_search :on => :action, :complete_value => false
     scoped_search :on => :label, :complete_value => true
