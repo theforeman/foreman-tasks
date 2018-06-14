@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_tasks 0.1.2\n"
+"Project-Id-Version: foreman_tasks 0.2.5\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-03 09:55-0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -150,6 +150,9 @@ msgstr ""
 msgid "External Id"
 msgstr ""
 
+msgid "Failed to check on tasks on proxy at %{url}: %{exception}"
+msgstr ""
+
 msgid "Failed to initialize"
 msgstr ""
 
@@ -271,6 +274,9 @@ msgstr ""
 msgid "Parent task"
 msgstr ""
 
+msgid "Proxy task gone missing from the smart proxy"
+msgstr ""
+
 msgid "Raw"
 msgstr ""
 
@@ -287,6 +293,9 @@ msgid "Recurring logic"
 msgstr ""
 
 msgid "Recurring logics"
+msgstr ""
+
+msgid "Remote action:"
 msgstr ""
 
 msgid "Repeat N times"
@@ -434,9 +443,6 @@ msgid "This will unlock the resources that the task is running against. Please n
 msgstr ""
 
 msgid "Thu"
-msgstr ""
-
-msgid "Time in second during which a task has to be started on the proxy"
 msgstr ""
 
 msgid "Time in seconds between retries"
