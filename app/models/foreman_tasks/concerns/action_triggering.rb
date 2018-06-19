@@ -35,13 +35,19 @@ module ForemanTasks
         dynflow_task_wrap(:destroy) { super }
       end
 
-      def update_attributes(*args)
+      # In order to use host.<attribute>_changed?, we must assign_attributes to
+      # the host record for these update and update! methods.
+      def update(*args)
+        assign_attributes(*args)
         dynflow_task_wrap(:save) { super(*args) }
       end
+      alias update_attributes update
 
-      def update_attributes!(*args)
+      def update!(*args)
+        assign_attributes(*args)
         dynflow_task_wrap(:save) { super(*args) }
       end
+      alias update_attributes! update!
 
       # this can be used when HostActionSubject is used for orchestration but you want to avoid
       # triggering more tasks by ActiveRecord callbacks within run/finalize phase of your task
