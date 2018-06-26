@@ -3,6 +3,8 @@ Foreman::Application.routes.draw do
     resources :recurring_logics, :only => [:index, :show] do
       member do
         post :cancel
+        put :enable
+        put :disable
       end
     end
 
@@ -22,7 +24,7 @@ Foreman::Application.routes.draw do
     end
 
     namespace :api do
-      resources :recurring_logics, :only => [:index, :show] do
+      resources :recurring_logics, :only => [:index, :show, :update] do
         member do
           post :cancel
         end

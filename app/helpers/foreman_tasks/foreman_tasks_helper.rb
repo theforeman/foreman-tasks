@@ -1,9 +1,12 @@
 module ForemanTasks
+  # rubocop:disable Metrics/ModuleLength
   module ForemanTasksHelper
     def recurring_logic_state(recurring_logic)
       icon, status = case recurring_logic.state
                      when 'active'
                        'glyphicon-info-sign'
+                     when 'disabled'
+                       'glyphicon glyphicon-pause'
                      when 'finished'
                        ['glyphicon-ok-sign', 'status-ok']
                      when 'cancelled'
@@ -52,14 +55,16 @@ module ForemanTasks
     def recurring_logic_action_buttons(recurring_logic)
       buttons = []
       if authorized_for(:permission => :edit_recurring_logics, :auth_object => recurring_logic)
-        buttons << link_to(N_('Cancel'), cancel_foreman_tasks_recurring_logic_path(recurring_logic), :method => :post, :class => 'btn btn-danger') unless %w[cancelled finished].include? recurring_logic.state
+        buttons << link_to(N_('Enable'), enable_foreman_tasks_recurring_logic_path(recurring_logic), :method => :put, :class => '') if !recurring_logic.done? && recurring_logic.disabled?
+        buttons << link_to(N_('Disable'), disable_foreman_tasks_recurring_logic_path(recurring_logic), :method => :put, :class => '') if !recurring_logic.done? && recurring_logic.enabled?
+        buttons << link_to(N_('Cancel'), cancel_foreman_tasks_recurring_logic_path(recurring_logic), :method => :post, :class => '') unless recurring_logic.done?
       end
-      button_group buttons
+      action_buttons buttons
     end
 
     def recurring_logic_next_occurrence(recurring_logic)
       default = '-'
-      return default if %w[finished cancelled].include? recurring_logic.state
+      return default if recurring_logic.done? || recurring_logic.disabled?
 
       last_task = recurring_logic.tasks.order(:start_at).last
       last_task ? last_task.start_at : default
@@ -197,4 +202,5 @@ module ForemanTasks
       tags.join.html_safe
     end
   end
+  # rubocop:enable Metrics/ModuleLength
 end

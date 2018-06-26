@@ -28,6 +28,17 @@ module ForemanRecurringLogic
         end
       end
 
+      describe 'PUT /api/recurring_logics/:id' do
+        it 'updates a recurring logic' do
+          @recurring_logic.start(::Support::DummyRecurringDynflowAction)
+
+          put :update, params: { :id => @recurring_logic.id, :recurring_logic => { :enabled => false } }
+          assert_response :success
+          assert_template 'api/recurring_logics/update'
+          assert @recurring_logic.reload.disabled?
+        end
+      end
+
       describe 'POST /api/recurring_logics/:id/cancel' do
         it 'cancels recurring logic' do
           post :cancel, params: { :id => @recurring_logic.id }

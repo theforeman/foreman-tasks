@@ -17,7 +17,7 @@
         <%= link_to_if_authorized(format_task_input(task),
                                   hash_for_foreman_tasks_task_path(:id => task)) %>
       </td>
-      <td class="ellipsis"><%= task.state %></td>
+      <td class="ellipsis"><%= task.state %> <%= _("(Disabled)") if task.frozen %></td>
       <td class="ellipsis"><%= task.result %></td>
       <td class="ellipsis"><%= task.started_at.try(:in_time_zone) %></td>
       <td class="ellipsis"><%= task.ended_at.try(:in_time_zone) %></td>

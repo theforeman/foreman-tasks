@@ -1,12 +1,21 @@
 module ForemanTasks
   class RecurringLogicsController < ::ApplicationController
-    before_action :find_recurring_logic, :only => [:show, :cancel]
+    before_action :find_recurring_logic, :only => [:show, :cancel, :enable, :disable]
 
     def index
+      @errors = params[:errors]
       @recurring_logics = filter(resource_base)
     end
 
     def show; end
+
+    def enable
+      change_enabled(true)
+    end
+
+    def disable
+      change_enabled(false)
+    end
 
     def cancel
       @recurring_logic.cancel
@@ -22,6 +31,15 @@ module ForemanTasks
     end
 
     private
+
+    def change_enabled(value)
+      begin
+        @recurring_logic.update!(:enabled => value)
+      rescue RecurringLogicCancelledException => e
+        @errors = e.message
+      end
+      redirect_to :action => :index, :errors => @errors
+    end
 
     def find_recurring_logic
       @recurring_logic ||= ::ForemanTasks::RecurringLogic.find(params[:id])
