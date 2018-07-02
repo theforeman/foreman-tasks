@@ -79,6 +79,7 @@ module ForemanTasks
                           :states       => ['stopped'],
                           :backup_dir   => ForemanTasks.dynflow.world.persistence.current_backup_dir }
       options         = default_options.merge(options)
+      Foreman::Logging.logger('foreman-tasks').info("Running foreman-tasks cleaner with options #{options.inspect}")
 
       @filter         = options[:filter]
       @after          = parse_time_interval(options[:after])
