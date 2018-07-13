@@ -1,6 +1,10 @@
 <% title _("Recurring logics") %>
 <% title_actions SETTINGS[:version].short <= '1.13' ? help_path : help_button %>
 
+<% if @errors %>
+<%= alert(:class => 'alert-info', :id => 'multiple-alert', :close => false, :header => '', :text => @errors) %>
+<% end %>
+
 <table class="<%= table_css_classes('table-condensed table-fixed') %>">
   <thead>
     <th><%= N_("Cron line") %></th>

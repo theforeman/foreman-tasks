@@ -75,7 +75,7 @@ class RecurringLogicsTest < ActiveSupport::TestCase
       parser = ForemanTasks::RecurringLogic.new_from_cronline('* * * * *')
       parser.stubs(:id).returns(1)
       reference_time = Time.utc(2015, 9, 29, 15)
-      expected_hash = { :start_at => reference_time + 60, :start_before => nil, :recurring_logic_id => parser.id }
+      expected_hash = { :start_at => reference_time + 60, :start_before => nil, :recurring_logic_id => parser.id, :frozen => false }
       parser.generate_delay_options(reference_time).must_equal expected_hash
       parser.generate_delay_options(reference_time, 'start_before' => reference_time + 3600)
             .must_equal expected_hash.merge(:start_before => reference_time + 3600)
@@ -120,6 +120,36 @@ class RecurringLogicsTest < ActiveSupport::TestCase
       recurring_logic.state = 'cancelled'
       recurring_logic.expects(:can_continue?).never
       recurring_logic.trigger_repeat('this is not important', 'neither is this')
+    end
+
+    describe 'enable/disable' do
+      let(:logic) do
+        recurring_logic = ForemanTasks::RecurringLogic.new_from_cronline('0 15 * * *')
+
+        future_time = Time.zone.now - 1.week
+        recurring_logic.start(::Support::DummyRecurringDynflowAction, future_time)
+        recurring_logic
+      end
+
+      it 'properly updates on disable' do
+        logic.update!(:enabled => false)
+
+        assert_equal 'disabled', logic.state
+
+        task = logic.tasks.find_by(:state => 'scheduled')
+        assert ForemanTasks.dynflow.world.persistence.load_delayed_plan(task.execution_plan.id).frozen
+      end
+
+      it 'properly re-enables on disable' do
+        logic.update!(:enabled => false)
+        logic.update!(:enabled => true)
+
+        assert_equal 'active', logic.state
+
+        task = logic.tasks.find_by(:state => 'scheduled')
+        refute ForemanTasks.dynflow.world.persistence.load_delayed_plan(task.execution_plan.id).frozen
+        assert task.start_at > Time.zone.now
+      end
     end
 
     describe 'validation' do

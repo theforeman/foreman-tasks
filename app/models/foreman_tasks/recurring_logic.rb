@@ -20,7 +20,30 @@ module ForemanTasks
     end
 
     def self.allowed_states
-      %w[active finished cancelled failed]
+      %w[active disabled finished cancelled failed]
+    end
+
+    def enabled=(value)
+      task = tasks.find_by(:state => :scheduled)
+      if task
+        ForemanTasks.dynflow.world.persistence.set_delayed_plan_frozen(task.execution_plan.id, !value, next_occurrence_time)
+        if value
+          task.update!(:start_at => next_occurrence_time) if task.start_at < Time.zone.now
+          update(:state => 'active')
+        else
+          update(:state => 'disabled')
+        end
+      else
+        raise RecurringLogicCancelledException
+      end
+    end
+
+    def enabled?
+      state != 'disabled'
+    end
+
+    def disabled?
+      !enabled?
     end
 
     def start(action_class, *args)
@@ -67,7 +90,8 @@ module ForemanTasks
       {
         :start_at => next_occurrence_time(time),
         :start_before => options['start_before'],
-        :recurring_logic_id => id
+        :recurring_logic_id => id,
+        :frozen => disabled?
       }
     end
 
@@ -87,7 +111,7 @@ module ForemanTasks
     end
 
     def can_continue?(time = Time.zone.now)
-      state == 'active' && can_start?(time)
+      %w[active disabled].include?(state) && can_start?(time)
     end
 
     def finished?
@@ -98,6 +122,10 @@ module ForemanTasks
       state == 'cancelled'
     end
 
+    def done?
+      %w[cancelled finished].include?(state)
+    end
+
     def humanized_state
       case state
       when 'active'
@@ -106,6 +134,8 @@ module ForemanTasks
         N_('Cancelled')
       when 'finished'
         N_('Finished')
+      when 'disabled'
+        N_('Disabled')
       else
         N_('N/A')
       end

@@ -114,7 +114,7 @@
     </div>
     <div>
       <span class="param-name list-group-item-heading"><%= _("Execution type") %>:</span>
-      <span class="param-value"><%= _(@task.execution_type) %></span>
+      <span class="param-value"><%= _(@task.execution_type) %> <%= _("(Disabled)") if @task.frozen %></span>
     </div>
   </div>
 

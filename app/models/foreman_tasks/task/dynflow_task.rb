@@ -65,6 +65,14 @@ module ForemanTasks
       nil
     end
 
+    def frozen
+      delayed_plan.try(:frozen)
+    end
+
+    def delayed_plan
+      ForemanTasks.dynflow.world.persistence.load_delayed_plan(external_id) if state == :scheduled
+    end
+
     def execution_plan!
       execution_plan(false)
     end
