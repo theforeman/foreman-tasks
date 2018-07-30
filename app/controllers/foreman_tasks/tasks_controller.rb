@@ -11,13 +11,14 @@ module ForemanTasks
 
     def index
       params[:order] ||= 'started_at DESC'
-      @tasks = filter(resource_base)
       respond_to do |format|
         format.html do
+          @tasks = filter(resource_base)
           render :index
         end
         format.csv do
-          csv_response(@tasks, [:action_label, :state, :result, 'started_at.in_time_zone', 'ended_at.in_time_zone', :username], ['Action', 'State', 'Result', 'Started At', 'Ended At', 'User'])
+          @tasks = filter(resource_base, paginate: false)
+          csv_response(@tasks, [:action, :state, :result, 'started_at.in_time_zone', 'ended_at.in_time_zone', :username], ['Action', 'State', 'Result', 'Started At', 'Ended At', 'User'])
         end
       end
     end
@@ -124,11 +125,12 @@ module ForemanTasks
       resource_scope.where(:type => 'ForemanTasks::Task::DynflowTask').find(params[:id])
     end
 
-    def filter(scope)
+    def filter(scope, paginate: true)
       search = current_taxonomy_search
       search = [search, params[:search]].select(&:present?).join(' AND ')
-      scope.search_for(search, :order => params[:order])
-           .paginate(:page => params[:page], :per_page => params[:per_page]).distinct
+      scope = scope.search_for(search, :order => params[:order])
+      scope = scope.paginate(:page => params[:page], :per_page => params[:per_page]) if paginate
+      scope.distinct
     end
 
     def current_taxonomy_search

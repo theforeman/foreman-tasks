@@ -85,8 +85,24 @@ module ForemanTasks
       delayed? ? N_('Delayed') : N_('Immediate')
     end
 
+    def get_humanized(method)
+      attr = case method
+             when :humanized_name
+               :action
+             when :humanized_input
+               :input
+             when :humanized_output
+               :output
+             end
+      if attr
+        humanized[attr]
+      else
+        _('N/A')
+      end
+    end
+
     def humanized
-      { action: label,
+      { action: action,
         input:  '',
         output: '' }
     end
