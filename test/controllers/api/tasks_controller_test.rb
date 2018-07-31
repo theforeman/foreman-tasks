@@ -19,7 +19,6 @@ module ForemanTasks
           assert_template 'api/tasks/show'
         end
 
-        test_attributes :pid => 'a2a81ca2-63c4-47f5-9314-5852f5e2617f'
         it 'search for non-existent task' do
           get :show, params: { :id => 'abc123' }
           assert_response :missing
@@ -35,7 +34,6 @@ module ForemanTasks
           end
         end
 
-        test_attributes :pid => 'bdcab413-a25d-4fe1-9db4-b50b5c31ebce'
         it 'get tasks summary' do
           ForemanTasks.trigger(DummyTestSummaryAction)
           get :summary
