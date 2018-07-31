@@ -39,13 +39,13 @@ module ForemanTasks
       # the host record for these update and update! methods.
       def update(*args)
         assign_attributes(*args)
-        dynflow_task_wrap(:save) { super(*args) }
+        dynflow_task_wrap(:save) { save }
       end
       alias update_attributes update
 
       def update!(*args)
         assign_attributes(*args)
-        dynflow_task_wrap(:save) { super(*args) }
+        dynflow_task_wrap(:save) { save! }
       end
       alias update_attributes! update!
 
