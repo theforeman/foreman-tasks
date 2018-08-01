@@ -24,6 +24,14 @@ module ForemanTasks
         Organization.current = Location.current = nil
       end
 
+      it 'supports csv export' do
+        FactoryBot.create(:some_task, :action => 'Some action')
+        get(:index, params: { format: :csv }, session: set_session_user)
+        assert_response :success
+        assert_equal 2, response.body.lines.size
+        assert_include response.body.lines[1], 'Some action'
+      end
+
       describe 'taxonomy scoping' do
         let(:organizations) { (0..1).map { FactoryBot.create(:organization) } }
         let(:tasks) { organizations.map { |o| linked_task(o) } + [FactoryBot.create(:some_task)] }
