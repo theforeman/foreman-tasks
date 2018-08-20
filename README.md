@@ -21,6 +21,7 @@ happening/happened in your Foreman instance. A framework for asynchronous tasks 
 | >= 1.16         | ~> 0.10.0      |
 | >= 1.17         | ~> 0.11.0      |
 | >= 1.18         | ~> 0.13.0      |
+| >= 1.20         | ~> 0.14.0      |
 
 Installation
 ------------
