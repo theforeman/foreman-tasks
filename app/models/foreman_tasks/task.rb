@@ -193,7 +193,8 @@ module ForemanTasks
                     value = User.current.id if value == 'current_user'
                     sanitize_sql_for_conditions(["foreman_tasks_locks_owner#{uniq_suffix}.resource_id #{operator} ?", value])
                   else
-                    sanitize_sql_for_conditions(["users#{uniq_suffix}.#{key_name} #{operator} ?", value])
+                    placeholder, value = operator == 'IN' ? ['(?)', value.split(',').map(&:strip)] : ['?', value]
+                    sanitize_sql_for_conditions(["users#{uniq_suffix}.#{key_name} #{operator} #{placeholder}", value])
                   end
       { :conditions => condition, :joins => joins }
     end
