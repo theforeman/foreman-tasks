@@ -186,6 +186,7 @@ module ForemanTasks
                    ON (users#{uniq_suffix}.id = foreman_tasks_locks_owner#{uniq_suffix}.resource_id)
         SQL
       end
+      value.sub!('*', '%%')
       condition = if key.blank?
                     sanitize_sql_for_conditions(["users#{uniq_suffix}.login #{operator} ? or users#{uniq_suffix}.firstname #{operator} ? ", value, value])
                   elsif key =~ /\.id\Z/
