@@ -51,7 +51,8 @@ module ForemanTasks
                   :complete_value => true,
                   :rename => 'owner.id',
                   :ext_method => :search_by_owner,
-                  :validator => ->(value) { ScopedSearch::Validators::INTEGER.call(value) || value == 'current_user' }
+                  :validator => ->(value) { ScopedSearch::Validators::INTEGER.call(value) || value == 'current_user' },
+                  :aliases => [:user]
     scoped_search :relation => :owners,  :on => :login, :complete_value => true, :rename => 'owner.login', :ext_method => :search_by_owner, :aliases => [:user]
     scoped_search :relation => :owners,  :on => :firstname, :complete_value => true, :rename => 'owner.firstname', :ext_method => :search_by_owner
     scoped_search :relation => :task_groups, :on => :id, :complete_value => true, :rename => 'task_group.id', :validator => ScopedSearch::Validators::INTEGER
