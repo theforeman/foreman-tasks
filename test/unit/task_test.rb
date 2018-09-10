@@ -21,6 +21,24 @@ class TasksTest < ActiveSupport::TestCase
     test 'can search the tasks by current_user in combination with implicit search' do
       assert_equal [@task_one], ForemanTasks::Task.search_for("owner.id = current_user AND #{@task_one.label}")
     end
+
+    test 'can search the tasks by user' do
+      assert_equal [@task_one], ForemanTasks::Task.search_for("user = #{@user_one.login}")
+    end
+
+    test 'can search the tasks by user\'s id' do
+      assert_equal [@task_one], ForemanTasks::Task.search_for("user.id = #{@user_one.id}")
+      assert_equal [@task_one], ForemanTasks::Task.search_for("owner.id = #{@user_one.id}")
+    end
+
+    test 'can search the tasks by user with wildcards' do
+      glob = '*' + @user_one.login[1..-1] # search for '*ser1' if login is 'user1'
+      assert_equal [@task_one], ForemanTasks::Task.search_for("user ~ #{glob}")
+    end
+
+    test 'can search the tasks by array' do
+      assert_equal [@task_one], ForemanTasks::Task.search_for("user ^ (this_user, #{@user_one.login}, that_user)")
+    end
   end
 
   describe 'authorization filtering' do

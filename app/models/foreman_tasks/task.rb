@@ -51,7 +51,8 @@ module ForemanTasks
                   :complete_value => true,
                   :rename => 'owner.id',
                   :ext_method => :search_by_owner,
-                  :validator => ->(value) { ScopedSearch::Validators::INTEGER.call(value) || value == 'current_user' }
+                  :validator => ->(value) { ScopedSearch::Validators::INTEGER.call(value) || value == 'current_user' },
+                  :aliases => ['user.id']
     scoped_search :relation => :owners,  :on => :login, :complete_value => true, :rename => 'owner.login', :ext_method => :search_by_owner, :aliases => [:user]
     scoped_search :relation => :owners,  :on => :firstname, :complete_value => true, :rename => 'owner.firstname', :ext_method => :search_by_owner
     scoped_search :relation => :task_groups, :on => :id, :complete_value => true, :rename => 'task_group.id', :validator => ScopedSearch::Validators::INTEGER
@@ -174,6 +175,20 @@ module ForemanTasks
       # using uniq suffix to avoid colisions when searching by two different owners via ScopedSearch
       uniq_suffix = SecureRandom.hex(3)
       key_name = connection.quote_column_name(key.sub(/^.*\./, ''))
+      value.sub!('*', '%%')
+      condition = if key.blank?
+                    sanitize_sql_for_conditions(["users#{uniq_suffix}.login #{operator} ? or users#{uniq_suffix}.firstname #{operator} ? ", value, value])
+                  elsif key =~ /\.id\Z/
+                    value = User.current.id if value == 'current_user'
+                    sanitize_sql_for_conditions(["foreman_tasks_locks_owner#{uniq_suffix}.resource_id #{operator} ?", value])
+                  else
+                    placeholder, value = operator == 'IN' ? ['(?)', value.split(',').map(&:strip)] : ['?', value]
+                    sanitize_sql_for_conditions(["users#{uniq_suffix}.#{key_name} #{operator} #{placeholder}", value])
+                  end
+      { :conditions => condition, :joins => joins_for_user_search(key, uniq_suffix) }
+    end
+
+    def self.joins_for_user_search(key, uniq_suffix)
       joins = <<-SQL
       INNER JOIN foreman_tasks_locks AS foreman_tasks_locks_owner#{uniq_suffix}
                  ON (foreman_tasks_locks_owner#{uniq_suffix}.task_id = foreman_tasks_tasks.id AND
@@ -186,15 +201,7 @@ module ForemanTasks
                    ON (users#{uniq_suffix}.id = foreman_tasks_locks_owner#{uniq_suffix}.resource_id)
         SQL
       end
-      condition = if key.blank?
-                    sanitize_sql_for_conditions(["users#{uniq_suffix}.login #{operator} ? or users#{uniq_suffix}.firstname #{operator} ? ", value, value])
-                  elsif key =~ /\.id\Z/
-                    value = User.current.id if value == 'current_user'
-                    sanitize_sql_for_conditions(["foreman_tasks_locks_owner#{uniq_suffix}.resource_id #{operator} ?", value])
-                  else
-                    sanitize_sql_for_conditions(["users#{uniq_suffix}.#{key_name} #{operator} ?", value])
-                  end
-      { :conditions => condition, :joins => joins }
+      joins
     end
 
     def progress
