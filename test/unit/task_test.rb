@@ -26,6 +26,11 @@ class TasksTest < ActiveSupport::TestCase
       assert_equal [@task_one], ForemanTasks::Task.search_for("user = #{@user_one.login}")
     end
 
+    test 'can search the tasks by user\'s id' do
+      assert_equal [@task_one], ForemanTasks::Task.search_for("user.id = #{@user_one.id}")
+      assert_equal [@task_one], ForemanTasks::Task.search_for("owner.id = #{@user_one.id}")
+    end
+
     test 'can search the tasks by user with wildcards' do
       glob = '*' + @user_one.login[1..-1] # search for '*ser1' if login is 'user1'
       assert_equal [@task_one], ForemanTasks::Task.search_for("user ~ #{glob}")
