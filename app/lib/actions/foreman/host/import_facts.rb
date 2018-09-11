@@ -15,7 +15,7 @@ module Actions
                    ::Host::Managed.import_host(host_name, facts['_type'], certname, proxy_id)
                  end
           host.save(:validate => false) if host.new_record?
-          action_subject(host, :facts => facts)
+          action_subject(host, :facts => facts.to_unsafe_h)
           if host.build?
             ::Foreman::Logging.logger('foreman-tasks').info "Skipping importing of facts for #{host.name} because it's in build mode"
           else
