@@ -64,9 +64,9 @@ module Actions
           task
         end
       rescue => e
-        # We could not reach the remote task, we assume it's gone
+        # We could not reach the remote task, we'll try again next time
         action.action_logger.warn(_('Failed to check on tasks on proxy at %{url}: %{exception}') % { :url => url, :exception => e.message })
-        tasks
+        []
       end
     end
   end
