@@ -120,7 +120,7 @@ module ForemanTasks
 
       # Records the information about the user that triggered the task
       def owner!(user, uuid)
-        build_owner(user, uuid).save!
+        # TODO: Log some deprecation warning?
       end
 
       private

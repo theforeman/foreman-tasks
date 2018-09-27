@@ -208,7 +208,8 @@ module ForemanTasks
     def self.new_for_execution_plan(execution_plan_id, data)
       new(:external_id => execution_plan_id,
           :state => data[:state].to_s,
-          :result => data[:result].to_s)
+          :result => data[:result].to_s,
+          :user_id => User.current.try(:id))
     end
 
     def self.model_name
