@@ -25,8 +25,9 @@ module Actions
 
         def run
           ::User.as :admin do
-            host           = ::Host.find(input[:host][:id])
-            state          = host.import_facts(input[:facts], proxy)
+            host_attrs = input[:host] || input[:managed]
+            host = ::Host.find(host_attrs[:id])
+            state = host.import_facts(input[:facts], proxy)
             output[:state] = state
           end
         rescue ::Foreman::Exception => e
