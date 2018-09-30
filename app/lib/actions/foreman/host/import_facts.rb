@@ -9,7 +9,7 @@ module Actions
         def plan(_host_type, host_name, facts, certname, proxy_id)
           facts['domain'].try(:downcase!)
           host = if SETTINGS[:version].short > '1.16'
-                   ::Host::Base.import_host(host_name, certname)
+                   ::Host::Managed.import_host(host_name, certname)
                  else
                    # backwards compatibility
                    ::Host::Managed.import_host(host_name, facts['_type'], certname, proxy_id)
