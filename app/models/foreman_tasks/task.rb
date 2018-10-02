@@ -43,16 +43,15 @@ module ForemanTasks
     scoped_search :on => :parent_task_id, :complete_value => true
     scoped_search :relation => :locks,  :on => :resource_id, :complete_value => false, :rename => 'location_id', :ext_method => :search_by_taxonomy, :only_explicit => true
     scoped_search :relation => :locks,  :on => :resource_id, :complete_value => false, :rename => 'organization_id', :ext_method => :search_by_taxonomy, :only_explicit => true
-    scoped_search :relation => :locks,  :on => :resource_type, :complete_value => true, :rename => 'resource_type', :ext_method => :search_by_generic_resource
-    scoped_search :relation => :locks,  :on => :resource_id, :complete_value => false, :rename => 'resource_id', :ext_method => :search_by_generic_resource
-    scoped_search :relation => :user,
-                  :on => :id,
+    scoped_search :relation => :locks,  :on => :resource_type, :complete_value => true, :rename => 'resource_type', :ext_method => :search_by_generic_resource, :only_explicit => true
+    scoped_search :relation => :locks,  :on => :resource_id, :complete_value => false, :rename => 'resource_id', :ext_method => :search_by_generic_resource, :only_explicit => true
+    scoped_search :on => :user_id,
                   :complete_value => true,
                   :rename => 'user.id',
                   :validator => ->(value) { ScopedSearch::Validators::INTEGER.call(value) || value == 'current_user' },
-                  :aliases => ['owner.id']
-    scoped_search :relation => :user, :on => :login, :rename => 'user.login', :complete_value => true, :aliases => ['owner.login']
-    scoped_search :relation => :user, :on => :firstname, :rename => 'user.firstname', :complete_value => true, :aliases => ['owner.firstname']
+                  :aliases => ['owner.id'], :ext_method => :search_by_owner, :only_explicit => true
+    scoped_search :relation => :user, :on => :login, :rename => 'user.login', :complete_value => true, :aliases => ['owner.login', 'user'], :ext_method => :search_by_owner, :only_explicit => true
+    scoped_search :relation => :user, :on => :firstname, :rename => 'user.firstname', :complete_value => true, :aliases => ['owner.firstname'], :ext_method => :search_by_owner, :only_explicit => true
     scoped_search :relation => :task_groups, :on => :id, :complete_value => true, :rename => 'task_group.id', :validator => ScopedSearch::Validators::INTEGER
 
     scope :active, -> {  where('foreman_tasks_tasks.state != ?', :stopped) }
@@ -192,31 +191,20 @@ module ForemanTasks
       key_name = connection.quote_column_name(key.sub(/^.*\./, ''))
       value.sub!('*', '%%')
       condition = if key.blank?
-                    sanitize_sql_for_conditions(["users#{uniq_suffix}.login #{operator} ? or users#{uniq_suffix}.firstname #{operator} ? ", value, value])
+                    sanitize_sql_for_conditions(["users_#{uniq_suffix}.login #{operator} ? or users_#{uniq_suffix}.firstname #{operator} ? ", value, value])
                   elsif key =~ /\.id\Z/
                     value = User.current.id if value == 'current_user'
-                    sanitize_sql_for_conditions(["foreman_tasks_locks_owner#{uniq_suffix}.resource_id #{operator} ?", value])
+                    sanitize_sql_for_conditions(["foreman_tasks_tasks.user_id #{operator} ?", value])
                   else
                     placeholder, value = operator == 'IN' ? ['(?)', value.split(',').map(&:strip)] : ['?', value]
-                    sanitize_sql_for_conditions(["users#{uniq_suffix}.#{key_name} #{operator} #{placeholder}", value])
+                    sanitize_sql_for_conditions(["users_#{uniq_suffix}.#{key_name} #{operator} #{placeholder}", value])
                   end
       { :conditions => condition, :joins => joins_for_user_search(key, uniq_suffix) }
     end
 
     def self.joins_for_user_search(key, uniq_suffix)
-      joins = <<-SQL
-      INNER JOIN foreman_tasks_locks AS foreman_tasks_locks_owner#{uniq_suffix}
-                 ON (foreman_tasks_locks_owner#{uniq_suffix}.task_id = foreman_tasks_tasks.id AND
-                     foreman_tasks_locks_owner#{uniq_suffix}.resource_type = 'User' AND
-                     foreman_tasks_locks_owner#{uniq_suffix}.name = '#{Lock::OWNER_LOCK_NAME}')
-      SQL
-      if key !~ /\.id\Z/
-        joins << <<-SQL
-        INNER JOIN users as users#{uniq_suffix}
-                   ON (users#{uniq_suffix}.id = foreman_tasks_locks_owner#{uniq_suffix}.resource_id)
-        SQL
-      end
-      joins
+      return '' if key =~ /\.id\Z/
+      "INNER JOIN users AS users_#{uniq_suffix} ON users_#{uniq_suffix}.id = foreman_tasks_tasks.user_id"
     end
 
     def progress

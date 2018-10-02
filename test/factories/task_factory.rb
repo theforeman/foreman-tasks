@@ -6,11 +6,11 @@ FactoryBot.define do
     result { 'success' }
 
     transient do
-      set_owner { nil }
+      lock_owner { nil }
     end
 
     after(:create) do |task, evaluator|
-      ForemanTasks::Lock.owner!(evaluator.set_owner, task.id) if evaluator.set_owner
+      ForemanTasks::Lock.owner!(evaluator.lock_owner, task.id) if evaluator.lock_owner
     end
 
     factory :dynflow_task, :class => ForemanTasks::Task::DynflowTask do
