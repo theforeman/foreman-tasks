@@ -26,10 +26,11 @@ class AddUserId < ActiveRecord::Migration[5.0]
   private
 
   def create_lock(user_id, task)
-    ForemanTasks::Lock.new(:name => ForemanTasks::Lock::OWNER_LOCK_NAME,
-      :resource_type => User.name,
-      :resource_id => user_id,
-      :exclusive => false).save!
+    ForemanTasks::Lock.new(:name          => ForemanTasks::Lock::OWNER_LOCK_NAME,
+                           :resource_type => User.name,
+                           :resource_id   => user_id,
+                           :task_id       => task.id,
+                           :exclusive     => false).save!
   end
 
   def user_locks
