@@ -2,6 +2,7 @@ class AddUserId < ActiveRecord::Migration[5.0]
   def up
     add_reference :foreman_tasks_tasks, :user, :foreign_key => true
 
+    return if User.unscoped.find_by_login(User::ANONYMOUS_ADMIN).nil?
     User.as_anonymous_admin do
       user_locks.select(:resource_id).distinct.pluck(:resource_id).each do |owner_id|
         tasks = ForemanTasks::Task.joins(:locks).where(:locks => user_locks.where(:resource_id => owner_id))
