@@ -5,6 +5,7 @@ class Setting::ForemanTasks < Setting
 
     transaction do
       [
+        set('foreman_tasks_sync_task_timeout', N_('Number of seconds to wait for synchronous task to finish.'), 120),
         set('dynflow_allow_dangerous_actions', N_('Allow unlocking actions which can have dangerous consequences.'), false),
         set('dynflow_enable_console', N_('Enable the dynflow console (/foreman_tasks/dynflow) for debugging'), true),
         set('dynflow_console_require_auth', N_('Require user to be authenticated as user with admin rights when accessing dynflow console'), true),
