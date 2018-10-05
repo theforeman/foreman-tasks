@@ -16,7 +16,7 @@ class AddUserId < ActiveRecord::Migration[5.0]
     User.as_anonymous_admin do
       ForemanTasks::Task.select(:user_id).distinct.pluck(:user_id).compact.each do |user_id|
         ForemanTasks::Task.where(:user_id => user_id).select(:id).find_in_batches do |group|
-          group.each { |task| create_lock user_id, task } # TODO: Bulk insert would be nice
+          group.each { |task| create_lock user_id, task }
         end
       end
     end
