@@ -118,11 +118,6 @@ module ForemanTasks
         build_link(resource, uuid).available?
       end
 
-      # Records the information about the user that triggered the task
-      def owner!(user, uuid)
-        # TODO: Log some deprecation warning?
-      end
-
       private
 
       def all_lock_names(resource, include_links = false)
@@ -164,10 +159,6 @@ module ForemanTasks
 
       def build_link(resource, uuid = nil)
         build(uuid, resource, LINK_LOCK_NAME, false)
-      end
-
-      def build_owner(user, uuid = nil)
-        build(uuid, user, OWNER_LOCK_NAME, false)
       end
 
       def build(uuid, resource, lock_name, exclusive)
