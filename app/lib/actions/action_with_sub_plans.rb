@@ -1,7 +1,5 @@
 module Actions
   class Actions::ActionWithSubPlans < Actions::EntryAction
-    middleware.use Actions::Middleware::KeepCurrentUser
-
     include Dynflow::Action::WithSubPlans
 
     def plan(*_args)
