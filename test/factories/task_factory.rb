@@ -5,14 +5,6 @@ FactoryBot.define do
     state { 'stopped' }
     result { 'success' }
 
-    transient do
-      lock_owner { nil }
-    end
-
-    after(:create) do |task, evaluator|
-      ForemanTasks::Lock.owner!(evaluator.lock_owner, task.id) if evaluator.lock_owner
-    end
-
     factory :dynflow_task, :class => ForemanTasks::Task::DynflowTask do
       label { 'Support::DummyDynflowAction' }
       type { 'ForemanTasks::Task::DynflowTask' }
