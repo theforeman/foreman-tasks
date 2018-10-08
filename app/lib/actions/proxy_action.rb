@@ -63,20 +63,29 @@ module Actions
 
     def trigger_proxy_task
       suspend do |_suspended_action|
-        response = proxy.trigger_task(proxy_action_name,
-                                      input.merge(:callback => { :task_id => task.id,
-                                                                 :step_id => run_step_id }))
-        ::ForemanTasks::RemoteTask.new(:remote_task_id => response['task_id'], :execution_plan_id => execution_plan_id,
-                                       :state => 'triggered', :proxy_url => input[:proxy_url], :step_id => run_step_id).save!
-        output[:proxy_task_id] = response['task_id']
+        if with_batch_triggering?
+          prepare_for_batch_triggering
+        else
+          remote_task = ::ForemanTasks::RemoteTask.new(:execution_plan_id => execution_plan_id,
+                                                       :proxy_url => input[:proxy_url],
+                                                       :step_id => run_step_id)
+          remote_task.save!
+          remote_task.trigger(proxy_action_name, proxy_input)
+          output[:proxy_task_id] = remote_task.remote_task_id
+        end
       end
     end
 
+    def proxy_input(task_id = task.id, step_id = run_step_id)
+      input.merge(:callback => { :task_id => task.id,
+                                 :step_id => run_step_id })
+    end
+
     def check_task_status
-      response = proxy.status_of_task(output[:proxy_task_id])
+      response = proxy.status_of_task(proxy_task_id)
       if %w[stopped paused].include? response['state']
         if response['result'] == 'error'
-          raise ::Foreman::Exception, _('The smart proxy task %s failed.') % output[:proxy_task_id]
+          raise ::Foreman::Exception, _('The smart proxy task %s failed.') % proxy_task_id
         else
           on_data(response['actions'].find { |block_action| block_action['class'] == proxy_action_name }['output'])
         end
@@ -89,14 +98,14 @@ module Actions
       if output[:cancel_sent]
         error! ForemanTasks::Task::TaskCancelledException.new(_('Cancel enforced: the task might be still running on the proxy'))
       else
-        proxy.cancel_task(output[:proxy_task_id])
+        proxy.cancel_task(proxy_task_id)
         output[:cancel_sent] = true
         suspend
       end
     end
 
     def abort_proxy_task
-      proxy.cancel_task(output[:proxy_task_id])
+      proxy.cancel_task(proxy_task_id)
       error! ForemanTasks::Task::TaskCancelledException.new(_('Task aborted: the task might be still running on the proxy'))
     end
 
@@ -137,8 +146,8 @@ module Actions
     def proxy_output(live = false)
       if output.key?(:proxy_output) || state == :error
         output.fetch(:proxy_output, {})
-      elsif live && output[:proxy_task_id]
-        proxy_data = proxy.status_of_task(output[:proxy_task_id])['actions'].detect { |action| action['class'] == proxy_action_name }
+      elsif live && proxy_task_id
+        proxy_data = proxy.status_of_task(proxy_task_id)['actions'].detect { |action| action['class'] == proxy_action_name }
         proxy_data.fetch('output', {})
       else
         {}
@@ -172,7 +181,12 @@ module Actions
       # Fails if the plan is not finished within 60 seconds from the first task trigger attempt on the smart proxy
       # If the triggering fails, it retries 3 more times with 15 second delays
       { :retry_interval => Setting['foreman_tasks_proxy_action_retry_interval'] || 15,
-        :retry_count    => Setting['foreman_tasks_proxy_action_retry_count'] || 4 }
+        :retry_count    => Setting['foreman_tasks_proxy_action_retry_count'] || 4,
+        :proxy_batch_triggering => true }
+    end
+
+    def with_batch_triggering?
+      input.fetch(:connection_options, {}).fetch(:proxy_batch_triggering, false)
     end
 
     def clean_remote_task(*_args)
@@ -196,7 +210,7 @@ module Actions
     end
 
     def format_exception(exception)
-      { :proxy_task_id => output[:proxy_task_id],
+      { :proxy_task_id => proxy_task_id,
         :exception_class => exception.class.name,
         :exception_message => exception.message,
         :timestamp => Time.now.to_f }
@@ -215,6 +229,15 @@ module Actions
       else
         raise exception
       end
+    end
+
+    def prepare_for_batch_triggering
+      ::ForemanTasks::RemoteTask.new(:execution_plan_id => execution_plan_id, :state => 'pending',
+                                     :proxy_url => input[:proxy_url], :step_id => run_step_id).save!
+    end
+
+    def proxy_task_id
+      output[:proxy_task_id] ||= remote_task.remote_task_id
     end
   end
 end

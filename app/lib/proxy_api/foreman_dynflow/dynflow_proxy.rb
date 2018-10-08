@@ -4,8 +4,9 @@ module ProxyAPI
       PREFIX = 'dynflow'.freeze
 
       class Task < ProxyAPI::Resource
-        def initialize(args)
+        def initialize(args, suffix = nil)
           @url = "#{args[:url]}/#{PREFIX}/tasks"
+          @url += "/#{suffix}" unless suffix.nil?
           super args
           @connect_params[:headers] ||= {}
           @connect_params[:headers]['content-type'] = 'application/json'
@@ -38,6 +39,11 @@ module ProxyAPI
       def task_states(ids)
         payload = MultiJson.dump(:task_ids => ids)
         MultiJson.load(Task.new(@args).send(:post, payload, 'status'))
+      end
+
+      def trigger_tasks(input_hash)
+        payload = MultiJson.dump(input_hash)
+        MultiJson.load(Task.new(@args, 'batch').send(:post, payload))
       end
     end
   end

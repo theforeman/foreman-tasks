@@ -7,14 +7,15 @@ module Actions
       BATCH_SIZE = 1000
 
       def run(event = nil)
-        if event.nil?
-          set_clock
-        elsif event == CheckOnProxyActions
+        if event == CheckOnProxyActions
           check_triggered
           set_clock
           action.send(:suspend)
         end
+        set_clock
         pass event
+      ensure
+        batch_trigger_pending if event.nil? || event.is_a?(Dynflow::Action::WithBulkSubPlans::PlanNextBatch)
       end
 
       private
@@ -25,13 +26,16 @@ module Actions
                                 CheckOnProxyActions
       end
 
+      def batch_trigger_pending
+        in_remote_task_batches(remote_tasks.pending) do |group|
+          # TODO: Un-hardcode the action class string
+          ForemanTasks::RemoteTask.batch_trigger(group, 'ForemanTasksCore::Runner::ParentAction')
+        end
+      end
+
       def check_triggered
-        # Sort by proxy_url so there are less requests per proxy
-        source = remote_tasks.triggered.order(:proxy_url, :id)
-        source.find_in_batches(:batch_size => BATCH_SIZE) do |batch|
-          tasks = batch.group_by(&:proxy_url)
-                       .map { |(url, tasks)| poll_proxy_tasks(url, tasks) }
-                       .flatten
+        in_remote_task_batches(remote_tasks.triggered).group_by(&:proxy_url).each do |group|
+          tasks = group.map { |(url, tasks)| poll_proxy_tasks(url, tasks) }.flatten
           process_task_results tasks
         end
       end
@@ -67,6 +71,13 @@ module Actions
         # We could not reach the remote task, we'll try again next time
         action.action_logger.warn(_('Failed to check on tasks on proxy at %{url}: %{exception}') % { :url => url, :exception => e.message })
         []
+      end
+
+      def in_remote_task_batches(scope)
+        # Sort by proxy_url so there are less requests per proxy
+        scope.order(:proxy_url, :id).find_in_batches(:batch_size => BATCH_SIZE) do |batch|
+          yield batch
+        end
       end
     end
   end
