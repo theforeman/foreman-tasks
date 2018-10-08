@@ -39,6 +39,18 @@ module ProxyAPI
         payload = MultiJson.dump(:task_ids => ids)
         MultiJson.load(Task.new(@args).send(:post, payload, 'status'))
       end
+
+      def operations
+        MultiJson.load(Task.new(@args).send(:get, 'operations'))
+      end
+
+      def launch_tasks(operation, input, options = {})
+        data = { :input => input,
+                 :operation => operation,
+                 :options => options }
+        payload = MultiJson.dump(data)
+        MultiJson.load(Task.new(@args).send(:post, payload, 'launch'))
+      end
     end
   end
 end

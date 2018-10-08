@@ -37,10 +37,12 @@ module ForemanTasksCore
 
         def refresh_runner
           @logger.debug("refresh runner #{@runner.id}")
-          if (update = @runner.run_refresh)
-            @suspended_action << update
-            finish if update.exit_status
-          end
+          updates = @runner.run_refresh
+
+          updates.each { |receiver, update| receiver << update }
+
+          main_process = updates[@suspended_action]
+          finish if main_process && main_process.exit_status
         ensure
           @refresh_planned = false
           plan_next_refresh

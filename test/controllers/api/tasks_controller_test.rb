@@ -65,6 +65,9 @@ module ForemanTasks
       describe 'POST /tasks/callback' do
         it 'passes the data to the corresponding action' do
           Support::DummyProxyAction.reset
+          ForemanTasks::RemoteTask.any_instance
+                                  .expects(:proxy)
+                                  .returns(Support::DummyProxyAction.proxy)
 
           triggered = ForemanTasks.trigger(Support::DummyProxyAction,
                                            Support::DummyProxyAction.proxy,
