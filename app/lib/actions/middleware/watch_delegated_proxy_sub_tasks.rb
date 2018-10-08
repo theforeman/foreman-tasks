@@ -26,13 +26,11 @@ module Actions
       end
 
       def check_triggered
-        # Sort by proxy_url so there are less requests per proxy
-        source = remote_tasks.triggered.order(:proxy_url, :id)
-        source.find_in_batches(:batch_size => BATCH_SIZE) do |batch|
-          tasks = batch.group_by(&:proxy_url)
-                       .map { |(url, tasks)| poll_proxy_tasks(url, tasks) }
-                       .flatten
-          process_task_results tasks
+        in_remote_task_batches(remote_tasks.triggered) do |batch|
+          batch.group_by(&:proxy_url).each do |(url, tasks)|
+            tasks = poll_proxy_tasks(url, tasks).flatten
+            process_task_results tasks
+          end
         end
       end
 
@@ -67,6 +65,13 @@ module Actions
         # We could not reach the remote task, we'll try again next time
         action.action_logger.warn(_('Failed to check on tasks on proxy at %{url}: %{exception}') % { :url => url, :exception => e.message })
         []
+      end
+
+      def in_remote_task_batches(scope)
+        # Sort by proxy_url so there are less requests per proxy
+        scope.order(:proxy_url, :id).find_in_batches(:batch_size => BATCH_SIZE) do |batch|
+          yield batch
+        end
       end
     end
   end

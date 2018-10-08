@@ -149,22 +149,40 @@ module ForemanTasks
         }
       end
 
-      api :POST, '/tasks/callback', N_('Send data to the task from external executor (such as smart_proxy_dynflow)')
-      param :callback, Hash do
-        param :task_id, :identifier, :desc => N_('UUID of the task')
-        param :step_id, String, :desc => N_('The ID of the step inside the execution plan to send the event to')
+      def_param_group :callback_target do
+        param :callback, Hash do
+          param :task_id, :identifier, :desc => N_('UUID of the task')
+          param :step_id, String, :desc => N_('The ID of the step inside the execution plan to send the event to')
+        end
       end
-      param :data, Hash, :desc => N_('Data to be sent to the action')
+
+      def_param_group :callback do
+        param_group :callback_target
+        param :data, Hash, :desc => N_('Data to be sent to the action')
+      end
+
+      api :POST, '/tasks/callback', N_('Send data to the task from external executor (such as smart_proxy_dynflow)')
+      param_group :callback
+      param :callbacks, Array, :of => param_group(:callback)
       def callback
-        task = ForemanTasks::Task::DynflowTask.find(params[:callback][:task_id])
-        ForemanTasks.dynflow.world.event(task.external_id,
-                                         params[:callback][:step_id].to_i,
-                                         # We need to call .to_unsafe_h to unwrap the hash from ActionController::Parameters
-                                         ::Actions::ProxyAction::CallbackData.new(params[:data].to_unsafe_h, :request_id => ::Logging.mdc['request']))
+        callbacks = params.key?(:callback) ? Array(params) : params[:callbacks]
+        ids = callbacks.map { |payload| payload[:callback][:task_id] }
+        external_map = Hash[*ForemanTasks::Task.where(:id => ids).pluck(:id, :external_id).flatten]
+        callbacks.each do |payload|
+          # We need to call .to_unsafe_h to unwrap the hash from ActionController::Parameters
+          callback = payload[:callback]
+process_callback(external_map[callback[:task_id]], callback[:step_id].to_i, payload[:data].to_unsafe_h, :request_id => ::Logging.mdc['request'])
+        end
         render :json => { :message => 'processing' }.to_json
       end
 
       private
+
+      def process_callback(execution_plan_uuid, step_id, data, meta)
+        ForemanTasks.dynflow.world.event(execution_plan_uuid,
+                                         step_id,
+                                         ::Actions::ProxyAction::CallbackData.new(data, meta))
+      end
 
       def search_tasks(search_params)
         scope = resource_scope_for_index.select('DISTINCT foreman_tasks_tasks.*')

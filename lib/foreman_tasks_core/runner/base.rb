@@ -6,9 +6,10 @@ module ForemanTasksCore
       attr_reader :id
       attr_writer :logger
 
-      def initialize(*_args)
+      def initialize(suspended_action, *_args)
+        @suspended_action = suspended_action
         @id = SecureRandom.uuid
-        @continuous_output = ::ForemanTasksCore::ContinuousOutput.new
+        initialize_continuous_outputs
       end
 
       def logger
@@ -18,11 +19,7 @@ module ForemanTasksCore
       def run_refresh
         logger.debug('refreshing runner')
         refresh
-        new_data = @continuous_output
-        @continuous_output = ForemanTasksCore::ContinuousOutput.new
-        if !new_data.empty? || @exit_status
-          return Runner::Update.new(new_data, @exit_status)
-        end
+        generate_updates
       end
 
       def start
@@ -59,12 +56,27 @@ module ForemanTasksCore
       def publish_exception(context, exception, fatal = true)
         logger.error("#{context} - #{exception.class} #{exception.message}:\n" + \
                      exception.backtrace.join("\n"))
-        @continuous_output.add_exception(context, exception)
+        dispatch_exception context, exception
         publish_exit_status('EXCEPTION') if fatal
       end
 
       def publish_exit_status(status)
         @exit_status = status
+      end
+
+      def dispatch_exception(context, exception)
+        @continuous_output.add_exception(context, exception)
+      end
+
+      def generate_updates
+        return {} if @continuous_output.empty? && @exit_status.nil?
+        new_data = @continuous_output
+        @continuous_output = ForemanTasksCore::ContinuousOutput.new
+        { @suspended_action => Runner::Update.new(new_data, @exit_status) }
+      end
+
+      def initialize_continuous_outputs
+        @continuous_output = ::ForemanTasksCore::ContinuousOutput.new
       end
     end
   end
