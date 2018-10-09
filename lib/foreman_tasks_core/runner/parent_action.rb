@@ -13,7 +13,7 @@ module ForemanTasksCore
           acc.merge(key => format_result(result))
         end
         plan_self :result => results
-        output = { :total_count => input_hash.keys.count }
+        self.output = { :total_count => input_hash.keys.count }
       end
 
       def create_sub_plans; end

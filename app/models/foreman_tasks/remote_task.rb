@@ -8,7 +8,9 @@ module ForemanTasks
                       :inverse_of  => :remote_tasks
 
     scope :triggered, -> { where(:state => 'triggered') }
-    scope :pending,   -> { where(:state => 'pending') }
+    scope :pending,   -> { where(:state => 'new') }
+
+    delegate :proxy_action_name, :to => :action
 
     def trigger(action_name, input)
       response = proxy.trigger_task(action_name, input)
@@ -39,11 +41,7 @@ module ForemanTasks
     end
 
     def proxy_input
-      action.proxy_input(task.id, step_id)
-    end
-
-    def proxy_action_name
-      action.proxy_action_name
+      action.proxy_input(task.id)
     end
 
     def proxy

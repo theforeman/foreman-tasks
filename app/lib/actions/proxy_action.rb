@@ -69,15 +69,14 @@ module Actions
           remote_task = ::ForemanTasks::RemoteTask.new(:execution_plan_id => execution_plan_id,
                                                        :proxy_url => input[:proxy_url],
                                                        :step_id => run_step_id)
-          remote_task.save!
           remote_task.trigger(proxy_action_name, proxy_input)
           output[:proxy_task_id] = remote_task.remote_task_id
         end
       end
     end
 
-    def proxy_input(task_id = task.id, step_id = run_step_id)
-      input.merge(:callback => { :task_id => task.id,
+    def proxy_input(task_id = task.id)
+      input.merge(:callback => { :task_id => task_id,
                                  :step_id => run_step_id })
     end
 
@@ -232,8 +231,9 @@ module Actions
     end
 
     def prepare_for_batch_triggering
-      ::ForemanTasks::RemoteTask.new(:execution_plan_id => execution_plan_id, :state => 'pending',
-                                     :proxy_url => input[:proxy_url], :step_id => run_step_id).save!
+      ::ForemanTasks::RemoteTask.new(:execution_plan_id => execution_plan_id,
+                                     :proxy_url => input[:proxy_url],
+                                     :step_id => run_step_id).save!
     end
 
     def proxy_task_id
