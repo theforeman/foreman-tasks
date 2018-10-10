@@ -38,6 +38,9 @@ msgstr ""
 msgid "%{value} is wrong format"
 msgstr ""
 
+msgid "(Disabled)"
+msgstr ""
+
 msgid ":after setting in tasks cleanup section is deprecated, use :after in :rules section to set the value. to cleanup rules"
 msgstr ""
 
@@ -87,6 +90,9 @@ msgstr ""
 msgid "Cancelled"
 msgstr ""
 
+msgid "Cannot update a cancelled Recurring Logic."
+msgstr ""
+
 msgid "Cron line"
 msgstr ""
 
@@ -111,6 +117,12 @@ msgstr ""
 msgid "Details"
 msgstr ""
 
+msgid "Disable"
+msgstr ""
+
+msgid "Disabled"
+msgstr ""
+
 msgid "Duration"
 msgstr ""
 
@@ -118,6 +130,9 @@ msgid "Dynflow console"
 msgstr ""
 
 msgid "Empty bulk action"
+msgstr ""
+
+msgid "Enable"
 msgstr ""
 
 msgid "Enable the dynflow console (/foreman_tasks/dynflow) for debugging"
@@ -259,6 +274,9 @@ msgid "Number of attempts to start a task on the smart proxy before failing"
 msgstr ""
 
 msgid "Number of results per page to return"
+msgstr ""
+
+msgid "Number of seconds to wait for synchronous task to finish."
 msgstr ""
 
 #. TRANSLATORS: Button text for saying when a task should end
@@ -473,6 +491,9 @@ msgid "Unlimited"
 msgstr ""
 
 msgid "Unlock"
+msgstr ""
+
+msgid "Update recurring logic"
 msgstr ""
 
 msgid "User"
