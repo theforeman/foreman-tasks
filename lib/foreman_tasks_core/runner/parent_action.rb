@@ -13,10 +13,12 @@ module ForemanTasksCore
           acc.merge(key => format_result(result))
         end
         plan_self :result => results
-        self.output = { :total_count => input_hash.keys.count }
       end
 
-      def create_sub_plans; end
+      def initiate
+        ping suspended_action
+        wait_for_sub_plans sub_plans
+      end
 
       private
 
