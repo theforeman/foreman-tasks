@@ -8,7 +8,7 @@ module ForemanTasksCore
 
       def initialize(*_args)
         @id = SecureRandom.uuid
-        @continuous_output = ::ForemanTasksCore::ContinuousOutput.new
+        initialize_continuous_outputs
       end
 
       def logger
@@ -68,6 +68,10 @@ module ForemanTasksCore
         new_data = @continuous_output
         @continuous_output = ForemanTasksCore::ContinuousOutput.new
         { :control => Runner::Update.new(new_data, @exit_status) }
+      end
+
+      def initialize_continuous_outputs
+        @continuous_output = ::ForemanTasksCore::ContinuousOutput.new
       end
     end
   end
