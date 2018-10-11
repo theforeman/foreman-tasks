@@ -18,10 +18,7 @@ module ForemanTasksCore
       def run_refresh
         logger.debug('refreshing runner')
         refresh
-        return if @continuous_output.empty? && @exit_status.nil?
-        new_data = @continuous_output
-        @continuous_output = ForemanTasksCore::ContinuousOutput.new
-        Runner::Update.new(new_data, @exit_status)
+        generate_updates
       end
 
       def start
@@ -64,6 +61,13 @@ module ForemanTasksCore
 
       def publish_exit_status(status)
         @exit_status = status
+      end
+
+      def generate_updates
+        return {} if @continuous_output.empty? && @exit_status.nil?
+        new_data = @continuous_output
+        @continuous_output = ForemanTasksCore::ContinuousOutput.new
+        { :control => Runner::Update.new(new_data, @exit_status) }
       end
     end
   end
