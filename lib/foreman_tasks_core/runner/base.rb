@@ -18,11 +18,10 @@ module ForemanTasksCore
       def run_refresh
         logger.debug('refreshing runner')
         refresh
+        return if @continuous_output.empty? && @exit_status.nil?
         new_data = @continuous_output
         @continuous_output = ForemanTasksCore::ContinuousOutput.new
-        if !new_data.empty? || @exit_status
-          return Runner::Update.new(new_data, @exit_status)
-        end
+        Runner::Update.new(new_data, @exit_status)
       end
 
       def start
