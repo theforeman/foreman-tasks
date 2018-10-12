@@ -1,10 +1,12 @@
 module ForemanTasksCore
   module Runner
-    class ParentRunner < Base
+    class Parent < Base
 
+      # targets = { hostname => { :execution_plan_id => "...", :run_step_id => id,
+      #                           :input => { ... } }
       def initialize(targets = {})
-        super()
         @targets = targets
+        super()
       end
 
       def generate_updates
@@ -20,13 +22,14 @@ module ForemanTasksCore
       end
 
       def initialize_continuous_outputs
-        ([:control] + @targets.keys).reduce({}) do |acc, target|
+        @outputs = ([:control] + @targets.keys).reduce({}) do |acc, target|
           acc.merge(target => ForemanTasksCore::ContinuousOutput.new)
         end
       end
 
       def host_action(hostname)
-        options = @targets[hostname].merge(:world => ForemanTasksCore.dynflow_world)
+        options = @targets[hostname].slice('execution_plan_id', 'run_step_id')
+                                    .merge(:world => ForemanTasksCore.dynflow_world)
         Dynflow::Action::Suspended.new OpenStruct.new(options)
       end
 
@@ -43,21 +46,6 @@ module ForemanTasksCore
                      exception.backtrace.join("\n"))
         @outputs.each { |output| output.add_exception(context, exception) }
         publish_exit_status('EXCEPTION') if fatal
-      end
-    end
-
-    class TestRunner < ParentRunner
-      def initialize(*args)
-        super *args
-        @counter = 0
-      end
-
-      def refresh
-        if @counter < 5
-          broadcast_data("BROADCASTING STUFF", "stdout")
-        else
-          publish_exit_status(0)
-        end
       end
     end
   end
