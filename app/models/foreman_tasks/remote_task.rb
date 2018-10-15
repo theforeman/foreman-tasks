@@ -12,8 +12,8 @@ module ForemanTasks
 
     delegate :proxy_action_name, :to => :action
 
-    def trigger(action_name, input)
-      response = proxy.trigger_task(action_name, input)
+    def trigger(input)
+      response = proxy.trigger_task(proxy_action_name, input)
       self.remote_task_id = response['task_id']
       self.state = 'triggered'
       save!
@@ -24,10 +24,22 @@ module ForemanTasks
         input_hash = group.reduce({}) do |acc, cur|
           acc.update(cur.execution_plan_id => { :action_input => cur.proxy_input, :action_class => cur.proxy_action_name })
         end
-        results = remote_tasks.first.proxy.trigger_tasks(:action_name => action_name, :action_input => input_hash)
-        group.each { |remote_task| remote_task.update_from_batch_trigger results[remote_task.execution_plan_id] }
+        safe_batch_trigger(group, action_name, input_hash)
       end
       remote_tasks
+    end
+
+    def self.safe_batch_trigger(remote_tasks, batch_action_name, input_hash)
+      results = remote_tasks.first.proxy.trigger_tasks(:action_name => batch_action_name, :action_input => input_hash)
+      group.each { |remote_task| remote_task.update_from_batch_trigger results[remote_task.execution_plan_id] }
+    rescue RestClient::NotFound
+      fallback_batch_trigger remote_tasks, input_hash
+    end
+
+    def self.fallback_batch_trigger(remote_tasks, input_hash)
+      remote_tasks.each do |remote_task|
+        remote_task.trigger(input_hash[remote_task.execution_plan_id][:action_input])
+      end
     end
 
     def update_from_batch_trigger(data)

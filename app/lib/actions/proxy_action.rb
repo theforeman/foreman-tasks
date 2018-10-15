@@ -181,10 +181,11 @@ module Actions
       # If the triggering fails, it retries 3 more times with 15 second delays
       { :retry_interval => Setting['foreman_tasks_proxy_action_retry_interval'] || 15,
         :retry_count    => Setting['foreman_tasks_proxy_action_retry_count'] || 4,
-        :proxy_batch_triggering => true }
+        :proxy_batch_triggering => Setting['foreman_tasks_proxy_batch_trigger'] }
     end
 
     def with_batch_triggering?
+      # TODO: Take proxy version into account
       input.fetch(:connection_options, {}).fetch(:proxy_batch_triggering, false)
     end
 
