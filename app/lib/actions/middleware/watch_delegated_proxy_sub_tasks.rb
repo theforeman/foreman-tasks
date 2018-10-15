@@ -14,8 +14,6 @@ module Actions
         end
         set_clock
         pass event
-      ensure
-        batch_trigger_pending if event.nil? || event.is_a?(Dynflow::Action::WithBulkSubPlans::PlanNextBatch)
       end
 
       private
@@ -24,13 +22,6 @@ module Actions
         action.world.clock.ping action.send(:suspended_action),
                                 POLL_INTERVAL,
                                 CheckOnProxyActions
-      end
-
-      def batch_trigger_pending
-        in_remote_task_batches(remote_tasks.pending) do |group|
-          # TODO: Un-hardcode the action class string
-          ForemanTasks::RemoteTask.batch_trigger(group, 'ForemanTasksCore::Runner::ParentAction')
-        end
       end
 
       def check_triggered
