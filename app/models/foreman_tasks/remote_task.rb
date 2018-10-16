@@ -19,18 +19,18 @@ module ForemanTasks
       save!
     end
 
-    def self.batch_trigger(remote_tasks, action_name)
+    def self.batch_trigger(feature, remote_tasks)
       remote_tasks.group_by(&:proxy_url).values.map do |group|
         input_hash = group.reduce({}) do |acc, cur|
           acc.update(cur.execution_plan_id => { :action_input => cur.proxy_input, :action_class => cur.proxy_action_name })
         end
-        safe_batch_trigger(group, action_name, input_hash)
+        safe_batch_trigger(feature, group, input_hash)
       end
       remote_tasks
     end
 
-    def self.safe_batch_trigger(remote_tasks, batch_action_name, input_hash)
-      results = remote_tasks.first.proxy.trigger_tasks(:action_name => batch_action_name, :action_input => input_hash)
+    def self.safe_batch_trigger(feature, remote_tasks, input_hash)
+      results = remote_tasks.first.proxy.launch_tasks(feature, input_hash)
       group.each { |remote_task| remote_task.update_from_batch_trigger results[remote_task.execution_plan_id] }
     rescue RestClient::NotFound
       fallback_batch_trigger remote_tasks, input_hash

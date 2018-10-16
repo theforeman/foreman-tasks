@@ -1,6 +1,8 @@
 module Actions
   module Middleware
     class RemoteTaskTriggering < ::Dynflow::Middleware
+      BATCH_SIZE = 1000
+
       def run(event = nil)
         pass event
       ensure
@@ -9,7 +11,9 @@ module Actions
 
       def trigger_remote_tasks
         remote_tasks.pending.order(:proxy_url, :id).find_in_batches(:batch_size => BATCH_SIZE) do |batch|
-          ForemanTasks::RemoteTask.batch_trigger(batch, 'ForemanTasksCore::Runner::ParentAction')
+          batch.group_by(&:feature).each do |feature, group|
+            ForemanTasks::RemoteTask.batch_trigger(feature, group)
+          end
         end
       end
 

@@ -68,7 +68,8 @@ module Actions
         else
           remote_task = ::ForemanTasks::RemoteTask.new(:execution_plan_id => execution_plan_id,
                                                        :proxy_url => input[:proxy_url],
-                                                       :step_id => run_step_id)
+                                                       :step_id => run_step_id,
+                                                       :feature => proxy_feature_name)
           remote_task.trigger(proxy_action_name, proxy_input)
           output[:proxy_task_id] = remote_task.remote_task_id
         end
@@ -136,6 +137,11 @@ module Actions
     # @override String name of an action to be triggered on server
     def proxy_action_name
       input[:proxy_action_name]
+    end
+
+    # @override String name of a feature to be triggered on server
+    def proxy_feature_name
+      input[:proxy_feature_name]
     end
 
     def proxy
@@ -234,7 +240,8 @@ module Actions
     def prepare_for_batch_triggering
       ::ForemanTasks::RemoteTask.new(:execution_plan_id => execution_plan_id,
                                      :proxy_url => input[:proxy_url],
-                                     :step_id => run_step_id).save!
+                                     :step_id => run_step_id,
+                                     :feature => proxy_feature_name).save!
     end
 
     def proxy_task_id
