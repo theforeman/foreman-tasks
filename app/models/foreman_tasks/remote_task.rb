@@ -31,7 +31,7 @@ module ForemanTasks
 
     def self.safe_batch_trigger(feature, remote_tasks, input_hash)
       results = remote_tasks.first.proxy.launch_tasks(feature, input_hash)
-      group.each { |remote_task| remote_task.update_from_batch_trigger results[remote_task.execution_plan_id] }
+      remote_tasks.each { |remote_task| remote_task.update_from_batch_trigger results[remote_task.execution_plan_id] }
     rescue RestClient::NotFound
       fallback_batch_trigger remote_tasks, input_hash
     end
