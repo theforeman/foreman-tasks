@@ -26,7 +26,6 @@ module ForemanTasksCore
       end
 
       def action_class(input)
-        require 'pry'; binding.pry
         ::Dynflow::Utils.constantize(input['action_class'])
       end
 
