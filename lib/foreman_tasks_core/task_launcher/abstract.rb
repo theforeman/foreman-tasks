@@ -13,6 +13,10 @@ module ForemanTasksCore
         raise NotImplementedError
       end
 
+      def feature
+        raise NotImplementedError
+      end
+
       private
 
       def format_result(result)
@@ -25,7 +29,7 @@ module ForemanTasksCore
       end
 
       def action_class(input)
-        ::Dynflow::Utils.constantize(input['action_class'])
+        options.fetch(:action_class_override, ::Dynflow::Utils.constantize(input['action_class']))
       end
 
       def with_callback(input)

@@ -1,8 +1,9 @@
 module ForemanTasksCore
   module TaskLauncher
-    class ParentAction < ::Dynflow::Action
-      include Dynflow::Action::WithSubPlans
-      include Dynflow::Action::WithPollingSubPlans
+    class Batch < Abstract
+      class ParentAction < ::Dynflow::Action
+        include Dynflow::Action::WithSubPlans
+        include Dynflow::Action::WithPollingSubPlans
 
       # { task_id => { :action_class => Klass, :input => input } }
       def plan(launcher, input_hash)
@@ -31,7 +32,6 @@ module ForemanTasksCore
       def rescue_strategy
         Dynflow::Action::Rescue::Fail
       end
-    end
 
     class BatchCallback < ::Dynflow::Action
       def plan(input_hash, results)
