@@ -28,7 +28,9 @@ module ForemanTasks
         Target.expects(:where).with(:id => targets.map(&:id)).returns(targets)
 
         task.sub_tasks.count.must_equal targets.count
-        assert task.sub_tasks.all? { |subtask| subtask.result == 'success' }
+        success, failed = task.sub_tasks.partition { |sub_task| sub_task.result == 'success' }
+        failed.must_be :empty?
+        success.count.must_equal 5
       end
 
       specify 'it plans a task for each target even if target cannot be found' do
