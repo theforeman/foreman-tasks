@@ -6,7 +6,7 @@ module ForemanTasksCore
       def initialize(world, callback, options = {})
         @world = world
         @callback = callback
-        @options = {}
+        @options = options
         @results = {}
       end
 
