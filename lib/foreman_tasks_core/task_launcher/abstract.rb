@@ -13,10 +13,6 @@ module ForemanTasksCore
         raise NotImplementedError
       end
 
-      def feature
-        raise NotImplementedError
-      end
-
       private
 
       def format_result(result)
