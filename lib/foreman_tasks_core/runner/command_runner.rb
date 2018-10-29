@@ -3,7 +3,7 @@ require 'pty'
 
 module ForemanTasksCore
   module Runner
-    class CommandRunner < Runner::Base
+    module CommandRunner
       def initialize_command(*command)
         @command_out, @command_in, @command_pid = PTY.spawn(*command)
       end

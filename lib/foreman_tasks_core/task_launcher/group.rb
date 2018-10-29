@@ -42,7 +42,6 @@ module ForemanTasksCore
           acc.merge(id => input)
         end
       end
-
       private
 
       def child_launcher(parent)
