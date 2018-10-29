@@ -13,6 +13,8 @@ module ForemanTasksCore
         raise NotImplementedError
       end
 
+      def self.input_format; end
+
       private
 
       def format_result(result)
