@@ -36,6 +36,10 @@ module ForemanTasksCore
         @outputs.each { |_k, output| output.add_output(data, type) }
       end
 
+      def publish_data(data, type)
+        @outputs[:control].add_output(data, type)
+      end
+
       def publish_data_for(hostname, data, type)
         @outputs[hostname].add_output(data, type)
       end
