@@ -3,9 +3,9 @@ module ForemanTasksCore
     class Parent < Base
       # targets = { hostname => { :execution_plan_id => "...", :run_step_id => id,
       #                           :input => { ... } }
-      def initialize(targets = {})
+      def initialize(suspended_action, targets = {})
         @targets = targets
-        super()
+        super suspended_action
       end
 
       def generate_updates
@@ -14,14 +14,14 @@ module ForemanTasksCore
             acc
           else
             @outputs[key] = ForemanTasksCore::ContinuousOutput.new
-            key = host_action(key) unless key == :control
+            key = host_action(key) unless key == @suspended_action
             acc.merge(key => Runner::Update.new(value, @exit_status))
           end
         end
       end
 
       def initialize_continuous_outputs
-        @outputs = ([:control] + @targets.keys).reduce({}) do |acc, target|
+        @outputs = ([@suspended_action] + @targets.keys).reduce({}) do |acc, target|
           acc.merge(target => ForemanTasksCore::ContinuousOutput.new)
         end
       end

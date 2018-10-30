@@ -6,7 +6,8 @@ module ForemanTasksCore
       attr_reader :id
       attr_writer :logger
 
-      def initialize(*_args)
+      def initialize(suspended_action, *_args)
+        @suspended_action = suspended_action
         @id = SecureRandom.uuid
         initialize_continuous_outputs
       end
@@ -67,7 +68,7 @@ module ForemanTasksCore
         return {} if @continuous_output.empty? && @exit_status.nil?
         new_data = @continuous_output
         @continuous_output = ForemanTasksCore::ContinuousOutput.new
-        { :control => Runner::Update.new(new_data, @exit_status) }
+        { @suspended_action => Runner::Update.new(new_data, @exit_status) }
       end
 
       def initialize_continuous_outputs

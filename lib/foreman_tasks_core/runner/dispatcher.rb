@@ -38,12 +38,10 @@ module ForemanTasksCore
         def refresh_runner
           @logger.debug("refresh runner #{@runner.id}")
           updates = @runner.run_refresh
-          control = updates.delete(:control)
-          updates[@suspended_action] = control if control
 
           updates.each { |receiver, update| receiver << update }
 
-          finish if control && control.exit_status
+          finish if updates[@suspended_action] && updates[@suspended_action].exit_status
         ensure
           @refresh_planned = false
           plan_next_refresh
