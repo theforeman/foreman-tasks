@@ -1,7 +1,6 @@
 module ForemanTasksCore
   module TaskLauncher
     class Abstract
-
       attr_reader :callback, :options, :results, :world
       def initialize(world, callback, options = {})
         @world = world
@@ -10,7 +9,7 @@ module ForemanTasksCore
         @results = {}
       end
 
-      def launch!(input)
+      def launch!(_input)
         raise NotImplementedError
       end
 

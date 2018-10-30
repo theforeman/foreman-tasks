@@ -1,7 +1,6 @@
 module ForemanTasksCore
   module Runner
     class Parent < Base
-
       # targets = { hostname => { :execution_plan_id => "...", :run_step_id => id,
       #                           :input => { ... } }
       def initialize(targets = {})
