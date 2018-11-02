@@ -57,18 +57,18 @@ module ForemanTasks
       end
 
       it 'can see only the tasks he has permissions on' do
-        refute dynflow_console_authorized?
+        assert_not dynflow_console_authorized?
         assert dynflow_console_authorized?(own_task)
-        refute dynflow_console_authorized?(foreign_task)
+        assert_not dynflow_console_authorized?(foreign_task)
       end
     end
 
     describe 'user without edit_foreman_tasks permissions' do
       let(:user) { FactoryBot.create(:user) }
       it 'can not see any tasks' do
-        refute dynflow_console_authorized?
-        refute dynflow_console_authorized?(own_task)
-        refute dynflow_console_authorized?(foreign_task)
+        assert_not dynflow_console_authorized?
+        assert_not dynflow_console_authorized?(own_task)
+        assert_not dynflow_console_authorized?(foreign_task)
       end
     end
   end
