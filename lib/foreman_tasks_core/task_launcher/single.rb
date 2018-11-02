@@ -7,6 +7,7 @@ module ForemanTasksCore
                             action_class(input),
                             with_callback(input.fetch('action_input', {})))
         @results = format_result(triggered)
+        triggered
       end
     end
   end

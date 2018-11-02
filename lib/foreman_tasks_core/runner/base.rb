@@ -56,12 +56,16 @@ module ForemanTasksCore
       def publish_exception(context, exception, fatal = true)
         logger.error("#{context} - #{exception.class} #{exception.message}:\n" + \
                      exception.backtrace.join("\n"))
-        @continuous_output.add_exception(context, exception)
+        dispatch_exception context, exception
         publish_exit_status('EXCEPTION') if fatal
       end
 
       def publish_exit_status(status)
         @exit_status = status
+      end
+
+      def dispatch_exception(context, exception)
+        @continuous_output.add_exception(context, exception)
       end
 
       def generate_updates

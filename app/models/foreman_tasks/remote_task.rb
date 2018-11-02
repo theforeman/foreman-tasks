@@ -12,7 +12,7 @@ module ForemanTasks
 
     delegate :proxy_action_name, :to => :action
 
-    def trigger(input)
+    def trigger(proxy_action_name, input)
       response = proxy.trigger_task(proxy_action_name, input)
       self.remote_task_id = response['task_id']
       self.state = 'triggered'

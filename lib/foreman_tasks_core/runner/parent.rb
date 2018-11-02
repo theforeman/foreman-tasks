@@ -40,11 +40,8 @@ module ForemanTasksCore
         @outputs[hostname].add_output(data, type)
       end
 
-      def publish_exception(context, exception, fatal = true)
-        logger.error("#{context} - #{exception.class} #{exception.message}:\n" + \
-                     exception.backtrace.join("\n"))
-        @outputs.each { |output| output.add_exception(context, exception) }
-        publish_exit_status('EXCEPTION') if fatal
+      def dispatch_exception(context, exception)
+        @outputs.values.each { |output| output.add_exception(context, exception) }
       end
     end
   end
