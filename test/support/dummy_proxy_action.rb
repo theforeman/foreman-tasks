@@ -32,6 +32,10 @@ module Support
       end
     end
 
+    def proxy_feature_name
+      'support'
+    end
+
     def proxy
       self.class.proxy
     end

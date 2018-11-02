@@ -23,3 +23,5 @@ def wait_for(waiting_message = 'something to happen')
   end
   raise "waiting for #{waiting_message} was not successful"
 end
+
+ForemanTasksCore.dynflow_setup(ForemanTasks.dynflow.world)
