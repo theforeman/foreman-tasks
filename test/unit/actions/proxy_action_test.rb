@@ -46,7 +46,7 @@ module ForemanTasks
             task = RemoteTask.first
             task.state.must_equal 'new'
             task.execution_plan_id.must_equal @action.execution_plan_id
-            task.operation.must_equal 'support'
+            task.feature.must_equal 'support'
             task.remote_task_id.must_be :nil?
           end
         end
