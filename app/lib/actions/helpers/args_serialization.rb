@@ -51,6 +51,7 @@ module Actions
           if @hash.key?(key)
             raise KeyError, "Conflict while serializing action args in key #{key}"
           end
+
           @hash.update(key => value)
         end
       end

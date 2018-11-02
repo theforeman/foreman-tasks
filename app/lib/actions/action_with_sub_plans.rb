@@ -8,6 +8,7 @@ module Actions
 
     def humanized_output
       return unless counts_set?
+
       _('%{total} task(s), %{success} success, %{failed} fail') %
         { total:   output[:total_count],
           success: output[:success_count],

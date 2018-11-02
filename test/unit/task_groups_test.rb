@@ -48,6 +48,7 @@ module ForemanTasks
         lambda do |action_class, *args|
           triggered = ForemanTasks.trigger(action_class, *args)
           raise triggered.error if triggered.respond_to?(:error)
+
           triggered.finished.wait
           ForemanTasks::Task.where(:external_id => triggered.id).first
         end

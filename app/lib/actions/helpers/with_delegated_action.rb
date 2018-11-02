@@ -33,6 +33,7 @@ module Actions
 
       def delegated_output
         return @delegated_output if @delegated_output
+
         action = delegated_action
         @delegated_output = case action
                             when NilClass
@@ -50,6 +51,7 @@ module Actions
           step.action_id == input[:delegated_action_id]
         end.last
         return unless delegated_step
+
         world.persistence.load_action(delegated_step)
       end
     end

@@ -12,6 +12,7 @@ module ForemanTasksCore
       unless missing_args.empty?
         raise ArgumentError, "Missing args for raw output: #{missing_args.inspect}"
       end
+
       @raw_outputs << raw_output
     end
 
@@ -21,6 +22,7 @@ module ForemanTasksCore
 
     def last_timestamp
       return if @raw_outputs.empty?
+
       @raw_outputs.last.fetch('timestamp')
     end
 

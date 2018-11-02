@@ -8,6 +8,7 @@ require 'foreman_tasks_core/ticker'
 module ForemanTasksCore
   def self.dynflow_world
     raise 'Dynflow world not set. Call initialize first' unless @dynflow_world
+
     @dynflow_world
   end
 

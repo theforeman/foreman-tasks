@@ -58,6 +58,7 @@ module ForemanTasks
 
     def trigger_repeat_after(time, action_class, *args)
       return if cancelled?
+
       if can_continue?(time)
         self.iteration += 1
         save!

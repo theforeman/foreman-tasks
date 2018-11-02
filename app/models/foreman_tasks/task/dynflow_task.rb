@@ -51,6 +51,7 @@ module ForemanTasks
 
     def execution_plan(silence_exception = true)
       return @execution_plan if defined?(@execution_plan)
+
       execution_plan = ForemanTasks.dynflow.world.persistence.load_execution_plan(external_id)
       # don't use invalid execution plans for our purposes
       if execution_plan.respond_to?(:valid?) && !execution_plan.valid?
@@ -58,10 +59,12 @@ module ForemanTasks
       else
         @execution_plan = execution_plan
       end
+
       @execution_plan
     rescue => e
       Foreman::Logging.exception("Could not load execution plan #{external_id} for task #{id}", e, :logger => 'foreman-tasks')
       raise e unless silence_exception
+
       nil
     end
 
@@ -79,11 +82,13 @@ module ForemanTasks
 
     def label
       return main_action.class.name if main_action.present?
+
       self[:label]
     end
 
     def input
       return execution_plan_action.input['job_arguments'] if active_job?
+
       main_action.task_input if main_action.respond_to?(:task_input)
     end
 
@@ -112,6 +117,7 @@ module ForemanTasks
 
     def main_action
       return @main_action if defined?(@main_action)
+
       if active_job?
         args = if execution_plan.delay_record
                  execution_plan.delay_record.args.first
@@ -129,6 +135,7 @@ module ForemanTasks
     # humanized_* methods for foreman-tasks integration.
     def active_job_action(klass, args)
       return if klass.blank?
+
       if (active_job_class = klass.safe_constantize)
         active_job_class.new(*args)
       end
@@ -137,6 +144,7 @@ module ForemanTasks
     def active_job?
       return false unless execution_plan.present? &&
                           execution_plan.root_plan_step.present?
+
       execution_plan_action.class == ::Dynflow::ActiveJob::QueueAdapters::JobWrapper
     end
 
@@ -159,6 +167,7 @@ module ForemanTasks
       elsif method == :humanized_name && main_action.nil?
         return N_(label)
       end
+
       @humanized_cache[method] ||= begin
                                      if main_action.respond_to? method
                                        begin
@@ -172,6 +181,7 @@ module ForemanTasks
 
     def find_humanize_method_kind(method)
       return method if /humanized_.*/ =~ method
+
       if [:name, :input, :output, :error].include?(method)
         "humanized_#{method}".to_sym
       end
@@ -212,6 +222,7 @@ module ForemanTasks
 
     def string_to_time(zone, time)
       return time if time.is_a?(Time)
+
       zone.parse(time)
     end
 

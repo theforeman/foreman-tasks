@@ -90,6 +90,7 @@ module ForemanTasks
       # we want to be able to rollback the whole db operation when planning fails.
       def plan_action(action_class, *args)
         return if ForemanTasks.dynflow.config.disable_active_record_actions
+
         @execution_plan = ::ForemanTasks.dynflow.world.plan(action_class, *args)
         raise @execution_plan.errors.first if @execution_plan.error?
       end
@@ -113,6 +114,7 @@ module ForemanTasks
            @_dynflow_task_wrapped
           return yield
         end
+
         @_dynflow_task_wrapped = true
 
         @_dynflow_hook_action = case method
