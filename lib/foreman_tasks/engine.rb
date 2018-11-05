@@ -118,6 +118,7 @@ module ForemanTasks
       ::ForemanTasks.dynflow.config.on_init(false) do |world|
         world.middleware.use Actions::Middleware::KeepCurrentTaxonomies
         world.middleware.use Actions::Middleware::KeepCurrentUser
+        world.middleware.use Actions::Middleware::KeepCurrentTimezone
       end
 
       ::ForemanTasks.dynflow.config.on_init do |world|
