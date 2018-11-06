@@ -158,7 +158,7 @@ module ForemanTasks
       cronline = if triggering.input_type == :cronline
                    triggering.cronline
                  else
-                   ::ForemanTasks::RecurringLogic.assemble_cronline(cronline_hash(triggering.input_type, triggering.time, triggering.days_of_week))
+                   ::ForemanTasks::RecurringLogic.assemble_cronline(cronline_hash(triggering.input_type, triggering.time, triggering.days, triggering.days_of_week))
                  end
       ::ForemanTasks::RecurringLogic.new_from_cronline(cronline).tap do |manager|
         manager.end_time = triggering.end_time if triggering.end_time_limited.present?
@@ -167,11 +167,10 @@ module ForemanTasks
       end
     end
 
-    def self.cronline_hash(recurring_type, time_hash, days_of_week_hash)
+    def self.cronline_hash(recurring_type, time_hash, days, days_of_week_hash)
       hash = Hash[[:years, :months, :days, :hours, :minutes].zip(time_hash.values)]
-      hash.update :days_of_week => days_of_week_hash
-        .select { |_key, value| value == '1' }
-        .keys.join(',')
+      days_of_week = days_of_week_hash.select { |_key, value| value == '1' }.keys.join(',')
+      hash.update :days_of_week => days_of_week, :days => days
       allowed_keys = case recurring_type
                      when :monthly
                        [:minutes, :hours, :days]
