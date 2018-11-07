@@ -12,23 +12,31 @@ module ForemanTasks
 
     delegate :proxy_action_name, :to => :action
 
+    # Triggers a task on the proxy "the old way"
     def trigger(proxy_action_name, input)
-      response = proxy.trigger_task(proxy_action_name, input)
-      self.remote_task_id = response['task_id']
-      self.state = 'triggered'
+      response = begin
+                   proxy.trigger_task(proxy_action_name, input)
+                 rescue RestClient::Exception => e
+                   logger.warn "Could not trigger task on the smart proxy: #{e.message}"
+                   {}
+                 end
+      update_from_batch_trigger(response)
       save!
     end
 
     def self.batch_trigger(operation, remote_tasks)
       remote_tasks.group_by(&:proxy_url).values.map do |group|
-        input_hash = group.reduce({}) do |acc, cur|
-          acc.update(cur.execution_plan_id => { :action_input => cur.proxy_input, :action_class => cur.proxy_action_name })
+        input_hash = group.reduce({}) do |acc, remote_task|
+          acc.merge(remote_task.execution_plan_id => { :action_input => remote_task.proxy_input,
+                                                       :action_class => remote_task.proxy_action_name })
         end
         safe_batch_trigger(operation, group, input_hash)
       end
       remote_tasks
     end
 
+    # Attempt to trigger the tasks using the new API and fall back to the old one
+    # if it fails
     def self.safe_batch_trigger(operation, remote_tasks, input_hash)
       results = remote_tasks.first.proxy.launch_tasks(operation, input_hash)
       remote_tasks.each { |remote_task| remote_task.update_from_batch_trigger results[remote_task.execution_plan_id] }
@@ -36,6 +44,7 @@ module ForemanTasks
       fallback_batch_trigger remote_tasks, input_hash
     end
 
+    # Trigger the tasks one-by-one using the old API
     def self.fallback_batch_trigger(remote_tasks, input_hash)
       remote_tasks.each do |remote_task|
         remote_task.trigger(input_hash[remote_task.execution_plan_id][:action_input])

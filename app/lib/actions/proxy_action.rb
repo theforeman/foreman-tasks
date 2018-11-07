@@ -63,13 +63,11 @@ module Actions
 
     def trigger_proxy_task
       suspend do |_suspended_action|
-        if with_batch_triggering?
-          prepare_for_batch_triggering
-        else
-          remote_task = ::ForemanTasks::RemoteTask.new(:execution_plan_id => execution_plan_id,
-                                                       :proxy_url => input[:proxy_url],
-                                                       :step_id => run_step_id,
-                                                       :operation => proxy_operation_name)
+        remote_task = prepare_remote_task
+        remote_task.save!
+        # Just saving the RemoteTask is enough when using batch triggering
+        # It will be picked up by the RemoteTaskTriggering middleware
+        unless with_batch_triggering?
           remote_task.trigger(proxy_action_name, proxy_input)
           output[:proxy_task_id] = remote_task.remote_task_id
         end
@@ -237,11 +235,11 @@ module Actions
       end
     end
 
-    def prepare_for_batch_triggering
+    def prepare_remote_task
       ::ForemanTasks::RemoteTask.new(:execution_plan_id => execution_plan_id,
                                      :proxy_url => input[:proxy_url],
                                      :step_id => run_step_id,
-                                     :operation => proxy_operation_name).save!
+                                     :operation => proxy_operation_name)
     end
 
     def proxy_task_id
