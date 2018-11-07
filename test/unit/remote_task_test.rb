@@ -21,7 +21,7 @@ module ForemanTasks
         fake_proxy = mock()
         fake_proxy.expects(:launch_tasks).returns(results)
         remote_tasks.first.expects(:proxy).returns(fake_proxy)
-        RemoteTask.batch_trigger('a_feature', remote_tasks)
+        RemoteTask.batch_trigger('a_operation', remote_tasks)
         remote_tasks.each do |remote_task|
           remote_task.reload
           remote_task.state.must_equal 'triggered'
@@ -34,7 +34,7 @@ module ForemanTasks
         fake_proxy.expects(:launch_tasks).raises(RestClient::NotFound.new)
         remote_tasks.first.expects(:proxy).returns(fake_proxy)
         remote_tasks.each { |task| task.expects(:trigger) }
-        RemoteTask.batch_trigger('a_feature', remote_tasks)
+        RemoteTask.batch_trigger('a_operation', remote_tasks)
       end
     end
   end

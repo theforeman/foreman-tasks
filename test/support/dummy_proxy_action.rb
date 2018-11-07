@@ -32,7 +32,7 @@ module Support
       end
     end
 
-    def proxy_feature_name
+    def proxy_operation_name
       'support'
     end
 

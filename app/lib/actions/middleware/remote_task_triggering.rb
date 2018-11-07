@@ -11,8 +11,8 @@ module Actions
 
       def trigger_remote_tasks
         remote_tasks.pending.order(:proxy_url, :id).find_in_batches(:batch_size => BATCH_SIZE) do |batch|
-          batch.group_by(&:feature).each do |feature, group|
-            ForemanTasks::RemoteTask.batch_trigger(feature, group)
+          batch.group_by(&:operation).each do |operation, group|
+            ForemanTasks::RemoteTask.batch_trigger(operation, group)
           end
         end
       end
