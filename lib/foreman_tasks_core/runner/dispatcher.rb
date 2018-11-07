@@ -41,7 +41,8 @@ module ForemanTasksCore
 
           updates.each { |receiver, update| receiver << update }
 
-          finish if updates[@suspended_action] && updates[@suspended_action].exit_status
+          main_process = updates[@suspended_action]
+          finish if main_process && main_process.exit_status
         ensure
           @refresh_planned = false
           plan_next_refresh

@@ -14,6 +14,10 @@ module ForemanTasksCore
         ping suspended_action
         wait_for_sub_plans sub_plans
       end
+
+      def rescue_strategy
+        Dynflow::Action::Rescue::Fail
+      end
     end
 
     class Batch < Abstract
