@@ -96,6 +96,10 @@ module ForemanTasks
       ForemanTasks::Task
     end
 
+    def auto_complete_controller_name
+      '/foreman_tasks/tasks'
+    end
+
     private
 
     def restrict_dangerous_actions
