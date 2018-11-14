@@ -37,7 +37,7 @@ module ForemanTasksCore
       end
 
       def publish_data(data, type)
-        @outputs[:control].add_output(data, type)
+        @outputs[@suspended_action].add_output(data, type)
       end
 
       def publish_data_for(hostname, data, type)

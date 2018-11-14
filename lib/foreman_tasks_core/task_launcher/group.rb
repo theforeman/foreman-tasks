@@ -17,7 +17,7 @@ module ForemanTasksCore
 
         def initiate_runner
           launcher = SmartProxyDynflowCore::TaskLauncherRegistry.fetch(input[:feature])
-          launcher.group_runner_class.new(input[:targets])
+          launcher.group_runner_class.new(suspended_action, input[:targets])
         end
       end
 
