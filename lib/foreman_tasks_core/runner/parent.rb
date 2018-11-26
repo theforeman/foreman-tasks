@@ -1,7 +1,7 @@
 module ForemanTasksCore
   module Runner
     class Parent < Base
-      # targets = { hostname => { :execution_plan_id => "...", :run_step_id => id,
+      # targets = { identifier => { :execution_plan_id => "...", :run_step_id => id,
       #                           :input => { ... } }
       def initialize(targets = {}, suspended_action: nil)
         @targets = targets
@@ -26,8 +26,8 @@ module ForemanTasksCore
         end
       end
 
-      def host_action(hostname)
-        options = @targets[hostname].slice('execution_plan_id', 'run_step_id')
+      def host_action(identifier)
+        options = @targets[identifier].slice('execution_plan_id', 'run_step_id')
                                     .merge(:world => ForemanTasksCore.dynflow_world)
         Dynflow::Action::Suspended.new OpenStruct.new(options)
       end
@@ -40,8 +40,8 @@ module ForemanTasksCore
         @outputs[@suspended_action].add_output(data, type)
       end
 
-      def publish_data_for(hostname, data, type)
-        @outputs[hostname].add_output(data, type)
+      def publish_data_for(identifier, data, type)
+        @outputs[identifier].add_output(data, type)
       end
 
       def dispatch_exception(context, exception)
