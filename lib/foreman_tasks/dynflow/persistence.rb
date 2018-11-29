@@ -30,7 +30,6 @@ module ForemanTasks
       when :scheduled
         delayed_plan = load_delayed_plan(execution_plan_id)
         raise Foreman::Exception, 'Plan is delayed but the delay record is missing' if delayed_plan.nil?
-
         task = ::ForemanTasks::Task::DynflowTask.find_by!(:external_id => execution_plan_id)
         task.update_from_dynflow(data.merge(:start_at => delayed_plan[:start_at],
                                             :start_before => delayed_plan[:start_before]))

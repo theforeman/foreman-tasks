@@ -248,7 +248,6 @@ module ForemanTasks
 
     def action
       return to_label if super.blank?
-
       super
     end
 

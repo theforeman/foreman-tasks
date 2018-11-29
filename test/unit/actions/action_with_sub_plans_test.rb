@@ -35,7 +35,6 @@ module ForemanTasks
         user = FactoryBot.create(:user)
         triggered = ForemanTasks.trigger(ParentAction, user)
         raise triggered.error if triggered.respond_to?(:error)
-
         triggered.finished.wait(2)
         ForemanTasks::Task.where(:external_id => triggered.id).first
       end

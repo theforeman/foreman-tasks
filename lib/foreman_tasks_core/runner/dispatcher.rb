@@ -5,7 +5,6 @@ module ForemanTasksCore
     class Dispatcher
       def self.instance
         return @instance if @instance
-
         @instance = new(ForemanTasksCore.dynflow_world.clock,
                         ForemanTasksCore.dynflow_world.logger)
       end
@@ -117,7 +116,6 @@ module ForemanTasksCore
         synchronize do
           begin
             raise "Actor with runner id #{runner.id} already exists" if @runner_actors[runner.id]
-
             runner.logger = @logger
             runner_actor = RunnerActor.spawn("runner-actor-#{runner.id}", self, suspended_action, runner, @clock, @logger)
             @runner_actors[runner.id] = runner_actor
@@ -172,7 +170,6 @@ module ForemanTasksCore
       def _finish(runner_id)
         runner_actor = @runner_actors.delete(runner_id)
         return unless runner_actor
-
         @logger.debug("closing session for command [#{runner_id}]," \
                       "#{@runner_actors.size} actors left ")
         runner_actor.tell([:start_termination, Concurrent.future])

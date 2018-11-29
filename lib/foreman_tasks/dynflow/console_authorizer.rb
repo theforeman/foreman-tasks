@@ -19,7 +19,6 @@ module ForemanTasks
 
     def unlimited_edit?
       return true if @user.admin?
-
       # users with unlimited edit_foreman_tasks can operate with the
       # console no matter what task it is...
       edit_permission = Permission.where(:name => :edit_foreman_tasks, :resource_type => ForemanTasks::Task.name).first

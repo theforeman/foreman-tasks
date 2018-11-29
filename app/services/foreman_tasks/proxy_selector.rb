@@ -18,12 +18,10 @@ module ForemanTasks
     def determine_proxy(*args)
       available_proxies = self.available_proxies(*args)
       return :not_defined if available_proxies.empty? || available_proxies.values.all?(&:empty?)
-
       proxy = nil
 
       strategies.each do |strategy|
         next if available_proxies[strategy].blank?
-
         proxy = select_by_jobs_count(available_proxies[strategy])
         break if proxy
       end

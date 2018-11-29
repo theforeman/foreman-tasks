@@ -184,7 +184,6 @@ module ForemanTasks
           if search_params[:user_id].blank?
             raise BadRequest, _('User search_params requires user_id to be specified')
           end
-
           scope.joins(:locks).where(foreman_tasks_locks:
                                         { name:          ::ForemanTasks::Lock::OWNER_LOCK_NAME,
                                           resource_type: 'User',
@@ -201,7 +200,6 @@ module ForemanTasks
           if search_params[:task_id].blank?
             raise BadRequest, _('Task search_params requires task_id to be specified')
           end
-
           scope.where(id: search_params[:task_id])
         else
           raise BadRequest, _('Type %s for search_params is not supported') % search_params[:type]
@@ -239,7 +237,6 @@ module ForemanTasks
 
       def task_hash(task)
         return @tasks[task.id] if @tasks && @tasks[task.id]
-
         task_hash = Rabl.render(
           task, 'show',
           view_path: "#{ForemanTasks::Engine.root}/app/views/foreman_tasks/api/tasks",

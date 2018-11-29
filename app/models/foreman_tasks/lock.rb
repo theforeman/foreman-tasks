@@ -136,7 +136,6 @@ module ForemanTasks
         if lock_names.any? { |lock_name| RESERVED_LOCK_NAMES.include?(lock_name) }
           raise "Lock name #{lock_name} is reserved"
         end
-
         lock_names.concat([LINK_LOCK_NAME, OWNER_LOCK_NAME]) if include_links
         lock_names
       end

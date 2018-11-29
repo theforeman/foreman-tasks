@@ -2,7 +2,6 @@ module ForemanTasks
   module TasksHelper
     def format_task_input(task)
       return '-' unless task
-
       task.action
     end
 

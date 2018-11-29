@@ -13,7 +13,6 @@ module ForemanTasks
 
     def backup_settings
       return @backup_settings if @backup_settings
-
       backup_options = {
         :backup_deleted_plans => true,
         :backup_dir => default_backup_dir

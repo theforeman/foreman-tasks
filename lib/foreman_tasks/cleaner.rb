@@ -48,7 +48,6 @@ module ForemanTasks
 
     def self.cleanup_settings
       return @cleanup_settings if @cleanup_settings
-
       @cleanup_settings = SETTINGS[:'foreman-tasks'] && SETTINGS[:'foreman-tasks'][:cleanup] || {}
     end
 
@@ -56,7 +55,6 @@ module ForemanTasks
       disable_actions_with_periods = "label !^ (#{actions_with_periods.keys.join(', ')})"
       cleanup_settings.fetch(:rules, []).map do |hash|
         next if hash[:after].nil?
-
         conditions = []
         conditions << disable_actions_with_periods unless hash[:override_actions]
         conditions << hash[:filter] if hash[:filter]
@@ -232,7 +230,6 @@ module ForemanTasks
       unless matched_string
         raise ArgumentError, "String #{string} isn't an expected specification of time in format of \"{number}{time_unit}\""
       end
-
       number = matched_string[1].to_i
       value = case matched_string[2]
               when 's'

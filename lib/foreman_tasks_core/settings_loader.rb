@@ -21,7 +21,6 @@ module ForemanTasksCore
       names.each do |name|
         raise 'settings name has to be a symbol' unless name.is_a? Symbol
         raise "settings #{name} already registered" if SettingsLoader.settings_registered?(name)
-
         name_to_settings[name] = object
       end
       settings_registry[names] = object
@@ -29,7 +28,6 @@ module ForemanTasksCore
 
     def self.setup_settings(name, settings)
       raise "Settings for #{name} were not registered" unless settings_registered?(name)
-
       name_to_settings[name].initialize_settings(settings)
     end
 
@@ -45,7 +43,6 @@ module ForemanTasksCore
 
     def settings
       raise "Settings for #{self} not initalized" unless @settings
-
       @settings
     end
 
