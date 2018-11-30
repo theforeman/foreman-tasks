@@ -114,7 +114,7 @@ module ForemanTasks
         action.world.stubs(:persistence).returns(persistence)
         action.wipe_secrets!(nil)
 
-        refute action.input.key?(:secrets)
+        assert_not action.input.key?(:secrets)
       end
     end
   end

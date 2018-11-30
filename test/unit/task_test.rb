@@ -152,7 +152,7 @@ class TasksTest < ActiveSupport::TestCase
     let(:task) { FactoryBot.create(:dynflow_task) }
 
     it 'can indicate it is recurring' do
-      refute task.recurring?
+      assert_not task.recurring?
       task.add_missing_task_groups(logic.task_group)
       task.reload
       assert task.recurring?
@@ -163,7 +163,7 @@ class TasksTest < ActiveSupport::TestCase
     let(:task) { FactoryBot.create(:some_task) }
 
     it 'can indicate it is delayed' do
-      refute task.delayed?
+      assert_not task.delayed?
       task.execution_type.must_equal 'Immediate'
       task.start_at = Time.now.utc + 100
       assert task.delayed?

@@ -147,7 +147,7 @@ class RecurringLogicsTest < ActiveSupport::TestCase
         assert_equal 'active', logic.state
 
         task = logic.tasks.find_by(:state => 'scheduled')
-        refute ForemanTasks.dynflow.world.persistence.load_delayed_plan(task.execution_plan.id).frozen
+        assert_not ForemanTasks.dynflow.world.persistence.load_delayed_plan(task.execution_plan.id).frozen
         assert task.start_at > Time.zone.now
       end
     end

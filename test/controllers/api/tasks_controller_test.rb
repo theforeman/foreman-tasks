@@ -42,7 +42,7 @@ module ForemanTasks
           assert_response :success
           response = JSON.parse(@response.body)
           assert_kind_of Array, response
-          refute response.empty?
+          assert_not response.empty?
           assert_kind_of Hash, response[0]
         end
       end

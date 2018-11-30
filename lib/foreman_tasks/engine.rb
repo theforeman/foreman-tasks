@@ -8,10 +8,10 @@ module ForemanTasks
 
     initializer 'foreman_tasks.load_default_settings', :before => :load_config_initializers do
       require_dependency File.expand_path('../../../app/models/setting/foreman_tasks.rb', __FILE__) if begin
-                                                                                                          Setting.table_exists?
-                                                                                                        rescue
-                                                                                                          (false)
-                                                                                                        end
+                                                                                                         Setting.table_exists?
+                                                                                                       rescue
+                                                                                                         false
+                                                                                                       end
     end
 
     # Precompile any JS or CSS files under app/assets/

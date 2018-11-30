@@ -201,7 +201,7 @@ namespace :foreman_tasks do
           #{template}
        <body>
        </html>
-         HTML
+        HTML
       end
 
       def self.copy_assets(tmp_dir)
