@@ -14,6 +14,9 @@ Lint/ShadowingOuterLocalVariable:
 Rails:
   Enabled: true
 
+Rails/Output:
+  Enabled: false
+
 # Don't prefer is_a? over kind_of?
 Style/ClassCheck:
   Enabled: false

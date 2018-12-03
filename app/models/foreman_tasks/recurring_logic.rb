@@ -83,6 +83,7 @@ module ForemanTasks
 
     def next_occurrence_time(time = Time.zone.now)
       @parser ||= CronParser.new(cron_line, Time.zone)
+      puts "====== time.inspect: #{time.inspect}; time.zone: #{Time.zone}, cron_line: #{cron_line}"
       @parser.next(time)
     end
 
