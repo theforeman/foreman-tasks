@@ -22,7 +22,7 @@ module ForemanTasks
           :minutes => 0,
           :hours => 12,
           :days => 1,
-          :months => (Time.zone.now.month + 1) % 12
+          :months => ((Time.zone.now.month + 1) % 12) + 1
         }
       end
 
