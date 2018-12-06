@@ -2,6 +2,7 @@ module Actions
   class Actions::ActionWithSubPlans < Actions::EntryAction
     include Dynflow::Action::WithSubPlans
 
+
     def plan(*_args)
       raise NotImplementedError
     end

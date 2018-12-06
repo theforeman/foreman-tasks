@@ -3,6 +3,8 @@ module Actions
     include Helpers::ArgsSerialization
     include Helpers::Lock
 
+    execution_plan_hooks.use :drop_all_locks!, :on => :stopped
+
     # what locks to use on the resource? All by default, can be overriden.
     # It might one or more locks available for the resource. This following
     # special values are supported as well:
@@ -34,12 +36,10 @@ module Actions
       input.update serialize_args(resource, *resource.all_related_resources, *additional_args)
 
       if resource.is_a? ActiveRecord::Base
-        if resource_locks == :exclusive
-          exclusive_lock!(resource)
-        elsif resource_locks == :link
+        if resource_locks == :link
           link!(resource)
         else
-          lock!(resource, resource_locks)
+          exclusive_lock!(resource)
         end
       end
     end
@@ -62,6 +62,10 @@ module Actions
 
     def self.serializer_class
       Serializers::ActiveRecordSerializer
+    end
+
+    def drop_all_locks!(_execution_plan)
+      ForemanTasks::Lock.where(:task_id => task.id).destroy_all
     end
   end
 end

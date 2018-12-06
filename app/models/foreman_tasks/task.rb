@@ -31,6 +31,7 @@ module ForemanTasks
     has_many :recurring_logic_task_groups, -> { where :type => 'ForemanTasks::TaskGroups::RecurringLogicTaskGroup' },
              :through => :task_group_members, :source => :task_group
     belongs_to :user
+    has_many :links, :dependent => :destroy
 
     scoped_search :on => :id, :complete_value => false
     scoped_search :on => :action, :complete_value => false
@@ -46,10 +47,15 @@ module ForemanTasks
 
     # Note: the following searches may return duplicates, this is due to
     #       one task maybe having multiple locks (e.g. read/write) for the same resource_id
-    scoped_search :relation => :locks,  :on => :resource_id, :complete_value => false, :rename => 'location_id', :ext_method => :search_by_taxonomy, :only_explicit => true
-    scoped_search :relation => :locks,  :on => :resource_id, :complete_value => false, :rename => 'organization_id', :ext_method => :search_by_taxonomy, :only_explicit => true
-    scoped_search :relation => :locks,  :on => :resource_type, :complete_value => true, :rename => 'resource_type', :ext_method => :search_by_generic_resource, :only_explicit => true
-    scoped_search :relation => :locks,  :on => :resource_id, :complete_value => false, :rename => 'resource_id', :ext_method => :search_by_generic_resource, :only_explicit => true
+    # scoped_search :relation => :locks,  :on => :resource_id, :complete_value => false, :rename => 'location_id', :ext_method => :search_by_taxonomy, :only_explicit => true
+    # scoped_search :relation => :locks,  :on => :resource_id, :complete_value => false, :rename => 'organization_id', :ext_method => :search_by_taxonomy, :only_explicit => true
+    # scoped_search :relation => :locks,  :on => :resource_type, :complete_value => true, :rename => 'resource_type', :ext_method => :search_by_generic_resource, :only_explicit => true
+    # scoped_search :relation => :locks,  :on => :resource_id, :complete_value => false, :rename => 'resource_id', :ext_method => :search_by_generic_resource, :only_explicit => true
+    scoped_search :relation => :links,  :on => :resource_id, :complete_value => false, :rename => 'location_id', :ext_method => :search_by_taxonomy, :only_explicit => true
+    scoped_search :relation => :links,  :on => :resource_id, :complete_value => false, :rename => 'organization_id', :ext_method => :search_by_taxonomy, :only_explicit => true
+    scoped_search :relation => :links,  :on => :resource_type, :complete_value => true, :rename => 'resource_type', :ext_method => :search_by_generic_resource, :only_explicit => true
+    scoped_search :relation => :links,  :on => :resource_id, :complete_value => false, :rename => 'resource_id', :ext_method => :search_by_generic_resource, :only_explicit => true
+
     scoped_search :on => :user_id,
                   :complete_value => true,
                   :rename => 'user.id',
@@ -65,8 +71,8 @@ module ForemanTasks
     scope :running, -> { where("foreman_tasks_tasks.state NOT IN ('stopped', 'paused')") }
     scope :for_resource,
           (lambda do |resource|
-             joins(:locks).where(:"foreman_tasks_locks.resource_id" => resource.id,
-                                 :"foreman_tasks_locks.resource_type" => resource.class.name)
+             joins(:links).where(:"foreman_tasks_links.resource_id" => resource.id,
+                                 :"foreman_tasks_links.resource_type" => resource.class.name)
            end)
     scope :for_action_types, (->(action_types) { where('foreman_tasks_tasks.label IN (?)', Array(action_types)) })
 

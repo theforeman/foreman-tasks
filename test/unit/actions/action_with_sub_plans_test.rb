@@ -34,8 +34,9 @@ module ForemanTasks
     describe Actions::ActionWithSubPlans do
       include ForemanTasks::TestHelpers::WithInThreadExecutor
 
+      let(:user) { FactoryBot.create(:user) }
+
       let(:task) do
-        user = FactoryBot.create(:user)
         triggered = ForemanTasks.trigger(ParentAction, user)
         raise triggered.error if triggered.respond_to?(:error)
         triggered.finished.wait(30)
@@ -49,7 +50,9 @@ module ForemanTasks
 
       specify "the locks of the sub-plan don't colide with the locks of its parent" do
         child_task = task.sub_tasks.first
-        assert(child_task.locks.any? { |lock| lock.name == 'write' }, "it's locks don't conflict with parent's")
+        assert(!child_task.locks.any?, "the lock is ensured by the parent")
+        found = ForemanTasks::Link.for_resource(user).where(:task_id => child_task.id).any?
+        assert(found, "the action is linked properly")
       end
     end
   end
