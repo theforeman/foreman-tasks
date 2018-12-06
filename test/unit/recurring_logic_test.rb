@@ -94,7 +94,9 @@ class RecurringLogicsTest < ActiveSupport::TestCase
       future_time = Time.zone.now + 1.week
       recurring_logic.start_after(::Support::DummyRecurringDynflowAction, future_time)
 
-      assert_equal future_time.change(:min => future_time.min + 1, :sec => 0), recurring_logic.tasks.first.start_at
+      # Add one minute to the time, set seconds to 0
+      target_time = (future_time + 1.minute).change(:sec => 0)
+      assert_equal target_time, recurring_logic.tasks.first.start_at
     end
 
     it 'has a task group associated to all tasks that were created as part of the recurring logic' do
