@@ -27,18 +27,12 @@ module ForemanTasks
     belongs_to :resource, polymorphic: true
 
     validates :task_id, :resource_id, :resource_type, presence: true
-    validates :resource_id, :uniqueness => { :scope => :resource_type }
 
     validate do
-      raise LockConflict.new(self, colliding_locks) unless available?
+      raise LockConflict.new(self, colliding_locks) if colliding_locks.any?
     end
 
     scope :for_resource, ->(resource) { where(:resource => resource) }
-
-    # returns true if it's possible to acquire this kind of lock
-    def available?
-      !colliding_locks.exists?
-    end
 
     # returns a scope of the locks colliding with this one
     def colliding_locks
