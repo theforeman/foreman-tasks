@@ -1,8 +1,9 @@
 require 'ostruct'
 require 'foreman_tasks_test_helper'
+require 'securerandom'
 
 module ForemanTasks
-  class LockingTest < ::ActiveSupport::TestCase
+  class LockTest < ::ActiveSupport::TestCase
     describe ::ForemanTasks::Lock::LockConflict do
       class FakeLockConflict < ForemanTasks::Lock::LockConflict
         def _(val)
@@ -41,12 +42,6 @@ module ForemanTasks
           lock = Lock.lock!(resource, task1)
           Lock.colliding_locks(resource, task2).must_equal [lock]
           proc { Lock.lock!(resource, task2) }.must_raise Lock::LockConflict
-        end
-
-        it 'creates a link when creating a lock for a resource' do
-          Lock.lock!(resource, task1)
-          link = Link.for_resource(resource).first
-          link.task_id.must_equal task1.id
         end
       end
 
