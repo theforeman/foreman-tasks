@@ -48,7 +48,9 @@ module Actions
       target_class = input[:target_class].constantize
       targets = target_class.where(:id => current_batch)
 
-      targets.map do |target|
+      missing = Array.new((current_batch - targets.map(&:id)).count) { nil }
+
+      (targets + missing).map do |target|
         trigger(action_class, target, *input[:args])
       end
     end
