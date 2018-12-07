@@ -19,6 +19,7 @@ const TaskDetails = ({
   failedSteps,
   runningSteps,
   locks,
+  links,
   cancelStep,
   taskReloadStart,
   taskReloadStop,
@@ -87,7 +88,7 @@ const TaskDetails = ({
           <Errors executionPlan={executionPlan} failedSteps={failedSteps} />
         </Tab>
         <Tab eventKey={4} disabled={isLoading} title={__('Locks')}>
-          <Locks locks={locks} />
+          <Locks locks={locks.concat(links)} />
         </Tab>
         <Tab eventKey={5} disabled={isLoading} title={__('Raw')}>
           <Raw
@@ -114,6 +115,7 @@ TaskDetails.propTypes = {
   APIerror: PropTypes.object,
   taskReloadStop: PropTypes.func.isRequired,
   taskReloadStart: PropTypes.func.isRequired,
+  links: PropTypes.array,
   ...Task.propTypes,
   ...Errors.propTypes,
   ...Locks.propTypes,
@@ -124,6 +126,7 @@ TaskDetails.defaultProps = {
   runningSteps: [],
   APIerror: null,
   status: STATUS.PENDING,
+  links: [],
   ...Task.defaultProps,
   ...RunningSteps.defaultProps,
   ...Errors.defaultProps,

@@ -21,10 +21,10 @@ const Locks = ({ locks }) => (
                     lock.exclusive ? 'fa-lock' : 'fa-unlock-alt'
                   }`}
                 />
-                {lock.name}
+                {lock.resource_type}
               </Card.Title>
               <Card.Body>
-                {`${lock.resource_type} id:${lock.resource_id}`}
+                {`id:${lock.resource_id}`}
                 <br />
               </Card.Body>
             </Card>

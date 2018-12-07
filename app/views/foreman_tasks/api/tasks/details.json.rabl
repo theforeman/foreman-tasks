@@ -9,10 +9,13 @@ node(:failed_steps) { @task.input_output_failed_steps }
 node(:running_steps) { @task.input_output_running_steps }
 node(:help) { troubleshooting_info_text }
 node(:has_sub_tasks) { @task.sub_tasks.any? }
+node(:allowDangerousActions) { Setting['dynflow_allow_dangerous_actions'] }
+
 node(:locks) do
-  @task.locks.map do |lock|
-    { name: lock.name, exclusive: lock.exclusive, resource_type: lock.resource_type, resource_id: lock.resource_id }
-  end
+  @task.locks.map { |lock| partial('foreman_tasks/api/locks/show', :object => lock) }
+end
+node(:links) do
+  @task.links.map { |link| partial('foreman_tasks/api/locks/show', :object => link, :locals => { :link => true }) }
 end
 node(:username_path) { username_link_task(@task.owner, @task.username) }
 node(:dynflow_enable_console) { Setting['dynflow_enable_console'] }

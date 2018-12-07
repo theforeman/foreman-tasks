@@ -1,0 +1,10 @@
+<div class="col-xs-6 col-sm-4 col-md-4">
+  <div class="card-pf card-pf-accented card-pf-aggregate-status">
+    <h2 class="card-pf-title">
+      <span class="fa <%= lock.is_a?(::ForemanTasks::Lock) ? 'fa-lock' : 'fa-unlock-alt' %>"></span> <%= lock.resource_type %>
+    </h2>
+    <div class="card-pf-body">
+      <a href="<%= url_for(lock.resource) %>"><%= format('id:%s', lock.resource_id) %></a><br>
+    </div>
+  </div>
+</div>
