@@ -20,8 +20,9 @@ module ForemanTasks
       let(:targets) { (1..5).map { |i| Target.new i } }
       let(:task) do
         triggered = ForemanTasks.trigger(ParentAction, ChildAction, targets)
-        triggered.finished.wait(2)
-        ForemanTasks::Task.where(:external_id => triggered.id).first
+        task = ForemanTasks::Task.where(:external_id => triggered.id).first
+        wait_for { task.reload.state == 'stopped' }
+        task
       end
 
       specify 'it plans a task for each target' do
