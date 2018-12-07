@@ -53,38 +53,30 @@ module ForemanTasks
       # No other task related to the resource is not allowed (even not-locking ones)
       # A typical usecase is resource deletion, where it's good idea to make sure
       # nothing else related to the resource is really running.
-      def exclusive!(resource, uuid)
-        lock = build(uuid, resource)
-        Link.link!(resource, uuid)
-        Link.build_related_links(resource, uuid).each(&:save!)
+      # It also creates a Link between the task and the resource and between the task
+      # and all related resources.
+      def exclusive!(resource, task)
+        lock = build(resource, task)
+        lock.save!
+        ForemanTasks::Link.link_resource_and_related!(resource, task)
         lock
       end
 
-      # Locks the resource so that no other task can lock it while running.
-      # Other not-locking tasks are tolerated.
-      #
-      # The lock names allow to specify what locks should be activated. It has to
-      # be a subset of names defined in model's class available_locks method
-      #
-      # When no lock name is specified, the resource is locked against all the available
-      # locks.
-      #
-      # It also looks at +related_resources+ method of the resource to calcuate all
-      # the related resources (recursively) and links the task to them as well.
-      def lock!(resource, uuid, *lock_names)
-        exclusive!(resource, uuid)
+      # See #exclusive!
+      def lock!(resource, task, *_lock_names)
+        exclusive!(resource, task)
       end
 
-      def colliding_locks(resource, uuid, *lock_names)
-        build(uuid, resource).colliding_locks.to_a
+      def colliding_locks(resource, task, *_lock_names)
+        build(resource, task).colliding_locks.to_a
       end
 
       private
 
-      def build(uuid, resource)
-        find_or_create_by(task_id:       uuid,
-                          resource_type: resource.class.name,
-                          resource_id:   resource.id)
+      def build(resource, task)
+        find_or_initialize_by(task_id:       task.id,
+                              resource_type: resource.class.name,
+                              resource_id:   resource.id)
       end
     end
   end

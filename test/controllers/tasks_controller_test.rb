@@ -10,7 +10,7 @@ module ForemanTasks
       # rubocop:enable Naming/AccessorMethodName
 
       def linked_task(resource)
-        FactoryBot.create(:some_task).tap { |t| ForemanTasks::Link.link!(resource, t.id) }
+        FactoryBot.create(:some_task).tap { |t| ForemanTasks::Link.link!(resource, t) }
       end
 
       def in_taxonomy_scope(organization, location = nil)
