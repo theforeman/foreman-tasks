@@ -14,10 +14,10 @@ module ForemanTasks
         resource_type = key == 'location_id' ? 'Location' : 'Organization'
 
         joins = <<-SQL
-     LEFT JOIN foreman_tasks_locks AS foreman_tasks_locks_taxonomy#{uniq_suffix}
-     ON (foreman_tasks_locks_taxonomy#{uniq_suffix}.task_id = foreman_tasks_tasks.id AND
-         foreman_tasks_locks_taxonomy#{uniq_suffix}.resource_type = '#{resource_type}')
-     SQL
+        LEFT JOIN foreman_tasks_locks AS foreman_tasks_locks_taxonomy#{uniq_suffix}
+        ON (foreman_tasks_locks_taxonomy#{uniq_suffix}.task_id = foreman_tasks_tasks.id AND
+            foreman_tasks_locks_taxonomy#{uniq_suffix}.resource_type = '#{resource_type}')
+        SQL
         # Select only those tasks which either have the correct taxonomy or are not related to any
         sql = "foreman_tasks_locks_taxonomy#{uniq_suffix}.resource_id #{operator} ? OR foreman_tasks_locks_taxonomy#{uniq_suffix}.resource_id IS NULL"
         { :conditions => sanitize_sql_for_conditions([sql, value]), :joins => joins }
