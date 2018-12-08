@@ -9,6 +9,6 @@ class MakeLocksExclusive < ActiveRecord::Migration[5.0]
   end
 
   def down
-    # raise ActiveRecord::IrreversibleMigration
+    raise ActiveRecord::IrreversibleMigration
   end
 end
