@@ -25,9 +25,9 @@ class RecurringLogicsTest < ActiveSupport::TestCase
       minute = 0
       reference_time = Time.utc(year, month, day, hour, minute)
       parser = ForemanTasks::RecurringLogic.new_from_cronline('* * * * *')
-      parser.next_occurrence_time(reference_time).must_equal Time.utc(year, month, day, hour, minute + 1)
+      parser.next_occurrence_time(reference_time).must_equal Time.utc(year, month, day, hour, minute)
       parser = ForemanTasks::RecurringLogic.new_from_cronline('*/2 * * * *')
-      parser.next_occurrence_time(reference_time).must_equal Time.utc(year, month, day, hour, minute + 2)
+      parser.next_occurrence_time(reference_time).must_equal Time.utc(year, month, day, hour, minute)
       parser = ForemanTasks::RecurringLogic.new_from_cronline('*/2 18,19 * * *')
       parser.next_occurrence_time(reference_time).must_equal Time.utc(year, month, day, 18)
       parser = ForemanTasks::RecurringLogic.new_from_cronline('*/2 18,19 10 * *')
@@ -75,7 +75,7 @@ class RecurringLogicsTest < ActiveSupport::TestCase
       parser = ForemanTasks::RecurringLogic.new_from_cronline('* * * * *')
       parser.stubs(:id).returns(1)
       reference_time = Time.utc(2015, 9, 29, 15)
-      expected_hash = { :start_at => reference_time + 60, :start_before => nil, :recurring_logic_id => parser.id, :frozen => false }
+      expected_hash = { :start_at => reference_time, :start_before => nil, :recurring_logic_id => parser.id, :frozen => false }
       parser.generate_delay_options(reference_time).must_equal expected_hash
       parser.generate_delay_options(reference_time, 'start_before' => reference_time + 3600)
             .must_equal expected_hash.merge(:start_before => reference_time + 3600)
@@ -90,13 +90,19 @@ class RecurringLogicsTest < ActiveSupport::TestCase
 
     it 'can start at' do
       recurring_logic = ForemanTasks::RecurringLogic.new_from_cronline('* * * * *')
-
-      future_time = Time.zone.now + 1.week
+      future_time = (Time.zone.now + 1.week).change(:sec => 0)
       recurring_logic.start_after(::Support::DummyRecurringDynflowAction, future_time)
-
-      # Add one minute to the time, set seconds to 0
-      target_time = (future_time + 1.minute).change(:sec => 0)
+      # Able to start at same time as it is valid for * * * * *
+      target_time = future_time
       assert_equal target_time, recurring_logic.tasks.first.start_at
+    end
+
+    it 'can start at scheduled time' do
+      future_time = (Time.zone.now + 2.minutes).change(:sec => 0)
+      cron = future_time.min.to_s + " * * * *"
+      recurring_logic = ForemanTasks::RecurringLogic.new_from_cronline(cron)
+      recurring_logic.start_after(::Support::DummyRecurringDynflowAction, future_time)
+      assert_equal future_time, recurring_logic.tasks.first.start_at
     end
 
     it 'has a task group associated to all tasks that were created as part of the recurring logic' do

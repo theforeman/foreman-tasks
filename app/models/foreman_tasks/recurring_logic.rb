@@ -83,6 +83,9 @@ module ForemanTasks
 
     def next_occurrence_time(time = Time.zone.now)
       @parser ||= CronParser.new(cron_line, Time.zone)
+      # @parser.next(start_time) is not inclusive of the start_time hence stepping back one run to include checking start_time for the first run.
+      before_next = @parser.next(@parser.last(time))
+      return before_next if before_next >= time && tasks.count == 0
       @parser.next(time)
     end
 
