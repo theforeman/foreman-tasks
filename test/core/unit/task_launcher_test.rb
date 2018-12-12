@@ -11,7 +11,7 @@ module ForemanTasksCore
       end
 
       describe ForemanTasksCore::TaskLauncher do
-        let(:launcher) { launcher_class.new ForemanTasks.dynflow.world, {}}
+        let(:launcher) { launcher_class.new ForemanTasks.dynflow.world, {} }
         let(:launcher_input) { { 'action_class' => Support::DummyDynflowAction.to_s, 'action_input' => input } }
         let(:input) { { :do => :something } }
         let(:expected_result) { input.merge(:callback_host => {}) }
@@ -38,15 +38,15 @@ module ForemanTasksCore
 
           it 'triggers the actions' do
             Support::DummyDynflowAction.any_instance.expects(:plan).with { |arg| arg == expected_result }.twice
-            parent = launcher.launch!({'foo' => launcher_input, 'bar' => launcher_input})
+            parent = launcher.launch!('foo' => launcher_input, 'bar' => launcher_input)
             plan = parent.finished.value!
             plan.result.must_equal :success
             plan.sub_plans.count.must_equal 2
           end
 
           it 'provides results' do
-            launcher.launch!({'foo' => launcher_input, 'bar' => launcher_input})
-            launcher.results.keys.must_equal %w(foo bar)
+            launcher.launch!('foo' => launcher_input, 'bar' => launcher_input)
+            launcher.results.keys.must_equal %w[foo bar]
             launcher.results.values.each do |result|
               plan = ForemanTasks.dynflow.world.persistence.load_execution_plan(result[:task_id])
               result[:result].must_equal 'success'

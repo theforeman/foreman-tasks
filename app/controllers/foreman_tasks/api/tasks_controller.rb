@@ -177,9 +177,9 @@ module ForemanTasks
       def process_callback(task_id, step_id, data)
         task = ForemanTasks::Task::DynflowTask.find(task_id)
         ForemanTasks.dynflow.world.event(task.external_id,
-          step_id,
-          # We need to call .to_unsafe_h to unwrap the hash from ActionController::Parameters
-          ::Actions::ProxyAction::CallbackData.new(data))
+                                         step_id,
+                                         # We need to call .to_unsafe_h to unwrap the hash from ActionController::Parameters
+                                         ::Actions::ProxyAction::CallbackData.new(data))
       end
 
       def search_tasks(search_params)

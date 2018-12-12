@@ -30,8 +30,8 @@ module ForemanTasksCore
         let(:suspended_action) { Class.new }
         let(:runner) { Parent.new suspended_action, targets }
         let(:targets) do
-          { 'foo' => { 'execution_plan_id' => '123', 'run_step_id' => 2, },
-            'bar' => { 'execution_plan_id' => '456', 'run_step_id' => 2, } }
+          { 'foo' => { 'execution_plan_id' => '123', 'run_step_id' => 2 },
+            'bar' => { 'execution_plan_id' => '456', 'run_step_id' => 2 } }
         end
 
         describe '#initialize_continuous_outputs' do
