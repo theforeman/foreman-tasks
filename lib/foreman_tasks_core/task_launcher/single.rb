@@ -1,7 +1,10 @@
 module ForemanTasksCore
   module TaskLauncher
     class Single < Abstract
-      # { :action_class => "MyActionClass", :action_input => {} }
+      def self.input_format
+        { :action_class => "MyActionClass", :action_input => {} }
+      end
+
       def launch!(input)
         triggered = trigger(options[:parent],
                             action_class(input),
