@@ -1,9 +1,12 @@
 require 'foreman_tasks_test_helper'
+require 'foreman_tasks/test_helpers'
 require 'ostruct'
 
 module ForemanTasksCore
   module Runner
     class RunnerTest < ActiveSupport::TestCase
+      include ForemanTasks::TestHelpers::WithInThreadExecutor
+
       describe Base do
         let(:suspended_action) { Class.new }
         let(:runner) { Base.new suspended_action }

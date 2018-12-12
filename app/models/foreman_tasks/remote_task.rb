@@ -57,9 +57,9 @@ module ForemanTasks
         self.state = 'triggered'
       else
         # Tell the action the task on the smart proxy stopped
-        ForemanTasks::Dynflow.world.event execution_plan_id,
-                                          step_id,
-                                          ::Actions::ProxyAction::ProxyActionStopped.new
+        ForemanTasks.dynflow.world.event execution_plan_id,
+                                         step_id,
+                                         ::Actions::ProxyAction::ProxyActionStopped.new
       end
       save!
     end

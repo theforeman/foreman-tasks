@@ -9,7 +9,9 @@ module ForemanTasksCore
         launcher.launch_children(self, input_hash)
         sequence do
           results = plan_self
-          plan_action BatchCallback, launcher.prepare_batch(input_hash), results.output[:results]
+          if defined?(::SmartProxyDynflowCore)
+            plan_action BatchCallback, launcher.prepare_batch(input_hash), results.output[:results]
+          end
         end
       end
 
@@ -59,7 +61,7 @@ module ForemanTasksCore
 
       def launch_children(parent, input_hash)
         input_hash.each do |task_id, input|
-          launcher = Single.new(world, nil, :parent => parent)
+          launcher = Single.new(world, callback, :parent => parent)
           launcher.launch!(wipe_callback(input))
           results[task_id] = launcher.results
         end

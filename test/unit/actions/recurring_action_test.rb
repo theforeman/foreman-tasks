@@ -55,7 +55,7 @@ module ForemanTasks
 
       specify 'it triggers the repeat when the task goes into planned state' do
         delay_options = recurring_logic.generate_delay_options
-        task = ForemanTasks.delay HookedAction, delay_options, args
+        task = ForemanTasks.delay HookedAction, delay_options, *args
         recurring_logic.tasks.count.must_equal 1
 
         # Perform planning of the delayed plan

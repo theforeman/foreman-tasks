@@ -13,10 +13,12 @@ module ForemanTasks
         setup do
           @old_dynflow_world = ForemanTasks.dynflow.world
           ForemanTasks.dynflow.world = ForemanTasks::TestHelpers.test_in_thread_world
+          ForemanTasksCore.dynflow_setup ForemanTasks.dynflow.world
         end
 
         teardown do
           ForemanTasks.dynflow.world = @old_dynflow_world
+          ForemanTasksCore.dynflow_setup ForemanTasks.dynflow.world
         end
       end
     end

@@ -15,7 +15,7 @@ module ForemanTasks
 
       it 'triggers in batches' do
         results = remote_tasks.reduce({}) do |acc, cur|
-          acc.merge(cur.id.to_s => { 'task_id' => cur.id + 5, 'result' => 'success' })
+          acc.merge(cur.execution_plan_id.to_s => { 'task_id' => cur.id + 5, 'result' => 'success' })
         end
 
         fake_proxy = mock
