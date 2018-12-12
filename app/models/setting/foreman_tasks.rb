@@ -11,7 +11,8 @@ class Setting::ForemanTasks < Setting
         set('dynflow_console_require_auth', N_('Require user to be authenticated as user with admin rights when accessing dynflow console'), true),
         set('foreman_tasks_proxy_action_retry_count', N_('Number of attempts to start a task on the smart proxy before failing'), 4),
         set('foreman_tasks_proxy_action_retry_interval', N_('Time in seconds between retries'), 15),
-        set('foreman_tasks_proxy_batch_trigger', N_('Allow triggering tasks on the smart proxy in batches'), true)
+        set('foreman_tasks_proxy_batch_trigger', N_('Allow triggering tasks on the smart proxy in batches'), true),
+        set('foreman_tasks_proxy_batch_size', N_('Number of tasks which should be sent to the smart proxy in one request, if foreman_tasks_proxy_batch_trigger is enabled'), 1000)
       ].each { |s| create! s.update(:category => 'Setting::ForemanTasks') }
     end
 
