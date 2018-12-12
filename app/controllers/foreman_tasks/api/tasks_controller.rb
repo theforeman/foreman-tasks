@@ -149,22 +149,38 @@ module ForemanTasks
         }
       end
 
-      api :POST, '/tasks/callback', N_('Send data to the task from external executor (such as smart_proxy_dynflow)')
-      param :callback, Hash do
-        param :task_id, :identifier, :desc => N_('UUID of the task')
-        param :step_id, String, :desc => N_('The ID of the step inside the execution plan to send the event to')
+      def_param_group :callback_target do
+        param :callback, Hash do
+          param :task_id, :identifier, :desc => N_('UUID of the task')
+          param :step_id, String, :desc => N_('The ID of the step inside the execution plan to send the event to')
+        end
       end
-      param :data, Hash, :desc => N_('Data to be sent to the action')
+
+      def_param_group :callback do
+        param_group :callback_target
+        param :data, Hash, :desc => N_('Data to be sent to the action')
+      end
+
+      api :POST, '/tasks/callback', N_('Send data to the task from external executor (such as smart_proxy_dynflow)')
+      param_group :callback
+      param :callbacks, Array, :of => param_group(:callback)
       def callback
-        task = ForemanTasks::Task::DynflowTask.find(params[:callback][:task_id])
-        ForemanTasks.dynflow.world.event(task.external_id,
-                                         params[:callback][:step_id].to_i,
-                                         # We need to call .to_unsafe_h to unwrap the hash from ActionController::Parameters
-                                         ::Actions::ProxyAction::CallbackData.new(params[:data].to_unsafe_h))
+        callbacks = params.key?(:callback) ? Array(params[:callback]) : params[:callbacks]
+        callbacks.each do |payload|
+          process_callback(payload[:callback][:task_id], payload[:callback][:step_id].to_i, payload[:data].to_unsafe_h)
+        end
         render :json => { :message => 'processing' }.to_json
       end
 
       private
+
+      def process_callback(task_id, step_id, data)
+        task = ForemanTasks::Task::DynflowTask.find(task_id)
+        ForemanTasks.dynflow.world.event(task.external_id,
+          step_id,
+          # We need to call .to_unsafe_h to unwrap the hash from ActionController::Parameters
+          ::Actions::ProxyAction::CallbackData.new(data))
+      end
 
       def search_tasks(search_params)
         scope = resource_scope_for_index.select('DISTINCT foreman_tasks_tasks.*')
