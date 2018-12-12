@@ -66,9 +66,10 @@ module ForemanTasksCore
       end
 
       def prepare_batch(input_hash)
-        input_hash.select do |task_id, input|
+        success_tasks = input_hash.select do |task_id, _input|
           results[task_id][:result] == 'success'
-        end.reduce({}) do |acc, (key, value)|
+        end
+        success_tasks.reduce({}) do |acc, (key, value)|
           acc.merge(results[key][:task_id] => value['action_input']['callback'])
         end
       end
