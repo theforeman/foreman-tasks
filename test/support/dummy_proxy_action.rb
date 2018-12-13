@@ -14,7 +14,7 @@ module Support
       def trigger_task(*args)
         @log[:trigger_task] << args
         @task_triggered.fulfill(true)
-        { 'task_id' => @uuid }
+        { 'task_id' => @uuid, 'result' => 'success' }
       end
 
       def cancel_task(*args)

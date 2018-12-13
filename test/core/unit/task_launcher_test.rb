@@ -1,4 +1,4 @@
-require 'foreman_tasks_test_helper'
+require 'foreman_tasks_core_test_helper'
 require 'foreman_tasks/test_helpers'
 
 module ForemanTasksCore

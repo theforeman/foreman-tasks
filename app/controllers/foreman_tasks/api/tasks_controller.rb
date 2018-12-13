@@ -165,7 +165,7 @@ module ForemanTasks
       param_group :callback
       param :callbacks, Array, :of => param_group(:callback)
       def callback
-        callbacks = params.key?(:callback) ? Array(params[:callback]) : params[:callbacks]
+        callbacks = params.key?(:callback) ? Array(params) : params[:callbacks]
         callbacks.each do |payload|
           process_callback(payload[:callback][:task_id], payload[:callback][:step_id].to_i, payload[:data].to_unsafe_h)
         end
