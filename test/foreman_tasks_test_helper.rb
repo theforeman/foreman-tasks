@@ -12,7 +12,6 @@ FactoryBot.find_definitions
 
 ForemanTasks.dynflow.require!
 ForemanTasks.dynflow.config.disable_active_record_actions = true
-# ForemanTasksCore.dynflow_setup(ForemanTasks.dynflow.world)
 
 # waits for the passed block to return non-nil value and reiterates it while getting false
 # (till some reasonable timeout). Useful for forcing the tests for some event to occur
@@ -24,4 +23,3 @@ def wait_for(waiting_message = 'something to happen')
   end
   raise "waiting for #{waiting_message} was not successful"
 end
-
