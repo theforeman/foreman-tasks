@@ -7,12 +7,13 @@ module Actions
       BATCH_SIZE = 1000
 
       def run(event = nil)
-        if event == CheckOnProxyActions
+        if event.nil?
+          set_clock
+        elsif event == CheckOnProxyActions
           check_triggered
           set_clock
           action.send(:suspend)
         end
-        set_clock
         pass event
       end
 
