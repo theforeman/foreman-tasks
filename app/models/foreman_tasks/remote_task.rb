@@ -47,7 +47,8 @@ module ForemanTasks
     # Trigger the tasks one-by-one using the old API
     def self.fallback_batch_trigger(remote_tasks, input_hash)
       remote_tasks.each do |remote_task|
-        remote_task.trigger(input_hash[remote_task.execution_plan_id][:action_input])
+        task_data = input_hash[remote_task.execution_plan_id]
+        remote_task.trigger(task_data[:action_class], task_data[:action_input])
       end
     end
 
