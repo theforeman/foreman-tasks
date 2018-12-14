@@ -166,20 +166,22 @@ module ForemanTasks
       param :callbacks, Array, :of => param_group(:callback)
       def callback
         callbacks = params.key?(:callback) ? Array(params) : params[:callbacks]
+        ids = callbacks.map { |payload| payload[:callback][:task_id] }
+        external_map = Hash[*ForemanTasks::Task.where(:id => ids).pluck(:id, :external_id).flatten]
         callbacks.each do |payload|
-          process_callback(payload[:callback][:task_id], payload[:callback][:step_id].to_i, payload[:data].to_unsafe_h, :request_id => ::Logging.mdc['request'])
+          # We need to call .to_unsafe_h to unwrap the hash from ActionController::Parameters
+          callback = payload[:callback]
+          process_callback(external_map[callback[:task_id]], callback[:step_id].to_i, payload[:data].to_unsafe_h, :request_id => ::Logging.mdc['request'])
         end
         render :json => { :message => 'processing' }.to_json
       end
 
       private
 
-      def process_callback(task_id, step_id, data, meta)
-        task = ForemanTasks::Task::DynflowTask.find(task_id)
-        ForemanTasks.dynflow.world.event(task.external_id,
+      def process_callback(execution_plan_uuid, step_id, data)
+        ForemanTasks.dynflow.world.event(execution_plan_uuid,
                                          step_id,
-                                         # We need to call .to_unsafe_h to unwrap the hash from ActionController::Parameters
-                                         ::Actions::ProxyAction::CallbackData.new(data, meta))
+                                         ::Actions::ProxyAction::CallbackData.new(data))
       end
 
       def search_tasks(search_params)
