@@ -26,10 +26,10 @@ module Actions
     def plan(proxy, klass, options)
       options[:connection_options] ||= {}
       default_connection_options.each { |key, value| options[:connection_options][key] ||= value }
-      plan_self(options.merge(:proxy_url => proxy.url, :proxy_action_name => klass.to_s))
+      plan_self(options.merge(:proxy_url => proxy.url, :proxy_action_name => klass.to_s, :proxy_version => proxy_version(proxy)))
       # Just saving the RemoteTask is enough when using batch triggering
       # It will be picked up by the RemoteTaskTriggering middleware
-      prepare_remote_task.save! if with_batch_triggering?
+      prepare_remote_task.save! if with_batch_triggering?(input[:proxy_version])
     end
 
     def run(event = nil)
@@ -67,7 +67,7 @@ module Actions
     def trigger_proxy_task
       suspend do |_suspended_action|
         # Noop if batch triggering is used, otherwise create and immediately trigger it
-        unless with_batch_triggering?
+        unless with_batch_triggering?(input[:proxy_version])
           remote_task = prepare_remote_task
           remote_task.trigger(proxy_action_name, proxy_input)
           output[:proxy_task_id] = remote_task.remote_task_id
@@ -189,9 +189,9 @@ module Actions
         :proxy_batch_triggering => Setting['foreman_tasks_proxy_batch_trigger'] || false }
     end
 
-    def with_batch_triggering?
-      # TODO: Take proxy version into account
-      input.fetch(:connection_options, {}).fetch(:proxy_batch_triggering, false)
+    def with_batch_triggering?(proxy_version)
+      (proxy_version[:major] == 1 && proxy_version[:minor] > 20) || proxy_version[:major] > 1 && 
+        input.fetch(:connection_options, {}).fetch(:proxy_batch_triggering, false)
     end
 
     def clean_remote_task(*_args)
@@ -199,6 +199,11 @@ module Actions
     end
 
     private
+
+    def proxy_version(proxy)
+      match = proxy.statuses[:version].version['version'].match(/(\d+)\.(\d+)\.(\d+)/)
+      { :major => match[1].to_i, :minor => match[2].to_i, :patch => match[3].to_i }
+    end
 
     def failed_proxy_tasks
       metadata[:failed_proxy_tasks] ||= []

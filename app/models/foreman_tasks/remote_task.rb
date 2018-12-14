@@ -15,7 +15,7 @@ module ForemanTasks
     # Triggers a task on the proxy "the old way"
     def trigger(proxy_action_name, input)
       response = begin
-                   proxy.trigger_task(proxy_action_name, input)
+                   proxy.trigger_task(proxy_action_name, input).merge('result' => 'success')
                  rescue RestClient::Exception => e
                    logger.warn "Could not trigger task on the smart proxy: #{e.message}"
                    {}
