@@ -18,4 +18,6 @@ Common code used both at Forman and Foreman proxy regarding tasks
 
   s.files = Dir['lib/foreman_tasks_core/**/*'] +
             ['lib/foreman_tasks_core.rb', 'LICENSE']
+
+  s.add_dependency "dynflow", '>= 1.2.0'
 end
