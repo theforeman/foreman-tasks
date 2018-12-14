@@ -7,13 +7,13 @@ module Support
 
       def initialize
         @log = Hash.new { |h, k| h[k] = [] }
-        @task_triggered = Concurrent.future
+        @task_triggered = defined?(Concurrent::Promises) ? Concurrent::Promises.resolvable_future : Concurrent.future
         @uuid = SecureRandom.uuid
       end
 
       def trigger_task(*args)
         @log[:trigger_task] << args
-        @task_triggered.success(true)
+        defined?(Concurrent::Promises) ? @task_triggered.fulfill(true) : @task_triggered.success(true)
         { 'task_id' => @uuid }
       end
 
