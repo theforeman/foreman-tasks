@@ -172,7 +172,7 @@ module ForemanTasksCore
         return unless runner_actor
         @logger.debug("closing session for command [#{runner_id}]," \
                       "#{@runner_actors.size} actors left ")
-        runner_actor.tell([:start_termination, (defined?(Concurrent::Promises) ? Concurrent::Promises.resolvable_future : Concurrent.future)])
+        runner_actor.tell([:start_termination, Concurrent::Promises.resolvable_future])
       ensure
         @runner_suspended_actions.delete(runner_id)
       end
