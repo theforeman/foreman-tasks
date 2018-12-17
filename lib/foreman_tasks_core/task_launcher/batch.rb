@@ -1,9 +1,8 @@
 module ForemanTasksCore
   module TaskLauncher
-    class Batch < Abstract
-      class ParentAction < ::Dynflow::Action
-        include Dynflow::Action::WithSubPlans
-        include Dynflow::Action::WithPollingSubPlans
+    class ParentAction < ::Dynflow::Action
+      include Dynflow::Action::WithSubPlans
+      include Dynflow::Action::WithPollingSubPlans
 
       # { task_id => { :action_class => Klass, :input => input } }
       def plan(launcher, input_hash)
@@ -32,6 +31,7 @@ module ForemanTasksCore
       def rescue_strategy
         Dynflow::Action::Rescue::Fail
       end
+    end
 
     class BatchCallback < ::Dynflow::Action
       def plan(input_hash, results)
@@ -59,7 +59,7 @@ module ForemanTasksCore
 
       def launch_children(parent, input_hash)
         input_hash.each do |task_id, input|
-          launcher = Single.new(world, nil, :parent => parent)
+          launcher = child_launcher(parent)
           launcher.launch!(wipe_callback(input))
           results[task_id] = launcher.results
         end
@@ -75,6 +75,10 @@ module ForemanTasksCore
       end
 
       private
+
+      def child_launcher(parent)
+        Single.new(world, callback, :parent => parent)
+      end
 
       def wipe_callback(input)
         input.merge('action_input' => input['action_input'].merge('callback' => nil))

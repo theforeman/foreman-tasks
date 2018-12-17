@@ -28,7 +28,7 @@ module ForemanTasksCore
 
       def host_action(identifier)
         options = @targets[identifier].slice('execution_plan_id', 'run_step_id')
-                                    .merge(:world => ForemanTasksCore.dynflow_world)
+                                      .merge(:world => ForemanTasksCore.dynflow_world)
         Dynflow::Action::Suspended.new OpenStruct.new(options)
       end
 
