@@ -12,11 +12,11 @@ module ForemanTasksCore
 
       class GroupRunner < ::ForemanTasksCore::Runner::Action
         def plan(launcher, input)
-          plan_self :targets => launcher.group_runner_input(input), :feature => launcher.feature
+          plan_self :targets => launcher.group_runner_input(input), :operation => launcher.operation
         end
 
         def initiate_runner
-          launcher = SmartProxyDynflowCore::TaskLauncherRegistry.fetch(input[:feature])
+          launcher = SmartProxyDynflowCore::TaskLauncherRegistry.fetch(input[:operation])
           launcher.group_runner_class.new(suspended_action, input[:targets])
         end
       end
@@ -30,7 +30,7 @@ module ForemanTasksCore
         trigger(parent, GroupRunner, self, input_hash)
       end
 
-      def feature
+      def operation
         raise NotImplementedError
       end
 
