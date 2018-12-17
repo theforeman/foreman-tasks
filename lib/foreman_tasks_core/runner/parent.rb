@@ -5,6 +5,7 @@ module ForemanTasksCore
       #                           :input => { ... } }
       def initialize(targets = {}, suspended_action: nil)
         @targets = targets
+        @exit_statuses = {}
         super suspended_action: suspended_action
       end
 
@@ -13,9 +14,11 @@ module ForemanTasksCore
           if value.empty? && @exit_status.nil?
             acc
           else
-            @outputs[key] = ForemanTasksCore::ContinuousOutput.new
-            key = host_action(key) unless key == @suspended_action
-            acc.merge(key => Runner::Update.new(value, @exit_status))
+            identifier = key
+            @outputs[identifier] = ForemanTasksCore::ContinuousOutput.new
+            key = host_action(identifier) unless identifier == @suspended_action
+            exit_status = @exit_statuses[identifier] || @exit_status if @exit_status
+            acc.merge(key => Runner::Update.new(value, exit_status))
           end
         end
       end
@@ -46,6 +49,10 @@ module ForemanTasksCore
 
       def dispatch_exception(context, exception)
         @outputs.values.each { |output| output.add_exception(context, exception) }
+      end
+
+      def publish_exit_status_for(identifier, exit_status)
+        @exit_statuses[identifier] = exit_status
       end
     end
   end

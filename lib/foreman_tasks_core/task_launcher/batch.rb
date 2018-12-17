@@ -13,6 +13,14 @@ module ForemanTasksCore
         end
       end
 
+      def run(event = nil)
+        super unless event == Dynflow::Action::Skip
+      end
+
+      def check_for_errors!(optional = true)
+        super unless optional
+      end
+
       def on_finish
         output[:results] = sub_plans.map(&:entry_action).reduce({}) do |acc, cur|
           acc.merge(cur.execution_plan_id => cur.output)
@@ -21,6 +29,7 @@ module ForemanTasksCore
 
       def finalize
         output.delete(:results)
+        check_for_errors!
       end
 
       def initiate
@@ -28,8 +37,8 @@ module ForemanTasksCore
         wait_for_sub_plans sub_plans
       end
 
-      def rescue_strategy
-        Dynflow::Action::Rescue::Fail
+      def rescue_strategy_for_self
+        Dynflow::Action::Rescue::Skip
       end
     end
 
