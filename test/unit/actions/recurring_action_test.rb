@@ -82,6 +82,23 @@ module ForemanTasks
         # Check no new repetitions were planned
         recurring_logic.tasks.count.must_equal 2
       end
+
+      specify 'it resets the request id on repetition' do
+        expected_id = 'an_id'
+        old_id = ::Logging.mdc['request']
+        ::Logging.mdc['request'] = expected_id
+
+        delay_options = recurring_logic.generate_delay_options
+        task = ForemanTasks.delay HookedAction, delay_options, true, args.last
+        task.input[:current_request_id].must_equal expected_id
+
+        # Perform the planning (trigger repeat)
+        task.execution_plan.delay_record.plan
+        repetition = recurring_logic.tasks.find { |t| t.id != task.id }
+        repetition.input[:current_request_id].must_be :nil?
+      ensure
+        ::Logging.mdc['request'] = old_id
+      end
     end
   end
 end
