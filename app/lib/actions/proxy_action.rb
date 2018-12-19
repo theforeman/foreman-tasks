@@ -8,10 +8,11 @@ module Actions
     execution_plan_hooks.use :wipe_secrets!, :on => :stopped
 
     class CallbackData
-      attr_reader :data
+      attr_reader :data, :meta
 
-      def initialize(data)
+      def initialize(data, meta = {})
         @data = data
+        @meta = meta
       end
     end
 
@@ -46,7 +47,7 @@ module Actions
         when ::Dynflow::Action::Cancellable::Abort
           abort_proxy_task
         when CallbackData
-          on_data(event.data)
+          on_data(event.data, event.meta)
         when ProxyActionMissing
           on_proxy_action_missing
         when ProxyActionStopped
@@ -106,7 +107,8 @@ module Actions
     end
 
     # @override to put custom logic on event handling
-    def on_data(data)
+    def on_data(data, meta = {})
+      action_logger.info(_('Event delivered by request %{request_id}') % { :request_id => meta[:request_id] }) if meta[:request_id].present?
       output[:proxy_output] = data
     end
 
