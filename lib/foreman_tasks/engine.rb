@@ -119,6 +119,7 @@ module ForemanTasks
         world.middleware.use Actions::Middleware::KeepCurrentTaxonomies
         world.middleware.use Actions::Middleware::KeepCurrentUser
         world.middleware.use Actions::Middleware::KeepCurrentTimezone
+        world.middleware.use Actions::Middleware::KeepCurrentRequestID
       end
 
       ::ForemanTasks.dynflow.config.on_init do |world|
