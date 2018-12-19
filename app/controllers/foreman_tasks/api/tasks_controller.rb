@@ -160,7 +160,7 @@ module ForemanTasks
         ForemanTasks.dynflow.world.event(task.external_id,
                                          params[:callback][:step_id].to_i,
                                          # We need to call .to_unsafe_h to unwrap the hash from ActionController::Parameters
-                                         ::Actions::ProxyAction::CallbackData.new(params[:data].to_unsafe_h))
+                                         ::Actions::ProxyAction::CallbackData.new(params[:data].to_unsafe_h, :request_id => ::Logging.mdc['request']))
         render :json => { :message => 'processing' }.to_json
       end
 

@@ -1,3 +1,5 @@
+require 'securerandom'
+
 module Actions
   module RecurringAction
     # When included sets the base action to use the RecurringLogic middleware and configures
@@ -10,11 +12,15 @@ module Actions
     # Hook to be called when a repetition needs to be triggered. This either happens when the plan goes into planned state
     #   or when it fails.
     def trigger_repeat(execution_plan)
+      request_id = ::Logging.mdc['request']
+      ::Logging.mdc['request'] = SecureRandom.uuid
       if execution_plan.delay_record && recurring_logic_task_group
         args = execution_plan.delay_record.args
         logic = recurring_logic_task_group.recurring_logic
         logic.trigger_repeat_after(task.start_at, self.class, *args)
       end
+    ensure
+      ::Logging.mdc['request'] = request_id
     end
 
     private
