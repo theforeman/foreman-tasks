@@ -26,9 +26,11 @@ module Actions
       end
 
       def check_triggered
-        in_remote_task_batches(remote_tasks.triggered).group_by(&:proxy_url).each do |group|
-          tasks = group.map { |(url, tasks)| poll_proxy_tasks(url, tasks) }.flatten
-          process_task_results tasks
+        in_remote_task_batches(remote_tasks.triggered) do |batch|
+          batch.group_by(&:proxy_url).each do |(url, tasks)|
+            tasks = poll_proxy_tasks(url, tasks).flatten
+            process_task_results tasks
+          end
         end
       end
 
