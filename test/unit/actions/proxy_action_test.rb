@@ -18,7 +18,8 @@ module ForemanTasks
                                          Support::DummyProxyAction.proxy,
                                          'Proxy::DummyAction',
                                          'foo' => 'bar',
-                                         'secrets' => secrets)
+                                         'secrets' => secrets,
+                                         'use_batch_triggering' => batch_triggering)
         @action = run_action(@action)
       end
 
@@ -30,9 +31,11 @@ module ForemanTasks
                              'secrets' => secrets,
                              'connection_options' =>
                                { 'retry_interval' => 15, 'retry_count' => 4,
-                                 'proxy_batch_triggering' => false },
+                                 'proxy_batch_triggering' => batch_triggering },
+                             'use_batch_triggering' => batch_triggering,
                              'proxy_url' => 'proxy.example.com',
                              'proxy_action_name' => 'Proxy::DummyAction',
+                             "proxy_version" => { "major" => 1, "minor" => 21, "patch" => 0 },
                              'callback' => { 'task_id' => Support::DummyProxyAction.proxy.uuid, 'step_id' => @action.run_step_id } }]
           proxy_call.must_equal(expected_call)
         end

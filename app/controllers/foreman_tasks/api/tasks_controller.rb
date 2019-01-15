@@ -171,7 +171,7 @@ module ForemanTasks
         callbacks.each do |payload|
           # We need to call .to_unsafe_h to unwrap the hash from ActionController::Parameters
           callback = payload[:callback]
-process_callback(external_map[callback[:task_id]], callback[:step_id].to_i, payload[:data].to_unsafe_h, :request_id => ::Logging.mdc['request'])
+          process_callback(external_map[callback[:task_id]], callback[:step_id].to_i, payload[:data].to_unsafe_h, :request_id => ::Logging.mdc['request'])
         end
         render :json => { :message => 'processing' }.to_json
       end

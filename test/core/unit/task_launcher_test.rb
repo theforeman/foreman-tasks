@@ -11,7 +11,6 @@ module ForemanTasksCore
         let(:launcher_input) { { 'action_class' => Support::DummyDynflowAction.to_s, 'action_input' => input } }
         let(:input) { { :do => :something } }
         let(:expected_result) { input.merge(:callback_host => {}) }
-        let(:expected_batch_result) { expected_result.merge('callback' => nil) }
 
         describe ForemanTasksCore::TaskLauncher::Single do
           let(:launcher_class) { Single }
@@ -34,7 +33,7 @@ module ForemanTasksCore
           let(:launcher_class) { Batch }
 
           it 'triggers the actions' do
-            Support::DummyDynflowAction.any_instance.expects(:plan).with { |arg| arg == expected_batch_result }.twice
+            Support::DummyDynflowAction.any_instance.expects(:plan).with { |arg| arg == expected_result }.twice
             parent = launcher.launch!('foo' => launcher_input, 'bar' => launcher_input)
             plan = parent.finished.value!
             plan.result.must_equal :success
