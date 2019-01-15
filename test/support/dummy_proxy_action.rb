@@ -2,6 +2,14 @@ require 'securerandom'
 
 module Support
   class DummyProxyAction < Actions::ProxyAction
+    class DummyProxyVersion
+      attr_reader :version
+
+      def initialize(version)
+        @version = { 'version' => version }
+      end
+    end
+
     class DummyProxy
       attr_reader :log, :task_triggered, :uuid
 
@@ -23,6 +31,10 @@ module Support
 
       def url
         'proxy.example.com'
+      end
+
+      def statuses
+        { version: DummyProxyVersion.new('1.21.0') }
       end
     end
 

@@ -33,7 +33,9 @@ module ForemanTasksCore
       end
 
       def trigger(parent, klass, *input)
-        world.trigger { world.plan_with_caller(parent, klass, *input) }
+        world.trigger do
+          world.plan_with_options(caller_action: parent, action_class: klass, args: input)
+        end
       end
     end
   end
