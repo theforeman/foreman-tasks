@@ -28,7 +28,7 @@ module Actions
       default_connection_options.each { |key, value| options[:connection_options][key] ||= value }
       plan_self(options.merge(:proxy_url => proxy.url, :proxy_action_name => klass.to_s, :proxy_version => proxy_version(proxy)))
       # Just saving the RemoteTask is enough when using batch triggering
-      # It will be picked up by the RemoteTaskTriggering middleware
+      # It will be picked up by the ProxyBatchTriggering middleware
       if input[:use_batch_triggering] && with_batch_triggering?(input[:proxy_version])
         prepare_remote_task.save!
       end

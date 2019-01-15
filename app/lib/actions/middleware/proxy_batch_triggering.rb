@@ -1,6 +1,6 @@
 module Actions
   module Middleware
-    class RemoteTaskTriggering < ::Dynflow::Middleware
+    class ProxyBatchTriggering < ::Dynflow::Middleware
       # If the event could result into sub tasks being planned, check if there are any RemoteTasks
       # to trigger after the event is processed
       #
