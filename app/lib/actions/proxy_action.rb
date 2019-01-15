@@ -29,7 +29,9 @@ module Actions
       plan_self(options.merge(:proxy_url => proxy.url, :proxy_action_name => klass.to_s, :proxy_version => proxy_version(proxy)))
       # Just saving the RemoteTask is enough when using batch triggering
       # It will be picked up by the RemoteTaskTriggering middleware
-      prepare_remote_task.save! if with_batch_triggering?(input[:proxy_version])
+      if input[:use_batch_triggering] && with_batch_triggering?(input[:proxy_version])
+        prepare_remote_task.save!
+      end
     end
 
     def run(event = nil)
@@ -66,12 +68,9 @@ module Actions
 
     def trigger_proxy_task
       suspend do |_suspended_action|
-        # Noop if batch triggering is used, otherwise create and immediately trigger it
-        unless with_batch_triggering?(input[:proxy_version])
-          remote_task = prepare_remote_task
-          remote_task.trigger(proxy_action_name, proxy_input)
-          output[:proxy_task_id] = remote_task.remote_task_id
-        end
+        remote_task = prepare_remote_task
+        remote_task.trigger(proxy_action_name, proxy_input)
+        output[:proxy_task_id] = remote_task.remote_task_id
       end
     end
 

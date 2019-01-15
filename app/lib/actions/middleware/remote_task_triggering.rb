@@ -3,6 +3,8 @@ module Actions
     class RemoteTaskTriggering < ::Dynflow::Middleware
       # If the event could result into sub tasks being planned, check if there are any RemoteTasks
       # to trigger after the event is processed
+      #
+      # The ProxyAction needs to be planned with `:use_batch_triggering => true` to activate the feature
       def run(event = nil)
         pass event
       ensure
