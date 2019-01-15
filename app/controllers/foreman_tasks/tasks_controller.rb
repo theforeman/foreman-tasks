@@ -7,6 +7,7 @@ module ForemanTasks
 
     def show
       @task = Task.find(params[:id])
+      render :layout => !request.xhr?
     end
 
     def index
