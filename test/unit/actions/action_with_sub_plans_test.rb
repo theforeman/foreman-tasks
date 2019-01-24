@@ -1,4 +1,5 @@
 require 'foreman_tasks_test_helper'
+require 'foreman_tasks/test_helpers'
 
 module ForemanTasks
   class ActionWithSubPlansTest < ActiveSupport::TestCase
@@ -31,6 +32,8 @@ module ForemanTasks
     end
 
     describe Actions::ActionWithSubPlans do
+      include ForemanTasks::TestHelpers::WithInThreadExecutor
+
       let(:task) do
         user = FactoryBot.create(:user)
         triggered = ForemanTasks.trigger(ParentAction, user)
