@@ -98,7 +98,7 @@ module ForemanTasks
     end
 
     def auto_complete_controller_name
-      '/foreman_tasks/tasks'
+      'foreman_tasks_tasks'
     end
 
     private
