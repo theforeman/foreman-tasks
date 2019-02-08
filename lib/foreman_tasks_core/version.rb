@@ -1,3 +1,3 @@
 module ForemanTasksCore
-  VERSION = '0.2.5'.freeze
+  VERSION = '0.3.0'.freeze
 end
