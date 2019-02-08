@@ -7,7 +7,7 @@
       url: url_for(foreman_tasks_tasks_path)
     },
     {
-      caption: truncate(format_task_input(@task), :length => 50)
+      caption: format_task_input(@task)
     }
   ],
   name_field: 'action',
