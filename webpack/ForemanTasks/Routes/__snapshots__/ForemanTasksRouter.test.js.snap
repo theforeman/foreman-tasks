@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ForemanTasksRouter render without Props 1`] = `
+<Switch>
+  <Route
+    key="someRoute"
+    path="/some-route"
+    render={[Function]}
+  />
+  <Route
+    key="someOtherRoute"
+    path="/some-other-route"
+    render={[Function]}
+  />
+</Switch>
+`;

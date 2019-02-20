@@ -1,0 +1,27 @@
+{
+  "plugins": ["patternfly-react"],
+  "extends": ["plugin:patternfly-react/recommended"],
+  "rules": {
+    "prettier/prettier": ["error", {
+      "singleQuote": true,
+      "trailingComma": "es5"
+    }]
+  },
+  "settings": {
+    "import/resolver": {
+      "babel-module": {}
+    }
+  },
+  "globals": {
+    "document": false,
+    "escape": false,
+    "navigator": false,
+    "unescape": false,
+    "window": false,
+    "$": true,
+    "_": true,
+    "__": true,
+    "n__": true,
+    "d3": true
+  }
+}
