@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ForemanTasksRoutes should create routes 1`] = `
+Object {
+  "indexTasks": Object {
+    "exact": true,
+    "path": "/foreman_tasks/ex_tasks",
+    "render": [Function],
+    "renderResult": <IndexTasks
+      some="props"
+    />,
+  },
+  "showTask": Object {
+    "path": "/foreman_tasks/ex_tasks/:id",
+    "render": [Function],
+    "renderResult": <ShowTask
+      some="props"
+    />,
+  },
+}
+`;

@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ForemanTasks render without Props 1`] = `
+<BrowserRouter>
+  <div>
+    <div
+      style={
+        Object {
+          "paddingBottom": "10px",
+          "paddingTop": "10px",
+        }
+      }
+    >
+      <ButtonGroup
+        block={false}
+        bsClass="btn-group"
+        bsSize="large"
+        justified={false}
+        vertical={false}
+      >
+        <LinkContainer
+          activeClassName="active"
+          exact={false}
+          replace={false}
+          strict={false}
+          to="/foreman_tasks/ex_tasks"
+        >
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="link"
+            disabled={false}
+          >
+            index-tasks-page
+          </Button>
+        </LinkContainer>
+        <LinkContainer
+          activeClassName="active"
+          exact={false}
+          replace={false}
+          strict={false}
+          to="/foreman_tasks/ex_tasks/some-id"
+        >
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="link"
+            disabled={false}
+          >
+            show-task-page
+          </Button>
+        </LinkContainer>
+      </ButtonGroup>
+    </div>
+    <ForemanTasksRouter />
+  </div>
+</BrowserRouter>
+`;
