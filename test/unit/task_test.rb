@@ -84,9 +84,11 @@ class TasksTest < ActiveSupport::TestCase
   end
 
   describe 'task without valid execution plan' do
+    let(:missing_task_uuid) { '11111111-2222-3333-4444-555555555555' }
+
     let(:task) do
       task = FactoryBot.create(:dynflow_task).tap do |task|
-        task.external_id = 'missing-task'
+        task.external_id = missing_task_uuid
         task.save
       end
       ForemanTasks::Task.find(task.id)
