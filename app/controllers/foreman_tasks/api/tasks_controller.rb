@@ -178,10 +178,10 @@ module ForemanTasks
 
       private
 
-      def process_callback(execution_plan_uuid, step_id, data)
+      def process_callback(execution_plan_uuid, step_id, data, meta)
         ForemanTasks.dynflow.world.event(execution_plan_uuid,
                                          step_id,
-                                         ::Actions::ProxyAction::CallbackData.new(data))
+                                         ::Actions::ProxyAction::CallbackData.new(data, meta))
       end
 
       def search_tasks(search_params)
