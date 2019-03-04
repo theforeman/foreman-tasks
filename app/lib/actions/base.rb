@@ -2,6 +2,8 @@ module Actions
   class Base < Dynflow::Action
     middleware.use ::Actions::Middleware::RailsExecutorWrap
 
+    execution_plan_hooks.use :notify_paused, :on => [:paused]
+
     def task
       @task ||= ::ForemanTasks::Task::DynflowTask.where(:external_id => execution_plan_id).first!
     end
@@ -51,6 +53,10 @@ module Actions
 
     def serializer_class
       ::Actions::Serializers::ActiveRecordSerializer
+    end
+
+    def notify_paused(*_args)
+      task.build_notifications.each(&:deliver!)
     end
   end
 end

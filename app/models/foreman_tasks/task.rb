@@ -148,6 +148,22 @@ module ForemanTasks
       end
     end
 
+    def notification_recipients_ids
+      owner_ids
+    end
+
+    def build_notifications
+      notifications = []
+      if state == 'paused'
+        owner = self.owner
+        if owner && !owner.hidden?
+          notifications << UINotifications::Tasks::TaskPausedOwner.new(self)
+        end
+        notifications << UINotifications::Tasks::TaskPausedAdmin.new(self)
+      end
+      notifications
+    end
+
     def self.search_by_generic_resource(key, operator, value)
       key = 'resource_type' if key.blank?
       key_name = connection.quote_column_name(key.sub(/^.*\./, ''))

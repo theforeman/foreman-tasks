@@ -17,6 +17,14 @@ module ForemanTasks
       content_tag(:i, '&nbsp'.html_safe, :class => "glyphicon #{icon}") + content_tag(:span, recurring_logic.humanized_state, :class => status)
     end
 
+    def troubleshooting_info
+      return if @task.state != 'paused' || @task.main_action.nil?
+      helper = TroubleshootingHelpGenerator.new(@task.main_action)
+      ret = '<p><b>Troubleshooting</b></p>'
+      ret += '<p>%{help}</p>' % { help: helper.generate_html }
+      ret.html_safe
+    end
+
     def task_result_icon_class(task)
       return 'task-status pficon-help' if task.state != 'stopped'
 
