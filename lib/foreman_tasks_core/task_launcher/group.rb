@@ -83,6 +83,10 @@ module ForemanTasksCore
         raise NotImplementedError
       end
 
+      def launch!(input)
+        trigger(nil, GroupParentAction, self, input)
+      end
+
       def launch_children(parent, input_hash)
         super(parent, input_hash)
         trigger(parent, GroupRunner, self, input_hash)
