@@ -10,7 +10,7 @@ module ForemanTasksCore
 
       describe Base do
         let(:suspended_action) { Class.new }
-        let(:runner) { Base.new suspended_action }
+        let(:runner) { Base.new suspended_action: suspended_action }
 
         describe '#generate_updates' do
           it 'returns empty hash when there are no outputs' do
@@ -27,12 +27,24 @@ module ForemanTasksCore
             update.exit_status.must_be :nil?
             update.continuous_output.raw_outputs.count.must_equal 1
           end
+
+          it 'works in compatibility mode' do
+            runner = Base.new
+            message = 'a message'
+            type = 'stdout'
+            runner.publish_data(message, type)
+            updates = runner.generate_updates
+            updates.keys.must_equal [nil]
+            update = updates.values.first
+            update.exit_status.must_be :nil?
+            update.continuous_output.raw_outputs.count.must_equal 1
+          end
         end
       end
 
       describe Parent do
-        let(:suspended_action) { Class.new }
-        let(:runner) { Parent.new suspended_action, targets }
+        let(:suspended_action) { ::Dynflow::Action::Suspended.allocate }
+        let(:runner) { Parent.new targets, suspended_action: suspended_action }
         let(:targets) do
           { 'foo' => { 'execution_plan_id' => '123', 'run_step_id' => 2 },
             'bar' => { 'execution_plan_id' => '456', 'run_step_id' => 2 } }
@@ -52,6 +64,28 @@ module ForemanTasksCore
             runner.publish_data_for('foo', 'something', 'something')
             updates = runner.generate_updates
             updates.keys.count.must_equal 1
+          end
+
+          it 'works in compatibility mode' do
+            runner = Parent.new targets
+            runner.generate_updates.must_equal({})
+            runner.broadcast_data('something', 'stdout')
+            updates = runner.generate_updates
+            updates.keys.count.must_equal 3
+            # One of the keys is nil in compatibility mode
+            updates.keys.compact.count.must_equal 2
+            updates.keys.compact.each do |key|
+              key.must_be_instance_of ::Dynflow::Action::Suspended
+            end
+          end
+
+          it 'works without compatibility mode' do
+            runner.broadcast_data('something', 'stdout')
+            updates = runner.generate_updates
+            updates.keys.count.must_equal 3
+            updates.keys.each do |key|
+              key.must_be_instance_of ::Dynflow::Action::Suspended
+            end
           end
         end
 

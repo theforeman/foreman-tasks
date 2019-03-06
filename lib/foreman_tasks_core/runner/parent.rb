@@ -3,9 +3,9 @@ module ForemanTasksCore
     class Parent < Base
       # targets = { hostname => { :execution_plan_id => "...", :run_step_id => id,
       #                           :input => { ... } }
-      def initialize(suspended_action, targets = {})
+      def initialize(targets = {}, suspended_action: nil)
         @targets = targets
-        super suspended_action
+        super suspended_action: suspended_action
       end
 
       def generate_updates
