@@ -6,7 +6,7 @@ module ForemanTasksCore
       attr_reader :id
       attr_writer :logger
 
-      def initialize(suspended_action, *_args)
+      def initialize(*_args, suspended_action: nil)
         @suspended_action = suspended_action
         @id = SecureRandom.uuid
         initialize_continuous_outputs

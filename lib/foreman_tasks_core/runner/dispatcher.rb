@@ -39,9 +39,11 @@ module ForemanTasksCore
           @logger.debug("refresh runner #{@runner.id}")
           updates = @runner.run_refresh
 
-          updates.each { |receiver, update| receiver << update }
+          updates.each { |receiver, update| (receiver || @suspended_action) << update }
 
-          main_process = updates[@suspended_action]
+          # This is a workaround when the runner does not accept the suspended action
+          main_key = updates.keys.any?(&:nil?) ? nil : @suspended_action
+          main_process = updates[main_key]
           finish if main_process && main_process.exit_status
         ensure
           @refresh_planned = false
