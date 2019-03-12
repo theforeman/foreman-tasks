@@ -10,6 +10,11 @@ module ForemanTasksCore
         plan_self
       end
 
+      def initiate
+        ping suspended_action
+        wait_for_sub_plans sub_plans
+      end
+
       def rescue_strategy
         Dynflow::Action::Rescue::Fail
       end
