@@ -68,6 +68,21 @@ class TasksTest < ActiveSupport::TestCase
       ForemanTasks::Task.where(id: tasks_to_keep).must_equal tasks_to_keep
     end
 
+    it 'matches tasks with compound filters properly' do
+      cleaner = ForemanTasks::Cleaner.new(:filter => 'result = pending or result = error',
+                                          :states => %w(paused planning))
+      tasks_to_delete = [FactoryBot.create(:some_task),
+                         FactoryBot.create(:some_task)]
+      tasks_to_delete[0].update_attributes!(:result => 'error', :state => 'paused')
+      tasks_to_delete[1].update_attributes!(:result => 'pending', :state => 'planning')
+      task_to_keep = FactoryBot.create(:some_task)
+      task_to_keep.update_attributes!(:result => 'pending', :state => 'planned')
+      cleaner.expects(:tasks_to_csv)
+      cleaner.delete
+      ForemanTasks::Task.where(id: tasks_to_delete).must_be_empty
+      ForemanTasks::Task.where(id: task_to_keep).must_equal [task_to_keep]
+    end
+
     it 'backs tasks up before deleting' do
       dir = '/tmp'
       cleaner = ForemanTasks::Cleaner.new(:filter => '', :after => '10d', :backup_dir => dir)
