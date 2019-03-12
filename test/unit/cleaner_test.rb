@@ -70,13 +70,13 @@ class TasksTest < ActiveSupport::TestCase
 
     it 'matches tasks with compound filters properly' do
       cleaner = ForemanTasks::Cleaner.new(:filter => 'result = pending or result = error',
-                                          :states => %w(paused planning))
+                                          :states => %w[paused planning])
       tasks_to_delete = [FactoryBot.create(:some_task),
                          FactoryBot.create(:some_task)]
-      tasks_to_delete[0].update_attributes!(:result => 'error', :state => 'paused')
-      tasks_to_delete[1].update_attributes!(:result => 'pending', :state => 'planning')
+      tasks_to_delete[0].update!(:result => 'error', :state => 'paused')
+      tasks_to_delete[1].update!(:result => 'pending', :state => 'planning')
       task_to_keep = FactoryBot.create(:some_task)
-      task_to_keep.update_attributes!(:result => 'pending', :state => 'planned')
+      task_to_keep.update!(:result => 'pending', :state => 'planned')
       cleaner.expects(:tasks_to_csv)
       cleaner.delete
       ForemanTasks::Task.where(id: tasks_to_delete).must_be_empty
