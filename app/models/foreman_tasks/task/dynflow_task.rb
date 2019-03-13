@@ -83,7 +83,7 @@ module ForemanTasks
     end
 
     def input
-      return execution_plan_action.input['job_arguments'] if active_job?
+      return active_job_data['arguments'] if active_job?
       main_action.task_input if main_action.respond_to?(:task_input)
     end
 
@@ -113,12 +113,8 @@ module ForemanTasks
     def main_action
       return @main_action if defined?(@main_action)
       if active_job?
-        args = if execution_plan.delay_record
-                 execution_plan.delay_record.args.first
-               else
-                 execution_plan_action.input
-               end
-        @main_action = active_job_action(args['job_class'], args['job_arguments'])
+        job_data = active_job_data
+        @main_action = active_job_action(job_data['job_class'], job_data['arguments'])
       else
         @main_action = execution_plan && execution_plan.root_plan_step.try(:action, execution_plan)
       end
@@ -138,6 +134,17 @@ module ForemanTasks
       return false unless execution_plan.present? &&
                           execution_plan.root_plan_step.present?
       execution_plan_action.class == ::Dynflow::ActiveJob::QueueAdapters::JobWrapper
+    end
+
+    def active_job_data
+      args = if execution_plan.delay_record
+               execution_plan.delay_record.args.first
+             else
+               execution_plan_action.input
+             end
+      return args['job_data'] if args.key?('job_data')
+      # For dynflow <= 1.2.1
+      { 'job_class' => args['job_class'], 'arguments' => args['job_arguments'] }
     end
 
     def execution_plan_action
