@@ -193,7 +193,7 @@ module Actions
     end
 
     def with_batch_triggering?(proxy_version)
-      (proxy_version[:major] == 1 && proxy_version[:minor] > 20) || proxy_version[:major] > 1 &&
+      ((proxy_version[:major] == 1 && proxy_version[:minor] > 20) || proxy_version[:major] > 1) &&
         input.fetch(:connection_options, {}).fetch(:proxy_batch_triggering, false)
     end
 
