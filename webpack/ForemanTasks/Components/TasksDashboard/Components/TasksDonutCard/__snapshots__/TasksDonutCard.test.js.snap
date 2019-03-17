@@ -23,7 +23,11 @@ exports[`TasksDonutCard render with focused-on last 1`] = `
           "#0089C9",
         ]
       }
-      focusedOn="last"
+      focusedOn={
+        Object {
+          "last": true,
+        }
+      }
       last={3}
       older={5}
       onLastClick={[Function]}
@@ -58,7 +62,11 @@ exports[`TasksDonutCard render with focused-on none 1`] = `
           "#0089C9",
         ]
       }
-      focusedOn="none"
+      focusedOn={
+        Object {
+          "none": true,
+        }
+      }
       last={3}
       older={5}
       onLastClick={[Function]}
@@ -93,7 +101,11 @@ exports[`TasksDonutCard render with focused-on normal 1`] = `
           "#0089C9",
         ]
       }
-      focusedOn="normal"
+      focusedOn={
+        Object {
+          "normal": true,
+        }
+      }
       last={3}
       older={5}
       onLastClick={[Function]}
@@ -128,7 +140,11 @@ exports[`TasksDonutCard render with focused-on older 1`] = `
           "#0089C9",
         ]
       }
-      focusedOn="older"
+      focusedOn={
+        Object {
+          "older": true,
+        }
+      }
       last={3}
       older={5}
       onLastClick={[Function]}
@@ -163,7 +179,11 @@ exports[`TasksDonutCard render with focused-on total 1`] = `
           "#0089C9",
         ]
       }
-      focusedOn="total"
+      focusedOn={
+        Object {
+          "total": true,
+        }
+      }
       last={3}
       older={5}
       onLastClick={[Function]}
@@ -198,7 +218,7 @@ exports[`TasksDonutCard render with minimal props 1`] = `
           "#0089C9",
         ]
       }
-      focusedOn="normal"
+      focusedOn={Object {}}
       last={3}
       older={5}
       onLastClick={[Function]}
@@ -236,7 +256,11 @@ exports[`TasksDonutCard render with props 1`] = `
           "#0089C9",
         ]
       }
-      focusedOn="normal"
+      focusedOn={
+        Object {
+          "normal": true,
+        }
+      }
       last={3}
       older={5}
       onLastClick={[Function]}

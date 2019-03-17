@@ -39,7 +39,7 @@ exports[`TasksDonutChart render with focused-on last 1`] = `
 
 exports[`TasksDonutChart render with focused-on none 1`] = `
 <C3Chart
-  className="donut-chart-pf tasks-donut-chart"
+  className="donut-chart-pf tasks-donut-chart tasks-donut-selected"
   color={
     Object {
       "pattern": Array [
@@ -76,7 +76,7 @@ exports[`TasksDonutChart render with focused-on none 1`] = `
 
 exports[`TasksDonutChart render with focused-on normal 1`] = `
 <C3Chart
-  className="donut-chart-pf tasks-donut-chart"
+  className="donut-chart-pf tasks-donut-chart tasks-donut-selected"
   color={
     Object {
       "pattern": Array [
@@ -187,7 +187,7 @@ exports[`TasksDonutChart render with focused-on total 1`] = `
 
 exports[`TasksDonutChart render with minimal props 1`] = `
 <C3Chart
-  className="donut-chart-pf tasks-donut-chart"
+  className="donut-chart-pf tasks-donut-chart tasks-donut-selected"
   color={
     Object {
       "pattern": Array [
@@ -224,7 +224,7 @@ exports[`TasksDonutChart render with minimal props 1`] = `
 
 exports[`TasksDonutChart render with props 1`] = `
 <C3Chart
-  className="donut-chart-pf tasks-donut-chart some-class"
+  className="donut-chart-pf tasks-donut-chart some-class tasks-donut-selected"
   color={
     Object {
       "pattern": Array [

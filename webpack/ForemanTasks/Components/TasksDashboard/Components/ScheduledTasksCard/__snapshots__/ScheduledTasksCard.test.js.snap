@@ -1,6 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ScheduledTasksCard render with props 1`] = `
+exports[`ScheduledTasksCard render selected 1`] = `
+<Card
+  accented={false}
+  aggregated={false}
+  aggregatedMini={false}
+  cardRef={null}
+  className="tasks-donut-card scheduled-tasks-card selected-tasks-card"
+  matchHeight={false}
+>
+  <CardTitle
+    className=""
+    onClick={[Function]}
+  >
+    Scheduled
+  </CardTitle>
+  <CardBody
+    className=""
+  >
+    <div
+      className="scheduled-data"
+      onClick={[Function]}
+    >
+      0
+      <Icon
+        name="clock-o"
+        type="fa"
+      />
+    </div>
+  </CardBody>
+</Card>
+`;
+
+exports[`ScheduledTasksCard render with minimal props 1`] = `
 <Card
   accented={false}
   aggregated={false}
@@ -19,10 +51,42 @@ exports[`ScheduledTasksCard render with props 1`] = `
     className=""
   >
     <div
-      className="scheduled-data not-focused"
+      className="scheduled-data"
       onClick={[Function]}
     >
-      1
+      0
+      <Icon
+        name="clock-o"
+        type="fa"
+      />
+    </div>
+  </CardBody>
+</Card>
+`;
+
+exports[`ScheduledTasksCard render with props 1`] = `
+<Card
+  accented={false}
+  aggregated={false}
+  aggregatedMini={false}
+  cardRef={null}
+  className="tasks-donut-card scheduled-tasks-card some-class"
+  matchHeight={false}
+>
+  <CardTitle
+    className=""
+    onClick={[Function]}
+  >
+    Scheduled
+  </CardTitle>
+  <CardBody
+    className=""
+  >
+    <div
+      className="scheduled-data"
+      onClick={[Function]}
+    >
+      3
       <Icon
         name="clock-o"
         type="fa"

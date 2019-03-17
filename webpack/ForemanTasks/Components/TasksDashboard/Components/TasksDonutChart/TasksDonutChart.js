@@ -6,7 +6,6 @@ import Chart from '../../../../Components/Chart/Chart';
 
 import {
   TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS,
-  TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS_ARRAY,
   COLLOR_PATTERN,
 } from './TasksDonutChartConstants';
 import {
@@ -37,8 +36,7 @@ class TasksDonutChart extends React.Component {
       chartElement: this.chart.element,
       value: last + older,
       onClick: () => onTotalClick(),
-      onMouseOver: () =>
-        this.setChartFocus(TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.TOTAL),
+      onMouseOver: () => this.setChartFocus({ focusedOn: { total: true } }),
       onMouseOut: () => this.updateChartFocus(),
     });
   }
@@ -48,22 +46,20 @@ class TasksDonutChart extends React.Component {
   }
 
   setChartFocus(focusedOn) {
-    switch (focusedOn) {
-      case TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.TOTAL:
-        this.chart.focus([
-          TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.LAST,
-          TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.OLDER,
-        ]);
-        break;
-      case TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.LAST:
-      case TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.OLDER:
-        this.chart.focus(focusedOn);
-        break;
-      case TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.NONE:
-        this.chart.focus([]);
-        break;
-      default:
-        this.chart.revert();
+    if (focusedOn.total) {
+      this.chart.focus([
+        TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.LAST,
+        TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.OLDER,
+      ]);
+    }
+    if (focusedOn.last) {
+      this.chart.focus([TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.LAST]);
+    }
+    if (focusedOn.older) {
+      this.chart.focus([TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.OLDER]);
+    }
+    if (!focusedOn || JSON.stringify(focusedOn) === '{}') {
+      this.chart.focus([]);
     }
   }
 
@@ -129,7 +125,7 @@ TasksDonutChart.propTypes = {
   className: PropTypes.string,
   timePeriod: PropTypes.string,
   colorsPattern: PropTypes.arrayOf(PropTypes.string),
-  focusedOn: PropTypes.oneOf(TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS_ARRAY),
+  focusedOn: PropTypes.shape({}),
   onTotalClick: PropTypes.func,
   onLastClick: PropTypes.func,
   onOlderClick: PropTypes.func,
@@ -139,7 +135,7 @@ TasksDonutChart.defaultProps = {
   className: '',
   timePeriod: '24h',
   colorsPattern: COLLOR_PATTERN,
-  focusedOn: TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.NORMAL,
+  focusedOn: {},
   onTotalClick: () => null,
   onLastClick: () => null,
   onOlderClick: () => null,

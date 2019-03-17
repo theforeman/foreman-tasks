@@ -1,5 +1,797 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`StoppedTasksCard render error-last selected 1`] = `
+<Card
+  accented={false}
+  aggregated={false}
+  aggregatedMini={false}
+  cardRef={null}
+  className="tasks-donut-card stopped-tasks-card selected-tasks-card"
+  matchHeight={false}
+>
+  <CardTitle
+    className=""
+    onClick={[Function]}
+  >
+    Stopped
+  </CardTitle>
+  <CardBody
+    className=""
+  >
+    <table
+      className="table table-bordered table-striped stopped-table"
+    >
+      <thead>
+        <tr>
+          <th />
+          <th>
+            Total
+          </th>
+          <th>
+            week
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          className="error-row"
+          key="error"
+        >
+          <td>
+            Error
+          </td>
+          <td
+            className="total-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+          <td
+            className="last-col active"
+            onClick={[Function]}
+          >
+            0
+          </td>
+        </tr>
+        <tr
+          className="warning-row"
+          key="warning"
+        >
+          <td>
+            Warning
+          </td>
+          <td
+            className="total-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+          <td
+            className="last-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+        </tr>
+        <tr
+          className="success-row"
+          key="success"
+        >
+          <td>
+            Success
+          </td>
+          <td
+            className="total-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+          <td
+            className="last-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </CardBody>
+</Card>
+`;
+
+exports[`StoppedTasksCard render error-total selected 1`] = `
+<Card
+  accented={false}
+  aggregated={false}
+  aggregatedMini={false}
+  cardRef={null}
+  className="tasks-donut-card stopped-tasks-card selected-tasks-card"
+  matchHeight={false}
+>
+  <CardTitle
+    className=""
+    onClick={[Function]}
+  >
+    Stopped
+  </CardTitle>
+  <CardBody
+    className=""
+  >
+    <table
+      className="table table-bordered table-striped stopped-table"
+    >
+      <thead>
+        <tr>
+          <th />
+          <th>
+            Total
+          </th>
+          <th>
+            24h
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          className="error-row"
+          key="error"
+        >
+          <td>
+            Error
+          </td>
+          <td
+            className="total-col active"
+            onClick={[Function]}
+          >
+            0
+          </td>
+          <td
+            className="last-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+        </tr>
+        <tr
+          className="warning-row"
+          key="warning"
+        >
+          <td>
+            Warning
+          </td>
+          <td
+            className="total-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+          <td
+            className="last-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+        </tr>
+        <tr
+          className="success-row"
+          key="success"
+        >
+          <td>
+            Success
+          </td>
+          <td
+            className="total-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+          <td
+            className="last-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </CardBody>
+</Card>
+`;
+
+exports[`StoppedTasksCard render selected 1`] = `
+<Card
+  accented={false}
+  aggregated={false}
+  aggregatedMini={false}
+  cardRef={null}
+  className="tasks-donut-card stopped-tasks-card selected-tasks-card"
+  matchHeight={false}
+>
+  <CardTitle
+    className=""
+    onClick={[Function]}
+  >
+    Stopped
+  </CardTitle>
+  <CardBody
+    className=""
+  >
+    <table
+      className="table table-bordered table-striped stopped-table"
+    >
+      <thead>
+        <tr>
+          <th />
+          <th>
+            Total
+          </th>
+          <th>
+            24h
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          className="error-row"
+          key="error"
+        >
+          <td>
+            Error
+          </td>
+          <td
+            className="total-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+          <td
+            className="last-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+        </tr>
+        <tr
+          className="warning-row"
+          key="warning"
+        >
+          <td>
+            Warning
+          </td>
+          <td
+            className="total-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+          <td
+            className="last-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+        </tr>
+        <tr
+          className="success-row"
+          key="success"
+        >
+          <td>
+            Success
+          </td>
+          <td
+            className="total-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+          <td
+            className="last-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </CardBody>
+</Card>
+`;
+
+exports[`StoppedTasksCard render success-last selected 1`] = `
+<Card
+  accented={false}
+  aggregated={false}
+  aggregatedMini={false}
+  cardRef={null}
+  className="tasks-donut-card stopped-tasks-card selected-tasks-card"
+  matchHeight={false}
+>
+  <CardTitle
+    className=""
+    onClick={[Function]}
+  >
+    Stopped
+  </CardTitle>
+  <CardBody
+    className=""
+  >
+    <table
+      className="table table-bordered table-striped stopped-table"
+    >
+      <thead>
+        <tr>
+          <th />
+          <th>
+            Total
+          </th>
+          <th>
+            week
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          className="error-row"
+          key="error"
+        >
+          <td>
+            Error
+          </td>
+          <td
+            className="total-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+          <td
+            className="last-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+        </tr>
+        <tr
+          className="warning-row"
+          key="warning"
+        >
+          <td>
+            Warning
+          </td>
+          <td
+            className="total-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+          <td
+            className="last-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+        </tr>
+        <tr
+          className="success-row"
+          key="success"
+        >
+          <td>
+            Success
+          </td>
+          <td
+            className="total-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+          <td
+            className="last-col active"
+            onClick={[Function]}
+          >
+            0
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </CardBody>
+</Card>
+`;
+
+exports[`StoppedTasksCard render success-total selected 1`] = `
+<Card
+  accented={false}
+  aggregated={false}
+  aggregatedMini={false}
+  cardRef={null}
+  className="tasks-donut-card stopped-tasks-card selected-tasks-card"
+  matchHeight={false}
+>
+  <CardTitle
+    className=""
+    onClick={[Function]}
+  >
+    Stopped
+  </CardTitle>
+  <CardBody
+    className=""
+  >
+    <table
+      className="table table-bordered table-striped stopped-table"
+    >
+      <thead>
+        <tr>
+          <th />
+          <th>
+            Total
+          </th>
+          <th>
+            24h
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          className="error-row"
+          key="error"
+        >
+          <td>
+            Error
+          </td>
+          <td
+            className="total-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+          <td
+            className="last-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+        </tr>
+        <tr
+          className="warning-row"
+          key="warning"
+        >
+          <td>
+            Warning
+          </td>
+          <td
+            className="total-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+          <td
+            className="last-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+        </tr>
+        <tr
+          className="success-row"
+          key="success"
+        >
+          <td>
+            Success
+          </td>
+          <td
+            className="total-col active"
+            onClick={[Function]}
+          >
+            0
+          </td>
+          <td
+            className="last-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </CardBody>
+</Card>
+`;
+
+exports[`StoppedTasksCard render warning-last selected 1`] = `
+<Card
+  accented={false}
+  aggregated={false}
+  aggregatedMini={false}
+  cardRef={null}
+  className="tasks-donut-card stopped-tasks-card selected-tasks-card"
+  matchHeight={false}
+>
+  <CardTitle
+    className=""
+    onClick={[Function]}
+  >
+    Stopped
+  </CardTitle>
+  <CardBody
+    className=""
+  >
+    <table
+      className="table table-bordered table-striped stopped-table"
+    >
+      <thead>
+        <tr>
+          <th />
+          <th>
+            Total
+          </th>
+          <th>
+            week
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          className="error-row"
+          key="error"
+        >
+          <td>
+            Error
+          </td>
+          <td
+            className="total-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+          <td
+            className="last-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+        </tr>
+        <tr
+          className="warning-row"
+          key="warning"
+        >
+          <td>
+            Warning
+          </td>
+          <td
+            className="total-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+          <td
+            className="last-col active"
+            onClick={[Function]}
+          >
+            0
+          </td>
+        </tr>
+        <tr
+          className="success-row"
+          key="success"
+        >
+          <td>
+            Success
+          </td>
+          <td
+            className="total-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+          <td
+            className="last-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </CardBody>
+</Card>
+`;
+
+exports[`StoppedTasksCard render warning-total selected 1`] = `
+<Card
+  accented={false}
+  aggregated={false}
+  aggregatedMini={false}
+  cardRef={null}
+  className="tasks-donut-card stopped-tasks-card selected-tasks-card"
+  matchHeight={false}
+>
+  <CardTitle
+    className=""
+    onClick={[Function]}
+  >
+    Stopped
+  </CardTitle>
+  <CardBody
+    className=""
+  >
+    <table
+      className="table table-bordered table-striped stopped-table"
+    >
+      <thead>
+        <tr>
+          <th />
+          <th>
+            Total
+          </th>
+          <th>
+            24h
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          className="error-row"
+          key="error"
+        >
+          <td>
+            Error
+          </td>
+          <td
+            className="total-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+          <td
+            className="last-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+        </tr>
+        <tr
+          className="warning-row"
+          key="warning"
+        >
+          <td>
+            Warning
+          </td>
+          <td
+            className="total-col active"
+            onClick={[Function]}
+          >
+            0
+          </td>
+          <td
+            className="last-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+        </tr>
+        <tr
+          className="success-row"
+          key="success"
+        >
+          <td>
+            Success
+          </td>
+          <td
+            className="total-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+          <td
+            className="last-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </CardBody>
+</Card>
+`;
+
+exports[`StoppedTasksCard render with minimal props 1`] = `
+<Card
+  accented={false}
+  aggregated={false}
+  aggregatedMini={false}
+  cardRef={null}
+  className="tasks-donut-card stopped-tasks-card"
+  matchHeight={false}
+>
+  <CardTitle
+    className=""
+    onClick={[Function]}
+  >
+    Stopped
+  </CardTitle>
+  <CardBody
+    className=""
+  >
+    <table
+      className="table table-bordered table-striped stopped-table"
+    >
+      <thead>
+        <tr>
+          <th />
+          <th>
+            Total
+          </th>
+          <th>
+            24h
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          className="error-row"
+          key="error"
+        >
+          <td>
+            Error
+          </td>
+          <td
+            className="total-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+          <td
+            className="last-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+        </tr>
+        <tr
+          className="warning-row"
+          key="warning"
+        >
+          <td>
+            Warning
+          </td>
+          <td
+            className="total-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+          <td
+            className="last-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+        </tr>
+        <tr
+          className="success-row"
+          key="success"
+        >
+          <td>
+            Success
+          </td>
+          <td
+            className="total-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+          <td
+            className="last-col"
+            onClick={[Function]}
+          >
+            0
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </CardBody>
+</Card>
+`;
+
 exports[`StoppedTasksCard render with props 1`] = `
 <Card
   accented={false}
@@ -19,30 +811,46 @@ exports[`StoppedTasksCard render with props 1`] = `
     className=""
   >
     <table
-      className="table table-titles"
-    >
-      <tbody>
-        <tr>
-          <td />
-          <td>
-            Total
-          </td>
-          <td>
-            24h
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table
       className="table table-bordered table-striped stopped-table"
     >
+      <thead>
+        <tr>
+          <th />
+          <th>
+            Total
+          </th>
+          <th>
+            week
+          </th>
+        </tr>
+      </thead>
       <tbody>
         <tr
           className="error-row"
-          key="0"
+          key="error"
         >
           <td>
             Error
+          </td>
+          <td
+            className="total-col"
+            onClick={[Function]}
+          >
+            9
+          </td>
+          <td
+            className="last-col"
+            onClick={[Function]}
+          >
+            1
+          </td>
+        </tr>
+        <tr
+          className="warning-row"
+          key="warning"
+        >
+          <td>
+            Warning
           </td>
           <td
             className="total-col"
@@ -54,32 +862,12 @@ exports[`StoppedTasksCard render with props 1`] = `
             className="last-col"
             onClick={[Function]}
           >
-            1
-          </td>
-        </tr>
-        <tr
-          className="warning-row"
-          key="1"
-        >
-          <td>
-            Warning
-          </td>
-          <td
-            className="total-col"
-            onClick={[Function]}
-          >
-            20
-          </td>
-          <td
-            className="last-col"
-            onClick={[Function]}
-          >
             2
           </td>
         </tr>
         <tr
           className="success-row"
-          key="2"
+          key="success"
         >
           <td>
             Success
@@ -88,7 +876,7 @@ exports[`StoppedTasksCard render with props 1`] = `
             className="total-col"
             onClick={[Function]}
           >
-            25
+            7
           </td>
           <td
             className="last-col"

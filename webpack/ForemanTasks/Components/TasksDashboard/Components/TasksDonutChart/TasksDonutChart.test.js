@@ -32,7 +32,7 @@ const fixtures = {
 TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS_ARRAY.forEach(mode => {
   fixtures[`render with focused-on ${mode}`] = {
     ...createRequiredProps(),
-    focusedOn: mode,
+    focusedOn: { [mode]: true },
   };
 });
 

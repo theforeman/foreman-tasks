@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Card } from 'patternfly-react';
-
 import { shouleBeSelected } from '../TasksDonutChart/TasksDonutChartHelper';
 import TasksDonutChart from '../TasksDonutChart/TasksDonutChart';
 import './TasksDonutCard.scss';
@@ -40,7 +39,7 @@ TasksDonutCard.propTypes = {
 TasksDonutCard.defaultProps = {
   title: '',
   className: '',
-  focusedOn: TasksDonutChart.defaultProps.focusedOn,
+  focusedOn: {},
 };
 
 export default TasksDonutCard;

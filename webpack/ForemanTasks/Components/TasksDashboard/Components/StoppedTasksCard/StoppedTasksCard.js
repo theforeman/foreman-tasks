@@ -4,22 +4,26 @@ import { Card } from 'patternfly-react';
 import classNames from 'classnames';
 import { capitalize } from 'lodash';
 import { translate as __ } from 'foremanReact/common/I18n';
-import './StoppedTasksCard.scss';
+
+import { timePropType, queryPropType } from '../../TasksDashboardPropTypes';
 import {
-  getTableItemClassName,
-  shouleBeSelected,
-} from './StoppedTasksCardHelpers';
+  TASKS_DASHBOARD_AVAILABLE_TIMES,
+  TASKS_DASHBOARD_AVAILABLE_QUERY_STATES,
+  TASKS_DASHBOARD_AVAILABLE_QUERY_MODES,
+} from '../../TasksDashboardConstants';
+import { getTimeText } from '../../TasksDashboardHelper';
+import './StoppedTasksCard.scss';
 
 const StoppedTasksCard = ({
+  data,
+  query,
+  time,
   className,
-  error,
-  warning,
-  success,
-  timePeriod,
-  focusedOn,
-  onTitleClick,
+  updateQuery,
+  ...props
 }) => {
-  const data = { error, warning, success };
+  const { STOPPED } = TASKS_DASHBOARD_AVAILABLE_QUERY_STATES;
+  const { LAST } = TASKS_DASHBOARD_AVAILABLE_QUERY_MODES;
 
   return (
     <Card
@@ -28,37 +32,56 @@ const StoppedTasksCard = ({
         'stopped-tasks-card',
         className,
         {
-          'selected-tasks-card': shouleBeSelected(focusedOn),
+          'selected-tasks-card': query.state === STOPPED,
         }
       )}
+      {...props}
     >
-      <Card.Title onClick={onTitleClick}>{__('Stopped')}</Card.Title>
+      <Card.Title onClick={() => updateQuery({ state: STOPPED })}>
+        {__('Stopped')}
+      </Card.Title>
       <Card.Body>
-        <table className="table table-titles">
-          <tbody>
-            <tr>
-              <td />
-              <td>Total</td>
-              <td>{timePeriod}</td>
-            </tr>
-          </tbody>
-        </table>
         <table className="table table-bordered table-striped stopped-table">
+          <thead>
+            <tr>
+              <th />
+              <th>{__('Total')}</th>
+              <th>{getTimeText(time)}</th>
+            </tr>
+          </thead>
           <tbody>
-            {Object.entries(data).map(([key, value], index) => (
-              <tr className={`${key}-row`} key={index}>
-                <td>{capitalize(key)}</td>
+            {Object.entries(data).map(([result, { total, last }]) => (
+              <tr className={`${result}-row`} key={result}>
+                <td>{capitalize(result)}</td>
                 <td
-                  className={getTableItemClassName(key, 'total', focusedOn)}
-                  onClick={value.total.onClick}
+                  className={classNames('total-col', {
+                    active:
+                      query.state === STOPPED &&
+                      query.result === result &&
+                      query.mode !== LAST,
+                  })}
+                  onClick={() => updateQuery({ state: STOPPED, result })}
                 >
-                  {value.total.value}
+                  {total}
                 </td>
                 <td
-                  className={getTableItemClassName(key, 'last', focusedOn)}
-                  onClick={value.last.onClick}
+                  className={classNames('last-col', {
+                    active:
+                      query.state === STOPPED &&
+                      query.result === result &&
+                      query.mode === LAST &&
+                      query.time === time,
+                  })}
+                  onClick={() =>
+                    updateQuery({
+                      state: STOPPED,
+                      result,
+                      mode: LAST,
+                      time,
+                    })
+                  }
                 >
-                  {value.last.value}
+                  {last}
                 </td>
               </tr>
             ))}
@@ -69,39 +92,33 @@ const StoppedTasksCard = ({
   );
 };
 
-const focusedOnResultPropType = PropTypes.shape({
-  total: PropTypes.bool,
-  last: PropTypes.bool,
-});
-
 const resultPropType = PropTypes.shape({
-  total: PropTypes.shape({
-    value: PropTypes.number.isRequired,
-    onClick: PropTypes.func.isRequired,
-  }),
-  last: PropTypes.shape({ value: PropTypes.number, onClick: PropTypes.func }),
+  total: PropTypes.number.isRequired,
+  last: PropTypes.number.isRequired,
 });
 
 StoppedTasksCard.propTypes = {
-  onTitleClick: PropTypes.func.isRequired,
-  error: resultPropType.isRequired,
-  warning: resultPropType.isRequired,
-  success: resultPropType.isRequired,
-  timePeriod: PropTypes.string,
-  className: PropTypes.string,
-  focusedOn: PropTypes.shape({
-    normal: PropTypes.bool,
-    total: PropTypes.bool,
-    error: focusedOnResultPropType,
-    warning: focusedOnResultPropType,
-    success: focusedOnResultPropType,
+  data: PropTypes.shape({
+    error: resultPropType.isRequired,
+    warning: resultPropType.isRequired,
+    success: resultPropType.isRequired,
   }),
+  time: timePropType,
+  query: queryPropType,
+  className: PropTypes.string,
+  updateQuery: PropTypes.func,
 };
 
 StoppedTasksCard.defaultProps = {
+  data: {
+    error: { total: 0, last: 0 },
+    warning: { total: 0, last: 0 },
+    success: { total: 0, last: 0 },
+  },
+  time: TASKS_DASHBOARD_AVAILABLE_TIMES.H24,
+  query: {},
   className: '',
-  focusedOn: {},
-  timePeriod: '24h',
+  updateQuery: () => null,
 };
 
 export default StoppedTasksCard;

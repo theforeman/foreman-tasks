@@ -11,7 +11,7 @@ const fixtures = {
     ...createRequiredProps(),
     title: 'some title',
     className: 'some-classname',
-    focusedOn: 'normal',
+    focusedOn: { normal: true },
     onTotalClick: jest.fn(),
   },
 };
@@ -19,7 +19,7 @@ const fixtures = {
 TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS_ARRAY.forEach(mode => {
   fixtures[`render with focused-on ${mode}`] = {
     ...createRequiredProps(),
-    focusedOn: mode,
+    focusedOn: { [mode]: true },
   };
 });
 

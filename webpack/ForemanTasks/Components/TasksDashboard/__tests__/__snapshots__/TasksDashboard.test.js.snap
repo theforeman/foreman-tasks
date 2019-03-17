@@ -1,7 +1,59 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TasksDashboard rendering render without Props 1`] = `
+exports[`TasksDashboard rendering render with Props 1`] = `
 <div
-  className=""
-/>
+  className="tasks-dashboard"
+>
+  <RunningTasksCard
+    className=""
+    focusedOn={Object {}}
+    last={1}
+    older={2}
+    onLastClick={[Function]}
+    onOlderClick={[Function]}
+    onTotalClick={[Function]}
+    query={Object {}}
+    time="H24"
+  />
+  <PausedTasksCard
+    className=""
+    focusedOn={Object {}}
+    last={3}
+    older={1}
+    onLastClick={[Function]}
+    onOlderClick={[Function]}
+    onTotalClick={[Function]}
+    query={Object {}}
+    time="H24"
+  />
+  <StoppedTasksCard
+    className=""
+    data={
+      Object {
+        "error": Object {
+          "last": 6,
+          "total": 5,
+        },
+        "success": Object {
+          "last": 10,
+          "total": 9,
+        },
+        "warning": Object {
+          "last": 8,
+          "total": 7,
+        },
+      }
+    }
+    query={Object {}}
+    time="H24"
+    updateQuery={[Function]}
+  />
+  <ScheduledTasksCard
+    className=""
+    data={11}
+    query={Object {}}
+    time="H24"
+    updateQuery={[Function]}
+  />
+</div>
 `;

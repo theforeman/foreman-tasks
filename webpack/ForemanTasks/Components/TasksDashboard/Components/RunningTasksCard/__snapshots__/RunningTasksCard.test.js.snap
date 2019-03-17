@@ -3,7 +3,7 @@
 exports[`RunningTasksCard render with minimal props 1`] = `
 <TasksDonutCard
   className=""
-  focusedOn="normal"
+  focusedOn={Object {}}
   last={3}
   older={5}
   title="Running"
