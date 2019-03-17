@@ -47,6 +47,7 @@
     "eslint-import-resolver-babel-module": "^4.0.0",
     "eslint-plugin-patternfly-react": "0.2.0",
     "identity-obj-proxy": "^3.0.0",
+    "jed": "^1.1.1",
     "jest-cli": "^23.6.0",
     "jest-prop-type-error": "^1.1.0",
     "node-sass": "^4.11.0",
@@ -78,7 +79,6 @@
     "uuid": "^3.3.2"
   },
   "jest": {
-    "automock": true,
     "verbose": true,
     "testMatch": [
       "**/*.test.js"
@@ -95,11 +95,6 @@
     ],
     "coverageReporters": [
       "lcov"
-    ],
-    "unmockedModulePathPatterns": [
-      "webpack/",
-      "react",
-      "node_modules/"
     ],
     "moduleNameMapper": {
       "^.+\\.(png|gif|css|scss)$": "identity-obj-proxy"
