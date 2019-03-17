@@ -1,10 +1,11 @@
 /*
   Copied from react-c3js: https://github.com/bcbcarl/react-c3js/blob/master/src/index.js
-  Added missing features:
-    * onChartCreate
-    * onChartUpdate
 
-  TODO: update react-c3js or move to patternfly-react
+  TODO:
+    * Add missing features:
+      * onChartCreate
+      * onChartUpdate
+    * update react-c3js or move to patternfly-react
  */
 
 /* eslint-disable global-require,
@@ -44,8 +45,9 @@ class C3Chart extends React.Component {
     }
   }
 
-  generateChart(config) {
-    const newConfig = Object.assign({ bindto: findDOMNode(this) }, config);
+  // eslint-disable-next-line class-methods-use-this
+  generateChart(mountNode, config) {
+    const newConfig = Object.assign({ bindto: mountNode }, config);
     return c3.generate(newConfig);
   }
 
@@ -57,18 +59,9 @@ class C3Chart extends React.Component {
     this.chart.unload();
   }
 
-  createChart(config) {
-    const { onChartCreate } = this.props;
-    this.chart = this.generateChart(config);
-
-    if (onChartCreate) onChartCreate(this.chart, config);
-  }
-
   updateChart(config) {
-    const { onChartUpdate } = this.props;
-
     if (!this.chart) {
-      this.createChart(config);
+      this.chart = this.generateChart(findDOMNode(this), config);
     }
 
     if (config.unloadBeforeLoad) {
@@ -76,8 +69,6 @@ class C3Chart extends React.Component {
     }
 
     this.loadNewData(config.data);
-
-    if (onChartUpdate) onChartUpdate(this.chart, config);
   }
 
   render() {
@@ -121,8 +112,6 @@ C3Chart.propTypes = {
   style: PropTypes.object,
   unloadBeforeLoad: PropTypes.bool,
   onPropsChanged: PropTypes.func,
-  onChartCreate: PropTypes.func,
-  onChartUpdate: PropTypes.func,
 };
 
 export default C3Chart;
