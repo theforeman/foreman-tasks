@@ -47,7 +47,10 @@
     "eslint-import-resolver-babel-module": "^4.0.0",
     "eslint-plugin-patternfly-react": "0.2.0",
     "identity-obj-proxy": "^3.0.0",
+<<<<<<< HEAD
     "jed": "^1.1.1",
+=======
+>>>>>>> Refs #26308 - Upgrade storybook to version 5
     "jest-cli": "^23.6.0",
     "jest-prop-type-error": "^1.1.0",
     "node-sass": "^4.11.0",
