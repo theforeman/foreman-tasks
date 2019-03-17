@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PausedTasksCard render with minimal props 1`] = `
+<TasksDonutCard
+  className=""
+  focusedOn="normal"
+  last={3}
+  older={5}
+  title="Paused"
+/>
+`;

@@ -18,7 +18,15 @@
   ],
   "env": {
     "test": {
-      "plugins": ["dynamic-import-node"]
+      "plugins": [
+        ["module-resolver", {
+          "alias": {
+            "root": ["./"],
+            "foremanReact": "./webpack/__mocks__/foremanReact"
+          }
+        }],
+        "dynamic-import-node"
+      ]
     }
   }
 }

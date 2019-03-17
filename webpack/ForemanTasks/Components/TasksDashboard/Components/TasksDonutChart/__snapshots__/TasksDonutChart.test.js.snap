@@ -1,0 +1,260 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TasksDonutChart render with focused-on last 1`] = `
+<C3Chart
+  className="donut-chart-pf tasks-donut-chart tasks-donut-selected"
+  color={
+    Object {
+      "pattern": Array [
+        "#C315C7",
+        "#0089C9",
+      ],
+    }
+  }
+  data={
+    Object {
+      "columns": "some-columns",
+      "names": "some-names",
+      "onclick": [Function],
+      "onmouseout": [Function],
+      "onmouseover": [Function],
+      "type": "donut",
+    }
+  }
+  legend={
+    Object {
+      "item": Object {
+        "onclick": [Function],
+        "onmouseout": [Function],
+        "onmouseover": [Function],
+      },
+      "position": "right",
+      "show": true,
+    }
+  }
+  onChartCreate={[Function]}
+  type="donut"
+/>
+`;
+
+exports[`TasksDonutChart render with focused-on none 1`] = `
+<C3Chart
+  className="donut-chart-pf tasks-donut-chart"
+  color={
+    Object {
+      "pattern": Array [
+        "#C315C7",
+        "#0089C9",
+      ],
+    }
+  }
+  data={
+    Object {
+      "columns": "some-columns",
+      "names": "some-names",
+      "onclick": [Function],
+      "onmouseout": [Function],
+      "onmouseover": [Function],
+      "type": "donut",
+    }
+  }
+  legend={
+    Object {
+      "item": Object {
+        "onclick": [Function],
+        "onmouseout": [Function],
+        "onmouseover": [Function],
+      },
+      "position": "right",
+      "show": true,
+    }
+  }
+  onChartCreate={[Function]}
+  type="donut"
+/>
+`;
+
+exports[`TasksDonutChart render with focused-on normal 1`] = `
+<C3Chart
+  className="donut-chart-pf tasks-donut-chart"
+  color={
+    Object {
+      "pattern": Array [
+        "#C315C7",
+        "#0089C9",
+      ],
+    }
+  }
+  data={
+    Object {
+      "columns": "some-columns",
+      "names": "some-names",
+      "onclick": [Function],
+      "onmouseout": [Function],
+      "onmouseover": [Function],
+      "type": "donut",
+    }
+  }
+  legend={
+    Object {
+      "item": Object {
+        "onclick": [Function],
+        "onmouseout": [Function],
+        "onmouseover": [Function],
+      },
+      "position": "right",
+      "show": true,
+    }
+  }
+  onChartCreate={[Function]}
+  type="donut"
+/>
+`;
+
+exports[`TasksDonutChart render with focused-on older 1`] = `
+<C3Chart
+  className="donut-chart-pf tasks-donut-chart tasks-donut-selected"
+  color={
+    Object {
+      "pattern": Array [
+        "#C315C7",
+        "#0089C9",
+      ],
+    }
+  }
+  data={
+    Object {
+      "columns": "some-columns",
+      "names": "some-names",
+      "onclick": [Function],
+      "onmouseout": [Function],
+      "onmouseover": [Function],
+      "type": "donut",
+    }
+  }
+  legend={
+    Object {
+      "item": Object {
+        "onclick": [Function],
+        "onmouseout": [Function],
+        "onmouseover": [Function],
+      },
+      "position": "right",
+      "show": true,
+    }
+  }
+  onChartCreate={[Function]}
+  type="donut"
+/>
+`;
+
+exports[`TasksDonutChart render with focused-on total 1`] = `
+<C3Chart
+  className="donut-chart-pf tasks-donut-chart tasks-donut-selected"
+  color={
+    Object {
+      "pattern": Array [
+        "#C315C7",
+        "#0089C9",
+      ],
+    }
+  }
+  data={
+    Object {
+      "columns": "some-columns",
+      "names": "some-names",
+      "onclick": [Function],
+      "onmouseout": [Function],
+      "onmouseover": [Function],
+      "type": "donut",
+    }
+  }
+  legend={
+    Object {
+      "item": Object {
+        "onclick": [Function],
+        "onmouseout": [Function],
+        "onmouseover": [Function],
+      },
+      "position": "right",
+      "show": true,
+    }
+  }
+  onChartCreate={[Function]}
+  type="donut"
+/>
+`;
+
+exports[`TasksDonutChart render with minimal props 1`] = `
+<C3Chart
+  className="donut-chart-pf tasks-donut-chart"
+  color={
+    Object {
+      "pattern": Array [
+        "#C315C7",
+        "#0089C9",
+      ],
+    }
+  }
+  data={
+    Object {
+      "columns": "some-columns",
+      "names": "some-names",
+      "onclick": [Function],
+      "onmouseout": [Function],
+      "onmouseover": [Function],
+      "type": "donut",
+    }
+  }
+  legend={
+    Object {
+      "item": Object {
+        "onclick": [Function],
+        "onmouseout": [Function],
+        "onmouseover": [Function],
+      },
+      "position": "right",
+      "show": true,
+    }
+  }
+  onChartCreate={[Function]}
+  type="donut"
+/>
+`;
+
+exports[`TasksDonutChart render with props 1`] = `
+<C3Chart
+  className="donut-chart-pf tasks-donut-chart some-class"
+  color={
+    Object {
+      "pattern": Array [
+        "color1",
+        "color2",
+      ],
+    }
+  }
+  data={
+    Object {
+      "columns": "some-columns",
+      "names": "some-names",
+      "onclick": [Function],
+      "onmouseout": [Function],
+      "onmouseover": [Function],
+      "type": "donut",
+    }
+  }
+  legend={
+    Object {
+      "item": Object {
+        "onclick": [Function],
+        "onmouseout": [Function],
+        "onmouseover": [Function],
+      },
+      "position": "right",
+      "show": true,
+    }
+  }
+  onChartCreate={[Function]}
+  type="donut"
+/>
+`;

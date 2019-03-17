@@ -1,0 +1,249 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TasksDonutCard render with focused-on last 1`] = `
+<Card
+  accented={false}
+  aggregated={false}
+  aggregatedMini={false}
+  cardRef={null}
+  className="tasks-donut-card selected-tasks-card"
+  matchHeight={false}
+>
+  <CardTitle
+    className=""
+  />
+  <CardBody
+    className=""
+  >
+    <TasksDonutChart
+      className=""
+      colorsPattern={
+        Array [
+          "#C315C7",
+          "#0089C9",
+        ]
+      }
+      focusedOn="last"
+      last={3}
+      older={5}
+      onLastClick={[Function]}
+      onOlderClick={[Function]}
+      onTotalClick={[Function]}
+      timePeriod="24h"
+    />
+  </CardBody>
+</Card>
+`;
+
+exports[`TasksDonutCard render with focused-on none 1`] = `
+<Card
+  accented={false}
+  aggregated={false}
+  aggregatedMini={false}
+  cardRef={null}
+  className="tasks-donut-card"
+  matchHeight={false}
+>
+  <CardTitle
+    className=""
+  />
+  <CardBody
+    className=""
+  >
+    <TasksDonutChart
+      className=""
+      colorsPattern={
+        Array [
+          "#C315C7",
+          "#0089C9",
+        ]
+      }
+      focusedOn="none"
+      last={3}
+      older={5}
+      onLastClick={[Function]}
+      onOlderClick={[Function]}
+      onTotalClick={[Function]}
+      timePeriod="24h"
+    />
+  </CardBody>
+</Card>
+`;
+
+exports[`TasksDonutCard render with focused-on normal 1`] = `
+<Card
+  accented={false}
+  aggregated={false}
+  aggregatedMini={false}
+  cardRef={null}
+  className="tasks-donut-card"
+  matchHeight={false}
+>
+  <CardTitle
+    className=""
+  />
+  <CardBody
+    className=""
+  >
+    <TasksDonutChart
+      className=""
+      colorsPattern={
+        Array [
+          "#C315C7",
+          "#0089C9",
+        ]
+      }
+      focusedOn="normal"
+      last={3}
+      older={5}
+      onLastClick={[Function]}
+      onOlderClick={[Function]}
+      onTotalClick={[Function]}
+      timePeriod="24h"
+    />
+  </CardBody>
+</Card>
+`;
+
+exports[`TasksDonutCard render with focused-on older 1`] = `
+<Card
+  accented={false}
+  aggregated={false}
+  aggregatedMini={false}
+  cardRef={null}
+  className="tasks-donut-card selected-tasks-card"
+  matchHeight={false}
+>
+  <CardTitle
+    className=""
+  />
+  <CardBody
+    className=""
+  >
+    <TasksDonutChart
+      className=""
+      colorsPattern={
+        Array [
+          "#C315C7",
+          "#0089C9",
+        ]
+      }
+      focusedOn="older"
+      last={3}
+      older={5}
+      onLastClick={[Function]}
+      onOlderClick={[Function]}
+      onTotalClick={[Function]}
+      timePeriod="24h"
+    />
+  </CardBody>
+</Card>
+`;
+
+exports[`TasksDonutCard render with focused-on total 1`] = `
+<Card
+  accented={false}
+  aggregated={false}
+  aggregatedMini={false}
+  cardRef={null}
+  className="tasks-donut-card selected-tasks-card"
+  matchHeight={false}
+>
+  <CardTitle
+    className=""
+  />
+  <CardBody
+    className=""
+  >
+    <TasksDonutChart
+      className=""
+      colorsPattern={
+        Array [
+          "#C315C7",
+          "#0089C9",
+        ]
+      }
+      focusedOn="total"
+      last={3}
+      older={5}
+      onLastClick={[Function]}
+      onOlderClick={[Function]}
+      onTotalClick={[Function]}
+      timePeriod="24h"
+    />
+  </CardBody>
+</Card>
+`;
+
+exports[`TasksDonutCard render with minimal props 1`] = `
+<Card
+  accented={false}
+  aggregated={false}
+  aggregatedMini={false}
+  cardRef={null}
+  className="tasks-donut-card"
+  matchHeight={false}
+>
+  <CardTitle
+    className=""
+  />
+  <CardBody
+    className=""
+  >
+    <TasksDonutChart
+      className=""
+      colorsPattern={
+        Array [
+          "#C315C7",
+          "#0089C9",
+        ]
+      }
+      focusedOn="normal"
+      last={3}
+      older={5}
+      onLastClick={[Function]}
+      onOlderClick={[Function]}
+      onTotalClick={[Function]}
+      timePeriod="24h"
+    />
+  </CardBody>
+</Card>
+`;
+
+exports[`TasksDonutCard render with props 1`] = `
+<Card
+  accented={false}
+  aggregated={false}
+  aggregatedMini={false}
+  cardRef={null}
+  className="tasks-donut-card some-classname"
+  matchHeight={false}
+>
+  <CardTitle
+    className=""
+    onClick={[MockFunction]}
+  >
+    some title
+  </CardTitle>
+  <CardBody
+    className=""
+  >
+    <TasksDonutChart
+      className=""
+      colorsPattern={
+        Array [
+          "#C315C7",
+          "#0089C9",
+        ]
+      }
+      focusedOn="normal"
+      last={3}
+      older={5}
+      onLastClick={[Function]}
+      onOlderClick={[Function]}
+      onTotalClick={[MockFunction]}
+      timePeriod="24h"
+    />
+  </CardBody>
+</Card>
+`;

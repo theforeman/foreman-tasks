@@ -1,0 +1,17 @@
+.tasks-donut-card {
+  .card-pf-title {
+    text-align: center;
+    font-size: 180%;
+    cursor: pointer;
+  }
+
+  .card-pf-body {
+    padding-left: 15px;
+  }
+
+  &.selected-tasks-card {
+    .card-pf-title {
+      font-weight: bold;
+    }
+  }
+}
