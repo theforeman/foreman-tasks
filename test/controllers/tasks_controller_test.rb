@@ -24,6 +24,16 @@ module ForemanTasks
         Organization.current = Location.current = nil
       end
 
+      describe 'summary' do
+        it 'works' do
+          FactoryBot.create(:some_task, :action => 'Some action')
+          get(:summary, params: { recent_timeframe: 24 }, session: set_session_user)
+          assert_response :success
+          response = JSON.parse(@response.body)
+          assert response['running']
+        end
+      end
+
       it 'supports csv export' do
         FactoryBot.create(:some_task, :action => 'Some action')
         get(:index, params: { format: :csv }, session: set_session_user)

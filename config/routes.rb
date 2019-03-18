@@ -11,6 +11,7 @@ Foreman::Application.routes.draw do
     resources :tasks, :only => [:index, :show] do
       collection do
         get 'auto_complete_search'
+        get '/summary/:recent_timeframe', action: 'summary'
       end
       member do
         get :sub_tasks
