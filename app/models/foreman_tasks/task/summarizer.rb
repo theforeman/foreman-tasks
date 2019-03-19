@@ -16,7 +16,7 @@ module ForemanTasks
       # updates `field` (one of [:recent, :total]) with counts from aggregated_scope
       def update(field, counts)
         raise ArgumentError, "Unexpected field #{field}" unless @data.key?(field)
-        @data[field] = counts.map(&:count).sum
+        @data[field] = counts.sum(&:count)
       end
     end
 

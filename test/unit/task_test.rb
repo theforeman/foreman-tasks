@@ -48,10 +48,10 @@ class TasksTest < ActiveSupport::TestCase
       task.update(state_updated_at: nil)
       task.result = 'error'
       task.save
-      assert_not task.state_updated_at, "Other than state change should not affect 'state_updated_at"
+      assert_not task.state_updated_at, "Other than state change should not affect 'state_updated_at'"
       task.state = 'running'
       task.save
-      assert task.state_updated_at, "State change should set 'state_updated_at"
+      assert task.state_updated_at, "State change should set 'state_updated_at'"
     end
   end
 

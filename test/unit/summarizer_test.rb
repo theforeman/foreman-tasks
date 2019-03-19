@@ -52,12 +52,8 @@ class SummarizerTest < ActiveSupport::TestCase
             task.update(state_updated_at: nil)
           end
         end
-        recent_tasks = []
-        status_summary[:recent].times do |i|
-          task = tasks[i]
-          task.update(state_updated_at: Time.now.utc)
-          recent_tasks << task
-        end
+        recent_tasks = tasks.take(status_summary[:recent])
+        recent_tasks.each { |t| t.update(state_updated_at: Time.now.utc) }
 
         untouched_recent_tasks = recent_tasks
         untouched_old_tasks = tasks - recent_tasks
