@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StoppedTasksCard render with props 1`] = `
+<Card
+  accented={false}
+  aggregated={false}
+  aggregatedMini={false}
+  cardRef={null}
+  className="tasks-donut-card stopped-tasks-card"
+  matchHeight={false}
+>
+  <CardTitle
+    className=""
+    onClick={[Function]}
+  >
+    Stopped
+  </CardTitle>
+  <CardBody
+    className=""
+  >
+    <table
+      className="table table-titles"
+    >
+      <tbody>
+        <tr>
+          <td />
+          <td>
+            Total
+          </td>
+          <td>
+            24h
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table
+      className="table table-bordered table-striped"
+    >
+      <tbody>
+        <tr
+          className="error-row"
+          key="0"
+        >
+          <td>
+            Error
+          </td>
+          <td
+            className="total-data"
+            onClick={[Function]}
+          >
+            8
+          </td>
+          <td
+            className="last-data"
+            onClick={[Function]}
+          >
+            1
+          </td>
+        </tr>
+        <tr
+          className="warning-row"
+          key="1"
+        >
+          <td>
+            Warning
+          </td>
+          <td
+            className="total-data"
+            onClick={[Function]}
+          >
+            20
+          </td>
+          <td
+            className="last-data"
+            onClick={[Function]}
+          >
+            2
+          </td>
+        </tr>
+        <tr
+          className="success-row"
+          key="2"
+        >
+          <td>
+            Success
+          </td>
+          <td
+            className="total-data"
+            onClick={[Function]}
+          >
+            25
+          </td>
+          <td
+            className="last-data"
+            onClick={[Function]}
+          >
+            3
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </CardBody>
+</Card>
+`;

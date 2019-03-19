@@ -1,0 +1,54 @@
+.stopped-tasks-card {
+  .not-focused {
+    opacity: 0.3;
+  }
+  td:hover {
+    border: 1px solid #d1d1d1;
+    background-color: #fff;
+  }
+
+  table {
+    table-layout: fixed;
+    td:first-child {
+      text-align: left;
+    }
+    td {
+      text-align: center;
+      padding-left: 5px;
+      width: 33%;
+    }
+    width: 100%;
+  }
+  .error-row {
+    .total-data {
+      background-color: #fcc5ca;
+    }
+    .last-data {
+      background-color: #f78c96;
+    }
+  }
+  .warning-row {
+    .total-data {
+      background-color: #fee4cc;
+    }
+    .last-data {
+      background-color: #fdc899;
+    }
+  }
+  .success-row {
+    .total-data {
+      background-color: #d1f0d6;
+    }
+    .last-data {
+      background-color: #a4e0ac;
+    }
+  }
+
+  .table-titles {
+    margin-bottom: 0px;
+    font-weight: bold;
+    td {
+      border: none;
+    }
+  }
+}

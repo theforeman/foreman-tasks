@@ -1,0 +1,21 @@
+.scheduled-tasks-card {
+  text-align: center;
+  .not-focused {
+    opacity: 0.3;
+  }
+  .scheduled-data {
+    cursor: pointer;
+    margin-top: 50px;
+    font-size: 40px;
+    font-weight: 300;
+    * {
+      margin: 10px;
+    }
+    &:hover {
+      .donut-title-big-pf,
+      .donut-title-small-pf {
+        font-weight: bold;
+      }
+    }
+  }
+}
