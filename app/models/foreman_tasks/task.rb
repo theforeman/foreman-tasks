@@ -15,6 +15,7 @@ module ForemanTasks
 
     self.primary_key = :id
     before_create :generate_id
+    before_save :update_state_updated_at
 
     belongs_to :parent_task, :class_name => 'ForemanTasks::Task'
     has_many :sub_tasks, :class_name => 'ForemanTasks::Task', :foreign_key => :parent_task_id, :dependent => :nullify
@@ -268,6 +269,10 @@ module ForemanTasks
 
     def generate_id
       self.id ||= SecureRandom.uuid
+    end
+
+    def update_state_updated_at
+      self.state_updated_at = Time.now.utc if changes.key?(:state)
     end
   end
 end

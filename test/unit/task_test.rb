@@ -41,6 +41,20 @@ class TasksTest < ActiveSupport::TestCase
     end
   end
 
+  describe 'state_updated_at' do
+    it 'updates the state_updated_at when the state changes' do
+      task = FactoryBot.create(:some_task)
+      assert task.state_updated_at > Time.now.utc - 1.minute, "Newly created task has to have state_updated_at set"
+      task.update(state_updated_at: nil)
+      task.result = 'error'
+      task.save
+      assert_not task.state_updated_at, "Other than state change should not affect 'state_updated_at'"
+      task.state = 'running'
+      task.save
+      assert task.state_updated_at, "State change should set 'state_updated_at'"
+    end
+  end
+
   describe 'authorization filtering' do
     it 'can filter by the task subject' do
       user_role  = FactoryBot.create(:user_user_role)

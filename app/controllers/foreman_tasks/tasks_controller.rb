@@ -24,6 +24,10 @@ module ForemanTasks
       end
     end
 
+    def summary
+      render json: Task::Summarizer.new(params[:recent_timeframe].to_i).summary
+    end
+
     def sub_tasks
       task   = Task.find(params[:id])
       @tasks = filter(task.sub_tasks)
@@ -109,7 +113,7 @@ module ForemanTasks
 
     def action_permission
       case params[:action]
-      when 'sub_tasks'
+      when 'sub_tasks', 'summary'
         :view
       when 'resume', 'unlock', 'force_unlock', 'cancel_step', 'cancel', 'abort'
         :edit
