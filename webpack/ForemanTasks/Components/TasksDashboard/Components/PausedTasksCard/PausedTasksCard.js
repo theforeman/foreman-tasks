@@ -12,7 +12,11 @@ const filterTitle = obj => {
   return newObj;
 };
 
-PausedTasksCard.propTypes = filterTitle(TasksDonutCard.propTypes);
-PausedTasksCard.defaultProps = filterTitle(TasksDonutCard.defaultProps);
+PausedTasksCard.propTypes = {
+  ...filterTitle(TasksDonutCard.propTypes),
+};
+PausedTasksCard.defaultProps = {
+  ...filterTitle(TasksDonutCard.defaultProps),
+};
 
 export default PausedTasksCard;

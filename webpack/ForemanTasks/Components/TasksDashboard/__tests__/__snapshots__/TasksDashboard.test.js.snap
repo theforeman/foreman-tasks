@@ -2,6 +2,92 @@
 
 exports[`TasksDashboard rendering render without Props 1`] = `
 <div
-  className=""
-/>
+  className="tasks-dashboard"
+>
+  <RunningTasksCard
+    className=""
+    focusedOn={
+      Object {
+        "normal": true,
+      }
+    }
+    last={3}
+    older={5}
+    onLastClick={[Function]}
+    onOlderClick={[Function]}
+    onTotalClick={[Function]}
+    timePeriod="24h"
+  />
+  <PausedTasksCard
+    className=""
+    focusedOn={
+      Object {
+        "normal": true,
+      }
+    }
+    last={3}
+    older={5}
+    onLastClick={[Function]}
+    onOlderClick={[Function]}
+    onTotalClick={[Function]}
+    timePeriod="24h"
+  />
+  <StoppedTasksCard
+    className=""
+    error={
+      Object {
+        "last": Object {
+          "onClick": [Function],
+          "value": 1,
+        },
+        "total": Object {
+          "onClick": [Function],
+          "value": 8,
+        },
+      }
+    }
+    focusedOn={
+      Object {
+        "normal": true,
+      }
+    }
+    onTitleClick={[Function]}
+    success={
+      Object {
+        "last": Object {
+          "onClick": [Function],
+          "value": 3,
+        },
+        "total": Object {
+          "onClick": [Function],
+          "value": 25,
+        },
+      }
+    }
+    timePeriod="24h"
+    warning={
+      Object {
+        "last": Object {
+          "onClick": [Function],
+          "value": 2,
+        },
+        "total": Object {
+          "onClick": [Function],
+          "value": 20,
+        },
+      }
+    }
+  />
+  <ScheduledTasksCard
+    className=""
+    focusedOn={
+      Object {
+        "normal": true,
+      }
+    }
+    onClick={[Function]}
+    scheduled={1}
+    timePeriod="24h"
+  />
+</div>
 `;

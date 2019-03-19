@@ -12,7 +12,10 @@ const filterTitle = obj => {
   return newObj;
 };
 
-RunningTasksCard.propTypes = filterTitle(TasksDonutCard.propTypes);
-RunningTasksCard.defaultProps = filterTitle(TasksDonutCard.defaultProps);
-
+RunningTasksCard.propTypes = {
+  ...filterTitle(TasksDonutCard.propTypes),
+};
+RunningTasksCard.defaultProps = {
+  ...filterTitle(TasksDonutCard.defaultProps),
+};
 export default RunningTasksCard;

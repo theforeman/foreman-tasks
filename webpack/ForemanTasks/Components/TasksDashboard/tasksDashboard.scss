@@ -1,0 +1,8 @@
+.tasks-dashboard {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  background-color: #f5f5f5;
+  .card-pf {
+    width: 300px;
+  }
+}

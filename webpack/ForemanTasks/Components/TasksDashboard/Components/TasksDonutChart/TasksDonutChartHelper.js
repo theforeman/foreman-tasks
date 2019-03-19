@@ -8,8 +8,7 @@ export const baseChartConfig = patternfly
   .getDefaultDonutConfig();
 
 export const shouleBeSelected = focusedOn =>
-  focusedOn !== TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.NORMAL &&
-  focusedOn !== TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.NONE;
+  focusedOn && (focusedOn.older || focusedOn.last || focusedOn.total);
 
 export const createChartData = ({
   last,
