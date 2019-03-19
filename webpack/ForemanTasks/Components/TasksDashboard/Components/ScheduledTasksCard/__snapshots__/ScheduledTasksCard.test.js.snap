@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ScheduledTasksCard render with props 1`] = `
+<Card
+  accented={false}
+  aggregated={false}
+  aggregatedMini={false}
+  cardRef={null}
+  className="tasks-donut-card scheduled-tasks-card"
+  matchHeight={false}
+>
+  <CardTitle
+    className=""
+    onClick={[Function]}
+  >
+    Scheduled
+  </CardTitle>
+  <CardBody
+    className=""
+  >
+    <div
+      className="scheduled-data not-focused"
+      onClick={[Function]}
+    >
+      1
+      <Icon
+        name="clock-o"
+        type="fa"
+      />
+    </div>
+  </CardBody>
+</Card>
+`;
