@@ -25,38 +25,17 @@ module ForemanTasks
       ret.html_safe
     end
 
-    def task_result_icon_class(task)
-      return 'task-status pficon-help' if task.state != 'stopped'
-
-      icon_class = case task.result
-                   when 'success'
-                     'pficon-ok'
-                   when 'error'
-                     'pficon-error-circle-o'
-                   when 'warning'
-                     'pficon-ok status-warn'
-                   else
-                     'pficon-help'
-                   end
-
-      "task-status #{icon_class}"
+    def troubleshooting_info_text
+      return if @task.state != 'paused' || @task.main_action.nil?
+      helper = TroubleshootingHelpGenerator.new(@task.main_action)
+      helper.generate_text
     end
 
-    def time_in_words_span(time)
-      if time.nil?
-        _('N/A')
+    def username_link_task(owner, username)
+      if owner.present? && username != User::ANONYMOUS_API_ADMIN && username != User::ANONYMOUS_ADMIN
+        link_to_if_authorized(username, hash_for_edit_user_path(owner))
       else
-        content_tag :span, (time > Time.now.utc ? _('in %s') : _('%s ago')) % time_ago_in_words(time),
-                    :'data-original-title' => time.try(:in_time_zone), :rel => 'twipsy'
-      end
-    end
-
-    def duration_in_words_span(start, finish)
-      if start.nil?
-        _('N/A')
-      else
-        content_tag :span, distance_of_time_in_words(start, finish),
-                    :'data-original-title' => number_with_delimiter((finish - start).to_i) + _(' seconds'), :rel => 'twipsy'
+        username
       end
     end
 

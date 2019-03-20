@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TaskDetails - Actions should fetch-task-details and success 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "FOREMAN_TASK_DETAILS_FETCH_TASK_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "payload": "some-data",
+      "type": "FOREMAN_TASK_DETAILS_FETCH_TASK_SUCCESS",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "timeoutId": 7,
+      },
+      "type": "FOREMAN_TASK_DETAILS_START_POLLING",
+    },
+  ],
+]
+`;
+
+exports[`TaskDetails - Actions should start reload 1`] = `
+Object {
+  "payload": Object {
+    "timeoutId": 1,
+  },
+  "type": "FOREMAN_TASK_DETAILS_START_POLLING",
+}
+`;
+
+exports[`TaskDetails - Actions should stop reload 1`] = `
+Object {
+  "payload": Object {
+    "timeoutId": 2,
+  },
+  "type": "FOREMAN_TASK_DETAILS_STOP_POLLING",
+}
+`;

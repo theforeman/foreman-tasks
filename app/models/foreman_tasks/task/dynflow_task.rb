@@ -99,6 +99,36 @@ module ForemanTasks
       execution_plan.try(:steps_in_state, :running, :suspended) || []
     end
 
+    def input_output_failed_steps
+      failed_steps.map do |f|
+        begin
+          f_action = f.action(execution_plan)
+          {
+            error: ({ exception_class: f.error.exception_class, message: f.error.message, backtrace: f.error.backtrace } if f.error),
+            action_class: f.action_class.name,
+            state: f.state,
+            input: f_action.input.pretty_inspect,
+            output: f_action.output.pretty_inspect
+          }
+        end
+      end
+    end
+
+    def input_output_running_steps
+      running_steps.map do |f|
+        begin
+          f_action = f.action(execution_plan)
+          {
+            action_class: f.action_class.name,
+            state: f.state,
+            input: f_action.input.pretty_inspect,
+            output: f_action.output.pretty_inspect,
+            cancellable: cancellable_action?(f_action)
+          }
+        end
+      end
+    end
+
     def humanized
       { action: get_humanized(:humanized_name),
         input:  get_humanized(:humanized_input),

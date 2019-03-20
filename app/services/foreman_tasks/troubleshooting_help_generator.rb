@@ -44,6 +44,10 @@ module ForemanTasks
       # rubocop:enable Rails/OutputSafety
     end
 
+    def generate_text
+      (description + link_descriptions_html).join("\n")
+    end
+
     def link_descriptions_html
       links.map do |link|
         link.description % { link: %(<a href="%{href}">%{title}</a>) % link.to_h }

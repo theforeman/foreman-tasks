@@ -22,7 +22,9 @@
     "url": "http://projects.theforeman.org/projects/foreman-tasks/issues"
   },
   "dependencies": {
-    "@theforeman/vendor": "^0.1.1"
+    "@theforeman/vendor": "^0.1.1",
+    "humanize-duration": "^3.20.1",
+    "react-intl": "^2.8.0"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^5.0.1",

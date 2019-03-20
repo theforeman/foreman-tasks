@@ -27,7 +27,7 @@ module ForemanTasks
 
     def cancel_step
       task = find_dynflow_task
-      flash[:notice] = _('Trying to cancel step %s') % params[:step_id]
+      flash[:info] = _('Trying to cancel step %s') % params[:step_id]
       ForemanTasks.dynflow.world.event(task.external_id, params[:step_id].to_i, ::Dynflow::Action::Cancellable::Cancel).wait
       redirect_to foreman_tasks_task_path(task)
     end
@@ -35,7 +35,7 @@ module ForemanTasks
     def cancel
       task = find_dynflow_task
       if task.cancel
-        flash[:notice] = _('Trying to cancel the task')
+        flash[:info] = _('Trying to cancel the task')
       else
         flash[:warning] = _('The task cannot be cancelled at the moment.')
       end
@@ -45,7 +45,7 @@ module ForemanTasks
     def abort
       task = find_dynflow_task
       if task.abort
-        flash[:notice] = _('Trying to abort the task')
+        flash[:info] = _('Trying to abort the task')
       else
         flash[:warning] = _('The task cannot be aborted at the moment.')
       end
@@ -56,7 +56,7 @@ module ForemanTasks
       task = find_dynflow_task
       if task.resumable?
         ForemanTasks.dynflow.world.execute(task.execution_plan.id)
-        flash[:notice] = _('The execution was resumed.')
+        flash[:info] = _('The execution was resumed.')
       else
         flash[:warning] = _('The execution has to be resumable.')
       end
@@ -68,7 +68,7 @@ module ForemanTasks
       if task.paused?
         task.state = :stopped
         task.save!
-        flash[:notice] = _('The task resources were unlocked.')
+        flash[:info] = _('The task resources were unlocked.')
       else
         flash[:warning] = _('The execution has to be paused.')
       end
@@ -79,7 +79,7 @@ module ForemanTasks
       task       = find_dynflow_task
       task.state = :stopped
       task.save!
-      flash[:notice] = _('The task resources were unlocked with force.')
+      flash[:info] = _('The task resources were unlocked with force.')
       redirect_back(:fallback_location => foreman_tasks_task_path(task))
     end
 
