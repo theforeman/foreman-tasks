@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Locks rendering render with Props 1`] = `
+<div>
+  <Alert
+    className=""
+    onDismiss={null}
+    type="info"
+  >
+    You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource
+  </Alert>
+  <CardGrid
+    className=""
+    matchHeight={false}
+  >
+    <Row
+      bsClass="row"
+      componentClass="div"
+    >
+      <Col
+        bsClass="col"
+        componentClass="div"
+        key="0"
+        md={4}
+        sm={4}
+        xs={6}
+      >
+        <Card
+          accented={true}
+          aggregated={false}
+          aggregatedMini={false}
+          cardRef={null}
+          className="card-pf-aggregate-status"
+          matchHeight={false}
+        >
+          <CardTitle
+            className=""
+          >
+            <span
+              className="fa fa-unlock-alt"
+            />
+            task_owner
+          </CardTitle>
+          <CardBody
+            className=""
+          >
+            User id:4
+            <br />
+          </CardBody>
+        </Card>
+      </Col>
+      <Col
+        bsClass="col"
+        componentClass="div"
+        key="1"
+        md={4}
+        sm={4}
+        xs={6}
+      >
+        <Card
+          accented={true}
+          aggregated={false}
+          aggregatedMini={false}
+          cardRef={null}
+          className="card-pf-aggregate-status"
+          matchHeight={false}
+        >
+          <CardTitle
+            className=""
+          >
+            <span
+              className="fa fa-unlock-alt"
+            />
+            task_owner2
+          </CardTitle>
+          <CardBody
+            className=""
+          >
+            User id:2
+            <br />
+          </CardBody>
+        </Card>
+      </Col>
+    </Row>
+  </CardGrid>
+</div>
+`;
+
+exports[`Locks rendering render without Props 1`] = `
+<div>
+  <Alert
+    className=""
+    onDismiss={null}
+    type="info"
+  >
+    You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource
+  </Alert>
+  <CardGrid
+    className=""
+    matchHeight={false}
+  >
+    <Row
+      bsClass="row"
+      componentClass="div"
+    />
+  </CardGrid>
+</div>
+`;

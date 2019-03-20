@@ -1,0 +1,276 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Task rendering render with Props 1`] = `
+<Fragment>
+  <ClickConfirmation
+    body="This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed."
+    closeModal={[Function]}
+    confirmAction="Unlock"
+    confirmType="warning"
+    confirmationMessage="I understand that this may cause harm and have working database backups of all backend services."
+    path="/foreman_tasks/tasks/test/unlock"
+    showModal={false}
+    title="Unlock"
+  />
+  <ClickConfirmation
+    body="Resources will be unlocked and will not prevent other tasks from being run. As the task might be still running, it should be avoided to use this unless you are really sure the task got stuck"
+    closeModal={[Function]}
+    confirmAction="Force Unlock"
+    confirmType="danger"
+    confirmationMessage="I understand that this may cause harm and have working database backups of all backend services."
+    path="/foreman_tasks/tasks/test/force_unlock"
+    showModal={true}
+    title="Force Unlock"
+  />
+  <Grid
+    bsClass="container"
+    componentClass="div"
+    fluid={false}
+  >
+    <Row
+      bsClass="row"
+      componentClass="div"
+    >
+      <Col
+        bsClass="col"
+        componentClass="div"
+        xs={12}
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsSize="small"
+          bsStyle="default"
+          className="reload-button "
+          disabled={false}
+          hidden={false}
+          onClick={[Function]}
+        >
+          Start  auto-reloading
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsSize="small"
+          bsStyle="default"
+          disabled={false}
+          href="/foreman_tasks/dynflow/"
+        >
+          Dynflow console
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsSize="small"
+          bsStyle="primary"
+          data-method="post"
+          disabled={true}
+          href="/foreman_tasks/tasks/test/resume"
+        >
+          Resume
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsSize="small"
+          bsStyle="default"
+          data-method="post"
+          disabled={true}
+          href="/foreman_tasks/tasks/test/cancel"
+        >
+          Cancel
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsSize="small"
+          bsStyle="default"
+          disabled={false}
+          href="/foreman_tasks/tasks/test/sub_tasks"
+        >
+          Sub tasks
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsSize="small"
+          bsStyle="default"
+          disabled={false}
+          onClick={[Function]}
+        >
+          Unlock
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsSize="small"
+          bsStyle="default"
+          disabled={false}
+          onClick={[Function]}
+        >
+          Force Unlock
+        </Button>
+      </Col>
+    </Row>
+    <TaskInfo
+      action=""
+      allowDangerousActions={true}
+      cancellable={false}
+      endedAt=""
+      error={Array []}
+      externalId=""
+      hasSubTasks={true}
+      help=""
+      id="test"
+      output=""
+      parentTask=""
+      progress={0}
+      refetchTaskDetails={[Function]}
+      result="error"
+      resumable={false}
+      showForceUnlockModal={true}
+      showUnlockModal={false}
+      startAt=""
+      startBefore=""
+      startedAt=""
+      state="paused"
+      taskReload={false}
+      taskReloadStart={null}
+      taskReloadStop={null}
+      timeoutId={null}
+      toggleForceUnlockModal={[Function]}
+      toggleUnlockModal={[Function]}
+      username=""
+      usernamePath=""
+    />
+  </Grid>
+</Fragment>
+`;
+
+exports[`Task rendering render without Props 1`] = `
+<Fragment>
+  <ClickConfirmation
+    body="This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed."
+    closeModal={[Function]}
+    confirmAction="Unlock"
+    confirmType="warning"
+    confirmationMessage="I understand that this may cause harm and have working database backups of all backend services."
+    path="/foreman_tasks/tasks/test/unlock"
+    showModal={false}
+    title="Unlock"
+  />
+  <ClickConfirmation
+    body="Resources will be unlocked and will not prevent other tasks from being run. As the task might be still running, it should be avoided to use this unless you are really sure the task got stuck"
+    closeModal={[Function]}
+    confirmAction="Force Unlock"
+    confirmType="danger"
+    confirmationMessage="I understand that this may cause harm and have working database backups of all backend services."
+    path="/foreman_tasks/tasks/test/force_unlock"
+    showModal={true}
+    title="Force Unlock"
+  />
+  <Grid
+    bsClass="container"
+    componentClass="div"
+    fluid={false}
+  >
+    <Row
+      bsClass="row"
+      componentClass="div"
+    >
+      <Col
+        bsClass="col"
+        componentClass="div"
+        xs={12}
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsSize="small"
+          bsStyle="default"
+          className="reload-button "
+          disabled={false}
+          hidden={true}
+          onClick={[Function]}
+        >
+          Start  auto-reloading
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsSize="small"
+          bsStyle="default"
+          disabled={false}
+          href="/foreman_tasks/dynflow/"
+        >
+          Dynflow console
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsSize="small"
+          bsStyle="primary"
+          data-method="post"
+          disabled={true}
+          href="/foreman_tasks/tasks/test/resume"
+        >
+          Resume
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsSize="small"
+          bsStyle="default"
+          data-method="post"
+          disabled={true}
+          href="/foreman_tasks/tasks/test/cancel"
+        >
+          Cancel
+        </Button>
+      </Col>
+    </Row>
+    <TaskInfo
+      action=""
+      allowDangerousActions={false}
+      cancellable={false}
+      endedAt=""
+      error={Array []}
+      externalId=""
+      hasSubTasks={false}
+      help=""
+      id="test"
+      output=""
+      parentTask=""
+      progress={0}
+      refetchTaskDetails={[Function]}
+      result="error"
+      resumable={false}
+      showForceUnlockModal={true}
+      showUnlockModal={false}
+      startAt=""
+      startBefore=""
+      startedAt=""
+      state=""
+      taskReload={false}
+      taskReloadStart={null}
+      taskReloadStop={null}
+      timeoutId={null}
+      toggleForceUnlockModal={[Function]}
+      toggleUnlockModal={[Function]}
+      username=""
+      usernamePath=""
+    />
+  </Grid>
+</Fragment>
+`;

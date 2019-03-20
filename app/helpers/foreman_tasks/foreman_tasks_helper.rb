@@ -25,6 +25,20 @@ module ForemanTasks
       ret.html_safe
     end
 
+    def troubleshooting_info_text
+      return if @task.state != 'paused' || @task.main_action.nil?
+      helper = TroubleshootingHelpGenerator.new(@task.main_action)
+      helper.generate_text
+    end
+
+    def username_link_task(owner, username)
+      if owner.present? && username != User::ANONYMOUS_API_ADMIN && username != User::ANONYMOUS_ADMIN
+        link_to_if_authorized(username, hash_for_edit_user_path(owner))
+      else
+        username
+      end
+    end
+
     def task_result_icon_class(task)
       return 'task-status pficon-help' if task.state != 'stopped'
 

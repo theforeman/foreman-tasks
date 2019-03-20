@@ -65,7 +65,7 @@ module ForemanTasks
       task = find_dynflow_task
       if task.resumable?
         ForemanTasks.dynflow.world.execute(task.execution_plan.id)
-        flash[:notice] = _('The execution was resumed.')
+        flash[:info] = _('The execution was resumed.')
       else
         flash[:warning] = _('The execution has to be resumable.')
       end

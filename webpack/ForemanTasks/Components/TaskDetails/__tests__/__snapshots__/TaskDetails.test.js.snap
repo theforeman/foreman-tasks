@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TaskDetails rendering render without Props 1`] = `
+<div
+  className="task-details-react well"
+>
+  <Uncontrolled(Tabs)
+    animation={false}
+    defaultActiveKey={1}
+    id="task-details-tabs"
+  >
+    <Tab
+      eventKey={1}
+      title="Task"
+    >
+      <Task
+        action=""
+        allowDangerousActions={false}
+        cancellable={false}
+        data={Object {}}
+        endedAt=""
+        error={Array []}
+        executionPlan={Object {}}
+        externalId=""
+        failedSteps={Array []}
+        fetchTaskDetails={[Function]}
+        hasSubTasks={false}
+        help=""
+        humanizedOutput=""
+        id="test"
+        input={Array []}
+        label=""
+        locks={Array []}
+        output={Object {}}
+        parentTask=""
+        progress={0}
+        refetchTaskDetails={[Function]}
+        result="error"
+        resumable={false}
+        runningSteps={Array []}
+        showForceUnlockModal={true}
+        showUnlockModal={false}
+        startAt=""
+        startBefore=""
+        startedAt=""
+        state=""
+        taskReload={false}
+        taskReloadStart={null}
+        taskReloadStop={null}
+        timeoutId={null}
+        toggleForceUnlockModal={[Function]}
+        toggleUnlockModal={[Function]}
+        username=""
+        usernamePath=""
+      />
+    </Tab>
+    <Tab
+      eventKey={2}
+      title="Running Steps"
+    >
+      <RunningSteps
+        executionPlan={Object {}}
+        runningSteps={Array []}
+      />
+    </Tab>
+    <Tab
+      eventKey={3}
+      title="Errors"
+    >
+      <Errors
+        executionPlan={Object {}}
+        failedSteps={Array []}
+      />
+    </Tab>
+    <Tab
+      eventKey={4}
+      title="Locks"
+    >
+      <Locks
+        locks={Array []}
+      />
+    </Tab>
+    <Tab
+      eventKey={5}
+      title="Raw"
+    >
+      <Raw
+        endedAt=""
+        externalId=""
+        id="test"
+        input={Array []}
+        label=""
+        output={Object {}}
+        startedAt=""
+      />
+    </Tab>
+  </Uncontrolled(Tabs)>
+</div>
+`;
