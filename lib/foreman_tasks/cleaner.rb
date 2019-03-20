@@ -200,8 +200,8 @@ module ForemanTasks
     def prepare_filter
       filter_parts = [filter]
       filter_parts << %(started_at < "#{after.ago.to_s(:db)}") if after > 0
-      filter_parts << states.map { |s| "state = #{s}" }.join(' OR ') if states.any?
-      filter_parts.select(&:present?).join(' AND ')
+      filter_parts << "state ^ (#{states.join(',')})" if states.any?
+      filter_parts.select(&:present?).map { |segment| "(#{segment})" }.join(' AND ')
     end
 
     def start_tracking_progress(name, total = tasks.size)
