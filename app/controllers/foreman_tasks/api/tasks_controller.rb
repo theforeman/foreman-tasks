@@ -16,7 +16,7 @@ module ForemanTasks
       class BadRequest < Apipie::ParamError
       end
 
-      before_action :find_task, :only => [:show]
+      before_action :find_task, :only => [:show, :details]
 
       api :GET, '/tasks/summary', 'Show task summary'
       def summary
@@ -26,6 +26,10 @@ module ForemanTasks
       api :GET, '/tasks/:id', 'Show task details'
       param :id, :identifier, desc: 'UUID of the task'
       def show; end
+
+      api :GET, '/tasks/:id/details', 'Show task extended details'
+      param :id, :identifier, desc: 'UUID of the task'
+      def details; end
 
       api :POST, '/tasks/bulk_search', 'List dynflow tasks for uuids'
       param :searches, Array, :desc => 'List of uuids to fetch info about' do
@@ -117,10 +121,10 @@ module ForemanTasks
         param :order, String, :desc => N_('How to order the sorted results (e.g. ASC for ascending)')
       end
       def index
-        scope = resource_scope.search_for(params[:search]).select('DISTINCT foreman_tasks_tasks.*')
-
         total = resource_scope.count
-        subtotal = scope.count
+        subtotal = resource_scope.search_for(params[:search]).select('DISTINCT foreman_tasks_tasks.id').count
+
+        scope = resource_scope.search_for(params[:search]).select('DISTINCT foreman_tasks_tasks.*')
 
         ordering_params = {
           sort_by: params[:sort_by] || 'started_at',
@@ -276,7 +280,7 @@ module ForemanTasks
 
       def action_permission
         case params[:action]
-        when 'bulk_search', 'summary'
+        when 'bulk_search', 'summary', 'details'
           :view
         when 'bulk_resume'
           :edit

@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Errors rendering render with Props 1`] = `
+<div>
+  <Alert
+    className=""
+    key="0"
+    onDismiss={null}
+    type="error"
+  >
+    <span>
+      Action
+      :
+    </span>
+    <span>
+      <pre>
+        Actions::Katello::EventQueue::Monitor
+      </pre>
+    </span>
+    <span>
+      Input
+      :
+    </span>
+    <span>
+      <pre>
+        {"locale"=&gt;"en",
+ "current_request_id"=&gt;nil,
+ "current_user_id"=&gt;4,
+ "current_organization_id"=&gt;nil,
+ "current_location_id"=&gt;nil}
+
+      </pre>
+    </span>
+    <span>
+      Output
+      :
+    </span>
+    <span>
+      <pre>
+        {}
+
+      </pre>
+    </span>
+    <span>
+      Exception
+      :
+    </span>
+    <span>
+      <pre>
+        RuntimeError
+        : 
+        Action Actions::Katello::EventQueue::Monitor is already active
+      </pre>
+    </span>
+    <span>
+      Backtrace
+      :
+    </span>
+    <span>
+      <pre>
+        /home/vagrant/.gem/ruby/gems/dynflow-1.2.3/lib/dynflow/action/singleton.rb:15:in \`rescue in singleton_lock!'
+/home/vagrant/.gem/ruby/gems/dynflow-1.2.3/lib/dynflow/action/singleton.rb:12:in \`singleton_lock!'
+      </pre>
+    </span>
+  </Alert>
+</div>
+`;
+
+exports[`Errors rendering render without Props 1`] = `
+<Alert
+  className=""
+  onDismiss={null}
+  type="success"
+>
+  No errors
+</Alert>
+`;
