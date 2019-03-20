@@ -60,7 +60,6 @@ module ForemanTasksCore
         end
       end
 
-
       class Dummy < ::ForemanTasksCore::Runner::Action
         def init_run
           output[:result] = []
