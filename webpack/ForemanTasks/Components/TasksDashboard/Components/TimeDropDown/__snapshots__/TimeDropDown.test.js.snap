@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TimeDropDown render with all props 1`] = `
+<DropdownButton
+  className="some-class"
+  id="some-id"
+  title="week"
+>
+  <MenuItem
+    active={false}
+    bsClass="dropdown"
+    disabled={false}
+    divider={false}
+    header={false}
+    key="H24"
+    onClick={[Function]}
+  >
+    24h
+  </MenuItem>
+  <MenuItem
+    active={false}
+    bsClass="dropdown"
+    disabled={false}
+    divider={false}
+    header={false}
+    key="H12"
+    onClick={[Function]}
+  >
+    12h
+  </MenuItem>
+  <MenuItem
+    active={true}
+    bsClass="dropdown"
+    disabled={false}
+    divider={false}
+    header={false}
+    key="WEEK"
+    onClick={[Function]}
+  >
+    week
+  </MenuItem>
+</DropdownButton>
+`;
+
+exports[`TimeDropDown render with minimal props 1`] = `
+<DropdownButton
+  className=""
+  id="some-id"
+  title="24h"
+>
+  <MenuItem
+    active={true}
+    bsClass="dropdown"
+    disabled={false}
+    divider={false}
+    header={false}
+    key="H24"
+    onClick={[Function]}
+  >
+    24h
+  </MenuItem>
+  <MenuItem
+    active={false}
+    bsClass="dropdown"
+    disabled={false}
+    divider={false}
+    header={false}
+    key="H12"
+    onClick={[Function]}
+  >
+    12h
+  </MenuItem>
+  <MenuItem
+    active={false}
+    bsClass="dropdown"
+    disabled={false}
+    divider={false}
+    header={false}
+    key="WEEK"
+    onClick={[Function]}
+  >
+    week
+  </MenuItem>
+</DropdownButton>
+`;
