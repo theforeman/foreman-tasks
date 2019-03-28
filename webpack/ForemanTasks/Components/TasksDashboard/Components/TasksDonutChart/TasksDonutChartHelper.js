@@ -11,10 +11,29 @@ export const shouleBeSelected = focusedOn =>
   focusedOn !== TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.NORMAL &&
   focusedOn !== TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.NONE;
 
+export const getFocusedOn = (query, wantedState, wantedTime) => {
+  if (query.state === wantedState) {
+    if (query.time === wantedTime) {
+      switch (query.mode) {
+        case 'last':
+          return TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.LAST;
+        case 'older':
+          return TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.OLDER;
+        default:
+          break;
+      }
+    }
+
+    return TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.TOTAL;
+  }
+
+  return TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.NORMAL;
+};
+
 export const createChartData = ({
   last,
   older,
-  timePeriod,
+  time,
   onLastClick,
   onOlderClick,
 }) => {
@@ -23,14 +42,14 @@ export const createChartData = ({
 
   const data = {
     [lastKey]: {
-      name: sprintf(__('%(last)s Last %(timePeriod)s'), { last, timePeriod }),
+      name: sprintf(__('%(last)s Last %(time)s'), { last, time }),
       value: last,
       onClick: onLastClick,
     },
     [olderKey]: {
-      name: sprintf(__('%(older)s Older %(timePeriod)s'), {
+      name: sprintf(__('%(older)s Older %(time)s'), {
         older,
-        timePeriod,
+        time,
       }),
       value: older,
       onClick: onOlderClick,

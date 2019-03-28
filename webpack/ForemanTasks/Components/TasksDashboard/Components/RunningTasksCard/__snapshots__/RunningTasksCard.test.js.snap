@@ -3,9 +3,34 @@
 exports[`RunningTasksCard render with minimal props 1`] = `
 <TasksDonutCard
   className=""
-  focusedOn="normal"
-  last={3}
-  older={5}
+  data={
+    Object {
+      "last": 0,
+      "older": 0,
+    }
+  }
+  query={Object {}}
+  time="H24"
   title="Running"
+  updateQuery={[Function]}
+  wantedQueryState="running"
+/>
+`;
+
+exports[`RunningTasksCard render with some props 1`] = `
+<TasksDonutCard
+  className=""
+  data={
+    Object {
+      "last": 0,
+      "older": 0,
+    }
+  }
+  query={Object {}}
+  some="prop"
+  time="H24"
+  title="Running"
+  updateQuery={[Function]}
+  wantedQueryState="running"
 />
 `;

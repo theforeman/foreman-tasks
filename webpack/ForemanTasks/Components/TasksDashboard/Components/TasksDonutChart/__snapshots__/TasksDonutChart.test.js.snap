@@ -33,6 +33,11 @@ exports[`TasksDonutChart render with focused-on last 1`] = `
     }
   }
   onChartCreate={[Function]}
+  size={
+    Object {
+      "height": 120,
+    }
+  }
   type="donut"
 />
 `;
@@ -70,6 +75,11 @@ exports[`TasksDonutChart render with focused-on none 1`] = `
     }
   }
   onChartCreate={[Function]}
+  size={
+    Object {
+      "height": 120,
+    }
+  }
   type="donut"
 />
 `;
@@ -107,6 +117,11 @@ exports[`TasksDonutChart render with focused-on normal 1`] = `
     }
   }
   onChartCreate={[Function]}
+  size={
+    Object {
+      "height": 120,
+    }
+  }
   type="donut"
 />
 `;
@@ -144,6 +159,11 @@ exports[`TasksDonutChart render with focused-on older 1`] = `
     }
   }
   onChartCreate={[Function]}
+  size={
+    Object {
+      "height": 120,
+    }
+  }
   type="donut"
 />
 `;
@@ -181,6 +201,11 @@ exports[`TasksDonutChart render with focused-on total 1`] = `
     }
   }
   onChartCreate={[Function]}
+  size={
+    Object {
+      "height": 120,
+    }
+  }
   type="donut"
 />
 `;
@@ -218,6 +243,11 @@ exports[`TasksDonutChart render with minimal props 1`] = `
     }
   }
   onChartCreate={[Function]}
+  size={
+    Object {
+      "height": 120,
+    }
+  }
   type="donut"
 />
 `;
@@ -255,6 +285,11 @@ exports[`TasksDonutChart render with props 1`] = `
     }
   }
   onChartCreate={[Function]}
+  size={
+    Object {
+      "height": 120,
+    }
+  }
   type="donut"
 />
 `;

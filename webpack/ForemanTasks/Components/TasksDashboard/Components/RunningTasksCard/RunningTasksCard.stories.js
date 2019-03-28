@@ -4,24 +4,40 @@ import { withKnobs, number, text, select } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { withCardsDecorator } from '../../../../../stories/decorators';
 
-import { TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS_ARRAY } from '../TasksDonutChart/TasksDonutChartConstants';
+import {
+  TASKS_DASHBOARD_AVAILABLE_QUERY_MODES,
+  TASKS_DASHBOARD_AVAILABLE_TIMES,
+} from '../../TasksDashboardConstants';
 import RunningTasksCard from './RunningTasksCard';
 
 storiesOf('TasksDashboard', module)
   .addDecorator(withKnobs)
   .addDecorator(withCardsDecorator)
-  .add('RunningTasksCard', () => (
-    <RunningTasksCard
-      last={number('last', 3)}
-      older={number('older', 5)}
-      timePeriod={text('timePeriod', '24h')}
-      focusedOn={select(
-        'focusedOn',
-        TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS_ARRAY,
-        RunningTasksCard.defaultProps.focusedOn
-      )}
-      onTotalClick={action('onTotalClick')}
-      onLastClick={action('onLastClick')}
-      onOlderClick={action('onOlderClick')}
-    />
-  ));
+  .add('RunningTasksCard', () => {
+    const selectTime = select(
+      'time',
+      TASKS_DASHBOARD_AVAILABLE_TIMES,
+      RunningTasksCard.defaultProps.time
+    );
+
+    const selectMode = select(
+      'mode',
+      { ...TASKS_DASHBOARD_AVAILABLE_QUERY_MODES, NONE: 'none' },
+      'none'
+    );
+    return (
+      <RunningTasksCard
+        data={{
+          last: number('data.last', 3),
+          older: number('data.older', 5),
+        }}
+        time={selectTime}
+        query={{
+          state: text('query.state', 'some-state'),
+          mode: selectMode,
+          time: selectTime,
+        }}
+        updateQuery={action('updateQuery')}
+      />
+    );
+  });

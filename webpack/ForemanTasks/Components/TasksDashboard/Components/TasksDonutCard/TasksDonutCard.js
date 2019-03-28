@@ -3,44 +3,81 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Card } from 'patternfly-react';
 
-import { shouleBeSelected } from '../TasksDonutChart/TasksDonutChartHelper';
+import {
+  TASKS_DASHBOARD_AVAILABLE_QUERY_MODES,
+  TASKS_DASHBOARD_AVAILABLE_TIMES,
+} from '../../TasksDashboardConstants';
+import { getTimeText } from '../../TasksDashboardHelper';
+import { timePropType, queryPropType } from '../../TasksDashboardPropTypes';
+import { TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS } from '../TasksDonutChart/TasksDonutChartConstants';
+import { getFocusedOn } from '../TasksDonutChart/TasksDonutChartHelper';
 import TasksDonutChart from '../TasksDonutChart/TasksDonutChart';
 import './TasksDonutCard.scss';
 
 const TasksDonutCard = ({
   title,
+  data,
+  query,
+  wantedQueryState,
   className,
-  focusedOn,
-  onTotalClick,
+  time,
+  updateQuery,
   ...props
-}) => (
-  <Card
-    className={classNames('tasks-donut-card', className, {
-      'selected-tasks-card': shouleBeSelected(focusedOn),
-    })}
-  >
-    <Card.Title onClick={onTotalClick}>{title}</Card.Title>
-    <Card.Body>
-      <TasksDonutChart
-        focusedOn={focusedOn}
-        onTotalClick={onTotalClick}
-        {...props}
-      />
-    </Card.Body>
-  </Card>
-);
+}) => {
+  const { LAST, OLDER } = TASKS_DASHBOARD_AVAILABLE_QUERY_MODES;
+  const focusedOn = getFocusedOn(query, wantedQueryState, time);
+  const onTotalClick = () => updateQuery({ state: wantedQueryState });
+
+  return (
+    <Card
+      className={classNames('tasks-donut-card', className, {
+        'selected-tasks-card':
+          focusedOn !== TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.NORMAL &&
+          focusedOn !== TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.NONE,
+      })}
+      {...props}
+    >
+      <Card.Title onClick={onTotalClick}>{title}</Card.Title>
+      <Card.Body>
+        <TasksDonutChart
+          last={data.last}
+          older={data.older}
+          time={getTimeText(time)}
+          focusedOn={focusedOn}
+          onTotalClick={onTotalClick}
+          onLastClick={() =>
+            updateQuery({ state: wantedQueryState, mode: LAST, time })
+          }
+          onOlderClick={() =>
+            updateQuery({ state: wantedQueryState, mode: OLDER, time })
+          }
+        />
+      </Card.Body>
+    </Card>
+  );
+};
 
 TasksDonutCard.propTypes = {
-  ...TasksDonutChart.propTypes,
   title: PropTypes.string,
+  data: PropTypes.shape({
+    last: PropTypes.number.isRequired,
+    older: PropTypes.number.isRequired,
+  }),
+  time: timePropType,
+  query: queryPropType,
+  wantedQueryState: PropTypes.string,
   className: PropTypes.string,
-  focusedOn: TasksDonutChart.propTypes.focusedOn,
+  updateQuery: PropTypes.func,
 };
 
 TasksDonutCard.defaultProps = {
   title: '',
+  data: { last: 0, older: 0 },
+  query: {},
+  wantedQueryState: '',
+  time: TASKS_DASHBOARD_AVAILABLE_TIMES.H24,
   className: '',
-  focusedOn: TasksDonutChart.defaultProps.focusedOn,
+  updateQuery: () => null,
 };
 
 export default TasksDonutCard;

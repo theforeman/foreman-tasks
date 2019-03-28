@@ -72,7 +72,7 @@ class TasksDonutChart extends React.Component {
       className,
       last,
       older,
-      timePeriod,
+      time,
       focusedOn,
       colorsPattern,
       onLastClick,
@@ -82,7 +82,7 @@ class TasksDonutChart extends React.Component {
     const { columns, names, onItemClick } = createChartData({
       last,
       older,
-      timePeriod,
+      time,
       onLastClick,
       onOlderClick,
     });
@@ -99,6 +99,7 @@ class TasksDonutChart extends React.Component {
         {...baseChartConfig}
         type="donut"
         className={classes}
+        size={{ height: 120 }}
         color={{ pattern: colorsPattern }}
         onChartCreate={chart => this.onChartCreate(chart)}
         data={{
@@ -127,7 +128,7 @@ TasksDonutChart.propTypes = {
   last: PropTypes.number.isRequired,
   older: PropTypes.number.isRequired,
   className: PropTypes.string,
-  timePeriod: PropTypes.string,
+  time: PropTypes.string,
   colorsPattern: PropTypes.arrayOf(PropTypes.string),
   focusedOn: PropTypes.oneOf(TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS_ARRAY),
   onTotalClick: PropTypes.func,
@@ -137,7 +138,7 @@ TasksDonutChart.propTypes = {
 
 TasksDonutChart.defaultProps = {
   className: '',
-  timePeriod: '24h',
+  time: '24h',
   colorsPattern: COLLOR_PATTERN,
   focusedOn: TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.NORMAL,
   onTotalClick: () => null,
