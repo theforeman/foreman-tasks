@@ -12,7 +12,7 @@ storiesOf('TasksDashboard', module)
     <TasksDonutChart
       last={number('last', 3)}
       older={number('older', 5)}
-      timePeriod={text('timePeriod', '24h')}
+      time={text('time', '24h')}
       focusedOn={select(
         'focusedOn',
         TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS_ARRAY,

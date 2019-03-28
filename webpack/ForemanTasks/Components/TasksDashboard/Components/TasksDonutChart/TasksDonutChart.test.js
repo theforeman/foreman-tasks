@@ -21,7 +21,7 @@ const fixtures = {
   'render with props': {
     ...createRequiredProps(),
     className: 'some-class',
-    timePeriod: 'time-period',
+    time: 'time-period',
     colorsPattern: ['color1', 'color2'],
     onTotalClick: jest.fn(),
     onLastClick: jest.fn(),

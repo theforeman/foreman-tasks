@@ -1,27 +1,43 @@
 import { testComponentSnapshotsWithFixtures } from 'react-redux-test-utils';
 
-import { TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS_ARRAY } from '../TasksDonutChart/TasksDonutChartConstants';
+import {
+  TASKS_DASHBOARD_AVAILABLE_TIMES,
+  TASKS_DASHBOARD_AVAILABLE_QUERY_MODES,
+} from '../../TasksDashboardConstants';
 import TasksDonutCard from './TasksDonutCard';
 
-const createRequiredProps = () => ({ last: 3, older: 5 });
-
 const fixtures = {
-  'render with minimal props': { ...createRequiredProps() },
+  'render with minimal props': {},
   'render with props': {
-    ...createRequiredProps(),
     title: 'some title',
+    time: TASKS_DASHBOARD_AVAILABLE_TIMES.WEEK,
+    wantedQueryState: 'some-state',
     className: 'some-classname',
-    focusedOn: 'normal',
-    onTotalClick: jest.fn(),
+    data: { last: 3, older: 5 },
+  },
+  'render with total selected': {
+    wantedQueryState: 'some-state',
+    query: { state: 'some-state' },
+  },
+  'render with last selected': {
+    wantedQueryState: 'some-state',
+    time: TASKS_DASHBOARD_AVAILABLE_TIMES.WEEK,
+    query: {
+      state: 'some-state',
+      mode: TASKS_DASHBOARD_AVAILABLE_QUERY_MODES.LAST,
+      time: TASKS_DASHBOARD_AVAILABLE_TIMES.WEEK,
+    },
+  },
+  'render with older selected': {
+    wantedQueryState: 'some-state',
+    time: TASKS_DASHBOARD_AVAILABLE_TIMES.WEEK,
+    query: {
+      state: 'some-state',
+      mode: TASKS_DASHBOARD_AVAILABLE_QUERY_MODES.OLDER,
+      time: TASKS_DASHBOARD_AVAILABLE_TIMES.WEEK,
+    },
   },
 };
-
-TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS_ARRAY.forEach(mode => {
-  fixtures[`render with focused-on ${mode}`] = {
-    ...createRequiredProps(),
-    focusedOn: mode,
-  };
-});
 
 describe('TasksDonutCard', () =>
   testComponentSnapshotsWithFixtures(TasksDonutCard, fixtures));

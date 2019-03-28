@@ -4,15 +4,17 @@ import { translate as __ } from 'foremanReact/common/I18n';
 import TasksDonutCard from '../TasksDonutCard/TasksDonutCard';
 
 const PausedTasksCard = ({ ...props }) => (
-  <TasksDonutCard title={__('Paused')} {...props} />
+  <TasksDonutCard title={__('Paused')} wantedQueryState="paused" {...props} />
 );
 
-const filterTitle = obj => {
-  const { title, ...newObj } = obj;
+const filterUnwantedFields = obj => {
+  const { title, wantedQueryState, ...newObj } = obj;
   return newObj;
 };
 
-PausedTasksCard.propTypes = filterTitle(TasksDonutCard.propTypes);
-PausedTasksCard.defaultProps = filterTitle(TasksDonutCard.defaultProps);
+PausedTasksCard.propTypes = filterUnwantedFields(TasksDonutCard.propTypes);
+PausedTasksCard.defaultProps = filterUnwantedFields(
+  TasksDonutCard.defaultProps
+);
 
 export default PausedTasksCard;
