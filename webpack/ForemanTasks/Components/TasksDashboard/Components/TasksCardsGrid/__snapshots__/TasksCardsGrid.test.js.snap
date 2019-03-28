@@ -1,0 +1,215 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TasksCardsGrid render with minimal props 1`] = `
+<CardGrid
+  className=""
+  fluid={true}
+  matchHeight={true}
+>
+  <Row
+    bsClass="row"
+    componentClass="div"
+  >
+    <Col
+      bsClass="col"
+      componentClass="div"
+      key="running"
+      md={3}
+    >
+      <RunningTasksCard
+        className=""
+        data={
+          Object {
+            "last": 0,
+            "older": 0,
+          }
+        }
+        matchHeight={true}
+        query={Object {}}
+        time="H24"
+        updateQuery={[Function]}
+      />
+    </Col>
+    <Col
+      bsClass="col"
+      componentClass="div"
+      key="paused"
+      md={3}
+    >
+      <PausedTasksCard
+        className=""
+        data={
+          Object {
+            "last": 0,
+            "older": 0,
+          }
+        }
+        matchHeight={true}
+        query={Object {}}
+        time="H24"
+        updateQuery={[Function]}
+      />
+    </Col>
+    <Col
+      bsClass="col"
+      componentClass="div"
+      key="stopped"
+      md={3}
+    >
+      <StoppedTasksCard
+        className=""
+        data={
+          Object {
+            "error": Object {
+              "last": 0,
+              "total": 0,
+            },
+            "success": Object {
+              "last": 0,
+              "total": 0,
+            },
+            "warning": Object {
+              "last": 0,
+              "total": 0,
+            },
+          }
+        }
+        matchHeight={true}
+        query={Object {}}
+        time="H24"
+        updateQuery={[Function]}
+      />
+    </Col>
+    <Col
+      bsClass="col"
+      componentClass="div"
+      key="scheduled"
+      md={3}
+    >
+      <ScheduledTasksCard
+        className=""
+        data={0}
+        matchHeight={true}
+        query={Object {}}
+        time="H24"
+        updateQuery={[Function]}
+      />
+    </Col>
+  </Row>
+</CardGrid>
+`;
+
+exports[`TasksCardsGrid render with props 1`] = `
+<CardGrid
+  className=""
+  fluid={true}
+  matchHeight={true}
+>
+  <Row
+    bsClass="row"
+    componentClass="div"
+  >
+    <Col
+      bsClass="col"
+      componentClass="div"
+      key="running"
+      md={3}
+    >
+      <RunningTasksCard
+        className=""
+        data={
+          Object {
+            "last": 3,
+            "older": 5,
+          }
+        }
+        matchHeight={true}
+        query={
+          Object {
+            "state": "running",
+          }
+        }
+        time="WEEK"
+        updateQuery={[MockFunction]}
+      />
+    </Col>
+    <Col
+      bsClass="col"
+      componentClass="div"
+      key="paused"
+      md={3}
+    >
+      <PausedTasksCard
+        className=""
+        data={
+          Object {
+            "last": 3,
+            "older": 5,
+          }
+        }
+        matchHeight={true}
+        query={
+          Object {
+            "state": "running",
+          }
+        }
+        time="WEEK"
+        updateQuery={[MockFunction]}
+      />
+    </Col>
+    <Col
+      bsClass="col"
+      componentClass="div"
+      key="stopped"
+      md={3}
+    >
+      <StoppedTasksCard
+        className=""
+        data={
+          Object {
+            "error": Object {
+              "last": 1,
+              "total": 8,
+            },
+            "success": Object {
+              "last": 3,
+              "total": 25,
+            },
+            "warning": Object {
+              "last": 2,
+              "total": 20,
+            },
+          }
+        }
+        matchHeight={true}
+        query={
+          Object {
+            "state": "running",
+          }
+        }
+        time="WEEK"
+        updateQuery={[MockFunction]}
+      />
+    </Col>
+    <Col
+      bsClass="col"
+      componentClass="div"
+      key="scheduled"
+      md={3}
+    >
+      <ScheduledTasksCard
+        className=""
+        data={1}
+        matchHeight={true}
+        query={
+          Object {
+            "state": "running",
+          }
+        }
+        time="WEEK"
+        updateQuery={[MockFunction]}
+      />
+    </Col>
+  </Row>
+</CardGrid>
+`;

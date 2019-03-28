@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TasksTimeRow render with minimal props 1`] = `
+<Row
+  bsClass="row"
+  className="tasks-time-row"
+  componentClass="div"
+>
+  <span
+    className="time-label"
+  >
+    With focus on last
+  </span>
+  <TimeDropDown
+    className=""
+    id="tasks-dashboard-time-period-dropdown"
+    onChange={[Function]}
+    selectedTime="H24"
+  />
+</Row>
+`;
+
+exports[`TasksTimeRow render with props 1`] = `
+<Row
+  bsClass="row"
+  className="tasks-time-row"
+  componentClass="div"
+>
+  <span
+    className="time-label"
+  >
+    With focus on last
+  </span>
+  <TimeDropDown
+    className=""
+    id="tasks-dashboard-time-period-dropdown"
+    onChange={[MockFunction]}
+    selectedTime="WEEK"
+  />
+</Row>
+`;
