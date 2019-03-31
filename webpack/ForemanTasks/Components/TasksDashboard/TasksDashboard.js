@@ -4,6 +4,7 @@ import { Grid } from 'patternfly-react';
 
 import TasksTimeRow from './Components/TasksTimeRow/TasksTimeRow';
 import TasksCardsGrid from './Components/TasksCardsGrid/TasksCardsGrid';
+import TasksLabelsRow from './Components/TasksLabelsRow/TasksLabelsRow';
 
 import { TASKS_DASHBOARD_AVAILABLE_TIMES } from './TasksDashboardConstants';
 import { getQueryFromUrl } from './TasksDashboardHelper';
@@ -25,13 +26,14 @@ class TasksDashboard extends React.Component {
 
     return (
       <Grid fluid className="tasks-dashboard-grid">
-        <TasksTimeRow selectedTime={time} onChange={updateTime} />
+        <TasksTimeRow time={time} updateTime={updateTime} />
         <TasksCardsGrid
           time={time}
           query={query}
           data={data}
           updateQuery={updateQuery}
         />
+        <TasksLabelsRow query={query} updateQuery={updateQuery} />
       </Grid>
     );
   }
@@ -42,8 +44,8 @@ TasksDashboard.propTypes = {
   query: queryPropType,
   data: TasksCardsGrid.propTypes.data,
   initializeDashboard: PropTypes.func,
-  updateQuery: PropTypes.func,
   updateTime: PropTypes.func,
+  updateQuery: PropTypes.func,
 };
 
 TasksDashboard.defaultProps = {
@@ -51,8 +53,8 @@ TasksDashboard.defaultProps = {
   query: {},
   data: TasksCardsGrid.defaultProps.data,
   initializeDashboard: () => null,
-  updateQuery: () => null,
   updateTime: () => null,
+  updateQuery: () => null,
 };
 
 export default TasksDashboard;

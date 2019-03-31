@@ -6,9 +6,14 @@ import { TASKS_DASHBOARD_AVAILABLE_TIMES_TEXT } from './TasksDashboardConstants'
 export const getTimeText = time => TASKS_DASHBOARD_AVAILABLE_TIMES_TEXT[time];
 
 export const getQueryFromUrl = () => {
-  const { state, result, mode, time } = getURIQuery(window.location.href);
+  const query = {};
+  const uriQuery = getURIQuery(window.location.href);
 
-  return { state, result, mode, time };
+  ['state', 'result', 'mode', 'time'].forEach(f => {
+    if (uriQuery[f]) query[f] = uriQuery[f];
+  });
+
+  return query;
 };
 
 export const resolveQuery = query => {
