@@ -60,7 +60,7 @@ module ForemanTasksCore
         end
       end
 
-      class Dummy < ::ForemanTasksCore::Runner::Action
+      class OutputCollectorAction < ::ForemanTasksCore::Runner::Action
         def init_run
           output[:result] = []
           suspend
@@ -107,7 +107,7 @@ module ForemanTasksCore
       private
 
       def child_launcher(parent)
-        Single.new(world, callback, :parent => parent, :action_class_override => Dummy)
+        Single.new(world, callback, :parent => parent, :action_class_override => OutputCollectorAction)
       end
 
       def transform_input(input)
