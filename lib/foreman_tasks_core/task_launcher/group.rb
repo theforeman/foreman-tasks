@@ -3,7 +3,7 @@ require 'foreman_tasks_core/runner'
 module ForemanTasksCore
   module TaskLauncher
     class AbstractGroup < Batch
-      class GroupParentAction < ForemanTasksCore::TaskLauncher::ParentAction
+      class SingleRunnerBatchAction < ForemanTasksCore::TaskLauncher::ParentAction
         def plan(launcher, input_hash)
           launcher.launch_children(self, input_hash)
           sequence do
@@ -83,7 +83,7 @@ module ForemanTasksCore
       end
 
       def launch!(input)
-        trigger(nil, GroupParentAction, self, input)
+        trigger(nil, SingleRunnerBatchAction, self, input)
       end
 
       def launch_children(parent, input_hash)
