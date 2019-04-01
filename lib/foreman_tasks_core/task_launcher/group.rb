@@ -67,7 +67,7 @@ module ForemanTasksCore
         end
       end
 
-      class GroupRunner < ::ForemanTasksCore::Runner::Action
+      class BatchRunnerAction < ::ForemanTasksCore::Runner::Action
         def plan(launcher, input)
           plan_self :targets => launcher.group_runner_input(input), :operation => launcher.operation
         end
@@ -88,7 +88,7 @@ module ForemanTasksCore
 
       def launch_children(parent, input_hash)
         super(parent, input_hash)
-        trigger(parent, GroupRunner, self, input_hash)
+        trigger(parent, BatchRunnerAction, self, input_hash)
       end
 
       def operation
