@@ -4,6 +4,10 @@
 require 'foreman_tasks_core/settings_loader'
 require 'foreman_tasks_core/otp_manager'
 require 'foreman_tasks_core/ticker'
+require 'foreman_tasks_core/batch_callback_action'
+require 'foreman_tasks_core/batch_runner_action'
+require 'foreman_tasks_core/output_collector_action'
+require 'foreman_tasks_core/single_runner_batch_action'
 require 'foreman_tasks_core/task_launcher'
 
 module ForemanTasksCore
