@@ -3,6 +3,8 @@ module ForemanTasksCore
     module Command
       def initialize_command(*command)
         @command_out, @command_in, @command_pid = PTY.spawn(*command)
+      rescue Errno::ENOENT => e
+        publish_exception("Error running command '#{command.join(' ')}'", e)
       end
 
       def refresh
