@@ -69,16 +69,16 @@ module ForemanTasksCore
 
       class BatchRunnerAction < ::ForemanTasksCore::Runner::Action
         def plan(launcher, input)
-          plan_self :targets => launcher.group_runner_input(input), :operation => launcher.operation
+          plan_self :targets => launcher.runner_input(input), :operation => launcher.operation
         end
 
         def initiate_runner
           launcher = SmartProxyDynflowCore::TaskLauncherRegistry.fetch(input[:operation])
-          launcher.group_runner_class.new(input[:targets], suspended_action: suspended_action)
+          launcher.runner_class.new(input[:targets], suspended_action: suspended_action)
         end
       end
 
-      def self.group_runner_class
+      def self.runner_class
         raise NotImplementedError
       end
 
@@ -95,7 +95,7 @@ module ForemanTasksCore
         raise NotImplementedError
       end
 
-      def group_runner_input(input)
+      def runner_input(input)
         input.reduce({}) do |acc, (id, input)|
           input = { :execution_plan_id => results[id][:task_id],
                     :run_step_id => 2,
