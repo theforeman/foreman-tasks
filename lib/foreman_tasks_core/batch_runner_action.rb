@@ -1,3 +1,5 @@
+require 'foreman_tasks_core/runner/action'
+
 module ForemanTasksCore
   class BatchRunnerAction < ::ForemanTasksCore::Runner::Action
     def plan(launcher, input)

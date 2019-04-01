@@ -1,5 +1,5 @@
 module ForemanTasksCore
-  class SingleRunnerBatchAction < ForemanTasksCore::TaskLauncher::ParentAction
+  class SingleRunnerBatchAction < ForemanTasksCore::BatchAction
     def plan(launcher, input_hash)
       launcher.launch_children(self, input_hash)
       sequence do
@@ -10,6 +10,11 @@ module ForemanTasksCore
 
     def run(event = nil)
       super unless event == Dynflow::Action::Skip
+    end
+
+    def initiate
+      ping suspended_action
+      wait_for_sub_plans sub_plans
     end
 
     def check_for_errors!(optional = true)
@@ -25,11 +30,6 @@ module ForemanTasksCore
     def finalize
       output.delete(:results)
       check_for_errors!
-    end
-
-    def initiate
-      ping suspended_action
-      wait_for_sub_plans sub_plans
     end
 
     def rescue_strategy_for_self
