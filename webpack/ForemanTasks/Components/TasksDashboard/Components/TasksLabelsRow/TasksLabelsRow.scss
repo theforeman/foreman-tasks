@@ -1,11 +1,26 @@
-@import "~patternfly/dist/sass/patternfly/_color-variables.scss";
-@import "~patternfly-react/dist/sass/_compound-label.scss";
+@import '~patternfly/dist/sass/patternfly/_color-variables.scss';
 
 .tasks-labels-row {
   margin: 0;
   padding: 0 10px;
+  .title {
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .label {
+    font-size: 100%;
 
+    margin-left: 5px;
+    margin-right: 5px;
+    a {
+      padding-left: 10px;
+    }
+  }
+  .pficon-close {
+    color: $color-pf-white;
+  }
   .compound-label-pf {
     margin-left: 0;
+    margin: 10px;
   }
 }

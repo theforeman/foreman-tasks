@@ -3,13 +3,16 @@ import { connect } from 'react-redux';
 import TasksDashboard from './TasksDashboard';
 import * as actions from './TasksDashboardActions';
 import reducer from './TasksDashboardReducer';
-import { selectTime, selectQuery } from './TasksDashboardSelectors';
-import { MOCKED_DATA } from './TasksDashboardConstants';
+import {
+  selectTime,
+  selectQuery,
+  selectTasksSummary,
+} from './TasksDashboardSelectors';
 
 const mapStateToProps = state => ({
   time: selectTime(state),
   query: selectQuery(state),
-  data: MOCKED_DATA,
+  tasksSummary: selectTasksSummary(state),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);

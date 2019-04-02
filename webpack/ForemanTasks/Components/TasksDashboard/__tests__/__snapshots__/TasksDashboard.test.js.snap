@@ -1,7 +1,51 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TasksDashboard rendering render without Props 1`] = `
-<div
-  className=""
-/>
+<Grid
+  bsClass="container"
+  className="tasks-dashboard-grid"
+  componentClass="div"
+  fluid={true}
+>
+  <TasksTimeRow
+    time="H24"
+    updateTime={[Function]}
+  />
+  <TasksCardsGrid
+    data={
+      Object {
+        "paused": Object {
+          "last": 0,
+          "older": 0,
+        },
+        "running": Object {
+          "last": 0,
+          "older": 0,
+        },
+        "scheduled": 0,
+        "stopped": Object {
+          "error": Object {
+            "last": 0,
+            "total": 0,
+          },
+          "success": Object {
+            "last": 0,
+            "total": 0,
+          },
+          "warning": Object {
+            "last": 0,
+            "total": 0,
+          },
+        },
+      }
+    }
+    query={Object {}}
+    time="H24"
+    updateQuery={[Function]}
+  />
+  <TasksLabelsRow
+    query={Object {}}
+    updateQuery={[Function]}
+  />
+</Grid>
 `;

@@ -1,12 +1,13 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withKnobs, number, text, select } from '@storybook/addon-knobs';
+import { withKnobs, number, select } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { withCardsDecorator } from '../../../../../../../stories/decorators';
 
 import {
   TASKS_DASHBOARD_AVAILABLE_QUERY_MODES,
   TASKS_DASHBOARD_AVAILABLE_TIMES,
+  TASKS_DASHBOARD_AVAILABLE_QUERY_STATES,
 } from '../../../../TasksDashboardConstants';
 import PausedTasksCard from './PausedTasksCard';
 
@@ -22,7 +23,7 @@ storiesOf('TasksDashboard/TasksCardsGrid', module)
 
     const selectMode = select(
       'mode',
-      { ...TASKS_DASHBOARD_AVAILABLE_QUERY_MODES, NONE: 'none' },
+      { ...TASKS_DASHBOARD_AVAILABLE_QUERY_MODES, NONE: 'none', TOTAL: null },
       'none'
     );
     return (
@@ -33,7 +34,14 @@ storiesOf('TasksDashboard/TasksCardsGrid', module)
         }}
         time={selectTime}
         query={{
-          state: text('query.state', 'some-state'),
+          state: select(
+            'query.state',
+            {
+              ...TASKS_DASHBOARD_AVAILABLE_QUERY_STATES,
+              NONE: null,
+            },
+            TASKS_DASHBOARD_AVAILABLE_QUERY_STATES.PAUSED
+          ),
           mode: selectMode,
           time: selectTime,
         }}
