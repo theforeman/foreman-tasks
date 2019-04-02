@@ -3,31 +3,38 @@ import { TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS } from './TasksDonutChartConstants
 
 const { patternfly } = window;
 
+const {
+  LAST,
+  OLDER,
+  TOTAL,
+  NONE,
+  NORMAL,
+} = TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS;
+
 export const baseChartConfig = patternfly
   .c3ChartDefaults()
   .getDefaultDonutConfig();
 
 export const shouleBeSelected = focusedOn =>
-  focusedOn !== TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.NORMAL &&
-  focusedOn !== TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.NONE;
+  focusedOn !== NORMAL && focusedOn !== NONE;
 
 export const getFocusedOn = (query, wantedState, wantedTime) => {
   if (query.state === wantedState) {
     if (query.time === wantedTime) {
       switch (query.mode) {
         case 'last':
-          return TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.LAST;
+          return LAST;
         case 'older':
-          return TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.OLDER;
+          return OLDER;
         default:
-          break;
+          return TOTAL;
       }
     }
 
-    return TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.TOTAL;
+    return TOTAL;
   }
 
-  return TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.NORMAL;
+  return query.state ? NONE : NORMAL;
 };
 
 export const createChartData = ({
@@ -37,8 +44,8 @@ export const createChartData = ({
   onLastClick,
   onOlderClick,
 }) => {
-  const lastKey = TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.LAST;
-  const olderKey = TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.OLDER;
+  const lastKey = LAST;
+  const olderKey = OLDER;
 
   const data = {
     [lastKey]: {

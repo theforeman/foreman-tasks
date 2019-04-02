@@ -32,7 +32,12 @@ const ScheduledTasksCard = ({
     >
       <Card.Title onClick={onClick}>{__('Scheduled')}</Card.Title>
       <Card.Body>
-        <div className="scheduled-data" onClick={onClick}>
+        <div
+          className={classNames('scheduled-data', {
+            'not-focused': query.state && query.state !== SCHEDULED,
+          })}
+          onClick={onClick}
+        >
           {data}
           <p>{__('Total')}</p>
         </div>

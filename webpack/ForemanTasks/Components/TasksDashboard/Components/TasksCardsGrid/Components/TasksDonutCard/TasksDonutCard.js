@@ -44,8 +44,8 @@ const TasksDonutCard = ({
       <Card.Title onClick={onTotalClick}>{title}</Card.Title>
       <Card.Body>
         <TasksDonutChart
-          last={data.last}
-          older={data.older}
+          last={3}
+          older={8}
           time={getTimeText(time)}
           focusedOn={focusedOn}
           onTotalClick={onTotalClick}
