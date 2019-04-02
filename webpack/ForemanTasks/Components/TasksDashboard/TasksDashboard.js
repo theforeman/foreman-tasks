@@ -13,16 +13,30 @@ import './TasksDashboard.scss';
 
 class TasksDashboard extends React.Component {
   componentDidMount() {
+    const { time, initializeDashboard, fetchTasksSummary } = this.props;
     const query = getQueryFromUrl();
 
-    this.props.initializeDashboard({
+    initializeDashboard({
       time: query.time,
       query,
     });
+
+    // dont fetch if time is going to be changed
+    if (!query.time || query.time === time) {
+      fetchTasksSummary(time);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { time, fetchTasksSummary } = this.props;
+
+    if (time !== prevProps.time) {
+      fetchTasksSummary(time);
+    }
   }
 
   render() {
-    const { time, query, data, updateTime, updateQuery } = this.props;
+    const { time, query, tasksSummary, updateTime, updateQuery } = this.props;
 
     return (
       <Grid fluid className="tasks-dashboard-grid">
@@ -30,7 +44,7 @@ class TasksDashboard extends React.Component {
         <TasksCardsGrid
           time={time}
           query={query}
-          data={data}
+          data={tasksSummary}
           updateQuery={updateQuery}
         />
         <TasksLabelsRow query={query} updateQuery={updateQuery} />
@@ -42,19 +56,21 @@ class TasksDashboard extends React.Component {
 TasksDashboard.propTypes = {
   time: timePropType,
   query: queryPropType,
-  data: TasksCardsGrid.propTypes.data,
+  tasksSummary: TasksCardsGrid.propTypes.data,
   initializeDashboard: PropTypes.func,
   updateTime: PropTypes.func,
   updateQuery: PropTypes.func,
+  fetchTasksSummary: PropTypes.func,
 };
 
 TasksDashboard.defaultProps = {
   time: TASKS_DASHBOARD_AVAILABLE_TIMES.H24,
   query: {},
-  data: TasksCardsGrid.defaultProps.data,
+  tasksSummary: TasksCardsGrid.defaultProps.data,
   initializeDashboard: () => null,
   updateTime: () => null,
   updateQuery: () => null,
+  fetchTasksSummary: () => null,
 };
 
 export default TasksDashboard;

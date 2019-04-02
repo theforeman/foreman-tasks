@@ -40,28 +40,39 @@ export const FOREMAN_TASKS_DASHBOARD_UPDATE_TIME =
 export const FOREMAN_TASKS_DASHBOARD_UPDATE_QUERY =
   'FOREMAN_TASKS_DASHBOARD_UPDATE_QUERY';
 
-export const MOCKED_DATA = {
+export const FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_REQUEST =
+  'FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_REQUEST';
+export const FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_SUCCESS =
+  'FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_SUCCESS';
+export const FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_FAILURE =
+  'FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_FAILURE';
+
+export const TASKS_SUMMARY_ZERO = {
   running: {
-    last: 3,
-    older: 5,
+    recent: 0,
+    total: 0,
   },
   paused: {
-    last: 3,
-    older: 5,
+    recent: 0,
+    total: 0,
   },
   stopped: {
-    error: {
-      total: 8,
-      last: 1,
-    },
-    warning: {
-      total: 20,
-      last: 2,
-    },
-    success: {
-      total: 25,
-      last: 3,
+    by_result: {
+      error: {
+        total: 0,
+        recent: 0,
+      },
+      warning: {
+        total: 0,
+        recent: 0,
+      },
+      success: {
+        total: 0,
+        recent: 0,
+      },
     },
   },
-  scheduled: 1,
+  scheduled: {
+    total: 0,
+  },
 };
