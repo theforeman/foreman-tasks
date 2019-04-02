@@ -193,8 +193,9 @@ module ForemanTasks
 
     def orphaned_dynflow_tasks
       db = ForemanTasks.dynflow.world.persistence.adapter.db
-      uuid_select = Sequel.lit(ForemanTasks::Task.select(:external_id).to_sql)
-      db[:dynflow_execution_plans].filter(:uuid => [uuid_select]).invert
+      db.fetch("select dynflow_execution_plans.uuid from dynflow_execution_plans left join "\
+               "foreman_tasks_tasks on (dynflow_execution_plans.uuid = foreman_tasks_tasks.external_id) "\
+               "where foreman_tasks_tasks.id IS NULL")
     end
 
     def prepare_filter
