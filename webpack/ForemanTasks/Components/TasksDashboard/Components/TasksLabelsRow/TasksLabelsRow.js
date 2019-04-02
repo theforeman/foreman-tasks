@@ -1,29 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, CompoundLabel } from 'patternfly-react';
+import { Row, Button, Label } from 'patternfly-react';
 import { translate as __ } from 'foremanReact/common/I18n';
 
+import { TASKS_DASHBOARD_AVAILABLE_TIMES_TEXT } from '../../TasksDashboardConstants';
 import { queryPropType } from '../../TasksDashboardPropTypes';
 import './TasksLabelsRow.scss';
 
 const TasksLabelsRow = ({ query, updateQuery }) => {
-  const values = Object.entries(query).map(([key, value]) => ({
-    id: key,
-    label: `${key} = ${value}`,
-  }));
-
-  const onDeleteClick = (category, value) => {
-    const { [value.id]: deleted, ...queryWithoutDeleted } = query;
+  const onDeleteClick = value => {
+    const { [value]: deleted, ...queryWithoutDeleted } = query;
     updateQuery(queryWithoutDeleted);
   };
 
   return (
     <Row className="tasks-labels-row">
-      <CompoundLabel
-        category={{ id: 'tasks-query-labels', label: __('Active Filters:') }}
-        values={values}
-        onDeleteClick={onDeleteClick}
-      />
+      <span className="title">{__('Active Filters:')}</span>
+      {Object.entries(query).map(([key, value]) => (
+        <Label
+          bsStyle="info"
+          key={key}
+          onRemoveClick={() => onDeleteClick(key)}
+        >
+          {__(
+            `${key} = ${
+              key === 'time'
+                ? TASKS_DASHBOARD_AVAILABLE_TIMES_TEXT[value]
+                : value
+            }`
+          )}
+        </Label>
+      ))}
+      {Object.entries(query).length > 0 && (
+        <Button bsStyle="link" onClick={() => updateQuery({})}>
+          {__('Clear All Filters')}
+        </Button>
+      )}
     </Row>
   );
 };
