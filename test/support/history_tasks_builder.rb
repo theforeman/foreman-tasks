@@ -1,7 +1,4 @@
 class HistoryTasksBuilder
-  def initialize
-  end
-
   def distribution
     { 'running' => { recent: 3, total: 6 },
       'stopped' => { recent: 3, total: 7,

@@ -32,12 +32,12 @@ module ForemanTasks
     end
 
     def scope_by_time
-      return unless @params[:time_horizon].present?
+      return if @params[:time_horizon].blank?
       hours = @params[:time_horizon][/\A(H)(\d{1,2})$/i, 2]
       unless hours
         raise Foreman::Exception, 'Unexpected format of time: should be in form of "H24"'
       end
-      timestamp = Time.now - hours.to_i.hours
+      timestamp = Time.now.utc - hours.to_i.hours
       case @params[:time_mode]
       when 'recent'
         operator = '>'
