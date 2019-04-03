@@ -5,8 +5,8 @@ module ForemanTasks
   #
   #  * :result
   #  * :state
-  #  * :time - expected format of Hxy, where the xy is the time horizon in hours we're interested in
-  #      :time can be set to 'last' to filter the recent tasks, or 'older' (default) to filter earlier ones
+  #  * :time_horizon - expected format of Hxy, where the xy is the time horizon in hours we're interested in
+  #      :time_mode can be set to 'recent' to filter the recent tasks, or 'older' (default) to filter earlier ones
   class DashboardTableFilter
     def initialize(scope, params)
       @scope = scope
@@ -32,14 +32,14 @@ module ForemanTasks
     end
 
     def scope_by_time
-      return unless @params[:time].present?
-      hours = @params[:time][/\A(H)(\d{1,2})$/i, 2]
+      return unless @params[:time_horizon].present?
+      hours = @params[:time_horizon][/\A(H)(\d{1,2})$/i, 2]
       unless hours
         raise Foreman::Exception, 'Unexpected format of time: should be in form of "H24"'
       end
       timestamp = Time.now - hours.to_i.hours
-      case @params[:mode]
-      when 'last'
+      case @params[:time_mode]
+      when 'recent'
         operator = '>'
       else
         operator = '<'

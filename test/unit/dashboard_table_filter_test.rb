@@ -38,8 +38,8 @@ class DashboardTableFilterTest < ActiveSupport::TestCase
 
     describe 'recent' do
       let(:params) { { state: 'running',
-                       time: 'H24',
-                       mode: 'last'} }
+                       time_horizon: 'H24',
+                       time_mode: 'recent'} }
 
       it 'filters' do
         filtered_scope.count.must_equal @tasks_builder.distribution['running'][:recent]
@@ -48,8 +48,8 @@ class DashboardTableFilterTest < ActiveSupport::TestCase
 
     describe 'older' do
       let(:params) { { state: 'running',
-                       time: 'H24',
-                       mode: 'older'} }
+                       time_horizon: 'H24',
+                       time_mode: 'older'} }
 
       it 'filters' do
         old_tasks_count = @tasks_builder.distribution['running'][:total] -
