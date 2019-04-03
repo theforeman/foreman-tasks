@@ -4,6 +4,7 @@ require_relative './support/dummy_dynflow_action'
 require_relative './support/dummy_recurring_dynflow_action'
 require_relative './support/dummy_proxy_action'
 require_relative './support/dummy_task_group'
+require_relative './support/history_tasks_builder'
 
 require 'dynflow/testing'
 
