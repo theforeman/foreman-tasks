@@ -3,10 +3,14 @@ import { getURIQuery } from 'foremanReact/common/helpers';
 
 import {
   TASKS_DASHBOARD_AVAILABLE_TIMES,
-  TASKS_DASHBOARD_AVAILABLE_TIMES_TEXT,
+  TASKS_DASHBOARD_QUERY_KEYS_TEXT,
+  TASKS_DASHBOARD_QUERY_VALUES_TEXT,
 } from './TasksDashboardConstants';
 
-export const getTimeText = time => TASKS_DASHBOARD_AVAILABLE_TIMES_TEXT[time];
+export const getQueryKeyText = key => TASKS_DASHBOARD_QUERY_KEYS_TEXT[key];
+
+export const getQueryValueText = value =>
+  TASKS_DASHBOARD_QUERY_VALUES_TEXT[value];
 
 export const timeToHoursNumber = time => {
   switch (time) {

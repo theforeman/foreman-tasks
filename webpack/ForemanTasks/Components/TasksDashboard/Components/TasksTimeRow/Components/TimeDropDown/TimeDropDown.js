@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { DropdownButton, MenuItem } from 'patternfly-react';
 
 import { TASKS_DASHBOARD_AVAILABLE_TIMES } from '../../../../TasksDashboardConstants';
-import { getTimeText } from '../../../../TasksDashboardHelper';
+import { getQueryValueText } from '../../../../TasksDashboardHelper';
 
 const TimeDropDown = ({ id, className, selectedTime, onChange, ...props }) => {
   const availableTimes = Object.keys(TASKS_DASHBOARD_AVAILABLE_TIMES).map(
     key => ({
       key,
-      text: getTimeText(key),
+      text: getQueryValueText(key),
       active: key === selectedTime,
     })
   );
@@ -18,7 +18,7 @@ const TimeDropDown = ({ id, className, selectedTime, onChange, ...props }) => {
     <DropdownButton
       id={id}
       className={className}
-      title={getTimeText(selectedTime)}
+      title={getQueryValueText(selectedTime)}
       {...props}
     >
       {availableTimes.map(({ key, text, active }) => (
