@@ -15,25 +15,21 @@ module ForemanTasks
 
     def scope
       @new_scope = @scope
-      scope_by_result
-      scope_by_state
+      scope_by(:result)
+      scope_by(:state)
       scope_by_time
       @new_scope
     end
 
     private
 
-    def scope_by_result
-      @new_scope = @new_scope.where(result: @params[:result]) if @params[:result].present?
-    end
-
-    def scope_by_state
-      @new_scope = @new_scope.where(state: @params[:state]) if @params[:state].present?
+    def scope_by(field)
+      @new_scope = @new_scope.where(field => @params[field]) if @params[field].present?
     end
 
     def scope_by_time
       return if @params[:time_horizon].blank?
-      hours = @params[:time_horizon][/\A(H)(\d{1,2})$/i, 2]
+      hours = @params[:time_horizon][/\AH(\d{1,2})$/i, 1]
       unless hours
         raise Foreman::Exception, 'Unexpected format of time: should be in form of "H24"'
       end
