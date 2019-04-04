@@ -24,8 +24,8 @@ export default (state = initialState, action) => {
   switch (type) {
     case FOREMAN_TASKS_DASHBOARD_INIT:
       return state
-        .set('time', payload.time || initialState.time)
-        .set('query', payload.query || initialState.query);
+        .set('time', (payload && payload.time) || initialState.time)
+        .set('query', (payload && payload.query) || initialState.query);
     case FOREMAN_TASKS_DASHBOARD_UPDATE_TIME:
       return state.set('time', payload);
     case FOREMAN_TASKS_DASHBOARD_UPDATE_QUERY:

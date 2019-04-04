@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid } from 'patternfly-react';
+import { noop } from 'foremanReact/common/helpers';
 
 import TasksTimeRow from './Components/TasksTimeRow/TasksTimeRow';
 import TasksCardsGrid from './Components/TasksCardsGrid/TasksCardsGrid';
@@ -67,10 +68,10 @@ TasksDashboard.defaultProps = {
   time: TASKS_DASHBOARD_AVAILABLE_TIMES.H24,
   query: {},
   tasksSummary: TasksCardsGrid.defaultProps.data,
-  initializeDashboard: () => null,
-  updateTime: () => null,
-  updateQuery: () => null,
-  fetchTasksSummary: () => null,
+  initializeDashboard: noop,
+  updateTime: noop,
+  updateQuery: noop,
+  fetchTasksSummary: noop,
 };
 
 export default TasksDashboard;

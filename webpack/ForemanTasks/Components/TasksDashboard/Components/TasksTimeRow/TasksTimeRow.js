@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Row } from 'patternfly-react';
+import { noop } from 'foremanReact/common/helpers';
 import { translate as __ } from 'foremanReact/common/I18n';
 
 import { timePropType } from '../../TasksDashboardPropTypes';
@@ -26,7 +27,7 @@ TasksTimeRow.propTypes = {
 
 TasksTimeRow.defaultProps = {
   time: TASKS_DASHBOARD_AVAILABLE_TIMES.H24,
-  updateTime: () => null,
+  updateTime: noop,
 };
 
 export default TasksTimeRow;

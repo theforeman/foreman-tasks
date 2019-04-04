@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { CardGrid } from 'patternfly-react';
+import { noop } from 'foremanReact/common/helpers';
 
 import RunningTasksCard from './Components/RunningTasksCard/RunningTasksCard';
 import PausedTasksCard from './Components/PausedTasksCard/PausedTasksCard';
@@ -22,7 +23,7 @@ const TasksCardsGrid = ({ time, query, data, updateQuery }) => (
         [TASKS_DASHBOARD_AVAILABLE_QUERY_STATES.STOPPED, StoppedTasksCard],
         [TASKS_DASHBOARD_AVAILABLE_QUERY_STATES.SCHEDULED, ScheduledTasksCard],
       ].map(([key, Card]) => (
-        <CardGrid.Col md={3} key={key}>
+        <CardGrid.Col sm={6} lg={3} key={key}>
           <Card
             matchHeight
             data={data[key]}
@@ -65,7 +66,7 @@ TasksCardsGrid.defaultProps = {
     [TASKS_DASHBOARD_AVAILABLE_QUERY_STATES.SCHEDULED]:
       ScheduledTasksCard.defaultProps.data,
   },
-  updateQuery: () => null,
+  updateQuery: noop,
 };
 
 export default TasksCardsGrid;

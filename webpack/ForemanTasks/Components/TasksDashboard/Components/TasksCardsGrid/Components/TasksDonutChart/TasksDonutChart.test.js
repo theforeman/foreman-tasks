@@ -5,7 +5,7 @@ import TasksDonutChart from './TasksDonutChart';
 
 jest.mock('./TasksDonutChartHelper', () => ({
   shouleBeSelected: focusedOn => focusedOn !== 'normal' && focusedOn !== 'none',
-  baseChartConfig: () => ({ base: 'some-base-config' }),
+  getBaseChartConfig: jest.fn(() => ({ base: 'some-base-config' })),
   createChartData: jest.fn(() => ({
     columns: 'some-columns',
     names: 'some-names',

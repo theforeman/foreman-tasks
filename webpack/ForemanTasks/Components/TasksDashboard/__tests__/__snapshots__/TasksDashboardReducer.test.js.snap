@@ -1,0 +1,280 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BreadcrumbBar reducer should handle FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_FAILURE 1`] = `
+Object {
+  "error": [Error: some error],
+  "isLoading": false,
+  "isLoadingTasksSummary": false,
+  "query": Object {},
+  "tasksSummary": Object {
+    "paused": Object {
+      "recent": 0,
+      "total": 0,
+    },
+    "running": Object {
+      "recent": 0,
+      "total": 0,
+    },
+    "scheduled": Object {
+      "total": 0,
+    },
+    "stopped": Object {
+      "by_result": Object {
+        "error": Object {
+          "recent": 0,
+          "total": 0,
+        },
+        "success": Object {
+          "recent": 0,
+          "total": 0,
+        },
+        "warning": Object {
+          "recent": 0,
+          "total": 0,
+        },
+      },
+    },
+  },
+  "time": "H24",
+}
+`;
+
+exports[`BreadcrumbBar reducer should handle FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_REQUEST 1`] = `
+Object {
+  "error": null,
+  "isLoading": true,
+  "isLoadingTasksSummary": false,
+  "query": Object {},
+  "tasksSummary": Object {
+    "paused": Object {
+      "recent": 0,
+      "total": 0,
+    },
+    "running": Object {
+      "recent": 0,
+      "total": 0,
+    },
+    "scheduled": Object {
+      "total": 0,
+    },
+    "stopped": Object {
+      "by_result": Object {
+        "error": Object {
+          "recent": 0,
+          "total": 0,
+        },
+        "success": Object {
+          "recent": 0,
+          "total": 0,
+        },
+        "warning": Object {
+          "recent": 0,
+          "total": 0,
+        },
+      },
+    },
+  },
+  "time": "H24",
+}
+`;
+
+exports[`BreadcrumbBar reducer should handle FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_SUCCESS 1`] = `
+Object {
+  "error": null,
+  "isLoading": false,
+  "isLoadingTasksSummary": false,
+  "query": Object {},
+  "tasksSummary": "some-payload",
+  "time": "H24",
+}
+`;
+
+exports[`BreadcrumbBar reducer should handle FOREMAN_TASKS_DASHBOARD_INIT 1`] = `
+Object {
+  "error": null,
+  "isLoadingTasksSummary": false,
+  "query": Object {},
+  "tasksSummary": Object {
+    "paused": Object {
+      "recent": 0,
+      "total": 0,
+    },
+    "running": Object {
+      "recent": 0,
+      "total": 0,
+    },
+    "scheduled": Object {
+      "total": 0,
+    },
+    "stopped": Object {
+      "by_result": Object {
+        "error": Object {
+          "recent": 0,
+          "total": 0,
+        },
+        "success": Object {
+          "recent": 0,
+          "total": 0,
+        },
+        "warning": Object {
+          "recent": 0,
+          "total": 0,
+        },
+      },
+    },
+  },
+  "time": "H24",
+}
+`;
+
+exports[`BreadcrumbBar reducer should handle FOREMAN_TASKS_DASHBOARD_INIT with data 1`] = `
+Object {
+  "error": null,
+  "isLoadingTasksSummary": false,
+  "query": "some-query",
+  "tasksSummary": Object {
+    "paused": Object {
+      "recent": 0,
+      "total": 0,
+    },
+    "running": Object {
+      "recent": 0,
+      "total": 0,
+    },
+    "scheduled": Object {
+      "total": 0,
+    },
+    "stopped": Object {
+      "by_result": Object {
+        "error": Object {
+          "recent": 0,
+          "total": 0,
+        },
+        "success": Object {
+          "recent": 0,
+          "total": 0,
+        },
+        "warning": Object {
+          "recent": 0,
+          "total": 0,
+        },
+      },
+    },
+  },
+  "time": "some-time",
+}
+`;
+
+exports[`BreadcrumbBar reducer should handle FOREMAN_TASKS_DASHBOARD_UPDATE_QUERY 1`] = `
+Object {
+  "error": null,
+  "isLoadingTasksSummary": false,
+  "query": "some-query",
+  "tasksSummary": Object {
+    "paused": Object {
+      "recent": 0,
+      "total": 0,
+    },
+    "running": Object {
+      "recent": 0,
+      "total": 0,
+    },
+    "scheduled": Object {
+      "total": 0,
+    },
+    "stopped": Object {
+      "by_result": Object {
+        "error": Object {
+          "recent": 0,
+          "total": 0,
+        },
+        "success": Object {
+          "recent": 0,
+          "total": 0,
+        },
+        "warning": Object {
+          "recent": 0,
+          "total": 0,
+        },
+      },
+    },
+  },
+  "time": "H24",
+}
+`;
+
+exports[`BreadcrumbBar reducer should handle FOREMAN_TASKS_DASHBOARD_UPDATE_TIME 1`] = `
+Object {
+  "error": null,
+  "isLoadingTasksSummary": false,
+  "query": Object {},
+  "tasksSummary": Object {
+    "paused": Object {
+      "recent": 0,
+      "total": 0,
+    },
+    "running": Object {
+      "recent": 0,
+      "total": 0,
+    },
+    "scheduled": Object {
+      "total": 0,
+    },
+    "stopped": Object {
+      "by_result": Object {
+        "error": Object {
+          "recent": 0,
+          "total": 0,
+        },
+        "success": Object {
+          "recent": 0,
+          "total": 0,
+        },
+        "warning": Object {
+          "recent": 0,
+          "total": 0,
+        },
+      },
+    },
+  },
+  "time": "some-time",
+}
+`;
+
+exports[`BreadcrumbBar reducer should return the initial state 1`] = `
+Object {
+  "error": null,
+  "isLoadingTasksSummary": false,
+  "query": Object {},
+  "tasksSummary": Object {
+    "paused": Object {
+      "recent": 0,
+      "total": 0,
+    },
+    "running": Object {
+      "recent": 0,
+      "total": 0,
+    },
+    "scheduled": Object {
+      "total": 0,
+    },
+    "stopped": Object {
+      "by_result": Object {
+        "error": Object {
+          "recent": 0,
+          "total": 0,
+        },
+        "success": Object {
+          "recent": 0,
+          "total": 0,
+        },
+        "warning": Object {
+          "recent": 0,
+          "total": 0,
+        },
+      },
+    },
+  },
+  "time": "H24",
+}
+`;
