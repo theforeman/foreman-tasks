@@ -73,19 +73,26 @@ export const createChartData = ({
   return { columns, names, onItemClick };
 };
 
-export const updateChartTitle = ({
+export const updateChartTitle = ({ chartElement, value }) =>
+  patternfly.pfSetDonutChartTitle(chartElement, value, __('Total'));
+
+export const assignExtraChartEvents = ({
   chartElement,
-  value,
   onClick,
   onMouseOver,
   onMouseOut,
-}) => {
-  patternfly.pfSetDonutChartTitle(chartElement, value, __('Total'));
-
+}) =>
   window.d3
     .select(chartElement)
     .select('text.c3-chart-arcs-title')
     .on('click', onClick)
     .on('mouseover', onMouseOver)
     .on('mouseout', onMouseOut);
-};
+
+export const clearExtraChartEvents = chartElement =>
+  window.d3
+    .select(chartElement)
+    .select('text.c3-chart-arcs-title')
+    .on('click', null)
+    .on('mouseover', null)
+    .on('mouseout', null);
