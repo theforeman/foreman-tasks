@@ -25,22 +25,54 @@ export const timeToHoursNumber = time => {
   }
 };
 
-export const getQueryFromUrl = () => {
-  const query = {};
-  const uriQuery = getURIQuery(window.location.href);
+const uriToQueryMap = {
+  state: 'state',
+  result: 'result',
+  time_mode: 'mode',
+  time_horizon: 'time',
+};
 
-  ['state', 'result', 'mode', 'time'].forEach(f => {
-    if (uriQuery[f]) query[f] = uriQuery[f];
+const queryFromUriQuery = uriQuery => {
+  const query = {};
+
+  Object.entries(uriToQueryMap).forEach(([uriField, queryField]) => {
+    if (uriQuery[uriField]) query[queryField] = uriQuery[uriField];
   });
+
+  if (query.mode === 'recent') {
+    query.mode = 'last';
+  }
 
   return query;
 };
 
+const uriQueryFromQuery = query => {
+  const uriQuery = {};
+
+  Object.entries(uriToQueryMap).forEach(([uriField, queryField]) => {
+    if (query[queryField]) uriQuery[uriField] = query[queryField];
+  });
+
+  if (uriQuery.time_mode === 'last') {
+    uriQuery.time_mode = 'recent';
+  }
+
+  return uriQuery;
+};
+
+export const getQueryFromUrl = () => {
+  const uriQuery = getURIQuery(window.location.href);
+
+  return queryFromUriQuery(uriQuery);
+};
+
 export const resolveQuery = query => {
+  const uriQuery = uriQueryFromQuery(query);
+
   const uri = new URI(window.location.href);
   const { search } = uri.query(true);
 
-  const data = { search, ...query, page: 1 };
+  const data = { search, ...uriQuery, page: 1 };
   uri.query(URI.buildQuery(data, true));
-  window.Turbolinks.visit(uri.toString());
+  window.location.href = uri.toString();
 };
