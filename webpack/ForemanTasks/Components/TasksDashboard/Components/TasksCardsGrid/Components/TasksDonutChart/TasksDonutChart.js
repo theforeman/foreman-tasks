@@ -14,37 +14,53 @@ import {
   shouleBeSelected,
   createChartData,
   updateChartTitle,
+  assignExtraChartEvents,
+  clearExtraChartEvents,
 } from './TasksDonutChartHelper';
 import './TasksDonutChart.scss';
 
 class TasksDonutChart extends React.Component {
   componentDidUpdate() {
-    this.updateChartTitle();
-    this.updateChartFocus();
+    this.updateChart();
+  }
+
+  componentWillUnmount() {
+    clearExtraChartEvents(this.chart.element);
   }
 
   onChartCreate(chart) {
     this.chart = chart;
 
+    this.updateChart();
+    this.assignExtraChartEvents();
+  }
+
+  updateChart() {
     this.updateChartTitle();
     this.updateChartFocus();
   }
 
   updateChartTitle() {
-    const { last, older, onTotalClick } = this.props;
+    const { last, older } = this.props;
 
     updateChartTitle({
       chartElement: this.chart.element,
       value: last + older,
-      onClick: () => onTotalClick(),
-      onMouseOver: () =>
-        this.setChartFocus(TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.TOTAL),
-      onMouseOut: () => this.updateChartFocus(),
     });
   }
 
   updateChartFocus() {
     this.setChartFocus(this.props.focusedOn);
+  }
+
+  assignExtraChartEvents() {
+    assignExtraChartEvents({
+      chartElement: this.chart.element,
+      onClick: () => this.props.onTotalClick(),
+      onMouseOver: () =>
+        this.setChartFocus(TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.TOTAL),
+      onMouseOut: () => this.updateChartFocus(),
+    });
   }
 
   setChartFocus(focusedOn) {
