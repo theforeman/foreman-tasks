@@ -13,7 +13,7 @@ import {
   TASKS_DASHBOARD_AVAILABLE_TIMES,
   TASKS_DASHBOARD_AVAILABLE_QUERY_STATES,
 } from '../../../../TasksDashboardConstants';
-import { getTimeText } from '../../../../TasksDashboardHelper';
+import { getQueryValueText } from '../../../../TasksDashboardHelper';
 import './StoppedTasksCard.scss';
 
 const StoppedTasksCard = ({
@@ -46,7 +46,7 @@ const StoppedTasksCard = ({
             <tr>
               <th />
               <th>{__('Total')}</th>
-              <th>{getTimeText(time)}</th>
+              <th>{getQueryValueText(time)}</th>
             </tr>
           </thead>
           <tbody>{StoppedTable(data, query, time, updateQuery)}</tbody>

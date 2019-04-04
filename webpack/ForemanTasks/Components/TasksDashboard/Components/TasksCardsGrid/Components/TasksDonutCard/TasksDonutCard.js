@@ -8,7 +8,7 @@ import {
   TASKS_DASHBOARD_AVAILABLE_TIMES,
   TASKS_DASHBOARD_CURRENT_TIME,
 } from '../../../../TasksDashboardConstants';
-import { getTimeText } from '../../../../TasksDashboardHelper';
+import { getQueryValueText } from '../../../../TasksDashboardHelper';
 import {
   timePropType,
   queryPropType,
@@ -46,7 +46,7 @@ const TasksDonutCard = ({
         <TasksDonutChart
           last={data.last}
           older={data.older}
-          time={getTimeText(time)}
+          time={getQueryValueText(time)}
           focusedOn={focusedOn}
           onTotalClick={onTotalClick}
           onLastClick={() =>
