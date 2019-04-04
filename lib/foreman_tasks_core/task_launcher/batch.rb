@@ -1,6 +1,5 @@
 module ForemanTasksCore
   module TaskLauncher
-
     class Batch < Abstract
       def launch!(input)
         trigger(nil, ParentAction, self, input)
