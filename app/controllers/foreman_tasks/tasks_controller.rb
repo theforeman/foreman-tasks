@@ -133,6 +133,7 @@ module ForemanTasks
     def filter(scope, paginate: true)
       search = current_taxonomy_search
       search = [search, params[:search]].select(&:present?).join(' AND ')
+      scope = DashboardTableFilter.new(scope, params).scope
       scope = scope.search_for(search, :order => params[:order])
       scope = scope.paginate(:page => params[:page], :per_page => params[:per_page]) if paginate
       scope.distinct
