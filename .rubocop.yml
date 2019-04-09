@@ -104,3 +104,6 @@ Style/FormatStringToken:
 
 Style/RegexpLiteral:
   Enabled: false
+
+Layout/AlignHash:
+  Enabled: false

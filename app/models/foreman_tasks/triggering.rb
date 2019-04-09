@@ -18,8 +18,8 @@ module ForemanTasks
     ALLOWED_INPUT_TYPES = [:cronline, :monthly, :weekly, :daily, :hourly].freeze
 
     TIME_FORMAT = '%Y-%m-%d %H:%M'.freeze
-    TIME_REGEXP = /\A\d{4}-\d{2}-\d{2} \d{2}:\d{2}\Z/
-    DAYS_REGEXP = /\A(\s*\d{1,2}\s*)(,\s*\d{1,2}\s*)*\Z/
+    TIME_REGEXP = /\A\d{4}-\d{2}-\d{2} \d{2}:\d{2}\Z/.freeze
+    DAYS_REGEXP = /\A(\s*\d{1,2}\s*)(,\s*\d{1,2}\s*)*\Z/.freeze
 
     has_one :recurring_logic, :foreign_key => :triggering_id, :dependent => :nullify
 
