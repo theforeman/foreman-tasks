@@ -3,6 +3,11 @@ module Support
   end
 
   class DummyPauseAction < Actions::EntryAction
+    def plan
+      plan_action(DummyPauseActionWithCustomTroubleshooting)
+      plan_self
+    end
+
     def run
       error! "This is an error"
     end

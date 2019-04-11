@@ -57,7 +57,9 @@ module ForemanTasks
     describe UINotifications::Tasks::TaskPausedOwner do
       it 'notifies the owner about the paused task' do
         task = trigger_task
-        notification = user_notifications(task_owner).first
+        notifications = user_notifications(task_owner)
+        assert_equal 1, notifications.size, 'Only notification for the main action should be triggered'
+        notification = notifications.first
         notification.message.must_equal "The task 'Dummy pause action' got paused"
         links = notification.actions['links']
         links.must_include("href" => "/foreman_tasks/tasks/#{task.id}",

@@ -66,7 +66,7 @@ module ForemanTasks
       @generic_info ||= Info.new.tap do |i|
         i.add_line _('A paused task represents a process that has not finished properly. '\
                         'Any task in paused state can lead to potential inconsistency '\
-                        'and to be resolved.')
+                        'and needs to be resolved.')
         i.add_line _("The recommended approach is to investigate the error messages below and in 'errors' tab, "\
                      'address the primary cause of the issue and resume the task.')
         if (link = troubleshooting_link)

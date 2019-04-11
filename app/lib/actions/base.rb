@@ -56,7 +56,7 @@ module Actions
     end
 
     def notify_paused(*_args)
-      task.build_notifications.each(&:deliver!)
+      task.build_notifications.each(&:deliver!) if root_action?
     end
   end
 end

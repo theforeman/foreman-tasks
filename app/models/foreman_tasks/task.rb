@@ -148,13 +148,14 @@ module ForemanTasks
       end
     end
 
+    # used by Foreman notifications framework
     def notification_recipients_ids
       owner_ids
     end
 
     def build_notifications
       notifications = []
-      if state == 'paused'
+      if paused?
         owner = self.owner
         if owner && !owner.hidden?
           notifications << UINotifications::Tasks::TaskPausedOwner.new(self)
