@@ -86,7 +86,7 @@ module ForemanTasks
     end
 
     def link_anchor
-      @action.label.to_s.tr('::', '')
+      @action.label.to_s
     end
   end
 end

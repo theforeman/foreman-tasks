@@ -67,7 +67,7 @@ module ForemanTasks
         links.must_include('name' => 'troubleshooting',
                            'title' => 'Troubleshooting Documentation',
                            'description' => 'See %{link} for more details on how to resolve the issue',
-                           'href' => "https://theforeman.org/manuals/#{SETTINGS[:version].short}/tasks_troubleshooting.html#SupportDummyPauseAction",
+                           'href' => "https://theforeman.org/manuals/#{SETTINGS[:version].short}/tasks_troubleshooting.html#Support::DummyPauseAction",
                            'external' => true)
       end
     end

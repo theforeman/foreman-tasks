@@ -14,7 +14,7 @@ module ForemanTasks
     end
 
     let :expected_troubleshooting_url do
-      "https://theforeman.org/manuals/#{SETTINGS[:version].short}/tasks_troubleshooting.html#SupportDummyPauseAction"
+      "https://theforeman.org/manuals/#{SETTINGS[:version].short}/tasks_troubleshooting.html#Support::DummyPauseAction"
     end
 
     let :action_class do
