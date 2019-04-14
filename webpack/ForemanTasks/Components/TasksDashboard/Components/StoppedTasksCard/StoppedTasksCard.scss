@@ -4,22 +4,23 @@
     border: none;
     table-layout: fixed;
 
-    &.not-focused {
+    .not-focused {
       opacity: 0.3;
     }
 
     thead {
-      background-color: transparent !important;
-      background-image: none !important;
+      background-color: transparent;
+      background-image: none;
       tr {
         th {
-          font-weight: bold !important;
-          border: none !important;
+          font-weight: bold;
+          border: none;
         }
       }
     }
 
-    td, th {
+    td,
+    th {
       text-align: center;
       padding-left: 5px;
       width: 33%;
@@ -30,43 +31,15 @@
     }
 
     td {
-      &:hover {
-        cursor: pointer;
-        border: 1px solid #d1d1d1 !important;
-        background-color: #fff !important;
-
-        &:first-child {
-          cursor: auto;
-        }
-      }
-
       &.active {
         font-weight: bold;
       }
     }
-
-    .error-row {
-      .total-col {
-        background-color: #fcc5ca;
-      }
-      .last-col {
-        background-color: #f78c96;
-      }
-    }
-    .warning-row {
-      .total-col {
-        background-color: #fee4cc;
-      }
-      .last-col {
-        background-color: #fdc899;
-      }
-    }
-    .success-row {
-      .total-col {
-        background-color: #d1f0d6;
-      }
-      .last-col {
-        background-color: #a4e0ac;
+    .data-col {
+      &:hover {
+        cursor: pointer;
+        border: 1px solid #d1d1d1;
+        background-color: #def3fe;
       }
     }
   }

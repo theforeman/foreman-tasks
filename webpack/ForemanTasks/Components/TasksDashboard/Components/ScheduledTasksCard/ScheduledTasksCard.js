@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Icon } from 'patternfly-react';
+import { Card } from 'patternfly-react';
 import classNames from 'classnames';
 import { translate as __ } from 'foremanReact/common/I18n';
 
@@ -34,7 +34,7 @@ const ScheduledTasksCard = ({
       <Card.Body>
         <div className="scheduled-data" onClick={onClick}>
           {data}
-          <Icon type="fa" name="clock-o" />
+          <p>{__('Total')}</p>
         </div>
       </Card.Body>
     </Card>

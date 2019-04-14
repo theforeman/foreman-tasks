@@ -23,10 +23,9 @@ exports[`ScheduledTasksCard render selected 1`] = `
       onClick={[Function]}
     >
       0
-      <Icon
-        name="clock-o"
-        type="fa"
-      />
+      <p>
+        Total
+      </p>
     </div>
   </CardBody>
 </Card>
@@ -55,10 +54,9 @@ exports[`ScheduledTasksCard render with minimal props 1`] = `
       onClick={[Function]}
     >
       0
-      <Icon
-        name="clock-o"
-        type="fa"
-      />
+      <p>
+        Total
+      </p>
     </div>
   </CardBody>
 </Card>
@@ -87,10 +85,9 @@ exports[`ScheduledTasksCard render with props 1`] = `
       onClick={[Function]}
     >
       3
-      <Icon
-        name="clock-o"
-        type="fa"
-      />
+      <p>
+        Total
+      </p>
     </div>
   </CardBody>
 </Card>
