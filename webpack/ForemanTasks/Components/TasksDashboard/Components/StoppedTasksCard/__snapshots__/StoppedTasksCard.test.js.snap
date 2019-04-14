@@ -34,60 +34,69 @@ exports[`StoppedTasksCard render error-last selected 1`] = `
       </thead>
       <tbody>
         <tr
-          className="error-row"
           key="error"
         >
           <td>
+            <Icon
+              name="error-circle-o"
+              type="pf"
+            />
             Error
           </td>
           <td
-            className="total-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
           </td>
           <td
-            className="last-col active"
+            className="data-col active"
             onClick={[Function]}
           >
             0
           </td>
         </tr>
         <tr
-          className="warning-row"
           key="warning"
         >
           <td>
+            <Icon
+              name="warning-triangle-o"
+              type="pf"
+            />
             Warning
           </td>
           <td
-            className="total-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
           </td>
           <td
-            className="last-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
           </td>
         </tr>
         <tr
-          className="success-row"
           key="success"
         >
           <td>
+            <Icon
+              name="ok"
+              type="pf"
+            />
             Success
           </td>
           <td
-            className="total-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
           </td>
           <td
-            className="last-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
@@ -133,60 +142,69 @@ exports[`StoppedTasksCard render error-total selected 1`] = `
       </thead>
       <tbody>
         <tr
-          className="error-row"
           key="error"
         >
           <td>
+            <Icon
+              name="error-circle-o"
+              type="pf"
+            />
             Error
           </td>
           <td
-            className="total-col active"
+            className="data-col active"
             onClick={[Function]}
           >
             0
           </td>
           <td
-            className="last-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
           </td>
         </tr>
         <tr
-          className="warning-row"
           key="warning"
         >
           <td>
+            <Icon
+              name="warning-triangle-o"
+              type="pf"
+            />
             Warning
           </td>
           <td
-            className="total-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
           </td>
           <td
-            className="last-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
           </td>
         </tr>
         <tr
-          className="success-row"
           key="success"
         >
           <td>
+            <Icon
+              name="ok"
+              type="pf"
+            />
             Success
           </td>
           <td
-            className="total-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
           </td>
           <td
-            className="last-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
@@ -232,60 +250,69 @@ exports[`StoppedTasksCard render selected 1`] = `
       </thead>
       <tbody>
         <tr
-          className="error-row"
           key="error"
         >
           <td>
+            <Icon
+              name="error-circle-o"
+              type="pf"
+            />
             Error
           </td>
           <td
-            className="total-col"
+            className="data-col"
             onClick={[Function]}
           >
             0
           </td>
           <td
-            className="last-col"
+            className="data-col"
             onClick={[Function]}
           >
             0
           </td>
         </tr>
         <tr
-          className="warning-row"
           key="warning"
         >
           <td>
+            <Icon
+              name="warning-triangle-o"
+              type="pf"
+            />
             Warning
           </td>
           <td
-            className="total-col"
+            className="data-col"
             onClick={[Function]}
           >
             0
           </td>
           <td
-            className="last-col"
+            className="data-col"
             onClick={[Function]}
           >
             0
           </td>
         </tr>
         <tr
-          className="success-row"
           key="success"
         >
           <td>
+            <Icon
+              name="ok"
+              type="pf"
+            />
             Success
           </td>
           <td
-            className="total-col"
+            className="data-col"
             onClick={[Function]}
           >
             0
           </td>
           <td
-            className="last-col"
+            className="data-col"
             onClick={[Function]}
           >
             0
@@ -331,60 +358,69 @@ exports[`StoppedTasksCard render success-last selected 1`] = `
       </thead>
       <tbody>
         <tr
-          className="error-row"
           key="error"
         >
           <td>
+            <Icon
+              name="error-circle-o"
+              type="pf"
+            />
             Error
           </td>
           <td
-            className="total-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
           </td>
           <td
-            className="last-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
           </td>
         </tr>
         <tr
-          className="warning-row"
           key="warning"
         >
           <td>
+            <Icon
+              name="warning-triangle-o"
+              type="pf"
+            />
             Warning
           </td>
           <td
-            className="total-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
           </td>
           <td
-            className="last-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
           </td>
         </tr>
         <tr
-          className="success-row"
           key="success"
         >
           <td>
+            <Icon
+              name="ok"
+              type="pf"
+            />
             Success
           </td>
           <td
-            className="total-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
           </td>
           <td
-            className="last-col active"
+            className="data-col active"
             onClick={[Function]}
           >
             0
@@ -430,60 +466,69 @@ exports[`StoppedTasksCard render success-total selected 1`] = `
       </thead>
       <tbody>
         <tr
-          className="error-row"
           key="error"
         >
           <td>
+            <Icon
+              name="error-circle-o"
+              type="pf"
+            />
             Error
           </td>
           <td
-            className="total-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
           </td>
           <td
-            className="last-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
           </td>
         </tr>
         <tr
-          className="warning-row"
           key="warning"
         >
           <td>
+            <Icon
+              name="warning-triangle-o"
+              type="pf"
+            />
             Warning
           </td>
           <td
-            className="total-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
           </td>
           <td
-            className="last-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
           </td>
         </tr>
         <tr
-          className="success-row"
           key="success"
         >
           <td>
+            <Icon
+              name="ok"
+              type="pf"
+            />
             Success
           </td>
           <td
-            className="total-col active"
+            className="data-col active"
             onClick={[Function]}
           >
             0
           </td>
           <td
-            className="last-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
@@ -529,60 +574,69 @@ exports[`StoppedTasksCard render warning-last selected 1`] = `
       </thead>
       <tbody>
         <tr
-          className="error-row"
           key="error"
         >
           <td>
+            <Icon
+              name="error-circle-o"
+              type="pf"
+            />
             Error
           </td>
           <td
-            className="total-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
           </td>
           <td
-            className="last-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
           </td>
         </tr>
         <tr
-          className="warning-row"
           key="warning"
         >
           <td>
+            <Icon
+              name="warning-triangle-o"
+              type="pf"
+            />
             Warning
           </td>
           <td
-            className="total-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
           </td>
           <td
-            className="last-col active"
+            className="data-col active"
             onClick={[Function]}
           >
             0
           </td>
         </tr>
         <tr
-          className="success-row"
           key="success"
         >
           <td>
+            <Icon
+              name="ok"
+              type="pf"
+            />
             Success
           </td>
           <td
-            className="total-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
           </td>
           <td
-            className="last-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
@@ -628,60 +682,69 @@ exports[`StoppedTasksCard render warning-total selected 1`] = `
       </thead>
       <tbody>
         <tr
-          className="error-row"
           key="error"
         >
           <td>
+            <Icon
+              name="error-circle-o"
+              type="pf"
+            />
             Error
           </td>
           <td
-            className="total-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
           </td>
           <td
-            className="last-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
           </td>
         </tr>
         <tr
-          className="warning-row"
           key="warning"
         >
           <td>
+            <Icon
+              name="warning-triangle-o"
+              type="pf"
+            />
             Warning
           </td>
           <td
-            className="total-col active"
+            className="data-col active"
             onClick={[Function]}
           >
             0
           </td>
           <td
-            className="last-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
           </td>
         </tr>
         <tr
-          className="success-row"
           key="success"
         >
           <td>
+            <Icon
+              name="ok"
+              type="pf"
+            />
             Success
           </td>
           <td
-            className="total-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
           </td>
           <td
-            className="last-col"
+            className="data-col not-focused"
             onClick={[Function]}
           >
             0
@@ -727,60 +790,69 @@ exports[`StoppedTasksCard render with minimal props 1`] = `
       </thead>
       <tbody>
         <tr
-          className="error-row"
           key="error"
         >
           <td>
+            <Icon
+              name="error-circle-o"
+              type="pf"
+            />
             Error
           </td>
           <td
-            className="total-col"
+            className="data-col"
             onClick={[Function]}
           >
             0
           </td>
           <td
-            className="last-col"
+            className="data-col"
             onClick={[Function]}
           >
             0
           </td>
         </tr>
         <tr
-          className="warning-row"
           key="warning"
         >
           <td>
+            <Icon
+              name="warning-triangle-o"
+              type="pf"
+            />
             Warning
           </td>
           <td
-            className="total-col"
+            className="data-col"
             onClick={[Function]}
           >
             0
           </td>
           <td
-            className="last-col"
+            className="data-col"
             onClick={[Function]}
           >
             0
           </td>
         </tr>
         <tr
-          className="success-row"
           key="success"
         >
           <td>
+            <Icon
+              name="ok"
+              type="pf"
+            />
             Success
           </td>
           <td
-            className="total-col"
+            className="data-col"
             onClick={[Function]}
           >
             0
           </td>
           <td
-            className="last-col"
+            className="data-col"
             onClick={[Function]}
           >
             0
@@ -826,60 +898,69 @@ exports[`StoppedTasksCard render with props 1`] = `
       </thead>
       <tbody>
         <tr
-          className="error-row"
           key="error"
         >
           <td>
+            <Icon
+              name="error-circle-o"
+              type="pf"
+            />
             Error
           </td>
           <td
-            className="total-col"
+            className="data-col"
             onClick={[Function]}
           >
             9
           </td>
           <td
-            className="last-col"
+            className="data-col"
             onClick={[Function]}
           >
             1
           </td>
         </tr>
         <tr
-          className="warning-row"
           key="warning"
         >
           <td>
+            <Icon
+              name="warning-triangle-o"
+              type="pf"
+            />
             Warning
           </td>
           <td
-            className="total-col"
+            className="data-col"
             onClick={[Function]}
           >
             8
           </td>
           <td
-            className="last-col"
+            className="data-col"
             onClick={[Function]}
           >
             2
           </td>
         </tr>
         <tr
-          className="success-row"
           key="success"
         >
           <td>
+            <Icon
+              name="ok"
+              type="pf"
+            />
             Success
           </td>
           <td
-            className="total-col"
+            className="data-col"
             onClick={[Function]}
           >
             7
           </td>
           <td
-            className="last-col"
+            className="data-col"
             onClick={[Function]}
           >
             3

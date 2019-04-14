@@ -4,18 +4,21 @@
     opacity: 0.3;
   }
   .scheduled-data {
+    padding-right: 15px;
     cursor: pointer;
-    margin-top: 50px;
     font-size: 40px;
     font-weight: 300;
+    transition: font-weight 50ms ease-in;
+    p {
+      font-size: 20px;
+      margin: 0;
+    }
     * {
       margin: 10px;
     }
     &:hover {
-      .donut-title-big-pf,
-      .donut-title-small-pf {
-        font-weight: bold;
-      }
+      transition: font-weight 50ms ease-in;
+      font-weight: 600;
     }
   }
 }

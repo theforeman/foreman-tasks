@@ -2,14 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Card } from 'patternfly-react';
 import classNames from 'classnames';
-import { capitalize } from 'lodash';
 import { translate as __ } from 'foremanReact/common/I18n';
 
+import { StoppedTable } from './StoppedTasksCardHelper';
 import { timePropType, queryPropType } from '../../TasksDashboardPropTypes';
 import {
   TASKS_DASHBOARD_AVAILABLE_TIMES,
   TASKS_DASHBOARD_AVAILABLE_QUERY_STATES,
-  TASKS_DASHBOARD_AVAILABLE_QUERY_MODES,
 } from '../../TasksDashboardConstants';
 import { getTimeText } from '../../TasksDashboardHelper';
 import './StoppedTasksCard.scss';
@@ -23,8 +22,6 @@ const StoppedTasksCard = ({
   ...props
 }) => {
   const { STOPPED } = TASKS_DASHBOARD_AVAILABLE_QUERY_STATES;
-  const { LAST } = TASKS_DASHBOARD_AVAILABLE_QUERY_MODES;
-
   return (
     <Card
       className={classNames(
@@ -49,43 +46,7 @@ const StoppedTasksCard = ({
               <th>{getTimeText(time)}</th>
             </tr>
           </thead>
-          <tbody>
-            {Object.entries(data).map(([result, { total, last }]) => (
-              <tr className={`${result}-row`} key={result}>
-                <td>{capitalize(result)}</td>
-                <td
-                  className={classNames('total-col', {
-                    active:
-                      query.state === STOPPED &&
-                      query.result === result &&
-                      query.mode !== LAST,
-                  })}
-                  onClick={() => updateQuery({ state: STOPPED, result })}
-                >
-                  {total}
-                </td>
-                <td
-                  className={classNames('last-col', {
-                    active:
-                      query.state === STOPPED &&
-                      query.result === result &&
-                      query.mode === LAST &&
-                      query.time === time,
-                  })}
-                  onClick={() =>
-                    updateQuery({
-                      state: STOPPED,
-                      result,
-                      mode: LAST,
-                      time,
-                    })
-                  }
-                >
-                  {last}
-                </td>
-              </tr>
-            ))}
-          </tbody>
+          <tbody>{StoppedTable(data, query, time, updateQuery)}</tbody>
         </table>
       </Card.Body>
     </Card>
