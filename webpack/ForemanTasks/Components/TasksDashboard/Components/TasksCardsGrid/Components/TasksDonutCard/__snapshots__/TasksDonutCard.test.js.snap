@@ -25,8 +25,8 @@ exports[`TasksDonutCard render with last selected 1`] = `
         ]
       }
       focusedOn="last"
-      last={3}
-      older={8}
+      last={0}
+      older={0}
       onLastClick={[Function]}
       onOlderClick={[Function]}
       onTotalClick={[Function]}
@@ -61,8 +61,8 @@ exports[`TasksDonutCard render with minimal props 1`] = `
         ]
       }
       focusedOn="normal"
-      last={3}
-      older={8}
+      last={0}
+      older={0}
       onLastClick={[Function]}
       onOlderClick={[Function]}
       onTotalClick={[Function]}
@@ -97,8 +97,8 @@ exports[`TasksDonutCard render with older selected 1`] = `
         ]
       }
       focusedOn="older"
-      last={3}
-      older={8}
+      last={0}
+      older={0}
       onLastClick={[Function]}
       onOlderClick={[Function]}
       onTotalClick={[Function]}
@@ -136,7 +136,7 @@ exports[`TasksDonutCard render with props 1`] = `
       }
       focusedOn="normal"
       last={3}
-      older={8}
+      older={5}
       onLastClick={[Function]}
       onOlderClick={[Function]}
       onTotalClick={[Function]}
@@ -171,8 +171,8 @@ exports[`TasksDonutCard render with total selected 1`] = `
         ]
       }
       focusedOn="total"
-      last={3}
-      older={8}
+      last={0}
+      older={0}
       onLastClick={[Function]}
       onOlderClick={[Function]}
       onTotalClick={[Function]}

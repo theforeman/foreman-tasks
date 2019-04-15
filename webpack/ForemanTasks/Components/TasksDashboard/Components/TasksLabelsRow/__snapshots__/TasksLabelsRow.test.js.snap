@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TasksLabelsRow rendering render with minimal props 1`] = `
+<Row
+  bsClass="row"
+  className="tasks-labels-row"
+  componentClass="div"
+>
+  <span
+    className="title"
+  >
+    Active Filters:
+  </span>
+</Row>
+`;
+
+exports[`TasksLabelsRow rendering render with props 1`] = `
+<Row
+  bsClass="row"
+  className="tasks-labels-row"
+  componentClass="div"
+>
+  <span
+    className="title"
+  >
+    Active Filters:
+  </span>
+  <Label
+    bsStyle="info"
+    key="some"
+    onRemoveClick={[Function]}
+    type="default"
+  >
+    some = query
+  </Label>
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="link"
+    disabled={false}
+    onClick={[Function]}
+  >
+    Clear All Filters
+  </Button>
+</Row>
+`;

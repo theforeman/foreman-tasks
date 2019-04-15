@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TasksDonutChartHelper should create chart-data 1`] = `
+Object {
+  "columns": Array [
+    Array [
+      "last",
+      1,
+    ],
+    Array [
+      "older",
+      3,
+    ],
+  ],
+  "names": Object {
+    "last": "1 Last 24h",
+    "older": "3 Older 24h",
+  },
+  "onItemClick": [Function],
+}
+`;

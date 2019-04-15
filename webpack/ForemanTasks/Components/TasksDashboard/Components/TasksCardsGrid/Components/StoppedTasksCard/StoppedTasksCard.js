@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Card } from 'patternfly-react';
 import classNames from 'classnames';
+import { noop } from 'foremanReact/common/helpers';
 import { translate as __ } from 'foremanReact/common/I18n';
 
 import { StoppedTable } from './StoppedTasksCardHelper';
@@ -82,7 +83,7 @@ StoppedTasksCard.defaultProps = {
   time: TASKS_DASHBOARD_AVAILABLE_TIMES.H24,
   query: {},
   className: '',
-  updateQuery: () => null,
+  updateQuery: noop,
 };
 
 export default StoppedTasksCard;

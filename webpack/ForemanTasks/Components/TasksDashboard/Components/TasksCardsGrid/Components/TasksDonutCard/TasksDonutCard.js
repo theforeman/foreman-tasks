@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Card } from 'patternfly-react';
+import { noop } from 'foremanReact/common/helpers';
 
 import {
   TASKS_DASHBOARD_AVAILABLE_QUERY_MODES,
@@ -89,7 +90,7 @@ TasksDonutCard.defaultProps = {
   wantedQueryState: '',
   time: TASKS_DASHBOARD_AVAILABLE_TIMES.H24,
   className: '',
-  updateQuery: () => null,
+  updateQuery: noop,
 };
 
 export default TasksDonutCard;

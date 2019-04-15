@@ -1,8 +1,6 @@
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
 import { TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS } from './TasksDonutChartConstants';
 
-const { patternfly } = window;
-
 const {
   LAST,
   OLDER,
@@ -11,9 +9,8 @@ const {
   NORMAL,
 } = TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS;
 
-export const baseChartConfig = patternfly
-  .c3ChartDefaults()
-  .getDefaultDonutConfig();
+export const getBaseChartConfig = () =>
+  window.patternfly.c3ChartDefaults().getDefaultDonutConfig();
 
 export const shouleBeSelected = focusedOn =>
   focusedOn !== NORMAL && focusedOn !== NONE;
@@ -27,7 +24,6 @@ export const getFocusedOn = (query, wantedState, wantedTime) => {
         case 'older':
           return OLDER;
         default:
-          return TOTAL;
       }
     }
 
@@ -74,7 +70,7 @@ export const createChartData = ({
 };
 
 export const updateChartTitle = ({ chartElement, value }) =>
-  patternfly.pfSetDonutChartTitle(chartElement, value, __('Total'));
+  window.patternfly.pfSetDonutChartTitle(chartElement, value, __('Total'));
 
 export const assignExtraChartEvents = ({
   chartElement,

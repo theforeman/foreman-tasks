@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { noop } from 'foremanReact/common/helpers';
 
 import Chart from '../../../../../../Components/Chart/Chart';
 
@@ -10,7 +11,7 @@ import {
   COLLOR_PATTERN,
 } from './TasksDonutChartConstants';
 import {
-  baseChartConfig,
+  getBaseChartConfig,
   shouleBeSelected,
   createChartData,
   updateChartTitle,
@@ -112,7 +113,7 @@ class TasksDonutChart extends React.Component {
 
     return (
       <Chart
-        {...baseChartConfig}
+        {...getBaseChartConfig()}
         type="donut"
         className={classes}
         size={{ height: 120 }}
@@ -157,9 +158,9 @@ TasksDonutChart.defaultProps = {
   time: '24h',
   colorsPattern: COLLOR_PATTERN,
   focusedOn: TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.NORMAL,
-  onTotalClick: () => null,
-  onLastClick: () => null,
-  onOlderClick: () => null,
+  onTotalClick: noop,
+  onLastClick: noop,
+  onOlderClick: noop,
 };
 
 export default TasksDonutChart;

@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TasksDashboard - Actions should fetch-tasks-summary and fail 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "payload": [Error: wrong time],
+      "type": "FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_FAILURE",
+    },
+  ],
+]
+`;
+
+exports[`TasksDashboard - Actions should fetch-tasks-summary and success 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "payload": "some-data",
+      "type": "FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_SUCCESS",
+    },
+  ],
+]
+`;
+
+exports[`TasksDashboard - Actions should initialize-dashboard 1`] = `
+Object {
+  "payload": Object {
+    "query": "some-query",
+    "time": "some-time",
+  },
+  "type": "FOREMAN_TASKS_DASHBOARD_INIT",
+}
+`;
+
+exports[`TasksDashboard - Actions should update-query 1`] = `
+Array [
+  Array [
+    Object {
+      "payload": "some-query",
+      "type": "FOREMAN_TASKS_DASHBOARD_UPDATE_QUERY",
+    },
+  ],
+]
+`;
+
+exports[`TasksDashboard - Actions should update-time 1`] = `
+Object {
+  "payload": "some-time",
+  "type": "FOREMAN_TASKS_DASHBOARD_UPDATE_TIME",
+}
+`;

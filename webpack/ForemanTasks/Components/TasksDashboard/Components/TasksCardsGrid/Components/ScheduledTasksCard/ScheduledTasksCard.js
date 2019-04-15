@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Card } from 'patternfly-react';
 import classNames from 'classnames';
+import { noop } from 'foremanReact/common/helpers';
 import { translate as __ } from 'foremanReact/common/I18n';
 
 import { TASKS_DASHBOARD_AVAILABLE_QUERY_STATES } from '../../../../TasksDashboardConstants';
@@ -57,7 +58,7 @@ ScheduledTasksCard.defaultProps = {
   data: 0,
   query: {},
   className: '',
-  updateQuery: () => null,
+  updateQuery: noop,
 };
 
 export default ScheduledTasksCard;

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { DropdownButton, MenuItem } from 'patternfly-react';
+import { noop } from 'foremanReact/common/helpers';
 
 import { TASKS_DASHBOARD_AVAILABLE_TIMES } from '../../../../TasksDashboardConstants';
 import { getQueryValueText } from '../../../../TasksDashboardHelper';
@@ -44,7 +45,7 @@ TimeDropDown.propTypes = {
 TimeDropDown.defaultProps = {
   className: '',
   selectedTime: TASKS_DASHBOARD_AVAILABLE_TIMES.H24,
-  onChange: () => null,
+  onChange: noop,
 };
 
 export default TimeDropDown;
