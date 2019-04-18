@@ -1,5 +1,4 @@
 module ForemanTasks
-  # rubocop:disable Metrics/ClassLength
   module Api
     class TasksController < ::Api::V2::BaseController
       include ::Foreman::Controller::SmartProxyAuth
@@ -285,5 +284,4 @@ module ForemanTasks
       end
     end
   end
-  # rubocop:enable Metrics/ClassLength
 end

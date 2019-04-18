@@ -107,3 +107,6 @@ Style/RegexpLiteral:
 
 Layout/AlignHash:
   Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false

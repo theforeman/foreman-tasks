@@ -7,12 +7,15 @@ require_relative './support/dummy_task_group'
 require_relative './support/history_tasks_builder'
 
 require 'dynflow/testing'
+require 'foreman_tasks/test_helpers'
 
 FactoryBot.definition_file_paths = ["#{ForemanTasks::Engine.root}/test/factories"]
 FactoryBot.find_definitions
 
 ForemanTasks.dynflow.require!
 ForemanTasks.dynflow.config.disable_active_record_actions = true
+
+ForemanTasks::TestHelpers.use_in_memory_sqlite!
 
 # waits for the passed block to return non-nil value and reiterates it while getting false
 # (till some reasonable timeout). Useful for forcing the tests for some event to occur
