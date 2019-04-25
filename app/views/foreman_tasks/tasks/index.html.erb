@@ -32,8 +32,8 @@
       </td>
       <td class="ellipsis"><%= task.state %> <%= _("(Disabled)") if task.frozen %></td>
       <td class="ellipsis"><%= task.result %></td>
-      <td class="ellipsis"><%= task.started_at.try(:in_time_zone) %></td>
-      <td class="ellipsis"><%= task.ended_at.try(:in_time_zone) %></td>
+      <td class="ellipsis"><%= task_time_absolute task.started_at %></td>
+      <td class="ellipsis"><%= task_time_absolute task.ended_at %></td>
       <td class="ellipsis"><%= task.username %></td>
     </tr>
   <% end %>

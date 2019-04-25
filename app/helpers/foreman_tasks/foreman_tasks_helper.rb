@@ -42,13 +42,8 @@ module ForemanTasks
       "task-status #{icon_class}"
     end
 
-    def time_in_words_span(time)
-      if time.nil?
-        _('N/A')
-      else
-        content_tag :span, (time > Time.now.utc ? _('in %s') : _('%s ago')) % time_ago_in_words(time),
-                    :'data-original-title' => time.try(:in_time_zone), :rel => 'twipsy'
-      end
+    def task_time_absolute(time)
+      date_time_absolute time, :long, true
     end
 
     def duration_in_words_span(start, finish)

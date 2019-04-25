@@ -121,19 +121,19 @@
   <div class="col-md-6">
     <div>
       <span class="param-name list-group-item-heading"><%= _("Start at") %>:</span>
-      <span class="param-value"><%= @task.start_at.nil? ? '-' : time_in_words_span(@task.start_at) %></span>
+      <span class="param-value"><%= @task.start_at.nil? ? '-' : date_time_relative(@task.start_at) %></span>
     </div>
     <div>
       <span class="param-name list-group-item-heading"><%= _("Started at") %>:</span>
-      <span class="param-value"><%= time_in_words_span @task.started_at.try(:in_time_zone) %></span>
+      <span class="param-value"><%= date_time_relative @task.started_at %></span>
     </div>
     <div>
       <span class="param-name list-group-item-heading"><%= _("Ended at") %>:</span>
-      <span class="param-value"><%= time_in_words_span @task.ended_at.try(:in_time_zone) %></span>
+      <span class="param-value"><%= date_time_relative @task.ended_at %></span>
     </div>
     <div>
       <span class="param-name list-group-item-heading"><%= _("Start before") %>:</span>
-      <span class="param-value"><%= @task.start_before.nil? ? '-' : time_in_words_span(@task.start_before) %></span>
+      <span class="param-value"><%= @task.start_before.nil? ? '-' : date_time_relative(@task.start_before) %></span>
     </div>
   </div>
 </div>
