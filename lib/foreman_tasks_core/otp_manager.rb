@@ -10,17 +10,19 @@ module ForemanTasksCore
       end
 
       def drop_otp(username, password)
-        passwords.delete(username) if passwords[username] == password
+        passwords.delete(username)
       end
 
       def passwords
         @password ||= {}
       end
 
-      def authenticate(hash)
+      def authenticate(hash, clear: true)
         plain = Base64.decode64(hash)
         username, otp = plain.split(':', 2)
-        drop_otp(username, otp)
+        passwords_match = passwords[username] == otp
+        drop_otp(username, otp) if clear && passwords_match
+        passwords_match
       end
 
       def tokenize(username, password)
