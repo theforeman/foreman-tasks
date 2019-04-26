@@ -17,6 +17,8 @@ module ForemanTasks
     end
 
     describe Actions::BulkAction do
+      include ForemanTasks::TestHelpers::WithInThreadExecutor
+
       let(:targets) { (1..5).map { |i| Target.new i } }
       let(:task) do
         triggered = ForemanTasks.trigger(ParentAction, ChildAction, targets)
