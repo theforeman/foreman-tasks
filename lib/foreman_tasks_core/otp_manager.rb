@@ -20,8 +20,9 @@ module ForemanTasksCore
       def authenticate(hash, clear: true)
         plain = Base64.decode64(hash)
         username, otp = plain.split(':', 2)
+        password_matches = passwords[username] == otp
         drop_otp(username, otp) if clear
-        passwords[username] == otp
+        password_matches
       end
 
       def tokenize(username, password)
