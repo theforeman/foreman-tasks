@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Ivan Nečas"]
   s.email       = ["inecas@redhat.com"]
   s.homepage    = "https://github.com/theforeman/foreman-tasks"
-  s.summary     = "Foreman plugin for showing tasks information for resoruces and users"
+  s.summary     = "Foreman plugin for showing tasks information for resources and users"
   s.description = <<-DESC
 The goal of this plugin is to unify the way of showing task statuses across the Foreman instance.
 It defines Task model for keeping the information about the tasks and Lock for assigning the tasks
