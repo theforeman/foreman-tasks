@@ -11,9 +11,26 @@ module Actions
         def run; end
       end
 
+      class TestHookAction < Support::DummyDynflowAction
+        middleware.use KeepCurrentUser
+        execution_plan_hooks.use :null_hook, :on => :planning
+
+        def null_hook; end
+      end
+
       before do
         @user = mock('user')
         @user.stubs(:id).returns(1)
+      end
+
+      describe 'hook' do
+        test 'does not reset current user before planning' do
+          triggered = ForemanTasks.trigger(TestHookAction)
+          task = ForemanTasks::Task.where(:external_id => triggered.id).first
+          wait_for { task.reload.state == 'stopped' }
+
+          assert_equal(User.current.id, task.execution_plan.entry_action.input['current_user_id'])
+        end
       end
 
       describe 'plan' do
