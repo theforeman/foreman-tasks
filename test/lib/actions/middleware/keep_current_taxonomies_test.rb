@@ -11,6 +11,13 @@ module Actions
         def run; end
       end
 
+      class TestHookAction < Support::DummyDynflowAction
+        middleware.use KeepCurrentTaxonomies
+        execution_plan_hooks.use :null_hook, :on => :planning
+
+        def null_hook; end
+      end
+
       before do
         @org = mock('organization')
         @org.stubs(:id).returns(1)
@@ -60,6 +67,23 @@ module Actions
           Location.stubs(:current=).with(nil)
 
           @action = run_action(@action)
+        end
+      end
+
+      describe 'hook' do
+        test 'does not unset taxonomies before planning' do
+          Organization.stubs(:current).returns(@org)
+          Location.stubs(:current).returns(@loc)
+
+          Organization.stubs(:current=)
+          Location.stubs(:current=)
+
+          triggered = ForemanTasks.trigger(TestHookAction)
+          task = ForemanTasks::Task.where(:external_id => triggered.id).first
+          wait_for { task.reload.state == 'stopped' }
+
+          assert_equal(@org.id, task.execution_plan.entry_action.input['current_organization_id'])
+          assert_equal(@loc.id, task.execution_plan.entry_action.input['current_location_id'])
         end
       end
     end

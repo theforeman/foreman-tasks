@@ -39,12 +39,12 @@ module Actions
       end
 
       def restore_current_taxonomies
+        old_taxonomies = [Organization, Location].reduce({}) { |acc, taxonomy| acc.merge(taxonomy => taxonomy.current) }
         Organization.current = Organization.unscoped.find(action.input[:current_organization_id]) if action.input[:current_organization_id].present?
         Location.current = Location.unscoped.find(action.input[:current_location_id]) if action.input[:current_location_id].present?
         yield
       ensure
-        Organization.current = nil
-        Location.current = nil
+        old_taxonomies.each { |taxonomy, value| taxonomy.current = value }
       end
 
       def current_taxonomies?
