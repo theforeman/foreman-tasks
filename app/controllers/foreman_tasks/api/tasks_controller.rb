@@ -156,13 +156,15 @@ module ForemanTasks
       end
 
       def_param_group :callback do
-        param_group :callback_target
+        param_group :callback_target, TasksController
         param :data, Hash, :desc => N_('Data to be sent to the action')
       end
 
       api :POST, '/tasks/callback', N_('Send data to the task from external executor (such as smart_proxy_dynflow)')
       param_group :callback
-      param :callbacks, Array, :of => param_group(:callback)
+      param :callbacks, Array do
+        param_group :callback, TasksController
+      end
       def callback
         callbacks = params.key?(:callback) ? Array(params) : params[:callbacks]
         ids = callbacks.map { |payload| payload[:callback][:task_id] }
