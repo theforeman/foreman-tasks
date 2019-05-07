@@ -9,6 +9,10 @@ module ForemanTasksCore
         passwords[username] = otp.to_s
       end
 
+      def drop_otp(username, password)
+        passwords.delete(username) if passwords[username] == password
+      end
+
       def passwords
         @password ||= {}
       end

@@ -31,7 +31,15 @@ module ForemanTasksCore
       TestOtpManager.generate_otp(username).must_equal otp.to_s
     end
 
-    it 'removes OTP only when correct username and password is provided' do
+    it 'provides #drop_otp method that removes OTP only when correct username and password is provided' do
+      otp = TestOtpManager.generate_otp(username)
+      assert_not TestOtpManager.drop_otp('wrong_username', 'wrong_password')
+      assert_not TestOtpManager.drop_otp(username, 'wrong_password')
+      assert_not TestOtpManager.drop_otp('wrong_username', otp)
+      assert TestOtpManager.drop_otp(username, otp)
+    end
+
+    it 'authenticate removes OTP only when correct username and password is provided' do
       otp = TestOtpManager.generate_otp(username)
       assert_not try_to_authenticate('wrong_username', 'wrong_password')
       assert_not try_to_authenticate(username, 'wrong_password')
