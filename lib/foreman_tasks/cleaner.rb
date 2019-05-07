@@ -192,9 +192,15 @@ module ForemanTasks
     end
 
     def orphaned_dynflow_tasks
+      dynflow_plan_uuid_attribute = "dynflow_execution_plans.uuid"
+      if ActiveRecord::Base.connection.adapter_name == 'PostgreSQL'
+        # typecast the UUID attribute for Postgres
+        dynflow_plan_uuid_attribute += "::varchar"
+      end
+
       db = ForemanTasks.dynflow.world.persistence.adapter.db
       db.fetch("select dynflow_execution_plans.uuid from dynflow_execution_plans left join "\
-               "foreman_tasks_tasks on (dynflow_execution_plans.uuid = foreman_tasks_tasks.external_id) "\
+               "foreman_tasks_tasks on (#{dynflow_plan_uuid_attribute} = foreman_tasks_tasks.external_id) "\
                "where foreman_tasks_tasks.id IS NULL")
     end
 
