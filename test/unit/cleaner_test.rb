@@ -32,6 +32,27 @@ class TasksTest < ActiveSupport::TestCase
                   .find_execution_plans(filters: { 'uuid' => tasks_to_keep.map(&:external_id) }).size.must_equal tasks_to_keep.size
     end
 
+    describe "#orphaned_dynflow_tasks" do
+      # We can't use transactional tests because we're using Sequel for the cleanup query
+      self.use_transactional_tests = false
+      before do
+        skip "Sqlite is running testing Dynlfow DB in memory" if ActiveRecord::Base.connection.adapter_name == 'SQLite'
+        @existing_task = FactoryBot.create(:dynflow_task, :user_create_task)
+        @missing_task = FactoryBot.create(:dynflow_task, :user_create_task)
+        @cleaner = ForemanTasks::Cleaner.new(filter: "id ^ (#{@existing_task.id}, #{@missing_task.id})")
+        @missing_task.destroy
+      end
+
+      after do
+        @cleaner.delete if @cleaner
+      end
+
+      it 'is able to find orphaned execution plans (without corresponding task object)' do
+        assert(@cleaner.orphaned_dynflow_tasks.any? { |t| t[:uuid] == @missing_task.external_id })
+        assert_not(@cleaner.orphaned_dynflow_tasks.any? { |t| t[:uuid] == @existing_task.external_id })
+      end
+    end
+
     it 'deletes all tasks matching the filter when the time limit is not specified' do
       cleaner = ForemanTasks::Cleaner.new(:filter => 'label = "Actions::User::Create"')
       tasks_to_delete = [FactoryBot.create(:dynflow_task, :user_create_task),
