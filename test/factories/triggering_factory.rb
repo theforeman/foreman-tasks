@@ -1,12 +1,12 @@
 FactoryBot.define do
   factory :triggering, :class => ForemanTasks::Triggering do
-    mode :immediate
+    mode { :immediate }
 
     trait :future do
       time = Time.zone.now
       mode { :future }
       start_at { time }
-      start_at_raw(time.strftime(ForemanTasks::Triggering::TIME_FORMAT))
+      start_at_raw { time.strftime(ForemanTasks::Triggering::TIME_FORMAT) }
     end
 
     trait :recurring do
