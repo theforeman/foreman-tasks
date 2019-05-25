@@ -1,12 +1,12 @@
 FactoryBot.define do
   factory :some_task, :class => ForemanTasks::Task do
     sequence(:label) { |n| "task#{n}" }
-    type 'ForemanTasks::Task'
-    state 'stopped'
-    result 'success'
+    type { 'ForemanTasks::Task' }
+    state { 'stopped' }
+    result { 'success' }
 
     transient do
-      set_owner nil
+      set_owner { nil }
     end
 
     after(:create) do |task, evaluator|
@@ -14,16 +14,16 @@ FactoryBot.define do
     end
 
     factory :dynflow_task, :class => ForemanTasks::Task::DynflowTask do
-      label 'Support::DummyDynflowAction'
-      type 'ForemanTasks::Task::DynflowTask'
-      started_at '2014-10-01 11:15:55'
-      ended_at '2014-10-01 11:15:57'
-      state 'stopped'
-      result 'success'
-      parent_task_id nil
+      label { 'Support::DummyDynflowAction' }
+      type { 'ForemanTasks::Task::DynflowTask' }
+      started_at { '2014-10-01 11:15:55' }
+      ended_at { '2014-10-01 11:15:57' }
+      state { 'stopped' }
+      result { 'success' }
+      parent_task_id { nil }
 
       transient do
-        sync_with_dynflow false
+        sync_with_dynflow { false }
       end
 
       after(:build) do |task, evaluator|
@@ -37,11 +37,11 @@ FactoryBot.define do
       end
 
       trait :user_create_task do
-        label 'Actions::User::Create'
+        label { 'Actions::User::Create' }
       end
 
       trait :product_create_task do
-        label 'Actions::Katello::Product::Create'
+        label { 'Actions::Katello::Product::Create' }
       end
 
       trait :inconsistent_dynflow_task do
