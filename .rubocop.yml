@@ -5,12 +5,6 @@ require:
 
 inherit_from: .rubocop_todo.yml
 
-AllCops:
-  Include:
-    - 'Rakefile'
-    - 'app/views/foreman_tasks/api/**/*.rabl'
-    - lib/**/*.rake
-
 Lint/ShadowingOuterLocalVariable:
   Enabled: false
 
