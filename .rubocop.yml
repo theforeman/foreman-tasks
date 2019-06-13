@@ -5,6 +5,11 @@ require:
 
 inherit_from: .rubocop_todo.yml
 
+AllCops:
+  Exclude:
+    - 'node_modules/**/*'
+    - 'locale/*'
+
 Lint/ShadowingOuterLocalVariable:
   Enabled: false
 
