@@ -23,7 +23,7 @@ const TasksCardsGrid = ({ time, query, data, updateQuery }) => (
         [TASKS_DASHBOARD_AVAILABLE_QUERY_STATES.STOPPED, StoppedTasksCard],
         [TASKS_DASHBOARD_AVAILABLE_QUERY_STATES.SCHEDULED, ScheduledTasksCard],
       ].map(([key, Card]) => (
-        <CardGrid.Col sm={6} lg={3} key={key}>
+        <CardGrid.Col key={key}>
           <Card
             matchHeight
             data={data[key]}
