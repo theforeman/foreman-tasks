@@ -19,7 +19,7 @@ module ForemanTasks
         end
         format.csv do
           @tasks = filter(resource_base, paginate: false)
-          csv_response(@tasks, [:action, :state, :result, 'started_at.in_time_zone', 'ended_at.in_time_zone', :username], ['Action', 'State', 'Result', 'Started At', 'Ended At', 'User'])
+          csv_response(@tasks, [:id, :action, :state, :result, 'started_at.in_time_zone', 'ended_at.in_time_zone', :username], ['Id', 'Action', 'State', 'Result', 'Started At', 'Ended At', 'User'])
         end
       end
     end
