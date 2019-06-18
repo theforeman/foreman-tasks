@@ -37,16 +37,18 @@ storiesOf('TasksDashboard/TasksCardsGrid', module)
     );
 
     return (
-      <TasksCardsGrid
-        time={selectTime}
-        query={{
-          state: selectState,
-          result: selectResult,
-          mode: selectMode,
-          time: selectTime,
-        }}
-        data={object('data', MOCKED_DATA)}
-        updateQuery={action('updateQuery')}
-      />
+      <div>
+        <TasksCardsGrid
+          time={selectTime}
+          query={{
+            state: selectState,
+            result: selectResult,
+            mode: selectMode,
+            time: selectTime,
+          }}
+          data={object('data', MOCKED_DATA)}
+          updateQuery={action('updateQuery')}
+        />
+      </div>
     );
   });

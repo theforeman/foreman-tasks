@@ -38,11 +38,6 @@ storiesOf('TasksDashboard/TasksCardsGrid', module)
     );
     return (
       <div>
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly-additions.min.css"
-        />
         <StoppedTasksCard
           data={{
             error: {

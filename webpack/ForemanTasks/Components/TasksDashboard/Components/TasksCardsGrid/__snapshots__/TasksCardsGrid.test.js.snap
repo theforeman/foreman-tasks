@@ -14,8 +14,6 @@ exports[`TasksCardsGrid render with minimal props 1`] = `
       bsClass="col"
       componentClass="div"
       key="running"
-      lg={3}
-      sm={6}
     >
       <RunningTasksCard
         className=""
@@ -35,8 +33,6 @@ exports[`TasksCardsGrid render with minimal props 1`] = `
       bsClass="col"
       componentClass="div"
       key="paused"
-      lg={3}
-      sm={6}
     >
       <PausedTasksCard
         className=""
@@ -56,8 +52,6 @@ exports[`TasksCardsGrid render with minimal props 1`] = `
       bsClass="col"
       componentClass="div"
       key="stopped"
-      lg={3}
-      sm={6}
     >
       <StoppedTasksCard
         className=""
@@ -87,8 +81,6 @@ exports[`TasksCardsGrid render with minimal props 1`] = `
       bsClass="col"
       componentClass="div"
       key="scheduled"
-      lg={3}
-      sm={6}
     >
       <ScheduledTasksCard
         className=""
@@ -117,8 +109,6 @@ exports[`TasksCardsGrid render with props 1`] = `
       bsClass="col"
       componentClass="div"
       key="running"
-      lg={3}
-      sm={6}
     >
       <RunningTasksCard
         className=""
@@ -142,8 +132,6 @@ exports[`TasksCardsGrid render with props 1`] = `
       bsClass="col"
       componentClass="div"
       key="paused"
-      lg={3}
-      sm={6}
     >
       <PausedTasksCard
         className=""
@@ -167,8 +155,6 @@ exports[`TasksCardsGrid render with props 1`] = `
       bsClass="col"
       componentClass="div"
       key="stopped"
-      lg={3}
-      sm={6}
     >
       <StoppedTasksCard
         className=""
@@ -202,8 +188,6 @@ exports[`TasksCardsGrid render with props 1`] = `
       bsClass="col"
       componentClass="div"
       key="scheduled"
-      lg={3}
-      sm={6}
     >
       <ScheduledTasksCard
         className=""
