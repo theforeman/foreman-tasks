@@ -17,7 +17,8 @@ module Actions
       if execution_plan.delay_record && recurring_logic_task_group
         args = execution_plan.delay_record.args
         logic = recurring_logic_task_group.recurring_logic
-        logic.trigger_repeat_after(task.start_at, self.class, *args)
+        task_start_at = [task.start_at, Time.zone.now].max
+        logic.trigger_repeat_after(task_start_at, self.class, *args)
       end
     ensure
       ::Logging.mdc['request'] = request_id
