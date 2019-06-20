@@ -34,6 +34,14 @@ module ForemanTasks
         logic
       end
 
+      let(:past_recurring_logic) do
+        cronline = "* * * * *"
+        logic = ForemanTasks::RecurringLogic.new_from_cronline(cronline)
+        logic.state = 'active'
+        logic.save!
+        logic
+      end
+
       let(:args) { [false, [1, 2, 3]] }
 
       let(:recurring_task) do
@@ -102,6 +110,19 @@ module ForemanTasks
         ensure
           ::Logging.mdc['request'] = old_id
         end
+      end
+
+      specify 'it does not trigger tasks in the past' do
+        delay_options = past_recurring_logic.generate_delay_options
+        delay_options[:start_at] = Time.zone.now - 1.week
+        task = ForemanTasks.delay HookedAction, delay_options, *args
+        past_recurring_logic.tasks.count.must_equal 1
+
+        task.execution_plan.delay_record.plan
+        # Post planning, a new task should be scheduled
+        past_recurring_logic.tasks.count.must_equal 2
+        # The scheduled task should have the start date according to cron in future.
+        assert_equal (Time.zone.now + 1.minute).change(:sec => 0), past_recurring_logic.tasks.where(:state => "scheduled").first.start_at
       end
     end
   end
