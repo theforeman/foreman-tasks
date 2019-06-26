@@ -244,6 +244,7 @@ namespace :foreman_tasks do
 
     tasks = ForemanTasks::Task.search_for(filter)
 
+    puts _("Exporting all tasks matching filter #{filter}")
     puts _("Gathering #{tasks.count} tasks.")
     if format == 'html'
       Dir.mktmpdir('task-export') do |tmp_dir|
@@ -255,7 +256,6 @@ namespace :foreman_tasks do
         tasks.each_with_index do |task, count|
           File.open(File.join(tmp_dir, "#{task.id}.html"), 'w') { |file| file.write(PageHelper.pagify(renderer.render_task(task))) }
           puts "#{count + 1}/#{total}"
-          count += 1
         end
 
         File.open(File.join(tmp_dir, 'index.html'), 'w') { |file| file.write(PageHelper.pagify(PageHelper.generate_index(tasks))) }
