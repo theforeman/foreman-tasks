@@ -1,4 +1,5 @@
 import API from 'foremanReact/API';
+import { API_OPERATIONS } from 'foremanReact/redux/API';
 import {
   showLoading,
   hideLoading,
@@ -48,14 +49,14 @@ export const fetchTaskDetails = id => dispatch => {
 };
 
 const getTasksDetails = async (id, dispatch) => {
-  try {
-    const { data } = await API.get(`/foreman_tasks/api/tasks/${id}/details`);
-    dispatch(requestSuccess(data));
-  } catch (error) {
-    dispatch(requestFailure(error));
-  } finally {
-    hideLoading();
-  }
+  dispatch({
+    type: API_OPERATIONS.GET,
+    url: `/foreman_tasks/api/tasks/${id}/details`,
+    outputType: 'FOREMAN_TASK_DETAILS_FETCH_TASK',
+    /* onSuccess and OnFailure will be supported in the next API PR */
+    onSuccess: hideLoading,
+    onFailure: hideLoading,
+  });
 };
 
 const startRequest = () => ({
