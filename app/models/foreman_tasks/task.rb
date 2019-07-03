@@ -77,7 +77,7 @@ module ForemanTasks
     end
 
     def username
-      owner.try(:login)
+      owner
     end
 
     def execution_type
@@ -146,7 +146,7 @@ module ForemanTasks
 
     # used by Foreman notifications framework
     def notification_recipients_ids
-      owner_ids
+      [owner.id]
     end
 
     def build_notifications
@@ -160,6 +160,7 @@ module ForemanTasks
       end
       notifications
     end
+
     def progress
       case state.to_s
       when 'running', 'paused'
