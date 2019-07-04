@@ -117,10 +117,10 @@ module ForemanTasks
         param :order, String, :desc => N_('How to order the sorted results (e.g. ASC for ascending)')
       end
       def index
-        scope = resource_scope.search_for(params[:search]).select('DISTINCT foreman_tasks_tasks.*')
-
         total = resource_scope.count
-        subtotal = scope.count
+        subtotal = resource_scope.search_for(params[:search]).select('DISTINCT foreman_tasks_tasks.id').count
+
+        scope = resource_scope.search_for(params[:search]).select('DISTINCT foreman_tasks_tasks.*')
 
         ordering_params = {
           sort_by: params[:sort_by] || 'started_at',

@@ -6,6 +6,7 @@ import { registerReducer } from 'foremanReact/common/MountingService';
 import reducers from './ForemanTasks/ForemanTasksReducers';
 import ForemanTasks from './ForemanTasks';
 import TasksDashboard from './ForemanTasks/Components/TasksDashboard';
+import TasksTable from './ForemanTasks/Components/TasksTable';
 
 // register reducers
 Object.entries(reducers).forEach(([key, reducer]) =>
@@ -20,4 +21,8 @@ componentRegistry.register({
 componentRegistry.register({
   name: 'TasksDashboard',
   type: TasksDashboard,
+});
+componentRegistry.register({
+  name: 'TasksTable',
+  type: TasksTable,
 });
