@@ -96,9 +96,9 @@
       <span class="param-name list-group-item-heading"><%= _("Result") %>:</span>
       <span class="param-value">
         <% if @task.state != 'stopped' %>
-          <%= content_tag(:i, '&nbsp'.html_safe, :class => 'task-status pficon-help') %>
+          <%= content_tag(:i, '&nbsp;'.html_safe, :class => 'task-status pficon-help') %>
         <% else %>
-          <%= content_tag(:i, '&nbsp'.html_safe, :class => task_result_icon_class(@task)) + content_tag(:span, @task.result) %>
+          <%= content_tag(:i, '&nbsp;'.html_safe, :class => task_result_icon_class(@task)) + content_tag(:span, @task.result) %>
         <% end %>
       </span>
     </div>
@@ -186,10 +186,10 @@
 <% end %>
 
 <% unless @task.humanized[:errors].blank? %>
-<p>
+<div>
   <span class="param-name"><b><%= _("Errors") %>:</b></span>
   <span class="param-value">
     <pre><%=Array(@task.humanized[:errors]).join("\n") %></pre>
   </span>
-</p>
+</div>
 <% end %>
