@@ -8,7 +8,7 @@ module ForemanTasks
       User.current = User.where(:login => 'apiadmin').first
     end
 
-    let(:own_task)     { FactoryBot.create(:dynflow_task, :set_owner => user) }
+    let(:own_task)     { FactoryBot.create(:dynflow_task, :user => user) }
     let(:foreign_task) { FactoryBot.create(:dynflow_task) }
 
     let(:edit_foreman_tasks_permission) do

@@ -7,8 +7,8 @@ class TasksTest < ActiveSupport::TestCase
       @user_one = FactoryBot.create(:user)
       @user_two = FactoryBot.create(:user)
 
-      @task_one = FactoryBot.create(:some_task, :set_owner => @user_one)
-      FactoryBot.create(:some_task, :set_owner => @user_two)
+      @task_one = FactoryBot.create(:some_task, :user => @user_one)
+      FactoryBot.create(:some_task, :user => @user_two)
 
       User.current = @user_one
     end
@@ -16,6 +16,10 @@ class TasksTest < ActiveSupport::TestCase
 
     test 'can search the tasks by current_user' do
       assert_equal [@task_one], ForemanTasks::Task.search_for('owner.id = current_user')
+    end
+
+    test 'can search by implicit search' do
+      assert_equal [@task_one], ForemanTasks::Task.search_for(@task_one.label)
     end
 
     test 'can search the tasks by current_user in combination with implicit search' do
