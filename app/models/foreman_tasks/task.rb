@@ -47,10 +47,11 @@ module ForemanTasks
 
     # Note: the following searches may return duplicates, this is due to
     #       one task maybe having multiple locks (e.g. read/write) for the same resource_id
-    # scoped_search :relation => :locks,  :on => :resource_id, :complete_value => false, :rename => 'location_id', :ext_method => :search_by_taxonomy, :only_explicit => true
-    # scoped_search :relation => :locks,  :on => :resource_id, :complete_value => false, :rename => 'organization_id', :ext_method => :search_by_taxonomy, :only_explicit => true
-    # scoped_search :relation => :locks,  :on => :resource_type, :complete_value => true, :rename => 'resource_type', :ext_method => :search_by_generic_resource, :only_explicit => true
-    # scoped_search :relation => :locks,  :on => :resource_id, :complete_value => false, :rename => 'resource_id', :ext_method => :search_by_generic_resource, :only_explicit => true
+    scoped_search :relation => :locks,  :on => :resource_id, :complete_value => false, :rename => 'locked_location_id', :ext_method => :search_by_taxonomy, :only_explicit => true
+    scoped_search :relation => :locks,  :on => :resource_id, :complete_value => false, :rename => 'locked_organization_id', :ext_method => :search_by_taxonomy, :only_explicit => true
+    scoped_search :relation => :locks,  :on => :resource_type, :complete_value => true, :rename => 'locked_resource_type', :ext_method => :search_by_generic_resource, :only_explicit => true
+    scoped_search :relation => :locks,  :on => :resource_id, :complete_value => false, :rename => 'locked_resource_id', :ext_method => :search_by_generic_resource, :only_explicit => true
+
     scoped_search :relation => :links,  :on => :resource_id, :complete_value => false, :rename => 'location_id', :ext_method => :search_by_taxonomy, :only_explicit => true
     scoped_search :relation => :links,  :on => :resource_id, :complete_value => false, :rename => 'organization_id', :ext_method => :search_by_taxonomy, :only_explicit => true
     scoped_search :relation => :links,  :on => :resource_type, :complete_value => true, :rename => 'resource_type', :ext_method => :search_by_generic_resource, :only_explicit => true
