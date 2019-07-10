@@ -48,6 +48,18 @@ class DashboardTableFilterTest < ActiveSupport::TestCase
       end
     end
 
+    describe 'recent week time horizon' do
+      let(:params) do
+        { state: 'running',
+          time_horizon: 'week',
+          time_mode: 'recent' }
+      end
+
+      it 'filters' do
+        filtered_scope.count.must_equal @tasks_builder.distribution['running'][:recent]
+      end
+    end
+
     describe 'older' do
       let(:params) do
         { state: 'running',
