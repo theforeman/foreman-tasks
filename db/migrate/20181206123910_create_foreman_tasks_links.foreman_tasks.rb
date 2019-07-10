@@ -8,8 +8,6 @@ class CreateForemanTasksLinks < ActiveRecord::Migration[4.2]
       else
         t.string :task_id, task_id_options
       end
-      # TODO: Figure out if we need this
-      # t.string :name, index: true, null: false
       t.string :resource_type
       t.integer :resource_id
     end
