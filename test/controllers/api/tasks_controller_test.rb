@@ -25,6 +25,13 @@ module ForemanTasks
           assert_response :missing
           assert_includes @response.body, 'Resource task not found by id'
         end
+
+        it 'does not show task the user is not allowed to see' do
+          setup_user('view', 'foreman_tasks', 'owner.id = current_user' )
+          get :show, params: { id: FactoryBot.create(:some_task).id },
+                     session: set_session_user(User.current)
+          assert_response :not_found
+        end
       end
 
       describe 'GET /api/tasks/summary' do
@@ -41,24 +48,41 @@ module ForemanTasks
               suspend
             end
           end
+
+          def self.while_suspended
+            triggered = ForemanTasks.trigger(DummyTestSummaryAction, true)
+            wait_for { ForemanTasks::Task.find_by(external_id: triggered.id).state == 'running' }
+            wait_for do
+              w = ForemanTasks.dynflow.world
+              w.persistence.load_step(triggered.id, 2, w).state == :suspended
+            end
+            yield
+            ForemanTasks.dynflow.world.event(triggered.id, 2, nil)
+            triggered.finished.wait
+          end
         end
 
         test_attributes :pid => 'bdcab413-a25d-4fe1-9db4-b50b5c31ebce'
         it 'get tasks summary' do
-          triggered = ForemanTasks.trigger(DummyTestSummaryAction, true)
-          wait_for { ForemanTasks::Task.find_by(external_id: triggered.id).state == 'running' }
-          wait_for do
-            w = ForemanTasks.dynflow.world
-            w.persistence.load_step(triggered.id, 2, w).state == :suspended
+          DummyTestSummaryAction.while_suspended do
+            get :summary
+            assert_response :success
+            response = JSON.parse(@response.body)
+            assert_kind_of Array, response
+            assert_not response.empty?
+            assert_kind_of Hash, response[0]
           end
-          get :summary
-          assert_response :success
-          response = JSON.parse(@response.body)
-          assert_kind_of Array, response
-          assert_not response.empty?
-          assert_kind_of Hash, response[0]
-          ForemanTasks.dynflow.world.event(triggered.id, 2, nil)
-          triggered.finished.wait
+        end
+
+        it 'gets tasks summary only for tasks the user is allowed to see' do
+          DummyTestSummaryAction.while_suspended do
+            setup_user('view', 'foreman_tasks', 'owner.id = current_user' )
+            get :summary
+            assert_response :success
+            response = JSON.parse(@response.body)
+            assert_kind_of Array, response
+            assert response.empty?
+          end
         end
       end
 
