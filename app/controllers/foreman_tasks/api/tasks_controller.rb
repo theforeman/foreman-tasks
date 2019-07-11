@@ -267,7 +267,7 @@ module ForemanTasks
       end
 
       def find_task
-        @task = Task.find(params[:id])
+        @task = resource_scope.find(params[:id])
       end
 
       def resource_scope(_options = {})
