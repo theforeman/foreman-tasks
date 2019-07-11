@@ -6,7 +6,7 @@ module ForemanTasks
     before_action :restrict_dangerous_actions, :only => [:unlock, :force_unlock]
 
     def show
-      @task = Task.find(params[:id])
+      @task = resource_base.find(params[:id])
       render :layout => !request.xhr?
     end
 
