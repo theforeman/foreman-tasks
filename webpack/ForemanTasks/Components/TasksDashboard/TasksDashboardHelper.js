@@ -73,6 +73,23 @@ export const resolveQuery = query => {
   const { search } = uri.query(true);
 
   const data = { search, ...uriQuery, page: 1 };
+  const { $, tfm } = window;
+
   uri.query(URI.buildQuery(data, true));
-  window.location.href = uri.toString();
+  tfm.tools.showSpinner();
+  $.ajax({
+    type: 'get',
+    url: uri.toString(),
+    success(result) {
+      const res = $(`<div>${result}</div>`);
+
+      $('#tasks-table').html(res.find('#tasks-table'));
+    },
+    error({ statusText }) {
+      $('#tasks-table').html(statusText);
+    },
+    complete(result) {
+      tfm.tools.hideSpinner();
+    },
+  });
 };
