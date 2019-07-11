@@ -110,3 +110,9 @@ Layout/AlignHash:
 
 Metrics/ClassLength:
   Enabled: false
+
+Rails/HelperInstanceVariable:
+  Enabled: false
+
+Naming/RescuedExceptionsVariableName:
+  Enabled: false
