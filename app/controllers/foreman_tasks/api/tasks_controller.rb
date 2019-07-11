@@ -20,7 +20,7 @@ module ForemanTasks
 
       api :GET, '/tasks/summary', 'Show task summary'
       def summary
-        render :json => ForemanTasks::Task::Summarizer.new.summarize_by_status
+        render :json => ForemanTasks::Task::Summarizer.new(resource_scope).summarize_by_status
       end
 
       api :GET, '/tasks/:id', 'Show task details'
@@ -276,7 +276,7 @@ module ForemanTasks
 
       def action_permission
         case params[:action]
-        when 'bulk_search'
+        when 'bulk_search', 'summary'
           :view
         when 'bulk_resume'
           :edit
