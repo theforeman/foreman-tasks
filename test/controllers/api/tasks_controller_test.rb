@@ -27,7 +27,7 @@ module ForemanTasks
         end
 
         it 'does not show task the user is not allowed to see' do
-          setup_user('view', 'foreman_tasks', 'owner.id = current_user' )
+          setup_user('view', 'foreman_tasks', 'owner.id = current_user')
           get :show, params: { id: FactoryBot.create(:some_task).id },
                      session: set_session_user(User.current)
           assert_response :not_found
@@ -76,7 +76,7 @@ module ForemanTasks
 
         it 'gets tasks summary only for tasks the user is allowed to see' do
           DummyTestSummaryAction.while_suspended do
-            setup_user('view', 'foreman_tasks', 'owner.id = current_user' )
+            setup_user('view', 'foreman_tasks', 'owner.id = current_user')
             get :summary
             assert_response :success
             response = JSON.parse(@response.body)

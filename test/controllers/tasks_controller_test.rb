@@ -34,7 +34,7 @@ module ForemanTasks
         end
 
         it 'shows summary only for the tasks the user is allowed to see' do
-          setup_user('view', 'foreman_tasks', 'owner.id = current_user' )
+          setup_user('view', 'foreman_tasks', 'owner.id = current_user')
           FactoryBot.create(:some_task)
           get(:summary, params: { recent_timeframe: 24 }, session: set_session_user(User.current))
           assert_response :success
@@ -53,7 +53,7 @@ module ForemanTasks
 
       describe 'show' do
         it 'does not allow user without permissions to see task details' do
-          setup_user('view', 'foreman_tasks', 'owner.id = current_user' )
+          setup_user('view', 'foreman_tasks', 'owner.id = current_user')
           get :show, params: { id: FactoryBot.create(:some_task).id },
                      session: set_session_user(User.current)
           assert_response :not_found
@@ -62,7 +62,7 @@ module ForemanTasks
 
       describe 'sub_tasks' do
         it 'does not allow user without permissions to see task details' do
-          setup_user('view', 'foreman_tasks', 'owner.id = current_user' )
+          setup_user('view', 'foreman_tasks', 'owner.id = current_user')
           get :sub_tasks, params: { id: FactoryBot.create(:some_task).id },
                           session: set_session_user(User.current)
           assert_response :not_found
