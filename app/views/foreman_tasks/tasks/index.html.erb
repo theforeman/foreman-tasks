@@ -15,27 +15,29 @@
 <% title_actions csv_link, help_button %>
 <% stylesheet 'foreman_tasks/tasks' %>
 
-<table class="<%= table_css_classes('table-fixed') %>">
-  <tr>
-    <th class="col-md-4"><%= _("Action") %></th>
-    <th class="col-md-1"><%= _("State") %></th>
-    <th class="col-md-1"><%= _("Result") %></th>
-    <th class="col-md-2"><%= sort :started_at, :as => _("Started at") %></th>
-    <th class="col-md-2"><%= sort :ended_at, :as => _("Ended at") %></th>
-    <th class="col-md-2"><%= _("User") %></th>
-  </tr>
-  <% for task in @tasks %>
-    <tr>
-      <td class="task-id ellipsis">
-        <%= link_to_if_authorized(format_task_input(task),
-                                  hash_for_foreman_tasks_task_path(:id => task)) %>
-      </td>
-      <td class="ellipsis"><%= task.state %> <%= _("(Disabled)") if task.frozen %></td>
-      <td class="ellipsis"><%= task.result %></td>
-      <td class="ellipsis"><%= task.started_at.try(:in_time_zone) %></td>
-      <td class="ellipsis"><%= task.ended_at.try(:in_time_zone) %></td>
-      <td class="ellipsis"><%= task.username %></td>
-    </tr>
-  <% end %>
-</table>
-<%= will_paginate_with_info @tasks %>
+<div id="tasks-table">
+   <table class="<%= table_css_classes('table-fixed') %>">
+     <tr>
+       <th class="col-md-4"><%= _("Action") %></th>
+       <th class="col-md-1"><%= _("State") %></th>
+       <th class="col-md-1"><%= _("Result") %></th>
+       <th class="col-md-2"><%= sort :started_at, :as => _("Started at") %></th>
+       <th class="col-md-2"><%= sort :ended_at, :as => _("Ended at") %></th>
+       <th class="col-md-2"><%= _("User") %></th>
+     </tr>
+     <% @tasks.each do |task| %>
+       <tr>
+         <td class="task-id ellipsis">
+           <%= link_to_if_authorized(format_task_input(task),
+                                     hash_for_foreman_tasks_task_path(:id => task)) %>
+         </td>
+         <td class="ellipsis"><%= task.state %> <%= _("(Disabled)") if task.frozen %></td>
+         <td class="ellipsis"><%= task.result %></td>
+         <td class="ellipsis"><%= task.started_at.try(:in_time_zone) %></td>
+         <td class="ellipsis"><%= task.ended_at.try(:in_time_zone) %></td>
+         <td class="ellipsis"><%= task.username %></td>
+       </tr>
+     <% end %>
+   </table>
+   <%= will_paginate_with_info @tasks %>
+</div>

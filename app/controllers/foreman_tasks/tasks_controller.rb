@@ -15,7 +15,7 @@ module ForemanTasks
       respond_to do |format|
         format.html do
           @tasks = filter(resource_base)
-          render :index
+          render :index, layout: !request.xhr?
         end
         format.csv do
           @tasks = filter(resource_base, paginate: false)
