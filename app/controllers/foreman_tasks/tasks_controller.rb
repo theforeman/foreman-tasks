@@ -29,7 +29,7 @@ module ForemanTasks
     end
 
     def sub_tasks
-      task   = Task.find(params[:id])
+      task   = resource_base.find(params[:id])
       @tasks = filter(task.sub_tasks)
       render :index
     end
