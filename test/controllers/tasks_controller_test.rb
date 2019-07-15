@@ -32,6 +32,24 @@ module ForemanTasks
         assert_include response.body.lines[1], 'Some action'
       end
 
+      describe 'show' do
+        it 'does not allow user without permissions to see task details' do
+          setup_user('view', 'foreman_tasks', 'owner.id = current_user')
+          get :show, params: { id: FactoryBot.create(:some_task).id },
+                     session: set_session_user(User.current)
+          assert_response :not_found
+        end
+      end
+
+      describe 'sub_tasks' do
+        it 'does not allow user without permissions to see task details' do
+          setup_user('view', 'foreman_tasks', 'owner.id = current_user')
+          get :sub_tasks, params: { id: FactoryBot.create(:some_task).id },
+                          session: set_session_user(User.current)
+          assert_response :not_found
+        end
+      end
+
       describe 'taxonomy scoping' do
         let(:organizations) { (0..1).map { FactoryBot.create(:organization) } }
         let(:tasks) { organizations.map { |o| linked_task(o) } + [FactoryBot.create(:some_task)] }
