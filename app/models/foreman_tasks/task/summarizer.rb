@@ -47,8 +47,9 @@ module ForemanTasks
       end
     end
 
-    def initialize(recent_timeframe = 24)
+    def initialize(scope = Task.authorized, recent_timeframe = 24)
       @recent_timeframe = recent_timeframe.hours
+      @scope = scope
     end
 
     def summarize_by_status
@@ -56,7 +57,7 @@ module ForemanTasks
     end
 
     def latest_tasks_in_errors_warning(limit = 5)
-      ::ForemanTasks::Task.where('result in (?)', %w[error warning]).order('started_at DESC').limit(limit)
+      @scope.where('result in (?)', %w[error warning]).order('started_at DESC').limit(limit)
     end
 
     # Returns summary of tasks count, grouped by `state` and `result`, if form of:
@@ -94,8 +95,8 @@ module ForemanTasks
     end
 
     def aggregated_scope
-      ::ForemanTasks::Task.select('count(state) AS count, state, result, max(started_at) AS started_at')
-                          .group(:state, :result).order(:state)
+      @scope.select('count(state) AS count, state, result, max(started_at) AS started_at')
+            .group(:state, :result).order(:state)
     end
 
     def aggregated_recent_scope
