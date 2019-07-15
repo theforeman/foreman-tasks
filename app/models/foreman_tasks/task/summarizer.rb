@@ -47,7 +47,7 @@ module ForemanTasks
       end
     end
 
-    def initialize(scope, recent_timeframe = 24)
+    def initialize(scope = Task.authorized, recent_timeframe = 24)
       @recent_timeframe = recent_timeframe.hours
       @scope = scope
     end
