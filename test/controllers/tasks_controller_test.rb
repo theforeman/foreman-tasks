@@ -32,6 +32,15 @@ module ForemanTasks
           response = JSON.parse(@response.body)
           assert response['running']
         end
+
+        it 'shows summary only for the tasks the user is allowed to see' do
+          setup_user('view', 'foreman_tasks', 'owner.id = current_user')
+          FactoryBot.create(:some_task)
+          get(:summary, params: { recent_timeframe: 24 }, session: set_session_user(User.current))
+          assert_response :success
+          response = JSON.parse(@response.body)
+          assert_equal 0, response['stopped']['total']
+        end
       end
 
       it 'supports csv export' do
@@ -40,6 +49,24 @@ module ForemanTasks
         assert_response :success
         assert_equal 2, response.body.lines.size
         assert_include response.body.lines[1], 'Some action'
+      end
+
+      describe 'show' do
+        it 'does not allow user without permissions to see task details' do
+          setup_user('view', 'foreman_tasks', 'owner.id = current_user')
+          get :show, params: { id: FactoryBot.create(:some_task).id },
+                     session: set_session_user(User.current)
+          assert_response :not_found
+        end
+      end
+
+      describe 'sub_tasks' do
+        it 'does not allow user without permissions to see task details' do
+          setup_user('view', 'foreman_tasks', 'owner.id = current_user')
+          get :sub_tasks, params: { id: FactoryBot.create(:some_task).id },
+                          session: set_session_user(User.current)
+          assert_response :not_found
+        end
       end
 
       describe 'taxonomy scoping' do

@@ -12,7 +12,7 @@ class SummarizerTest < ActiveSupport::TestCase
     end
 
     let :subject do
-      ForemanTasks::Task::Summarizer.new
+      ForemanTasks::Task::Summarizer.new(ForemanTasks::Task)
     end
 
     let :expected do

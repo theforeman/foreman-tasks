@@ -6,7 +6,7 @@ module ForemanTasks
     before_action :restrict_dangerous_actions, :only => [:unlock, :force_unlock]
 
     def show
-      @task = Task.find(params[:id])
+      @task = resource_base.find(params[:id])
       render :layout => !request.xhr?
     end
 
@@ -25,11 +25,11 @@ module ForemanTasks
     end
 
     def summary
-      render json: Task::Summarizer.new(params[:recent_timeframe].to_i).summary
+      render json: Task::Summarizer.new(resource_base, params[:recent_timeframe].to_i).summary
     end
 
     def sub_tasks
-      task   = Task.find(params[:id])
+      task   = resource_base.find(params[:id])
       @tasks = filter(task.sub_tasks)
       render :index
     end
