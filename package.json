@@ -63,6 +63,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "bootstrap-sass": "^3.3.7",
     "classnames": "^2.2.5",
     "lodash": "^4.17.11",
     "patternfly-react": "^2.29.0",
