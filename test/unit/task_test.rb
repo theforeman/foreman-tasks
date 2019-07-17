@@ -52,7 +52,7 @@ class TasksTest < ActiveSupport::TestCase
 
     test 'can search by array of user ids' do
       assert_equal [@task_one], ForemanTasks::Task.search_for("user.id ^ (#{@user_one.id})")
-      assert_equal [@task_one], ForemanTasks::Task.search_for("owner.id ^  (#{@user_one.id})")
+      assert_equal [@task_one], ForemanTasks::Task.search_for("owner.id ^ (#{@user_one.id})")
       assert_equal [@task_one], ForemanTasks::Task.search_for("user.id !^ (#{@user_two.id})")
       assert_equal [@task_one], ForemanTasks::Task.search_for("owner.id !^ (#{@user_two.id})")
     end
