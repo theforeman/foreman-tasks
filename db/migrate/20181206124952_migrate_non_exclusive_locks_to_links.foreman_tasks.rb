@@ -8,7 +8,7 @@ class MigrateNonExclusiveLocksToLinks < ActiveRecord::Migration[5.0]
         ON links.task_id = locks.task_id
           AND links.resource_type = locks.resource_type
           AND links.resource_id = locks.resource_id
-      WHERE locks.exclusive = 'f' AND links.task_id IS NULL;
+      WHERE locks.exclusive = FALSE AND links.task_id IS NULL;
     SQL
   end
 end
