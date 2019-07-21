@@ -7,6 +7,7 @@ import {
   cellFormatter,
 } from 'foremanReact/components/common/table';
 import { translate as __ } from 'foremanReact/common/I18n';
+import { Cancel } from './Components/Cancel';
 
 const headFormat = [headerFormatterWithProps];
 const cellFormat = [cellFormatter];
@@ -26,6 +27,9 @@ const sortControllerFactory = (apiCall, sortBy, sortOrder) => ({
 
 const actionCellFormatter = url => (value, { rowData: { id } }) =>
   cellFormatter(<a href={`/${url}/${id}`}>{value}</a>);
+
+export const cancelCellFormatter = () => (value, { rowData: { id } }) =>
+  cellFormatter(<Cancel id={id} cancellable={value} />);
 
 /**
  * Generate a table schema to the Hardware Tasks page.
@@ -55,9 +59,15 @@ const createTasksTableSchema = (apiCall, by, order) => {
     }),
     sortableColumn('started_at', __('Started at'), 2, sortController),
     sortableColumn('ended_at', __('Ended at'), 2, sortController),
-    column('username', __('User'), headFormat, cellFormat, {
-      className: 'col-md-2',
-    }),
+    column(
+      'cancellable',
+      __('Cancel'),
+      headFormat,
+      [cancelCellFormatter('foreman_tasks/tasks')],
+      {
+        className: 'col-md-2',
+      }
+    ),
   ];
 };
 
