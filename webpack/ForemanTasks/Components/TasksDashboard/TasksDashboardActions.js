@@ -21,7 +21,7 @@ export const updateTime = time => ({
   payload: time,
 });
 
-export const updateQuery = query => (dispatch, getState) => {
+export const updateQuery = (query, onSearch) => (dispatch, getState) => {
   if (query.time === TASKS_DASHBOARD_CURRENT_TIME)
     query.time = selectTime(getState());
 
@@ -29,8 +29,10 @@ export const updateQuery = query => (dispatch, getState) => {
     type: FOREMAN_TASKS_DASHBOARD_UPDATE_QUERY,
     payload: query,
   });
-
-  resolveQuery(query);
+  if (query.mode === 'last') {
+    query.mode = 'recent';
+  }
+  onSearch(query);
 };
 
 export const fetchTasksSummary = time => async dispatch => {

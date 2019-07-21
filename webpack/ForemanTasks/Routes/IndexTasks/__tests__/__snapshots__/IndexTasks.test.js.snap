@@ -2,11 +2,12 @@
 
 exports[`IndexTasks render without Props 1`] = `
 <div>
-  <h1>
-    Hello Foreman Tasks
-  </h1>
-  <h2>
-    index-tasks-page
-  </h2>
+  <Connect(TasksTablePage)
+    history={
+      Object {
+        "push": [MockFunction],
+      }
+    }
+  />
 </div>
 `;

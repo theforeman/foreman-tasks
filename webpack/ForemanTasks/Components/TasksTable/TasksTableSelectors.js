@@ -1,14 +1,20 @@
+import { translate as __ } from 'foremanReact/common/I18n';
+import { getURIsearch } from 'foremanReact/common/urlHelpers';
 import { selectForemanTasks } from '../../ForemanTasksSelectors';
 
 export const selectTasksTable = state =>
-  selectForemanTasks(state).tasksTable || {};
+  selectForemanTasks(state).tasksTable.tasksTableContent || {};
+
+export const selectTasksTablePagitanion = state =>
+  selectForemanTasks(state).tasksTable.tasksTablePagination || {};
 
 const formatDate = (date, locale = 'en-GB') =>
-  date &&
-  new Date(date).toLocaleString(locale, {
-    hour12: false,
-    timeZoneName: 'short',
-  });
+  date
+    ? new Date(date).toLocaleString(locale, {
+        hour12: false,
+        timeZoneName: 'short',
+      })
+    : __('N/A');
 
 export const selectResults = state =>
   selectTasksTable(state).results.map(result => ({
@@ -17,3 +23,24 @@ export const selectResults = state =>
     started_at: formatDate(result.started_at, selectTasksTable(state).locale),
     ended_at: formatDate(result.ended_at, selectTasksTable(state).locale),
   }));
+
+export const tasksPageSearchString = state => {
+  const { searchBar } = state.autocomplete;
+  let searchQuery;
+  if (searchBar) {
+    searchQuery = searchBar.searchQuery || '';
+  }
+  return searchQuery || getURIsearch() || '';
+};
+
+export const tasksPageSearchLabels = state => {
+  const { tasksDashboard } = selectForemanTasks(state);
+  if (tasksDashboard) {
+    const { query } = tasksDashboard;
+    if (query.mode === 'last') {
+      return { ...query, mode: 'recent' };
+    }
+    return query;
+  }
+  return null;
+};

@@ -28,18 +28,18 @@ module ForemanTasks
     end
 
     def scope_by_time
-      return if @params[:time_horizon].blank?
-      hours = if @params[:time_horizon].casecmp('week') == 0
-                24 * 7
-              else
-                @params[:time_horizon][/\AH(\d{1,2})$/i, 1]
-              end
-
+      return if @params[:time].blank?
+      hours = if @params[:time].casecmp('week') == 0
+        24 * 7
+      else
+        @params[:time][/\AH(\d{1,2})$/i, 1]
+      end
+      
       unless hours
         raise Foreman::Exception, 'Unexpected format of time: should be in form of "H24" or equal to "week"'
       end
       timestamp = Time.now.utc - hours.to_i.hours
-      case @params[:time_mode]
+      case @params[:mode]
       when 'recent'
         operator = '>'
       else

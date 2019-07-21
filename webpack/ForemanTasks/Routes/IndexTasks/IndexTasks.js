@@ -1,10 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import TasksTablePage from '../../Components/TasksTable';
 
-const IndexTasks = () => (
+const IndexTasks = ({ history }) => (
   <div>
-    <h1>Hello Foreman Tasks</h1>
-    <h2>index-tasks-page</h2>
+    <TasksTablePage history={history} />
   </div>
 );
+IndexTasks.propTypes = {
+  history: PropTypes.object.isRequired,
+};
 
 export default IndexTasks;

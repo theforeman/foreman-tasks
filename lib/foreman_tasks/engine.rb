@@ -43,11 +43,6 @@ module ForemanTasks
       Foreman::Plugin.register :"foreman-tasks" do
         requires_foreman '>= 1.16.0'
         divider :top_menu, :parent => :monitor_menu, :last => true, :caption => N_('Foreman Tasks')
-        menu :top_menu, :tasks,
-             :url_hash => { :controller => 'foreman_tasks/tasks', :action => :index },
-             :caption  => N_('Tasks'),
-             :parent   => :monitor_menu,
-             :last     => true
 
         menu :top_menu, :recurring_logics,
              :url_hash => { :controller => 'foreman_tasks/recurring_logics', :action => :index },

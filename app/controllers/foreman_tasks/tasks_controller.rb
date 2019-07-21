@@ -12,16 +12,8 @@ module ForemanTasks
 
     def index
       params[:order] ||= 'started_at DESC'
-      respond_to do |format|
-        format.html do
-          @tasks = filter(resource_base)
-          render :index, layout: !request.xhr?
-        end
-        format.csv do
-          @tasks = filter(resource_base, paginate: false)
-          csv_response(@tasks, [:id, :action, :state, :result, 'started_at.in_time_zone', 'ended_at.in_time_zone', :username], ['Id', 'Action', 'State', 'Result', 'Started At', 'Ended At', 'User'])
-        end
-      end
+      @tasks = filter(resource_base, paginate: false)
+      csv_response(@tasks, [:id, :action, :state, :result, 'started_at.in_time_zone', 'ended_at.in_time_zone', :username], ['Id', 'Action', 'State', 'Result', 'Started At', 'Ended At', 'User'])
     end
 
     def summary

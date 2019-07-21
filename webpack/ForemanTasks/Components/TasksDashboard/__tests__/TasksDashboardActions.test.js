@@ -27,7 +27,7 @@ const fixtures = {
   'should initialize-dashboard': () =>
     initializeDashboard({ time: 'some-time', query: 'some-query' }),
   'should update-time': () => updateTime('some-time'),
-  'should update-query': () => updateQuery('some-query'),
+  'should update-query': () => updateQuery('some-query', jest.fn()),
   'should fetch-tasks-summary and success': () =>
     fetchTasksSummary(correctTime),
   'should fetch-tasks-summary and fail': () => fetchTasksSummary(wrongTime),

@@ -8,7 +8,7 @@ Foreman::Application.routes.draw do
       end
     end
 
-    resources :tasks, :only => [:index, :show] do
+    resources :tasks, :only => [:show] do
       collection do
         get 'auto_complete_search'
         get '/summary/:recent_timeframe', action: 'summary'
@@ -24,7 +24,9 @@ Foreman::Application.routes.draw do
       end
     end
 
-    match '/ex_tasks' => 'react#index', :via => [:get]
+    resources :tasks, :only => [:index,], constraints: ->(req) { req.format == :csv }
+
+    match '/tasks' => 'react#index', :via => [:get]
     match '/ex_tasks/:id' => 'react#index', :via => [:get]
 
     namespace :api do

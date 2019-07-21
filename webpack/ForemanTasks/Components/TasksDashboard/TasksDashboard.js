@@ -37,8 +37,17 @@ class TasksDashboard extends React.Component {
   }
 
   render() {
-    const { time, query, tasksSummary, updateTime, updateQuery } = this.props;
-
+    const {
+      time,
+      query,
+      tasksSummary,
+      updateTime,
+      updateQuery,
+      onSearch,
+    } = this.props;
+    const updateQuerySearch = searchQuery => {
+      updateQuery(searchQuery, onSearch);
+    };
     return (
       <Grid fluid className="tasks-dashboard-grid">
         <TasksTimeRow time={time} updateTime={updateTime} />
@@ -46,9 +55,9 @@ class TasksDashboard extends React.Component {
           time={time}
           query={query}
           data={tasksSummary}
-          updateQuery={updateQuery}
+          updateQuery={updateQuerySearch}
         />
-        <TasksLabelsRow query={query} updateQuery={updateQuery} />
+        <TasksLabelsRow query={query} updateQuery={updateQuerySearch} />
       </Grid>
     );
   }
@@ -62,6 +71,7 @@ TasksDashboard.propTypes = {
   updateTime: PropTypes.func,
   updateQuery: PropTypes.func,
   fetchTasksSummary: PropTypes.func,
+  onSearch: PropTypes.func,
 };
 
 TasksDashboard.defaultProps = {
@@ -72,6 +82,7 @@ TasksDashboard.defaultProps = {
   updateTime: noop,
   updateQuery: noop,
   fetchTasksSummary: noop,
+  onSearch: noop,
 };
 
 export default TasksDashboard;
