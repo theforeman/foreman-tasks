@@ -16,8 +16,12 @@
   word-break: normal;
 }
 
-#pagination {
-  padding-bottom: 70px;
+.tasks-table {
+  margin-bottom: 70px;
+}
+
+.tasks-pagination{
+  margin-top: -6px;
 }
 
 .tasks-time-row .time-label {

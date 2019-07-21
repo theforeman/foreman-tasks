@@ -34,7 +34,7 @@ module ForemanTasks
       else
         @params[:time][/\AH(\d{1,2})$/i, 1]
       end
-      
+
       unless hours
         raise Foreman::Exception, 'Unexpected format of time: should be in form of "H24" or equal to "week"'
       end

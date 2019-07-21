@@ -1,0 +1,697 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TasksTablePage should render 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <TasksTablePage
+    getTableItems={[MockFunction]}
+    history={Object {}}
+    itemCount={1}
+    onPageChange={[MockFunction]}
+    pagination={Object {}}
+    results={Array []}
+    search=""
+    searchLabels={Object {}}
+    version=""
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": <PageLayout
+        header="Tasks"
+        searchable={false}
+      >
+        <Connect(TasksDashboard)
+          onSearch={[Function]}
+        />
+        <Row
+          bsClass="row"
+          componentClass="div"
+        >
+          <Col
+            bsClass="col"
+            componentClass="div"
+            xs={6}
+          >
+            <SearchBar
+              data={
+                Object {
+                  "autocomplete": Object {
+                    "id": "searchBar",
+                    "searchQuery": "",
+                    "url": "tasks/auto_complete_search",
+                    "useKeyShortcuts": true,
+                  },
+                  "bookmarks": Object {
+                    "canCreateBookmarks": true,
+                    "documentationUrl": "4.1.5Searching",
+                    "url": "/api/bookmarks",
+                  },
+                  "controller": "tasks",
+                }
+              }
+              initialQuery=""
+              onBookmarkClick={[Function]}
+              onSearch={[Function]}
+            />
+          </Col>
+          <Col
+            bsClass="col"
+            componentClass="div"
+            xs={6}
+          >
+            <ExportButton
+              url="/foreman_tasks/tasks.csv?search=&include_permissions=true"
+            />
+          </Col>
+        </Row>
+        <TasksTable
+          error={null}
+          getTableItems={[Function]}
+          history={Object {}}
+          itemCount={1}
+          loading={false}
+          onPageChange={[Function]}
+          pagination={Object {}}
+          results={Array []}
+          search=""
+          searchLabels={Object {}}
+          sortBy=""
+          sortOrder=""
+          status="PENDING"
+          version=""
+        />
+      </PageLayout>,
+      "className": "tasks-table-page",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <Connect(TasksDashboard)
+            onSearch={[Function]}
+          />,
+          <Row
+            bsClass="row"
+            componentClass="div"
+          >
+            <Col
+              bsClass="col"
+              componentClass="div"
+              xs={6}
+            >
+              <SearchBar
+                data={
+                  Object {
+                    "autocomplete": Object {
+                      "id": "searchBar",
+                      "searchQuery": "",
+                      "url": "tasks/auto_complete_search",
+                      "useKeyShortcuts": true,
+                    },
+                    "bookmarks": Object {
+                      "canCreateBookmarks": true,
+                      "documentationUrl": "4.1.5Searching",
+                      "url": "/api/bookmarks",
+                    },
+                    "controller": "tasks",
+                  }
+                }
+                initialQuery=""
+                onBookmarkClick={[Function]}
+                onSearch={[Function]}
+              />
+            </Col>
+            <Col
+              bsClass="col"
+              componentClass="div"
+              xs={6}
+            >
+              <ExportButton
+                url="/foreman_tasks/tasks.csv?search=&include_permissions=true"
+              />
+            </Col>
+          </Row>,
+          <TasksTable
+            error={null}
+            getTableItems={[Function]}
+            history={Object {}}
+            itemCount={1}
+            loading={false}
+            onPageChange={[Function]}
+            pagination={Object {}}
+            results={Array []}
+            search=""
+            searchLabels={Object {}}
+            sortBy=""
+            sortOrder=""
+            status="PENDING"
+            version=""
+          />,
+        ],
+        "header": "Tasks",
+        "searchable": false,
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "onSearch": [Function],
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "bsClass": "row",
+            "children": Array [
+              <Col
+                bsClass="col"
+                componentClass="div"
+                xs={6}
+              >
+                <SearchBar
+                  data={
+                    Object {
+                      "autocomplete": Object {
+                        "id": "searchBar",
+                        "searchQuery": "",
+                        "url": "tasks/auto_complete_search",
+                        "useKeyShortcuts": true,
+                      },
+                      "bookmarks": Object {
+                        "canCreateBookmarks": true,
+                        "documentationUrl": "4.1.5Searching",
+                        "url": "/api/bookmarks",
+                      },
+                      "controller": "tasks",
+                    }
+                  }
+                  initialQuery=""
+                  onBookmarkClick={[Function]}
+                  onSearch={[Function]}
+                />
+              </Col>,
+              <Col
+                bsClass="col"
+                componentClass="div"
+                xs={6}
+              >
+                <ExportButton
+                  url="/foreman_tasks/tasks.csv?search=&include_permissions=true"
+                />
+              </Col>,
+            ],
+            "componentClass": "div",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "bsClass": "col",
+                "children": <SearchBar
+                  data={
+                    Object {
+                      "autocomplete": Object {
+                        "id": "searchBar",
+                        "searchQuery": "",
+                        "url": "tasks/auto_complete_search",
+                        "useKeyShortcuts": true,
+                      },
+                      "bookmarks": Object {
+                        "canCreateBookmarks": true,
+                        "documentationUrl": "4.1.5Searching",
+                        "url": "/api/bookmarks",
+                      },
+                      "controller": "tasks",
+                    }
+                  }
+                  initialQuery=""
+                  onBookmarkClick={[Function]}
+                  onSearch={[Function]}
+                />,
+                "componentClass": "div",
+                "xs": 6,
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "data": Object {
+                    "autocomplete": Object {
+                      "id": "searchBar",
+                      "searchQuery": "",
+                      "url": "tasks/auto_complete_search",
+                      "useKeyShortcuts": true,
+                    },
+                    "bookmarks": Object {
+                      "canCreateBookmarks": true,
+                      "documentationUrl": "4.1.5Searching",
+                      "url": "/api/bookmarks",
+                    },
+                    "controller": "tasks",
+                  },
+                  "initialQuery": "",
+                  "onBookmarkClick": [Function],
+                  "onSearch": [Function],
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "bsClass": "col",
+                "children": <ExportButton
+                  url="/foreman_tasks/tasks.csv?search=&include_permissions=true"
+                />,
+                "componentClass": "div",
+                "xs": 6,
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "function",
+                "props": Object {
+                  "url": "/foreman_tasks/tasks.csv?search=&include_permissions=true",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "error": null,
+            "getTableItems": [Function],
+            "history": Object {},
+            "itemCount": 1,
+            "loading": false,
+            "onPageChange": [Function],
+            "pagination": Object {},
+            "results": Array [],
+            "search": "",
+            "searchLabels": Object {},
+            "sortBy": "",
+            "sortOrder": "",
+            "status": "PENDING",
+            "version": "",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <PageLayout
+          header="Tasks"
+          searchable={false}
+        >
+          <Connect(TasksDashboard)
+            onSearch={[Function]}
+          />
+          <Row
+            bsClass="row"
+            componentClass="div"
+          >
+            <Col
+              bsClass="col"
+              componentClass="div"
+              xs={6}
+            >
+              <SearchBar
+                data={
+                  Object {
+                    "autocomplete": Object {
+                      "id": "searchBar",
+                      "searchQuery": "",
+                      "url": "tasks/auto_complete_search",
+                      "useKeyShortcuts": true,
+                    },
+                    "bookmarks": Object {
+                      "canCreateBookmarks": true,
+                      "documentationUrl": "4.1.5Searching",
+                      "url": "/api/bookmarks",
+                    },
+                    "controller": "tasks",
+                  }
+                }
+                initialQuery=""
+                onBookmarkClick={[Function]}
+                onSearch={[Function]}
+              />
+            </Col>
+            <Col
+              bsClass="col"
+              componentClass="div"
+              xs={6}
+            >
+              <ExportButton
+                url="/foreman_tasks/tasks.csv?search=&include_permissions=true"
+              />
+            </Col>
+          </Row>
+          <TasksTable
+            error={null}
+            getTableItems={[Function]}
+            history={Object {}}
+            itemCount={1}
+            loading={false}
+            onPageChange={[Function]}
+            pagination={Object {}}
+            results={Array []}
+            search=""
+            searchLabels={Object {}}
+            sortBy=""
+            sortOrder=""
+            status="PENDING"
+            version=""
+          />
+        </PageLayout>,
+        "className": "tasks-table-page",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": Array [
+            <Connect(TasksDashboard)
+              onSearch={[Function]}
+            />,
+            <Row
+              bsClass="row"
+              componentClass="div"
+            >
+              <Col
+                bsClass="col"
+                componentClass="div"
+                xs={6}
+              >
+                <SearchBar
+                  data={
+                    Object {
+                      "autocomplete": Object {
+                        "id": "searchBar",
+                        "searchQuery": "",
+                        "url": "tasks/auto_complete_search",
+                        "useKeyShortcuts": true,
+                      },
+                      "bookmarks": Object {
+                        "canCreateBookmarks": true,
+                        "documentationUrl": "4.1.5Searching",
+                        "url": "/api/bookmarks",
+                      },
+                      "controller": "tasks",
+                    }
+                  }
+                  initialQuery=""
+                  onBookmarkClick={[Function]}
+                  onSearch={[Function]}
+                />
+              </Col>
+              <Col
+                bsClass="col"
+                componentClass="div"
+                xs={6}
+              >
+                <ExportButton
+                  url="/foreman_tasks/tasks.csv?search=&include_permissions=true"
+                />
+              </Col>
+            </Row>,
+            <TasksTable
+              error={null}
+              getTableItems={[Function]}
+              history={Object {}}
+              itemCount={1}
+              loading={false}
+              onPageChange={[Function]}
+              pagination={Object {}}
+              results={Array []}
+              search=""
+              searchLabels={Object {}}
+              sortBy=""
+              sortOrder=""
+              status="PENDING"
+              version=""
+            />,
+          ],
+          "header": "Tasks",
+          "searchable": false,
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "onSearch": [Function],
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "bsClass": "row",
+              "children": Array [
+                <Col
+                  bsClass="col"
+                  componentClass="div"
+                  xs={6}
+                >
+                  <SearchBar
+                    data={
+                      Object {
+                        "autocomplete": Object {
+                          "id": "searchBar",
+                          "searchQuery": "",
+                          "url": "tasks/auto_complete_search",
+                          "useKeyShortcuts": true,
+                        },
+                        "bookmarks": Object {
+                          "canCreateBookmarks": true,
+                          "documentationUrl": "4.1.5Searching",
+                          "url": "/api/bookmarks",
+                        },
+                        "controller": "tasks",
+                      }
+                    }
+                    initialQuery=""
+                    onBookmarkClick={[Function]}
+                    onSearch={[Function]}
+                  />
+                </Col>,
+                <Col
+                  bsClass="col"
+                  componentClass="div"
+                  xs={6}
+                >
+                  <ExportButton
+                    url="/foreman_tasks/tasks.csv?search=&include_permissions=true"
+                  />
+                </Col>,
+              ],
+              "componentClass": "div",
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "bsClass": "col",
+                  "children": <SearchBar
+                    data={
+                      Object {
+                        "autocomplete": Object {
+                          "id": "searchBar",
+                          "searchQuery": "",
+                          "url": "tasks/auto_complete_search",
+                          "useKeyShortcuts": true,
+                        },
+                        "bookmarks": Object {
+                          "canCreateBookmarks": true,
+                          "documentationUrl": "4.1.5Searching",
+                          "url": "/api/bookmarks",
+                        },
+                        "controller": "tasks",
+                      }
+                    }
+                    initialQuery=""
+                    onBookmarkClick={[Function]}
+                    onSearch={[Function]}
+                  />,
+                  "componentClass": "div",
+                  "xs": 6,
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "data": Object {
+                      "autocomplete": Object {
+                        "id": "searchBar",
+                        "searchQuery": "",
+                        "url": "tasks/auto_complete_search",
+                        "useKeyShortcuts": true,
+                      },
+                      "bookmarks": Object {
+                        "canCreateBookmarks": true,
+                        "documentationUrl": "4.1.5Searching",
+                        "url": "/api/bookmarks",
+                      },
+                      "controller": "tasks",
+                    },
+                    "initialQuery": "",
+                    "onBookmarkClick": [Function],
+                    "onSearch": [Function],
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "bsClass": "col",
+                  "children": <ExportButton
+                    url="/foreman_tasks/tasks.csv?search=&include_permissions=true"
+                  />,
+                  "componentClass": "div",
+                  "xs": 6,
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "function",
+                  "props": Object {
+                    "url": "/foreman_tasks/tasks.csv?search=&include_permissions=true",
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                "type": [Function],
+              },
+            ],
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "function",
+            "props": Object {
+              "error": null,
+              "getTableItems": [Function],
+              "history": Object {},
+              "itemCount": 1,
+              "loading": false,
+              "onPageChange": [Function],
+              "pagination": Object {},
+              "results": Array [],
+              "search": "",
+              "searchLabels": Object {},
+              "sortBy": "",
+              "sortOrder": "",
+              "status": "PENDING",
+              "version": "",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromError": true,
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;

@@ -4,6 +4,7 @@ import { stringifyParams, changeQuery } from 'foremanReact/common/urlHelpers';
 import SearchBar from 'foremanReact/components/SearchBar';
 import PageLayout from 'foremanReact/pages/common/PageLayout/PageLayout';
 import { Row, Col } from 'patternfly-react';
+import { translate as __ } from 'foremanReact/common/I18n';
 import TasksTable from './TasksTable';
 import { TASKS_SEARCH_PROPS } from './TasksTableConstants';
 import { ExportButton } from './Components/ExportButton';
@@ -65,7 +66,6 @@ const TasksTablePage = ({ ...props }) => {
           </Col>
         </Row>
         <TasksTable
-          className="tasks-table"
           {...props}
           onPageChange={onPageChange}
           getTableItems={() =>

@@ -24,7 +24,7 @@ Foreman::Application.routes.draw do
       end
     end
 
-    resources :tasks, :only => [:index,], constraints: ->(req) { req.format == :csv }
+    resources :tasks, :only => [:index], constraints: ->(req) { req.format == :csv }
 
     match '/tasks' => 'react#index', :via => [:get]
     match '/ex_tasks/:id' => 'react#index', :via => [:get]

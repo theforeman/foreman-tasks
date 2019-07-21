@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExportButton render with minimal props 1`] = `
+<Button
+  active={false}
+  block={false}
+  bsClass="btn"
+  bsStyle="default"
+  className="export-csv"
+  data-no-turbolink="true"
+  disabled={false}
+  href="url"
+  title="Export to CSV"
+>
+  Export
+</Button>
+`;

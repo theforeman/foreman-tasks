@@ -42,21 +42,21 @@ const TasksTable = ({
     );
   }
   return (
-    <React.Fragment>
+    <div className="tasks-table">
       <Table
         key="tasks-table"
         columns={createTasksTableSchema(getTableItems, sortBy, sortOrder)}
         rows={results}
       />
       <Pagination
-        className="col-md-12"
+        className="tasks-pagination col-md-12"
         viewType="table"
         itemCount={itemCount}
         pagination={pagination}
         onChange={onPageChange(history)}
         dropdownButtonId="tasks-table-dropdown"
       />
-    </React.Fragment>
+    </div>
   );
 };
 

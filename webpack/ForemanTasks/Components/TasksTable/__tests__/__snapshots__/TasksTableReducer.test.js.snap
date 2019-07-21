@@ -1,5 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`TasksTablePaginationReducer reducer should handle TASKS_TABLE_PENDING 1`] = `
+Object {
+  "tasksTablePagination": Object {
+    "itemCount": 0,
+    "loading": true,
+    "pagination": Object {
+      "page": 1,
+      "perPage": 10,
+    },
+  },
+}
+`;
+
 exports[`TasksTablePaginationReducer reducer should handle TASKS_TABLE_SUCCESS 1`] = `
 Object {
   "tasksTablePagination": Object {

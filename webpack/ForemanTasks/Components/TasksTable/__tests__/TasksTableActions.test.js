@@ -1,5 +1,5 @@
-import { TASKS_TABLE_CONTROLLER } from './TasksTableConstants';
-import { getTableItems } from './TasksTableActions';
+import { TASKS_TABLE_CONTROLLER } from '../TasksTableConstants';
+import { getTableItems } from '../TasksTableActions';
 
 jest.mock('foremanReact/components/common/table', () => ({
   getTableItemsAction: jest.fn((controller, query) => `${controller}-${query}`),

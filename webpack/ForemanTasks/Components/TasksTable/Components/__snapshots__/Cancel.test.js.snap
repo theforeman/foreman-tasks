@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Cancel render with cancellable false props 1`] = `
+<Button
+  active={false}
+  block={false}
+  bsClass="btn"
+  bsSize="small"
+  bsStyle="default"
+  data-method="post"
+  disabled={true}
+  href="/foreman_tasks/tasks/id/cancel"
+>
+  Cancel
+</Button>
+`;
+
+exports[`Cancel render with cancellable true props 1`] = `
+<Button
+  active={false}
+  block={false}
+  bsClass="btn"
+  bsSize="small"
+  bsStyle="default"
+  data-method="post"
+  disabled={false}
+  href="/foreman_tasks/tasks/id/cancel"
+>
+  Cancel
+</Button>
+`;
