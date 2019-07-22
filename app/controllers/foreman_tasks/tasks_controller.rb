@@ -12,16 +12,7 @@ module ForemanTasks
 
     def index
       params[:order] ||= 'started_at DESC'
-      respond_to do |format|
-        format.html do
-          @tasks = filter(resource_base)
-          render :index, layout: !request.xhr?
-        end
-        format.csv do
-          @tasks = filter(resource_base, paginate: false)
-          csv_response(@tasks, [:id, :action, :state, :result, 'started_at.in_time_zone', 'ended_at.in_time_zone', :username], ['Id', 'Action', 'State', 'Result', 'Started At', 'Ended At', 'User'])
-        end
-      end
+      respond_with_tasks resource_base
     end
 
     def summary
@@ -29,9 +20,7 @@ module ForemanTasks
     end
 
     def sub_tasks
-      task   = resource_base.find(params[:id])
-      @tasks = filter(task.sub_tasks)
-      render :index
+      respond_with_tasks resource_base.find(params[:id]).sub_tasks
     end
 
     def cancel_step
@@ -102,6 +91,19 @@ module ForemanTasks
     end
 
     private
+
+    def respond_with_tasks(scope)
+      respond_to do |format|
+        format.html do
+          @tasks = filter(scope)
+          render :index, layout: !request.xhr?
+        end
+        format.csv do
+          @tasks = filter(scope, paginate: false)
+          csv_response(@tasks, [:id, :action, :state, :result, 'started_at.in_time_zone', 'ended_at.in_time_zone', :username], ['Id', 'Action', 'State', 'Result', 'Started At', 'Ended At', 'User'])
+        end
+      end
+    end
 
     def restrict_dangerous_actions
       render_403 unless Setting['dynflow_allow_dangerous_actions']
