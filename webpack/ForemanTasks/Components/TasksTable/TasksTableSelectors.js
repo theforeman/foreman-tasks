@@ -1,6 +1,5 @@
 import { translate as __ } from 'foremanReact/common/I18n';
 import { selectForemanTasks } from '../../ForemanTasksSelectors';
-import { getURIPagination } from './TasksTableHelpers';
 
 export const selectTasksTable = state =>
   selectForemanTasks(state).tasksTable || {};
@@ -12,7 +11,7 @@ export const selectTasksTableQuery = state =>
   selectTasksTable(state).tasksTableQuery || {};
 
 export const selectPagitation = state =>
-  selectTasksTableQuery(state).pagination || getURIPagination();
+  selectTasksTableQuery(state).pagination || {};
 
 export const selectItemCount = state =>
   selectTasksTableQuery(state).itemCount || 0;

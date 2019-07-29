@@ -3,7 +3,6 @@ import { bindActionCreators } from 'redux';
 import TasksTablePage from './TasksTablePage';
 import reducer from './TasksTableReducer';
 import * as actions from './TasksTableActions';
-import { selectQuery } from '../TasksDashboard/TasksDashboardSelectors';
 import {
   selectStatus,
   selectError,
@@ -19,7 +18,6 @@ const mapStateToProps = state => ({
   error: selectError(state),
   sort: selectSort(state),
   results: selectResults(state),
-  query: selectQuery(state),
   pagination: selectPagitation(state),
   itemCount: selectItemCount(state),
   actionName: selectActionName(state),

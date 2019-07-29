@@ -52,7 +52,7 @@ export const getQueryFromUrl = () => {
   return queryFromUriQuery(uriQuery);
 };
 
-export const resolveQuery = ({ state, result, mode, time }) => {
+export const resolveQuery = ({ state, result, mode, time }, history) => {
   const uriQuery = {
     state,
     result,
@@ -60,12 +60,5 @@ export const resolveQuery = ({ state, result, mode, time }) => {
     time_horizon: time,
     page: 1,
   };
-  updateURlQuery(uriQuery);
-};
-
-export const getTasksQueryURI = () => {
-  const { state, result, time_mode: mode, time_horizon: time } = getURIQuery(
-    window.location.href
-  );
-  return { state, result, mode: mode === 'recent' ? 'last' : mode, time };
+  updateURlQuery(uriQuery, history);
 };

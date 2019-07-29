@@ -21,11 +21,11 @@ export const updateTime = time => ({
   payload: time,
 });
 
-export const updateQuery = query => (dispatch, getState) => {
+export const updateQuery = (query, history) => (dispatch, getState) => {
   if (query.time === TASKS_DASHBOARD_CURRENT_TIME)
     query.time = selectTime(getState());
 
-  resolveQuery(query);
+  resolveQuery(query, history);
   dispatch({
     type: FOREMAN_TASKS_DASHBOARD_UPDATE_QUERY,
     payload: query,

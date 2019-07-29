@@ -7,7 +7,7 @@ import ForemanTasksRoutes from './ForemanTasksRoutes';
 describe('ForemanTasksRoutes', () => {
   it('should create routes', () => {
     Object.entries(ForemanTasksRoutes).forEach(([key, Route]) => {
-      const component = shallow(<Route.render some="props" />);
+      const component = shallow(<Route.render history={{}} some="props" />);
       Route.renderResult = toJson(component);
     });
 

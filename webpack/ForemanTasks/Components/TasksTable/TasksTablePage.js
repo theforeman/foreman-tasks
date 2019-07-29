@@ -12,10 +12,12 @@ import { resolveSearchQuery, addSearchToURL } from './TasksTableHelpers';
 import { TASKS_SEARCH_PROPS } from './TasksTableConstants';
 import './TasksTablePage.scss';
 
-const TasksTablePage = ({ getBreadcrumbs, ...props }) => {
+const TasksTablePage = ({ getBreadcrumbs, history, ...props }) => {
+  const url = history.location.pathname + history.location.search;
+  const uriQuery = getURIQuery(url);
   const onSearch = searchQuery => {
-    resolveSearchQuery(searchQuery);
-    props.getTableItems();
+    resolveSearchQuery(searchQuery, history);
+    props.getTableItems(url);
   };
 
   return (
@@ -29,17 +31,14 @@ const TasksTablePage = ({ getBreadcrumbs, ...props }) => {
           <React.Fragment>
             {props.status === STATUS.PENDING && <Spinner size="lg" loading />}
             <ExportButton
-              url={addSearchToURL(
-                '/foreman_tasks/tasks.csv',
-                getURIQuery(window.location.href)
-              )}
+              url={addSearchToURL('/foreman_tasks/tasks.csv', uriQuery)}
             />
           </React.Fragment>
         }
         searchQuery={getURIsearch()}
-        beforeToolbarComponent={<TasksDashboard />}
+        beforeToolbarComponent={<TasksDashboard history={history} />}
       >
-        <TasksTable {...props} />
+        <TasksTable history={history} {...props} />
       </PageLayout>
     </div>
   );
@@ -51,7 +50,7 @@ TasksTablePage.propTypes = {
   actionName: PropTypes.string,
   isSubTask: PropTypes.bool,
   status: PropTypes.oneOf(Object.keys(STATUS)),
-  location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 TasksTablePage.defaultProps = {

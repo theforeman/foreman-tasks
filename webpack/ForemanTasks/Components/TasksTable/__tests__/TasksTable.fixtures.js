@@ -2,15 +2,14 @@ import { STATUS } from 'foremanReact/constants';
 
 export const minProps = {
   getTableItems: jest.fn(),
-  setSort: jest.fn(),
   getBreadcrumbs: jest.fn(),
-  changeTablePage: jest.fn(),
-  location: { pathname: '' },
   itemCount: 2,
   pagination: {
     page: 1,
     perPage: 10,
   },
+  history: { location: { search: '' } },
+  location: { pathname: '' },
   status: STATUS.RESOLVED,
   results: ['a', 'b'],
   sort: {

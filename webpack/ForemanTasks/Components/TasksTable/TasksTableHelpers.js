@@ -1,28 +1,22 @@
 import URI from 'urijs';
-import { getURIQuery } from 'foremanReact/common/helpers';
 
-export const updateURlQuery = query => {
-  const uri = new URI(window.location.href);
+export const updateURlQuery = (query, history) => {
+  const uri = new URI(history.location.pathname + history.location.search);
   uri.setSearch(query);
-  window.history.pushState({ path: uri.toString() }, '', uri.toString());
+  history.push(uri.search());
 };
 
-export const getApiPathname = () => {
-  const uri = new URI(window.location.href);
+export const getApiPathname = url => {
+  const uri = new URI(url);
   return uri.pathname().replace('foreman_tasks/', 'foreman_tasks/api/');
 };
 
-export const getURIPagination = () => {
-  const { per_page: perPage, page } = getURIQuery(window.location.href);
-  return { perPage: Number(perPage) || 20, page: Number(page) || 1 };
-};
-
-export const resolveSearchQuery = search => {
+export const resolveSearchQuery = (search, history) => {
   const uriQuery = {
     search,
     page: 1,
   };
-  updateURlQuery(uriQuery);
+  updateURlQuery(uriQuery, history);
 };
 
 export const addSearchToURL = (path, query) => {

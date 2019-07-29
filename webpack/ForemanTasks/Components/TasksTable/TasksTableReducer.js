@@ -2,11 +2,7 @@ import Immutable from 'seamless-immutable';
 import { combineReducers } from 'redux';
 import { createTableReducer } from 'foremanReact/components/common/table';
 import createTableActionTypes from 'foremanReact/components/common/table/actionsHelpers/actionTypeCreator';
-import {
-  TASKS_TABLE_ID,
-  TASKS_TABLE_SET_SORT,
-  TASKS_TABLE_SET_PAGINATION,
-} from './TasksTableConstants';
+import { TASKS_TABLE_ID } from './TasksTableConstants';
 
 export const TasksTableQueryReducer = (state = {}, action) => {
   const {
@@ -15,9 +11,6 @@ export const TasksTableQueryReducer = (state = {}, action) => {
       subtotal,
       page,
       per_page: perPageString,
-      by,
-      order,
-      perPage,
       action_name: actionName,
     } = {},
   } = action;
@@ -32,21 +25,6 @@ export const TasksTableQueryReducer = (state = {}, action) => {
           perPage: Number(perPageString),
         },
       });
-    case TASKS_TABLE_SET_SORT:
-      return Immutable.merge(state, {
-        sort: {
-          by,
-          order,
-        },
-      });
-    case TASKS_TABLE_SET_PAGINATION:
-      return Immutable.merge(state, {
-        pagination: {
-          page,
-          perPage,
-        },
-      });
-
     default:
       return state;
   }

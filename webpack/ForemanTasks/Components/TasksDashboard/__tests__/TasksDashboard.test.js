@@ -3,7 +3,7 @@ import { testComponentSnapshotsWithFixtures } from 'react-redux-test-utils';
 import TasksDashboard from '../TasksDashboard';
 
 const fixtures = {
-  'render without Props': {},
+  'render without Props': { history: {} },
   /** fixtures, props for the component */
 };
 

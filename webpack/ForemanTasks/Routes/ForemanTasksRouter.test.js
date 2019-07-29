@@ -15,7 +15,11 @@ jest.mock('./ForemanTasksRoutes', () => ({
 }));
 
 const fixtures = {
-  'render without Props': {},
+  'render without Props': {
+    history: {
+      push: jest.fn(),
+    },
+  },
 };
 
 describe('ForemanTasksRouter', () =>
