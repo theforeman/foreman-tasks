@@ -7,36 +7,38 @@ import {
 } from '../TasksDashboardSelectors';
 
 const state = {
-  tasksDashboard: {
-    time: 'some-time',
-    query: 'some-query',
-    tasksSummary: {
-      running: {
-        recent: 3,
-        total: 8,
-      },
-      paused: {
-        recent: 2,
-        total: 9,
-      },
-      stopped: {
-        by_result: {
-          error: {
-            total: 9,
-            recent: 1,
-          },
-          warning: {
-            total: 8,
-            recent: 2,
-          },
-          success: {
-            total: 7,
-            recent: 3,
+  foremanTasks: {
+    tasksDashboard: {
+      time: 'some-time',
+      query: 'some-query',
+      tasksSummary: {
+        running: {
+          recent: 3,
+          total: 8,
+        },
+        paused: {
+          recent: 2,
+          total: 9,
+        },
+        stopped: {
+          by_result: {
+            error: {
+              total: 9,
+              recent: 1,
+            },
+            warning: {
+              total: 8,
+              recent: 2,
+            },
+            success: {
+              total: 7,
+              recent: 3,
+            },
           },
         },
-      },
-      scheduled: {
-        total: 6,
+        scheduled: {
+          total: 6,
+        },
       },
     },
   },

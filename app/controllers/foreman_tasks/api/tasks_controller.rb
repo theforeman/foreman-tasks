@@ -37,6 +37,8 @@ module ForemanTasks
         parent_task = resource_scope.find(params[:id])
         filtered_scope = parent_task.sub_tasks
         action_name = { "action_name" => parent_task.action }
+
+        filtered_scope = DashboardTableFilter.new(filtered_scope, params).scope
         render :json => action_name.merge(tasks_list(filtered_scope))
       end
 
@@ -253,16 +255,16 @@ module ForemanTasks
         task_hash
       end
 
+      def resource_class
+        @resource_class ||= ForemanTasks::Task
+      end
+
       def find_task
         @task = resource_scope.find(params[:id])
       end
 
       def resource_scope(_options = {})
         @resource_scope ||= ForemanTasks::Task.authorized("#{action_permission}_foreman_tasks")
-      end
-
-      def resource_class
-        @resource_class ||= ForemanTasks::Task
       end
 
       def action_permission

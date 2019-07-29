@@ -24,6 +24,7 @@ const TasksTable = ({
   unselectAllRows,
   selectRow,
   unselectRow,
+  parentTaskID,
 }) => {
   const url = history.location.pathname + history.location.search;
   const uriQuery = getURIQuery(url);
@@ -82,10 +83,10 @@ const TasksTable = ({
 
   const taskActions = {
     cancel: (id, name) => {
-      cancelTask(id, name, url);
+      cancelTask(id, name, url, parentTaskID);
     },
     resume: (id, name) => {
-      resumeTask(id, name, url);
+      resumeTask(id, name, url, parentTaskID);
     },
   };
 
@@ -132,6 +133,7 @@ TasksTable.propTypes = {
   unselectAllRows: PropTypes.func.isRequired,
   selectRow: PropTypes.func.isRequired,
   unselectRow: PropTypes.func.isRequired,
+  parentTaskID: PropTypes.string,
 };
 
 TasksTable.defaultProps = {
@@ -142,6 +144,7 @@ TasksTable.defaultProps = {
     perPage: 20,
   },
   selectedRows: [],
+  parentTaskID: null,
 };
 
 export default TasksTable;

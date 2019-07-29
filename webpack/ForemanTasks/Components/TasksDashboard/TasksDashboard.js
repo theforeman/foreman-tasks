@@ -14,7 +14,12 @@ import './TasksDashboard.scss';
 
 class TasksDashboard extends React.Component {
   componentDidMount() {
-    const { time, initializeDashboard, fetchTasksSummary } = this.props;
+    const {
+      time,
+      initializeDashboard,
+      fetchTasksSummary,
+      parentTaskID,
+    } = this.props;
     const query = getQueryFromUrl();
 
     initializeDashboard({
@@ -24,15 +29,15 @@ class TasksDashboard extends React.Component {
 
     // dont fetch if time is going to be changed
     if (!query.time || query.time === time) {
-      fetchTasksSummary(time);
+      fetchTasksSummary(time, parentTaskID);
     }
   }
 
   componentDidUpdate(prevProps) {
-    const { time, fetchTasksSummary } = this.props;
+    const { time, fetchTasksSummary, parentTaskID } = this.props;
 
     if (time !== prevProps.time) {
-      fetchTasksSummary(time);
+      fetchTasksSummary(time, parentTaskID);
     }
   }
 
@@ -65,6 +70,7 @@ TasksDashboard.propTypes = {
   updateQuery: PropTypes.func,
   fetchTasksSummary: PropTypes.func,
   history: PropTypes.object.isRequired,
+  parentTaskID: PropTypes.string,
 };
 
 TasksDashboard.defaultProps = {
@@ -75,6 +81,7 @@ TasksDashboard.defaultProps = {
   updateTime: noop,
   updateQuery: noop,
   fetchTasksSummary: noop,
+  parentTaskID: '',
 };
 
 export default TasksDashboard;

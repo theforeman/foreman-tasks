@@ -28,6 +28,7 @@ exports[`SubTasksPage rendering render with minimal props 1`] = `
       "perPage": 10,
     }
   }
+  parentTaskID="some-id"
   results={
     Array [
       "a",
