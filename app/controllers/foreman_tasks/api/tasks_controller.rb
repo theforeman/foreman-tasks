@@ -117,23 +117,25 @@ module ForemanTasks
         param :order, String, :desc => N_('How to order the sorted results (e.g. ASC for ascending)')
       end
       def index
-        scope = resource_scope.search_for(params[:search]).select('DISTINCT foreman_tasks_tasks.*')
-
+        filtered_scope = DashboardTableFilter.new(resource_scope, params).scope
         total = resource_scope.count
-        subtotal = scope.count
+
+        search_scope = filtered_scope.search_for(params[:search])
+        subtotal = search_scope.select('DISTINCT foreman_tasks_tasks.id').count
+        filtered_scope = search_scope.select('DISTINCT foreman_tasks_tasks.*')
 
         ordering_params = {
           sort_by: params[:sort_by] || 'started_at',
           sort_order: params[:sort_order] || 'DESC'
         }
-        scope = ordering_scope(scope, ordering_params)
+        filtered_scope = ordering_scope(filtered_scope, ordering_params)
 
         pagination_params = {
           page: params[:page] || 1,
           per_page: params[:per_page] || Setting[:entries_per_page] || 20
         }
-        scope = pagination_scope(scope, pagination_params)
-        results = scope.map { |task| task_hash(task) }
+        filtered_scope = pagination_scope(filtered_scope, pagination_params)
+        results = filtered_scope.map { |task| task_hash(task) }
 
         render :json => {
           total: total,
