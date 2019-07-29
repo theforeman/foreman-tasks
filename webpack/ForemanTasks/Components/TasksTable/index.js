@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import TasksTable from './TasksTable';
+import TasksTableWrapper from './TasksTableWrapper';
 import reducer from './TasksTableReducer';
 import * as actions from './TasksTableActions';
 import {
@@ -27,4 +27,4 @@ export const reducers = { tasksTable: reducer };
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(TasksTable);
+)(TasksTableWrapper);

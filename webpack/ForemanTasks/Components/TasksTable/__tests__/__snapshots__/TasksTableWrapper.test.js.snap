@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TasksTableWrapper rendering render with minimal Props 1`] = `
+<div
+  className="tasks-table-wrapper"
+>
+  <ExportButton
+    url="/foreman_tasks/tasks.csv?include_permissions=true"
+  />
+  <TasksTable
+    error={null}
+    getTableItems={[MockFunction]}
+    itemCount={0}
+    loading={false}
+    pagination={
+      Object {
+        "page": 1,
+        "perPage": 10,
+      }
+    }
+    query={Object {}}
+    results={
+      Array [
+        "a",
+      ]
+    }
+    status="PENDING"
+  />
+</div>
+`;
