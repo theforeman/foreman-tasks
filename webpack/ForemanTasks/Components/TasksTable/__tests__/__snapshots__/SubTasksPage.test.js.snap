@@ -2,9 +2,15 @@
 
 exports[`SubTasksPage rendering render with minimal props 1`] = `
 <Connect(TasksTablePage)
-  changeTablePage={[MockFunction]}
   getBreadcrumbs={[MockFunction]}
   getTableItems={[MockFunction]}
+  history={
+    Object {
+      "location": Object {
+        "search": "",
+      },
+    }
+  }
   itemCount={2}
   location={
     Object {
@@ -30,7 +36,6 @@ exports[`SubTasksPage rendering render with minimal props 1`] = `
       "b",
     ]
   }
-  setSort={[MockFunction]}
   sort={
     Object {
       "by": "q",

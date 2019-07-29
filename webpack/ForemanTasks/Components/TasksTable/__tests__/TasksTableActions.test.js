@@ -7,6 +7,6 @@ jest.mock('foremanReact/components/common/table', () => ({
 
 describe('TasksTable actions', () => {
   it('getTableItems should reuse common/table/getTableItemsAction', () => {
-    expect(getTableItems()).toEqual(TASKS_TABLE_ID);
+    expect(getTableItems('')).toEqual(TASKS_TABLE_ID);
   });
 });

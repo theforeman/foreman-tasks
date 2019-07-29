@@ -5,7 +5,17 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
   className="tasks-table-wrapper"
 >
   <PageLayout
-    beforeToolbarComponent={<Connect(TasksDashboard) />}
+    beforeToolbarComponent={
+      <Connect(TasksDashboard)
+        history={
+          Object {
+            "location": Object {
+              "search": "",
+            },
+          }
+        }
+      />
+    }
     breadcrumbOptions={
       Object {
         "breadcrumbItems": Array [
@@ -52,9 +62,15 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
   >
     <TasksTable
       actionName=""
-      changeTablePage={[MockFunction]}
       error={null}
       getTableItems={[MockFunction]}
+      history={
+        Object {
+          "location": Object {
+            "search": "",
+          },
+        }
+      }
       isSubTask={false}
       itemCount={2}
       location={
@@ -68,14 +84,12 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
           "perPage": 10,
         }
       }
-      query={Object {}}
       results={
         Array [
           "a",
           "b",
         ]
       }
-      setSort={[MockFunction]}
       sort={
         Object {
           "by": "q",
@@ -93,7 +107,17 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
   className="tasks-table-wrapper"
 >
   <PageLayout
-    beforeToolbarComponent={<Connect(TasksDashboard) />}
+    beforeToolbarComponent={
+      <Connect(TasksDashboard)
+        history={
+          Object {
+            "location": Object {
+              "search": "",
+            },
+          }
+        }
+      />
+    }
     onSearch={[Function]}
     searchProps={
       Object {
@@ -123,9 +147,15 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
   >
     <TasksTable
       actionName=""
-      changeTablePage={[MockFunction]}
       error={null}
       getTableItems={[MockFunction]}
+      history={
+        Object {
+          "location": Object {
+            "search": "",
+          },
+        }
+      }
       isSubTask={false}
       itemCount={2}
       location={
@@ -139,14 +169,12 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
           "perPage": 10,
         }
       }
-      query={Object {}}
       results={
         Array [
           "a",
           "b",
         ]
       }
-      setSort={[MockFunction]}
       sort={
         Object {
           "by": "q",

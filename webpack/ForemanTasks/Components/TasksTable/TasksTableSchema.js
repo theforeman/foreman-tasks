@@ -28,6 +28,7 @@ const createTasksTableSchema = (setSort, by, order) => {
     property: by,
     order,
   };
+
   return [
     column(
       'action',

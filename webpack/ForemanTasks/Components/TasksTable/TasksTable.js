@@ -5,32 +5,25 @@ import { STATUS } from 'foremanReact/constants';
 import MessageBox from 'foremanReact/components/common/MessageBox';
 import { translate as __ } from 'foremanReact/common/I18n';
 import Pagination from 'foremanReact/components/Pagination/PaginationWrapper';
+import { getURIQuery } from 'foremanReact/common/helpers';
 import createTasksTableSchema from './TasksTableSchema';
+import { updateURlQuery } from './TasksTableHelpers';
 
 const TasksTable = ({
   getTableItems,
   error,
   status,
   results,
-  query,
+  history,
   itemCount,
   pagination,
-  setSort,
-  changeTablePage,
-  sort,
 }) => {
+  const url = history.location.pathname + history.location.search;
+  const uriQuery = getURIQuery(url);
+
   useEffect(() => {
-    getTableItems();
-  }, [
-    query.state,
-    query.result,
-    query.mode,
-    query.time,
-    pagination.page,
-    pagination.perPage,
-    sort.by,
-    sort.order,
-  ]);
+    getTableItems(url);
+  }, [history.location.search]);
 
   if (status === STATUS.ERROR) {
     return (
@@ -50,11 +43,29 @@ const TasksTable = ({
     return <span>{__('No Tasks')}</span>;
   }
 
+  const changeTablePage = ({ page, perPage }) => {
+    updateURlQuery(
+      {
+        page,
+        per_page: perPage,
+      },
+      history
+    );
+  };
+
+  const setSortHistory = (by, order) => {
+    updateURlQuery({ sort_by: by, sort_order: order }, history);
+  };
+
   return (
     <div className="tasks-table">
       <Table
         key="tasks-table"
-        columns={createTasksTableSchema(setSort, sort.by, sort.order)}
+        columns={createTasksTableSchema(
+          setSortHistory,
+          uriQuery.sort_by,
+          uriQuery.sort_order
+        )}
         rows={results}
       />
       <Pagination
@@ -72,30 +83,18 @@ const TasksTable = ({
 TasksTable.propTypes = {
   results: PropTypes.array.isRequired,
   getTableItems: PropTypes.func.isRequired,
-  setSort: PropTypes.func.isRequired,
-  changeTablePage: PropTypes.func.isRequired,
   status: PropTypes.oneOf(Object.keys(STATUS)),
-  query: PropTypes.shape({
-    state: PropTypes.string,
-    result: PropTypes.string,
-    mode: PropTypes.string,
-    time: PropTypes.string,
-  }),
   error: PropTypes.instanceOf(Error),
   itemCount: PropTypes.number.isRequired,
   pagination: PropTypes.shape({
     page: PropTypes.number,
     perPage: PropTypes.number,
   }),
-  sort: PropTypes.shape({
-    by: PropTypes.string,
-    order: PropTypes.string,
-  }).isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 TasksTable.defaultProps = {
   status: STATUS.PENDING,
-  query: {},
   error: null,
   pagination: {
     page: 1,
