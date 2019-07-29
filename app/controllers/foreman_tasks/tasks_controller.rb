@@ -21,7 +21,7 @@ module ForemanTasks
 
     def sub_tasks
       # @task is used when rendering breadcrumbs
-      @task  = resource_base.find(params[:id])
+      @task = resource_base.find(params[:id])
       respond_with_tasks @task.sub_tasks
     end
 

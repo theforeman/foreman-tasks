@@ -8,7 +8,7 @@ module ForemanTasks
       end
 
       it 'prepares items for index correctly' do
-        self.stubs(:action_name).returns('index')
+        stubs(:action_name).returns('index')
         items = breadcrumb_items
         items.count.must_equal 1
         items.first[:caption].must_equal 'Tasks'
@@ -18,7 +18,7 @@ module ForemanTasks
       it 'prepares items for show correctly' do
         @task = FactoryBot.build(:dynflow_task, :user_create_task)
         @task.action = 'A task'
-        self.stubs(:action_name).returns('show')
+        stubs(:action_name).returns('show')
         items = breadcrumb_items
         items.map { |i| i[:caption] }.must_equal ['Tasks', 'A task']
         items.last[:url].must_be_nil
@@ -29,7 +29,7 @@ module ForemanTasks
         child = FactoryBot.build(:dynflow_task, :user_create_task)
         @task.sub_tasks = [child]
         @task.action = 'A task'
-        self.stubs(:action_name).returns('sub_tasks')
+        stubs(:action_name).returns('sub_tasks')
         items = breadcrumb_items
         items.map { |i| i[:caption] }.must_equal ['Tasks', 'A task', 'Sub tasks']
         items.last[:url].must_be_nil
