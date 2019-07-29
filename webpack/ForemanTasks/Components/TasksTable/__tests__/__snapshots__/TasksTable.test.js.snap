@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TasksTable rendering render with error Props 1`] = `
+<Component
+  icontype="error-circle-o"
+  key="tasks-table-error"
+  msg="Could not receive data: null"
+/>
+`;
+
+exports[`TasksTable rendering render with loading Props 1`] = `
+<Spinner
+  className=""
+  inline={false}
+  inverse={false}
+  loading={true}
+  size="lg"
+/>
+`;
+
+exports[`TasksTable rendering render with minimal Props 1`] = `
+<Fragment>
+  <Table
+    key="tasks-table"
+    rows={
+      Array [
+        "a",
+      ]
+    }
+  />
+  <PaginationWrapper
+    className="tasks-pagination col-md-12"
+    dropdownButtonId="tasks-table-dropdown"
+    itemCount={0}
+    onChange={[Function]}
+    pagination={
+      Object {
+        "page": 1,
+        "perPage": 10,
+      }
+    }
+    viewType="table"
+  />
+</Fragment>
+`;
+
+exports[`TasksTable rendering render with no results 1`] = `
+<span>
+  No Tasks
+</span>
+`;

@@ -29,7 +29,6 @@ export const updateQuery = query => (dispatch, getState) => {
     type: FOREMAN_TASKS_DASHBOARD_UPDATE_QUERY,
     payload: query,
   });
-
   resolveQuery(query);
 };
 
