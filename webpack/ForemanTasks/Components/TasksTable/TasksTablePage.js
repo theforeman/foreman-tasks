@@ -74,7 +74,9 @@ const TasksTablePage = ({ getBreadcrumbs, history, ...props }) => {
           </React.Fragment>
         }
         searchQuery={getURIsearch()}
-        beforeToolbarComponent={<TasksDashboard history={history} />}
+        beforeToolbarComponent={
+          <TasksDashboard history={history} parentTaskID={props.parentTaskID} />
+        }
       >
         <TasksTable history={history} {...props} />
       </PageLayout>
@@ -87,7 +89,6 @@ TasksTablePage.propTypes = {
   getTableItems: PropTypes.func.isRequired,
   getBreadcrumbs: PropTypes.func.isRequired,
   actionName: PropTypes.string,
-  isSubTask: PropTypes.bool,
   status: PropTypes.oneOf(Object.keys(STATUS)),
   history: PropTypes.object.isRequired,
   actionSelected: PropTypes.func.isRequired,
@@ -96,14 +97,15 @@ TasksTablePage.propTypes = {
   showCancelSelcetedModal: PropTypes.func.isRequired,
   hideSelcetedModal: PropTypes.func.isRequired,
   modalStatus: PropTypes.oneOf([CANCEL, RESUME, CLOSED]),
+  parentTaskID: PropTypes.string,
 };
 
 TasksTablePage.defaultProps = {
   actionName: '',
-  isSubTask: false,
   status: STATUS.PENDING,
   selectedRows: [],
   modalStatus: CLOSED,
+  parentTaskID: null,
 };
 
 export default TasksTablePage;

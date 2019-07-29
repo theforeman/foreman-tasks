@@ -4,17 +4,24 @@ import { translate as __ } from 'foremanReact/common/I18n';
 import TasksTablePage from './';
 
 export const SubTasksPage = props => {
+  const parentTaskID = props.match.params.id;
   const getBreadcrumbs = actionName => ({
     breadcrumbItems: [
       { caption: __('Tasks'), url: `/foreman_tasks/tasks` },
       {
         caption: actionName,
-        url: `/foreman_tasks/tasks/${props.match.params.id}`,
+        url: `/foreman_tasks/tasks/${parentTaskID}`,
       },
       { caption: __('Sub tasks') },
     ],
   });
-  return <TasksTablePage getBreadcrumbs={getBreadcrumbs} {...props} />;
+  return (
+    <TasksTablePage
+      getBreadcrumbs={getBreadcrumbs}
+      parentTaskID={parentTaskID}
+      {...props}
+    />
+  );
 };
 
 SubTasksPage.propTypes = {

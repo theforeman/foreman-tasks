@@ -32,13 +32,15 @@ export const updateQuery = (query, history) => (dispatch, getState) => {
   });
 };
 
-export const fetchTasksSummary = time => async dispatch => {
+export const fetchTasksSummary = (time, parentTaskID) => async dispatch => {
   try {
     dispatch(startRequest());
 
     const hours = timeToHoursNumber(time);
-
-    const { data } = await API.get(`/foreman_tasks/tasks/summary/${hours}`);
+    const url = parentTaskID
+      ? `/foreman_tasks/tasks/summary/${parentTaskID}/sub_tasks/${hours}`
+      : `/foreman_tasks/tasks/summary/${hours}`;
+    const { data } = await API.get(url);
 
     return dispatch(requestSuccess(data));
   } catch (error) {

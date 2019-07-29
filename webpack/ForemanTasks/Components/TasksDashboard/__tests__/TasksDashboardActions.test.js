@@ -7,21 +7,18 @@ import {
   updateQuery,
   fetchTasksSummary,
 } from '../TasksDashboardActions';
+import {
+  correctTime,
+  wrongTime,
+  parentTaskID,
+  apiGetMock,
+} from './TaskDashboard.fixtures';
 
 jest.mock('foremanReact/API');
 jest.mock('../TasksDashboardHelper');
 
-const correctTime = 'H24';
-const wrongTime = 'H25';
-
 timeToHoursNumber.mockImplementation(arg => arg);
-API.get.mockImplementation(async path => {
-  if (path === `/foreman_tasks/tasks/summary/${correctTime}`) {
-    return { data: 'some-data' };
-  }
-
-  throw new Error('wrong time');
-});
+API.get.mockImplementation(apiGetMock);
 
 const fixtures = {
   'should initialize-dashboard': () =>
@@ -30,6 +27,8 @@ const fixtures = {
   'should update-query': () => updateQuery('some-query'),
   'should fetch-tasks-summary and success': () =>
     fetchTasksSummary(correctTime),
+  'should fetch-tasks-summary for subtasks and success': () =>
+    fetchTasksSummary(correctTime, parentTaskID),
   'should fetch-tasks-summary and fail': () => fetchTasksSummary(wrongTime),
 };
 

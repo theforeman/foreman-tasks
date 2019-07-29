@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TasksDashboard - Selectors should select query 1`] = `"some-query"`;
+
+exports[`TasksDashboard - Selectors should select query when state is empty 1`] = `Object {}`;
+
+exports[`TasksDashboard - Selectors should select tasks-dashboard 1`] = `
+Object {
+  "query": "some-query",
+  "tasksSummary": Object {
+    "paused": Object {
+      "recent": 2,
+      "total": 9,
+    },
+    "running": Object {
+      "recent": 3,
+      "total": 8,
+    },
+    "scheduled": Object {
+      "total": 6,
+    },
+    "stopped": Object {
+      "by_result": Object {
+        "error": Object {
+          "recent": 1,
+          "total": 9,
+        },
+        "success": Object {
+          "recent": 3,
+          "total": 7,
+        },
+        "warning": Object {
+          "recent": 2,
+          "total": 8,
+        },
+      },
+    },
+  },
+  "time": "some-time",
+}
+`;
+
+exports[`TasksDashboard - Selectors should select tasks-dashboard when state is empty 1`] = `Object {}`;
+
+exports[`TasksDashboard - Selectors should select tasks-summary 1`] = `
+Object {
+  "paused": Object {
+    "last": 2,
+    "older": 7,
+  },
+  "running": Object {
+    "last": 3,
+    "older": 5,
+  },
+  "scheduled": 6,
+  "stopped": Object {
+    "error": Object {
+      "last": 1,
+      "total": 9,
+    },
+    "success": Object {
+      "last": 3,
+      "total": 7,
+    },
+    "warning": Object {
+      "last": 2,
+      "total": 8,
+    },
+  },
+}
+`;
+
+exports[`TasksDashboard - Selectors should select tasks-summary when state is empty 1`] = `
+Object {
+  "paused": Object {
+    "last": 0,
+    "older": 0,
+  },
+  "running": Object {
+    "last": 0,
+    "older": 0,
+  },
+  "scheduled": 0,
+  "stopped": Object {
+    "error": Object {
+      "last": 0,
+      "total": 0,
+    },
+    "success": Object {
+      "last": 0,
+      "total": 0,
+    },
+    "warning": Object {
+      "last": 0,
+      "total": 0,
+    },
+  },
+}
+`;
+
+exports[`TasksDashboard - Selectors should select time 1`] = `"some-time"`;
+
+exports[`TasksDashboard - Selectors should select time when state is empty 1`] = `"H24"`;

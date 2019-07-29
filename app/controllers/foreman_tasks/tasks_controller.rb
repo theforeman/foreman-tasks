@@ -20,6 +20,11 @@ module ForemanTasks
       render json: Task::Summarizer.new(Task.where(:id => scope), params[:recent_timeframe].to_i).summary
     end
 
+    def summary_sub_tasks
+      filtered_scope = resource_base.find(params[:id]).sub_tasks
+      render :json => Task::Summarizer.new(filtered_scope, params[:recent_timeframe].to_i).summary
+    end
+
     def sub_tasks
       # @task is used when rendering breadcrumbs
       @task = resource_base.find(params[:id])
@@ -108,7 +113,7 @@ module ForemanTasks
 
     def action_permission
       case params[:action]
-      when 'sub_tasks', 'summary'
+      when 'sub_tasks', 'summary', 'summary_sub_tasks'
         :view
       when 'resume', 'unlock', 'force_unlock', 'cancel_step', 'cancel', 'abort'
         :edit

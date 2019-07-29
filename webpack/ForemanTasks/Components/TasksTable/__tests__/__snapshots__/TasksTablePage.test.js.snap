@@ -21,6 +21,7 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
             },
           }
         }
+        parentTaskID={null}
       />
     }
     breadcrumbOptions={
@@ -88,7 +89,6 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
           },
         }
       }
-      isSubTask={false}
       itemCount={2}
       modalStatus="CLOSED"
       pagination={
@@ -97,6 +97,7 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
           "perPage": 10,
         }
       }
+      parentTaskID={null}
       results={
         Array [
           "a",
@@ -144,6 +145,7 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
             },
           }
         }
+        parentTaskID={null}
       />
     }
     onSearch={[Function]}
@@ -194,7 +196,6 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
           },
         }
       }
-      isSubTask={false}
       itemCount={2}
       modalStatus="CLOSED"
       pagination={
@@ -203,6 +204,7 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
           "perPage": 10,
         }
       }
+      parentTaskID={null}
       results={
         Array [
           "a",

@@ -19,10 +19,10 @@ import { fetchTasksSummary } from '../TasksDashboard/TasksDashboardActions';
 export const getTableItems = url =>
   getTableItemsAction(TASKS_TABLE_ID, getURIQuery(url), getApiPathname(url));
 
-export const cancelTask = (id, name, url) => async dispatch => {
+export const cancelTask = (id, name, url, parentTaskID) => async dispatch => {
   await dispatch(cancelTaskRequest(id, name));
   dispatch(getTableItems(url));
-  dispatch(fetchTasksSummary(getURIQuery(url).time));
+  dispatch(fetchTasksSummary(getURIQuery(url).time, parentTaskID));
 };
 
 export const cancelTaskRequest = (id, name) => async dispatch => {
@@ -50,10 +50,10 @@ export const cancelTaskRequest = (id, name) => async dispatch => {
   }
 };
 
-export const resumeTask = (id, name, url) => async dispatch => {
+export const resumeTask = (id, name, url, parentTaskID) => async dispatch => {
   await dispatch(resumeTaskRequest(id, name));
   dispatch(getTableItems(url));
-  dispatch(fetchTasksSummary(getURIQuery(url).time));
+  dispatch(fetchTasksSummary(getURIQuery(url).time), parentTaskID);
 };
 
 export const resumeTaskRequest = (id, name) => async dispatch => {

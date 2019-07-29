@@ -25,7 +25,97 @@ Array [
   ],
   Array [
     Object {
-      "payload": "some-data",
+      "payload": Object {
+        "tasksSummary": Object {
+          "paused": Object {
+            "recent": 0,
+            "total": 54,
+          },
+          "running": Object {
+            "recent": 0,
+            "total": 3,
+          },
+          "scheduled": Object {
+            "recent": 0,
+            "total": 7,
+          },
+          "stopped": Object {
+            "by_result": Object {
+              "cancelled": Object {
+                "recent": 0,
+                "total": 105,
+              },
+              "error": Object {
+                "recent": 0,
+                "total": 121,
+              },
+              "success": Object {
+                "recent": 0,
+                "total": 532,
+              },
+              "warning": Object {
+                "recent": 0,
+                "total": 10,
+              },
+            },
+            "recent": 0,
+            "total": 768,
+          },
+        },
+      },
+      "type": "FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_SUCCESS",
+    },
+  ],
+]
+`;
+
+exports[`TasksDashboard - Actions should fetch-tasks-summary for subtasks and success 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "tasksSummary": Object {
+          "paused": Object {
+            "recent": 0,
+            "total": 7,
+          },
+          "running": Object {
+            "recent": 0,
+            "total": 3,
+          },
+          "scheduled": Object {
+            "recent": 0,
+            "total": 7,
+          },
+          "stopped": Object {
+            "by_result": Object {
+              "cancelled": Object {
+                "recent": 0,
+                "total": 0,
+              },
+              "error": Object {
+                "recent": 0,
+                "total": 0,
+              },
+              "success": Object {
+                "recent": 0,
+                "total": 0,
+              },
+              "warning": Object {
+                "recent": 0,
+                "total": 0,
+              },
+            },
+            "recent": 0,
+            "total": 0,
+          },
+        },
+      },
       "type": "FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_SUCCESS",
     },
   ],

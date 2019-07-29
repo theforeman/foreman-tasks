@@ -12,6 +12,7 @@ Foreman::Application.routes.draw do
       collection do
         get 'auto_complete_search'
         get '/summary/:recent_timeframe', action: 'summary'
+        get '/summary/:id/sub_tasks/:recent_timeframe', action: 'summary_sub_tasks'
       end
       member do
         post :abort
@@ -49,6 +50,7 @@ Foreman::Application.routes.draw do
           post :bulk_search
           post :bulk_resume
           get :summary
+          get '/summary/:id/sub_tasks/', action: 'summary_sub_tasks'
           post :callback
         end
       end
