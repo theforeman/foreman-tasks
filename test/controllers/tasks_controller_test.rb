@@ -67,6 +67,17 @@ module ForemanTasks
                           session: set_session_user(User.current)
           assert_response :not_found
         end
+
+        it 'supports csv export' do
+          parent = FactoryBot.create(:some_task, :action => 'Some action')
+          child = FactoryBot.create(:some_task, :action => 'Child action')
+          child.parent_task_id = parent.id
+          child.save!
+          get(:sub_tasks, params: { id: parent.id, format: :csv }, session: set_session_user)
+          assert_response :success
+          assert_equal 2, response.body.lines.size
+          assert_include response.body.lines[1], 'Child action'
+        end
       end
 
       describe 'taxonomy scoping' do
