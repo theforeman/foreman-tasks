@@ -12,7 +12,7 @@ module ForemanTasks
 
     def index
       params[:order] ||= 'started_at DESC'
-      process_index resource_base
+      respond_with_tasks resource_base
     end
 
     def summary
@@ -20,7 +20,7 @@ module ForemanTasks
     end
 
     def sub_tasks
-      process_index resource_base.find(params[:id]).sub_tasks
+      respond_with_tasks resource_base.find(params[:id]).sub_tasks
     end
 
     def cancel_step
@@ -92,7 +92,7 @@ module ForemanTasks
 
     private
 
-    def process_index(scope)
+    def respond_with_tasks(scope)
       respond_to do |format|
         format.html do
           @tasks = filter(scope)
