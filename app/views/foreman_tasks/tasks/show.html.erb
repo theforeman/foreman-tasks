@@ -1,15 +1,7 @@
 <% stylesheet 'foreman_tasks/tasks' %>
 
 <%= breadcrumbs(
-  items: [
-    {
-      caption: _('Tasks'),
-      url: url_for(foreman_tasks_tasks_path)
-    },
-    {
-      caption: format_task_input(@task)
-    }
-  ],
+  items: breadcrumb_items,
   name_field: 'action',
   resource_url: foreman_tasks_api_tasks_path,
   switcher_item_url: foreman_tasks_task_path(:id => ':id')

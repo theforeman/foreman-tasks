@@ -10,6 +10,9 @@
       yo: 'ya'
   }.to_json) %>
 <% end %>
+<% content_for(:breadcrumbs) do %>
+  <% breadcrumbs(:items => breadcrumb_items) %>
+<% end %>
 
 <% title _("Tasks") %>
 <% title_actions csv_link, help_button %>

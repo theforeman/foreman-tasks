@@ -20,7 +20,9 @@ module ForemanTasks
     end
 
     def sub_tasks
-      respond_with_tasks resource_base.find(params[:id]).sub_tasks
+      # @task is used when rendering breadcrumbs
+      @task  = resource_base.find(params[:id])
+      respond_with_tasks @task.sub_tasks
     end
 
     def cancel_step
