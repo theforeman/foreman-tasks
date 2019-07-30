@@ -18,6 +18,7 @@ export const TasksTableQueryReducer = (state = {}, action) => {
       by,
       order,
       perPage,
+      action_name: actionName,
     } = {},
   } = action;
   const ACTION_TYPES = createTableActionTypes(TASKS_TABLE_ID);
@@ -25,6 +26,7 @@ export const TasksTableQueryReducer = (state = {}, action) => {
     case ACTION_TYPES.SUCCESS:
       return Immutable.merge(state, {
         itemCount: subtotal,
+        actionName,
         pagination: {
           page: Number(page),
           perPage: Number(perPageString),

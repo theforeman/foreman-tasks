@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TasksTable rendering render with error Props 1`] = `
-<Component
+<MessageBox
   icontype="error-circle-o"
   key="tasks-table-error"
   msg="Could not receive data: null"
@@ -9,17 +9,9 @@ exports[`TasksTable rendering render with error Props 1`] = `
 `;
 
 exports[`TasksTable rendering render with loading Props 1`] = `
-<Spinner
-  className=""
-  inline={false}
-  inverse={false}
-  loading={true}
-  size="lg"
-/>
-`;
-
-exports[`TasksTable rendering render with minimal Props 1`] = `
-<Fragment>
+<div
+  className="tasks-table"
+>
   <Table
     key="tasks-table"
     rows={
@@ -31,7 +23,7 @@ exports[`TasksTable rendering render with minimal Props 1`] = `
   <PaginationWrapper
     className="tasks-pagination"
     dropdownButtonId="tasks-table-dropdown"
-    itemCount={0}
+    itemCount={2}
     onChange={[MockFunction]}
     pagination={
       Object {
@@ -41,7 +33,36 @@ exports[`TasksTable rendering render with minimal Props 1`] = `
     }
     viewType="table"
   />
-</Fragment>
+</div>
+`;
+
+exports[`TasksTable rendering render with minimal Props 1`] = `
+<div
+  className="tasks-table"
+>
+  <Table
+    key="tasks-table"
+    rows={
+      Array [
+        "a",
+        "b",
+      ]
+    }
+  />
+  <PaginationWrapper
+    className="tasks-pagination"
+    dropdownButtonId="tasks-table-dropdown"
+    itemCount={2}
+    onChange={[MockFunction]}
+    pagination={
+      Object {
+        "page": 1,
+        "perPage": 10,
+      }
+    }
+    viewType="table"
+  />
+</div>
 `;
 
 exports[`TasksTable rendering render with no results 1`] = `

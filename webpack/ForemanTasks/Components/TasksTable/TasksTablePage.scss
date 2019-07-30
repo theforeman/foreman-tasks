@@ -1,0 +1,29 @@
+.tasks-pagination {
+  margin-top: -6px;
+}
+.tasks-table {
+  margin-bottom: 70px;
+}
+
+.tasks-table-wrapper {
+  .export-csv {
+    float: right;
+  }
+  .search-bar {
+    padding-bottom: 20px;
+  }
+}
+
+.param-name {
+  display: inline-block;
+  width: 10em;
+}
+
+.task-details pre {
+  white-space: pre;
+  word-break: normal;
+}
+
+.tasks-time-row .time-label {
+  float: left;
+}

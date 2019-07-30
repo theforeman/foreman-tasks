@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Spinner } from 'patternfly-react';
 import PropTypes from 'prop-types';
 import { Table } from 'foremanReact/components/common/table';
 import { STATUS } from 'foremanReact/constants';
@@ -7,7 +6,6 @@ import MessageBox from 'foremanReact/components/common/MessageBox';
 import { translate as __ } from 'foremanReact/common/I18n';
 import Pagination from 'foremanReact/components/Pagination/PaginationWrapper';
 import createTasksTableSchema from './TasksTableSchema';
-import './TasksTable.scss';
 
 const TasksTable = ({
   getTableItems,
@@ -44,8 +42,8 @@ const TasksTable = ({
     );
   }
 
-  if (status === STATUS.PENDING) {
-    return <Spinner size="lg" loading />;
+  if (status === STATUS.PENDING && results.length === 0) {
+    return <div />;
   }
 
   if (results.length === 0) {
@@ -53,7 +51,7 @@ const TasksTable = ({
   }
 
   return (
-    <React.Fragment>
+    <div className="tasks-table">
       <Table
         key="tasks-table"
         columns={createTasksTableSchema(setSort, sort.by, sort.order)}
@@ -67,7 +65,7 @@ const TasksTable = ({
         onChange={changeTablePage}
         dropdownButtonId="tasks-table-dropdown"
       />
-    </React.Fragment>
+    </div>
   );
 };
 

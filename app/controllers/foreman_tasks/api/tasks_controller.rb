@@ -34,8 +34,10 @@ module ForemanTasks
       api :GET, '/tasks/:id/sub_tasks', 'Show sub_tasks details'
       param :id, :identifier, desc: 'UUID of the task'
       def sub_tasks
-        filtered_scope = resource_scope.find(params[:id]).sub_tasks
-        tasks_list filtered_scope
+        parent_task = resource_scope.find(params[:id])
+        filtered_scope = parent_task.sub_tasks
+        action_name = { "action_name" => parent_task.action }
+        render :json => action_name.merge(tasks_list(filtered_scope))
       end
 
       api :POST, '/tasks/bulk_search', 'List dynflow tasks for uuids'
@@ -129,7 +131,7 @@ module ForemanTasks
       end
       def index
         filtered_scope = DashboardTableFilter.new(resource_scope, params).scope
-        tasks_list filtered_scope
+        render :json => tasks_list(filtered_scope)
       end
 
       def_param_group :callback_target do
@@ -293,7 +295,7 @@ module ForemanTasks
         filtered_scope = pagination_scope(filtered_scope, pagination_params)
         results = filtered_scope.map { |task| task_hash(task) }
 
-        render :json => {
+        {
           total: total,
           subtotal: subtotal,
           page: pagination_params[:page],

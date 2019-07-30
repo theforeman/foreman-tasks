@@ -4,9 +4,9 @@ exports[`ForemanTasksRoutes should create routes 1`] = `
 Object {
   "indexTasks": Object {
     "exact": true,
-    "path": "/foreman_tasks/ex_tasks",
+    "path": "/foreman_tasks/tasks",
     "render": [Function],
-    "renderResult": <IndexTasks
+    "renderResult": <TasksIndexPage
       some="props"
     />,
   },
@@ -14,6 +14,19 @@ Object {
     "path": "/foreman_tasks/ex_tasks/:id",
     "render": [Function],
     "renderResult": <ShowTask
+      some="props"
+    />,
+  },
+  "subTasks": Object {
+    "exact": true,
+    "path": "/foreman_tasks/tasks/:id/sub_tasks",
+    "render": [Function],
+    "renderResult": <SubTasksPage
+      match={
+        Object {
+          "params": Object {},
+        }
+      }
       some="props"
     />,
   },

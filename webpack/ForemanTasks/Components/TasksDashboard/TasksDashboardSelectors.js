@@ -3,6 +3,7 @@ import {
   TASKS_DASHBOARD_AVAILABLE_TIMES,
   TASKS_SUMMARY_ZERO,
 } from './TasksDashboardConstants';
+import { getTasksQueryURI } from './TasksDashboardHelper';
 
 export const selectTasksDashboard = state =>
   selectForemanTasks(state).tasksDashboard || {};
@@ -10,7 +11,8 @@ export const selectTasksDashboard = state =>
 export const selectTime = state =>
   selectTasksDashboard(state).time || TASKS_DASHBOARD_AVAILABLE_TIMES.H24;
 
-export const selectQuery = state => selectTasksDashboard(state).query || {};
+export const selectQuery = state =>
+  selectTasksDashboard(state).query || getTasksQueryURI();
 
 export const selectTasksSummary = state => {
   const { running, paused, stopped, scheduled } =

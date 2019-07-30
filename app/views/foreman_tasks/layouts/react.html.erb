@@ -1,6 +1,9 @@
 <% content_for(:javascripts) do %>
   <%= webpacked_plugins_js_for :'foreman-tasks' %>
 <% end %>
+<% content_for(:stylesheets) do %>
+  <%= webpacked_plugins_css_for :'foreman-tasks' %>
+<% end %>
 
 <% content_for(:content) do %>
   <%= notifications %>
@@ -9,4 +12,4 @@
   <div id="foremanTasksReactRoot"></div>
 <% end %>
 <%= render file: "layouts/base" %>
-<%= mount_react_component('ForemanTasks', '#foremanTasksReactRoot',{ :flatten_data => true }) %>
+<%= mount_react_component('ForemanTasks', '#foremanTasksReactRoot') %>

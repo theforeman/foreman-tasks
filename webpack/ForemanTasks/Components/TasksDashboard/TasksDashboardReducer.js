@@ -12,7 +12,6 @@ import {
 
 const initialState = Immutable({
   time: TASKS_DASHBOARD_AVAILABLE_TIMES.H24,
-  query: {},
   isLoadingTasksSummary: false,
   error: null,
   tasksSummary: TASKS_SUMMARY_ZERO,
