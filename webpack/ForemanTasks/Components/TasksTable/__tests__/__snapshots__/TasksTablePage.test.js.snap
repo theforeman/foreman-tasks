@@ -1,0 +1,160 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
+<div
+  className="tasks-table-wrapper"
+>
+  <PageLayout
+    beforeToolbarComponent={<Connect(TasksDashboard) />}
+    breadcrumbOptions={
+      Object {
+        "breadcrumbItems": Array [
+          Object {
+            "caption": "Tasks",
+            "url": "/foreman_tasks/tasks",
+          },
+          Object {
+            "caption": "action Name",
+            "url": "/foreman_tasks/tasks/someid",
+          },
+          Object {
+            "caption": "Sub tasks",
+          },
+        ],
+      }
+    }
+    onSearch={[Function]}
+    searchProps={
+      Object {
+        "autocomplete": Object {
+          "id": "searchBar",
+          "searchQuery": "",
+          "url": "tasks/auto_complete_search",
+          "useKeyShortcuts": true,
+        },
+        "bookmarks": Object {
+          "canCreateBookmarks": true,
+          "documentationUrl": "4.1.5Searching",
+          "url": "/api/bookmarks",
+        },
+        "controller": "tasks",
+      }
+    }
+    searchQuery="a=b"
+    searchable={true}
+    toolbarButtons={
+      <React.Fragment>
+        <ExportButton
+          url="/foreman_tasks/tasks.csv?include_permissions=true"
+        />
+      </React.Fragment>
+    }
+  >
+    <TasksTable
+      actionName=""
+      changeTablePage={[MockFunction]}
+      error={null}
+      getTableItems={[MockFunction]}
+      isSubTask={false}
+      itemCount={2}
+      location={
+        Object {
+          "pathname": "",
+        }
+      }
+      pagination={
+        Object {
+          "page": 1,
+          "perPage": 10,
+        }
+      }
+      query={Object {}}
+      results={
+        Array [
+          "a",
+          "b",
+        ]
+      }
+      setSort={[MockFunction]}
+      sort={
+        Object {
+          "by": "q",
+          "order": "w",
+        }
+      }
+      status="RESOLVED"
+    />
+  </PageLayout>
+</div>
+`;
+
+exports[`TasksTablePage rendering render with minimal props 1`] = `
+<div
+  className="tasks-table-wrapper"
+>
+  <PageLayout
+    beforeToolbarComponent={<Connect(TasksDashboard) />}
+    onSearch={[Function]}
+    searchProps={
+      Object {
+        "autocomplete": Object {
+          "id": "searchBar",
+          "searchQuery": "",
+          "url": "tasks/auto_complete_search",
+          "useKeyShortcuts": true,
+        },
+        "bookmarks": Object {
+          "canCreateBookmarks": true,
+          "documentationUrl": "4.1.5Searching",
+          "url": "/api/bookmarks",
+        },
+        "controller": "tasks",
+      }
+    }
+    searchQuery="a=b"
+    searchable={true}
+    toolbarButtons={
+      <React.Fragment>
+        <ExportButton
+          url="/foreman_tasks/tasks.csv?include_permissions=true"
+        />
+      </React.Fragment>
+    }
+  >
+    <TasksTable
+      actionName=""
+      changeTablePage={[MockFunction]}
+      error={null}
+      getTableItems={[MockFunction]}
+      isSubTask={false}
+      itemCount={2}
+      location={
+        Object {
+          "pathname": "",
+        }
+      }
+      pagination={
+        Object {
+          "page": 1,
+          "perPage": 10,
+        }
+      }
+      query={Object {}}
+      results={
+        Array [
+          "a",
+          "b",
+        ]
+      }
+      setSort={[MockFunction]}
+      sort={
+        Object {
+          "by": "q",
+          "order": "w",
+        }
+      }
+      status="RESOLVED"
+    />
+  </PageLayout>
+</div>
+`;

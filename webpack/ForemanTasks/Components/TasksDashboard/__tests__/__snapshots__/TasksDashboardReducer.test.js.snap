@@ -5,7 +5,6 @@ Object {
   "error": [Error: some error],
   "isLoading": false,
   "isLoadingTasksSummary": false,
-  "query": Object {},
   "tasksSummary": Object {
     "paused": Object {
       "recent": 0,
@@ -44,7 +43,6 @@ Object {
   "error": null,
   "isLoading": true,
   "isLoadingTasksSummary": false,
-  "query": Object {},
   "tasksSummary": Object {
     "paused": Object {
       "recent": 0,
@@ -83,7 +81,6 @@ Object {
   "error": null,
   "isLoading": false,
   "isLoadingTasksSummary": false,
-  "query": Object {},
   "tasksSummary": "some-payload",
   "time": "H24",
 }
@@ -93,7 +90,7 @@ exports[`BreadcrumbBar reducer should handle FOREMAN_TASKS_DASHBOARD_INIT 1`] = 
 Object {
   "error": null,
   "isLoadingTasksSummary": false,
-  "query": Object {},
+  "query": undefined,
   "tasksSummary": Object {
     "paused": Object {
       "recent": 0,
@@ -207,7 +204,6 @@ exports[`BreadcrumbBar reducer should handle FOREMAN_TASKS_DASHBOARD_UPDATE_TIME
 Object {
   "error": null,
   "isLoadingTasksSummary": false,
-  "query": Object {},
   "tasksSummary": Object {
     "paused": Object {
       "recent": 0,
@@ -245,7 +241,6 @@ exports[`BreadcrumbBar reducer should return the initial state 1`] = `
 Object {
   "error": null,
   "isLoadingTasksSummary": false,
-  "query": Object {},
   "tasksSummary": Object {
     "paused": Object {
       "recent": 0,

@@ -17,6 +17,9 @@ export const selectPagitation = state =>
 export const selectItemCount = state =>
   selectTasksTableQuery(state).itemCount || 0;
 
+export const selectActionName = state =>
+  selectTasksTableQuery(state).actionName || '';
+
 export const selectResults = state => {
   const { results } = selectTasksTableContent(state);
   if (!results) return [];

@@ -96,16 +96,8 @@ module ForemanTasks
     private
 
     def respond_with_tasks(scope)
-      respond_to do |format|
-        format.html do
-          @tasks = filter(scope)
-          render :index, layout: !request.xhr?
-        end
-        format.csv do
-          @tasks = filter(scope, paginate: false)
-          csv_response(@tasks, [:id, :action, :state, :result, 'started_at.in_time_zone', 'ended_at.in_time_zone', :username], ['Id', 'Action', 'State', 'Result', 'Started At', 'Ended At', 'User'])
-        end
-      end
+      @tasks = filter(scope, paginate: false)
+      csv_response(@tasks, [:id, :action, :state, :result, 'started_at.in_time_zone', 'ended_at.in_time_zone', :username], ['Id', 'Action', 'State', 'Result', 'Started At', 'Ended At', 'User'])
     end
 
     def restrict_dangerous_actions

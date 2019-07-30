@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TasksIndexPage rendering render with minimal props 1`] = `
+<Connect(TasksTablePage)
+  changeTablePage={[MockFunction]}
+  getBreadcrumbs={[MockFunction]}
+  getTableItems={[MockFunction]}
+  itemCount={2}
+  location={
+    Object {
+      "pathname": "",
+    }
+  }
+  pagination={
+    Object {
+      "page": 1,
+      "perPage": 10,
+    }
+  }
+  results={
+    Array [
+      "a",
+      "b",
+    ]
+  }
+  setSort={[MockFunction]}
+  sort={
+    Object {
+      "by": "q",
+      "order": "w",
+    }
+  }
+  status="RESOLVED"
+/>
+`;

@@ -8,13 +8,12 @@ Foreman::Application.routes.draw do
       end
     end
 
-    resources :tasks, :only => [:index, :show] do
+    resources :tasks, :only => [:show] do
       collection do
         get 'auto_complete_search'
         get '/summary/:recent_timeframe', action: 'summary'
       end
       member do
-        get :sub_tasks
         post :abort
         post :cancel
         post :resume
@@ -23,8 +22,15 @@ Foreman::Application.routes.draw do
         post :cancel_step
       end
     end
+    resources :tasks, :only => [:show], constraints: ->(req) { req.format == :csv } do
+      member do
+        get :sub_tasks
+      end
+    end
+    resources :tasks, :only => [:index], constraints: ->(req) { req.format == :csv }
 
-    match '/ex_tasks' => 'react#index', :via => [:get]
+    match '/tasks' => 'react#index', :via => [:get]
+    match '/tasks/:id/sub_tasks' => 'react#index', :via => [:get]
     match '/ex_tasks/:id' => 'react#index', :via => [:get]
 
     namespace :api do

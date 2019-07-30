@@ -25,11 +25,11 @@ export const updateQuery = query => (dispatch, getState) => {
   if (query.time === TASKS_DASHBOARD_CURRENT_TIME)
     query.time = selectTime(getState());
 
+  resolveQuery(query);
   dispatch({
     type: FOREMAN_TASKS_DASHBOARD_UPDATE_QUERY,
     payload: query,
   });
-  resolveQuery(query);
 };
 
 export const fetchTasksSummary = time => async dispatch => {
