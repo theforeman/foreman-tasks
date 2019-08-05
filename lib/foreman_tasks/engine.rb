@@ -41,7 +41,8 @@ module ForemanTasks
 
     initializer 'foreman_tasks.register_plugin', :before => :finisher_hook do |_app|
       Foreman::Plugin.register :"foreman-tasks" do
-        requires_foreman '>= 1.16.0'
+        register_global_js_file 'routes'
+        requires_foreman '>= 1.23.0'
         divider :top_menu, :parent => :monitor_menu, :last => true, :caption => N_('Foreman Tasks')
         menu :top_menu, :tasks,
              :url_hash => { :controller => 'foreman_tasks/tasks', :action => :index },
