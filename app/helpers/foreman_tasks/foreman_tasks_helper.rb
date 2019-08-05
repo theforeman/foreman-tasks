@@ -122,6 +122,26 @@ module ForemanTasks
       render :partial => 'common/trigger_form', :locals => { :f => f, :triggering => triggering }
     end
 
+    def task_breadcrumb_item(task, active = false)
+      item = { :caption => format_task_input(task) }
+      item[:url] = url_for(foreman_tasks_task_path(task.id)) unless active
+      item
+    end
+
+    def index_breadcrumb_item
+      item = { :caption => _('Tasks') }
+      item[:url] = foreman_tasks_tasks_url if action_name != 'index'
+      item
+    end
+
+    def breadcrumb_items
+      items = [index_breadcrumb_item]
+      return items if action_name == 'index'
+      items << task_breadcrumb_item(@task, action_name == 'show')
+      items << { :caption => _('Sub tasks') } if action_name == 'sub_tasks'
+      items
+    end
+
     private
 
     def future_mode_fieldset(f, triggering)
