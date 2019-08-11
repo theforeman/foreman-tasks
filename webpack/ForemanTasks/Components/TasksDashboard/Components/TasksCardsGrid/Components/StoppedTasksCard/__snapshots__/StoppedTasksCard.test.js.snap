@@ -47,13 +47,29 @@ exports[`StoppedTasksCard render error-last selected 1`] = `
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
           <td
             className="data-col active"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
         </tr>
         <tr
@@ -70,13 +86,29 @@ exports[`StoppedTasksCard render error-last selected 1`] = `
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
           <td
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
         </tr>
         <tr
@@ -93,13 +125,29 @@ exports[`StoppedTasksCard render error-last selected 1`] = `
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
           <td
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
         </tr>
       </tbody>
@@ -155,13 +203,29 @@ exports[`StoppedTasksCard render error-total selected 1`] = `
             className="data-col active"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
           <td
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
         </tr>
         <tr
@@ -178,13 +242,29 @@ exports[`StoppedTasksCard render error-total selected 1`] = `
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
           <td
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
         </tr>
         <tr
@@ -201,13 +281,29 @@ exports[`StoppedTasksCard render error-total selected 1`] = `
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
           <td
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
         </tr>
       </tbody>
@@ -263,13 +359,29 @@ exports[`StoppedTasksCard render selected 1`] = `
             className="data-col"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
           <td
             className="data-col"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
         </tr>
         <tr
@@ -286,13 +398,29 @@ exports[`StoppedTasksCard render selected 1`] = `
             className="data-col"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
           <td
             className="data-col"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
         </tr>
         <tr
@@ -309,13 +437,29 @@ exports[`StoppedTasksCard render selected 1`] = `
             className="data-col"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
           <td
             className="data-col"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
         </tr>
       </tbody>
@@ -371,13 +515,29 @@ exports[`StoppedTasksCard render success-last selected 1`] = `
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
           <td
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
         </tr>
         <tr
@@ -394,13 +554,29 @@ exports[`StoppedTasksCard render success-last selected 1`] = `
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
           <td
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
         </tr>
         <tr
@@ -417,13 +593,29 @@ exports[`StoppedTasksCard render success-last selected 1`] = `
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
           <td
             className="data-col active"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
         </tr>
       </tbody>
@@ -479,13 +671,29 @@ exports[`StoppedTasksCard render success-total selected 1`] = `
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
           <td
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
         </tr>
         <tr
@@ -502,13 +710,29 @@ exports[`StoppedTasksCard render success-total selected 1`] = `
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
           <td
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
         </tr>
         <tr
@@ -525,13 +749,29 @@ exports[`StoppedTasksCard render success-total selected 1`] = `
             className="data-col active"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
           <td
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
         </tr>
       </tbody>
@@ -587,13 +827,29 @@ exports[`StoppedTasksCard render warning-last selected 1`] = `
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
           <td
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
         </tr>
         <tr
@@ -610,13 +866,29 @@ exports[`StoppedTasksCard render warning-last selected 1`] = `
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
           <td
             className="data-col active"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
         </tr>
         <tr
@@ -633,13 +905,29 @@ exports[`StoppedTasksCard render warning-last selected 1`] = `
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
           <td
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
         </tr>
       </tbody>
@@ -695,13 +983,29 @@ exports[`StoppedTasksCard render warning-total selected 1`] = `
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
           <td
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
         </tr>
         <tr
@@ -718,13 +1022,29 @@ exports[`StoppedTasksCard render warning-total selected 1`] = `
             className="data-col active"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
           <td
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
         </tr>
         <tr
@@ -741,13 +1061,29 @@ exports[`StoppedTasksCard render warning-total selected 1`] = `
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
           <td
             className="data-col not-focused"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
         </tr>
       </tbody>
@@ -803,13 +1139,29 @@ exports[`StoppedTasksCard render with minimal props 1`] = `
             className="data-col"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
           <td
             className="data-col"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
         </tr>
         <tr
@@ -826,13 +1178,29 @@ exports[`StoppedTasksCard render with minimal props 1`] = `
             className="data-col"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
           <td
             className="data-col"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
         </tr>
         <tr
@@ -849,13 +1217,29 @@ exports[`StoppedTasksCard render with minimal props 1`] = `
             className="data-col"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
           <td
             className="data-col"
             onClick={[Function]}
           >
-            0
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              0
+            </Button>
           </td>
         </tr>
       </tbody>
@@ -911,13 +1295,29 @@ exports[`StoppedTasksCard render with props 1`] = `
             className="data-col"
             onClick={[Function]}
           >
-            9
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              9
+            </Button>
           </td>
           <td
             className="data-col"
             onClick={[Function]}
           >
-            1
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              1
+            </Button>
           </td>
         </tr>
         <tr
@@ -934,13 +1334,29 @@ exports[`StoppedTasksCard render with props 1`] = `
             className="data-col"
             onClick={[Function]}
           >
-            8
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              8
+            </Button>
           </td>
           <td
             className="data-col"
             onClick={[Function]}
           >
-            2
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              2
+            </Button>
           </td>
         </tr>
         <tr
@@ -957,13 +1373,29 @@ exports[`StoppedTasksCard render with props 1`] = `
             className="data-col"
             onClick={[Function]}
           >
-            7
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              7
+            </Button>
           </td>
           <td
             className="data-col"
             onClick={[Function]}
           >
-            3
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="link"
+              disabled={false}
+            >
+              3
+            </Button>
           </td>
         </tr>
       </tbody>
