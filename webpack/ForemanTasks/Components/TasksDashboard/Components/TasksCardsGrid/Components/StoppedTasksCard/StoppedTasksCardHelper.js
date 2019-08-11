@@ -1,7 +1,7 @@
 import React from 'react';
 import { capitalize } from 'lodash';
 import classNames from 'classnames';
-import { Icon } from 'patternfly-react';
+import { Icon, Button } from 'patternfly-react';
 import {
   TASKS_DASHBOARD_AVAILABLE_QUERY_STATES,
   TASKS_DASHBOARD_AVAILABLE_QUERY_MODES,
@@ -40,7 +40,7 @@ export const StoppedTable = (data, query, time, updateQuery) =>
           })}
           onClick={() => updateQuery({ state: STOPPED, result })}
         >
-          {total}
+          <Button bsStyle="link">{total}</Button>
         </td>
         <td
           className={classNames('data-col', {
@@ -56,7 +56,7 @@ export const StoppedTable = (data, query, time, updateQuery) =>
             })
           }
         >
-          {last}
+          <Button bsStyle="link">{last}</Button>
         </td>
       </tr>
     );
