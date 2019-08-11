@@ -1,4 +1,10 @@
 .tasks-donut-card {
+  &.not-focused {
+    .card-pf-title,
+    .card-pf-body {
+      opacity: 0.6;
+    }
+  }
   .card-pf-title {
     text-align: center;
     font-size: 180%;

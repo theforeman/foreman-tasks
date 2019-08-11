@@ -34,6 +34,7 @@ const StoppedTasksCard = ({
         className,
         {
           'selected-tasks-card': query.state === STOPPED,
+          'not-focused': query.state && query.state !== STOPPED,
         }
       )}
       {...props}
