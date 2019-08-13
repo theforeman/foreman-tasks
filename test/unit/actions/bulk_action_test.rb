@@ -28,6 +28,7 @@ module ForemanTasks
       end
 
       specify 'it plans a task for each target' do
+        Target.expects(:unscoped).returns(Target)
         Target.expects(:where).with(:id => targets.map(&:id)).returns(targets)
 
         task.sub_tasks.count.must_equal targets.count
@@ -37,6 +38,7 @@ module ForemanTasks
       end
 
       specify 'it plans a task for each target even if target cannot be found' do
+        Target.expects(:unscoped).returns(Target)
         Target.expects(:where).with(:id => targets.map(&:id)).returns(targets.take(4))
 
         task.sub_tasks.count.must_equal targets.count
