@@ -52,30 +52,13 @@ export const getQueryFromUrl = () => {
   return queryFromUriQuery(uriQuery);
 };
 
-export const updateURLQuery = ({ state, result, mode, time, uri }) => {
-  const query = {
+export const resolveQuery = ({ state, result, mode, time }) => {
+  const uriQuery = {
     state,
     result,
     time_mode: mode === 'last' ? 'recent' : mode,
     time_horizon: time,
     page: 1,
-  };
-
-  uri.setSearch(query);
-  window.history.pushState({ path: uri.toString() }, '', uri.toString());
-};
-
-export const resolveQuery = query => {
-  if (query.mode === 'last') {
-    query.mode = 'recent';
-  }
-  const uriQuery = {
-    state: query.state,
-    result: query.result,
-    time_mode: query.mode,
-    time_horizon: query.time,
-    page: 1,
-    per_page: 20,
   };
   updateURlQuery(uriQuery);
 };

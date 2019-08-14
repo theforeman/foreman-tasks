@@ -29,10 +29,10 @@ exports[`TasksTable rendering render with minimal Props 1`] = `
     }
   />
   <PaginationWrapper
-    className="tasks-pagination col-md-12"
+    className="tasks-pagination"
     dropdownButtonId="tasks-table-dropdown"
     itemCount={0}
-    onChange={[Function]}
+    onChange={[MockFunction]}
     pagination={
       Object {
         "page": 1,

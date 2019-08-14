@@ -26,6 +26,8 @@ componentRegistry.register({
 componentRegistry.register({
   name: 'TaskDetails',
   type: TaskDetails,
+});
+componentRegistry.register({
   name: 'TasksTable',
   type: TasksTable,
 });

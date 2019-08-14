@@ -5,10 +5,8 @@ import { Table } from 'foremanReact/components/common/table';
 import { STATUS } from 'foremanReact/constants';
 import MessageBox from 'foremanReact/components/common/MessageBox';
 import { translate as __ } from 'foremanReact/common/I18n';
-import { getURIQuery } from 'foremanReact/common/helpers';
 import Pagination from 'foremanReact/components/Pagination/PaginationWrapper';
 import createTasksTableSchema from './TasksTableSchema';
-import { updateURlQuery } from './TasksTableHelpers';
 import './TasksTable.scss';
 
 const TasksTable = ({
@@ -16,21 +14,25 @@ const TasksTable = ({
   error,
   status,
   results,
-  loading,
   query,
   itemCount,
   pagination,
+  setSort,
+  changeTablePage,
+  sort,
 }) => {
   useEffect(() => {
     getTableItems();
-  }, [query.state, query.result, query.mode, query.time]);
-  const onPageChange = paginationArgs => {
-    updateURlQuery({
-      page: paginationArgs.page,
-      per_page: paginationArgs.perPage,
-    });
-    getTableItems();
-  };
+  }, [
+    query.state,
+    query.result,
+    query.mode,
+    query.time,
+    pagination.page,
+    pagination.perPage,
+    sort.by,
+    sort.order,
+  ]);
 
   if (status === STATUS.ERROR) {
     return (
@@ -42,7 +44,7 @@ const TasksTable = ({
     );
   }
 
-  if (loading) {
+  if (status === STATUS.PENDING) {
     return <Spinner size="lg" loading />;
   }
 
@@ -50,24 +52,19 @@ const TasksTable = ({
     return <span>{__('No Tasks')}</span>;
   }
 
-  const uriQuery = getURIQuery(window.location.href);
   return (
     <React.Fragment>
       <Table
         key="tasks-table"
-        columns={createTasksTableSchema(
-          getTableItems,
-          uriQuery.sort_by,
-          uriQuery.sort_order
-        )}
+        columns={createTasksTableSchema(setSort, sort.by, sort.order)}
         rows={results}
       />
       <Pagination
-        className="tasks-pagination col-md-12"
+        className="tasks-pagination"
         viewType="table"
         itemCount={itemCount}
         pagination={pagination}
-        onChange={onPageChange}
+        onChange={changeTablePage}
         dropdownButtonId="tasks-table-dropdown"
       />
     </React.Fragment>
@@ -77,14 +74,24 @@ const TasksTable = ({
 TasksTable.propTypes = {
   results: PropTypes.array.isRequired,
   getTableItems: PropTypes.func.isRequired,
+  setSort: PropTypes.func.isRequired,
+  changeTablePage: PropTypes.func.isRequired,
   status: PropTypes.oneOf(Object.keys(STATUS)),
-  query: PropTypes.shape(),
-  error: PropTypes.object,
-  loading: PropTypes.bool,
+  query: PropTypes.shape({
+    state: PropTypes.string,
+    result: PropTypes.string,
+    mode: PropTypes.string,
+    time: PropTypes.string,
+  }),
+  error: PropTypes.instanceOf(Error),
   itemCount: PropTypes.number.isRequired,
   pagination: PropTypes.shape({
     page: PropTypes.number,
     perPage: PropTypes.number,
+  }),
+  sort: PropTypes.shape({
+    by: PropTypes.string,
+    order: PropTypes.string,
   }).isRequired,
 };
 
@@ -92,7 +99,10 @@ TasksTable.defaultProps = {
   status: STATUS.PENDING,
   query: {},
   error: null,
-  loading: false,
+  pagination: {
+    page: 1,
+    perPage: 20,
+  },
 };
 
 export default TasksTable;

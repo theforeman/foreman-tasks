@@ -37,6 +37,7 @@ Foreman::Application.routes.draw do
       resources :tasks, :only => [:show, :index] do
         member do
           get :details
+          get :sub_tasks
         end
         collection do
           post :bulk_search

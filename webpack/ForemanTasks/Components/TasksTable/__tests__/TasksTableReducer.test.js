@@ -1,7 +1,8 @@
 import { testReducerSnapshotWithFixtures } from 'react-redux-test-utils';
 import {
-  TASKS_TABLE_SUCCESS,
-  TASKS_TABLE_REQUEST,
+  TASKS_TABLE_ID,
+  TASKS_TABLE_SET_SORT,
+  TASKS_TABLE_SET_PAGINATION,
 } from '../TasksTableConstants';
 import reducer from '../TasksTableReducer';
 
@@ -9,7 +10,7 @@ const fixtures = {
   'should return the initial state': {},
   'should handle TASKS_TABLE_SUCCESS': {
     action: {
-      type: TASKS_TABLE_SUCCESS,
+      type: `${TASKS_TABLE_ID}_SUCCESS`,
       payload: {
         subtotal: 120,
         page: 3,
@@ -17,9 +18,17 @@ const fixtures = {
       },
     },
   },
-  'should handle TASKS_TABLE_REQUEST': {
+  'should handle TASKS_TABLE_SET_SORT': {
     action: {
-      type: TASKS_TABLE_REQUEST,
+      type: TASKS_TABLE_SET_SORT,
+      payload: { by: 'a', order: 'b' },
+    },
+  },
+
+  'should handle TASKS_TABLE_SET_PAGINATION': {
+    action: {
+      type: TASKS_TABLE_SET_PAGINATION,
+      payload: { page: 4, perPage: 7 },
     },
   },
 };

@@ -1,50 +1,55 @@
 import Immutable from 'seamless-immutable';
 import { combineReducers } from 'redux';
 import { createTableReducer } from 'foremanReact/components/common/table';
+import createTableActionTypes from 'foremanReact/components/common/table/actionsHelpers/actionTypeCreator';
 import {
-  TASKS_TABLE_CONTROLLER,
-  TASKS_TABLE_REQUEST,
-  TASKS_TABLE_SUCCESS,
-  TASKS_TABLE_FAILURE,
+  TASKS_TABLE_ID,
+  TASKS_TABLE_SET_SORT,
+  TASKS_TABLE_SET_PAGINATION,
 } from './TasksTableConstants';
-import { FOREMAN_TASKS_DASHBOARD_UPDATE_QUERY } from '../TasksDashboard/TasksDashboardConstants';
 
-const initialState = Immutable({
-  query: null,
-  loading: true,
-  itemCount: 0,
-  pagination: {
-    page: 1,
-    perPage: 20,
-  },
-});
-
-export const TasksTableQueryReducer = (state = initialState, action) => {
-  const { type, payload } = action;
+export const TasksTableQueryReducer = (state = {}, action) => {
+  const {
+    type,
+    payload: {
+      subtotal,
+      page,
+      per_page: perPageString,
+      by,
+      order,
+      perPage,
+    } = {},
+  } = action;
+  const ACTION_TYPES = createTableActionTypes(TASKS_TABLE_ID);
   switch (type) {
-    case TASKS_TABLE_REQUEST:
-      return state.set('loading', true);
-    case TASKS_TABLE_FAILURE:
-      return state.set('loading', true);
-    case TASKS_TABLE_SUCCESS:
+    case ACTION_TYPES.SUCCESS:
       return Immutable.merge(state, {
-        loading: false,
-        itemCount: payload.subtotal,
+        itemCount: subtotal,
         pagination: {
-          page: parseInt(payload.page, 10),
-          perPage: parseInt(payload.per_page, 10),
+          page: Number(page),
+          perPage: Number(perPageString),
         },
       });
-    case FOREMAN_TASKS_DASHBOARD_UPDATE_QUERY:
-      if (payload.mode === 'last') {
-        payload.mode = 'recent';
-      }
-      return state.set('query', payload);
+    case TASKS_TABLE_SET_SORT:
+      return Immutable.merge(state, {
+        sort: {
+          by,
+          order,
+        },
+      });
+    case TASKS_TABLE_SET_PAGINATION:
+      return Immutable.merge(state, {
+        pagination: {
+          page,
+          perPage,
+        },
+      });
+
     default:
       return state;
   }
 };
 export default combineReducers({
-  tasksTableContent: createTableReducer(TASKS_TABLE_CONTROLLER),
+  tasksTableContent: createTableReducer(TASKS_TABLE_ID),
   tasksTableQuery: TasksTableQueryReducer,
 });
