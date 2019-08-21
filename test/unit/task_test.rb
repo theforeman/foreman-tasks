@@ -43,6 +43,10 @@ class TasksTest < ActiveSupport::TestCase
     test 'can search the tasks by array' do
       assert_equal [@task_one], ForemanTasks::Task.search_for("user ^ (this_user, #{@user_one.login}, that_user)")
     end
+
+    test 'properly returns username' do
+      assert_equal @task_one.username, @user_one.login
+    end
   end
 
   describe 'state_updated_at' do

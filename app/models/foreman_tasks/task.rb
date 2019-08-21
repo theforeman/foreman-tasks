@@ -77,7 +77,7 @@ module ForemanTasks
     end
 
     def username
-      owner
+      owner.try(:login)
     end
 
     def execution_type
