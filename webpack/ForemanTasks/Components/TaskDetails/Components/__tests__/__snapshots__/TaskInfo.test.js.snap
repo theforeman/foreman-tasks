@@ -56,9 +56,9 @@ exports[`TaskInfo rendering render with Props 1`] = `
       md={3}
       sm={6}
     >
-      <FormattedRelative
-        updateInterval={10000}
-        value={2019-06-17T13:04:09.000Z}
+      <Component
+        date="2019-06-17 16:04:09 +0300"
+        defaultValue="N/A"
       />
     </Col>
   </Row>
@@ -115,9 +115,9 @@ exports[`TaskInfo rendering render with Props 1`] = `
       md={3}
       sm={6}
     >
-      <FormattedRelative
-        updateInterval={10000}
-        value={2019-06-17T13:04:09.000Z}
+      <Component
+        date="2019-06-17 16:04:09 +0300"
+        defaultValue="N/A"
       />
     </Col>
   </Row>
@@ -168,7 +168,10 @@ exports[`TaskInfo rendering render with Props 1`] = `
       md={3}
       sm={6}
     >
-      N/A
+      <Component
+        date={null}
+        defaultValue="N/A"
+      />
     </Col>
   </Row>
   <Row
@@ -356,7 +359,10 @@ exports[`TaskInfo rendering render without Props 1`] = `
       md={3}
       sm={6}
     >
-      N/A
+      <Component
+        date=""
+        defaultValue="N/A"
+      />
     </Col>
   </Row>
   <Row
@@ -412,7 +418,10 @@ exports[`TaskInfo rendering render without Props 1`] = `
       md={3}
       sm={6}
     >
-      N/A
+      <Component
+        date=""
+        defaultValue="N/A"
+      />
     </Col>
   </Row>
   <Row
@@ -460,7 +469,10 @@ exports[`TaskInfo rendering render without Props 1`] = `
       md={3}
       sm={6}
     >
-      N/A
+      <Component
+        date=""
+        defaultValue="N/A"
+      />
     </Col>
   </Row>
   <Row

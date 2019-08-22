@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Grid, Row, Col, ProgressBar } from 'patternfly-react';
 import { translate as __ } from 'foremanReact/common/I18n';
 import EllipsisWithTooltip from 'react-ellipsis-with-tooltip';
-import { timeInWords } from './TaskHelper';
+import RelativeDateTime from 'foremanReact/components/common/dates/RelativeDateTime';
 
 class TaskInfo extends Component {
   isDelayed = () => {
@@ -73,7 +73,10 @@ class TaskInfo extends Component {
             <EllipsisWithTooltip>{action || __('N/A')}</EllipsisWithTooltip>
           ),
         },
-        { title: 'Start at', value: timeInWords(startAt) },
+        {
+          title: 'Start at',
+          value: <RelativeDateTime defaultValue={__('N/A')} date={startAt} />,
+        },
       ],
       [
         {
@@ -85,7 +88,10 @@ class TaskInfo extends Component {
             </React.Fragment>
           ),
         },
-        { title: 'Started at', value: timeInWords(startedAt) },
+        {
+          title: 'Started at',
+          value: <RelativeDateTime defaultValue={__('N/A')} date={startedAt} />,
+        },
       ],
       [
         {
@@ -96,7 +102,10 @@ class TaskInfo extends Component {
             username || ''
           ),
         },
-        { title: 'Ended at', value: timeInWords(endedAt) },
+        {
+          title: 'Ended at',
+          value: <RelativeDateTime defaultValue={__('N/A')} date={endedAt} />,
+        },
       ],
       [
         {
@@ -105,7 +114,11 @@ class TaskInfo extends Component {
         },
         {
           title: 'Start before',
-          value: startBefore ? timeInWords(startBefore) : '-',
+          value: startBefore ? (
+            <RelativeDateTime defaultValue={__('N/A')} date={startBefore} />
+          ) : (
+            '-'
+          ),
         },
       ],
     ];
