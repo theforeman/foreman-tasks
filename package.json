@@ -22,7 +22,7 @@
     "url": "http://projects.theforeman.org/projects/foreman-tasks/issues"
   },
   "dependencies": {
-    "@theforeman/vendor": "^0.1.1",
+    "@theforeman/vendor": "^1.4.0",
     "humanize-duration": "^3.20.1",
     "react-intl": "^2.8.0"
   },
@@ -30,7 +30,7 @@
     "@storybook/addon-actions": "^5.0.1",
     "@storybook/addon-knobs": "^5.0.1",
     "@storybook/react": "^5.0.1",
-    "@theforeman/vendor-dev": "^0.1.1",
+    "@theforeman/vendor-dev": "^1.4.0",
     "babel-cli": "^6.10.1",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
