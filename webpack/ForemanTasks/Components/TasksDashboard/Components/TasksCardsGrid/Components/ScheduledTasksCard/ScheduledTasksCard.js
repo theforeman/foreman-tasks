@@ -30,6 +30,7 @@ const ScheduledTasksCard = ({
         }
       )}
       {...props}
+      id="scheduled-tasks-card"
     >
       <Card.Title onClick={onClick}>{__('Scheduled')}</Card.Title>
       <Card.Body>

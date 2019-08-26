@@ -7,6 +7,7 @@ exports[`ScheduledTasksCard render selected 1`] = `
   aggregatedMini={false}
   cardRef={null}
   className="tasks-donut-card scheduled-tasks-card selected-tasks-card"
+  id="scheduled-tasks-card"
   matchHeight={false}
 >
   <CardTitle
@@ -38,6 +39,7 @@ exports[`ScheduledTasksCard render with minimal props 1`] = `
   aggregatedMini={false}
   cardRef={null}
   className="tasks-donut-card scheduled-tasks-card"
+  id="scheduled-tasks-card"
   matchHeight={false}
 >
   <CardTitle
@@ -69,6 +71,7 @@ exports[`ScheduledTasksCard render with props 1`] = `
   aggregatedMini={false}
   cardRef={null}
   className="tasks-donut-card scheduled-tasks-card some-class"
+  id="scheduled-tasks-card"
   matchHeight={false}
 >
   <CardTitle
