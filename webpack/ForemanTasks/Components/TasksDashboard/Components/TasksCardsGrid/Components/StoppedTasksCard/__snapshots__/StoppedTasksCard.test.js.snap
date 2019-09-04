@@ -7,6 +7,7 @@ exports[`StoppedTasksCard render error-last selected 1`] = `
   aggregatedMini={false}
   cardRef={null}
   className="tasks-donut-card stopped-tasks-card selected-tasks-card"
+  id="stopped-tasks-card"
   matchHeight={false}
 >
   <CardTitle
@@ -163,6 +164,7 @@ exports[`StoppedTasksCard render error-total selected 1`] = `
   aggregatedMini={false}
   cardRef={null}
   className="tasks-donut-card stopped-tasks-card selected-tasks-card"
+  id="stopped-tasks-card"
   matchHeight={false}
 >
   <CardTitle
@@ -319,6 +321,7 @@ exports[`StoppedTasksCard render selected 1`] = `
   aggregatedMini={false}
   cardRef={null}
   className="tasks-donut-card stopped-tasks-card selected-tasks-card"
+  id="stopped-tasks-card"
   matchHeight={false}
 >
   <CardTitle
@@ -475,6 +478,7 @@ exports[`StoppedTasksCard render success-last selected 1`] = `
   aggregatedMini={false}
   cardRef={null}
   className="tasks-donut-card stopped-tasks-card selected-tasks-card"
+  id="stopped-tasks-card"
   matchHeight={false}
 >
   <CardTitle
@@ -631,6 +635,7 @@ exports[`StoppedTasksCard render success-total selected 1`] = `
   aggregatedMini={false}
   cardRef={null}
   className="tasks-donut-card stopped-tasks-card selected-tasks-card"
+  id="stopped-tasks-card"
   matchHeight={false}
 >
   <CardTitle
@@ -787,6 +792,7 @@ exports[`StoppedTasksCard render warning-last selected 1`] = `
   aggregatedMini={false}
   cardRef={null}
   className="tasks-donut-card stopped-tasks-card selected-tasks-card"
+  id="stopped-tasks-card"
   matchHeight={false}
 >
   <CardTitle
@@ -943,6 +949,7 @@ exports[`StoppedTasksCard render warning-total selected 1`] = `
   aggregatedMini={false}
   cardRef={null}
   className="tasks-donut-card stopped-tasks-card selected-tasks-card"
+  id="stopped-tasks-card"
   matchHeight={false}
 >
   <CardTitle
@@ -1099,6 +1106,7 @@ exports[`StoppedTasksCard render with minimal props 1`] = `
   aggregatedMini={false}
   cardRef={null}
   className="tasks-donut-card stopped-tasks-card"
+  id="stopped-tasks-card"
   matchHeight={false}
 >
   <CardTitle
@@ -1255,6 +1263,7 @@ exports[`StoppedTasksCard render with props 1`] = `
   aggregatedMini={false}
   cardRef={null}
   className="tasks-donut-card stopped-tasks-card"
+  id="stopped-tasks-card"
   matchHeight={false}
 >
   <CardTitle
