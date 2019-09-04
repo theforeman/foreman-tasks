@@ -4,7 +4,12 @@ import { translate as __ } from 'foremanReact/common/I18n';
 import TasksDonutCard from '../TasksDonutCard/TasksDonutCard';
 
 const PausedTasksCard = ({ ...props }) => (
-  <TasksDonutCard title={__('Paused')} wantedQueryState="paused" {...props} />
+  <TasksDonutCard
+    title={__('Paused')}
+    wantedQueryState="paused"
+    id="paused-tasks-card"
+    {...props}
+  />
 );
 
 const filterUnwantedFields = obj => {
