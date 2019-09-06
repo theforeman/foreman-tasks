@@ -16,8 +16,8 @@ module ForemanTasks
     end
 
     def summary
-      scope = resource_base.search_for(current_taxonomy_search)
-      render json: Task::Summarizer.new(scope, params[:recent_timeframe].to_i).summary
+      scope = resource_base.search_for(current_taxonomy_search).select(:id)
+      render json: Task::Summarizer.new(Task.where(:id => scope), params[:recent_timeframe].to_i).summary
     end
 
     def sub_tasks
