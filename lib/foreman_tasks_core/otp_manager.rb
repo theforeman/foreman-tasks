@@ -17,10 +17,15 @@ module ForemanTasksCore
         @password ||= {}
       end
 
-      def authenticate(hash)
+      def authenticate(hash, expected_user: nil, clear: true)
         plain = Base64.decode64(hash)
         username, otp = plain.split(':', 2)
-        drop_otp(username, otp)
+        if expected_user
+          return false unless expected_user == username
+        end
+        password_matches = passwords[username] == otp
+        passwords.delete(username) if clear && password_matches
+        password_matches
       end
 
       def tokenize(username, password)
