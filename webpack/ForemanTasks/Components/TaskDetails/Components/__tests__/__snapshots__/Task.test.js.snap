@@ -75,18 +75,12 @@ exports[`Task rendering render with some Props 1`] = `
         >
           Resume
         </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsSize="small"
-          bsStyle="default"
-          data-method="post"
-          disabled={true}
-          href="/foreman_tasks/tasks/test/cancel"
-        >
-          Cancel
-        </Button>
+        <Cancel
+          cancelTaskAction={[Function]}
+          cancellable={false}
+          id="test"
+          name=""
+        />
         <Button
           active={false}
           block={false}
@@ -125,6 +119,7 @@ exports[`Task rendering render with some Props 1`] = `
     <TaskInfo
       action=""
       allowDangerousActions={true}
+      cancelTask={[Function]}
       cancellable={false}
       endedAt=""
       error={Array []}
@@ -232,23 +227,18 @@ exports[`Task rendering render without Props 1`] = `
         >
           Resume
         </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsSize="small"
-          bsStyle="default"
-          data-method="post"
-          disabled={true}
-          href="/foreman_tasks/tasks/test/cancel"
-        >
-          Cancel
-        </Button>
+        <Cancel
+          cancelTaskAction={[Function]}
+          cancellable={false}
+          id="test"
+          name=""
+        />
       </Col>
     </Row>
     <TaskInfo
       action=""
       allowDangerousActions={false}
+      cancelTask={[Function]}
       cancellable={false}
       endedAt=""
       error={Array []}

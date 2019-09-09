@@ -36,11 +36,10 @@ module ForemanTasks
     def cancel
       task = find_dynflow_task
       if task.cancel
-        flash[:info] = _('Trying to cancel the task')
+        render json: { statusText: 'OK' }
       else
-        flash[:warning] = _('The task cannot be cancelled at the moment.')
+        render json: {}, status: :bad_request
       end
-      redirect_back(:fallback_location => foreman_tasks_task_path(task))
     end
 
     def abort

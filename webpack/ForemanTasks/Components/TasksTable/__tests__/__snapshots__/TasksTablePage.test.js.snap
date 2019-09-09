@@ -52,6 +52,7 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
     }
     searchQuery="a=b"
     searchable={true}
+    toastNotifications="foreman-tasks-cancel"
     toolbarButtons={
       <React.Fragment>
         <ExportButton
@@ -62,6 +63,7 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
   >
     <TasksTable
       actionName=""
+      cancelTaskAction={[MockFunction]}
       error={null}
       getTableItems={[MockFunction]}
       history={
@@ -137,6 +139,7 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
     }
     searchQuery="a=b"
     searchable={true}
+    toastNotifications="foreman-tasks-cancel"
     toolbarButtons={
       <React.Fragment>
         <ExportButton
@@ -147,6 +150,7 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
   >
     <TasksTable
       actionName=""
+      cancelTaskAction={[MockFunction]}
       error={null}
       getTableItems={[MockFunction]}
       history={

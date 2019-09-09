@@ -58,7 +58,7 @@ export const selectLocks = state => selectTaskDetails(state).locks || [];
 export const selectUsernamePath = state =>
   selectTaskDetails(state).username_path || null;
 
-export const selectAction = state => selectTaskDetails(state).action || null;
+export const selectAction = state => selectTaskDetails(state).action || '';
 
 export const selectState = state => selectTaskDetails(state).state || null;
 

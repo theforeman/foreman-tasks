@@ -2,6 +2,7 @@
 
 exports[`TasksIndexPage rendering render with minimal props 1`] = `
 <Connect(TasksTablePage)
+  cancelTaskAction={[MockFunction]}
   getBreadcrumbs={[MockFunction]}
   getTableItems={[MockFunction]}
   history={
