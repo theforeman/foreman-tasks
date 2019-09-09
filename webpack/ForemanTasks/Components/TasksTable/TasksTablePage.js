@@ -27,6 +27,7 @@ const TasksTablePage = ({ getBreadcrumbs, history, ...props }) => {
         searchProps={TASKS_SEARCH_PROPS}
         onSearch={onSearch}
         breadcrumbOptions={getBreadcrumbs(props.actionName)}
+        toastNotifications="foreman-tasks-cancel"
         toolbarButtons={
           <React.Fragment>
             {props.status === STATUS.PENDING && <Spinner size="lg" loading />}

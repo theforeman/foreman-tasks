@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TasksTable actions should cancelTask and fail 1`] = `
+Array [
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "Trying to cancel \\"some-name\\" task",
+          "type": "info",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "\\"some-name\\" task cannot be cancelled at the moment.",
+          "type": "error",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;
+
+exports[`TasksTable actions should cancelTask and succeed 1`] = `
+Array [
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "Trying to cancel \\"some-name\\" task",
+          "type": "info",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "\\"some-name\\" task cancelled",
+          "type": "success",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;
+
+exports[`TasksTable actions should cancelTaskAction 1`] = `
+Array [
+  Array [
+    [Function],
+  ],
+  Array [
+    "TASKS_TABLE",
+  ],
+  Array [
+    [Function],
+  ],
+]
+`;

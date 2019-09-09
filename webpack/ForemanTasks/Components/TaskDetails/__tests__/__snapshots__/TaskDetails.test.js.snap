@@ -16,6 +16,7 @@ exports[`TaskDetails rendering render without Props 1`] = `
       <Task
         action=""
         allowDangerousActions={false}
+        cancelTask={[Function]}
         cancellable={false}
         endedAt=""
         error={Array []}
