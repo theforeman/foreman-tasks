@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@theforeman/vendor": "^0.1.1",
+    "c3": "^0.4.11",
     "humanize-duration": "^3.20.1",
     "react-intl": "^2.8.0"
   },
