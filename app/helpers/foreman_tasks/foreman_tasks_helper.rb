@@ -25,38 +25,17 @@ module ForemanTasks
       ret.html_safe
     end
 
-    def task_result_icon_class(task)
-      return 'task-status pficon-help' if task.state != 'stopped'
-
-      icon_class = case task.result
-                   when 'success'
-                     'pficon-ok'
-                   when 'error'
-                     'pficon-error-circle-o'
-                   when 'warning'
-                     'pficon-ok status-warn'
-                   else
-                     'pficon-help'
-                   end
-
-      "task-status #{icon_class}"
+    def troubleshooting_info_text
+      return if @task.state != 'paused' || @task.main_action.nil?
+      helper = TroubleshootingHelpGenerator.new(@task.main_action)
+      helper.generate_text
     end
 
-    def time_in_words_span(time)
-      if time.nil?
-        _('N/A')
+    def username_link_task(owner, username)
+      if owner.present? && username != User::ANONYMOUS_API_ADMIN && username != User::ANONYMOUS_ADMIN
+        link_to_if_authorized(username, hash_for_edit_user_path(owner))
       else
-        content_tag :span, (time > Time.now.utc ? _('in %s') : _('%s ago')) % time_ago_in_words(time),
-                    :'data-original-title' => time.try(:in_time_zone), :rel => 'twipsy'
-      end
-    end
-
-    def duration_in_words_span(start, finish)
-      if start.nil?
-        _('N/A')
-      else
-        content_tag :span, distance_of_time_in_words(start, finish),
-                    :'data-original-title' => number_with_delimiter((finish - start).to_i) + _(' seconds'), :rel => 'twipsy'
+        username
       end
     end
 
@@ -120,6 +99,26 @@ module ForemanTasks
 
     def trigger_selector(f, triggering = Triggering.new, _options = {})
       render :partial => 'common/trigger_form', :locals => { :f => f, :triggering => triggering }
+    end
+
+    def task_breadcrumb_item(task, active = false)
+      item = { :caption => format_task_input(task) }
+      item[:url] = url_for(foreman_tasks_task_path(task.id)) unless active
+      item
+    end
+
+    def index_breadcrumb_item
+      item = { :caption => _('Tasks') }
+      item[:url] = foreman_tasks_tasks_url if action_name != 'index'
+      item
+    end
+
+    def breadcrumb_items
+      items = [index_breadcrumb_item]
+      return items if action_name == 'index'
+      items << task_breadcrumb_item(@task, action_name == 'show')
+      items << { :caption => _('Sub tasks') } if action_name == 'sub_tasks'
+      items
     end
 
     private

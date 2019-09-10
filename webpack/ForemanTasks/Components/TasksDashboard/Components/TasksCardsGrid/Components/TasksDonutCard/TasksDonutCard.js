@@ -39,6 +39,7 @@ const TasksDonutCard = ({
         'selected-tasks-card':
           focusedOn !== TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.NORMAL &&
           focusedOn !== TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.NONE,
+        'not-focused': focusedOn === TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.NONE,
       })}
       {...props}
     >

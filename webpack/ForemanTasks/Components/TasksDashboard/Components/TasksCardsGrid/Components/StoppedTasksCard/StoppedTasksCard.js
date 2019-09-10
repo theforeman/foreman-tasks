@@ -34,9 +34,11 @@ const StoppedTasksCard = ({
         className,
         {
           'selected-tasks-card': query.state === STOPPED,
+          'not-focused': query.state && query.state !== STOPPED,
         }
       )}
       {...props}
+      id="stopped-tasks-card"
     >
       <Card.Title onClick={() => updateQuery({ state: STOPPED })}>
         {__('Stopped')}

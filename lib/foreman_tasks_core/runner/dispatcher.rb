@@ -37,17 +37,19 @@ module ForemanTasksCore
 
         def refresh_runner
           @logger.debug("refresh runner #{@runner.id}")
-          updates = @runner.run_refresh
+          dispatch_updates(@runner.run_refresh)
+        ensure
+          @refresh_planned = false
+          plan_next_refresh
+        end
 
+        def dispatch_updates(updates)
           updates.each { |receiver, update| (receiver || @suspended_action) << update }
 
           # This is a workaround when the runner does not accept the suspended action
           main_key = updates.keys.any?(&:nil?) ? nil : @suspended_action
           main_process = updates[main_key]
           finish if main_process && main_process.exit_status
-        ensure
-          @refresh_planned = false
-          plan_next_refresh
         end
 
         def timeout_runner
@@ -77,8 +79,8 @@ module ForemanTasksCore
           finish_termination
         end
 
-        def external_event(_event)
-          refresh_runner
+        def external_event(event)
+          dispatch_updates(@runner.external_event(event))
         end
 
         private

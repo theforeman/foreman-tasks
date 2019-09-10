@@ -1,144 +1,20 @@
 <% stylesheet 'foreman_tasks/tasks' %>
-
+<% content_for(:javascripts) do %>
+  <%= webpacked_plugins_js_for :'foreman-tasks' %>
+<% end %>
+<% content_for(:stylesheets) do %>
+  <%= webpacked_plugins_css_for :'foreman-tasks' %>
+<% end %>
 <%= breadcrumbs(
-  items: [
-    {
-      caption: _('Tasks'),
-      url: url_for(foreman_tasks_tasks_path)
-    },
-    {
-      caption: format_task_input(@task)
-    }
-  ],
+  items: breadcrumb_items,
   name_field: 'action',
   resource_url: foreman_tasks_api_tasks_path,
   switcher_item_url: foreman_tasks_task_path(:id => ':id')
 ) %>
 
 
-<div class="task-details">
-  <script>
-    if (typeof taskProgressReloader === 'undefined') {
-      var taskProgressReloader = {
-        timeoutId: null,
-        formId: null,
-        reload: function () {
-          tfm.tools.showSpinner();
-          taskProgressReloader.timeoutId = null;
-          taskProgressReloader.formId = null;
-
-          $.ajax({
-            type:'GET',
-            url: document.location.href,
-            headers: {"X-Foreman-Layout": "two-pane"},
-            success: function(response){
-              $('#content .task-details').replaceWith($(response));
-            },
-            error: function(response){
-              document.location.reload();
-            },
-            complete: function(){
-              tfm.tools.hideSpinner();
-            }
-          });
-        },
-
-        start: function () {
-          var button = $('.reload-button');
-          if (!taskProgressReloader.timeoutId) {
-            taskProgressReloader.timeoutId = setTimeout(this.reload, 5000);
-            taskProgressReloader.formId = $(button).closest('form')[0].id;
-          }
-          button.html('<span class="glyphicon glyphicon-refresh spin"></span> <%= _('Stop auto-reloading') %>');
-          button.show();
-        },
-
-        stop: function () {
-          if (taskProgressReloader.timeoutId) {
-            clearTimeout(taskProgressReloader.timeoutId);
-          }
-          taskProgressReloader.timeoutId = null;
-          taskProgressReloader.formId = null;
-          var button = $('.reload-button');
-          button.html('<span class="glyphicon glyphicon-refresh"></span> <%= _('Start auto-reloading') %>');
-          button.show();
-        },
-
-        toggle: function () {
-          if (taskProgressReloader.timeoutId) {
-            this.stop();
-          } else {
-            this.start();
-          }
-        }
-      };
-    }
-
-    $(document).ready(function () {
-      $('.modal-submit').click(function(e){
-        if($(this).hasClass('disabled')){
-          e.preventDefault();
-        }
-      });
-      $('.disable-unlock').click(function() {
-        var button = $(this).parents('.modal').find('.modal-submit');
-
-        if($(this).is(':checked')){
-          button.removeClass('disabled')
-        }
-        else{
-          button.addClass('disabled')
-        }
-      });
-
-      $('.reload-button').click(function (event) {
-        taskProgressReloader.toggle();
-        event.preventDefault();
-      });
-
-      $('.reload-button-stop').click(function (event) {
-        taskProgressReloader.stop();
-      });
-
-      $('ul.nav-tabs a' ).click(function (event) {
-        taskProgressReloader.stop();
-      });
-
-    <% if @task.state != 'stopped' %>
-      taskProgressReloader.start();
-    <% else %>
-      taskProgressReloader.stop();
-    <% end %>
-    });
-  </script>
-
-
-  <%= form_for @task, :url => "#" do %>
-
-  <ul class="nav nav-tabs" data-tabs="tabs">
-    <li class="active"><a href="#primary" data-toggle="tab"><%= _("Task") %></a></li>
-    <li><a href="#running-steps" data-toggle="tab"><%= _("Running Steps") %></a></li>
-    <li><a href="#errors" data-toggle="tab"><%= _("Errors") %></a></li>
-    <li><a href="#locks" data-toggle="tab"><%= _("Locks") %></a></li>
-    <li><a href="#raw" data-toggle="tab"><%= _("Raw") %></a></li>
-  </ul>
-
-  <div class="tab-content">
-    <div class="tab-pane active" id="primary">
-      <%= render :partial => 'details' %>
-    </div>
-    <div class="tab-pane" id="running-steps">
-      <%= render :partial => 'running_steps' %>
-    </div>
-    <div class="tab-pane" id="errors">
-      <%= render :partial => 'errors' %>
-    </div>
-    <div class="tab-pane" id="raw">
-      <%= render :partial => 'raw' %>
-    </div>
-    <div class="tab-pane" id="locks">
-      <%= render :partial => 'locks' %>
-    </div>
-
-  <% end %>
+<div class="task-details" id="foremanTaskDetails">
 </div>
+
+
+<%= mount_react_component('TaskDetails', '#foremanTaskDetails')  %>

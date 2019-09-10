@@ -22,6 +22,13 @@ module ForemanTasksCore
         generate_updates
       end
 
+      # by default, external event just causes the refresh to be triggered: this allows the descendants
+      # of the Base to add custom logic to process the external events.
+      # Similarly as `run_refresh`, it's expected to return updates to be dispatched.
+      def external_event(_event)
+        run_refresh
+      end
+
       def start
         raise NotImplementedError
       end
@@ -69,10 +76,18 @@ module ForemanTasksCore
       end
 
       def generate_updates
-        return {} if @continuous_output.empty? && @exit_status.nil?
+        return no_update if @continuous_output.empty? && @exit_status.nil?
         new_data = @continuous_output
         @continuous_output = ForemanTasksCore::ContinuousOutput.new
-        { @suspended_action => Runner::Update.new(new_data, @exit_status) }
+        new_update(new_data, @exit_status)
+      end
+
+      def no_update
+        {}
+      end
+
+      def new_update(data, exit_status)
+        { @suspended_action => Runner::Update.new(data, exit_status) }
       end
 
       def initialize_continuous_outputs

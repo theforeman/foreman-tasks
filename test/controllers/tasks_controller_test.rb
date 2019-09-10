@@ -41,6 +41,41 @@ module ForemanTasks
           response = JSON.parse(@response.body)
           assert_equal 0, response['stopped']['total']
         end
+
+        describe 'taxonomy scoping' do
+          before do
+            @organizations = [0, 0].map { FactoryBot.create(:organization) }
+            @locations = [0, 0].map { FactoryBot.create(:location) }
+            @tasks = [0, 0].map { FactoryBot.create(:some_task) }
+            @tasks.zip(@organizations, @locations).each do |task, org, loc|
+              Lock.link!(org, task.id)
+              Lock.link!(loc, task.id)
+            end
+          end
+
+          it 'does not limit if unset' do
+            get(:summary, params: { recent_timeframe: 24 }, session: set_session_user)
+            assert_response :success
+            response = JSON.parse(@response.body)
+            assert_equal 2, response['stopped']['total']
+          end
+
+          it 'finds only tasks with matching taxonomies' do
+            get(:summary, params: { recent_timeframe: 24 },
+                          session: set_session_user.merge(:organization_id => @organizations.first, :location_id => @locations.first))
+            assert_response :success
+            response = JSON.parse(@response.body)
+            assert_equal 1, response['stopped']['total']
+          end
+
+          it 'find no tasks when taxonomy combination contains no tasks' do
+            get(:summary, params: { recent_timeframe: 24 },
+                          session: set_session_user.merge(:organization_id => @organizations.first, :location_id => @locations.last))
+            assert_response :success
+            response = JSON.parse(@response.body)
+            assert_equal 0, response['stopped']['total']
+          end
+        end
       end
 
       it 'supports csv export' do
@@ -66,6 +101,17 @@ module ForemanTasks
           get :sub_tasks, params: { id: FactoryBot.create(:some_task).id },
                           session: set_session_user(User.current)
           assert_response :not_found
+        end
+
+        it 'supports csv export' do
+          parent = FactoryBot.create(:some_task, :action => 'Some action')
+          child = FactoryBot.create(:some_task, :action => 'Child action')
+          child.parent_task_id = parent.id
+          child.save!
+          get(:sub_tasks, params: { id: parent.id, format: :csv }, session: set_session_user)
+          assert_response :success
+          assert_equal 2, response.body.lines.size
+          assert_include response.body.lines[1], 'Child action'
         end
       end
 

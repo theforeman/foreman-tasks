@@ -1,0 +1,174 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Raw rendering render with Props 1`] = `
+<div>
+  <div>
+    <span
+      className="param-name list-group-item-heading"
+    >
+      Id
+      :
+    </span>
+    <span
+      className="param-value"
+    >
+      6b0d6db2-e9ab-40da-94e5-b6842ac50bd0
+    </span>
+  </div>
+  <div>
+    <span
+      className="param-name list-group-item-heading"
+    >
+      Label
+      :
+    </span>
+    <span
+      className="param-value"
+    >
+      Actions::Katello::EventQueue::Monitor
+    </span>
+  </div>
+  <div>
+    <span
+      className="param-name list-group-item-heading"
+    >
+      Duration
+      :
+    </span>
+    <span
+      className="param-value"
+      title="60 seconds"
+    >
+      1 minute
+    </span>
+  </div>
+  <div>
+    <span
+      className="param-name list-group-item-heading"
+    >
+      Raw input
+      :
+    </span>
+    <span
+      className="param-value"
+    >
+      <pre>
+        {
+  "locale": "en",
+  "current_request_id": 1,
+  "current_user_id": 4,
+  "current_organization_id": 2,
+  "current_location_id": 3
+}
+      </pre>
+    </span>
+  </div>
+  <div>
+    <span
+      className="param-name list-group-item-heading"
+    >
+      Raw output
+      :
+    </span>
+    <span
+      className="param-value"
+    >
+      <pre>
+        {}
+      </pre>
+    </span>
+  </div>
+  <div>
+    <span
+      className="param-name list-group-item-heading"
+    >
+      External Id
+      :
+    </span>
+    <span
+      className="param-value"
+    >
+      test
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Raw rendering render without Props 1`] = `
+<div>
+  <div>
+    <span
+      className="param-name list-group-item-heading"
+    >
+      Id
+      :
+    </span>
+    <span
+      className="param-value"
+    />
+  </div>
+  <div>
+    <span
+      className="param-name list-group-item-heading"
+    >
+      Label
+      :
+    </span>
+    <span
+      className="param-value"
+    />
+  </div>
+  <div>
+    <span
+      className="param-name list-group-item-heading"
+    >
+      Duration
+      :
+    </span>
+    <span
+      className="param-value"
+    />
+  </div>
+  <div>
+    <span
+      className="param-name list-group-item-heading"
+    >
+      Raw input
+      :
+    </span>
+    <span
+      className="param-value"
+    >
+      <pre>
+        []
+      </pre>
+    </span>
+  </div>
+  <div>
+    <span
+      className="param-name list-group-item-heading"
+    >
+      Raw output
+      :
+    </span>
+    <span
+      className="param-value"
+    >
+      <pre>
+        {}
+      </pre>
+    </span>
+  </div>
+  <div>
+    <span
+      className="param-name list-group-item-heading"
+    >
+      External Id
+      :
+    </span>
+    <span
+      className="param-value"
+    />
+  </div>
+</div>
+`;

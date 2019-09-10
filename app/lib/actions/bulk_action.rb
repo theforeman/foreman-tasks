@@ -46,7 +46,7 @@ module Actions
     def create_sub_plans
       action_class = input[:action_class].constantize
       target_class = input[:target_class].constantize
-      targets = target_class.where(:id => current_batch)
+      targets = target_class.unscoped.where(:id => current_batch)
 
       missing = Array.new((current_batch - targets.map(&:id)).count) { nil }
 

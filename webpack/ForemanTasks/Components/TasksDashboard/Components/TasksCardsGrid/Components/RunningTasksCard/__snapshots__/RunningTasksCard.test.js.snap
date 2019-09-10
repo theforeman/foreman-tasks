@@ -9,6 +9,7 @@ exports[`RunningTasksCard render with minimal props 1`] = `
       "older": 0,
     }
   }
+  id="running-tasks-card"
   query={Object {}}
   time="H24"
   title="Running"
@@ -26,6 +27,7 @@ exports[`RunningTasksCard render with some props 1`] = `
       "older": 0,
     }
   }
+  id="running-tasks-card"
   query={Object {}}
   some="prop"
   time="H24"

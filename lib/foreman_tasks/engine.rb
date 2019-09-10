@@ -41,7 +41,7 @@ module ForemanTasks
 
     initializer 'foreman_tasks.register_plugin', :before => :finisher_hook do |_app|
       Foreman::Plugin.register :"foreman-tasks" do
-        requires_foreman '>= 1.16.0'
+        requires_foreman '>= 1.24.0'
         divider :top_menu, :parent => :monitor_menu, :last => true, :caption => N_('Foreman Tasks')
         menu :top_menu, :tasks,
              :url_hash => { :controller => 'foreman_tasks/tasks', :action => :index },
@@ -58,7 +58,7 @@ module ForemanTasks
         security_block :foreman_tasks do |_map|
           permission :view_foreman_tasks, { :'foreman_tasks/tasks' => [:auto_complete_search, :sub_tasks, :index, :summary, :show],
                                             :'foreman_tasks/react' => [:index],
-                                            :'foreman_tasks/api/tasks' => [:bulk_search, :show, :index, :summary] }, :resource_type => ForemanTasks::Task.name
+                                            :'foreman_tasks/api/tasks' => [:bulk_search, :show, :index, :summary, :details] }, :resource_type => ForemanTasks::Task.name
           permission :edit_foreman_tasks, { :'foreman_tasks/tasks' => [:resume, :unlock, :force_unlock, :cancel_step, :cancel, :abort],
                                             :'foreman_tasks/api/tasks' => [:bulk_resume] }, :resource_type => ForemanTasks::Task.name
 
