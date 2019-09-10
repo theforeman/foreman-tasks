@@ -49,10 +49,12 @@ module ForemanTasks
     scoped_search :on => :user_id,
                   :complete_value => true,
                   :rename => 'user.id',
-                  :validator => ->(value) { ScopedSearch::Validators::INTEGER.call(value) || value == 'current_user' },
-                  :aliases => ['owner.id'], :ext_method => :search_by_owner, :only_explicit => true
-    scoped_search :relation => :user, :on => :login, :rename => 'user.login', :complete_value => true, :aliases => ['owner.login', 'user'], :ext_method => :search_by_owner, :only_explicit => true
-    scoped_search :relation => :user, :on => :firstname, :rename => 'user.firstname', :complete_value => true, :aliases => ['owner.firstname'], :ext_method => :search_by_owner, :only_explicit => true
+                  :validator => ->(value) { ScopedSearch::Validators::INTEGER.call(value) },
+                  :value_translation => ->(value) { value == 'current_user' ? User.current.id : value },
+                  :special_values => %w[current_user],
+                  :aliases => ['owner.id'], :only_explicit => true
+    scoped_search :relation => :user, :on => :login, :complete_value => true, :aliases => ['owner.login', 'user'], :only_explicit => true
+    scoped_search :relation => :user, :on => :firstname, :rename => 'user.firstname', :complete_value => true, :aliases => ['owner.firstname'], :only_explicit => true
     scoped_search :relation => :task_groups, :on => :id, :complete_value => true, :rename => 'task_group.id', :validator => ScopedSearch::Validators::INTEGER
 
     scope :active, -> {  where('foreman_tasks_tasks.state != ?', :stopped) }
