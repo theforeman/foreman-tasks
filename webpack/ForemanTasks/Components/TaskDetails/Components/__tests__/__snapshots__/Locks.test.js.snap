@@ -39,12 +39,12 @@ exports[`Locks rendering render with Props 1`] = `
             <span
               className="fa fa-unlock-alt"
             />
-            task_owner
+            User
           </CardTitle>
           <CardBody
             className=""
           >
-            User id:4
+            id:4
             <br />
           </CardBody>
         </Card>
@@ -71,12 +71,12 @@ exports[`Locks rendering render with Props 1`] = `
             <span
               className="fa fa-unlock-alt"
             />
-            task_owner2
+            User
           </CardTitle>
           <CardBody
             className=""
           >
-            User id:2
+            id:2
             <br />
           </CardBody>
         </Card>
