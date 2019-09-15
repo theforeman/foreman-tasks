@@ -4,7 +4,8 @@ import { Grid, Row, Col, Button } from 'patternfly-react';
 import { translate as __ } from 'foremanReact/common/I18n';
 import TaskInfo from './TaskInfo';
 import { ClickConfirmation } from '../../common/ClickConfirmation';
-import { Cancel } from '../../common/Cancel/Cancel';
+import { ResumeButton } from '../../common/ActionButtons/ResumeButton';
+import { CancelButton } from '../../common/ActionButtons/CancelButton';
 
 class Task extends Component {
   taskProgressToggle = () => {
@@ -38,7 +39,8 @@ class Task extends Component {
       showForceUnlockModal,
       toggleUnlockModal,
       toggleForceUnlockModal,
-      cancelTask,
+      cancelTaskRequest,
+      resumeTaskRequest,
       action,
     } = this.props;
     const modalUnlock = (
@@ -100,27 +102,28 @@ class Task extends Component {
               >
                 {__('Dynflow console')}
               </Button>
-              <Button
-                bsSize="small"
-                bsStyle="primary"
-                data-method="post"
-                href={`/foreman_tasks/tasks/${id}/resume`}
-                disabled={!resumable}
-              >
-                {__('Resume')}
-              </Button>
-              <Cancel
+              <ResumeButton
                 id={id}
-                name={action}
-                cancellable={cancellable}
-                cancelTaskAction={() => {
+                onClick={() => {
                   if (!taskReload) {
                     this.taskProgressToggle();
                   }
-                  cancelTask(id, action);
+                  resumeTaskRequest(id, action);
+                }}
+                name={action}
+                disabled={!resumable}
+              />
+              <CancelButton
+                id={id}
+                name={action}
+                disabled={!cancellable}
+                onClick={() => {
+                  if (!taskReload) {
+                    this.taskProgressToggle();
+                  }
+                  cancelTaskRequest(id, action);
                 }}
               />
-
               {parentTask && (
                 <Button
                   bsSize="small"
@@ -183,7 +186,8 @@ Task.propTypes = {
   showForceUnlockModal: PropTypes.bool,
   toggleUnlockModal: PropTypes.func,
   toggleForceUnlockModal: PropTypes.func,
-  cancelTask: PropTypes.func,
+  cancelTaskRequest: PropTypes.func,
+  resumeTaskRequest: PropTypes.func,
 };
 
 Task.defaultProps = {
@@ -204,7 +208,8 @@ Task.defaultProps = {
   showForceUnlockModal: false,
   toggleUnlockModal: () => null,
   toggleForceUnlockModal: () => null,
-  cancelTask: () => null,
+  cancelTaskRequest: () => null,
+  resumeTaskRequest: () => null,
 };
 
 export default Task;

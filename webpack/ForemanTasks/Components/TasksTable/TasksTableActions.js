@@ -10,13 +10,13 @@ import { fetchTasksSummary } from '../TasksDashboard/TasksDashboardActions';
 export const getTableItems = url =>
   getTableItemsAction(TASKS_TABLE_ID, getURIQuery(url), getApiPathname(url));
 
-export const cancelTaskAction = (id, name, url) => async dispatch => {
-  await dispatch(cancelTask(id, name));
+export const cancelTask = (id, name, url) => async dispatch => {
+  await dispatch(cancelTaskRequest(id, name));
   dispatch(getTableItems(url));
   dispatch(fetchTasksSummary(getURIQuery(url).time));
 };
 
-export const cancelTask = (id, name) => async dispatch => {
+export const cancelTaskRequest = (id, name) => async dispatch => {
   dispatch(
     addToast({
       type: 'info',
@@ -36,6 +36,31 @@ export const cancelTask = (id, name) => async dispatch => {
       addToast({
         type: 'error',
         message: `"${name}" ${__('task cannot be cancelled at the moment.')}`,
+      })
+    );
+  }
+};
+
+export const resumeTask = (id, name, url) => async dispatch => {
+  await dispatch(resumeTaskRequest(id, name));
+  dispatch(getTableItems(url));
+  dispatch(fetchTasksSummary(getURIQuery(url).time));
+};
+
+export const resumeTaskRequest = (id, name) => async dispatch => {
+  try {
+    await API.post(`/foreman_tasks/tasks/${id}/resume`);
+    dispatch(
+      addToast({
+        type: 'success',
+        message: __(`"${name}" ${__('Task execution was resumed')}`),
+      })
+    );
+  } catch ({ response }) {
+    dispatch(
+      addToast({
+        type: 'error',
+        message: __(`Task "${name}" has to be resumable.`),
       })
     );
   }

@@ -4,7 +4,8 @@ export const minProps = {
   getTableItems: jest.fn(),
   getBreadcrumbs: jest.fn(),
   itemCount: 2,
-  cancelTaskAction: jest.fn(),
+  cancelTask: jest.fn(),
+  resumeTask: jest.fn(),
   pagination: {
     page: 1,
     perPage: 10,

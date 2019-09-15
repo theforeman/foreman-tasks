@@ -16,7 +16,7 @@ exports[`TaskDetails rendering render without Props 1`] = `
       <Task
         action=""
         allowDangerousActions={false}
-        cancelTask={[Function]}
+        cancelTaskRequest={[Function]}
         cancellable={false}
         endedAt=""
         error={Array []}
@@ -36,6 +36,7 @@ exports[`TaskDetails rendering render without Props 1`] = `
         refetchTaskDetails={[Function]}
         result="error"
         resumable={false}
+        resumeTaskRequest={[Function]}
         runningSteps={Array []}
         showForceUnlockModal={false}
         showUnlockModal={false}
