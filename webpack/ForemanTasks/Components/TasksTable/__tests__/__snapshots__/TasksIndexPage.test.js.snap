@@ -2,9 +2,11 @@
 
 exports[`TasksIndexPage rendering render with minimal props 1`] = `
 <Connect(TasksTablePage)
+  cancelSelected={[MockFunction]}
   cancelTask={[MockFunction]}
   getBreadcrumbs={[MockFunction]}
   getTableItems={[MockFunction]}
+  hideCancelAllModal={[MockFunction]}
   history={
     Object {
       "location": Object {
@@ -12,12 +14,8 @@ exports[`TasksIndexPage rendering render with minimal props 1`] = `
       },
     }
   }
+  isCancelAllModalOpen={false}
   itemCount={2}
-  location={
-    Object {
-      "pathname": "",
-    }
-  }
   pagination={
     Object {
       "page": 1,
@@ -31,6 +29,10 @@ exports[`TasksIndexPage rendering render with minimal props 1`] = `
     ]
   }
   resumeTask={[MockFunction]}
+  selectAllRows={[MockFunction]}
+  selectRow={[MockFunction]}
+  selectedRows={Array []}
+  showCancelAllModal={[MockFunction]}
   sort={
     Object {
       "by": "q",
@@ -38,5 +40,7 @@ exports[`TasksIndexPage rendering render with minimal props 1`] = `
     }
   }
   status="RESOLVED"
+  unselectAllRows={[MockFunction]}
+  unselectRow={[MockFunction]}
 />
 `;

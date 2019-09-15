@@ -1,32 +1,96 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TasksTablePaginationReducer reducer should handle TASKS_TABLE_SET_PAGINATION 1`] = `
+exports[`TasksTableReducer reducer should handle SELECT_ROWS 1`] = `
 Object {
-  "tasksTableQuery": Object {},
+  "tasksTableQuery": Object {
+    "isCancelAllModalOpen": false,
+    "selectedRows": Array [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+    ],
+  },
 }
 `;
 
-exports[`TasksTablePaginationReducer reducer should handle TASKS_TABLE_SET_SORT 1`] = `
+exports[`TasksTableReducer reducer should handle TASKS_TABLE_HIDE_CANCEL_ALL_MODAL 1`] = `
 Object {
-  "tasksTableQuery": Object {},
+  "tasksTableQuery": Object {
+    "isCancelAllModalOpen": false,
+    "selectedRows": Array [],
+  },
 }
 `;
 
-exports[`TasksTablePaginationReducer reducer should handle TASKS_TABLE_SUCCESS 1`] = `
+exports[`TasksTableReducer reducer should handle TASKS_TABLE_SET_PAGINATION 1`] = `
+Object {
+  "tasksTableQuery": Object {
+    "isCancelAllModalOpen": false,
+    "selectedRows": Array [],
+  },
+}
+`;
+
+exports[`TasksTableReducer reducer should handle TASKS_TABLE_SET_SORT 1`] = `
+Object {
+  "tasksTableQuery": Object {
+    "isCancelAllModalOpen": false,
+    "selectedRows": Array [],
+  },
+}
+`;
+
+exports[`TasksTableReducer reducer should handle TASKS_TABLE_SHOW_CANCEL_ALL_MODAL 1`] = `
+Object {
+  "tasksTableQuery": Object {
+    "isCancelAllModalOpen": true,
+    "selectedRows": Array [],
+  },
+}
+`;
+
+exports[`TasksTableReducer reducer should handle TASKS_TABLE_SUCCESS 1`] = `
 Object {
   "tasksTableQuery": Object {
     "actionName": undefined,
+    "isCancelAllModalOpen": false,
     "itemCount": 120,
     "pagination": Object {
       "page": 3,
       "perPage": 12,
     },
+    "selectedRows": Array [],
   },
 }
 `;
 
-exports[`TasksTablePaginationReducer reducer should return the initial state 1`] = `
+exports[`TasksTableReducer reducer should handle UNSELECT_ALL_ROWS 1`] = `
 Object {
-  "tasksTableQuery": Object {},
+  "tasksTableQuery": Object {
+    "isCancelAllModalOpen": false,
+    "selectedRows": Array [],
+  },
+}
+`;
+
+exports[`TasksTableReducer reducer should handle UNSELECT_ROWS 1`] = `
+Object {
+  "tasksTableQuery": Object {
+    "isCancelAllModalOpen": false,
+    "selectedRows": Array [],
+  },
+}
+`;
+
+exports[`TasksTableReducer reducer should return the initial state 1`] = `
+Object {
+  "tasksTableQuery": Object {
+    "isCancelAllModalOpen": false,
+    "selectedRows": Array [],
+  },
 }
 `;

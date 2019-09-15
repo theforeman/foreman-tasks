@@ -3,7 +3,14 @@ import { getTableItemsAction } from 'foremanReact/components/common/table';
 import API from 'foremanReact/API';
 import { addToast } from 'foremanReact/redux/actions/toasts';
 import { translate as __ } from 'foremanReact/common/I18n';
-import { TASKS_TABLE_ID } from './TasksTableConstants';
+import {
+  TASKS_TABLE_ID,
+  SELECT_ROWS,
+  UNSELECT_ALL_ROWS,
+  UNSELECT_ROWS,
+  TASKS_TABLE_SHOW_CANCEL_ALL_MODAL,
+  TASKS_TABLE_HIDE_CANCEL_ALL_MODAL,
+} from './TasksTableConstants';
 import { getApiPathname } from './TasksTableHelpers';
 import { fetchTasksSummary } from '../TasksDashboard/TasksDashboardActions';
 
@@ -28,14 +35,14 @@ export const cancelTaskRequest = (id, name) => async dispatch => {
     dispatch(
       addToast({
         type: 'success',
-        message: `"${name}" ${__('task cancelled')}`,
+        message: `"${name}" ${__('Task cancelled')}`,
       })
     );
   } catch ({ response }) {
     dispatch(
       addToast({
         type: 'error',
-        message: `"${name}" ${__('task cannot be cancelled at the moment.')}`,
+        message: `"${name}" ${__('Task cannot be cancelled at the moment.')}`,
       })
     );
   }
@@ -65,3 +72,55 @@ export const resumeTaskRequest = (id, name) => async dispatch => {
     );
   }
 };
+
+export const selectAllRows = results => ({
+  type: SELECT_ROWS,
+  payload: results.map(row => row.id),
+});
+
+export const unselectAllRows = () => ({
+  type: UNSELECT_ALL_ROWS,
+});
+
+export const selectRow = id => ({
+  type: SELECT_ROWS,
+  payload: [id],
+});
+
+export const unselectRow = id => ({
+  type: UNSELECT_ROWS,
+  payload: id,
+});
+
+export const cancelSelected = (selected, url) => async dispatch => {
+  let notAllCancelleble = false;
+  let someCancelleble = false;
+  const promises = selected.map(task => {
+    if (task.isCancelleble) {
+      someCancelleble = true;
+      return dispatch(cancelTaskRequest(task.id, task.name));
+    }
+    notAllCancelleble = true;
+    return null;
+  });
+  if (notAllCancelleble)
+    dispatch(
+      addToast({
+        type: 'warning',
+        message: __('Not all the selected tasks can be canceled'),
+      })
+    );
+  if (someCancelleble) {
+    await Promise.all(promises);
+    dispatch(getTableItems(url));
+    dispatch(fetchTasksSummary(getURIQuery(url).time));
+  }
+};
+
+export const showCancelAllModal = () => ({
+  type: TASKS_TABLE_SHOW_CANCEL_ALL_MODAL,
+});
+
+export const hideCancelAllModal = () => ({
+  type: TASKS_TABLE_HIDE_CANCEL_ALL_MODAL,
+});

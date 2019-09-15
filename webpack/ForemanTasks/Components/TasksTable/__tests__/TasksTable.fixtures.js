@@ -6,18 +6,26 @@ export const minProps = {
   itemCount: 2,
   cancelTask: jest.fn(),
   resumeTask: jest.fn(),
+  cancelSelected: jest.fn(),
+  selectAllRows: jest.fn(),
+  unselectAllRows: jest.fn(),
+  selectRow: jest.fn(),
+  unselectRow: jest.fn(),
+  selectedRows: [],
   pagination: {
     page: 1,
     perPage: 10,
   },
   history: { location: { search: '' } },
-  location: { pathname: '' },
   status: STATUS.RESOLVED,
   results: ['a', 'b'],
   sort: {
     by: 'q',
     order: 'w',
   },
+  isCancelAllModalOpen: false,
+  showCancelAllModal: jest.fn(),
+  hideCancelAllModal: jest.fn(),
 };
 
 export default {

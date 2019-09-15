@@ -11,6 +11,8 @@ import {
   selectItemCount,
   selectSort,
   selectActionName,
+  selectSelectedRows,
+  selectIsCancelAllModalOpen,
 } from './TasksTableSelectors';
 
 const mapStateToProps = state => ({
@@ -21,6 +23,8 @@ const mapStateToProps = state => ({
   pagination: selectPagitation(state),
   itemCount: selectItemCount(state),
   actionName: selectActionName(state),
+  selectedRows: selectSelectedRows(state),
+  isCancelAllModalOpen: selectIsCancelAllModalOpen(state),
 });
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
