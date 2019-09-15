@@ -63,23 +63,17 @@ exports[`Task rendering render with some Props 1`] = `
         >
           Dynflow console
         </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsSize="small"
-          bsStyle="primary"
-          data-method="post"
+        <ResumeButton
           disabled={true}
-          href="/foreman_tasks/tasks/test/resume"
-        >
-          Resume
-        </Button>
-        <Cancel
-          cancelTaskAction={[Function]}
-          cancellable={false}
           id="test"
           name=""
+          onClick={[Function]}
+        />
+        <CancelButton
+          disabled={true}
+          id="test"
+          name=""
+          onClick={[Function]}
         />
         <Button
           active={false}
@@ -119,7 +113,7 @@ exports[`Task rendering render with some Props 1`] = `
     <TaskInfo
       action=""
       allowDangerousActions={true}
-      cancelTask={[Function]}
+      cancelTaskRequest={[Function]}
       cancellable={false}
       endedAt=""
       error={Array []}
@@ -133,6 +127,7 @@ exports[`Task rendering render with some Props 1`] = `
       refetchTaskDetails={[Function]}
       result="error"
       resumable={false}
+      resumeTaskRequest={[Function]}
       showForceUnlockModal={false}
       showUnlockModal={false}
       startAt=""
@@ -215,30 +210,24 @@ exports[`Task rendering render without Props 1`] = `
         >
           Dynflow console
         </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsSize="small"
-          bsStyle="primary"
-          data-method="post"
+        <ResumeButton
           disabled={true}
-          href="/foreman_tasks/tasks/test/resume"
-        >
-          Resume
-        </Button>
-        <Cancel
-          cancelTaskAction={[Function]}
-          cancellable={false}
           id="test"
           name=""
+          onClick={[Function]}
+        />
+        <CancelButton
+          disabled={true}
+          id="test"
+          name=""
+          onClick={[Function]}
         />
       </Col>
     </Row>
     <TaskInfo
       action=""
       allowDangerousActions={false}
-      cancelTask={[Function]}
+      cancelTaskRequest={[Function]}
       cancellable={false}
       endedAt=""
       error={Array []}
@@ -252,6 +241,7 @@ exports[`Task rendering render without Props 1`] = `
       refetchTaskDetails={[Function]}
       result="error"
       resumable={false}
+      resumeTaskRequest={[Function]}
       showForceUnlockModal={false}
       showUnlockModal={false}
       startAt=""

@@ -17,7 +17,8 @@ const TasksTable = ({
   history,
   itemCount,
   pagination,
-  cancelTaskAction,
+  cancelTask,
+  resumeTask,
 }) => {
   const url = history.location.pathname + history.location.search;
   const uriQuery = getURIQuery(url);
@@ -58,8 +59,13 @@ const TasksTable = ({
     updateURlQuery({ sort_by: by, sort_order: order }, history);
   };
 
-  const cancelTask = (id, name) => {
-    cancelTaskAction(id, name, url);
+  const taskActions = {
+    cancel: (id, name) => {
+      cancelTask(id, name, url);
+    },
+    resume: (id, name) => {
+      resumeTask(id, name, url);
+    },
   };
 
   return (
@@ -70,7 +76,7 @@ const TasksTable = ({
           setSortHistory,
           uriQuery.sort_by,
           uriQuery.sort_order,
-          cancelTask
+          taskActions
         )}
         rows={results}
       />
@@ -89,7 +95,6 @@ const TasksTable = ({
 TasksTable.propTypes = {
   results: PropTypes.array.isRequired,
   getTableItems: PropTypes.func.isRequired,
-  cancelTaskAction: PropTypes.func.isRequired,
   status: PropTypes.oneOf(Object.keys(STATUS)),
   error: PropTypes.instanceOf(Error),
   itemCount: PropTypes.number.isRequired,
@@ -98,6 +103,8 @@ TasksTable.propTypes = {
     perPage: PropTypes.number,
   }),
   history: PropTypes.object.isRequired,
+  cancelTask: PropTypes.func.isRequired,
+  resumeTask: PropTypes.func.isRequired,
 };
 
 TasksTable.defaultProps = {

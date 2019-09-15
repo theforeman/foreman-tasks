@@ -8,7 +8,7 @@ import { translate as __ } from 'foremanReact/common/I18n';
 import {
   dateCellFormmatter,
   actionCellFormatter,
-  cancelCellFormatter,
+  actionNameCellFormatter,
 } from './TaskTableFormmatters';
 
 const headFormat = [headerFormatterWithProps];
@@ -21,10 +21,10 @@ const cellFormat = [cellFormatter];
  *                                     If none then set it to undefined/null.
  * @param  {String}   order            in what order to sort a column. If none then set it to undefined/null.
  *                                     Otherwise, 'ASC' for ascending and 'DESC' for descending
- * @param  {function} cancelTaskAction A function to run when the cancel cell is clicked
+ * @param  {function} cancelTask       A function to run when the cancel cell is clicked
  * @return {Array}
  */
-const createTasksTableSchema = (setSort, by, order, cancelTaskAction) => {
+const createTasksTableSchema = (setSort, by, order, taskActions) => {
   const sortController = {
     apply: setSort,
     property: by,
@@ -36,7 +36,7 @@ const createTasksTableSchema = (setSort, by, order, cancelTaskAction) => {
       'action',
       __('Action'),
       headFormat,
-      [actionCellFormatter('foreman_tasks/tasks')],
+      [actionNameCellFormatter('foreman_tasks/tasks')],
       { className: 'col-md-4' }
     ),
     column('state', __('State'), headFormat, cellFormat, {
@@ -52,12 +52,12 @@ const createTasksTableSchema = (setSort, by, order, cancelTaskAction) => {
       dateCellFormmatter,
     ]),
     column(
-      'cancellable',
-      'Cancel',
+      'available_actions',
+      __('Action'),
       headFormat,
-      [cancelCellFormatter(cancelTaskAction)],
+      [actionCellFormatter(taskActions)],
       {
-        className: 'col-md-2',
+        className: 'col-md-1',
       }
     ),
   ];

@@ -12,7 +12,10 @@ import {
   FOREMAN_TASK_DETAILS_TOGGLE_UNLOCK_MODAL,
   FOREMAN_TASK_DETAILS_TOGGLE_FORCE_UNLOCK_MODAL,
 } from './TaskDetailsConstants';
-import { cancelTask } from '../TasksTable/TasksTableActions';
+import {
+  cancelTaskRequest,
+  resumeTaskRequest,
+} from '../TasksTable/TasksTableActions';
 
 export const taskReloadStop = timeoutId => {
   if (timeoutId) {
@@ -109,4 +112,4 @@ export const toggleForceUnlockModal = () => ({
   type: FOREMAN_TASK_DETAILS_TOGGLE_FORCE_UNLOCK_MODAL,
 });
 
-export { cancelTask };
+export { cancelTaskRequest, resumeTaskRequest };

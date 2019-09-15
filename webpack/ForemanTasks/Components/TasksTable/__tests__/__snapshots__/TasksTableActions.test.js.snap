@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TasksTable actions should cancelTask and fail 1`] = `
+exports[`TasksTable actions should cancelTaskRequest and fail 1`] = `
 Array [
   Array [
     Object {
@@ -27,7 +27,7 @@ Array [
 ]
 `;
 
-exports[`TasksTable actions should cancelTask and succeed 1`] = `
+exports[`TasksTable actions should cancelTaskRequest and succeed 1`] = `
 Array [
   Array [
     Object {
@@ -54,7 +54,53 @@ Array [
 ]
 `;
 
-exports[`TasksTable actions should cancelTaskAction 1`] = `
+exports[`TasksTable actions should cancelTask 1`] = `
+Array [
+  Array [
+    [Function],
+  ],
+  Array [
+    "TASKS_TABLE",
+  ],
+  Array [
+    [Function],
+  ],
+]
+`;
+
+exports[`TasksTable actions should resumeTaskRequest and fail 1`] = `
+Array [
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "Task \\"some-name\\" has to be resumable.",
+          "type": "error",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;
+
+exports[`TasksTable actions should resumeTaskRequest and succeed 1`] = `
+Array [
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "\\"some-name\\" Task execution was resumed",
+          "type": "success",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;
+
+exports[`TasksTable actions should resumeTask 1`] = `
 Array [
   Array [
     [Function],

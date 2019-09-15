@@ -4,7 +4,7 @@ import { isoCompatibleDate } from 'foremanReact/common/helpers';
 import { translate as __ } from 'foremanReact/common/I18n';
 import EllipsisWithTooltip from 'react-ellipsis-with-tooltip';
 import { cellFormatter } from 'foremanReact/components/common/table';
-import { Cancel } from '../common/Cancel/Cancel';
+import { ActionButton } from '../common/ActionButtons/ActionButton';
 
 export const dateCellFormmatter = value => {
   if (value) {
@@ -26,22 +26,22 @@ export const dateCellFormmatter = value => {
   return <span>{__('N/A')}</span>;
 };
 
-export const actionCellFormatter = url => (value, { rowData: { id } }) =>
+export const actionNameCellFormatter = url => (value, { rowData: { id } }) =>
   cellFormatter(
     <EllipsisWithTooltip>
       <a href={`/${url}/${id}`}>{value}</a>
     </EllipsisWithTooltip>
   );
 
-export const cancelCellFormatter = cancelTaskAction => (
+export const actionCellFormatter = taskActions => (
   value,
   { rowData: { action, id } }
 ) =>
   cellFormatter(
-    <Cancel
+    <ActionButton
+      taskActions={taskActions}
+      availableActions={value}
       id={id}
       name={action}
-      cancellable={value}
-      cancelTaskAction={cancelTaskAction}
     />
   );

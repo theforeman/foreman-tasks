@@ -56,11 +56,10 @@ module ForemanTasks
       task = find_dynflow_task
       if task.resumable?
         ForemanTasks.dynflow.world.execute(task.execution_plan.id)
-        flash[:info] = _('The execution was resumed.')
+        render json: { statusText: 'OK' }
       else
-        flash[:warning] = _('The execution has to be resumable.')
+        render json: {}, status: :bad_request
       end
-      redirect_back(:fallback_location => foreman_tasks_task_path(task))
     end
 
     def unlock

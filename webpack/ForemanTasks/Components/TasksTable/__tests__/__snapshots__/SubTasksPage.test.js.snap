@@ -2,7 +2,7 @@
 
 exports[`SubTasksPage rendering render with minimal props 1`] = `
 <Connect(TasksTablePage)
-  cancelTaskAction={[MockFunction]}
+  cancelTask={[MockFunction]}
   getBreadcrumbs={[MockFunction]}
   getTableItems={[MockFunction]}
   history={
@@ -37,6 +37,7 @@ exports[`SubTasksPage rendering render with minimal props 1`] = `
       "b",
     ]
   }
+  resumeTask={[MockFunction]}
   sort={
     Object {
       "by": "q",

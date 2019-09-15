@@ -63,7 +63,7 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
   >
     <TasksTable
       actionName=""
-      cancelTaskAction={[MockFunction]}
+      cancelTask={[MockFunction]}
       error={null}
       getTableItems={[MockFunction]}
       history={
@@ -92,6 +92,7 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
           "b",
         ]
       }
+      resumeTask={[MockFunction]}
       sort={
         Object {
           "by": "q",
@@ -150,7 +151,7 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
   >
     <TasksTable
       actionName=""
-      cancelTaskAction={[MockFunction]}
+      cancelTask={[MockFunction]}
       error={null}
       getTableItems={[MockFunction]}
       history={
@@ -179,6 +180,7 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
           "b",
         ]
       }
+      resumeTask={[MockFunction]}
       sort={
         Object {
           "by": "q",
