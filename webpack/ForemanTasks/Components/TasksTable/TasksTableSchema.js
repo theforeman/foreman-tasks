@@ -53,7 +53,7 @@ const createTasksTableSchema = (setSort, by, order, taskActions) => {
     ]),
     column(
       'available_actions',
-      __('Action'),
+      __('Operation'),
       headFormat,
       [actionCellFormatter(taskActions)],
       {
