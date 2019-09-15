@@ -19,6 +19,11 @@ const TasksTable = ({
   pagination,
   cancelTask,
   resumeTask,
+  selectedRows,
+  selectAllRows,
+  unselectAllRows,
+  selectRow,
+  unselectRow,
 }) => {
   const url = history.location.pathname + history.location.search;
   const uriQuery = getURIQuery(url);
@@ -26,6 +31,22 @@ const TasksTable = ({
   useEffect(() => {
     getTableItems(url);
   }, [history.location.search]);
+
+  const getSelectionController = () => {
+    const checkAllRowsSelected = () => results.length === selectedRows.length;
+    return {
+      allRowsSelected: () => checkAllRowsSelected(),
+      selectAllRows: () => {
+        if (checkAllRowsSelected()) unselectAllRows();
+        else selectAllRows(results);
+      },
+      selectRow: ({ rowData: { id } }) => {
+        if (selectedRows.includes(id)) unselectRow(id);
+        else selectRow(id);
+      },
+      isSelected: ({ rowData }) => selectedRows.includes(rowData.id),
+    };
+  };
 
   if (status === STATUS.ERROR) {
     return (
@@ -76,7 +97,8 @@ const TasksTable = ({
           setSortHistory,
           uriQuery.sort_by,
           uriQuery.sort_order,
-          taskActions
+          taskActions,
+          getSelectionController()
         )}
         rows={results}
       />
@@ -105,6 +127,11 @@ TasksTable.propTypes = {
   history: PropTypes.object.isRequired,
   cancelTask: PropTypes.func.isRequired,
   resumeTask: PropTypes.func.isRequired,
+  selectedRows: PropTypes.array,
+  selectAllRows: PropTypes.func.isRequired,
+  unselectAllRows: PropTypes.func.isRequired,
+  selectRow: PropTypes.func.isRequired,
+  unselectRow: PropTypes.func.isRequired,
 };
 
 TasksTable.defaultProps = {
@@ -114,6 +141,7 @@ TasksTable.defaultProps = {
     page: 1,
     perPage: 20,
   },
+  selectedRows: [],
 };
 
 export default TasksTable;

@@ -4,6 +4,15 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
 <div
   className="tasks-table-wrapper"
 >
+  <ActionConfirmation
+    abortAction="No"
+    closeModal={[MockFunction]}
+    confirmAction="Yes"
+    message="This will stop 0 tasks, putting them in the \\"canceled\\" state.  Are you sure?"
+    onClick={[Function]}
+    showModal={false}
+    title="Cancel Selected Tasks"
+  />
   <PageLayout
     beforeToolbarComponent={
       <Connect(TasksDashboard)
@@ -56,16 +65,29 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
     toolbarButtons={
       <React.Fragment>
         <ExportButton
+          title="Export All"
           url="/foreman_tasks/tasks.csv?include_permissions=true"
         />
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="default"
+          disabled={true}
+          onClick={[MockFunction]}
+        >
+          Cancel Selected
+        </Button>
       </React.Fragment>
     }
   >
     <TasksTable
       actionName=""
+      cancelSelected={[MockFunction]}
       cancelTask={[MockFunction]}
       error={null}
       getTableItems={[MockFunction]}
+      hideCancelAllModal={[MockFunction]}
       history={
         Object {
           "location": Object {
@@ -73,13 +95,9 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
           },
         }
       }
+      isCancelAllModalOpen={false}
       isSubTask={false}
       itemCount={2}
-      location={
-        Object {
-          "pathname": "",
-        }
-      }
       pagination={
         Object {
           "page": 1,
@@ -93,6 +111,10 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
         ]
       }
       resumeTask={[MockFunction]}
+      selectAllRows={[MockFunction]}
+      selectRow={[MockFunction]}
+      selectedRows={Array []}
+      showCancelAllModal={[MockFunction]}
       sort={
         Object {
           "by": "q",
@@ -100,6 +122,8 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
         }
       }
       status="RESOLVED"
+      unselectAllRows={[MockFunction]}
+      unselectRow={[MockFunction]}
     />
   </PageLayout>
 </div>
@@ -109,6 +133,15 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
 <div
   className="tasks-table-wrapper"
 >
+  <ActionConfirmation
+    abortAction="No"
+    closeModal={[MockFunction]}
+    confirmAction="Yes"
+    message="This will stop 0 tasks, putting them in the \\"canceled\\" state.  Are you sure?"
+    onClick={[Function]}
+    showModal={false}
+    title="Cancel Selected Tasks"
+  />
   <PageLayout
     beforeToolbarComponent={
       <Connect(TasksDashboard)
@@ -144,16 +177,29 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
     toolbarButtons={
       <React.Fragment>
         <ExportButton
+          title="Export All"
           url="/foreman_tasks/tasks.csv?include_permissions=true"
         />
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="default"
+          disabled={true}
+          onClick={[MockFunction]}
+        >
+          Cancel Selected
+        </Button>
       </React.Fragment>
     }
   >
     <TasksTable
       actionName=""
+      cancelSelected={[MockFunction]}
       cancelTask={[MockFunction]}
       error={null}
       getTableItems={[MockFunction]}
+      hideCancelAllModal={[MockFunction]}
       history={
         Object {
           "location": Object {
@@ -161,13 +207,9 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
           },
         }
       }
+      isCancelAllModalOpen={false}
       isSubTask={false}
       itemCount={2}
-      location={
-        Object {
-          "pathname": "",
-        }
-      }
       pagination={
         Object {
           "page": 1,
@@ -181,6 +223,10 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
         ]
       }
       resumeTask={[MockFunction]}
+      selectAllRows={[MockFunction]}
+      selectRow={[MockFunction]}
+      selectedRows={Array []}
+      showCancelAllModal={[MockFunction]}
       sort={
         Object {
           "by": "q",
@@ -188,6 +234,8 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
         }
       }
       status="RESOLVED"
+      unselectAllRows={[MockFunction]}
+      unselectRow={[MockFunction]}
     />
   </PageLayout>
 </div>

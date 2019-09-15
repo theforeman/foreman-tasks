@@ -2,9 +2,11 @@
 
 exports[`SubTasksPage rendering render with minimal props 1`] = `
 <Connect(TasksTablePage)
+  cancelSelected={[MockFunction]}
   cancelTask={[MockFunction]}
   getBreadcrumbs={[MockFunction]}
   getTableItems={[MockFunction]}
+  hideCancelAllModal={[MockFunction]}
   history={
     Object {
       "location": Object {
@@ -12,12 +14,8 @@ exports[`SubTasksPage rendering render with minimal props 1`] = `
       },
     }
   }
+  isCancelAllModalOpen={false}
   itemCount={2}
-  location={
-    Object {
-      "pathname": "",
-    }
-  }
   match={
     Object {
       "params": Object {
@@ -38,6 +36,10 @@ exports[`SubTasksPage rendering render with minimal props 1`] = `
     ]
   }
   resumeTask={[MockFunction]}
+  selectAllRows={[MockFunction]}
+  selectRow={[MockFunction]}
+  selectedRows={Array []}
+  showCancelAllModal={[MockFunction]}
   sort={
     Object {
       "by": "q",
@@ -45,5 +47,7 @@ exports[`SubTasksPage rendering render with minimal props 1`] = `
     }
   }
   status="RESOLVED"
+  unselectAllRows={[MockFunction]}
+  unselectRow={[MockFunction]}
 />
 `;

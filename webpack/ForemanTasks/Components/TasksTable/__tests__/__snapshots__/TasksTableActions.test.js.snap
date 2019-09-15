@@ -17,7 +17,7 @@ Array [
     Object {
       "payload": Object {
         "message": Object {
-          "message": "\\"some-name\\" task cannot be cancelled at the moment.",
+          "message": "\\"some-name\\" Task cannot be cancelled at the moment.",
           "type": "error",
         },
       },
@@ -44,7 +44,7 @@ Array [
     Object {
       "payload": Object {
         "message": Object {
-          "message": "\\"some-name\\" task cancelled",
+          "message": "\\"some-name\\" Task cancelled",
           "type": "success",
         },
       },

@@ -6,11 +6,13 @@ import {
 } from 'foremanReact/components/common/table';
 import { translate as __ } from 'foremanReact/common/I18n';
 import {
-  dateCellFormmatter,
-  actionCellFormatter,
+  selectionHeaderCellFormatter,
+  selectionCellFormatter,
   actionNameCellFormatter,
   durationCellFormmatter,
-} from './TaskTableFormmatters';
+  actionCellFormatter,
+  dateCellFormmatter,
+} from './formatters';
 
 const headFormat = [headerFormatterWithProps];
 const cellFormat = [cellFormatter];
@@ -25,7 +27,14 @@ const cellFormat = [cellFormatter];
  * @param  {function} cancelTask       A function to run when the cancel cell is clicked
  * @return {Array}
  */
-const createTasksTableSchema = (setSort, by, order, taskActions) => {
+
+const createTasksTableSchema = (
+  setSort,
+  by,
+  order,
+  taskActions,
+  selectionController
+) => {
   const sortController = {
     apply: setSort,
     property: by,
@@ -33,6 +42,15 @@ const createTasksTableSchema = (setSort, by, order, taskActions) => {
   };
 
   return [
+    column(
+      'select',
+      'Select all rows',
+      [label => selectionHeaderCellFormatter(selectionController, label)],
+      [
+        (value, additionalData) =>
+          selectionCellFormatter(selectionController, additionalData),
+      ]
+    ),
     column(
       'action',
       __('Action'),
@@ -53,7 +71,7 @@ const createTasksTableSchema = (setSort, by, order, taskActions) => {
       durationCellFormmatter,
     ]),
     column(
-      'available_actions',
+      'availableActions',
       __('Operation'),
       headFormat,
       [actionCellFormatter(taskActions)],

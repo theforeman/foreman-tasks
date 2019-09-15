@@ -20,6 +20,12 @@ export const selectItemCount = state =>
 export const selectActionName = state =>
   selectTasksTableQuery(state).actionName || '';
 
+export const selectSelectedRows = state =>
+  selectTasksTableQuery(state).selectedRows || [];
+
+export const selectIsCancelAllModalOpen = state =>
+  selectTasksTableQuery(state).isCancelAllModalOpen || false;
+
 export const selectResults = state => {
   const { results } = selectTasksTableContent(state);
   if (!results) return [];
@@ -28,6 +34,7 @@ export const selectResults = state => {
     username: result.username || '',
     state: result.state + (result.frozen ? ` ${__('Disabled')}` : ''),
     duration: getDuration(result.started_at, result.ended_at),
+    availableActions: result.available_actions,
   }));
 };
 
