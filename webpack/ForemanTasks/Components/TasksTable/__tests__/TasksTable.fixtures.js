@@ -6,7 +6,7 @@ export const minProps = {
   itemCount: 2,
   cancelTask: jest.fn(),
   resumeTask: jest.fn(),
-  cancelSelected: jest.fn(),
+  actionSelected: jest.fn(),
   selectAllRows: jest.fn(),
   unselectAllRows: jest.fn(),
   selectRow: jest.fn(),
@@ -23,9 +23,9 @@ export const minProps = {
     by: 'q',
     order: 'w',
   },
-  isCancelAllModalOpen: false,
-  showCancelAllModal: jest.fn(),
-  hideCancelAllModal: jest.fn(),
+  showResumeSelcetedModal: jest.fn(),
+  showCancelSelcetedModal: jest.fn(),
+  hideSelcetedModal: jest.fn(),
 };
 
 export default {

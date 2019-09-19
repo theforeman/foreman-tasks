@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getURIsearch } from 'foremanReact/common/urlHelpers';
-import { Spinner, Button } from 'patternfly-react';
+import { Spinner } from 'patternfly-react';
 import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { getURIQuery } from 'foremanReact/common/helpers';
@@ -10,8 +10,14 @@ import { STATUS } from 'foremanReact/constants';
 import TasksDashboard from '../TasksDashboard';
 import TasksTable from './TasksTable';
 import { resolveSearchQuery, addSearchToURL } from './TasksTableHelpers';
-import { TASKS_SEARCH_PROPS } from './TasksTableConstants';
-import { ActionConfirmation } from './Components/ActionConfirmation';
+import { CancelResumeConfirm } from './Components/CancelResumeConfirm';
+import {
+  TASKS_SEARCH_PROPS,
+  RESUME,
+  CANCEL,
+  CLOSED,
+} from './TasksTableConstants';
+import { ActionSelectButton } from './Components/ActionSelectButton';
 import './TasksTablePage.scss';
 
 const TasksTablePage = ({ getBreadcrumbs, history, ...props }) => {
@@ -30,24 +36,22 @@ const TasksTablePage = ({ getBreadcrumbs, history, ...props }) => {
       name: item.action,
       id: item.id,
       isCancelleble: item.availableActions.cancellable,
+      isResumeble: item.availableActions.resumable,
     }));
+  };
+
+  const TaskSelectedAction = (id, name) => {
+    props.actionSelected(id, name, url);
   };
 
   return (
     <div className="tasks-table-wrapper">
-      <ActionConfirmation
-        showModal={props.isCancelAllModalOpen}
-        closeModal={props.hideCancelAllModal}
-        title={__('Cancel Selected Tasks')}
-        message={__(
-          `This will stop ${props.selectedRows.length} tasks, putting them in the "canceled" state.  Are you sure?`
-        )}
-        onClick={() => {
-          props.cancelSelected(getSelected(), url);
-          props.hideCancelAllModal();
-        }}
-        confirmAction={__('Yes')}
-        abortAction={__('No')}
+      <CancelResumeConfirm
+        closeModal={props.hideSelcetedModal}
+        action={TaskSelectedAction}
+        selected={getSelected()}
+        modalStatus={props.modalStatus}
+        selectedRowsLen={props.selectedRows.length}
       />
       <PageLayout
         searchable
@@ -62,12 +66,11 @@ const TasksTablePage = ({ getBreadcrumbs, history, ...props }) => {
               url={addSearchToURL('/foreman_tasks/tasks.csv', uriQuery)}
               title={__('Export All')}
             />
-            <Button
+            <ActionSelectButton
               disabled={props.selectedRows.length < 1}
-              onClick={props.showCancelAllModal}
-            >
-              {__('Cancel Selected')}
-            </Button>
+              onCancel={props.showCancelSelcetedModal}
+              onResume={props.showResumeSelcetedModal}
+            />
           </React.Fragment>
         }
         searchQuery={getURIsearch()}
@@ -87,11 +90,12 @@ TasksTablePage.propTypes = {
   isSubTask: PropTypes.bool,
   status: PropTypes.oneOf(Object.keys(STATUS)),
   history: PropTypes.object.isRequired,
-  cancelSelected: PropTypes.func.isRequired,
+  actionSelected: PropTypes.func.isRequired,
   selectedRows: PropTypes.arrayOf(PropTypes.string),
-  isCancelAllModalOpen: PropTypes.bool.isRequired,
-  showCancelAllModal: PropTypes.func.isRequired,
-  hideCancelAllModal: PropTypes.func.isRequired,
+  showResumeSelcetedModal: PropTypes.func.isRequired,
+  showCancelSelcetedModal: PropTypes.func.isRequired,
+  hideSelcetedModal: PropTypes.func.isRequired,
+  modalStatus: PropTypes.oneOf([CANCEL, RESUME, CLOSED]),
 };
 
 TasksTablePage.defaultProps = {
@@ -99,6 +103,7 @@ TasksTablePage.defaultProps = {
   isSubTask: false,
   status: STATUS.PENDING,
   selectedRows: [],
+  modalStatus: CLOSED,
 };
 
 export default TasksTablePage;

@@ -6,8 +6,8 @@ import {
   SELECT_ROWS,
   UNSELECT_ROWS,
   UNSELECT_ALL_ROWS,
-  TASKS_TABLE_SHOW_CANCEL_ALL_MODAL,
-  TASKS_TABLE_HIDE_CANCEL_ALL_MODAL,
+  TASKS_TABLE_SELECTED_MODAL,
+  RESUME,
 } from '../TasksTableConstants';
 import reducer from '../TasksTableReducer';
 
@@ -53,14 +53,10 @@ const fixtures = {
       type: UNSELECT_ALL_ROWS,
     },
   },
-  'should handle TASKS_TABLE_SHOW_CANCEL_ALL_MODAL': {
+  'should handle TASKS_TABLE_SELECTED_MODAL': {
     action: {
-      type: TASKS_TABLE_SHOW_CANCEL_ALL_MODAL,
-    },
-  },
-  'should handle TASKS_TABLE_HIDE_CANCEL_ALL_MODAL': {
-    action: {
-      type: TASKS_TABLE_HIDE_CANCEL_ALL_MODAL,
+      type: TASKS_TABLE_SELECTED_MODAL,
+      payload: RESUME,
     },
   },
 };

@@ -12,7 +12,7 @@ import {
   selectSort,
   selectActionName,
   selectSelectedRows,
-  selectIsCancelAllModalOpen,
+  selectModalStatus,
 } from './TasksTableSelectors';
 
 const mapStateToProps = state => ({
@@ -24,7 +24,7 @@ const mapStateToProps = state => ({
   itemCount: selectItemCount(state),
   actionName: selectActionName(state),
   selectedRows: selectSelectedRows(state),
-  isCancelAllModalOpen: selectIsCancelAllModalOpen(state),
+  modalStatus: selectModalStatus(state),
 });
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 

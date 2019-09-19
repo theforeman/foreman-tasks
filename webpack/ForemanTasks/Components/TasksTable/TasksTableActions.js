@@ -8,8 +8,10 @@ import {
   SELECT_ROWS,
   UNSELECT_ALL_ROWS,
   UNSELECT_ROWS,
-  TASKS_TABLE_SHOW_CANCEL_ALL_MODAL,
-  TASKS_TABLE_HIDE_CANCEL_ALL_MODAL,
+  TASKS_TABLE_SELECTED_MODAL,
+  CLOSED,
+  RESUME,
+  CANCEL,
 } from './TasksTableConstants';
 import { getApiPathname } from './TasksTableHelpers';
 import { fetchTasksSummary } from '../TasksDashboard/TasksDashboardActions';
@@ -92,35 +94,49 @@ export const unselectRow = id => ({
   payload: id,
 });
 
-export const cancelSelected = (selected, url) => async dispatch => {
-  let notAllCancelleble = false;
-  let someCancelleble = false;
+export const actionSelected = (actionType, selected, url) => async dispatch => {
+  let notAllActionable = false;
+  let someActionable = false;
   const promises = selected.map(task => {
-    if (task.isCancelleble) {
-      someCancelleble = true;
-      return dispatch(cancelTaskRequest(task.id, task.name));
+    if (actionType === RESUME && task.isResumeble) {
+      someActionable = true;
+      return dispatch(resumeTaskRequest(task.id, task.name, url));
+    } else if (actionType === CANCEL && task.isCancelleble) {
+      someActionable = true;
+      return dispatch(cancelTaskRequest(task.id, task.name, url));
     }
-    notAllCancelleble = true;
+    notAllActionable = true;
     return null;
   });
-  if (notAllCancelleble)
+  if (notAllActionable)
     dispatch(
       addToast({
         type: 'warning',
-        message: __('Not all the selected tasks can be canceled'),
+        message: __(
+          `Not all the selected tasks can be ${
+            actionType === RESUME ? 'resumed' : 'canceled'
+          }`
+        ),
       })
     );
-  if (someCancelleble) {
+  if (someActionable) {
     await Promise.all(promises);
     dispatch(getTableItems(url));
     dispatch(fetchTasksSummary(getURIQuery(url).time));
   }
 };
 
-export const showCancelAllModal = () => ({
-  type: TASKS_TABLE_SHOW_CANCEL_ALL_MODAL,
+export const showCancelSelcetedModal = () => ({
+  type: TASKS_TABLE_SELECTED_MODAL,
+  payload: CANCEL,
 });
 
-export const hideCancelAllModal = () => ({
-  type: TASKS_TABLE_HIDE_CANCEL_ALL_MODAL,
+export const showResumeSelcetedModal = () => ({
+  type: TASKS_TABLE_SELECTED_MODAL,
+  payload: RESUME,
+});
+
+export const hideSelcetedModal = () => ({
+  type: TASKS_TABLE_SELECTED_MODAL,
+  payload: CLOSED,
 });

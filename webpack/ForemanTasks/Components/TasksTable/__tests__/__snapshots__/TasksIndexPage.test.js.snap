@@ -2,11 +2,11 @@
 
 exports[`TasksIndexPage rendering render with minimal props 1`] = `
 <Connect(TasksTablePage)
-  cancelSelected={[MockFunction]}
+  actionSelected={[MockFunction]}
   cancelTask={[MockFunction]}
   getBreadcrumbs={[MockFunction]}
   getTableItems={[MockFunction]}
-  hideCancelAllModal={[MockFunction]}
+  hideSelcetedModal={[MockFunction]}
   history={
     Object {
       "location": Object {
@@ -14,7 +14,6 @@ exports[`TasksIndexPage rendering render with minimal props 1`] = `
       },
     }
   }
-  isCancelAllModalOpen={false}
   itemCount={2}
   pagination={
     Object {
@@ -32,7 +31,8 @@ exports[`TasksIndexPage rendering render with minimal props 1`] = `
   selectAllRows={[MockFunction]}
   selectRow={[MockFunction]}
   selectedRows={Array []}
-  showCancelAllModal={[MockFunction]}
+  showCancelSelcetedModal={[MockFunction]}
+  showResumeSelcetedModal={[MockFunction]}
   sort={
     Object {
       "by": "q",
