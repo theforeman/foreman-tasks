@@ -45,3 +45,9 @@ export const actionCellFormatter = taskActions => (
       name={action}
     />
   );
+
+export const durationCellFormmatter = value => (
+  <span className="param-value" title={value.tooltip}>
+    {value.text}
+  </span>
+);

@@ -1,5 +1,6 @@
 import { translate as __ } from 'foremanReact/common/I18n';
 import { selectForemanTasks } from '../../ForemanTasksSelectors';
+import { getDuration } from './TasksTableHelpers';
 
 export const selectTasksTable = state =>
   selectForemanTasks(state).tasksTable || {};
@@ -26,6 +27,7 @@ export const selectResults = state => {
     ...result,
     username: result.username || '',
     state: result.state + (result.frozen ? ` ${__('Disabled')}` : ''),
+    duration: getDuration(result.started_at, result.ended_at),
   }));
 };
 

@@ -1,4 +1,7 @@
 import URI from 'urijs';
+import { translate as __, documentLocale } from 'foremanReact/common/I18n';
+import humanizeDuration from 'humanize-duration';
+import { isoCompatibleDate } from 'foremanReact/common/helpers';
 
 export const updateURlQuery = (query, history) => {
   const uri = new URI(history.location.pathname + history.location.search);
@@ -23,4 +26,39 @@ export const addSearchToURL = (path, query) => {
   const url = new URI(path);
   url.addSearch({ ...query, include_permissions: true });
   return url.toString();
+};
+
+export const getDuration = (start, finish) => {
+  if (!start && !finish)
+    return { text: __('N/A'), tooltip: __('No start or end dates') };
+
+  if (!start && finish) {
+    return { text: __('N/A'), tooltip: __('Task was canceled') };
+  }
+
+  const dateOptions = {
+    largest: 1,
+    language: documentLocale(),
+    fallbacks: ['en'],
+    round: true,
+  };
+
+  const startDate = new Date(isoCompatibleDate(start));
+
+  if (!finish) {
+    const finishDate = new Date();
+    const duration = finishDate - startDate;
+    return {
+      text: `${__('More than')} ${humanizeDuration(duration, dateOptions)}`,
+    };
+  }
+
+  const finishDate = new Date(isoCompatibleDate(finish));
+  const duration = finishDate - startDate;
+  return {
+    text:
+      duration > 0 && duration < 1000
+        ? __('Less than a second')
+        : humanizeDuration(duration, dateOptions),
+  };
 };
