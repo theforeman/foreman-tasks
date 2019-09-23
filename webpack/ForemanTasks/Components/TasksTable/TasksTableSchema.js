@@ -9,6 +9,7 @@ import {
   dateCellFormmatter,
   actionCellFormatter,
   actionNameCellFormatter,
+  durationCellFormmatter,
 } from './TaskTableFormmatters';
 
 const headFormat = [headerFormatterWithProps];
@@ -48,8 +49,8 @@ const createTasksTableSchema = (setSort, by, order, taskActions) => {
     sortableColumn('started_at', __('Started at'), 3, sortController, [
       dateCellFormmatter,
     ]),
-    sortableColumn('ended_at', __('Ended at'), 3, sortController, [
-      dateCellFormmatter,
+    sortableColumn('duration', __('Duration'), 3, sortController, [
+      durationCellFormmatter,
     ]),
     column(
       'available_actions',
