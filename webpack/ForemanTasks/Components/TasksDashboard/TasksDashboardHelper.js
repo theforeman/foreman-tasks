@@ -66,14 +66,29 @@ export const getQueryFromUrl = () => {
   return queryFromUriQuery(uriQuery);
 };
 
+export const updateURLQuery = ({ state, result, mode, time, uri }) => {
+  const query = {
+    state,
+    result,
+    time_mode: mode === 'last' ? 'recent' : mode,
+    time_horizon: time,
+    page: 1,
+  };
+
+  uri.setSearch(query);
+  window.history.pushState({ path: uri.toString() }, '', uri.toString());
+};
+
 export const resolveQuery = query => {
   const uriQuery = uriQueryFromQuery(query);
 
   const uri = new URI(window.location.href);
-  const { search } = uri.query(true);
+  const { search, per_page: perPage } = uri.query(true);
 
-  const data = { search, ...uriQuery, page: 1 };
+  const data = { search, ...uriQuery, page: 1, per_page: perPage };
   const { $, tfm } = window;
+
+  updateURLQuery({ uri, ...query });
 
   uri.query(URI.buildQuery(data, true));
   tfm.tools.showSpinner();
