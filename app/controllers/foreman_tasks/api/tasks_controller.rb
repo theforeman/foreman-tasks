@@ -31,6 +31,13 @@ module ForemanTasks
       param :id, :identifier, desc: 'UUID of the task'
       def details; end
 
+      api :GET, '/tasks/:id/sub_tasks', 'Show sub_tasks details'
+      param :id, :identifier, desc: 'UUID of the task'
+      def sub_tasks
+        filtered_scope = resource_scope.find(params[:id]).sub_tasks
+        tasks_list filtered_scope
+      end
+
       api :POST, '/tasks/bulk_search', 'List dynflow tasks for uuids'
       param :searches, Array, :desc => 'List of uuids to fetch info about' do
         param :search_id, String, :desc => <<-DESC
@@ -121,35 +128,8 @@ module ForemanTasks
         param :order, String, :desc => N_('How to order the sorted results (e.g. ASC for ascending)')
       end
       def index
-        total = resource_scope.count
-        subtotal = resource_scope.search_for(params[:search]).select('DISTINCT foreman_tasks_tasks.id').count
-
-        scope = resource_scope.search_for(params[:search]).select('DISTINCT foreman_tasks_tasks.*')
-
-        ordering_params = {
-          sort_by: params[:sort_by] || 'started_at',
-          sort_order: params[:sort_order] || 'DESC'
-        }
-        scope = ordering_scope(scope, ordering_params)
-
-        pagination_params = {
-          page: params[:page] || 1,
-          per_page: params[:per_page] || Setting[:entries_per_page] || 20
-        }
-        scope = pagination_scope(scope, pagination_params)
-        results = scope.map { |task| task_hash(task) }
-
-        render :json => {
-          total: total,
-          subtotal: subtotal,
-          page: pagination_params[:page],
-          per_page: pagination_params[:per_page],
-          sort: {
-            by: ordering_params[:sort_by],
-            order: ordering_params[:sort_order]
-          },
-          results: results
-        }
+        filtered_scope = DashboardTableFilter.new(resource_scope, params).scope
+        tasks_list filtered_scope
       end
 
       def_param_group :callback_target do
@@ -284,13 +264,46 @@ module ForemanTasks
 
       def action_permission
         case params[:action]
-        when 'bulk_search', 'summary', 'details'
+        when 'bulk_search', 'summary', 'details', 'sub_tasks'
           :view
         when 'bulk_resume'
           :edit
         else
           super
         end
+      end
+
+      def tasks_list(filtered_scope)
+        total = resource_scope.count
+
+        search_scope = filtered_scope.search_for(params[:search])
+        subtotal = search_scope.select('DISTINCT foreman_tasks_tasks.id').count
+        filtered_scope = search_scope.select('DISTINCT foreman_tasks_tasks.*')
+
+        ordering_params = {
+          sort_by: params[:sort_by] || 'started_at',
+          sort_order: params[:sort_order] || 'DESC'
+        }
+        filtered_scope = ordering_scope(filtered_scope, ordering_params)
+
+        pagination_params = {
+          page: params[:page] || 1,
+          per_page: params[:per_page] || Setting[:entries_per_page] || 20
+        }
+        filtered_scope = pagination_scope(filtered_scope, pagination_params)
+        results = filtered_scope.map { |task| task_hash(task) }
+
+        render :json => {
+          total: total,
+          subtotal: subtotal,
+          page: pagination_params[:page],
+          per_page: pagination_params[:per_page],
+          sort: {
+            by: ordering_params[:sort_by],
+            order: ordering_params[:sort_order]
+          },
+          results: results
+        }
       end
     end
   end

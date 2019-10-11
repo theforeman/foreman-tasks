@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TasksTablePaginationReducer reducer should handle TASKS_TABLE_SET_PAGINATION 1`] = `
+Object {
+  "tasksTableQuery": Object {
+    "pagination": Object {
+      "page": 4,
+      "perPage": 7,
+    },
+  },
+}
+`;
+
+exports[`TasksTablePaginationReducer reducer should handle TASKS_TABLE_SET_SORT 1`] = `
+Object {
+  "tasksTableQuery": Object {
+    "sort": Object {
+      "by": "a",
+      "order": "b",
+    },
+  },
+}
+`;
+
+exports[`TasksTablePaginationReducer reducer should handle TASKS_TABLE_SUCCESS 1`] = `
+Object {
+  "tasksTableQuery": Object {
+    "itemCount": 120,
+    "pagination": Object {
+      "page": 3,
+      "perPage": 12,
+    },
+  },
+}
+`;
+
+exports[`TasksTablePaginationReducer reducer should return the initial state 1`] = `
+Object {
+  "tasksTableQuery": Object {},
+}
+`;
