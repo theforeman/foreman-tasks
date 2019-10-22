@@ -20,7 +20,7 @@ module ForemanTasks
       dynflow_path += task.external_id.to_s if task
       dynflow_rack_env = { 'rack.session' => { 'user' => user.id, 'expires_at' => Time.zone.now + 100 },
                            'PATH_INFO' => dynflow_path }.with_indifferent_access
-      ForemanTasks::Dynflow::ConsoleAuthorizer.new(dynflow_rack_env).allow?
+      ForemanTasks::Dynflow::ConsoleAuthorizer.from_env(dynflow_rack_env).allow?
     end
 
     describe 'admin user' do

@@ -1,7 +1,18 @@
 module ForemanTasks
+  class Dynflow::SidekiqConsoleConstraint
+    def matches?(request)
+      Setting[:dynflow_enable_console] &&
+        (!Setting[:dynflow_console_require_auth] || Dynflow::ConsoleAuthorizer.new(request).allow?)
+    end
+  end
+
   class Dynflow::ConsoleAuthorizer
-    def initialize(env)
-      @rack_request = Rack::Request.new(env)
+    def self.from_env(env)
+      new(Rack::Request.new(env))
+    end
+
+    def initialize(request)
+      @rack_request = request
       @user_id = @rack_request.session[:user]
       @expires_at = @rack_request.session[:expires_at]
       @user = User.unscoped.where(:id => @user_id).first unless session_expired?
