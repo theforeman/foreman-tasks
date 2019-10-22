@@ -9,7 +9,7 @@ module ForemanTasks
       ::Dynflow::Web.setup do
         before do
           if !Setting[:dynflow_enable_console] ||
-             (Setting[:dynflow_console_require_auth] && !ConsoleAuthorizer.new(env).allow?)
+             (Setting[:dynflow_console_require_auth] && !ConsoleAuthorizer.from_env(env).allow?)
             halt 403, 'Access forbidden'
           end
         end
