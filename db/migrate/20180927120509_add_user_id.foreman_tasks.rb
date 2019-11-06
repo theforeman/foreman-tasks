@@ -5,8 +5,10 @@ class AddUserId < ActiveRecord::Migration[5.0]
     return if User.unscoped.find_by(:login => User::ANONYMOUS_ADMIN).nil?
     User.as_anonymous_admin do
       user_locks.select(:resource_id).distinct.pluck(:resource_id).each do |owner_id|
-        tasks = ForemanTasks::Task.joins(:locks).where(:locks => user_locks.where(:resource_id => owner_id))
-        tasks.update_all(:user_id => owner_id)
+        if User.exists?(:id => owner_id)
+          tasks = ForemanTasks::Task.joins(:locks).where(:locks => user_locks.where(:resource_id => owner_id))
+          tasks.update_all(:user_id => owner_id)
+        end
         user_locks.where(:resource_id => owner_id).delete_all
       end
     end
