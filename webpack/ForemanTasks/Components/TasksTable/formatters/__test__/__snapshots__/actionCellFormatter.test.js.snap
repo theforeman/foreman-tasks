@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`actionCellFormatter render 1`] = `
+<ActionButton
+  availableActions={
+    Object {
+      "cancellable": true,
+    }
+  }
+  id="some-id"
+  name="some-name"
+  taskActions={Object {}}
+/>
+`;

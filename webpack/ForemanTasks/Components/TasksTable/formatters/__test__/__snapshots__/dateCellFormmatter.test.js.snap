@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`dateCellFormmatter render 1`] = `
+<LongDateTime
+  date="some-value"
+  defaultValue="N/A"
+  seconds={true}
+/>
+`;

@@ -1,6 +1,4 @@
-export {
-  default as selectionHeaderCellFormatter,
-} from './selectionHeaderCellFormatter';
+export { default as selectionHeaderCellFormatter } from './selectionHeaderCellFormatter';
 export { default as selectionCellFormatter } from './selectionCellFormatter';
 
 export { actionNameCellFormatter } from './actionNameCellFormatter';

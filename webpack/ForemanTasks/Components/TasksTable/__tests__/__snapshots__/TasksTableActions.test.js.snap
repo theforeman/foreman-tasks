@@ -1,5 +1,79 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`TasksTable actions should actionSelected CANCEL cancelleble 1`] = `
+Array [
+  Array [
+    [Function],
+  ],
+  Array [
+    "TASKS_TABLE",
+  ],
+  Array [
+    [Function],
+  ],
+]
+`;
+
+exports[`TasksTable actions should actionSelected CANCEL not cancelleble 1`] = `
+Array [
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "Not all the selected tasks can be canceled",
+          "type": "warning",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;
+
+exports[`TasksTable actions should actionSelected RESUME not resumable 1`] = `
+Array [
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "Not all the selected tasks can be resumed",
+          "type": "warning",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;
+
+exports[`TasksTable actions should actionSelected RESUME resumable 1`] = `
+Array [
+  Array [
+    [Function],
+  ],
+  Array [
+    "TASKS_TABLE",
+  ],
+  Array [
+    [Function],
+  ],
+]
+`;
+
+exports[`TasksTable actions should cancelTask 1`] = `
+Array [
+  Array [
+    [Function],
+  ],
+  Array [
+    "TASKS_TABLE",
+  ],
+  Array [
+    [Function],
+  ],
+]
+`;
+
 exports[`TasksTable actions should cancelTaskRequest and fail 1`] = `
 Array [
   Array [
@@ -54,7 +128,7 @@ Array [
 ]
 `;
 
-exports[`TasksTable actions should cancelTask 1`] = `
+exports[`TasksTable actions should resumeTask 1`] = `
 Array [
   Array [
     [Function],
@@ -96,20 +170,6 @@ Array [
       },
       "type": "TOASTS_ADD",
     },
-  ],
-]
-`;
-
-exports[`TasksTable actions should resumeTask 1`] = `
-Array [
-  Array [
-    [Function],
-  ],
-  Array [
-    "TASKS_TABLE",
-  ],
-  Array [
-    [Function],
   ],
 ]
 `;

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`actionNameCellFormatter render 1`] = `
+<a
+  href="/some-url/some-id"
+>
+  action-name
+</a>
+`;

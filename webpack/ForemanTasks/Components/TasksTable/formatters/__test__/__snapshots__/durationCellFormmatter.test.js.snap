@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`durationCellFormmatter render with tooltip 1`] = `
+<span
+  className="param-value"
+  title="some-tooltip"
+>
+  some-value
+</span>
+`;
+
+exports[`durationCellFormmatter render without tooltip 1`] = `
+<span
+  className="param-value"
+>
+  some-value
+</span>
+`;
