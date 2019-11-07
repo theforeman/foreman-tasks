@@ -29,7 +29,9 @@ export const selectErrors = state => {
 };
 
 export const selectProgress = state =>
-  selectTaskDetails(state).progress * 100 || 0;
+  selectTaskDetails(state).progress
+    ? selectTaskDetails(state).progress.toFixed(4) * 100
+    : 0;
 
 export const selectUsername = state =>
   selectTaskDetails(state).username || null;
