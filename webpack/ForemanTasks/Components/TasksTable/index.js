@@ -26,7 +26,4 @@ const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
 export const reducers = { tasksTable: reducer };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TasksTablePage);
+export default connect(mapStateToProps, mapDispatchToProps)(TasksTablePage);

@@ -4,7 +4,7 @@ exports[`TaskDetails rendering render without Props 1`] = `
 <div
   className="task-details-react well"
 >
-  <Uncontrolled(Tabs)
+  <ForwardRef
     animation={false}
     defaultActiveKey={1}
     id="task-details-tabs"
@@ -94,6 +94,6 @@ exports[`TaskDetails rendering render without Props 1`] = `
         startedAt=""
       />
     </Tab>
-  </Uncontrolled(Tabs)>
+  </ForwardRef>
 </div>
 `;
