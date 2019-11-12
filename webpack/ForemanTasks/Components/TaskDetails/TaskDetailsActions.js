@@ -66,10 +66,10 @@ export const fetchTaskDetails = (
   id,
   timeoutId,
   refetchTaskDetailsAction
-) => dispatch => {
+) => async dispatch => {
   showLoading();
   dispatch(startRequest());
-  getTasksDetails(id, dispatch, timeoutId, refetchTaskDetailsAction);
+  await getTasksDetails(id, dispatch, timeoutId, refetchTaskDetailsAction);
 };
 
 const getTasksDetails = async (
