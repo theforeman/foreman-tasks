@@ -13,7 +13,7 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
   />
   <PageLayout
     beforeToolbarComponent={
-      <Connect(TasksDashboard)
+      <UNDEFINED
         history={
           Object {
             "location": Object {
@@ -137,7 +137,7 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
   />
   <PageLayout
     beforeToolbarComponent={
-      <Connect(TasksDashboard)
+      <UNDEFINED
         history={
           Object {
             "location": Object {
