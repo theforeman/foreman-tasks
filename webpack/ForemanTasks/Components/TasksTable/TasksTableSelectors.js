@@ -1,6 +1,7 @@
 import { translate as __ } from 'foremanReact/common/I18n';
 import { selectForemanTasks } from '../../ForemanTasksSelectors';
 import { getDuration } from './TasksTableHelpers';
+import { CLOSED } from './TasksTableConstants';
 
 export const selectTasksTable = state =>
   selectForemanTasks(state).tasksTable || {};
@@ -23,8 +24,8 @@ export const selectActionName = state =>
 export const selectSelectedRows = state =>
   selectTasksTableQuery(state).selectedRows || [];
 
-export const selectIsCancelAllModalOpen = state =>
-  selectTasksTableQuery(state).isCancelAllModalOpen || false;
+export const selectModalStatus = state =>
+  selectTasksTableQuery(state).modalStatus || CLOSED;
 
 export const selectResults = state => {
   const { results } = selectTasksTableContent(state);

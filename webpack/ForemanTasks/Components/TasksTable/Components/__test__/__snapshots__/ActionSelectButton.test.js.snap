@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ActionSelectButton renders with minimal props 1`] = `
+<DropdownButton
+  disabled={false}
+  id="selcted-action-type"
+  title="Select Action"
+>
+  <MenuItem
+    bsClass="dropdown"
+    disabled={false}
+    divider={false}
+    eventKey="1"
+    header={false}
+    onClick={[MockFunction]}
+    title="Cancel selected tasks"
+  >
+    Cancel Selected
+  </MenuItem>
+  <MenuItem
+    bsClass="dropdown"
+    disabled={false}
+    divider={false}
+    eventKey="2"
+    header={false}
+    onClick={[MockFunction]}
+    title="Resume selected tasks"
+  >
+    Resume Selected
+  </MenuItem>
+</DropdownButton>
+`;

@@ -1,12 +1,13 @@
 import { testActionSnapshotWithFixtures } from 'react-redux-test-utils';
 import API from 'foremanReact/API';
-import { TASKS_TABLE_ID } from '../TasksTableConstants';
+import { TASKS_TABLE_ID, CANCEL, RESUME } from '../TasksTableConstants';
 import {
   getTableItems,
   cancelTask,
   cancelTaskRequest,
   resumeTask,
   resumeTaskRequest,
+  actionSelected,
 } from '../TasksTableActions';
 
 jest.mock('foremanReact/components/common/table', () => ({
@@ -38,6 +39,50 @@ const fixtures = {
       Promise.reject(new Error('Network Error'))
     );
     return resumeTaskRequest('some-id', 'some-name', 'some-url');
+  },
+  'should actionSelected CANCEL not cancelleble': () => {
+    const selected = [
+      {
+        id: '',
+        name: '',
+        isResumeble: false,
+        isCancelleble: false,
+      },
+    ];
+    return actionSelected(CANCEL, selected, 'some-url');
+  },
+  'should actionSelected CANCEL cancelleble': () => {
+    const selected = [
+      {
+        id: '',
+        name: '',
+        isResumeble: false,
+        isCancelleble: true,
+      },
+    ];
+    return actionSelected(CANCEL, selected, 'some-url');
+  },
+  'should actionSelected RESUME not resumable': () => {
+    const selected = [
+      {
+        id: '',
+        name: '',
+        isResumeble: false,
+        isCancelleble: false,
+      },
+    ];
+    return actionSelected(RESUME, selected, 'some-url');
+  },
+  'should actionSelected RESUME resumable': () => {
+    const selected = [
+      {
+        id: '',
+        name: '',
+        isResumeble: true,
+        isCancelleble: false,
+      },
+    ];
+    return actionSelected(RESUME, selected, 'some-url');
   },
 };
 describe('TasksTable actions', () => {

@@ -8,13 +8,13 @@ import {
   SELECT_ROWS,
   UNSELECT_ROWS,
   UNSELECT_ALL_ROWS,
-  TASKS_TABLE_SHOW_CANCEL_ALL_MODAL,
-  TASKS_TABLE_HIDE_CANCEL_ALL_MODAL,
+  TASKS_TABLE_SELECTED_MODAL,
+  CLOSED,
 } from './TasksTableConstants';
 
 const initialState = Immutable({
   selectedRows: [],
-  isCancelAllModalOpen: false,
+  modalStatus: CLOSED,
 });
 
 export const TasksTableQueryReducer = (state = initialState, action) => {
@@ -42,10 +42,8 @@ export const TasksTableQueryReducer = (state = initialState, action) => {
       );
     case UNSELECT_ALL_ROWS:
       return state.set('selectedRows', []);
-    case TASKS_TABLE_SHOW_CANCEL_ALL_MODAL:
-      return state.set('isCancelAllModalOpen', true);
-    case TASKS_TABLE_HIDE_CANCEL_ALL_MODAL:
-      return state.set('isCancelAllModalOpen', false);
+    case TASKS_TABLE_SELECTED_MODAL:
+      return state.set('modalStatus', payload);
     default:
       return state;
   }
