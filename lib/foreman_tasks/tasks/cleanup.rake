@@ -4,15 +4,15 @@ namespace :foreman_tasks do
       Clean tasks based on filter and age. ENV variables:
 
         * TASK_SEARCH : scoped search filter (example: 'label = "Actions::Foreman::Host::ImportFacts"')
-        * AFTER       : delete tasks created after *AFTER* period. Expected format is a number followed by the time unit (s,h,m,y), such as '10d' for 10 days
+        * AFTER       : delete tasks started after *AFTER* period. Expected format is a number followed by the time unit (s = seconds, m = minutes, h = hours, d = days, y = years), such as '10d' for 10 days
         * STATES      : comma separated list of task states to touch with the cleanup, by default only stopped tasks are covered, special value all can be used to clean the tasks, disregarding their states
         * NOOP        : set to "true" if the task should not actually perform the deletion
         * VERBOSE     : set to "true" for more verbose output
         * BATCH_SIZE  : the size of batches the tasks get processed in (1000 by default)
         * TASK_BACKUP : set to "true" or "false" to enable/disable task backup
 
-      If none of TASK_SEARCH, BEFORE, STATES is specified, the tasks will be cleaned based
-      configuration in settings
+      If TASK_SEARCH is set then AFTER, STATES can be set and it's used for cleanup. If TASK_SEARCH is not set then
+      the cleanup respects the configuration file and setting AFTER or STATES will throw exception.
     DESC
     task :run => 'environment' do
       options = {}
