@@ -32,6 +32,7 @@ export const selectResults = state => {
   if (!results) return [];
   return results.map(result => ({
     ...result,
+    action: result.action || result.label.replace(/::/g, ' '),
     username: result.username || '',
     state: result.state + (result.frozen ? ` ${__('Disabled')}` : ''),
     duration: getDuration(result.started_at, result.ended_at),
