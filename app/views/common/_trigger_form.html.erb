@@ -1,8 +1,8 @@
 <div class="form-group ">
   <label class="col-md-2 control-label"><%= _('Schedule') %></label>
   <div class="col-md-6">
-    <% javascript 'foreman_tasks/trigger_form' %>
-    <% stylesheet 'foreman_tasks/trigger_form' %>
+    <% javascript 'foreman_tasks/foreman_tasks' %>
+    <% stylesheet 'foreman_tasks/foreman_tasks' %>
 
     <%= javascript_tag do %>
       $(function() { trigger_form_selector_binds('<%= f.options[:html][:id] %>','<%= f.object_name %>') });

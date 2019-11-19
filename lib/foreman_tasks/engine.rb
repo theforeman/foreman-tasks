@@ -14,15 +14,8 @@ module ForemanTasks
                                                                                                        end
     end
 
-    # Precompile any JS or CSS files under app/assets/
-    # If requiring files from each other, list them explicitly here to avoid precompiling the same
-    # content twice.
-    assets_to_precompile =
-      Dir.chdir(root) do
-        Dir['app/assets/javascripts/**/*', 'app/assets/stylesheets/**/*'].map do |f|
-          f.split(File::SEPARATOR, 4).last
-        end
-      end
+    assets_to_precompile = %w[foreman_tasks/foreman_tasks.css
+                              foreman_tasks/foreman_tasks.js]
 
     initializer 'foreman_tasks.assets.precompile' do |app|
       app.config.assets.precompile += assets_to_precompile
