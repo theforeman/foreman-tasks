@@ -11,8 +11,3 @@
  *= require_self
  *= require_tree .
  */
-
-div.form-group div.trigger_fields {
-  margin-top: 15px;
-}
-
