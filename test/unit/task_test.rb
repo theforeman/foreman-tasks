@@ -95,6 +95,14 @@ class TasksTest < ActiveSupport::TestCase
     end
   end
 
+  describe 'users' do
+    test 'users can be deleted even if they have tasks assigned' do
+      user = FactoryBot.create(:user)
+      FactoryBot.create(:some_task, :user => user)
+      user.destroy!
+    end
+  end
+
   describe 'state_updated_at' do
     it 'updates the state_updated_at when the state changes' do
       task = FactoryBot.create(:some_task)

@@ -149,6 +149,7 @@ module ForemanTasks
       ForemanTasks.dynflow.eager_load_actions! if ForemanTasks.dynflow.initialized?
 
       Authorizer.send(:prepend, AuthorizerExt)
+      User.send(:include, ForemanTasks::Concerns::UserExtensions)
     end
 
     rake_tasks do
