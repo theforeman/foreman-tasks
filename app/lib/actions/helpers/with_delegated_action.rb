@@ -46,9 +46,9 @@ module Actions
 
       def delegated_action
         # TODO: make it easier in dynflow to load action data
-        delegated_step = task.execution_plan.steps.values.find_all do |step|
+        delegated_step = task.execution_plan.steps.values.reverse.find do |step|
           step.action_id == input[:delegated_action_id]
-        end.last
+        end
         return unless delegated_step
         world.persistence.load_action(delegated_step)
       end

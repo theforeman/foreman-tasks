@@ -44,9 +44,9 @@ class RecurringLogicsTest < ActiveSupport::TestCase
       days = '11'
       days_of_week = { '1' => '1', '2' => '0', '3' => '0', '4' => '1', '5' => '0', '6' => '1', '7' => '0' }
       time_hash = { '0' => '2015', '1' => '12', '2' => '10', '3' => hours, '4' => minutes }
-      expected_result_hourly  = { :minutes => minutes }
-      expected_result_daily   = { :minutes => minutes, :hours => hours }
-      expected_result_weekly  = { :minutes => minutes, :hours => hours, :days_of_week => '1,4,6' }
+      expected_result_hourly = { :minutes => minutes }
+      expected_result_daily = { :minutes => minutes, :hours => hours }
+      expected_result_weekly = { :minutes => minutes, :hours => hours, :days_of_week => '1,4,6' }
       expected_result_monthly = { :minutes => minutes, :hours => hours, :days => days }
       ForemanTasks::RecurringLogic.cronline_hash(:hourly,  time_hash, days, days_of_week).must_equal expected_result_hourly
       ForemanTasks::RecurringLogic.cronline_hash(:daily,   time_hash, days, days_of_week).must_equal expected_result_daily

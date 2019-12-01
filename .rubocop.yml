@@ -1,3 +1,5 @@
+require: rubocop-rails
+
 # TODO: remove this file by either moving cops here or fixing code
 inherit_from:
   - .rubocop_todo.yml
@@ -33,9 +35,6 @@ Style/StringLiterals:
 # Don't enforce frozen string literals
 Style/FrozenStringLiteralComment:
   Enabled: false
-
-Style/FormatStringToken:
-  EnforcedStyle: template
 
 Rails/SkipsModelValidations:
   Enabled: false
@@ -87,9 +86,6 @@ Style/IfUnlessModifier:
 Style/NumericPredicate:
   Enabled: false
 
-Style/IfUnlessModifier:
-  Enabled: false
-
 Style/SafeNavigation:
   Enabled: false
 
@@ -115,4 +111,7 @@ Rails/HelperInstanceVariable:
   Enabled: false
 
 Naming/RescuedExceptionsVariableName:
+  Enabled: false
+
+Style/WordArray:
   Enabled: false
