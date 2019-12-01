@@ -79,10 +79,10 @@ class TasksTest < ActiveSupport::TestCase
       tasks_to_delete = [FactoryBot.create(:dynflow_task, :user_create_task),
                          FactoryBot.create(:dynflow_task, :product_create_task)]
 
-      tasks_to_keep   = [FactoryBot.create(:dynflow_task, :user_create_task) do |task|
-                           task.started_at = task.ended_at = Time.zone.now
-                           task.save
-                         end]
+      tasks_to_keep = [FactoryBot.create(:dynflow_task, :user_create_task) do |task|
+                         task.started_at = task.ended_at = Time.zone.now
+                         task.save
+                       end]
       cleaner.expects(:tasks_to_csv)
       cleaner.delete
       ForemanTasks::Task.where(id: tasks_to_delete).must_be_empty

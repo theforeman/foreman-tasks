@@ -19,7 +19,7 @@ module ForemanTasks
         | #{_('Required lock: %s') % required_lock.name}
         | #{_('Conflicts with tasks:')}
         HEADER
-        url_helpers       = Rails.application.routes.url_helpers
+        url_helpers = Rails.application.routes.url_helpers
         conflicting_tasks = conflicting_locks
                             .map(&:task)
                             .uniq

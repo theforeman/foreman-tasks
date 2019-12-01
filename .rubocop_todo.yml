@@ -190,3 +190,6 @@ Style/GuardClause:
 Style/RedundantReturn:
   Exclude:
     - 'app/models/foreman_tasks/concerns/action_triggering.rb'
+
+Lint/SendWithMixinArgument:
+  Enabled: false
