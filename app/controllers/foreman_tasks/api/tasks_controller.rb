@@ -240,7 +240,7 @@ module ForemanTasks
         sort_by = ordering_params[:sort_by] || 'started_at'
         sort_order = ordering_params[:sort_order] || 'DESC'
         scope = scope.select("*, coalesce(ended_at, current_timestamp) - coalesce(coalesce(started_at, ended_at), current_timestamp) as duration")
-        scope.order("#{sort_by} #{sort_order}")
+        scope.order(sort_by => sort_order)
       end
 
       def task_hash(task)
