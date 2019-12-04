@@ -1,13 +1,14 @@
 import { testActionSnapshotWithFixtures } from '@theforeman/test';
 import API from 'foremanReact/API';
-import { TASKS_TABLE_ID, CANCEL, RESUME } from '../TasksTableConstants';
+import { TASKS_TABLE_ID } from '../TasksTableConstants';
 import {
   getTableItems,
   cancelTask,
   cancelTaskRequest,
   resumeTask,
   resumeTaskRequest,
-  actionSelected,
+  bulkCancel,
+  bulkResume,
 } from '../TasksTableActions';
 
 jest.mock('foremanReact/components/common/table', () => ({
@@ -18,10 +19,15 @@ jest.mock('foremanReact/API');
 
 API.post.mockImplementation(() => ({ data: 'some-data' }));
 
+const taskInfo = {
+  id: 'some-id',
+  name: 'some-name',
+};
+
 const fixtures = {
-  'should cancelTask': () => cancelTask('some-id', 'some-name', 'some-url'),
+  'should cancelTask': () => cancelTask({ ...taskInfo, url: 'some-url' }),
   'should cancelTaskRequest and succeed': () =>
-    cancelTaskRequest('some-id', 'some-name', 'some-url'),
+    cancelTaskRequest('some-id', 'some-name'),
   'should cancelTaskRequest and fail': () => {
     API.post.mockImplementation(() =>
       Promise.reject(new Error('Network Error'))
@@ -29,60 +35,51 @@ const fixtures = {
     return cancelTaskRequest('some-id', 'some-name');
   },
 
-  'should resumeTask': () => resumeTask('some-id', 'some-name', 'some-url'),
+  'should resumeTask': () => resumeTask({ ...taskInfo, url: 'some-url' }),
   'should resumeTaskRequest and succeed': () => {
     API.post.mockImplementation(() => ({ data: 'some-data' }));
-    return resumeTaskRequest('some-id', 'some-name', 'some-url');
+    return resumeTaskRequest('some-id', 'some-name');
   },
   'should resumeTaskRequest and fail': () => {
     API.post.mockImplementation(() =>
       Promise.reject(new Error('Network Error'))
     );
-    return resumeTaskRequest('some-id', 'some-name', 'some-url');
+    return resumeTaskRequest('some-id', 'some-name');
   },
-  'should actionSelected CANCEL not cancelleble': () => {
-    const selected = [
-      {
-        id: '',
-        name: '',
-        isResumeble: false,
-        isCancelleble: false,
-      },
-    ];
-    return actionSelected(CANCEL, selected, 'some-url');
+  'handles bulkResume requests that fail': () => {
+    const selected = [{ ...taskInfo, isResumable: true, isCancellable: false }];
+
+    API.post.mockImplementation(() =>
+      Promise.reject(new Error('Network Error'))
+    );
+    return bulkResume({ selected, url: 'some-url' });
   },
-  'should actionSelected CANCEL cancelleble': () => {
-    const selected = [
-      {
-        id: '',
-        name: '',
-        isResumeble: false,
-        isCancelleble: true,
+  'handles resumable bulkResume requests': () => {
+    const selected = [{ ...taskInfo, isResumable: true, isCancellable: false }];
+
+    API.post.mockImplementation(() => ({
+      data: {
+        resumed: [{ action: 'I am resumed' }],
+        failed: [{ action: 'I am failed' }],
       },
-    ];
-    return actionSelected(CANCEL, selected, 'some-url');
+    }));
+    return bulkResume({ selected, url: 'some-url' });
   },
-  'should actionSelected RESUME not resumable': () => {
-    const selected = [
-      {
-        id: '',
-        name: '',
-        isResumeble: false,
-        isCancelleble: false,
-      },
-    ];
-    return actionSelected(RESUME, selected, 'some-url');
+  'handles bulkCancel requests': () => {
+    const selected = [{ ...taskInfo, isResumable: false, isCancellable: true }];
+    return bulkCancel({ selected, url: 'some-url' });
   },
-  'should actionSelected RESUME resumable': () => {
+  'handles bulkCancel requests that are not cancellable': () => {
     const selected = [
-      {
-        id: '',
-        name: '',
-        isResumeble: true,
-        isCancelleble: false,
-      },
+      { ...taskInfo, isResumable: false, isCancellable: false },
     ];
-    return actionSelected(RESUME, selected, 'some-url');
+    return bulkCancel({ selected, url: 'some-url' });
+  },
+  'handles bulkResume requests that are not resumable': () => {
+    const selected = [
+      { ...taskInfo, isResumable: false, isCancellable: false },
+    ];
+    return bulkResume({ selected, url: 'some-url' });
   },
 };
 describe('TasksTable actions', () => {
