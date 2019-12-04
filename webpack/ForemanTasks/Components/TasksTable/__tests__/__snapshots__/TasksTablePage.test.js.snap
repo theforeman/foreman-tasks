@@ -105,7 +105,8 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
   >
     <TasksTable
       actionName=""
-      actionSelected={[MockFunction]}
+      bulkCancel={[MockFunction]}
+      bulkResume={[MockFunction]}
       cancelTask={[MockFunction]}
       error={null}
       getTableItems={[MockFunction]}
@@ -261,7 +262,8 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
   >
     <TasksTable
       actionName=""
-      actionSelected={[MockFunction]}
+      bulkCancel={[MockFunction]}
+      bulkResume={[MockFunction]}
       cancelTask={[MockFunction]}
       error={null}
       getTableItems={[MockFunction]}

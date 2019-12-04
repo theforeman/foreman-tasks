@@ -2,7 +2,8 @@
 
 exports[`SubTasksPage rendering render with minimal props 1`] = `
 <Connect(TasksTablePage)
-  actionSelected={[MockFunction]}
+  bulkCancel={[MockFunction]}
+  bulkResume={[MockFunction]}
   cancelTask={[MockFunction]}
   getBreadcrumbs={[MockFunction]}
   getTableItems={[MockFunction]}
