@@ -11,6 +11,24 @@ module ForemanTasks
         @request.env['CONTENT_TYPE'] = 'application/json'
       end
 
+      describe 'GET /api/tasks' do
+        it 'lists all tasks with default sorting' do
+          FactoryBot.create_list(:dynflow_task, 5, :user_create_task)
+          get :index
+          assert_response :success
+          data = JSON.parse(response.body)
+          _(data['results'].count).must_equal 5
+        end
+
+        it 'supports searching' do
+          FactoryBot.create_list(:dynflow_task, 5, :user_create_task)
+          get :index, params: { :search => 'label = Actions::User::Create' }
+          assert_response :success
+          data = JSON.parse(response.body)
+          _(data['results'].count).must_equal 5
+        end
+      end
+
       describe 'GET /api/tasks/show' do
         it 'searches for task' do
           task = FactoryBot.create(:dynflow_task, :user_create_task)
