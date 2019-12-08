@@ -1,7 +1,6 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { withKnobs, number, text, select } from '@storybook/addon-knobs';
-import { action } from '@storybook/addon-actions';
+import { number, text, select, action } from '@theforeman/stories';
+
 import { withCardsDecorator } from '../../../../../../../stories/decorators';
 
 import {
@@ -10,37 +9,43 @@ import {
 } from '../../../../TasksDashboardConstants';
 import TasksDonutCard from './TasksDonutCard';
 
-storiesOf('TasksDashboard/TasksCardsGrid', module)
-  .addDecorator(withKnobs)
-  .addDecorator(withCardsDecorator)
-  .add('TasksDonutCard', () => {
-    const selectTime = select(
-      'time',
-      TASKS_DASHBOARD_AVAILABLE_TIMES,
-      TasksDonutCard.defaultProps.time
-    );
+export default {
+  title: 'TasksDashboard/TasksCardsGrid/Cards/TasksDonutCard',
+  component: TasksDonutCard,
+  decorators: [withCardsDecorator],
+  parameters: {
+    centered: { disable: true },
+  },
+};
 
-    const selectMode = select(
-      'mode',
-      { ...TASKS_DASHBOARD_AVAILABLE_QUERY_MODES, NONE: 'none' },
-      'none'
-    );
+export const Basic = () => {
+  const selectTime = select(
+    'time',
+    TASKS_DASHBOARD_AVAILABLE_TIMES,
+    TasksDonutCard.defaultProps.time
+  );
 
-    return (
-      <TasksDonutCard
-        title={text('title', 'Some Title')}
-        data={{
-          last: number('data.last', 3),
-          older: number('data.older', 5),
-        }}
-        time={selectTime}
-        query={{
-          state: text('query.state', 'some-state'),
-          mode: selectMode,
-          time: selectTime,
-        }}
-        wantedQueryState={text('wantedQueryState', 'wanted-state')}
-        updateQuery={action('updateQuery')}
-      />
-    );
-  });
+  const selectMode = select(
+    'mode',
+    { ...TASKS_DASHBOARD_AVAILABLE_QUERY_MODES, NONE: 'none' },
+    'none'
+  );
+
+  return (
+    <TasksDonutCard
+      title={text('title', 'Some Title')}
+      data={{
+        last: number('data.last', 3),
+        older: number('data.older', 5),
+      }}
+      time={selectTime}
+      query={{
+        state: text('query.state', 'some-state'),
+        mode: selectMode,
+        time: selectTime,
+      }}
+      wantedQueryState={text('wantedQueryState', 'wanted-state')}
+      updateQuery={action('updateQuery')}
+    />
+  );
+};
