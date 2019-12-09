@@ -30,7 +30,7 @@ const TasksTable = ({
 
   useEffect(() => {
     getTableItems(url);
-  }, [history.location.search]);
+  }, [getTableItems, url]);
 
   const getSelectionController = () => {
     const checkAllRowsSelected = () => results.length === selectedRows.length;
