@@ -1,4 +1,4 @@
-import { testComponentSnapshotsWithFixtures } from '@theforeman/test';;
+import { testComponentSnapshotsWithFixtures } from '@theforeman/test';
 
 import { TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS_ARRAY } from './TasksDonutChartConstants';
 import TasksDonutChart from './TasksDonutChart';
