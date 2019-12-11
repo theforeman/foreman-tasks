@@ -1,97 +1,128 @@
 require 'foreman_tasks_test_helper'
 
 class TasksTest < ActiveSupport::TestCase
-  describe 'filtering by current user' do
-    before do
-      @original_current_user = User.current
-      @user_one = FactoryBot.create(:user)
-      @user_two = FactoryBot.create(:user)
+  describe 'search' do
+    describe 'by current user' do
+      before do
+        @original_current_user = User.current
+        @user_one = FactoryBot.create(:user)
+        @user_two = FactoryBot.create(:user)
 
-      @task_one = FactoryBot.create(:some_task, :user => @user_one)
-      FactoryBot.create(:some_task, :user => @user_two)
+        @task_one = FactoryBot.create(:some_task, :user => @user_one)
+        FactoryBot.create(:some_task, :user => @user_two)
 
-      User.current = @user_one
+        User.current = @user_one
+      end
+      after { User.current = @original_current_user }
+
+      test 'can search the tasks by current_user' do
+        assert_equal [@task_one], ForemanTasks::Task.search_for('owner.id = current_user')
+      end
+
+      test 'can search by implicit search' do
+        assert_equal [@task_one], ForemanTasks::Task.search_for(@task_one.label)
+      end
+
+      test 'can search the tasks by current_user in combination with implicit search' do
+        assert_equal [@task_one], ForemanTasks::Task.search_for("owner.id = current_user AND #{@task_one.label}")
+      end
+
+      test 'can search the tasks by user' do
+        assert_equal [@task_one], ForemanTasks::Task.search_for("user = #{@user_one.login}")
+      end
+
+      test 'cannot search by arbitrary key' do
+        proc { ForemanTasks::Task.search_for('user.my_key ~ 5') }.must_raise(ScopedSearch::QueryNotSupported)
+        proc { ForemanTasks::Task.search_for('user. = 5') }.must_raise(ScopedSearch::QueryNotSupported)
+      end
+
+      test 'can search the tasks by negated user' do
+        assert_equal [@task_one], ForemanTasks::Task.search_for("user != #{@user_two.login}")
+        assert_equal [@task_one], ForemanTasks::Task.search_for("user <> #{@user_two.login}")
+        SecureRandom.stubs(:hex).returns('abc')
+        assert_equal ForemanTasks::Task.search_for("user != #{@user_two.login}").to_sql,
+                     ForemanTasks::Task.search_for("user <> #{@user_two.login}").to_sql
+      end
+
+      test 'can search the tasks by user\'s id' do
+        assert_equal [@task_one], ForemanTasks::Task.search_for("user.id = #{@user_one.id}")
+        assert_equal [@task_one], ForemanTasks::Task.search_for("owner.id = #{@user_one.id}")
+        assert_equal [@task_one], ForemanTasks::Task.search_for("user.id != #{@user_two.id}")
+        assert_equal [@task_one], ForemanTasks::Task.search_for("owner.id != #{@user_two.id}")
+      end
+
+      test 'can search by array of user ids' do
+        assert_equal [@task_one], ForemanTasks::Task.search_for("user.id ^ (#{@user_one.id})")
+        assert_equal [@task_one], ForemanTasks::Task.search_for("owner.id ^ (#{@user_one.id})")
+        assert_equal [@task_one], ForemanTasks::Task.search_for("user.id !^ (#{@user_two.id})")
+        assert_equal [@task_one], ForemanTasks::Task.search_for("owner.id !^ (#{@user_two.id})")
+      end
+
+      test 'cannot glob on user\'s id' do
+        proc { ForemanTasks::Task.search_for("user.id ~ something") }.must_raise(ScopedSearch::QueryNotSupported)
+        proc { ForemanTasks::Task.search_for("user.id ~ 5") }.must_raise(ScopedSearch::QueryNotSupported)
+      end
+
+      test 'can search the tasks by user with wildcards' do
+        part = @user_one.login[1..-1] # search for '*ser1' if login is 'user1'
+        # The following two should be equivalent
+        assert_equal [@task_one], ForemanTasks::Task.search_for("user ~ #{part}")
+        assert_equal [@task_one], ForemanTasks::Task.search_for("user ~ *#{part}*")
+        SecureRandom.stubs(:hex).returns('abc')
+        assert_equal ForemanTasks::Task.search_for("user ~ #{part}").to_sql,
+                     ForemanTasks::Task.search_for("user ~ *#{part}*").to_sql
+      end
+
+      test 'can search the tasks by user with negated wildcards' do
+        part = @user_two.login[1..-1] # search for '*ser1' if login is 'user1'
+        # The following two should be equivalent
+        assert_equal [@task_one], ForemanTasks::Task.search_for("user !~ #{part}")
+        assert_equal [@task_one], ForemanTasks::Task.search_for("user !~ *#{part}*")
+        SecureRandom.stubs(:hex).returns('abc')
+        assert_equal ForemanTasks::Task.search_for("user !~ #{part}").to_sql,
+                     ForemanTasks::Task.search_for("user !~ *#{part}*").to_sql
+      end
+
+      test 'can search the tasks by array' do
+        assert_equal [@task_one], ForemanTasks::Task.search_for("user ^ (this_user, #{@user_one.login}, that_user)")
+      end
+
+      test 'can search the tasks by negated array' do
+        assert_equal [@task_one], ForemanTasks::Task.search_for("user !^ (this_user, #{@user_two.login}, that_user)")
+      end
+
+      test 'properly returns username' do
+        assert_equal @task_one.username, @user_one.login
+      end
     end
-    after { User.current = @original_current_user }
 
-    test 'can search the tasks by current_user' do
-      assert_equal [@task_one], ForemanTasks::Task.search_for('owner.id = current_user')
-    end
+    describe 'by duration' do
+      before do
+        @task_one = FactoryBot.create(:dynflow_task)
+        @task_two = FactoryBot.create(:dynflow_task)
+      end
 
-    test 'can search by implicit search' do
-      assert_equal [@task_one], ForemanTasks::Task.search_for(@task_one.label)
-    end
+      it 'can search by seconds ' do
+        _(ForemanTasks::Task.search_for('duration < "2 seconds"')).must_be :empty?
+        _(ForemanTasks::Task.search_for('duration > "2 seconds"')).must_be :empty?
+        _(ForemanTasks::Task.search_for('duration = "2 seconds"')).must_equal [@task_one, @task_two]
+        _(ForemanTasks::Task.search_for('duration <= "2 seconds"')).must_equal [@task_one, @task_two]
+        _(ForemanTasks::Task.search_for('duration >= "2 seconds"')).must_equal [@task_one, @task_two]
+      end
 
-    test 'can search the tasks by current_user in combination with implicit search' do
-      assert_equal [@task_one], ForemanTasks::Task.search_for("owner.id = current_user AND #{@task_one.label}")
-    end
+      it 'can search by other time intervals' do
+        %w[minutes hours days months years].each do |interval|
+          _(ForemanTasks::Task.search_for("duration < \"2 #{interval}\"")).must_equal [@task_one, @task_two]
+          _(ForemanTasks::Task.search_for("duration > \"2 #{interval}\"")).must_be :empty?
+          _(ForemanTasks::Task.search_for("duration = \"2 #{interval}\"")).must_be :empty?
+          _(ForemanTasks::Task.search_for("duration <= \"2 #{interval}\"")).must_equal [@task_one, @task_two]
+          _(ForemanTasks::Task.search_for("duration >= \"2 #{interval}\"")).must_be :empty?
+        end
+      end
 
-    test 'can search the tasks by user' do
-      assert_equal [@task_one], ForemanTasks::Task.search_for("user = #{@user_one.login}")
-    end
-
-    test 'cannot search by arbitrary key' do
-      proc { ForemanTasks::Task.search_for('user.my_key ~ 5') }.must_raise(ScopedSearch::QueryNotSupported)
-      proc { ForemanTasks::Task.search_for('user. = 5') }.must_raise(ScopedSearch::QueryNotSupported)
-    end
-
-    test 'can search the tasks by negated user' do
-      assert_equal [@task_one], ForemanTasks::Task.search_for("user != #{@user_two.login}")
-      assert_equal [@task_one], ForemanTasks::Task.search_for("user <> #{@user_two.login}")
-      SecureRandom.stubs(:hex).returns('abc')
-      assert_equal ForemanTasks::Task.search_for("user != #{@user_two.login}").to_sql,
-                   ForemanTasks::Task.search_for("user <> #{@user_two.login}").to_sql
-    end
-
-    test 'can search the tasks by user\'s id' do
-      assert_equal [@task_one], ForemanTasks::Task.search_for("user.id = #{@user_one.id}")
-      assert_equal [@task_one], ForemanTasks::Task.search_for("owner.id = #{@user_one.id}")
-      assert_equal [@task_one], ForemanTasks::Task.search_for("user.id != #{@user_two.id}")
-      assert_equal [@task_one], ForemanTasks::Task.search_for("owner.id != #{@user_two.id}")
-    end
-
-    test 'can search by array of user ids' do
-      assert_equal [@task_one], ForemanTasks::Task.search_for("user.id ^ (#{@user_one.id})")
-      assert_equal [@task_one], ForemanTasks::Task.search_for("owner.id ^ (#{@user_one.id})")
-      assert_equal [@task_one], ForemanTasks::Task.search_for("user.id !^ (#{@user_two.id})")
-      assert_equal [@task_one], ForemanTasks::Task.search_for("owner.id !^ (#{@user_two.id})")
-    end
-
-    test 'cannot glob on user\'s id' do
-      proc { ForemanTasks::Task.search_for("user.id ~ something") }.must_raise(ScopedSearch::QueryNotSupported)
-      proc { ForemanTasks::Task.search_for("user.id ~ 5") }.must_raise(ScopedSearch::QueryNotSupported)
-    end
-
-    test 'can search the tasks by user with wildcards' do
-      part = @user_one.login[1..-1] # search for '*ser1' if login is 'user1'
-      # The following two should be equivalent
-      assert_equal [@task_one], ForemanTasks::Task.search_for("user ~ #{part}")
-      assert_equal [@task_one], ForemanTasks::Task.search_for("user ~ *#{part}*")
-      SecureRandom.stubs(:hex).returns('abc')
-      assert_equal ForemanTasks::Task.search_for("user ~ #{part}").to_sql,
-                   ForemanTasks::Task.search_for("user ~ *#{part}*").to_sql
-    end
-
-    test 'can search the tasks by user with negated wildcards' do
-      part = @user_two.login[1..-1] # search for '*ser1' if login is 'user1'
-      # The following two should be equivalent
-      assert_equal [@task_one], ForemanTasks::Task.search_for("user !~ #{part}")
-      assert_equal [@task_one], ForemanTasks::Task.search_for("user !~ *#{part}*")
-      SecureRandom.stubs(:hex).returns('abc')
-      assert_equal ForemanTasks::Task.search_for("user !~ #{part}").to_sql,
-                   ForemanTasks::Task.search_for("user !~ *#{part}*").to_sql
-    end
-
-    test 'can search the tasks by array' do
-      assert_equal [@task_one], ForemanTasks::Task.search_for("user ^ (this_user, #{@user_one.login}, that_user)")
-    end
-
-    test 'can search the tasks by negated array' do
-      assert_equal [@task_one], ForemanTasks::Task.search_for("user !^ (this_user, #{@user_two.login}, that_user)")
-    end
-
-    test 'properly returns username' do
-      assert_equal @task_one.username, @user_one.login
+      it 'raises an exception if duration is unknown' do
+        proc { ForemanTasks::Task.search_for('duration = "25 potatoes"') }.must_raise ScopedSearch::QueryNotSupported
+      end
     end
   end
 
