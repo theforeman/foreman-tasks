@@ -12,8 +12,8 @@ module ForemanTasks
       end
 
       describe 'GET /api/tasks' do
+        before { FactoryBot.create_list(:dynflow_task, 5, :user_create_task) }
         it 'lists all tasks with default sorting' do
-          FactoryBot.create_list(:dynflow_task, 5, :user_create_task)
           get :index
           assert_response :success
           data = JSON.parse(response.body)
@@ -21,10 +21,17 @@ module ForemanTasks
         end
 
         it 'supports searching' do
-          FactoryBot.create_list(:dynflow_task, 5, :user_create_task)
           get :index, params: { :search => 'label = Actions::User::Create' }
           assert_response :success
           data = JSON.parse(response.body)
+          _(data['results'].count).must_equal 5
+        end
+
+        it 'supports ordering by duration' do
+          get :index, params: { :sort_by => 'duration' }
+          assert_response :success
+          data = JSON.parse(response.body)
+          _(data.dig('sort', 'by')).must_equal 'duration'
           _(data['results'].count).must_equal 5
         end
       end
