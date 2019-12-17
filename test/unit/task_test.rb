@@ -103,6 +103,8 @@ class TasksTest < ActiveSupport::TestCase
       end
 
       it 'can search by seconds ' do
+        _(ForemanTasks::Task.search_for('duration < 2')).must_be :empty?
+        _(ForemanTasks::Task.search_for('duration = 2')).must_equal [@task_one, @task_two]
         _(ForemanTasks::Task.search_for('duration < "2 seconds"')).must_be :empty?
         _(ForemanTasks::Task.search_for('duration > "2 seconds"')).must_be :empty?
         _(ForemanTasks::Task.search_for('duration = "2 seconds"')).must_equal [@task_one, @task_two]

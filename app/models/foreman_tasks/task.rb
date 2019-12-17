@@ -42,7 +42,7 @@ module ForemanTasks
     scoped_search :on => :start_at, :complete_value => false
     scoped_search :on => :ended_at, :complete_value => false
     scoped_search :on => :parent_task_id, :complete_value => true
-    scoped_search :on => :duration, :complete_value => false, :ext_method => :search_by_duration, :operators => [:>, :>=, :'=', :<=, :<], :only_explicit => true
+    scoped_search :on => :duration, :complete_value => false, :ext_method => :search_by_duration, :operators => %w[> >= = <= <], :only_explicit => true
 
     # Note: the following searches may return duplicates, this is due to
     #       one task maybe having multiple locks (e.g. read/write) for the same resource_id

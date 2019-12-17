@@ -25,7 +25,7 @@ module ForemanTasks
       end
 
       # Expects the time in the format "\d+ (seconds|minutes|hours|days|months|years)"
-      SUPPORTED_DURATION_FORMAT = /\A\s*(\d+\s+\b(seconds?|minutes?|hours?|days?|months?|years?)\b)\b\s*\z/i.freeze
+      SUPPORTED_DURATION_FORMAT = /\A\s*(\d+(\s+\b(seconds?|minutes?|hours?|days?|months?|years?)\b)?)\b\s*\z/i.freeze
       def search_by_duration(_key, operator, value)
         raise "Unsupported duration '#{value}' specified for searching" unless value =~ SUPPORTED_DURATION_FORMAT
         value = value.strip
