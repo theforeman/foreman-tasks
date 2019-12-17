@@ -103,6 +103,7 @@ class TasksTest < ActiveSupport::TestCase
       end
 
       it 'can search by seconds ' do
+        skip unless on_postgresql?
         _(ForemanTasks::Task.search_for('duration < 2')).must_be :empty?
         _(ForemanTasks::Task.search_for('duration = 2')).must_equal [@task_one, @task_two]
         _(ForemanTasks::Task.search_for('duration < "2 seconds"')).must_be :empty?
@@ -113,6 +114,7 @@ class TasksTest < ActiveSupport::TestCase
       end
 
       it 'can search by other time intervals' do
+        skip unless on_postgresql?
         %w[minutes hours days months years].each do |interval|
           _(ForemanTasks::Task.search_for("duration < \"2 #{interval}\"")).must_equal [@task_one, @task_two]
           _(ForemanTasks::Task.search_for("duration > \"2 #{interval}\"")).must_be :empty?
