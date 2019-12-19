@@ -56,7 +56,7 @@ exports[`TaskInfo rendering render with Props 1`] = `
       md={3}
       sm={6}
     >
-      <Component
+      <_default
         date="2019-06-17 16:04:09 +0300"
         defaultValue="N/A"
       />
@@ -115,7 +115,7 @@ exports[`TaskInfo rendering render with Props 1`] = `
       md={3}
       sm={6}
     >
-      <Component
+      <_default
         date="2019-06-17 16:04:09 +0300"
         defaultValue="N/A"
       />
@@ -168,7 +168,7 @@ exports[`TaskInfo rendering render with Props 1`] = `
       md={3}
       sm={6}
     >
-      <Component
+      <_default
         date={null}
         defaultValue="N/A"
       />
@@ -359,7 +359,7 @@ exports[`TaskInfo rendering render without Props 1`] = `
       md={3}
       sm={6}
     >
-      <Component
+      <_default
         date=""
         defaultValue="N/A"
       />
@@ -418,7 +418,7 @@ exports[`TaskInfo rendering render without Props 1`] = `
       md={3}
       sm={6}
     >
-      <Component
+      <_default
         date=""
         defaultValue="N/A"
       />
@@ -469,7 +469,7 @@ exports[`TaskInfo rendering render without Props 1`] = `
       md={3}
       sm={6}
     >
-      <Component
+      <_default
         date=""
         defaultValue="N/A"
       />
