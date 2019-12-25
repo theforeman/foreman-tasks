@@ -1,4 +1,4 @@
-import { testComponentSnapshotsWithFixtures } from 'react-redux-test-utils';
+import { testComponentSnapshotsWithFixtures } from '@theforeman/test';
 import TasksTablePage from '../TasksTablePage';
 import { minProps } from './TasksTable.fixtures';
 

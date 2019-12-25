@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "lint": "./node_modules/.bin/eslint -c .eslintrc webpack/",
-    "test": "node node_modules/.bin/jest --no-cache",
-    "test:watch": "node node_modules/.bin/jest --watchAll",
-    "test:current": "node node_modules/.bin/jest --watch",
-    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "test": "tfm-test --plugin",
+    "test:watch": "tfm-test --plugin --watchAll",
+    "test:current": "tfm-test --plugin --watch",
+    "publish-coverage": "tfm-publish-coverage",
     "stories": "tfm-stories --plugin",
     "stories:build": "tfm-build-stories --plugin",
     "stories:deploy": "surge --project .storybook-dist",
@@ -22,76 +22,27 @@
     "url": "http://projects.theforeman.org/projects/foreman-tasks/issues"
   },
   "dependencies": {
-    "@theforeman/vendor": "^3.11.0",
+    "@theforeman/vendor": "^4.0.2",
     "c3": "^0.4.11",
     "humanize-duration": "^3.20.1",
     "react-intl": "^2.8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.7.0",
-    "@theforeman/env": "^3.11.0",
-    "@theforeman/builder": "^3.11.0",
-    "@theforeman/stories": "^3.11.0",
-    "@theforeman/vendor-core": "^3.11.0",
-    "@theforeman/vendor-dev": "^3.11.0",
+    "@theforeman/test": "^4.0.2",
+    "@theforeman/builder": "^4.0.2",
+    "@theforeman/vendor-dev": "^4.0.2",
     "babel-eslint": "^10.0.3",
-    "babel-jest": "^24.9.0",
-    "coveralls": "^3.0.0",
-    "enzyme": "^3.4.0",
-    "enzyme-adapter-react-16": "^1.4.0",
-    "enzyme-to-json": "^3.2.1",
     "eslint": "^4.10.0",
     "eslint-import-resolver-babel-module": "^5.1.0",
     "eslint-plugin-patternfly-react": "0.2.0",
     "identity-obj-proxy": "^3.0.0",
     "jed": "^1.1.1",
-    "jest-cli": "^24.9.0",
-    "jest-prop-type-error": "^1.1.0",
     "patternfly": "^3.58.0",
     "prettier": "^1.13.5",
-    "raf": "^3.4.0",
-    "react-redux-test-utils": "^0.1.1",
     "react-remarkable": "^1.1.3",
     "stylelint": "^9.3.0",
     "stylelint-config-standard": "^18.0.0",
     "surge": "^0.20.3"
-  },
-  "jest": {
-    "verbose": true,
-    "testMatch": [
-      "**/*.test.js"
-    ],
-    "testURL": "http://localhost/",
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "webpack/**/*.js",
-      "!webpack/index.js",
-      "!webpack/test_setup.js",
-      "!webpack/**/bundle*",
-      "!webpack/stories/**",
-      "!webpack/**/*stories.js"
-    ],
-    "coverageReporters": [
-      "lcov"
-    ],
-    "moduleNameMapper": {
-      "^.+\\.(png|gif|css|scss)$": "identity-obj-proxy"
-    },
-    "globals": {
-      "__testing__": true
-    },
-    "transform": {
-      "^.+\\.js$": "babel-jest"
-    },
-    "moduleDirectories": [
-      "node_modules/@theforeman/vendor-core/node_modules",
-      "node_modules",
-      "webpack"
-    ],
-    "setupFiles": [
-      "raf/polyfill",
-      "jest-prop-type-error",
-      "./webpack/test_setup.js"
-    ]
   }
 }

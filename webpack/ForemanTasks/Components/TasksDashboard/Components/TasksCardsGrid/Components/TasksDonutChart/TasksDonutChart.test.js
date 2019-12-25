@@ -1,4 +1,4 @@
-import { testComponentSnapshotsWithFixtures } from 'react-redux-test-utils';
+import { testComponentSnapshotsWithFixtures } from '@theforeman/test';;
 
 import { TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS_ARRAY } from './TasksDonutChartConstants';
 import TasksDonutChart from './TasksDonutChart';

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import API from 'foremanReact/API';
-import { IntegrationTestHelper } from 'react-redux-test-utils';
+import { IntegrationTestHelper } from '@theforeman/test';
 
 import TaskDetails, { reducers } from '../index';
 import { selectForemanTasks } from '../../../ForemanTasksSelectors';
