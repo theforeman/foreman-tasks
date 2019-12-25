@@ -1,6 +1,5 @@
 import React from 'react';
-import { testComponentSnapshotsWithFixtures } from 'react-redux-test-utils';
-import { shallow } from 'enzyme';
+import { testComponentSnapshotsWithFixtures, shallow } from '@theforeman/test';
 
 import { getQueryKeyText, getQueryValueText } from '../../TasksDashboardHelper';
 import TasksLabelsRow from './TasksLabelsRow';

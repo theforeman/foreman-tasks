@@ -1,4 +1,4 @@
-import { testReducerSnapshotWithFixtures } from 'react-redux-test-utils';
+import { testReducerSnapshotWithFixtures } from '@theforeman/test';
 
 import {
   FOREMAN_TASK_DETAILS_FETCH_TASK_SUCCESS,

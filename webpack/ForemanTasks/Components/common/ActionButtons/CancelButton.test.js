@@ -1,6 +1,5 @@
 import React from 'react';
-import { testComponentSnapshotsWithFixtures } from 'react-redux-test-utils';
-import { shallow } from 'enzyme';
+import { testComponentSnapshotsWithFixtures, shallow } from '@theforeman/test';
 import { CancelButton } from './CancelButton';
 
 const fixtures = {
