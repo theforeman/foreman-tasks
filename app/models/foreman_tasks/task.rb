@@ -70,6 +70,10 @@ module ForemanTasks
            end)
     scope :for_action_types, (->(action_types) { where('foreman_tasks_tasks.label IN (?)', Array(action_types)) })
 
+    class Jail < Safemode::Jail
+      allow :started_at, :ended_at, :result, :state, :label, :main_action
+    end
+
     def input
       {}
     end
