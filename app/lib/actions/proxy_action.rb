@@ -42,7 +42,11 @@ module Actions
         case event
         when nil
           if remote_task
-            on_resume
+            if remote_task.state == 'external'
+              trigger_remote_task
+            else
+              on_resume
+            end
           else
             trigger_proxy_task
           end
@@ -74,6 +78,12 @@ module Actions
         remote_task = prepare_remote_task
         remote_task.trigger(proxy_action_name, proxy_input)
         output[:proxy_task_id] = remote_task.remote_task_id
+      end
+    end
+
+    def trigger_remote_task
+      suspend do |_suspended_action|
+        ForemanTasks::RemoteTask.batch_trigger(remote_task.operation, [remote_task])
       end
     end
 
@@ -247,10 +257,12 @@ module Actions
     end
 
     def prepare_remote_task
+      state = input[:use_concurrency_control] ? 'external' : 'new'
       ::ForemanTasks::RemoteTask.new(:execution_plan_id => execution_plan_id,
                                      :proxy_url => input[:proxy_url],
                                      :step_id => run_step_id,
-                                     :operation => proxy_operation_name)
+                                     :operation => proxy_operation_name,
+                                     :state => state)
     end
 
     def proxy_task_id

@@ -9,6 +9,7 @@ module ForemanTasks
 
     scope :triggered, -> { where(:state => 'triggered') }
     scope :pending,   -> { where(:state => 'new') }
+    scope :external,  -> { where(:state => 'external') }
 
     delegate :proxy_action_name, :to => :action
 
