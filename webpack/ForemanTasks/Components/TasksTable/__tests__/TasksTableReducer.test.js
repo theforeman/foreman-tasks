@@ -16,7 +16,7 @@ const fixtures = {
   'should handle TASKS_TABLE_SUCCESS': {
     action: {
       type: `${TASKS_TABLE_ID}_SUCCESS`,
-      payload: {
+      response: {
         subtotal: 120,
         page: 3,
         per_page: 12,
