@@ -1,3 +1,4 @@
+import { createSelector } from 'reselect';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { selectForemanTasks } from '../../ForemanTasksSelectors';
 import { getDuration } from './TasksTableHelpers';
@@ -27,18 +28,18 @@ export const selectSelectedRows = state =>
 export const selectModalStatus = state =>
   selectTasksTableQuery(state).modalStatus || CLOSED;
 
-export const selectResults = state => {
-  const { results } = selectTasksTableContent(state);
-  if (!results) return [];
-  return results.map(result => ({
-    ...result,
-    action: result.action || result.label.replace(/::/g, ' '),
-    username: result.username || '',
-    state: result.state + (result.frozen ? ` ${__('Disabled')}` : ''),
-    duration: getDuration(result.started_at, result.ended_at),
-    availableActions: result.available_actions,
-  }));
-};
+export const selectResults = createSelector(
+  selectTasksTableContent,
+  ({ results }) =>
+    results.map(result => ({
+      ...result,
+      action: result.action || result.label.replace(/::/g, ' '),
+      username: result.username || '',
+      state: result.state + (result.frozen ? ` ${__('Disabled')}` : ''),
+      duration: getDuration(result.started_at, result.ended_at),
+      availableActions: result.available_actions,
+    }))
+);
 
 export const selectStatus = state => selectTasksTableContent(state).status;
 
