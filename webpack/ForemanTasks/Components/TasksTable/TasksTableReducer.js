@@ -18,9 +18,9 @@ const initialState = Immutable({
 });
 
 export const TasksTableQueryReducer = (state = initialState, action) => {
-  const { type, payload } = action;
+  const { type, payload, response } = action;
   const { subtotal, page, per_page: perPageString, action_name: actionName } =
-    payload || {};
+    response || {};
   const ACTION_TYPES = createTableActionTypes(TASKS_TABLE_ID);
   switch (type) {
     case ACTION_TYPES.SUCCESS:
