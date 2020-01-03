@@ -41,16 +41,7 @@ module Actions
       with_connection_error_handling(event) do |event|
         case event
         when nil
-          if remote_task
-            if remote_task.state == 'external'
-              trigger_remote_task
-            else
-              on_resume
-            end
-          else
-            trigger_proxy_task
-          end
-          suspend
+          start_or_resume
         when ::Dynflow::Action::Skip
           # do nothing
         when ::Dynflow::Action::Cancellable::Cancel
@@ -214,6 +205,19 @@ module Actions
     end
 
     private
+
+    def start_or_resume
+      if remote_task
+        if remote_task.state == 'external'
+          trigger_remote_task
+        else
+          on_resume
+        end
+      else
+        trigger_proxy_task
+      end
+      suspend
+    end
 
     def proxy_version(proxy)
       match = proxy.statuses[:version].version['version'].match(/(\d+)\.(\d+)\.(\d+)/)
