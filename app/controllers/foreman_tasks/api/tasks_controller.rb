@@ -240,7 +240,7 @@ module ForemanTasks
         sort_by = ordering_params[:sort_by] || 'started_at'
         sort_by = 'foreman_tasks_tasks.' + sort_by if sort_by == 'started_at'
         sort_order = ordering_params[:sort_order] || 'DESC'
-        scope = scope.select("*, coalesce(ended_at, current_timestamp) - coalesce(coalesce(started_at, ended_at), current_timestamp) as duration")
+        scope = scope.select("foreman_tasks_tasks.*, coalesce(ended_at, current_timestamp) - coalesce(coalesce(started_at, ended_at), current_timestamp) as duration")
         scope.order("#{sort_by} #{sort_order}")
       end
 
