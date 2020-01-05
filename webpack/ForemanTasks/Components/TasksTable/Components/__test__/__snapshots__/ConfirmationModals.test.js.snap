@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConfirmationModals renders ConfirmationModals 1`] = `
+<Fragment>
+  <CancelConfirm
+    action={[MockFunction]}
+    closeModal={[MockFunction]}
+    id="cancelConfirmModal"
+    selectedRowsLen={1}
+  />
+  <ResumeConfirm
+    action={[MockFunction]}
+    closeModal={[MockFunction]}
+    id="resumeConfirmModal"
+    selectedRowsLen={1}
+  />
+  <CancelConfirm
+    action={[MockFunction]}
+    closeModal={[MockFunction]}
+    id="cancelSelectedConfirmModal"
+    selectedRowsLen={7}
+  />
+  <ResumeConfirm
+    action={[MockFunction]}
+    closeModal={[MockFunction]}
+    id="resumeSelectedConfirmModal"
+    selectedRowsLen={7}
+  />
+</Fragment>
+`;

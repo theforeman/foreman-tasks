@@ -3,7 +3,6 @@
 exports[`TasksTableReducer reducer should handle SELECT_ROWS 1`] = `
 Object {
   "tasksTableQuery": Object {
-    "modalStatus": "CLOSED",
     "selectedRows": Array [
       1,
       2,
@@ -17,19 +16,9 @@ Object {
 }
 `;
 
-exports[`TasksTableReducer reducer should handle TASKS_TABLE_SELECTED_MODAL 1`] = `
-Object {
-  "tasksTableQuery": Object {
-    "modalStatus": "RESUME",
-    "selectedRows": Array [],
-  },
-}
-`;
-
 exports[`TasksTableReducer reducer should handle TASKS_TABLE_SET_PAGINATION 1`] = `
 Object {
   "tasksTableQuery": Object {
-    "modalStatus": "CLOSED",
     "selectedRows": Array [],
   },
 }
@@ -38,7 +27,6 @@ Object {
 exports[`TasksTableReducer reducer should handle TASKS_TABLE_SET_SORT 1`] = `
 Object {
   "tasksTableQuery": Object {
-    "modalStatus": "CLOSED",
     "selectedRows": Array [],
   },
 }
@@ -49,7 +37,6 @@ Object {
   "tasksTableQuery": Object {
     "actionName": undefined,
     "itemCount": 120,
-    "modalStatus": "CLOSED",
     "pagination": Object {
       "page": 3,
       "perPage": 12,
@@ -62,7 +49,6 @@ Object {
 exports[`TasksTableReducer reducer should handle UNSELECT_ALL_ROWS 1`] = `
 Object {
   "tasksTableQuery": Object {
-    "modalStatus": "CLOSED",
     "selectedRows": Array [],
   },
 }
@@ -71,7 +57,15 @@ Object {
 exports[`TasksTableReducer reducer should handle UNSELECT_ROWS 1`] = `
 Object {
   "tasksTableQuery": Object {
-    "modalStatus": "CLOSED",
+    "selectedRows": Array [],
+  },
+}
+`;
+
+exports[`TasksTableReducer reducer should handle UPDATE_CLICKED 1`] = `
+Object {
+  "tasksTableQuery": Object {
+    "clicked": "task",
     "selectedRows": Array [],
   },
 }
@@ -80,7 +74,6 @@ Object {
 exports[`TasksTableReducer reducer should return the initial state 1`] = `
 Object {
   "tasksTableQuery": Object {
-    "modalStatus": "CLOSED",
     "selectedRows": Array [],
   },
 }

@@ -8,10 +8,9 @@ import {
   SELECT_ROWS,
   UNSELECT_ALL_ROWS,
   UNSELECT_ROWS,
-  TASKS_TABLE_SELECTED_MODAL,
-  CLOSED,
   RESUME,
   CANCEL,
+  UPDATE_CLICKED,
 } from './TasksTableConstants';
 import { getApiPathname } from './TasksTableHelpers';
 import { fetchTasksSummary } from '../TasksDashboard/TasksDashboardActions';
@@ -94,7 +93,12 @@ export const unselectRow = id => ({
   payload: id,
 });
 
-export const actionSelected = (actionType, selected, url) => async dispatch => {
+export const actionSelected = (
+  actionType,
+  selected,
+  url,
+  parentTaskID
+) => async dispatch => {
   let notAllActionable = false;
   let someActionable = false;
   const promises = selected.map(task => {
@@ -122,21 +126,14 @@ export const actionSelected = (actionType, selected, url) => async dispatch => {
   if (someActionable) {
     await Promise.all(promises);
     dispatch(getTableItems(url));
-    dispatch(fetchTasksSummary(getURIQuery(url).time));
+    dispatch(fetchTasksSummary(getURIQuery(url).time, parentTaskID));
   }
 };
 
-export const showCancelSelcetedModal = () => ({
-  type: TASKS_TABLE_SELECTED_MODAL,
-  payload: CANCEL,
-});
-
-export const showResumeSelcetedModal = () => ({
-  type: TASKS_TABLE_SELECTED_MODAL,
-  payload: RESUME,
-});
-
-export const hideSelcetedModal = () => ({
-  type: TASKS_TABLE_SELECTED_MODAL,
-  payload: CLOSED,
-});
+export const openClickedModal = ({ taskId, taskName, setModalOpen }) => {
+  setModalOpen();
+  return {
+    type: UPDATE_CLICKED,
+    payload: { clicked: { taskId, taskName } },
+  };
+};

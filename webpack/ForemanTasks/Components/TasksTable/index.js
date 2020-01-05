@@ -12,7 +12,7 @@ import {
   selectSort,
   selectActionName,
   selectSelectedRows,
-  selectModalStatus,
+  selectClicked,
 } from './TasksTableSelectors';
 
 const mapStateToProps = state => ({
@@ -24,8 +24,9 @@ const mapStateToProps = state => ({
   itemCount: selectItemCount(state),
   actionName: selectActionName(state),
   selectedRows: selectSelectedRows(state),
-  modalStatus: selectModalStatus(state),
+  clicked: selectClicked(state),
 });
+
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
 export const reducers = { tasksTable: reducer };

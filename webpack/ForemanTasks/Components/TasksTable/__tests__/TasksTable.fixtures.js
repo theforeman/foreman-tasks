@@ -23,9 +23,13 @@ export const minProps = {
     by: 'q',
     order: 'w',
   },
-  showResumeSelcetedModal: jest.fn(),
-  showCancelSelcetedModal: jest.fn(),
-  hideSelcetedModal: jest.fn(),
+  openClickedModal: jest.fn(),
+  modalProps: {
+    cancelSelectedModal: {},
+    resumeSelectedModal: {},
+    cancelModal: {},
+    resumeModal: {},
+  },
 };
 
 export default {

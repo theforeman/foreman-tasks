@@ -17,14 +17,13 @@ const TasksTable = ({
   history,
   itemCount,
   pagination,
-  cancelTask,
-  resumeTask,
   selectedRows,
   selectAllRows,
   unselectAllRows,
   selectRow,
   unselectRow,
-  parentTaskID,
+  openClickedModal,
+  modalProps,
 }) => {
   const url = history.location.pathname + history.location.search;
   const uriQuery = getURIQuery(url);
@@ -82,11 +81,19 @@ const TasksTable = ({
   };
 
   const taskActions = {
-    cancel: (id, name) => {
-      cancelTask(id, name, url, parentTaskID);
+    cancelTask: (taskId, taskName) => {
+      openClickedModal({
+        taskId,
+        taskName,
+        setModalOpen: modalProps.cancelModal.setModalOpen,
+      });
     },
-    resume: (id, name) => {
-      resumeTask(id, name, url, parentTaskID);
+    resumeTask: (taskId, taskName) => {
+      openClickedModal({
+        taskId,
+        taskName,
+        setModalOpen: modalProps.resumeModal.setModalOpen,
+      });
     },
   };
 
@@ -126,14 +133,18 @@ TasksTable.propTypes = {
     perPage: PropTypes.number,
   }),
   history: PropTypes.object.isRequired,
-  cancelTask: PropTypes.func.isRequired,
-  resumeTask: PropTypes.func.isRequired,
+  openClickedModal: PropTypes.func.isRequired,
   selectedRows: PropTypes.array,
   selectAllRows: PropTypes.func.isRequired,
   unselectAllRows: PropTypes.func.isRequired,
   selectRow: PropTypes.func.isRequired,
   unselectRow: PropTypes.func.isRequired,
-  parentTaskID: PropTypes.string,
+  modalProps: PropTypes.shape({
+    cancelSelectedModal: PropTypes.object,
+    resumeSelectedModal: PropTypes.object,
+    cancelModal: PropTypes.object,
+    resumeModal: PropTypes.object,
+  }).isRequired,
 };
 
 TasksTable.defaultProps = {
@@ -144,7 +155,6 @@ TasksTable.defaultProps = {
     perPage: 20,
   },
   selectedRows: [],
-  parentTaskID: null,
 };
 
 export default TasksTable;

@@ -6,8 +6,7 @@ import {
   SELECT_ROWS,
   UNSELECT_ROWS,
   UNSELECT_ALL_ROWS,
-  TASKS_TABLE_SELECTED_MODAL,
-  RESUME,
+  UPDATE_CLICKED,
 } from '../TasksTableConstants';
 import reducer from '../TasksTableReducer';
 
@@ -53,10 +52,10 @@ const fixtures = {
       type: UNSELECT_ALL_ROWS,
     },
   },
-  'should handle TASKS_TABLE_SELECTED_MODAL': {
+  'should handle UPDATE_CLICKED': {
     action: {
-      type: TASKS_TABLE_SELECTED_MODAL,
-      payload: RESUME,
+      type: UPDATE_CLICKED,
+      payload: { clicked: 'task' },
     },
   },
 };

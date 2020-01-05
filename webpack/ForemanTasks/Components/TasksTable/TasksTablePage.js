@@ -7,20 +7,24 @@ import { translate as __ } from 'foremanReact/common/I18n';
 import { getURIQuery } from 'foremanReact/common/helpers';
 import ExportButton from 'foremanReact/routes/common/PageLayout/components/ExportButton/ExportButton';
 import { STATUS } from 'foremanReact/constants';
+import { useForemanModal } from 'foremanReact/components/ForemanModal/ForemanModalHooks';
 import TasksDashboard from '../TasksDashboard';
 import TasksTable from './TasksTable';
 import { resolveSearchQuery, addSearchToURL } from './TasksTableHelpers';
-import { CancelResumeConfirm } from './Components/CancelResumeConfirm';
+import { ConfirmationModals } from './Components/ConfirmationModals';
 import {
   TASKS_SEARCH_PROPS,
   RESUME,
   CANCEL,
-  CLOSED,
+  CANCEL_SELECTED_CONFIRM_MODAL_ID,
+  RESUME_SELECTED_CONFIRM_MODAL_ID,
+  RESUME_CONFIRM_MODAL_ID,
+  CANCEL_CONFIRM_MODAL_ID,
 } from './TasksTableConstants';
 import { ActionSelectButton } from './Components/ActionSelectButton';
 import './TasksTablePage.scss';
 
-const TasksTablePage = ({ getBreadcrumbs, history, ...props }) => {
+const TasksTablePage = ({ getBreadcrumbs, history, clicked, ...props }) => {
   const url = history.location.pathname + history.location.search;
   const uriQuery = getURIQuery(url);
   const onSearch = searchQuery => {
@@ -40,18 +44,47 @@ const TasksTablePage = ({ getBreadcrumbs, history, ...props }) => {
     }));
   };
 
-  const TaskSelectedAction = (id, name) => {
-    props.actionSelected(id, name, url);
+  const modalProps = {
+    cancelSelectedModal: useForemanModal({
+      id: CANCEL_SELECTED_CONFIRM_MODAL_ID,
+    }),
+    resumeSelectedModal: useForemanModal({
+      id: RESUME_SELECTED_CONFIRM_MODAL_ID,
+    }),
+    cancelModal: useForemanModal({ id: CANCEL_CONFIRM_MODAL_ID }),
+    resumeModal: useForemanModal({ id: RESUME_CONFIRM_MODAL_ID }),
   };
 
+  const tasksActions = {
+    cancelSelectedTasks: () => {
+      props.actionSelected(CANCEL, getSelected(), url, props.parentTaskID);
+    },
+    cancelTask: () => {
+      props.cancelTask(
+        clicked.taskId,
+        clicked.taskName,
+        url,
+        props.parentTaskID
+      );
+    },
+    resumeSelectedTasks: () => {
+      props.actionSelected(RESUME, getSelected(), url, props.parentTaskID);
+    },
+    resumeTask: () => {
+      props.resumeTask(
+        clicked.taskId,
+        clicked.taskName,
+        url,
+        props.parentTaskID
+      );
+    },
+  };
   return (
     <div className="tasks-table-wrapper">
-      <CancelResumeConfirm
-        closeModal={props.hideSelcetedModal}
-        action={TaskSelectedAction}
-        selected={getSelected()}
-        modalStatus={props.modalStatus}
+      <ConfirmationModals
+        tasksActions={tasksActions}
         selectedRowsLen={props.selectedRows.length}
+        modalProps={modalProps}
       />
       <PageLayout
         searchable
@@ -68,8 +101,8 @@ const TasksTablePage = ({ getBreadcrumbs, history, ...props }) => {
             />
             <ActionSelectButton
               disabled={props.selectedRows.length < 1}
-              onCancel={props.showCancelSelcetedModal}
-              onResume={props.showResumeSelcetedModal}
+              onCancel={modalProps.cancelSelectedModal.setModalOpen}
+              onResume={modalProps.resumeSelectedModal.setModalOpen}
             />
           </React.Fragment>
         }
@@ -78,7 +111,7 @@ const TasksTablePage = ({ getBreadcrumbs, history, ...props }) => {
           <TasksDashboard history={history} parentTaskID={props.parentTaskID} />
         }
       >
-        <TasksTable history={history} {...props} />
+        <TasksTable history={history} {...props} modalProps={modalProps} />
       </PageLayout>
     </div>
   );
@@ -92,20 +125,23 @@ TasksTablePage.propTypes = {
   status: PropTypes.oneOf(Object.keys(STATUS)),
   history: PropTypes.object.isRequired,
   actionSelected: PropTypes.func.isRequired,
+  cancelTask: PropTypes.func.isRequired,
+  resumeTask: PropTypes.func.isRequired,
   selectedRows: PropTypes.arrayOf(PropTypes.string),
-  showResumeSelcetedModal: PropTypes.func.isRequired,
-  showCancelSelcetedModal: PropTypes.func.isRequired,
-  hideSelcetedModal: PropTypes.func.isRequired,
-  modalStatus: PropTypes.oneOf([CANCEL, RESUME, CLOSED]),
   parentTaskID: PropTypes.string,
+  clicked: PropTypes.shape({
+    taskId: PropTypes.string,
+    taskName: PropTypes.string,
+    parentTaskID: PropTypes.string,
+  }),
 };
 
 TasksTablePage.defaultProps = {
   actionName: '',
   status: STATUS.PENDING,
   selectedRows: [],
-  modalStatus: CLOSED,
   parentTaskID: null,
+  clicked: {},
 };
 
 export default TasksTablePage;
