@@ -10,7 +10,7 @@ export const ActionButton = ({ id, name, availableActions, taskActions }) => {
       <ResumeButton
         id={id}
         name={name}
-        onClick={taskActions.resume}
+        onClick={taskActions.resumeTask}
         disabled={false}
       />
     );
@@ -20,7 +20,7 @@ export const ActionButton = ({ id, name, availableActions, taskActions }) => {
       id={id}
       name={name}
       disabled={!availableActions.cancellable}
-      onClick={taskActions.cancel}
+      onClick={taskActions.cancelTask}
     />
   );
 };
@@ -33,7 +33,7 @@ ActionButton.propTypes = {
     resumable: PropTypes.bool,
   }).isRequired,
   taskActions: PropTypes.shape({
-    cancel: PropTypes.func,
-    resume: PropTypes.func,
+    cancelTask: PropTypes.func,
+    resumeTask: PropTypes.func,
   }).isRequired,
 };

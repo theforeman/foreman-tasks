@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ResumeConfirm renders RESUME modal 1`] = `
+<ForemanModal
+  id="resumeConfirmModal"
+  title="Resume Selected Tasks"
+>
+  This will resume 3 task(s), putting them in the running state. Are you sure?
+  <Component>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      disabled={false}
+      onClick={[Function]}
+    >
+      No
+    </Button>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="primary"
+      disabled={false}
+      onClick={[Function]}
+    >
+      Yes
+    </Button>
+  </Component>
+</ForemanModal>
+`;
+
+exports[`ResumeConfirm renders RESUME_SELECTED modal 1`] = `
+<ForemanModal
+  id="resumeSelectedConfirmModal"
+  title="Resume Selected Tasks"
+>
+  This will resume 3 task(s), putting them in the running state. Are you sure?
+  <Component>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      disabled={false}
+      onClick={[Function]}
+    >
+      No
+    </Button>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="primary"
+      disabled={false}
+      onClick={[Function]}
+    >
+      Yes
+    </Button>
+  </Component>
+</ForemanModal>
+`;

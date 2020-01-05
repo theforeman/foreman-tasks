@@ -6,7 +6,6 @@ exports[`TasksIndexPage rendering render with minimal props 1`] = `
   cancelTask={[MockFunction]}
   getBreadcrumbs={[MockFunction]}
   getTableItems={[MockFunction]}
-  hideSelcetedModal={[MockFunction]}
   history={
     Object {
       "location": Object {
@@ -15,6 +14,15 @@ exports[`TasksIndexPage rendering render with minimal props 1`] = `
     }
   }
   itemCount={2}
+  modalProps={
+    Object {
+      "cancelModal": Object {},
+      "cancelSelectedModal": Object {},
+      "resumeModal": Object {},
+      "resumeSelectedModal": Object {},
+    }
+  }
+  openClickedModal={[MockFunction]}
   pagination={
     Object {
       "page": 1,
@@ -31,8 +39,6 @@ exports[`TasksIndexPage rendering render with minimal props 1`] = `
   selectAllRows={[MockFunction]}
   selectRow={[MockFunction]}
   selectedRows={Array []}
-  showCancelSelcetedModal={[MockFunction]}
-  showResumeSelcetedModal={[MockFunction]}
   sort={
     Object {
       "by": "q",

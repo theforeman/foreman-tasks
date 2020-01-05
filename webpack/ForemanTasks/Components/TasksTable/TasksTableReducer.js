@@ -8,13 +8,11 @@ import {
   SELECT_ROWS,
   UNSELECT_ROWS,
   UNSELECT_ALL_ROWS,
-  TASKS_TABLE_SELECTED_MODAL,
-  CLOSED,
+  UPDATE_CLICKED,
 } from './TasksTableConstants';
 
 const initialState = Immutable({
   selectedRows: [],
-  modalStatus: CLOSED,
 });
 
 export const TasksTableQueryReducer = (state = initialState, action) => {
@@ -42,8 +40,8 @@ export const TasksTableQueryReducer = (state = initialState, action) => {
       );
     case UNSELECT_ALL_ROWS:
       return state.set('selectedRows', []);
-    case TASKS_TABLE_SELECTED_MODAL:
-      return state.set('modalStatus', payload);
+    case UPDATE_CLICKED:
+      return state.set('clicked', payload.clicked);
     default:
       return state;
   }
