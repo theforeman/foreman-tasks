@@ -43,6 +43,7 @@
     "eslint": "^4.10.0",
     "eslint-import-resolver-babel-module": "^5.1.0",
     "eslint-plugin-patternfly-react": "0.2.0",
+    "identity-obj-proxy": "^3.0.0",
     "jed": "^1.1.1",
     "jest-cli": "^24.9.0",
     "jest-prop-type-error": "^1.1.0",
