@@ -33,6 +33,7 @@
     "@babel/core": "^7.7.0",
     "@theforeman/builder": "^4.0.2",
     "@theforeman/stories": "^4.0.2",
+    "@theforeman/test": "^4.0.2",
     "@theforeman/vendor-dev": "^4.0.2",
     "babel-eslint": "^10.0.3",
     "eslint": "^4.10.0",
