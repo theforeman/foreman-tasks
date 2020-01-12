@@ -12,4 +12,4 @@
   <div id="foremanTasksReactRoot"></div>
 <% end %>
 <%= render file: "layouts/base" %>
-<%= mount_react_component('ForemanTasks', '#foremanTasksReactRoot') %>
+<%= mount_react_component('ForemanTasks', '#foremanTasksReactRoot', {}, { context: true })  %>
