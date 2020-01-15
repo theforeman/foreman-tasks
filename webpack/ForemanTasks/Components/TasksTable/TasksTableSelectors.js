@@ -32,7 +32,9 @@ export const selectResults = createSelector(
   ({ results }) =>
     results.map(result => ({
       ...result,
-      action: result.action || result.label.replace(/::/g, ' '),
+      action:
+        result.action ||
+        (result.label ? result.label.replace(/::/g, ' ') : result.id),
       username: result.username || '',
       state: result.state + (result.frozen ? ` ${__('Disabled')}` : ''),
       duration: getDuration(result.started_at, result.ended_at),
