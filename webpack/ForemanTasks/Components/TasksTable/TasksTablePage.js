@@ -27,7 +27,6 @@ const TasksTablePage = ({ getBreadcrumbs, history, clicked, ...props }) => {
   const uriQuery = getURIQuery(url);
   const onSearch = searchQuery => {
     resolveSearchQuery(searchQuery, history);
-    props.getTableItems(url);
   };
 
   const getSelectedTasks = () => {
