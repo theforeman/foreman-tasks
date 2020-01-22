@@ -98,29 +98,30 @@ class TasksTest < ActiveSupport::TestCase
 
     describe 'by duration' do
       before do
-        @task_one = FactoryBot.create(:dynflow_task)
-        @task_two = FactoryBot.create(:dynflow_task)
+        @task_one, @task_two = FactoryBot.create_list(:dynflow_task, 2).sort_by(&:id)
       end
+
+      let(:scope) { ForemanTasks::Task.order(:id) }
 
       it 'can search by seconds ' do
         skip unless on_postgresql?
-        _(ForemanTasks::Task.search_for('duration < 2')).must_be :empty?
-        _(ForemanTasks::Task.search_for('duration = 2')).must_equal [@task_one, @task_two]
-        _(ForemanTasks::Task.search_for('duration < "2 seconds"')).must_be :empty?
-        _(ForemanTasks::Task.search_for('duration > "2 seconds"')).must_be :empty?
-        _(ForemanTasks::Task.search_for('duration = "2 seconds"')).must_equal [@task_one, @task_two]
-        _(ForemanTasks::Task.search_for('duration <= "2 seconds"')).must_equal [@task_one, @task_two]
-        _(ForemanTasks::Task.search_for('duration >= "2 seconds"')).must_equal [@task_one, @task_two]
+        _(scope.search_for('duration < 2')).must_be :empty?
+        _(scope.search_for('duration = 2')).must_equal [@task_one, @task_two]
+        _(scope.search_for('duration < "2 seconds"')).must_be :empty?
+        _(scope.search_for('duration > "2 seconds"')).must_be :empty?
+        _(scope.search_for('duration = "2 seconds"')).must_equal [@task_one, @task_two]
+        _(scope.search_for('duration <= "2 seconds"')).must_equal [@task_one, @task_two]
+        _(scope.search_for('duration >= "2 seconds"')).must_equal [@task_one, @task_two]
       end
 
       it 'can search by other time intervals' do
         skip unless on_postgresql?
         %w[minutes hours days months years].each do |interval|
-          _(ForemanTasks::Task.search_for("duration < \"2 #{interval}\"")).must_equal [@task_one, @task_two]
-          _(ForemanTasks::Task.search_for("duration > \"2 #{interval}\"")).must_be :empty?
-          _(ForemanTasks::Task.search_for("duration = \"2 #{interval}\"")).must_be :empty?
-          _(ForemanTasks::Task.search_for("duration <= \"2 #{interval}\"")).must_equal [@task_one, @task_two]
-          _(ForemanTasks::Task.search_for("duration >= \"2 #{interval}\"")).must_be :empty?
+          _(scope.search_for("duration < \"2 #{interval}\"")).must_equal [@task_one, @task_two]
+          _(scope.search_for("duration > \"2 #{interval}\"")).must_be :empty?
+          _(scope.search_for("duration = \"2 #{interval}\"")).must_be :empty?
+          _(scope.search_for("duration <= \"2 #{interval}\"")).must_equal [@task_one, @task_two]
+          _(scope.search_for("duration >= \"2 #{interval}\"")).must_be :empty?
         end
       end
 
