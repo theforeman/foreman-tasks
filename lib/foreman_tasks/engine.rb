@@ -60,7 +60,7 @@ module ForemanTasks
           permission :view_recurring_logics, { :'foreman_tasks/recurring_logics' => [:index, :show],
                                                :'foreman_tasks/api/recurring_logics' => [:index, :show] }, :resource_type => ForemanTasks::RecurringLogic.name
 
-          permission :edit_recurring_logics, { :'foreman_tasks/recurring_logics' => [:cancel, :enable, :disable],
+          permission :edit_recurring_logics, { :'foreman_tasks/recurring_logics' => [:cancel, :enable, :disable, :clear_cancelled],
                                                :'foreman_tasks/api/recurring_logics' => [:cancel, :update] }, :resource_type => ForemanTasks::RecurringLogic.name
         end
 

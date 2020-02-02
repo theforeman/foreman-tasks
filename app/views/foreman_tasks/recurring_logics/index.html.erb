@@ -5,6 +5,36 @@
 <%= alert(:class => 'alert-info', :id => 'multiple-alert', :close => false, :header => '', :text => @errors) %>
 <% end %>
 
+<% if authorized_for(:permission => :edit_recurring_logics, :auth_object => @recurring_logics) %>
+  <% title_actions link_to(_('Clear Cancelled'),
+              clear_cancelled_foreman_tasks_recurring_logics_path,
+              class:  ['btn', 'btn-sm', 'btn-danger'],                  
+              :'data-toggle' => "modal",
+              :'data-target' => "#clear_modal") 
+              %>
+
+  <div class="modal fade" id="clear_modal" tabindex="-1" role="dialog" aria-labelledby="Deploy" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h2 class="modal-title" id="deploy_modal_label">
+            <span class="glyphicon glyphicon-warning-sign"></span>
+            <%= _("Clear Cancelled") %>
+          </h2>
+        </div>
+        <div class="modal-body">
+          <%= _("This action will delete all cancelled recurring logics. Please note that this action can't be reversed.") %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal"><%= _("Cancel") %></button>
+          <%= link_to(_('Clear Cancelled'), clear_cancelled_foreman_tasks_recurring_logics_path, method: :post, class: 'btn btn-danger modal-submit') %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
 <table class="<%= table_css_classes('table-condensed table-fixed') %>">
   <thead>
     <th><%= N_("Cron line") %></th>
