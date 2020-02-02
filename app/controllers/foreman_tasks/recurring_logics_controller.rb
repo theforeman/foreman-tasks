@@ -22,6 +22,12 @@ module ForemanTasks
       redirect_to :action => :index
     end
 
+    def clear_cancelled
+      scope = resource_base.search_for('state=cancelled')
+      scope.destroy_all
+      redirect_to :action => :index
+    end
+
     def controller_name
       'foreman_tasks_recurring_logics'
     end
@@ -48,6 +54,15 @@ module ForemanTasks
     def filter(scope)
       scope.search_for(params[:search])
            .paginate(:page => params[:page], :per_page => params[:per_page])
+    end
+
+    def action_permission
+      case params[:action]
+      when 'clear_cancelled'
+        'edit'
+      else
+        super
+      end
     end
   end
 end

@@ -6,6 +6,9 @@ Foreman::Application.routes.draw do
         put :enable
         put :disable
       end
+      collection do
+        post :clear_cancelled
+      end
     end
 
     resources :tasks, :only => [:show] do
