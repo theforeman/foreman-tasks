@@ -42,6 +42,9 @@ Foreman::Application.routes.draw do
         member do
           post :cancel
         end
+        collection do
+          post :bulk_destroy
+        end
       end
 
       resources :tasks, :only => [:show, :index] do

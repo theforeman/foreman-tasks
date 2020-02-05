@@ -10,6 +10,12 @@ module ForemanTasks
         api_base_url '/foreman_tasks/api'
       end
 
+      # Foreman right now doesn't have mechanism to
+      # cause general BadRequest handling, resuing the Apipie::ParamError
+      # for now http://projects.theforeman.org/issues/3957
+      class BadRequest < Apipie::ParamError
+      end
+
       before_action :find_resource, :only => %w[show cancel update]
 
       api :GET, '/recurring_logics', N_('List recurring logics')
@@ -39,9 +45,22 @@ module ForemanTasks
         ForemanTasks::RecurringLogic
       end
 
+      api :POST, '/recurring_logics/bulk_destroy', N_('Delete recurring logics by search query')
+      param :search, String, :desc => N_('Search query'), :required => true
+      def bulk_destroy
+        if params[:search].blank?
+          raise BadRequest, _('Please provide a search parameter in the request')
+        end
+        scope = resource_scope.search_for(params[:search])
+        scope.each(&:destroy!)
+        render json: { destroyed: scope }
+      rescue ActiveRecord::RecordNotDestroyed => error
+        render json: { error: error, scope: scope }, status: :bad_request
+      end
+
       def action_permission
         case params[:action]
-        when 'cancel'
+        when 'cancel', 'bulk_destroy'
           'edit'
         else
           super
