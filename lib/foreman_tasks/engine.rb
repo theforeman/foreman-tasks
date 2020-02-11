@@ -69,8 +69,10 @@ module ForemanTasks
         logger :dynflow, :enabled => true
         logger :action, :enabled => true
 
-        role 'Tasks Manager', [:view_foreman_tasks, :edit_foreman_tasks]
-        role 'Tasks Reader', [:view_foreman_tasks]
+        role 'Tasks Manager', [:view_foreman_tasks, :edit_foreman_tasks],
+             'Role granting permissions to inspect, cancel, resume and unlock tasks'
+        role 'Tasks Reader', [:view_foreman_tasks],
+             'Role granting permissions to inspect tasks'
 
         widget 'foreman_tasks/tasks/dashboard/tasks_status', :sizex => 6, :sizey => 1, :name => N_('Task Status')
         widget 'foreman_tasks/tasks/dashboard/latest_tasks_in_error_warning', :sizex => 6, :sizey => 1, :name => N_('Latest Warning/Error Tasks')
