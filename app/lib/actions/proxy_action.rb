@@ -89,7 +89,7 @@ module Actions
         if response['result'] == 'error'
           raise ::Foreman::Exception, _('The smart proxy task %s failed.') % proxy_task_id
         else
-          on_data(response['actions'].find { |block_action| block_action['class'] == proxy_action_name }['output'])
+          on_data(get_proxy_data(response))
         end
       else
         suspend
@@ -155,10 +155,8 @@ module Actions
       if output.key?(:proxy_output) || state == :error
         output.fetch(:proxy_output, {})
       elsif live && proxy_task_id
-        proxy_data = proxy.status_of_task(proxy_task_id)['actions'].detect do |action|
-          action['class'] == proxy_action_name || action.fetch('input', {})['proxy_operation_name'] == proxy_operation_name
-        end
-        proxy_data.fetch('output', {})
+        response = proxy.status_of_task(proxy_task_id)
+        get_proxy_data(response)
       else
         {}
       end
@@ -217,6 +215,13 @@ module Actions
         trigger_proxy_task
       end
       suspend
+    end
+
+    def get_proxy_data(response)
+      proxy_data = response['actions'].detect do |action|
+        action['class'] == proxy_action_name || action.fetch('input', {})['proxy_operation_name'] == proxy_operation_name
+      end
+      proxy_data.fetch('output', {})
     end
 
     def proxy_version(proxy)
