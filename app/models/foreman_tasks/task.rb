@@ -255,6 +255,32 @@ module ForemanTasks
       main_action.continuous_output.raw_outputs
     end
 
+    def self.latest_tasks_by_resource_ids(label, resource_type, resource_ids)
+      tasks = arel_table
+      links = ForemanTasks::Link.arel_table
+      started_at = tasks[:started_at]
+      resource_id = links[:resource_id]
+
+      base_combined_table = tasks
+                            .join(links).on(tasks[:id].eq(links[:task_id]))
+                            .where(tasks[:label].eq(label)
+                                                .and(links[:resource_type].eq(resource_type))
+                                                .and(links[:resource_id].in(resource_ids)))
+
+      grouped = base_combined_table.project(
+        started_at.maximum.as('started_at_max'),
+        resource_id
+      ).group(resource_id).order(resource_id).as('grouped')
+
+      max_per_resource_id = tasks
+                            .join(links).on(tasks[:id].eq(links[:task_id]))
+                            .join(grouped).on(grouped[:started_at_max].eq(started_at).and(grouped[:resource_id].eq(resource_id)))
+                            .distinct
+                            .project(tasks[Arel.star], grouped[:resource_id])
+
+      find_by_sql(max_per_resource_id.to_sql).index_by(&:resource_id)
+    end
+
     protected
 
     def generate_id

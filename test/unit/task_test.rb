@@ -296,12 +296,12 @@ class TasksTest < ActiveSupport::TestCase
   end
 
   describe 'search for resource_ids' do
-    it 'finds tasks' do
-      label = 'label1'
-      resource_ids = [1, 2]
-      resource_type = 'restype1'
+    label = 'label1'
+    resource_ids = [1, 2]
+    resource_type = 'restype1'
 
-      task1_old = FactoryBot.create(
+    let(:task1_old) do
+      FactoryBot.create(
         :task_with_links,
         started_at: '2019-10-01 11:15:55',
         ended_at: '2019-10-01 11:15:57',
@@ -309,7 +309,9 @@ class TasksTest < ActiveSupport::TestCase
         label: label,
         resource_type: resource_type
       )
-      task1_new = FactoryBot.create(
+    end
+    let(:task1_new) do
+      FactoryBot.create(
         :task_with_links,
         started_at: '2019-10-02 11:15:55',
         ended_at: '2019-10-02 11:15:57',
@@ -317,7 +319,9 @@ class TasksTest < ActiveSupport::TestCase
         label: label,
         resource_type: resource_type
       )
-      task2 = FactoryBot.create(
+    end
+    let(:task2) do
+      FactoryBot.create(
         :task_with_links,
         started_at: '2019-10-03 11:15:55',
         ended_at: '2019-10-03 11:15:57',
@@ -325,7 +329,9 @@ class TasksTest < ActiveSupport::TestCase
         label: label,
         resource_type: resource_type
       )
-      task3 = FactoryBot.create(
+    end
+    let(:task3) do
+      FactoryBot.create(
         :task_with_links,
         started_at: '2019-10-03 11:15:55',
         ended_at: '2019-10-03 11:15:57',
@@ -333,6 +339,13 @@ class TasksTest < ActiveSupport::TestCase
         label: label,
         resource_type: 'another_type'
       )
+    end
+
+    it 'finds tasks' do
+      task1_old
+      task1_new
+      task2
+      task3
 
       result = ForemanTasks::Task.search_for(
         "resource_id ^ (#{resource_ids.join(',')}) and resource_type = #{resource_type}"
@@ -342,6 +355,24 @@ class TasksTest < ActiveSupport::TestCase
       assert_includes result, task1_new
       assert_includes result, task2
       assert_not_includes result, task3
+    end
+
+    it 'finds latest task for each resource_id' do
+      task1_old
+      task1_new
+      task2
+      task3
+
+      result = ForemanTasks::Task.latest_tasks_by_resource_ids(
+        label,
+        resource_type,
+        resource_ids
+      )
+      assert_equal 2, result.length
+      assert_equal resource_ids, result.keys.sort
+      assert_equal task1_new, result[1]
+      assert_equal task2, result[2]
+      assert_not_includes result.values, task3
     end
   end
 end
