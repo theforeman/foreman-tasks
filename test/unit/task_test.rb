@@ -248,4 +248,54 @@ class TasksTest < ActiveSupport::TestCase
       task.execution_type.must_equal 'Delayed'
     end
   end
+
+  describe 'search for resource_ids' do
+    it 'finds tasks' do
+      label = 'label1'
+      resource_ids = [1, 2]
+      resource_type = 'restype1'
+
+      task1_old = FactoryBot.create(
+        :task_with_locks,
+        started_at: '2019-10-01 11:15:55',
+        ended_at: '2019-10-01 11:15:57',
+        resource_id: 1,
+        label: label,
+        resource_type: resource_type
+      )
+      task1_new = FactoryBot.create(
+        :task_with_locks,
+        started_at: '2019-10-02 11:15:55',
+        ended_at: '2019-10-02 11:15:57',
+        resource_id: 1,
+        label: label,
+        resource_type: resource_type
+      )
+      task2 = FactoryBot.create(
+        :task_with_locks,
+        started_at: '2019-10-03 11:15:55',
+        ended_at: '2019-10-03 11:15:57',
+        resource_id: 2,
+        label: label,
+        resource_type: resource_type
+      )
+      task3 = FactoryBot.create(
+        :task_with_locks,
+        started_at: '2019-10-03 11:15:55',
+        ended_at: '2019-10-03 11:15:57',
+        resource_id: 3,
+        label: label,
+        resource_type: 'another_type'
+      )
+
+      result = ForemanTasks::Task.search_for(
+        "resource_id ^ (#{resource_ids.join(',')}) and resource_type = #{resource_type}"
+      ).distinct
+      assert_equal 3, result.length
+      assert_includes result, task1_old
+      assert_includes result, task1_new
+      assert_includes result, task2
+      assert_not_includes result, task3
+    end
+  end
 end
