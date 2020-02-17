@@ -4,7 +4,8 @@ module ForemanTasks
       def search_by_generic_resource(key, operator, value)
         key = 'resource_type' if key.blank?
         key_name = connection.quote_column_name(key.sub(/^.*\./, ''))
-        condition = sanitize_sql_for_conditions(["foreman_tasks_locks.#{key_name} #{operator} ?", value])
+        value = value.split(',') if operator.index(/IN/i)
+        condition = sanitize_sql_for_conditions(["foreman_tasks_locks.#{key_name} #{operator} (?)", value])
 
         { :conditions => condition, :joins => :locks }
       end
