@@ -1,7 +1,7 @@
 import { getControllerSearchProps } from 'foremanReact/constants';
 
 export const TASKS_TABLE_ID = 'TASKS_TABLE';
-export const TASKS_CONTROLLER = 'tasks';
+export const TASKS_CONTROLLER = 'foreman_tasks/tasks';
 export const TASKS_SUCCESS = 'TASKS_SUCCESS';
 export const TASKS_REQUEST = 'TASKS_REQUEST';
 export const TASKS_FAILURE = 'TASKS_FAILURE';
@@ -18,4 +18,4 @@ export const CANCEL_SELECTED_CONFIRM_MODAL_ID = 'cancelSelectedConfirmModal';
 export const RESUME_SELECTED_CONFIRM_MODAL_ID = 'resumeSelectedConfirmModal';
 export const UPDATE_CLICKED = 'UPDATE_CLICKED';
 
-export const TASKS_SEARCH_PROPS = getControllerSearchProps('tasks');
+export const TASKS_SEARCH_PROPS = getControllerSearchProps('foreman_tasks/tasks');
