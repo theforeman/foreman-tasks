@@ -22,7 +22,7 @@ import {
 import { ActionSelectButton } from './Components/ActionSelectButton';
 import './TasksTablePage.scss';
 
-const TasksTablePage = ({ getBreadcrumbs, history, clicked, ...props }) => {
+const TasksTablePage = ({ getBreadcrumbs, history, clicked, createHeader, ...props }) => {
   const url = history.location.pathname + history.location.search;
   const uriQuery = getURIQuery(url);
   const onSearch = searchQuery => {
@@ -95,6 +95,7 @@ const TasksTablePage = ({ getBreadcrumbs, history, clicked, ...props }) => {
         searchable
         searchProps={TASKS_SEARCH_PROPS}
         onSearch={onSearch}
+        header={createHeader(props.actionName)}
         breadcrumbOptions={getBreadcrumbs(props.actionName)}
         toastNotifications="foreman-tasks-cancel"
         toolbarButtons={
@@ -135,6 +136,7 @@ TasksTablePage.propTypes = {
   bulkResume: PropTypes.func.isRequired,
   selectedRows: PropTypes.arrayOf(PropTypes.string),
   parentTaskID: PropTypes.string,
+  createHeader: PropTypes.func,
   clicked: PropTypes.shape({
     taskId: PropTypes.string,
     taskName: PropTypes.string,
@@ -148,6 +150,7 @@ TasksTablePage.defaultProps = {
   selectedRows: [],
   parentTaskID: null,
   clicked: {},
+  createHeader: () => __('Tasks'),
 };
 
 export default TasksTablePage;

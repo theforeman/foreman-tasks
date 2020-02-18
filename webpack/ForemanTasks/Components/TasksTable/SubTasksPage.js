@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { translate as __ } from 'foremanReact/common/I18n';
+import { sprintf, translate as __ } from 'foremanReact/common/I18n';
 import TasksTablePage from './';
 
 export const SubTasksPage = props => {
@@ -15,10 +15,12 @@ export const SubTasksPage = props => {
       { caption: __('Sub tasks') },
     ],
   });
+  const createHeader = actionName => actionName ? sprintf(__('Sub tasks of %s'), actionName) : __('Sub tasks');
   return (
     <TasksTablePage
       getBreadcrumbs={getBreadcrumbs}
       parentTaskID={parentTaskID}
+      createHeader={createHeader}
       {...props}
     />
   );

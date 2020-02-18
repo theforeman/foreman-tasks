@@ -5,6 +5,9 @@
 <% content_for(:stylesheets) do %>
   <%= webpacked_plugins_css_for :'foreman-tasks' %>
 <% end %>
+
+<% title _("Details of %s task") % @task.to_s %>
+
 <%= breadcrumbs(
   items: breadcrumb_items,
   name_field: 'action',
