@@ -18,6 +18,7 @@ exports[`TaskDetails rendering render without Props 1`] = `
         allowDangerousActions={false}
         cancelTaskRequest={[Function]}
         cancellable={false}
+        dynflowEnableConsole={false}
         endedAt=""
         error={Array []}
         executionPlan={Object {}}

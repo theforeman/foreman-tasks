@@ -33,6 +33,7 @@ import {
   selectShowUnlockModal,
   selectShowForceUnlockModal,
   selectExternalId,
+  selectDynflowEnableConsole,
 } from './TaskDetailsSelectors';
 
 const mapStateToProps = state => ({
@@ -65,6 +66,7 @@ const mapStateToProps = state => ({
   showUnlockModal: selectShowUnlockModal(state),
   showForceUnlockModal: selectShowForceUnlockModal(state),
   externalId: selectExternalId(state),
+  dynflowEnableConsole: selectDynflowEnableConsole(state),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);

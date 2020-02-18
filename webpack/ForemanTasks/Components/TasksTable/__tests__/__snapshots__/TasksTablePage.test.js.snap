@@ -69,6 +69,7 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
         ],
       }
     }
+    header="Tasks"
     onSearch={[Function]}
     searchProps={
       Object {
@@ -226,6 +227,7 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
         parentTaskID={null}
       />
     }
+    header="Tasks"
     onSearch={[Function]}
     searchProps={
       Object {

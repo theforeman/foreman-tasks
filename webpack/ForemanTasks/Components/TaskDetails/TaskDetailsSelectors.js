@@ -83,3 +83,6 @@ export const selectShowForceUnlockModal = state =>
 
 export const selectExternalId = state =>
   selectTaskDetails(state).external_id || null;
+
+export const selectDynflowEnableConsole = state =>
+  selectTaskDetails(state).dynflow_enable_console || false;

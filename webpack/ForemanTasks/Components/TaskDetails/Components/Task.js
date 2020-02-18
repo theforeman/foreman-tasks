@@ -42,6 +42,7 @@ class Task extends Component {
       cancelTaskRequest,
       resumeTaskRequest,
       action,
+      dynflowEnableConsole,
     } = this.props;
     const modalUnlock = (
       <ClickConfirmation
@@ -99,6 +100,7 @@ class Task extends Component {
               <Button
                 bsSize="small"
                 href={`/foreman_tasks/dynflow/${externalId}`}
+                disabled={!dynflowEnableConsole}
               >
                 {__('Dynflow console')}
               </Button>
@@ -188,6 +190,7 @@ Task.propTypes = {
   toggleForceUnlockModal: PropTypes.func,
   cancelTaskRequest: PropTypes.func,
   resumeTaskRequest: PropTypes.func,
+  dynflowEnableConsole: PropTypes.bool,
 };
 
 Task.defaultProps = {
@@ -210,6 +213,7 @@ Task.defaultProps = {
   toggleForceUnlockModal: () => null,
   cancelTaskRequest: () => null,
   resumeTaskRequest: () => null,
+  dynflowEnableConsole: false,
 };
 
 export default Task;
