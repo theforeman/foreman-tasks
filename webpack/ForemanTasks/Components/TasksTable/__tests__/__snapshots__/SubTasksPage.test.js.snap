@@ -5,6 +5,7 @@ exports[`SubTasksPage rendering render with minimal props 1`] = `
   bulkCancel={[MockFunction]}
   bulkResume={[MockFunction]}
   cancelTask={[MockFunction]}
+  createHeader={[Function]}
   getBreadcrumbs={[MockFunction]}
   getTableItems={[MockFunction]}
   history={

@@ -9,6 +9,7 @@ const fixtures = {
     state: 'paused',
     hasSubTasks: true,
     allowDangerousActions: true,
+    dynflowEnableConsole: true,
   },
 };
 

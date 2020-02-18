@@ -16,3 +16,4 @@ node(:locks) do
   end
 end
 node(:username_path) { username_link_task(@task.owner, @task.username) }
+node(:dynflow_enable_console ) { Setting['dynflow_enable_console'] }

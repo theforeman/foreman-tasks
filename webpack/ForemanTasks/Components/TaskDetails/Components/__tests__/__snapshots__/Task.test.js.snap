@@ -115,6 +115,7 @@ exports[`Task rendering render with some Props 1`] = `
       allowDangerousActions={true}
       cancelTaskRequest={[Function]}
       cancellable={false}
+      dynflowEnableConsole={true}
       endedAt=""
       error={Array []}
       externalId=""
@@ -205,7 +206,7 @@ exports[`Task rendering render without Props 1`] = `
           bsClass="btn"
           bsSize="small"
           bsStyle="default"
-          disabled={false}
+          disabled={true}
           href="/foreman_tasks/dynflow/"
         >
           Dynflow console
@@ -229,6 +230,7 @@ exports[`Task rendering render without Props 1`] = `
       allowDangerousActions={false}
       cancelTaskRequest={[Function]}
       cancellable={false}
+      dynflowEnableConsole={false}
       endedAt=""
       error={Array []}
       externalId=""
