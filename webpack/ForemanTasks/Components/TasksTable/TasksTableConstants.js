@@ -14,4 +14,7 @@ export const CANCEL_SELECTED_CONFIRM_MODAL_ID = 'cancelSelectedConfirmModal';
 export const RESUME_SELECTED_CONFIRM_MODAL_ID = 'resumeSelectedConfirmModal';
 export const UPDATE_CLICKED = 'UPDATE_CLICKED';
 
-export const TASKS_SEARCH_PROPS = getControllerSearchProps('foreman_tasks/tasks');
+export const TASKS_SEARCH_PROPS = {
+  ...getControllerSearchProps('tasks'),
+  controller: 'foreman_tasks/tasks'
+};
