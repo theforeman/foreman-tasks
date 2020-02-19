@@ -1,10 +1,6 @@
 import { getControllerSearchProps } from 'foremanReact/constants';
 
 export const TASKS_TABLE_ID = 'TASKS_TABLE';
-export const TASKS_CONTROLLER = 'foreman_tasks/tasks';
-export const TASKS_SUCCESS = 'TASKS_SUCCESS';
-export const TASKS_REQUEST = 'TASKS_REQUEST';
-export const TASKS_FAILURE = 'TASKS_FAILURE';
 export const SELECT_ROWS = 'SELECT_ROWS';
 export const UNSELECT_ROWS = 'UNSELECT_ROWS';
 export const UNSELECT_ALL_ROWS = 'UNSELECT_ALL_ROWS';
