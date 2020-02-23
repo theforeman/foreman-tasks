@@ -21,12 +21,12 @@ export const getTableItems = url =>
   getTableItemsAction(TASKS_TABLE_ID, getURIQuery(url), getApiPathname(url));
 
 export const cancelTask = ({
-  id,
-  name,
+  taskId,
+  taskName,
   url,
   parentTaskID,
 }) => async dispatch => {
-  await dispatch(cancelTaskRequest(id, name));
+  await dispatch(cancelTaskRequest(taskId, taskName));
   dispatch(getTableItems(url));
   dispatch(fetchTasksSummary(getURIQuery(url).time, parentTaskID));
 };
@@ -57,12 +57,12 @@ export const cancelTaskRequest = (id, name) => async dispatch => {
 };
 
 export const resumeTask = ({
-  id,
-  name,
+  taskId,
+  taskName,
   url,
   parentTaskID,
 }) => async dispatch => {
-  await dispatch(resumeTaskRequest(id, name));
+  await dispatch(resumeTaskRequest(taskId, taskName));
   dispatch(getTableItems(url));
   dispatch(fetchTasksSummary(getURIQuery(url).time), parentTaskID);
 };

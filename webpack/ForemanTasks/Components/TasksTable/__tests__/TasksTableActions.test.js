@@ -20,6 +20,11 @@ jest.mock('foremanReact/API');
 API.post.mockImplementation(() => ({ data: 'some-data' }));
 
 const taskInfo = {
+  taskId: 'some-id',
+  taskName: 'some-name',
+};
+
+const task = {
   id: 'some-id',
   name: 'some-name',
 };
@@ -47,7 +52,7 @@ const fixtures = {
     return resumeTaskRequest('some-id', 'some-name');
   },
   'handles bulkResume requests that fail': () => {
-    const selected = [{ ...taskInfo, isResumable: true, isCancellable: false }];
+    const selected = [{ ...task, isResumable: true, isCancellable: false }];
 
     API.post.mockImplementation(() =>
       Promise.reject(new Error('Network Error'))
@@ -55,7 +60,7 @@ const fixtures = {
     return bulkResume({ selected, url: 'some-url' });
   },
   'handles resumable bulkResume requests': () => {
-    const selected = [{ ...taskInfo, isResumable: true, isCancellable: false }];
+    const selected = [{ ...task, isResumable: true, isCancellable: false }];
 
     API.post.mockImplementation(() => ({
       data: {
@@ -66,19 +71,15 @@ const fixtures = {
     return bulkResume({ selected, url: 'some-url' });
   },
   'handles bulkCancel requests': () => {
-    const selected = [{ ...taskInfo, isResumable: false, isCancellable: true }];
+    const selected = [{ ...task, isResumable: false, isCancellable: true }];
     return bulkCancel({ selected, url: 'some-url' });
   },
   'handles bulkCancel requests that are not cancellable': () => {
-    const selected = [
-      { ...taskInfo, isResumable: false, isCancellable: false },
-    ];
+    const selected = [{ ...task, isResumable: false, isCancellable: false }];
     return bulkCancel({ selected, url: 'some-url' });
   },
   'handles bulkResume requests that are not resumable': () => {
-    const selected = [
-      { ...taskInfo, isResumable: false, isCancellable: false },
-    ];
+    const selected = [{ ...task, isResumable: false, isCancellable: false }];
     return bulkResume({ selected, url: 'some-url' });
   },
 };
