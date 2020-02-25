@@ -28,7 +28,7 @@ module ForemanTasks
     def troubleshooting_info_text
       return if @task.state != 'paused' || @task.main_action.nil?
       helper = TroubleshootingHelpGenerator.new(@task.main_action)
-      helper.generate_text
+      helper.generate_html
     end
 
     def username_link_task(owner, username)

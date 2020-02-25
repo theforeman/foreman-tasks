@@ -4,6 +4,7 @@ import { Grid, Row, Col, ProgressBar } from 'patternfly-react';
 import { translate as __ } from 'foremanReact/common/I18n';
 import EllipsisWithTooltip from 'react-ellipsis-with-tooltip';
 import RelativeDateTime from 'foremanReact/components/common/dates/RelativeDateTime';
+import ReactHtmlParser from 'react-html-parser';
 
 class TaskInfo extends Component {
   isDelayed = () => {
@@ -173,14 +174,7 @@ class TaskInfo extends Component {
                   <b>{__('Troubleshooting')}</b>
                 </span>
               </p>
-              <p>
-                {help.split('\n').map((item, i) => (
-                  <React.Fragment key={i}>
-                    {item}
-                    <br />
-                  </React.Fragment>
-                ))}
-              </p>
+              <p>{ReactHtmlParser(help)}</p>
             </Col>
           </Row>
         )}
