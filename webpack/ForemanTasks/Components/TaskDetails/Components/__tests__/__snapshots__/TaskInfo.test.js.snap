@@ -32,9 +32,7 @@ exports[`TaskInfo rendering render with Props 1`] = `
       sm={6}
     >
       <span>
-        <EllipisWithTooltip>
-          Monitor Event Queue
-        </EllipisWithTooltip>
+        Monitor Event Queue
       </span>
     </Col>
     <Col
@@ -335,9 +333,7 @@ exports[`TaskInfo rendering render without Props 1`] = `
       sm={6}
     >
       <span>
-        <EllipisWithTooltip>
-          N/A
-        </EllipisWithTooltip>
+        N/A
       </span>
     </Col>
     <Col
