@@ -259,7 +259,7 @@ namespace :foreman_tasks do
 
         File.open(File.join(tmp_dir, 'index.html'), 'w') { |file| file.write(PageHelper.pagify(PageHelper.generate_index(tasks))) }
 
-        sh("tar cvzf #{export_filename} #{tmp_dir} > /dev/null")
+        system("tar", "czf", export_filename, tmp_dir)
       end
     elsif format == 'csv'
       CSV.open(export_filename, 'wb') do |csv|
