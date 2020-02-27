@@ -30,7 +30,7 @@ export const selectErrors = state => {
 
 export const selectProgress = state =>
   selectTaskDetails(state).progress
-    ? selectTaskDetails(state).progress.toFixed(4) * 100
+    ? parseFloat((selectTaskDetails(state).progress * 100).toFixed(2))
     : 0;
 
 export const selectUsername = state =>
