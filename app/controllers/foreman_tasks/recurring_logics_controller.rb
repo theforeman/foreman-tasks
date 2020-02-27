@@ -64,5 +64,9 @@ module ForemanTasks
         super
       end
     end
+
+    def controller_permission
+      'recurring_logics'
+    end
   end
 end
