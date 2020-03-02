@@ -1,3 +1,5 @@
+require 'dynflow'
+
 module ForemanTasksCore
   class Ticker < ::Dynflow::Actor
     attr_reader :clock
