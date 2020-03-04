@@ -89,19 +89,13 @@ module ForemanTasks
       param :search, String, :desc => N_('Resume tasks matching search string')
       param :task_ids, Array, :desc => N_('Resume specific tasks by ID')
       def bulk_resume
-        scope = resource_scope
-        scope = scope.search_for(params[:search]) if params[:search]
-        scope = scope.select('DISTINCT foreman_tasks_tasks.*')
         if params[:search].nil? && params[:task_ids].nil?
-          scope = scope.where(:state => :paused)
-          scope = scope.where(:result => :error)
+          raise BadRequest, _('Please provide at least one of search or task_ids parameters in the request')
         end
-        scope = scope.where(:id => params[:task_ids]) if params[:task_ids]
-
         resumed = []
         failed = []
         skipped = []
-        scope.each do |task|
+        bulk_scope.each do |task|
           if task.resumable?
             begin
               ForemanTasks.dynflow.world.execute(task.execution_plan.id)
@@ -118,6 +112,24 @@ module ForemanTasks
           total: resumed.length + failed.length + skipped.length,
           resumed: resumed,
           failed: failed,
+          skipped: skipped
+        }
+      end
+
+      api :POST, '/tasks/bulk_cancel', N_('Cancel all cancellable tasks')
+      param :search, String, :desc => N_('Cancel tasks matching search string')
+      param :task_ids, Array, :desc => N_('Cancel specific tasks by ID')
+      def bulk_cancel
+        if params[:search].nil? && params[:task_ids].nil?
+          raise BadRequest, _('Please provide at least one of search or task_ids parameters in the request')
+        end
+
+        cancelled, skipped = bulk_scope.partition(&:cancellable?)
+
+        cancelled.each(&:cancel)
+        render :json => {
+          total: cancelled.length + skipped.length,
+          cancelled: cancelled,
           skipped: skipped
         }
       end
@@ -272,7 +284,7 @@ module ForemanTasks
         case params[:action]
         when 'bulk_search', 'summary', 'details', 'sub_tasks'
           :view
-        when 'bulk_resume'
+        when 'bulk_resume', 'bulk_cancel'
           :edit
         else
           super
@@ -310,6 +322,14 @@ module ForemanTasks
           },
           results: results
         }
+      end
+
+      def bulk_scope
+        scope = resource_scope
+        scope = scope.search_for(params[:search]) if params[:search]
+        scope = scope.select('DISTINCT foreman_tasks_tasks.*')
+        scope.where(:id => params[:task_ids]) if params[:task_ids]
+        scope
       end
     end
   end
