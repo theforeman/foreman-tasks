@@ -3,7 +3,25 @@
 exports[`TasksTable actions handles bulkCancel requests 1`] = `
 Array [
   Array [
-    [Function],
+    Object {
+      "type": "TASKS_CANCEL_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "type": "TASKS_CANCEL_SUCCESS",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "I am cancelled Task execution was cancelled",
+          "type": "success",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
   ],
   Array [
     "TASKS_TABLE",
@@ -20,8 +38,35 @@ Array [
     Object {
       "payload": Object {
         "message": Object {
-          "message": "Not all the selected tasks can be canceled",
+          "message": "Not all the selected tasks can be cancelled",
           "type": "warning",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;
+
+exports[`TasksTable actions handles bulkCancel requests that fail 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "TASKS_CANCEL_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "error": [Error: Network Error],
+      "type": "TASKS_CANCEL_FAILURE",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "Cannot cancel tasks at the moment Error: Network Error",
+          "type": "error",
         },
       },
       "type": "TOASTS_ADD",
@@ -112,6 +157,58 @@ Array [
   ],
   Array [
     [Function],
+  ],
+]
+`;
+
+exports[`TasksTable actions handles skipped bulkCancel requests 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "TASKS_CANCEL_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "type": "TASKS_CANCEL_SUCCESS",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "I am skipped Task execution task has to be cancellable",
+          "type": "warning",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;
+
+exports[`TasksTable actions handles skipped bulkResume requests 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "TASKS_RESUME_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "type": "TASKS_RESUME_SUCCESS",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "I am skipped Task execution task has to be resumable",
+          "type": "warning",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
   ],
 ]
 `;

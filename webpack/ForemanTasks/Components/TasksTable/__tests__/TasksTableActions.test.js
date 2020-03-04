@@ -52,7 +52,7 @@ const fixtures = {
     return resumeTaskRequest('some-id', 'some-name');
   },
   'handles bulkResume requests that fail': () => {
-    const selected = [{ ...task, isResumable: true, isCancellable: false }];
+    const selected = [{ ...task, isResumable: true }];
 
     API.post.mockImplementation(() =>
       Promise.reject(new Error('Network Error'))
@@ -60,7 +60,7 @@ const fixtures = {
     return bulkResume({ selected, url: 'some-url' });
   },
   'handles resumable bulkResume requests': () => {
-    const selected = [{ ...task, isResumable: true, isCancellable: false }];
+    const selected = [{ ...task, isResumable: true }];
 
     API.post.mockImplementation(() => ({
       data: {
@@ -71,11 +71,45 @@ const fixtures = {
     return bulkResume({ selected, url: 'some-url' });
   },
   'handles bulkCancel requests': () => {
-    const selected = [{ ...task, isResumable: false, isCancellable: true }];
+    const selected = [{ ...task, isCancellable: true }];
+
+    API.post.mockImplementation(() => ({
+      data: {
+        cancelled: [{ action: 'I am cancelled' }],
+      },
+    }));
+    return bulkCancel({ selected, url: 'some-url' });
+  },
+  'handles bulkCancel requests that fail': () => {
+    const selected = [{ ...task, isCancellable: true }];
+
+    API.post.mockImplementation(() =>
+      Promise.reject(new Error('Network Error'))
+    );
+    return bulkCancel({ selected, url: 'some-url' });
+  },
+  'handles skipped bulkResume requests': () => {
+    const selected = [{ ...task, isResumable: true }];
+
+    API.post.mockImplementation(() => ({
+      data: {
+        skipped: [{ action: 'I am skipped' }],
+      },
+    }));
+    return bulkResume({ selected, url: 'some-url' });
+  },
+  'handles skipped bulkCancel requests': () => {
+    const selected = [{ ...task, isCancellable: true }];
+
+    API.post.mockImplementation(() => ({
+      data: {
+        skipped: [{ action: 'I am skipped' }],
+      },
+    }));
     return bulkCancel({ selected, url: 'some-url' });
   },
   'handles bulkCancel requests that are not cancellable': () => {
-    const selected = [{ ...task, isResumable: false, isCancellable: false }];
+    const selected = [{ ...task, isCancellable: false }];
     return bulkCancel({ selected, url: 'some-url' });
   },
   'handles bulkResume requests that are not resumable': () => {
