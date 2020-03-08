@@ -1,5 +1,4 @@
 module ForemanTasks
-  # rubocop:disable Metrics/ModuleLength
   module ForemanTasksHelper
     def recurring_logic_state(recurring_logic)
       icon, status = case recurring_logic.state
@@ -209,5 +208,4 @@ module ForemanTasks
       tags.join.html_safe
     end
   end
-  # rubocop:enable Metrics/ModuleLength
 end
