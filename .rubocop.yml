@@ -1,8 +1,8 @@
-require: rubocop-rails
+require:
+  - rubocop-performance
+  - rubocop-rails
 
-# TODO: remove this file by either moving cops here or fixing code
-inherit_from:
-  - .rubocop_todo.yml
+inherit_from: .rubocop_todo.yml
 
 AllCops:
   Include:
@@ -55,12 +55,11 @@ Rails/FilePath:
 Rails/ReversibleMigration:
   Enabled: false
 
-Metrics/BlockLength:
-  Exclude:
-    - config/routes.rb
-    - lib/foreman_tasks/engine.rb
-    - test/**/*
-    - lib/foreman_tasks/tasks/**/*
+Metrics:
+  Enabled: false
+
+Layout/LineLength:
+  Enabled: false
 
 Naming/FileName:
   Exclude:
@@ -69,7 +68,7 @@ Naming/FileName:
     - db/seeds.d/*
     - lib/foreman-tasks.rb
 
-Layout/IndentHeredoc:
+Layout/HeredocIndentation:
   Exclude:
     - '*.gemspec'
     - bin/*
@@ -101,7 +100,7 @@ Style/FormatStringToken:
 Style/RegexpLiteral:
   Enabled: false
 
-Layout/AlignHash:
+Layout/HashAlignment:
   Enabled: false
 
 Metrics/ClassLength:
