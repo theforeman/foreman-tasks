@@ -34,7 +34,7 @@ module ForemanTasks
       # console no matter what task it is...
       edit_permission = Permission.where(:name => :edit_foreman_tasks, :resource_type => ForemanTasks::Task.name).first
       if @user.filters.joins(:filterings).unlimited.where('filterings.permission_id' => edit_permission).first
-        return true
+        true
       end
     end
 
@@ -43,7 +43,7 @@ module ForemanTasks
         begin
           original_user = User.current
           User.current = @user
-          return Authorizer.new(@user).can?(:edit_foreman_tasks, task)
+          Authorizer.new(@user).can?(:edit_foreman_tasks, task)
         ensure
           User.current = original_user
         end

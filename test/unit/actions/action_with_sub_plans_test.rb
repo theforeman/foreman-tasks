@@ -8,7 +8,7 @@ module ForemanTasks
     end
 
     # to be able to use the locking
-    ::User.send(:include, ForemanTasks::Concerns::ActionSubject)
+    ::User.include ForemanTasks::Concerns::ActionSubject
 
     class ParentAction < Actions::ActionWithSubPlans
       def plan(user)

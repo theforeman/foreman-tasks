@@ -78,9 +78,7 @@ module Actions
           else
             head, *tail = subkeys
             if data.is_a?(Hash) && data.key?(head)
-              return fetch_data(data[head], *tail)
-            else
-              return nil
+              fetch_data(data[head], *tail)
             end
           end
         end

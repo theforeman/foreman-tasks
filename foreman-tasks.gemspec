@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-
-$LOAD_PATH.push File.expand_path("../lib", __FILE__)
+$LOAD_PATH.push File.expand_path('lib', __dir__)
 
 # Maintain your gem's version:
 require "foreman_tasks/version"
@@ -29,11 +27,11 @@ same resource. It also optionally provides Dynflow infrastructure for using it f
   s.test_files = `git ls-files test`.split("\n")
   s.extra_rdoc_files = Dir['README*', 'LICENSE']
 
-  s.add_dependency "foreman-tasks-core"
   s.add_dependency "dynflow", '>= 1.2.3'
-  s.add_dependency "sinatra" # for Dynflow web console
-  s.add_dependency "parse-cron", '~> 0.1.4'
+  s.add_dependency "foreman-tasks-core"
   s.add_dependency "get_process_mem" # for memory polling
+  s.add_dependency "parse-cron", '~> 0.1.4'
+  s.add_dependency "sinatra" # for Dynflow web console
 
   s.add_development_dependency 'factory_bot_rails', '~> 4.8.0'
 end

@@ -14,4 +14,4 @@ module ForemanTasks
   end
 end
 
-ActiveSupport::TestCase.send(:include, ForemanTasks::TestExtensions::AccessPermissionsTestExtension)
+ActiveSupport::TestCase.include ForemanTasks::TestExtensions::AccessPermissionsTestExtension

@@ -9,7 +9,7 @@ module ForemanTasks
                                        params[:certname],
                                        detected_proxy.try(:id))
 
-        render :json => { :task_id => task.id }, :status => 202
+        render :json => { :task_id => task.id }, :status => :accepted
       rescue ::Foreman::Exception => e
         render :json => { 'message' => e.to_s }, :status => :unprocessable_entity
       end

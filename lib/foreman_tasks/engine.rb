@@ -7,10 +7,10 @@ module ForemanTasks
     engine_name 'foreman_tasks'
 
     initializer 'foreman_tasks.load_default_settings', :before => :load_config_initializers do
-      require_dependency File.expand_path('../../../app/models/setting/foreman_tasks.rb', __FILE__) if begin
+      require_dependency File.expand_path('../../app/models/setting/foreman_tasks.rb', __dir__) if begin
                                                                                                          Setting.table_exists?
-                                                                                                       rescue
-                                                                                                         false
+                                                                                                   rescue
+                                                                                                     false
                                                                                                        end
     end
 
@@ -26,7 +26,7 @@ module ForemanTasks
     end
 
     initializer 'foreman_tasks.register_gettext', :after => :load_config_initializers do
-      locale_dir = File.join(File.expand_path('../../..', __FILE__), 'locale')
+      locale_dir = File.join(File.expand_path('../..', __dir__), 'locale')
       locale_domain = 'foreman_tasks'
 
       Foreman::Gettext::Support.add_text_domain locale_domain, locale_dir
@@ -135,16 +135,16 @@ module ForemanTasks
     # to enable async Foreman operations using Dynflow
     if ENV['FOREMAN_TASKS_MONKEYS'] == 'true'
       config.to_prepare do
-        ::Api::V2::HostsController.send :prepend, ForemanTasks::Concerns::HostsControllerExtension
-        ::Host::Base.send :include, ForemanTasks::Concerns::HostActionSubject
+        ::Api::V2::HostsController.prepend ForemanTasks::Concerns::HostsControllerExtension
+        ::Host::Base.include ForemanTasks::Concerns::HostActionSubject
       end
     end
 
     config.to_prepare do
       ForemanTasks.dynflow.eager_load_actions! if ForemanTasks.dynflow.initialized?
 
-      Authorizer.send(:prepend, AuthorizerExt)
-      User.send(:include, ForemanTasks::Concerns::UserExtensions)
+      Authorizer.prepend AuthorizerExt
+      User.include ForemanTasks::Concerns::UserExtensions
     end
 
     rake_tasks do
