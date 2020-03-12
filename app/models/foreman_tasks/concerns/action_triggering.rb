@@ -158,7 +158,7 @@ module ForemanTasks
             end
           end
         end
-        return true
+        true
       ensure
         # to not execute the same execution plan twice in a row
         @execution_plan = nil

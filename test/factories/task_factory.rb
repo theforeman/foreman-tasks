@@ -22,7 +22,7 @@ FactoryBot.define do
         execution_plan = ForemanTasks.dynflow.world.plan(Support::DummyDynflowAction)
         # remove the task created automatically by the persistence
         ForemanTasks::Task.where(:external_id => execution_plan.id).delete_all
-        task.update_attributes!(:external_id => execution_plan.id)
+        task.update!(:external_id => execution_plan.id)
         if evaluator.sync_with_dynflow
           task.update_from_dynflow(execution_plan.to_hash)
         end
@@ -38,7 +38,7 @@ FactoryBot.define do
 
       trait :inconsistent_dynflow_task do
         after(:build) do |task|
-          task.update_attributes!(:state => 'running')
+          task.update!(:state => 'running')
         end
       end
 

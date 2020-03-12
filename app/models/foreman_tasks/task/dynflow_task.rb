@@ -228,7 +228,7 @@ module ForemanTasks
           # if we fail updating the data from dynflow, it usually means there is something
           # odd with the data consistency and at this point it is not possible to resume, switching
           # the task to stopped/error
-          task.update_attributes(:state => 'stopped', :result => 'error')
+          task.update(:state => 'stopped', :result => 'error')
           Foreman::Logging.exception("Failed at consistency check for task #{task.id}", e, :logger => 'foreman-tasks')
         end
       end
