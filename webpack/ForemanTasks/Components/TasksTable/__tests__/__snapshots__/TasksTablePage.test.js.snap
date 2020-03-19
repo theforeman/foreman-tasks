@@ -106,8 +106,11 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
   >
     <TasksTable
       actionName=""
-      bulkCancel={[MockFunction]}
-      bulkResume={[MockFunction]}
+      allRowsSelected={false}
+      bulkCancelById={[MockFunction]}
+      bulkCancelBySearch={[MockFunction]}
+      bulkResumeById={[MockFunction]}
+      bulkResumeBySearch={[MockFunction]}
       cancelTask={[MockFunction]}
       error={null}
       getTableItems={[MockFunction]}
@@ -158,7 +161,7 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
         ]
       }
       resumeTask={[MockFunction]}
-      selectAllRows={[MockFunction]}
+      selectPage={[MockFunction]}
       selectRow={[MockFunction]}
       selectedRows={Array []}
       sort={
@@ -264,8 +267,11 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
   >
     <TasksTable
       actionName=""
-      bulkCancel={[MockFunction]}
-      bulkResume={[MockFunction]}
+      allRowsSelected={false}
+      bulkCancelById={[MockFunction]}
+      bulkCancelBySearch={[MockFunction]}
+      bulkResumeById={[MockFunction]}
+      bulkResumeBySearch={[MockFunction]}
       cancelTask={[MockFunction]}
       error={null}
       getTableItems={[MockFunction]}
@@ -316,7 +322,7 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
         ]
       }
       resumeTask={[MockFunction]}
-      selectAllRows={[MockFunction]}
+      selectPage={[MockFunction]}
       selectRow={[MockFunction]}
       selectedRows={Array []}
       sort={

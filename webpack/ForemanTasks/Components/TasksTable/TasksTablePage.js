@@ -21,12 +21,15 @@ import {
 } from './TasksTableConstants';
 import { ActionSelectButton } from './Components/ActionSelectButton';
 import './TasksTablePage.scss';
+import { SelectAllAlert } from './Components/SelectAllAlert';
 
 const TasksTablePage = ({
   getBreadcrumbs,
   history,
   clicked,
   createHeader,
+  selectAllRows,
+  showSelectAll,
   ...props
 }) => {
   const url = history.location.pathname + history.location.search;
@@ -59,15 +62,23 @@ const TasksTablePage = ({
   };
 
   const {
-    bulkCancel,
-    bulkResume,
+    bulkCancelById,
+    bulkCancelBySearch,
+    bulkResumeById,
+    bulkResumeBySearch,
     cancelTask,
     resumeTask,
     parentTaskID,
   } = props;
   const tasksActions = {
     cancelSelectedTasks: () => {
-      bulkCancel({ selected: getSelectedTasks(), url, parentTaskID });
+      props.allRowsSelected
+        ? bulkCancelBySearch({ search: uriQuery, url, parentTaskID })
+        : bulkCancelById({
+            selected: getSelectedTasks(),
+            url,
+            parentTaskID,
+          });
     },
     cancelTask: () => {
       cancelTask({
@@ -78,7 +89,13 @@ const TasksTablePage = ({
       });
     },
     resumeSelectedTasks: () => {
-      bulkResume({ selected: getSelectedTasks(), url, parentTaskID });
+      props.allRowsSelected
+        ? bulkResumeBySearch({ search: uriQuery, url, parentTaskID })
+        : bulkResumeById({
+            selected: getSelectedTasks(),
+            url,
+            parentTaskID,
+          });
     },
     resumeTask: () => {
       resumeTask({
@@ -94,7 +111,9 @@ const TasksTablePage = ({
     <div className="tasks-table-wrapper">
       <ConfirmationModals
         tasksActions={tasksActions}
-        selectedRowsLen={props.selectedRows.length}
+        selectedRowsLen={
+          props.allRowsSelected ? props.itemCount : props.selectedRows.length
+        }
         modalProps={modalProps}
       />
       <PageLayout
@@ -112,7 +131,7 @@ const TasksTablePage = ({
               title={__('Export All')}
             />
             <ActionSelectButton
-              disabled={props.selectedRows.length < 1}
+              disabled={!(props.selectedRows.length || props.allRowsSelected)}
               onCancel={modalProps.cancelSelectedModal.setModalOpen}
               onResume={modalProps.resumeSelectedModal.setModalOpen}
             />
@@ -123,13 +142,30 @@ const TasksTablePage = ({
           <TasksDashboard history={history} parentTaskID={props.parentTaskID} />
         }
       >
-        <TasksTable history={history} {...props} modalProps={modalProps} />
+        <React.Fragment>
+          {showSelectAll && props.itemCount >= props.pagination.perPage && (
+            <SelectAllAlert
+              itemCount={props.itemCount}
+              perPage={props.pagination.perPage}
+              selectAllRows={selectAllRows}
+              unselectAllRows={props.unselectAllRows}
+              allRowsSelected={props.allRowsSelected}
+            />
+          )}
+          <TasksTable history={history} {...props} modalProps={modalProps} />
+        </React.Fragment>
       </PageLayout>
     </div>
   );
 };
 
 TasksTablePage.propTypes = {
+  allRowsSelected: PropTypes.bool,
+  itemCount: PropTypes.number.isRequired,
+  pagination: PropTypes.shape({
+    perPage: PropTypes.number,
+  }),
+  selectAllRows: PropTypes.func.isRequired,
   results: PropTypes.array.isRequired,
   getTableItems: PropTypes.func.isRequired,
   getBreadcrumbs: PropTypes.func.isRequired,
@@ -138,8 +174,10 @@ TasksTablePage.propTypes = {
   history: PropTypes.object.isRequired,
   cancelTask: PropTypes.func.isRequired,
   resumeTask: PropTypes.func.isRequired,
-  bulkCancel: PropTypes.func.isRequired,
-  bulkResume: PropTypes.func.isRequired,
+  bulkCancelById: PropTypes.func.isRequired,
+  bulkCancelBySearch: PropTypes.func.isRequired,
+  bulkResumeById: PropTypes.func.isRequired,
+  bulkResumeBySearch: PropTypes.func.isRequired,
   selectedRows: PropTypes.arrayOf(PropTypes.string),
   parentTaskID: PropTypes.string,
   createHeader: PropTypes.func,
@@ -148,15 +186,23 @@ TasksTablePage.propTypes = {
     taskName: PropTypes.string,
     parentTaskID: PropTypes.string,
   }),
+  showSelectAll: PropTypes.bool,
+  unselectAllRows: PropTypes.func.isRequired,
 };
 
 TasksTablePage.defaultProps = {
+  pagination: {
+    page: 1,
+    perPage: 20,
+  },
+  allRowsSelected: false,
   actionName: '',
   status: STATUS.PENDING,
   selectedRows: [],
   parentTaskID: null,
   clicked: {},
   createHeader: () => __('Tasks'),
+  showSelectAll: false,
 };
 
 export default TasksTablePage;

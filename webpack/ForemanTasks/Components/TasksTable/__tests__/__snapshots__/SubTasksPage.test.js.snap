@@ -2,8 +2,10 @@
 
 exports[`SubTasksPage rendering render with minimal props 1`] = `
 <Connect(TasksTablePage)
-  bulkCancel={[MockFunction]}
-  bulkResume={[MockFunction]}
+  bulkCancelById={[MockFunction]}
+  bulkCancelBySearch={[MockFunction]}
+  bulkResumeById={[MockFunction]}
+  bulkResumeBySearch={[MockFunction]}
   cancelTask={[MockFunction]}
   createHeader={[Function]}
   getBreadcrumbs={[MockFunction]}
@@ -47,6 +49,7 @@ exports[`SubTasksPage rendering render with minimal props 1`] = `
   }
   resumeTask={[MockFunction]}
   selectAllRows={[MockFunction]}
+  selectPage={[MockFunction]}
   selectRow={[MockFunction]}
   selectedRows={Array []}
   sort={

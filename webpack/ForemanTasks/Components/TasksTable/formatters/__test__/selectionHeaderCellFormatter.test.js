@@ -4,7 +4,7 @@ describe('selectionHeaderCellFormatter', () => {
   it('render', () => {
     expect(
       selectionHeaderCellFormatter(
-        { allRowsSelected: () => true },
+        { allPageSelected: () => true },
         'some-label'
       )
     ).toMatchSnapshot();

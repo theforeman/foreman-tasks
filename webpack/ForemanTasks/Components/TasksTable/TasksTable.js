@@ -18,33 +18,45 @@ const TasksTable = ({
   itemCount,
   pagination,
   selectedRows,
-  selectAllRows,
+  selectPage,
   unselectAllRows,
   selectRow,
   unselectRow,
   openClickedModal,
   modalProps,
+  allRowsSelected,
 }) => {
-  const url = history.location.pathname + history.location.search;
+  const { search, pathname } = history.location;
+  const url = pathname + search;
   const uriQuery = getURIQuery(url);
 
   useEffect(() => {
     getTableItems(url);
   }, [getTableItems, url]);
 
+  useEffect(() => {
+    unselectAllRows();
+  }, [unselectAllRows, search]);
+
   const getSelectionController = () => {
-    const checkAllRowsSelected = () => results.length === selectedRows.length;
+    const checkAllPageSelected = () =>
+      allRowsSelected || results.length === selectedRows.length;
     return {
-      allRowsSelected: () => checkAllRowsSelected(),
-      selectAllRows: () => {
-        if (checkAllRowsSelected()) unselectAllRows();
-        else selectAllRows(results);
+      allRowsSelected,
+      allPageSelected: () => checkAllPageSelected(),
+      selectPage: () => {
+        if (checkAllPageSelected()) unselectAllRows();
+        else {
+          selectPage(results);
+        }
       },
       selectRow: ({ rowData: { id } }) => {
-        if (selectedRows.includes(id)) unselectRow(id);
+        if (selectedRows.includes(id) || allRowsSelected)
+          unselectRow(id, allRowsSelected && results);
         else selectRow(id);
       },
-      isSelected: ({ rowData }) => selectedRows.includes(rowData.id),
+      isSelected: ({ rowData }) =>
+        allRowsSelected || selectedRows.includes(rowData.id),
     };
   };
 
@@ -135,7 +147,7 @@ TasksTable.propTypes = {
   history: PropTypes.object.isRequired,
   openClickedModal: PropTypes.func.isRequired,
   selectedRows: PropTypes.array,
-  selectAllRows: PropTypes.func.isRequired,
+  selectPage: PropTypes.func.isRequired,
   unselectAllRows: PropTypes.func.isRequired,
   selectRow: PropTypes.func.isRequired,
   unselectRow: PropTypes.func.isRequired,
@@ -145,6 +157,7 @@ TasksTable.propTypes = {
     cancelModal: PropTypes.object,
     resumeModal: PropTypes.object,
   }).isRequired,
+  allRowsSelected: PropTypes.bool,
 };
 
 TasksTable.defaultProps = {
@@ -155,6 +168,7 @@ TasksTable.defaultProps = {
     perPage: 20,
   },
   selectedRows: [],
+  allRowsSelected: false,
 };
 
 export default TasksTable;

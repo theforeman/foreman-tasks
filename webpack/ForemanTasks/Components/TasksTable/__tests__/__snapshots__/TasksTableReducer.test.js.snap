@@ -49,7 +49,9 @@ Object {
 exports[`TasksTableReducer reducer should handle UNSELECT_ALL_ROWS 1`] = `
 Object {
   "tasksTableQuery": Object {
+    "allRowsSelected": false,
     "selectedRows": Array [],
+    "showSelectAll": false,
   },
 }
 `;
