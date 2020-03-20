@@ -31,17 +31,6 @@ module ForemanTasks
       param :id, :identifier, desc: 'UUID of the task'
       def details; end
 
-      api :GET, '/tasks/:id/sub_tasks', 'Show sub_tasks details'
-      param :id, :identifier, desc: 'UUID of the task'
-      def sub_tasks
-        parent_task = resource_scope.find(params[:id])
-        filtered_scope = parent_task.sub_tasks
-        action_name = { "action_name" => parent_task.action }
-
-        filtered_scope = DashboardTableFilter.new(filtered_scope, params).scope
-        render :json => action_name.merge(tasks_list(filtered_scope))
-      end
-
       api :POST, '/tasks/bulk_search', 'List dynflow tasks for uuids'
       param :searches, Array, :desc => 'List of uuids to fetch info about' do
         param :search_id, String, :desc => <<-DESC
@@ -170,17 +159,28 @@ module ForemanTasks
       end
 
       api :GET, '/tasks', N_('List tasks')
-      param :search, String, :desc => N_('Search string')
-      param :page, :number, :desc => N_('Page number, starting at 1')
-      param :per_page, :number, :desc => N_('Number of results per page to return')
-      param :order, String, :desc => N_("Sort field and order, e.g. 'name DESC'")
-      param :sort, Hash, :desc => N_("Hash version of 'order' param") do
-        param :by, String, :desc => N_('Field to sort the results on')
-        param :order, String, :desc => N_('How to order the sorted results (e.g. ASC for ascending)')
-      end
+      api :GET, '/tasks/:parent_task_id/sub_tasks', 'Show sub_tasks details'
+      param :parent_task_id, :identifier, desc: 'UUID of the task'
+      param_group :search_and_pagination, ::Api::V2::BaseController
       def index
-        filtered_scope = DashboardTableFilter.new(resource_scope, params).scope
-        render :json => tasks_list(filtered_scope)
+        if params[:sort_by] || params[:sort_order]
+          Foreman::Deprecation.api_deprecation_warning(
+            "The sort params sort_by and sort_order are deprecated.
+            Please use the order param instead as one string 'order=started_at desc'"
+          )
+
+          ordering_params = {
+            sort_by: params[:sort_by] || 'started_at',
+            sort_order: params[:sort_order] || 'DESC'
+          }
+          params[:order] = "#{ordering_params[:sort_by]} #{ordering_params[:sort_order]}"
+        end
+        params[:order] ||= 'started_at DESC'
+        @tasks = DashboardTableFilter.new(resource_scope_for_index, params).scope.order(params[:order].to_s)
+      end
+
+      def search_options
+        [params[:search], {}]
       end
 
       def_param_group :callback_target do
@@ -312,7 +312,13 @@ module ForemanTasks
       end
 
       def resource_scope(_options = {})
-        @resource_scope ||= ForemanTasks::Task.authorized("#{action_permission}_foreman_tasks")
+        scope = ForemanTasks::Task.authorized("#{action_permission}_foreman_tasks")
+        scope = scope.where(:parent_task_id => params[:parent_task_id]) if params[:parent_task_id]
+        scope
+      end
+
+      def resource_scope_for_index(*args)
+        super.select("DISTINCT foreman_tasks_tasks.*, coalesce(ended_at, current_timestamp) - coalesce(coalesce(started_at, ended_at), current_timestamp) as duration")
       end
 
       def controller_permission
@@ -328,39 +334,6 @@ module ForemanTasks
         else
           super
         end
-      end
-
-      def tasks_list(filtered_scope)
-        total = resource_scope.count
-
-        search_scope = filtered_scope.search_for(params[:search])
-        subtotal = search_scope.select('DISTINCT foreman_tasks_tasks.id').count
-        filtered_scope = search_scope.select('DISTINCT foreman_tasks_tasks.*')
-
-        ordering_params = {
-          sort_by: params[:sort_by] || 'started_at',
-          sort_order: params[:sort_order] || 'DESC'
-        }
-        filtered_scope = ordering_scope(filtered_scope, ordering_params)
-
-        pagination_params = {
-          page: params[:page] || 1,
-          per_page: params[:per_page] || Setting[:entries_per_page] || 20
-        }
-        filtered_scope = pagination_scope(filtered_scope, pagination_params)
-        results = filtered_scope.map { |task| task_hash(task) }
-
-        {
-          total: total,
-          subtotal: subtotal,
-          page: pagination_params[:page],
-          per_page: pagination_params[:per_page],
-          sort: {
-            by: ordering_params[:sort_by],
-            order: ordering_params[:sort_order]
-          },
-          results: results
-        }
       end
 
       def bulk_scope
