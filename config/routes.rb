@@ -50,13 +50,13 @@ Foreman::Application.routes.draw do
       resources :tasks, :only => [:show, :index] do
         member do
           get :details
-          get :sub_tasks
         end
         collection do
           post :bulk_search
           post :bulk_resume
           post :bulk_cancel
           get :summary
+          get '/:parent_task_id/sub_tasks', action: 'index'
           get '/summary/:id/sub_tasks/', action: 'summary_sub_tasks'
           post :callback
         end
