@@ -8,6 +8,15 @@ Lint/UselessAssignment:
   Exclude:
     - 'lib/foreman_tasks/tasks/export_tasks.rake'
 
+Minitest/AssertEmpty:
+  Enabled: false
+
+Minitest/AssertEqual:
+  Enabled: false
+
+Minitest/GlobalExpectations:
+  Enabled: false
+
 # Offense count: 3
 # Configuration parameters: EnforcedStyleForLeadingUnderscores.
 # SupportedStylesForLeadingUnderscores: disallowed, required, optional
