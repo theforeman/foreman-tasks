@@ -9,22 +9,31 @@ module ForemanTasks
         { 'logins' => { 'admin' => 'changeme', 'root' => 'toor' } }
       end
       let(:batch_triggering) { false }
+      let(:run_task) { true }
 
       before do
         Support::DummyProxyAction.any_instance.stubs(:with_batch_triggering?).returns(batch_triggering)
         Support::DummyProxyAction.reset
         RemoteTask.any_instance.stubs(:proxy).returns(Support::DummyProxyAction.proxy)
-        @action = create_and_plan_action(Support::DummyProxyAction,
-                                         Support::DummyProxyAction.proxy,
-                                         'Proxy::DummyAction',
-                                         'foo' => 'bar',
-                                         'secrets' => secrets,
-                                         'use_batch_triggering' => batch_triggering)
-        @action = run_action(@action)
+        plan_action = create_and_plan_action(Support::DummyProxyAction,
+                                             Support::DummyProxyAction.proxy,
+                                             'Proxy::DummyAction',
+                                             'foo' => 'bar',
+                                             'secrets' => secrets,
+                                             'use_batch_triggering' => batch_triggering)
+
+        @action = create_run_action(plan_action)
+        RemoteTask.any_instance.stubs(:task).returns(@action.task)
+        RemoteTask.any_instance.stubs(:action).returns(@action)
+        @action = run_action(@action) if run_task
       end
 
-      describe 'first run' do
-        it 'triggers the corresponding action on the proxy' do
+      describe 'fallback to old API' do
+        let(:run_task) { false }
+        it 'triggers the corresponding action on the proxy fallback to old API' do
+          Support::DummyProxyAction::DummyProxy.any_instance.stubs(:launch_tasks).raises(RestClient::NotFound)
+
+          @action = run_action(@action)
           proxy_call = Support::DummyProxyAction.proxy.log[:trigger_task].first
           expected_call = ['Proxy::DummyAction',
                            { 'foo' => 'bar',
@@ -52,6 +61,29 @@ module ForemanTasks
         end
       end
 
+      describe 'new API' do
+        it 'triggers the corresponding action on the proxy with new API' do
+          proxy_call = Support::DummyProxyAction.proxy.log[:trigger_task].first
+          expected_call = ['support',
+                           @action.execution_plan_id => {
+                             :action_input => {
+                               'foo' => 'bar',
+                               'secrets' => secrets,
+                               'use_batch_triggering' => batch_triggering,
+                               'connection_options' =>
+                                 { 'retry_interval' => 15, 'retry_count' => 4,
+                                   'proxy_batch_triggering' => batch_triggering },
+                               'proxy_url' => 'proxy.example.com',
+                               'proxy_action_name' => 'Proxy::DummyAction',
+                               "proxy_version" => { "major" => 1, "minor" => 21, "patch" => 0 },
+                               'callback' => { 'task_id' => @action.task.id, 'step_id' => @action.run_step_id }
+                             },
+                             :action_class => 'Proxy::DummyAction'
+                           }]
+          proxy_call.must_equal(expected_call)
+        end
+      end
+
       describe 'resumed run' do
         it "doesn't trigger the corresponding action again on the proxy" do
           action = run_action(@action)
@@ -70,7 +102,8 @@ module ForemanTasks
       describe 'cancel' do
         it 'sends the cancel event to the proxy when the cancel event is sent for the first time' do
           action = run_action(@action, ::Dynflow::Action::Cancellable::Cancel)
-          Support::DummyProxyAction.proxy.log[:cancel_task].first.must_equal [Support::DummyProxyAction.proxy.uuid]
+          remote_task_id = @action.remote_task.remote_task_id
+          Support::DummyProxyAction.proxy.log[:cancel_task].first.must_equal [remote_task_id]
           action.state.must_equal :suspended
         end
 

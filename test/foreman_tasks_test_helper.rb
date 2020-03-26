@@ -27,3 +27,24 @@ def wait_for(waiting_message = 'something to happen')
   end
   raise "waiting for #{waiting_message} was not successful"
 end
+
+module Dynflow
+  module Testing
+    module Factories
+      def create_run_action(plan_action)
+        Match! plan_action.phase, Action::Plan, Action::Run
+        step       = DummyStep.new
+        plan_action.class.new(
+            { step:              step,
+              execution_plan_id: plan_action.execution_plan_id,
+              id:                plan_action.id,
+              plan_step_id:      plan_action.plan_step_id,
+              run_step_id:       step.id,
+              finalize_step_id:  nil,
+              phase:             Action::Run,
+              input:             plan_action.input },
+              plan_action.world)
+      end
+    end
+  end
+end

@@ -25,6 +25,16 @@ module Support
         { 'task_id' => @uuid, 'result' => 'success' }
       end
 
+      def launch_tasks(*args)
+        @log[:trigger_task] << args
+        @task_triggered.fulfill(true)
+        results = {}
+        args[1].each_pair do |task_id, data|
+          results[task_id] = { 'task_id' => SecureRandom.uuid, 'result' => 'success' }
+        end
+        results
+      end
+
       def cancel_task(*args)
         @log[:cancel_task] << args
       end

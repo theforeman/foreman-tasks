@@ -135,17 +135,20 @@ module ForemanTasks
           wait_for { ForemanTasks::Task.find_by(external_id: triggered.id).state == 'running' }
 
           task = ForemanTasks::Task.where(:external_id => triggered.id).first
+          action = task.execution_plan.actions.detect { |a| a.class == Support::DummyProxyAction }
+          remote_task = action.remote_task
           task.state.must_equal 'running'
           task.result.must_equal 'pending'
 
-          callback = Support::DummyProxyAction.proxy.log[:trigger_task].first[1][:callback]
+          input_hash = Support::DummyProxyAction.proxy.log[:trigger_task].first[1]
+          callback = input_hash[task.external_id][:action_input]['callback']
           post :callback, params: { 'callback' => callback, 'data' => { 'result' => 'success' } }
           triggered.finished.wait(5)
 
           task.reload
           task.state.must_equal 'stopped'
           task.result.must_equal 'success'
-          task.main_action.output['proxy_task_id'].must_equal Support::DummyProxyAction.proxy.uuid
+          task.main_action.output['proxy_task_id'].must_equal remote_task.remote_task_id
           task.main_action.output['proxy_output'].must_equal('result' => 'success')
         end
       end
