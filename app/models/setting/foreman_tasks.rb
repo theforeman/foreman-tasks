@@ -14,18 +14,18 @@ class Setting::ForemanTasks < Setting
              'It should contain %{label} placeholder, that will be replaced with normalized task label '\
              '(restricted to only alphanumeric characters)). %{version} placeholder is also available.'),
           nil),
-      set('foreman_tasks_extra_polling_intervals',
-          N_('An array of polling intervals to extend the predefined polling intervals with. '\
+      set('foreman_tasks_polling_intervals',
+          N_('An array of polling intervals to use instead of the predefined polling intervals. '\
              'This can be used to prevent polling too frequently for long running tasks.'),
           [],
-          N_("Extra polling intervals"),
+          N_("Polling intervals"),
           nil,
           { :type => 'array' })
     ]
   end
 
   def self.load_defaults
-    Setting::BLANK_ATTRS.push('foreman_tasks_troubleshooting_url', 'foreman_tasks_extra_polling_intervals')
+    Setting::BLANK_ATTRS.push('foreman_tasks_troubleshooting_url', 'foreman_tasks_polling_intervals')
     super
   end
 end
