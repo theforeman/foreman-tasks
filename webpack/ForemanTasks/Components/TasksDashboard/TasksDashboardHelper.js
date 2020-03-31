@@ -4,6 +4,7 @@ import {
   TASKS_DASHBOARD_AVAILABLE_TIMES,
   TASKS_DASHBOARD_QUERY_KEYS_TEXT,
   TASKS_DASHBOARD_QUERY_VALUES_TEXT,
+  TASKS_DASHBOARD_JS_QUERY_MODES,
 } from './TasksDashboardConstants';
 import { updateURlQuery } from '../TasksTable/TasksTableHelpers';
 
@@ -39,8 +40,8 @@ const queryFromUriQuery = uriQuery => {
     if (uriQuery[uriField]) query[queryField] = uriQuery[uriField];
   });
 
-  if (query.mode === 'recent') {
-    query.mode = 'last';
+  if (query.mode === TASKS_DASHBOARD_JS_QUERY_MODES.RECENT) {
+    query.mode = TASKS_DASHBOARD_QUERY_VALUES_TEXT.LAST;
   }
 
   return query;

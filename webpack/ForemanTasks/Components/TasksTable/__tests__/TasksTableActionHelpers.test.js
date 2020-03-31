@@ -1,6 +1,6 @@
 import { convertDashboardQuery } from '../TasksTableActionHelpers';
 import {
-  TASKS_DASHBOARD_AVAILABLE_QUERY_MODES,
+  TASKS_DASHBOARD_JS_QUERY_MODES,
   TASKS_DASHBOARD_AVAILABLE_TIMES,
 } from '../../TasksDashboard/TasksDashboardConstants';
 
@@ -21,14 +21,14 @@ describe('convertDashboardQuery', () => {
       }
     };
     const query = {
-      time_mode: TASKS_DASHBOARD_AVAILABLE_QUERY_MODES.LAST,
+      time_mode: TASKS_DASHBOARD_JS_QUERY_MODES.RECENT,
       time_horizon: TASKS_DASHBOARD_AVAILABLE_TIMES.WEEK,
       state: 'stopped',
       result: 'error',
       search: 'action~job',
     };
     expect(convertDashboardQuery(query)).toEqual(
-      'state=stopped and result=error and action~job and (state_updated_at<2020-05-01T11:01:58.135Z or state_updated_at = NULL)'
+      'state=stopped and result=error and action~job and (state_updated_at>2020-05-01T11:01:58.135Z or state_updated_at = NULL)'
     );
     // Cleanup
     global.Date = realDate;

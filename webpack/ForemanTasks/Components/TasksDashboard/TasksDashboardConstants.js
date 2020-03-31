@@ -18,6 +18,11 @@ export const TASKS_DASHBOARD_AVAILABLE_QUERY_MODES = {
   OLDER: 'older',
 };
 
+export const TASKS_DASHBOARD_JS_QUERY_MODES = {
+  RECENT: 'recent',
+  OLDER: 'older',
+};
+
 export const TASKS_DASHBOARD_AVAILABLE_TIMES = {
   H24: 'H24',
   H12: 'H12',
