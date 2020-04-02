@@ -328,7 +328,7 @@ module ForemanTasks
         scope = resource_scope
         scope = scope.search_for(params[:search]) if params[:search]
         scope = scope.select('DISTINCT foreman_tasks_tasks.*')
-        scope.where(:id => params[:task_ids]) if params[:task_ids]
+        scope = scope.where(:id => params[:task_ids]) if params[:task_ids]
         scope
       end
     end
