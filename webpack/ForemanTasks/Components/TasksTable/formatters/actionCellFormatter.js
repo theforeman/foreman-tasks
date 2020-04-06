@@ -4,13 +4,16 @@ import { ActionButton } from '../../common/ActionButtons/ActionButton';
 
 export const actionCellFormatter = taskActions => (
   value,
-  { rowData: { action, id } }
+  { rowData: { action, id, canEdit } }
 ) =>
   cellFormatter(
-    <ActionButton
-      id={id}
-      name={action}
-      taskActions={taskActions}
-      availableActions={value}
-    />
+    canEdit && (
+      <ActionButton
+        canEdit={canEdit}
+        id={id}
+        name={action}
+        taskActions={taskActions}
+        availableActions={value}
+      />
+    )
   );

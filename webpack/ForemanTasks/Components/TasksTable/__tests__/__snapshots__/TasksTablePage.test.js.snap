@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
+exports[`TasksTablePage rendering render with Breadcrubs and edit permissions 1`] = `
 <div
   className="tasks-table-wrapper"
 >
@@ -114,8 +114,10 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
       parentTaskID={null}
       results={
         Array [
-          "a",
-          "b",
+          Object {
+            "action": "a",
+            "canEdit": true,
+          },
         ]
       }
       selectPage={[MockFunction]}

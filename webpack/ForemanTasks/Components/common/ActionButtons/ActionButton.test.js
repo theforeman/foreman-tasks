@@ -7,6 +7,7 @@ const resumeTask = jest.fn();
 const cancelTask = jest.fn();
 const forceCancelTask = jest.fn();
 const taskActions = { resumeTask, cancelTask, forceCancelTask };
+const minProps = { canEdit: true, id: 'id', name: 'some-name' };
 const fixtures = {
   'render with cancellable true props': {
     availableActions: {
@@ -14,8 +15,7 @@ const fixtures = {
       resumable: false,
     },
     taskActions,
-    id: 'id',
-    name: 'some-name',
+    ...minProps,
   },
   'render with resumable true props': {
     availableActions: {
@@ -23,8 +23,7 @@ const fixtures = {
       resumable: true,
     },
     taskActions,
-    id: 'id',
-    name: 'some-name',
+    ...minProps,
   },
   'render with stoppable and cancellable true props': {
     availableActions: {
@@ -32,8 +31,7 @@ const fixtures = {
       stoppable: true,
     },
     taskActions,
-    id: 'id',
-    name: 'some-name',
+    ...minProps,
   },
   'render with cancellable false props': {
     availableActions: {
@@ -41,8 +39,16 @@ const fixtures = {
       resumable: false,
     },
     taskActions,
-    id: 'id',
-    name: 'some-name',
+    ...minProps,
+  },
+  'render with canEdit false': {
+    availableActions: {
+      cancellable: false,
+      resumable: false,
+    },
+    taskActions,
+    ...minProps,
+    canEdit: false,
   },
 };
 
@@ -57,6 +63,7 @@ describe('ActionButton', () => {
         <ActionButton
           id={id}
           name={name}
+          canEdit
           availableActions={{ cancellable: true }}
           taskActions={taskActions}
         />
@@ -69,6 +76,7 @@ describe('ActionButton', () => {
         <ActionButton
           id={id}
           name={name}
+          canEdit
           availableActions={{ resumable: true }}
           taskActions={taskActions}
         />
@@ -81,6 +89,7 @@ describe('ActionButton', () => {
         <ActionButton
           id={id}
           name={name}
+          canEdit
           availableActions={{ stoppable: true }}
           taskActions={taskActions}
         />

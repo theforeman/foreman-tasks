@@ -27,6 +27,7 @@ export const selectSelectedTasks = state => {
     id: item.id,
     isCancellable: item.availableActions.cancellable,
     isResumable: item.availableActions.resumable,
+    canEdit: item.canEdit,
   }));
 };
 

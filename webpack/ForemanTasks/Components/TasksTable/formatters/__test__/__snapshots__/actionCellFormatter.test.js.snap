@@ -7,6 +7,7 @@ exports[`actionCellFormatter render 1`] = `
       "cancellable": true,
     }
   }
+  canEdit={true}
   id="some-id"
   name="some-name"
   taskActions={Object {}}

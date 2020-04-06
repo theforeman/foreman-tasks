@@ -5,7 +5,7 @@ describe('selectionCellFormatter', () => {
     expect(
       selectionCellFormatter(
         { isSelected: () => true },
-        { rowIndex: 'some-index' }
+        { rowIndex: 'some-index', rowData: {} }
       )
     ).toMatchSnapshot();
   });

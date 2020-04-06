@@ -3,8 +3,10 @@
 exports[`selectionCellFormatter render 1`] = `
 <TableSelectionCell
   checked={true}
+  disabled={true}
   id="selectsome-index"
   label="Select row"
   onChange={[Function]}
+  title="You do not have permission"
 />
 `;

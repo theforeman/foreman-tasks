@@ -1,5 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`ActionButton snapshot test render with canEdit false 1`] = `
+<span>
+  <ActionButtons
+    buttons={Array []}
+  />
+</span>
+`;
+
 exports[`ActionButton snapshot test render with cancellable false props 1`] = `
 <span
   title="Task cannot be canceled"

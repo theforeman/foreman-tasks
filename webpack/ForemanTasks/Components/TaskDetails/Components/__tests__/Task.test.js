@@ -20,6 +20,7 @@ const fixtures = {
     dynflowEnableConsole: true,
     parentTask: 'parent-id',
     taskReload: true,
+    canEdit: true,
   },
 };
 

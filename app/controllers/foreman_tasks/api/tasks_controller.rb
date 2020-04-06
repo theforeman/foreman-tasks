@@ -315,6 +315,10 @@ module ForemanTasks
         @resource_scope ||= ForemanTasks::Task.authorized("#{action_permission}_foreman_tasks")
       end
 
+      def controller_permission
+        'foreman_tasks'
+      end
+
       def action_permission
         case params[:action]
         when 'bulk_search', 'summary', 'details', 'sub_tasks'
