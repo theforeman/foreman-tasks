@@ -27,3 +27,7 @@ def wait_for(waiting_message = 'something to happen')
   end
   raise "waiting for #{waiting_message} was not successful"
 end
+
+def on_postgresql?
+  ActiveRecord::Base.connection.adapter_name == 'PostgreSQL'
+end

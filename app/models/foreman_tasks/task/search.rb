@@ -23,6 +23,15 @@ module ForemanTasks
         sql = "foreman_tasks_locks_taxonomy#{uniq_suffix}.resource_id #{operator} ? OR foreman_tasks_locks_taxonomy#{uniq_suffix}.resource_id IS NULL"
         { :conditions => sanitize_sql_for_conditions([sql, value]), :joins => joins }
       end
+
+      # Expects the time in the format "\d+ (seconds|minutes|hours|days|months|years)"
+      SUPPORTED_DURATION_FORMAT = /\A\s*(\d+(\s+\b(seconds?|minutes?|hours?|days?|months?|years?)\b)?)\b\s*\z/i.freeze
+      def search_by_duration(_key, operator, value)
+        raise "Unsupported duration '#{value}' specified for searching" unless value =~ SUPPORTED_DURATION_FORMAT
+        value = value.strip
+        { :conditions => "coalesce(ended_at, current_timestamp) - coalesce(coalesce(started_at, ended_at), current_timestamp) #{operator} ?::interval",
+          :parameter => [value] }
+      end
     end
   end
 end
