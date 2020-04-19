@@ -22,7 +22,13 @@ import {
 import { ActionSelectButton } from './Components/ActionSelectButton';
 import './TasksTablePage.scss';
 
-const TasksTablePage = ({ getBreadcrumbs, history, clicked, createHeader, ...props }) => {
+const TasksTablePage = ({
+  getBreadcrumbs,
+  history,
+  clicked,
+  createHeader,
+  ...props
+}) => {
   const url = history.location.pathname + history.location.search;
   const uriQuery = getURIQuery(url);
   const onSearch = searchQuery => {
