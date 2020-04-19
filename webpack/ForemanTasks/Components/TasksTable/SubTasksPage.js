@@ -15,7 +15,8 @@ export const SubTasksPage = props => {
       { caption: __('Sub tasks') },
     ],
   });
-  const createHeader = actionName => actionName ? sprintf(__('Sub tasks of %s'), actionName) : __('Sub tasks');
+  const createHeader = actionName =>
+    actionName ? sprintf(__('Sub tasks of %s'), actionName) : __('Sub tasks');
   return (
     <TasksTablePage
       getBreadcrumbs={getBreadcrumbs}

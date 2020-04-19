@@ -84,7 +84,7 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
           "documentationUrl": "4.1.5Searching",
           "url": "/api/bookmarks",
         },
-        "controller": "tasks",
+        "controller": "foreman_tasks/tasks",
       }
     }
     searchQuery="a=b"
@@ -242,7 +242,7 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
           "documentationUrl": "4.1.5Searching",
           "url": "/api/bookmarks",
         },
-        "controller": "tasks",
+        "controller": "foreman_tasks/tasks",
       }
     }
     searchQuery="a=b"
