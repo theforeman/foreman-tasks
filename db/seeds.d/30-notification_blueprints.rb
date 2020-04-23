@@ -27,6 +27,20 @@ blueprints = [
             title: N_('Task Details')
           ]
       }
+  },
+
+  {
+    group: N_('Tasks'),
+    name: 'tasks_bulk_resume',
+    level: 'info',
+    message: "DYNAMIC",
+  },
+
+  {
+    group: N_('Tasks'),
+    name: 'tasks_bulk_cancel',
+    level: 'info',
+    message: "DYNAMIC",
   }
 ]
 

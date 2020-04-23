@@ -73,7 +73,7 @@ const TasksTablePage = ({
   const tasksActions = {
     cancelSelectedTasks: () => {
       props.allRowsSelected
-        ? bulkCancelBySearch({ search: uriQuery, url, parentTaskID })
+        ? bulkCancelBySearch({ query: uriQuery, parentTaskID })
         : bulkCancelById({
             selected: getSelectedTasks(),
             url,
@@ -90,7 +90,7 @@ const TasksTablePage = ({
     },
     resumeSelectedTasks: () => {
       props.allRowsSelected
-        ? bulkResumeBySearch({ search: uriQuery, url, parentTaskID })
+        ? bulkResumeBySearch({ query: uriQuery, parentTaskID })
         : bulkResumeById({
             selected: getSelectedTasks(),
             url,

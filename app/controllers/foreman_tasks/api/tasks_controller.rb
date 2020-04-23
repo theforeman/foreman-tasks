@@ -95,7 +95,8 @@ module ForemanTasks
         resumed = []
         failed = []
         skipped = []
-        bulk_scope.each do |task|
+        filtered_scope = bulk_scope
+        filtered_scope.each do |task|
           if task.resumable?
             begin
               ForemanTasks.dynflow.world.execute(task.execution_plan.id)
@@ -107,8 +108,11 @@ module ForemanTasks
             skipped << task_hash(task)
           end
         end
-
-        render :json => {
+        if params[:search]
+          notification = UINotifications::Tasks::TaskBulkResume.new(filtered_scope.first, resumed.length , failed.length, skipped.length)
+          notification.deliver!
+        end
+         render :json => {
           total: resumed.length + failed.length + skipped.length,
           resumed: resumed,
           failed: failed,
@@ -123,10 +127,13 @@ module ForemanTasks
         if params[:search].nil? && params[:task_ids].nil?
           raise BadRequest, _('Please provide at least one of search or task_ids parameters in the request')
         end
-
-        cancelled, skipped = bulk_scope.partition(&:cancellable?)
-
+        filtered_scope = bulk_scope
+        cancelled, skipped = filtered_scope.partition(&:cancellable?)
         cancelled.each(&:cancel)
+        if params[:search]
+          notification = UINotifications::Tasks::TaskBulkCancel.new(filtered_scope.first, cancelled.length ,skipped.length )
+          notification.deliver!
+        end
         render :json => {
           total: cancelled.length + skipped.length,
           cancelled: cancelled,
