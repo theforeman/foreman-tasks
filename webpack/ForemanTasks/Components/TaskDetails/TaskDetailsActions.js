@@ -9,13 +9,7 @@ import {
   FOREMAN_TASK_DETAILS_FETCH_TASK_FAILURE,
   FOREMAN_TASK_DETAILS_STOP_POLLING,
   FOREMAN_TASK_DETAILS_START_POLLING,
-  FOREMAN_TASK_DETAILS_TOGGLE_UNLOCK_MODAL,
-  FOREMAN_TASK_DETAILS_TOGGLE_FORCE_UNLOCK_MODAL,
 } from './TaskDetailsConstants';
-import {
-  cancelTaskRequest,
-  resumeTaskRequest,
-} from '../TasksTable/TasksTableActions';
 
 export const taskReloadStop = timeoutId => {
   if (timeoutId) {
@@ -104,12 +98,3 @@ const requestFailure = error => ({
   type: FOREMAN_TASK_DETAILS_FETCH_TASK_FAILURE,
   payload: error,
 });
-
-export const toggleUnlockModal = () => ({
-  type: FOREMAN_TASK_DETAILS_TOGGLE_UNLOCK_MODAL,
-});
-export const toggleForceUnlockModal = () => ({
-  type: FOREMAN_TASK_DETAILS_TOGGLE_FORCE_UNLOCK_MODAL,
-});
-
-export { cancelTaskRequest, resumeTaskRequest };

@@ -4,8 +4,6 @@ import { Grid, Row, Col, Button } from 'patternfly-react';
 import { translate as __ } from 'foremanReact/common/I18n';
 import TaskInfo from './TaskInfo';
 import { ClickConfirmation } from '../../common/ClickConfirmation';
-import { ResumeButton } from '../../common/ActionButtons/ResumeButton';
-import { CancelButton } from '../../common/ActionButtons/CancelButton';
 
 class Task extends Component {
   taskProgressToggle = () => {
@@ -104,20 +102,20 @@ class Task extends Component {
               >
                 {__('Dynflow console')}
               </Button>
-              <ResumeButton
-                id={id}
+              <Button
+                bsSize="small"
+                disabled={!resumable}
                 onClick={() => {
                   if (!taskReload) {
                     this.taskProgressToggle();
                   }
                   resumeTaskRequest(id, action);
                 }}
-                name={action}
-                disabled={!resumable}
-              />
-              <CancelButton
-                id={id}
-                name={action}
+              >
+                {__('Resume')}
+              </Button>
+              <Button
+                bsSize="small"
                 disabled={!cancellable}
                 onClick={() => {
                   if (!taskReload) {
@@ -125,7 +123,10 @@ class Task extends Component {
                   }
                   cancelTaskRequest(id, action);
                 }}
-              />
+              >
+                {__('Cancel')}
+              </Button>
+
               {parentTask && (
                 <Button
                   bsSize="small"

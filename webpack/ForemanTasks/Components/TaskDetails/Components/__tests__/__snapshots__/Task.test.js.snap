@@ -63,18 +63,28 @@ exports[`Task rendering render with some Props 1`] = `
         >
           Dynflow console
         </Button>
-        <ResumeButton
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsSize="small"
+          bsStyle="default"
           disabled={true}
-          id="test"
-          name=""
           onClick={[Function]}
-        />
-        <CancelButton
+        >
+          Resume
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsSize="small"
+          bsStyle="default"
           disabled={true}
-          id="test"
-          name=""
           onClick={[Function]}
-        />
+        >
+          Cancel
+        </Button>
         <Button
           active={false}
           block={false}
@@ -211,18 +221,28 @@ exports[`Task rendering render without Props 1`] = `
         >
           Dynflow console
         </Button>
-        <ResumeButton
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsSize="small"
+          bsStyle="default"
           disabled={true}
-          id="test"
-          name=""
           onClick={[Function]}
-        />
-        <CancelButton
+        >
+          Resume
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsSize="small"
+          bsStyle="default"
           disabled={true}
-          id="test"
-          name=""
           onClick={[Function]}
-        />
+        >
+          Cancel
+        </Button>
       </Col>
     </Row>
     <TaskInfo

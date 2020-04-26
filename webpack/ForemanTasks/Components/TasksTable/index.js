@@ -13,6 +13,7 @@ import {
   selectActionName,
   selectSelectedRows,
   selectClicked,
+  selectModalID,
 } from './TasksTableSelectors';
 
 const mapStateToProps = state => ({
@@ -25,6 +26,7 @@ const mapStateToProps = state => ({
   actionName: selectActionName(state),
   selectedRows: selectSelectedRows(state),
   clicked: selectClicked(state),
+  modalID: selectModalID(state),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);

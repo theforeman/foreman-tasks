@@ -1,7 +1,6 @@
 import { getURIQuery } from 'foremanReact/common/helpers';
 import { getTableItemsAction } from 'foremanReact/components/common/table';
 import API from 'foremanReact/API';
-import { addToast } from 'foremanReact/redux/actions/toasts';
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
 import {
   TASKS_TABLE_ID,
@@ -15,10 +14,13 @@ import {
   TASKS_CANCEL_REQUEST,
   TASKS_CANCEL_SUCCESS,
   TASKS_CANCEL_FAILURE,
+  UPDATE_MODAL,
 } from './TasksTableConstants';
-import { TOAST_TYPES } from '../common/ToastTypesConstants';
+import { cancelTaskRequest, resumeTaskRequest } from '../TaskActions';
+import { dispatchToast } from '../common/ToastHelpers';
 import { getApiPathname } from './TasksTableHelpers';
 import { fetchTasksSummary } from '../TasksDashboard/TasksDashboardActions';
+import { TOAST_TYPES } from '../common/ToastTypesConstants';
 
 export const getTableItems = url =>
   getTableItemsAction(TASKS_TABLE_ID, getURIQuery(url), getApiPathname(url));
@@ -34,31 +36,6 @@ export const cancelTask = ({
   dispatch(fetchTasksSummary(getURIQuery(url).time, parentTaskID));
 };
 
-export const cancelTaskRequest = (id, name) => async dispatch => {
-  dispatch(
-    addToast({
-      type: TOAST_TYPES.INFO,
-      message: `${__('Trying to cancel')} "${name}" ${__('task')}`,
-    })
-  );
-  try {
-    await API.post(`/foreman_tasks/tasks/${id}/cancel`);
-    dispatch(
-      addToast({
-        type: TOAST_TYPES.SUCCESS,
-        message: `"${name}" ${__('Task cancelled')}`,
-      })
-    );
-  } catch ({ response }) {
-    dispatch(
-      addToast({
-        type: TOAST_TYPES.ERROR,
-        message: `"${name}" ${__('Task cannot be cancelled at the moment.')}`,
-      })
-    );
-  }
-};
-
 export const resumeTask = ({
   taskId,
   taskName,
@@ -68,25 +45,6 @@ export const resumeTask = ({
   await dispatch(resumeTaskRequest(taskId, taskName));
   dispatch(getTableItems(url));
   dispatch(fetchTasksSummary(getURIQuery(url).time), parentTaskID);
-};
-
-export const resumeTaskRequest = (id, name) => async dispatch => {
-  try {
-    await API.post(`/foreman_tasks/tasks/${id}/resume`);
-    dispatch(
-      addToast({
-        type: TOAST_TYPES.SUCCESS,
-        message: __(`"${name}" ${__('Task execution was resumed')}`),
-      })
-    );
-  } catch ({ response }) {
-    dispatch(
-      addToast({
-        type: TOAST_TYPES.ERROR,
-        message: __(`Task "${name}" has to be resumable.`),
-      })
-    );
-  }
 };
 
 export const selectAllRows = results => ({
@@ -129,12 +87,10 @@ export const bulkResume = ({
 }) => async dispatch => {
   const resumeTasks = selected.filter(task => task.isResumable);
   if (resumeTasks.length < selected.length)
-    dispatch(
-      addToast({
-        type: TOAST_TYPES.WARNING,
-        message: __('Not all the selected tasks can be resumed'),
-      })
-    );
+    dispatchToast(dispatch, {
+      type: TOAST_TYPES.WARNING,
+      message: __('Not all the selected tasks can be resumed'),
+    });
   if (resumeTasks.length) {
     try {
       dispatch({ type: TASKS_RESUME_REQUEST });
@@ -148,21 +104,19 @@ export const bulkResume = ({
           text: 'task has to be resumable',
         },
       };
-      const toastDispatch = (type, name) =>
-        dispatch(
-          addToast({
-            type: toastInfo[type].type,
-            message: sprintf(__('%(name)s Task execution %(type)s'), {
-              name,
-              type: toastInfo[type].text,
-            }),
-          })
-        );
+      const toastDispatchByType = (type, name) =>
+        dispatchToast(dispatch, {
+          type: toastInfo[type].type,
+          message: sprintf(__('%(name)s Task execution %(type)s'), {
+            name,
+            type: toastInfo[type].text,
+          }),
+        });
 
       ['resumed', 'failed', 'skipped'].forEach(type => {
         data[type] &&
           data[type].forEach(task => {
-            toastDispatch(type, task.action);
+            toastDispatchByType(type, task.action);
           });
       });
       if (data.resumed) {
@@ -171,12 +125,10 @@ export const bulkResume = ({
       }
     } catch (error) {
       dispatch({ type: TASKS_RESUME_FAILURE, error });
-      dispatch(
-        addToast({
-          type: TOAST_TYPES.ERROR,
-          message: `${__(`Cannot resume tasks at the moment`)} ${error}`,
-        })
-      );
+      dispatchToast(dispatch, {
+        type: TOAST_TYPES.ERROR,
+        message: `${__(`Cannot resume tasks at the moment`)} ${error}`,
+      });
     }
   }
 };
@@ -188,12 +140,11 @@ export const bulkCancel = ({
 }) => async dispatch => {
   const cancelTasks = selected.filter(task => task.isCancellable);
   if (cancelTasks.length < selected.length)
-    dispatch(
-      addToast({
-        type: TOAST_TYPES.WARNING,
-        message: __('Not all the selected tasks can be cancelled'),
-      })
-    );
+    dispatchToast(dispatch, {
+      type: TOAST_TYPES.WARNING,
+      message: __('Not all the selected tasks can be cancelled'),
+    });
+
   if (cancelTasks.length) {
     try {
       dispatch({ type: TASKS_CANCEL_REQUEST });
@@ -206,20 +157,18 @@ export const bulkCancel = ({
           text: 'task has to be cancellable',
         },
       };
-      const toastDispatch = (type, name) =>
-        dispatch(
-          addToast({
-            type: toastInfo[type].type,
-            message: sprintf(__('%(name)s Task execution %(type)s'), {
-              name,
-              type: toastInfo[type].text,
-            }),
-          })
-        );
+      const toastDispatchByType = (type, name) =>
+        dispatchToast(dispatch, {
+          type: toastInfo[type].type,
+          message: sprintf(__('%(name)s Task execution %(type)s'), {
+            name,
+            type: toastInfo[type].text,
+          }),
+        });
       ['cancelled', 'skipped'].forEach(type => {
         data[type] &&
           data[type].forEach(task => {
-            toastDispatch(type, task.action);
+            toastDispatchByType(type, task.action);
           });
       });
       if (data.cancelled) {
@@ -228,12 +177,10 @@ export const bulkCancel = ({
       }
     } catch (error) {
       dispatch({ type: TASKS_CANCEL_FAILURE, error });
-      dispatch(
-        addToast({
-          type: TOAST_TYPES.ERROR,
-          message: `${__(`Cannot cancel tasks at the moment`)} ${error}`,
-        })
-      );
+      dispatchToast(dispatch, {
+        type: TOAST_TYPES.ERROR,
+        message: `${__(`Cannot cancel tasks at the moment`)} ${error}`,
+      });
     }
   }
 };
@@ -243,5 +190,13 @@ export const openClickedModal = ({ taskId, taskName, setModalOpen }) => {
   return {
     type: UPDATE_CLICKED,
     payload: { clicked: { taskId, taskName } },
+  };
+};
+
+export const openModalAction = (modalID, setModalOpen) => {
+  setModalOpen();
+  return {
+    type: UPDATE_MODAL,
+    payload: { modalID },
   };
 };

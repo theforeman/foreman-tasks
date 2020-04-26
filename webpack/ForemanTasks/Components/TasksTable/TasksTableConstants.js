@@ -11,11 +11,14 @@ export const TASKS_CANCEL_REQUEST = 'TASKS_CANCEL_REQUEST';
 export const TASKS_CANCEL_SUCCESS = 'TASKS_CANCEL_SUCCESS';
 export const TASKS_CANCEL_FAILURE = 'TASKS_CANCEL_FAILURE';
 
-export const CANCEL_CONFIRM_MODAL_ID = 'cancelConfirmModal';
-export const RESUME_CONFIRM_MODAL_ID = 'resumeConfirmModal';
-export const CANCEL_SELECTED_CONFIRM_MODAL_ID = 'cancelSelectedConfirmModal';
-export const RESUME_SELECTED_CONFIRM_MODAL_ID = 'resumeSelectedConfirmModal';
+export const CANCEL_MODAL = 'cancelConfirmModal';
+export const RESUME_MODAL = 'resumeConfirmModal';
+export const CANCEL_SELECTED_MODAL = 'cancelSelectedConfirmModal';
+export const RESUME_SELECTED_MODAL = 'resumeSelectedConfirmModal';
+export const CONFIRM_MODAL = 'ConfirmModal';
+
 export const UPDATE_CLICKED = 'UPDATE_CLICKED';
+export const UPDATE_MODAL = 'UPDATE_MODAL';
 
 export const TASKS_SEARCH_PROPS = {
   ...getControllerSearchProps('tasks'),

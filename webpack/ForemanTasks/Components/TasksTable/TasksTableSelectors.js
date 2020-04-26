@@ -48,3 +48,6 @@ export const selectError = state => selectTasksTableContent(state).error;
 
 export const selectSort = state =>
   selectTasksTableQuery(state).sort || { by: 'started_at', order: 'DESC' };
+
+export const selectModalID = state =>
+  selectTasksTableQuery(state).modalID || '';

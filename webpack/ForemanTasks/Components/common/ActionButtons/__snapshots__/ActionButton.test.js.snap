@@ -1,28 +1,49 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ActionButton render with cancellable false props 1`] = `
-<CancelButton
-  disabled={true}
-  id="id"
-  name="some-name"
-  onClick={[Function]}
+exports[`ActionButton snapshot test render with cancellable false props 1`] = `
+<ActionButtons
+  buttons={
+    Array [
+      Object {
+        "action": Object {
+          "disabled": true,
+          "onClick": [Function],
+        },
+        "title": "Cancel",
+      },
+    ]
+  }
 />
 `;
 
-exports[`ActionButton render with cancellable true props 1`] = `
-<CancelButton
-  disabled={false}
-  id="id"
-  name="some-name"
-  onClick={[Function]}
+exports[`ActionButton snapshot test render with cancellable true props 1`] = `
+<ActionButtons
+  buttons={
+    Array [
+      Object {
+        "action": Object {
+          "disabled": false,
+          "onClick": [Function],
+        },
+        "title": "Cancel",
+      },
+    ]
+  }
 />
 `;
 
-exports[`ActionButton render with resumable true props 1`] = `
-<ResumeButton
-  disabled={false}
-  id="id"
-  name="some-name"
-  onClick={[Function]}
+exports[`ActionButton snapshot test render with resumable true props 1`] = `
+<ActionButtons
+  buttons={
+    Array [
+      Object {
+        "action": Object {
+          "disabled": false,
+          "onClick": [Function],
+        },
+        "title": "Resume",
+      },
+    ]
+  }
 />
 `;

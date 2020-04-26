@@ -1,4 +1,5 @@
-import { testComponentSnapshotsWithFixtures } from '@theforeman/test';
+import React from 'react';
+import { testComponentSnapshotsWithFixtures, shallow } from '@theforeman/test';
 
 import { ActionButton } from './ActionButton';
 
@@ -8,7 +9,7 @@ const fixtures = {
       cancellable: true,
       resumable: false,
     },
-    taskActions: {
+    modalActions: {
       cancel: jest.fn(),
       resume: jest.fn(),
     },
@@ -20,7 +21,7 @@ const fixtures = {
       cancellable: false,
       resumable: true,
     },
-    taskActions: {
+    modalActions: {
       cancel: jest.fn(),
       resume: jest.fn(),
     },
@@ -32,7 +33,7 @@ const fixtures = {
       cancellable: false,
       resumable: false,
     },
-    taskActions: {
+    modalActions: {
       cancel: jest.fn(),
       resume: jest.fn(),
     },
@@ -41,5 +42,41 @@ const fixtures = {
   },
 };
 
-describe('ActionButton', () =>
-  testComponentSnapshotsWithFixtures(ActionButton, fixtures));
+describe('ActionButton', () => {
+  describe('snapshot test', () =>
+    testComponentSnapshotsWithFixtures(ActionButton, fixtures));
+
+  describe('click test', () => {
+    const resumeTask = jest.fn();
+    const cancelTask = jest.fn();
+    const id = 'some-id';
+    const name = 'some-name';
+    const madalActions = { resumeTask, cancelTask };
+    it('cancel', () => {
+      const component = shallow(
+        <ActionButton
+          id={id}
+          name={name}
+          availableActions={{ cancellable: true }}
+          modalActions={madalActions}
+        />
+      );
+      component.props().buttons[0].action.onClick();
+      expect(cancelTask).toHaveBeenCalledWith(id, name);
+    });
+    it('resume', () => {
+      const component = shallow(
+        <ActionButton
+          id={id}
+          name={name}
+          availableActions={{ resumable: true }}
+          modalActions={madalActions}
+        />
+      );
+
+      component.props().buttons[0].action.onClick();
+      expect(resumeTask).toHaveBeenCalledWith(id, name);
+    });
+    it('snapshot test', () => {});
+  });
+});

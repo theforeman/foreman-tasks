@@ -4,11 +4,11 @@ import { TASKS_TABLE_ID } from '../TasksTableConstants';
 import {
   getTableItems,
   cancelTask,
-  cancelTaskRequest,
   resumeTask,
-  resumeTaskRequest,
   bulkCancel,
   bulkResume,
+  openClickedModal,
+  openModalAction,
 } from '../TasksTableActions';
 
 jest.mock('foremanReact/components/common/table', () => ({
@@ -31,26 +31,7 @@ const task = {
 
 const fixtures = {
   'should cancelTask': () => cancelTask({ ...taskInfo, url: 'some-url' }),
-  'should cancelTaskRequest and succeed': () =>
-    cancelTaskRequest('some-id', 'some-name'),
-  'should cancelTaskRequest and fail': () => {
-    API.post.mockImplementation(() =>
-      Promise.reject(new Error('Network Error'))
-    );
-    return cancelTaskRequest('some-id', 'some-name');
-  },
-
   'should resumeTask': () => resumeTask({ ...taskInfo, url: 'some-url' }),
-  'should resumeTaskRequest and succeed': () => {
-    API.post.mockImplementation(() => ({ data: 'some-data' }));
-    return resumeTaskRequest('some-id', 'some-name');
-  },
-  'should resumeTaskRequest and fail': () => {
-    API.post.mockImplementation(() =>
-      Promise.reject(new Error('Network Error'))
-    );
-    return resumeTaskRequest('some-id', 'some-name');
-  },
   'handles bulkResume requests that fail': () => {
     const selected = [{ ...task, isResumable: true }];
 
@@ -116,10 +97,24 @@ const fixtures = {
     const selected = [{ ...task, isResumable: false, isCancellable: false }];
     return bulkResume({ selected, url: 'some-url' });
   },
+
+  'handles openClickedModal': () =>
+    openClickedModal({ ...taskInfo, setModalOpen: jest.fn() }),
+  'handles openModalAction': () => openModalAction('some-modal-id', jest.fn()),
 };
 describe('TasksTable actions', () => {
   it('getTableItems should reuse common/table/getTableItemsAction', () => {
     expect(getTableItems('')).toEqual(TASKS_TABLE_ID);
   });
   testActionSnapshotWithFixtures(fixtures);
+  it('openClickedModal opens modal', () => {
+    const setModalOpen = jest.fn();
+    openClickedModal({ ...taskInfo, setModalOpen });
+    expect(setModalOpen).toHaveBeenCalled();
+  });
+  it('openModalAction opens modal', () => {
+    const setModalOpen = jest.fn();
+    openModalAction('some-modal-id', setModalOpen);
+    expect(setModalOpen).toHaveBeenCalled();
+  });
 });

@@ -15,15 +15,9 @@ exports[`TasksIndexPage rendering render with minimal props 1`] = `
     }
   }
   itemCount={2}
-  modalProps={
-    Object {
-      "cancelModal": Object {},
-      "cancelSelectedModal": Object {},
-      "resumeModal": Object {},
-      "resumeSelectedModal": Object {},
-    }
-  }
   openClickedModal={[MockFunction]}
+  openModal={[MockFunction]}
+  openModalAction={[MockFunction]}
   pagination={
     Object {
       "page": 1,

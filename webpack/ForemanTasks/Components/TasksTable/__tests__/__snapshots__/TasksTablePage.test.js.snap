@@ -5,37 +5,15 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
   className="tasks-table-wrapper"
 >
   <ConfirmationModals
-    modalProps={
-      Object {
-        "cancelModal": Object {
-          "modalOpen": true,
-          "setModalClosed": [MockFunction],
-          "setModalOpen": [MockFunction],
-        },
-        "cancelSelectedModal": Object {
-          "modalOpen": true,
-          "setModalClosed": [MockFunction],
-          "setModalOpen": [MockFunction],
-        },
-        "resumeModal": Object {
-          "modalOpen": true,
-          "setModalClosed": [MockFunction],
-          "setModalOpen": [MockFunction],
-        },
-        "resumeSelectedModal": Object {
-          "modalOpen": true,
-          "setModalClosed": [MockFunction],
-          "setModalOpen": [MockFunction],
-        },
-      }
-    }
+    modalID=""
     selectedRowsLen={0}
+    setModalClosed={[MockFunction]}
     tasksActions={
       Object {
-        "cancelSelectedTasks": [Function],
-        "cancelTask": [Function],
-        "resumeSelectedTasks": [Function],
-        "resumeTask": [Function],
+        "cancelConfirmModal": [Function],
+        "cancelSelectedConfirmModal": [Function],
+        "resumeConfirmModal": [Function],
+        "resumeSelectedConfirmModal": [Function],
       }
     }
   />
@@ -98,8 +76,8 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
         />
         <ActionSelectButton
           disabled={true}
-          onCancel={[MockFunction]}
-          onResume={[MockFunction]}
+          onCancel={[Function]}
+          onResume={[Function]}
         />
       </React.Fragment>
     }
@@ -119,31 +97,8 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
         }
       }
       itemCount={2}
-      modalProps={
-        Object {
-          "cancelModal": Object {
-            "modalOpen": true,
-            "setModalClosed": [MockFunction],
-            "setModalOpen": [MockFunction],
-          },
-          "cancelSelectedModal": Object {
-            "modalOpen": true,
-            "setModalClosed": [MockFunction],
-            "setModalOpen": [MockFunction],
-          },
-          "resumeModal": Object {
-            "modalOpen": true,
-            "setModalClosed": [MockFunction],
-            "setModalOpen": [MockFunction],
-          },
-          "resumeSelectedModal": Object {
-            "modalOpen": true,
-            "setModalClosed": [MockFunction],
-            "setModalOpen": [MockFunction],
-          },
-        }
-      }
       openClickedModal={[MockFunction]}
+      openModal={[Function]}
       pagination={
         Object {
           "page": 1,
@@ -180,37 +135,15 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
   className="tasks-table-wrapper"
 >
   <ConfirmationModals
-    modalProps={
-      Object {
-        "cancelModal": Object {
-          "modalOpen": true,
-          "setModalClosed": [MockFunction],
-          "setModalOpen": [MockFunction],
-        },
-        "cancelSelectedModal": Object {
-          "modalOpen": true,
-          "setModalClosed": [MockFunction],
-          "setModalOpen": [MockFunction],
-        },
-        "resumeModal": Object {
-          "modalOpen": true,
-          "setModalClosed": [MockFunction],
-          "setModalOpen": [MockFunction],
-        },
-        "resumeSelectedModal": Object {
-          "modalOpen": true,
-          "setModalClosed": [MockFunction],
-          "setModalOpen": [MockFunction],
-        },
-      }
-    }
+    modalID=""
     selectedRowsLen={0}
+    setModalClosed={[MockFunction]}
     tasksActions={
       Object {
-        "cancelSelectedTasks": [Function],
-        "cancelTask": [Function],
-        "resumeSelectedTasks": [Function],
-        "resumeTask": [Function],
+        "cancelConfirmModal": [Function],
+        "cancelSelectedConfirmModal": [Function],
+        "resumeConfirmModal": [Function],
+        "resumeSelectedConfirmModal": [Function],
       }
     }
   />
@@ -256,8 +189,8 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
         />
         <ActionSelectButton
           disabled={true}
-          onCancel={[MockFunction]}
-          onResume={[MockFunction]}
+          onCancel={[Function]}
+          onResume={[Function]}
         />
       </React.Fragment>
     }
@@ -277,31 +210,8 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
         }
       }
       itemCount={2}
-      modalProps={
-        Object {
-          "cancelModal": Object {
-            "modalOpen": true,
-            "setModalClosed": [MockFunction],
-            "setModalOpen": [MockFunction],
-          },
-          "cancelSelectedModal": Object {
-            "modalOpen": true,
-            "setModalClosed": [MockFunction],
-            "setModalOpen": [MockFunction],
-          },
-          "resumeModal": Object {
-            "modalOpen": true,
-            "setModalClosed": [MockFunction],
-            "setModalOpen": [MockFunction],
-          },
-          "resumeSelectedModal": Object {
-            "modalOpen": true,
-            "setModalClosed": [MockFunction],
-            "setModalOpen": [MockFunction],
-          },
-        }
-      }
       openClickedModal={[MockFunction]}
+      openModal={[Function]}
       pagination={
         Object {
           "page": 1,
