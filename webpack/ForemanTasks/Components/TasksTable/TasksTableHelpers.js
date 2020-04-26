@@ -22,9 +22,10 @@ export const resolveSearchQuery = (search, history) => {
   updateURlQuery(uriQuery, history);
 };
 
-export const addSearchToURL = (path, query) => {
-  const url = new URI(path);
-  url.addSearch({ ...query, include_permissions: true });
+export const getCSVurl = (path, query) => {
+  let url = new URI(path);
+  url = url.pathname(`${url.pathname()}.csv`);
+  url.addSearch(query);
   return url.toString();
 };
 

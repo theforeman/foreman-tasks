@@ -2,11 +2,19 @@ import { testComponentSnapshotsWithFixtures } from '@theforeman/test';
 import TasksTablePage from '../TasksTablePage';
 import { minProps } from './TasksTable.fixtures';
 
+jest.mock('foremanReact/common/helpers', () => ({
+  getURIQuery: () => ({ state: 'stopped' }),
+}));
+
+const history = {
+  location: { pathname: '/foreman_tasks/tasks', search: '?action="some-name"' },
+};
 const fixtures = {
-  'render with minimal props': minProps,
+  'render with minimal props': { ...minProps, history },
 
   'render with Breadcrubs': {
     ...minProps,
+    history,
     getBreadcrumbs: () => ({
       breadcrumbItems: [
         { caption: 'Tasks', url: `/foreman_tasks/tasks` },

@@ -1,4 +1,4 @@
-import { updateURlQuery, getDuration } from '../TasksTableHelpers';
+import { updateURlQuery, getDuration, getCSVurl } from '../TasksTableHelpers';
 
 describe('updateURlQuery', () => {
   it('should use url with new query', () => {
@@ -24,5 +24,21 @@ describe('updateURlQuery', () => {
     const duration = getDuration('', '1/1/2000 11:25');
     expect(duration.text).toEqual('N/A');
     expect(duration.tooltip).toEqual('Task was canceled');
+  });
+});
+
+describe('getCSVurl', () => {
+  it('should return currect url for tasks with search', () => {
+    const url = '/foreman_tasks/tasks';
+    const query = { state: 'stopped' };
+    expect(getCSVurl(url, query)).toEqual(
+      '/foreman_tasks/tasks.csv?state=stopped'
+    );
+  });
+  it('should return currect url for subtasks', () => {
+    const url = '/foreman_tasks/tasks/some-id/sub_tasks';
+    expect(getCSVurl(url, {})).toEqual(
+      '/foreman_tasks/tasks/some-id/sub_tasks.csv'
+    );
   });
 });
