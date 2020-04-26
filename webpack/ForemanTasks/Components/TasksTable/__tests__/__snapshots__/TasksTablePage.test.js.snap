@@ -45,7 +45,8 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
         history={
           Object {
             "location": Object {
-              "search": "",
+              "pathname": "/foreman_tasks/tasks",
+              "search": "?action=\\"some-name\\"",
             },
           }
         }
@@ -94,7 +95,7 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
       <React.Fragment>
         <ExportButton
           title="Export All"
-          url="/foreman_tasks/tasks.csv?include_permissions=true"
+          url="/foreman_tasks/tasks.csv?action=%22some-name%22&state=stopped"
         />
         <ActionSelectButton
           disabled={true}
@@ -114,7 +115,8 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
       history={
         Object {
           "location": Object {
-            "search": "",
+            "pathname": "/foreman_tasks/tasks",
+            "search": "?action=\\"some-name\\"",
           },
         }
       }
@@ -220,7 +222,8 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
         history={
           Object {
             "location": Object {
-              "search": "",
+              "pathname": "/foreman_tasks/tasks",
+              "search": "?action=\\"some-name\\"",
             },
           }
         }
@@ -252,7 +255,7 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
       <React.Fragment>
         <ExportButton
           title="Export All"
-          url="/foreman_tasks/tasks.csv?include_permissions=true"
+          url="/foreman_tasks/tasks.csv?action=%22some-name%22&state=stopped"
         />
         <ActionSelectButton
           disabled={true}
@@ -272,7 +275,8 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
       history={
         Object {
           "location": Object {
-            "search": "",
+            "pathname": "/foreman_tasks/tasks",
+            "search": "?action=\\"some-name\\"",
           },
         }
       }

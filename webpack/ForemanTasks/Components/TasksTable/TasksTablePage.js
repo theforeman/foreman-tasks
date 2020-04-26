@@ -10,7 +10,7 @@ import { STATUS } from 'foremanReact/constants';
 import { useForemanModal } from 'foremanReact/components/ForemanModal/ForemanModalHooks';
 import TasksDashboard from '../TasksDashboard';
 import TasksTable from './TasksTable';
-import { resolveSearchQuery, addSearchToURL } from './TasksTableHelpers';
+import { resolveSearchQuery, getCSVurl } from './TasksTableHelpers';
 import { ConfirmationModals } from './Components/ConfirmationModals';
 import {
   TASKS_SEARCH_PROPS,
@@ -108,7 +108,7 @@ const TasksTablePage = ({
           <React.Fragment>
             {props.status === STATUS.PENDING && <Spinner size="lg" loading />}
             <ExportButton
-              url={addSearchToURL('/foreman_tasks/tasks.csv', uriQuery)}
+              url={getCSVurl(url, uriQuery)}
               title={__('Export All')}
             />
             <ActionSelectButton
