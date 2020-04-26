@@ -92,6 +92,13 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
     toastNotifications="foreman-tasks-cancel"
     toolbarButtons={
       <React.Fragment>
+        <Spinner
+          className=""
+          inline={false}
+          inverse={false}
+          loading={true}
+          size="lg"
+        />
         <ExportButton
           title="Export All"
           url="/foreman_tasks/tasks.csv?include_permissions=true"
@@ -170,7 +177,7 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
           "order": "w",
         }
       }
-      status="RESOLVED"
+      status="PENDING"
       unselectAllRows={[MockFunction]}
       unselectRow={[MockFunction]}
     />
@@ -253,6 +260,13 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
     toastNotifications="foreman-tasks-cancel"
     toolbarButtons={
       <React.Fragment>
+        <Spinner
+          className=""
+          inline={false}
+          inverse={false}
+          loading={true}
+          size="lg"
+        />
         <ExportButton
           title="Export All"
           url="/foreman_tasks/tasks.csv?include_permissions=true"
@@ -331,7 +345,7 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
           "order": "w",
         }
       }
-      status="RESOLVED"
+      status="PENDING"
       unselectAllRows={[MockFunction]}
       unselectRow={[MockFunction]}
     />

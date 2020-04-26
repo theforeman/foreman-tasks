@@ -57,36 +57,14 @@ Array [
   ],
   Array [
     Object {
-      "type": "TASKS_CANCEL_SUCCESS",
-    },
-  ],
-  Array [
-    Object {
       "payload": Object {
         "message": Object {
-          "message": "I am skipped Task execution task has to be cancellable",
-          "type": "warning",
+          "message": "Canceling selected tasks, this might take a while",
+          "type": "info",
         },
       },
       "type": "TOASTS_ADD",
     },
-  ],
-  Array [
-    Object {
-      "payload": Object {
-        "message": Object {
-          "message": "1 Tasks were cancelled",
-          "type": "success",
-        },
-      },
-      "type": "TOASTS_ADD",
-    },
-  ],
-  Array [
-    "TASKS_TABLE",
-  ],
-  Array [
-    [Function],
   ],
 ]
 `;
@@ -143,43 +121,10 @@ Array [
   ],
   Array [
     Object {
-      "type": "TASKS_RESUME_SUCCESS",
-    },
-  ],
-  Array [
-    Object {
       "payload": Object {
         "message": Object {
-          "message": "I am failed Task execution could not be resumed",
-          "type": "error",
-        },
-      },
-      "type": "TOASTS_ADD",
-    },
-  ],
-  Array [
-    Object {
-      "payload": Object {
-        "message": Object {
-          "message": "I am skipped Task execution task has to be resumable",
-          "type": "warning",
-        },
-      },
-      "type": "TOASTS_ADD",
-    },
-  ],
-  Array [
-    Object {
-      "error": [TypeError: Cannot read property 'length' of undefined],
-      "type": "TASKS_RESUME_FAILURE",
-    },
-  ],
-  Array [
-    Object {
-      "payload": Object {
-        "message": Object {
-          "message": "Cannot resume tasks at the moment TypeError: Cannot read property 'length' of undefined",
-          "type": "error",
+          "message": "Resuming selected tasks, this might take a while",
+          "type": "info",
         },
       },
       "type": "TOASTS_ADD",
@@ -254,23 +199,6 @@ Array [
       "type": "TOASTS_ADD",
     },
   ],
-  Array [
-    Object {
-      "error": [TypeError: Cannot read property 'length' of undefined],
-      "type": "TASKS_CANCEL_FAILURE",
-    },
-  ],
-  Array [
-    Object {
-      "payload": Object {
-        "message": Object {
-          "message": "Cannot cancel tasks at the moment TypeError: Cannot read property 'length' of undefined",
-          "type": "error",
-        },
-      },
-      "type": "TOASTS_ADD",
-    },
-  ],
 ]
 `;
 
@@ -292,23 +220,6 @@ Array [
         "message": Object {
           "message": "I am skipped Task execution task has to be resumable",
           "type": "warning",
-        },
-      },
-      "type": "TOASTS_ADD",
-    },
-  ],
-  Array [
-    Object {
-      "error": [TypeError: Cannot read property 'length' of undefined],
-      "type": "TASKS_RESUME_FAILURE",
-    },
-  ],
-  Array [
-    Object {
-      "payload": Object {
-        "message": Object {
-          "message": "Cannot resume tasks at the moment TypeError: Cannot read property 'length' of undefined",
-          "type": "error",
         },
       },
       "type": "TOASTS_ADD",

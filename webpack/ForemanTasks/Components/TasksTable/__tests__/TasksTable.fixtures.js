@@ -21,7 +21,6 @@ export const minProps = {
     perPage: 10,
   },
   history: { location: { search: '' } },
-  status: STATUS.RESOLVED,
   results: ['a', 'b'],
   sort: {
     by: 'q',

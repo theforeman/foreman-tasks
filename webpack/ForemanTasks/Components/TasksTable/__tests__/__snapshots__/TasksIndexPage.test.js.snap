@@ -49,7 +49,6 @@ exports[`TasksIndexPage rendering render with minimal props 1`] = `
       "order": "w",
     }
   }
-  status="RESOLVED"
   unselectAllRows={[MockFunction]}
   unselectRow={[MockFunction]}
 />

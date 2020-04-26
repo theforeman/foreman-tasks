@@ -84,7 +84,11 @@ const fixtures = {
         skipped: [{ action: 'I am skipped' }],
       },
     }));
-    return bulkCancelBySearch({ search: {}, url: 'some-url' });
+    return bulkCancelBySearch({
+      query: { search: {} },
+      url: 'some-url',
+      parentTaskID: 'parent',
+    });
   },
 
   'handles bulkResumeBySearch requests': () => {
@@ -95,7 +99,11 @@ const fixtures = {
         failed: [{ action: 'I am failed' }],
       },
     }));
-    return bulkResumeBySearch({ search: {}, url: 'some-url' });
+    return bulkResumeBySearch({
+      query: { search: {} },
+      url: 'some-url',
+      parentTaskID: 'parent',
+    });
   },
 };
 

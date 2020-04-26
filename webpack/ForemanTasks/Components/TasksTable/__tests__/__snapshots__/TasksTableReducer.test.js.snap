@@ -1,5 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`TasksTableReducer reducer should handle OPEN_SELECT_ALL 1`] = `
+Object {
+  "tasksTableQuery": Object {
+    "selectedRows": Array [],
+    "showSelectAll": true,
+  },
+}
+`;
+
+exports[`TasksTableReducer reducer should handle SELECT_ALL_ROWS 1`] = `
+Object {
+  "tasksTableQuery": Object {
+    "allRowsSelected": true,
+    "selectedRows": Array [],
+  },
+}
+`;
+
 exports[`TasksTableReducer reducer should handle SELECT_ROWS 1`] = `
 Object {
   "tasksTableQuery": Object {
@@ -60,6 +78,20 @@ exports[`TasksTableReducer reducer should handle UNSELECT_ROWS 1`] = `
 Object {
   "tasksTableQuery": Object {
     "selectedRows": Array [],
+  },
+}
+`;
+
+exports[`TasksTableReducer reducer should handle UNSELECT_ROWS with all rows selected 1`] = `
+Object {
+  "tasksTableQuery": Object {
+    "allRowsSelected": false,
+    "selectedRows": Array [
+      3,
+      4,
+      5,
+    ],
+    "showSelectAll": false,
   },
 }
 `;
