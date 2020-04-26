@@ -1,7 +1,7 @@
 module UINotifications
   module Tasks
-    class TaskBulkCancel < ::UINotifications::Base      
-      def initialize(task, cancelled_length , skipped_length)
+    class TaskBulkCancel < ::UINotifications::Base
+      def initialize(task, cancelled_length, skipped_length)
         @subject = task
         @cancelled_length = cancelled_length
         @skipped_length = skipped_length
@@ -14,7 +14,7 @@ module UINotifications
           subject: subject,
           notification_blueprint: blueprint,
           message: message,
-          notification_recipients: [NotificationRecipient.create({ :user =>  User.current })],
+          notification_recipients: [NotificationRecipient.create({ :user => User.current })]
         )
       end
 
@@ -23,7 +23,7 @@ module UINotifications
       end
 
       def message
-        ('%{cancelled} Tasks were cancelled. %{skipped} Tasks were skipped. ' % 
+        ('%{cancelled} Tasks were cancelled. %{skipped} Tasks were skipped. ' %
           { cancelled: @cancelled_length,
           skipped: @skipped_length })
       end
@@ -31,7 +31,6 @@ module UINotifications
       def blueprint
         @blueprint ||= NotificationBlueprint.find_by(name: 'tasks_bulk_cancel')
       end
-
     end
   end
 end

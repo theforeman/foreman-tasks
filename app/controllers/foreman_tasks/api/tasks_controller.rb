@@ -109,10 +109,10 @@ module ForemanTasks
           end
         end
         if params[:search]
-          notification = UINotifications::Tasks::TaskBulkResume.new(filtered_scope.first, resumed.length , failed.length, skipped.length)
+          notification = UINotifications::Tasks::TaskBulkResume.new(filtered_scope.first, resumed.length, failed.length, skipped.length)
           notification.deliver!
         end
-         render :json => {
+        render :json => {
           total: resumed.length + failed.length + skipped.length,
           resumed: resumed,
           failed: failed,
@@ -131,7 +131,7 @@ module ForemanTasks
         cancelled, skipped = filtered_scope.partition(&:cancellable?)
         cancelled.each(&:cancel)
         if params[:search]
-          notification = UINotifications::Tasks::TaskBulkCancel.new(filtered_scope.first, cancelled.length ,skipped.length )
+          notification = UINotifications::Tasks::TaskBulkCancel.new(filtered_scope.first, cancelled.length, skipped.length)
           notification.deliver!
         end
         render :json => {

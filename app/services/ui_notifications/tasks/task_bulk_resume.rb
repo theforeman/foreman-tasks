@@ -1,7 +1,7 @@
 module UINotifications
   module Tasks
-    class TaskBulkResume < ::UINotifications::Base      
-      def initialize(task, resumed_length , failed_length, skipped_length)
+    class TaskBulkResume < ::UINotifications::Base
+      def initialize(task, resumed_length, failed_length, skipped_length)
         @subject = task
         @resumed_length = resumed_length
         @failed_length = failed_length
@@ -15,7 +15,7 @@ module UINotifications
           subject: subject,
           notification_blueprint: blueprint,
           message: message,
-          notification_recipients: [NotificationRecipient.create({ :user =>  User.current })],
+          notification_recipients: [NotificationRecipient.create({ :user => User.current })]
         )
       end
 
@@ -24,7 +24,7 @@ module UINotifications
       end
 
       def message
-        ('%{resumed} Tasks were resumed. %{failed} Tasks failed to resume. %{skipped} Tasks were skipped. ' % 
+        ('%{resumed} Tasks were resumed. %{failed} Tasks failed to resume. %{skipped} Tasks were skipped. ' %
           { resumed: @resumed_length,
           failed: @failed_length,
           skipped: @skipped_length })
@@ -33,7 +33,6 @@ module UINotifications
       def blueprint
         @blueprint ||= NotificationBlueprint.find_by(name: 'tasks_bulk_resume')
       end
-
     end
   end
 end
