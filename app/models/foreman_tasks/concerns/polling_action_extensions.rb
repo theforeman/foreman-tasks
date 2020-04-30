@@ -2,11 +2,10 @@ module ForemanTasks
   module Concerns
     module PollingActionExtensions
       def poll_intervals
-        if (setting = Setting[:foreman_tasks_polling_intervals]).any?
-          setting
-        else
-          super + [32, 64, 128, 256, 512, 1024]
-        end
+        multiplier = Setting[:foreman_tasks_polling_multiplier]
+
+        # Prevent the intervals from going below 0.5 seconds
+        super.map { |interval| [interval * multiplier, 0.5].max }
       end
     end
   end
