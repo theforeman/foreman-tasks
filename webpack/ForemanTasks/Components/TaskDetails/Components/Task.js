@@ -96,6 +96,7 @@ class Task extends Component {
                 {__(`${taskReload ? 'Stop' : 'Start'}  auto-reloading`)}
               </Button>
               <Button
+                className="dynflow-button"
                 bsSize="small"
                 href={`/foreman_tasks/dynflow/${externalId}`}
                 disabled={!dynflowEnableConsole}
@@ -103,6 +104,7 @@ class Task extends Component {
                 {__('Dynflow console')}
               </Button>
               <Button
+                className="resume-button"
                 bsSize="small"
                 disabled={!resumable}
                 onClick={() => {
@@ -115,6 +117,7 @@ class Task extends Component {
                 {__('Resume')}
               </Button>
               <Button
+                className="cancel-button"
                 bsSize="small"
                 disabled={!cancellable}
                 onClick={() => {
@@ -129,6 +132,7 @@ class Task extends Component {
 
               {parentTask && (
                 <Button
+                  className="parent-button"
                   bsSize="small"
                   href={`/foreman_tasks/tasks/${parentTask}`}
                 >
@@ -137,6 +141,7 @@ class Task extends Component {
               )}
               {hasSubTasks && (
                 <Button
+                  className="subtask-button"
                   bsSize="small"
                   href={`/foreman_tasks/tasks/${id}/sub_tasks`}
                 >
@@ -145,6 +150,7 @@ class Task extends Component {
               )}
               {allowDangerousActions && (
                 <Button
+                  className="unlock-button"
                   bsSize="small"
                   disabled={state !== 'paused'}
                   onClick={toggleUnlockModal}
@@ -154,6 +160,7 @@ class Task extends Component {
               )}
               {allowDangerousActions && (
                 <Button
+                  className="force-unlock-button"
                   bsSize="small"
                   disabled={state === 'stopped'}
                   onClick={toggleForceUnlockModal}

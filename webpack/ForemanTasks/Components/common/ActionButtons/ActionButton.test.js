@@ -77,6 +77,5 @@ describe('ActionButton', () => {
       component.props().buttons[0].action.onClick();
       expect(resumeTask).toHaveBeenCalledWith(id, name);
     });
-    it('snapshot test', () => {});
   });
 });
