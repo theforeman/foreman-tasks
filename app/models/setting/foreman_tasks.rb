@@ -13,7 +13,12 @@ class Setting::ForemanTasks < Setting
           N_('Url pointing to the task troubleshooting documentation. '\
              'It should contain %{label} placeholder, that will be replaced with normalized task label '\
              '(restricted to only alphanumeric characters)). %{version} placeholder is also available.'),
-          nil)
+          nil),
+      set('foreman_tasks_polling_multiplier',
+          N_('Polling multiplier which is used to multiply the default polling intervals. '\
+             'This can be used to prevent polling too frequently for long running tasks.'),
+          1,
+          N_("Polling intervals multiplier"))
     ]
   end
 
