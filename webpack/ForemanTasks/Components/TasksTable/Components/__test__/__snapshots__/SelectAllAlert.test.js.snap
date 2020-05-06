@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SelectAllAlert renders SelectAllAlert with all rows selected 1`] = `
+<Alert
+  className=""
+  onDismiss={null}
+  type="info"
+>
+  All 7 tasks are selected. 
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="link"
+    disabled={false}
+    onClick={[MockFunction]}
+  >
+    Undo selection
+  </Button>
+</Alert>
+`;
+
+exports[`SelectAllAlert renders SelectAllAlert with perPage > itemCout 1`] = `
+<Alert
+  className=""
+  onDismiss={null}
+  type="info"
+>
+  All 5 tasks on this page are selected
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="link"
+    disabled={false}
+    onClick={[MockFunction]}
+  >
+    Select All
+    <b>
+       
+      7
+       
+    </b>
+     
+    tasks.
+  </Button>
+</Alert>
+`;
+
+exports[`SelectAllAlert renders SelectAllAlert without all rows selected 1`] = `
+<Alert
+  className=""
+  onDismiss={null}
+  type="info"
+>
+  All 5 tasks on this page are selected
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="link"
+    disabled={false}
+    onClick={[MockFunction]}
+  >
+    Select All
+    <b>
+       
+      7
+       
+    </b>
+     
+    tasks.
+  </Button>
+</Alert>
+`;

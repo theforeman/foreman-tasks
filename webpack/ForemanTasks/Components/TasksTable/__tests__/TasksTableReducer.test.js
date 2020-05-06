@@ -1,3 +1,4 @@
+import Immutable from 'seamless-immutable';
 import { testReducerSnapshotWithFixtures } from '@theforeman/test';
 import {
   TASKS_TABLE_ID,
@@ -7,6 +8,8 @@ import {
   UNSELECT_ROWS,
   UNSELECT_ALL_ROWS,
   UPDATE_CLICKED,
+  SELECT_ALL_ROWS,
+  OPEN_SELECT_ALL,
 } from '../TasksTableConstants';
 import reducer from '../TasksTableReducer';
 
@@ -44,7 +47,7 @@ const fixtures = {
   'should handle UNSELECT_ROWS': {
     action: {
       type: UNSELECT_ROWS,
-      payload: 4,
+      payload: [{ id: 4 }],
     },
   },
   'should handle UNSELECT_ALL_ROWS': {
@@ -56,6 +59,24 @@ const fixtures = {
     action: {
       type: UPDATE_CLICKED,
       payload: { clicked: 'task' },
+    },
+  },
+  'should handle SELECT_ALL_ROWS': {
+    action: {
+      type: SELECT_ALL_ROWS,
+      payload: { clicked: 'task' },
+    },
+  },
+  'should handle OPEN_SELECT_ALL': {
+    action: {
+      type: OPEN_SELECT_ALL,
+    },
+  },
+  'should handle UNSELECT_ROWS with all rows selected': {
+    state: Immutable({ tasksTableQuery: { allRowsSelected: true } }),
+    action: {
+      type: UNSELECT_ROWS,
+      payload: { id: [4], results: [{ id: 3 }, { id: 4 }, { id: 5 }] },
     },
   },
 };

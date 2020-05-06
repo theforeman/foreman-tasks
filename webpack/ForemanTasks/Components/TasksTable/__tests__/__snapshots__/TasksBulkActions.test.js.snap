@@ -1,0 +1,229 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TasksTable bulk actions handles bulkCancelById requests 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "TASKS_CANCEL_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "type": "TASKS_CANCEL_SUCCESS",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "I am cancelled Task execution was cancelled",
+          "type": "success",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+  Array [
+    "TASKS_TABLE",
+  ],
+  Array [
+    [Function],
+  ],
+]
+`;
+
+exports[`TasksTable bulk actions handles bulkCancelById requests that are not cancellable 1`] = `
+Array [
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "Not all the selected tasks can be cancelled",
+          "type": "warning",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;
+
+exports[`TasksTable bulk actions handles bulkCancelBySearch requests 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "TASKS_CANCEL_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "Canceling selected tasks, this might take a while",
+          "type": "info",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;
+
+exports[`TasksTable bulk actions handles bulkResumeById requests that are not resumable 1`] = `
+Array [
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "Not all the selected tasks can be resumed",
+          "type": "warning",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;
+
+exports[`TasksTable bulk actions handles bulkResumeById requests that fail 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "TASKS_RESUME_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "error": [Error: Network Error],
+      "type": "TASKS_RESUME_FAILURE",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "Cannot resume tasks at the moment Error: Network Error",
+          "type": "error",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;
+
+exports[`TasksTable bulk actions handles bulkResumeBySearch requests 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "TASKS_RESUME_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "Resuming selected tasks, this might take a while",
+          "type": "info",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;
+
+exports[`TasksTable bulk actions handles resumable bulkResumeById requests 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "TASKS_RESUME_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "type": "TASKS_RESUME_SUCCESS",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "I am resumed Task execution was resumed",
+          "type": "success",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "I am failed Task execution could not be resumed",
+          "type": "error",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+  Array [
+    "TASKS_TABLE",
+  ],
+  Array [
+    [Function],
+  ],
+]
+`;
+
+exports[`TasksTable bulk actions handles skipped bulkCancelById requests 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "TASKS_CANCEL_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "type": "TASKS_CANCEL_SUCCESS",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "I am skipped Task execution task has to be cancellable",
+          "type": "warning",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;
+
+exports[`TasksTable bulk actions handles skipped bulkResumeById requests 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "TASKS_RESUME_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "type": "TASKS_RESUME_SUCCESS",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "I am skipped Task execution task has to be resumable",
+          "type": "warning",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;

@@ -1,239 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TasksTable actions handles bulkCancel requests 1`] = `
-Array [
-  Array [
-    Object {
-      "type": "TASKS_CANCEL_REQUEST",
-    },
-  ],
-  Array [
-    Object {
-      "type": "TASKS_CANCEL_SUCCESS",
-    },
-  ],
-  Array [
-    Object {
-      "payload": Object {
-        "message": Object {
-          "message": "I am cancelled Task execution was cancelled",
-          "type": "success",
-        },
-      },
-      "type": "TOASTS_ADD",
-    },
-  ],
-  Array [
-    "TASKS_TABLE",
-  ],
-  Array [
-    [Function],
-  ],
-]
-`;
-
-exports[`TasksTable actions handles bulkCancel requests that are not cancellable 1`] = `
-Array [
-  Array [
-    Object {
-      "payload": Object {
-        "message": Object {
-          "message": "Not all the selected tasks can be cancelled",
-          "type": "warning",
-        },
-      },
-      "type": "TOASTS_ADD",
-    },
-  ],
-]
-`;
-
-exports[`TasksTable actions handles bulkCancel requests that fail 1`] = `
-Array [
-  Array [
-    Object {
-      "type": "TASKS_CANCEL_REQUEST",
-    },
-  ],
-  Array [
-    Object {
-      "error": [Error: Network Error],
-      "type": "TASKS_CANCEL_FAILURE",
-    },
-  ],
-  Array [
-    Object {
-      "payload": Object {
-        "message": Object {
-          "message": "Cannot cancel tasks at the moment Error: Network Error",
-          "type": "error",
-        },
-      },
-      "type": "TOASTS_ADD",
-    },
-  ],
-]
-`;
-
-exports[`TasksTable actions handles bulkResume requests that are not resumable 1`] = `
-Array [
-  Array [
-    Object {
-      "payload": Object {
-        "message": Object {
-          "message": "Not all the selected tasks can be resumed",
-          "type": "warning",
-        },
-      },
-      "type": "TOASTS_ADD",
-    },
-  ],
-]
-`;
-
-exports[`TasksTable actions handles bulkResume requests that fail 1`] = `
-Array [
-  Array [
-    Object {
-      "type": "TASKS_RESUME_REQUEST",
-    },
-  ],
-  Array [
-    Object {
-      "error": [Error: Network Error],
-      "type": "TASKS_RESUME_FAILURE",
-    },
-  ],
-  Array [
-    Object {
-      "payload": Object {
-        "message": Object {
-          "message": "Cannot resume tasks at the moment Error: Network Error",
-          "type": "error",
-        },
-      },
-      "type": "TOASTS_ADD",
-    },
-  ],
-]
-`;
-
-exports[`TasksTable actions handles resumable bulkResume requests 1`] = `
-Array [
-  Array [
-    Object {
-      "type": "TASKS_RESUME_REQUEST",
-    },
-  ],
-  Array [
-    Object {
-      "type": "TASKS_RESUME_SUCCESS",
-    },
-  ],
-  Array [
-    Object {
-      "payload": Object {
-        "message": Object {
-          "message": "I am resumed Task execution was resumed",
-          "type": "success",
-        },
-      },
-      "type": "TOASTS_ADD",
-    },
-  ],
-  Array [
-    Object {
-      "payload": Object {
-        "message": Object {
-          "message": "I am failed Task execution could not be resumed",
-          "type": "error",
-        },
-      },
-      "type": "TOASTS_ADD",
-    },
-  ],
-  Array [
-    "TASKS_TABLE",
-  ],
-  Array [
-    [Function],
-  ],
-]
-`;
-
-exports[`TasksTable actions handles skipped bulkCancel requests 1`] = `
-Array [
-  Array [
-    Object {
-      "type": "TASKS_CANCEL_REQUEST",
-    },
-  ],
-  Array [
-    Object {
-      "type": "TASKS_CANCEL_SUCCESS",
-    },
-  ],
-  Array [
-    Object {
-      "payload": Object {
-        "message": Object {
-          "message": "I am skipped Task execution task has to be cancellable",
-          "type": "warning",
-        },
-      },
-      "type": "TOASTS_ADD",
-    },
-  ],
-]
-`;
-
-exports[`TasksTable actions handles skipped bulkResume requests 1`] = `
-Array [
-  Array [
-    Object {
-      "type": "TASKS_RESUME_REQUEST",
-    },
-  ],
-  Array [
-    Object {
-      "type": "TASKS_RESUME_SUCCESS",
-    },
-  ],
-  Array [
-    Object {
-      "payload": Object {
-        "message": Object {
-          "message": "I am skipped Task execution task has to be resumable",
-          "type": "warning",
-        },
-      },
-      "type": "TOASTS_ADD",
-    },
-  ],
-]
-`;
-
-exports[`TasksTable actions should cancelTask 1`] = `
-Array [
-  Array [
-    [Function],
-  ],
-  Array [
-    "TASKS_TABLE",
-  ],
-  Array [
-    [Function],
-  ],
-]
-`;
-
 exports[`TasksTable actions should cancelTaskRequest and fail 1`] = `
 Array [
   Array [
     Object {
       "payload": Object {
         "message": Object {
-          "message": "Trying to cancel \\"some-name\\" task",
+          "message": "Trying to cancel some-name task",
           "type": "info",
         },
       },
@@ -242,10 +15,21 @@ Array [
   ],
   Array [
     Object {
+      "type": "TASKS_CANCEL_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "payload": undefined,
+      "type": "TASKS_CANCEL_FAILURE",
+    },
+  ],
+  Array [
+    Object {
       "payload": Object {
         "message": Object {
-          "message": "\\"some-name\\" Task cannot be cancelled at the moment.",
-          "type": "error",
+          "message": "some-name Task execution task has to be cancellable",
+          "type": "warning",
         },
       },
       "type": "TOASTS_ADD",
@@ -260,7 +44,7 @@ Array [
     Object {
       "payload": Object {
         "message": Object {
-          "message": "Trying to cancel \\"some-name\\" task",
+          "message": "Trying to cancel some-name task",
           "type": "info",
         },
       },
@@ -269,9 +53,19 @@ Array [
   ],
   Array [
     Object {
+      "type": "TASKS_CANCEL_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "type": "TASKS_CANCEL_SUCCESS",
+    },
+  ],
+  Array [
+    Object {
       "payload": Object {
         "message": Object {
-          "message": "\\"some-name\\" Task cancelled",
+          "message": "some-name Task execution was cancelled",
           "type": "success",
         },
       },
@@ -281,28 +75,24 @@ Array [
 ]
 `;
 
-exports[`TasksTable actions should resumeTask 1`] = `
-Array [
-  Array [
-    [Function],
-  ],
-  Array [
-    "TASKS_TABLE",
-  ],
-  Array [
-    [Function],
-    undefined,
-  ],
-]
-`;
-
 exports[`TasksTable actions should resumeTaskRequest and fail 1`] = `
 Array [
   Array [
     Object {
+      "type": "TASKS_RESUME_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "payload": undefined,
+      "type": "TASKS_RESUME_FAILURE",
+    },
+  ],
+  Array [
+    Object {
       "payload": Object {
         "message": Object {
-          "message": "Task \\"some-name\\" has to be resumable.",
+          "message": "some-name Task execution could not be resumed",
           "type": "error",
         },
       },
@@ -316,13 +106,41 @@ exports[`TasksTable actions should resumeTaskRequest and succeed 1`] = `
 Array [
   Array [
     Object {
+      "type": "TASKS_RESUME_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "type": "TASKS_RESUME_SUCCESS",
+    },
+  ],
+  Array [
+    Object {
       "payload": Object {
         "message": Object {
-          "message": "\\"some-name\\" Task execution was resumed",
+          "message": "some-name Task execution was resumed",
           "type": "success",
         },
       },
       "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;
+
+exports[`TasksTable actions should selectPage and succeed 1`] = `
+Array [
+  Array [
+    Object {
+      "payload": Array [
+        "some-id",
+      ],
+      "type": "SELECT_ROWS",
+    },
+  ],
+  Array [
+    Object {
+      "type": "OPEN_SELECT_ALL",
     },
   ],
 ]

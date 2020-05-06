@@ -9,6 +9,8 @@ import {
   UNSELECT_ROWS,
   UNSELECT_ALL_ROWS,
   UPDATE_CLICKED,
+  SELECT_ALL_ROWS,
+  OPEN_SELECT_ALL,
 } from './TasksTableConstants';
 
 const initialState = Immutable({
@@ -21,6 +23,8 @@ export const TasksTableQueryReducer = (state = initialState, action) => {
     response || {};
   const ACTION_TYPES = createTableActionTypes(TASKS_TABLE_ID);
   switch (type) {
+    case SELECT_ALL_ROWS:
+      return state.set('allRowsSelected', true);
     case ACTION_TYPES.SUCCESS:
       return Immutable.merge(state, {
         itemCount: subtotal,
@@ -33,13 +37,28 @@ export const TasksTableQueryReducer = (state = initialState, action) => {
       });
     case SELECT_ROWS:
       return state.set('selectedRows', union(payload, state.selectedRows));
+    case OPEN_SELECT_ALL:
+      return state.set('showSelectAll', true);
     case UNSELECT_ROWS:
+      if (state.allRowsSelected) {
+        // User can unselect rows if only the page rows are selected
+        return state
+          .set(
+            'selectedRows',
+            payload.results.map(row => row.id).filter(row => row !== payload.id)
+          )
+          .set('allRowsSelected', false)
+          .set('showSelectAll', false);
+      }
       return state.set(
         'selectedRows',
-        state.selectedRows.filter(row => row !== payload)
+        state.selectedRows.filter(row => row !== payload.id)
       );
     case UNSELECT_ALL_ROWS:
-      return state.set('selectedRows', []);
+      return state
+        .set('selectedRows', [])
+        .set('allRowsSelected', false)
+        .set('showSelectAll', false);
     case UPDATE_CLICKED:
       return state.set('clicked', payload.clicked);
     default:

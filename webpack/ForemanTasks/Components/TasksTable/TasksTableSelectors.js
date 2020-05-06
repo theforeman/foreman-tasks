@@ -48,3 +48,9 @@ export const selectError = state => selectTasksTableContent(state).error;
 
 export const selectSort = state =>
   selectTasksTableQuery(state).sort || { by: 'started_at', order: 'DESC' };
+
+export const selectAllRowsSelected = state =>
+  selectTasksTableQuery(state).allRowsSelected;
+
+export const selectShowSelectAll = state =>
+  selectTasksTableQuery(state).showSelectAll;

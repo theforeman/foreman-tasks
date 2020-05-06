@@ -93,6 +93,13 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
     toastNotifications="foreman-tasks-cancel"
     toolbarButtons={
       <React.Fragment>
+        <Spinner
+          className=""
+          inline={false}
+          inverse={false}
+          loading={true}
+          size="lg"
+        />
         <ExportButton
           title="Export All"
           url="/foreman_tasks/tasks.csv?action=%22some-name%22&state=stopped"
@@ -107,8 +114,11 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
   >
     <TasksTable
       actionName=""
-      bulkCancel={[MockFunction]}
-      bulkResume={[MockFunction]}
+      allRowsSelected={false}
+      bulkCancelById={[MockFunction]}
+      bulkCancelBySearch={[MockFunction]}
+      bulkResumeById={[MockFunction]}
+      bulkResumeBySearch={[MockFunction]}
       cancelTask={[MockFunction]}
       error={null}
       getTableItems={[MockFunction]}
@@ -160,7 +170,7 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
         ]
       }
       resumeTask={[MockFunction]}
-      selectAllRows={[MockFunction]}
+      selectPage={[MockFunction]}
       selectRow={[MockFunction]}
       selectedRows={Array []}
       sort={
@@ -169,7 +179,7 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
           "order": "w",
         }
       }
-      status="RESOLVED"
+      status="PENDING"
       unselectAllRows={[MockFunction]}
       unselectRow={[MockFunction]}
     />
@@ -253,6 +263,13 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
     toastNotifications="foreman-tasks-cancel"
     toolbarButtons={
       <React.Fragment>
+        <Spinner
+          className=""
+          inline={false}
+          inverse={false}
+          loading={true}
+          size="lg"
+        />
         <ExportButton
           title="Export All"
           url="/foreman_tasks/tasks.csv?action=%22some-name%22&state=stopped"
@@ -267,8 +284,11 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
   >
     <TasksTable
       actionName=""
-      bulkCancel={[MockFunction]}
-      bulkResume={[MockFunction]}
+      allRowsSelected={false}
+      bulkCancelById={[MockFunction]}
+      bulkCancelBySearch={[MockFunction]}
+      bulkResumeById={[MockFunction]}
+      bulkResumeBySearch={[MockFunction]}
       cancelTask={[MockFunction]}
       error={null}
       getTableItems={[MockFunction]}
@@ -320,7 +340,7 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
         ]
       }
       resumeTask={[MockFunction]}
-      selectAllRows={[MockFunction]}
+      selectPage={[MockFunction]}
       selectRow={[MockFunction]}
       selectedRows={Array []}
       sort={
@@ -329,7 +349,7 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
           "order": "w",
         }
       }
-      status="RESOLVED"
+      status="PENDING"
       unselectAllRows={[MockFunction]}
       unselectRow={[MockFunction]}
     />

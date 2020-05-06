@@ -2,7 +2,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import TasksTablePage from './TasksTablePage';
 import reducer from './TasksTableReducer';
-import * as actions from './TasksTableActions';
+import * as tableActions from './TasksTableActions';
+import * as bulkActions from './TasksBulkActions';
 import {
   selectStatus,
   selectError,
@@ -13,6 +14,8 @@ import {
   selectActionName,
   selectSelectedRows,
   selectClicked,
+  selectAllRowsSelected,
+  selectShowSelectAll,
 } from './TasksTableSelectors';
 
 const mapStateToProps = state => ({
@@ -25,9 +28,12 @@ const mapStateToProps = state => ({
   actionName: selectActionName(state),
   selectedRows: selectSelectedRows(state),
   clicked: selectClicked(state),
+  allRowsSelected: selectAllRowsSelected(state),
+  showSelectAll: selectShowSelectAll(state),
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ ...tableActions, ...bulkActions }, dispatch);
 
 export const reducers = { tasksTable: reducer };
 
