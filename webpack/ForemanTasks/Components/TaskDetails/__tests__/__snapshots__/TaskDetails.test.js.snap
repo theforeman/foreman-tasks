@@ -39,8 +39,6 @@ exports[`TaskDetails rendering render without Props 1`] = `
         resumable={false}
         resumeTaskRequest={[Function]}
         runningSteps={Array []}
-        showForceUnlockModal={false}
-        showUnlockModal={false}
         startAt=""
         startBefore=""
         startedAt=""
@@ -49,8 +47,6 @@ exports[`TaskDetails rendering render without Props 1`] = `
         taskReloadStart={[Function]}
         taskReloadStop={[Function]}
         timeoutId={null}
-        toggleForceUnlockModal={[Function]}
-        toggleUnlockModal={[Function]}
         username=""
         usernamePath=""
       />

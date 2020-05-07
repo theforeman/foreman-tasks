@@ -31,8 +31,6 @@ import {
   selectTimeoutId,
   selectTaskReload,
   selectParentTask,
-  selectShowUnlockModal,
-  selectShowForceUnlockModal,
   selectExternalId,
   selectDynflowEnableConsole,
 } from './TaskDetailsSelectors';
@@ -64,8 +62,6 @@ const mapStateToProps = state => ({
   timeoutId: selectTimeoutId(state),
   taskReload: selectTaskReload(state),
   parentTask: selectParentTask(state),
-  showUnlockModal: selectShowUnlockModal(state),
-  showForceUnlockModal: selectShowForceUnlockModal(state),
   externalId: selectExternalId(state),
   dynflowEnableConsole: selectDynflowEnableConsole(state),
 });

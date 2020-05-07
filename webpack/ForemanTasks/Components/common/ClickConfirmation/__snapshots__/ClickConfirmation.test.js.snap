@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ClickConfirmation render 1`] = `
+<ForemanModal
+  id="some-id"
+>
+  <Component>
+    <span
+      className="glyphicon glyphicon-warning-sign"
+    />
+     some-title
+  </Component>
+  some-body
+  <div>
+    <input
+      checked={false}
+      onChange={[Function]}
+      type="checkbox"
+    />
+     some-message
+  </div>
+  <Component>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="warning"
+      data-method="post"
+      disabled={true}
+      href="some-path"
+    >
+      some-confirm
+    </Button>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      disabled={false}
+      onClick={[MockFunction]}
+    >
+      Cancel
+    </Button>
+  </Component>
+</ForemanModal>
+`;
