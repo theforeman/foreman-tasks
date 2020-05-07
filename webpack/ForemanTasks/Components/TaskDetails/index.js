@@ -1,7 +1,8 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import TaskDetails from './TaskDetails';
-import * as actions from './TaskDetailsActions';
+import * as taskDetailsActions from './TaskDetailsActions';
+import * as taskActions from '../TaskActions';
 import reducer from './TaskDetailsReducer';
 import {
   selectEndedAt,
@@ -69,7 +70,8 @@ const mapStateToProps = state => ({
   dynflowEnableConsole: selectDynflowEnableConsole(state),
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ ...taskActions, ...taskDetailsActions }, dispatch);
 
 export const reducers = { taskDetails: reducer };
 
