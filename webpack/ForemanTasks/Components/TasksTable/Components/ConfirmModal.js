@@ -1,23 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { startCase } from 'lodash';
 import { sprintf, translate as __ } from 'foremanReact/common/I18n';
 import { Button } from 'patternfly-react';
 import ForemanModal from 'foremanReact/components/ForemanModal';
-import {
-  CANCEL_CONFIRM_MODAL_ID,
-  RESUME_CONFIRM_MODAL_ID,
-  CANCEL_SELECTED_CONFIRM_MODAL_ID,
-  RESUME_SELECTED_CONFIRM_MODAL_ID,
-} from '../TasksTableConstants';
 
-export const CancelConfirm = ({ closeModal, action, selectedRowsLen, id }) => (
-  <ForemanModal title={__('Cancel Selected Tasks')} id={id}>
-    <ForemanModal.Header />
+export const ConfirmModal = ({
+  closeModal,
+  actionText,
+  actionState,
+  action,
+  selectedRowsLen,
+  id,
+}) => (
+  <ForemanModal
+    title={sprintf(__('%s Selected Tasks'), startCase(actionText))}
+    id={id}
+  >
     {sprintf(
       __(
-        `This will cancel %s task(s), putting them in the stopped state. Are you sure?`
+        `This will %(action)s %(number)s task(s), putting them in the %(state)s state. Are you sure?`
       ),
-      selectedRowsLen
+      { action: actionText, number: selectedRowsLen, state: actionState }
     )}
     <ForemanModal.Footer>
       <Button onClick={closeModal}>{__('No')}</Button>
@@ -34,20 +38,17 @@ export const CancelConfirm = ({ closeModal, action, selectedRowsLen, id }) => (
   </ForemanModal>
 );
 
-CancelConfirm.propTypes = {
+ConfirmModal.propTypes = {
+  actionText: PropTypes.string.isRequired,
+  actionState: PropTypes.string.isRequired,
   closeModal: PropTypes.func.isRequired,
   selectedRowsLen: PropTypes.number.isRequired,
   action: PropTypes.func,
-  id: PropTypes.oneOf([
-    CANCEL_CONFIRM_MODAL_ID,
-    RESUME_CONFIRM_MODAL_ID,
-    CANCEL_SELECTED_CONFIRM_MODAL_ID,
-    RESUME_SELECTED_CONFIRM_MODAL_ID,
-  ]).isRequired,
+  id: PropTypes.string.isRequired,
 };
 
-CancelConfirm.defaultProps = {
+ConfirmModal.defaultProps = {
   action: () => null,
 };
 
-export default CancelConfirm;
+export default ConfirmModal;

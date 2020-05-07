@@ -27,12 +27,8 @@ export const minProps = {
     order: 'w',
   },
   openClickedModal: jest.fn(),
-  modalProps: {
-    cancelSelectedModal: {},
-    resumeSelectedModal: {},
-    cancelModal: {},
-    resumeModal: {},
-  },
+  openModalAction: jest.fn(),
+  openModal: jest.fn(),
 };
 
 export default {

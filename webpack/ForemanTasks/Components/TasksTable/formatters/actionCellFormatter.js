@@ -2,7 +2,7 @@ import React from 'react';
 import { cellFormatter } from 'foremanReact/components/common/table';
 import { ActionButton } from '../../common/ActionButtons/ActionButton';
 
-export const actionCellFormatter = taskActions => (
+export const actionCellFormatter = modalActions => (
   value,
   { rowData: { action, id } }
 ) =>
@@ -10,7 +10,7 @@ export const actionCellFormatter = taskActions => (
     <ActionButton
       id={id}
       name={action}
-      taskActions={taskActions}
+      modalActions={modalActions}
       availableActions={value}
     />
   );

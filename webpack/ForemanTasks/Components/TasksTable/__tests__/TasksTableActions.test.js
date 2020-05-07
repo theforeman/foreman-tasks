@@ -8,6 +8,8 @@ import {
   cancelTask,
   resumeTask,
   selectPage,
+  openClickedModal,
+  openModalAction,
 } from '../TasksTableActions';
 
 jest.mock('foremanReact/components/common/table', () => ({
@@ -21,6 +23,9 @@ const taskInfo = {
 
 const fixtures = {
   'should selectPage and succeed': () => selectPage([{ id: 'some-id' }]),
+  'handles openClickedModal': () =>
+    openClickedModal({ ...taskInfo, setModalOpen: jest.fn() }),
+  'handles openModalAction': () => openModalAction('some-modal-id', jest.fn()),
 };
 describe('TasksTable actions', () => {
   it('getTableItems should reuse common/table/getTableItemsAction', () => {
@@ -38,6 +43,16 @@ describe('TasksTable actions', () => {
     cancelTask({ ...taskInfo, url: 'some-url' })(dispatch);
     await IntegrationTestHelper.flushAllPromises();
     expect(dispatch.mock.calls).toHaveLength(3);
+  });
+  it('openClickedModal opens modal', () => {
+    const setModalOpen = jest.fn();
+    openClickedModal({ ...taskInfo, setModalOpen });
+    expect(setModalOpen).toHaveBeenCalled();
+  });
+  it('openModalAction opens modal', () => {
+    const setModalOpen = jest.fn();
+    openModalAction('some-modal-id', setModalOpen);
+    expect(setModalOpen).toHaveBeenCalled();
   });
   testActionSnapshotWithFixtures(fixtures);
 });

@@ -14,10 +14,11 @@ import { resolveSearchQuery, getCSVurl } from './TasksTableHelpers';
 import { ConfirmationModals } from './Components/ConfirmationModals';
 import {
   TASKS_SEARCH_PROPS,
-  CANCEL_SELECTED_CONFIRM_MODAL_ID,
-  RESUME_SELECTED_CONFIRM_MODAL_ID,
-  RESUME_CONFIRM_MODAL_ID,
-  CANCEL_CONFIRM_MODAL_ID,
+  CANCEL_SELECTED_MODAL,
+  RESUME_SELECTED_MODAL,
+  RESUME_MODAL,
+  CANCEL_MODAL,
+  CONFIRM_MODAL,
 } from './TasksTableConstants';
 import { ActionSelectButton } from './Components/ActionSelectButton';
 import './TasksTablePage.scss';
@@ -30,6 +31,8 @@ const TasksTablePage = ({
   createHeader,
   selectAllRows,
   showSelectAll,
+  modalID,
+  openModalAction,
   ...props
 }) => {
   const url = history.location.pathname + history.location.search;
@@ -50,17 +53,6 @@ const TasksTablePage = ({
     }));
   };
 
-  const modalProps = {
-    cancelSelectedModal: useForemanModal({
-      id: CANCEL_SELECTED_CONFIRM_MODAL_ID,
-    }),
-    resumeSelectedModal: useForemanModal({
-      id: RESUME_SELECTED_CONFIRM_MODAL_ID,
-    }),
-    cancelModal: useForemanModal({ id: CANCEL_CONFIRM_MODAL_ID }),
-    resumeModal: useForemanModal({ id: RESUME_CONFIRM_MODAL_ID }),
-  };
-
   const {
     bulkCancelById,
     bulkCancelBySearch,
@@ -71,7 +63,7 @@ const TasksTablePage = ({
     parentTaskID,
   } = props;
   const tasksActions = {
-    cancelSelectedTasks: () => {
+    [CANCEL_SELECTED_MODAL]: () => {
       props.allRowsSelected
         ? bulkCancelBySearch({ query: uriQuery, parentTaskID })
         : bulkCancelById({
@@ -80,7 +72,7 @@ const TasksTablePage = ({
             parentTaskID,
           });
     },
-    cancelTask: () => {
+    [CANCEL_MODAL]: () => {
       cancelTask({
         taskId: clicked.taskId,
         taskName: clicked.taskName,
@@ -88,7 +80,7 @@ const TasksTablePage = ({
         parentTaskID,
       });
     },
-    resumeSelectedTasks: () => {
+    [RESUME_SELECTED_MODAL]: () => {
       props.allRowsSelected
         ? bulkResumeBySearch({ query: uriQuery, parentTaskID })
         : bulkResumeById({
@@ -97,7 +89,7 @@ const TasksTablePage = ({
             parentTaskID,
           });
     },
-    resumeTask: () => {
+    [RESUME_MODAL]: () => {
       resumeTask({
         taskId: clicked.taskId,
         taskName: clicked.taskName,
@@ -106,6 +98,10 @@ const TasksTablePage = ({
       });
     },
   };
+  const { setModalOpen, setModalClosed } = useForemanModal({
+    id: CONFIRM_MODAL,
+  });
+  const openModal = id => openModalAction(id, setModalOpen);
 
   return (
     <div className="tasks-table-wrapper">
@@ -114,7 +110,8 @@ const TasksTablePage = ({
         selectedRowsLen={
           props.allRowsSelected ? props.itemCount : props.selectedRows.length
         }
-        modalProps={modalProps}
+        setModalClosed={setModalClosed}
+        modalID={modalID}
       />
       <PageLayout
         searchable
@@ -132,8 +129,8 @@ const TasksTablePage = ({
             />
             <ActionSelectButton
               disabled={!(props.selectedRows.length || props.allRowsSelected)}
-              onCancel={modalProps.cancelSelectedModal.setModalOpen}
-              onResume={modalProps.resumeSelectedModal.setModalOpen}
+              onCancel={() => openModal(CANCEL_SELECTED_MODAL)}
+              onResume={() => openModal(RESUME_SELECTED_MODAL)}
             />
           </React.Fragment>
         }
@@ -152,7 +149,7 @@ const TasksTablePage = ({
               allRowsSelected={props.allRowsSelected}
             />
           )}
-          <TasksTable history={history} {...props} modalProps={modalProps} />
+          <TasksTable history={history} {...props} openModal={openModal} />
         </React.Fragment>
       </PageLayout>
     </div>
@@ -186,6 +183,8 @@ TasksTablePage.propTypes = {
     taskName: PropTypes.string,
     parentTaskID: PropTypes.string,
   }),
+  modalID: PropTypes.string,
+  openModalAction: PropTypes.func.isRequired,
   showSelectAll: PropTypes.bool,
   unselectAllRows: PropTypes.func.isRequired,
 };
@@ -203,6 +202,7 @@ TasksTablePage.defaultProps = {
   clicked: {},
   createHeader: () => __('Tasks'),
   showSelectAll: false,
+  modalID: '',
 };
 
 export default TasksTablePage;

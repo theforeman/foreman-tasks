@@ -9,7 +9,7 @@ const fixtures = {
       cancellable: true,
       resumable: false,
     },
-    taskActions: {
+    modalActions: {
       cancelTask: jest.fn(),
       resumeTask: jest.fn(),
     },
@@ -21,7 +21,7 @@ const fixtures = {
       cancellable: false,
       resumable: true,
     },
-    taskActions: {
+    modalActions: {
       cancelTask: jest.fn(),
       resumeTask: jest.fn(),
     },
@@ -33,7 +33,7 @@ const fixtures = {
       cancellable: false,
       resumable: false,
     },
-    taskActions: {
+    modalActions: {
       cancelTask: jest.fn(),
       resumeTask: jest.fn(),
     },
@@ -50,14 +50,14 @@ describe('ActionButton', () => {
     const cancelTask = jest.fn();
     const id = 'some-id';
     const name = 'some-name';
-    const taskActions = { resumeTask, cancelTask };
+    const modalActions = { resumeTask, cancelTask };
     it('cancel', () => {
       const component = shallow(
         <ActionButton
           id={id}
           name={name}
           availableActions={{ cancellable: true }}
-          taskActions={taskActions}
+          modalActions={modalActions}
         />
       ).children();
       component.props().buttons[0].action.onClick();
@@ -69,7 +69,7 @@ describe('ActionButton', () => {
           id={id}
           name={name}
           availableActions={{ resumable: true }}
-          taskActions={taskActions}
+          modalActions={modalActions}
         />
       ).children();
 
