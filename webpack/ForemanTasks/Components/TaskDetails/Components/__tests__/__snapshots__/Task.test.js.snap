@@ -48,9 +48,9 @@ exports[`Task rendering render with some Props 1`] = `
           onClick={[Function]}
         >
           <span
-            className="glyphicon glyphicon-refresh "
+            className="glyphicon glyphicon-refresh spin"
           />
-          Start  auto-reloading
+          Stop  auto-reloading
         </Button>
         <Button
           active={false}
@@ -58,29 +58,55 @@ exports[`Task rendering render with some Props 1`] = `
           bsClass="btn"
           bsSize="small"
           bsStyle="default"
+          className="dynflow-button"
           disabled={false}
           href="/foreman_tasks/dynflow/"
         >
           Dynflow console
         </Button>
-        <ResumeButton
-          disabled={true}
-          id="test"
-          name=""
-          onClick={[Function]}
-        />
-        <CancelButton
-          disabled={true}
-          id="test"
-          name=""
-          onClick={[Function]}
-        />
         <Button
           active={false}
           block={false}
           bsClass="btn"
           bsSize="small"
           bsStyle="default"
+          className="resume-button"
+          disabled={true}
+          onClick={[Function]}
+        >
+          Resume
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsSize="small"
+          bsStyle="default"
+          className="cancel-button"
+          disabled={true}
+          onClick={[Function]}
+        >
+          Cancel
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsSize="small"
+          bsStyle="default"
+          className="parent-button"
+          disabled={false}
+          href="/foreman_tasks/tasks/parent-id"
+        >
+          Parent task
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsSize="small"
+          bsStyle="default"
+          className="subtask-button"
           disabled={false}
           href="/foreman_tasks/tasks/test/sub_tasks"
         >
@@ -92,6 +118,7 @@ exports[`Task rendering render with some Props 1`] = `
           bsClass="btn"
           bsSize="small"
           bsStyle="default"
+          className="unlock-button"
           disabled={false}
           onClick={[Function]}
         >
@@ -103,6 +130,7 @@ exports[`Task rendering render with some Props 1`] = `
           bsClass="btn"
           bsSize="small"
           bsStyle="default"
+          className="force-unlock-button"
           disabled={false}
           onClick={[Function]}
         >
@@ -123,7 +151,7 @@ exports[`Task rendering render with some Props 1`] = `
       help=""
       id="test"
       output=""
-      parentTask=""
+      parentTask="parent-id"
       progress={0}
       refetchTaskDetails={[Function]}
       result="error"
@@ -135,7 +163,7 @@ exports[`Task rendering render with some Props 1`] = `
       startBefore=""
       startedAt=""
       state="paused"
-      taskReload={false}
+      taskReload={true}
       taskReloadStart={[Function]}
       taskReloadStop={[Function]}
       timeoutId={null}
@@ -206,23 +234,36 @@ exports[`Task rendering render without Props 1`] = `
           bsClass="btn"
           bsSize="small"
           bsStyle="default"
+          className="dynflow-button"
           disabled={true}
           href="/foreman_tasks/dynflow/"
         >
           Dynflow console
         </Button>
-        <ResumeButton
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsSize="small"
+          bsStyle="default"
+          className="resume-button"
           disabled={true}
-          id="test"
-          name=""
           onClick={[Function]}
-        />
-        <CancelButton
+        >
+          Resume
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsSize="small"
+          bsStyle="default"
+          className="cancel-button"
           disabled={true}
-          id="test"
-          name=""
           onClick={[Function]}
-        />
+        >
+          Cancel
+        </Button>
       </Col>
     </Row>
     <TaskInfo
