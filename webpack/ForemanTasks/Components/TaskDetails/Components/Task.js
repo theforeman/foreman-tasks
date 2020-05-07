@@ -1,12 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Row, Col, Button } from 'patternfly-react';
 import { translate as __ } from 'foremanReact/common/I18n';
+import { useForemanModal } from 'foremanReact/components/ForemanModal/ForemanModalHooks';
 import TaskInfo from './TaskInfo';
-import { ClickConfirmation } from '../../common/ClickConfirmation';
+import {
+  UNLOCK_MODAL,
+  FORCE_UNLOCK_MODAL,
+} from '../../TaskActions/TaskActionsConstants';
+import { ForceUnlockModal, UnlockModal } from './UnlockModals';
 
-class Task extends Component {
-  taskProgressToggle = () => {
+const Task = props => {
+  const taskProgressToggle = () => {
     const {
       timeoutId,
       refetchTaskDetails,
@@ -14,7 +19,7 @@ class Task extends Component {
       loading,
       taskReloadStop,
       taskReloadStart,
-    } = this.props;
+    } = props;
     if (timeoutId) {
       taskReloadStop(timeoutId);
     } else {
@@ -22,160 +27,129 @@ class Task extends Component {
     }
   };
 
-  render() {
-    const {
-      taskReload,
-      externalId,
-      id,
-      state,
-      allowDangerousActions,
-      resumable,
-      cancellable,
-      hasSubTasks,
-      parentTask,
-      showUnlockModal,
-      showForceUnlockModal,
-      toggleUnlockModal,
-      toggleForceUnlockModal,
-      cancelTaskRequest,
-      resumeTaskRequest,
-      action,
-      dynflowEnableConsole,
-    } = this.props;
-    const modalUnlock = (
-      <ClickConfirmation
-        showModal={showUnlockModal}
-        title={__('Unlock')}
-        body={__(
-          "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed."
-        )}
-        confirmationMessage={__(
-          'I understand that this may cause harm and have working database backups of all backend services.'
-        )}
-        confirmAction={__('Unlock')}
-        path={`/foreman_tasks/tasks/${id}/unlock`}
-        confirmType="warning"
-        closeModal={toggleUnlockModal}
-      />
-    );
+  const unlockModalActions = useForemanModal({
+    id: UNLOCK_MODAL,
+  });
+  const forceUnlockModalActions = useForemanModal({
+    id: FORCE_UNLOCK_MODAL,
+  });
 
-    const modalForceUnlock = (
-      <ClickConfirmation
-        showModal={showForceUnlockModal}
-        title={__('Force Unlock')}
-        body={__(
-          'Resources will be unlocked and will not prevent other tasks from being run. As the task might be still running, it should be avoided to use this unless you are really sure the task got stuck'
-        )}
-        confirmationMessage={__(
-          'I understand that this may cause harm and have working database backups of all backend services.'
-        )}
-        confirmAction={__('Force Unlock')}
-        path={`/foreman_tasks/tasks/${id}/force_unlock`}
-        confirmType="danger"
-        closeModal={toggleForceUnlockModal}
-      />
-    );
-    return (
-      <React.Fragment>
-        {modalUnlock}
-        {modalForceUnlock}
-        <Grid>
-          <Row>
-            <Col xs={12}>
-              <Button
-                hidden={!allowDangerousActions}
-                className="reload-button"
-                bsSize="small"
-                onClick={this.taskProgressToggle}
-              >
-                <span
-                  className={`glyphicon glyphicon-refresh ${
-                    taskReload ? 'spin' : ''
-                  }`}
-                />
-                {__(`${taskReload ? 'Stop' : 'Start'}  auto-reloading`)}
-              </Button>
-              <Button
-                className="dynflow-button"
-                bsSize="small"
-                href={`/foreman_tasks/dynflow/${externalId}`}
-                disabled={!dynflowEnableConsole}
-              >
-                {__('Dynflow console')}
-              </Button>
-              <Button
-                className="resume-button"
-                bsSize="small"
-                disabled={!resumable}
-                onClick={() => {
-                  if (!taskReload) {
-                    this.taskProgressToggle();
-                  }
-                  resumeTaskRequest(id, action);
-                }}
-              >
-                {__('Resume')}
-              </Button>
-              <Button
-                className="cancel-button"
-                bsSize="small"
-                disabled={!cancellable}
-                onClick={() => {
-                  if (!taskReload) {
-                    this.taskProgressToggle();
-                  }
-                  cancelTaskRequest(id, action);
-                }}
-              >
-                {__('Cancel')}
-              </Button>
+  const {
+    taskReload,
+    externalId,
+    id,
+    state,
+    allowDangerousActions,
+    resumable,
+    cancellable,
+    hasSubTasks,
+    parentTask,
+    cancelTaskRequest,
+    resumeTaskRequest,
+    action,
+    dynflowEnableConsole,
+  } = props;
 
-              {parentTask && (
-                <Button
-                  className="parent-button"
-                  bsSize="small"
-                  href={`/foreman_tasks/tasks/${parentTask}`}
-                >
-                  {__('Parent task')}
-                </Button>
-              )}
-              {hasSubTasks && (
-                <Button
-                  className="subtask-button"
-                  bsSize="small"
-                  href={`/foreman_tasks/tasks/${id}/sub_tasks`}
-                >
-                  {__('Sub tasks')}
-                </Button>
-              )}
-              {allowDangerousActions && (
-                <Button
-                  className="unlock-button"
-                  bsSize="small"
-                  disabled={state !== 'paused'}
-                  onClick={toggleUnlockModal}
-                >
-                  {__('Unlock')}
-                </Button>
-              )}
-              {allowDangerousActions && (
-                <Button
-                  className="force-unlock-button"
-                  bsSize="small"
-                  disabled={state === 'stopped'}
-                  onClick={toggleForceUnlockModal}
-                >
-                  {__('Force Unlock')}
-                </Button>
-              )}
-            </Col>
-          </Row>
-          <TaskInfo {...this.props} />
-        </Grid>
-      </React.Fragment>
-    );
-  }
-}
+  return (
+    <React.Fragment>
+      <UnlockModal taskID={id} />
+      <ForceUnlockModal taskID={id} />
+      <Grid>
+        <Row>
+          <Col xs={12}>
+            <Button
+              hidden={!allowDangerousActions}
+              className="reload-button"
+              bsSize="small"
+              onClick={taskProgressToggle}
+            >
+              <span
+                className={`glyphicon glyphicon-refresh ${
+                  taskReload ? 'spin' : ''
+                }`}
+              />
+              {__(`${taskReload ? 'Stop' : 'Start'}  auto-reloading`)}
+            </Button>
+            <Button
+              className="dynflow-button"
+              bsSize="small"
+              href={`/foreman_tasks/dynflow/${externalId}`}
+              disabled={!dynflowEnableConsole}
+            >
+              {__('Dynflow console')}
+            </Button>
+            <Button
+              className="resume-button"
+              bsSize="small"
+              disabled={!resumable}
+              onClick={() => {
+                if (!taskReload) {
+                  taskProgressToggle();
+                }
+                resumeTaskRequest(id, action);
+              }}
+            >
+              {__('Resume')}
+            </Button>
+            <Button
+              className="cancel-button"
+              bsSize="small"
+              disabled={!cancellable}
+              onClick={() => {
+                if (!taskReload) {
+                  taskProgressToggle();
+                }
+                cancelTaskRequest(id, action);
+              }}
+            >
+              {__('Cancel')}
+            </Button>
+
+            {parentTask && (
+              <Button
+                className="parent-button"
+                bsSize="small"
+                href={`/foreman_tasks/tasks/${parentTask}`}
+              >
+                {__('Parent task')}
+              </Button>
+            )}
+            {hasSubTasks && (
+              <Button
+                className="subtask-button"
+                bsSize="small"
+                href={`/foreman_tasks/tasks/${id}/sub_tasks`}
+              >
+                {__('Sub tasks')}
+              </Button>
+            )}
+            {allowDangerousActions && (
+              <Button
+                className="unlock-button"
+                bsSize="small"
+                disabled={state !== 'paused'}
+                onClick={unlockModalActions.setModalOpen}
+              >
+                {__('Unlock')}
+              </Button>
+            )}
+            {allowDangerousActions && (
+              <Button
+                className="force-unlock-button"
+                bsSize="small"
+                disabled={state === 'stopped'}
+                onClick={forceUnlockModalActions.setModalOpen}
+              >
+                {__('Force Unlock')}
+              </Button>
+            )}
+          </Col>
+        </Row>
+        <TaskInfo {...props} />
+      </Grid>
+    </React.Fragment>
+  );
+};
 
 Task.propTypes = {
   ...TaskInfo.PropTypes,
@@ -192,10 +166,6 @@ Task.propTypes = {
   timeoutId: PropTypes.number,
   externalId: PropTypes.string,
   id: PropTypes.string.isRequired,
-  showUnlockModal: PropTypes.bool,
-  showForceUnlockModal: PropTypes.bool,
-  toggleUnlockModal: PropTypes.func,
-  toggleForceUnlockModal: PropTypes.func,
   cancelTaskRequest: PropTypes.func,
   resumeTaskRequest: PropTypes.func,
   dynflowEnableConsole: PropTypes.bool,
@@ -215,10 +185,6 @@ Task.defaultProps = {
   taskReloadStart: () => null,
   timeoutId: null,
   externalId: '',
-  showUnlockModal: false,
-  showForceUnlockModal: false,
-  toggleUnlockModal: () => null,
-  toggleForceUnlockModal: () => null,
   cancelTaskRequest: () => null,
   resumeTaskRequest: () => null,
   dynflowEnableConsole: false,

@@ -2,25 +2,13 @@
 
 exports[`Task rendering render with some Props 1`] = `
 <Fragment>
-  <ClickConfirmation
-    body="This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed."
-    closeModal={[Function]}
-    confirmAction="Unlock"
-    confirmType="warning"
-    confirmationMessage="I understand that this may cause harm and have working database backups of all backend services."
-    path="/foreman_tasks/tasks/test/unlock"
-    showModal={false}
-    title="Unlock"
+  <UnlockModal
+    id="unlockModal"
+    taskID="test"
   />
-  <ClickConfirmation
-    body="Resources will be unlocked and will not prevent other tasks from being run. As the task might be still running, it should be avoided to use this unless you are really sure the task got stuck"
-    closeModal={[Function]}
-    confirmAction="Force Unlock"
-    confirmType="danger"
-    confirmationMessage="I understand that this may cause harm and have working database backups of all backend services."
-    path="/foreman_tasks/tasks/test/force_unlock"
-    showModal={false}
-    title="Force Unlock"
+  <ForceUnlockModal
+    id="forceUnlockModal"
+    taskID="test"
   />
   <Grid
     bsClass="container"
@@ -120,7 +108,7 @@ exports[`Task rendering render with some Props 1`] = `
           bsStyle="default"
           className="unlock-button"
           disabled={false}
-          onClick={[Function]}
+          onClick={[MockFunction]}
         >
           Unlock
         </Button>
@@ -132,7 +120,7 @@ exports[`Task rendering render with some Props 1`] = `
           bsStyle="default"
           className="force-unlock-button"
           disabled={false}
-          onClick={[Function]}
+          onClick={[MockFunction]}
         >
           Force Unlock
         </Button>
@@ -157,8 +145,6 @@ exports[`Task rendering render with some Props 1`] = `
       result="error"
       resumable={false}
       resumeTaskRequest={[Function]}
-      showForceUnlockModal={false}
-      showUnlockModal={false}
       startAt=""
       startBefore=""
       startedAt=""
@@ -167,8 +153,6 @@ exports[`Task rendering render with some Props 1`] = `
       taskReloadStart={[Function]}
       taskReloadStop={[Function]}
       timeoutId={null}
-      toggleForceUnlockModal={[Function]}
-      toggleUnlockModal={[Function]}
       username=""
       usernamePath=""
     />
@@ -178,25 +162,13 @@ exports[`Task rendering render with some Props 1`] = `
 
 exports[`Task rendering render without Props 1`] = `
 <Fragment>
-  <ClickConfirmation
-    body="This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed."
-    closeModal={[Function]}
-    confirmAction="Unlock"
-    confirmType="warning"
-    confirmationMessage="I understand that this may cause harm and have working database backups of all backend services."
-    path="/foreman_tasks/tasks/test/unlock"
-    showModal={false}
-    title="Unlock"
+  <UnlockModal
+    id="unlockModal"
+    taskID="test"
   />
-  <ClickConfirmation
-    body="Resources will be unlocked and will not prevent other tasks from being run. As the task might be still running, it should be avoided to use this unless you are really sure the task got stuck"
-    closeModal={[Function]}
-    confirmAction="Force Unlock"
-    confirmType="danger"
-    confirmationMessage="I understand that this may cause harm and have working database backups of all backend services."
-    path="/foreman_tasks/tasks/test/force_unlock"
-    showModal={false}
-    title="Force Unlock"
+  <ForceUnlockModal
+    id="forceUnlockModal"
+    taskID="test"
   />
   <Grid
     bsClass="container"
@@ -285,8 +257,6 @@ exports[`Task rendering render without Props 1`] = `
       result="error"
       resumable={false}
       resumeTaskRequest={[Function]}
-      showForceUnlockModal={false}
-      showUnlockModal={false}
       startAt=""
       startBefore=""
       startedAt=""
@@ -295,8 +265,6 @@ exports[`Task rendering render without Props 1`] = `
       taskReloadStart={[Function]}
       taskReloadStop={[Function]}
       timeoutId={null}
-      toggleForceUnlockModal={[Function]}
-      toggleUnlockModal={[Function]}
       username=""
       usernamePath=""
     />

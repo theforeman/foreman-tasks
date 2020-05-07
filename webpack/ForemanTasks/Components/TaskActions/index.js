@@ -2,8 +2,6 @@ import { sprintf } from 'foremanReact/common/I18n';
 import API from 'foremanReact/API';
 import { addToast } from 'foremanReact/redux/actions/toasts';
 import {
-  FOREMAN_TASK_DETAILS_TOGGLE_UNLOCK_MODAL,
-  FOREMAN_TASK_DETAILS_TOGGLE_FORCE_UNLOCK_MODAL,
   TASKS_RESUME_REQUEST,
   TASKS_RESUME_SUCCESS,
   TASKS_RESUME_FAILURE,
@@ -17,13 +15,6 @@ import {
   cancelToastInfo,
   toastDispatch,
 } from './TaskActionHelpers';
-
-export const toggleUnlockModal = () => ({
-  type: FOREMAN_TASK_DETAILS_TOGGLE_UNLOCK_MODAL,
-});
-export const toggleForceUnlockModal = () => ({
-  type: FOREMAN_TASK_DETAILS_TOGGLE_FORCE_UNLOCK_MODAL,
-});
 
 export const cancelTaskRequest = (id, name) => async dispatch => {
   dispatch(

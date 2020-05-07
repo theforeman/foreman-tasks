@@ -75,12 +75,6 @@ export const selectTaskReload = state =>
 export const selectParentTask = state =>
   selectTaskDetails(state).parent_task_id || '';
 
-export const selectShowUnlockModal = state =>
-  selectTaskDetails(state).showUnlockModal || false;
-
-export const selectShowForceUnlockModal = state =>
-  selectTaskDetails(state).showForceUnlockModal || false;
-
 export const selectExternalId = state =>
   selectTaskDetails(state).external_id || null;
 

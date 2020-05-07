@@ -4,7 +4,12 @@ import {
   mount,
   shallow,
 } from '@theforeman/test';
+import { useForemanModal } from 'foremanReact/components/ForemanModal/ForemanModalHooks';
 import Task from '../Task';
+import {
+  UNLOCK_MODAL,
+  FORCE_UNLOCK_MODAL,
+} from '../../../TaskActions/TaskActionsConstants';
 
 const fixtures = {
   'render without Props': { id: 'test' },
@@ -23,8 +28,10 @@ describe('Task', () => {
   describe('rendering', () =>
     testComponentSnapshotsWithFixtures(Task, fixtures));
   describe('click test', () => {
-    const toggleUnlockModal = jest.fn();
-    const toggleForceUnlockModal = jest.fn();
+    const setModalOpen = jest.fn();
+    useForemanModal.mockImplementation(id => ({
+      setModalOpen: () => setModalOpen(id),
+    }));
     const cancelTaskRequest = jest.fn();
     const resumeTaskRequest = jest.fn();
     const taskReloadStart = jest.fn();
@@ -35,8 +42,6 @@ describe('Task', () => {
       taskReloadStart,
       id,
       action,
-      toggleUnlockModal,
-      toggleForceUnlockModal,
       cancelTaskRequest,
       resumeTaskRequest,
       allowDangerousActions: true,
@@ -68,13 +73,13 @@ describe('Task', () => {
       const component = shallow(<Task {...props} />);
       const unlockButton = component.find('.unlock-button').at(0);
       unlockButton.props().onClick();
-      expect(toggleUnlockModal).toBeCalled();
+      expect(setModalOpen).toBeCalledWith({ id: UNLOCK_MODAL });
     });
     it('focrce unlock', () => {
       const component = shallow(<Task {...props} />);
       const forceUnlockButton = component.find('.force-unlock-button').at(0);
       forceUnlockButton.props().onClick();
-      expect(toggleForceUnlockModal).toBeCalled();
+      expect(setModalOpen).toBeCalledWith({ id: FORCE_UNLOCK_MODAL });
     });
   });
 });
