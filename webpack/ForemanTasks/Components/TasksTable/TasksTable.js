@@ -8,6 +8,7 @@ import Pagination from 'foremanReact/components/Pagination/PaginationWrapper';
 import { getURIQuery } from 'foremanReact/common/helpers';
 import createTasksTableSchema from './TasksTableSchema';
 import { updateURlQuery } from './TasksTableHelpers';
+import { RESUME_MODAL, CANCEL_MODAL } from './TasksTableConstants';
 
 const TasksTable = ({
   getTableItems,
@@ -23,7 +24,7 @@ const TasksTable = ({
   selectRow,
   unselectRow,
   openClickedModal,
-  modalProps,
+  openModal,
   allRowsSelected,
 }) => {
   const { search, pathname } = history.location;
@@ -92,19 +93,19 @@ const TasksTable = ({
     updateURlQuery({ sort_by: by, sort_order: order }, history);
   };
 
-  const taskActions = {
+  const modalActions = {
     cancelTask: (taskId, taskName) => {
       openClickedModal({
         taskId,
         taskName,
-        setModalOpen: modalProps.cancelModal.setModalOpen,
+        setModalOpen: () => openModal(CANCEL_MODAL),
       });
     },
     resumeTask: (taskId, taskName) => {
       openClickedModal({
         taskId,
         taskName,
-        setModalOpen: modalProps.resumeModal.setModalOpen,
+        setModalOpen: () => openModal(RESUME_MODAL),
       });
     },
   };
@@ -117,7 +118,7 @@ const TasksTable = ({
           setSortHistory,
           uriQuery.sort_by,
           uriQuery.sort_order,
-          taskActions,
+          modalActions,
           getSelectionController()
         )}
         rows={results}
@@ -151,12 +152,7 @@ TasksTable.propTypes = {
   unselectAllRows: PropTypes.func.isRequired,
   selectRow: PropTypes.func.isRequired,
   unselectRow: PropTypes.func.isRequired,
-  modalProps: PropTypes.shape({
-    cancelSelectedModal: PropTypes.object,
-    resumeSelectedModal: PropTypes.object,
-    cancelModal: PropTypes.object,
-    resumeModal: PropTypes.object,
-  }).isRequired,
+  openModal: PropTypes.func.isRequired,
   allRowsSelected: PropTypes.bool,
 };
 

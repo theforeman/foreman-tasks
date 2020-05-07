@@ -54,3 +54,6 @@ export const selectAllRowsSelected = state =>
 
 export const selectShowSelectAll = state =>
   selectTasksTableQuery(state).showSelectAll;
+
+export const selectModalID = state =>
+  selectTasksTableQuery(state).modalID || '';

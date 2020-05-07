@@ -8,7 +8,7 @@ exports[`actionCellFormatter render 1`] = `
     }
   }
   id="some-id"
+  modalActions={Object {}}
   name="some-name"
-  taskActions={Object {}}
 />
 `;

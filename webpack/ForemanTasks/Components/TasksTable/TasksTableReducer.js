@@ -11,6 +11,7 @@ import {
   UPDATE_CLICKED,
   SELECT_ALL_ROWS,
   OPEN_SELECT_ALL,
+  UPDATE_MODAL,
 } from './TasksTableConstants';
 
 const initialState = Immutable({
@@ -61,6 +62,8 @@ export const TasksTableQueryReducer = (state = initialState, action) => {
         .set('showSelectAll', false);
     case UPDATE_CLICKED:
       return state.set('clicked', payload.clicked);
+    case UPDATE_MODAL:
+      return state.set('modalID', payload.modalID);
     default:
       return state;
   }

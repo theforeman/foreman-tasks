@@ -1,5 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`TasksTable actions handles openClickedModal 1`] = `
+Object {
+  "payload": Object {
+    "clicked": Object {
+      "taskId": "some-id",
+      "taskName": "some-name",
+    },
+  },
+  "type": "UPDATE_CLICKED",
+}
+`;
+
+exports[`TasksTable actions handles openModalAction 1`] = `
+Object {
+  "payload": Object {
+    "modalID": "some-modal-id",
+  },
+  "type": "UPDATE_MODAL",
+}
+`;
+
 exports[`TasksTable actions should selectPage and succeed 1`] = `
 Array [
   Array [

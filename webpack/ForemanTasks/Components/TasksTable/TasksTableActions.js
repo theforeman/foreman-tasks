@@ -9,6 +9,7 @@ import {
   UNSELECT_ROWS,
   UPDATE_CLICKED,
   OPEN_SELECT_ALL,
+  UPDATE_MODAL,
 } from './TasksTableConstants';
 import { getApiPathname } from './TasksTableHelpers';
 import { fetchTasksSummary } from '../TasksDashboard/TasksDashboardActions';
@@ -75,5 +76,13 @@ export const openClickedModal = ({ taskId, taskName, setModalOpen }) => {
   return {
     type: UPDATE_CLICKED,
     payload: { clicked: { taskId, taskName } },
+  };
+};
+
+export const openModalAction = (modalID, setModalOpen) => {
+  setModalOpen();
+  return {
+    type: UPDATE_MODAL,
+    payload: { modalID },
   };
 };

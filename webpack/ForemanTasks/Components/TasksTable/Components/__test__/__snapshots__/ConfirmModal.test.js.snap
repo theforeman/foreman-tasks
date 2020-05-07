@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConfirmModal renders ConfirmModal 1`] = `
+<ForemanModal
+  id="modalID"
+  title="Some Text Selected Tasks"
+>
+  This will some text 1 task(s), putting them in the some state state. Are you sure?
+  <Component>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      disabled={false}
+      onClick={[MockFunction]}
+    >
+      No
+    </Button>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="primary"
+      disabled={false}
+      onClick={[Function]}
+    >
+      Yes
+    </Button>
+  </Component>
+</ForemanModal>
+`;
