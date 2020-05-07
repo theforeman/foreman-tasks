@@ -4,8 +4,6 @@ import { Grid, Row, Col, Button } from 'patternfly-react';
 import { translate as __ } from 'foremanReact/common/I18n';
 import TaskInfo from './TaskInfo';
 import { ClickConfirmation } from '../../common/ClickConfirmation';
-import { ResumeButton } from '../../common/ActionButtons/ResumeButton';
-import { CancelButton } from '../../common/ActionButtons/CancelButton';
 
 class Task extends Component {
   taskProgressToggle = () => {
@@ -98,26 +96,29 @@ class Task extends Component {
                 {__(`${taskReload ? 'Stop' : 'Start'}  auto-reloading`)}
               </Button>
               <Button
+                className="dynflow-button"
                 bsSize="small"
                 href={`/foreman_tasks/dynflow/${externalId}`}
                 disabled={!dynflowEnableConsole}
               >
                 {__('Dynflow console')}
               </Button>
-              <ResumeButton
-                id={id}
+              <Button
+                className="resume-button"
+                bsSize="small"
+                disabled={!resumable}
                 onClick={() => {
                   if (!taskReload) {
                     this.taskProgressToggle();
                   }
                   resumeTaskRequest(id, action);
                 }}
-                name={action}
-                disabled={!resumable}
-              />
-              <CancelButton
-                id={id}
-                name={action}
+              >
+                {__('Resume')}
+              </Button>
+              <Button
+                className="cancel-button"
+                bsSize="small"
                 disabled={!cancellable}
                 onClick={() => {
                   if (!taskReload) {
@@ -125,9 +126,13 @@ class Task extends Component {
                   }
                   cancelTaskRequest(id, action);
                 }}
-              />
+              >
+                {__('Cancel')}
+              </Button>
+
               {parentTask && (
                 <Button
+                  className="parent-button"
                   bsSize="small"
                   href={`/foreman_tasks/tasks/${parentTask}`}
                 >
@@ -136,6 +141,7 @@ class Task extends Component {
               )}
               {hasSubTasks && (
                 <Button
+                  className="subtask-button"
                   bsSize="small"
                   href={`/foreman_tasks/tasks/${id}/sub_tasks`}
                 >
@@ -144,6 +150,7 @@ class Task extends Component {
               )}
               {allowDangerousActions && (
                 <Button
+                  className="unlock-button"
                   bsSize="small"
                   disabled={state !== 'paused'}
                   onClick={toggleUnlockModal}
@@ -153,6 +160,7 @@ class Task extends Component {
               )}
               {allowDangerousActions && (
                 <Button
+                  className="force-unlock-button"
                   bsSize="small"
                   disabled={state === 'stopped'}
                   onClick={toggleForceUnlockModal}
