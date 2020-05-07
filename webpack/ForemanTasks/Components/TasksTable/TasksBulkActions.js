@@ -2,6 +2,7 @@ import API from 'foremanReact/API';
 import { addToast } from 'foremanReact/redux/actions/toasts';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { TOAST_TYPES } from '../common/ToastTypesConstants';
+import { BULK_CANCEL_PATH, BULK_RESUME_PATH } from './TasksTableConstants';
 import {
   TASKS_RESUME_REQUEST,
   TASKS_RESUME_SUCCESS,
@@ -9,16 +10,14 @@ import {
   TASKS_CANCEL_REQUEST,
   TASKS_CANCEL_SUCCESS,
   TASKS_CANCEL_FAILURE,
-  BULK_CANCEL_PATH,
-  BULK_RESUME_PATH,
-} from './TasksTableConstants';
+} from '../TaskActions/TaskActionsConstants';
 import { reloadPage } from './TasksTableActions';
 import {
   convertDashboardQuery,
   resumeToastInfo,
   cancelToastInfo,
   toastDispatch,
-} from './TasksTableActionHelpers';
+} from '../TaskActions/TaskActionHelpers';
 
 export const bulkByIdRequest = (resumeTasks, path) => {
   const ids = resumeTasks.map(task => task.id);

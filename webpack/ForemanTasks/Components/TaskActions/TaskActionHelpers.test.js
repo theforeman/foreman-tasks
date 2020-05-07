@@ -1,8 +1,8 @@
-import { convertDashboardQuery } from '../TasksTableActionHelpers';
+import { convertDashboardQuery } from './TaskActionHelpers';
 import {
   TASKS_DASHBOARD_JS_QUERY_MODES,
   TASKS_DASHBOARD_AVAILABLE_TIMES,
-} from '../../TasksDashboard/TasksDashboardConstants';
+} from '../TasksDashboard/TasksDashboardConstants';
 
 let realDate;
 
