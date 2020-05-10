@@ -72,19 +72,17 @@ module ForemanTasks
       if task.paused?
         task.state = :stopped
         task.save!
-        flash[:info] = _('The task resources were unlocked.')
+        render json: { statusText: 'OK' }
       else
-        flash[:warning] = _('The execution has to be paused.')
+        render json: {}, status: :bad_request
       end
-      redirect_back(:fallback_location => foreman_tasks_task_path(task))
     end
 
     def force_unlock
       task       = find_dynflow_task
       task.state = :stopped
       task.save!
-      flash[:info] = _('The task resources were unlocked with force.')
-      redirect_back(:fallback_location => foreman_tasks_task_path(task))
+      render json: { statusText: 'OK' }
     end
 
     # we need do this to make the Foreman helpers working properly

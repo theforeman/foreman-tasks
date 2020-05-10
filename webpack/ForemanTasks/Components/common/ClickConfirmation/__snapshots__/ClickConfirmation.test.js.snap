@@ -6,7 +6,7 @@ exports[`ClickConfirmation render 1`] = `
 >
   <Component>
     <span
-      className="glyphicon glyphicon-warning-sign"
+      className="glyphicon glyphicon-exclamation-sign"
     />
      some-title
   </Component>
@@ -24,10 +24,10 @@ exports[`ClickConfirmation render 1`] = `
       active={false}
       block={false}
       bsClass="btn"
-      bsStyle="warning"
-      data-method="post"
+      bsStyle="danger"
+      className="confirm-button"
       disabled={true}
-      href="some-path"
+      onClick={[Function]}
     >
       some-confirm
     </Button>

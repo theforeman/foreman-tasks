@@ -2,6 +2,11 @@ import { translate as __, sprintf } from 'foremanReact/common/I18n';
 import { addToast } from 'foremanReact/redux/actions/toasts';
 import { TASKS_DASHBOARD_JS_QUERY_MODES } from '../TasksDashboard/TasksDashboardConstants';
 import { timeToHoursNumber } from '../TasksDashboard/TasksDashboardHelper';
+import {
+  successToastData,
+  errorToastData,
+  warningToastData,
+} from '../common/ToastsHelpers';
 
 export const convertDashboardQuery = query => {
   const {
@@ -29,16 +34,31 @@ export const convertDashboardQuery = query => {
 };
 
 export const resumeToastInfo = {
-  resumed: { type: 'success', text: __('was resumed') },
-  failed: { type: 'error', text: __('could not be resumed') },
-  skipped: { type: 'warning', text: __('task has to be resumable') },
+  resumed: successToastData(__('was resumed')),
+  failed: errorToastData(__('could not be resumed')),
+  skipped: warningToastData(__('task has to be resumable')),
 };
 
 export const cancelToastInfo = {
-  cancelled: { type: 'success', text: __('was cancelled') },
-  skipped: { type: 'warning', text: __('task has to be cancellable') },
+  cancelled: successToastData(__('was cancelled')),
+  skipped: warningToastData(__('task has to be cancellable')),
 };
 
+export const forceCancelToastInfo = {
+  forceCancelled: successToastData(
+    __('Task resources were unlocked with force.')
+  ),
+  failed: warningToastData(
+    __('Task cannot be cancelled with force at the moment.')
+  ),
+};
+
+export const unlockToastInfo = {
+  unlocked: successToastData(__('Task resources were unlocked ')),
+  failed: warningToastData(
+    __('Task resources cannot be unlocked at the moment.')
+  ),
+};
 export const toastDispatch = ({ type, name, toastInfo, dispatch }) => {
   dispatch(
     addToast({

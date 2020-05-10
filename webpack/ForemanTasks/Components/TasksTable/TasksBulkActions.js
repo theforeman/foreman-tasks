@@ -1,7 +1,7 @@
 import API from 'foremanReact/API';
 import { addToast } from 'foremanReact/redux/actions/toasts';
 import { translate as __ } from 'foremanReact/common/I18n';
-import { TOAST_TYPES } from '../common/ToastTypesConstants';
+import { TOAST_TYPES } from '../common/ToastsHelpers/ToastTypesConstants';
 import { BULK_CANCEL_PATH, BULK_RESUME_PATH } from './TasksTableConstants';
 import {
   TASKS_RESUME_REQUEST,

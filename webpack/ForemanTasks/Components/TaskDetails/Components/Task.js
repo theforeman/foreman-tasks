@@ -8,7 +8,7 @@ import {
   UNLOCK_MODAL,
   FORCE_UNLOCK_MODAL,
 } from '../../TaskActions/TaskActionsConstants';
-import { ForceUnlockModal, UnlockModal } from './UnlockModals';
+import { ForceUnlockModal, UnlockModal } from '../../TaskActions/UnlockModals';
 
 const Task = props => {
   const taskProgressToggle = () => {
@@ -46,14 +46,27 @@ const Task = props => {
     parentTask,
     cancelTaskRequest,
     resumeTaskRequest,
+    forceCancelTaskRequest,
+    unlockTaskRequest,
     action,
     dynflowEnableConsole,
   } = props;
-
+  const forceUnlock = () => {
+    if (!taskReload) {
+      taskProgressToggle();
+    }
+    forceCancelTaskRequest(id, action);
+  };
+  const unlock = () => {
+    if (!taskReload) {
+      taskProgressToggle();
+    }
+    unlockTaskRequest(id, action);
+  };
   return (
     <React.Fragment>
-      <UnlockModal taskID={id} />
-      <ForceUnlockModal taskID={id} />
+      <UnlockModal onClick={unlock} />
+      <ForceUnlockModal onClick={forceUnlock} />
       <Grid>
         <Row>
           <Col xs={12}>

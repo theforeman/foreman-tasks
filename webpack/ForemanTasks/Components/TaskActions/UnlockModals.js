@@ -1,17 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { translate as __ } from 'foremanReact/common/I18n';
-import { ClickConfirmation } from '../../common/ClickConfirmation';
-import {
-  UNLOCK_MODAL,
-  FORCE_UNLOCK_MODAL,
-} from '../../TaskActions/TaskActionsConstants';
+import { ClickConfirmation } from '../common/ClickConfirmation';
+import { UNLOCK_MODAL, FORCE_UNLOCK_MODAL } from './TaskActionsConstants';
 
 const confirmationMessage = __(
   'I understand that this may cause harm and have working database backups of all backend services.'
 );
 
-export const UnlockModal = ({ taskID, id }) => (
+export const UnlockModal = ({ onClick, id }) => (
   <ClickConfirmation
     id={id}
     title={__('Unlock')}
@@ -20,12 +17,12 @@ export const UnlockModal = ({ taskID, id }) => (
     )}
     confirmationMessage={confirmationMessage}
     confirmAction={__('Unlock')}
-    path={`/foreman_tasks/tasks/${taskID}/unlock`}
+    onClick={onClick}
     confirmType="warning"
   />
 );
 
-export const ForceUnlockModal = ({ taskID, id }) => (
+export const ForceUnlockModal = ({ onClick, id }) => (
   <ClickConfirmation
     id={id}
     title={__('Force Unlock')}
@@ -34,17 +31,20 @@ export const ForceUnlockModal = ({ taskID, id }) => (
     )}
     confirmationMessage={confirmationMessage}
     confirmAction={__('Force Unlock')}
-    path={`/foreman_tasks/tasks/${taskID}/force_unlock`}
+    onClick={onClick}
     confirmType="danger"
   />
 );
 
 UnlockModal.propTypes = {
-  taskID: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
   id: PropTypes.string,
 };
 
-ForceUnlockModal.propTypes = UnlockModal.propTypes;
+ForceUnlockModal.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  id: PropTypes.string,
+};
 
 UnlockModal.defaultProps = {
   id: UNLOCK_MODAL,
