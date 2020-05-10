@@ -1,6 +1,11 @@
 import { testActionSnapshotWithFixtures } from '@theforeman/test';
 import API from 'foremanReact/API';
-import { cancelTaskRequest, resumeTaskRequest } from './';
+import {
+  cancelTaskRequest,
+  resumeTaskRequest,
+  forceCancelTaskRequest,
+  unlockTaskRequest,
+} from './';
 
 jest.mock('foremanReact/components/common/table', () => ({
   getTableItemsAction: jest.fn(controller => controller),
@@ -28,6 +33,26 @@ const fixtures = {
       Promise.reject(new Error('Network Error'))
     );
     return resumeTaskRequest(...task);
+  },
+  'should forceCancelTaskRequest and succeed': () => {
+    API.post.mockImplementation(() => ({ data: 'some-data' }));
+    return forceCancelTaskRequest(...task);
+  },
+  'should forceCancelTaskRequest and fail': () => {
+    API.post.mockImplementation(() =>
+      Promise.reject(new Error('Network Error'))
+    );
+    return forceCancelTaskRequest(...task);
+  },
+  'should unlockTaskRequest and succeed': () => {
+    API.post.mockImplementation(() => ({ data: 'some-data' }));
+    return unlockTaskRequest(...task);
+  },
+  'should unlockTaskRequest and fail': () => {
+    API.post.mockImplementation(() =>
+      Promise.reject(new Error('Network Error'))
+    );
+    return forceCancelTaskRequest(...task);
   },
 };
 describe('Tasks actions', () => {

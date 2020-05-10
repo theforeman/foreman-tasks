@@ -11,8 +11,8 @@ export const ClickConfirmation = ({
   body,
   confirmationMessage,
   id,
-  path,
   confirmAction,
+  onClick,
 }) => {
   const [isConfirmed, setConfirm] = useState(false);
   const { setModalClosed, modalOpen } = useForemanModal({
@@ -42,8 +42,11 @@ export const ClickConfirmation = ({
       </div>
       <ForemanModal.Footer>
         <Button
-          href={path}
-          data-method="post"
+          className="confirm-button"
+          onClick={() => {
+            onClick();
+            setModalClosed();
+          }}
           bsStyle={confirmType}
           disabled={!isConfirmed}
         >
@@ -60,7 +63,7 @@ ClickConfirmation.propTypes = {
   body: PropTypes.string.isRequired,
   confirmationMessage: PropTypes.string.isRequired,
   confirmAction: PropTypes.string.isRequired,
-  path: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
   confirmType: PropTypes.oneOf(['warning', 'danger']),
   id: PropTypes.string.isRequired,
 };

@@ -4,11 +4,11 @@ exports[`Task rendering render with some Props 1`] = `
 <Fragment>
   <UnlockModal
     id="unlockModal"
-    taskID="test"
+    onClick={[Function]}
   />
   <ForceUnlockModal
     id="forceUnlockModal"
-    taskID="test"
+    onClick={[Function]}
   />
   <Grid
     bsClass="container"
@@ -164,11 +164,11 @@ exports[`Task rendering render without Props 1`] = `
 <Fragment>
   <UnlockModal
     id="unlockModal"
-    taskID="test"
+    onClick={[Function]}
   />
   <ForceUnlockModal
     id="forceUnlockModal"
-    taskID="test"
+    onClick={[Function]}
   />
   <Grid
     bsClass="container"

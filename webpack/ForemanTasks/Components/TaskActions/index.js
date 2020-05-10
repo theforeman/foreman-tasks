@@ -8,11 +8,19 @@ import {
   TASKS_CANCEL_REQUEST,
   TASKS_CANCEL_SUCCESS,
   TASKS_CANCEL_FAILURE,
+  TASKS_FORCE_CANCEL_REQUEST,
+  TASKS_FORCE_CANCEL_SUCCESS,
+  TASKS_FORCE_CANCEL_FAILURE,
+  TASKS_UNLOCK_REQUEST,
+  TASKS_UNLOCK_SUCCESS,
+  TASKS_UNLOCK_FAILURE,
 } from './TaskActionsConstants';
-import { TOAST_TYPES } from '../common/ToastTypesConstants';
+import { TOAST_TYPES } from '../common/ToastsHelpers/ToastTypesConstants';
 import {
   resumeToastInfo,
   cancelToastInfo,
+  forceCancelToastInfo,
+  unlockToastInfo,
   toastDispatch,
 } from './TaskActionHelpers';
 
@@ -62,6 +70,50 @@ export const resumeTaskRequest = (id, name) => async dispatch => {
       type: 'failed',
       name,
       toastInfo: resumeToastInfo,
+      dispatch,
+    });
+  }
+};
+
+export const forceCancelTaskRequest = (id, name) => async dispatch => {
+  dispatch({ type: TASKS_FORCE_CANCEL_REQUEST });
+  try {
+    await API.post(`/foreman_tasks/tasks/${id}/force_unlock`);
+    dispatch({ type: TASKS_FORCE_CANCEL_SUCCESS });
+    toastDispatch({
+      type: 'forceCancelled',
+      name,
+      toastInfo: forceCancelToastInfo,
+      dispatch,
+    });
+  } catch ({ response }) {
+    dispatch({ type: TASKS_FORCE_CANCEL_FAILURE });
+    toastDispatch({
+      type: 'failed',
+      name,
+      toastInfo: forceCancelToastInfo,
+      dispatch,
+    });
+  }
+};
+
+export const unlockTaskRequest = (id, name) => async dispatch => {
+  dispatch({ type: TASKS_UNLOCK_REQUEST });
+  try {
+    await API.post(`/foreman_tasks/tasks/${id}/unlock`);
+    dispatch({ type: TASKS_UNLOCK_SUCCESS });
+    toastDispatch({
+      type: 'unlocked',
+      name,
+      toastInfo: unlockToastInfo,
+      dispatch,
+    });
+  } catch ({ response }) {
+    dispatch({ type: TASKS_UNLOCK_FAILURE });
+    toastDispatch({
+      type: 'failed',
+      name,
+      toastInfo: unlockToastInfo,
       dispatch,
     });
   }

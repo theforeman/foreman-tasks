@@ -7,7 +7,7 @@ exports[`ForceUnlockModal render 1`] = `
   confirmType="danger"
   confirmationMessage="I understand that this may cause harm and have working database backups of all backend services."
   id="forceUnlockModal"
-  path="/foreman_tasks/tasks/some-id/force_unlock"
+  onClick={[MockFunction]}
   title="Force Unlock"
 />
 `;
@@ -19,7 +19,7 @@ exports[`UnlockModal render 1`] = `
   confirmType="warning"
   confirmationMessage="I understand that this may cause harm and have working database backups of all backend services."
   id="unlockModal"
-  path="/foreman_tasks/tasks/some-id/unlock"
+  onClick={[MockFunction]}
   title="Unlock"
 />
 `;

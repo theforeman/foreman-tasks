@@ -75,6 +75,58 @@ Array [
 ]
 `;
 
+exports[`Tasks actions should forceCancelTaskRequest and fail 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "TASKS_FORCE_CANCEL_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "type": "TASKS_FORCE_CANCEL_FAILURE",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "some-name Task execution Task cannot be cancelled with force at the moment.",
+          "type": "warning",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;
+
+exports[`Tasks actions should forceCancelTaskRequest and succeed 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "TASKS_FORCE_CANCEL_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "type": "TASKS_FORCE_CANCEL_SUCCESS",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "some-name Task execution Task resources were unlocked with force.",
+          "type": "success",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;
+
 exports[`Tasks actions should resumeTaskRequest and fail 1`] = `
 Array [
   Array [
@@ -119,6 +171,58 @@ Array [
       "payload": Object {
         "message": Object {
           "message": "some-name Task execution was resumed",
+          "type": "success",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;
+
+exports[`Tasks actions should unlockTaskRequest and fail 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "TASKS_FORCE_CANCEL_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "type": "TASKS_FORCE_CANCEL_FAILURE",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "some-name Task execution Task cannot be cancelled with force at the moment.",
+          "type": "warning",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;
+
+exports[`Tasks actions should unlockTaskRequest and succeed 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "TASKS_UNLOCK_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "type": "TASKS_UNLOCK_SUCCESS",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "some-name Task execution Task resources were unlocked ",
           "type": "success",
         },
       },
