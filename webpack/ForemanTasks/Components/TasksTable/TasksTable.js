@@ -9,6 +9,7 @@ import { getURIQuery } from 'foremanReact/common/helpers';
 import createTasksTableSchema from './TasksTableSchema';
 import { updateURlQuery } from './TasksTableHelpers';
 import { RESUME_MODAL, CANCEL_MODAL } from './TasksTableConstants';
+import { FORCE_UNLOCK_MODAL } from '../TaskActions/TaskActionsConstants';
 
 const TasksTable = ({
   getTableItems,
@@ -106,6 +107,13 @@ const TasksTable = ({
         taskId,
         taskName,
         setModalOpen: () => openModal(RESUME_MODAL),
+      });
+    },
+    forceCancelTask: (taskId, taskName) => {
+      openClickedModal({
+        taskId,
+        taskName,
+        setModalOpen: () => openModal(FORCE_UNLOCK_MODAL),
       });
     },
   };

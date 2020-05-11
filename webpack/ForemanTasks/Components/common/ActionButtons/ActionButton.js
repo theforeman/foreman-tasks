@@ -6,27 +6,41 @@ import { ActionButtons } from 'foremanReact/components/common/ActionButtons/Acti
 export const ActionButton = ({
   id,
   name,
-  availableActions: { resumable, cancellable },
+  availableActions: { resumable, cancellable, stoppable },
   taskActions,
 }) => {
   const buttons = [];
-  const title =
-    !resumable && !cancellable ? __('Task cannot be canceled') : undefined;
+  const isTitle = !(resumable || cancellable || stoppable);
+  const title = isTitle ? __('Task cannot be canceled') : undefined;
   if (resumable) {
     buttons.push({
       title: __('Resume'),
       action: {
         disabled: !resumable,
         onClick: () => taskActions.resumeTask(id, name),
+        id: `task-resume-button-${id}`,
       },
     });
   }
-  if (cancellable || !resumable) {
+  if (cancellable || (!stoppable && !resumable)) {
+    // Cancel is the default button that should be shown if no task action can be done
     buttons.push({
       title: __('Cancel'),
       action: {
         disabled: !cancellable,
         onClick: () => taskActions.cancelTask(id, name),
+        id: `task-cancel-button-${id}`,
+      },
+    });
+  }
+
+  if (stoppable) {
+    buttons.push({
+      title: __('Force Cancel'),
+      action: {
+        disabled: !stoppable,
+        onClick: () => taskActions.forceCancelTask(id, name),
+        id: `task-force-cancel-button-${id}`,
       },
     });
   }
@@ -43,9 +57,11 @@ ActionButton.propTypes = {
   availableActions: PropTypes.shape({
     cancellable: PropTypes.bool,
     resumable: PropTypes.bool,
+    stoppable: PropTypes.bool,
   }).isRequired,
   taskActions: PropTypes.shape({
     cancelTask: PropTypes.func,
     resumeTask: PropTypes.func,
+    forceCancelTask: PropTypes.func,
   }).isRequired,
 };

@@ -1,4 +1,8 @@
-import { resumeTask, cancelTask } from '../../TasksTableActions';
+import {
+  resumeTask,
+  cancelTask,
+  forceCancelTask,
+} from '../../TasksTableActions';
 import {
   bulkCancelBySearch,
   bulkCancelById,
@@ -13,6 +17,7 @@ import {
   CANCEL_SELECTED_MODAL,
   RESUME_SELECTED_MODAL,
 } from '../../TasksTableConstants';
+import { FORCE_UNLOCK_MODAL } from '../../../TaskActions/TaskActionsConstants';
 
 export default {
   [CANCEL_SELECTED_MODAL]: ({ url, query, parentTaskID }) => (
@@ -61,6 +66,18 @@ export default {
     const { taskId, taskName } = selectClicked(getState());
     return dispatch(
       resumeTask({
+        taskId,
+        taskName,
+        url,
+        parentTaskID,
+      })
+    );
+  },
+
+  [FORCE_UNLOCK_MODAL]: ({ url, parentTaskID }) => (dispatch, getState) => {
+    const { taskId, taskName } = selectClicked(getState());
+    return dispatch(
+      forceCancelTask({
         taskId,
         taskName,
         url,

@@ -9,6 +9,7 @@ exports[`Task rendering render with some Props 1`] = `
   <ForceUnlockModal
     id="forceUnlockModal"
     onClick={[Function]}
+    selectedRowsLen={1}
   />
   <Grid
     bsClass="container"
@@ -169,6 +170,7 @@ exports[`Task rendering render without Props 1`] = `
   <ForceUnlockModal
     id="forceUnlockModal"
     onClick={[Function]}
+    selectedRowsLen={1}
   />
   <Grid
     bsClass="container"

@@ -91,7 +91,7 @@ Array [
     Object {
       "payload": Object {
         "message": Object {
-          "message": "some-name Task execution Task cannot be cancelled with force at the moment.",
+          "message": "some-name Task execution cannot be cancelled with force at the moment.",
           "type": "warning",
         },
       },
@@ -117,7 +117,7 @@ Array [
     Object {
       "payload": Object {
         "message": Object {
-          "message": "some-name Task execution Task resources were unlocked with force.",
+          "message": "some-name Task execution resources were unlocked with force.",
           "type": "success",
         },
       },
@@ -196,7 +196,7 @@ Array [
     Object {
       "payload": Object {
         "message": Object {
-          "message": "some-name Task execution Task cannot be cancelled with force at the moment.",
+          "message": "some-name Task execution cannot be cancelled with force at the moment.",
           "type": "warning",
         },
       },
@@ -222,7 +222,7 @@ Array [
     Object {
       "payload": Object {
         "message": Object {
-          "message": "some-name Task execution Task resources were unlocked ",
+          "message": "some-name Task execution resources were unlocked ",
           "type": "success",
         },
       },

@@ -2,7 +2,7 @@
 
 exports[`ForceUnlockModal render 1`] = `
 <ClickConfirmation
-  body="Resources will be unlocked and will not prevent other tasks from being run. As the task might be still running, it should be avoided to use this unless you are really sure the task got stuck"
+  body="Resources for 1 task(s) will be unlocked and will not prevent other tasks from being run. As the task might be still running, it should be avoided to use this unless you are really sure the task got stuck."
   confirmAction="Force Unlock"
   confirmType="danger"
   confirmationMessage="I understand that this may cause harm and have working database backups of all backend services."
