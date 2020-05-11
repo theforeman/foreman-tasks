@@ -67,7 +67,7 @@ const createTasksTableSchema = (
     sortableColumn('started_at', __('Started at'), 3, sortController, [
       dateCellFormmatter,
     ]),
-    sortableColumn('duration', __('Duration'), 3, sortController, [
+    sortableColumn('duration', __('Duration'), 2, sortController, [
       durationCellFormmatter,
     ]),
     column(
@@ -76,7 +76,7 @@ const createTasksTableSchema = (
       headFormat,
       [actionCellFormatter(taskActions)],
       {
-        className: 'col-md-1',
+        className: 'col-md-2',
       }
     ),
   ];

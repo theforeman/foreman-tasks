@@ -10,6 +10,7 @@ exports[`ActionButton snapshot test render with cancellable false props 1`] = `
         Object {
           "action": Object {
             "disabled": true,
+            "id": "task-cancel-button-id",
             "onClick": [Function],
           },
           "title": "Cancel",
@@ -28,6 +29,7 @@ exports[`ActionButton snapshot test render with cancellable true props 1`] = `
         Object {
           "action": Object {
             "disabled": false,
+            "id": "task-cancel-button-id",
             "onClick": [Function],
           },
           "title": "Cancel",
@@ -46,9 +48,37 @@ exports[`ActionButton snapshot test render with resumable true props 1`] = `
         Object {
           "action": Object {
             "disabled": false,
+            "id": "task-resume-button-id",
             "onClick": [Function],
           },
           "title": "Resume",
+        },
+      ]
+    }
+  />
+</span>
+`;
+
+exports[`ActionButton snapshot test render with stoppable and cancellable true props 1`] = `
+<span>
+  <ActionButtons
+    buttons={
+      Array [
+        Object {
+          "action": Object {
+            "disabled": false,
+            "id": "task-cancel-button-id",
+            "onClick": [Function],
+          },
+          "title": "Cancel",
+        },
+        Object {
+          "action": Object {
+            "disabled": false,
+            "id": "task-force-cancel-button-id",
+            "onClick": [Function],
+          },
+          "title": "Force Cancel",
         },
       ]
     }

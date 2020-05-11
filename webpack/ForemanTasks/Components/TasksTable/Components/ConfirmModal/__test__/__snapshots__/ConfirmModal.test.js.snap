@@ -31,3 +31,11 @@ exports[`ConfirmModal renders ConfirmModal 1`] = `
   </Component>
 </ForemanModal>
 `;
+
+exports[`ConfirmModal renders ConfirmModal for unlock  1`] = `
+<ForceUnlockModal
+  id="modalID"
+  onClick={[Function]}
+  selectedRowsLen={1}
+/>
+`;

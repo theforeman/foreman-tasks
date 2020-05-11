@@ -45,20 +45,15 @@ export const cancelToastInfo = {
 };
 
 export const forceCancelToastInfo = {
-  forceCancelled: successToastData(
-    __('Task resources were unlocked with force.')
-  ),
-  failed: warningToastData(
-    __('Task cannot be cancelled with force at the moment.')
-  ),
+  forceCancelled: successToastData(__('resources were unlocked with force.')),
+  failed: warningToastData(__('cannot be cancelled with force at the moment.')),
 };
 
 export const unlockToastInfo = {
-  unlocked: successToastData(__('Task resources were unlocked ')),
-  failed: warningToastData(
-    __('Task resources cannot be unlocked at the moment.')
-  ),
+  unlocked: successToastData(__('resources were unlocked ')),
+  failed: warningToastData(__('resources cannot be unlocked at the moment.')),
 };
+
 export const toastDispatch = ({ type, name, toastInfo, dispatch }) => {
   dispatch(
     addToast({

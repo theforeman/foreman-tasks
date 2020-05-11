@@ -7,6 +7,7 @@ import {
   selectAllRowsSelected,
 } from '../../TasksTableSelectors';
 import { RESUME_MODAL, CANCEL_MODAL } from '../../TasksTableConstants';
+import { FORCE_UNLOCK_MODAL } from '../../../TaskActions/TaskActionsConstants';
 
 export const selectCofirmModal = state =>
   selectForemanTasks(state).confirmModal || {};
@@ -30,7 +31,11 @@ export const selectSelectedTasks = state => {
 };
 
 export const selectSelectedRowsLen = state => {
-  if ([CANCEL_MODAL, RESUME_MODAL].includes(selectActionType(state))) {
+  if (
+    [CANCEL_MODAL, RESUME_MODAL, FORCE_UNLOCK_MODAL].includes(
+      selectActionType(state)
+    )
+  ) {
     return 1;
   }
   if (selectAllRowsSelected(state)) {

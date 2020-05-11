@@ -35,7 +35,10 @@ export const selectResults = createSelector(
       username: result.username || '',
       state: result.state + (result.frozen ? ` ${__('Disabled')}` : ''),
       duration: getDuration(result.started_at, result.ended_at),
-      availableActions: result.available_actions,
+      availableActions: {
+        ...result.available_actions,
+        stoppable: result.state !== 'stopped',
+      },
     }))
 );
 

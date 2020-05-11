@@ -6,12 +6,15 @@ import {
   RESUME_SELECTED_MODAL,
 } from '../../../TasksTableConstants';
 
+import { FORCE_UNLOCK_MODAL } from '../../../../TaskActions/TaskActionsConstants';
+
 import { resumeTask, cancelTask } from '../../../TasksTableActions';
 import {
   bulkCancelBySearch,
   bulkCancelById,
   bulkResumeBySearch,
   bulkResumeById,
+  forceCancelTask,
 } from '../../../TasksBulkActions';
 
 jest.mock('../../../TasksBulkActions');
@@ -100,6 +103,13 @@ describe('ConfirmModalActions', () => {
       parentTaskID,
     });
     expect(dispatch).toBeCalledWith(resumeTaskMock);
+  });
+  it('run FORCE_UNLOCK_MODAL', () => {
+    runWithGetState(clickedState, taskActions[FORCE_UNLOCK_MODAL], dispatch, {
+      url,
+      parentTaskID,
+    });
+    expect(dispatch).toBeCalledWith(forceCancelTask);
   });
   it('run CANCEL_SELECTED_MODAL by id', () => {
     runWithGetState(

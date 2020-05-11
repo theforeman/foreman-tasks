@@ -3,16 +3,17 @@ import { testComponentSnapshotsWithFixtures, shallow } from '@theforeman/test';
 
 import { ActionButton } from './ActionButton';
 
+const resumeTask = jest.fn();
+const cancelTask = jest.fn();
+const forceCancelTask = jest.fn();
+const taskActions = { resumeTask, cancelTask, forceCancelTask };
 const fixtures = {
   'render with cancellable true props': {
     availableActions: {
       cancellable: true,
       resumable: false,
     },
-    taskActions: {
-      cancelTask: jest.fn(),
-      resumeTask: jest.fn(),
-    },
+    taskActions,
     id: 'id',
     name: 'some-name',
   },
@@ -21,10 +22,16 @@ const fixtures = {
       cancellable: false,
       resumable: true,
     },
-    taskActions: {
-      cancelTask: jest.fn(),
-      resumeTask: jest.fn(),
+    taskActions,
+    id: 'id',
+    name: 'some-name',
+  },
+  'render with stoppable and cancellable true props': {
+    availableActions: {
+      cancellable: true,
+      stoppable: true,
     },
+    taskActions,
     id: 'id',
     name: 'some-name',
   },
@@ -33,10 +40,7 @@ const fixtures = {
       cancellable: false,
       resumable: false,
     },
-    taskActions: {
-      cancelTask: jest.fn(),
-      resumeTask: jest.fn(),
-    },
+    taskActions,
     id: 'id',
     name: 'some-name',
   },
@@ -46,11 +50,8 @@ describe('ActionButton', () => {
   describe('snapshot test', () =>
     testComponentSnapshotsWithFixtures(ActionButton, fixtures));
   describe('click test', () => {
-    const resumeTask = jest.fn();
-    const cancelTask = jest.fn();
     const id = 'some-id';
     const name = 'some-name';
-    const taskActions = { resumeTask, cancelTask };
     it('cancel', () => {
       const component = shallow(
         <ActionButton
@@ -72,9 +73,20 @@ describe('ActionButton', () => {
           taskActions={taskActions}
         />
       ).children();
-
       component.props().buttons[0].action.onClick();
       expect(resumeTask).toHaveBeenCalledWith(id, name);
+    });
+    it('force cancel', () => {
+      const component = shallow(
+        <ActionButton
+          id={id}
+          name={name}
+          availableActions={{ stoppable: true }}
+          taskActions={taskActions}
+        />
+      ).children();
+      component.props().buttons[0].action.onClick();
+      expect(cancelTask).toHaveBeenCalledWith(id, name);
     });
   });
 });

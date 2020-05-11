@@ -7,6 +7,7 @@ import {
   getTableItems,
   cancelTask,
   resumeTask,
+  forceCancelTask,
   selectPage,
   openClickedModal,
   openModalAction,
@@ -41,6 +42,12 @@ describe('TasksTable actions', () => {
   it('should cancelTask', async () => {
     const dispatch = jest.fn();
     cancelTask({ ...taskInfo, url: 'some-url' })(dispatch);
+    await IntegrationTestHelper.flushAllPromises();
+    expect(dispatch.mock.calls).toHaveLength(3);
+  });
+  it('should forceCancelTask', async () => {
+    const dispatch = jest.fn();
+    forceCancelTask({ ...taskInfo, url: 'some-url' })(dispatch);
     await IntegrationTestHelper.flushAllPromises();
     expect(dispatch.mock.calls).toHaveLength(3);
   });

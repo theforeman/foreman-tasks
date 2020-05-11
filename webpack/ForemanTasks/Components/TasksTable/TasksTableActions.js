@@ -13,7 +13,11 @@ import {
 } from './TasksTableConstants';
 import { getApiPathname } from './TasksTableHelpers';
 import { fetchTasksSummary } from '../TasksDashboard/TasksDashboardActions';
-import { cancelTaskRequest, resumeTaskRequest } from '../TaskActions';
+import {
+  cancelTaskRequest,
+  resumeTaskRequest,
+  forceCancelTaskRequest,
+} from '../TaskActions';
 
 export const getTableItems = url =>
   getTableItemsAction(TASKS_TABLE_ID, getURIQuery(url), getApiPathname(url));
@@ -41,6 +45,17 @@ export const resumeTask = ({
 }) => async dispatch => {
   await dispatch(resumeTaskRequest(taskId, taskName));
   reloadPage(url, parentTaskID, dispatch);
+};
+
+export const forceCancelTask = ({
+  taskId,
+  taskName,
+  url,
+  parentTaskID,
+}) => async dispatch => {
+  await dispatch(forceCancelTaskRequest(taskId, taskName));
+  dispatch(getTableItems(url));
+  dispatch(fetchTasksSummary(getURIQuery(url).time, parentTaskID));
 };
 
 export const selectPage = results => dispatch => {

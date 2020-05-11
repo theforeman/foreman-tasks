@@ -29,7 +29,7 @@ export const ConfirmModalReducer = (state = initialState, action) => {
             actionType: payload.modalID,
           });
         default:
-          return state;
+          return state.set('actionType', payload.modalID);
       }
     default:
       return state;

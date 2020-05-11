@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { translate as __ } from 'foremanReact/common/I18n';
+import { translate as __, sprintf } from 'foremanReact/common/I18n';
 import { ClickConfirmation } from '../common/ClickConfirmation';
 import { UNLOCK_MODAL, FORCE_UNLOCK_MODAL } from './TaskActionsConstants';
 
@@ -22,12 +22,15 @@ export const UnlockModal = ({ onClick, id }) => (
   />
 );
 
-export const ForceUnlockModal = ({ onClick, id }) => (
+export const ForceUnlockModal = ({ onClick, id, selectedRowsLen }) => (
   <ClickConfirmation
     id={id}
     title={__('Force Unlock')}
-    body={__(
-      'Resources will be unlocked and will not prevent other tasks from being run. As the task might be still running, it should be avoided to use this unless you are really sure the task got stuck'
+    body={sprintf(
+      __(
+        `Resources for %s task(s) will be unlocked and will not prevent other tasks from being run. As the task might be still running, it should be avoided to use this unless you are really sure the task got stuck.`
+      ),
+      selectedRowsLen
     )}
     confirmationMessage={confirmationMessage}
     confirmAction={__('Force Unlock')}
@@ -44,6 +47,7 @@ UnlockModal.propTypes = {
 ForceUnlockModal.propTypes = {
   onClick: PropTypes.func.isRequired,
   id: PropTypes.string,
+  selectedRowsLen: PropTypes.number,
 };
 
 UnlockModal.defaultProps = {
@@ -52,4 +56,5 @@ UnlockModal.defaultProps = {
 
 ForceUnlockModal.defaultProps = {
   id: FORCE_UNLOCK_MODAL,
+  selectedRowsLen: 1,
 };
