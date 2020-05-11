@@ -27,7 +27,7 @@ exports[`TaskDetails rendering render without Props 1`] = `
         fetchTaskDetails={[Function]}
         hasSubTasks={false}
         help=""
-        id=""
+        id="a15dd820-32f1-4ced-9ab7-c0fab8234c47"
         input={Array []}
         label=""
         locks={Array []}
@@ -88,7 +88,7 @@ exports[`TaskDetails rendering render without Props 1`] = `
       <Raw
         endedAt=""
         externalId=""
-        id=""
+        id="a15dd820-32f1-4ced-9ab7-c0fab8234c47"
         input={Array []}
         label=""
         output={Object {}}
