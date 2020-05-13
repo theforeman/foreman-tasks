@@ -39,8 +39,8 @@ export const ConfirmModal = ({
 );
 
 ConfirmModal.propTypes = {
-  actionText: PropTypes.string.isRequired,
-  actionState: PropTypes.string.isRequired,
+  actionText: PropTypes.string,
+  actionState: PropTypes.string,
   closeModal: PropTypes.func.isRequired,
   selectedRowsLen: PropTypes.number.isRequired,
   action: PropTypes.func,
@@ -49,6 +49,8 @@ ConfirmModal.propTypes = {
 
 ConfirmModal.defaultProps = {
   action: () => null,
+  actionText: '',
+  actionState: '',
 };
 
 export default ConfirmModal;
