@@ -28,5 +28,16 @@ exports[`ActionSelectButton renders with minimal props 1`] = `
   >
     Resume Selected
   </MenuItem>
+  <MenuItem
+    bsClass="dropdown"
+    disabled={false}
+    divider={false}
+    eventKey="3"
+    header={false}
+    onClick={[MockFunction]}
+    title="Force Cancel selected tasks"
+  >
+    Force Cancel Selected
+  </MenuItem>
 </DropdownButton>
 `;

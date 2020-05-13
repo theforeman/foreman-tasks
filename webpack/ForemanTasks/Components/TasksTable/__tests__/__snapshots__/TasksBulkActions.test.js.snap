@@ -69,6 +69,86 @@ Array [
 ]
 `;
 
+exports[`TasksTable bulk actions handles bulkForceCancelById requests 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "TASKS_FORCE_CANCEL_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "type": "TASKS_FORCE_CANCEL_SUCCESS",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "I am cancelled Task execution resources were unlocked with force.",
+          "type": "success",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "4 task(s) are already stopped",
+          "type": "warning",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+  Array [
+    "TASKS_TABLE",
+  ],
+  Array [
+    [Function],
+  ],
+]
+`;
+
+exports[`TasksTable bulk actions handles bulkForceCancelById requests that are stopped 1`] = `
+Array [
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "1 task(s) are already stopped",
+          "type": "warning",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;
+
+exports[`TasksTable bulk actions handles bulkForceCancelBySearch requests 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "TASKS_FORCE_CANCEL_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "Canceling with force selected tasks, this might take a while",
+          "type": "info",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;
+
 exports[`TasksTable bulk actions handles bulkResumeById requests that are not resumable 1`] = `
 Array [
   Array [

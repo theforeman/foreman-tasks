@@ -3,7 +3,12 @@ import { DropdownButton, MenuItem } from 'patternfly-react';
 import PropTypes from 'prop-types';
 import { translate as __ } from 'foremanReact/common/I18n';
 
-export const ActionSelectButton = ({ onCancel, onResume, disabled }) => (
+export const ActionSelectButton = ({
+  onCancel,
+  onResume,
+  onForceCancel,
+  disabled,
+}) => (
   <DropdownButton
     title={__('Select Action')}
     disabled={disabled}
@@ -23,6 +28,13 @@ export const ActionSelectButton = ({ onCancel, onResume, disabled }) => (
     >
       {__('Resume Selected')}
     </MenuItem>
+    <MenuItem
+      title={__('Force Cancel selected tasks')}
+      onClick={onForceCancel}
+      eventKey="3"
+    >
+      {__('Force Cancel Selected')}
+    </MenuItem>
   </DropdownButton>
 );
 
@@ -30,6 +42,7 @@ ActionSelectButton.propTypes = {
   disabled: PropTypes.bool,
   onCancel: PropTypes.func.isRequired,
   onResume: PropTypes.func.isRequired,
+  onForceCancel: PropTypes.func.isRequired,
 };
 
 ActionSelectButton.defaultProps = {

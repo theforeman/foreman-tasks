@@ -28,7 +28,7 @@ export const ForceUnlockModal = ({ onClick, id, selectedRowsLen }) => (
     title={__('Force Unlock')}
     body={sprintf(
       __(
-        `Resources for %s task(s) will be unlocked and will not prevent other tasks from being run. As the task might be still running, it should be avoided to use this unless you are really sure the task got stuck.`
+        `Resources for %s task(s) will be unlocked and will not prevent other tasks from being run. As the task(s) might be still running, it should be avoided to use this unless you are really sure the task(s) got stuck.`
       ),
       selectedRowsLen
     )}

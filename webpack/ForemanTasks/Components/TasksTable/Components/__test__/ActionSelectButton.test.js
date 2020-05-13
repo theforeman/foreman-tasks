@@ -6,6 +6,7 @@ const fixtures = {
   'renders with minimal props': {
     onCancel: jest.fn(),
     onResume: jest.fn(),
+    onForceCancel: jest.fn(),
   },
 };
 

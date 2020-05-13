@@ -10,12 +10,14 @@ export const OPEN_SELECT_ALL = 'OPEN_SELECT_ALL';
 
 export const BULK_CANCEL_PATH = 'bulk_cancel';
 export const BULK_RESUME_PATH = 'bulk_resume';
+export const BULK_FORCE_CANCEL_PATH = 'bulk_stop';
 
 export const CANCEL_MODAL = 'cancelConfirmModal';
 export const RESUME_MODAL = 'resumeConfirmModal';
 export const CANCEL_SELECTED_MODAL = 'cancelSelectedConfirmModal';
 export const RESUME_SELECTED_MODAL = 'resumeSelectedConfirmModal';
 export const CONFIRM_MODAL = 'ConfirmModal';
+export const FORCE_UNLOCK_SELECTED_MODAL = 'forceUnlockSelectedConfirmModal';
 
 export const UPDATE_CLICKED = 'UPDATE_CLICKED';
 export const UPDATE_MODAL = 'UPDATE_MODAL';

@@ -16,6 +16,7 @@ import {
   TASKS_SEARCH_PROPS,
   CANCEL_SELECTED_MODAL,
   RESUME_SELECTED_MODAL,
+  FORCE_UNLOCK_SELECTED_MODAL,
   CONFIRM_MODAL,
 } from './TasksTableConstants';
 import { ActionSelectButton } from './Components/ActionSelectButton';
@@ -71,6 +72,7 @@ const TasksTablePage = ({
               disabled={!(props.selectedRows.length || props.allRowsSelected)}
               onCancel={() => openModal(CANCEL_SELECTED_MODAL)}
               onResume={() => openModal(RESUME_SELECTED_MODAL)}
+              onForceCancel={() => openModal(FORCE_UNLOCK_SELECTED_MODAL)}
             />
           </React.Fragment>
         }

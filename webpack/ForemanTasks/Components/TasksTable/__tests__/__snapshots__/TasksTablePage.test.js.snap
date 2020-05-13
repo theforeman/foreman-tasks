@@ -83,6 +83,7 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
         <ActionSelectButton
           disabled={true}
           onCancel={[Function]}
+          onForceCancel={[Function]}
           onResume={[Function]}
         />
       </React.Fragment>
@@ -200,6 +201,7 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
         <ActionSelectButton
           disabled={true}
           onCancel={[Function]}
+          onForceCancel={[Function]}
           onResume={[Function]}
         />
       </React.Fragment>

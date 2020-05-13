@@ -1,8 +1,12 @@
 import API from 'foremanReact/API';
 import { addToast } from 'foremanReact/redux/actions/toasts';
-import { translate as __ } from 'foremanReact/common/I18n';
+import { translate as __, sprintf } from 'foremanReact/common/I18n';
 import { TOAST_TYPES } from '../common/ToastsHelpers/ToastTypesConstants';
-import { BULK_CANCEL_PATH, BULK_RESUME_PATH } from './TasksTableConstants';
+import {
+  BULK_CANCEL_PATH,
+  BULK_RESUME_PATH,
+  BULK_FORCE_CANCEL_PATH,
+} from './TasksTableConstants';
 import {
   TASKS_RESUME_REQUEST,
   TASKS_RESUME_SUCCESS,
@@ -10,6 +14,9 @@ import {
   TASKS_CANCEL_REQUEST,
   TASKS_CANCEL_SUCCESS,
   TASKS_CANCEL_FAILURE,
+  TASKS_FORCE_CANCEL_REQUEST,
+  TASKS_FORCE_CANCEL_SUCCESS,
+  TASKS_FORCE_CANCEL_FAILURE,
 } from '../TaskActions/TaskActionsConstants';
 import { reloadPage } from './TasksTableActions';
 import {
@@ -17,6 +24,7 @@ import {
   resumeToastInfo,
   cancelToastInfo,
   toastDispatch,
+  forceCancelToastInfo,
 } from '../TaskActions/TaskActionHelpers';
 
 export const bulkByIdRequest = (resumeTasks, path) => {
@@ -160,4 +168,83 @@ export const bulkCancelById = ({
       handleErrorCancel(error, dispatch);
     }
   }
+};
+
+const handleErrorForceCancel = (error, dispatch) => {
+  dispatch({ type: TASKS_FORCE_CANCEL_FAILURE, error });
+  dispatch(
+    addToast({
+      type: TOAST_TYPES.ERROR,
+      message: `${__(`Cannot force cancel tasks at the moment`)} ${error}`,
+    })
+  );
+};
+
+export const bulkForceCancelById = ({
+  selected,
+  url,
+  parentTaskID,
+}) => async dispatch => {
+  const stopTasks = selected.filter(task => task.state !== 'stopped');
+  if (stopTasks.length < selected.length)
+    dispatch(
+      addToast({
+        type: TOAST_TYPES.WARNING,
+        message: sprintf(
+          '%s task(s) are already stopped',
+          selected.length - stopTasks.length
+        ),
+      })
+    );
+  if (stopTasks.length) {
+    dispatch({ type: TASKS_FORCE_CANCEL_REQUEST });
+    try {
+      const { data } = await bulkByIdRequest(stopTasks, BULK_FORCE_CANCEL_PATH);
+      dispatch({ type: TASKS_FORCE_CANCEL_SUCCESS });
+      if (data.stopped) {
+        data.stopped.forEach(task => {
+          toastDispatch({
+            type: 'forceCancelled',
+            name: task.action,
+            toastInfo: forceCancelToastInfo,
+            dispatch,
+          });
+        });
+      }
+      dispatch(
+        addToast({
+          type: TOAST_TYPES.WARNING,
+          message: sprintf(
+            '%s task(s) are already stopped',
+            data.skipped_length
+          ),
+        })
+      );
+      if (data.stopped) {
+        reloadPage(url, parentTaskID, dispatch);
+      }
+    } catch (error) {
+      handleErrorForceCancel(error, dispatch);
+    }
+  }
+};
+
+export const bulkForceCancelBySearch = ({
+  query,
+  parentTaskID,
+}) => async dispatch => {
+  dispatch({ type: TASKS_FORCE_CANCEL_REQUEST });
+  dispatch(
+    addToast({
+      type: 'info',
+      message: __(
+        'Canceling with force selected tasks, this might take a while'
+      ),
+    })
+  );
+  await bulkBySearchRequest({
+    query,
+    path: BULK_FORCE_CANCEL_PATH,
+    parentTaskID,
+  });
 };
