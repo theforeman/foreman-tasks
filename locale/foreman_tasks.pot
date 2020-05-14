@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_tasks 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-11 19:14+0530\n"
-"PO-Revision-Date: 2020-05-11 19:14+0530\n"
+"POT-Creation-Date: 2020-05-14 20:47+0530\n"
+"PO-Revision-Date: 2020-05-14 20:47+0530\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -173,6 +173,9 @@ msgstr ""
 
 #: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:46
 #: ../app/views/foreman_tasks/recurring_logics/index.html.erb:30
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/RunningSteps.js:19
+#: ../webpack/ForemanTasks/Components/common/ActionButtons/CancelButton.js:9
+#: ../webpack/ForemanTasks/Components/common/ClickConfirmation/index.js:52
 msgid "Cancel"
 msgstr ""
 
@@ -182,10 +185,16 @@ msgstr ""
 #: ../db/seeds.d/30-notification_blueprints.rb:33
 #: ../db/seeds.d/30-notification_blueprints.rb:40
 #: ../lib/foreman_tasks/engine.rb:41
+#: ../webpack/ForemanTasks/Components/TasksTable/SubTasksPage.js:10
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksIndexPage.js:7
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTablePage.js:204
 msgid "Tasks"
 msgstr ""
 
 #: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:119
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Task.js:142
+#: ../webpack/ForemanTasks/Components/TasksTable/SubTasksPage.js:15
+#: ../webpack/ForemanTasks/Components/TasksTable/SubTasksPage.js:19
 msgid "Sub tasks"
 msgstr ""
 
@@ -324,11 +333,11 @@ msgstr ""
 msgid "The targets are of different types"
 msgstr ""
 
-#: ../app/lib/actions/foreman/host/import_facts.rb:48 action_names.rb:5
+#: ../app/lib/actions/foreman/host/import_facts.rb:48 action_names.rb:4
 msgid "Import facts"
 msgstr ""
 
-#: ../app/lib/actions/foreman/puppetclass/import.rb:18 action_names.rb:3
+#: ../app/lib/actions/foreman/puppetclass/import.rb:18 action_names.rb:2
 msgid "Import Puppet classes"
 msgstr ""
 
@@ -437,6 +446,7 @@ msgid "Finished"
 msgstr ""
 
 #: ../app/models/foreman_tasks/recurring_logic.rb:142
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableSelectors.js:39
 msgid "Disabled"
 msgstr ""
 
@@ -444,6 +454,15 @@ msgstr ""
 #: ../app/models/foreman_tasks/task.rb:105
 #: ../app/views/foreman_tasks/tasks/dashboard/_latest_tasks_in_error_warning.html.erb:14
 #: ../app/views/foreman_tasks/tasks/dashboard/_tasks_status.html.erb:14
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskHelper.js:10
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskInfo.js:72
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskInfo.js:76
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskInfo.js:91
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskInfo.js:105
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskInfo.js:116
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableHelpers.js:34
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableHelpers.js:37
+#: ../webpack/ForemanTasks/Components/TasksTable/formatters/dateCellFormmatter.js:6
 msgid "N/A"
 msgstr ""
 
@@ -611,6 +630,9 @@ msgstr ""
 
 #: ../app/views/foreman_tasks/recurring_logics/index.html.erb:42
 #: ../app/views/foreman_tasks/task_groups/recurring_logic_task_groups/_recurring_logic_task_group.html.erb:12
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Errors.js:18
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/RunningSteps.js:25
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableSchema.js:56
 msgid "Action"
 msgstr ""
 
@@ -643,6 +665,9 @@ msgstr ""
 #: ../app/views/foreman_tasks/task_groups/recurring_logic_task_groups/_recurring_logic_task_group.html.erb:36
 #: ../app/views/foreman_tasks/tasks/dashboard/_latest_tasks_in_error_warning.html.erb:5
 #: ../app/views/foreman_tasks/tasks/dashboard/_tasks_status.html.erb:4
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/RunningSteps.js:30
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskInfo.js:150
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableSchema.js:61
 msgid "State"
 msgstr ""
 
@@ -676,6 +701,7 @@ msgstr ""
 #:
 #: ../app/views/foreman_tasks/tasks/dashboard/_latest_tasks_in_error_warning.html.erb:6
 #: ../app/views/foreman_tasks/tasks/dashboard/_tasks_status.html.erb:5
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableSchema.js:64
 msgid "Result"
 msgstr ""
 
@@ -727,10 +753,413 @@ msgstr ""
 msgid "Recurring Logics"
 msgstr ""
 
-#: action_names.rb:2
-msgid "Remote action:"
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Errors.js:10
+msgid "Execution plan data not available "
 msgstr ""
 
-#: action_names.rb:4
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Errors.js:13
+msgid "No errors"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Errors.js:22
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/RunningSteps.js:33
+msgid "Input"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Errors.js:26
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/RunningSteps.js:37
+msgid "Output"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Errors.js:32
+msgid "Exception"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Errors.js:38
+msgid "Backtrace"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Raw.js:10
+msgid "Id"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Raw.js:14
+msgid "Label"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Raw.js:19
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableSchema.js:70
+msgid "Duration"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Raw.js:30
+msgid "Raw input"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Raw.js:38
+msgid "Raw output"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Raw.js:46
+msgid "External Id"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/RunningSteps.js:7
+msgid "No running steps"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Task.js:50
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Task.js:57
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Task.js:151
+msgid "Unlock"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Task.js:67
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Task.js:74
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Task.js:160
+msgid "Force Unlock"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Task.js:98
+msgid "${taskReload ? 'Stop' : 'Start'}  auto-reloading"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Task.js:105
+msgid "Dynflow console"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Task.js:134
+msgid "Parent task"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskHelper.js:19
+msgid "seconds"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskInfo.js:155
+msgid "Complete"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskInfo.js:171
+msgid "Troubleshooting"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskInfo.js:183
+msgid "Output:"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskInfo.js:195
+msgid "Errors:"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/TaskDetails.js:42
+msgid "Task"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/TaskDetails.js:45
+msgid "Running Steps"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/TaskDetails.js:51
+msgid "Errors"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/TaskDetails.js:54
+msgid "Locks"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/TaskDetails.js:57
+msgid "Raw"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/Components/TasksCardsGrid/Components/PausedTasksCard/PausedTasksCard.js:8
+msgid "Paused"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/Components/TasksCardsGrid/Components/RunningTasksCard/RunningTasksCard.js:8
+msgid "Running"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/Components/TasksCardsGrid/Components/ScheduledTasksCard/ScheduledTasksCard.js:36
+msgid "Scheduled"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/Components/TasksCardsGrid/Components/ScheduledTasksCard/ScheduledTasksCard.js:40
+#: ../webpack/ForemanTasks/Components/TasksDashboard/Components/TasksCardsGrid/Components/StoppedTasksCard/StoppedTasksCard.js:51
+#: ../webpack/ForemanTasks/Components/TasksDashboard/Components/TasksCardsGrid/Components/TasksDonutChart/TasksDonutChartHelper.js:73
+msgid "Total"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/Components/TasksCardsGrid/Components/StoppedTasksCard/StoppedTasksCard.js:44
+msgid "Stopped"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/Components/TasksCardsGrid/Components/TasksDonutChart/TasksDonutChartHelper.js:48
+msgid "%(last)s Last %(time)s"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/Components/TasksCardsGrid/Components/TasksDonutChart/TasksDonutChartHelper.js:53
+msgid "%(older)s Older %(time)s"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/Components/TasksLabelsRow/TasksLabelsRow.js:28
+msgid "Active Filters:"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/Components/TasksLabelsRow/TasksLabelsRow.js:40
+msgid "Clear All Filters"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/Components/TasksTimeRow/TasksTimeRow.js:14
+msgid "With focus on last"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:33
+msgid "state"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:34
+msgid "result"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:35
+msgid "mode"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:36
+msgid "time"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:40
+msgid "running"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:41
+msgid "paused"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:42
+msgid "stopped"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:43
+msgid "scheduled"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:44
+msgid "error"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:45
+msgid "warning"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:46
+msgid "success"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:47
+msgid "last"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:48
+msgid "older"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:49
+msgid "24h"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:50
+msgid "12h"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:51
+msgid "week"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksTable/Components/ActionSelectButton.js:8
+msgid "Select Action"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksTable/Components/ActionSelectButton.js:13
+msgid "Cancel selected tasks"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksTable/Components/ActionSelectButton.js:17
+msgid "Cancel Selected"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksTable/Components/ActionSelectButton.js:20
+msgid "Resume selected tasks"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksTable/Components/ActionSelectButton.js:24
+msgid "Resume Selected"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TasksTable/Components/CancelConfirm.js:14
+msgid "Cancel Selected Tasks"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TasksTable/Components/CancelConfirm.js:23
+#: ../webpack/ForemanTasks/Components/TasksTable/Components/ResumeConfirm.js:22
+msgid "No"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TasksTable/Components/CancelConfirm.js:31
+#: ../webpack/ForemanTasks/Components/TasksTable/Components/ResumeConfirm.js:30
+msgid "Yes"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TasksTable/Components/ResumeConfirm.js:14
+msgid "Resume Selected Tasks"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksTable/Components/SelectAllAlert.js:20
+msgid "Select All"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksTable/Components/SelectAllAlert.js:21
+msgid "tasks."
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksTable/Components/SelectAllAlert.js:27
+msgid "All %s tasks are selected. "
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksTable/Components/SelectAllAlert.js:29
+msgid "Undo selection"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksTable/Components/TableSelectionCell.js:27
+msgid "Select row"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TasksTable/SubTasksPage.js:19
+msgid "Sub tasks of %s"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksBulkActions.js:46
+msgid "Cannot resume tasks at the moment"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksBulkActions.js:61
+msgid "Not all the selected tasks can be resumed"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksBulkActions.js:97
+msgid "Resuming selected tasks, this might take a while"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksBulkActions.js:108
+msgid "Cannot cancel tasks at the moment"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksBulkActions.js:121
+msgid "Canceling selected tasks, this might take a while"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksBulkActions.js:137
+msgid "Not all the selected tasks can be cancelled"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTable.js:68
+msgid "Could not receive data: ${error && error.message}"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTable.js:78
+msgid "No Tasks"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableActionHelpers.js:32
+msgid "was resumed"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableActionHelpers.js:33
+msgid "could not be resumed"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableActionHelpers.js:34
+msgid "task has to be resumable"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableActionHelpers.js:38
+msgid "was cancelled"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableActionHelpers.js:39
+msgid "task has to be cancellable"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableHelpers.js:34
+msgid "No start or end dates"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableHelpers.js:37
+msgid "Task was canceled"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableHelpers.js:53
+msgid "More than"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableHelpers.js:62
+msgid "Less than a second"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTablePage.js:131
+msgid "Export All"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableSchema.js:67
+msgid "Started at"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableSchema.js:75
+msgid "Operation"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/common/ActionButtons/ResumeButton.js:9
+msgid "Resume"
+msgstr ""
+
+#: action_names.rb:3
 msgid "Action with sub plans"
 msgstr ""
