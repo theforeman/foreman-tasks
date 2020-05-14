@@ -19,5 +19,5 @@ export const UPDATE_CLICKED = 'UPDATE_CLICKED';
 
 export const TASKS_SEARCH_PROPS = {
   ...getControllerSearchProps('tasks'),
-  controller: 'foreman_tasks/tasks',
+  controller: 'foreman_tasks_tasks',
 };
