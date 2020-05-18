@@ -11,7 +11,7 @@ import { useForemanModal } from 'foremanReact/components/ForemanModal/ForemanMod
 import TasksDashboard from '../TasksDashboard';
 import TasksTable from './TasksTable';
 import { resolveSearchQuery, getCSVurl } from './TasksTableHelpers';
-import { ConfirmModal } from './Components/ConfirmModal';
+import ConfirmModal from './Components/ConfirmModal/';
 import {
   TASKS_SEARCH_PROPS,
   CANCEL_SELECTED_MODAL,
@@ -62,74 +62,57 @@ const TasksTablePage = ({
     resumeTask,
     parentTaskID,
   } = props;
-  const tasksActions = {
-    [CANCEL_SELECTED_MODAL]: {
-      action: () => {
-        props.allRowsSelected
-          ? bulkCancelBySearch({ query: uriQuery, parentTaskID })
-          : bulkCancelById({
-              selected: getSelectedTasks(),
-              url,
-              parentTaskID,
-            });
-      },
-      actionText: 'cancel',
-      actionState: 'stopped',
-    },
-    [CANCEL_MODAL]: {
-      action: () => {
-        cancelTask({
-          taskId: clicked.taskId,
-          taskName: clicked.taskName,
-          url,
-          parentTaskID,
-        });
-      },
-      actionText: 'cancel',
-      actionState: 'stopped',
-    },
 
-    [RESUME_SELECTED_MODAL]: {
-      action: () => {
-        props.allRowsSelected
-          ? bulkResumeBySearch({ query: uriQuery, parentTaskID })
-          : bulkResumeById({
-              selected: getSelectedTasks(),
-              url,
-              parentTaskID,
-            });
-      },
-      actionText: 'resume',
-      actionState: 'running',
-    },
-    [RESUME_MODAL]: {
-      action: () => {
-        resumeTask({
-          taskId: clicked.taskId,
-          taskName: clicked.taskName,
-          url,
-          parentTaskID,
-        });
-      },
-      actionText: 'resume',
-      actionState: 'running',
-    },
+  const tasksActions = {
+    [CANCEL_SELECTED_MODAL]: () =>
+      props.allRowsSelected
+        ? bulkCancelBySearch({ query: uriQuery, parentTaskID })
+        : bulkCancelById({
+            selected: getSelectedTasks(),
+            url,
+            parentTaskID,
+          }),
+    [CANCEL_MODAL]: () =>
+      cancelTask({
+        taskId: clicked.taskId,
+        taskName: clicked.taskName,
+        url,
+        parentTaskID,
+      }),
+
+    [RESUME_SELECTED_MODAL]: () =>
+      props.allRowsSelected
+        ? bulkResumeBySearch({ query: uriQuery, parentTaskID })
+        : bulkResumeById({
+            selected: getSelectedTasks(),
+            url,
+            parentTaskID,
+          }),
+
+    [RESUME_MODAL]: () =>
+      resumeTask({
+        taskId: clicked.taskId,
+        taskName: clicked.taskName,
+        url,
+        parentTaskID,
+      }),
   };
-  const { setModalOpen, setModalClosed } = useForemanModal({
+
+  const { setModalOpen } = useForemanModal({
     id: CONFIRM_MODAL,
   });
+
   const openModal = id => openModalAction(id, setModalOpen);
+
   const selectedRowsLen = props.allRowsSelected
     ? props.itemCount
     : props.selectedRows.length;
+
   return (
     <div className="tasks-table-wrapper">
       <ConfirmModal
-        closeModal={setModalClosed}
-        {...tasksActions[modalID]}
-        selectedRowsLen={
-          [CANCEL_MODAL, RESUME_MODAL].includes(modalID) ? 1 : selectedRowsLen
-        }
+        tasksActions={tasksActions}
+        selectedRowsLen={selectedRowsLen}
         id={CONFIRM_MODAL}
       />
       <PageLayout

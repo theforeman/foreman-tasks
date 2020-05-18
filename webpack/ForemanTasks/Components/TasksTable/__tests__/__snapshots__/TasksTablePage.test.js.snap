@@ -4,13 +4,17 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
 <div
   className="tasks-table-wrapper"
 >
-  <ConfirmModal
-    action={[Function]}
-    actionState=""
-    actionText=""
-    closeModal={[MockFunction]}
+  <Connect(ConfirmModal)
     id="ConfirmModal"
     selectedRowsLen={0}
+    tasksActions={
+      Object {
+        "cancelConfirmModal": [Function],
+        "cancelSelectedConfirmModal": [Function],
+        "resumeConfirmModal": [Function],
+        "resumeSelectedConfirmModal": [Function],
+      }
+    }
   />
   <PageLayout
     beforeToolbarComponent={
@@ -141,13 +145,17 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
 <div
   className="tasks-table-wrapper"
 >
-  <ConfirmModal
-    action={[Function]}
-    actionState=""
-    actionText=""
-    closeModal={[MockFunction]}
+  <Connect(ConfirmModal)
     id="ConfirmModal"
     selectedRowsLen={0}
+    tasksActions={
+      Object {
+        "cancelConfirmModal": [Function],
+        "cancelSelectedConfirmModal": [Function],
+        "resumeConfirmModal": [Function],
+        "resumeSelectedConfirmModal": [Function],
+      }
+    }
   />
   <PageLayout
     beforeToolbarComponent={

@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TasksDashboard - Selectors should select actionState 1`] = `"some-state"`;
+
+exports[`TasksDashboard - Selectors should select actionText 1`] = `"some-text"`;
+
+exports[`TasksDashboard - Selectors should select actionType 1`] = `"some-type"`;

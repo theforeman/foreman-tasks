@@ -105,15 +105,6 @@ Object {
 }
 `;
 
-exports[`TasksTableReducer reducer should handle UPDATE_MODAL 1`] = `
-Object {
-  "tasksTableQuery": Object {
-    "modalID": "some-id",
-    "selectedRows": Array [],
-  },
-}
-`;
-
 exports[`TasksTableReducer reducer should return the initial state 1`] = `
 Object {
   "tasksTableQuery": Object {
