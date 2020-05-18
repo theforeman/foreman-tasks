@@ -24,6 +24,7 @@ class Setting::ForemanTasks < Setting
 
   def self.load_defaults
     Setting::BLANK_ATTRS.push('foreman_tasks_troubleshooting_url')
+    Setting::NONZERO_ATTRS.push('foreman_tasks_polling_multiplier')
     super
   end
 end
