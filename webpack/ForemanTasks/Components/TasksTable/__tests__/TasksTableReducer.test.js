@@ -10,7 +10,6 @@ import {
   UPDATE_CLICKED,
   SELECT_ALL_ROWS,
   OPEN_SELECT_ALL,
-  UPDATE_MODAL,
 } from '../TasksTableConstants';
 import reducer from '../TasksTableReducer';
 
@@ -78,12 +77,6 @@ const fixtures = {
     action: {
       type: UNSELECT_ROWS,
       payload: { id: [4], results: [{ id: 3 }, { id: 4 }, { id: 5 }] },
-    },
-  },
-  'should handle UPDATE_MODAL': {
-    action: {
-      type: UPDATE_MODAL,
-      payload: { modalID: 'some-id' },
     },
   },
 };

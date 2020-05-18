@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConfirmModalReducer reducer should handle UPDATE_MODAL to cancel 1`] = `
+Object {
+  "actionState": "stopped",
+  "actionText": "cancel",
+  "actionType": "cancelConfirmModal",
+}
+`;
+
+exports[`ConfirmModalReducer reducer should handle UPDATE_MODAL to resume 1`] = `
+Object {
+  "actionState": "running",
+  "actionText": "resume",
+  "actionType": "resumeSelectedConfirmModal",
+}
+`;
+
+exports[`ConfirmModalReducer reducer should return the initial state 1`] = `Object {}`;
