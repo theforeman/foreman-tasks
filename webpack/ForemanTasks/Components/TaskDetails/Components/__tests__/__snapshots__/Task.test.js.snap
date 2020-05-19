@@ -33,7 +33,6 @@ exports[`Task rendering render with some Props 1`] = `
           bsStyle="default"
           className="reload-button"
           disabled={false}
-          hidden={false}
           onClick={[Function]}
         >
           <span
@@ -129,7 +128,6 @@ exports[`Task rendering render with some Props 1`] = `
     </Row>
     <TaskInfo
       action=""
-      allowDangerousActions={true}
       cancelTaskRequest={[Function]}
       cancellable={false}
       dynflowEnableConsole={true}
@@ -194,7 +192,6 @@ exports[`Task rendering render without Props 1`] = `
           bsStyle="default"
           className="reload-button"
           disabled={false}
-          hidden={true}
           onClick={[Function]}
         >
           <span
@@ -238,11 +235,34 @@ exports[`Task rendering render without Props 1`] = `
         >
           Cancel
         </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsSize="small"
+          bsStyle="default"
+          className="unlock-button"
+          disabled={true}
+          onClick={[MockFunction]}
+        >
+          Unlock
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsSize="small"
+          bsStyle="default"
+          className="force-unlock-button"
+          disabled={false}
+          onClick={[MockFunction]}
+        >
+          Force Unlock
+        </Button>
       </Col>
     </Row>
     <TaskInfo
       action=""
-      allowDangerousActions={false}
       cancelTaskRequest={[Function]}
       cancellable={false}
       dynflowEnableConsole={false}

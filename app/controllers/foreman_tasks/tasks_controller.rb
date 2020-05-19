@@ -3,8 +3,6 @@ module ForemanTasks
     include Foreman::Controller::AutoCompleteSearch
     include Foreman::Controller::CsvResponder
 
-    before_action :restrict_dangerous_actions, :only => [:unlock, :force_unlock]
-
     def show
       @task = resource_base.find(params[:id])
       render :layout => !request.xhr?
@@ -99,10 +97,6 @@ module ForemanTasks
     def respond_with_tasks(scope)
       @tasks = filter(scope, paginate: false)
       csv_response(@tasks, [:id, :action, :state, :result, 'started_at.in_time_zone', 'ended_at.in_time_zone', :username], ['Id', 'Action', 'State', 'Result', 'Started At', 'Ended At', 'User'])
-    end
-
-    def restrict_dangerous_actions
-      render_403 unless Setting['dynflow_allow_dangerous_actions']
     end
 
     def controller_permission

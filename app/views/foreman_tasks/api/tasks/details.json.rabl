@@ -9,7 +9,6 @@ node(:failed_steps) { @task.input_output_failed_steps }
 node(:running_steps) { @task.input_output_running_steps }
 node(:help) { troubleshooting_info_text }
 node(:has_sub_tasks) { @task.sub_tasks.any? }
-node(:allowDangerousActions) { Setting['dynflow_allow_dangerous_actions'] }
 node(:locks) do
   @task.locks.map do |lock|
     { name: lock.name, exclusive: lock.exclusive, resource_type: lock.resource_type, resource_id: lock.resource_id }

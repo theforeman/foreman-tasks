@@ -41,7 +41,6 @@ const fixtures = {
     help:
       "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved.\nThe recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task.",
     hasSubTasks: false,
-    allowDangerousActions: false,
     locks: [
       {
         name: 'task_owner',

@@ -39,7 +39,6 @@ const Task = props => {
     externalId,
     id,
     state,
-    allowDangerousActions,
     resumable,
     cancellable,
     hasSubTasks,
@@ -71,7 +70,6 @@ const Task = props => {
         <Row>
           <Col xs={12}>
             <Button
-              hidden={!allowDangerousActions}
               className="reload-button"
               bsSize="small"
               onClick={taskProgressToggle}
@@ -117,7 +115,6 @@ const Task = props => {
             >
               {__('Cancel')}
             </Button>
-
             {parentTask && (
               <Button
                 className="parent-button"
@@ -136,26 +133,22 @@ const Task = props => {
                 {__('Sub tasks')}
               </Button>
             )}
-            {allowDangerousActions && (
-              <Button
-                className="unlock-button"
-                bsSize="small"
-                disabled={state !== 'paused'}
-                onClick={unlockModalActions.setModalOpen}
-              >
-                {__('Unlock')}
-              </Button>
-            )}
-            {allowDangerousActions && (
-              <Button
-                className="force-unlock-button"
-                bsSize="small"
-                disabled={state === 'stopped'}
-                onClick={forceUnlockModalActions.setModalOpen}
-              >
-                {__('Force Unlock')}
-              </Button>
-            )}
+            <Button
+              className="unlock-button"
+              bsSize="small"
+              disabled={state !== 'paused'}
+              onClick={unlockModalActions.setModalOpen}
+            >
+              {__('Unlock')}
+            </Button>
+            <Button
+              className="force-unlock-button"
+              bsSize="small"
+              disabled={state === 'stopped'}
+              onClick={forceUnlockModalActions.setModalOpen}
+            >
+              {__('Force Unlock')}
+            </Button>
           </Col>
         </Row>
         <TaskInfo {...props} />
@@ -167,7 +160,6 @@ const Task = props => {
 Task.propTypes = {
   ...TaskInfo.PropTypes,
   state: PropTypes.string,
-  allowDangerousActions: PropTypes.bool,
   resumable: PropTypes.bool,
   cancellable: PropTypes.bool,
   refetchTaskDetails: PropTypes.func,
@@ -187,7 +179,6 @@ Task.propTypes = {
 Task.defaultProps = {
   ...TaskInfo.defaultProps,
   state: '',
-  allowDangerousActions: false,
   resumable: false,
   cancellable: false,
   refetchTaskDetails: () => null,
