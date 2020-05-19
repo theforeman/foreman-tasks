@@ -2,7 +2,6 @@ class Setting::ForemanTasks < Setting
   def self.default_settings
     [
       set('foreman_tasks_sync_task_timeout', N_('Number of seconds to wait for synchronous task to finish.'), 120),
-      set('dynflow_allow_dangerous_actions', N_('Allow unlocking actions which can have dangerous consequences.'), false),
       set('dynflow_enable_console', N_('Enable the dynflow console (/foreman_tasks/dynflow) for debugging'), true),
       set('dynflow_console_require_auth', N_('Require user to be authenticated as user with admin rights when accessing dynflow console'), true),
       set('foreman_tasks_proxy_action_retry_count', N_('Number of attempts to start a task on the smart proxy before failing'), 4),

@@ -17,7 +17,6 @@ const fixtures = {
     id: 'test',
     state: 'paused',
     hasSubTasks: true,
-    allowDangerousActions: true,
     dynflowEnableConsole: true,
     parentTask: 'parent-id',
     taskReload: true,
@@ -44,7 +43,6 @@ describe('Task', () => {
       action,
       cancelTaskRequest,
       resumeTaskRequest,
-      allowDangerousActions: true,
     };
     afterEach(() => {
       jest.clearAllMocks();

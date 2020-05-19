@@ -52,9 +52,6 @@ export const selectHelp = state => selectTaskDetails(state).help || null;
 export const selectHasSubTasks = state =>
   selectTaskDetails(state).has_sub_tasks || false;
 
-export const selectAllowDangerousActions = state =>
-  selectTaskDetails(state).allowDangerousActions || false;
-
 export const selectLocks = state => selectTaskDetails(state).locks || [];
 
 export const selectUsernamePath = state =>
