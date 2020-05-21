@@ -1,8 +1,9 @@
 import API from 'foremanReact/API';
 import { addToast } from 'foremanReact/redux/actions/toasts';
+import { urlBuilder } from 'foremanReact/common/urlHelpers';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { TOAST_TYPES } from '../common/ToastsHelpers/ToastTypesConstants';
-import { BULK_CANCEL_PATH, BULK_RESUME_PATH } from './TasksTableConstants';
+import { BULK_CANCEL_ACTION, BULK_RESUME_ACTION } from './TasksTableConstants';
 import {
   TASKS_RESUME_REQUEST,
   TASKS_RESUME_SUCCESS,
@@ -19,15 +20,15 @@ import {
   toastDispatch,
 } from '../TaskActions/TaskActionHelpers';
 
-export const bulkByIdRequest = (resumeTasks, path) => {
+export const bulkByIdRequest = (resumeTasks, action) => {
   const ids = resumeTasks.map(task => task.id);
-  const url = `/foreman_tasks/api/tasks/${path}`;
+  const url = urlBuilder('/foreman_tasks/api/tasks', action);
   const data = { task_ids: ids };
   return API.post(url, data);
 };
 
-export const bulkBySearchRequest = ({ query, parentTaskID, path }) => {
-  const url = `/foreman_tasks/api/tasks/${path}`;
+export const bulkBySearchRequest = ({ query, parentTaskID, action }) => {
+  const url = urlBuilder('foreman_tasks/api/tasks', action);
   if (parentTaskID) {
     query.search = query.search
       ? ` ${query.search} and parent_task_id=${parentTaskID}`
@@ -63,7 +64,7 @@ export const bulkResumeById = ({
   if (resumeTasks.length) {
     dispatch({ type: TASKS_RESUME_REQUEST });
     try {
-      const { data } = await bulkByIdRequest(resumeTasks, BULK_RESUME_PATH);
+      const { data } = await bulkByIdRequest(resumeTasks, BULK_RESUME_ACTION);
       dispatch({ type: TASKS_RESUME_SUCCESS });
       ['resumed', 'failed', 'skipped'].forEach(type => {
         data[type] &&
@@ -96,7 +97,7 @@ export const bulkResumeBySearch = ({
       message: __('Resuming selected tasks, this might take a while'),
     })
   );
-  await bulkBySearchRequest({ query, path: BULK_RESUME_PATH, parentTaskID });
+  await bulkBySearchRequest({ query, action: BULK_RESUME_ACTION, parentTaskID });
 };
 
 const handleErrorCancel = (error, dispatch) => {
@@ -120,7 +121,7 @@ export const bulkCancelBySearch = ({
       message: __('Canceling selected tasks, this might take a while'),
     })
   );
-  await bulkBySearchRequest({ query, path: BULK_CANCEL_PATH, parentTaskID });
+  await bulkBySearchRequest({ query, action: BULK_CANCEL_ACTION, parentTaskID });
 };
 
 export const bulkCancelById = ({

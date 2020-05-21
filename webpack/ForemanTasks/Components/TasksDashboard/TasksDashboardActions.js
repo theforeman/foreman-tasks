@@ -1,4 +1,5 @@
 import API from 'foremanReact/API';
+import { foremanUrl } from 'foremanReact/common/urlHelpers';
 import { timeToHoursNumber, resolveQuery } from './TasksDashboardHelper';
 import {
   FOREMAN_TASKS_DASHBOARD_INIT,
@@ -37,9 +38,8 @@ export const fetchTasksSummary = (time, parentTaskID) => async dispatch => {
     dispatch(startRequest());
 
     const hours = timeToHoursNumber(time);
-    const url = parentTaskID
-      ? `/foreman_tasks/tasks/summary/${parentTaskID}/sub_tasks/${hours}`
-      : `/foreman_tasks/tasks/summary/${hours}`;
+    const url =
+      foremanUrl(`/foreman_tasks/tasks/summary/${parentTaskID ? '/' + parentTaskID : ''}/sub_tasks/${hours}`);
     const { data } = await API.get(url);
 
     return dispatch(requestSuccess(data));

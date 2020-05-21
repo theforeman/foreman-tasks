@@ -80,11 +80,10 @@ export const subtaskSummary = {
 };
 
 export const apiGetMock = async path => {
-  if (path === `/foreman_tasks/tasks/summary/${correctTime}`) {
+  if (path.endsWith(`/tasks/summary/${correctTime}`)) {
     return { data: taskSummary };
   } else if (
-    path ===
-    `/foreman_tasks/tasks/summary/${parentTaskID}/sub_tasks/${correctTime}`
+    path.endsWith(`/tasks/summary/${parentTaskID}/sub_tasks/${correctTime}`)
   ) {
     return { data: subtaskSummary };
   }

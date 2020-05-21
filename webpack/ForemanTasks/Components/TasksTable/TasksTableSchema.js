@@ -4,6 +4,7 @@ import {
   headerFormatterWithProps,
   cellFormatter,
 } from 'foremanReact/components/common/table';
+import { urlBuilder } from 'foremanReact/common/urlHelpers'
 import { translate as __ } from 'foremanReact/common/I18n';
 import {
   selectionHeaderCellFormatter,
@@ -55,7 +56,7 @@ const createTasksTableSchema = (
       'action',
       __('Action'),
       headFormat,
-      [actionNameCellFormatter('foreman_tasks/tasks')],
+      [actionNameCellFormatter(urlBuilder('foreman_tasks', 'tasks'))],
       { className: 'col-md-4' }
     ),
     column('state', __('State'), headFormat, cellFormat, {

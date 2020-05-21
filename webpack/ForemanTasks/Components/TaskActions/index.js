@@ -1,4 +1,5 @@
 import { sprintf } from 'foremanReact/common/I18n';
+import { urlBuilder } from 'foremanReact/common/urlHelpers';
 import API from 'foremanReact/API';
 import { addToast } from 'foremanReact/redux/actions/toasts';
 import {
@@ -33,7 +34,7 @@ export const cancelTaskRequest = (id, name) => async dispatch => {
   );
   dispatch({ type: TASKS_CANCEL_REQUEST });
   try {
-    await API.post(`/foreman_tasks/tasks/${id}/cancel`);
+    await API.post(urlBuilder('foreman_tasks/tasks', 'cancel', id));
     dispatch({ type: TASKS_CANCEL_SUCCESS });
     toastDispatch({
       type: 'cancelled',
@@ -55,7 +56,7 @@ export const cancelTaskRequest = (id, name) => async dispatch => {
 export const resumeTaskRequest = (id, name) => async dispatch => {
   dispatch({ type: TASKS_RESUME_REQUEST });
   try {
-    await API.post(`/foreman_tasks/tasks/${id}/resume`);
+    await API.post(urlBuilder('foreman_tasks/tasks', 'resume', id));
 
     dispatch({ type: TASKS_RESUME_SUCCESS });
     toastDispatch({
@@ -78,7 +79,7 @@ export const resumeTaskRequest = (id, name) => async dispatch => {
 export const forceCancelTaskRequest = (id, name) => async dispatch => {
   dispatch({ type: TASKS_FORCE_CANCEL_REQUEST });
   try {
-    await API.post(`/foreman_tasks/tasks/${id}/force_unlock`);
+    await API.post(urlBuilder('foreman_tasks/tasks', 'force_unlock', id));
     dispatch({ type: TASKS_FORCE_CANCEL_SUCCESS });
     toastDispatch({
       type: 'forceCancelled',
@@ -100,7 +101,7 @@ export const forceCancelTaskRequest = (id, name) => async dispatch => {
 export const unlockTaskRequest = (id, name) => async dispatch => {
   dispatch({ type: TASKS_UNLOCK_REQUEST });
   try {
-    await API.post(`/foreman_tasks/tasks/${id}/unlock`);
+    await API.post(urlBuilder('foreman_tasks/tasks', 'unlock', id));
     dispatch({ type: TASKS_UNLOCK_SUCCESS });
     toastDispatch({
       type: 'unlocked',

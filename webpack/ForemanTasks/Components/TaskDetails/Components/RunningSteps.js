@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Alert, Button } from 'patternfly-react';
 import { translate as __ } from 'foremanReact/common/I18n';
+import { urlBuilder } from 'foremanReact/common/urlHelpers';
 
 const RunningSteps = ({ runningSteps }) => {
   if (!runningSteps.length) return <span>{__('No running steps')}</span>;
@@ -14,7 +15,7 @@ const RunningSteps = ({ runningSteps }) => {
               <Button
                 bsSize="small"
                 data-method="post"
-                href={`/foreman_tasks/tasks/${step.id}/cancel_step`}
+                href={urlBuilder('foreman_tasks/tasks', 'cancel_step', step.id)}
               >
                 {__('Cancel')}
               </Button>

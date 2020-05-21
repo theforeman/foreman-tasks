@@ -8,8 +8,8 @@ export const UNSELECT_ALL_ROWS = 'UNSELECT_ALL_ROWS';
 export const SELECT_ALL_ROWS = 'SELECT_ALL_ROWS';
 export const OPEN_SELECT_ALL = 'OPEN_SELECT_ALL';
 
-export const BULK_CANCEL_PATH = 'bulk_cancel';
-export const BULK_RESUME_PATH = 'bulk_resume';
+export const BULK_CANCEL_ACTION = 'bulk_cancel';
+export const BULK_RESUME_ACTION = 'bulk_resume';
 
 export const CANCEL_MODAL = 'cancelConfirmModal';
 export const RESUME_MODAL = 'resumeConfirmModal';

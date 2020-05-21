@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Row, Col, Button } from 'patternfly-react';
 import { translate as __ } from 'foremanReact/common/I18n';
+import { foremanUrl, urlBuilder } from 'foremanReact/common/urlHelpers';
 import { useForemanModal } from 'foremanReact/components/ForemanModal/ForemanModalHooks';
 import TaskInfo from './TaskInfo';
 import {
@@ -84,7 +85,7 @@ const Task = props => {
             <Button
               className="dynflow-button"
               bsSize="small"
-              href={`/foreman_tasks/dynflow/${externalId}`}
+              href={foremanUrl(`/foreman_tasks/dynflow/${externalId}`)}
               disabled={!dynflowEnableConsole}
             >
               {__('Dynflow console')}
@@ -119,7 +120,7 @@ const Task = props => {
               <Button
                 className="parent-button"
                 bsSize="small"
-                href={`/foreman_tasks/tasks/${parentTask}`}
+                href={foremanUrl(`/foreman_tasks/tasks/${parentTask}`)}
               >
                 {__('Parent task')}
               </Button>
@@ -128,7 +129,7 @@ const Task = props => {
               <Button
                 className="subtask-button"
                 bsSize="small"
-                href={`/foreman_tasks/tasks/${id}/sub_tasks`}
+                href={urlBuilder('/foreman_tasks/tasks', 'sub_tasks', id)}
               >
                 {__('Sub tasks')}
               </Button>

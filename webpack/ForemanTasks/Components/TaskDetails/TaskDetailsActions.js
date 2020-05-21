@@ -1,3 +1,4 @@
+import { urlBuilder } from 'foremanReact/common/urlHelpers';
 import API from 'foremanReact/API';
 import {
   showLoading,
@@ -46,7 +47,7 @@ export const refetchTaskDetails = (id, loading) => dispatch => {
 
 const reloadTasksDetails = async (id, dispatch) => {
   try {
-    const { data } = await API.get(`/foreman_tasks/api/tasks/${id}/details`);
+    const { data } = await API.get(urlBuilder('foreman_tasks/api/tasks', 'details', id));
     dispatch(requestSuccess(data));
   } catch (error) {
     dispatch(requestFailure(error));
@@ -73,7 +74,7 @@ const getTasksDetails = async (
   refetchTaskDetailsAction
 ) => {
   try {
-    const { data } = await API.get(`/foreman_tasks/api/tasks/${id}/details`);
+    const { data } = await API.get(urlBuilder('foreman_tasks/api/tasks', 'details', id));
     dispatch(requestSuccess(data));
     if (data.state !== 'stopped') {
       dispatch(taskReloadStart(timeoutId, refetchTaskDetailsAction, id));
