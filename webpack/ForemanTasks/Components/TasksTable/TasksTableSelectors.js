@@ -24,9 +24,6 @@ export const selectActionName = state =>
 export const selectSelectedRows = state =>
   selectTasksTableQuery(state).selectedRows || [];
 
-export const selectClicked = state =>
-  selectTasksTableQuery(state).clicked || {};
-
 export const selectResults = createSelector(
   selectTasksTableContent,
   ({ results }) =>

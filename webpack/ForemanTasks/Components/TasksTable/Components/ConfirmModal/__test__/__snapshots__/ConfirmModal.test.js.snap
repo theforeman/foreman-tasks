@@ -22,6 +22,7 @@ exports[`ConfirmModal renders ConfirmModal 1`] = `
       block={false}
       bsClass="btn"
       bsStyle="primary"
+      className="confirm-button"
       disabled={false}
       onClick={[Function]}
     >

@@ -5,3 +5,26 @@ exports[`TasksDashboard - Selectors should select actionState 1`] = `"some-state
 exports[`TasksDashboard - Selectors should select actionText 1`] = `"some-text"`;
 
 exports[`TasksDashboard - Selectors should select actionType 1`] = `"some-type"`;
+
+exports[`TasksDashboard - Selectors should select selectedRowsLen 1 1`] = `1`;
+
+exports[`TasksDashboard - Selectors should select selectedRowsLen all 1`] = `3`;
+
+exports[`TasksDashboard - Selectors should select selectedRowsLen some 1`] = `3`;
+
+exports[`TasksDashboard - Selectors should select selectedTasks 1`] = `
+Array [
+  Object {
+    "id": 1,
+    "isCancellable": true,
+    "isResumable": undefined,
+    "name": "action1",
+  },
+  Object {
+    "id": 2,
+    "isCancellable": undefined,
+    "isResumable": true,
+    "name": "action2",
+  },
+]
+`;
