@@ -6,15 +6,14 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
 >
   <Connect(ConfirmModal)
     id="ConfirmModal"
-    selectedRowsLen={0}
-    tasksActions={
+    parentTaskID={null}
+    setModalClosed={[MockFunction]}
+    uriQuery={
       Object {
-        "cancelConfirmModal": [Function],
-        "cancelSelectedConfirmModal": [Function],
-        "resumeConfirmModal": [Function],
-        "resumeSelectedConfirmModal": [Function],
+        "state": "stopped",
       }
     }
+    url="/foreman_tasks/tasks?action=\\"some-name\\""
   />
   <PageLayout
     beforeToolbarComponent={
@@ -92,11 +91,6 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
     <TasksTable
       actionName=""
       allRowsSelected={false}
-      bulkCancelById={[MockFunction]}
-      bulkCancelBySearch={[MockFunction]}
-      bulkResumeById={[MockFunction]}
-      bulkResumeBySearch={[MockFunction]}
-      cancelTask={[MockFunction]}
       error={null}
       getTableItems={[MockFunction]}
       history={
@@ -123,7 +117,6 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
           "b",
         ]
       }
-      resumeTask={[MockFunction]}
       selectPage={[MockFunction]}
       selectRow={[MockFunction]}
       selectedRows={Array []}
@@ -147,15 +140,14 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
 >
   <Connect(ConfirmModal)
     id="ConfirmModal"
-    selectedRowsLen={0}
-    tasksActions={
+    parentTaskID={null}
+    setModalClosed={[MockFunction]}
+    uriQuery={
       Object {
-        "cancelConfirmModal": [Function],
-        "cancelSelectedConfirmModal": [Function],
-        "resumeConfirmModal": [Function],
-        "resumeSelectedConfirmModal": [Function],
+        "state": "stopped",
       }
     }
+    url="/foreman_tasks/tasks?action=\\"some-name\\""
   />
   <PageLayout
     beforeToolbarComponent={
@@ -216,11 +208,6 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
     <TasksTable
       actionName=""
       allRowsSelected={false}
-      bulkCancelById={[MockFunction]}
-      bulkCancelBySearch={[MockFunction]}
-      bulkResumeById={[MockFunction]}
-      bulkResumeBySearch={[MockFunction]}
-      cancelTask={[MockFunction]}
       error={null}
       getTableItems={[MockFunction]}
       history={
@@ -247,7 +234,6 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
           "b",
         ]
       }
-      resumeTask={[MockFunction]}
       selectPage={[MockFunction]}
       selectRow={[MockFunction]}
       selectedRows={Array []}

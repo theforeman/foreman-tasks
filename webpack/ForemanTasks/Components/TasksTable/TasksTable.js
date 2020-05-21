@@ -93,7 +93,7 @@ const TasksTable = ({
     updateURlQuery({ sort_by: by, sort_order: order }, history);
   };
 
-  const modalActions = {
+  const taskActions = {
     cancelTask: (taskId, taskName) => {
       openClickedModal({
         taskId,
@@ -118,7 +118,7 @@ const TasksTable = ({
           setSortHistory,
           uriQuery.sort_by,
           uriQuery.sort_order,
-          modalActions,
+          taskActions,
           getSelectionController()
         )}
         rows={results}

@@ -32,7 +32,7 @@ const createTasksTableSchema = (
   setSort,
   by,
   order,
-  modalActions,
+  taskActions,
   selectionController
 ) => {
   const sortController = {
@@ -74,7 +74,7 @@ const createTasksTableSchema = (
       'availableActions',
       __('Operation'),
       headFormat,
-      [actionCellFormatter(modalActions)],
+      [actionCellFormatter(taskActions)],
       {
         className: 'col-md-1',
       }

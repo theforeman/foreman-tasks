@@ -7,7 +7,7 @@ export const ActionButton = ({
   id,
   name,
   availableActions: { resumable, cancellable },
-  modalActions,
+  taskActions,
 }) => {
   const buttons = [];
   const title =
@@ -17,7 +17,7 @@ export const ActionButton = ({
       title: __('Resume'),
       action: {
         disabled: !resumable,
-        onClick: () => modalActions.resumeTask(id, name),
+        onClick: () => taskActions.resumeTask(id, name),
       },
     });
   }
@@ -26,7 +26,7 @@ export const ActionButton = ({
       title: __('Cancel'),
       action: {
         disabled: !cancellable,
-        onClick: () => modalActions.cancelTask(id, name),
+        onClick: () => taskActions.cancelTask(id, name),
       },
     });
   }
@@ -44,7 +44,7 @@ ActionButton.propTypes = {
     cancellable: PropTypes.bool,
     resumable: PropTypes.bool,
   }).isRequired,
-  modalActions: PropTypes.shape({
+  taskActions: PropTypes.shape({
     cancelTask: PropTypes.func,
     resumeTask: PropTypes.func,
   }).isRequired,
