@@ -17,10 +17,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "\n"
 
-msgid " seconds"
+msgid "${taskReload ? 'Stop' : 'Start'}  auto-reloading"
 msgstr ""
 
-msgid "%s ago"
+msgid "%(last)s Last %(time)s"
+msgstr ""
+
+msgid "%(older)s Older %(time)s"
 msgstr ""
 
 msgid "%s is not valid format of cron line"
@@ -38,7 +41,10 @@ msgstr ""
 msgid "%{value} is wrong format"
 msgstr ""
 
-msgid "(Disabled)"
+msgid "12h"
+msgstr ""
+
+msgid "24h"
 msgstr ""
 
 msgid ":after setting in tasks cleanup section is deprecated, use :after in :rules section to set the value. to cleanup rules"
@@ -54,6 +60,12 @@ msgid "Action with sub plans"
 msgstr ""
 
 msgid "Active"
+msgstr ""
+
+msgid "Active Filters:"
+msgstr ""
+
+msgid "All %s tasks are selected. "
 msgstr ""
 
 msgid "All proxies with the required feature are unavailable at the moment"
@@ -72,9 +84,6 @@ msgstr ""
 msgid "At"
 msgstr ""
 
-msgid "Auto Reload"
-msgstr ""
-
 msgid "Back to tasks"
 msgstr ""
 
@@ -87,19 +96,61 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
+msgid "Cancel Selected"
+msgstr ""
+
+msgid "Cancel Selected Tasks"
+msgstr ""
+
+msgid "Cancel all cancellable tasks"
+msgstr ""
+
 msgid "Cancel enforced: the task might be still running on the proxy"
 msgstr ""
 
 msgid "Cancel recurring logic"
 msgstr ""
 
+msgid "Cancel selected tasks"
+msgstr ""
+
+msgid "Cancel specific tasks by ID"
+msgstr ""
+
+msgid "Cancel tasks matching search string"
+msgstr ""
+
+msgid "Canceling selected tasks, this might take a while"
+msgstr ""
+
 msgid "Cancelled"
+msgstr ""
+
+msgid "Cannot cancel tasks at the moment"
+msgstr ""
+
+msgid "Cannot resume tasks at the moment"
 msgstr ""
 
 msgid "Cannot update a cancelled Recurring Logic."
 msgstr ""
 
 msgid "Changing request id %{request_id} to saved id %{saved_id}"
+msgstr ""
+
+msgid "Clear All Filters"
+msgstr ""
+
+msgid "Clear Cancelled"
+msgstr ""
+
+msgid "Complete"
+msgstr ""
+
+msgid "Conflicts with tasks:"
+msgstr ""
+
+msgid "Could not receive data: ${error && error.message}"
 msgstr ""
 
 msgid "Cron line"
@@ -123,7 +174,13 @@ msgstr ""
 msgid "Delayed"
 msgstr ""
 
+msgid "Delete recurring logics by search query"
+msgstr ""
+
 msgid "Details"
+msgstr ""
+
+msgid "Details of %s task"
 msgstr ""
 
 msgid "Disable"
@@ -147,9 +204,6 @@ msgstr ""
 msgid "Enable the dynflow console (/foreman_tasks/dynflow) for debugging"
 msgstr ""
 
-msgid "Ended at"
-msgstr ""
-
 msgid "Ends"
 msgstr ""
 
@@ -157,6 +211,9 @@ msgid "Ends at"
 msgstr ""
 
 msgid "Errors"
+msgstr ""
+
+msgid "Errors:"
 msgstr ""
 
 msgid "Event delivered by request %{request_id}"
@@ -171,7 +228,7 @@ msgstr ""
 msgid "Execution plan data not available "
 msgstr ""
 
-msgid "Execution type"
+msgid "Export All"
 msgstr ""
 
 msgid "External Id"
@@ -202,9 +259,6 @@ msgid "Hash version of 'order' param"
 msgstr ""
 
 msgid "How to order the sorted results (e.g. ASC for ascending)"
-msgstr ""
-
-msgid "I understand that this may cause harm and have working database backups of all backend services."
 msgstr ""
 
 msgid "ID"
@@ -246,6 +300,9 @@ msgstr ""
 msgid "Latest Warning/Error Tasks"
 msgstr ""
 
+msgid "Less than a second"
+msgstr ""
+
 msgid "List of tasks"
 msgstr ""
 
@@ -261,6 +318,9 @@ msgstr ""
 msgid "Mon"
 msgstr ""
 
+msgid "More than"
+msgstr ""
+
 msgid "N/A"
 msgstr ""
 
@@ -273,6 +333,12 @@ msgstr ""
 msgid "Next occurrence"
 msgstr ""
 
+msgid "No"
+msgstr ""
+
+msgid "No Tasks"
+msgstr ""
+
 msgid "No errors"
 msgstr ""
 
@@ -282,10 +348,19 @@ msgstr ""
 msgid "No running steps"
 msgstr ""
 
+msgid "No start or end dates"
+msgstr ""
+
 msgid "No task could be started"
 msgstr ""
 
 msgid "No. of Tasks"
+msgstr ""
+
+msgid "Not all the selected tasks can be cancelled"
+msgstr ""
+
+msgid "Not all the selected tasks can be resumed"
 msgstr ""
 
 msgid "Number of attempts to start a task on the smart proxy before failing"
@@ -304,13 +379,37 @@ msgstr ""
 msgid "On"
 msgstr ""
 
+msgid "Operation"
+msgstr ""
+
 msgid "Output"
+msgstr ""
+
+msgid "Output:"
 msgstr ""
 
 msgid "Page number, starting at 1"
 msgstr ""
 
 msgid "Parent task"
+msgstr ""
+
+msgid "Paused"
+msgstr ""
+
+msgid "Please inspect their state, fix their errors and resume them."
+msgstr ""
+
+msgid "Please provide a search parameter in the request"
+msgstr ""
+
+msgid "Please provide at least one of search or task_ids parameters in the request"
+msgstr ""
+
+msgid "Polling intervals multiplier"
+msgstr ""
+
+msgid "Polling multiplier which is used to multiply the default polling intervals. This can be used to prevent polling too frequently for long running tasks."
 msgstr ""
 
 msgid "Proxy task gone missing from the smart proxy"
@@ -334,9 +433,6 @@ msgstr ""
 msgid "Recurring logics"
 msgstr ""
 
-msgid "Remote action:"
-msgstr ""
-
 msgid "Repeat N times"
 msgstr ""
 
@@ -349,10 +445,13 @@ msgstr ""
 msgid "Require user to be authenticated as user with admin rights when accessing dynflow console"
 msgstr ""
 
-msgid "Resource search_params requires resource_type and resource_id to be specified"
+msgid "Required lock is already taken by other running tasks."
 msgstr ""
 
-msgid "Resources will be unlocked and will not prevent other tasks from being run. As the task might be still running, it should be avoided to use this unless you are really sure the task got stuck"
+msgid "Required lock: %s"
+msgstr ""
+
+msgid "Resource search_params requires resource_type and resource_id to be specified"
 msgstr ""
 
 msgid "Result"
@@ -361,13 +460,28 @@ msgstr ""
 msgid "Resume"
 msgstr ""
 
+msgid "Resume Selected"
+msgstr ""
+
+msgid "Resume Selected Tasks"
+msgstr ""
+
 msgid "Resume all paused error tasks"
+msgstr ""
+
+msgid "Resume selected tasks"
 msgstr ""
 
 msgid "Resume specific tasks by ID"
 msgstr ""
 
 msgid "Resume tasks matching search string"
+msgstr ""
+
+msgid "Resuming selected tasks, this might take a while"
+msgstr ""
+
+msgid "Running"
 msgstr ""
 
 msgid "Running Steps"
@@ -382,10 +496,25 @@ msgstr ""
 msgid "Schedule future execution"
 msgstr ""
 
+msgid "Scheduled"
+msgstr ""
+
+msgid "Search query"
+msgstr ""
+
 msgid "Search string"
 msgstr ""
 
 msgid "See %{link} for more details on how to resolve the issue"
+msgstr ""
+
+msgid "Select Action"
+msgstr ""
+
+msgid "Select All"
+msgstr ""
+
+msgid "Select row"
 msgstr ""
 
 msgid "Send data to the task from external executor (such as smart_proxy_dynflow)"
@@ -403,9 +532,6 @@ msgstr ""
 msgid "Start at"
 msgstr ""
 
-msgid "Start auto-reloading"
-msgstr ""
-
 msgid "Start before"
 msgstr ""
 
@@ -418,10 +544,13 @@ msgstr ""
 msgid "State"
 msgstr ""
 
-msgid "Stop auto-reloading"
+msgid "Stopped"
 msgstr ""
 
 msgid "Sub tasks"
+msgstr ""
+
+msgid "Sub tasks of %s"
 msgstr ""
 
 msgid "Sun"
@@ -448,6 +577,9 @@ msgstr ""
 msgid "Task search_params requires task_id to be specified"
 msgstr ""
 
+msgid "Task was canceled"
+msgstr ""
+
 msgid "Tasks"
 msgstr ""
 
@@ -455,12 +587,6 @@ msgid "The ID of the step inside the execution plan to send the event to"
 msgstr ""
 
 msgid "The execution has to be paused."
-msgstr ""
-
-msgid "The execution has to be resumable."
-msgstr ""
-
-msgid "The execution was resumed."
 msgstr ""
 
 msgid "The recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task."
@@ -473,9 +599,6 @@ msgid "The targets are of different types"
 msgstr ""
 
 msgid "The task cannot be aborted at the moment."
-msgstr ""
-
-msgid "The task cannot be cancelled at the moment."
 msgstr ""
 
 msgid "The task could not be started"
@@ -492,7 +615,7 @@ msgid_plural "There are %{count} paused tasks in the system that need attention"
 msgstr[0] ""
 msgstr[1] ""
 
-msgid "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed."
+msgid "This action will delete all cancelled recurring logics. Please note that this action can't be reversed."
 msgstr ""
 
 msgid "Thu"
@@ -501,16 +624,16 @@ msgstr ""
 msgid "Time in seconds between retries"
 msgstr ""
 
-msgid "Triggered by"
+msgid "Total"
+msgstr ""
+
+msgid "Troubleshooting"
 msgstr ""
 
 msgid "Trying to abort the task"
 msgstr ""
 
 msgid "Trying to cancel step %s"
-msgstr ""
-
-msgid "Trying to cancel the task"
 msgstr ""
 
 msgid "Tue"
@@ -520,6 +643,9 @@ msgid "Type %s for search_params is not supported"
 msgstr ""
 
 msgid "UUID of the task"
+msgstr ""
+
+msgid "Undo selection"
 msgstr ""
 
 msgid "Unlimited"
@@ -534,16 +660,16 @@ msgstr ""
 msgid "Url pointing to the task troubleshooting documentation. It should contain %{label} placeholder, that will be replaced with normalized task label (restricted to only alphanumeric characters)). %{version} placeholder is also available."
 msgstr ""
 
-msgid "User"
-msgstr ""
-
 msgid "User search_params requires user_id to be specified"
 msgstr ""
 
 msgid "Wed"
 msgstr ""
 
-msgid "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource"
+msgid "With focus on last"
+msgstr ""
+
+msgid "Yes"
 msgstr ""
 
 msgid "activation key"
@@ -555,7 +681,10 @@ msgstr ""
 msgid "content view version"
 msgstr ""
 
-msgid "in %s"
+msgid "could not be resumed"
+msgstr ""
+
+msgid "error"
 msgstr ""
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
@@ -578,10 +707,22 @@ msgstr ""
 msgid "is month (range: 1-12)"
 msgstr ""
 
+msgid "last"
+msgstr ""
+
+msgid "mode"
+msgstr ""
+
 msgid "mode has to be one of %{allowed_modes}"
 msgstr ""
 
+msgid "older"
+msgstr ""
+
 msgid "organization"
+msgstr ""
+
+msgid "paused"
 msgstr ""
 
 msgid "product"
@@ -590,11 +731,56 @@ msgstr ""
 msgid "repository"
 msgstr ""
 
+msgid "result"
+msgstr ""
+
+msgid "running"
+msgstr ""
+
+msgid "scheduled"
+msgstr ""
+
+msgid "seconds"
+msgstr ""
+
+msgid "state"
+msgstr ""
+
+msgid "stopped"
+msgstr ""
+
+msgid "success"
+msgstr ""
+
 msgid "system"
+msgstr ""
+
+msgid "task has to be cancellable"
+msgstr ""
+
+msgid "task has to be resumable"
+msgstr ""
+
+msgid "tasks."
+msgstr ""
+
+msgid "time"
 msgstr ""
 
 msgid "troubleshooting documentation"
 msgstr ""
 
 msgid "user"
+msgstr ""
+
+msgid "warning"
+msgstr ""
+
+msgid "was cancelled"
+msgstr ""
+
+msgid "was resumed"
+msgstr ""
+
+msgid "week"
 msgstr ""
