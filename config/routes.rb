@@ -56,6 +56,7 @@ Foreman::Application.routes.draw do
           post :bulk_search
           post :bulk_resume
           post :bulk_cancel
+          post :bulk_stop
           get :summary
           get '/summary/:id/sub_tasks/', action: 'summary_sub_tasks'
           post :callback

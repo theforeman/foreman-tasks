@@ -141,6 +141,34 @@ module ForemanTasks
         }
       end
 
+      api :POST, '/tasks/bulk_stop', N_('Stop all stoppable tasks')
+      param :search, String, :desc => N_('Stop tasks matching search string')
+      param :task_ids, Array, :desc => N_('Stop specific tasks by ID')
+      def bulk_stop
+        if params[:search].nil? && params[:task_ids].nil?
+          raise BadRequest, _('Please provide at least one of search or task_ids parameters in the request')
+        end
+
+        filtered_scope = bulk_scope
+        total_length = filtered_scope.count
+        to_stop = filtered_scope.where.not(state: :stopped)
+        to_stop_length = to_stop.count
+        skipped_length = total_length - to_stop_length
+
+        to_stop.find_each { |task| task.update(state: :stopped) }
+
+        if params[:search]
+          notification = UINotifications::Tasks::TaskBulkStop.new(filtered_scope.first, to_stop_length, skipped_length)
+          notification.deliver!
+        end
+
+        render :json => {
+          total: total_length,
+          stopped_length: to_stop_length,
+          skipped_length: skipped_length
+        }
+      end
+
       api :GET, '/tasks', N_('List tasks')
       param :search, String, :desc => N_('Search string')
       param :page, :number, :desc => N_('Page number, starting at 1')
@@ -291,7 +319,7 @@ module ForemanTasks
         case params[:action]
         when 'bulk_search', 'summary', 'details', 'sub_tasks'
           :view
-        when 'bulk_resume', 'bulk_cancel'
+        when 'bulk_resume', 'bulk_cancel', 'bulk_stop'
           :edit
         else
           super
