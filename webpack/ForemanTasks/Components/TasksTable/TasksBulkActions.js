@@ -24,7 +24,6 @@ import {
   resumeToastInfo,
   cancelToastInfo,
   toastDispatch,
-  forceCancelToastInfo,
 } from '../TaskActions/TaskActionHelpers';
 
 export const bulkByIdRequest = (resumeTasks, path) => {
@@ -196,31 +195,33 @@ export const bulkForceCancelById = ({
         ),
       })
     );
-  if (stopTasks.length) {
+  if (stopTasks.length > 0) {
     dispatch({ type: TASKS_FORCE_CANCEL_REQUEST });
     try {
       const { data } = await bulkByIdRequest(stopTasks, BULK_FORCE_CANCEL_PATH);
       dispatch({ type: TASKS_FORCE_CANCEL_SUCCESS });
-      if (data.stopped) {
-        data.stopped.forEach(task => {
-          toastDispatch({
-            type: 'forceCancelled',
-            name: task.action,
-            toastInfo: forceCancelToastInfo,
-            dispatch,
-          });
-        });
+      if (data.stopped_length) {
+        dispatch(
+          addToast({
+            type: TOAST_TYPES.SUCCESS,
+            message: sprintf(
+              '%s task(s) cancelled with force',
+              data.stopped_length
+            ),
+          })
+        );
       }
-      dispatch(
-        addToast({
-          type: TOAST_TYPES.WARNING,
-          message: sprintf(
-            '%s task(s) are already stopped',
-            data.skipped_length
-          ),
-        })
-      );
-      if (data.stopped) {
+      if (data.skipped_length > 0)
+        dispatch(
+          addToast({
+            type: TOAST_TYPES.WARNING,
+            message: sprintf(
+              '%s task(s) are already stopped',
+              data.skipped_length
+            ),
+          })
+        );
+      if (data.stopped_length > 0) {
         reloadPage(url, parentTaskID, dispatch);
       }
     } catch (error) {

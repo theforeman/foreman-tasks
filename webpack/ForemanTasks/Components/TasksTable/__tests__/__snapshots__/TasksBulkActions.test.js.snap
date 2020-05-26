@@ -85,7 +85,7 @@ Array [
     Object {
       "payload": Object {
         "message": Object {
-          "message": "I am cancelled Task execution resources were unlocked with force.",
+          "message": "2 task(s) cancelled with force",
           "type": "success",
         },
       },

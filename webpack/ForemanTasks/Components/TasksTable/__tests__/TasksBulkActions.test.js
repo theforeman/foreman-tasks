@@ -76,7 +76,7 @@ const fixtures = {
 
     API.post.mockImplementation(() => ({
       data: {
-        stopped: [{ action: 'I am cancelled' }],
+        stopped_length: 2,
         skipped_length: 4,
       },
     }));
@@ -125,19 +125,12 @@ const fixtures = {
       parentTaskID: 'parent',
     });
   },
-  'handles bulkForceCancelBySearch requests': () => {
-    API.post.mockImplementation(() => ({
-      data: {
-        stopped: [{ action: 'I am cancelled' }],
-        skipped_length: 7,
-      },
-    }));
-    return bulkForceCancelBySearch({
+  'handles bulkForceCancelBySearch requests': () =>
+    bulkForceCancelBySearch({
       query: { search: {} },
       url: 'some-url',
       parentTaskID: 'parent',
-    });
-  },
+    }),
 };
 
 describe('TasksTable bulk actions', () => {
