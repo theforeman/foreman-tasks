@@ -15,7 +15,7 @@ import {
   TASKS_UNLOCK_SUCCESS,
   TASKS_UNLOCK_FAILURE,
 } from './TaskActionsConstants';
-import { TOAST_TYPES } from '../common/ToastsHelpers/ToastTypesConstants';
+import { infoToastData } from '../common/ToastsHelpers/';
 import {
   resumeToastInfo,
   cancelToastInfo,
@@ -25,12 +25,7 @@ import {
 } from './TaskActionHelpers';
 
 export const cancelTaskRequest = (id, name) => async dispatch => {
-  dispatch(
-    addToast({
-      type: TOAST_TYPES.INFO,
-      message: sprintf('Trying to cancel %s task', name),
-    })
-  );
+  dispatch(addToast(infoToastData(sprintf('Trying to cancel %s task', name))));
   dispatch({ type: TASKS_CANCEL_REQUEST });
   try {
     await API.post(`/foreman_tasks/tasks/${id}/cancel`);

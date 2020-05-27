@@ -1,7 +1,6 @@
 import API from 'foremanReact/API';
 import { addToast } from 'foremanReact/redux/actions/toasts';
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
-import { TOAST_TYPES } from '../common/ToastsHelpers/ToastTypesConstants';
 import {
   BULK_CANCEL_PATH,
   BULK_RESUME_PATH,
@@ -25,6 +24,12 @@ import {
   cancelToastInfo,
   toastDispatch,
 } from '../TaskActions/TaskActionHelpers';
+import {
+  successToastData,
+  errorToastData,
+  warningToastData,
+  infoToastData,
+} from '../common/ToastsHelpers';
 
 export const bulkByIdRequest = (resumeTasks, path) => {
   const ids = resumeTasks.map(task => task.id);
@@ -47,10 +52,9 @@ export const bulkBySearchRequest = ({ query, parentTaskID, path }) => {
 const handleErrorResume = (error, dispatch) => {
   dispatch({ type: TASKS_RESUME_FAILURE, error });
   dispatch(
-    addToast({
-      type: TOAST_TYPES.ERROR,
-      message: `${__(`Cannot resume tasks at the moment`)} ${error}`,
-    })
+    addToast(
+      errorToastData(`${__(`Cannot resume tasks at the moment`)} ${error}`)
+    )
   );
 };
 
@@ -62,10 +66,9 @@ export const bulkResumeById = ({
   const resumeTasks = selected.filter(task => task.isResumable);
   if (resumeTasks.length < selected.length)
     dispatch(
-      addToast({
-        type: TOAST_TYPES.WARNING,
-        message: __('Not all the selected tasks can be resumed'),
-      })
+      addToast(
+        warningToastData(__('Not all the selected tasks can be resumed'))
+      )
     );
   if (resumeTasks.length) {
     dispatch({ type: TASKS_RESUME_REQUEST });
@@ -98,10 +101,9 @@ export const bulkResumeBySearch = ({
 }) => async dispatch => {
   dispatch({ type: TASKS_RESUME_REQUEST });
   dispatch(
-    addToast({
-      type: 'info',
-      message: __('Resuming selected tasks, this might take a while'),
-    })
+    addToast(
+      infoToastData(__('Resuming selected tasks, this might take a while'))
+    )
   );
   await bulkBySearchRequest({ query, path: BULK_RESUME_PATH, parentTaskID });
 };
@@ -109,10 +111,9 @@ export const bulkResumeBySearch = ({
 const handleErrorCancel = (error, dispatch) => {
   dispatch({ type: TASKS_CANCEL_FAILURE, error });
   dispatch(
-    addToast({
-      type: TOAST_TYPES.ERROR,
-      message: `${__(`Cannot cancel tasks at the moment`)} ${error}`,
-    })
+    addToast(
+      errorToastData(`${__(`Cannot cancel tasks at the moment`)} ${error}`)
+    )
   );
 };
 
@@ -122,10 +123,9 @@ export const bulkCancelBySearch = ({
 }) => async dispatch => {
   dispatch({ type: TASKS_CANCEL_REQUEST });
   dispatch(
-    addToast({
-      type: 'info',
-      message: __('Canceling selected tasks, this might take a while'),
-    })
+    addToast(
+      infoToastData(__('Canceling selected tasks, this might take a while'))
+    )
   );
   await bulkBySearchRequest({ query, path: BULK_CANCEL_PATH, parentTaskID });
 };
@@ -138,10 +138,9 @@ export const bulkCancelById = ({
   const cancelTasks = selected.filter(task => task.isCancellable);
   if (cancelTasks.length < selected.length)
     dispatch(
-      addToast({
-        type: TOAST_TYPES.WARNING,
-        message: __('Not all the selected tasks can be cancelled'),
-      })
+      addToast(
+        warningToastData(__('Not all the selected tasks can be cancelled'))
+      )
     );
   if (cancelTasks.length) {
     dispatch({ type: TASKS_CANCEL_REQUEST });
@@ -172,10 +171,11 @@ export const bulkCancelById = ({
 const handleErrorForceCancel = (error, dispatch) => {
   dispatch({ type: TASKS_FORCE_CANCEL_FAILURE, error });
   dispatch(
-    addToast({
-      type: TOAST_TYPES.ERROR,
-      message: `${__(`Cannot force cancel tasks at the moment`)} ${error}`,
-    })
+    addToast(
+      errorToastData(
+        `${__(`Cannot force cancel tasks at the moment`)} ${error}`
+      )
+    )
   );
 };
 
@@ -187,13 +187,14 @@ export const bulkForceCancelById = ({
   const stopTasks = selected.filter(task => task.state !== 'stopped');
   if (stopTasks.length < selected.length)
     dispatch(
-      addToast({
-        type: TOAST_TYPES.WARNING,
-        message: sprintf(
-          '%s task(s) are already stopped',
-          selected.length - stopTasks.length
-        ),
-      })
+      addToast(
+        warningToastData(
+          sprintf(
+            '%s task(s) are already stopped',
+            selected.length - stopTasks.length
+          )
+        )
+      )
     );
   if (stopTasks.length > 0) {
     dispatch({ type: TASKS_FORCE_CANCEL_REQUEST });
@@ -202,24 +203,20 @@ export const bulkForceCancelById = ({
       dispatch({ type: TASKS_FORCE_CANCEL_SUCCESS });
       if (data.stopped_length) {
         dispatch(
-          addToast({
-            type: TOAST_TYPES.SUCCESS,
-            message: sprintf(
-              '%s task(s) cancelled with force',
-              data.stopped_length
-            ),
-          })
+          addToast(
+            successToastData(
+              sprintf('%s task(s) cancelled with force', data.stopped_length)
+            )
+          )
         );
       }
       if (data.skipped_length > 0)
         dispatch(
-          addToast({
-            type: TOAST_TYPES.WARNING,
-            message: sprintf(
-              '%s task(s) are already stopped',
-              data.skipped_length
-            ),
-          })
+          addToast(
+            warningToastData(
+              sprintf('%s task(s) are already stopped', data.skipped_length)
+            )
+          )
         );
       if (data.stopped_length > 0) {
         reloadPage(url, parentTaskID, dispatch);
@@ -236,12 +233,11 @@ export const bulkForceCancelBySearch = ({
 }) => async dispatch => {
   dispatch({ type: TASKS_FORCE_CANCEL_REQUEST });
   dispatch(
-    addToast({
-      type: 'info',
-      message: __(
-        'Canceling with force selected tasks, this might take a while'
-      ),
-    })
+    addToast(
+      infoToastData(
+        __('Canceling with force selected tasks, this might take a while')
+      )
+    )
   );
   await bulkBySearchRequest({
     query,

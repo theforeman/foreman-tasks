@@ -4,6 +4,7 @@ import { Button } from 'patternfly-react';
 import ForemanModal from 'foremanReact/components/ForemanModal';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { useForemanModal } from 'foremanReact/components/ForemanModal/ForemanModalHooks';
+import './ClickConfirmation.scss';
 
 export const ClickConfirmation = ({
   title,
@@ -29,8 +30,8 @@ export const ClickConfirmation = ({
         <span className={`glyphicon glyphicon-${icon}-sign`} />
         {` ${title}`}
       </ForemanModal.Header>
-      {body}
-      <div>
+      <span>{body}</span>
+      <div className="confirmation-check">
         <input
           onChange={e => {
             setConfirm(e.target.checked);
@@ -38,7 +39,7 @@ export const ClickConfirmation = ({
           checked={isConfirmed}
           type="checkbox"
         />
-        {` ${confirmationMessage}`}
+        <span>{` ${confirmationMessage}`}</span>
       </div>
       <ForemanModal.Footer>
         <Button

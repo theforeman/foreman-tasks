@@ -10,14 +10,20 @@ exports[`ClickConfirmation render 1`] = `
     />
      some-title
   </Component>
-  some-body
-  <div>
+  <span>
+    some-body
+  </span>
+  <div
+    className="confirmation-check"
+  >
     <input
       checked={false}
       onChange={[Function]}
       type="checkbox"
     />
-     some-message
+    <span>
+       some-message
+    </span>
   </div>
   <Component>
     <Button
