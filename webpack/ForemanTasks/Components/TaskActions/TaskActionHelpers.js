@@ -60,7 +60,7 @@ export const toastDispatch = ({ type, name, toastInfo, dispatch }) => {
       type: toastInfo[type].type,
       message: sprintf('%(name)s Task execution %(type)s', {
         name,
-        type: toastInfo[type].text,
+        type: toastInfo[type].message,
       }),
     })
   );

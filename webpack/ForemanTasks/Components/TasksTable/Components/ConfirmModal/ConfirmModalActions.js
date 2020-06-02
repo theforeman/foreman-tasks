@@ -8,6 +8,8 @@ import {
   bulkCancelById,
   bulkResumeBySearch,
   bulkResumeById,
+  bulkForceCancelBySearch,
+  bulkForceCancelById,
 } from '../../TasksBulkActions';
 import { selectClicked, selectSelectedTasks } from './ConfirmModalSelectors';
 import { selectAllRowsSelected } from '../../TasksTableSelectors';
@@ -16,6 +18,7 @@ import {
   RESUME_MODAL,
   CANCEL_SELECTED_MODAL,
   RESUME_SELECTED_MODAL,
+  FORCE_UNLOCK_SELECTED_MODAL,
 } from '../../TasksTableConstants';
 import { FORCE_UNLOCK_MODAL } from '../../../TaskActions/TaskActionsConstants';
 
@@ -80,6 +83,21 @@ export default {
       forceCancelTask({
         taskId,
         taskName,
+        url,
+        parentTaskID,
+      })
+    );
+  },
+  [FORCE_UNLOCK_SELECTED_MODAL]: ({ url, query, parentTaskID }) => (
+    dispatch,
+    getState
+  ) => {
+    if (selectAllRowsSelected(getState())) {
+      return dispatch(bulkForceCancelBySearch({ query, parentTaskID }));
+    }
+    return dispatch(
+      bulkForceCancelById({
+        selected: selectSelectedTasks(getState()),
         url,
         parentTaskID,
       })

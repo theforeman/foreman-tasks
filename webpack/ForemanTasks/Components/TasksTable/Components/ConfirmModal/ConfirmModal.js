@@ -5,6 +5,7 @@ import { sprintf, translate as __ } from 'foremanReact/common/I18n';
 import { Button } from 'patternfly-react';
 import ForemanModal from 'foremanReact/components/ForemanModal';
 import { FORCE_UNLOCK_MODAL } from '../../../TaskActions/TaskActionsConstants';
+import { FORCE_UNLOCK_SELECTED_MODAL } from '../../TasksTableConstants';
 import { ForceUnlockModal } from '../../../TaskActions/UnlockModals';
 
 export const ConfirmModal = ({
@@ -19,7 +20,7 @@ export const ConfirmModal = ({
   setModalClosed,
   ...props
 }) => {
-  if (actionType === FORCE_UNLOCK_MODAL) {
+  if ([FORCE_UNLOCK_MODAL, FORCE_UNLOCK_SELECTED_MODAL].includes(actionType)) {
     return (
       <ForceUnlockModal
         onClick={() => {
