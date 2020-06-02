@@ -83,6 +83,15 @@ const fixtures = {
     return bulkForceCancelById({ selected, url: 'some-url' });
   },
 
+  'handles bulkForceCancelById requests that fail': () => {
+    const selected = [{ ...task, isResumable: true }];
+
+    API.post.mockImplementation(() =>
+      Promise.reject(new Error('Network Error'))
+    );
+    return bulkForceCancelById({ selected, url: 'some-url' });
+  },
+
   'handles bulkCancelById requests that are not cancellable': () => {
     const selected = [{ ...task, isCancellable: false }];
     return bulkCancelById({ selected, url: 'some-url' });

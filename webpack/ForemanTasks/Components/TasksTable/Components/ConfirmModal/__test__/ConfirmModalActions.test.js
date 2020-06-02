@@ -4,17 +4,23 @@ import {
   RESUME_MODAL,
   CANCEL_SELECTED_MODAL,
   RESUME_SELECTED_MODAL,
+  FORCE_UNLOCK_SELECTED_MODAL,
 } from '../../../TasksTableConstants';
 
 import { FORCE_UNLOCK_MODAL } from '../../../../TaskActions/TaskActionsConstants';
 
-import { resumeTask, cancelTask } from '../../../TasksTableActions';
+import {
+  resumeTask,
+  cancelTask,
+  forceCancelTask,
+} from '../../../TasksTableActions';
 import {
   bulkCancelBySearch,
   bulkCancelById,
   bulkResumeBySearch,
   bulkResumeById,
-  forceCancelTask,
+  bulkForceCancelBySearch,
+  bulkForceCancelById,
 } from '../../../TasksBulkActions';
 
 jest.mock('../../../TasksBulkActions');
@@ -24,15 +30,21 @@ const bulkCancelBySearchMock = 'bulkCancelBySearchMock';
 const bulkCancelByIdMock = 'bulkCancelByIdMock';
 const bulkResumeBySearchMock = 'bulkResumeBySearchMock';
 const bulkResumeByIdMock = 'bulkResumeByIdMock';
+const bulkForceCancelBySearchMock = 'bulkForceCancelBySearchMock';
+const bulkForceCancelByIdMock = 'bulkForceCancelByIdMock';
 const resumeTaskMock = 'resumeTaskMock';
 const cancelTaskMock = 'cancelTaskMock';
+const forceCancelTaskMock = 'forceCancelTaskMock';
 
 bulkCancelBySearch.mockImplementation(() => bulkCancelBySearchMock);
 bulkCancelById.mockImplementation(() => bulkCancelByIdMock);
 bulkResumeBySearch.mockImplementation(() => bulkResumeBySearchMock);
 bulkResumeById.mockImplementation(() => bulkResumeByIdMock);
+bulkForceCancelBySearch.mockImplementation(() => bulkForceCancelBySearchMock);
+bulkForceCancelById.mockImplementation(() => bulkForceCancelByIdMock);
 resumeTask.mockImplementation(() => resumeTaskMock);
 cancelTask.mockImplementation(() => cancelTaskMock);
+forceCancelTask.mockImplementation(() => forceCancelTaskMock);
 
 const url = 'some-url';
 const query = 'some-query';
@@ -109,7 +121,7 @@ describe('ConfirmModalActions', () => {
       url,
       parentTaskID,
     });
-    expect(dispatch).toBeCalledWith(forceCancelTask);
+    expect(dispatch).toBeCalledWith(forceCancelTaskMock);
   });
   it('run CANCEL_SELECTED_MODAL by id', () => {
     runWithGetState(
@@ -163,5 +175,31 @@ describe('ConfirmModalActions', () => {
       }
     );
     expect(dispatch).toBeCalledWith(bulkResumeBySearchMock);
+  });
+  it('run FORCE_UNLOCK_SELECTED_MODAL by id', () => {
+    runWithGetState(
+      selectedState,
+      taskActions[FORCE_UNLOCK_SELECTED_MODAL],
+      dispatch,
+      {
+        url,
+        query,
+        parentTaskID,
+      }
+    );
+    expect(dispatch).toBeCalledWith(bulkForceCancelByIdMock);
+  });
+  it('run FORCE_UNLOCK_SELECTED_MODAL by search', () => {
+    runWithGetState(
+      allRowsState,
+      taskActions[FORCE_UNLOCK_SELECTED_MODAL],
+      dispatch,
+      {
+        url,
+        query,
+        parentTaskID,
+      }
+    );
+    expect(dispatch).toBeCalledWith(bulkForceCancelBySearchMock);
   });
 });

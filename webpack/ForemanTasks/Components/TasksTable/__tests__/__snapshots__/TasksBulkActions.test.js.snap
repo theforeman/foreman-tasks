@@ -128,6 +128,33 @@ Array [
 ]
 `;
 
+exports[`TasksTable bulk actions handles bulkForceCancelById requests that fail 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "TASKS_FORCE_CANCEL_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "error": [Error: Network Error],
+      "type": "TASKS_FORCE_CANCEL_FAILURE",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "Cannot force cancel tasks at the moment Error: Network Error",
+          "type": "error",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;
+
 exports[`TasksTable bulk actions handles bulkForceCancelBySearch requests 1`] = `
 Array [
   Array [
