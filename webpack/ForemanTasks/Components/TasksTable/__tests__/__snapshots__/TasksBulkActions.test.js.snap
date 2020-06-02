@@ -48,6 +48,22 @@ Array [
 ]
 `;
 
+exports[`TasksTable bulk actions handles bulkCancelById requests with canEdit false 1`] = `
+Array [
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "Not all the selected tasks can be cancelled",
+          "type": "warning",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;
+
 exports[`TasksTable bulk actions handles bulkCancelBySearch requests 1`] = `
 Array [
   Array [
@@ -155,6 +171,22 @@ Array [
 ]
 `;
 
+exports[`TasksTable bulk actions handles bulkForceCancelById requests with canEdit false 1`] = `
+Array [
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "User has no permission for 1 task(s)",
+          "type": "warning",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;
+
 exports[`TasksTable bulk actions handles bulkForceCancelBySearch requests 1`] = `
 Array [
   Array [
@@ -211,6 +243,22 @@ Array [
         "message": Object {
           "message": "Cannot resume tasks at the moment Error: Network Error",
           "type": "error",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;
+
+exports[`TasksTable bulk actions handles bulkResumeById requests with canEdit false 1`] = `
+Array [
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "Not all the selected tasks can be resumed",
+          "type": "warning",
         },
       },
       "type": "TOASTS_ADD",

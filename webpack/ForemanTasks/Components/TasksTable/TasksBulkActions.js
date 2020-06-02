@@ -63,7 +63,7 @@ export const bulkResumeById = ({
   url,
   parentTaskID,
 }) => async dispatch => {
-  const resumeTasks = selected.filter(task => task.isResumable);
+  const resumeTasks = selected.filter(task => task.isResumable && task.canEdit);
   if (resumeTasks.length < selected.length)
     dispatch(
       addToast(
@@ -135,7 +135,9 @@ export const bulkCancelById = ({
   url,
   parentTaskID,
 }) => async dispatch => {
-  const cancelTasks = selected.filter(task => task.isCancellable);
+  const cancelTasks = selected.filter(
+    task => task.isCancellable && task.canEdit
+  );
   if (cancelTasks.length < selected.length)
     dispatch(
       addToast(
@@ -185,6 +187,18 @@ export const bulkForceCancelById = ({
   parentTaskID,
 }) => async dispatch => {
   const stopTasks = selected.filter(task => task.state !== 'stopped');
+  const authorisedTasks = stopTasks.filter(task => task.canEdit);
+  if (authorisedTasks.length < stopTasks.length)
+    dispatch(
+      addToast(
+        warningToastData(
+          sprintf(
+            'User has no permission for %s task(s)',
+            stopTasks.length - authorisedTasks.length
+          )
+        )
+      )
+    );
   if (stopTasks.length < selected.length)
     dispatch(
       addToast(
@@ -196,10 +210,13 @@ export const bulkForceCancelById = ({
         )
       )
     );
-  if (stopTasks.length > 0) {
+  if (authorisedTasks.length > 0) {
     dispatch({ type: TASKS_FORCE_CANCEL_REQUEST });
     try {
-      const { data } = await bulkByIdRequest(stopTasks, BULK_FORCE_CANCEL_PATH);
+      const { data } = await bulkByIdRequest(
+        authorisedTasks,
+        BULK_FORCE_CANCEL_PATH
+      );
       dispatch({ type: TASKS_FORCE_CANCEL_SUCCESS });
       if (data.stopped_length) {
         dispatch(
