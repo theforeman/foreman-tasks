@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Tab, Tabs } from 'patternfly-react';
+import Skeleton from 'react-loading-skeleton';
 import { translate as __ } from 'foremanReact/common/I18n';
+import { STATUS } from 'foremanReact/constants';
 import Task from './Components/Task';
 import RunningSteps from './Components/RunningSteps';
 import Errors from './Components/Errors';
@@ -49,25 +51,33 @@ class TaskDetails extends Component {
       runningSteps,
       locks,
       cancelStep,
+      status,
+      isData,
     } = this.props;
     const id = getTaskID();
     const resumable = executionPlan ? executionPlan.state === 'paused' : false;
     const cancellable = executionPlan ? executionPlan.cancellable : false;
+    const loading = status === STATUS.PENDING && !isData;
     return (
       <div className="task-details-react well">
         <Tabs defaultActiveKey={1} animation={false} id="task-details-tabs">
           <Tab eventKey={1} title={__('Task')}>
-            <Task
-              {...{
-                ...this.props,
-                cancellable,
-                resumable,
-                id,
-                taskProgressToggle: this.taskProgressToggle,
-              }}
-            />
+            {loading ? (
+              <Skeleton height={350} />
+            ) : (
+              <Task
+                {...{
+                  ...this.props,
+                  cancellable,
+                  resumable,
+                  id,
+                  status,
+                  taskProgressToggle: this.taskProgressToggle,
+                }}
+              />
+            )}
           </Tab>
-          <Tab eventKey={2} title={__('Running Steps')}>
+          <Tab eventKey={2} disabled={loading} title={__('Running Steps')}>
             <RunningSteps
               runningSteps={runningSteps}
               id={id}
@@ -76,13 +86,13 @@ class TaskDetails extends Component {
               taskProgressToggle={this.taskProgressToggle}
             />
           </Tab>
-          <Tab eventKey={3} title={__('Errors')}>
+          <Tab eventKey={3} disabled={loading} title={__('Errors')}>
             <Errors executionPlan={executionPlan} failedSteps={failedSteps} />
           </Tab>
-          <Tab eventKey={4} title={__('Locks')}>
+          <Tab eventKey={4} disabled={loading} title={__('Locks')}>
             <Locks locks={locks} />
           </Tab>
-          <Tab eventKey={5} title={__('Raw')}>
+          <Tab eventKey={5} disabled={loading} title={__('Raw')}>
             <Raw
               {...{ id, label, startedAt, endedAt, input, output, externalId }}
             />

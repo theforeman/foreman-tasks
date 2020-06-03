@@ -5,6 +5,7 @@ import {
   shallow,
 } from '@theforeman/test';
 import { useForemanModal } from 'foremanReact/components/ForemanModal/ForemanModalHooks';
+import { STATUS } from 'foremanReact/constants';
 import Task from '../Task';
 import {
   UNLOCK_MODAL,
@@ -21,6 +22,7 @@ const fixtures = {
     parentTask: 'parent-id',
     taskReload: true,
     canEdit: true,
+    status: STATUS.RESOLVED,
   },
 };
 
@@ -44,6 +46,7 @@ describe('Task', () => {
       cancelTaskRequest,
       resumeTaskRequest,
       taskProgressToggle,
+      status: STATUS.RESOLVED,
     };
     afterEach(() => {
       jest.clearAllMocks();

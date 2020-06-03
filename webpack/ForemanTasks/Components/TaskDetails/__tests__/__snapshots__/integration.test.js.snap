@@ -1,29 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TaskDetails integration test should change the data after reload: task details data should change 1`] = `
+exports[`TaskDetails integration test should change the data after reload: initial state 1`] = `
 Object {
-  "action": Array [
-    Array [
-      Object {
-        "payload": Object {
-          "timeoutId": 1,
-        },
-        "type": "FOREMAN_TASK_DETAILS_START_POLLING",
-      },
-    ],
-  ],
-  "state": Object {
-    "taskDetails": Object {
-      "label": "new-label",
-      "loading": false,
-      "taskReload": true,
-      "timeoutId": 1,
-    },
+  "taskDetails": Object {
+    "isData": true,
+    "label": "new-label-unchanged",
+    "state": "stopped",
+    "status": "RESOLVED",
+    "taskReload": false,
+    "timeoutId": null,
   },
 }
 `;
 
-exports[`TaskDetails integration test should change the data after reload: task details reload start without error 1`] = `
+exports[`TaskDetails integration test should change the data after reload: task details data should change 1`] = `
+Object {
+  "taskDetails": Object {
+    "isData": true,
+    "label": "new-label-changed",
+    "state": "stopped",
+    "status": "RESOLVED",
+    "taskReload": false,
+    "timeoutId": null,
+  },
+}
+`;
+
+exports[`TaskDetails integration test should flow: initial state 1`] = `
+Object {
+  "taskDetails": Object {
+    "isData": false,
+    "status": "PENDING",
+  },
+}
+`;
+
+exports[`TaskDetails integration test should flow: task details reload start 1`] = `
 Array [
   Array [
     Object {
@@ -33,15 +45,8 @@ Array [
   Array [
     Object {
       "payload": Object {
-        "timeoutId": 1,
-      },
-      "type": "FOREMAN_TASK_DETAILS_START_POLLING",
-    },
-  ],
-  Array [
-    Object {
-      "payload": Object {
         "label": "new-label",
+        "state": "stopped",
       },
       "type": "FOREMAN_TASK_DETAILS_FETCH_TASK_SUCCESS",
     },
@@ -49,7 +54,7 @@ Array [
   Array [
     Object {
       "payload": Object {
-        "timeoutId": 1,
+        "timeoutId": 3,
       },
       "type": "FOREMAN_TASK_DETAILS_START_POLLING",
     },
@@ -57,15 +62,7 @@ Array [
 ]
 `;
 
-exports[`TaskDetails integration test should flow: initial state 1`] = `
-Object {
-  "taskDetails": Object {
-    "loading": true,
-  },
-}
-`;
-
-exports[`TaskDetails integration test should flow: task details reload start with error 1`] = `
+exports[`TaskDetails integration test should flow: task details reload stop after reload button click 1`] = `
 Array [
   Array [
     Object {
@@ -75,45 +72,24 @@ Array [
   Array [
     Object {
       "payload": Object {
-        "timeoutId": 1,
+        "label": "new-label",
+        "state": "stopped",
+      },
+      "type": "FOREMAN_TASK_DETAILS_FETCH_TASK_SUCCESS",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "timeoutId": 3,
       },
       "type": "FOREMAN_TASK_DETAILS_START_POLLING",
     },
   ],
   Array [
     Object {
-      "payload": [TypeError: Cannot read property 'data' of undefined],
-      "type": "FOREMAN_TASK_DETAILS_FETCH_TASK_FAILURE",
-    },
-  ],
-]
-`;
-
-exports[`TaskDetails integration test should flow: task details reload stop 1`] = `
-Array [
-  Array [
-    Object {
-      "type": "FOREMAN_TASK_DETAILS_FETCH_TASK_REQUEST",
-    },
-  ],
-  Array [
-    Object {
       "payload": Object {
-        "timeoutId": 1,
-      },
-      "type": "FOREMAN_TASK_DETAILS_START_POLLING",
-    },
-  ],
-  Array [
-    Object {
-      "payload": [TypeError: Cannot read property 'data' of undefined],
-      "type": "FOREMAN_TASK_DETAILS_FETCH_TASK_FAILURE",
-    },
-  ],
-  Array [
-    Object {
-      "payload": Object {
-        "timeoutId": 1,
+        "timeoutId": 3,
       },
       "type": "FOREMAN_TASK_DETAILS_STOP_POLLING",
     },

@@ -1,5 +1,78 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`TaskDetails rendering render with loading Props 1`] = `
+<div
+  className="task-details-react well"
+>
+  <ForwardRef
+    animation={false}
+    defaultActiveKey={1}
+    id="task-details-tabs"
+  >
+    <Tab
+      eventKey={1}
+      title="Task"
+    >
+      <G
+        circle={false}
+        count={1}
+        duration={1.2}
+        height={350}
+        width={null}
+        wrapper={null}
+      />
+    </Tab>
+    <Tab
+      disabled={true}
+      eventKey={2}
+      title="Running Steps"
+    >
+      <RunningSteps
+        cancelStep={[MockFunction]}
+        id="a15dd820-32f1-4ced-9ab7-c0fab8234c47"
+        runningSteps={Array []}
+        taskProgressToggle={[Function]}
+        taskReload={false}
+      />
+    </Tab>
+    <Tab
+      disabled={true}
+      eventKey={3}
+      title="Errors"
+    >
+      <Errors
+        executionPlan={Object {}}
+        failedSteps={Array []}
+      />
+    </Tab>
+    <Tab
+      disabled={true}
+      eventKey={4}
+      title="Locks"
+    >
+      <Locks
+        locks={Array []}
+      />
+    </Tab>
+    <Tab
+      disabled={true}
+      eventKey={5}
+      title="Raw"
+    >
+      <Raw
+        endedAt=""
+        externalId=""
+        id="a15dd820-32f1-4ced-9ab7-c0fab8234c47"
+        input={Array []}
+        label=""
+        output={Object {}}
+        startedAt=""
+      />
+    </Tab>
+  </ForwardRef>
+</div>
+`;
+
 exports[`TaskDetails rendering render with min Props 1`] = `
 <div
   className="task-details-react well"
@@ -21,7 +94,8 @@ exports[`TaskDetails rendering render with min Props 1`] = `
         cancellable={false}
         dynflowEnableConsole={false}
         endedAt=""
-        error={Array []}
+        error={null}
+        errors={Array []}
         executionPlan={Object {}}
         externalId=""
         failedSteps={Array []}
@@ -33,8 +107,17 @@ exports[`TaskDetails rendering render with min Props 1`] = `
                 null,
                 [MockFunction],
               ],
+              Array [
+                "a15dd820-32f1-4ced-9ab7-c0fab8234c47",
+                null,
+                [MockFunction],
+              ],
             ],
             "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
               Object {
                 "type": "return",
                 "value": undefined,
@@ -47,6 +130,7 @@ exports[`TaskDetails rendering render with min Props 1`] = `
         id="a15dd820-32f1-4ced-9ab7-c0fab8234c47"
         input={Array []}
         label=""
+        loading={false}
         locks={Array []}
         output={Object {}}
         parentTask=""
@@ -60,6 +144,7 @@ exports[`TaskDetails rendering render with min Props 1`] = `
         startBefore=""
         startedAt=""
         state=""
+        status="RESOLVED"
         taskProgressToggle={[Function]}
         taskReload={false}
         taskReloadStart={[MockFunction]}
@@ -70,6 +155,7 @@ exports[`TaskDetails rendering render with min Props 1`] = `
       />
     </Tab>
     <Tab
+      disabled={false}
       eventKey={2}
       title="Running Steps"
     >
@@ -82,6 +168,7 @@ exports[`TaskDetails rendering render with min Props 1`] = `
       />
     </Tab>
     <Tab
+      disabled={false}
       eventKey={3}
       title="Errors"
     >
@@ -91,6 +178,7 @@ exports[`TaskDetails rendering render with min Props 1`] = `
       />
     </Tab>
     <Tab
+      disabled={false}
       eventKey={4}
       title="Locks"
     >
@@ -99,6 +187,7 @@ exports[`TaskDetails rendering render with min Props 1`] = `
       />
     </Tab>
     <Tab
+      disabled={false}
       eventKey={5}
       title="Raw"
     >

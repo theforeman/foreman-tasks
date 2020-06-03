@@ -5,4 +5,5 @@ export const minProps = {
   refetchTaskDetails: jest.fn(),
   fetchTaskDetails: jest.fn(),
   taskProgressToggle: jest.fn(),
+  status: 'RESOLVED',
 };
