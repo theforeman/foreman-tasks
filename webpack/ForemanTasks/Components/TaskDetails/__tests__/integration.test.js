@@ -1,13 +1,13 @@
 import React from 'react';
 
-import API from 'foremanReact/API';
+import { API } from 'foremanReact/redux/API';
 import { IntegrationTestHelper } from '@theforeman/test';
 
 import TaskDetails, { reducers } from '../index';
 import { selectForemanTasks } from '../../../ForemanTasksSelectors';
 
 jest.mock('../../../ForemanTasksSelectors');
-jest.mock('foremanReact/API');
+jest.mock('foremanReact/redux/API');
 selectForemanTasks.mockImplementation(state => state);
 describe('TaskDetails integration test', () => {
   beforeEach(() => {

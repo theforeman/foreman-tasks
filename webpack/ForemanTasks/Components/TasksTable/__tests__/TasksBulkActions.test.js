@@ -1,5 +1,5 @@
 import { testActionSnapshotWithFixtures } from '@theforeman/test';
-import API from 'foremanReact/API';
+import { API } from 'foremanReact/redux/API';
 import {
   bulkCancelById,
   bulkCancelBySearch,
@@ -13,7 +13,7 @@ jest.mock('foremanReact/components/common/table', () => ({
   getTableItemsAction: jest.fn(controller => controller),
 }));
 
-jest.mock('foremanReact/API');
+jest.mock('foremanReact/redux/API');
 
 const task = {
   id: 'some-id',

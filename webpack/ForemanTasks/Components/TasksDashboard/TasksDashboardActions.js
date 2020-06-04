@@ -1,4 +1,4 @@
-import API from 'foremanReact/API';
+import { API } from 'foremanReact/redux/API';
 import { timeToHoursNumber, resolveQuery } from './TasksDashboardHelper';
 import {
   FOREMAN_TASKS_DASHBOARD_INIT,

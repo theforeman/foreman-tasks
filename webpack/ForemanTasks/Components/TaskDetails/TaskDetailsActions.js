@@ -1,4 +1,4 @@
-import API from 'foremanReact/API';
+import { API } from 'foremanReact/redux/API';
 import {
   showLoading,
   hideLoading,

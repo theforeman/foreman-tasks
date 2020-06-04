@@ -1,5 +1,5 @@
 import { testActionSnapshotWithFixtures } from '@theforeman/test';
-import API from 'foremanReact/API';
+import { API } from 'foremanReact/redux/API';
 import { timeToHoursNumber } from '../TasksDashboardHelper';
 import {
   initializeDashboard,
@@ -14,7 +14,7 @@ import {
   apiGetMock,
 } from './TaskDashboard.fixtures';
 
-jest.mock('foremanReact/API');
+jest.mock('foremanReact/redux/API');
 jest.mock('../TasksDashboardHelper');
 
 timeToHoursNumber.mockImplementation(arg => arg);
