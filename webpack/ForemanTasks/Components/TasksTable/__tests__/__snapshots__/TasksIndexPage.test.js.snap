@@ -21,6 +21,7 @@ exports[`TasksIndexPage rendering render with minimal props 1`] = `
       "perPage": 10,
     }
   }
+  reloadPage={[MockFunction]}
   results={
     Array [
       "a",

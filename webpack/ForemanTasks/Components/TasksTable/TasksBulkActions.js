@@ -87,7 +87,7 @@ export const bulkResumeById = ({
           });
       });
       if (data.resumed) {
-        reloadPage(url, parentTaskID, dispatch);
+        reloadPage(url, parentTaskID)(dispatch);
       }
     } catch (error) {
       handleErrorResume(error, dispatch);
@@ -160,7 +160,7 @@ export const bulkCancelById = ({
           });
       });
       if (data.cancelled) {
-        reloadPage(url, parentTaskID, dispatch);
+        reloadPage(url, parentTaskID)(dispatch);
       }
     } catch (error) {
       handleErrorCancel(error, dispatch);
@@ -219,7 +219,7 @@ export const bulkForceCancelById = ({
           )
         );
       if (data.stopped_length > 0) {
-        reloadPage(url, parentTaskID, dispatch);
+        reloadPage(url, parentTaskID)(dispatch);
       }
     } catch (error) {
       handleErrorForceCancel(error, dispatch);

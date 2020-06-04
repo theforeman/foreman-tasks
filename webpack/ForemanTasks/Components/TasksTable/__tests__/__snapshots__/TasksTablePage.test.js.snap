@@ -69,12 +69,27 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
     toastNotifications="foreman-tasks-cancel"
     toolbarButtons={
       <React.Fragment>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="default"
+          disabled={false}
+          onClick={[Function]}
+        >
+          <Icon
+            name="refresh"
+            type="fa"
+          />
+           
+          Refresh Data
+        </Button>
         <Spinner
           className=""
           inline={false}
           inverse={false}
           loading={true}
-          size="lg"
+          size="md"
         />
         <ExportButton
           title="Export All"
@@ -112,6 +127,7 @@ exports[`TasksTablePage rendering render with Breadcrubs 1`] = `
         }
       }
       parentTaskID={null}
+      reloadPage={[MockFunction]}
       results={
         Array [
           "a",
@@ -187,12 +203,27 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
     toastNotifications="foreman-tasks-cancel"
     toolbarButtons={
       <React.Fragment>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="default"
+          disabled={false}
+          onClick={[Function]}
+        >
+          <Icon
+            name="refresh"
+            type="fa"
+          />
+           
+          Refresh Data
+        </Button>
         <Spinner
           className=""
           inline={false}
           inverse={false}
           loading={true}
-          size="lg"
+          size="md"
         />
         <ExportButton
           title="Export All"
@@ -230,6 +261,7 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
         }
       }
       parentTaskID={null}
+      reloadPage={[MockFunction]}
       results={
         Array [
           "a",
