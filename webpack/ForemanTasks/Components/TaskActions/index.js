@@ -1,5 +1,5 @@
 import { sprintf } from 'foremanReact/common/I18n';
-import API from 'foremanReact/API';
+import { API } from 'foremanReact/redux/API';
 import { addToast } from 'foremanReact/redux/actions/toasts';
 import {
   TASKS_RESUME_REQUEST,
