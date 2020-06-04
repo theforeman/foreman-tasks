@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getURIsearch } from 'foremanReact/common/urlHelpers';
-import { Spinner } from 'patternfly-react';
+import { Spinner, Button, Icon } from 'patternfly-react';
 import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { getURIQuery } from 'foremanReact/common/helpers';
@@ -63,7 +63,10 @@ const TasksTablePage = ({
         toastNotifications="foreman-tasks-cancel"
         toolbarButtons={
           <React.Fragment>
-            {props.status === STATUS.PENDING && <Spinner size="lg" loading />}
+            <Button onClick={() => props.reloadPage(url, props.parentTaskID)}>
+              <Icon type="fa" name="refresh" /> {__('Refresh Data')}
+            </Button>
+            {props.status === STATUS.PENDING && <Spinner size="md" loading />}
             <ExportButton
               url={getCSVurl(url, uriQuery)}
               title={__('Export All')}
@@ -118,6 +121,7 @@ TasksTablePage.propTypes = {
   openModalAction: PropTypes.func.isRequired,
   showSelectAll: PropTypes.bool,
   unselectAllRows: PropTypes.func.isRequired,
+  reloadPage: PropTypes.func.isRequired,
 };
 
 TasksTablePage.defaultProps = {

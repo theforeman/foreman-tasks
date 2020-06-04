@@ -9,6 +9,7 @@ export const minProps = {
   unselectAllRows: jest.fn(),
   selectRow: jest.fn(),
   unselectRow: jest.fn(),
+  reloadPage: jest.fn(),
   selectedRows: [],
   pagination: {
     page: 1,

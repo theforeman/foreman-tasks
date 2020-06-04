@@ -30,6 +30,7 @@ exports[`SubTasksPage rendering render with minimal props 1`] = `
     }
   }
   parentTaskID="some-id"
+  reloadPage={[MockFunction]}
   results={
     Array [
       "a",

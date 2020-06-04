@@ -22,7 +22,7 @@ import {
 export const getTableItems = url =>
   getTableItemsAction(TASKS_TABLE_ID, getURIQuery(url), getApiPathname(url));
 
-export const reloadPage = (url, parentTaskID, dispatch) => {
+export const reloadPage = (url, parentTaskID) => dispatch => {
   dispatch(getTableItems(url));
   dispatch(fetchTasksSummary(getURIQuery(url).time, parentTaskID));
 };
@@ -34,7 +34,7 @@ export const cancelTask = ({
   parentTaskID,
 }) => async dispatch => {
   await dispatch(cancelTaskRequest(taskId, taskName));
-  reloadPage(url, parentTaskID, dispatch);
+  reloadPage(url, parentTaskID)(dispatch);
 };
 
 export const resumeTask = ({
@@ -44,7 +44,7 @@ export const resumeTask = ({
   parentTaskID,
 }) => async dispatch => {
   await dispatch(resumeTaskRequest(taskId, taskName));
-  reloadPage(url, parentTaskID, dispatch);
+  reloadPage(url, parentTaskID)(dispatch);
 };
 
 export const forceCancelTask = ({
