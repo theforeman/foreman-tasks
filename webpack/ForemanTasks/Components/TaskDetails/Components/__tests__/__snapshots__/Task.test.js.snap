@@ -49,6 +49,8 @@ exports[`Task rendering render with some Props 1`] = `
           className="dynflow-button"
           disabled={false}
           href="/foreman_tasks/dynflow/"
+          rel="noopener noreferrer"
+          target="_blank"
         >
           Dynflow console
         </Button>
@@ -208,6 +210,8 @@ exports[`Task rendering render without Props 1`] = `
           className="dynflow-button"
           disabled={true}
           href="/foreman_tasks/dynflow/"
+          rel="noopener noreferrer"
+          target="_blank"
         >
           Dynflow console
         </Button>
