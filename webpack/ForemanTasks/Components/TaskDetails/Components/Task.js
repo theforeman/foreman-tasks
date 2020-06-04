@@ -86,6 +86,8 @@ const Task = props => {
               bsSize="small"
               href={`/foreman_tasks/dynflow/${externalId}`}
               disabled={!dynflowEnableConsole}
+              rel="noopener noreferrer"
+              target="_blank"
             >
               {__('Dynflow console')}
             </Button>
