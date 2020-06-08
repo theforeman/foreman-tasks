@@ -79,11 +79,6 @@ module ForemanTasks
       end
     end
 
-    initializer 'foreman_tasks.ignore_dynflow_tables' do |_app|
-      # Ignore Dynflow tables when schema-dumping. Dynflow tables are handled automatically by Dynflow.
-      ActiveRecord::SchemaDumper.ignore_tables << /^dynflow_.*$/
-    end
-
     initializer 'foreman_tasks.apipie' do
       # this condition is here for compatibility reason to work with Foreman 1.4.x
       if Apipie.configuration.api_controllers_matcher.is_a?(Array) &&
