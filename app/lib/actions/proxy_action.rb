@@ -257,7 +257,7 @@ module Actions
       if failed_proxy_tasks.count < options[:retry_count]
         suspend do |suspended_action|
           @world.clock.ping suspended_action,
-                            Time.zone.now + options[:retry_interval],
+                            Time.now.getlocal + options[:retry_interval],
                             event
         end
       else
