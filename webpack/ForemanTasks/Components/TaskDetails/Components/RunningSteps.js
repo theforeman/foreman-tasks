@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 import { Alert, Button } from 'patternfly-react';
 import { translate as __ } from 'foremanReact/common/I18n';
 
-const RunningSteps = ({ runningSteps }) => {
+const RunningSteps = ({
+  runningSteps,
+  id,
+  cancelStep,
+  taskReload,
+  taskProgressToggle,
+}) => {
   if (!runningSteps.length) return <span>{__('No running steps')}</span>;
   return (
     <div>
@@ -13,8 +19,12 @@ const RunningSteps = ({ runningSteps }) => {
             <p>
               <Button
                 bsSize="small"
-                data-method="post"
-                href={`/foreman_tasks/tasks/${step.id}/cancel_step`}
+                onClick={() => {
+                  if (!taskReload) {
+                    taskProgressToggle();
+                  }
+                  cancelStep(id, step.id);
+                }}
               >
                 {__('Cancel')}
               </Button>
@@ -46,6 +56,10 @@ const RunningSteps = ({ runningSteps }) => {
 
 RunningSteps.propTypes = {
   runningSteps: PropTypes.array,
+  id: PropTypes.string.isRequired,
+  cancelStep: PropTypes.func.isRequired,
+  taskReload: PropTypes.bool.isRequired,
+  taskProgressToggle: PropTypes.func.isRequired,
 };
 
 RunningSteps.defaultProps = {

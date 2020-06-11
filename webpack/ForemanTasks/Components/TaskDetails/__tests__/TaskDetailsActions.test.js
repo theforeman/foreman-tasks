@@ -4,6 +4,7 @@ import {
   taskReloadStop,
   taskReloadStart,
   fetchTaskDetails,
+  cancelStep,
 } from '../TaskDetailsActions';
 
 jest.mock('foremanReact/API');
@@ -14,6 +15,7 @@ const fixtures = {
   'should start reload': () => taskReloadStart(1),
   'should stop reload': () => taskReloadStop(2),
   'should fetch-task-details and success': () => fetchTaskDetails(),
+  'should cancelStep and success': () => cancelStep('task-id', 'step-id'),
 };
 
 describe('TaskDetails - Actions', () =>

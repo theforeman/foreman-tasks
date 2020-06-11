@@ -55,7 +55,7 @@ exports[`RunningSteps rendering render with Props 1`] = `
 </div>
 `;
 
-exports[`RunningSteps rendering render without Props 1`] = `
+exports[`RunningSteps rendering render with min Props 1`] = `
 <span>
   No running steps
 </span>

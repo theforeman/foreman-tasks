@@ -1,5 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`TaskDetails - Actions should cancelStep and success 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "TASK_STEP_CANCEL_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "Trying to cancel step step-id",
+          "type": "info",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+  Array [
+    Object {
+      "type": "TASK_STEP_CANCEL_SUCCESS",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "step-id {__('Step Canceled')}",
+          "type": "success",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;
+
 exports[`TaskDetails - Actions should fetch-task-details and success 1`] = `
 Array [
   Array [

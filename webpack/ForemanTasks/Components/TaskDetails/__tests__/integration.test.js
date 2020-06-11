@@ -5,6 +5,7 @@ import { IntegrationTestHelper } from '@theforeman/test';
 
 import TaskDetails, { reducers } from '../index';
 import { selectForemanTasks } from '../../../ForemanTasksSelectors';
+import { minProps } from './TaskDetails.fixtures';
 
 jest.mock('../../../ForemanTasksSelectors');
 jest.mock('foremanReact/API');
@@ -26,7 +27,9 @@ describe('TaskDetails integration test', () => {
     API.get.mockImplementationOnce();
     const integrationTestHelper = new IntegrationTestHelper(reducers);
 
-    const component = integrationTestHelper.mount(<TaskDetails id="test" />);
+    const component = integrationTestHelper.mount(
+      <TaskDetails {...minProps} id="test" />
+    );
     integrationTestHelper.takeStoreSnapshot('initial state');
 
     const reloadButton = component.find('.reload-button').at(0);
@@ -50,7 +53,9 @@ describe('TaskDetails integration test', () => {
     }));
     const integrationTestHelper = new IntegrationTestHelper(reducers);
 
-    const component = integrationTestHelper.mount(<TaskDetails id="test" />);
+    const component = integrationTestHelper.mount(
+      <TaskDetails {...minProps} id="test" />
+    );
 
     const reloadButton = component.find('.reload-button').at(0);
     reloadButton.simulate('click');

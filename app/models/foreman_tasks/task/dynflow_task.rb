@@ -119,6 +119,7 @@ module ForemanTasks
         begin
           f_action = f.action(execution_plan)
           {
+            id: f_action.id,
             action_class: f.action_class.name,
             state: f.state,
             input: f_action.input.pretty_inspect,
