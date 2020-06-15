@@ -1,5 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`TaskDetails - Actions should cancelStep and fail 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "TASK_STEP_CANCEL_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "Trying to cancel step step-id",
+          "type": "info",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+  Array [
+    Object {
+      "payload": [Error: Network Error],
+      "type": "TASK_STEP_CANCEL_FAILURE",
+    },
+  ],
+  Array [
+    Object {
+      "payload": Object {
+        "message": Object {
+          "message": "Could not cancel step. Error: step-id undefined",
+          "type": "error",
+        },
+      },
+      "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;
+
 exports[`TaskDetails - Actions should cancelStep and success 1`] = `
 Array [
   Array [
@@ -32,6 +70,22 @@ Array [
         },
       },
       "type": "TOASTS_ADD",
+    },
+  ],
+]
+`;
+
+exports[`TaskDetails - Actions should fetch-task-details and fail 1`] = `
+Array [
+  Array [
+    Object {
+      "type": "FOREMAN_TASK_DETAILS_FETCH_TASK_REQUEST",
+    },
+  ],
+  Array [
+    Object {
+      "payload": [Error: Network Error],
+      "type": "FOREMAN_TASK_DETAILS_FETCH_TASK_FAILURE",
     },
   ],
 ]
