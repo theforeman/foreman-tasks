@@ -31,9 +31,12 @@ module ForemanTasks
 
     def cancel_step
       task = find_dynflow_task
-      flash[:info] = _('Trying to cancel step %s') % params[:step_id]
-      ForemanTasks.dynflow.world.event(task.external_id, params[:step_id].to_i, ::Dynflow::Action::Cancellable::Cancel).wait
-      redirect_to foreman_tasks_task_path(task)
+      result = ForemanTasks.dynflow.world.event(task.external_id, params[:step_id].to_i, ::Dynflow::Action::Cancellable::Cancel).wait
+      if result.rejected?
+        render json: { error: result.reason }, status: :bad_request
+      else
+        render json: { statusText: 'OK' }
+      end
     end
 
     def cancel

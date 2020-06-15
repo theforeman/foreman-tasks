@@ -2,9 +2,16 @@ import { testComponentSnapshotsWithFixtures } from '@theforeman/test';
 
 import RunningSteps from '../RunningSteps';
 
+const minProps = {
+  id: 'task-id1',
+  taskReload: true,
+  cancelStep: jest.fn(),
+  taskProgressToggle: jest.fn(),
+};
 const fixtures = {
-  'render without Props': {},
+  'render with min Props': minProps,
   'render with Props': {
+    ...minProps,
     executionPlan: {
       state: 'paused',
       cancellable: false,

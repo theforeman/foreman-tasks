@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TaskDetails rendering render without Props 1`] = `
+exports[`TaskDetails rendering render with min Props 1`] = `
 <div
   className="task-details-react well"
 >
@@ -15,6 +15,7 @@ exports[`TaskDetails rendering render without Props 1`] = `
     >
       <Task
         action=""
+        cancelStep={[MockFunction]}
         cancelTaskRequest={[Function]}
         cancellable={false}
         dynflowEnableConsole={false}
@@ -23,7 +24,23 @@ exports[`TaskDetails rendering render without Props 1`] = `
         executionPlan={Object {}}
         externalId=""
         failedSteps={Array []}
-        fetchTaskDetails={[Function]}
+        fetchTaskDetails={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                "a15dd820-32f1-4ced-9ab7-c0fab8234c47",
+                null,
+                [MockFunction],
+              ],
+            ],
+            "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+            ],
+          }
+        }
         hasSubTasks={false}
         help=""
         id="a15dd820-32f1-4ced-9ab7-c0fab8234c47"
@@ -33,7 +50,7 @@ exports[`TaskDetails rendering render without Props 1`] = `
         output={Object {}}
         parentTask=""
         progress={0}
-        refetchTaskDetails={[Function]}
+        refetchTaskDetails={[MockFunction]}
         result="error"
         resumable={false}
         resumeTaskRequest={[Function]}
@@ -42,9 +59,10 @@ exports[`TaskDetails rendering render without Props 1`] = `
         startBefore=""
         startedAt=""
         state=""
+        taskProgressToggle={[Function]}
         taskReload={false}
-        taskReloadStart={[Function]}
-        taskReloadStop={[Function]}
+        taskReloadStart={[MockFunction]}
+        taskReloadStop={[MockFunction]}
         timeoutId={null}
         username=""
         usernamePath=""
@@ -55,8 +73,11 @@ exports[`TaskDetails rendering render without Props 1`] = `
       title="Running Steps"
     >
       <RunningSteps
-        executionPlan={Object {}}
+        cancelStep={[MockFunction]}
+        id="a15dd820-32f1-4ced-9ab7-c0fab8234c47"
         runningSteps={Array []}
+        taskProgressToggle={[Function]}
+        taskReload={false}
       />
     </Tab>
     <Tab

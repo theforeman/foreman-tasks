@@ -33,16 +33,16 @@ describe('Task', () => {
     }));
     const cancelTaskRequest = jest.fn();
     const resumeTaskRequest = jest.fn();
-    const taskReloadStart = jest.fn();
+    const taskProgressToggle = jest.fn();
     const id = 'some-id';
     const action = 'some-action';
     const props = {
       taskReload: false,
-      taskReloadStart,
       id,
       action,
       cancelTaskRequest,
       resumeTaskRequest,
+      taskProgressToggle,
     };
     afterEach(() => {
       jest.clearAllMocks();
@@ -51,20 +51,20 @@ describe('Task', () => {
       const component = mount(<Task {...props} />);
       const reloadButton = component.find('.reload-button').at(0);
       reloadButton.simulate('click');
-      expect(taskReloadStart).toBeCalled();
+      expect(taskProgressToggle).toBeCalled();
     });
     it('resume', () => {
       const component = shallow(<Task {...props} />);
       const resumeButton = component.find('.resume-button').at(0);
       resumeButton.props().onClick();
-      expect(taskReloadStart).toBeCalled();
+      expect(taskProgressToggle).toBeCalled();
       expect(resumeTaskRequest).toBeCalledWith(id, action);
     });
     it('cancel', () => {
       const component = shallow(<Task {...props} />);
       const cancelButton = component.find('.cancel-button').at(0);
       cancelButton.props().onClick();
-      expect(taskReloadStart).toBeCalled();
+      expect(taskProgressToggle).toBeCalled();
       expect(cancelTaskRequest).toBeCalledWith(id, action);
     });
     it('unlock', () => {

@@ -3,13 +3,23 @@ import {
   showLoading,
   hideLoading,
 } from 'foremanReact/components/Layout/LayoutActions';
+import { addToast } from 'foremanReact/redux/actions/toasts';
+import { translate as __ } from 'foremanReact/common/I18n';
 import {
   FOREMAN_TASK_DETAILS_FETCH_TASK_REQUEST,
   FOREMAN_TASK_DETAILS_FETCH_TASK_SUCCESS,
   FOREMAN_TASK_DETAILS_FETCH_TASK_FAILURE,
   FOREMAN_TASK_DETAILS_STOP_POLLING,
   FOREMAN_TASK_DETAILS_START_POLLING,
+  TASK_STEP_CANCEL_REQUEST,
+  TASK_STEP_CANCEL_FAILURE,
+  TASK_STEP_CANCEL_SUCCESS,
 } from './TaskDetailsConstants';
+import {
+  errorToastData,
+  infoToastData,
+  successToastData,
+} from '../common/ToastsHelpers';
 
 export const taskReloadStop = timeoutId => {
   if (timeoutId) {
@@ -98,3 +108,28 @@ const requestFailure = error => ({
   type: FOREMAN_TASK_DETAILS_FETCH_TASK_FAILURE,
   payload: error,
 });
+
+export const cancelStep = (taskId, stepId) => async dispatch => {
+  dispatch({ type: TASK_STEP_CANCEL_REQUEST });
+  dispatch(addToast(infoToastData(`${__('Trying to cancel step')} ${stepId}`)));
+  try {
+    await API.post(
+      `/foreman_tasks/tasks/${taskId}/cancel_step?step_id=${stepId}`
+    );
+    dispatch({ type: TASK_STEP_CANCEL_SUCCESS });
+    dispatch(addToast(successToastData(`${stepId} {__('Step Canceled')}`)));
+  } catch (error) {
+    dispatch({ type: TASK_STEP_CANCEL_FAILURE, payload: error });
+    dispatch(
+      addToast(
+        errorToastData(
+          `${__('Could not cancel step.')} ${__(
+            'Error:'
+          )} ${stepId} ${error.response &&
+            error.response.data &&
+            error.response.data.error}`
+        )
+      )
+    );
+  }
+};

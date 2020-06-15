@@ -33,7 +33,6 @@ exports[`Task rendering render with some Props 1`] = `
           bsStyle="default"
           className="reload-button"
           disabled={false}
-          onClick={[Function]}
         >
           <span
             className="glyphicon glyphicon-refresh spin"
@@ -151,7 +150,6 @@ exports[`Task rendering render with some Props 1`] = `
       startedAt=""
       state="paused"
       taskReload={true}
-      taskReloadStart={[Function]}
       taskReloadStop={[Function]}
       timeoutId={null}
       username=""
@@ -194,7 +192,6 @@ exports[`Task rendering render without Props 1`] = `
           bsStyle="default"
           className="reload-button"
           disabled={false}
-          onClick={[Function]}
         >
           <span
             className="glyphicon glyphicon-refresh "
@@ -288,7 +285,6 @@ exports[`Task rendering render without Props 1`] = `
       startedAt=""
       state=""
       taskReload={false}
-      taskReloadStart={[Function]}
       taskReloadStop={[Function]}
       timeoutId={null}
       username=""

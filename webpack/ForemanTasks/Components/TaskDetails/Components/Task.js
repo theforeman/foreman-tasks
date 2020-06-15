@@ -11,22 +11,6 @@ import {
 import { ForceUnlockModal, UnlockModal } from '../../TaskActions/UnlockModals';
 
 const Task = props => {
-  const taskProgressToggle = () => {
-    const {
-      timeoutId,
-      refetchTaskDetails,
-      id,
-      loading,
-      taskReloadStop,
-      taskReloadStart,
-    } = props;
-    if (timeoutId) {
-      taskReloadStop(timeoutId);
-    } else {
-      taskReloadStart(timeoutId, refetchTaskDetails, id, loading);
-    }
-  };
-
   const unlockModalActions = useForemanModal({
     id: UNLOCK_MODAL,
   });
@@ -49,6 +33,7 @@ const Task = props => {
     unlockTaskRequest,
     action,
     dynflowEnableConsole,
+    taskProgressToggle,
   } = props;
   const forceUnlock = () => {
     if (!taskReload) {
@@ -169,7 +154,6 @@ Task.propTypes = {
   parentTask: PropTypes.string,
   taskReload: PropTypes.bool,
   taskReloadStop: PropTypes.func,
-  taskReloadStart: PropTypes.func,
   timeoutId: PropTypes.number,
   externalId: PropTypes.string,
   id: PropTypes.string.isRequired,
@@ -188,7 +172,6 @@ Task.defaultProps = {
   parentTask: '',
   taskReload: false,
   taskReloadStop: () => null,
-  taskReloadStart: () => null,
   timeoutId: null,
   externalId: '',
   cancelTaskRequest: () => null,

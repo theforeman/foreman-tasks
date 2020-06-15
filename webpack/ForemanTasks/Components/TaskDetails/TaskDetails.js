@@ -20,6 +20,22 @@ class TaskDetails extends Component {
   componentWillUnmount() {
     this.props.taskReloadStop(this.props.timeoutId);
   }
+  taskProgressToggle = () => {
+    const {
+      timeoutId,
+      refetchTaskDetails,
+      id,
+      loading,
+      taskReloadStop,
+      taskReloadStart,
+    } = this.props;
+    if (timeoutId) {
+      taskReloadStop(timeoutId);
+    } else {
+      taskReloadStart(timeoutId, refetchTaskDetails, id, loading);
+    }
+  };
+
   render() {
     const {
       externalId,
@@ -32,6 +48,7 @@ class TaskDetails extends Component {
       failedSteps,
       runningSteps,
       locks,
+      cancelStep,
     } = this.props;
     const id = getTaskID();
     const resumable = executionPlan ? executionPlan.state === 'paused' : false;
@@ -40,12 +57,23 @@ class TaskDetails extends Component {
       <div className="task-details-react well">
         <Tabs defaultActiveKey={1} animation={false} id="task-details-tabs">
           <Tab eventKey={1} title={__('Task')}>
-            <Task {...{ ...this.props, cancellable, resumable, id }} />
+            <Task
+              {...{
+                ...this.props,
+                cancellable,
+                resumable,
+                id,
+                taskProgressToggle: this.taskProgressToggle,
+              }}
+            />
           </Tab>
           <Tab eventKey={2} title={__('Running Steps')}>
             <RunningSteps
-              executionPlan={executionPlan}
               runningSteps={runningSteps}
+              id={id}
+              cancelStep={cancelStep}
+              taskReload={this.props.taskReload}
+              taskProgressToggle={this.taskProgressToggle}
             />
           </Tab>
           <Tab eventKey={3} title={__('Errors')}>
@@ -67,16 +95,18 @@ class TaskDetails extends Component {
 
 TaskDetails.propTypes = {
   label: PropTypes.string,
-  fetchTaskDetails: PropTypes.func,
+  fetchTaskDetails: PropTypes.func.isRequired,
+  runningSteps: PropTypes.array,
+  cancelStep: PropTypes.func.isRequired,
+  taskReload: PropTypes.bool.isRequired,
   ...Task.propTypes,
-  ...RunningSteps.propTypes,
   ...Errors.propTypes,
   ...Locks.propTypes,
   ...Raw.propTypes,
 };
 TaskDetails.defaultProps = {
   label: '',
-  fetchTaskDetails: () => null,
+  runningSteps: [],
   ...Task.defaultProps,
   ...RunningSteps.defaultProps,
   ...Errors.defaultProps,

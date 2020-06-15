@@ -1,9 +1,10 @@
 import { testComponentSnapshotsWithFixtures } from '@theforeman/test';
 
 import TaskDetails from '../TaskDetails';
+import { minProps } from './TaskDetails.fixtures';
 
 const fixtures = {
-  'render without Props': {},
+  'render with min Props': minProps,
 };
 
 delete window.location;
