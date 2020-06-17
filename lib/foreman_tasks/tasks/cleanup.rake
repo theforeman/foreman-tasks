@@ -14,7 +14,7 @@ namespace :foreman_tasks do
       If TASK_SEARCH is set then AFTER, STATES can be set and it's used for cleanup. If TASK_SEARCH is not set then
       the cleanup respects the configuration file and setting AFTER or STATES will throw exception.
     DESC
-    task :run => 'environment' do
+    task :run => ['environment', 'dynflow:client'] do
       options = {}
 
       options[:filter] = ENV['TASK_SEARCH'] if ENV['TASK_SEARCH']
@@ -38,7 +38,7 @@ namespace :foreman_tasks do
     end
 
     desc 'Show the current configuration for auto-cleanup'
-    task :config => 'environment' do
+    task :config => ['environment', 'dynflow:client'] do
       if ForemanTasks::Cleaner.cleanup_settings[:after]
         puts _('The tasks will be deleted after %{after}') % { :after => ForemanTasks::Cleaner.cleanup_settings[:after] }
       else
