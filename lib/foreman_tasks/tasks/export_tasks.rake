@@ -19,7 +19,7 @@ namespace :foreman_tasks do
     all unsuccessful tasks in the past 60 days. The default TASK_FORMAT is html
     which requires a tar.gz file extension.
   DESC
-  task :export_tasks => :environment do
+  task :export_tasks => [:environment, 'dynflow:client'] do
     deprecated_options = { :tasks => 'TASK_SEARCH',
                            :days => 'TASK_DAYS',
                            :export => 'TASK_FILE' }
