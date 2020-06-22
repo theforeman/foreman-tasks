@@ -1,0 +1,817 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the foreman_tasks package.
+#
+# Translators:
+# Kazuki Omo <kazuki.omo@gmail.com>, 2019
+msgid ""
+msgstr ""
+"Project-Id-Version: foreman_tasks 0.3.4\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2020-06-22 15:11+0000\n"
+"Last-Translator: Amit Upadhye <aupadhye@redhat.com>\n"
+"Language-Team: Japanese (http://www.transifex.com/foreman/foreman/language/ja/"
+")\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "${taskReload ? 'Stop' : 'Start'}  auto-reloading"
+msgstr "${taskReload ? 'Stop' : 'Start'}  自動再読み込み"
+
+msgid "%(last)s Last %(time)s"
+msgstr "過去 %(time)s 時間で %(last)s 件"
+
+msgid "%(older)s Older %(time)s"
+msgstr "%(time)s 以前で %(older)s 件"
+
+msgid "%s Selected Tasks"
+msgstr ""
+
+msgid "%s is not valid format of cron line"
+msgstr "%s は有効は cron 行の形式ではありません"
+
+msgid "%{total} task(s), %{success} success, %{failed} fail"
+msgstr "%{total} タスク、%{success} 成功、%{failed} 失敗"
+
+msgid "%{value} is not allowed input type"
+msgstr "%{value} は許可された入力タイプではありません"
+
+msgid "%{value} is not allowed triggering mode"
+msgstr "%{value} は許可されたトリガーモードではありません"
+
+msgid "%{value} is wrong format"
+msgstr "%{value} は不正な形式です"
+
+msgid "12h"
+msgstr "12 時間"
+
+msgid "24h"
+msgstr "24 時間"
+
+msgid ":after setting in tasks cleanup section is deprecated, use :after in :rules section to set the value. to cleanup rules"
+msgstr "タスク消去のセクションの :after の設定は非推奨になりました。:rule セクションで :after を使用して値を設定し、ルールを消去してください。"
+
+msgid "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved."
+msgstr "一時停止タスクは、適切に終了していないプロセスを表します。一時停止状態のタスクは、一貫性に欠ける可能性があり、解決する必要があります。"
+
+msgid "Action"
+msgstr "アクション"
+
+msgid "Action with sub plans"
+msgstr "サブプランによるアクション"
+
+msgid "Active"
+msgstr "アクティブ"
+
+msgid "Active Filters:"
+msgstr "アクティブなフィルター:"
+
+msgid "All %s tasks are selected. "
+msgstr "%s の全タスクを選択します。"
+
+msgid "All proxies with the required feature are unavailable at the moment"
+msgstr "現在、必要な機能があるすべてのプロキシーが利用できません"
+
+msgid "Allow triggering tasks on the smart proxy in batches"
+msgstr "Smart Proxy でタスクを一括でトリガーできるようにする"
+
+msgid "Associated resources"
+msgstr "関連リソース"
+
+#. TRANSLATORS: Time widget for when a task should start
+msgid "At"
+msgstr "場所"
+
+msgid "Back to tasks"
+msgstr "タスクに戻る"
+
+msgid "Backtrace"
+msgstr "バックトレース"
+
+msgid "Bulk action"
+msgstr "一括処理"
+
+msgid "Cancel"
+msgstr "取り消し"
+
+msgid "Cancel Selected"
+msgstr "選択項目をキャンセル"
+
+msgid "Cancel all cancellable tasks"
+msgstr "キャンセル可能な全タスクをキャンセル"
+
+msgid "Cancel enforced: the task might be still running on the proxy"
+msgstr "強制的にキャンセル: タスクはプロキシーで引き続き実行されている可能性があります"
+
+msgid "Cancel recurring logic"
+msgstr "再帰論理をキャンセル"
+
+msgid "Cancel selected tasks"
+msgstr "選択したタスクをキャンセル"
+
+msgid "Cancel specific tasks by ID"
+msgstr "ID 別に特定のタスクをキャンセル"
+
+msgid "Cancel tasks matching search string"
+msgstr "検索文字列に一致するタスクをキャンセル"
+
+msgid "Canceling selected tasks, this might take a while"
+msgstr "選択したタスクをキャンセルしています。しばらく時間がかかる場合があります"
+
+msgid "Canceling with force selected tasks, this might take a while"
+msgstr ""
+
+msgid "Cancelled"
+msgstr "キャンセル"
+
+msgid "Cannot cancel tasks at the moment"
+msgstr "現在、タスクをキャンセルできません"
+
+msgid "Cannot force cancel tasks at the moment"
+msgstr ""
+
+msgid "Cannot resume tasks at the moment"
+msgstr "現在、タスクを再開できません"
+
+msgid "Cannot update a cancelled Recurring Logic."
+msgstr "取り消された再帰論理を更新できません"
+
+msgid "Changing request id %{request_id} to saved id %{saved_id}"
+msgstr "要求 ID％{request_id}を 保存済み ID％{saved_id}に変更しています"
+
+msgid "Clear All Filters"
+msgstr "すべてのフィルターを消去"
+
+msgid "Clear Cancelled"
+msgstr "キャンセル済みの項目を消去"
+
+msgid "Complete"
+msgstr "完了"
+
+msgid "Conflicts with tasks:"
+msgstr "タスクとの競合:"
+
+msgid "Could not cancel step."
+msgstr ""
+
+msgid "Could not receive data: ${error && error.message}"
+msgstr "データを受信できませんでした: ${error && error.message}"
+
+msgid "Cron line"
+msgstr "Cron 行"
+
+msgid "Cron line format 'a b c d e', where: %s"
+msgstr "Cron 行形式 'a b c d e'。where: %s"
+
+msgid "Current iteration"
+msgstr "現在の繰り返し"
+
+msgid "Data to be sent to the action"
+msgstr "アクションに送信されるデータ"
+
+msgid "Days"
+msgstr "日"
+
+msgid "Days of week"
+msgstr "曜日"
+
+msgid "Delayed"
+msgstr "遅延"
+
+msgid "Delete recurring logics by search query"
+msgstr "検索クエリーで再帰論理を削除"
+
+msgid "Details"
+msgstr "詳細"
+
+msgid "Details of %s task"
+msgstr "％s タスクの詳細"
+
+msgid "Disable"
+msgstr "無効"
+
+msgid "Disabled"
+msgstr "無効"
+
+msgid "Duration"
+msgstr "期間"
+
+msgid "Dynflow console"
+msgstr "Dynflow コンソール"
+
+msgid "Empty bulk action"
+msgstr "空の一括処理"
+
+msgid "Enable"
+msgstr "有効化"
+
+msgid "Enable the dynflow console (/foreman_tasks/dynflow) for debugging"
+msgstr "デバッグのために dynflow コンソール (/foreman_tasks/dynflow) を有効にする"
+
+msgid "Ends"
+msgstr "終了"
+
+msgid "Ends at"
+msgstr "終了時間"
+
+msgid "Errors"
+msgstr "エラー"
+
+msgid "Errors:"
+msgstr "エラー:"
+
+msgid "Event delivered by request %{request_id}"
+msgstr "要求 ％{request_id} で配信されたイベント"
+
+msgid "Exception"
+msgstr "Exception"
+
+msgid "Execute now"
+msgstr "今すぐ実行"
+
+msgid "Execution plan data not available "
+msgstr "利用可能な実行プランデータはありません"
+
+msgid "Export All"
+msgstr "すべてエクスポート"
+
+msgid "External Id"
+msgstr "外部 Id"
+
+msgid "Failed to check on tasks on proxy at %{url}: %{exception}"
+msgstr "%{url} でのプロキシータスクをチェックできませんでした: %{exception}"
+
+msgid "Failed to initialize"
+msgstr "初期化に失敗しました"
+
+msgid "Field to sort the results on"
+msgstr "結果をソートするフィールド"
+
+msgid "Finished"
+msgstr "終了"
+
+msgid "Force Cancel"
+msgstr ""
+
+msgid "Force Cancel Selected"
+msgstr ""
+
+msgid "Force Cancel selected tasks"
+msgstr ""
+
+msgid "Force Unlock"
+msgstr "強制ロック解除"
+
+msgid "Foreman Tasks"
+msgstr "Foreman タスク"
+
+msgid "Fri"
+msgstr "金"
+
+msgid "Hash version of 'order' param"
+msgstr "ハッシュバージョンの 'order' パラメーター"
+
+msgid "How to order the sorted results (e.g. ASC for ascending)"
+msgstr "ソートされた結果を順序付ける方法 (例:  ascending (昇順) の ASC)"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Id"
+msgstr "ID"
+
+msgid "Immediate"
+msgstr "即時"
+
+msgid "Import Puppet classes"
+msgstr "Puppet クラスのインポート"
+
+msgid "Import facts"
+msgstr "ファクトのインポート"
+
+msgid "Indicates that the action should be cancelled if it cannot be started before this time."
+msgstr "アクションはこの時刻よりも前に開始できない場合にキャンセルされることを示しています。"
+
+msgid "Initialization error: %s"
+msgstr "初期化エラー: %s"
+
+msgid "Input"
+msgstr "入力"
+
+msgid "Iteration limit"
+msgstr "繰り返し制限"
+
+msgid "Label"
+msgstr "ラベル"
+
+msgid "Last occurrence"
+msgstr "最後の実行"
+
+msgid "Last start time"
+msgstr "最終開始時間"
+
+msgid "Latest Warning/Error Tasks"
+msgstr "最新の警告/エラータスク"
+
+msgid "Less than a second"
+msgstr "1 秒未満"
+
+msgid "List of tasks"
+msgstr "タスクの一覧"
+
+msgid "List recurring logics"
+msgstr "再帰論理の一覧を表示"
+
+msgid "List tasks"
+msgstr "タスクの一覧を表示します。"
+
+msgid "Locks"
+msgstr "ロック"
+
+msgid "Mon"
+msgstr "月"
+
+msgid "More than"
+msgstr "以下の値を超える"
+
+msgid "N/A"
+msgstr "N/A"
+
+msgid "Name"
+msgstr "名前"
+
+msgid "Never"
+msgstr "なし"
+
+msgid "Next occurrence"
+msgstr "次の実行"
+
+msgid "No"
+msgstr "いいえ"
+
+msgid "No Tasks"
+msgstr "タスクなし"
+
+msgid "No errors"
+msgstr "エラーはありません"
+
+msgid "No proxy defined for execution"
+msgstr "実行用プロキシーが設定されていません"
+
+msgid "No running steps"
+msgstr "実行中のステップがありません"
+
+msgid "No start or end dates"
+msgstr "開始日または終了日がありません"
+
+msgid "No task could be started"
+msgstr "タスクを開始できませんでした"
+
+msgid "No. of Tasks"
+msgstr "タスク数"
+
+msgid "Not all the selected tasks can be cancelled"
+msgstr "選択したタスクを一括でキャンセルできません"
+
+msgid "Not all the selected tasks can be resumed"
+msgstr "選択したタスクを一括で再開できません"
+
+msgid "Number of attempts to start a task on the smart proxy before failing"
+msgstr "失敗するまでに Smart Proxy でタスクの起動を試行させる回数"
+
+msgid "Number of results per page to return"
+msgstr "戻されるページごとの結果数"
+
+msgid "Number of seconds to wait for synchronous task to finish."
+msgstr "同期タスクが完了するまで待機する秒数"
+
+msgid "Number of tasks which should be sent to the smart proxy in one request, if foreman_tasks_proxy_batch_trigger is enabled"
+msgstr "foreman_tasks_proxy_batch_trigger が有効な場合に、1つの要求で Smart Proxy に送信する必要があるタスクの数"
+
+#. TRANSLATORS: Button text for saying when a task should end
+msgid "On"
+msgstr "オン"
+
+msgid "Operation"
+msgstr "操作"
+
+msgid "Output"
+msgstr "出力"
+
+msgid "Output:"
+msgstr "出力:"
+
+msgid "Page number, starting at 1"
+msgstr "1 から始まるページ番号"
+
+msgid "Parent task"
+msgstr "親タスク"
+
+msgid "Paused"
+msgstr "一時停止中"
+
+msgid "Please inspect their state, fix their errors and resume them."
+msgstr "タスクの状態を確認し、エラーを修正してタスクを再開してください。"
+
+msgid "Please provide a search parameter in the request"
+msgstr "要求で検索パラメーターを指定してください。"
+
+msgid "Please provide at least one of search or task_ids parameters in the request"
+msgstr "要求で検索パラメーターまたは task_ids パラメーターを 1 つ指定してください。"
+
+msgid "Polling intervals multiplier"
+msgstr "ポーリングの間隔乗数"
+
+msgid "Polling multiplier which is used to multiply the default polling intervals. This can be used to prevent polling too frequently for long running tasks."
+msgstr "デフォルトのポーリングの間隔を乗算するときに使用するポーリング乗数。この乗数を使用して、長期間にわたり実行中のタスクが頻繁にポーリングされるのを回避します。"
+
+msgid "Proxy task gone missing from the smart proxy"
+msgstr "Smart Proxy のプロキシータスクが見つかりません"
+
+msgid "Raw"
+msgstr "ロー"
+
+msgid "Raw input"
+msgstr "生入力"
+
+msgid "Raw output"
+msgstr "生出力"
+
+msgid "Recurring Logics"
+msgstr "再帰論理"
+
+msgid "Recurring logic"
+msgstr "再帰論理"
+
+msgid "Recurring logics"
+msgstr "再帰論理"
+
+msgid "Repeat N times"
+msgstr "N 回繰り返す"
+
+msgid "Repeat until"
+msgstr "繰り返し"
+
+msgid "Repeats"
+msgstr "繰り返し"
+
+msgid "Require user to be authenticated as user with admin rights when accessing dynflow console"
+msgstr "dynflow コンソールにアクセスする場合、ユーザーは管理者権限を持つユーザーとして認証する必要があります"
+
+msgid "Required lock is already taken by other running tasks."
+msgstr "必要なロックは、実行中の他のタスクにより取得済みです。"
+
+msgid "Required lock: %s"
+msgstr "必要なロック: ％s"
+
+msgid "Resource search_params requires resource_type and resource_id to be specified"
+msgstr "リソース search_params では resource_type と resource_id を指定する必要があります"
+
+msgid "Result"
+msgstr "結果"
+
+msgid "Resume"
+msgstr "再開"
+
+msgid "Resume Selected"
+msgstr "選択項目を再開"
+
+msgid "Resume all paused error tasks"
+msgstr "一時停止されたすべてのエラータスクを再開"
+
+msgid "Resume selected tasks"
+msgstr "選択したタスクを再開"
+
+msgid "Resume specific tasks by ID"
+msgstr "ID 別に特定のタスクを再開"
+
+msgid "Resume tasks matching search string"
+msgstr "検索文字列に一致するタスクを再開"
+
+msgid "Resuming selected tasks, this might take a while"
+msgstr "選択したタスクを再開しています。しばらく時間がかかる場合があります"
+
+msgid "Running"
+msgstr "実行中"
+
+msgid "Running Steps"
+msgstr "実行中のステップ"
+
+msgid "Sat"
+msgstr "土"
+
+msgid "Schedule"
+msgstr "スケジュール"
+
+msgid "Schedule future execution"
+msgstr "将来の実行をスケジュール"
+
+msgid "Scheduled"
+msgstr "スケジュール済み"
+
+msgid "Search query"
+msgstr "検索クエリー"
+
+msgid "Search string"
+msgstr "検索文字列"
+
+msgid "See %{link} for more details on how to resolve the issue"
+msgstr "問題解決の詳細については、％{link} を参照してください"
+
+msgid "Select Action"
+msgstr "アクションの選択"
+
+msgid "Select All"
+msgstr "すべてを選択"
+
+msgid "Select row"
+msgstr "行を選択"
+
+msgid "Send data to the task from external executor (such as smart_proxy_dynflow)"
+msgstr "外部のエグゼキューター (smart_proxy_dynflow など) からタスクにデータを送信"
+
+msgid "Set up recurring execution"
+msgstr "繰り返し実行を設定"
+
+msgid "Show recurring logic details"
+msgstr "再帰論理の詳細を表示"
+
+msgid "Sort field and order, e.g. 'name DESC'"
+msgstr "フィールドと順序のソート (例:  'name DESC')"
+
+msgid "Start at"
+msgstr "開始時刻"
+
+msgid "Start before"
+msgstr "次の時刻よりも前に開始"
+
+msgid "Started"
+msgstr "開始済み"
+
+msgid "Started at"
+msgstr "開始時刻"
+
+msgid "State"
+msgstr "状態"
+
+msgid "Step Canceled"
+msgstr ""
+
+msgid "Stop all stoppable tasks"
+msgstr ""
+
+msgid "Stop specific tasks by ID"
+msgstr ""
+
+msgid "Stop tasks matching search string"
+msgstr ""
+
+msgid "Stopped"
+msgstr "停止"
+
+msgid "Sub tasks"
+msgstr "サブタスク"
+
+msgid "Sub tasks of %s"
+msgstr "%s のサブタスク"
+
+msgid "Sun"
+msgstr "日"
+
+msgid "Task"
+msgstr "タスク"
+
+msgid "Task Details"
+msgstr "タスクの詳細"
+
+msgid "Task Status"
+msgstr "タスクのステータス"
+
+msgid "Task aborted: the task might be still running on the proxy"
+msgstr "タスクの中断: タスクはプロキシーで引き続き実行されている可能性があります"
+
+msgid "Task cannot be canceled"
+msgstr ""
+
+msgid "Task count"
+msgstr "タスク数"
+
+msgid "Task group common"
+msgstr "共通のタスクグループ"
+
+msgid "Task search_params requires task_id to be specified"
+msgstr "タスク search_params では task_id を指定する必要があります"
+
+msgid "Task was canceled"
+msgstr "タスクがキャンセルされました"
+
+msgid "Tasks"
+msgstr "タスク"
+
+msgid "The ID of the step inside the execution plan to send the event to"
+msgstr "イベントの送信先の実行プラン内のステップ ID"
+
+msgid "The recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task."
+msgstr "推奨のアプローチとして、以下のエラーメッセージを調査して、「エラー」タブで、問題の主な原因に対処して、タスクを再開してください。"
+
+msgid "The smart proxy task %s failed."
+msgstr "Smart Proxy タスク %s が失敗しました。"
+
+msgid "The targets are of different types"
+msgstr "ターゲットは異なるタイプです"
+
+msgid "The task cannot be aborted at the moment."
+msgstr "現在、タスクは中断できません。"
+
+msgid "The task could not be started"
+msgstr "タスクを開始できませんでした"
+
+msgid "There is %{count} paused task in the system that need attention"
+msgid_plural "There are %{count} paused tasks in the system that need attention"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "This action will delete all cancelled recurring logics. Please note that this action can't be reversed."
+msgstr "このアクションは、キャンセル済みの再帰論理をすべて削除します。この操作は元に戻すことはできません。注意してください。"
+
+msgid "Thu"
+msgstr "木"
+
+msgid "Time in seconds between retries"
+msgstr "次に再試行するまでの時間 (秒単位)"
+
+msgid "Total"
+msgstr "合計"
+
+msgid "Troubleshooting"
+msgstr "トラブルシューティング"
+
+msgid "Trying to abort the task"
+msgstr "タスクを中断しようとしています"
+
+msgid "Trying to cancel step"
+msgstr ""
+
+msgid "Tue"
+msgstr "火"
+
+msgid "Type %s for search_params is not supported"
+msgstr "search_params のタイプ %s はサポートされていません"
+
+msgid "UUID of the task"
+msgstr "タスクの UUID"
+
+msgid "Undo selection"
+msgstr "元に戻す"
+
+msgid "Unlimited"
+msgstr "無制限"
+
+msgid "Unlock"
+msgstr "ロック解除"
+
+msgid "Update recurring logic"
+msgstr "再帰論理を更新"
+
+msgid "Url pointing to the task troubleshooting documentation. It should contain %{label} placeholder, that will be replaced with normalized task label (restricted to only alphanumeric characters)). %{version} placeholder is also available."
+msgstr "タスクのトラブルシューティングドキュメントを参照する URL。％{label} プレースホルダーを含める必要があります。これは、正規化されたタスクラベル (英数字のみ) に置き換えられます。また、％{version} プレースホルダーも利用できます。"
+
+msgid "User search_params requires user_id to be specified"
+msgstr "ユーザー search_params では user_id を指定する必要があります"
+
+msgid "Wed"
+msgstr "水"
+
+msgid "With focus on last"
+msgstr "フォーカスする時間: 過去 "
+
+msgid "Yes"
+msgstr "はい"
+
+msgid "activation key"
+msgstr "アクティベーションキー"
+
+msgid "cannot be cancelled with force at the moment."
+msgstr ""
+
+msgid "content view"
+msgstr "コンテンツビュー"
+
+msgid "content view version"
+msgstr "コンテンツビューのバージョン"
+
+msgid "could not be resumed"
+msgstr "再開できませんでした"
+
+msgid "error"
+msgstr "エラー"
+
+#. TRANSLATORS: this translation is referring to an option which is a time interval
+msgid "is day of month (range: 1-31)"
+msgstr "日 (範囲: 1〜31)"
+
+#. TRANSLATORS: this translation is referring to an option which is a time interval
+msgid "is day of week (range: 0-6)"
+msgstr "曜日 (範囲: 0〜6)"
+
+#. TRANSLATORS: this translation is referring to an option which is a time interval
+msgid "is hour (range: 0-23)"
+msgstr "時間 (範囲: 0〜23)"
+
+#. TRANSLATORS: this translation is referring to an option which is a time interval
+msgid "is minute (range: 0-59)"
+msgstr "分 (範囲: 0〜59)"
+
+#. TRANSLATORS: this translation is referring to an option which is a time interval
+msgid "is month (range: 1-12)"
+msgstr "月 (範囲: 1〜12)"
+
+msgid "last"
+msgstr "過去"
+
+msgid "mode"
+msgstr "モード"
+
+msgid "mode has to be one of %{allowed_modes}"
+msgstr "モードは %{allowed_modes} のいずれかである必要があります"
+
+msgid "older"
+msgstr "前"
+
+msgid "organization"
+msgstr "組織"
+
+msgid "paused"
+msgstr "一時停止中"
+
+msgid "product"
+msgstr "製品"
+
+msgid "repository"
+msgstr "リポジトリー"
+
+msgid "resources cannot be unlocked at the moment."
+msgstr ""
+
+msgid "resources were unlocked "
+msgstr ""
+
+msgid "resources were unlocked with force."
+msgstr ""
+
+msgid "result"
+msgstr "結果"
+
+msgid "running"
+msgstr "実行中"
+
+msgid "scheduled"
+msgstr "スケジュール済み"
+
+msgid "seconds"
+msgstr "秒"
+
+msgid "state"
+msgstr "状態"
+
+msgid "stopped"
+msgstr "停止"
+
+msgid "success"
+msgstr "成功"
+
+msgid "system"
+msgstr "システム"
+
+msgid "task has to be cancellable"
+msgstr "タスクはキャンセル可能でなければなりません"
+
+msgid "task has to be resumable"
+msgstr "タスクは再開可能でなければなりません"
+
+msgid "tasks."
+msgstr "タスク。"
+
+msgid "time"
+msgstr "時間"
+
+msgid "troubleshooting documentation"
+msgstr "トラブルシューティングドキュメント"
+
+msgid "user"
+msgstr "ユーザー"
+
+msgid "warning"
+msgstr "警告!"
+
+msgid "was cancelled"
+msgstr "キャンセルされました"
+
+msgid "was resumed"
+msgstr "再開されました"
+
+msgid "week"
+msgstr "1 週間"
