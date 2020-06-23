@@ -5,3 +5,5 @@ export const API = {
   delete: jest.fn(),
   patch: jest.fn(),
 };
+
+export const get = data => ({ type: 'some-type', ...data });

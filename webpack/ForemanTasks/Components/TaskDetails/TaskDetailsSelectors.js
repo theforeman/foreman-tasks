@@ -1,89 +1,105 @@
+import { selectAPIResponse } from 'foremanReact/redux/API/APISelectors';
+import { selectDoesIntervalExist } from 'foremanReact/redux/middlewares/IntervalMiddleware/IntervalSelectors';
 import { selectForemanTasks } from '../../ForemanTasksSelectors';
+import { FOREMAN_TASK_DETAILS } from './TaskDetailsConstants';
 
 export const selectTaskDetails = state =>
   selectForemanTasks(state).taskDetails || {};
 
-export const selectStartAt = state => selectTaskDetails(state).start_at || null;
+export const selectTaskDetailsResponse = state =>
+  selectAPIResponse(state, FOREMAN_TASK_DETAILS);
+
+export const selectStartAt = state =>
+  selectTaskDetailsResponse(state).start_at || null;
 
 export const selectStartBefore = state =>
-  selectTaskDetails(state).start_before || null;
+  selectTaskDetailsResponse(state).start_before || null;
 
 export const selectStartedAt = state =>
-  selectTaskDetails(state).started_at || null;
+  selectTaskDetailsResponse(state).started_at || null;
 
-export const selectEndedAt = state => selectTaskDetails(state).ended_at || null;
+export const selectEndedAt = state =>
+  selectTaskDetailsResponse(state).ended_at || null;
 
-export const selectInput = state => selectTaskDetails(state).input || [];
+export const selectInput = state =>
+  selectTaskDetailsResponse(state).input || [];
 
-export const selectOutput = state => selectTaskDetails(state).output || {};
+export const selectOutput = state =>
+  selectTaskDetailsResponse(state).output || {};
 
 export const selectResumable = state =>
-  selectTaskDetails(state).resumable || false;
+  selectTaskDetailsResponse(state).resumable || false;
 
 export const selectCancellable = state =>
-  selectTaskDetails(state).cancellable || false;
+  selectTaskDetailsResponse(state).cancellable || false;
 
 export const selectErrors = state => {
-  const { humanized } = selectTaskDetails(state);
+  const { humanized } = selectTaskDetailsResponse(state);
   return humanized ? humanized.errors : [];
 };
 
 export const selectProgress = state =>
-  selectTaskDetails(state).progress
+  selectTaskDetailsResponse(state).progress
     ? Math.trunc(selectTaskDetails(state).progress * 100)
     : 0;
 
 export const selectUsername = state =>
-  selectTaskDetails(state).username || null;
+  selectTaskDetailsResponse(state).username || null;
 
-export const selectLabel = state => selectTaskDetails(state).label || null;
+export const selectLabel = state =>
+  selectTaskDetailsResponse(state).label || null;
 
 export const selectExecutionPlan = state =>
-  selectTaskDetails(state).execution_plan || {};
+  selectTaskDetailsResponse(state).execution_plan || {};
 
 export const selectFailedSteps = state =>
-  selectTaskDetails(state).failed_steps || [];
+  selectTaskDetailsResponse(state).failed_steps || [];
 
 export const selectRunningSteps = state =>
-  selectTaskDetails(state).running_steps || [];
+  selectTaskDetailsResponse(state).running_steps || [];
 
-export const selectHelp = state => selectTaskDetails(state).help || null;
+export const selectHelp = state =>
+  selectTaskDetailsResponse(state).help || null;
 
 export const selectHasSubTasks = state =>
-  selectTaskDetails(state).has_sub_tasks || false;
+  selectTaskDetailsResponse(state).has_sub_tasks || false;
 
-export const selectLocks = state => selectTaskDetails(state).locks || [];
+export const selectLocks = state =>
+  selectTaskDetailsResponse(state).locks || [];
 
 export const selectUsernamePath = state =>
-  selectTaskDetails(state).username_path || null;
+  selectTaskDetailsResponse(state).username_path || null;
 
-export const selectAction = state => selectTaskDetails(state).action || '';
+export const selectAction = state =>
+  selectTaskDetailsResponse(state).action || '';
 
-export const selectState = state => selectTaskDetails(state).state || null;
+export const selectState = state =>
+  selectTaskDetailsResponse(state).state || null;
 
-export const selectResult = state => selectTaskDetails(state).result || null;
+export const selectResult = state =>
+  selectTaskDetailsResponse(state).result || null;
 
 export const selectTimeoutId = state =>
-  selectTaskDetails(state).timeoutId || null;
+  selectTaskDetailsResponse(state).timeoutId || null;
 
 export const selectTaskReload = state =>
-  selectTaskDetails(state).taskReload || false;
+  !!selectDoesIntervalExist(state, FOREMAN_TASK_DETAILS);
 
 export const selectParentTask = state =>
-  selectTaskDetails(state).parent_task_id || '';
+  selectTaskDetailsResponse(state).parent_task_id || '';
 
 export const selectExternalId = state =>
-  selectTaskDetails(state).external_id || null;
+  selectTaskDetailsResponse(state).external_id || null;
 
 export const selectDynflowEnableConsole = state =>
-  selectTaskDetails(state).dynflow_enable_console || false;
+  selectTaskDetailsResponse(state).dynflow_enable_console || false;
 
 export const selectCanEdit = state =>
-  selectTaskDetails(state).can_edit || false;
+  selectTaskDetailsResponse(state).can_edit || false;
 
-export const selectStatus = state => selectTaskDetails(state).status;
+export const selectStatus = state => selectTaskDetailsResponse(state).status;
 
 export const selectAPIError = state =>
-  selectTaskDetails(state).APIerror || null;
+  selectTaskDetailsResponse(state).APIerror || null;
 
 export const selectIsData = state => selectTaskDetails(state).isData || null;
