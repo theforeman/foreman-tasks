@@ -18,7 +18,7 @@ Gemspec/OrderedDependencies:
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: final_newline, final_blank_line
-Layout/TrailingBlankLines:
+Layout/TrailingEmptyLines:
   Exclude:
     - 'locale/action_names.rb'
 
@@ -96,7 +96,7 @@ Naming/PredicateName:
 # Offense count: 12
 # Configuration parameters: MinNameLength, AllowNamesEndingInNumbers, AllowedNames, ForbiddenNames.
 # AllowedNames: io, id, to
-Naming/UncommunicativeMethodParamName:
+Naming/MethodParameterName:
   Exclude:
     - 'app/helpers/foreman_tasks/foreman_tasks_helper.rb'
     - 'app/models/foreman_tasks/recurring_logic.rb'

@@ -1,6 +1,6 @@
 namespace :foreman_tasks do
   namespace :cleanup do
-    desc <<-DESC.strip_heredoc
+    desc <<~DESC
       Clean tasks based on filter and age. ENV variables:
 
         * TASK_SEARCH : scoped search filter (example: 'label = "Actions::Foreman::Host::ImportFacts"')

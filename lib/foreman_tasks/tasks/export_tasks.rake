@@ -7,7 +7,7 @@
 require 'csv'
 
 namespace :foreman_tasks do
-  desc <<-DESC.strip_heredoc
+  desc <<~DESC
     Export dynflow tasks based on filter. ENV variables:
 
       * TASK_SEARCH     : scoped search filter (example: 'label = "Actions::Foreman::Host::ImportFacts"')
