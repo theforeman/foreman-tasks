@@ -46,7 +46,8 @@ module ForemanTasks
     end
 
     def progress
-      execution_plan.try(:progress) || 0
+      progress_raw = execution_plan.try(:progress) || 0
+      progress_raw.round(2)
     end
 
     def execution_plan(silence_exception = true)
