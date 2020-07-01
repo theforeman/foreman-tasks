@@ -4,6 +4,7 @@
   "description": "Foreman Tasks =============",
   "main": "index.js",
   "scripts": {
+    "foreman-js:link": "./script/npm_link_foreman_js.sh",
     "lint": "tfm-lint --plugin -d /webpack",
     "test": "tfm-test --plugin",
     "test:watch": "tfm-test --plugin --watchAll",
