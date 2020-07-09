@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ConfirmModal renders ConfirmModal 1`] = `
-<ForemanModal
+<ConnectedForemanModal
   id="modalID"
   title="Some Text Selected Tasks"
 >
   This will some text 1 task(s), putting them in the some state state. Are you sure?
-  <Component>
+  <ForemanModalFooter>
     <Button
       active={false}
       block={false}
@@ -28,8 +28,8 @@ exports[`ConfirmModal renders ConfirmModal 1`] = `
     >
       Yes
     </Button>
-  </Component>
-</ForemanModal>
+  </ForemanModalFooter>
+</ConnectedForemanModal>
 `;
 
 exports[`ConfirmModal renders ConfirmModal for unlock  1`] = `

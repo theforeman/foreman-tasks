@@ -6,32 +6,18 @@ Object {
     "exact": true,
     "path": "/foreman_tasks/tasks",
     "render": [Function],
-    "renderResult": <TasksIndexPage
-      history={Object {}}
-      some="props"
-    />,
+    "renderResult": ShallowWrapper {},
   },
   "showTask": Object {
     "path": "/foreman_tasks/ex_tasks/:id",
     "render": [Function],
-    "renderResult": <ShowTask
-      history={Object {}}
-      some="props"
-    />,
+    "renderResult": ShallowWrapper {},
   },
   "subTasks": Object {
     "exact": true,
     "path": "/foreman_tasks/tasks/:id/sub_tasks",
     "render": [Function],
-    "renderResult": <SubTasksPage
-      history={Object {}}
-      match={
-        Object {
-          "params": Object {},
-        }
-      }
-      some="props"
-    />,
+    "renderResult": ShallowWrapper {},
   },
 }
 `;

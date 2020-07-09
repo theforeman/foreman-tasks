@@ -2,6 +2,18 @@
 
 exports[`TasksTableReducer reducer should handle OPEN_SELECT_ALL 1`] = `
 Object {
+  "tasksTableContent": Object {
+    "error": null,
+    "pagination": Object {
+      "page": 1,
+      "perPage": 20,
+    },
+    "results": Array [],
+    "sortBy": "",
+    "sortOrder": "",
+    "status": "PENDING",
+    "total": 0,
+  },
   "tasksTableQuery": Object {
     "selectedRows": Array [],
     "showSelectAll": true,
@@ -11,6 +23,18 @@ Object {
 
 exports[`TasksTableReducer reducer should handle SELECT_ALL_ROWS 1`] = `
 Object {
+  "tasksTableContent": Object {
+    "error": null,
+    "pagination": Object {
+      "page": 1,
+      "perPage": 20,
+    },
+    "results": Array [],
+    "sortBy": "",
+    "sortOrder": "",
+    "status": "PENDING",
+    "total": 0,
+  },
   "tasksTableQuery": Object {
     "allRowsSelected": true,
     "selectedRows": Array [],
@@ -20,6 +44,18 @@ Object {
 
 exports[`TasksTableReducer reducer should handle SELECT_ROWS 1`] = `
 Object {
+  "tasksTableContent": Object {
+    "error": null,
+    "pagination": Object {
+      "page": 1,
+      "perPage": 20,
+    },
+    "results": Array [],
+    "sortBy": "",
+    "sortOrder": "",
+    "status": "PENDING",
+    "total": 0,
+  },
   "tasksTableQuery": Object {
     "selectedRows": Array [
       1,
@@ -36,6 +72,18 @@ Object {
 
 exports[`TasksTableReducer reducer should handle TASKS_TABLE_SET_PAGINATION 1`] = `
 Object {
+  "tasksTableContent": Object {
+    "error": null,
+    "pagination": Object {
+      "page": 1,
+      "perPage": 20,
+    },
+    "results": Array [],
+    "sortBy": "",
+    "sortOrder": "",
+    "status": "PENDING",
+    "total": 0,
+  },
   "tasksTableQuery": Object {
     "selectedRows": Array [],
   },
@@ -44,6 +92,18 @@ Object {
 
 exports[`TasksTableReducer reducer should handle TASKS_TABLE_SET_SORT 1`] = `
 Object {
+  "tasksTableContent": Object {
+    "error": null,
+    "pagination": Object {
+      "page": 1,
+      "perPage": 20,
+    },
+    "results": Array [],
+    "sortBy": "",
+    "sortOrder": "",
+    "status": "PENDING",
+    "total": 0,
+  },
   "tasksTableQuery": Object {
     "selectedRows": Array [],
   },
@@ -66,6 +126,18 @@ Object {
 
 exports[`TasksTableReducer reducer should handle UNSELECT_ALL_ROWS 1`] = `
 Object {
+  "tasksTableContent": Object {
+    "error": null,
+    "pagination": Object {
+      "page": 1,
+      "perPage": 20,
+    },
+    "results": Array [],
+    "sortBy": "",
+    "sortOrder": "",
+    "status": "PENDING",
+    "total": 0,
+  },
   "tasksTableQuery": Object {
     "allRowsSelected": false,
     "selectedRows": Array [],
@@ -76,6 +148,18 @@ Object {
 
 exports[`TasksTableReducer reducer should handle UNSELECT_ROWS 1`] = `
 Object {
+  "tasksTableContent": Object {
+    "error": null,
+    "pagination": Object {
+      "page": 1,
+      "perPage": 20,
+    },
+    "results": Array [],
+    "sortBy": "",
+    "sortOrder": "",
+    "status": "PENDING",
+    "total": 0,
+  },
   "tasksTableQuery": Object {
     "selectedRows": Array [],
   },
@@ -84,6 +168,18 @@ Object {
 
 exports[`TasksTableReducer reducer should handle UNSELECT_ROWS with all rows selected 1`] = `
 Object {
+  "tasksTableContent": Object {
+    "error": null,
+    "pagination": Object {
+      "page": 1,
+      "perPage": 20,
+    },
+    "results": Array [],
+    "sortBy": "",
+    "sortOrder": "",
+    "status": "PENDING",
+    "total": 0,
+  },
   "tasksTableQuery": Object {
     "allRowsSelected": false,
     "selectedRows": Array [
@@ -98,6 +194,18 @@ Object {
 
 exports[`TasksTableReducer reducer should handle UPDATE_CLICKED 1`] = `
 Object {
+  "tasksTableContent": Object {
+    "error": null,
+    "pagination": Object {
+      "page": 1,
+      "perPage": 20,
+    },
+    "results": Array [],
+    "sortBy": "",
+    "sortOrder": "",
+    "status": "PENDING",
+    "total": 0,
+  },
   "tasksTableQuery": Object {
     "clicked": "task",
     "selectedRows": Array [],
@@ -107,6 +215,18 @@ Object {
 
 exports[`TasksTableReducer reducer should return the initial state 1`] = `
 Object {
+  "tasksTableContent": Object {
+    "error": null,
+    "pagination": Object {
+      "page": 1,
+      "perPage": 20,
+    },
+    "results": Array [],
+    "sortBy": "",
+    "sortOrder": "",
+    "status": "PENDING",
+    "total": 0,
+  },
   "tasksTableQuery": Object {
     "selectedRows": Array [],
   },

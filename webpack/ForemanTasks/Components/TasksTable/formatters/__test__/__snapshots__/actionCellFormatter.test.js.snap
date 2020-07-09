@@ -1,15 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`actionCellFormatter render 1`] = `
-<ActionButton
-  availableActions={
-    Object {
-      "cancellable": true,
+<TableCell
+  align=""
+  className=""
+>
+  <ActionButton
+    availableActions={
+      Object {
+        "cancellable": true,
+      }
     }
-  }
-  canEdit={true}
-  id="some-id"
-  name="some-name"
-  taskActions={Object {}}
-/>
+    canEdit={true}
+    id="some-id"
+    name="some-name"
+    taskActions={Object {}}
+  />
+</TableCell>
 `;
