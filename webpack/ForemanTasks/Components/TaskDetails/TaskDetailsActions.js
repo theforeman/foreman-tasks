@@ -56,7 +56,9 @@ export const refetchTaskDetails = (id, loading) => dispatch => {
 
 const reloadTasksDetails = async (id, dispatch) => {
   try {
-    const { data } = await API.get(`/foreman_tasks/api/tasks/${id}/details`);
+    const { data } = await API.get(
+      `/foreman_tasks/api/tasks/${id}/details?include_permissions`
+    );
     dispatch(requestSuccess(data));
   } catch (error) {
     dispatch(requestFailure(error));
@@ -83,7 +85,9 @@ const getTasksDetails = async (
   refetchTaskDetailsAction
 ) => {
   try {
-    const { data } = await API.get(`/foreman_tasks/api/tasks/${id}/details`);
+    const { data } = await API.get(
+      `/foreman_tasks/api/tasks/${id}/details?include_permissions`
+    );
     dispatch(requestSuccess(data));
     if (data.state !== 'stopped') {
       dispatch(taskReloadStart(timeoutId, refetchTaskDetailsAction, id));

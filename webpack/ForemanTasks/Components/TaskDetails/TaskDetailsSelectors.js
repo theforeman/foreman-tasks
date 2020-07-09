@@ -77,3 +77,6 @@ export const selectExternalId = state =>
 
 export const selectDynflowEnableConsole = state =>
   selectTaskDetails(state).dynflow_enable_console || false;
+
+export const selectCanEdit = state =>
+  selectTaskDetails(state).can_edit || false;

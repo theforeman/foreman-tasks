@@ -39,6 +39,7 @@ export const selectResults = createSelector(
         ...result.available_actions,
         stoppable: result.state !== 'stopped',
       },
+      canEdit: result.can_edit,
     }))
 );
 

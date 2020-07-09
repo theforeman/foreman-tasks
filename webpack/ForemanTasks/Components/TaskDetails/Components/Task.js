@@ -34,6 +34,7 @@ const Task = props => {
     action,
     dynflowEnableConsole,
     taskProgressToggle,
+    canEdit,
   } = props;
   const forceUnlock = () => {
     if (!taskReload) {
@@ -47,6 +48,12 @@ const Task = props => {
     }
     unlockTaskRequest(id, action);
   };
+  const editActionsTitle = canEdit
+    ? undefined
+    : __('You do not have permission');
+  const dynflowTitle = dynflowEnableConsole
+    ? undefined
+    : `dynflow_enable_console ${__('Setting is off')}`;
   return (
     <React.Fragment>
       <UnlockModal onClick={unlock} />
@@ -74,12 +81,16 @@ const Task = props => {
               rel="noopener noreferrer"
               target="_blank"
             >
-              {__('Dynflow console')}
+              <span title={dynflowTitle} data-original-title={dynflowTitle}>
+                {__('Dynflow console')}
+              </span>
             </Button>
             <Button
               className="resume-button"
               bsSize="small"
-              disabled={!resumable}
+              title={editActionsTitle}
+              data-original-title={editActionsTitle}
+              disabled={!canEdit || !resumable}
               onClick={() => {
                 if (!taskReload) {
                   taskProgressToggle();
@@ -92,7 +103,9 @@ const Task = props => {
             <Button
               className="cancel-button"
               bsSize="small"
-              disabled={!cancellable}
+              title={editActionsTitle}
+              data-original-title={editActionsTitle}
+              disabled={!canEdit || !cancellable}
               onClick={() => {
                 if (!taskReload) {
                   taskProgressToggle();
@@ -123,16 +136,20 @@ const Task = props => {
             <Button
               className="unlock-button"
               bsSize="small"
-              disabled={state !== 'paused'}
+              disabled={!canEdit || state !== 'paused'}
               onClick={unlockModalActions.setModalOpen}
+              title={editActionsTitle}
+              data-original-title={editActionsTitle}
             >
               {__('Unlock')}
             </Button>
             <Button
               className="force-unlock-button"
               bsSize="small"
-              disabled={state === 'stopped'}
+              disabled={!canEdit || state === 'stopped'}
               onClick={forceUnlockModalActions.setModalOpen}
+              title={editActionsTitle}
+              data-original-title={editActionsTitle}
             >
               {__('Force Unlock')}
             </Button>
@@ -160,6 +177,7 @@ Task.propTypes = {
   cancelTaskRequest: PropTypes.func,
   resumeTaskRequest: PropTypes.func,
   dynflowEnableConsole: PropTypes.bool,
+  canEdit: PropTypes.bool,
 };
 
 Task.defaultProps = {
@@ -177,6 +195,7 @@ Task.defaultProps = {
   cancelTaskRequest: () => null,
   resumeTaskRequest: () => null,
   dynflowEnableConsole: false,
+  canEdit: false,
 };
 
 export default Task;

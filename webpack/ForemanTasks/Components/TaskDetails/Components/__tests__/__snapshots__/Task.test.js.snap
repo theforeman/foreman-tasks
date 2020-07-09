@@ -51,7 +51,9 @@ exports[`Task rendering render with some Props 1`] = `
           rel="noopener noreferrer"
           target="_blank"
         >
-          Dynflow console
+          <span>
+            Dynflow console
+          </span>
         </Button>
         <Button
           active={false}
@@ -129,6 +131,7 @@ exports[`Task rendering render with some Props 1`] = `
     </Row>
     <TaskInfo
       action=""
+      canEdit={true}
       cancelTaskRequest={[Function]}
       cancellable={false}
       dynflowEnableConsole={true}
@@ -210,7 +213,12 @@ exports[`Task rendering render without Props 1`] = `
           rel="noopener noreferrer"
           target="_blank"
         >
-          Dynflow console
+          <span
+            data-original-title="dynflow_enable_console Setting is off"
+            title="dynflow_enable_console Setting is off"
+          >
+            Dynflow console
+          </span>
         </Button>
         <Button
           active={false}
@@ -219,8 +227,10 @@ exports[`Task rendering render without Props 1`] = `
           bsSize="small"
           bsStyle="default"
           className="resume-button"
+          data-original-title="You do not have permission"
           disabled={true}
           onClick={[Function]}
+          title="You do not have permission"
         >
           Resume
         </Button>
@@ -231,8 +241,10 @@ exports[`Task rendering render without Props 1`] = `
           bsSize="small"
           bsStyle="default"
           className="cancel-button"
+          data-original-title="You do not have permission"
           disabled={true}
           onClick={[Function]}
+          title="You do not have permission"
         >
           Cancel
         </Button>
@@ -243,8 +255,10 @@ exports[`Task rendering render without Props 1`] = `
           bsSize="small"
           bsStyle="default"
           className="unlock-button"
+          data-original-title="You do not have permission"
           disabled={true}
           onClick={[MockFunction]}
+          title="You do not have permission"
         >
           Unlock
         </Button>
@@ -255,8 +269,10 @@ exports[`Task rendering render without Props 1`] = `
           bsSize="small"
           bsStyle="default"
           className="force-unlock-button"
-          disabled={false}
+          data-original-title="You do not have permission"
+          disabled={true}
           onClick={[MockFunction]}
+          title="You do not have permission"
         >
           Force Unlock
         </Button>
@@ -264,6 +280,7 @@ exports[`Task rendering render without Props 1`] = `
     </Row>
     <TaskInfo
       action=""
+      canEdit={false}
       cancelTaskRequest={[Function]}
       cancellable={false}
       dynflowEnableConsole={false}

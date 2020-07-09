@@ -15,6 +15,7 @@ exports[`TaskDetails rendering render with min Props 1`] = `
     >
       <Task
         action=""
+        canEdit={false}
         cancelStep={[MockFunction]}
         cancelTaskRequest={[Function]}
         cancellable={false}

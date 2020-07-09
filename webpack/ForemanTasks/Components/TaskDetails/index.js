@@ -32,6 +32,7 @@ import {
   selectParentTask,
   selectExternalId,
   selectDynflowEnableConsole,
+  selectCanEdit,
 } from './TaskDetailsSelectors';
 
 const mapStateToProps = state => ({
@@ -62,6 +63,7 @@ const mapStateToProps = state => ({
   parentTask: selectParentTask(state),
   externalId: selectExternalId(state),
   dynflowEnableConsole: selectDynflowEnableConsole(state),
+  canEdit: selectCanEdit(state),
 });
 
 const mapDispatchToProps = dispatch =>

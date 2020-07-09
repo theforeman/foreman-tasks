@@ -18,6 +18,7 @@ jest.mock('foremanReact/redux/API');
 const task = {
   id: 'some-id',
   name: 'some-name',
+  canEdit: true,
 };
 
 const fixtures = {
@@ -140,6 +141,18 @@ const fixtures = {
       url: 'some-url',
       parentTaskID: 'parent',
     }),
+  'handles bulkCancelById requests with canEdit false': () => {
+    const selected = [{ ...task, isCancellable: true, canEdit: false }];
+    return bulkCancelById({ selected, url: 'some-url' });
+  },
+  'handles bulkResumeById requests with canEdit false': () => {
+    const selected = [{ ...task, isResumable: false, canEdit: false }];
+    return bulkResumeById({ selected, url: 'some-url' });
+  },
+  'handles bulkForceCancelById requests with canEdit false': () => {
+    const selected = [{ ...task, isResumable: false, canEdit: false }];
+    return bulkForceCancelById({ selected, url: 'some-url' });
+  },
 };
 
 describe('TasksTable bulk actions', () => {

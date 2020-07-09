@@ -22,6 +22,7 @@ const state = {
             id: 1,
             action: 'action1',
             available_actions: { cancellable: true },
+            can_edit: true,
           },
           { id: 2, action: 'action2', available_actions: { resumable: true } },
         ],
