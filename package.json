@@ -6,9 +6,9 @@
   "scripts": {
     "foreman-js:link": "./script/npm_link_foreman_js.sh",
     "lint": "tfm-lint --plugin -d /webpack",
-    "test": "tfm-test --plugin",
-    "test:watch": "tfm-test --plugin --watchAll",
-    "test:current": "tfm-test --plugin --watch",
+    "test": "npx jest webpack",
+    "test:watch": "npx jest webpack --watchAll",
+    "test:current": "npx jest webpack --watch",
     "publish-coverage": "tfm-publish-coverage",
     "stories": "tfm-stories --plugin",
     "stories:build": "tfm-build-stories --plugin",
@@ -22,9 +22,6 @@
   "bugs": {
     "url": "http://projects.theforeman.org/projects/foreman-tasks/issues"
   },
-  "peerDependencies": {
-    "@theforeman/vendor": ">= 4.0.2"
-  },
   "dependencies": {
     "c3": "^0.4.11",
     "humanize-duration": "^3.20.1",
@@ -33,12 +30,14 @@
   },
   "devDependencies": {
     "@babel/core": "^7.7.0",
-    "@theforeman/builder": "^4.0.2",
-    "@theforeman/eslint-plugin-foreman": "4.0.5",
-    "@theforeman/stories": "^4.0.2",
-    "@theforeman/test": "^4.0.2",
-    "@theforeman/vendor-dev": "^4.0.2",
+    "@theforeman/builder": "^4.9.0",
+    "@theforeman/eslint-plugin-foreman": "^4.9.0",
+    "@theforeman/find-foreman": "^4.9.0",
+    "@theforeman/stories": "^4.9.0",
+    "@theforeman/test": "^4.9.0",
     "babel-eslint": "^10.0.3",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "eslint": "^6.7.2",
     "jed": "^1.1.1",
     "prettier": "^1.13.5",
