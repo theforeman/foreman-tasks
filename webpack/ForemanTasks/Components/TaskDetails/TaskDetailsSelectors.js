@@ -83,6 +83,7 @@ export const selectCanEdit = state =>
 
 export const selectStatus = state => selectTaskDetails(state).status;
 
-export const selectError = state => selectTaskDetails(state).error || null;
+export const selectAPIError = state =>
+  selectTaskDetails(state).APIerror || null;
 
 export const selectIsData = state => selectTaskDetails(state).isData || null;

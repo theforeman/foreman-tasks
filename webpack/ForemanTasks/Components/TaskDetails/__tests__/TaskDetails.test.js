@@ -5,6 +5,11 @@ import { minProps } from './TaskDetails.fixtures';
 
 const fixtures = {
   'render with loading Props': { ...minProps, status: 'PENDING' },
+  'render with error Props': {
+    ...minProps,
+    status: 'ERROR',
+    APIerror: { message: 'some-error' },
+  },
   'render with min Props': minProps,
 };
 

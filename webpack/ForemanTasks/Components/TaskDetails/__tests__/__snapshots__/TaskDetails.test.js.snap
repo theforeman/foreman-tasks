@@ -1,5 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`TaskDetails rendering render with error Props 1`] = `
+<MessageBox
+  icontype="error-circle-o"
+  key="tasks-table-error"
+  msg="Could not receive data: some-error"
+/>
+`;
+
 exports[`TaskDetails rendering render with loading Props 1`] = `
 <div
   className="task-details-react well"
@@ -87,6 +95,7 @@ exports[`TaskDetails rendering render with min Props 1`] = `
       title="Task"
     >
       <Task
+        APIerror={null}
         action=""
         canEdit={false}
         cancelStep={[MockFunction]}
@@ -94,7 +103,6 @@ exports[`TaskDetails rendering render with min Props 1`] = `
         cancellable={false}
         dynflowEnableConsole={false}
         endedAt=""
-        error={null}
         errors={Array []}
         executionPlan={Object {}}
         externalId=""
@@ -112,8 +120,17 @@ exports[`TaskDetails rendering render with min Props 1`] = `
                 null,
                 [MockFunction],
               ],
+              Array [
+                "a15dd820-32f1-4ced-9ab7-c0fab8234c47",
+                null,
+                [MockFunction],
+              ],
             ],
             "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
               Object {
                 "type": "return",
                 "value": undefined,

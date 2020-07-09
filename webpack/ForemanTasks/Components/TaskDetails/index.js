@@ -34,7 +34,7 @@ import {
   selectDynflowEnableConsole,
   selectCanEdit,
   selectStatus,
-  selectError,
+  selectAPIError,
   selectIsData,
 } from './TaskDetailsSelectors';
 
@@ -68,7 +68,7 @@ const mapStateToProps = state => ({
   dynflowEnableConsole: selectDynflowEnableConsole(state),
   canEdit: selectCanEdit(state),
   status: selectStatus(state),
-  error: selectError(state),
+  APIerror: selectAPIError(state),
   isData: selectIsData(state),
 });
 

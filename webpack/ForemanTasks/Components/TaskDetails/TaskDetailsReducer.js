@@ -31,7 +31,7 @@ export default (state = initialState, action) => {
         timeoutId,
       });
     case FOREMAN_TASK_DETAILS_FETCH_TASK_FAILURE:
-      return state.merge({ status: STATUS.ERROR, error: payload });
+      return state.merge({ status: STATUS.ERROR, APIerror: payload });
     case FOREMAN_TASK_DETAILS_STOP_POLLING:
       return state.merge({ taskReload: false, timeoutId: null });
     case FOREMAN_TASK_DETAILS_START_POLLING:

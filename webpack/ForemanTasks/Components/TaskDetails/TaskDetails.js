@@ -4,6 +4,7 @@ import { Tab, Tabs } from 'patternfly-react';
 import Skeleton from 'react-loading-skeleton';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { STATUS } from 'foremanReact/constants';
+import MessageBox from 'foremanReact/components/common/MessageBox';
 import Task from './Components/Task';
 import RunningSteps from './Components/RunningSteps';
 import Errors from './Components/Errors';
@@ -53,11 +54,22 @@ class TaskDetails extends Component {
       cancelStep,
       status,
       isData,
+      APIerror,
     } = this.props;
     const id = getTaskID();
     const resumable = executionPlan ? executionPlan.state === 'paused' : false;
     const cancellable = executionPlan ? executionPlan.cancellable : false;
     const loading = status === STATUS.PENDING && !isData;
+
+    if (status === STATUS.ERROR) {
+      return (
+        <MessageBox
+          key="tasks-table-error"
+          icontype="error-circle-o"
+          msg={__(`Could not receive data: ${APIerror && APIerror.message}`)}
+        />
+      );
+    }
     return (
       <div className="task-details-react well">
         <Tabs defaultActiveKey={1} animation={false} id="task-details-tabs">
@@ -109,6 +121,8 @@ TaskDetails.propTypes = {
   runningSteps: PropTypes.array,
   cancelStep: PropTypes.func.isRequired,
   taskReload: PropTypes.bool.isRequired,
+  status: PropTypes.oneOf(Object.keys(STATUS)),
+  APIerror: PropTypes.object,
   ...Task.propTypes,
   ...Errors.propTypes,
   ...Locks.propTypes,
@@ -117,6 +131,8 @@ TaskDetails.propTypes = {
 TaskDetails.defaultProps = {
   label: '',
   runningSteps: [],
+  APIerror: null,
+  status: STATUS.PENDING,
   ...Task.defaultProps,
   ...RunningSteps.defaultProps,
   ...Errors.defaultProps,

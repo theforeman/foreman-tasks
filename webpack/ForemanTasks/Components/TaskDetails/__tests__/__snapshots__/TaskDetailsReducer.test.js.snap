@@ -2,7 +2,7 @@
 
 exports[`TaskDetails - Reducer should handle FOREMAN_TASK_DETAILS_FETCH_TASK_FAILURE 1`] = `
 Object {
-  "error": "some-error",
+  "APIerror": "some-error",
   "isData": false,
   "status": "ERROR",
 }

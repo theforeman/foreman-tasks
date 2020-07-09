@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { Grid, Row, Col, Button } from 'patternfly-react';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { useForemanModal } from 'foremanReact/components/ForemanModal/ForemanModalHooks';
-import { STATUS } from 'foremanReact/constants';
-import MessageBox from 'foremanReact/components/common/MessageBox';
 import TaskInfo from './TaskInfo';
 import {
   UNLOCK_MODAL,
@@ -37,8 +35,6 @@ const Task = props => {
     dynflowEnableConsole,
     taskProgressToggle,
     canEdit,
-    status,
-    error,
   } = props;
   const forceUnlock = () => {
     if (!taskReload) {
@@ -59,15 +55,6 @@ const Task = props => {
     ? undefined
     : `dynflow_enable_console ${__('Setting is off')}`;
 
-  if (status === STATUS.ERROR) {
-    return (
-      <MessageBox
-        key="tasks-table-error"
-        icontype="error-circle-o"
-        msg={__(`Could not receive data: ${error && error.message}`)}
-      />
-    );
-  }
   return (
     <React.Fragment>
       <UnlockModal onClick={unlock} />
@@ -192,8 +179,6 @@ Task.propTypes = {
   resumeTaskRequest: PropTypes.func,
   dynflowEnableConsole: PropTypes.bool,
   canEdit: PropTypes.bool,
-  status: PropTypes.oneOf(Object.keys(STATUS)),
-  error: PropTypes.object,
 };
 
 Task.defaultProps = {
@@ -213,8 +198,6 @@ Task.defaultProps = {
   dynflowEnableConsole: false,
   canEdit: false,
   loading: false,
-  error: null,
-  status: STATUS.PENDING,
 };
 
 export default Task;
