@@ -21,14 +21,7 @@ exports[`TaskDetails rendering render with loading Props 1`] = `
       eventKey={1}
       title="Task"
     >
-      <G
-        circle={false}
-        count={1}
-        duration={1.2}
-        height={350}
-        width={null}
-        wrapper={null}
-      />
+      <TaskSkeleton />
     </Tab>
     <Tab
       disabled={true}
@@ -112,17 +105,17 @@ exports[`TaskDetails rendering render with min Props 1`] = `
             "calls": Array [
               Array [
                 "a15dd820-32f1-4ced-9ab7-c0fab8234c47",
-                null,
+                undefined,
                 [MockFunction],
               ],
               Array [
                 "a15dd820-32f1-4ced-9ab7-c0fab8234c47",
-                null,
+                undefined,
                 [MockFunction],
               ],
               Array [
                 "a15dd820-32f1-4ced-9ab7-c0fab8234c47",
-                null,
+                undefined,
                 [MockFunction],
               ],
             ],
@@ -147,7 +140,6 @@ exports[`TaskDetails rendering render with min Props 1`] = `
         id="a15dd820-32f1-4ced-9ab7-c0fab8234c47"
         input={Array []}
         label=""
-        loading={false}
         locks={Array []}
         output={Object {}}
         parentTask=""
@@ -166,7 +158,6 @@ exports[`TaskDetails rendering render with min Props 1`] = `
         taskReload={false}
         taskReloadStart={[MockFunction]}
         taskReloadStop={[MockFunction]}
-        timeoutId={null}
         username=""
         usernamePath=""
       />

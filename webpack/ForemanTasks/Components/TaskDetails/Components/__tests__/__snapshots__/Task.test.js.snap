@@ -1,5 +1,84 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Task rendering render with minimal Props 1`] = `
+<Fragment>
+  <UnlockModal
+    id="unlockModal"
+    onClick={[Function]}
+  />
+  <ForceUnlockModal
+    id="forceUnlockModal"
+    onClick={[Function]}
+    selectedRowsLen={1}
+  />
+  <Grid
+    bsClass="container"
+    componentClass="div"
+    fluid={false}
+  >
+    <Row
+      bsClass="row"
+      componentClass="div"
+    >
+      <TaskButtons
+        action=""
+        canEdit={false}
+        cancelTaskRequest={[Function]}
+        cancellable={false}
+        dynflowEnableConsole={false}
+        endedAt=""
+        errors={Array []}
+        externalId=""
+        hasSubTasks={false}
+        help=""
+        id="test"
+        output=""
+        parentTask=""
+        progress={0}
+        result="error"
+        resumable={false}
+        resumeTaskRequest={[Function]}
+        startAt=""
+        startBefore=""
+        startedAt=""
+        state=""
+        taskProgressToggle={[MockFunction]}
+        taskReload={false}
+        username=""
+        usernamePath=""
+      />
+    </Row>
+    <TaskInfo
+      action=""
+      canEdit={false}
+      cancelTaskRequest={[Function]}
+      cancellable={false}
+      dynflowEnableConsole={false}
+      endedAt=""
+      errors={Array []}
+      externalId=""
+      hasSubTasks={false}
+      help=""
+      id="test"
+      output=""
+      parentTask=""
+      progress={0}
+      result="error"
+      resumable={false}
+      resumeTaskRequest={[Function]}
+      startAt=""
+      startBefore=""
+      startedAt=""
+      state=""
+      taskProgressToggle={[MockFunction]}
+      taskReload={false}
+      username=""
+      usernamePath=""
+    />
+  </Grid>
+</Fragment>
+`;
+
 exports[`Task rendering render with some Props 1`] = `
 <Fragment>
   <UnlockModal
@@ -20,114 +99,34 @@ exports[`Task rendering render with some Props 1`] = `
       bsClass="row"
       componentClass="div"
     >
-      <Col
-        bsClass="col"
-        componentClass="div"
-        xs={12}
-      >
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsSize="small"
-          bsStyle="default"
-          className="reload-button"
-          disabled={false}
-        >
-          <span
-            className="glyphicon glyphicon-refresh spin"
-          />
-          Stop  auto-reloading
-        </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsSize="small"
-          bsStyle="default"
-          className="dynflow-button"
-          disabled={false}
-          href="/foreman_tasks/dynflow/"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <span>
-            Dynflow console
-          </span>
-        </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsSize="small"
-          bsStyle="default"
-          className="resume-button"
-          disabled={true}
-          onClick={[Function]}
-        >
-          Resume
-        </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsSize="small"
-          bsStyle="default"
-          className="cancel-button"
-          disabled={true}
-          onClick={[Function]}
-        >
-          Cancel
-        </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsSize="small"
-          bsStyle="default"
-          className="parent-button"
-          disabled={false}
-          href="/foreman_tasks/tasks/parent-id"
-        >
-          Parent task
-        </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsSize="small"
-          bsStyle="default"
-          className="subtask-button"
-          disabled={false}
-          href="/foreman_tasks/tasks/test/sub_tasks"
-        >
-          Sub tasks
-        </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsSize="small"
-          bsStyle="default"
-          className="unlock-button"
-          disabled={false}
-          onClick={[MockFunction]}
-        >
-          Unlock
-        </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsSize="small"
-          bsStyle="default"
-          className="force-unlock-button"
-          disabled={false}
-          onClick={[MockFunction]}
-        >
-          Force Unlock
-        </Button>
-      </Col>
+      <TaskButtons
+        action=""
+        canEdit={true}
+        cancelTaskRequest={[Function]}
+        cancellable={false}
+        dynflowEnableConsole={true}
+        endedAt=""
+        errors={Array []}
+        externalId=""
+        hasSubTasks={true}
+        help=""
+        id="test"
+        output=""
+        parentTask="parent-id"
+        progress={0}
+        result="error"
+        resumable={false}
+        resumeTaskRequest={[Function]}
+        startAt=""
+        startBefore=""
+        startedAt=""
+        state="paused"
+        status="RESOLVED"
+        taskProgressToggle={[MockFunction]}
+        taskReload={true}
+        username=""
+        usernamePath=""
+      />
     </Row>
     <TaskInfo
       action=""
@@ -141,11 +140,9 @@ exports[`Task rendering render with some Props 1`] = `
       hasSubTasks={true}
       help=""
       id="test"
-      loading={false}
       output=""
       parentTask="parent-id"
       progress={0}
-      refetchTaskDetails={[Function]}
       result="error"
       resumable={false}
       resumeTaskRequest={[Function]}
@@ -154,159 +151,8 @@ exports[`Task rendering render with some Props 1`] = `
       startedAt=""
       state="paused"
       status="RESOLVED"
+      taskProgressToggle={[MockFunction]}
       taskReload={true}
-      taskReloadStop={[Function]}
-      timeoutId={null}
-      username=""
-      usernamePath=""
-    />
-  </Grid>
-</Fragment>
-`;
-
-exports[`Task rendering render without Props 1`] = `
-<Fragment>
-  <UnlockModal
-    id="unlockModal"
-    onClick={[Function]}
-  />
-  <ForceUnlockModal
-    id="forceUnlockModal"
-    onClick={[Function]}
-    selectedRowsLen={1}
-  />
-  <Grid
-    bsClass="container"
-    componentClass="div"
-    fluid={false}
-  >
-    <Row
-      bsClass="row"
-      componentClass="div"
-    >
-      <Col
-        bsClass="col"
-        componentClass="div"
-        xs={12}
-      >
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsSize="small"
-          bsStyle="default"
-          className="reload-button"
-          disabled={false}
-        >
-          <span
-            className="glyphicon glyphicon-refresh "
-          />
-          Start  auto-reloading
-        </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsSize="small"
-          bsStyle="default"
-          className="dynflow-button"
-          disabled={true}
-          href="/foreman_tasks/dynflow/"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <span
-            data-original-title="dynflow_enable_console Setting is off"
-            title="dynflow_enable_console Setting is off"
-          >
-            Dynflow console
-          </span>
-        </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsSize="small"
-          bsStyle="default"
-          className="resume-button"
-          data-original-title="You do not have permission"
-          disabled={true}
-          onClick={[Function]}
-          title="You do not have permission"
-        >
-          Resume
-        </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsSize="small"
-          bsStyle="default"
-          className="cancel-button"
-          data-original-title="You do not have permission"
-          disabled={true}
-          onClick={[Function]}
-          title="You do not have permission"
-        >
-          Cancel
-        </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsSize="small"
-          bsStyle="default"
-          className="unlock-button"
-          data-original-title="You do not have permission"
-          disabled={true}
-          onClick={[MockFunction]}
-          title="You do not have permission"
-        >
-          Unlock
-        </Button>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsSize="small"
-          bsStyle="default"
-          className="force-unlock-button"
-          data-original-title="You do not have permission"
-          disabled={true}
-          onClick={[MockFunction]}
-          title="You do not have permission"
-        >
-          Force Unlock
-        </Button>
-      </Col>
-    </Row>
-    <TaskInfo
-      action=""
-      canEdit={false}
-      cancelTaskRequest={[Function]}
-      cancellable={false}
-      dynflowEnableConsole={false}
-      endedAt=""
-      errors={Array []}
-      externalId=""
-      hasSubTasks={false}
-      help=""
-      id="test"
-      loading={false}
-      output=""
-      parentTask=""
-      progress={0}
-      refetchTaskDetails={[Function]}
-      result="error"
-      resumable={false}
-      resumeTaskRequest={[Function]}
-      startAt=""
-      startBefore=""
-      startedAt=""
-      state=""
-      taskReload={false}
-      taskReloadStop={[Function]}
-      timeoutId={null}
       username=""
       usernamePath=""
     />

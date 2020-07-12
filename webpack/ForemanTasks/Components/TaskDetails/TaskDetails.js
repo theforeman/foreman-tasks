@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Tab, Tabs } from 'patternfly-react';
-import Skeleton from 'react-loading-skeleton';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { STATUS } from 'foremanReact/constants';
 import MessageBox from 'foremanReact/components/common/MessageBox';
@@ -11,13 +10,13 @@ import Errors from './Components/Errors';
 import Locks from './Components/Locks';
 import Raw from './Components/Raw';
 import { getTaskID } from './TasksDetailsHelper';
+import { TaskSkeleton } from './Components/TaskSkeleton';
 
 import './TaskDetails.scss';
 
 class TaskDetails extends Component {
   componentDidMount() {
     const { timeoutId, refetchTaskDetails, fetchTaskDetails } = this.props;
-
     fetchTaskDetails(getTaskID(), timeoutId, refetchTaskDetails);
   }
   componentWillUnmount() {
@@ -27,18 +26,17 @@ class TaskDetails extends Component {
     const {
       timeoutId,
       refetchTaskDetails,
-      id,
       loading,
       taskReloadStop,
       taskReloadStart,
     } = this.props;
+    const id = getTaskID();
     if (timeoutId) {
       taskReloadStop(timeoutId);
     } else {
       taskReloadStart(timeoutId, refetchTaskDetails, id, loading);
     }
   };
-
   render() {
     const {
       externalId,
@@ -61,6 +59,7 @@ class TaskDetails extends Component {
     const cancellable = executionPlan ? executionPlan.cancellable : false;
     const loading = status === STATUS.PENDING && !isData;
 
+    // const loading = true;
     if (status === STATUS.ERROR) {
       return (
         <MessageBox
@@ -75,7 +74,7 @@ class TaskDetails extends Component {
         <Tabs defaultActiveKey={1} animation={false} id="task-details-tabs">
           <Tab eventKey={1} title={__('Task')}>
             {loading ? (
-              <Skeleton height={350} />
+              <TaskSkeleton />
             ) : (
               <Task
                 {...{
