@@ -38,7 +38,10 @@ export const taskReloadStart = (
   loading = false
 ) => {
   if (!timeoutId) {
-    timeoutId = setInterval(() => refetchTaskDetails(id, loading), 5000);
+    timeoutId = setInterval(
+      () => refetchTaskDetails(id, loading, timeoutId),
+      5000
+    );
   }
   return {
     type: FOREMAN_TASK_DETAILS_START_POLLING,
@@ -46,23 +49,23 @@ export const taskReloadStart = (
   };
 };
 
-export const refetchTaskDetails = (id, loading) => dispatch => {
+export const refetchTaskDetails = (id, loading, timeoutId) => dispatch => {
   if (!loading) {
     showLoading();
     dispatch(startRequest());
-    reloadTasksDetails(id, dispatch);
+    reloadTasksDetails(id, timeoutId, dispatch);
   }
 };
 
-const reloadTasksDetails = async (id, dispatch) => {
+const reloadTasksDetails = async (id, timeoutId, dispatch) => {
   try {
     const { data } = await API.get(
       `/foreman_tasks/api/tasks/${id}/details?include_permissions`
     );
     dispatch(requestSuccess(data));
   } catch (error) {
+    dispatch(taskReloadStop(timeoutId));
     dispatch(requestFailure(error));
-    document.location.reload();
   } finally {
     hideLoading();
   }
@@ -94,6 +97,7 @@ const getTasksDetails = async (
     }
   } catch (error) {
     dispatch(requestFailure(error));
+    if (timeoutId) dispatch(taskReloadStop(timeoutId));
   } finally {
     hideLoading();
   }

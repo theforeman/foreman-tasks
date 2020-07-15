@@ -80,3 +80,10 @@ export const selectDynflowEnableConsole = state =>
 
 export const selectCanEdit = state =>
   selectTaskDetails(state).can_edit || false;
+
+export const selectStatus = state => selectTaskDetails(state).status;
+
+export const selectAPIError = state =>
+  selectTaskDetails(state).APIerror || null;
+
+export const selectIsData = state => selectTaskDetails(state).isData || null;

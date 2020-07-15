@@ -33,6 +33,9 @@ import {
   selectExternalId,
   selectDynflowEnableConsole,
   selectCanEdit,
+  selectStatus,
+  selectAPIError,
+  selectIsData,
 } from './TaskDetailsSelectors';
 
 const mapStateToProps = state => ({
@@ -64,6 +67,9 @@ const mapStateToProps = state => ({
   externalId: selectExternalId(state),
   dynflowEnableConsole: selectDynflowEnableConsole(state),
   canEdit: selectCanEdit(state),
+  status: selectStatus(state),
+  APIerror: selectAPIError(state),
+  isData: selectIsData(state),
 });
 
 const mapDispatchToProps = dispatch =>

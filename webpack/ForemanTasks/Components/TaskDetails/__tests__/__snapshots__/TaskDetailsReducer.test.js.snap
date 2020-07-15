@@ -1,9 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`TaskDetails - Reducer should handle FOREMAN_TASK_DETAILS_FETCH_TASK_FAILURE 1`] = `
+Object {
+  "APIerror": "some-error",
+  "isData": false,
+  "status": "ERROR",
+}
+`;
+
 exports[`TaskDetails - Reducer should handle FOREMAN_TASK_DETAILS_FETCH_TASK_SUCCESS 1`] = `
 Object {
   "data": "some-payload",
-  "loading": false,
+  "isData": true,
+  "status": "RESOLVED",
   "taskReload": undefined,
   "timeoutId": undefined,
 }
@@ -11,6 +20,7 @@ Object {
 
 exports[`TaskDetails - Reducer should handle FOREMAN_TASK_DETAILS_START_POLLING 1`] = `
 Object {
+  "isData": false,
   "taskReload": true,
   "timeoutId": 1,
 }
@@ -18,9 +28,14 @@ Object {
 
 exports[`TaskDetails - Reducer should handle FOREMAN_TASK_DETAILS_STOP_POLLING 1`] = `
 Object {
+  "isData": false,
   "taskReload": false,
   "timeoutId": null,
 }
 `;
 
-exports[`TaskDetails - Reducer should return the initial state 1`] = `Object {}`;
+exports[`TaskDetails - Reducer should return the initial state 1`] = `
+Object {
+  "isData": false,
+}
+`;

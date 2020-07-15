@@ -59,7 +59,7 @@ class TaskInfo extends Component {
       state,
       help,
       output,
-      error,
+      errors,
       progress,
       username,
       usernamePath,
@@ -187,7 +187,7 @@ class TaskInfo extends Component {
             </Col>
           </Row>
         )}
-        {error && error.length > 0 && (
+        {errors && errors.length > 0 && (
           <Row>
             <Col xs={12}>
               <div>
@@ -195,7 +195,7 @@ class TaskInfo extends Component {
                   <b>{__('Errors:')}</b>
                 </span>
               </div>
-              <pre>{error}</pre>
+              <pre>{errors}</pre>
             </Col>
           </Row>
         )}
@@ -213,7 +213,7 @@ TaskInfo.propTypes = {
   startedAt: PropTypes.string,
   state: PropTypes.string,
   help: PropTypes.string,
-  error: PropTypes.array,
+  errors: PropTypes.array,
   progress: PropTypes.number,
   username: PropTypes.string,
   usernamePath: PropTypes.string,
@@ -232,7 +232,7 @@ TaskInfo.defaultProps = {
   startedAt: '',
   state: '',
   help: '',
-  error: [],
+  errors: [],
   progress: 0,
   username: '',
   usernamePath: '',
