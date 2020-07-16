@@ -70,6 +70,17 @@ module ForemanTasks
            end)
     scope :for_action_types, (->(action_types) { where('foreman_tasks_tasks.label IN (?)', Array(action_types)) })
 
+    apipie :class, "A class representing #{model_name.human} object" do
+      name 'Task'
+      refs 'Task'
+      sections only: %w[all additional]
+      property :main_action, object_of: 'Dynflow::Action', desc: 'Returns the main action of the task, e.g. Actions::RemoteExecution::RunHostJob'
+      property :label, String, desc: 'Returns the label of the task'
+      property :state, String, desc: 'Returns state of the task execution, e.g. "stopped"'
+      property :result, String, desc: 'Returns result of the task execution, e.g. "success"'
+      property :started_at, ActiveSupport::TimeWithZone, desc: 'Returns date with time the task started at'
+      property :ended_at, ActiveSupport::TimeWithZone, desc: 'Returns date with time the task ended at'
+    end
     class Jail < Safemode::Jail
       allow :started_at, :ended_at, :result, :state, :label, :main_action
     end
