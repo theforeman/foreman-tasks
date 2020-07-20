@@ -6,4 +6,5 @@ export const API = {
   patch: jest.fn(),
 };
 
-export const get = data => ({ type: 'some-type', ...data });
+export const get = data => ({ type: 'get-some-type', ...data });
+export const post = data => ({ type: 'post-some-type', ...data });

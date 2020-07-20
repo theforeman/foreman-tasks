@@ -15,13 +15,7 @@ const fixtures = {
   'should start reload': () => taskReloadStart(1),
   'should stop reload': () => taskReloadStop(),
   'should fetch-task-details and success': () => fetchTaskDetails(2),
-  'should cancelStep and success': () => cancelStep('task-id', 'step-id'),
-  'should cancelStep and fail': () => {
-    API.post.mockImplementationOnce(() =>
-      Promise.reject(new Error('Network Error'))
-    );
-    return cancelStep('task-id', 'step-id');
-  },
+  'should cancelStep': () => cancelStep('task-id', 'step-id'),
 };
 
 describe('TaskDetails - Actions', () =>

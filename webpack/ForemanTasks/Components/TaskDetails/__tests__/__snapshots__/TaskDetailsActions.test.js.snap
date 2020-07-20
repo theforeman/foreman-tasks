@@ -1,12 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TaskDetails - Actions should cancelStep and fail 1`] = `
+exports[`TaskDetails - Actions should cancelStep 1`] = `
 Array [
-  Array [
-    Object {
-      "type": "TASK_STEP_CANCEL_REQUEST",
-    },
-  ],
   Array [
     Object {
       "payload": Object {
@@ -20,56 +15,11 @@ Array [
   ],
   Array [
     Object {
-      "payload": [Error: Network Error],
-      "type": "TASK_STEP_CANCEL_FAILURE",
-    },
-  ],
-  Array [
-    Object {
-      "payload": Object {
-        "message": Object {
-          "message": "Could not cancel step. Error: step-id undefined",
-          "type": "error",
-        },
-      },
-      "type": "TOASTS_ADD",
-    },
-  ],
-]
-`;
-
-exports[`TaskDetails - Actions should cancelStep and success 1`] = `
-Array [
-  Array [
-    Object {
-      "type": "TASK_STEP_CANCEL_REQUEST",
-    },
-  ],
-  Array [
-    Object {
-      "payload": Object {
-        "message": Object {
-          "message": "Trying to cancel step step-id",
-          "type": "info",
-        },
-      },
-      "type": "TOASTS_ADD",
-    },
-  ],
-  Array [
-    Object {
-      "type": "TASK_STEP_CANCEL_SUCCESS",
-    },
-  ],
-  Array [
-    Object {
-      "payload": Object {
-        "message": Object {
-          "message": "step-id {__('Step Canceled')}",
-          "type": "success",
-        },
-      },
-      "type": "TOASTS_ADD",
+      "handleError": [Function],
+      "handleSuccess": [Function],
+      "key": "TASK_STEP_CANCEL",
+      "type": "post-some-type",
+      "url": "/foreman_tasks/tasks/task-id/cancel_step?step_id=step-id",
     },
   ],
 ]
@@ -81,7 +31,7 @@ Array [
     Object {
       "handleSuccess": [Function],
       "key": "FOREMAN_TASK_DETAILS",
-      "type": "some-type",
+      "type": "get-some-type",
       "url": "/foreman_tasks/api/tasks/2/details?include_permissions",
     },
   ],
@@ -96,7 +46,7 @@ Array [
       "handleSuccess": [Function],
       "interval": 5000,
       "key": "FOREMAN_TASK_DETAILS",
-      "type": "some-type",
+      "type": "get-some-type",
       "url": "/foreman_tasks/api/tasks/1/details?include_permissions",
     },
   ],
