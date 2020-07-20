@@ -28,7 +28,6 @@ const TaskDetails = ({
   cancelStep,
   taskReloadStart,
   taskReloadStop,
-  fetchTaskDetails,
   APIerror,
   ...props
 }) => {
@@ -36,11 +35,11 @@ const TaskDetails = ({
   const { taskReload, status, isData } = props;
 
   useEffect(() => {
-    fetchTaskDetails(id);
+    taskReloadStart(id);
     return () => {
       taskReloadStop();
     };
-  }, [id, fetchTaskDetails, taskReloadStop]);
+  }, [id, taskReloadStart, taskReloadStop]);
 
   const taskProgressToggle = () => {
     if (taskReload) {
@@ -77,6 +76,7 @@ const TaskDetails = ({
                 id,
                 status,
                 taskProgressToggle,
+                taskReloadStart,
               }}
             />
           )}
@@ -87,7 +87,7 @@ const TaskDetails = ({
             id={id}
             cancelStep={cancelStep}
             taskReload={taskReload}
-            taskProgressToggle={taskProgressToggle}
+            taskReloadStart={taskReloadStart}
           />
         </Tab>
         <Tab eventKey={3} disabled={loading} title={__('Errors')}>
@@ -108,7 +108,6 @@ const TaskDetails = ({
 
 TaskDetails.propTypes = {
   label: PropTypes.string,
-  fetchTaskDetails: PropTypes.func.isRequired,
   runningSteps: PropTypes.array,
   cancelStep: PropTypes.func.isRequired,
   taskReload: PropTypes.bool.isRequired,

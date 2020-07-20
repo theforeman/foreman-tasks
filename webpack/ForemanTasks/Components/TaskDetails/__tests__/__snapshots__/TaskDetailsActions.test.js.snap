@@ -19,20 +19,7 @@ Array [
       "handleSuccess": [Function],
       "key": "TASK_STEP_CANCEL",
       "type": "post-some-type",
-      "url": "/foreman_tasks/tasks/task-id/cancel_step?step_id=step-id",
-    },
-  ],
-]
-`;
-
-exports[`TaskDetails - Actions should fetch-task-details and success 1`] = `
-Array [
-  Array [
-    Object {
-      "handleSuccess": [Function],
-      "key": "FOREMAN_TASK_DETAILS",
-      "type": "get-some-type",
-      "url": "/foreman_tasks/api/tasks/2/details?include_permissions",
+      "url": "foreman/foreman_tasks/tasks/task-id/cancel_step?step_id=step-id",
     },
   ],
 ]
@@ -47,7 +34,7 @@ Array [
       "interval": 5000,
       "key": "FOREMAN_TASK_DETAILS",
       "type": "get-some-type",
-      "url": "/foreman_tasks/api/tasks/1/details?include_permissions",
+      "url": "foreman/foreman_tasks/api/tasks/1/details?include_permissions",
     },
   ],
 ]

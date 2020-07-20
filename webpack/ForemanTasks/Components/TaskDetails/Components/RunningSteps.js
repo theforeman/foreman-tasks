@@ -8,7 +8,7 @@ const RunningSteps = ({
   id,
   cancelStep,
   taskReload,
-  taskProgressToggle,
+  taskReloadStart,
 }) => {
   if (!runningSteps.length) return <span>{__('No running steps')}</span>;
   return (
@@ -21,7 +21,7 @@ const RunningSteps = ({
                 bsSize="small"
                 onClick={() => {
                   if (!taskReload) {
-                    taskProgressToggle();
+                    taskReloadStart(id);
                   }
                   cancelStep(id, step.id);
                 }}
@@ -59,7 +59,7 @@ RunningSteps.propTypes = {
   id: PropTypes.string.isRequired,
   cancelStep: PropTypes.func.isRequired,
   taskReload: PropTypes.bool.isRequired,
-  taskProgressToggle: PropTypes.func.isRequired,
+  taskReloadStart: PropTypes.func.isRequired,
 };
 
 RunningSteps.defaultProps = {

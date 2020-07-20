@@ -32,8 +32,8 @@ exports[`TaskDetails rendering render with loading Props 1`] = `
         cancelStep={[MockFunction]}
         id="a15dd820-32f1-4ced-9ab7-c0fab8234c47"
         runningSteps={Array []}
-        taskProgressToggle={[Function]}
         taskReload={false}
+        taskReloadStart={[MockFunction]}
       />
     </Tab>
     <Tab
@@ -112,6 +112,7 @@ exports[`TaskDetails rendering render with min Props 1`] = `
         status="RESOLVED"
         taskProgressToggle={[Function]}
         taskReload={false}
+        taskReloadStart={[MockFunction]}
         username=""
         usernamePath=""
       />
@@ -125,8 +126,8 @@ exports[`TaskDetails rendering render with min Props 1`] = `
         cancelStep={[MockFunction]}
         id="a15dd820-32f1-4ced-9ab7-c0fab8234c47"
         runningSteps={Array []}
-        taskProgressToggle={[Function]}
         taskReload={false}
+        taskReloadStart={[MockFunction]}
       />
     </Tab>
     <Tab

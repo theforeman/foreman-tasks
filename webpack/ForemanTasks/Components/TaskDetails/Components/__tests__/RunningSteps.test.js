@@ -6,7 +6,7 @@ const minProps = {
   id: 'task-id1',
   taskReload: true,
   cancelStep: jest.fn(),
-  taskProgressToggle: jest.fn(),
+  taskReloadStart: jest.fn(),
 };
 const fixtures = {
   'render with min Props': minProps,

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { selectAPIResponse } from 'foremanReact/redux/API/APISelectors';
 import { selectDoesIntervalExist } from 'foremanReact/redux/middlewares/IntervalMiddleware/IntervalSelectors';
 import { selectForemanTasks } from '../../ForemanTasksSelectors';
@@ -10,16 +11,16 @@ export const selectTaskDetailsResponse = state =>
   selectAPIResponse(state, FOREMAN_TASK_DETAILS);
 
 export const selectStartAt = state =>
-  selectTaskDetailsResponse(state).start_at || null;
+  selectTaskDetailsResponse(state)?.start_at;
 
 export const selectStartBefore = state =>
-  selectTaskDetailsResponse(state).start_before || null;
+  selectTaskDetailsResponse(state)?.start_before;
 
 export const selectStartedAt = state =>
-  selectTaskDetailsResponse(state).started_at || null;
+  selectTaskDetailsResponse(state)?.started_at;
 
 export const selectEndedAt = state =>
-  selectTaskDetailsResponse(state).ended_at || null;
+  selectTaskDetailsResponse(state)?.ended_at;
 
 export const selectInput = state =>
   selectTaskDetailsResponse(state).input || [];
@@ -44,10 +45,9 @@ export const selectProgress = state =>
     : 0;
 
 export const selectUsername = state =>
-  selectTaskDetailsResponse(state).username || null;
+  selectTaskDetailsResponse(state)?.username;
 
-export const selectLabel = state =>
-  selectTaskDetailsResponse(state).label || null;
+export const selectLabel = state => selectTaskDetailsResponse(state)?.label;
 
 export const selectExecutionPlan = state =>
   selectTaskDetailsResponse(state).execution_plan || {};
@@ -58,8 +58,7 @@ export const selectFailedSteps = state =>
 export const selectRunningSteps = state =>
   selectTaskDetailsResponse(state).running_steps || [];
 
-export const selectHelp = state =>
-  selectTaskDetailsResponse(state).help || null;
+export const selectHelp = state => selectTaskDetailsResponse(state)?.help;
 
 export const selectHasSubTasks = state =>
   selectTaskDetailsResponse(state).has_sub_tasks || false;
@@ -68,19 +67,17 @@ export const selectLocks = state =>
   selectTaskDetailsResponse(state).locks || [];
 
 export const selectUsernamePath = state =>
-  selectTaskDetailsResponse(state).username_path || null;
+  selectTaskDetailsResponse(state)?.username_path;
 
 export const selectAction = state =>
   selectTaskDetailsResponse(state).action || '';
 
-export const selectState = state =>
-  selectTaskDetailsResponse(state).state || null;
+export const selectState = state => selectTaskDetailsResponse(state)?.state;
 
-export const selectResult = state =>
-  selectTaskDetailsResponse(state).result || null;
+export const selectResult = state => selectTaskDetailsResponse(state)?.result;
 
 export const selectTimeoutId = state =>
-  selectTaskDetailsResponse(state).timeoutId || null;
+  selectTaskDetailsResponse(state)?.timeoutId;
 
 export const selectTaskReload = state =>
   !!selectDoesIntervalExist(state, FOREMAN_TASK_DETAILS);
@@ -89,7 +86,7 @@ export const selectParentTask = state =>
   selectTaskDetailsResponse(state).parent_task_id || '';
 
 export const selectExternalId = state =>
-  selectTaskDetailsResponse(state).external_id || null;
+  selectTaskDetailsResponse(state)?.external_id;
 
 export const selectDynflowEnableConsole = state =>
   selectTaskDetailsResponse(state).dynflow_enable_console || false;
@@ -100,6 +97,6 @@ export const selectCanEdit = state =>
 export const selectStatus = state => selectTaskDetailsResponse(state).status;
 
 export const selectAPIError = state =>
-  selectTaskDetailsResponse(state).APIerror || null;
+  selectTaskDetailsResponse(state)?.APIerror;
 
-export const selectIsData = state => selectTaskDetails(state).isData || null;
+export const selectIsData = state => selectTaskDetails(state)?.isData;

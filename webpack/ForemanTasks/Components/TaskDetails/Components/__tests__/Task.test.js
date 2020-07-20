@@ -3,7 +3,11 @@ import { STATUS } from 'foremanReact/constants';
 import Task from '../Task';
 
 const fixtures = {
-  'render with minimal Props': { id: 'test', taskProgressToggle: jest.fn() },
+  'render with minimal Props': {
+    id: 'test',
+    taskReloadStart: jest.fn(),
+    taskProgressToggle: jest.fn(),
+  },
   'render with some Props': {
     id: 'test',
     state: 'paused',
@@ -14,6 +18,7 @@ const fixtures = {
     canEdit: true,
     status: STATUS.RESOLVED,
     taskProgressToggle: jest.fn(),
+    taskReloadStart: jest.fn(),
   },
 };
 

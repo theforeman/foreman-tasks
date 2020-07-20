@@ -44,6 +44,7 @@ exports[`Task rendering render with minimal Props 1`] = `
         state=""
         taskProgressToggle={[MockFunction]}
         taskReload={false}
+        taskReloadStart={[MockFunction]}
         username=""
         usernamePath=""
       />
@@ -72,6 +73,7 @@ exports[`Task rendering render with minimal Props 1`] = `
       state=""
       taskProgressToggle={[MockFunction]}
       taskReload={false}
+      taskReloadStart={[MockFunction]}
       username=""
       usernamePath=""
     />
@@ -124,6 +126,7 @@ exports[`Task rendering render with some Props 1`] = `
         status="RESOLVED"
         taskProgressToggle={[MockFunction]}
         taskReload={true}
+        taskReloadStart={[MockFunction]}
         username=""
         usernamePath=""
       />
@@ -153,6 +156,7 @@ exports[`Task rendering render with some Props 1`] = `
       status="RESOLVED"
       taskProgressToggle={[MockFunction]}
       taskReload={true}
+      taskReloadStart={[MockFunction]}
       username=""
       usernamePath=""
     />

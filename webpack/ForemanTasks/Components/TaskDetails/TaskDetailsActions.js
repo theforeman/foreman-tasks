@@ -5,6 +5,7 @@ import {
   withInterval,
   stopInterval,
 } from 'foremanReact/redux/middlewares/IntervalMiddleware';
+import { foremanTasksApiPath, foremanTasksPath } from '../common/urlHelpers';
 import { TASK_STEP_CANCEL, FOREMAN_TASK_DETAILS } from './TaskDetailsConstants';
 import {
   errorToastData,
@@ -19,32 +20,18 @@ export const taskReloadStart = id => dispatch => {
     withInterval(
       get({
         key: FOREMAN_TASK_DETAILS,
-        url: `/foreman_tasks/api/tasks/${id}/details?include_permissions`,
+        url: foremanTasksApiPath(`${id}/details?include_permissions`),
         handleSuccess: ({ data }) => {
           if (data.state === 'stopped') {
-            dispatch(taskReloadStop(id));
+            dispatch(stopInterval(FOREMAN_TASK_DETAILS));
           }
         },
         handleError: () => {
-          dispatch(taskReloadStop());
+          dispatch(stopInterval(FOREMAN_TASK_DETAILS));
         },
       }),
       5000
     )
-  );
-};
-
-export const fetchTaskDetails = id => dispatch => {
-  dispatch(
-    get({
-      key: FOREMAN_TASK_DETAILS,
-      url: `/foreman_tasks/api/tasks/${id}/details?include_permissions`,
-      handleSuccess: ({ data }) => {
-        if (data.state !== 'stopped') {
-          dispatch(taskReloadStart(id));
-        }
-      },
-    })
   );
 };
 
@@ -53,7 +40,7 @@ export const cancelStep = (taskId, stepId) => async dispatch => {
   dispatch(
     post({
       key: TASK_STEP_CANCEL,
-      url: `/foreman_tasks/tasks/${taskId}/cancel_step?step_id=${stepId}`,
+      url: foremanTasksPath(`${taskId}/cancel_step?step_id=${stepId}`),
       handleSuccess: () => {
         dispatch(addToast(successToastData(`${stepId} {__('Step Canceled')}`)));
       },
