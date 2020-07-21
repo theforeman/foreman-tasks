@@ -118,7 +118,6 @@ exports[`TaskDetails rendering render with min Props 1`] = `
       />
     </Tab>
     <Tab
-      disabled={false}
       eventKey={2}
       title="Running Steps"
     >
@@ -131,7 +130,6 @@ exports[`TaskDetails rendering render with min Props 1`] = `
       />
     </Tab>
     <Tab
-      disabled={false}
       eventKey={3}
       title="Errors"
     >
@@ -141,7 +139,6 @@ exports[`TaskDetails rendering render with min Props 1`] = `
       />
     </Tab>
     <Tab
-      disabled={false}
       eventKey={4}
       title="Locks"
     >
@@ -150,7 +147,6 @@ exports[`TaskDetails rendering render with min Props 1`] = `
       />
     </Tab>
     <Tab
-      disabled={false}
       eventKey={5}
       title="Raw"
     >

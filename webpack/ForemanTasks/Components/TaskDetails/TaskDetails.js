@@ -32,7 +32,7 @@ const TaskDetails = ({
   ...props
 }) => {
   const id = getTaskID();
-  const { taskReload, status, isData } = props;
+  const { taskReload, status, isLoading } = props;
 
   useEffect(() => {
     taskReloadStart(id);
@@ -60,12 +60,11 @@ const TaskDetails = ({
   }
   const resumable = executionPlan ? executionPlan.state === 'paused' : false;
   const cancellable = executionPlan ? executionPlan.cancellable : false;
-  const loading = status === STATUS.PENDING && !isData;
   return (
     <div className="task-details-react well">
       <Tabs defaultActiveKey={1} animation={false} id="task-details-tabs">
         <Tab eventKey={1} title={__('Task')}>
-          {loading ? (
+          {isLoading ? (
             <TaskSkeleton />
           ) : (
             <Task
@@ -81,7 +80,7 @@ const TaskDetails = ({
             />
           )}
         </Tab>
-        <Tab eventKey={2} disabled={loading} title={__('Running Steps')}>
+        <Tab eventKey={2} disabled={isLoading} title={__('Running Steps')}>
           <RunningSteps
             runningSteps={runningSteps}
             id={id}
@@ -90,13 +89,13 @@ const TaskDetails = ({
             taskReloadStart={taskReloadStart}
           />
         </Tab>
-        <Tab eventKey={3} disabled={loading} title={__('Errors')}>
+        <Tab eventKey={3} disabled={isLoading} title={__('Errors')}>
           <Errors executionPlan={executionPlan} failedSteps={failedSteps} />
         </Tab>
-        <Tab eventKey={4} disabled={loading} title={__('Locks')}>
+        <Tab eventKey={4} disabled={isLoading} title={__('Locks')}>
           <Locks locks={locks} />
         </Tab>
-        <Tab eventKey={5} disabled={loading} title={__('Raw')}>
+        <Tab eventKey={5} disabled={isLoading} title={__('Raw')}>
           <Raw
             {...{ id, label, startedAt, endedAt, input, output, externalId }}
           />

@@ -1,6 +1,10 @@
 /* eslint-disable camelcase */
-import { selectAPIResponse } from 'foremanReact/redux/API/APISelectors';
+import {
+  selectAPIResponse,
+  selectAPIByKey,
+} from 'foremanReact/redux/API/APISelectors';
 import { selectDoesIntervalExist } from 'foremanReact/redux/middlewares/IntervalMiddleware/IntervalSelectors';
+import { STATUS } from 'foremanReact/constants';
 import { selectForemanTasks } from '../../ForemanTasksSelectors';
 import { FOREMAN_TASK_DETAILS } from './TaskDetailsConstants';
 
@@ -99,4 +103,6 @@ export const selectStatus = state => selectTaskDetailsResponse(state).status;
 export const selectAPIError = state =>
   selectTaskDetailsResponse(state)?.APIerror;
 
-export const selectIsData = state => selectTaskDetails(state)?.isData;
+export const selectIsLoading = state =>
+  !!selectAPIByKey(state, FOREMAN_TASK_DETAILS).response &&
+  selectStatus(state) === STATUS.PENDING;

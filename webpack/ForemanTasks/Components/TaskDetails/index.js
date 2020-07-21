@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import TaskDetails from './TaskDetails';
 import * as taskDetailsActions from './TaskDetailsActions';
 import * as taskActions from '../TaskActions';
-import reducer from './TaskDetailsReducer';
 import {
   selectEndedAt,
   selectStartAt,
@@ -35,7 +34,7 @@ import {
   selectCanEdit,
   selectStatus,
   selectAPIError,
-  selectIsData,
+  selectIsLoading,
 } from './TaskDetailsSelectors';
 
 const mapStateToProps = state => ({
@@ -69,12 +68,10 @@ const mapStateToProps = state => ({
   canEdit: selectCanEdit(state),
   status: selectStatus(state),
   APIerror: selectAPIError(state),
-  isData: selectIsData(state),
+  isLoading: selectIsLoading(state),
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ ...taskActions, ...taskDetailsActions }, dispatch);
-
-export const reducers = { taskDetails: reducer };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskDetails);
