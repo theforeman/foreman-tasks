@@ -15,12 +15,6 @@ import { TaskSkeleton } from './Components/TaskSkeleton';
 import './TaskDetails.scss';
 
 const TaskDetails = ({
-  externalId,
-  startedAt,
-  endedAt,
-  label,
-  input,
-  output,
   executionPlan,
   failedSteps,
   runningSteps,
@@ -97,7 +91,13 @@ const TaskDetails = ({
         </Tab>
         <Tab eventKey={5} disabled={isLoading} title={__('Raw')}>
           <Raw
-            {...{ id, label, startedAt, endedAt, input, output, externalId }}
+            id={id}
+            label={props.label}
+            startedAt={props.startedAt}
+            endedAt={props.endedAt}
+            input={props.input}
+            output={props.output}
+            externalId={props.externalId}
           />
         </Tab>
       </Tabs>

@@ -45,7 +45,7 @@ export const selectErrors = state => {
 
 export const selectProgress = state =>
   selectTaskDetailsResponse(state).progress
-    ? Math.trunc(selectTaskDetails(state).progress * 100)
+    ? Math.trunc(selectTaskDetailsResponse(state).progress * 100)
     : 0;
 
 export const selectUsername = state =>
