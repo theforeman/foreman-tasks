@@ -68,6 +68,8 @@ Naming/FileName:
     - Gemfile
     - db/seeds.d/*
     - lib/foreman-tasks.rb
+    - gemfile.d/foreman-tasks.rb
+
 
 Layout/HeredocIndentation:
   Exclude:
