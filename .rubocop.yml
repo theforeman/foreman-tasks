@@ -117,3 +117,9 @@ Naming/RescuedExceptionsVariableName:
 
 Style/WordArray:
   Enabled: false
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma

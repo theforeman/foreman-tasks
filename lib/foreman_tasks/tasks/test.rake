@@ -33,7 +33,7 @@ namespace :foreman_tasks do
           "#{ForemanTasks::Engine.root}/{bin,script}/*",
           "#{ForemanTasks::Engine.root}/{app,config,db,lib,test}/**/*.rb",
           "#{ForemanTasks::Engine.root}/app/**/*.rabl",
-          "#{ForemanTasks::Engine.root}/lib/**/*.rake"
+          "#{ForemanTasks::Engine.root}/lib/**/*.rake",
         ]
       end
     rescue

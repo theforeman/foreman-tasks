@@ -9,9 +9,9 @@ blueprints = [
         links:
           [
             href: "/foreman_tasks/tasks?search=#{CGI.escape('state=paused')}",
-            title: N_('List of tasks')
-          ]
-      }
+            title: N_('List of tasks'),
+          ],
+      },
   },
 
   {
@@ -24,31 +24,31 @@ blueprints = [
         links:
           [
             path_method: :foreman_tasks_task_path,
-            title: N_('Task Details')
-          ]
-      }
+            title: N_('Task Details'),
+          ],
+      },
   },
 
   {
     group: N_('Tasks'),
     name: 'tasks_bulk_resume',
     level: 'info',
-    message: "DYNAMIC"
+    message: "DYNAMIC",
   },
 
   {
     group: N_('Tasks'),
     name: 'tasks_bulk_cancel',
     level: 'info',
-    message: "DYNAMIC"
+    message: "DYNAMIC",
   },
 
   {
     group: N_('Tasks'),
     name: 'tasks_bulk_stop',
     level: 'info',
-    message: "DYNAMIC"
-  }
+    message: "DYNAMIC",
+  },
 ]
 
 blueprints.each { |blueprint| UINotifications::Seed.new(blueprint).configure }

@@ -108,7 +108,7 @@ module ForemanTasks
           action_class: f.action_class.name,
           state: f.state,
           input: f_action.input.pretty_inspect,
-          output: f_action.output.pretty_inspect
+          output: f_action.output.pretty_inspect,
         }
       end
     end
@@ -122,7 +122,7 @@ module ForemanTasks
           state: f.state,
           input: f_action.input.pretty_inspect,
           output: f_action.output.pretty_inspect,
-          cancellable: cancellable_action?(f_action)
+          cancellable: cancellable_action?(f_action),
         }
       end
     end

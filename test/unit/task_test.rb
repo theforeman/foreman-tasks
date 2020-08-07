@@ -224,7 +224,7 @@ class TasksTest < ActiveSupport::TestCase
         :total     => 0,
         :success   => 0,
         :cancelled => 0,
-        :pending   => 0
+        :pending   => 0,
       }
     end
     let(:task) { FactoryBot.create(:dynflow_task) }

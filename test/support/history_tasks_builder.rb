@@ -5,7 +5,7 @@ class HistoryTasksBuilder
                      by_result: {
                        'success' => { recent: 2, total: 4 },
                        'warning' => { recent: 1, total: 2 },
-                       'error' => { recent: 0, total: 1 }
+                       'error' => { recent: 0, total: 1 },
                      } } }
   end
 
