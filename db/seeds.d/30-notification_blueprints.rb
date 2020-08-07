@@ -33,21 +33,21 @@ blueprints = [
     group: N_('Tasks'),
     name: 'tasks_bulk_resume',
     level: 'info',
-    message: "DYNAMIC",
+    message: "DYNAMIC"
   },
 
   {
     group: N_('Tasks'),
     name: 'tasks_bulk_cancel',
     level: 'info',
-    message: "DYNAMIC",
+    message: "DYNAMIC"
   },
 
   {
     group: N_('Tasks'),
     name: 'tasks_bulk_stop',
     level: 'info',
-    message: "DYNAMIC",
+    message: "DYNAMIC"
   }
 ]
 

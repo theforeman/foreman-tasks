@@ -31,20 +31,20 @@ module ForemanTasks
         Target.expects(:unscoped).returns(Target)
         Target.expects(:where).with(:id => targets.map(&:id)).returns(targets)
 
-        task.sub_tasks.count.must_equal targets.count
+        _(task.sub_tasks.count).must_equal targets.count
         success, failed = task.sub_tasks.partition { |sub_task| sub_task.result == 'success' }
-        failed.must_be :empty?
-        success.count.must_equal 5
+        _(failed).must_be :empty?
+        _(success.count).must_equal 5
       end
 
       specify 'it plans a task for each target even if target cannot be found' do
         Target.expects(:unscoped).returns(Target)
         Target.expects(:where).with(:id => targets.map(&:id)).returns(targets.take(4))
 
-        task.sub_tasks.count.must_equal targets.count
+        _(task.sub_tasks.count).must_equal targets.count
         success, failed = task.sub_tasks.partition { |sub_task| sub_task.result == 'success' }
-        success.count.must_equal 4
-        failed.count.must_equal 1
+        _(success.count).must_equal 4
+        _(failed.count).must_equal 1
       end
     end
   end

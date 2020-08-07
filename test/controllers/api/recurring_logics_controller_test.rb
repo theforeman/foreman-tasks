@@ -44,7 +44,7 @@ module ForemanRecurringLogic
           post :cancel, params: { :id => @recurring_logic.id }
           assert_response :success
           @recurring_logic.reload
-          assert @recurring_logic.state == 'cancelled'
+          assert_equal @recurring_logic.state, 'cancelled'
         end
       end
     end

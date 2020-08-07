@@ -23,11 +23,11 @@ module ForemanTasks
       it 'notifies all admins about current amount of paused tasks when some paused task occurs' do
         trigger_task
         notification = user_notifications(admin_user).first
-        notification.message.must_equal "There is 1 paused task in the system that need attention"
+        _(notification.message).must_equal "There is 1 paused task in the system that need attention"
         links = notification.actions['links']
-        links.must_include('href' => '/foreman_tasks/tasks?search=state%3Dpaused',
+        _(links).must_include('href' => '/foreman_tasks/tasks?search=state%3Dpaused',
                            'title' => 'List of tasks')
-        links.must_include('name' => 'troubleshooting',
+        _(links).must_include('name' => 'troubleshooting',
                            'title' => 'Troubleshooting Documentation',
                            'description' => 'See %{link} for more details on how to resolve the issue',
                            'href' => "https://theforeman.org/manuals/#{SETTINGS[:version].short}/tasks_troubleshooting.html#",
@@ -37,19 +37,19 @@ module ForemanTasks
       it 'aggregates the notification when multiple tasks get paused' do
         trigger_task
         recipient1 = NotificationRecipient.find_by(user_id: admin_user)
-        recipient1.notification.message.must_match(/1 paused task/)
+        _(recipient1.notification.message).must_match(/1 paused task/)
 
         new_admin_user = FactoryBot.create(:user, :admin)
 
         trigger_task
 
-        NotificationRecipient.find_by(id: recipient1.id).must_be_nil
-        Notification.find_by(id: recipient1.notification.id).must_be_nil
+        _(NotificationRecipient.find_by(id: recipient1.id)).must_be_nil
+        _(Notification.find_by(id: recipient1.notification.id)).must_be_nil
         recipient2 = NotificationRecipient.find_by(user_id: admin_user)
-        recipient2.notification.message.must_match(/2 paused tasks/)
+        _(recipient2.notification.message).must_match(/2 paused tasks/)
 
         new_recipient = NotificationRecipient.find_by(user_id: new_admin_user)
-        new_recipient.notification.must_equal recipient2.notification
+        _(new_recipient.notification).must_equal recipient2.notification
       end
     end
 
@@ -59,11 +59,11 @@ module ForemanTasks
         notifications = user_notifications(task_owner)
         assert_equal 1, notifications.size, 'Only notification for the main action should be triggered'
         notification = notifications.first
-        notification.message.must_equal "The task 'Dummy pause action' got paused"
+        _(notification.message).must_equal "The task 'Dummy pause action' got paused"
         links = notification.actions['links']
-        links.must_include("href" => "/foreman_tasks/tasks/#{task.id}",
+        _(links).must_include("href" => "/foreman_tasks/tasks/#{task.id}",
                            "title" => "Task Details")
-        links.must_include('name' => 'troubleshooting',
+        _(links).must_include('name' => 'troubleshooting',
                            'title' => 'Troubleshooting Documentation',
                            'description' => 'See %{link} for more details on how to resolve the issue',
                            'href' => "https://theforeman.org/manuals/#{SETTINGS[:version].short}/tasks_troubleshooting.html#Support::DummyPauseAction",

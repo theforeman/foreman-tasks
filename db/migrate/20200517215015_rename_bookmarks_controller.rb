@@ -3,7 +3,7 @@ class RenameBookmarksController < ActiveRecord::Migration[5.2]
     original_controller = 'foreman_tasks_tasks'
     original_bookmarks = Bookmark.where(controller: original_controller)
     original_bookmarks_names = Hash[original_bookmarks.pluck(:name, :id)]
-    
+
     new_controller = 'foreman_tasks/tasks'
     new_bookmarks = Bookmark.where(controller: new_controller)
     new_bookmarks.find_each do |new_bookmark|
@@ -18,7 +18,7 @@ class RenameBookmarksController < ActiveRecord::Migration[5.2]
                         original_bookmark.public == new_bookmark.public
 
         if is_duplicated
-          original_bookmark.destroy     
+          original_bookmark.destroy
         else
           modified_name = "#{name}_#{generate_token}"
           original_bookmark.update(name: modified_name)

@@ -22,14 +22,14 @@ class TasksTest < ActiveSupport::TestCase
                          FactoryBot.create(:dynflow_task, :product_create_task)]
       cleaner.expects(:tasks_to_csv)
       cleaner.delete
-      ForemanTasks::Task.where(id: tasks_to_delete).must_be_empty
-      ForemanTasks::Task.where(id: tasks_to_keep).order(:id).map(&:id).must_equal tasks_to_keep.map(&:id).sort
+      _(ForemanTasks::Task.where(id: tasks_to_delete)).must_be_empty
+      _(ForemanTasks::Task.where(id: tasks_to_keep).order(:id).map(&:id)).must_equal tasks_to_keep.map(&:id).sort
 
-      ForemanTasks.dynflow.world.persistence
-                  .find_execution_plans(filters: { 'uuid' => tasks_to_delete.map(&:external_id) }).size.must_equal 0
+      _(ForemanTasks.dynflow.world.persistence
+                  .find_execution_plans(filters: { 'uuid' => tasks_to_delete.map(&:external_id) }).size).must_equal 0
 
-      ForemanTasks.dynflow.world.persistence
-                  .find_execution_plans(filters: { 'uuid' => tasks_to_keep.map(&:external_id) }).size.must_equal tasks_to_keep.size
+      _(ForemanTasks.dynflow.world.persistence
+                  .find_execution_plans(filters: { 'uuid' => tasks_to_keep.map(&:external_id) }).size).must_equal tasks_to_keep.size
     end
 
     describe "#orphaned_dynflow_tasks" do
@@ -67,11 +67,11 @@ class TasksTest < ActiveSupport::TestCase
 
       cleaner.expects(:tasks_to_csv)
       cleaner.delete
-      ForemanTasks::Task.where(id: tasks_to_delete).must_be_empty
-      ForemanTasks::Task.where(id: tasks_to_keep).must_equal tasks_to_keep
+      _(ForemanTasks::Task.where(id: tasks_to_delete)).must_be_empty
+      _(ForemanTasks::Task.where(id: tasks_to_keep)).must_equal tasks_to_keep
 
-      ForemanTasks::Lock.find_by(id: lock_to_delete.id).must_be_nil
-      ForemanTasks::Lock.find_by(id: lock_to_keep.id).wont_be_nil
+      _(ForemanTasks::Lock.find_by(id: lock_to_delete.id)).must_be_nil
+      _(ForemanTasks::Lock.find_by(id: lock_to_keep.id)).wont_be_nil
     end
 
     it 'supports passing empty filter (just delete all)' do
@@ -85,8 +85,8 @@ class TasksTest < ActiveSupport::TestCase
                        end]
       cleaner.expects(:tasks_to_csv)
       cleaner.delete
-      ForemanTasks::Task.where(id: tasks_to_delete).must_be_empty
-      ForemanTasks::Task.where(id: tasks_to_keep).must_equal tasks_to_keep
+      _(ForemanTasks::Task.where(id: tasks_to_delete)).must_be_empty
+      _(ForemanTasks::Task.where(id: tasks_to_keep)).must_equal tasks_to_keep
     end
 
     it 'matches tasks with compound filters properly' do
@@ -100,8 +100,8 @@ class TasksTest < ActiveSupport::TestCase
       task_to_keep.update!(:result => 'pending', :state => 'planned')
       cleaner.expects(:tasks_to_csv)
       cleaner.delete
-      ForemanTasks::Task.where(id: tasks_to_delete).must_be_empty
-      ForemanTasks::Task.where(id: task_to_keep).must_equal [task_to_keep]
+      _(ForemanTasks::Task.where(id: tasks_to_delete)).must_be_empty
+      _(ForemanTasks::Task.where(id: task_to_keep)).must_equal [task_to_keep]
     end
 
     it 'backs tasks up before deleting' do
@@ -117,11 +117,11 @@ class TasksTest < ActiveSupport::TestCase
       cleaner.delete
       w.close
       header, *data = r.readlines.map(&:chomp)
-      header.must_equal ForemanTasks::Task.attribute_names.join(',')
+      _(header).must_equal ForemanTasks::Task.attribute_names.join(',')
       expected_lines = tasks_to_delete.map { |task| task.attributes.values.to_csv.chomp }
-      data.count.must_equal expected_lines.count
-      expected_lines.each { |line| data.must_include line }
-      ForemanTasks::Task.where(id: tasks_to_delete).must_be_empty
+      _(data.count).must_equal expected_lines.count
+      expected_lines.each { |line| _(data).must_include line }
+      _(ForemanTasks::Task.where(id: tasks_to_delete)).must_be_empty
     end
 
     class ActionWithCleanup < Actions::Base
@@ -133,13 +133,13 @@ class TasksTest < ActiveSupport::TestCase
     describe 'default behaviour' do
       it 'searches for the actions that have the cleanup_after defined' do
         ForemanTasks::Cleaner.stubs(:cleanup_settings => {})
-        ForemanTasks::Cleaner.actions_with_default_cleanup[ActionWithCleanup].must_equal '15d'
+        _(ForemanTasks::Cleaner.actions_with_default_cleanup[ActionWithCleanup]).must_equal '15d'
       end
 
       it 'searches for the actions that have the cleanup_after defined' do
         ForemanTasks::Cleaner.stubs(:cleanup_settings =>
                                      { :actions => [{ :name => ActionWithCleanup.name, :after => '5d' }] })
-        ForemanTasks::Cleaner.actions_with_default_cleanup[ActionWithCleanup].must_equal '5d'
+        _(ForemanTasks::Cleaner.actions_with_default_cleanup[ActionWithCleanup]).must_equal '5d'
       end
 
       it 'deprecates the usage of :after' do
@@ -159,10 +159,10 @@ class TasksTest < ActiveSupport::TestCase
                    :override_actions => true, :states => 'all' }]
         ForemanTasks::Cleaner.stubs(:cleanup_settings).returns(:rules => rules)
         r1, r2 = ForemanTasks::Cleaner.actions_by_rules actions_with_default
-        r1[:filter].must_equal '(label !^ (action1, action2)) AND (label = something)'
-        r1[:states].must_equal %w[stopped paused]
-        r2[:filter].must_equal '(label = something_else)'
-        r2[:states].must_equal []
+        _(r1[:filter]).must_equal '(label !^ (action1, action2)) AND (label = something)'
+        _(r1[:states]).must_equal %w[stopped paused]
+        _(r2[:filter]).must_equal '(label = something_else)'
+        _(r2[:states]).must_equal []
       end
     end
   end

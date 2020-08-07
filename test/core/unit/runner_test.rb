@@ -14,7 +14,7 @@ module ForemanTasksCore
 
         describe '#generate_updates' do
           it 'returns empty hash when there are no outputs' do
-            runner.generate_updates.must_be :empty?
+            _(runner.generate_updates).must_be :empty?
           end
 
           it 'returns a hash with outputs' do
@@ -22,10 +22,10 @@ module ForemanTasksCore
             type = 'stdout'
             runner.publish_data(message, type)
             updates = runner.generate_updates
-            updates.keys.must_equal [suspended_action]
+            _(updates.keys).must_equal [suspended_action]
             update = updates.values.first
-            update.exit_status.must_be :nil?
-            update.continuous_output.raw_outputs.count.must_equal 1
+            _(update.exit_status).must_be :nil?
+            _(update.continuous_output.raw_outputs.count).must_equal 1
           end
 
           it 'works in compatibility mode' do
@@ -34,10 +34,10 @@ module ForemanTasksCore
             type = 'stdout'
             runner.publish_data(message, type)
             updates = runner.generate_updates
-            updates.keys.must_equal [nil]
+            _(updates.keys).must_equal [nil]
             update = updates.values.first
-            update.exit_status.must_be :nil?
-            update.continuous_output.raw_outputs.count.must_equal 1
+            _(update.exit_status).must_be :nil?
+            _(update.continuous_output.raw_outputs.count).must_equal 1
           end
         end
       end
@@ -53,38 +53,38 @@ module ForemanTasksCore
         describe '#initialize_continuous_outputs' do
           it 'initializes outputs for targets and parent' do
             outputs = runner.initialize_continuous_outputs
-            outputs.keys.count.must_equal 3
-            outputs.values.each { |output| output.must_be_instance_of ContinuousOutput }
+            _(outputs.keys.count).must_equal 3
+            outputs.values.each { |output| _(output).must_be_instance_of ContinuousOutput }
           end
         end
 
         describe '#generate_updates' do
           it 'returns only updates for hosts with pending outputs' do
-            runner.generate_updates.must_equal({})
+            _(runner.generate_updates).must_equal({})
             runner.publish_data_for('foo', 'something', 'something')
             updates = runner.generate_updates
-            updates.keys.count.must_equal 1
+            _(updates.keys.count).must_equal 1
           end
 
           it 'works in compatibility mode' do
             runner = Parent.new targets
-            runner.generate_updates.must_equal({})
+            _(runner.generate_updates).must_equal({})
             runner.broadcast_data('something', 'stdout')
             updates = runner.generate_updates
-            updates.keys.count.must_equal 3
+            _(updates.keys.count).must_equal 3
             # One of the keys is nil in compatibility mode
-            updates.keys.compact.count.must_equal 2
+            _(updates.keys.compact.count).must_equal 2
             updates.keys.compact.each do |key|
-              key.must_be_instance_of ::Dynflow::Action::Suspended
+              _(key).must_be_instance_of ::Dynflow::Action::Suspended
             end
           end
 
           it 'works without compatibility mode' do
             runner.broadcast_data('something', 'stdout')
             updates = runner.generate_updates
-            updates.keys.count.must_equal 3
+            _(updates.keys.count).must_equal 3
             updates.keys.each do |key|
-              key.must_be_instance_of ::Dynflow::Action::Suspended
+              _(key).must_be_instance_of ::Dynflow::Action::Suspended
             end
           end
         end
@@ -92,14 +92,14 @@ module ForemanTasksCore
         describe '#publish_data_for' do
           it 'publishes data for a single host' do
             runner.publish_data_for('foo', 'message', 'stdout')
-            runner.generate_updates.keys.count.must_equal 1
+            _(runner.generate_updates.keys.count).must_equal 1
           end
         end
 
         describe '#broadcast_data' do
           it 'publishes data for all hosts' do
             runner.broadcast_data('message', 'stdout')
-            runner.generate_updates.keys.count.must_equal 3
+            _(runner.generate_updates.keys.count).must_equal 3
           end
         end
 
@@ -115,7 +115,7 @@ module ForemanTasksCore
           it 'broadcasts the exception to all targets' do
             runner.expects(:publish_exit_status).never
             runner.publish_exception('general failure', exception, false)
-            runner.generate_updates.keys.count.must_equal 3
+            _(runner.generate_updates.keys.count).must_equal 3
           end
 
           it 'publishes exit status if fatal' do

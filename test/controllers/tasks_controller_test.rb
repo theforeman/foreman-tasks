@@ -120,30 +120,30 @@ module ForemanTasks
           @controller.stubs(:params).returns(:search => "id = #{task.id}")
           in_taxonomy_scope(organizations.first) do |_o, _l|
             results = @controller.send(:filter, ForemanTasks::Task)
-            results.map(&:id).sort.must_equal [task.id]
+            _(results.map(&:id).sort).must_equal [task.id]
           end
         end
 
         it 'does not scope by taxonomy if unset' do
           organizations
           tasks
-          @controller.send(:current_taxonomy_search).must_equal ''
+          _(@controller.send(:current_taxonomy_search)).must_equal ''
           results = @controller.send(:filter, ForemanTasks::Task)
-          results.map(&:id).sort.must_equal tasks.map(&:id).sort
+          _(results.map(&:id).sort).must_equal tasks.map(&:id).sort
         end
 
         it 'scopes by organization if set' do
           scoped, _, unscoped = tasks
           in_taxonomy_scope(organizations.first) do |o, _l|
-            @controller.send(:current_taxonomy_search).must_equal "(organization_id = #{o.id})"
+            _(@controller.send(:current_taxonomy_search)).must_equal "(organization_id = #{o.id})"
             results = @controller.send(:filter, ForemanTasks::Task)
-            results.map(&:id).sort.must_equal [scoped, unscoped].map(&:id).sort
+            _(results.map(&:id).sort).must_equal [scoped, unscoped].map(&:id).sort
           end
         end
 
         it 'scopes by org and location if set' do
           in_taxonomy_scope(organizations.first, FactoryBot.create(:location)) do |o, l|
-            @controller.send(:current_taxonomy_search).must_equal "(organization_id = #{o.id} AND location_id = #{l.id})"
+            _(@controller.send(:current_taxonomy_search)).must_equal "(organization_id = #{o.id} AND location_id = #{l.id})"
           end
         end
       end

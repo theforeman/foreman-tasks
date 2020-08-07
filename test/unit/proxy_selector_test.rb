@@ -18,22 +18,22 @@ describe ForemanTasks::ProxySelector do
         found << proxy_selector.select_by_jobs_count(proxies)
       end
 
-      available.count.must_equal count
-      available.uniq.count.must_equal count - 1
-      proxy_selector.offline.count.must_equal 1
+      _(available.count).must_equal count
+      _(available.uniq.count).must_equal count - 1
+      _(proxy_selector.offline.count).must_equal 1
     end
 
     it 'returns nil for if no proxy is available' do
-      proxy_selector.select_by_jobs_count([]).must_be_nil
+      _(proxy_selector.select_by_jobs_count([])).must_be_nil
     end
   end
 
   describe '#determine_proxy' do
     it 'returns :not_defined when avialable proxies returns empty hash' do
       proxy_selector.stubs(:available_proxies => [])
-      proxy_selector.determine_proxy.must_equal :not_defined
+      _(proxy_selector.determine_proxy).must_equal :not_defined
       proxy_selector.stubs(:available_proxies => { :global => [] })
-      proxy_selector.determine_proxy.must_equal :not_defined
+      _(proxy_selector.determine_proxy).must_equal :not_defined
     end
 
     it 'returns :not_available when proxies are set but offline' do
@@ -41,7 +41,7 @@ describe ForemanTasks::ProxySelector do
       ProxyAPI::ForemanDynflow::DynflowProxy.any_instance.expects(:tasks_count).times(count).raises
       proxy_selector.stubs(:available_proxies =>
                            { :global => FactoryBot.create_list(:smart_proxy, count) })
-      proxy_selector.determine_proxy.must_equal :not_available
+      _(proxy_selector.determine_proxy).must_equal :not_available
     end
 
     it 'returns first available proxy, prioritizing by strategy' do
@@ -51,9 +51,9 @@ describe ForemanTasks::ProxySelector do
       ForemanTasks::ProxySelector.any_instance.stubs(:available_proxies =>
                                                      { :fallback => [fallback_proxy],
                                                        :global => [global_proxy] })
-      ForemanTasks::ProxySelector.new.determine_proxy.must_equal fallback_proxy
+      _(ForemanTasks::ProxySelector.new.determine_proxy).must_equal fallback_proxy
       ProxyAPI::ForemanDynflow::DynflowProxy.any_instance.expects(:tasks_count).raises.then.returns(0)
-      ForemanTasks::ProxySelector.new.determine_proxy.must_equal global_proxy
+      _(ForemanTasks::ProxySelector.new.determine_proxy).must_equal global_proxy
     end
   end
 end

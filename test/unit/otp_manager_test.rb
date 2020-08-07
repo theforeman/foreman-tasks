@@ -28,7 +28,7 @@ module ForemanTasksCore
     it 'generates OTPs using SecureRandom.hex and converts them to strings' do
       otp = 4
       SecureRandom.stubs(:hex).returns(otp)
-      TestOtpManager.generate_otp(username).must_equal otp.to_s
+      _(TestOtpManager.generate_otp(username)).must_equal otp.to_s
     end
 
     it 'provides #drop_otp method that removes OTP only when correct username and password is provided' do
@@ -64,7 +64,7 @@ module ForemanTasksCore
     end
 
     it 'creates token from username and password correctly' do
-      TestOtpManager.tokenize(username, password).must_equal base64
+      _(TestOtpManager.tokenize(username, password)).must_equal base64
     end
 
     it 'overwrites old OTP when generating a new one for the same username' do
