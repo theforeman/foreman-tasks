@@ -92,24 +92,22 @@ module ForemanTasks
       end
 
       specify 'it resets the request id on repetition' do
-        begin
-          expected_id = 'an_id'
-          new_id = SecureRandom.uuid
-          old_id = ::Logging.mdc['request']
-          ::Logging.mdc['request'] = expected_id
+        expected_id = 'an_id'
+        new_id = SecureRandom.uuid
+        old_id = ::Logging.mdc['request']
+        ::Logging.mdc['request'] = expected_id
 
-          delay_options = recurring_logic.generate_delay_options
-          task = ForemanTasks.delay HookedAction, delay_options, true, args.last
-          _(task.input[:current_request_id]).must_equal expected_id
+        delay_options = recurring_logic.generate_delay_options
+        task = ForemanTasks.delay HookedAction, delay_options, true, args.last
+        _(task.input[:current_request_id]).must_equal expected_id
 
-          SecureRandom.stubs(:uuid).returns(new_id)
-          # Perform the planning (trigger repeat)
-          task.execution_plan.delay_record.plan
-          repetition = recurring_logic.tasks.find { |t| t.id != task.id }
-          _(repetition.input[:current_request_id]).must_equal new_id
-        ensure
-          ::Logging.mdc['request'] = old_id
-        end
+        SecureRandom.stubs(:uuid).returns(new_id)
+        # Perform the planning (trigger repeat)
+        task.execution_plan.delay_record.plan
+        repetition = recurring_logic.tasks.find { |t| t.id != task.id }
+        _(repetition.input[:current_request_id]).must_equal new_id
+      ensure
+        ::Logging.mdc['request'] = old_id
       end
 
       specify 'it does not trigger tasks in the past' do

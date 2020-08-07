@@ -120,39 +120,33 @@ module ForemanTasksCore
 
       def start(suspended_action, runner)
         synchronize do
-          begin
-            raise "Actor with runner id #{runner.id} already exists" if @runner_actors[runner.id]
-            runner.logger = @logger
-            runner_actor = RunnerActor.spawn("runner-actor-#{runner.id}", self, suspended_action, runner, @clock, @logger)
-            @runner_actors[runner.id] = runner_actor
-            @runner_suspended_actions[runner.id] = suspended_action
-            runner_actor.tell(:start_runner)
-            return runner.id
-          rescue => exception
-            _handle_command_exception(runner.id, exception)
-            return nil
-          end
+          raise "Actor with runner id #{runner.id} already exists" if @runner_actors[runner.id]
+          runner.logger = @logger
+          runner_actor = RunnerActor.spawn("runner-actor-#{runner.id}", self, suspended_action, runner, @clock, @logger)
+          @runner_actors[runner.id] = runner_actor
+          @runner_suspended_actions[runner.id] = suspended_action
+          runner_actor.tell(:start_runner)
+          return runner.id
+        rescue => exception
+          _handle_command_exception(runner.id, exception)
+          return nil
         end
       end
 
       def kill(runner_id)
         synchronize do
-          begin
-            runner_actor = @runner_actors[runner_id]
-            runner_actor.tell(:kill) if runner_actor
-          rescue => exception
-            _handle_command_exception(runner_id, exception, false)
-          end
+          runner_actor = @runner_actors[runner_id]
+          runner_actor.tell(:kill) if runner_actor
+        rescue => exception
+          _handle_command_exception(runner_id, exception, false)
         end
       end
 
       def finish(runner_id)
         synchronize do
-          begin
-            _finish(runner_id)
-          rescue => exception
-            _handle_command_exception(runner_id, exception, false)
-          end
+          _finish(runner_id)
+        rescue => exception
+          _handle_command_exception(runner_id, exception, false)
         end
       end
 
