@@ -6,10 +6,10 @@ require:
 inherit_from: .rubocop_todo.yml
 
 AllCops:
-  Include:
-    - 'Rakefile'
-    - 'app/views/foreman_tasks/api/**/*.rabl'
-    - lib/**/*.rake
+  Exclude:
+    - 'node_modules/**/*'
+    - 'locale/*'
+  TargetRubyVersion: 2.5
 
 Lint/ShadowingOuterLocalVariable:
   Enabled: false
@@ -68,6 +68,8 @@ Naming/FileName:
     - Gemfile
     - db/seeds.d/*
     - lib/foreman-tasks.rb
+    - gemfile.d/foreman-tasks.rb
+
 
 Layout/HeredocIndentation:
   Exclude:
@@ -115,3 +117,9 @@ Naming/RescuedExceptionsVariableName:
 
 Style/WordArray:
   Enabled: false
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma

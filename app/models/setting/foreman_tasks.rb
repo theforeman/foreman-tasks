@@ -17,7 +17,7 @@ class Setting::ForemanTasks < Setting
           N_('Polling multiplier which is used to multiply the default polling intervals. '\
              'This can be used to prevent polling too frequently for long running tasks.'),
           1,
-          N_("Polling intervals multiplier"))
+          N_("Polling intervals multiplier")),
     ]
   end
 

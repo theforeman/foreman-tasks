@@ -32,8 +32,8 @@ class TasksTest < ActiveSupport::TestCase
       end
 
       test 'cannot search by arbitrary key' do
-        proc { ForemanTasks::Task.search_for('user.my_key ~ 5') }.must_raise(ScopedSearch::QueryNotSupported)
-        proc { ForemanTasks::Task.search_for('user. = 5') }.must_raise(ScopedSearch::QueryNotSupported)
+        _ { proc { ForemanTasks::Task.search_for('user.my_key ~ 5') } }.must_raise(ScopedSearch::QueryNotSupported)
+        _ { proc { ForemanTasks::Task.search_for('user. = 5') } }.must_raise(ScopedSearch::QueryNotSupported)
       end
 
       test 'can search the tasks by negated user' do
@@ -59,8 +59,8 @@ class TasksTest < ActiveSupport::TestCase
       end
 
       test 'cannot glob on user\'s id' do
-        proc { ForemanTasks::Task.search_for("user.id ~ something") }.must_raise(ScopedSearch::QueryNotSupported)
-        proc { ForemanTasks::Task.search_for("user.id ~ 5") }.must_raise(ScopedSearch::QueryNotSupported)
+        _ { proc { ForemanTasks::Task.search_for("user.id ~ something") } }.must_raise(ScopedSearch::QueryNotSupported)
+        _ { proc { ForemanTasks::Task.search_for("user.id ~ 5") } }.must_raise(ScopedSearch::QueryNotSupported)
       end
 
       test 'can search the tasks by user with wildcards' do
@@ -126,7 +126,7 @@ class TasksTest < ActiveSupport::TestCase
       end
 
       it 'raises an exception if duration is unknown' do
-        proc { ForemanTasks::Task.search_for('duration = "25 potatoes"') }.must_raise ScopedSearch::QueryNotSupported
+        _ { proc { ForemanTasks::Task.search_for('duration = "25 potatoes"') } }.must_raise ScopedSearch::QueryNotSupported
       end
     end
   end
@@ -176,13 +176,13 @@ class TasksTest < ActiveSupport::TestCase
     let(:inconsistent_task) { FactoryBot.create(:dynflow_task, :inconsistent_dynflow_task) }
 
     it 'ensures the tasks marked as running are really running in Dynflow' do
-      consistent_task.state.must_equal 'planned'
-      inconsistent_task.state.must_equal 'running'
+      _(consistent_task.state).must_equal 'planned'
+      _(inconsistent_task.state).must_equal 'running'
 
       ForemanTasks::Task::DynflowTask.consistency_check
 
-      consistent_task.reload.state.must_equal 'planned'
-      inconsistent_task.reload.state.must_equal 'planned'
+      _(consistent_task.reload.state).must_equal 'planned'
+      _(inconsistent_task.reload.state).must_equal 'planned'
     end
   end
 
@@ -190,8 +190,8 @@ class TasksTest < ActiveSupport::TestCase
     it 'when scheduled to the future, the label and action is set properly' do
       job = Support::DummyActiveJob.set(:wait => 12.hours).perform_later
       task = ForemanTasks::Task.find_by!(:external_id => job.provider_job_id)
-      task.action.must_equal "Dummy action"
-      task.label.must_equal "Support::DummyActiveJob"
+      _(task.action).must_equal "Dummy action"
+      _(task.label).must_equal "Support::DummyActiveJob"
     end
   end
 
@@ -224,14 +224,14 @@ class TasksTest < ActiveSupport::TestCase
         :total     => 0,
         :success   => 0,
         :cancelled => 0,
-        :pending   => 0
+        :pending   => 0,
       }
     end
     let(:task) { FactoryBot.create(:dynflow_task) }
 
     describe 'without sub tasks' do
       it 'calculates the progress report correctly' do
-        task.sub_tasks_counts.must_equal result_base
+        _(task.sub_tasks_counts).must_equal result_base
       end
     end
 
@@ -242,7 +242,7 @@ class TasksTest < ActiveSupport::TestCase
 
       it 'calculate the progress report correctly' do
         expected_result = result_base.merge(:success => 1, :error => 1, :total => 2)
-        task.sub_tasks_counts.must_equal expected_result
+        _(task.sub_tasks_counts).must_equal expected_result
       end
 
       it 'calculates the progress report correctly when using batch planning' do
@@ -252,11 +252,11 @@ class TasksTest < ActiveSupport::TestCase
 
         task.state = 'stopped'
         expected_result = result_base.merge(:cancelled => 23)
-        task.sub_tasks_counts.must_equal expected_result
+        _(task.sub_tasks_counts).must_equal expected_result
 
         task.state = 'pending'
         expected_result = result_base.merge(:pending => 23)
-        task.sub_tasks_counts.must_equal expected_result
+        _(task.sub_tasks_counts).must_equal expected_result
       end
     end
   end
@@ -278,10 +278,10 @@ class TasksTest < ActiveSupport::TestCase
 
     it 'can indicate it is delayed' do
       assert_not task.delayed?
-      task.execution_type.must_equal 'Immediate'
+      _(task.execution_type).must_equal 'Immediate'
       task.start_at = Time.now.utc + 100
       assert task.delayed?
-      task.execution_type.must_equal 'Delayed'
+      _(task.execution_type).must_equal 'Delayed'
     end
   end
 

@@ -4,7 +4,7 @@ module ForemanTasks
     ERRONEOUS_STATUSES = [
       { :state => 'paused', :result => ANY },
       { :state => ANY, :result => 'error' },
-      { :state => ANY, :result => 'warning' }
+      { :state => ANY, :result => 'warning' },
     ].freeze
     def is_erroneous(task)
       remainder = ERRONEOUS_STATUSES.select do |status|

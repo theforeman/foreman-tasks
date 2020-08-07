@@ -82,7 +82,7 @@ module ForemanTasks
             ' &mdash; ',
             content_tag(:span, nil, :class => 'time', :style => 'white-space: nowrap;') do
               fields.time_select(attr, datetime_options.merge(:ignore_date => true), html_options)
-            end
+            end,
           ].join
         end
       end
@@ -139,7 +139,7 @@ module ForemanTasks
         cronline_fieldset(f, triggering),
         monthly_fieldset(f, triggering),
         weekly_fieldset(f, triggering),
-        time_picker_fieldset(f, triggering)
+        time_picker_fieldset(f, triggering),
       ]
 
       content_tag(:fieldset, nil, :id => 'trigger_mode_recurring', :class => "trigger_mode_form #{'hidden' unless triggering.recurring?}") do
@@ -158,7 +158,7 @@ module ForemanTasks
         # TRANSLATORS: this translation is referring to an option which is a time interval
         _('is month (range: 1-12)'),
         # TRANSLATORS: this translation is referring to an option which is a time interval
-        _('is day of week (range: 0-6)')
+        _('is day of week (range: 0-6)'),
       ].map { |opt| content_tag(:li, opt) }.join
 
       help = _("Cron line format 'a b c d e', where: %s") % "<br><ol type=\"a\">#{options}</ol>".html_safe

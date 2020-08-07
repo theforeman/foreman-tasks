@@ -115,7 +115,7 @@ module ForemanTasks
             assert_response :success
             response = JSON.parse(@response.body)
             assert_kind_of Array, response
-            assert response.empty?
+            assert_empty response
           end
         end
       end
@@ -135,18 +135,18 @@ module ForemanTasks
           wait_for { ForemanTasks::Task.find_by(external_id: triggered.id).state == 'running' }
 
           task = ForemanTasks::Task.where(:external_id => triggered.id).first
-          task.state.must_equal 'running'
-          task.result.must_equal 'pending'
+          _(task.state).must_equal 'running'
+          _(task.result).must_equal 'pending'
 
           callback = Support::DummyProxyAction.proxy.log[:trigger_task].first[1][:callback]
           post :callback, params: { 'callback' => callback, 'data' => { 'result' => 'success' } }
           triggered.finished.wait(5)
 
           task.reload
-          task.state.must_equal 'stopped'
-          task.result.must_equal 'success'
-          task.main_action.output['proxy_task_id'].must_equal Support::DummyProxyAction.proxy.uuid
-          task.main_action.output['proxy_output'].must_equal('result' => 'success')
+          _(task.state).must_equal 'stopped'
+          _(task.result).must_equal 'success'
+          _(task.main_action.output['proxy_task_id']).must_equal Support::DummyProxyAction.proxy.uuid
+          _(task.main_action.output['proxy_output']).must_equal('result' => 'success')
         end
       end
     end

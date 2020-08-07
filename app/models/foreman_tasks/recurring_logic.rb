@@ -95,7 +95,7 @@ module ForemanTasks
         :start_at => next_occurrence_time(time),
         :start_before => options['start_before'],
         :recurring_logic_id => id,
-        :frozen => disabled?
+        :frozen => disabled?,
       }
     end
 

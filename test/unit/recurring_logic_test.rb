@@ -4,17 +4,17 @@ class RecurringLogicsTest < ActiveSupport::TestCase
   describe 'generating times' do
     it 'assembles cronline' do
       hash = {}
-      ForemanTasks::RecurringLogic.assemble_cronline(hash).must_equal '* * * * *'
+      _(ForemanTasks::RecurringLogic.assemble_cronline(hash)).must_equal '* * * * *'
       hash.update :minutes => '*'
-      ForemanTasks::RecurringLogic.assemble_cronline(hash).must_equal '* * * * *'
+      _(ForemanTasks::RecurringLogic.assemble_cronline(hash)).must_equal '* * * * *'
       hash.update :hours => '0,12'
-      ForemanTasks::RecurringLogic.assemble_cronline(hash).must_equal '* 0,12 * * *'
+      _(ForemanTasks::RecurringLogic.assemble_cronline(hash)).must_equal '* 0,12 * * *'
       hash.update :days => '*/2'
-      ForemanTasks::RecurringLogic.assemble_cronline(hash).must_equal '* 0,12 */2 * *'
+      _(ForemanTasks::RecurringLogic.assemble_cronline(hash)).must_equal '* 0,12 */2 * *'
       hash.update :months => '12'
-      ForemanTasks::RecurringLogic.assemble_cronline(hash).must_equal '* 0,12 */2 12 *'
+      _(ForemanTasks::RecurringLogic.assemble_cronline(hash)).must_equal '* 0,12 */2 12 *'
       hash.update :days_of_week => '1,2,3,4,5,6,7'
-      ForemanTasks::RecurringLogic.assemble_cronline(hash).must_equal '* 0,12 */2 12 1,2,3,4,5,6,7'
+      _(ForemanTasks::RecurringLogic.assemble_cronline(hash)).must_equal '* 0,12 */2 12 1,2,3,4,5,6,7'
     end
 
     it 'generates correct times' do
@@ -25,17 +25,17 @@ class RecurringLogicsTest < ActiveSupport::TestCase
       minute = 0
       reference_time = Time.utc(year, month, day, hour, minute)
       parser = ForemanTasks::RecurringLogic.new_from_cronline('* * * * *')
-      parser.next_occurrence_time(reference_time).must_equal Time.utc(year, month, day, hour, minute)
+      _(parser.next_occurrence_time(reference_time)).must_equal Time.utc(year, month, day, hour, minute)
       parser = ForemanTasks::RecurringLogic.new_from_cronline('*/2 * * * *')
-      parser.next_occurrence_time(reference_time).must_equal Time.utc(year, month, day, hour, minute)
+      _(parser.next_occurrence_time(reference_time)).must_equal Time.utc(year, month, day, hour, minute)
       parser = ForemanTasks::RecurringLogic.new_from_cronline('*/2 18,19 * * *')
-      parser.next_occurrence_time(reference_time).must_equal Time.utc(year, month, day, 18)
+      _(parser.next_occurrence_time(reference_time)).must_equal Time.utc(year, month, day, 18)
       parser = ForemanTasks::RecurringLogic.new_from_cronline('*/2 18,19 10 * *')
-      parser.next_occurrence_time(reference_time).must_equal Time.utc(year, month + 1, 10, 18, minute)
+      _(parser.next_occurrence_time(reference_time)).must_equal Time.utc(year, month + 1, 10, 18, minute)
       parser = ForemanTasks::RecurringLogic.new_from_cronline('*/2 18,19 10 11,12 *')
-      parser.next_occurrence_time(reference_time).must_equal Time.utc(year, 11, 10, 18, 0)
+      _(parser.next_occurrence_time(reference_time)).must_equal Time.utc(year, 11, 10, 18, 0)
       parser = ForemanTasks::RecurringLogic.new_from_cronline('* * * * 1')
-      parser.next_occurrence_time(reference_time).must_equal Time.utc(year, month + 1, 5)
+      _(parser.next_occurrence_time(reference_time)).must_equal Time.utc(year, month + 1, 5)
     end
 
     it 'creates correct cronline hash' do
@@ -48,27 +48,27 @@ class RecurringLogicsTest < ActiveSupport::TestCase
       expected_result_daily = { :minutes => minutes, :hours => hours }
       expected_result_weekly = { :minutes => minutes, :hours => hours, :days_of_week => '1,4,6' }
       expected_result_monthly = { :minutes => minutes, :hours => hours, :days => days }
-      ForemanTasks::RecurringLogic.cronline_hash(:hourly,  time_hash, days, days_of_week).must_equal expected_result_hourly
-      ForemanTasks::RecurringLogic.cronline_hash(:daily,   time_hash, days, days_of_week).must_equal expected_result_daily
-      ForemanTasks::RecurringLogic.cronline_hash(:weekly,  time_hash, days, days_of_week).must_equal expected_result_weekly
-      ForemanTasks::RecurringLogic.cronline_hash(:monthly, time_hash, days, days_of_week).must_equal expected_result_monthly
+      _(ForemanTasks::RecurringLogic.cronline_hash(:hourly,  time_hash, days, days_of_week)).must_equal expected_result_hourly
+      _(ForemanTasks::RecurringLogic.cronline_hash(:daily,   time_hash, days, days_of_week)).must_equal expected_result_daily
+      _(ForemanTasks::RecurringLogic.cronline_hash(:weekly,  time_hash, days, days_of_week)).must_equal expected_result_weekly
+      _(ForemanTasks::RecurringLogic.cronline_hash(:monthly, time_hash, days, days_of_week)).must_equal expected_result_monthly
     end
 
     it 'can have limited number of repeats' do
       parser = ForemanTasks::RecurringLogic.new_from_cronline('* * * * *')
       parser.state = 'active'
-      parser.must_be :can_continue?
+      _(parser).must_be :can_continue?
       parser.max_iteration = 5
       parser.expects(:iteration).twice.returns(5)
-      parser.wont_be :can_continue?
+      _(parser).wont_be :can_continue?
       parser.max_iteration = nil
       time = Time.utc(2015, 9, 29, 15, 0)
       parser.end_time = time
-      parser.wont_be :can_continue?, time
+      _(parser).wont_be :can_continue?, time
       parser.end_time = time + 120
-      parser.must_be :can_continue?, time
+      _(parser).must_be :can_continue?, time
       parser.max_iteration = 5
-      parser.wont_be :can_continue?, time
+      _(parser).wont_be :can_continue?, time
     end
 
     it 'generates delay options' do
@@ -76,9 +76,9 @@ class RecurringLogicsTest < ActiveSupport::TestCase
       parser.stubs(:id).returns(1)
       reference_time = Time.utc(2015, 9, 29, 15)
       expected_hash = { :start_at => reference_time, :start_before => nil, :recurring_logic_id => parser.id, :frozen => false }
-      parser.generate_delay_options(reference_time).must_equal expected_hash
-      parser.generate_delay_options(reference_time, 'start_before' => reference_time + 3600)
-            .must_equal expected_hash.merge(:start_before => reference_time + 3600)
+      _(parser.generate_delay_options(reference_time)).must_equal expected_hash
+      _(parser.generate_delay_options(reference_time, 'start_before' => reference_time + 3600))
+        .must_equal expected_hash.merge(:start_before => reference_time + 3600)
     end
 
     it 'can start' do
@@ -108,19 +108,19 @@ class RecurringLogicsTest < ActiveSupport::TestCase
     it 'has a task group associated to all tasks that were created as part of the recurring logic' do
       recurring_logic = ForemanTasks::RecurringLogic.new_from_cronline('* * * * *')
       recurring_logic.save
-      recurring_logic.task_group.must_be_kind_of ForemanTasks::TaskGroups::RecurringLogicTaskGroup
+      _(recurring_logic.task_group).must_be_kind_of ForemanTasks::TaskGroups::RecurringLogicTaskGroup
       task = FactoryBot.build(:dynflow_task, :user_create_task)
       task.task_groups << Support::DummyTaskGroup.new
       task.save!
       recurring_logic.task_group.tasks << task
-      recurring_logic.task_groups.must_include(*task.task_groups)
+      _(recurring_logic.task_groups).must_include(*task.task_groups)
     end
 
     it 'can be created from triggering' do
       triggering = FactoryBot.build(:triggering, :recurring, :end_time_limited)
       logic = ForemanTasks::RecurringLogic.new_from_triggering(triggering)
       # Mysql coerces the times a bit
-      logic.end_time.must_be_close_to(triggering.end_time, 1.second)
+      _(logic.end_time).must_be_close_to(triggering.end_time, 1.second)
     end
 
     it 'cannot trigger tasks when cancelled' do
@@ -164,24 +164,24 @@ class RecurringLogicsTest < ActiveSupport::TestCase
       let(:logic) { FactoryBot.build(:recurring_logic) }
 
       it 'is valid by default' do
-        logic.must_be :valid?
+        _(logic).must_be :valid?
       end
 
       it 'is invalid when end time in past' do
         logic.end_time = (Time.zone.now - 120)
-        logic.wont_be :valid?
+        _(logic).wont_be :valid?
       end
 
       it 'is invalid when iteration limit < 1' do
         logic.max_iteration = 0
-        logic.wont_be :valid?
+        _(logic).wont_be :valid?
       end
 
       it 'is valid when in active state' do
         logic.end_time = (Time.zone.now - 120)
-        logic.wont_be :valid?
+        _(logic).wont_be :valid?
         logic.state = 'active'
-        logic.must_be :valid?
+        _(logic).must_be :valid?
       end
     end
   end

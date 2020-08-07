@@ -8,12 +8,10 @@ module ForemanTasks
       # clear connection only if not running in some active record transaction already
       clear_connections = ActiveRecord::Base.connection.open_transactions.zero?
       super.tap do
-        begin
-          on_execution_plan_save(execution_plan_id, value)
-        rescue => e
-          Foreman::Logging.exception('Error on on_execution_plan_save event', e,
-                                     :logger => 'dynflow')
-        end
+        on_execution_plan_save(execution_plan_id, value)
+      rescue => e
+        Foreman::Logging.exception('Error on on_execution_plan_save event', e,
+                                   :logger => 'dynflow')
       end
     ensure
       ::ActiveRecord::Base.clear_active_connections! if clear_connections

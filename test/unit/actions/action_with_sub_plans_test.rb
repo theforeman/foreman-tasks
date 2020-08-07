@@ -43,8 +43,8 @@ module ForemanTasks
       end
 
       specify 'the sub-plan stores the information about its parent' do
-        task.sub_tasks.size.must_equal 1
-        task.sub_tasks.first.label.must_equal ChildAction.name
+        _(task.sub_tasks.size).must_equal 1
+        _(task.sub_tasks.first.label).must_equal ChildAction.name
       end
 
       specify "the locks of the sub-plan don't colide with the locks of its parent" do

@@ -1,7 +1,7 @@
 Bookmark.without_auditing do
   [
     { :name => 'running', :query => 'state = running' },
-    { :name => 'failed', :query => 'state = paused or result = error or result = warning' }
+    { :name => 'failed', :query => 'state = paused or result = error or result = warning' },
 
   ].each do |item|
     next if Bookmark.where(:name => item[:name]).first

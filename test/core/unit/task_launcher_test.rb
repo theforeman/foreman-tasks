@@ -17,15 +17,15 @@ module ForemanTasksCore
 
           it 'triggers an action' do
             Support::DummyDynflowAction.any_instance.expects(:plan).with do |arg|
-              arg.must_equal(expected_result)
+              _(arg).must_equal(expected_result)
             end
             launcher.launch!(launcher_input)
           end
 
           it 'provides results' do
             plan = launcher.launch!(launcher_input).finished.value!
-            launcher.results[:result].must_equal 'success'
-            plan.result.must_equal :success
+            _(launcher.results[:result]).must_equal 'success'
+            _(plan.result).must_equal :success
           end
         end
 
@@ -36,17 +36,17 @@ module ForemanTasksCore
             Support::DummyDynflowAction.any_instance.expects(:plan).with { |arg| arg == expected_result }.twice
             parent = launcher.launch!('foo' => launcher_input, 'bar' => launcher_input)
             plan = parent.finished.value!
-            plan.result.must_equal :success
-            plan.sub_plans.count.must_equal 2
+            _(plan.result).must_equal :success
+            _(plan.sub_plans.count).must_equal 2
           end
 
           it 'provides results' do
             launcher.launch!('foo' => launcher_input, 'bar' => launcher_input)
-            launcher.results.keys.must_equal %w[foo bar]
+            _(launcher.results.keys).must_equal %w[foo bar]
             launcher.results.values.each do |result|
               plan = ForemanTasks.dynflow.world.persistence.load_execution_plan(result[:task_id])
-              result[:result].must_equal 'success'
-              plan.result.must_equal :success
+              _(result[:result]).must_equal 'success'
+              _(plan.result).must_equal :success
             end
           end
         end

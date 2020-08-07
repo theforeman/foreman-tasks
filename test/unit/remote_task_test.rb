@@ -24,8 +24,8 @@ module ForemanTasks
         RemoteTask.batch_trigger('a_operation', remote_tasks)
         remote_tasks.each do |remote_task|
           remote_task.reload
-          remote_task.state.must_equal 'triggered'
-          remote_task.remote_task_id.must_equal((remote_task.id + 5).to_s)
+          _(remote_task.state).must_equal 'triggered'
+          _(remote_task.remote_task_id).must_equal((remote_task.id + 5).to_s)
         end
       end
 

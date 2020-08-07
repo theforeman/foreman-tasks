@@ -102,32 +102,28 @@ module ForemanTasks
 
     def input_output_failed_steps
       failed_steps.map do |f|
-        begin
-          f_action = f.action(execution_plan)
-          {
-            error: ({ exception_class: f.error.exception_class, message: f.error.message, backtrace: f.error.backtrace } if f.error),
-            action_class: f.action_class.name,
-            state: f.state,
-            input: f_action.input.pretty_inspect,
-            output: f_action.output.pretty_inspect
-          }
-        end
+        f_action = f.action(execution_plan)
+        {
+          error: ({ exception_class: f.error.exception_class, message: f.error.message, backtrace: f.error.backtrace } if f.error),
+          action_class: f.action_class.name,
+          state: f.state,
+          input: f_action.input.pretty_inspect,
+          output: f_action.output.pretty_inspect,
+        }
       end
     end
 
     def input_output_running_steps
       running_steps.map do |f|
-        begin
-          f_action = f.action(execution_plan)
-          {
-            id: f_action.id,
-            action_class: f.action_class.name,
-            state: f.state,
-            input: f_action.input.pretty_inspect,
-            output: f_action.output.pretty_inspect,
-            cancellable: cancellable_action?(f_action)
-          }
-        end
+        f_action = f.action(execution_plan)
+        {
+          id: f_action.id,
+          action_class: f.action_class.name,
+          state: f.state,
+          input: f_action.input.pretty_inspect,
+          output: f_action.output.pretty_inspect,
+          cancellable: cancellable_action?(f_action),
+        }
       end
     end
 
@@ -220,19 +216,17 @@ module ForemanTasks
       fixed_count = 0
       logger = Foreman::Logging.logger('foreman-tasks')
       running.each do |task|
-        begin
-          changes = task.update_from_dynflow(task.execution_plan.to_hash)
-          unless changes.empty?
-            fixed_count += 1
-            logger.warn('Task %s updated at consistency check: %s' % [task.id, changes.inspect])
-          end
-        rescue => e
-          # if we fail updating the data from dynflow, it usually means there is something
-          # odd with the data consistency and at this point it is not possible to resume, switching
-          # the task to stopped/error
-          task.update(:state => 'stopped', :result => 'error')
-          Foreman::Logging.exception("Failed at consistency check for task #{task.id}", e, :logger => 'foreman-tasks')
+        changes = task.update_from_dynflow(task.execution_plan.to_hash)
+        unless changes.empty?
+          fixed_count += 1
+          logger.warn('Task %s updated at consistency check: %s' % [task.id, changes.inspect])
         end
+      rescue => e
+        # if we fail updating the data from dynflow, it usually means there is something
+        # odd with the data consistency and at this point it is not possible to resume, switching
+        # the task to stopped/error
+        task.update(:state => 'stopped', :result => 'error')
+        Foreman::Logging.exception("Failed at consistency check for task #{task.id}", e, :logger => 'foreman-tasks')
       end
       fixed_count
     end

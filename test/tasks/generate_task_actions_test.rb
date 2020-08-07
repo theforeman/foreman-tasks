@@ -26,7 +26,7 @@ class GenerateTaskActionsTest < ActiveSupport::TestCase
     end
 
     assert_match(%r{Generating action for #{tasks.count} tasks}, stdout)
-    ForemanTasks::Task.where(:action => label).count.must_equal tasks.count
+    _(ForemanTasks::Task.where(:action => label).count).must_equal tasks.count
     assert_match(%r{Processed #{tasks.count}/#{tasks.count} tasks}, stdout)
   end
 

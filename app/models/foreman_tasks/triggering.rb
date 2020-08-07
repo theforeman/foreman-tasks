@@ -75,7 +75,7 @@ module ForemanTasks
     def delay_options
       {
         :start_at => start_at.utc,
-        :start_before => start_before.try(:utc)
+        :start_before => start_before.try(:utc),
       }
     end
 

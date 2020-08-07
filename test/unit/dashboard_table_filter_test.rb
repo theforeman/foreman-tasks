@@ -24,7 +24,7 @@ class DashboardTableFilterTest < ActiveSupport::TestCase
       let(:params) { { result: 'warning' } }
 
       it 'filters' do
-        filtered_scope.count.must_equal @tasks_builder.distribution['stopped'][:by_result]['warning'][:total]
+        _(filtered_scope.count).must_equal @tasks_builder.distribution['stopped'][:by_result]['warning'][:total]
       end
     end
 
@@ -32,7 +32,7 @@ class DashboardTableFilterTest < ActiveSupport::TestCase
       let(:params) { { state: 'running' } }
 
       it 'filters' do
-        filtered_scope.count.must_equal @tasks_builder.distribution['running'][:total]
+        _(filtered_scope.count).must_equal @tasks_builder.distribution['running'][:total]
       end
     end
 
@@ -44,7 +44,7 @@ class DashboardTableFilterTest < ActiveSupport::TestCase
       end
 
       it 'filters' do
-        filtered_scope.count.must_equal @tasks_builder.distribution['running'][:recent]
+        _(filtered_scope.count).must_equal @tasks_builder.distribution['running'][:recent]
       end
     end
 
@@ -56,7 +56,7 @@ class DashboardTableFilterTest < ActiveSupport::TestCase
       end
 
       it 'filters' do
-        filtered_scope.count.must_equal @tasks_builder.distribution['running'][:recent]
+        _(filtered_scope.count).must_equal @tasks_builder.distribution['running'][:recent]
       end
     end
 
@@ -70,7 +70,7 @@ class DashboardTableFilterTest < ActiveSupport::TestCase
       it 'filters' do
         old_tasks_count = @tasks_builder.distribution['running'][:total] -
                           @tasks_builder.distribution['running'][:recent]
-        filtered_scope.count.must_equal old_tasks_count
+        _(filtered_scope.count).must_equal old_tasks_count
       end
     end
   end

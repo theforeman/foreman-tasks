@@ -30,12 +30,10 @@ module ForemanTasks
       actions_with_periods = {}
       if cleanup_settings[:actions]
         cleanup_settings[:actions].each do |action|
-          begin
-            action_class = action[:name].constantize
-            actions_with_periods[action_class] = action[:after]
-          rescue => e
-            Foreman::Logging.exception("Error handling #{action} cleanup settings", e)
-          end
+          action_class = action[:name].constantize
+          actions_with_periods[action_class] = action[:after]
+        rescue => e
+          Foreman::Logging.exception("Error handling #{action} cleanup settings", e)
         end
       end
       (ForemanTasks.dynflow.world.action_classes - actions_with_periods.keys).each do |action_class|

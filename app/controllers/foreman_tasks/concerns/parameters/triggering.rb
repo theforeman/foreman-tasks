@@ -15,7 +15,7 @@ module ForemanTasks
                   *::ForemanTasks::Triggering::PARAMS,
                   :days_of_week => {},
                   :time => {},
-                  :end_time => {}
+                  :end_time => {},
                 ],
                 :nested => true
               )

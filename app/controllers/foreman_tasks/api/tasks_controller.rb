@@ -105,7 +105,7 @@ module ForemanTasks
           total: resumed.length + failed.length + skipped.length,
           resumed: resumed,
           failed: failed,
-          skipped: skipped
+          skipped: skipped,
         }
       end
 
@@ -126,7 +126,7 @@ module ForemanTasks
         render :json => {
           total: cancelled.length + skipped.length,
           cancelled: cancelled,
-          skipped: skipped
+          skipped: skipped,
         }
       end
 
@@ -154,7 +154,7 @@ module ForemanTasks
         render :json => {
           total: total_length,
           stopped_length: to_stop_length,
-          skipped_length: skipped_length
+          skipped_length: skipped_length,
         }
       end
 
@@ -171,7 +171,7 @@ module ForemanTasks
 
           ordering_params = {
             sort_by: params[:sort_by] || 'started_at',
-            sort_order: params[:sort_order] || 'DESC'
+            sort_order: params[:sort_order] || 'DESC',
           }
           params[:order] = "#{ordering_params[:sort_by]} #{ordering_params[:sort_order]}"
         end
