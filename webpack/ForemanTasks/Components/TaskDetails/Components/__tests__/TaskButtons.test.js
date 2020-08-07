@@ -13,7 +13,11 @@ import {
 } from '../../../TaskActions/TaskActionsConstants';
 
 const fixtures = {
-  'render with minimal Props': { id: 'test', taskProgressToggle: jest.fn() },
+  'render with minimal Props': {
+    id: 'test',
+    taskReloadStart: jest.fn(),
+    taskProgressToggle: jest.fn(),
+  },
   'render with some Props': {
     id: 'test',
     state: 'paused',
@@ -23,6 +27,7 @@ const fixtures = {
     taskReload: true,
     canEdit: true,
     status: STATUS.RESOLVED,
+    taskReloadStart: jest.fn(),
     taskProgressToggle: jest.fn(),
   },
 };
@@ -38,6 +43,7 @@ describe('Task', () => {
     const cancelTaskRequest = jest.fn();
     const resumeTaskRequest = jest.fn();
     const taskProgressToggle = jest.fn();
+    const taskReloadStart = jest.fn();
     const id = 'some-id';
     const action = 'some-action';
     const props = {
@@ -47,6 +53,7 @@ describe('Task', () => {
       cancelTaskRequest,
       resumeTaskRequest,
       taskProgressToggle,
+      taskReloadStart,
       status: STATUS.RESOLVED,
     };
     afterEach(() => {
@@ -62,14 +69,14 @@ describe('Task', () => {
       const component = shallow(<TaskButtons {...props} />);
       const resumeButton = component.find('.resume-button').at(0);
       resumeButton.props().onClick();
-      expect(taskProgressToggle).toBeCalled();
+      expect(taskReloadStart).toBeCalled();
       expect(resumeTaskRequest).toBeCalledWith(id, action);
     });
     it('cancel', () => {
       const component = shallow(<TaskButtons {...props} />);
       const cancelButton = component.find('.cancel-button').at(0);
       cancelButton.props().onClick();
-      expect(taskProgressToggle).toBeCalled();
+      expect(taskReloadStart).toBeCalled();
       expect(cancelTaskRequest).toBeCalledWith(id, action);
     });
     it('unlock', () => {

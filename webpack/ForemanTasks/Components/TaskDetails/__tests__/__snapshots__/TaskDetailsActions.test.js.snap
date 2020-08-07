@@ -1,12 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TaskDetails - Actions should cancelStep and fail 1`] = `
+exports[`TaskDetails - Actions should cancelStep 1`] = `
 Array [
-  Array [
-    Object {
-      "type": "TASK_STEP_CANCEL_REQUEST",
-    },
-  ],
   Array [
     Object {
       "payload": Object {
@@ -20,115 +15,33 @@ Array [
   ],
   Array [
     Object {
-      "payload": [Error: Network Error],
-      "type": "TASK_STEP_CANCEL_FAILURE",
-    },
-  ],
-  Array [
-    Object {
-      "payload": Object {
-        "message": Object {
-          "message": "Could not cancel step. Error: step-id undefined",
-          "type": "error",
-        },
-      },
-      "type": "TOASTS_ADD",
-    },
-  ],
-]
-`;
-
-exports[`TaskDetails - Actions should cancelStep and success 1`] = `
-Array [
-  Array [
-    Object {
-      "type": "TASK_STEP_CANCEL_REQUEST",
-    },
-  ],
-  Array [
-    Object {
-      "payload": Object {
-        "message": Object {
-          "message": "Trying to cancel step step-id",
-          "type": "info",
-        },
-      },
-      "type": "TOASTS_ADD",
-    },
-  ],
-  Array [
-    Object {
-      "type": "TASK_STEP_CANCEL_SUCCESS",
-    },
-  ],
-  Array [
-    Object {
-      "payload": Object {
-        "message": Object {
-          "message": "step-id {__('Step Canceled')}",
-          "type": "success",
-        },
-      },
-      "type": "TOASTS_ADD",
-    },
-  ],
-]
-`;
-
-exports[`TaskDetails - Actions should fetch-task-details and fail 1`] = `
-Array [
-  Array [
-    Object {
-      "type": "FOREMAN_TASK_DETAILS_FETCH_TASK_REQUEST",
-    },
-  ],
-  Array [
-    Object {
-      "payload": [Error: Network Error],
-      "type": "FOREMAN_TASK_DETAILS_FETCH_TASK_FAILURE",
-    },
-  ],
-]
-`;
-
-exports[`TaskDetails - Actions should fetch-task-details and success 1`] = `
-Array [
-  Array [
-    Object {
-      "type": "FOREMAN_TASK_DETAILS_FETCH_TASK_REQUEST",
-    },
-  ],
-  Array [
-    Object {
-      "payload": "some-data",
-      "type": "FOREMAN_TASK_DETAILS_FETCH_TASK_SUCCESS",
-    },
-  ],
-  Array [
-    Object {
-      "payload": Object {
-        "timeoutId": 7,
-      },
-      "type": "FOREMAN_TASK_DETAILS_START_POLLING",
+      "handleError": [Function],
+      "handleSuccess": [Function],
+      "key": "TASK_STEP_CANCEL",
+      "type": "post-some-type",
+      "url": "foreman/foreman_tasks/tasks/task-id/cancel_step?step_id=step-id",
     },
   ],
 ]
 `;
 
 exports[`TaskDetails - Actions should start reload 1`] = `
-Object {
-  "payload": Object {
-    "timeoutId": 1,
-  },
-  "type": "FOREMAN_TASK_DETAILS_START_POLLING",
-}
+Array [
+  Array [
+    Object {
+      "handleError": [Function],
+      "handleSuccess": [Function],
+      "interval": 5000,
+      "key": "FOREMAN_TASK_DETAILS",
+      "type": "get-some-type",
+      "url": "foreman/foreman_tasks/api/tasks/1/details?include_permissions",
+    },
+  ],
+]
 `;
 
 exports[`TaskDetails - Actions should stop reload 1`] = `
 Object {
-  "payload": Object {
-    "timeoutId": 2,
-  },
-  "type": "FOREMAN_TASK_DETAILS_STOP_POLLING",
+  "type": "stop",
 }
 `;

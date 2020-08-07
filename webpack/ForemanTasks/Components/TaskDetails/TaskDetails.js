@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Tab, Tabs } from 'patternfly-react';
 import { translate as __ } from 'foremanReact/common/I18n';
@@ -14,114 +14,106 @@ import { TaskSkeleton } from './Components/TaskSkeleton';
 
 import './TaskDetails.scss';
 
-class TaskDetails extends Component {
-  componentDidMount() {
-    const { timeoutId, refetchTaskDetails, fetchTaskDetails } = this.props;
-    fetchTaskDetails(getTaskID(), timeoutId, refetchTaskDetails);
-  }
-  componentWillUnmount() {
-    this.props.taskReloadStop(this.props.timeoutId);
-  }
-  taskProgressToggle = () => {
-    const {
-      timeoutId,
-      refetchTaskDetails,
-      loading,
-      taskReloadStop,
-      taskReloadStart,
-    } = this.props;
-    const id = getTaskID();
-    if (timeoutId) {
-      taskReloadStop(timeoutId);
+const TaskDetails = ({
+  executionPlan,
+  failedSteps,
+  runningSteps,
+  locks,
+  cancelStep,
+  taskReloadStart,
+  taskReloadStop,
+  APIerror,
+  ...props
+}) => {
+  const id = getTaskID();
+  const { taskReload, status, isLoading } = props;
+
+  useEffect(() => {
+    taskReloadStart(id);
+    return () => {
+      taskReloadStop();
+    };
+  }, [id, taskReloadStart, taskReloadStop]);
+
+  const taskProgressToggle = () => {
+    if (taskReload) {
+      taskReloadStop();
     } else {
-      taskReloadStart(timeoutId, refetchTaskDetails, id, loading);
+      taskReloadStart(id);
     }
   };
-  render() {
-    const {
-      externalId,
-      startedAt,
-      endedAt,
-      label,
-      input,
-      output,
-      executionPlan,
-      failedSteps,
-      runningSteps,
-      locks,
-      cancelStep,
-      status,
-      isData,
-      APIerror,
-    } = this.props;
-    const id = getTaskID();
-    const resumable = executionPlan ? executionPlan.state === 'paused' : false;
-    const cancellable = executionPlan ? executionPlan.cancellable : false;
-    const loading = status === STATUS.PENDING && !isData;
 
-    // const loading = true;
-    if (status === STATUS.ERROR) {
-      return (
-        <MessageBox
-          key="tasks-table-error"
-          icontype="error-circle-o"
-          msg={__(`Could not receive data: ${APIerror && APIerror.message}`)}
-        />
-      );
-    }
+  if (status === STATUS.ERROR) {
     return (
-      <div className="task-details-react well">
-        <Tabs defaultActiveKey={1} animation={false} id="task-details-tabs">
-          <Tab eventKey={1} title={__('Task')}>
-            {loading ? (
-              <TaskSkeleton />
-            ) : (
-              <Task
-                {...{
-                  ...this.props,
-                  cancellable,
-                  resumable,
-                  id,
-                  status,
-                  taskProgressToggle: this.taskProgressToggle,
-                }}
-              />
-            )}
-          </Tab>
-          <Tab eventKey={2} disabled={loading} title={__('Running Steps')}>
-            <RunningSteps
-              runningSteps={runningSteps}
-              id={id}
-              cancelStep={cancelStep}
-              taskReload={this.props.taskReload}
-              taskProgressToggle={this.taskProgressToggle}
-            />
-          </Tab>
-          <Tab eventKey={3} disabled={loading} title={__('Errors')}>
-            <Errors executionPlan={executionPlan} failedSteps={failedSteps} />
-          </Tab>
-          <Tab eventKey={4} disabled={loading} title={__('Locks')}>
-            <Locks locks={locks} />
-          </Tab>
-          <Tab eventKey={5} disabled={loading} title={__('Raw')}>
-            <Raw
-              {...{ id, label, startedAt, endedAt, input, output, externalId }}
-            />
-          </Tab>
-        </Tabs>
-      </div>
+      <MessageBox
+        key="task-details-error"
+        icontype="error-circle-o"
+        msg={__(`Could not receive data: ${APIerror && APIerror.message}`)}
+      />
     );
   }
-}
+  const resumable = executionPlan ? executionPlan.state === 'paused' : false;
+  const cancellable = executionPlan ? executionPlan.cancellable : false;
+  return (
+    <div className="task-details-react well">
+      <Tabs defaultActiveKey={1} animation={false} id="task-details-tabs">
+        <Tab eventKey={1} title={__('Task')}>
+          {isLoading ? (
+            <TaskSkeleton />
+          ) : (
+            <Task
+              {...{
+                ...props,
+                cancellable,
+                resumable,
+                id,
+                status,
+                taskProgressToggle,
+                taskReloadStart,
+              }}
+            />
+          )}
+        </Tab>
+        <Tab eventKey={2} disabled={isLoading} title={__('Running Steps')}>
+          <RunningSteps
+            runningSteps={runningSteps}
+            id={id}
+            cancelStep={cancelStep}
+            taskReload={taskReload}
+            taskReloadStart={taskReloadStart}
+          />
+        </Tab>
+        <Tab eventKey={3} disabled={isLoading} title={__('Errors')}>
+          <Errors executionPlan={executionPlan} failedSteps={failedSteps} />
+        </Tab>
+        <Tab eventKey={4} disabled={isLoading} title={__('Locks')}>
+          <Locks locks={locks} />
+        </Tab>
+        <Tab eventKey={5} disabled={isLoading} title={__('Raw')}>
+          <Raw
+            id={id}
+            label={props.label}
+            startedAt={props.startedAt}
+            endedAt={props.endedAt}
+            input={props.input}
+            output={props.output}
+            externalId={props.externalId}
+          />
+        </Tab>
+      </Tabs>
+    </div>
+  );
+};
 
 TaskDetails.propTypes = {
   label: PropTypes.string,
-  fetchTaskDetails: PropTypes.func.isRequired,
   runningSteps: PropTypes.array,
   cancelStep: PropTypes.func.isRequired,
   taskReload: PropTypes.bool.isRequired,
   status: PropTypes.oneOf(Object.keys(STATUS)),
   APIerror: PropTypes.object,
+  taskReloadStop: PropTypes.func.isRequired,
+  taskReloadStart: PropTypes.func.isRequired,
   ...Task.propTypes,
   ...Errors.propTypes,
   ...Locks.propTypes,

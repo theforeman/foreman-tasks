@@ -11,6 +11,7 @@ import {
 export const TaskButtons = ({
   canEdit,
   dynflowEnableConsole,
+  taskReloadStart,
   taskProgressToggle,
   taskReload,
   externalId,
@@ -69,7 +70,7 @@ export const TaskButtons = ({
         disabled={!canEdit || !resumable}
         onClick={() => {
           if (!taskReload) {
-            taskProgressToggle();
+            taskReloadStart(id);
           }
           resumeTaskRequest(id, action);
         }}
@@ -84,7 +85,7 @@ export const TaskButtons = ({
         disabled={!canEdit || !cancellable}
         onClick={() => {
           if (!taskReload) {
-            taskProgressToggle();
+            taskReloadStart(id);
           }
           cancelTaskRequest(id, action);
         }}
@@ -136,6 +137,7 @@ export const TaskButtons = ({
 TaskButtons.propTypes = {
   canEdit: PropTypes.bool,
   dynflowEnableConsole: PropTypes.bool,
+  taskReloadStart: PropTypes.func.isRequired,
   taskProgressToggle: PropTypes.func.isRequired,
   taskReload: PropTypes.bool,
   externalId: PropTypes.string,

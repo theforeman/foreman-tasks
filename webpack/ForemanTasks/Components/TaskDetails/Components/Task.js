@@ -11,17 +11,17 @@ const Task = props => {
     forceCancelTaskRequest,
     unlockTaskRequest,
     action,
-    taskProgressToggle,
+    taskReloadStart,
   } = props;
   const forceUnlock = () => {
     if (!taskReload) {
-      taskProgressToggle();
+      taskReloadStart(id);
     }
     forceCancelTaskRequest(id, action);
   };
   const unlock = () => {
     if (!taskReload) {
-      taskProgressToggle();
+      taskReloadStart(id);
     }
     unlockTaskRequest(id, action);
   };
@@ -31,7 +31,7 @@ const Task = props => {
       <ForceUnlockModal onClick={forceUnlock} />
       <Grid>
         <Row>
-          <TaskButtons {...props} />
+          <TaskButtons taskReloadStart={taskReloadStart} {...props} />
         </Row>
         <TaskInfo {...props} />
       </Grid>

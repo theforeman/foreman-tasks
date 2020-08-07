@@ -3,7 +3,7 @@
 exports[`TaskDetails rendering render with error Props 1`] = `
 <MessageBox
   icontype="error-circle-o"
-  key="tasks-table-error"
+  key="task-details-error"
   msg="Could not receive data: some-error"
 />
 `;
@@ -32,8 +32,8 @@ exports[`TaskDetails rendering render with loading Props 1`] = `
         cancelStep={[MockFunction]}
         id="a15dd820-32f1-4ced-9ab7-c0fab8234c47"
         runningSteps={Array []}
-        taskProgressToggle={[Function]}
         taskReload={false}
+        taskReloadStart={[MockFunction]}
       />
     </Tab>
     <Tab
@@ -88,67 +88,25 @@ exports[`TaskDetails rendering render with min Props 1`] = `
       title="Task"
     >
       <Task
-        APIerror={null}
         action=""
         canEdit={false}
-        cancelStep={[MockFunction]}
         cancelTaskRequest={[Function]}
         cancellable={false}
         dynflowEnableConsole={false}
         endedAt=""
         errors={Array []}
-        executionPlan={Object {}}
         externalId=""
-        failedSteps={Array []}
-        fetchTaskDetails={
-          [MockFunction] {
-            "calls": Array [
-              Array [
-                "a15dd820-32f1-4ced-9ab7-c0fab8234c47",
-                undefined,
-                [MockFunction],
-              ],
-              Array [
-                "a15dd820-32f1-4ced-9ab7-c0fab8234c47",
-                undefined,
-                [MockFunction],
-              ],
-              Array [
-                "a15dd820-32f1-4ced-9ab7-c0fab8234c47",
-                undefined,
-                [MockFunction],
-              ],
-            ],
-            "results": Array [
-              Object {
-                "type": "return",
-                "value": undefined,
-              },
-              Object {
-                "type": "return",
-                "value": undefined,
-              },
-              Object {
-                "type": "return",
-                "value": undefined,
-              },
-            ],
-          }
-        }
         hasSubTasks={false}
         help=""
         id="a15dd820-32f1-4ced-9ab7-c0fab8234c47"
         input={Array []}
         label=""
-        locks={Array []}
         output={Object {}}
         parentTask=""
         progress={0}
-        refetchTaskDetails={[MockFunction]}
         result="error"
         resumable={false}
         resumeTaskRequest={[Function]}
-        runningSteps={Array []}
         startAt=""
         startBefore=""
         startedAt=""
@@ -157,13 +115,11 @@ exports[`TaskDetails rendering render with min Props 1`] = `
         taskProgressToggle={[Function]}
         taskReload={false}
         taskReloadStart={[MockFunction]}
-        taskReloadStop={[MockFunction]}
         username=""
         usernamePath=""
       />
     </Tab>
     <Tab
-      disabled={false}
       eventKey={2}
       title="Running Steps"
     >
@@ -171,12 +127,11 @@ exports[`TaskDetails rendering render with min Props 1`] = `
         cancelStep={[MockFunction]}
         id="a15dd820-32f1-4ced-9ab7-c0fab8234c47"
         runningSteps={Array []}
-        taskProgressToggle={[Function]}
         taskReload={false}
+        taskReloadStart={[MockFunction]}
       />
     </Tab>
     <Tab
-      disabled={false}
       eventKey={3}
       title="Errors"
     >
@@ -186,7 +141,6 @@ exports[`TaskDetails rendering render with min Props 1`] = `
       />
     </Tab>
     <Tab
-      disabled={false}
       eventKey={4}
       title="Locks"
     >
@@ -195,7 +149,6 @@ exports[`TaskDetails rendering render with min Props 1`] = `
       />
     </Tab>
     <Tab
-      disabled={false}
       eventKey={5}
       title="Raw"
     >

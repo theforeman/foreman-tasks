@@ -4,7 +4,7 @@ import TaskDetails from '../TaskDetails';
 import { minProps } from './TaskDetails.fixtures';
 
 const fixtures = {
-  'render with loading Props': { ...minProps, status: 'PENDING' },
+  'render with loading Props': { ...minProps, isLoading: true },
   'render with error Props': {
     ...minProps,
     status: 'ERROR',
