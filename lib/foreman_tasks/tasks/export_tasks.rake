@@ -252,7 +252,7 @@ namespace :foreman_tasks do
         renderer = TaskRender.new
         total = tasks.count
 
-        tasks.each_with_index do |task, count|
+        tasks.find_each.with_index do |task, count|
           File.open(File.join(tmp_dir, "#{task.id}.html"), 'w') { |file| file.write(PageHelper.pagify(renderer.render_task(task))) }
           puts "#{count + 1}/#{total}"
         end
@@ -264,7 +264,7 @@ namespace :foreman_tasks do
     elsif format == 'csv'
       CSV.open(export_filename, 'wb') do |csv|
         csv << %w[id state type label result parent_task_id started_at ended_at]
-        tasks.each do |task|
+        tasks.find_each do |task|
           csv << [task.id, task.state, task.type, task.label, task.result,
                   task.parent_task_id, task.started_at, task.ended_at]
         end
