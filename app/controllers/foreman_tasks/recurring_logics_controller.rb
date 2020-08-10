@@ -41,6 +41,11 @@ module ForemanTasks
     def change_enabled(value)
       begin
         @recurring_logic.update!(:enabled => value)
+        flash[:success] = if value
+                            _('The recurring logic was enabled.')
+                          else
+                            _('The recurring logic was disabled.')
+                          end
       rescue RecurringLogicCancelledException => e
         @errors = e.message
       end
