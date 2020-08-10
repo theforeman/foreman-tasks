@@ -1,5 +1,7 @@
 module ForemanTasks
   class RecurringLogicsController < ::ApplicationController
+    include Foreman::Controller::AutoCompleteSearch
+
     before_action :find_recurring_logic, :only => [:show, :cancel, :enable, :disable]
 
     def index

@@ -7,6 +7,7 @@ Foreman::Application.routes.draw do
         put :disable
       end
       collection do
+        get 'auto_complete_search'
         post :clear_cancelled
       end
     end
