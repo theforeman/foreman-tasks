@@ -24,17 +24,20 @@ exports[`TasksDashboard rendering render without Props 1`] = `
         },
         "scheduled": 0,
         "stopped": Object {
-          "error": Object {
-            "last": 0,
-            "total": 0,
-          },
-          "success": Object {
-            "last": 0,
-            "total": 0,
-          },
-          "warning": Object {
-            "last": 0,
-            "total": 0,
+          "other": 0,
+          "results": Object {
+            "error": Object {
+              "last": 0,
+              "total": 0,
+            },
+            "success": Object {
+              "last": 0,
+              "total": 0,
+            },
+            "warning": Object {
+              "last": 0,
+              "total": 0,
+            },
           },
         },
       }

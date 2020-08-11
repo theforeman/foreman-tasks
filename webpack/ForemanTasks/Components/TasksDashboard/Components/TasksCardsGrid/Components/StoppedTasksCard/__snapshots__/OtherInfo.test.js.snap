@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OtherInfo render 1`] = `
+<span
+  className=""
+>
+  <OverlayTrigger
+    defaultOverlayShown={false}
+    overlay={
+      <Tooltip
+        bsClass="tooltip"
+        id="stopped-tooltip"
+        placement="right"
+      >
+        Other includes all stopped tasks that are cancelled or pending
+      </Tooltip>
+    }
+    placement="bottom"
+    trigger={
+      Array [
+        "hover",
+        "focus",
+      ]
+    }
+  >
+    <span>
+      <Icon
+        name="info"
+        type="pf"
+      />
+      <span>
+        Other:
+         
+      </span>
+    </span>
+  </OverlayTrigger>
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="link"
+    disabled={false}
+    onClick={[Function]}
+  >
+    7
+  </Button>
+</span>
+`;
