@@ -24,7 +24,11 @@ module ForemanTasks
     private
 
     def scope_by(field)
-      @new_scope = @new_scope.where(field => @params[field]) if @params[field].present?
+      if (field == :result) && (@params[field] == 'other')
+        @new_scope = @new_scope.where(:result => ['cancelled', 'pending'])
+      elsif @params[field].present?
+        @new_scope = @new_scope.where(field => @params[field])
+      end
     end
 
     def scope_by_time

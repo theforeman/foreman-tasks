@@ -1,11 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { capitalize } from 'lodash';
 import classNames from 'classnames';
 import { Icon, Button } from 'patternfly-react';
+import { translate as __ } from 'foremanReact/common/I18n';
 import {
   TASKS_DASHBOARD_AVAILABLE_QUERY_STATES,
   TASKS_DASHBOARD_AVAILABLE_QUERY_MODES,
 } from '../../../../TasksDashboardConstants';
+import { getQueryValueText } from '../../../../TasksDashboardHelper';
+import {
+  timePropType,
+  queryPropType,
+} from '../../../../TasksDashboardPropTypes';
 
 const resultIcons = {
   error: <Icon type="pf" name="error-circle-o" />,
@@ -13,7 +20,7 @@ const resultIcons = {
   success: <Icon type="pf" name="ok" />,
 };
 
-export const StoppedTable = (data, query, time, updateQuery) =>
+const StoppedTableCells = (data, query, time, updateQuery) =>
   Object.entries(data).map(([result, { total, last }]) => {
     const { STOPPED } = TASKS_DASHBOARD_AVAILABLE_QUERY_STATES;
     const { LAST } = TASKS_DASHBOARD_AVAILABLE_QUERY_MODES;
@@ -61,3 +68,23 @@ export const StoppedTable = (data, query, time, updateQuery) =>
       </tr>
     );
   });
+
+export const StoppedTable = ({ data, query, time, updateQuery }) => (
+  <table className="table table-bordered table-striped stopped-table">
+    <thead>
+      <tr>
+        <th />
+        <th>{__('Total')}</th>
+        <th>{getQueryValueText(time)}</th>
+      </tr>
+    </thead>
+    <tbody>{StoppedTableCells(data, query, time, updateQuery)}</tbody>
+  </table>
+);
+
+StoppedTable.propTypes = {
+  data: PropTypes.object.isRequired,
+  query: queryPropType.isRequired,
+  time: timePropType.isRequired,
+  updateQuery: PropTypes.func.isRequired,
+};

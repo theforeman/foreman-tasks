@@ -4,8 +4,8 @@ import { Card } from 'patternfly-react';
 import classNames from 'classnames';
 import { noop } from 'foremanReact/common/helpers';
 import { translate as __ } from 'foremanReact/common/I18n';
-
-import { StoppedTable } from './StoppedTasksCardHelper';
+import { OtherInfo } from './OtherInfo';
+import { StoppedTable } from './StoppedTasksCardTable';
 import {
   timePropType,
   queryPropType,
@@ -14,7 +14,6 @@ import {
   TASKS_DASHBOARD_AVAILABLE_TIMES,
   TASKS_DASHBOARD_AVAILABLE_QUERY_STATES,
 } from '../../../../TasksDashboardConstants';
-import { getQueryValueText } from '../../../../TasksDashboardHelper';
 import './StoppedTasksCard.scss';
 
 const StoppedTasksCard = ({
@@ -44,16 +43,19 @@ const StoppedTasksCard = ({
         {__('Stopped')}
       </Card.Title>
       <Card.Body>
-        <table className="table table-bordered table-striped stopped-table">
-          <thead>
-            <tr>
-              <th />
-              <th>{__('Total')}</th>
-              <th>{getQueryValueText(time)}</th>
-            </tr>
-          </thead>
-          <tbody>{StoppedTable(data, query, time, updateQuery)}</tbody>
-        </table>
+        <React.Fragment>
+          <StoppedTable
+            data={data.results}
+            query={query}
+            time={time}
+            updateQuery={updateQuery}
+          />
+          <OtherInfo
+            updateQuery={updateQuery}
+            otherCount={data.other}
+            query={query}
+          />
+        </React.Fragment>
       </Card.Body>
     </Card>
   );
@@ -66,9 +68,12 @@ const resultPropType = PropTypes.shape({
 
 StoppedTasksCard.propTypes = {
   data: PropTypes.shape({
-    error: resultPropType.isRequired,
-    warning: resultPropType.isRequired,
-    success: resultPropType.isRequired,
+    results: PropTypes.shape({
+      error: resultPropType.isRequired,
+      warning: resultPropType.isRequired,
+      success: resultPropType.isRequired,
+    }),
+    other: PropTypes.number,
   }),
   time: timePropType,
   query: queryPropType,
@@ -78,9 +83,12 @@ StoppedTasksCard.propTypes = {
 
 StoppedTasksCard.defaultProps = {
   data: {
-    error: { total: 0, last: 0 },
-    warning: { total: 0, last: 0 },
-    success: { total: 0, last: 0 },
+    results: {
+      error: { total: 0, last: 0 },
+      warning: { total: 0, last: 0 },
+      success: { total: 0, last: 0 },
+    },
+    other: 0,
   },
   time: TASKS_DASHBOARD_AVAILABLE_TIMES.H24,
   query: {},

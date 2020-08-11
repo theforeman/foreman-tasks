@@ -57,17 +57,20 @@ exports[`TasksCardsGrid render with minimal props 1`] = `
         className=""
         data={
           Object {
-            "error": Object {
-              "last": 0,
-              "total": 0,
-            },
-            "success": Object {
-              "last": 0,
-              "total": 0,
-            },
-            "warning": Object {
-              "last": 0,
-              "total": 0,
+            "other": 0,
+            "results": Object {
+              "error": Object {
+                "last": 0,
+                "total": 0,
+              },
+              "success": Object {
+                "last": 0,
+                "total": 0,
+              },
+              "warning": Object {
+                "last": 0,
+                "total": 0,
+              },
             },
           }
         }

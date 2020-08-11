@@ -1,15 +1,19 @@
 .scheduled-tasks-card {
   text-align: center;
+
   .scheduled-data {
+    margin-top: 30px;
     padding-right: 15px;
     cursor: pointer;
     font-size: 40px;
     font-weight: 300;
     transition: font-weight 50ms ease-in;
+
     p {
       font-size: 20px;
       margin: 0;
     }
+
     * {
       margin: 10px;
     }

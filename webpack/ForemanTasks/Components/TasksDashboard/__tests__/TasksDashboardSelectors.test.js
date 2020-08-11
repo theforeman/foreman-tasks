@@ -4,7 +4,31 @@ import {
   selectTime,
   selectQuery,
   selectTasksSummary,
+  calcStoppedOther,
 } from '../TasksDashboardSelectors';
+
+const stoppedResult = {
+  error: {
+    total: 9,
+    recent: 1,
+  },
+  warning: {
+    total: 8,
+    recent: 2,
+  },
+  success: {
+    total: 7,
+    recent: 3,
+  },
+  cancelled: {
+    total: 5,
+    recent: 3,
+  },
+  pending: {
+    total: 11,
+    recent: 4,
+  },
+};
 
 const state = {
   foremanTasks: {
@@ -21,20 +45,7 @@ const state = {
           total: 9,
         },
         stopped: {
-          by_result: {
-            error: {
-              total: 9,
-              recent: 1,
-            },
-            warning: {
-              total: 8,
-              recent: 2,
-            },
-            success: {
-              total: 7,
-              recent: 3,
-            },
-          },
+          by_result: stoppedResult,
         },
         scheduled: {
           total: 6,
@@ -55,6 +66,7 @@ const fixtures = {
   'should select tasks-summary': () => selectTasksSummary(state),
   'should select tasks-summary when state is empty': () =>
     selectTasksSummary({}),
+  'should calcStoppedOther': () => calcStoppedOther(stoppedResult),
 };
 
 describe('TasksDashboard - Selectors', () =>

@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`TasksDashboard - Selectors should calcStoppedOther 1`] = `16`;
+
 exports[`TasksDashboard - Selectors should select query 1`] = `"some-query"`;
 
 exports[`TasksDashboard - Selectors should select query when state is empty 1`] = `Object {}`;
@@ -21,9 +23,17 @@ Object {
     },
     "stopped": Object {
       "by_result": Object {
+        "cancelled": Object {
+          "recent": 3,
+          "total": 5,
+        },
         "error": Object {
           "recent": 1,
           "total": 9,
+        },
+        "pending": Object {
+          "recent": 4,
+          "total": 11,
         },
         "success": Object {
           "recent": 3,
@@ -54,17 +64,20 @@ Object {
   },
   "scheduled": 6,
   "stopped": Object {
-    "error": Object {
-      "last": 1,
-      "total": 9,
-    },
-    "success": Object {
-      "last": 3,
-      "total": 7,
-    },
-    "warning": Object {
-      "last": 2,
-      "total": 8,
+    "other": 16,
+    "results": Object {
+      "error": Object {
+        "last": 1,
+        "total": 9,
+      },
+      "success": Object {
+        "last": 3,
+        "total": 7,
+      },
+      "warning": Object {
+        "last": 2,
+        "total": 8,
+      },
     },
   },
 }
@@ -82,17 +95,20 @@ Object {
   },
   "scheduled": 0,
   "stopped": Object {
-    "error": Object {
-      "last": 0,
-      "total": 0,
-    },
-    "success": Object {
-      "last": 0,
-      "total": 0,
-    },
-    "warning": Object {
-      "last": 0,
-      "total": 0,
+    "other": 0,
+    "results": Object {
+      "error": Object {
+        "last": 0,
+        "total": 0,
+      },
+      "success": Object {
+        "last": 0,
+        "total": 0,
+      },
+      "warning": Object {
+        "last": 0,
+        "total": 0,
+      },
     },
   },
 }
