@@ -290,10 +290,14 @@ exports[`TaskInfo rendering render with Props 1`] = `
           </b>
         </span>
       </p>
-      <p>
-        A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved.
-The recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task.
-      </p>
+      <p
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved.
+The recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task.",
+          }
+        }
+      />
     </Col>
   </Row>
 </Grid>

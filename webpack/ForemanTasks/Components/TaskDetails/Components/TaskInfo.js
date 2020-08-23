@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Grid, Row, Col, ProgressBar } from 'patternfly-react';
 import { translate as __ } from 'foremanReact/common/I18n';
 import RelativeDateTime from 'foremanReact/components/common/dates/RelativeDateTime';
-import ReactHtmlParser from 'react-html-parser';
 
 class TaskInfo extends Component {
   isDelayed = () => {
@@ -171,7 +170,7 @@ class TaskInfo extends Component {
                   <b>{__('Troubleshooting')}</b>
                 </span>
               </p>
-              <p>{ReactHtmlParser(help)}</p>
+              <p dangerouslySetInnerHTML={{ __html: help }} />
             </Col>
           </Row>
         )}
