@@ -34,6 +34,7 @@ jobs:
         ruby-version: [2.5, 2.6]
         node-version: [12]
     steps:
+      - run: sudo apt-get update
       - run: sudo apt-get install build-essential libcurl4-openssl-dev zlib1g-dev libpq-dev
       - uses: actions/checkout@v2
         with:
