@@ -86,6 +86,9 @@ module ForemanTasks
         Apipie.configuration.api_controllers_matcher << "#{ForemanTasks::Engine.root}/app/controllers/foreman_tasks/api/*.rb"
         Apipie.configuration.checksum_path += ['/foreman_tasks/api/']
       end
+      ApipieDSL.configuration.dsl_classes_matchers += [
+        "#{ForemanTasks::Engine.root}/app/models/**/*.rb"
+      ]
     end
 
     initializer 'foreman_tasks.register_paths' do |_app|

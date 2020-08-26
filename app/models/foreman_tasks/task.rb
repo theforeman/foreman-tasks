@@ -4,6 +4,7 @@ module ForemanTasks
   class Task < ApplicationRecord
     include Authorizable
     extend Search
+    extend ApipieDSL::Class
 
     def check_permissions_after_save
       # there's no create_tasks permission, tasks are created as a result of internal actions, in such case we
