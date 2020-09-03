@@ -12,7 +12,7 @@ namespace :foreman_tasks do
 
       * TASK_SEARCH     : scoped search filter (example: 'label = "Actions::Foreman::Host::ImportFacts"')
       * TASK_FILE       : file to export to
-      * TASK_FORMAT     : format to use for the export (either html or csv)
+      * TASK_FORMAT     : format to use for the export (either html or csv or yaml)
       * TASK_DAYS       : number of days to go back
 
     If TASK_SEARCH is not defined, it defaults to all tasks in the past 7 days and
@@ -245,32 +245,47 @@ namespace :foreman_tasks do
 
     puts _("Exporting all tasks matching filter #{filter}")
     puts _("Gathering #{tasks.count} tasks.")
-    if format == 'html'
-      Dir.mktmpdir('task-export') do |tmp_dir|
-        PageHelper.copy_assets(tmp_dir)
-
-        renderer = TaskRender.new
-        total = tasks.count
-
-        tasks.each_with_index do |task, count|
-          File.open(File.join(tmp_dir, "#{task.id}.html"), 'w') { |file| file.write(PageHelper.pagify(renderer.render_task(task))) }
-          puts "#{count + 1}/#{total}"
-        end
-
+    case format
+    when 'html'
+      after = ->(tmp_dir) do
         File.open(File.join(tmp_dir, 'index.html'), 'w') { |file| file.write(PageHelper.pagify(PageHelper.generate_index(tasks))) }
-
-        system("tar", "czf", export_filename, tmp_dir)
       end
-    elsif format == 'csv'
+      renderer = TaskRender.new
+      generate_archive(export_filename, format, tasks,
+                       before: PageHelper.method(:copy_assets),
+                       after: after) do |task|
+        PageHelper.pagify(renderer.render_task(task))
+      end
+    when 'csv'
       CSV.open(export_filename, 'wb') do |csv|
         csv << %w[id state type label result parent_task_id started_at ended_at]
         tasks.each do |task|
           csv << [task.id, task.state, task.type, task.label, task.result,
-                  task.parent_task_id, task.started_at, task.ended_at]
+            task.parent_task_id, task.started_at, task.ended_at]
         end
+      end
+    when 'yaml', 'yml'
+      require 'foreman_tasks/export'
+      exporter = ForemanTasks::Export.new(ForemanTasks.dynflow.world)
+      generate_archive(export_filename, format, tasks) do |task|
+        YAML.dump(exporter.prepare_task(task))
       end
     end
 
     puts "Created #{export_filename}"
+  end
+
+  def generate_archive(export_filename, format, tasks, before: nil, after: nil)
+    total = tasks.count
+    Dir.mktmpdir('task-export') do |tmp_dir|
+      before.call(tmp_dir) if before
+      tasks.each_with_index do |task, count|
+        data = yield(task)
+        File.open(File.join(tmp_dir, "#{task.id}.#{format}"), 'w') { |file| file.write(data) }
+        puts "#{count + 1}/#{total}"
+      end
+      after.call(tmp_dir) if after
+      system("tar", "czf", export_filename, tmp_dir)
+    end
   end
 end
