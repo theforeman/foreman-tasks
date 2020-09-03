@@ -16,7 +16,7 @@ module ForemanTasks
         state_updated_at: format_time(task.state_updated_at),
         user_id:          task.user_id,
         sub_task_ids:     task.sub_tasks.pluck(:id),
-        locks:            prepare_locks(task.locks)
+        locks:            prepare_locks(task.locks),
       }
       base[:execution_plan] = task.execution_plan && prepare_execution_plan(task.execution_plan)
       base
@@ -29,7 +29,7 @@ module ForemanTasks
           name: lock.name,
           exclusive: lock.exclusive,
           resource_type: lock.resource_type,
-          resource_id: lock.resource_id
+          resource_id: lock.resource_id,
         }
       end
     end

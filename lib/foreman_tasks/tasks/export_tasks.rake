@@ -247,7 +247,7 @@ namespace :foreman_tasks do
     puts _("Gathering #{tasks.count} tasks.")
     case format
     when 'html'
-      after = ->(tmp_dir) do
+      after = lambda do |tmp_dir|
         File.open(File.join(tmp_dir, 'index.html'), 'w') { |file| file.write(PageHelper.pagify(PageHelper.generate_index(tasks))) }
       end
       renderer = TaskRender.new
@@ -261,7 +261,7 @@ namespace :foreman_tasks do
         csv << %w[id state type label result parent_task_id started_at ended_at]
         tasks.each do |task|
           csv << [task.id, task.state, task.type, task.label, task.result,
-            task.parent_task_id, task.started_at, task.ended_at]
+                  task.parent_task_id, task.started_at, task.ended_at]
         end
       end
     when 'yaml', 'yml'
