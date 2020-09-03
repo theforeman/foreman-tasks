@@ -265,7 +265,6 @@ namespace :foreman_tasks do
         end
       end
     when 'yaml', 'yml'
-      require 'foreman_tasks/export'
       exporter = ForemanTasks::Export.new(ForemanTasks.dynflow.world)
       generate_archive(export_filename, format, tasks) do |task|
         YAML.dump(exporter.prepare_task(task))
