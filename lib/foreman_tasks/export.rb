@@ -1,7 +1,11 @@
 require 'dynflow/export'
 
 module ForemanTasks
-  class Export < ::Dynflow::Export
+  class Export
+    def initialize(world)
+      @world = world
+    end
+
     def prepare_task(task)
       base = {
         id:               task.id,
@@ -18,7 +22,10 @@ module ForemanTasks
         sub_task_ids:     task.sub_tasks.pluck(:id),
         locks:            prepare_locks(task.locks),
       }
-      base[:execution_plan] = task.execution_plan && prepare_execution_plan(task.execution_plan)
+      if task.is_a?(Task::DynflowTask)
+        @dynflow_exporter ||= ::Dynflow::Export.new(@world)
+        base[:execution_plan] = task.execution_plan && @dynflow_exporter.prepare_execution_plan(task.execution_plan)
+      end
       base
     end
 
@@ -32,6 +39,11 @@ module ForemanTasks
           resource_id: lock.resource_id,
         }
       end
+    end
+
+    def format_time(time)
+      return unless time
+      time.utc.iso8601
     end
   end
 end
