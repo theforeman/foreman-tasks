@@ -16,7 +16,7 @@ module ForemanTasks
       class BadRequest < Apipie::ParamError
       end
 
-      before_action :find_task, :only => [:show, :details]
+      before_action :find_task, :only => [:show, :details, :plan]
 
       api :GET, '/tasks/summary', 'Show task summary'
       def summary
@@ -30,6 +30,13 @@ module ForemanTasks
       api :GET, '/tasks/:id/details', 'Show task extended details'
       param :id, :identifier, desc: 'UUID of the task'
       def details; end
+
+      api :GET, "/tasks/:id/plan", "Show task plan including sub-tasks"
+      param :id, :identifier, desc: "UUID of the task"
+      def plan
+        exporter = ForemanTasks::Export.new(ForemanTasks.dynflow.world)
+        render json: exporter.prepare_task(@task)
+      end
 
       api :POST, '/tasks/bulk_search', 'List dynflow tasks for uuids'
       param :searches, Array, :desc => 'List of uuids to fetch info about' do
@@ -327,7 +334,7 @@ module ForemanTasks
 
       def action_permission
         case params[:action]
-        when 'bulk_search', 'summary', 'details', 'sub_tasks'
+        when 'bulk_search', 'summary', 'details', 'sub_tasks', 'plan'
           :view
         when 'bulk_resume', 'bulk_cancel', 'bulk_stop'
           :edit
