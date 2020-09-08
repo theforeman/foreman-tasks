@@ -198,6 +198,10 @@ module ForemanTasks
       'ForemanTasks::Task'
     end
 
+    def self.allows_taxonomy_filtering?(_taxonomy)
+      false
+    end
+
     def add_missing_task_groups(groups)
       groups = [groups] unless groups.is_a? Array
       (groups - task_groups).each { |group| task_groups << group }
