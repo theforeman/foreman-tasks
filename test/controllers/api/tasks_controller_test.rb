@@ -45,6 +45,16 @@ module ForemanTasks
         end
       end
 
+      describe 'POST /api/tasks/bulk_search' do
+        it 'searching for a task' do
+          task = FactoryBot.create(:dynflow_task, :user_create_task)
+          post :bulk_search, params: { :searches => [{ :type => "task", :task_id => task.id, :search_id => "1" }] }
+          assert_response :success
+          data = JSON.parse(response.body)
+          _(data[0]['results'][0]['id']).must_equal task.id
+        end
+      end
+
       describe 'GET /api/tasks/show' do
         it 'searches for task' do
           task = FactoryBot.create(:dynflow_task, :user_create_task)
