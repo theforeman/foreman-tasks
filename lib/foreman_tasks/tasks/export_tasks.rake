@@ -14,6 +14,7 @@ namespace :foreman_tasks do
       * TASK_FILE       : file to export to
       * TASK_FORMAT     : format to use for the export (either html or csv)
       * TASK_DAYS       : number of days to go back
+      * SKIP_FAILED     : skip tasks that fail to export (true or false[default])
 
     If TASK_SEARCH is not defined, it defaults to all tasks in the past 7 days and
     all unsuccessful tasks in the past 60 days. The default TASK_FORMAT is html
@@ -26,6 +27,8 @@ namespace :foreman_tasks do
     deprecated_options.each do |option, new_option|
       raise "The #{option} option is deprecated. Please use #{new_option} instead" if ENV.include?(option.to_s)
     end
+
+    skip_errors = ENV['SKIP_FAILED'] == "true"
 
     class TaskRender
       def initialize
@@ -221,6 +224,15 @@ namespace :foreman_tasks do
         tasks.order('started_at desc').all.each do |task|
           html << "<tr><td><a href=\"#{task.id}.html\">#{task.label}</a></td><td>#{task.started_at}</td>\
                    <td>#{task.state}</td><td>#{task.result}</td></tr>"
+        rescue StandardError => e
+          if skip_errors
+            puts _('Skipping indexing a task that failed to export because SKIP_FAILED is set to "true"')
+          else
+            puts _('Indexing tasks failed because the task below failed to be indexed.')
+            puts _('Re-run with SKIP_FAILED=true if you wish to prevent this problem from halting task export altogether.')
+            puts task.inspect
+            raise e
+          end
         end
         html << '</table></div>'
       end
@@ -242,6 +254,7 @@ namespace :foreman_tasks do
     export_filename = ENV['TASK_FILE'] || "/tmp/task-export-#{Time.now.to_i}.#{format == 'csv' ? 'csv' : 'tar.gz'}"
 
     tasks = ForemanTasks::Task.search_for(filter)
+    exported_tasks = []
 
     puts _("Exporting all tasks matching filter #{filter}")
     puts _("Gathering #{tasks.count} tasks.")
@@ -254,10 +267,21 @@ namespace :foreman_tasks do
 
         tasks.each_with_index do |task, count|
           File.open(File.join(tmp_dir, "#{task.id}.html"), 'w') { |file| file.write(PageHelper.pagify(renderer.render_task(task))) }
+          exported_tasks << task
           puts "#{count + 1}/#{total}"
+        rescue StandardError => e
+          puts _("WARNING: task failed to export. Additional task details below.")
+          puts task.inspect
+          if skip_errors
+            # Displaying task.id may result in another failure in case the task is severely broken (as seen on the field).
+            puts _("WARNING: Skipping task #{count + 1} because it failed to export.")
+          else
+            puts _("Re-run with SKIP_FAILED=true if you want to simply skip task #{count + 1} and any other tasks that fail to export.")
+            raise e
+          end
         end
 
-        File.open(File.join(tmp_dir, 'index.html'), 'w') { |file| file.write(PageHelper.pagify(PageHelper.generate_index(tasks))) }
+        File.open(File.join(tmp_dir, 'index.html'), 'w') { |file| file.write(PageHelper.pagify(PageHelper.generate_index(exported_tasks))) }
 
         system("tar", "czf", export_filename, tmp_dir)
       end
@@ -267,6 +291,16 @@ namespace :foreman_tasks do
         tasks.each do |task|
           csv << [task.id, task.state, task.type, task.label, task.result,
                   task.parent_task_id, task.started_at, task.ended_at]
+        rescue StandardError => e
+          puts _("WARNING: task failed to export. Additional task details below.")
+          puts task.inspect
+          if skip_errors
+            # Displaying task.id may result in another failure in case the task is severely broken (as seen on the field).
+            puts _("WARNING: Skipping a task because it failed to export.")
+          else
+            puts _("Re-run with SKIP_FAILED=true if you want to simply skip any tasks that fail to export.")
+            raise e
+          end
         end
       end
     end
