@@ -14,6 +14,7 @@ namespace :foreman_tasks do
       * TASK_FILE       : file to export to
       * TASK_FORMAT     : format to use for the export (either html or csv)
       * TASK_DAYS       : number of days to go back
+      * SKIP_FAILED     : allow the export to keep going in case an individual task fails to be exported (true or false[default])
 
     If TASK_SEARCH is not defined, it defaults to all tasks in the past 7 days and
     all unsuccessful tasks in the past 60 days. The default TASK_FORMAT is html
@@ -240,6 +241,7 @@ namespace :foreman_tasks do
 
     format = ENV['TASK_FORMAT'] || 'html'
     export_filename = ENV['TASK_FILE'] || "/tmp/task-export-#{Time.now.to_i}.#{format == 'csv' ? 'csv' : 'tar.gz'}"
+    skip_errors = ENV['SKIP_FAILED']
 
     tasks = ForemanTasks::Task.search_for(filter)
 
@@ -253,8 +255,17 @@ namespace :foreman_tasks do
         total = tasks.count
 
         tasks.each_with_index do |task, count|
-          File.open(File.join(tmp_dir, "#{task.id}.html"), 'w') { |file| file.write(PageHelper.pagify(renderer.render_task(task))) }
-          puts "#{count + 1}/#{total}"
+          begin
+            File.open(File.join(tmp_dir, "#{task.id}.html"), 'w') { |file| file.write(PageHelper.pagify(renderer.render_task(task))) }
+            puts "#{count + 1}/#{total}"
+          rescue StandardError => e
+            if skip_errors == "true"
+              # Displaying task.id may result in another failure in case the task is severely broken (as seen on the field).
+              puts "WARNING: Skipping task #{count + 1} because it failed to export."
+            else
+              raise e
+            end
+          end
         end
 
         File.open(File.join(tmp_dir, 'index.html'), 'w') { |file| file.write(PageHelper.pagify(PageHelper.generate_index(tasks))) }
@@ -265,8 +276,17 @@ namespace :foreman_tasks do
       CSV.open(export_filename, 'wb') do |csv|
         csv << %w[id state type label result parent_task_id started_at ended_at]
         tasks.each do |task|
-          csv << [task.id, task.state, task.type, task.label, task.result,
-                  task.parent_task_id, task.started_at, task.ended_at]
+          begin
+            csv << [task.id, task.state, task.type, task.label, task.result,
+                    task.parent_task_id, task.started_at, task.ended_at]
+          rescue StandardError => e
+            if skip_errors == "true"
+              # Displaying task.id may result in another failure in case the task is severely broken (as seen on the field).
+              puts "WARNING: Skipping a task because it failed to export."
+            else
+              raise e
+            end
+          end
         end
       end
     end
