@@ -70,7 +70,8 @@ export const selectHasSubTasks = state =>
 export const selectLocks = state =>
   selectTaskDetailsResponse(state).locks || [];
 
-export const selectLinks = state => selectTaskDetails(state).links || [];
+export const selectLinks = state =>
+  selectTaskDetailsResponse(state).links || [];
 
 export const selectUsernamePath = state =>
   selectTaskDetailsResponse(state)?.username_path;
