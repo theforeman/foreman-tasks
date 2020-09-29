@@ -101,7 +101,6 @@ exports[`TaskDetails rendering render with min Props 1`] = `
         id="a15dd820-32f1-4ced-9ab7-c0fab8234c47"
         input={Array []}
         label=""
-        links={Array []}
         output={Object {}}
         parentTask=""
         progress={0}
