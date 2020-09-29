@@ -33,15 +33,15 @@ module ForemanTasks
 
         it 'can lock a resource for a single task only once' do
           Lock.lock!(resource, task1)
-          Lock.for_resource(resource).count.must_equal 1
+          _(Lock.for_resource(resource).count).must_equal 1
           Lock.lock!(resource, task1)
-          Lock.for_resource(resource).count.must_equal 1
+          _(Lock.for_resource(resource).count).must_equal 1
         end
 
         it 'cannot lock a resource for multiple tasks' do
           lock = Lock.lock!(resource, task1)
-          Lock.colliding_locks(resource, task2).must_equal [lock]
-          proc { Lock.lock!(resource, task2) }.must_raise Lock::LockConflict
+          _(Lock.colliding_locks(resource, task2)).must_equal [lock]
+          _ { proc { Lock.lock!(resource, task2) } }.must_raise Lock::LockConflict
         end
       end
 
@@ -52,15 +52,15 @@ module ForemanTasks
 
         it 'can link a resource for a single task only once' do
           Link.link!(resource, task1)
-          Link.for_resource(resource).count.must_equal 1
+          _(Link.for_resource(resource).count).must_equal 1
           Link.link!(resource, task1)
-          Link.for_resource(resource).count.must_equal 1
+          _(Link.for_resource(resource).count).must_equal 1
         end
 
         it 'can link a resource to multiple tasks' do
           Link.link!(resource, task1)
           Link.link!(resource, task2)
-          Link.for_resource(resource).count.must_equal 2
+          _(Link.for_resource(resource).count).must_equal 2
         end
       end
     end
