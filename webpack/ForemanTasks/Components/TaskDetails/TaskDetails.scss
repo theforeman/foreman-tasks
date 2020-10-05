@@ -49,4 +49,14 @@
   .dynflow-button > span {
     pointer-events: auto;
   }
+
+  pre {
+    white-space: pre;
+    word-break: normal;
+  }
+
+  .param-name {
+    display: inline-block;
+    width: 10em;
+  }
 }
