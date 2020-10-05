@@ -15,9 +15,4 @@
   switcher_item_url: foreman_tasks_task_path(:id => ':id')
 ) %>
 
-
-<div class="task-details" id="foremanTaskDetails">
-</div>
-
-
-<%= mount_react_component('TaskDetails', '#foremanTaskDetails')  %>
+<%= react_component('TaskDetails')  %>
