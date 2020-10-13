@@ -21,6 +21,6 @@ class CreateForemanTasksLinks < ActiveRecord::Migration[4.2]
   private
 
   def on_postgresql?
-    ActiveRecord::Base.connection.adapter_name == 'PostgreSQL'
+    ActiveRecord::Base.connection.adapter_name.casecmp('postgresql').zero?
   end
 end
