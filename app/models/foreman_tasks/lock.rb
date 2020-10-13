@@ -29,7 +29,9 @@ module ForemanTasks
     validates :task_id, :resource_id, :resource_type, presence: true
 
     validate do
-      raise LockConflict.new(self, colliding_locks) if colliding_locks.any?
+      if (locks = colliding_locks).any?
+        raise LockConflict.new(self, locks)
+      end
     end
 
     scope :for_resource, ->(resource) { where(:resource => resource) }
