@@ -17,8 +17,4 @@ class DropOldLocks < ActiveRecord::Migration[5.0]
     # Make sure there is at most one lock per task and resource
     ForemanTasks::Lock.where(:id => scope.limit(BATCH_SIZE)).delete_all while scope.any?
   end
-
-  def down
-    raise ActiveRecord::IrreversibleMigration
-  end
 end
