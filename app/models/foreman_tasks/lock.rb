@@ -42,6 +42,12 @@ module ForemanTasks
                                   resource_type: resource_type)
     end
 
+    def save!
+      super
+    rescue ActiveRecord::RecordNotUnique
+      raise LockConflict.new(self, colliding_locks)
+    end
+
     class << self
       # Locks the resource so that no other task can lock it while running.
       # No other task related to the resource is not allowed (even not-locking ones)

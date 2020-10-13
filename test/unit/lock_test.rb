@@ -40,7 +40,19 @@ module ForemanTasks
         it 'cannot lock a resource for multiple tasks' do
           lock = Lock.lock!(resource, task1)
           _(Lock.colliding_locks(resource, task2)).must_equal [lock]
-          _ { proc { Lock.lock!(resource, task2) } }.must_raise Lock::LockConflict
+          assert_raises Lock::LockConflict do
+            Lock.lock!(resource, task2)
+          end
+        end
+
+        it 'raises LockConflict when enforced by db' do
+          lock = Lock.lock!(resource, task1)
+          Lock.any_instance
+              .expects(:colliding_locks).twice.returns([], [lock])
+          exception = assert_raises Lock::LockConflict do
+            Lock.lock!(resource, task2)
+          end
+          _(exception.message).must_match(/#{lock.task_id}/)
         end
 
         it 'creates a link when creating a lock for a resource' do
