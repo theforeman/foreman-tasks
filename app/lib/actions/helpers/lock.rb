@@ -15,7 +15,7 @@ module Actions
 
       # @see Lock.lock!
       def lock!(resource, *_lock_names)
-        Foreman::Deprecation.deprecation_warning('2.3', 'locking in foreman-tasks was reworked, please use a combination of exclusive_lock! and link! instead.')
+        Foreman::Deprecation.deprecation_warning('2.4', 'locking in foreman-tasks was reworked, please use a combination of exclusive_lock! and link! instead.')
         exclusive_lock!(resource)
       end
 
