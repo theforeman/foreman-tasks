@@ -60,7 +60,6 @@ const TasksTablePage = ({
         onSearch={onSearch}
         header={createHeader(props.actionName)}
         breadcrumbOptions={getBreadcrumbs(props.actionName)}
-        toastNotifications="foreman-tasks-cancel"
         toolbarButtons={
           <React.Fragment>
             <Button onClick={() => props.reloadPage(url, props.parentTaskID)}>
