@@ -19,6 +19,10 @@ module Actions
         restore_curent_user { pass }
       end
 
+      def finalize_phase(execution_plan, *args)
+        restore_curent_user(execution_plan.entry_action) { pass(execution_plan, *args) }
+      end
+
       # Run all execution plan lifecycle hooks as the original user
       def hook(*args)
         restore_curent_user { pass(*args) }
@@ -38,7 +42,7 @@ module Actions
         action.input[:current_user_id] = User.current.try(:id)
       end
 
-      def restore_curent_user
+      def restore_curent_user(action = self.action)
         old_user = User.current
         User.current = User.unscoped.find(action.input[:current_user_id]) if action.input[:current_user_id].present?
         yield
