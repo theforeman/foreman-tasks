@@ -16,6 +16,12 @@ module Actions
       end
 
       def finalize
+        current_id = User.current.try(:id)
+        saved_id = action.input[:current_user_id]
+        if User.current && saved_id && current_id != saved_id
+          Foreman::Deprecation.deprecation_warning('2.5', 'relying on per-step setting of current user in finalize phase')
+        end
+
         restore_curent_user { pass }
       end
 
