@@ -31,12 +31,12 @@ module ForemanTasks
         if value
           task.update!(:start_at => next_occurrence_time) if task.start_at < Time.zone.now
           update(:state => 'active')
-        else
-          update(:state => 'disabled')
         end
-      else
+      elsif value
         raise RecurringLogicCancelledException
       end
+
+      update(:state => 'disabled') unless value
     end
 
     def enabled?
