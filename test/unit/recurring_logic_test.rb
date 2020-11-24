@@ -148,6 +148,12 @@ class RecurringLogicsTest < ActiveSupport::TestCase
         assert ForemanTasks.dynflow.world.persistence.load_delayed_plan(task.execution_plan.id).frozen
       end
 
+      it 'handles if the task has been deleted' do
+        logic.tasks.find_by(:state => 'scheduled').destroy
+        logic.update!(:enabled => false)
+        assert_equal 'disabled', logic.state
+      end
+
       it 'properly re-enables on disable' do
         logic.update!(:enabled => false)
         logic.update!(:enabled => true)
