@@ -4,6 +4,8 @@ exports[`actionNameCellFormatter render 1`] = `
 <a
   href="/some-url/some-id"
 >
-  action-name
+  <EllipisWithTooltip>
+    action-name
+  </EllipisWithTooltip>
 </a>
 `;
