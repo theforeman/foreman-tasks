@@ -79,7 +79,7 @@ module ForemanTasks
       param :task_ids, Array, :desc => N_('Resume specific tasks by ID')
       def bulk_resume
         if params[:search].nil? && params[:task_ids].nil?
-          raise BadRequest, _('Please provide at least one of search or task_ids parameters in the request')
+          params[:search] = 'state = paused and result = error'
         end
         resumed = []
         failed = []
