@@ -75,11 +75,16 @@ module ForemanTasks
       end
 
       api :POST, '/tasks/bulk_resume', N_('Resume all paused error tasks')
+      desc <<~DOC
+        Resumes all selected resumable tasks. If neither a search query nor an
+        explicit list of task IDs is provided, it tries to resume all tasks in
+        paused state with result error.
+      DOC
       param :search, String, :desc => N_('Resume tasks matching search string')
       param :task_ids, Array, :desc => N_('Resume specific tasks by ID')
       def bulk_resume
         if params[:search].nil? && params[:task_ids].nil?
-          raise BadRequest, _('Please provide at least one of search or task_ids parameters in the request')
+          params[:search] = 'state = paused and result = error'
         end
         resumed = []
         failed = []
@@ -109,9 +114,14 @@ module ForemanTasks
         }
       end
 
-      api :POST, '/tasks/bulk_cancel', N_('Cancel all cancellable tasks')
+      api :POST, '/tasks/bulk_cancel', N_('Cancel selected cancellable tasks')
+      desc <<~DOC
+        Cancels all selected cancellable tasks. Requires a search query or an
+        explicit list of task IDs to be provided.
+      DOC
       param :search, String, :desc => N_('Cancel tasks matching search string')
       param :task_ids, Array, :desc => N_('Cancel specific tasks by ID')
+      error :bad_request, 'Returned if neither search nor task_ids parameter is provided.'
       def bulk_cancel
         if params[:search].nil? && params[:task_ids].nil?
           raise BadRequest, _('Please provide at least one of search or task_ids parameters in the request')
@@ -130,9 +140,14 @@ module ForemanTasks
         }
       end
 
-      api :POST, '/tasks/bulk_stop', N_('Stop all stoppable tasks')
+      api :POST, '/tasks/bulk_stop', N_('Stop selected stoppable tasks')
+      desc <<~DOC
+        Stops all selected tasks which are not already stopped. Requires a
+        search query or an explicit list of task IDs to be provided.
+      DOC
       param :search, String, :desc => N_('Stop tasks matching search string')
       param :task_ids, Array, :desc => N_('Stop specific tasks by ID')
+      error :bad_request, 'Returned if neither search nor task_ids parameter is provided.'
       def bulk_stop
         if params[:search].nil? && params[:task_ids].nil?
           raise BadRequest, _('Please provide at least one of search or task_ids parameters in the request')
