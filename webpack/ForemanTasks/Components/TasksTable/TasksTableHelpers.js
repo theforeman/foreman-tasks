@@ -14,14 +14,6 @@ export const getApiPathname = url => {
   return uri.pathname().replace('foreman_tasks/', 'foreman_tasks/api/');
 };
 
-export const resolveSearchQuery = (search, history) => {
-  const uriQuery = {
-    search,
-    page: 1,
-  };
-  updateURlQuery(uriQuery, history);
-};
-
 export const getCSVurl = (path, query) => {
   let url = new URI(path);
   url = url.pathname(`${url.pathname()}.csv`);
