@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import URI from 'urijs';
 import { getURIsearch } from 'foremanReact/common/urlHelpers';
 import { Spinner, Button, Icon } from 'patternfly-react';
 import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
@@ -10,7 +11,7 @@ import { STATUS } from 'foremanReact/constants';
 import { useForemanModal } from 'foremanReact/components/ForemanModal/ForemanModalHooks';
 import TasksDashboard from '../TasksDashboard';
 import TasksTable from './TasksTable';
-import { resolveSearchQuery, getCSVurl } from './TasksTableHelpers';
+import { getCSVurl, updateURlQuery } from './TasksTableHelpers';
 import ConfirmModal from './Components/ConfirmModal/';
 import {
   TASKS_SEARCH_PROPS,
@@ -35,8 +36,17 @@ const TasksTablePage = ({
 }) => {
   const url = history.location.pathname + history.location.search;
   const uriQuery = getURIQuery(url);
-  const onSearch = searchQuery => {
-    resolveSearchQuery(searchQuery, history);
+  const onSearch = search => {
+    const uri = new URI(url);
+    if (uri.search(true).search === search && uri.search(true).page === '1') {
+      props.getTableItems(uri);
+    } else {
+      const newUriQuery = {
+        search,
+        page: 1,
+      };
+      updateURlQuery(newUriQuery, history);
+    }
   };
 
   const { setModalOpen, setModalClosed } = useForemanModal({
