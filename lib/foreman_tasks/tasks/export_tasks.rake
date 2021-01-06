@@ -228,14 +228,14 @@ namespace :foreman_tasks do
       end
 
       def self.generate_index_entry(io, task)
-        io << <<~EOF
+        io << <<~HTML
           <tr>
             <td><a href=\"#{task.id}.html\">#{task.label}</a></td>
             <td>#{task.started_at}</td>
             <td>#{task.state}</td>
             <td>#{task.result}</td>
           </tr>
-        EOF
+        HTML
       end
     end
 
@@ -244,7 +244,7 @@ namespace :foreman_tasks do
         csv << %w[id state type label result parent_task_id started_at ended_at]
         tasks.find_each do |task|
           csv << [task.id, task.state, task.type, task.label, task.result,
-            task.parent_task_id, task.started_at, task.ended_at]
+                  task.parent_task_id, task.started_at, task.ended_at]
         end
       end
     end
