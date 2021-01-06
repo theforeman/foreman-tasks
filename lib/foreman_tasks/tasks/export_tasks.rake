@@ -12,7 +12,7 @@ namespace :foreman_tasks do
 
       * TASK_SEARCH     : scoped search filter (example: 'label = "Actions::Foreman::Host::ImportFacts"')
       * TASK_FILE       : file to export to
-      * TASK_FORMAT     : format to use for the export (either html or csv)
+      * TASK_FORMAT     : format to use for the export (either html, html-dir or csv)
       * TASK_DAYS       : number of days to go back
 
     If TASK_SEARCH is not defined, it defaults to all tasks in the past 7 days and
@@ -249,27 +249,35 @@ namespace :foreman_tasks do
       end
     end
 
-    def html_export(export_filename, tasks)
-      Dir.mktmpdir('task-export') do |tmp_dir|
-        PageHelper.copy_assets(tmp_dir)
+    def html_export(workdir, tasks)
+      PageHelper.copy_assets(workdir)
 
-        renderer = TaskRender.new
-        total = tasks.count
-        index = File.open(File.join(tmp_dir, 'index.html'), 'w')
+      renderer = TaskRender.new
+      total = tasks.count
+      index = File.open(File.join(workdir, 'index.html'), 'w')
 
-        File.open(File.join(tmp_dir, 'index.html'), 'w') do |index|
-          PageHelper.pagify(index) do |io|
-            PageHelper.generate_with_index(io) do |index|
-              tasks.find_each.each_with_index do |task, count|
-                File.open(File.join(tmp_dir, "#{task.id}.html"), 'w') { |file| PageHelper.pagify(file, renderer.render_task(task)) }
-                PageHelper.generate_index_entry(index, task)
-                puts "#{count + 1}/#{total}"
-              end
+      File.open(File.join(workdir, 'index.html'), 'w') do |index|
+        PageHelper.pagify(index) do |io|
+          PageHelper.generate_with_index(io) do |index|
+            tasks.find_each.each_with_index do |task, count|
+              File.open(File.join(workdir, "#{task.id}.html"), 'w') { |file| PageHelper.pagify(file, renderer.render_task(task)) }
+              PageHelper.generate_index_entry(index, task)
+              puts "#{count + 1}/#{total}"
             end
           end
         end
+      end
+    end
 
-        system("tar", "czf", export_filename, tmp_dir)
+    def generate_filename(format)
+      base = "/tmp/task-export-#{Time.now.to_i}"
+      case format
+      when 'html'
+        base + '.tar.gz'
+      when 'csv'
+        base + '.csv'
+      when 'html-dir'
+        base
       end
     end
 
@@ -286,7 +294,7 @@ namespace :foreman_tasks do
     end
 
     format = ENV['TASK_FORMAT'] || 'html'
-    export_filename = ENV['TASK_FILE'] || "/tmp/task-export-#{Time.now.to_i}.#{format == 'csv' ? 'csv' : 'tar.gz'}"
+    export_filename = ENV['TASK_FILE'] || generate_filename(format)
 
     tasks = ForemanTasks::Task.search_for(filter).order(:started_at => :desc)
 
@@ -294,9 +302,17 @@ namespace :foreman_tasks do
     puts _("Gathering #{tasks.count} tasks.")
     case format
     when 'html'
+      Dir.mktmpdir('task-export') do |tmp_dir|
+        html_export(tmp_dir, tasks)
+        system("tar", "czf", export_filename, tmp_dir)
+      end
+    when 'html-dir'
+      FileUtils.mkdir_p(export_filename)
       html_export(export_filename, tasks)
     when 'csv'
       csv_export(export_filename, tasks)
+    else
+      raise "Unkonwn export format '#{format}'"
     end
 
     puts "Created #{export_filename}"
