@@ -185,23 +185,27 @@ namespace :foreman_tasks do
     end
 
     class PageHelper
-      def self.pagify(template)
-        pre = <<-HTML
-       <html>
-       <head>
-       <title>Dynflow Console</title>
-       <script src="jquery.js"></script>
-       <link rel="stylesheet" type="text/css" href="bootstrap.css">
-       <link rel="stylesheet" type="text/css" href="application.css">
-       <script src="bootstrap.js"></script>
-       <script src="run_prettify.js"></script>
-       <script src="application.js"></script>
-       </head>
-       <body>
-          #{template}
-       <body>
-       </html>
+      def self.pagify(io, template = nil)
+        io.write <<~HTML
+          <html>
+            <head>
+              <title>Dynflow Console</title>
+              <script src="jquery.js"></script>
+              <link rel="stylesheet" type="text/css" href="bootstrap.css">
+              <link rel="stylesheet" type="text/css" href="application.css">
+              <script src="bootstrap.js"></script>
+              <script src="run_prettify.js"></script>
+              <script src="application.js"></script>
+            </head>
+          <body>
         HTML
+        if block_given?
+          yield io
+        else
+          io.write template
+        end
+      ensure
+        io.write '</body></html>'
       end
 
       def self.copy_assets(tmp_dir)
@@ -216,13 +220,22 @@ namespace :foreman_tasks do
         end
       end
 
-      def self.generate_index(tasks)
-        html = '<div><table class="table">'
-        tasks.order('started_at desc').all.each do |task|
-          html << "<tr><td><a href=\"#{task.id}.html\">#{task.label}</a></td><td>#{task.started_at}</td>\
-                   <td>#{task.state}</td><td>#{task.result}</td></tr>"
-        end
-        html << '</table></div>'
+      def self.generate_with_index(io)
+        io.write '<div><table class="table">'
+        yield io
+      ensure
+        io.write '</table></div>'
+      end
+
+      def self.generate_index_entry(io, task)
+        io << <<~EOF
+          <tr>
+            <td><a href=\"#{task.id}.html\">#{task.label}</a></td>
+            <td>#{task.started_at}</td>
+            <td>#{task.state}</td>
+            <td>#{task.result}</td>
+          </tr>
+        EOF
       end
     end
 
@@ -241,7 +254,7 @@ namespace :foreman_tasks do
     format = ENV['TASK_FORMAT'] || 'html'
     export_filename = ENV['TASK_FILE'] || "/tmp/task-export-#{Time.now.to_i}.#{format == 'csv' ? 'csv' : 'tar.gz'}"
 
-    tasks = ForemanTasks::Task.search_for(filter)
+    tasks = ForemanTasks::Task.search_for(filter).order(:started_at => :desc)
 
     puts _("Exporting all tasks matching filter #{filter}")
     puts _("Gathering #{tasks.count} tasks.")
@@ -251,13 +264,18 @@ namespace :foreman_tasks do
 
         renderer = TaskRender.new
         total = tasks.count
+        index = File.open(File.join(tmp_dir, 'index.html'), 'w')
 
-        tasks.find_each.with_index do |task, count|
-          File.open(File.join(tmp_dir, "#{task.id}.html"), 'w') { |file| file.write(PageHelper.pagify(renderer.render_task(task))) }
-          puts "#{count + 1}/#{total}"
+        PageHelper.pagify(index) do |io|
+          PageHelper.generate_with_index(io) do |index|
+            tasks.find_each.each_with_index do |task, count|
+              File.open(File.join(tmp_dir, "#{task.id}.html"), 'w') { |file| PageHelper.pagify(file, renderer.render_task(task)) }
+              PageHelper.generate_index_entry(index, task)
+              puts "#{count + 1}/#{total}"
+            end
+          end
         end
-
-        File.open(File.join(tmp_dir, 'index.html'), 'w') { |file| file.write(PageHelper.pagify(PageHelper.generate_index(tasks))) }
+        index.close
 
         system("tar", "czf", export_filename, tmp_dir)
       end
