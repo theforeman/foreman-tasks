@@ -69,6 +69,7 @@ class TaskInfo extends Component {
         {
           title: 'Name',
           value: action || __('N/A'),
+          className: 'details-name',
         },
         {
           title: 'Start at',
@@ -129,7 +130,7 @@ class TaskInfo extends Component {
                 {__(items[0].title)}:
               </span>
             </Col>
-            <Col md={5} sm={6}>
+            <Col md={5} sm={6} className={items[0].className}>
               <span>{items[0].value}</span>
             </Col>
             <Col md={2} sm={6}>
@@ -137,7 +138,7 @@ class TaskInfo extends Component {
                 {__(items[1].title)}:
               </span>
             </Col>
-            <Col md={3} sm={6}>
+            <Col md={3} sm={6} className={items[1].className}>
               {items[1].value}
             </Col>
           </Row>

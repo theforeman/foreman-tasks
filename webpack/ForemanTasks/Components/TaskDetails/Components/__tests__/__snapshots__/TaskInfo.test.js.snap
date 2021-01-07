@@ -27,6 +27,7 @@ exports[`TaskInfo rendering render with Props 1`] = `
     </Col>
     <Col
       bsClass="col"
+      className="details-name"
       componentClass="div"
       md={5}
       sm={6}
@@ -330,6 +331,7 @@ exports[`TaskInfo rendering render without Props 1`] = `
     </Col>
     <Col
       bsClass="col"
+      className="details-name"
       componentClass="div"
       md={5}
       sm={6}

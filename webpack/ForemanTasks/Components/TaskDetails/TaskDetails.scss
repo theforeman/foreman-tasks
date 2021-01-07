@@ -51,12 +51,16 @@
   }
 
   pre {
-    white-space: pre;
+    white-space: pre-wrap;
     word-break: normal;
   }
 
   .param-name {
     display: inline-block;
     width: 10em;
+  }
+
+  .details-name {
+    overflow-wrap: anywhere;
   }
 }
