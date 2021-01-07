@@ -32,9 +32,9 @@ exports[`TaskInfo rendering render with Props 1`] = `
       sm={6}
     >
       <span>
-        <EllipsisWithTooltip>
+        <EllipisWithTooltip>
           Monitor Event Queue
-        </EllipsisWithTooltip>
+        </EllipisWithTooltip>
       </span>
     </Col>
     <Col

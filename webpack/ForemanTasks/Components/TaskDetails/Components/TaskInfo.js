@@ -69,8 +69,11 @@ class TaskInfo extends Component {
       [
         {
           title: 'Name',
-          value:
-            <EllipsisWithTooltip>{action}</EllipsisWithTooltip> || __('N/A'),
+          value: action ? (
+            <EllipsisWithTooltip>{action}</EllipsisWithTooltip>
+          ) : (
+            __('N/A')
+          ),
         },
         {
           title: 'Start at',
