@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Grid, Row, Col, ProgressBar } from 'patternfly-react';
 import { translate as __ } from 'foremanReact/common/I18n';
 import RelativeDateTime from 'foremanReact/components/common/dates/RelativeDateTime';
+import EllipsisWithTooltip from 'react-ellipsis-with-tooltip';
 
 class TaskInfo extends Component {
   isDelayed = () => {
@@ -68,7 +69,7 @@ class TaskInfo extends Component {
       [
         {
           title: 'Name',
-          value: action || __('N/A'),
+          value: <EllipsisWithTooltip>{action}</EllipsisWithTooltip> || __('N/A'),
         },
         {
           title: 'Start at',
