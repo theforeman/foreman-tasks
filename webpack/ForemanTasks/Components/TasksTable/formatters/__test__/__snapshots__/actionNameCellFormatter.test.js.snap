@@ -2,10 +2,9 @@
 
 exports[`actionNameCellFormatter render 1`] = `
 <a
+  className="action-name-tasks-table"
   href="/some-url/some-id"
 >
-  <EllipisWithTooltip>
-    action-name
-  </EllipisWithTooltip>
+  action-name
 </a>
 `;

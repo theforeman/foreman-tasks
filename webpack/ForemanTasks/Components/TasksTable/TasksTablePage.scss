@@ -1,5 +1,9 @@
 .tasks-table {
   margin-bottom: 70px;
+
+  .action-name-tasks-table {
+    overflow-wrap: anywhere;
+  }
 }
 
 .tasks-table-wrapper {
