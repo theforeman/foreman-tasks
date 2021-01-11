@@ -3,12 +3,6 @@ module ForemanTasks
     module ActionSubject
       extend ActiveSupport::Concern
 
-      module ClassMethods
-        def available_locks
-          [:read, :write]
-        end
-      end
-
       def action_input_key
         self.class.name.demodulize.underscore
       end

@@ -103,6 +103,7 @@ module ForemanTasks
         end
       end
       delete_orphaned_locks
+      delete_orphaned_links
       delete_orphaned_dynflow_tasks
     end
 
@@ -152,6 +153,15 @@ module ForemanTasks
       with_noop(orphaned_locks, 'orphaned task locks') do |source, name|
         with_batches(source, name) do |chunk|
           ForemanTasks::Lock.where(id: chunk.pluck(:id)).delete_all
+        end
+      end
+    end
+
+    def delete_orphaned_links
+      orphaned_links = ForemanTasks::Link.left_outer_joins(:task).where(:'foreman_tasks_tasks.id' => nil)
+      with_noop(orphaned_links, 'orphaned task links') do |source, name|
+        with_batches(source, name) do |chunk|
+          ForemanTasks::Link.where(id: chunk.pluck(:id)).delete_all
         end
       end
     end
