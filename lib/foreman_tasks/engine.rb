@@ -141,6 +141,7 @@ module ForemanTasks
       Authorizer.prepend AuthorizerExt
       User.include ForemanTasks::Concerns::UserExtensions
       ::Dynflow::Action::Polling.prepend ForemanTasks::Concerns::PollingActionExtensions
+      ::Foreman::EventSubscribers.singleton_class.prepend ForemanTasks::EventSubscribersExtensions
     end
 
     rake_tasks do
