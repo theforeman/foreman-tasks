@@ -108,7 +108,7 @@ module ForemanTasks
       ForemanTasks.dynflow.require!
       ::ForemanTasks.dynflow.config.on_init(false) do |world|
         world.middleware.use Actions::Middleware::KeepCurrentTaxonomies
-        world.middleware.use Actions::Middleware::KeepCurrentUser
+        world.middleware.use Actions::Middleware::KeepCurrentUser, :before => ::Dynflow::Middleware::Common::Transaction
         world.middleware.use Actions::Middleware::KeepCurrentTimezone
         world.middleware.use Actions::Middleware::KeepCurrentRequestID
       end
