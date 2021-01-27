@@ -1,19 +1,41 @@
 module Actions
   module ObservableAction
-    def self.included(base)
-      base.include ::Foreman::Observable
-      base.execution_plan_hooks.use :emit_event, :on => :stopped
+    module ClassMethods
+      def event_name_suffix(hook)
+        case hook
+        when :success
+          'succeeded'
+        when :failure
+          'failed'
+        else
+          hook
+        end
+      end
 
-      def base.event_name
-        # actions/remote_execution/run_host_job_stopped
-        ::Foreman::Observable.event_name_for(to_s.underscore + '_stopped')
+      def event_names
+        [event_name_base + '_' + event_name_suffix(:success)]
+      end
+
+      def namespaced_event_names
+        event_names.map { |e| ::Foreman::Observable.event_name_for(e) }
+      end
+
+      def event_name_base
+        to_s.underscore.tr('/', '.')
       end
     end
 
-    def emit_event(execution_plan)
+    def self.included(base)
+      base.extend ClassMethods
+      base.include ::Foreman::Observable
+      base.execution_plan_hooks.use :emit_event, :on => :success
+    end
+
+    def emit_event(execution_plan, hook = :success)
       return unless root_action?
 
-      trigger_hook self.class.event_name, payload: event_payload(execution_plan)
+      trigger_hook "#{self.class.event_name_base}_#{event_name_suffix(hook)}",
+                   payload: event_payload(execution_plan)
     end
 
     # { "id"=>"10abd90e-bcb7-4568-a68c-679701a2b2f7",
