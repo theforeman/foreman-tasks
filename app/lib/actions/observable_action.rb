@@ -1,4 +1,27 @@
 module Actions
+  # Examples:
+
+  # # Action A which emits an event when it successfully finishes.
+  # class A
+  #   include ::Actions::ObservableAction
+  #   # ... rest ...
+  # end
+
+  # # Action B which emits an event when it successfully finishes or fails.
+  # class B
+  #   include ::Actions::ObservableAction
+  #
+  #   execution_plan_hooks.use :emit_event_failure, :on => [:failure]
+  #
+  #   def self.event_names
+  #     super + [event_name_base + '_' + event_name_suffix(:failure)]
+  #   end
+  #
+  #   def emit_event_failure(plan)
+  #     emit_event(plan, :failure)
+  #   end
+  #   # ... rest ...
+  # end
   module ObservableAction
     module ClassMethods
       def event_name_suffix(hook)
