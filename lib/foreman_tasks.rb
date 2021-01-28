@@ -1,6 +1,5 @@
 require 'foreman_tasks/version'
 require 'foreman_tasks/task_error'
-require 'foreman_tasks/event_subscribers_extensions'
 require 'foreman_tasks/engine'
 require 'foreman_tasks/dynflow'
 require 'foreman_tasks/dynflow/configuration'

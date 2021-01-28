@@ -76,6 +76,8 @@ module ForemanTasks
 
         widget 'foreman_tasks/tasks/dashboard/tasks_status', :sizex => 6, :sizey => 1, :name => N_('Task Status')
         widget 'foreman_tasks/tasks/dashboard/latest_tasks_in_error_warning', :sizex => 6, :sizey => 1, :name => N_('Latest Warning/Error Tasks')
+
+        extend_observable_events(::Dynflow::Action.descendants.select { |klass| klass <= ::Actions::ObservableAction }.map(&:namespaced_event_names))
       end
     end
 
@@ -141,7 +143,6 @@ module ForemanTasks
       Authorizer.prepend AuthorizerExt
       User.include ForemanTasks::Concerns::UserExtensions
       ::Dynflow::Action::Polling.prepend ForemanTasks::Concerns::PollingActionExtensions
-      ::Foreman::EventSubscribers.singleton_class.prepend ForemanTasks::EventSubscribersExtensions
     end
 
     rake_tasks do
