@@ -129,6 +129,16 @@ class TasksTest < ActiveSupport::TestCase
         _ { proc { ForemanTasks::Task.search_for('duration = "25 potatoes"') } }.must_raise ScopedSearch::QueryNotSupported
       end
     end
+
+    context 'by taxonomies' do
+      test 'can search by taxonomies using IN' do
+        # These raise an exception if it does not work
+        # ActiveRecord::StatementInvalid: PG::SyntaxError: ERROR:  syntax error at or near "'1'"
+        # LINE 3: ...foreman_tasks_links_taxonomy7a7295.resource_id IN '1' OR for...
+        ForemanTasks::Task.search_for('location_id ^ (1)').first
+        ForemanTasks::Task.search_for('organization_id ^ (1)').first
+      end
+    end
   end
 
   describe 'users' do
