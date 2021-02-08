@@ -62,7 +62,7 @@ module Actions
     end
 
     def event_payload(_execution_plan)
-      Jail.new(self)
+      self
     end
 
     class Jail < Safemode::Jail
