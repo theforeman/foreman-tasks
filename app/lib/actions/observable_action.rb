@@ -57,12 +57,12 @@ module Actions
     def emit_event(execution_plan, hook = :success)
       return unless root_action?
 
-      trigger_hook "#{self.class.event_name_base}_#{event_name_suffix(hook)}",
+      trigger_hook "#{self.class.event_name_base}_#{self.class.event_name_suffix(hook)}",
                    payload: event_payload(execution_plan)
     end
 
     def event_payload(_execution_plan)
-      self
+      { object: self }
     end
 
     class Jail < Safemode::Jail
