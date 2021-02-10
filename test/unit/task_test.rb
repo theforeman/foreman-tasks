@@ -129,6 +129,14 @@ class TasksTest < ActiveSupport::TestCase
         _ { proc { ForemanTasks::Task.search_for('duration = "25 potatoes"') } }.must_raise ScopedSearch::QueryNotSupported
       end
     end
+
+    context 'by taxonomies' do
+      test 'can search by taxonomies using IN' do
+        assert_nothing_raised(PG::SyntaxError) { ForemanTasks::Task.search_for('location_id ^ (1)').first }
+        assert_nothing_raised(PG::SyntaxError) { ForemanTasks::Task.search_for('organization_id ^ (1)').first }
+        assert_nothing_raised(PG::SyntaxError) { ForemanTasks::Task.search_for('organization_id = 1').first }
+      end
+    end
   end
 
   describe 'users' do
