@@ -5,7 +5,7 @@ export default (selectionController, label) => (
   <TableSelectionHeaderCell
     label={label}
     checked={selectionController.allPageSelected()}
-    disabled
+    disabled={!selectionController.permissions.edit}
     onChange={selectionController.selectPage}
   />
 );

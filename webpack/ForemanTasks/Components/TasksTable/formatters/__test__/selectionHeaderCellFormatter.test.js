@@ -4,7 +4,7 @@ describe('selectionHeaderCellFormatter', () => {
   it('render', () => {
     expect(
       selectionHeaderCellFormatter(
-        { allPageSelected: () => true },
+        { allPageSelected: () => true, permissions: { edit: true } },
         'some-label'
       )
     ).toMatchSnapshot();

@@ -3,7 +3,7 @@
 exports[`selectionHeaderCellFormatter render 1`] = `
 <TableSelectionHeaderCell
   checked={true}
-  disabled={true}
+  disabled={false}
   id="selectAll"
   label="some-label"
   onChange={[Function]}
