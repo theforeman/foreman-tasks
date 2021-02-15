@@ -81,7 +81,7 @@ const TasksTablePage = ({
               title={__('Export All')}
             />
             <ActionSelectButton
-              disabled={!(props.selectedRows.length || props.allRowsSelected)}
+              disabled={!props.permissions.edit || !(props.selectedRows.length || props.allRowsSelected)}
               onCancel={() => openModal(CANCEL_SELECTED_MODAL)}
               onResume={() => openModal(RESUME_SELECTED_MODAL)}
               onForceCancel={() => openModal(FORCE_UNLOCK_SELECTED_MODAL)}
@@ -94,7 +94,7 @@ const TasksTablePage = ({
         }
       >
         <React.Fragment>
-          {showSelectAll && props.itemCount >= props.pagination.perPage && (
+          {props.permissions.edit && showSelectAll && props.itemCount >= props.pagination.perPage && (
             <SelectAllAlert
               itemCount={props.itemCount}
               perPage={props.pagination.perPage}
@@ -131,6 +131,9 @@ TasksTablePage.propTypes = {
   showSelectAll: PropTypes.bool,
   unselectAllRows: PropTypes.func.isRequired,
   reloadPage: PropTypes.func.isRequired,
+  permissions: PropTypes.shape({
+    edit: PropTypes.bool,
+  }),
 };
 
 TasksTablePage.defaultProps = {
@@ -146,6 +149,9 @@ TasksTablePage.defaultProps = {
   createHeader: () => __('Tasks'),
   showSelectAll: false,
   modalID: '',
+  permissions: {
+    edit: false
+  },
 };
 
 export default TasksTablePage;
