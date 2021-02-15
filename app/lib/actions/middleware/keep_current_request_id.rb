@@ -21,7 +21,10 @@ module Actions
 
       # Run all execution plan lifecycle hooks as the original request_id
       def hook(*args)
-        restore_current_request_id { pass(*args) }
+        store_current_request_id if !action.input.key?(:current_request_id) && ::Logging.mdc['request']
+        restore_current_request_id do
+          pass(*args)
+        end
       end
 
       private
