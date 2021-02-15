@@ -19,8 +19,13 @@ const initialState = Immutable({
 
 export const TasksTableQueryReducer = (state = initialState, action) => {
   const { type, payload, response } = action;
-  const { subtotal, page, per_page: perPageString, action_name: actionName, can_edit: canEdit } =
-    response || {};
+  const {
+    subtotal,
+    page,
+    per_page: perPageString,
+    action_name: actionName,
+    can_edit: canEdit,
+  } = response || {};
   const ACTION_TYPES = createTableActionTypes(TASKS_TABLE_ID);
   switch (type) {
     case SELECT_ALL_ROWS:

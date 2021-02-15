@@ -81,7 +81,10 @@ const TasksTablePage = ({
               title={__('Export All')}
             />
             <ActionSelectButton
-              disabled={!props.permissions.edit || !(props.selectedRows.length || props.allRowsSelected)}
+              disabled={
+                !props.permissions.edit ||
+                !(props.selectedRows.length || props.allRowsSelected)
+              }
               onCancel={() => openModal(CANCEL_SELECTED_MODAL)}
               onResume={() => openModal(RESUME_SELECTED_MODAL)}
               onForceCancel={() => openModal(FORCE_UNLOCK_SELECTED_MODAL)}
@@ -94,15 +97,17 @@ const TasksTablePage = ({
         }
       >
         <React.Fragment>
-          {props.permissions.edit && showSelectAll && props.itemCount >= props.pagination.perPage && (
-            <SelectAllAlert
-              itemCount={props.itemCount}
-              perPage={props.pagination.perPage}
-              selectAllRows={selectAllRows}
-              unselectAllRows={props.unselectAllRows}
-              allRowsSelected={props.allRowsSelected}
-            />
-          )}
+          {props.permissions.edit &&
+            showSelectAll &&
+            props.itemCount >= props.pagination.perPage && (
+              <SelectAllAlert
+                itemCount={props.itemCount}
+                perPage={props.pagination.perPage}
+                selectAllRows={selectAllRows}
+                unselectAllRows={props.unselectAllRows}
+                allRowsSelected={props.allRowsSelected}
+              />
+            )}
           <TasksTable history={history} {...props} openModal={openModal} />
         </React.Fragment>
       </PageLayout>
@@ -150,7 +155,7 @@ TasksTablePage.defaultProps = {
   showSelectAll: false,
   modalID: '',
   permissions: {
-    edit: false
+    edit: false,
   },
 };
 
