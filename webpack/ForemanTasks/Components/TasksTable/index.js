@@ -16,6 +16,7 @@ import {
   selectAllRowsSelected,
   selectShowSelectAll,
   selectModalID,
+  selectPermissions,
 } from './TasksTableSelectors';
 
 const mapStateToProps = state => ({
@@ -30,6 +31,7 @@ const mapStateToProps = state => ({
   allRowsSelected: selectAllRowsSelected(state),
   showSelectAll: selectShowSelectAll(state),
   modalID: selectModalID(state),
+  permissions: selectPermissions(state),
 });
 
 const mapDispatchToProps = dispatch =>
