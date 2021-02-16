@@ -126,6 +126,11 @@ exports[`TasksTablePage rendering render with Breadcrubs and edit permissions 1`
         }
       }
       parentTaskID={null}
+      permissions={
+        Object {
+          "edit": false,
+        }
+      }
       reloadPage={[MockFunction]}
       results={
         Array [
@@ -261,6 +266,11 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
         }
       }
       parentTaskID={null}
+      permissions={
+        Object {
+          "edit": false,
+        }
+      }
       reloadPage={[MockFunction]}
       results={
         Array [
