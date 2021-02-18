@@ -79,6 +79,8 @@ module ForemanTasks
 
         ForemanTasks.dynflow.eager_load_actions!
         extend_observable_events(::Dynflow::Action.descendants.select { |klass| klass <= ::Actions::ObservableAction }.map(&:namespaced_event_names))
+
+        extend_template_helpers ForemanTasks::RendererMethods
       end
     end
 
