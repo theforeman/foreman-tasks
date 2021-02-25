@@ -232,6 +232,7 @@ namespace :foreman_tasks do
           <tr>
             <td><a href=\"#{task.id}.html\">#{task.label}</a></td>
             <td>#{task.started_at}</td>
+            <td>#{task.duration}</td>
             <td>#{task.state}</td>
             <td>#{task.result}</td>
           </tr>
@@ -241,10 +242,10 @@ namespace :foreman_tasks do
 
     def csv_export(export_filename, tasks)
       CSV.open(export_filename, 'wb') do |csv|
-        csv << %w[id state type label result parent_task_id started_at ended_at]
+        csv << %w[id state type label result parent_task_id started_at ended_at duration]
         tasks.find_each do |task|
           csv << [task.id, task.state, task.type, task.label, task.result,
-                  task.parent_task_id, task.started_at, task.ended_at]
+                  task.parent_task_id, task.started_at, task.ended_at, task.duration]
         end
       end
     end
@@ -253,7 +254,7 @@ namespace :foreman_tasks do
       PageHelper.copy_assets(workdir)
 
       renderer = TaskRender.new
-      total = tasks.count
+      total = tasks.count(:all)
       index = File.open(File.join(workdir, 'index.html'), 'w')
 
       File.open(File.join(workdir, 'index.html'), 'w') do |index|
@@ -299,7 +300,7 @@ namespace :foreman_tasks do
     tasks = ForemanTasks::Task.search_for(filter).order(:started_at => :desc)
 
     puts _("Exporting all tasks matching filter #{filter}")
-    puts _("Gathering #{tasks.count} tasks.")
+    puts _("Gathering #{tasks.count(:all)} tasks.")
     case format
     when 'html'
       Dir.mktmpdir('task-export') do |tmp_dir|
