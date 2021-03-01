@@ -297,7 +297,7 @@ namespace :foreman_tasks do
     format = ENV['TASK_FORMAT'] || 'html'
     export_filename = ENV['TASK_FILE'] || generate_filename(format)
 
-    tasks = ForemanTasks::Task.search_for(filter).order(:started_at => :desc)
+    tasks = ForemanTasks::Task.search_for(filter).order(:started_at => :desc).with_duration.distinct
 
     puts _("Exporting all tasks matching filter #{filter}")
     puts _("Gathering #{tasks.count(:all)} tasks.")

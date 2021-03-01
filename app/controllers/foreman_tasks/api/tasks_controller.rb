@@ -320,7 +320,7 @@ module ForemanTasks
       end
 
       def find_task
-        @task = resource_scope.find(params[:id])
+        @task = resource_scope.with_duration.find(params[:id])
       end
 
       def resource_scope(_options = {})
@@ -330,7 +330,7 @@ module ForemanTasks
       end
 
       def resource_scope_for_index(*args)
-        super.select("DISTINCT foreman_tasks_tasks.*, coalesce(ended_at, current_timestamp) - coalesce(coalesce(started_at, ended_at), current_timestamp) as duration")
+        super.with_duration.distinct
       end
 
       def controller_permission
