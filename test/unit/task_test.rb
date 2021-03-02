@@ -134,6 +134,8 @@ class TasksTest < ActiveSupport::TestCase
       test 'can search by taxonomies using IN' do
         assert_nothing_raised(PG::SyntaxError) { ForemanTasks::Task.search_for('location_id ^ (1)').first }
         assert_nothing_raised(PG::SyntaxError) { ForemanTasks::Task.search_for('organization_id ^ (1)').first }
+        assert_nothing_raised(PG::SyntaxError) { ForemanTasks::Task.search_for('location_id ^ (1,2)').first }
+        assert_nothing_raised(PG::SyntaxError) { ForemanTasks::Task.search_for('organization_id ^ (1,2)').first }
         assert_nothing_raised(PG::SyntaxError) { ForemanTasks::Task.search_for('organization_id = 1').first }
       end
     end
