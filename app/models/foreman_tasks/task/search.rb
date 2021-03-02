@@ -21,6 +21,7 @@ module ForemanTasks
         SQL
         # Select only those tasks which either have the correct taxonomy or are not related to any
         sql = "foreman_tasks_links_taxonomy#{uniq_suffix}.resource_id #{operator} (?) OR foreman_tasks_links_taxonomy#{uniq_suffix}.resource_id IS NULL"
+        value = value.split(',') if operator.index(/IN/i)
         { :conditions => sanitize_sql_for_conditions([sql, value]), :joins => joins }
       end
 
