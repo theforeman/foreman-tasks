@@ -27,7 +27,6 @@ const TasksTable = ({
   openClickedModal,
   openModal,
   allRowsSelected,
-  permissions,
 }) => {
   const { search, pathname } = history.location;
   const url = pathname + search;
@@ -60,7 +59,6 @@ const TasksTable = ({
       },
       isSelected: ({ rowData }) =>
         allRowsSelected || selectedRows.includes(rowData.id),
-      permissions,
     };
   };
 
@@ -164,9 +162,6 @@ TasksTable.propTypes = {
   unselectRow: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired,
   allRowsSelected: PropTypes.bool,
-  permissions: PropTypes.shape({
-    edit: PropTypes.bool,
-  }),
 };
 
 TasksTable.defaultProps = {
@@ -178,9 +173,6 @@ TasksTable.defaultProps = {
   },
   selectedRows: [],
   allRowsSelected: false,
-  permissions: {
-    edit: false,
-  },
 };
 
 export default TasksTable;

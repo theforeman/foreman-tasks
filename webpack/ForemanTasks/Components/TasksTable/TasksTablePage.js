@@ -81,10 +81,7 @@ const TasksTablePage = ({
               title={__('Export All')}
             />
             <ActionSelectButton
-              disabled={
-                !props.permissions.edit ||
-                !(props.selectedRows.length || props.allRowsSelected)
-              }
+              disabled={!(props.selectedRows.length || props.allRowsSelected)}
               onCancel={() => openModal(CANCEL_SELECTED_MODAL)}
               onResume={() => openModal(RESUME_SELECTED_MODAL)}
               onForceCancel={() => openModal(FORCE_UNLOCK_SELECTED_MODAL)}
@@ -97,17 +94,15 @@ const TasksTablePage = ({
         }
       >
         <React.Fragment>
-          {props.permissions.edit &&
-            showSelectAll &&
-            props.itemCount >= props.pagination.perPage && (
-              <SelectAllAlert
-                itemCount={props.itemCount}
-                perPage={props.pagination.perPage}
-                selectAllRows={selectAllRows}
-                unselectAllRows={props.unselectAllRows}
-                allRowsSelected={props.allRowsSelected}
-              />
-            )}
+          {showSelectAll && props.itemCount >= props.pagination.perPage && (
+            <SelectAllAlert
+              itemCount={props.itemCount}
+              perPage={props.pagination.perPage}
+              selectAllRows={selectAllRows}
+              unselectAllRows={props.unselectAllRows}
+              allRowsSelected={props.allRowsSelected}
+            />
+          )}
           <TasksTable history={history} {...props} openModal={openModal} />
         </React.Fragment>
       </PageLayout>
@@ -136,9 +131,6 @@ TasksTablePage.propTypes = {
   showSelectAll: PropTypes.bool,
   unselectAllRows: PropTypes.func.isRequired,
   reloadPage: PropTypes.func.isRequired,
-  permissions: PropTypes.shape({
-    edit: PropTypes.bool,
-  }),
 };
 
 TasksTablePage.defaultProps = {
@@ -154,9 +146,6 @@ TasksTablePage.defaultProps = {
   createHeader: () => __('Tasks'),
   showSelectAll: false,
   modalID: '',
-  permissions: {
-    edit: false,
-  },
 };
 
 export default TasksTablePage;

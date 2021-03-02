@@ -24,9 +24,6 @@ export const selectActionName = state =>
 export const selectSelectedRows = state =>
   selectTasksTableQuery(state).selectedRows || [];
 
-export const selectPermissions = state =>
-  selectTasksTableQuery(state).permissions || { edit: false };
-
 export const selectResults = createSelector(
   selectTasksTableContent,
   ({ results }) =>

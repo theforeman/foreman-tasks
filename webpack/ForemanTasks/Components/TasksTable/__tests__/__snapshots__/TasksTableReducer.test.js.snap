@@ -59,9 +59,6 @@ Object {
       "page": 3,
       "perPage": 12,
     },
-    "permissions": Object {
-      "edit": undefined,
-    },
     "selectedRows": Array [],
   },
 }

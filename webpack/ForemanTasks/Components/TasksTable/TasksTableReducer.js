@@ -19,13 +19,8 @@ const initialState = Immutable({
 
 export const TasksTableQueryReducer = (state = initialState, action) => {
   const { type, payload, response } = action;
-  const {
-    subtotal,
-    page,
-    per_page: perPageString,
-    action_name: actionName,
-    can_edit: canEdit,
-  } = response || {};
+  const { subtotal, page, per_page: perPageString, action_name: actionName } =
+    response || {};
   const ACTION_TYPES = createTableActionTypes(TASKS_TABLE_ID);
   switch (type) {
     case SELECT_ALL_ROWS:
@@ -39,9 +34,6 @@ export const TasksTableQueryReducer = (state = initialState, action) => {
           perPage: Number(perPageString),
         },
         selectedRows: [],
-        permissions: {
-          edit: canEdit,
-        },
       });
     case SELECT_ROWS:
       return state.set('selectedRows', union(payload, state.selectedRows));
