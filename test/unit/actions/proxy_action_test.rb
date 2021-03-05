@@ -35,7 +35,6 @@ module ForemanTasks
                              'use_batch_triggering' => batch_triggering,
                              'proxy_url' => 'proxy.example.com',
                              'proxy_action_name' => 'Proxy::DummyAction',
-                             "proxy_version" => { "major" => 1, "minor" => 21, "patch" => 0 },
                              'callback' => { 'task_id' => Support::DummyProxyAction.proxy.uuid, 'step_id' => @action.run_step_id } }]
           _(proxy_call).must_equal(expected_call)
         end

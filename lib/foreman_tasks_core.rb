@@ -29,3 +29,8 @@ module ForemanTasksCore
     [::Dynflow::DeadLetterSilencer::Matcher.new(ForemanTasksCore::Ticker)]
   end
 end
+
+if defined?(SmartProxyDynflowCore)
+  SmartProxyDynflowCore::TaskLauncherRegistry.register('single',
+                                                       ForemanTasksCore::TaskLauncher::Single)
+end

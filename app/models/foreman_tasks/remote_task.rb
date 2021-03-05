@@ -16,7 +16,7 @@ module ForemanTasks
     # Triggers a task on the proxy "the old way"
     def trigger(proxy_action_name, input)
       response = begin
-                   proxy.trigger_task(proxy_action_name, input).merge('result' => 'success')
+                   proxy.launch_tasks('single', :action_class => proxy_action_name, :action_input => input)
                  rescue RestClient::Exception => e
                    logger.warn "Could not trigger task on the smart proxy: #{e.message}"
                    {}
@@ -31,26 +31,10 @@ module ForemanTasks
           acc.merge(remote_task.execution_plan_id => { :action_input => remote_task.proxy_input,
                                                        :action_class => remote_task.proxy_action_name })
         end
-        safe_batch_trigger(operation, group, input_hash)
+        results = remote_tasks.first.proxy.launch_tasks(operation, input_hash)
+        remote_tasks.each { |remote_task| remote_task.update_from_batch_trigger results[remote_task.execution_plan_id] }
       end
       remote_tasks
-    end
-
-    # Attempt to trigger the tasks using the new API and fall back to the old one
-    # if it fails
-    def self.safe_batch_trigger(operation, remote_tasks, input_hash)
-      results = remote_tasks.first.proxy.launch_tasks(operation, input_hash)
-      remote_tasks.each { |remote_task| remote_task.update_from_batch_trigger results[remote_task.execution_plan_id] }
-    rescue RestClient::NotFound
-      fallback_batch_trigger remote_tasks, input_hash
-    end
-
-    # Trigger the tasks one-by-one using the old API
-    def self.fallback_batch_trigger(remote_tasks, input_hash)
-      remote_tasks.each do |remote_task|
-        task_data = input_hash[remote_task.execution_plan_id]
-        remote_task.trigger(task_data[:action_class], task_data[:action_input])
-      end
     end
 
     def update_from_batch_trigger(data)
