@@ -28,14 +28,6 @@ module ForemanTasks
           _(remote_task.remote_task_id).must_equal((remote_task.id + 5).to_s)
         end
       end
-
-      it 'fallbacks to old way when batch trigger gets 404' do
-        fake_proxy = mock
-        fake_proxy.expects(:launch_tasks).raises(RestClient::NotFound.new)
-        remote_tasks.first.expects(:proxy).returns(fake_proxy)
-        remote_tasks.each { |task| task.expects(:trigger) }
-        RemoteTask.batch_trigger('a_operation', remote_tasks)
-      end
     end
   end
 end
