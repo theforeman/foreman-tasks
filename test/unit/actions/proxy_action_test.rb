@@ -11,12 +11,11 @@ module ForemanTasks
       let(:batch_triggering) { false }
 
       before do
-        Support::DummyProxyAction.any_instance.stubs(:with_batch_triggering?).returns(batch_triggering)
         Support::DummyProxyAction.reset
         RemoteTask.any_instance.stubs(:proxy).returns(Support::DummyProxyAction.proxy)
         Setting.stubs(:[]).with('foreman_tasks_proxy_action_retry_interval')
         Setting.stubs(:[]).with('foreman_tasks_proxy_action_retry_count')
-        Setting.stubs(:[]).with('foreman_tasks_proxy_batch_trigger')
+        Setting.stubs(:[]).with('foreman_tasks_proxy_batch_trigger').returns(batch_triggering)
         @action = create_and_plan_action(Support::DummyProxyAction,
                                          Support::DummyProxyAction.proxy,
                                          'Proxy::DummyAction',
@@ -29,17 +28,18 @@ module ForemanTasks
       describe 'first run' do
         it 'triggers the corresponding action on the proxy' do
           proxy_call = Support::DummyProxyAction.proxy.log[:trigger_task].first
-          expected_call = ['Proxy::DummyAction',
-                           { 'foo' => 'bar',
-                             'secrets' => secrets,
-                             'connection_options' =>
+          expected_call = ['single',
+                           { :action_class => 'Proxy::DummyAction',
+                             :action_input =>
+                             { 'foo' => 'bar',
+                               'secrets' => secrets,
+                               'connection_options' =>
                                { 'retry_interval' => 15, 'retry_count' => 4,
                                  'proxy_batch_triggering' => batch_triggering },
-                             'use_batch_triggering' => batch_triggering,
-                             'proxy_url' => 'proxy.example.com',
-                             'proxy_action_name' => 'Proxy::DummyAction',
-                             "proxy_version" => { "major" => 1, "minor" => 21, "patch" => 0 },
-                             'callback' => { 'task_id' => Support::DummyProxyAction.proxy.uuid, 'step_id' => @action.run_step_id } }]
+                               'use_batch_triggering' => batch_triggering,
+                               'proxy_url' => 'proxy.example.com',
+                               'proxy_action_name' => 'Proxy::DummyAction',
+                               'callback' => { 'task_id' => Support::DummyProxyAction.proxy.uuid, 'step_id' => @action.run_step_id } } }]
           _(proxy_call).must_equal(expected_call)
         end
 

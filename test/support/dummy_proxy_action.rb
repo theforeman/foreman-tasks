@@ -36,6 +36,12 @@ module Support
       def statuses
         { version: DummyProxyVersion.new('1.21.0') }
       end
+
+      def launch_tasks(operation, args = {})
+        @log[:trigger_task] << [operation, args]
+        @task_triggered.fulfill(true)
+        { 'task_id' => @uuid, 'result' => 'success' }
+      end
     end
 
     class ProxySelector < ::ForemanTasks::ProxySelector
