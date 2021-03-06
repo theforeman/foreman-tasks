@@ -12,7 +12,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.6
+          ruby-version: 2.7
       - name: Setup
         run: |
           gem install bundler
@@ -31,7 +31,7 @@ jobs:
       fail-fast: false
       matrix:
         foreman-core-branch: [develop]
-        ruby-version: [2.5, 2.6]
+        ruby-version: [2.5, 2.6, 2.7]
         node-version: [12]
     steps:
       - run: sudo apt-get update
