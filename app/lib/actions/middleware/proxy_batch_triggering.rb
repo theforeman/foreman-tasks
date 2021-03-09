@@ -14,7 +14,7 @@ module Actions
       def trigger_remote_tasks
         # Find the tasks in batches, order them by proxy_url so we get all tasks
         # to a certain proxy "close to each other"
-        remote_tasks.pending.order(:proxy_url, :id).find_in_batches(:batch_size => batch_size) do |batch|
+        remote_tasks.pending.order(:proxy_url, :id).find_in_batches(:batch_size => proxy_batch_size) do |batch|
           # Group the tasks by operation, in theory there should be only one operation
           batch.group_by(&:operation).each do |operation, group|
             ForemanTasks::RemoteTask.batch_trigger(operation, group)
@@ -28,8 +28,8 @@ module Actions
 
       private
 
-      def batch_size
-        Setting['foreman_tasks_proxy_batch_size']
+      def proxy_batch_size
+        action&.proxy_batch_size || Setting['foreman_tasks_proxy_batch_size']
       end
     end
   end
