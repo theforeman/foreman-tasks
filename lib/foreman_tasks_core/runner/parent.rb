@@ -10,13 +10,15 @@ module ForemanTasksCore
       end
 
       def generate_updates
-        @outputs.reduce({}) do |acc, (key, value)|
+        base = {}
+        base[@suspended_action] = Runner::Update.new(ForemanTasksCore::ContinuousOutput.new, @exit_status) if @exit_status
+        @outputs.reduce(base) do |acc, (key, value)|
           if value.empty? && @exit_status.nil?
             acc
           else
             identifier = key
             @outputs[identifier] = ForemanTasksCore::ContinuousOutput.new
-            key = host_action(identifier) unless identifier == @suspended_action
+            key = host_action(identifier)
             exit_status = @exit_statuses[identifier] || @exit_status if @exit_status
             acc.merge(key => Runner::Update.new(value, exit_status))
           end
@@ -24,7 +26,7 @@ module ForemanTasksCore
       end
 
       def initialize_continuous_outputs
-        @outputs = ([@suspended_action] + @targets.keys).reduce({}) do |acc, target|
+        @outputs = @targets.keys.reduce({}) do |acc, target|
           acc.merge(target => ForemanTasksCore::ContinuousOutput.new)
         end
       end
@@ -39,8 +41,8 @@ module ForemanTasksCore
         @outputs.each { |_k, output| output.add_output(data, type) }
       end
 
-      def publish_data(data, type)
-        @outputs[@suspended_action].add_output(data, type)
+      def publish_data(_data, _type)
+        true
       end
 
       def publish_data_for(identifier, data, type)
