@@ -21,6 +21,13 @@ module Actions
         []
       end
     end
+    class ProxyActionNotStarted
+      attr_reader :exception
+
+      def initialize(exception)
+        @exception = exception
+      end
+    end
 
     class ProxyActionStopped; end
 
@@ -52,6 +59,8 @@ module Actions
           on_data(event.data, event.meta)
         when ProxyActionMissing
           on_proxy_action_missing
+        when ProxyActionNotStarted
+          raise event.exception
         when ProxyActionStopped
           on_proxy_action_stopped
         else
@@ -84,6 +93,8 @@ module Actions
     end
 
     def check_task_status
+      raise ::Foreman::Exception, _('Delegation of task to the smart proxy failed.') if proxy_task_id.nil?
+
       response = proxy.status_of_task(proxy_task_id)
       if %w[stopped paused].include? response['state']
         if response['result'] == 'error'
