@@ -1,5 +1,7 @@
 module ForemanTasks
   class Lock < ApplicationRecord
+    OWNER_LOCK_NAME = :task_owner
+
     class LockConflict < StandardError
       attr_reader :required_lock, :conflicting_locks
       def initialize(required_lock, conflicting_locks)
