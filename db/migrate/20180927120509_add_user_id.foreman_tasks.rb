@@ -1,4 +1,6 @@
 class AddUserId < ActiveRecord::Migration[5.0]
+  OWNER_LOCK_NAME = :task_owner
+
   def up
     add_reference :foreman_tasks_tasks, :user, :foreign_key => true
 
@@ -29,7 +31,7 @@ class AddUserId < ActiveRecord::Migration[5.0]
   private
 
   def create_lock(user_id, task)
-    ForemanTasks::Lock.new(:name          => ForemanTasks::Lock::OWNER_LOCK_NAME,
+    ForemanTasks::Lock.new(:name          => OWNER_LOCK_NAME,
                            :resource_type => User.name,
                            :resource_id   => user_id,
                            :task_id       => task.id,
@@ -37,6 +39,6 @@ class AddUserId < ActiveRecord::Migration[5.0]
   end
 
   def user_locks
-    ForemanTasks::Lock.where(:name => ForemanTasks::Lock::OWNER_LOCK_NAME)
+    ForemanTasks::Lock.where(:name => OWNER_LOCK_NAME)
   end
 end
