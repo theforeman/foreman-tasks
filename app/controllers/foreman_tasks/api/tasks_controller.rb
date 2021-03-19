@@ -192,7 +192,7 @@ module ForemanTasks
           params[:order] = "#{ordering_params[:sort_by]} #{ordering_params[:sort_order]}"
         end
         params[:order] ||= 'started_at DESC'
-        @tasks = DashboardTableFilter.new(resource_scope_for_index, params).scope.order(params[:order].to_s)
+        @tasks = resource_scope_for_index.order(params[:order].to_s)
       end
 
       def search_options
