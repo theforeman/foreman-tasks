@@ -91,6 +91,15 @@ module ForemanTasks
         end
       end
 
+      describe 'index' do
+        it 'shows duration column' do
+          task = ForemanTasks::Task.with_duration.find(FactoryBot.create(:some_task).id)
+          get(:index, params: {}, session: set_session_user)
+          assert_response :success
+          assert_include response.body.lines[1], task.duration
+        end
+      end
+
       describe 'sub_tasks' do
         it 'does not allow user without permissions to see task details' do
           setup_user('view', 'foreman_tasks', 'owner.id = current_user')
@@ -108,6 +117,16 @@ module ForemanTasks
           assert_response :success
           assert_equal 2, response.body.lines.size
           assert_include response.body.lines[1], 'Child action'
+        end
+
+        it 'shows duration column' do
+          parent = ForemanTasks::Task.find(FactoryBot.create(:some_task).id)
+          child = ForemanTasks::Task.with_duration.find(FactoryBot.create(:some_task).id)
+          child.parent_task_id = parent.id
+          child.save!
+          get(:sub_tasks, params: { id: parent.id }, session: set_session_user)
+          assert_response :success
+          assert_include response.body.lines[1], child.duration
         end
       end
 

@@ -91,6 +91,24 @@ module ForemanTasks
                      session: set_session_user(User.current)
           assert_response :not_found
         end
+
+        it 'shows duration column' do
+          task = ForemanTasks::Task.with_duration.find(FactoryBot.create(:dynflow_task).id)
+          get :show, params: { id: task.id }, session: set_session_user
+          assert_response :success
+          data = JSON.parse(response.body)
+          _(data['duration']).must_equal task.duration
+        end
+      end
+
+      describe 'GET /api/tasks/index' do
+        it 'shows duration column' do
+          task = ForemanTasks::Task.with_duration.find(FactoryBot.create(:dynflow_task).id)
+          get :index, session: set_session_user
+          assert_response :success
+          data = JSON.parse(response.body)
+          _(data['results'][0]['duration']).must_equal task.duration
+        end
       end
 
       describe 'GET /api/tasks/summary' do
