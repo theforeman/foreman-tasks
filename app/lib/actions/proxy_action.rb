@@ -218,10 +218,8 @@ module Actions
     end
 
     def get_proxy_data(response)
-      proxy_data = response['actions'].detect do |action|
-        action['class'] == proxy_action_name || action.fetch('input', {})['proxy_operation_name'] == proxy_operation_name
-      end
-      proxy_data.fetch('output', {})
+      response['actions'].detect { |action| action.fetch('input', {})['task_id'] == task.id }
+                         .try(:fetch, 'output', {})
     end
 
     def proxy_version(proxy)
