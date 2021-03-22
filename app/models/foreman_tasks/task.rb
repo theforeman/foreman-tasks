@@ -89,7 +89,7 @@ module ForemanTasks
       property :ended_at, ActiveSupport::TimeWithZone, desc: 'Returns date with time the task ended at'
     end
     class Jail < Safemode::Jail
-      allow :started_at, :ended_at, :result, :state, :label, :main_action, :action_output
+      allow :started_at, :ended_at, :result, :state, :label, :main_action, :action_continuous_output
     end
 
     def input
@@ -249,7 +249,7 @@ module ForemanTasks
       parts.join(' ').strip
     end
 
-    def action_output
+    def action_continuous_output
       return unless main_action.is_a?(Actions::Helpers::WithContinuousOutput)
       main_action.continuous_output.sort!
       main_action.continuous_output.raw_outputs
