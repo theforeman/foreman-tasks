@@ -253,10 +253,7 @@ module ForemanTasks
           if search_params[:user_id].blank?
             raise BadRequest, _('User search_params requires user_id to be specified')
           end
-          scope.joins(:locks).where(foreman_tasks_locks:
-                                        { name:          ::ForemanTasks::Lock::OWNER_LOCK_NAME,
-                                          resource_type: 'User',
-                                          resource_id:   search_params[:user_id] })
+          scope.search_for("user_id = #{search_params[:user_id]}")
         when 'resource'
           if search_params[:resource_type].blank? || search_params[:resource_id].blank?
             raise BadRequest,
