@@ -12,17 +12,13 @@ module ForemanTasksCore
       def generate_updates
         base = {}
         base[@suspended_action] = Runner::Update.new(ForemanTasksCore::ContinuousOutput.new, @exit_status) if @exit_status
-        @outputs.reduce(base) do |acc, (key, value)|
-          if value.empty? && @exit_status.nil?
-            acc
-          else
-            identifier = key
-            @outputs[identifier] = ForemanTasksCore::ContinuousOutput.new
-            key = host_action(identifier)
-            exit_status = @exit_statuses[identifier] || @exit_status if @exit_status
-            acc.merge(key => Runner::Update.new(value, exit_status))
-          end
-        end
+        # Operate on all hosts if the main process ended or only on hosts for which we have updates
+        @outputs.reject { |_, output| @exit_status.nil? && output.empty? }
+                .reduce(base) do |acc, (identifier, output)|
+                  @outputs[identifier] = ForemanTasksCore::ContinuousOutput.new # Create a new ContinuousOutput for next round of updates
+                  exit_status = @exit_statuses[identifier] || @exit_status if @exit_status
+                  acc.merge(host_action(identifier) => Runner::Update.new(output, exit_status))
+                end
       end
 
       def initialize_continuous_outputs
