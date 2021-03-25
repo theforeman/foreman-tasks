@@ -70,7 +70,7 @@ module Actions
     apipie :class, "An common ancestor action for observable actions" do
       name 'Actions::ObservableAction'
       refs 'Actions::ObservableAction'
-      sections only: %w[webhooks]
+      sections only: %w[all webhooks]
       property :task, object_of: 'Task', desc: 'Returns the task to which this action belongs'
     end
     class Jail < Safemode::Jail
