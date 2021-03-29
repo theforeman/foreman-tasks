@@ -24,7 +24,7 @@ class TriggeringTest < ActiveSupport::TestCase
   it 'cannot have mode set to arbitrary value' do
     triggering = FactoryBot.build(:triggering)
     _(triggering).must_be :valid?
-    _ { proc { triggering.mode = 'bogus' } }.must_raise ArgumentError
-    _ { proc { triggering.mode = 27 } }.must_raise ArgumentError
+    _(proc { triggering.mode = 'bogus' }).must_raise ArgumentError
+    _(proc { triggering.mode = 27 }).must_raise ArgumentError
   end
 end
