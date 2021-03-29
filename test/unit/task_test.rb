@@ -302,7 +302,7 @@ class TasksTest < ActiveSupport::TestCase
       resource_type = 'restype1'
 
       task1_old = FactoryBot.create(
-        :task_with_locks,
+        :task_with_links,
         started_at: '2019-10-01 11:15:55',
         ended_at: '2019-10-01 11:15:57',
         resource_id: 1,
@@ -310,7 +310,7 @@ class TasksTest < ActiveSupport::TestCase
         resource_type: resource_type
       )
       task1_new = FactoryBot.create(
-        :task_with_locks,
+        :task_with_links,
         started_at: '2019-10-02 11:15:55',
         ended_at: '2019-10-02 11:15:57',
         resource_id: 1,
@@ -318,7 +318,7 @@ class TasksTest < ActiveSupport::TestCase
         resource_type: resource_type
       )
       task2 = FactoryBot.create(
-        :task_with_locks,
+        :task_with_links,
         started_at: '2019-10-03 11:15:55',
         ended_at: '2019-10-03 11:15:57',
         resource_id: 2,
@@ -326,7 +326,7 @@ class TasksTest < ActiveSupport::TestCase
         resource_type: resource_type
       )
       task3 = FactoryBot.create(
-        :task_with_locks,
+        :task_with_links,
         started_at: '2019-10-03 11:15:55',
         ended_at: '2019-10-03 11:15:57',
         resource_id: 3,
