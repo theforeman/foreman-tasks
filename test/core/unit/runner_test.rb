@@ -53,7 +53,7 @@ module ForemanTasksCore
         describe '#initialize_continuous_outputs' do
           it 'initializes outputs for targets and parent' do
             outputs = runner.initialize_continuous_outputs
-            _(outputs.keys.count).must_equal 3
+            _(outputs.keys.count).must_equal 2
             outputs.values.each { |output| _(output).must_be_instance_of ContinuousOutput }
           end
         end
@@ -66,23 +66,10 @@ module ForemanTasksCore
             _(updates.keys.count).must_equal 1
           end
 
-          it 'works in compatibility mode' do
-            runner = Parent.new targets
-            _(runner.generate_updates).must_equal({})
-            runner.broadcast_data('something', 'stdout')
-            updates = runner.generate_updates
-            _(updates.keys.count).must_equal 3
-            # One of the keys is nil in compatibility mode
-            _(updates.keys.compact.count).must_equal 2
-            updates.keys.compact.each do |key|
-              _(key).must_be_instance_of ::Dynflow::Action::Suspended
-            end
-          end
-
           it 'works without compatibility mode' do
             runner.broadcast_data('something', 'stdout')
             updates = runner.generate_updates
-            _(updates.keys.count).must_equal 3
+            _(updates.keys.count).must_equal 2
             updates.keys.each do |key|
               _(key).must_be_instance_of ::Dynflow::Action::Suspended
             end
@@ -99,7 +86,7 @@ module ForemanTasksCore
         describe '#broadcast_data' do
           it 'publishes data for all hosts' do
             runner.broadcast_data('message', 'stdout')
-            _(runner.generate_updates.keys.count).must_equal 3
+            _(runner.generate_updates.keys.count).must_equal 2
           end
         end
 
@@ -115,7 +102,7 @@ module ForemanTasksCore
           it 'broadcasts the exception to all targets' do
             runner.expects(:publish_exit_status).never
             runner.publish_exception('general failure', exception, false)
-            _(runner.generate_updates.keys.count).must_equal 3
+            _(runner.generate_updates.keys.count).must_equal 2
           end
 
           it 'publishes exit status if fatal' do
