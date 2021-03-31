@@ -42,11 +42,34 @@ FactoryBot.define do
         end
       end
 
+      factory :task_with_links do
+        # posts_count is declared as a transient attribute and available in
+        # attributes on the factory, as well as the callback via the evaluator
+        transient do
+          locks_count { 1 }
+          resource_id { 1 }
+          resource_type { 'type1' }
+        end
+
+        # the after(:create) yields two values; the user instance itself and the
+        # evaluator, which stores all values from the factory, including transient
+        # attributes; `create_list`'s second argument is the number of records
+        # to create and we make sure the user is associated properly to the post
+        after(:create) do |task, evaluator|
+          create_list(
+            :link,
+            1,
+            task: task,
+            resource_type: evaluator.resource_type,
+            resource_id: evaluator.resource_id
+          )
+        end
+      end
+
       factory :task_with_locks do
         # posts_count is declared as a transient attribute and available in
         # attributes on the factory, as well as the callback via the evaluator
         transient do
-          locks_count { 3 }
           resource_id { 1 }
           resource_type { 'type1' }
         end
@@ -58,7 +81,7 @@ FactoryBot.define do
         after(:create) do |task, evaluator|
           create_list(
             :lock,
-            evaluator.locks_count,
+            1,
             task: task,
             resource_type: evaluator.resource_type,
             resource_id: evaluator.resource_id
@@ -68,11 +91,15 @@ FactoryBot.define do
     end
   end
 
-  factory :lock, :class => ForemanTasks::Lock do
-    name { 'read' }
+  factory :link, :class => ForemanTasks::Link do
     resource_type { 'Katello::Repository' }
     resource_id { 1 }
-    exclusive { true }
+    association :task, factory: :task_with_links
+  end
+
+  factory :lock, :class => ForemanTasks::Lock do
+    resource_type { 'Katello::Repository' }
+    resource_id { 1 }
     association :task, factory: :task_with_locks
   end
 end

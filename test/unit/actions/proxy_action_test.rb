@@ -107,7 +107,7 @@ module ForemanTasks
         _(action.world.clock.pending_pings.length).must_equal 1
         _(action.output[:metadata][:failed_proxy_tasks].length).must_equal 1
         2.times { action.output[:metadata][:failed_proxy_tasks] << {} }
-        _ { proc { action = run_stubbed_action.call action } }.must_raise(Errno::ECONNREFUSED)
+        _(proc { action = run_stubbed_action.call action }).must_raise(Errno::ECONNREFUSED)
         _(action.state).must_equal :error
       end
 

@@ -60,6 +60,7 @@ jobs:
       - name: Setup Bundler
         run: |
           echo "gem 'foreman-tasks', path: './foreman-tasks'" > bundler.d/foreman-tasks.local.rb
+          echo "gem 'sqlite3'" >> bundler.d/foreman-tasks.local.rb
           gem install bundler
           bundle config set without journald development console libvirt
           bundle config set path vendor/bundle
@@ -70,5 +71,6 @@ jobs:
           bundle exec rake db:migrate
       - name: Run plugin tests
         run: |
-          bundle exec rake test:foreman-tasks
+          bundle exec rake test:foreman_tasks
+          bundle exec rake test:foreman_tasks_core
           bundle exec rake test TEST="test/unit/foreman/access_permissions_test.rb"

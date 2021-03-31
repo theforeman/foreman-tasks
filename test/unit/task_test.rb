@@ -31,9 +31,9 @@ class TasksTest < ActiveSupport::TestCase
         assert_equal [@task_one], ForemanTasks::Task.search_for("user = #{@user_one.login}")
       end
 
-      test 'cannot search by arbitrary key' do
-        _ { proc { ForemanTasks::Task.search_for('user.my_key ~ 5') } }.must_raise(ScopedSearch::QueryNotSupported)
-        _ { proc { ForemanTasks::Task.search_for('user. = 5') } }.must_raise(ScopedSearch::QueryNotSupported)
+      it 'cannot search by arbitrary key' do
+        _(proc { ForemanTasks::Task.search_for('user.my_key ~ 5') }).must_raise(ScopedSearch::QueryNotSupported)
+        _(proc { ForemanTasks::Task.search_for('user. = 5') }).must_raise(ScopedSearch::QueryNotSupported)
       end
 
       test 'can search the tasks by negated user' do
@@ -59,8 +59,8 @@ class TasksTest < ActiveSupport::TestCase
       end
 
       test 'cannot glob on user\'s id' do
-        _ { proc { ForemanTasks::Task.search_for("user.id ~ something") } }.must_raise(ScopedSearch::QueryNotSupported)
-        _ { proc { ForemanTasks::Task.search_for("user.id ~ 5") } }.must_raise(ScopedSearch::QueryNotSupported)
+        _(proc { ForemanTasks::Task.search_for("user.id ~ something") }).must_raise(ScopedSearch::QueryNotSupported)
+        _(proc { ForemanTasks::Task.search_for("user.id ~ 5") }).must_raise(ScopedSearch::QueryNotSupported)
       end
 
       test 'can search the tasks by user with wildcards' do
@@ -126,17 +126,17 @@ class TasksTest < ActiveSupport::TestCase
       end
 
       it 'raises an exception if duration is unknown' do
-        _ { proc { ForemanTasks::Task.search_for('duration = "25 potatoes"') } }.must_raise ScopedSearch::QueryNotSupported
+        _(proc { ForemanTasks::Task.search_for('duration = "25 potatoes"') }).must_raise ScopedSearch::QueryNotSupported
       end
     end
 
     context 'by taxonomies' do
       test 'can search by taxonomies using IN' do
-        assert_nothing_raised(PG::SyntaxError) { ForemanTasks::Task.search_for('location_id ^ (1)').first }
-        assert_nothing_raised(PG::SyntaxError) { ForemanTasks::Task.search_for('organization_id ^ (1)').first }
-        assert_nothing_raised(PG::SyntaxError) { ForemanTasks::Task.search_for('location_id ^ (1,2)').first }
-        assert_nothing_raised(PG::SyntaxError) { ForemanTasks::Task.search_for('organization_id ^ (1,2)').first }
-        assert_nothing_raised(PG::SyntaxError) { ForemanTasks::Task.search_for('organization_id = 1').first }
+        assert_nothing_raised { ForemanTasks::Task.search_for('location_id ^ (1)').first }
+        assert_nothing_raised { ForemanTasks::Task.search_for('organization_id ^ (1)').first }
+        assert_nothing_raised { ForemanTasks::Task.search_for('location_id ^ (1,2)').first }
+        assert_nothing_raised { ForemanTasks::Task.search_for('organization_id ^ (1,2)').first }
+        assert_nothing_raised { ForemanTasks::Task.search_for('organization_id = 1').first }
       end
     end
   end
@@ -302,7 +302,7 @@ class TasksTest < ActiveSupport::TestCase
       resource_type = 'restype1'
 
       task1_old = FactoryBot.create(
-        :task_with_locks,
+        :task_with_links,
         started_at: '2019-10-01 11:15:55',
         ended_at: '2019-10-01 11:15:57',
         resource_id: 1,
@@ -310,7 +310,7 @@ class TasksTest < ActiveSupport::TestCase
         resource_type: resource_type
       )
       task1_new = FactoryBot.create(
-        :task_with_locks,
+        :task_with_links,
         started_at: '2019-10-02 11:15:55',
         ended_at: '2019-10-02 11:15:57',
         resource_id: 1,
@@ -318,7 +318,7 @@ class TasksTest < ActiveSupport::TestCase
         resource_type: resource_type
       )
       task2 = FactoryBot.create(
-        :task_with_locks,
+        :task_with_links,
         started_at: '2019-10-03 11:15:55',
         ended_at: '2019-10-03 11:15:57',
         resource_id: 2,
@@ -326,7 +326,7 @@ class TasksTest < ActiveSupport::TestCase
         resource_type: resource_type
       )
       task3 = FactoryBot.create(
-        :task_with_locks,
+        :task_with_links,
         started_at: '2019-10-03 11:15:55',
         ended_at: '2019-10-03 11:15:57',
         resource_id: 3,
