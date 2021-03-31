@@ -44,8 +44,8 @@ module ForemanTasks
             @locations = [0, 0].map { FactoryBot.create(:location) }
             @tasks = [0, 0].map { FactoryBot.create(:some_task) }
             @tasks.zip(@organizations, @locations).each do |task, org, loc|
-              Lock.link!(org, task.id)
-              Lock.link!(loc, task.id)
+              Link.link!(org, task)
+              Link.link!(loc, task)
             end
           end
 

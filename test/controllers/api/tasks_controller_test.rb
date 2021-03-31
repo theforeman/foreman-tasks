@@ -29,7 +29,7 @@ module ForemanTasks
 
         it 'renders task ids when searching by resource id' do
           task = FactoryBot.create(:dynflow_task, :product_create_task)
-          ForemanTasks::Lock.create!(name: "create", resource_type: "Katello::Product", resource_id: 1, task_id: task.id)
+          ForemanTasks::Link.create!(resource_type: "Katello::Product", resource_id: 1, task_id: task.id)
           get :index, params: { :search => "label = Actions::Katello::Product::Create and resource_id = 1" }
           assert_response :success
           data = JSON.parse(response.body)
