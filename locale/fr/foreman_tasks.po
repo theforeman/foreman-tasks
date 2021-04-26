@@ -75,6 +75,9 @@ msgstr "Toutes les tâches %s sont sélectionnées. "
 msgid "All proxies with the required feature are unavailable at the moment"
 msgstr "Les proxys possédant les fonctionnalités demandées ne sont pas disponibles actuellement"
 
+msgid "Allow proxy batch tasks"
+msgstr ""
+
 msgid "Allow triggering tasks on the smart proxy in batches"
 msgstr "Permettre le déclenchement de tâches sur le proxy smart par lots"
 
@@ -100,14 +103,14 @@ msgstr "Annuler"
 msgid "Cancel Selected"
 msgstr "Annuler la sélection"
 
-msgid "Cancel all cancellable tasks"
-msgstr "Annuler toutes les tâches annulables"
-
 msgid "Cancel enforced: the task might be still running on the proxy"
 msgstr "Annulation forcée : la tâche peut-être en cours d'exécution sur le proxy"
 
 msgid "Cancel recurring logic"
 msgstr "Annuler la logique récurrente"
+
+msgid "Cancel selected cancellable tasks"
+msgstr ""
 
 msgid "Cancel selected tasks"
 msgstr "Annuler des tâches sélectionnées"
@@ -155,6 +158,9 @@ msgid "Conflicts with tasks:"
 msgstr "Conflits avec les tâches :"
 
 msgid "Could not cancel step."
+msgstr ""
+
+msgid "Could not receive data: ${APIerror && APIerror.message}"
 msgstr ""
 
 msgid "Could not receive data: ${error && error.message}"
@@ -208,6 +214,9 @@ msgstr "Action par lot vide"
 msgid "Enable"
 msgstr "Activer"
 
+msgid "Enable dynflow console"
+msgstr ""
+
 msgid "Enable the dynflow console (/foreman_tasks/dynflow) for debugging"
 msgstr "Active la console dynflow (/foreman_tasks/dynflow) pour le déboggage"
 
@@ -247,9 +256,6 @@ msgstr "N'a pu vérifier les tâches du proxy à %{url}: %{exception}"
 msgid "Failed to initialize"
 msgstr "L'initialisation a échoué"
 
-msgid "Field to sort the results on"
-msgstr "Champs dans lequel trier les résultats"
-
 msgid "Finished"
 msgstr "TerminÃ©"
 
@@ -270,12 +276,6 @@ msgstr "Tâches Foreman"
 
 msgid "Fri"
 msgstr "Ven."
-
-msgid "Hash version of 'order' param"
-msgstr "Version Hash des paramètres d'« ordre »"
-
-msgid "How to order the sorted results (e.g. ASC for ascending)"
-msgstr "Comment classer les résultats triés (ex :  ASC for ascending ou CRO pour croissant)"
 
 msgid "ID"
 msgstr "ID"
@@ -382,9 +382,6 @@ msgstr "Toutes les tâches sélectionnées ne peuvent pas être reprises"
 msgid "Number of attempts to start a task on the smart proxy before failing"
 msgstr "Nombre de tentatives de démarrage d'une tâche sur le smart proxy avant un échec"
 
-msgid "Number of results per page to return"
-msgstr "Nombre de résultats par page à renvoyer"
-
 msgid "Number of seconds to wait for synchronous task to finish."
 msgstr "Nombre de secondes à attendre avant qu'une tâche synchrone soit terminée."
 
@@ -398,14 +395,17 @@ msgstr "Activé"
 msgid "Operation"
 msgstr "Opération"
 
+msgid "Other includes all stopped tasks that are cancelled or pending"
+msgstr ""
+
+msgid "Other:"
+msgstr ""
+
 msgid "Output"
 msgstr "Sortie"
 
 msgid "Output:"
 msgstr "Sortie :"
-
-msgid "Page number, starting at 1"
-msgstr "Numéro de la page, commençant par 1"
 
 msgid "Parent task"
 msgstr "Tâche parente"
@@ -428,8 +428,20 @@ msgstr "Multiplicateur des intervalles de sondage"
 msgid "Polling multiplier which is used to multiply the default polling intervals. This can be used to prevent polling too frequently for long running tasks."
 msgstr "Multiplicateur de sondage qui est utilisé pour multiplier les intervalles de sondage par défaut. Il peut être utilisé pour éviter que les sondages ne soient trop fréquents pour des tâches de longue durée."
 
+msgid "Preupgrade job"
+msgstr ""
+
+msgid "Proxy action retry count"
+msgstr ""
+
+msgid "Proxy action retry interval"
+msgstr ""
+
 msgid "Proxy task gone missing from the smart proxy"
 msgstr "Tâches de proxy manquantes du smart proxy"
+
+msgid "Proxy tasks batch size"
+msgstr ""
 
 msgid "Raw"
 msgstr "Brut"
@@ -449,6 +461,12 @@ msgstr "Logique récurrente"
 msgid "Recurring logics"
 msgstr "Logiques périodiques"
 
+msgid "Refresh Data"
+msgstr ""
+
+msgid "Remote action:"
+msgstr ""
+
 msgid "Repeat N times"
 msgstr "Répéter N fois"
 
@@ -458,14 +476,14 @@ msgstr "Répéter jusqu'à"
 msgid "Repeats"
 msgstr "Répétitions"
 
+msgid "Require auth for dynflow console"
+msgstr ""
+
 msgid "Require user to be authenticated as user with admin rights when accessing dynflow console"
 msgstr "Exige que l'utilisateur soir authentifié en tant qu'utilisateur avec un accès admin pour accéder à la concole dynflow"
 
 msgid "Required lock is already taken by other running tasks."
 msgstr "Le verrouillage requis est déjà utilisé par d'autres tâches en cours."
-
-msgid "Required lock: %s"
-msgstr "Verrouillage requis : %s"
 
 msgid "Resource search_params requires resource_type and resource_id to be specified"
 msgstr "Ressource search_params a besoin que resource_type et resource_id soient spécifiés"
@@ -515,9 +533,6 @@ msgstr "Prévu"
 msgid "Search query"
 msgstr "Requête de recherche"
 
-msgid "Search string"
-msgstr "Rechercher une chaîne"
-
 msgid "See %{link} for more details on how to resolve the issue"
 msgstr "Voir %{link} pour plus de détails sur la manière de résoudre le problème"
 
@@ -536,11 +551,11 @@ msgstr "Envoie les données à la tâche à partir d'un exécuteur exérieur (te
 msgid "Set up recurring execution"
 msgstr "Mettre en place une exécution périodique"
 
+msgid "Setting is off"
+msgstr ""
+
 msgid "Show recurring logic details"
 msgstr "Afficher les détails des logiques récurrentes"
-
-msgid "Sort field and order, e.g. 'name DESC'"
-msgstr "Trier le champ et l'ordre, ex : 'name DESC'"
 
 msgid "Start at"
 msgstr "Démarre à"
@@ -560,7 +575,7 @@ msgstr "État"
 msgid "Step Canceled"
 msgstr ""
 
-msgid "Stop all stoppable tasks"
+msgid "Stop selected stoppable tasks"
 msgstr ""
 
 msgid "Stop specific tasks by ID"
@@ -580,6 +595,9 @@ msgstr "Sous-tâches de %s"
 
 msgid "Sun"
 msgstr "Dim."
+
+msgid "Sync task timeout"
+msgstr ""
 
 msgid "Task"
 msgstr "Tâche"
@@ -611,11 +629,20 @@ msgstr "La tâche a été annulée"
 msgid "Tasks"
 msgstr "Tâches"
 
+msgid "Tasks troubleshooting URL"
+msgstr ""
+
 msgid "The ID of the step inside the execution plan to send the event to"
 msgstr "L'ID de l'étape qui se trouve dans le plan d'exécution auquel envoyer l'événement"
 
 msgid "The recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task."
 msgstr "L'approche recommandée consiste à examiner les messages d'erreur ci-dessous et dans l'onglet \"erreurs\", à s'attaquer à la cause première du problème et à reprendre la tâche."
+
+msgid "The recurring logic was disabled."
+msgstr ""
+
+msgid "The recurring logic was enabled."
+msgstr ""
 
 msgid "The smart proxy task %s failed."
 msgstr "La tâche de smart proxy %s a échoué."
@@ -691,6 +718,9 @@ msgstr "En se concentrant sur la dernière"
 msgid "Yes"
 msgstr "Oui"
 
+msgid "You do not have permission"
+msgstr ""
+
 msgid "activation key"
 msgstr "clé d'activation"
 
@@ -743,6 +773,9 @@ msgstr "plus ancien"
 
 msgid "organization"
 msgstr "organisation"
+
+msgid "other"
+msgstr ""
 
 msgid "paused"
 msgstr "suspendue"

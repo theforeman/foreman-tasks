@@ -75,6 +75,9 @@ msgstr "%s の全タスクを選択します。"
 msgid "All proxies with the required feature are unavailable at the moment"
 msgstr "現在、必要な機能があるすべてのプロキシーが利用できません"
 
+msgid "Allow proxy batch tasks"
+msgstr ""
+
 msgid "Allow triggering tasks on the smart proxy in batches"
 msgstr "Smart Proxy でタスクを一括でトリガーできるようにする"
 
@@ -100,14 +103,14 @@ msgstr "取り消し"
 msgid "Cancel Selected"
 msgstr "選択項目をキャンセル"
 
-msgid "Cancel all cancellable tasks"
-msgstr "キャンセル可能な全タスクをキャンセル"
-
 msgid "Cancel enforced: the task might be still running on the proxy"
 msgstr "強制的にキャンセル: タスクはプロキシーで引き続き実行されている可能性があります"
 
 msgid "Cancel recurring logic"
 msgstr "再帰論理をキャンセル"
+
+msgid "Cancel selected cancellable tasks"
+msgstr ""
 
 msgid "Cancel selected tasks"
 msgstr "選択したタスクをキャンセル"
@@ -155,6 +158,9 @@ msgid "Conflicts with tasks:"
 msgstr "タスクとの競合:"
 
 msgid "Could not cancel step."
+msgstr ""
+
+msgid "Could not receive data: ${APIerror && APIerror.message}"
 msgstr ""
 
 msgid "Could not receive data: ${error && error.message}"
@@ -208,6 +214,9 @@ msgstr "空の一括処理"
 msgid "Enable"
 msgstr "有効化"
 
+msgid "Enable dynflow console"
+msgstr ""
+
 msgid "Enable the dynflow console (/foreman_tasks/dynflow) for debugging"
 msgstr "デバッグのために dynflow コンソール (/foreman_tasks/dynflow) を有効にする"
 
@@ -247,9 +256,6 @@ msgstr "%{url} でのプロキシータスクをチェックできませんで�
 msgid "Failed to initialize"
 msgstr "初期化に失敗しました"
 
-msgid "Field to sort the results on"
-msgstr "結果をソートするフィールド"
-
 msgid "Finished"
 msgstr "終了"
 
@@ -270,12 +276,6 @@ msgstr "Foreman タスク"
 
 msgid "Fri"
 msgstr "金"
-
-msgid "Hash version of 'order' param"
-msgstr "ハッシュバージョンの 'order' パラメーター"
-
-msgid "How to order the sorted results (e.g. ASC for ascending)"
-msgstr "ソートされた結果を順序付ける方法 (例:  ascending (昇順) の ASC)"
 
 msgid "ID"
 msgstr "ID"
@@ -382,9 +382,6 @@ msgstr "選択したタスクを一括で再開できません"
 msgid "Number of attempts to start a task on the smart proxy before failing"
 msgstr "失敗するまでに Smart Proxy でタスクの起動を試行させる回数"
 
-msgid "Number of results per page to return"
-msgstr "戻されるページごとの結果数"
-
 msgid "Number of seconds to wait for synchronous task to finish."
 msgstr "同期タスクが完了するまで待機する秒数"
 
@@ -398,14 +395,17 @@ msgstr "オン"
 msgid "Operation"
 msgstr "操作"
 
+msgid "Other includes all stopped tasks that are cancelled or pending"
+msgstr ""
+
+msgid "Other:"
+msgstr ""
+
 msgid "Output"
 msgstr "出力"
 
 msgid "Output:"
 msgstr "出力:"
-
-msgid "Page number, starting at 1"
-msgstr "1 から始まるページ番号"
 
 msgid "Parent task"
 msgstr "親タスク"
@@ -428,8 +428,20 @@ msgstr "ポーリングの間隔乗数"
 msgid "Polling multiplier which is used to multiply the default polling intervals. This can be used to prevent polling too frequently for long running tasks."
 msgstr "デフォルトのポーリングの間隔を乗算するときに使用するポーリング乗数。この乗数を使用して、長期間にわたり実行中のタスクが頻繁にポーリングされるのを回避します。"
 
+msgid "Preupgrade job"
+msgstr ""
+
+msgid "Proxy action retry count"
+msgstr ""
+
+msgid "Proxy action retry interval"
+msgstr ""
+
 msgid "Proxy task gone missing from the smart proxy"
 msgstr "Smart Proxy のプロキシータスクが見つかりません"
+
+msgid "Proxy tasks batch size"
+msgstr ""
 
 msgid "Raw"
 msgstr "ロー"
@@ -449,6 +461,12 @@ msgstr "再帰論理"
 msgid "Recurring logics"
 msgstr "再帰論理"
 
+msgid "Refresh Data"
+msgstr ""
+
+msgid "Remote action:"
+msgstr ""
+
 msgid "Repeat N times"
 msgstr "N 回繰り返す"
 
@@ -458,14 +476,14 @@ msgstr "繰り返し"
 msgid "Repeats"
 msgstr "繰り返し"
 
+msgid "Require auth for dynflow console"
+msgstr ""
+
 msgid "Require user to be authenticated as user with admin rights when accessing dynflow console"
 msgstr "dynflow コンソールにアクセスする場合、ユーザーは管理者権限を持つユーザーとして認証する必要があります"
 
 msgid "Required lock is already taken by other running tasks."
 msgstr "必要なロックは、実行中の他のタスクにより取得済みです。"
-
-msgid "Required lock: %s"
-msgstr "必要なロック: ％s"
 
 msgid "Resource search_params requires resource_type and resource_id to be specified"
 msgstr "リソース search_params では resource_type と resource_id を指定する必要があります"
@@ -515,9 +533,6 @@ msgstr "スケジュール済み"
 msgid "Search query"
 msgstr "検索クエリー"
 
-msgid "Search string"
-msgstr "検索文字列"
-
 msgid "See %{link} for more details on how to resolve the issue"
 msgstr "問題解決の詳細については、％{link} を参照してください"
 
@@ -536,11 +551,11 @@ msgstr "外部のエグゼキューター (smart_proxy_dynflow など) からタ
 msgid "Set up recurring execution"
 msgstr "繰り返し実行を設定"
 
+msgid "Setting is off"
+msgstr ""
+
 msgid "Show recurring logic details"
 msgstr "再帰論理の詳細を表示"
-
-msgid "Sort field and order, e.g. 'name DESC'"
-msgstr "フィールドと順序のソート (例:  'name DESC')"
 
 msgid "Start at"
 msgstr "開始時刻"
@@ -560,7 +575,7 @@ msgstr "状態"
 msgid "Step Canceled"
 msgstr ""
 
-msgid "Stop all stoppable tasks"
+msgid "Stop selected stoppable tasks"
 msgstr ""
 
 msgid "Stop specific tasks by ID"
@@ -580,6 +595,9 @@ msgstr "%s のサブタスク"
 
 msgid "Sun"
 msgstr "日"
+
+msgid "Sync task timeout"
+msgstr ""
 
 msgid "Task"
 msgstr "タスク"
@@ -611,11 +629,20 @@ msgstr "タスクがキャンセルされました"
 msgid "Tasks"
 msgstr "タスク"
 
+msgid "Tasks troubleshooting URL"
+msgstr ""
+
 msgid "The ID of the step inside the execution plan to send the event to"
 msgstr "イベントの送信先の実行プラン内のステップ ID"
 
 msgid "The recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task."
 msgstr "推奨のアプローチとして、以下のエラーメッセージを調査して、「エラー」タブで、問題の主な原因に対処して、タスクを再開してください。"
+
+msgid "The recurring logic was disabled."
+msgstr ""
+
+msgid "The recurring logic was enabled."
+msgstr ""
 
 msgid "The smart proxy task %s failed."
 msgstr "Smart Proxy タスク %s が失敗しました。"
@@ -691,6 +718,9 @@ msgstr "フォーカスする時間: 過去 "
 msgid "Yes"
 msgstr "はい"
 
+msgid "You do not have permission"
+msgstr ""
+
 msgid "activation key"
 msgstr "アクティベーションキー"
 
@@ -743,6 +773,9 @@ msgstr "前"
 
 msgid "organization"
 msgstr "組織"
+
+msgid "other"
+msgstr ""
 
 msgid "paused"
 msgstr "一時停止中"
