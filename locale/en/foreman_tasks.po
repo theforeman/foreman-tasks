@@ -74,6 +74,9 @@ msgstr ""
 msgid "All proxies with the required feature are unavailable at the moment"
 msgstr ""
 
+msgid "Allow proxy batch tasks"
+msgstr ""
+
 msgid "Allow triggering tasks on the smart proxy in batches"
 msgstr ""
 
@@ -99,13 +102,13 @@ msgstr ""
 msgid "Cancel Selected"
 msgstr ""
 
-msgid "Cancel all cancellable tasks"
-msgstr ""
-
 msgid "Cancel enforced: the task might be still running on the proxy"
 msgstr ""
 
 msgid "Cancel recurring logic"
+msgstr ""
+
+msgid "Cancel selected cancellable tasks"
 msgstr ""
 
 msgid "Cancel selected tasks"
@@ -154,6 +157,9 @@ msgid "Conflicts with tasks:"
 msgstr ""
 
 msgid "Could not cancel step."
+msgstr ""
+
+msgid "Could not receive data: ${APIerror && APIerror.message}"
 msgstr ""
 
 msgid "Could not receive data: ${error && error.message}"
@@ -207,6 +213,9 @@ msgstr ""
 msgid "Enable"
 msgstr ""
 
+msgid "Enable dynflow console"
+msgstr ""
+
 msgid "Enable the dynflow console (/foreman_tasks/dynflow) for debugging"
 msgstr ""
 
@@ -246,9 +255,6 @@ msgstr ""
 msgid "Failed to initialize"
 msgstr ""
 
-msgid "Field to sort the results on"
-msgstr ""
-
 msgid "Finished"
 msgstr ""
 
@@ -268,12 +274,6 @@ msgid "Foreman Tasks"
 msgstr ""
 
 msgid "Fri"
-msgstr ""
-
-msgid "Hash version of 'order' param"
-msgstr ""
-
-msgid "How to order the sorted results (e.g. ASC for ascending)"
 msgstr ""
 
 msgid "ID"
@@ -381,9 +381,6 @@ msgstr ""
 msgid "Number of attempts to start a task on the smart proxy before failing"
 msgstr ""
 
-msgid "Number of results per page to return"
-msgstr ""
-
 msgid "Number of seconds to wait for synchronous task to finish."
 msgstr ""
 
@@ -397,13 +394,16 @@ msgstr ""
 msgid "Operation"
 msgstr ""
 
+msgid "Other includes all stopped tasks that are cancelled or pending"
+msgstr ""
+
+msgid "Other:"
+msgstr ""
+
 msgid "Output"
 msgstr ""
 
 msgid "Output:"
-msgstr ""
-
-msgid "Page number, starting at 1"
 msgstr ""
 
 msgid "Parent task"
@@ -427,7 +427,19 @@ msgstr ""
 msgid "Polling multiplier which is used to multiply the default polling intervals. This can be used to prevent polling too frequently for long running tasks."
 msgstr ""
 
+msgid "Preupgrade job"
+msgstr ""
+
+msgid "Proxy action retry count"
+msgstr ""
+
+msgid "Proxy action retry interval"
+msgstr ""
+
 msgid "Proxy task gone missing from the smart proxy"
+msgstr ""
+
+msgid "Proxy tasks batch size"
 msgstr ""
 
 msgid "Raw"
@@ -448,6 +460,12 @@ msgstr ""
 msgid "Recurring logics"
 msgstr ""
 
+msgid "Refresh Data"
+msgstr ""
+
+msgid "Remote action:"
+msgstr ""
+
 msgid "Repeat N times"
 msgstr ""
 
@@ -457,13 +475,13 @@ msgstr ""
 msgid "Repeats"
 msgstr ""
 
+msgid "Require auth for dynflow console"
+msgstr ""
+
 msgid "Require user to be authenticated as user with admin rights when accessing dynflow console"
 msgstr ""
 
 msgid "Required lock is already taken by other running tasks."
-msgstr ""
-
-msgid "Required lock: %s"
 msgstr ""
 
 msgid "Resource search_params requires resource_type and resource_id to be specified"
@@ -514,9 +532,6 @@ msgstr ""
 msgid "Search query"
 msgstr ""
 
-msgid "Search string"
-msgstr ""
-
 msgid "See %{link} for more details on how to resolve the issue"
 msgstr ""
 
@@ -535,10 +550,10 @@ msgstr ""
 msgid "Set up recurring execution"
 msgstr ""
 
-msgid "Show recurring logic details"
+msgid "Setting is off"
 msgstr ""
 
-msgid "Sort field and order, e.g. 'name DESC'"
+msgid "Show recurring logic details"
 msgstr ""
 
 msgid "Start at"
@@ -559,7 +574,7 @@ msgstr ""
 msgid "Step Canceled"
 msgstr ""
 
-msgid "Stop all stoppable tasks"
+msgid "Stop selected stoppable tasks"
 msgstr ""
 
 msgid "Stop specific tasks by ID"
@@ -578,6 +593,9 @@ msgid "Sub tasks of %s"
 msgstr ""
 
 msgid "Sun"
+msgstr ""
+
+msgid "Sync task timeout"
 msgstr ""
 
 msgid "Task"
@@ -610,10 +628,19 @@ msgstr ""
 msgid "Tasks"
 msgstr ""
 
+msgid "Tasks troubleshooting URL"
+msgstr ""
+
 msgid "The ID of the step inside the execution plan to send the event to"
 msgstr ""
 
 msgid "The recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task."
+msgstr ""
+
+msgid "The recurring logic was disabled."
+msgstr ""
+
+msgid "The recurring logic was enabled."
 msgstr ""
 
 msgid "The smart proxy task %s failed."
@@ -690,6 +717,9 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
+msgid "You do not have permission"
+msgstr ""
+
 msgid "activation key"
 msgstr ""
 
@@ -741,6 +771,9 @@ msgid "older"
 msgstr ""
 
 msgid "organization"
+msgstr ""
+
+msgid "other"
 msgstr ""
 
 msgid "paused"

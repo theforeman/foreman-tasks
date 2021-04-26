@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_tasks 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-22 23:35+0530\n"
-"PO-Revision-Date: 2020-06-22 23:35+0530\n"
+"POT-Creation-Date: 2021-04-26 17:14+0200\n"
+"PO-Revision-Date: 2021-04-26 17:14+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -46,110 +46,89 @@ msgstr ""
 msgid "Please provide a search parameter in the request"
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:88
+#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:77
 msgid "Resume all paused error tasks"
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:89
+#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:83
 msgid "Resume tasks matching search string"
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:90
+#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:84
 msgid "Resume specific tasks by ID"
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:93
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:128
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:149
-msgid "Please provide at least one of search or task_ids parameters in the request"
+#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:117
+msgid "Cancel selected cancellable tasks"
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:123
-msgid "Cancel all cancellable tasks"
-msgstr ""
-
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:124
+#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:122
 msgid "Cancel tasks matching search string"
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:125
+#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:123
 msgid "Cancel specific tasks by ID"
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:144
-msgid "Stop all stoppable tasks"
+#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:127
+#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:153
+msgid "Please provide at least one of search or task_ids parameters in the request"
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:145
+#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:143
+msgid "Stop selected stoppable tasks"
+msgstr ""
+
+#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:148
 msgid "Stop tasks matching search string"
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:146
+#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:149
 msgid "Stop specific tasks by ID"
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:172
+#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:176
 msgid "List tasks"
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:173
-msgid "Search string"
-msgstr ""
-
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:174
-msgid "Page number, starting at 1"
-msgstr ""
-
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:175
-msgid "Number of results per page to return"
-msgstr ""
-
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:176
-msgid "Sort field and order, e.g. 'name DESC'"
-msgstr ""
-
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:177
-msgid "Hash version of 'order' param"
-msgstr ""
-
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:178
-msgid "Field to sort the results on"
-msgstr ""
-
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:179
-msgid "How to order the sorted results (e.g. ASC for ascending)"
-msgstr ""
-
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:188
+#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:203
 msgid "UUID of the task"
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:189
+#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:204
 msgid "The ID of the step inside the execution plan to send the event to"
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:195
+#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:210
 msgid "Data to be sent to the action"
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:198
+#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:213
 msgid "Send data to the task from external executor (such as smart_proxy_dynflow)"
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:239
+#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:254
 msgid "User search_params requires user_id to be specified"
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:248
+#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:260
 msgid "Resource search_params requires resource_type and resource_id to be specified"
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:255
+#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:267
 msgid "Task search_params requires task_id to be specified"
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:259
+#: ../app/controllers/foreman_tasks/api/tasks_controller.rb:271
 msgid "Type %s for search_params is not supported"
+msgstr ""
+
+#: ../app/controllers/foreman_tasks/recurring_logics_controller.rb:47
+msgid "The recurring logic was enabled."
+msgstr ""
+
+#: ../app/controllers/foreman_tasks/recurring_logics_controller.rb:49
+msgid "The recurring logic was disabled."
 msgstr ""
 
 #: ../app/controllers/foreman_tasks/tasks_controller.rb:54
@@ -171,8 +150,8 @@ msgstr ""
 #: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:46
 #: ../app/views/foreman_tasks/recurring_logics/index.html.erb:30
 #: ../webpack/ForemanTasks/Components/TaskDetails/Components/RunningSteps.js:29
-#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Task.js:103
-#: ../webpack/ForemanTasks/Components/common/ActionButtons/ActionButton.js:28
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskButtons.js:93
+#: ../webpack/ForemanTasks/Components/common/ActionButtons/ActionButton.js:30
 #: ../webpack/ForemanTasks/Components/common/ClickConfirmation/index.js:56
 msgid "Cancel"
 msgstr ""
@@ -186,12 +165,12 @@ msgstr ""
 #: ../lib/foreman_tasks/engine.rb:41
 #: ../webpack/ForemanTasks/Components/TasksTable/SubTasksPage.js:10
 #: ../webpack/ForemanTasks/Components/TasksTable/TasksIndexPage.js:7
-#: ../webpack/ForemanTasks/Components/TasksTable/TasksTablePage.js:133
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTablePage.js:146
 msgid "Tasks"
 msgstr ""
 
 #: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:119
-#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Task.js:120
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskButtons.js:110
 #: ../webpack/ForemanTasks/Components/TasksTable/SubTasksPage.js:15
 #: ../webpack/ForemanTasks/Components/TasksTable/SubTasksPage.js:19
 msgid "Sub tasks"
@@ -245,7 +224,7 @@ msgid "Cron line format 'a b c d e', where: %s"
 msgstr ""
 
 #: ../app/helpers/foreman_tasks/foreman_tasks_helper.rb:166
-#: ../app/views/foreman_tasks/recurring_logics/index.html.erb:40
+#: ../app/views/foreman_tasks/recurring_logics/index.html.erb:41
 #: ../app/views/foreman_tasks/task_groups/recurring_logic_task_groups/_recurring_logic_task_group.html.erb:8
 msgid "Cron line"
 msgstr ""
@@ -332,11 +311,11 @@ msgstr ""
 msgid "The targets are of different types"
 msgstr ""
 
-#: ../app/lib/actions/foreman/host/import_facts.rb:48 action_names.rb:4
+#: ../app/lib/actions/foreman/host/import_facts.rb:48 action_names.rb:5
 msgid "Import facts"
 msgstr ""
 
-#: ../app/lib/actions/foreman/puppetclass/import.rb:18 action_names.rb:3
+#: ../app/lib/actions/foreman/puppetclass/import.rb:18 action_names.rb:4
 msgid "Import Puppet classes"
 msgstr ""
 
@@ -384,7 +363,7 @@ msgstr ""
 msgid "All proxies with the required feature are unavailable at the moment"
 msgstr ""
 
-#: ../app/lib/actions/middleware/keep_current_request_id.rb:45
+#: ../app/lib/actions/middleware/keep_current_request_id.rb:48
 msgid "Changing request id %{request_id} to saved id %{saved_id}"
 msgstr ""
 
@@ -416,19 +395,15 @@ msgstr ""
 msgid "Initialization error: %s"
 msgstr ""
 
-#: ../app/models/foreman_tasks/lock.rb:16
+#: ../app/models/foreman_tasks/lock.rb:7
 msgid "Required lock is already taken by other running tasks."
 msgstr ""
 
-#: ../app/models/foreman_tasks/lock.rb:17
+#: ../app/models/foreman_tasks/lock.rb:8
 msgid "Please inspect their state, fix their errors and resume them."
 msgstr ""
 
-#: ../app/models/foreman_tasks/lock.rb:19
-msgid "Required lock: %s"
-msgstr ""
-
-#: ../app/models/foreman_tasks/lock.rb:20
+#: ../app/models/foreman_tasks/lock.rb:10
 msgid "Conflicts with tasks:"
 msgstr ""
 
@@ -450,17 +425,17 @@ msgid "Disabled"
 msgstr ""
 
 #: ../app/models/foreman_tasks/recurring_logic.rb:144
-#: ../app/models/foreman_tasks/task.rb:109
+#: ../app/models/foreman_tasks/task.rb:127
 #: ../app/views/foreman_tasks/tasks/dashboard/_latest_tasks_in_error_warning.html.erb:14
 #: ../app/views/foreman_tasks/tasks/dashboard/_tasks_status.html.erb:14
 #: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskHelper.js:10
-#: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskInfo.js:72
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskInfo.js:71
 #: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskInfo.js:76
 #: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskInfo.js:91
 #: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskInfo.js:105
 #: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskInfo.js:116
-#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableHelpers.js:34
-#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableHelpers.js:37
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableHelpers.js:26
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableHelpers.js:29
 #: ../webpack/ForemanTasks/Components/TasksTable/formatters/dateCellFormmatter.js:6
 msgid "N/A"
 msgstr ""
@@ -469,11 +444,11 @@ msgstr ""
 msgid "Cannot update a cancelled Recurring Logic."
 msgstr ""
 
-#: ../app/models/foreman_tasks/task.rb:94
+#: ../app/models/foreman_tasks/task.rb:112
 msgid "Delayed"
 msgstr ""
 
-#: ../app/models/foreman_tasks/task.rb:94
+#: ../app/models/foreman_tasks/task.rb:112
 msgid "Immediate"
 msgstr ""
 
@@ -515,8 +490,16 @@ msgstr ""
 msgid "Number of seconds to wait for synchronous task to finish."
 msgstr ""
 
+#: ../app/models/setting/foreman_tasks.rb:4
+msgid "Sync task timeout"
+msgstr ""
+
 #: ../app/models/setting/foreman_tasks.rb:5
 msgid "Enable the dynflow console (/foreman_tasks/dynflow) for debugging"
+msgstr ""
+
+#: ../app/models/setting/foreman_tasks.rb:5
+msgid "Enable dynflow console"
 msgstr ""
 
 #: ../app/models/setting/foreman_tasks.rb:6
@@ -525,16 +508,32 @@ msgid ""
 "low console"
 msgstr ""
 
+#: ../app/models/setting/foreman_tasks.rb:6
+msgid "Require auth for dynflow console"
+msgstr ""
+
 #: ../app/models/setting/foreman_tasks.rb:7
 msgid "Number of attempts to start a task on the smart proxy before failing"
+msgstr ""
+
+#: ../app/models/setting/foreman_tasks.rb:7
+msgid "Proxy action retry count"
 msgstr ""
 
 #: ../app/models/setting/foreman_tasks.rb:8
 msgid "Time in seconds between retries"
 msgstr ""
 
+#: ../app/models/setting/foreman_tasks.rb:8
+msgid "Proxy action retry interval"
+msgstr ""
+
 #: ../app/models/setting/foreman_tasks.rb:9
 msgid "Allow triggering tasks on the smart proxy in batches"
+msgstr ""
+
+#: ../app/models/setting/foreman_tasks.rb:9
+msgid "Allow proxy batch tasks"
 msgstr ""
 
 #: ../app/models/setting/foreman_tasks.rb:10
@@ -543,11 +542,19 @@ msgid ""
 "eman_tasks_proxy_batch_trigger is enabled"
 msgstr ""
 
+#: ../app/models/setting/foreman_tasks.rb:10
+msgid "Proxy tasks batch size"
+msgstr ""
+
 #: ../app/models/setting/foreman_tasks.rb:12
 msgid ""
 "Url pointing to the task troubleshooting documentation. It should contain %{la"
 "bel} placeholder, that will be replaced with normalized task label (restricted"
 " to only alphanumeric characters)). %{version} placeholder is also available."
+msgstr ""
+
+#: ../app/models/setting/foreman_tasks.rb:15
+msgid "Tasks troubleshooting URL"
 msgstr ""
 
 #: ../app/models/setting/foreman_tasks.rb:17
@@ -618,12 +625,17 @@ msgid ""
 "action can't be reversed."
 msgstr ""
 
-#: ../app/views/foreman_tasks/recurring_logics/index.html.erb:41
+#: ../app/views/foreman_tasks/recurring_logics/index.html.erb:40
+#: ../app/views/foreman_tasks/task_groups/_common.html.erb:4
+msgid "ID"
+msgstr ""
+
+#: ../app/views/foreman_tasks/recurring_logics/index.html.erb:42
 #: ../app/views/foreman_tasks/task_groups/_common.html.erb:8
 msgid "Task count"
 msgstr ""
 
-#: ../app/views/foreman_tasks/recurring_logics/index.html.erb:42
+#: ../app/views/foreman_tasks/recurring_logics/index.html.erb:43
 #: ../app/views/foreman_tasks/task_groups/recurring_logic_task_groups/_recurring_logic_task_group.html.erb:12
 #: ../webpack/ForemanTasks/Components/TaskDetails/Components/Errors.js:18
 #: ../webpack/ForemanTasks/Components/TaskDetails/Components/RunningSteps.js:35
@@ -631,32 +643,32 @@ msgstr ""
 msgid "Action"
 msgstr ""
 
-#: ../app/views/foreman_tasks/recurring_logics/index.html.erb:43
+#: ../app/views/foreman_tasks/recurring_logics/index.html.erb:44
 #: ../app/views/foreman_tasks/task_groups/recurring_logic_task_groups/_recurring_logic_task_group.html.erb:16
 msgid "Last occurrence"
 msgstr ""
 
-#: ../app/views/foreman_tasks/recurring_logics/index.html.erb:44
+#: ../app/views/foreman_tasks/recurring_logics/index.html.erb:45
 #: ../app/views/foreman_tasks/task_groups/recurring_logic_task_groups/_recurring_logic_task_group.html.erb:20
 msgid "Next occurrence"
 msgstr ""
 
-#: ../app/views/foreman_tasks/recurring_logics/index.html.erb:45
+#: ../app/views/foreman_tasks/recurring_logics/index.html.erb:46
 #: ../app/views/foreman_tasks/task_groups/recurring_logic_task_groups/_recurring_logic_task_group.html.erb:24
 msgid "Current iteration"
 msgstr ""
 
-#: ../app/views/foreman_tasks/recurring_logics/index.html.erb:46
+#: ../app/views/foreman_tasks/recurring_logics/index.html.erb:47
 #: ../app/views/foreman_tasks/task_groups/recurring_logic_task_groups/_recurring_logic_task_group.html.erb:28
 msgid "Iteration limit"
 msgstr ""
 
-#: ../app/views/foreman_tasks/recurring_logics/index.html.erb:47
+#: ../app/views/foreman_tasks/recurring_logics/index.html.erb:48
 #: ../app/views/foreman_tasks/task_groups/recurring_logic_task_groups/_recurring_logic_task_group.html.erb:32
 msgid "Repeat until"
 msgstr ""
 
-#: ../app/views/foreman_tasks/recurring_logics/index.html.erb:48
+#: ../app/views/foreman_tasks/recurring_logics/index.html.erb:49
 #: ../app/views/foreman_tasks/task_groups/recurring_logic_task_groups/_recurring_logic_task_group.html.erb:36
 #: ../app/views/foreman_tasks/tasks/dashboard/_latest_tasks_in_error_warning.html.erb:5
 #: ../app/views/foreman_tasks/tasks/dashboard/_tasks_status.html.erb:4
@@ -668,10 +680,6 @@ msgstr ""
 
 #: ../app/views/foreman_tasks/recurring_logics/show.html.erb:6
 msgid "Details"
-msgstr ""
-
-#: ../app/views/foreman_tasks/task_groups/_common.html.erb:4
-msgid "ID"
 msgstr ""
 
 #: ../app/views/foreman_tasks/task_groups/_detail.html.erb:1
@@ -786,13 +794,13 @@ msgstr ""
 
 #: ../webpack/ForemanTasks/Components/TaskActions/UnlockModals.js:14
 #: ../webpack/ForemanTasks/Components/TaskActions/UnlockModals.js:19
-#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Task.js:129
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskButtons.js:121
 msgid "Unlock"
 msgstr ""
 
 #: ../webpack/ForemanTasks/Components/TaskActions/UnlockModals.js:28
 #: ../webpack/ForemanTasks/Components/TaskActions/UnlockModals.js:36
-#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Task.js:137
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskButtons.js:131
 msgid "Force Unlock"
 msgstr ""
 
@@ -851,20 +859,29 @@ msgstr ""
 msgid "No running steps"
 msgstr ""
 
-#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Task.js:67
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskButtons.js:36
+#: ../webpack/ForemanTasks/Components/TasksTable/formatters/selectionCellFormatter.js:12
+msgid "You do not have permission"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskButtons.js:39
+msgid "Setting is off"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskButtons.js:51
 msgid "${taskReload ? 'Stop' : 'Start'}  auto-reloading"
 msgstr ""
 
-#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Task.js:77
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskButtons.js:62
 msgid "Dynflow console"
 msgstr ""
 
-#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Task.js:90
-#: ../webpack/ForemanTasks/Components/common/ActionButtons/ActionButton.js:17
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskButtons.js:78
+#: ../webpack/ForemanTasks/Components/common/ActionButtons/ActionButton.js:19
 msgid "Resume"
 msgstr ""
 
-#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Task.js:111
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskButtons.js:101
 msgid "Parent task"
 msgstr ""
 
@@ -888,35 +905,39 @@ msgstr ""
 msgid "Errors:"
 msgstr ""
 
-#: ../webpack/ForemanTasks/Components/TaskDetails/TaskDetails.js:59
+#: ../webpack/ForemanTasks/Components/TaskDetails/TaskDetails.js:52
+msgid "Could not receive data: ${APIerror && APIerror.message}"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/TaskDetails.js:61
 msgid "Task"
 msgstr ""
 
-#: ../webpack/ForemanTasks/Components/TaskDetails/TaskDetails.js:70
+#: ../webpack/ForemanTasks/Components/TaskDetails/TaskDetails.js:78
 msgid "Running Steps"
 msgstr ""
 
-#: ../webpack/ForemanTasks/Components/TaskDetails/TaskDetails.js:79
+#: ../webpack/ForemanTasks/Components/TaskDetails/TaskDetails.js:87
 msgid "Errors"
 msgstr ""
 
-#: ../webpack/ForemanTasks/Components/TaskDetails/TaskDetails.js:82
+#: ../webpack/ForemanTasks/Components/TaskDetails/TaskDetails.js:90
 msgid "Locks"
 msgstr ""
 
-#: ../webpack/ForemanTasks/Components/TaskDetails/TaskDetails.js:85
+#: ../webpack/ForemanTasks/Components/TaskDetails/TaskDetails.js:93
 msgid "Raw"
 msgstr ""
 
-#: ../webpack/ForemanTasks/Components/TaskDetails/TaskDetailsActions.js:114
+#: ../webpack/ForemanTasks/Components/TaskDetails/TaskDetailsActions.js:39
 msgid "Trying to cancel step"
 msgstr ""
 
-#: ../webpack/ForemanTasks/Components/TaskDetails/TaskDetailsActions.js:120
+#: ../webpack/ForemanTasks/Components/TaskDetails/TaskDetailsActions.js:45
 msgid "Step Canceled"
 msgstr ""
 
-#: ../webpack/ForemanTasks/Components/TaskDetails/TaskDetailsActions.js:126
+#: ../webpack/ForemanTasks/Components/TaskDetails/TaskDetailsActions.js:51
 msgid "Could not cancel step."
 msgstr ""
 
@@ -937,13 +958,23 @@ msgstr ""
 
 #:
 #: ../webpack/ForemanTasks/Components/TasksDashboard/Components/TasksCardsGrid/Components/ScheduledTasksCard/ScheduledTasksCard.js:40
-#: ../webpack/ForemanTasks/Components/TasksDashboard/Components/TasksCardsGrid/Components/StoppedTasksCard/StoppedTasksCard.js:51
+#: ../webpack/ForemanTasks/Components/TasksDashboard/Components/TasksCardsGrid/Components/StoppedTasksCard/StoppedTasksCardTable.js:77
 #: ../webpack/ForemanTasks/Components/TasksDashboard/Components/TasksCardsGrid/Components/TasksDonutChart/TasksDonutChartHelper.js:73
 msgid "Total"
 msgstr ""
 
 #:
-#: ../webpack/ForemanTasks/Components/TasksDashboard/Components/TasksCardsGrid/Components/StoppedTasksCard/StoppedTasksCard.js:44
+#: ../webpack/ForemanTasks/Components/TasksDashboard/Components/TasksCardsGrid/Components/StoppedTasksCard/OtherInfo.js:15
+msgid "Other includes all stopped tasks that are cancelled or pending"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/Components/TasksCardsGrid/Components/StoppedTasksCard/OtherInfo.js:32
+msgid "Other:"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/Components/TasksCardsGrid/Components/StoppedTasksCard/StoppedTasksCard.js:43
 msgid "Stopped"
 msgstr ""
 
@@ -973,82 +1004,87 @@ msgid "With focus on last"
 msgstr ""
 
 #:
-#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:33
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:34
 msgid "state"
 msgstr ""
 
 #:
-#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:34
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:35
 msgid "result"
 msgstr ""
 
 #:
-#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:35
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:36
 msgid "mode"
 msgstr ""
 
 #:
-#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:36
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:37
 msgid "time"
 msgstr ""
 
 #:
-#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:40
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:41
 msgid "running"
 msgstr ""
 
 #:
-#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:41
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:42
 msgid "paused"
 msgstr ""
 
 #:
-#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:42
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:43
 msgid "stopped"
 msgstr ""
 
 #:
-#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:43
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:44
 msgid "scheduled"
 msgstr ""
 
 #:
-#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:44
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:45
 msgid "error"
 msgstr ""
 
 #:
-#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:45
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:46
 msgid "warning"
 msgstr ""
 
 #:
-#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:46
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:47
 msgid "success"
 msgstr ""
 
 #:
-#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:47
-msgid "last"
-msgstr ""
-
-#:
 #: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:48
-msgid "older"
+msgid "other"
 msgstr ""
 
 #:
 #: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:49
-msgid "24h"
+msgid "last"
 msgstr ""
 
 #:
 #: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:50
-msgid "12h"
+msgid "older"
 msgstr ""
 
 #:
 #: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:51
+msgid "24h"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:52
+msgid "12h"
+msgstr ""
+
+#:
+#: ../webpack/ForemanTasks/Components/TasksDashboard/TasksDashboardConstants.js:53
 msgid "week"
 msgstr ""
 
@@ -1151,15 +1187,15 @@ msgstr ""
 msgid "Canceling selected tasks, this might take a while"
 msgstr ""
 
-#: ../webpack/ForemanTasks/Components/TasksTable/TasksBulkActions.js:142
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksBulkActions.js:144
 msgid "Not all the selected tasks can be cancelled"
 msgstr ""
 
-#: ../webpack/ForemanTasks/Components/TasksTable/TasksBulkActions.js:176
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksBulkActions.js:178
 msgid "Cannot force cancel tasks at the moment"
 msgstr ""
 
-#: ../webpack/ForemanTasks/Components/TasksTable/TasksBulkActions.js:238
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksBulkActions.js:255
 msgid "Canceling with force selected tasks, this might take a while"
 msgstr ""
 
@@ -1171,23 +1207,27 @@ msgstr ""
 msgid "No Tasks"
 msgstr ""
 
-#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableHelpers.js:34
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableHelpers.js:26
 msgid "No start or end dates"
 msgstr ""
 
-#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableHelpers.js:37
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableHelpers.js:29
 msgid "Task was canceled"
 msgstr ""
 
-#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableHelpers.js:53
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableHelpers.js:45
 msgid "More than"
 msgstr ""
 
-#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableHelpers.js:62
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTableHelpers.js:54
 msgid "Less than a second"
 msgstr ""
 
-#: ../webpack/ForemanTasks/Components/TasksTable/TasksTablePage.js:69
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTablePage.js:76
+msgid "Refresh Data"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTablePage.js:81
 msgid "Export All"
 msgstr ""
 
@@ -1199,14 +1239,22 @@ msgstr ""
 msgid "Operation"
 msgstr ""
 
-#: ../webpack/ForemanTasks/Components/common/ActionButtons/ActionButton.js:14
+#: ../webpack/ForemanTasks/Components/common/ActionButtons/ActionButton.js:15
 msgid "Task cannot be canceled"
 msgstr ""
 
-#: ../webpack/ForemanTasks/Components/common/ActionButtons/ActionButton.js:39
+#: ../webpack/ForemanTasks/Components/common/ActionButtons/ActionButton.js:41
 msgid "Force Cancel"
 msgstr ""
 
 #: action_names.rb:2
+msgid "Preupgrade job"
+msgstr ""
+
+#: action_names.rb:3
+msgid "Remote action:"
+msgstr ""
+
+#: action_names.rb:6
 msgid "Action with sub plans"
 msgstr ""

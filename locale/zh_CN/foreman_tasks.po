@@ -74,6 +74,9 @@ msgstr "已选择所有％s任务。 "
 msgid "All proxies with the required feature are unavailable at the moment"
 msgstr "具备所需功能的所有代理暂时都不可用"
 
+msgid "Allow proxy batch tasks"
+msgstr ""
+
 msgid "Allow triggering tasks on the smart proxy in batches"
 msgstr "允许批量触发智能代理上的任务"
 
@@ -99,14 +102,14 @@ msgstr "取消"
 msgid "Cancel Selected"
 msgstr "取消选择"
 
-msgid "Cancel all cancellable tasks"
-msgstr "取消所有可取消的任务"
-
 msgid "Cancel enforced: the task might be still running on the proxy"
 msgstr "強制取消：任務可能還在代理伺服器上執行"
 
 msgid "Cancel recurring logic"
 msgstr "取消週期邏輯"
+
+msgid "Cancel selected cancellable tasks"
+msgstr ""
 
 msgid "Cancel selected tasks"
 msgstr "取消选择的任务"
@@ -154,6 +157,9 @@ msgid "Conflicts with tasks:"
 msgstr "与任务冲突 :"
 
 msgid "Could not cancel step."
+msgstr ""
+
+msgid "Could not receive data: ${APIerror && APIerror.message}"
 msgstr ""
 
 msgid "Could not receive data: ${error && error.message}"
@@ -207,6 +213,9 @@ msgstr "清空批次動作"
 msgid "Enable"
 msgstr "启用"
 
+msgid "Enable dynflow console"
+msgstr ""
+
 msgid "Enable the dynflow console (/foreman_tasks/dynflow) for debugging"
 msgstr "啟用 dynflow 主控台（/foreman_tasks/dynflow）作為偵錯使用"
 
@@ -246,9 +255,6 @@ msgstr "无法检查在 %{url} 代理中的任务: %{exception}"
 msgid "Failed to initialize"
 msgstr "無法初始化"
 
-msgid "Field to sort the results on"
-msgstr "用來排序結果的欄位"
-
 msgid "Finished"
 msgstr "完成"
 
@@ -269,12 +275,6 @@ msgstr "Foreman 任务"
 
 msgid "Fri"
 msgstr "周五"
-
-msgid "Hash version of 'order' param"
-msgstr "「order」參數的雜湊版本"
-
-msgid "How to order the sorted results (e.g. ASC for ascending)"
-msgstr "如何排序結果的順序（比方說 ASC 從下到上）"
 
 msgid "ID"
 msgstr "ID"
@@ -381,9 +381,6 @@ msgstr "并非所有选定的任务都可以恢复"
 msgid "Number of attempts to start a task on the smart proxy before failing"
 msgstr "在智慧代理上啟動任務的嘗試次數"
 
-msgid "Number of results per page to return"
-msgstr "每頁要傳回的結果數量"
-
 msgid "Number of seconds to wait for synchronous task to finish."
 msgstr "等待同步任务完成的秒数。"
 
@@ -397,14 +394,17 @@ msgstr "上"
 msgid "Operation"
 msgstr "操作"
 
+msgid "Other includes all stopped tasks that are cancelled or pending"
+msgstr ""
+
+msgid "Other:"
+msgstr ""
+
 msgid "Output"
 msgstr "输出"
 
 msgid "Output:"
 msgstr "输出："
-
-msgid "Page number, starting at 1"
-msgstr "頁數，從 1 開始"
 
 msgid "Parent task"
 msgstr "父任務"
@@ -427,8 +427,20 @@ msgstr "轮询间隔乘数"
 msgid "Polling multiplier which is used to multiply the default polling intervals. This can be used to prevent polling too frequently for long running tasks."
 msgstr "轮询乘数，用于乘以默认轮询间隔。这可用于防止对长时间运行的任务进行过于频繁的轮询。"
 
+msgid "Preupgrade job"
+msgstr ""
+
+msgid "Proxy action retry count"
+msgstr ""
+
+msgid "Proxy action retry interval"
+msgstr ""
+
 msgid "Proxy task gone missing from the smart proxy"
 msgstr "代理任务在智能代理中丢失"
+
+msgid "Proxy tasks batch size"
+msgstr ""
 
 msgid "Raw"
 msgstr "Raw"
@@ -448,6 +460,12 @@ msgstr "週期邏輯"
 msgid "Recurring logics"
 msgstr "週期邏輯"
 
+msgid "Refresh Data"
+msgstr ""
+
+msgid "Remote action:"
+msgstr ""
+
 msgid "Repeat N times"
 msgstr "重複 N 次"
 
@@ -457,14 +475,14 @@ msgstr "重複直到"
 msgid "Repeats"
 msgstr "重複"
 
+msgid "Require auth for dynflow console"
+msgstr ""
+
 msgid "Require user to be authenticated as user with admin rights when accessing dynflow console"
 msgstr "存取 dynflow 主控台時，需要使用者授權成為擁有 admin 權限的使用者"
 
 msgid "Required lock is already taken by other running tasks."
 msgstr "所需的锁定已由其他正在运行的任务获取。"
-
-msgid "Required lock: %s"
-msgstr "所需的锁定 : %s"
 
 msgid "Resource search_params requires resource_type and resource_id to be specified"
 msgstr "資源 search_params 需要指定 resource_type 與 resource_id"
@@ -514,9 +532,6 @@ msgstr "调度的"
 msgid "Search query"
 msgstr "搜索查询"
 
-msgid "Search string"
-msgstr "搜尋字串"
-
 msgid "See %{link} for more details on how to resolve the issue"
 msgstr "有关如何解决此问题的更多详细信息，请参见％{link}"
 
@@ -535,11 +550,11 @@ msgstr "從外部執行者（例如 smart_proxy_dynflow）發送資料到任務"
 msgid "Set up recurring execution"
 msgstr "設定週期執行"
 
+msgid "Setting is off"
+msgstr ""
+
 msgid "Show recurring logic details"
 msgstr "顯示週期邏輯的詳情"
-
-msgid "Sort field and order, e.g. 'name DESC'"
-msgstr "排序欄位與次序，例如「name DESC」"
 
 msgid "Start at"
 msgstr "開始於"
@@ -559,7 +574,7 @@ msgstr "州"
 msgid "Step Canceled"
 msgstr ""
 
-msgid "Stop all stoppable tasks"
+msgid "Stop selected stoppable tasks"
 msgstr ""
 
 msgid "Stop specific tasks by ID"
@@ -579,6 +594,9 @@ msgstr "%s 的子任务"
 
 msgid "Sun"
 msgstr "周日"
+
+msgid "Sync task timeout"
+msgstr ""
 
 msgid "Task"
 msgstr "任務"
@@ -610,11 +628,20 @@ msgstr "任务已取消"
 msgid "Tasks"
 msgstr "任务"
 
+msgid "Tasks troubleshooting URL"
+msgstr ""
+
 msgid "The ID of the step inside the execution plan to send the event to"
 msgstr "執行計畫中要發送事件的步驟 ID"
 
 msgid "The recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task."
 msgstr "推荐的方法是调查下面和“错误”选项卡中的错误消息，解决造成问题的主要原因，然后继续执行任务。"
+
+msgid "The recurring logic was disabled."
+msgstr ""
+
+msgid "The recurring logic was enabled."
+msgstr ""
 
 msgid "The smart proxy task %s failed."
 msgstr "智慧型代理任務 %s 失敗。"
@@ -690,6 +717,9 @@ msgstr "专注于最后"
 msgid "Yes"
 msgstr "是"
 
+msgid "You do not have permission"
+msgstr ""
+
 msgid "activation key"
 msgstr "啟動金鑰"
 
@@ -742,6 +772,9 @@ msgstr "较老"
 
 msgid "organization"
 msgstr "組織"
+
+msgid "other"
+msgstr ""
 
 msgid "paused"
 msgstr "暂停"
