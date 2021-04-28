@@ -40,7 +40,8 @@ module ForemanTasksCore
       end
 
       def wipe_callback(input)
-        input.merge('action_input' => input['action_input'].merge('callback' => nil))
+        callback = input['action_input']['callback']
+        input.merge('action_input' => input['action_input'].merge('callback' => nil, :task_id => callback['task_id']))
       end
     end
   end

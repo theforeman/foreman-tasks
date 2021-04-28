@@ -219,7 +219,7 @@ module Actions
 
     def get_proxy_data(response)
       response['actions'].detect { |action| action.fetch('input', {})['task_id'] == task.id }
-                         .try(:fetch, 'output', {})
+                         .try(:fetch, 'output', {}) || {}
     end
 
     def proxy_version(proxy)
