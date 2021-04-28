@@ -14,6 +14,9 @@ module ForemanTasks
         Support::DummyProxyAction.any_instance.stubs(:with_batch_triggering?).returns(batch_triggering)
         Support::DummyProxyAction.reset
         RemoteTask.any_instance.stubs(:proxy).returns(Support::DummyProxyAction.proxy)
+        Setting.stubs(:[]).with('foreman_tasks_proxy_action_retry_interval')
+        Setting.stubs(:[]).with('foreman_tasks_proxy_action_retry_count')
+        Setting.stubs(:[]).with('foreman_tasks_proxy_batch_trigger')
         @action = create_and_plan_action(Support::DummyProxyAction,
                                          Support::DummyProxyAction.proxy,
                                          'Proxy::DummyAction',
