@@ -51,7 +51,7 @@ module ForemanTasks
           In case :type = 'resource', what resource id we're searching the tasks for
         DESC
         param :action_types, [String], :desc => <<-DESC
-          Return just tasks of given action type, e.g. ["Actions::Katello::Repository::Synchronize"]
+          Return just tasks of given action type, e.g. `["Actions::Katello::Repository::Synchronize"]`
         DESC
         param :active_only, :bool
         param :page, String
