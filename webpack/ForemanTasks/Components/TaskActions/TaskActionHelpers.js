@@ -29,9 +29,9 @@ export const convertDashboardQuery = query => {
     resultQuery = result ? `result=${result}` : '';
   }
   if (timeMode === TASKS_DASHBOARD_JS_QUERY_MODES.RECENT) {
-    dashboardTime = `state_updated_at>${timestamp.toISOString()} or state_updated_at = NULL`;
+    dashboardTime = `state_updated_at>${timestamp.toISOString()} or null? state_updated_at`;
   } else if (timeMode === TASKS_DASHBOARD_JS_QUERY_MODES.OLDER) {
-    dashboardTime = `state_updated_at>${timestamp.toISOString()}`;
+    dashboardTime = `state_updated_at<=${timestamp.toISOString()}`;
   }
   const newQuery = [stateQuery, resultQuery, search, dashboardTime]
     .filter(Boolean)
