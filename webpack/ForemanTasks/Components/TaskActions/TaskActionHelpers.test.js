@@ -28,9 +28,17 @@ describe('convertDashboardQuery', () => {
       search: 'action~job',
     };
     const expected =
-      '(state=stopped) and (result=error) and (action~job) and (state_updated_at>2020-05-01T11:01:58.135Z or state_updated_at = NULL)';
+      '(state=stopped) and (result=error) and (action~job) and (state_updated_at>2020-05-01T11:01:58.135Z or null? state_updated_at)';
 
     expect(convertDashboardQuery(query)).toEqual({ search: expected });
+
+    const query2 = {
+      ...query,
+      time_mode: TASKS_DASHBOARD_JS_QUERY_MODES.OLDER,
+    };
+    const expected2 =
+      '(state=stopped) and (result=error) and (action~job) and (state_updated_at<=2020-05-01T11:01:58.135Z)';
+    expect(convertDashboardQuery(query2)).toEqual({ search: expected2 });
     // Cleanup
     global.Date = realDate;
   });
