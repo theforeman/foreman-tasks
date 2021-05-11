@@ -20,9 +20,7 @@ module Actions
       private
 
       def set_clock
-        action.world.clock.ping action.send(:suspended_action),
-                                POLL_INTERVAL,
-                                CheckOnProxyActions
+        action.plan_event(CheckOnProxyActions, POLL_INTERVAL, optional: true)
       end
 
       def check_triggered
@@ -44,9 +42,7 @@ module Actions
 
       def notify(event, tasks)
         tasks.each do |task|
-          action.world.event task.execution_plan_id,
-                             task.step_id,
-                             event
+          action.plan_event(event, execution_plan_id: task.execution_plan_id, step_id: task.step_id)
         end
       end
 

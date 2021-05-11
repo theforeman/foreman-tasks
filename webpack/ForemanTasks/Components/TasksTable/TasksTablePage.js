@@ -77,7 +77,7 @@ const TasksTablePage = ({
             </Button>
             {props.status === STATUS.PENDING && <Spinner size="md" loading />}
             <ExportButton
-              url={getCSVurl(url, uriQuery)}
+              url={getCSVurl(history.location.pathname, uriQuery)}
               title={__('Export All')}
             />
             <ActionSelectButton

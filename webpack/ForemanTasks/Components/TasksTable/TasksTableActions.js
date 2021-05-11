@@ -18,9 +18,14 @@ import {
   resumeTaskRequest,
   forceCancelTaskRequest,
 } from '../TaskActions';
+import { convertDashboardQuery } from '../TaskActions/TaskActionHelpers';
 
 export const getTableItems = url =>
-  getTableItemsAction(TASKS_TABLE_ID, getURIQuery(url), getApiPathname(url));
+  getTableItemsAction(
+    TASKS_TABLE_ID,
+    convertDashboardQuery(getURIQuery(url)),
+    getApiPathname(url)
+  );
 
 export const reloadPage = (url, parentTaskID) => dispatch => {
   dispatch(getTableItems(url));

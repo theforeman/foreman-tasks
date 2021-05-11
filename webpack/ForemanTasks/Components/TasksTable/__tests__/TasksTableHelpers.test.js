@@ -32,7 +32,7 @@ describe('getCSVurl', () => {
     const url = '/foreman_tasks/tasks';
     const query = { state: 'stopped' };
     expect(getCSVurl(url, query)).toEqual(
-      '/foreman_tasks/tasks.csv?state=stopped'
+      '/foreman_tasks/tasks.csv?search=%28state%3Dstopped%29'
     );
   });
   it('should return currect url for subtasks', () => {
