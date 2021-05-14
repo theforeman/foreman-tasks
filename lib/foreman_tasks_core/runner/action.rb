@@ -52,6 +52,7 @@ module ForemanTasksCore
 
       def finish_run(update)
         output[:exit_status] = update.exit_status
+        output[:result] = stored_output_chunks.map { |c| c[:chunk] }.reduce(&:concat)
       end
 
       def process_external_event(event)
@@ -60,7 +61,7 @@ module ForemanTasksCore
       end
 
       def process_update(update)
-        output[:result].concat(update.continuous_output.raw_outputs)
+        output_chunk(update.continuous_output.raw_outputs) unless update.continuous_output.raw_outputs.empty?
         if update.exit_status
           finish_run(update)
         else
