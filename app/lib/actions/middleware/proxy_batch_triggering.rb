@@ -1,7 +1,6 @@
 module Actions
   module Middleware
     class ProxyBatchTriggering < ::Dynflow::Middleware
-
       RETRY_TRIGGER = Class.new
 
       # If the event could result into sub tasks being planned, check if there are any RemoteTasks

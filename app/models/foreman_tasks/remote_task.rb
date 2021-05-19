@@ -84,7 +84,7 @@ module ForemanTasks
     end
 
     def handle_trigger_failure(exception)
-      if self.retry_count < retry_limit
+      if retry_count < retry_limit
         self.retry_count += 1
         save!
         true
