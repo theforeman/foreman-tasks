@@ -12,11 +12,7 @@ module ForemanTasks
   extend Algebrick::Matching
 
   def self.dynflow
-    @dynflow ||= begin
-                   world = ForemanTasks::Dynflow.new(nil, ForemanTasks::Dynflow::Configuration.new)
-                   ForemanTasksCore.dynflow_setup(world) if defined?(ForemanTasksCore)
-                   world
-                 end
+    @dynflow ||= ForemanTasks::Dynflow.new(nil, ForemanTasks::Dynflow::Configuration.new)
   end
 
   def self.trigger(action, *args, &block)
