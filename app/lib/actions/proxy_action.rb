@@ -29,10 +29,10 @@ module Actions
       default_connection_options.each do |key, value|
         options[:connection_options][key] = value unless options[:connection_options].key?(key)
       end
-      plan_self(options.merge(:proxy_url => proxy.url, :proxy_action_name => klass.to_s, :proxy_version => proxy_version(proxy)))
+      plan_self(options.merge(:proxy_url => proxy.url, :proxy_action_name => klass.to_s))
       # Just saving the RemoteTask is enough when using batch triggering
       # It will be picked up by the ProxyBatchTriggering middleware
-      if input[:use_batch_triggering] && with_batch_triggering?(input[:proxy_version])
+      if input[:use_batch_triggering] && input.dig(:connection_options, :proxy_batch_triggering)
         prepare_remote_task.save!
       end
     end
@@ -193,11 +193,6 @@ module Actions
         :proxy_batch_triggering => Setting['foreman_tasks_proxy_batch_trigger'] || false }
     end
 
-    def with_batch_triggering?(proxy_version)
-      ((proxy_version[:major] == 1 && proxy_version[:minor] > 20) || proxy_version[:major] > 1) &&
-        input.fetch(:connection_options, {}).fetch(:proxy_batch_triggering, false)
-    end
-
     def clean_remote_task(*_args)
       remote_task.destroy! if remote_task
     end
@@ -220,11 +215,6 @@ module Actions
     def get_proxy_data(response)
       response['actions'].detect { |action| action.fetch('input', {})['task_id'] == task.id }
                          .try(:fetch, 'output', {}) || {}
-    end
-
-    def proxy_version(proxy)
-      match = proxy.statuses[:version].version['version'].match(/(\d+)\.(\d+)\.(\d+)/)
-      { :major => match[1].to_i, :minor => match[2].to_i, :patch => match[3].to_i }
     end
 
     def failed_proxy_tasks
