@@ -5,6 +5,8 @@ module ForemanTasks
               :end_time].freeze
     attr_accessor(*PARAMS)
 
+    graphql_type '::Types::Triggering'
+
     before_save do
       if future?
         parse_start_at!

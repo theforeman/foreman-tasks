@@ -5,6 +5,8 @@ module ForemanTasks
     include Authorizable
     extend Search
 
+    graphql_type '::Types::Task'
+
     def check_permissions_after_save
       # there's no create_tasks permission, tasks are created as a result of internal actions, in such case we
       # don't do authorization, that should have been performed on wrapping action level
