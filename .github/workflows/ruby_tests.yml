@@ -72,5 +72,4 @@ jobs:
       - name: Run plugin tests
         run: |
           bundle exec rake test:foreman_tasks
-          bundle exec rake test:foreman_tasks_core
           bundle exec rake test TEST="test/unit/foreman/access_permissions_test.rb"
