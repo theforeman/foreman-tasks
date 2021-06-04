@@ -1,5 +1,5 @@
-require 'smart_proxy_dynflow/shareable_action'
+require 'smart_proxy_dynflow/action/shareable'
 
 module ForemanTasksCore
-  ShareableAction = Proxy::Dynflow::ShareableAction
+  ShareableAction = Proxy::Dynflow::Action::Shareable
 end
