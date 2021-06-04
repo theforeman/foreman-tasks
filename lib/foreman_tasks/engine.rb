@@ -34,7 +34,7 @@ module ForemanTasks
 
     initializer 'foreman_tasks.register_plugin', :before => :finisher_hook do |_app|
       Foreman::Plugin.register :"foreman-tasks" do
-        requires_foreman '>= 2.4.0'
+        requires_foreman '>= 2.6.0'
         divider :top_menu, :parent => :monitor_menu, :last => true, :caption => N_('Foreman Tasks')
         menu :top_menu, :tasks,
              :url_hash => { :controller => 'foreman_tasks/tasks', :action => :index },
@@ -65,6 +65,11 @@ module ForemanTasks
         end
 
         add_all_permissions_to_default_roles
+
+        register_graphql_query_field :task, '::Types::Task', :record_field
+        register_graphql_query_field :tasks, '::Types::Task', :collection_field
+        register_graphql_query_field :recurring_logic, '::Types::RecurringLogic', :record_field
+        register_graphql_query_field :recurring_logics, '::Types::RecurringLogic', :collection_field
 
         logger :dynflow, :enabled => true
         logger :action, :enabled => true

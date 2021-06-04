@@ -4,6 +4,8 @@ module ForemanTasks
   class RecurringLogic < ApplicationRecord
     include Authorizable
 
+    graphql_type '::Types::RecurringLogic'
+
     belongs_to :task_group
     belongs_to :triggering
 
