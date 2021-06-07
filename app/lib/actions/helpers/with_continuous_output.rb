@@ -8,7 +8,7 @@ module Actions
       end
 
       def continuous_output
-        continuous_output = ::ForemanTasksCore::ContinuousOutput.new
+        continuous_output = ::ForemanTasks::ContinuousOutput.new
         continuous_output_providers.each do |continous_output_provider|
           continous_output_provider.fill_continuous_output(continuous_output)
         end
