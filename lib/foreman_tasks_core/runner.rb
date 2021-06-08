@@ -1,10 +1,9 @@
+require 'smart_proxy_dynflow/runner'
+
 module ForemanTasksCore
+  Runner = Proxy::Dynflow::Runner
+
   module Runner
+    Action = Proxy::Dynflow::Action::Runner
   end
 end
-
-require 'foreman_tasks_core/runner/update'
-require 'foreman_tasks_core/runner/base'
-require 'foreman_tasks_core/runner/dispatcher'
-require 'foreman_tasks_core/runner/action'
-require 'foreman_tasks_core/runner/parent'

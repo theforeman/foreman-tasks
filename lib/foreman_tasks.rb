@@ -6,17 +6,14 @@ require 'foreman_tasks/dynflow/configuration'
 require 'foreman_tasks/triggers'
 require 'foreman_tasks/authorizer_ext'
 require 'foreman_tasks/cleaner'
+require 'foreman_tasks/continuous_output'
 
 module ForemanTasks
   extend Algebrick::TypeCheck
   extend Algebrick::Matching
 
   def self.dynflow
-    @dynflow ||= begin
-                   world = ForemanTasks::Dynflow.new(nil, ForemanTasks::Dynflow::Configuration.new)
-                   ForemanTasksCore.dynflow_setup(world) if defined?(ForemanTasksCore)
-                   world
-                 end
+    @dynflow ||= ForemanTasks::Dynflow.new(nil, ForemanTasks::Dynflow::Configuration.new)
   end
 
   def self.trigger(action, *args, &block)

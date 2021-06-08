@@ -20,4 +20,5 @@ Common code used both at Forman and Foreman proxy regarding tasks
             ['lib/foreman_tasks_core.rb', 'LICENSE']
 
   s.add_dependency "dynflow", '>= 1.2.0'
+  s.add_dependency "smart_proxy_dynflow", '>= 0.5.0'
 end

@@ -1,4 +1,4 @@
-module ForemanTasksCore
+module ForemanTasks
   class ContinuousOutput
     attr_accessor :raw_outputs
 

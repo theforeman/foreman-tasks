@@ -1,4 +1,3 @@
-require 'foreman_tasks_core'
 require 'fast_gettext'
 require 'gettext_i18n_rails'
 
@@ -114,19 +113,6 @@ module ForemanTasks
         world.middleware.use Actions::Middleware::KeepCurrentUser, :before => ::Dynflow::Middleware::Common::Transaction
         world.middleware.use Actions::Middleware::KeepCurrentTimezone
         world.middleware.use Actions::Middleware::KeepCurrentRequestID
-      end
-
-      ::ForemanTasks.dynflow.config.on_init do |world|
-        ForemanTasksCore.dynflow_setup(world)
-      end
-    end
-
-    initializer 'foreman_tasks.set_core_settings' do
-      ForemanTasksCore::SettingsLoader.settings_registry.each_key do |settings_keys|
-        settings = settings_keys.inject({}) do |h, settings_key|
-          h.merge(SETTINGS[settings_key] || {})
-        end
-        ForemanTasksCore::SettingsLoader.setup_settings(settings_keys.first, settings)
       end
     end
 
