@@ -1,6 +1,7 @@
 module Actions
   class Base < Dynflow::Action
     middleware.use ::Actions::Middleware::RailsExecutorWrap
+    middleware.use ::Actions::Middleware::LoadSettingValues
     include Actions::Helpers::LifecycleLogging
 
     execution_plan_hooks.use :notify_paused, :on => [:paused]
