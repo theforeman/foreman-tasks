@@ -4,6 +4,7 @@
 require 'smart_proxy_dynflow'
 require 'smart_proxy_dynflow/task_launcher'
 require 'smart_proxy_dynflow/settings_loader'
+require 'smart_proxy_dynflow/otp_manager'
 
 require 'foreman_tasks_core/runner'
 
@@ -20,4 +21,5 @@ module ForemanTasksCore
 
   TaskLauncher = Proxy::Dynflow::TaskLauncher
   SettingsLoader = Proxy::Dynflow::SettingsLoader
+  OtpManager = Proxy::Dynflow::OtpManager
 end
