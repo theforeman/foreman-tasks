@@ -113,6 +113,7 @@ module ForemanTasks
         world.middleware.use Actions::Middleware::KeepCurrentUser, :before => ::Dynflow::Middleware::Common::Transaction
         world.middleware.use Actions::Middleware::KeepCurrentTimezone
         world.middleware.use Actions::Middleware::KeepCurrentRequestID
+        world.middleware.use ::Actions::Middleware::LoadSettingValues if Gem::Version.new(::SETTINGS[:version]) >= Gem::Version.new('2.5')
       end
     end
 
