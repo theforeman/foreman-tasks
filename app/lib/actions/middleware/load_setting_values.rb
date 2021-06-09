@@ -28,7 +28,6 @@ module Actions
       private
 
       def reload_setting_values
-        return unless Gem::Version.new(::SETTINGS[:version]) >= Gem::Version.new('2.5')
         ::Foreman.settings.load_values
       end
     end
