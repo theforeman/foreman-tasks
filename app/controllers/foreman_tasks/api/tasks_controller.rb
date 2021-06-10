@@ -1,6 +1,7 @@
 module ForemanTasks
   module Api
     class TasksController < ::Api::V2::BaseController
+      include ForemanTasks::FindTasksCommon
       include ::Foreman::Controller::SmartProxyAuth
       add_smart_proxy_filters :callback, :features => 'Dynflow'
 
@@ -195,7 +196,7 @@ module ForemanTasks
       end
 
       def search_options
-        [params[:search], {}]
+        [search_query, {}]
       end
 
       def_param_group :callback_target do

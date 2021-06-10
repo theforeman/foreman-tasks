@@ -43,6 +43,21 @@ module ForemanTasks
           _(data.dig('sort', 'by')).must_equal 'duration'
           _(data['results'].count).must_equal 5
         end
+
+        context 'with current taxonomies' do
+          it 'includes untaxed tasks and taxed by current taxonomy' do
+            org1 = FactoryBot.create(:organization)
+            org2 = FactoryBot.create(:organization)
+            org1_task = FactoryBot.create(:task_with_links, resource_id: org1.id, resource_type: 'Organization')
+            org2_task = FactoryBot.create(:task_with_links, resource_id: org2.id, resource_type: 'Organization')
+            get :index, params: { organization_id: org1.id }
+            assert_response :success
+            results = JSON.parse(response.body)['results']
+            _(results.count).must_equal 6
+            _(results.map { |r| r['id'] }).must_include org1_task.id
+            _(results.map { |r| r['id'] }).wont_include org2_task.id
+          end
+        end
       end
 
       describe 'POST /api/tasks/bulk_search' do
