@@ -2,6 +2,7 @@ module ForemanTasks
   class TasksController < ::ApplicationController
     include Foreman::Controller::AutoCompleteSearch
     include Foreman::Controller::CsvResponder
+    include ForemanTasks::FindTasksCommon
 
     def show
       @task = resource_base.find(params[:id])
@@ -126,19 +127,10 @@ module ForemanTasks
     end
 
     def filter(scope, paginate: true)
-      search = current_taxonomy_search
-      search = [search, params[:search]].select(&:present?).join(' AND ')
       scope = DashboardTableFilter.new(scope, params).scope
-      scope = scope.search_for(search, :order => params[:order])
-      scope = scope.paginate(:page => params[:page], :per_page => params[:per_page]) if paginate
+      scope = scope.search_for(search_query, order: params[:order])
+      scope = scope.paginate(page: params[:page], per_page: params[:per_page]) if paginate
       scope.distinct
-    end
-
-    def current_taxonomy_search
-      conditions = []
-      conditions << "organization_id = #{Organization.current.id}" if Organization.current
-      conditions << "location_id = #{Location.current.id}" if Location.current
-      conditions.empty? ? '' : "(#{conditions.join(' AND ')})"
     end
   end
 end
