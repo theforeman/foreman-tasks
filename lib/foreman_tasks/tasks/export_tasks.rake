@@ -12,7 +12,7 @@ namespace :foreman_tasks do
 
       * TASK_SEARCH     : scoped search filter (example: 'label = "Actions::Foreman::Host::ImportFacts"')
       * TASK_FILE       : file to export to
-      * TASK_FORMAT     : format to use for the export (either html or csv)
+      * TASK_FORMAT     : format to use for the export (either html, html-dir or csv)
       * TASK_DAYS       : number of days to go back
 
     If TASK_SEARCH is not defined, it defaults to all tasks in the past 7 days and
@@ -185,23 +185,27 @@ namespace :foreman_tasks do
     end
 
     class PageHelper
-      def self.pagify(template)
-        pre = <<-HTML
-       <html>
-       <head>
-       <title>Dynflow Console</title>
-       <script src="jquery.js"></script>
-       <link rel="stylesheet" type="text/css" href="bootstrap.css">
-       <link rel="stylesheet" type="text/css" href="application.css">
-       <script src="bootstrap.js"></script>
-       <script src="run_prettify.js"></script>
-       <script src="application.js"></script>
-       </head>
-       <body>
-          #{template}
-       <body>
-       </html>
+      def self.pagify(io, template = nil)
+        io.write <<~HTML
+          <html>
+            <head>
+              <title>Dynflow Console</title>
+              <script src="jquery.js"></script>
+              <link rel="stylesheet" type="text/css" href="bootstrap.css">
+              <link rel="stylesheet" type="text/css" href="application.css">
+              <script src="bootstrap.js"></script>
+              <script src="run_prettify.js"></script>
+              <script src="application.js"></script>
+            </head>
+          <body>
         HTML
+        if block_given?
+          yield io
+        else
+          io.write template
+        end
+      ensure
+        io.write '</body></html>'
       end
 
       def self.copy_assets(tmp_dir)
@@ -216,13 +220,64 @@ namespace :foreman_tasks do
         end
       end
 
-      def self.generate_index(tasks)
-        html = '<div><table class="table">'
-        tasks.order('started_at desc').all.each do |task|
-          html << "<tr><td><a href=\"#{task.id}.html\">#{task.label}</a></td><td>#{task.started_at}</td>\
-                   <td>#{task.state}</td><td>#{task.result}</td></tr>"
+      def self.generate_with_index(io)
+        io.write '<div><table class="table">'
+        yield io
+      ensure
+        io.write '</table></div>'
+      end
+
+      def self.generate_index_entry(io, task)
+        io << <<~HTML
+          <tr>
+            <td><a href=\"#{task.id}.html\">#{task.label}</a></td>
+            <td>#{task.started_at}</td>
+            <td>#{task.state}</td>
+            <td>#{task.result}</td>
+          </tr>
+        HTML
+      end
+    end
+
+    def csv_export(export_filename, tasks)
+      CSV.open(export_filename, 'wb') do |csv|
+        csv << %w[id state type label result parent_task_id started_at ended_at]
+        tasks.find_each do |task|
+          csv << [task.id, task.state, task.type, task.label, task.result,
+                  task.parent_task_id, task.started_at, task.ended_at]
         end
-        html << '</table></div>'
+      end
+    end
+
+    def html_export(workdir, tasks)
+      PageHelper.copy_assets(workdir)
+
+      renderer = TaskRender.new
+      total = tasks.count
+      index = File.open(File.join(workdir, 'index.html'), 'w')
+
+      File.open(File.join(workdir, 'index.html'), 'w') do |index|
+        PageHelper.pagify(index) do |io|
+          PageHelper.generate_with_index(io) do |index|
+            tasks.find_each.each_with_index do |task, count|
+              File.open(File.join(workdir, "#{task.id}.html"), 'w') { |file| PageHelper.pagify(file, renderer.render_task(task)) }
+              PageHelper.generate_index_entry(index, task)
+              puts "#{count + 1}/#{total}"
+            end
+          end
+        end
+      end
+    end
+
+    def generate_filename(format)
+      base = "/tmp/task-export-#{Time.now.to_i}"
+      case format
+      when 'html'
+        base + '.tar.gz'
+      when 'csv'
+        base + '.csv'
+      when 'html-dir'
+        base
       end
     end
 
@@ -239,36 +294,25 @@ namespace :foreman_tasks do
     end
 
     format = ENV['TASK_FORMAT'] || 'html'
-    export_filename = ENV['TASK_FILE'] || "/tmp/task-export-#{Time.now.to_i}.#{format == 'csv' ? 'csv' : 'tar.gz'}"
+    export_filename = ENV['TASK_FILE'] || generate_filename(format)
 
-    tasks = ForemanTasks::Task.search_for(filter)
+    tasks = ForemanTasks::Task.search_for(filter).order(:started_at => :desc)
 
     puts _("Exporting all tasks matching filter #{filter}")
     puts _("Gathering #{tasks.count} tasks.")
-    if format == 'html'
+    case format
+    when 'html'
       Dir.mktmpdir('task-export') do |tmp_dir|
-        PageHelper.copy_assets(tmp_dir)
-
-        renderer = TaskRender.new
-        total = tasks.count
-
-        tasks.find_each.with_index do |task, count|
-          File.open(File.join(tmp_dir, "#{task.id}.html"), 'w') { |file| file.write(PageHelper.pagify(renderer.render_task(task))) }
-          puts "#{count + 1}/#{total}"
-        end
-
-        File.open(File.join(tmp_dir, 'index.html'), 'w') { |file| file.write(PageHelper.pagify(PageHelper.generate_index(tasks))) }
-
+        html_export(tmp_dir, tasks)
         system("tar", "czf", export_filename, tmp_dir)
       end
-    elsif format == 'csv'
-      CSV.open(export_filename, 'wb') do |csv|
-        csv << %w[id state type label result parent_task_id started_at ended_at]
-        tasks.find_each do |task|
-          csv << [task.id, task.state, task.type, task.label, task.result,
-                  task.parent_task_id, task.started_at, task.ended_at]
-        end
-      end
+    when 'html-dir'
+      FileUtils.mkdir_p(export_filename)
+      html_export(export_filename, tasks)
+    when 'csv'
+      csv_export(export_filename, tasks)
+    else
+      raise "Unkonwn export format '#{format}'"
     end
 
     puts "Created #{export_filename}"
