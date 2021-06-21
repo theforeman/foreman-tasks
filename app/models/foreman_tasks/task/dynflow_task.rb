@@ -146,10 +146,9 @@ module ForemanTasks
         job_data = active_job_data
         begin
           @main_action = active_job_action(job_data['job_class'], job_data['arguments'])
-        # rubocop:disable Lint/SuppressedException
-        rescue
+        rescue => e
+          Foreman::Logging.exception("Failed to load ActiveJob for task #{id}", e, :logger => 'foreman-tasks')
         end
-        # rubocop:enable Lint/SuppressedException
       end
       @main_action
     end
