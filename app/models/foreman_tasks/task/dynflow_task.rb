@@ -140,12 +140,17 @@ module ForemanTasks
 
     def main_action
       return @main_action if defined?(@main_action)
+
+      @main_action = execution_plan && execution_plan.root_plan_step.try(:action, execution_plan)
       if active_job?
         job_data = active_job_data
-        @main_action = active_job_action(job_data['job_class'], job_data['arguments'])
-      else
-        @main_action = execution_plan && execution_plan.root_plan_step.try(:action, execution_plan)
+        begin
+          @main_action = active_job_action(job_data['job_class'], job_data['arguments'])
+        rescue => e
+          Foreman::Logging.exception("Failed to load ActiveJob for task #{id}", e, :logger => 'foreman-tasks')
+        end
       end
+      @main_action
     end
 
     # The class for ActiveJob jobs in Dynflow, JobWrapper is not expected to
