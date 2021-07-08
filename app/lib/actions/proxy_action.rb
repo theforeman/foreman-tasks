@@ -263,7 +263,7 @@ module Actions
     end
 
     def proxy_task_id
-      output[:proxy_task_id] ||= remote_task.try(:remote_task_id)
+      output[:proxy_task_id] || remote_task.try(:remote_task_id) || @execution_plan_id
     end
   end
 end
