@@ -41,7 +41,7 @@ module Actions
           # has a remote parent, proxy has the remote parent but it is stopped or paused
           task.parent_task_id.nil? ||
             !results.key?(task.parent_task_id) ||
-            %[stopped paused].include?(results[task.parent_task_id]['state'])
+            %(stopped paused).include?(results[task.parent_task_id]['state'])
         end
         notify ::Actions::ProxyAction::ProxyActionMissing.new, missing if missing.any?
 
