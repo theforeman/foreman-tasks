@@ -26,17 +26,26 @@ module Actions
       def check_triggered
         in_remote_task_batches(remote_tasks.triggered) do |batch|
           batch.group_by(&:proxy_url).each do |(url, tasks)|
-            tasks = poll_proxy_tasks(url, tasks).flatten
-            process_task_results tasks
+            results = poll_proxy_tasks(url, tasks)
+            process_task_results tasks, results
           end
         end
       end
 
-      def process_task_results(tasks)
-        missing, present = tasks.partition { |task| task.result.nil? }
+      def process_task_results(tasks, results)
+        possibly_missing, present = tasks.partition { |task| !results.key?(task.remote_task_id) }
+        missing = possibly_missing.select do |task|
+          # Really missing are tasks which are missing and:
+          # don't have a remote parent
+          # had a remote parent but the proxy doesn't have the remote parent anymore
+          # has a remote parent, proxy has the remote parent but it is stopped or paused
+          task.parent_task_id.nil? ||
+            !results.key?(task.parent_task_id) ||
+            %[stopped paused].include?(results[task.parent_task_id]['state'])
+        end
         notify ::Actions::ProxyAction::ProxyActionMissing.new, missing if missing.any?
 
-        stopped = present.select { |task| %w[stopped paused].include? task.result['state'] }
+        stopped = present.select { |task| %w[stopped paused].include? results.dig(task.remote_task_id, 'state') }
         notify ::Actions::ProxyAction::ProxyActionStopped.new, stopped if stopped.any?
       end
 
@@ -52,15 +61,13 @@ module Actions
 
       def poll_proxy_tasks(url, tasks)
         proxy = ProxyAPI::ForemanDynflow::DynflowProxy.new(:url => url)
-        results = proxy.task_states(tasks.map(&:remote_task_id))
-        tasks.map do |task|
-          task.result = results[task.remote_task_id]
-          task
-        end
+        # Get statuses of tasks and their optional parent tasks
+        ids = (tasks.map(&:remote_task_id) + tasks.map(&:parent_task_id)).uniq
+        proxy.task_states(ids)
       rescue => e
         # We could not reach the remote task, we'll try again next time
         action.action_logger.warn(_('Failed to check on tasks on proxy at %{url}: %{exception}') % { :url => url, :exception => e.message })
-        []
+        {}
       end
 
       def in_remote_task_batches(scope)
