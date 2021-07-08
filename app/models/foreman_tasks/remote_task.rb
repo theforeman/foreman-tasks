@@ -32,20 +32,27 @@ module ForemanTasks
                                                        :action_class => remote_task.proxy_action_name })
         end
         results = remote_tasks.first.proxy.launch_tasks(operation, input_hash)
-        remote_tasks.each { |remote_task| remote_task.update_from_batch_trigger results[remote_task.execution_plan_id] }
+        remote_tasks.each do |remote_task|
+          remote_task.update_from_batch_trigger results.fetch(remote_task.execution_plan_id, {}),
+                                                results.fetch('parent', {})
+        end
       end
       remote_tasks
     end
 
-    def update_from_batch_trigger(data)
+    def update_from_batch_trigger(data, parent = {})
       if data['result'] == 'success'
         self.remote_task_id = data['task_id']
         self.state = 'triggered'
+      elsif !parent.empty?
+        self.parent_task_id = parent['task_id']
+        self.state = 'parent-triggered'
       else
         # Tell the action the task on the smart proxy stopped
         ForemanTasks.dynflow.world.event execution_plan_id,
                                          step_id,
-                                         ::Actions::ProxyAction::ProxyActionStopped.new
+                                         ::Actions::ProxyAction::ProxyActionStopped.new,
+                                         optional: true
       end
       save!
     end
