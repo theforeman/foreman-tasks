@@ -142,6 +142,9 @@ module ForemanTasks
         time_picker_fieldset(f, triggering),
       ]
       tags << text_f(f, :start_at_raw, :label => _('Start at'), :placeholder => 'YYYY-mm-dd HH:MM')
+      tags << text_f(f, :purpose,
+                     :label => _('Purpose'),
+                     :label_help => N_('A special label for tracking a recurring job. There can be only one active job with a given purpose at a time.'))
       content_tag(:fieldset, nil, :id => 'trigger_mode_recurring', :class => "trigger_mode_form #{'hidden' unless triggering.recurring?}") do
         tags.join.html_safe
       end

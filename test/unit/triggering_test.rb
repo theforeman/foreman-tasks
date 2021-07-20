@@ -19,6 +19,28 @@ class TriggeringTest < ActiveSupport::TestCase
       triggering.recurring_logic.stubs(:valid?).returns(false)
       _(triggering).wont_be :valid?
     end
+
+    it 'is valid when recurring logic has purpose' do
+      logic = FactoryBot.build(:recurring_logic, :purpose => 'test', :state => 'active')
+      triggering = FactoryBot.build(:triggering, :recurring_logic => logic, :mode => :recurring, :input_type => :cronline, :cronline => '* * * * *')
+      _(triggering).must_be :valid?
+    end
+
+    it 'is invalid when recurring logic with given purpose exists' do
+      FactoryBot.create(:recurring_logic, :purpose => 'test', :state => 'active')
+      logic = FactoryBot.build(:recurring_logic, :purpose => 'test', :state => 'active')
+      triggering = FactoryBot.build(:triggering, :recurring_logic => logic, :mode => :recurring, :input_type => :cronline, :cronline => '* * * * *')
+      _(triggering).wont_be :valid?
+    end
+
+    it 'is valid when recurring logic with given purpose exists and is not active or disabled' do
+      ['finished', 'cancelled', 'failed'].each do |item|
+        FactoryBot.create(:recurring_logic, :purpose => 'test', :state => item)
+      end
+      logic = FactoryBot.build(:recurring_logic, :purpose => 'test')
+      triggering = FactoryBot.build(:triggering, :recurring_logic => logic, :mode => :recurring, :input_type => :cronline, :cronline => '* * * * *')
+      _(triggering).must_be :valid?
+    end
   end
 
   it 'cannot have mode set to arbitrary value' do
