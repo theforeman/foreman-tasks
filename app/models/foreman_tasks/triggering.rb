@@ -30,7 +30,7 @@ module ForemanTasks
     validates :input_type, :if => :recurring?,
                            :inclusion => { :in => ALLOWED_INPUT_TYPES,
                                            :message => _('%{value} is not allowed input type') }
-    validates :start_at_raw, format: { :with => TIME_REGEXP, :if => :future?,
+    validates :start_at_raw, format: { :with => TIME_REGEXP, :if => ->(triggering) { triggering.future? || (triggering.recurring? && triggering.start_at_raw) },
                                        :message => _('%{value} is wrong format') }
     validates :start_before_raw, format: { :with => TIME_REGEXP, :if => :future?,
                                            :message => _('%{value} is wrong format'), :allow_blank => true }
@@ -70,7 +70,7 @@ module ForemanTasks
                              delay_options,
                              *args
       when :recurring
-        recurring_logic.start(action, *args)
+        recurring_logic.start_after(action, delay_options[:start_at] || Time.zone.now, *args)
       end
     end
 
@@ -94,7 +94,7 @@ module ForemanTasks
     end
 
     def parse_start_at!
-      self.start_at ||= Time.zone.parse(start_at_raw)
+      self.start_at ||= Time.zone.parse(start_at_raw) if start_at_raw.present?
     end
 
     def parse_start_before!
@@ -104,6 +104,7 @@ module ForemanTasks
     private
 
     def can_start_recurring
+      parse_start_at!
       errors.add(:input_type, _('No task could be started')) unless recurring_logic.valid?
       errors.add(:cronline, _('%s is not valid format of cron line') % cronline) unless recurring_logic.valid_cronline?
     end
