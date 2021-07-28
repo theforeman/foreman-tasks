@@ -14,6 +14,7 @@ namespace :foreman_tasks do
       * TASK_FILE       : file to export to
       * TASK_FORMAT     : format to use for the export (either html, html-dir or csv)
       * TASK_DAYS       : number of days to go back
+      * SKIP_FAILED     : skip tasks that fail to export (true or false[default])
 
     If TASK_SEARCH is not defined, it defaults to all tasks in the past 7 days and
     all unsuccessful tasks in the past 60 days. The default TASK_FORMAT is html
@@ -244,8 +245,10 @@ namespace :foreman_tasks do
       CSV.open(export_filename, 'wb') do |csv|
         csv << %w[id state type label result parent_task_id started_at ended_at duration]
         tasks.find_each do |task|
-          csv << [task.id, task.state, task.type, task.label, task.result,
-                  task.parent_task_id, task.started_at, task.ended_at, task.duration]
+          with_error_handling(task) do
+            csv << [task.id, task.state, task.type, task.label, task.result,
+                    task.parent_task_id, task.started_at, task.ended_at, task.duration]
+          end
         end
       end
     end
@@ -261,8 +264,11 @@ namespace :foreman_tasks do
         PageHelper.pagify(index) do |io|
           PageHelper.generate_with_index(io) do |index|
             tasks.find_each.each_with_index do |task, count|
-              File.open(File.join(workdir, "#{task.id}.html"), 'w') { |file| PageHelper.pagify(file, renderer.render_task(task)) }
-              PageHelper.generate_index_entry(index, task)
+              content = with_error_handling(task) { renderer.render_task(task) }
+              if content
+                File.open(File.join(workdir, "#{task.id}.html"), 'w') { |file| PageHelper.pagify(file, content) }
+                with_error_handling(task, _('task index entry')) { PageHelper.generate_index_entry(index, task) }
+              end
               puts "#{count + 1}/#{total}"
             end
           end
@@ -281,6 +287,20 @@ namespace :foreman_tasks do
         base
       end
     end
+
+    def with_error_handling(task, what = _('task'))
+      yield
+    rescue StandardError => e
+      resolution = SKIP_ERRORS ? _(', skipping') : ''
+      puts _("WARNING: %{what} failed to export%{resolution}. Additional task details below.") % { :what => what, :resolution => resolution }
+      puts task.inspect
+      unless SKIP_ERRORS
+        puts _("Re-run with SKIP_FAILED=true if you want to simply skip any tasks that fail to export.")
+        raise e
+      end
+    end
+
+    SKIP_ERRORS = ['true', '1', 'y', 'yes'].include? ENV['SKIP_FAILED'].downcase
 
     filter = if ENV['TASK_SEARCH'].nil? && ENV['TASK_DAYS'].nil?
                "started_at > \"#{7.days.ago.to_s(:db)}\" || " \

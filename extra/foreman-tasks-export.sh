@@ -14,7 +14,7 @@ function die() {
 function build_rake() {
     echo -n "$RAKE_COMMAND "
     echo -n 'foreman_tasks:export_tasks '
-    for env in TASK_SEARCH TASK_FILE TASK_FORMAT TASK_DAYS; do
+    for env in TASK_SEARCH TASK_FILE TASK_FORMAT TASK_DAYS SKIP_FAILED; do
         local value="${!env}"
         [ -n "${value}" ] && echo -n "${env}=$(printf '%q' "$value") "
     done
@@ -46,11 +46,12 @@ EOF
 -f|--format FORMAT & export tasks in FORMAT, one of html, html-dir, csv
 -o|--output FILE & export tasks into FILE, a random file will be used if not provided
 -s|--search QUERY & use QUERY in scoped search format to match tasks to export
+-S|--skip-failed & skip tasks that fail to export
 EOF
 }
 
-SHORTOPTS="d:Ehs:o:f:"
-LONGOPTS="days:,execute,help,search:,output:,format:"
+SHORTOPTS="d:Ehs:o:f:S"
+LONGOPTS="days:,execute,help,search:,output:,format:,skip-failed"
 
 ARGS=$(getopt -s bash \
               --options $SHORTOPTS \
@@ -95,6 +96,9 @@ while true; do
             ;;
         -E|--execute)
             EXECUTE=1
+            ;;
+        -S|--skip-failed)
+            SKIP_FAILED=1
             ;;
         \?)
             die 1 "Invalid option: -$OPTARG"
