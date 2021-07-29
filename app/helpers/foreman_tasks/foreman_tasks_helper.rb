@@ -141,7 +141,7 @@ module ForemanTasks
         weekly_fieldset(f, triggering),
         time_picker_fieldset(f, triggering),
       ]
-
+      tags << text_f(f, :start_at_raw, :label => _('Start at'), :placeholder => 'YYYY-mm-dd HH:MM')
       content_tag(:fieldset, nil, :id => 'trigger_mode_recurring', :class => "trigger_mode_form #{'hidden' unless triggering.recurring?}") do
         tags.join.html_safe
       end

@@ -97,6 +97,12 @@ module ForemanTasks
       self.start_at ||= Time.zone.parse(start_at_raw) if start_at_raw.present?
     end
 
+    def parse_start_at
+      self.start_at ||= Time.zone.parse(start_at_raw) if start_at_raw.present?
+    rescue ArgumentError
+      errors.add(:start_at, _('is not a valid format'))
+    end
+
     def parse_start_before!
       self.start_before ||= Time.zone.parse(start_before_raw) if start_before_raw.present?
     end
@@ -104,7 +110,7 @@ module ForemanTasks
     private
 
     def can_start_recurring
-      parse_start_at!
+      parse_start_at
       errors.add(:input_type, _('No task could be started')) unless recurring_logic.valid?
       errors.add(:cronline, _('%s is not valid format of cron line') % cronline) unless recurring_logic.valid_cronline?
     end
