@@ -27,9 +27,18 @@ describe('convertDashboardQuery', () => {
       result: 'error',
       search: 'action~job',
     };
-    expect(convertDashboardQuery(query)).toEqual(
-      'state=stopped and result=error and action~job and (state_updated_at>2020-05-01T11:01:58.135Z or state_updated_at = NULL)'
-    );
+    const expected =
+      '(state=stopped) and (result=error) and (action~job) and (state_updated_at>2020-05-01T11:01:58.135Z or null? state_updated_at)';
+
+    expect(convertDashboardQuery(query)).toEqual({ search: expected });
+
+    const query2 = {
+      ...query,
+      time_mode: TASKS_DASHBOARD_JS_QUERY_MODES.OLDER,
+    };
+    const expected2 =
+      '(state=stopped) and (result=error) and (action~job) and (state_updated_at<=2020-05-01T11:01:58.135Z)';
+    expect(convertDashboardQuery(query2)).toEqual({ search: expected2 });
     // Cleanup
     global.Date = realDate;
   });
@@ -37,10 +46,23 @@ describe('convertDashboardQuery', () => {
     const query = {
       search: 'action~job',
     };
-    expect(convertDashboardQuery(query)).toEqual('action~job');
+    expect(convertDashboardQuery(query)).toEqual({ search: '(action~job)' });
   });
   it('convertDashboardQuery should work with no query', () => {
     const query = {};
-    expect(convertDashboardQuery(query)).toEqual('');
+    expect(convertDashboardQuery(query)).toEqual({});
+  });
+  it('convertDashboardQuery should not override unknown keys', () => {
+    const query = { weather: 'nice', search: 'okay', number: 7 };
+    expect(convertDashboardQuery(query)).toEqual({
+      ...query,
+      search: '(okay)',
+    });
+  });
+  it('convertDashboardQuery should expand other result', () => {
+    const query = { result: 'other' };
+    expect(convertDashboardQuery(query)).toEqual({
+      search: '(result ^ (pending, cancelled))',
+    });
   });
 });

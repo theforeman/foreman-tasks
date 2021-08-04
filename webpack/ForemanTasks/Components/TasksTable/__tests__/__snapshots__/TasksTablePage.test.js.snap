@@ -92,7 +92,7 @@ exports[`TasksTablePage rendering render with Breadcrubs and edit permissions 1`
         />
         <ExportButton
           title="Export All"
-          url="/foreman_tasks/tasks.csv?action=%22some-name%22&state=stopped"
+          url="/foreman_tasks/tasks.csv?search=%28state%3Dstopped%29"
         />
         <ActionSelectButton
           disabled={true}
@@ -227,7 +227,7 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
         />
         <ExportButton
           title="Export All"
-          url="/foreman_tasks/tasks.csv?action=%22some-name%22&state=stopped"
+          url="/foreman_tasks/tasks.csv?search=%28state%3Dstopped%29"
         />
         <ActionSelectButton
           disabled={true}

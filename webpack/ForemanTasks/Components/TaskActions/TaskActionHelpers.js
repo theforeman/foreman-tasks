@@ -15,22 +15,29 @@ export const convertDashboardQuery = query => {
     state,
     result,
     search,
+    ...rest
   } = query;
 
   const hours = timeToHoursNumber(timeHorizon);
   const timestamp = new Date(new Date() - hours * 60 * 60 * 1000);
   let dashboardTime = '';
   const stateQuery = state ? `state=${state}` : '';
-  const resultQuery = result ? `result=${result}` : '';
+  let resultQuery = '';
+  if (result === 'other') {
+    resultQuery = 'result ^ (pending, cancelled)';
+  } else {
+    resultQuery = result ? `result=${result}` : '';
+  }
   if (timeMode === TASKS_DASHBOARD_JS_QUERY_MODES.RECENT) {
-    dashboardTime = `(state_updated_at>${timestamp.toISOString()} or state_updated_at = NULL)`;
+    dashboardTime = `state_updated_at>${timestamp.toISOString()} or null? state_updated_at`;
   } else if (timeMode === TASKS_DASHBOARD_JS_QUERY_MODES.OLDER) {
-    dashboardTime = `(state_updated_at>${timestamp.toISOString()})`;
+    dashboardTime = `state_updated_at<=${timestamp.toISOString()}`;
   }
   const newQuery = [stateQuery, resultQuery, search, dashboardTime]
     .filter(Boolean)
+    .map(q => `(${q})`)
     .join(' and ');
-  return newQuery;
+  return newQuery ? { search: newQuery, ...rest } : rest;
 };
 
 export const resumeToastInfo = {
