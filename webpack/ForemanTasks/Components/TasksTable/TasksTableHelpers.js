@@ -2,6 +2,7 @@ import URI from 'urijs';
 import { translate as __, documentLocale } from 'foremanReact/common/I18n';
 import humanizeDuration from 'humanize-duration';
 import { isoCompatibleDate } from 'foremanReact/common/helpers';
+import { convertDashboardQuery } from '../TaskActions/TaskActionHelpers';
 
 export const updateURlQuery = (query, history) => {
   const uri = new URI(history.location.pathname + history.location.search);
@@ -17,7 +18,7 @@ export const getApiPathname = url => {
 export const getCSVurl = (path, query) => {
   let url = new URI(path);
   url = url.pathname(`${url.pathname()}.csv`);
-  url.addSearch(query);
+  url.addSearch(convertDashboardQuery(query));
   return url.toString();
 };
 
