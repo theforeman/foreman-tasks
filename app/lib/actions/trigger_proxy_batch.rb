@@ -4,8 +4,10 @@ module Actions
   #
   # The ProxyAction needs to be planned with `:use_batch_triggering => true` to activate the feature
   class TriggerProxyBatch < Base
-    TriggerNextBatch = Struct.new(:batches)
-    TriggerLastBatch = Class.new
+    TriggerNextBatch = Algebrick.type do
+      fields! batches: Integer
+    end
+    TriggerLastBatch = Algebrick.atom
 
     def run(event = nil)
       case event
