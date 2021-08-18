@@ -62,8 +62,8 @@
       <td><%= format_recurring_logic_limit recurring_logic.max_iteration %></td>
       <td><%= format_recurring_logic_limit recurring_logic.end_time.try(:in_time_zone) %></td>
       <td><%= recurring_logic_state(recurring_logic) %></td>
-      <td><%= recurring_logic_action_buttons(recurring_logic) %></td>
       <td><%= recurring_logic.purpose %></td>
+      <td><%= recurring_logic_action_buttons(recurring_logic) %></td>
     </tr>
   <% end %>
 </table>

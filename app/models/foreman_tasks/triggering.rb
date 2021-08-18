@@ -112,7 +112,7 @@ module ForemanTasks
     def can_start_recurring
       parse_start_at
       errors.add(:input_type, _('No task could be started')) unless recurring_logic.valid?
-      errors.add(:purpose, _('already exists for active or disabled state')) unless recurring_logic.valid_purpose?
+      errors.add(:purpose, _('Active or disabled recurring logic with purpose %s already exists') % recurring_logic.purpose) unless recurring_logic.valid_purpose?
       errors.add(:cronline, _('%s is not valid format of cron line') % cronline) unless recurring_logic.valid_cronline?
     end
 

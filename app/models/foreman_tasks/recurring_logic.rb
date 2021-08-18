@@ -17,7 +17,7 @@ module ForemanTasks
     scoped_search :on => :iteration, :complete_value => false
     scoped_search :on => :cron_line, :complete_value => true
     scoped_search :on => :state, :complete_value => true
-    scoped_search :on => :purpose, :complete_value => false
+    scoped_search :on => :purpose, :complete_value => true
 
     validate :valid_purpose
 
