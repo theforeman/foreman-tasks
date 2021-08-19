@@ -2,7 +2,7 @@
 
 PROGNAME="$0"
 EXECUTE=0
-RAKE_COMMAND="${RAKE_COMMAND:-"forman-rake"}"
+RAKE_COMMAND="${RAKE_COMMAND:-"foreman-rake"}"
 
 function die() {
     local code="$1"
