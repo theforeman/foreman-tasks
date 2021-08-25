@@ -260,7 +260,7 @@ module ForemanTasks
             raise BadRequest,
                   _('Resource search_params requires resource_type and resource_id to be specified')
           end
-          scope.joins(:locks).where(foreman_tasks_locks:
+          scope.joins(:links).where(foreman_tasks_links:
                                         { resource_type: search_params[:resource_type],
                                           resource_id:   search_params[:resource_id] })
         when 'task'
