@@ -68,6 +68,17 @@ module ForemanTasks
           data = JSON.parse(response.body)
           _(data[0]['results'][0]['id']).must_equal task.id
         end
+
+        it 'can search for a specific resource' do
+          org = FactoryBot.create(:organization)
+          task = FactoryBot.create(:task_with_links, resource_id: org.id, resource_type: 'Organization')
+
+          post :bulk_search, params: { :searches => [{ :type => 'resource', :resource_id => org.id, :resource_type => 'Organization' }] }
+
+          assert_response :success
+          data = JSON.parse(response.body)
+          _(data[0]['results'][0]['id']).must_equal task.id
+        end
       end
 
       describe 'GET /api/tasks/show' do
