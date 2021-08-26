@@ -73,7 +73,9 @@ const fixtures = {
     },
   },
   'should handle UNSELECT_ROWS with all rows selected': {
-    state: Immutable({ tasksTableQuery: { allRowsSelected: true } }),
+    state: Immutable({
+      tasksTableQuery: { allRowsSelected: true, selectedRows: [3, 4, 5] },
+    }),
     action: {
       type: UNSELECT_ROWS,
       payload: { id: [4], results: [{ id: 3 }, { id: 4 }, { id: 5 }] },

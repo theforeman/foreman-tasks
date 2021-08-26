@@ -48,20 +48,13 @@ export const TasksTableQueryReducer = (state = initialState, action) => {
     case OPEN_SELECT_ALL:
       return state.set('showSelectAll', true);
     case UNSELECT_ROWS:
-      if (state.allRowsSelected) {
-        // User can unselect rows if only the page rows are selected
-        return state
-          .set(
-            'selectedRows',
-            payload.results.map(row => row.id).filter(row => row !== payload.id)
-          )
-          .set('allRowsSelected', false)
-          .set('showSelectAll', false);
-      }
-      return state.set(
-        'selectedRows',
-        state.selectedRows.filter(row => row !== payload.id)
-      );
+      return state
+        .set(
+          'selectedRows',
+          state.selectedRows.filter(row => row !== payload.id)
+        )
+        .set('showSelectAll', false)
+        .set('allRowsSelected', false);
     case UNSELECT_ALL_ROWS:
       return state
         .set('selectedRows', [])
