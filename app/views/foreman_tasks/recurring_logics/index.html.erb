@@ -8,9 +8,9 @@
 <% if authorized_for(:permission => :edit_recurring_logics, :auth_object => @recurring_logics) %>
   <% title_actions link_to(_('Clear Cancelled'),
               clear_cancelled_foreman_tasks_recurring_logics_path,
-              class:  ['btn', 'btn-sm', 'btn-danger'],                  
+              class:  ['btn', 'btn-sm', 'btn-danger'],
               :'data-toggle' => "modal",
-              :'data-target' => "#clear_modal") 
+              :'data-target' => "#clear_modal")
               %>
 
   <div class="modal fade" id="clear_modal" tabindex="-1" role="dialog" aria-labelledby="Deploy" aria-hidden="true">
@@ -47,6 +47,7 @@
     <th><%= N_("Iteration limit") %></th>
     <th><%= N_("Repeat until") %></th>
     <th><%= N_("State") %></th>
+    <th><%= N_("Purpose") %></th>
     <th/>
   </thead>
   <% @recurring_logics.each do |recurring_logic| %>
@@ -61,6 +62,7 @@
       <td><%= format_recurring_logic_limit recurring_logic.max_iteration %></td>
       <td><%= format_recurring_logic_limit recurring_logic.end_time.try(:in_time_zone) %></td>
       <td><%= recurring_logic_state(recurring_logic) %></td>
+      <td><%= recurring_logic.purpose %></td>
       <td><%= recurring_logic_action_buttons(recurring_logic) %></td>
     </tr>
   <% end %>

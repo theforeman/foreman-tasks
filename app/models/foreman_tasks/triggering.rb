@@ -2,7 +2,7 @@ module ForemanTasks
   class Triggering < ApplicationRecord
     PARAMS = [:start_at_raw, :start_before_raw, :max_iteration, :input_type,
               :cronline, :days, :days_of_week, :time, :end_time_limited,
-              :end_time].freeze
+              :end_time, :purpose].freeze
     attr_accessor(*PARAMS)
 
     graphql_type '::Types::Triggering'
@@ -112,6 +112,7 @@ module ForemanTasks
     def can_start_recurring
       parse_start_at
       errors.add(:input_type, _('No task could be started')) unless recurring_logic.valid?
+      errors.add(:purpose, _('Active or disabled recurring logic with purpose %s already exists') % recurring_logic.purpose) unless recurring_logic.valid_purpose?
       errors.add(:cronline, _('%s is not valid format of cron line') % cronline) unless recurring_logic.valid_cronline?
     end
 

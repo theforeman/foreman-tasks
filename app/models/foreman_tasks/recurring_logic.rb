@@ -17,6 +17,9 @@ module ForemanTasks
     scoped_search :on => :iteration, :complete_value => false
     scoped_search :on => :cron_line, :complete_value => true
     scoped_search :on => :state, :complete_value => true
+    scoped_search :on => :purpose, :complete_value => true
+
+    validate :valid_purpose
 
     before_create do
       task_group.save
@@ -169,6 +172,7 @@ module ForemanTasks
       ::ForemanTasks::RecurringLogic.new_from_cronline(cronline).tap do |manager|
         manager.end_time = triggering.end_time if triggering.end_time_limited.present?
         manager.max_iteration = triggering.max_iteration if triggering.max_iteration.present?
+        manager.purpose = triggering.purpose if triggering.purpose.present?
         manager.triggering = triggering
       end
     end
@@ -188,6 +192,10 @@ module ForemanTasks
                        [:minutes]
                      end
       hash.select { |key, _| allowed_keys.include? key }
+    end
+
+    def valid_purpose?
+      !(purpose.present? && self.class.where(:purpose => purpose, :state => %w[active disabled]).any?)
     end
   end
 end

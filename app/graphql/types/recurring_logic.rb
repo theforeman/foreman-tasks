@@ -9,6 +9,7 @@ module Types
     field :max_iteration, Integer
     field :iteration, Integer
     field :state, String
+    field :purpose, String
     belongs_to :triggering, Types::Triggering
 
     def self.graphql_definition
