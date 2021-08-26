@@ -99,8 +99,8 @@ module ForemanTasks
     private
 
     def respond_with_tasks(scope)
-      @tasks = filter(scope, paginate: false)
-      csv_response(@tasks, [:id, :action, :state, :result, 'started_at.in_time_zone', 'ended_at.in_time_zone', :username], ['Id', 'Action', 'State', 'Result', 'Started At', 'Ended At', 'User'])
+      @tasks = filter(scope, paginate: false).with_duration
+      csv_response(@tasks, [:id, :action, :state, :result, 'started_at.in_time_zone', 'ended_at.in_time_zone', :duration, :username], ['Id', 'Action', 'State', 'Result', 'Started At', 'Ended At', 'Duration', 'User'])
     end
 
     def controller_permission
