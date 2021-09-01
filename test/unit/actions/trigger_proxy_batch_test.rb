@@ -46,7 +46,6 @@ module ForemanTasks
 
         it 'fetches batch_size of tasks and triggers them' do
           remote_tasks.expects(:first).with(batch_size).returns(remote_tasks)
-          remote_tasks.expects(:size).returns(batch_size)
           triggered.expects(:remote_tasks).returns(remote_tasks)
           ForemanTasks::RemoteTask.expects(:batch_trigger).with(proxy_operation_name, grouped_remote_batch)
 
