@@ -37,8 +37,8 @@ module Actions
       # Group the tasks by operation, in theory there should be only one operation
       batch.group_by(&:operation).each do |operation, group|
         ForemanTasks::RemoteTask.batch_trigger(operation, group)
+        output[:planned_count] += group.size
       end
-      output[:planned_count] += batch.size
     rescue => e
       action_logger.warn "Could not trigger task on the smart proxy: #{e.message}"
       batch.each { |remote_task| remote_task.update_from_batch_trigger({}) }
