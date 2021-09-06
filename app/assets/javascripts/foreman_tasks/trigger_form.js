@@ -8,6 +8,7 @@ function trigger_form_selector_binds(form_name, form_object_name) {
       form.find('fieldset.trigger_mode_form#trigger_mode_' + type).hide();
     });
     form.find('fieldset.trigger_mode_form#trigger_mode_' + $(this).val()).show();
+    disable_hidden_start_field($(this).val(), form)
   });
 
   input_type_selector.on('change', function () {
@@ -37,5 +38,11 @@ function trigger_form_selector_binds(form_name, form_object_name) {
     } else {
       o.hide();
     };
+  });
+};
+
+function disable_hidden_start_field(clicked, form) {
+  ["future", "recurring"].forEach(function(type) {
+    form.find('.trigger_mode_form#trigger_mode_' + type + ' #triggering_start_at_raw').prop('disabled', type !== clicked);
   });
 };
