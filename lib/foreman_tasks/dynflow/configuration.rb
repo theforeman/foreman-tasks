@@ -1,5 +1,4 @@
 require File.expand_path('lib/foreman/dynflow/configuration', Rails.root)
-require 'foreman_tasks/dynflow/persistence'
 
 module ForemanTasks
   # Import all Dynflow configuration from Foreman, and add our own for Tasks
@@ -33,10 +32,6 @@ module ForemanTasks
         options[:backup_deleted_plans] = !%w[0 n no false].include?(env_var.downcase)
       end
       options
-    end
-
-    def persistence_class
-      ForemanTasks::Dynflow::Persistence
     end
   end
 end

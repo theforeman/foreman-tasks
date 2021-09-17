@@ -11,7 +11,7 @@ module ForemanTasks
       world_config = ForemanTasks.dynflow.config.world_config
       if @use_in_memory_sqlite
         world_config.persistence_adapter = lambda do |*_args|
-          ::ForemanTasks::Dynflow::Persistence.new('adapter' => 'sqlite', 'database' => ':memory:')
+          ::Dynflow::PersistenceAdapters::Sequel.new('adapter' => 'sqlite', 'database' => ':memory:')
         end
       end
       @test_in_thread_world = ::Dynflow::Testing::InThreadWorld.new(world_config)

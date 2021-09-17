@@ -2,6 +2,7 @@ module Actions
   class Base < Dynflow::Action
     middleware.use ::Actions::Middleware::RailsExecutorWrap
     include Actions::Helpers::LifecycleLogging
+    include Actions::TaskSynchronization
 
     execution_plan_hooks.use :notify_paused, :on => [:paused]
 

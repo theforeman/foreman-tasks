@@ -15,7 +15,7 @@ module Actions
         middleware.use KeepCurrentTaxonomies
         execution_plan_hooks.use :null_hook, :on => :planning
 
-        def null_hook; end
+        def null_hook(plan); end
       end
 
       before do
@@ -77,6 +77,14 @@ module Actions
 
           Organization.stubs(:current=)
           Location.stubs(:current=)
+
+          org_finder = mock('organization finder')
+          org_finder.stubs(:find).with(@org.id).returns(@org)
+          Organization.stubs(:unscoped).returns(org_finder)
+
+          loc_finder = mock('location finder')
+          loc_finder.stubs(:find).with(@loc.id).returns(@loc)
+          Location.stubs(:unscoped).returns(loc_finder)
 
           triggered = ForemanTasks.trigger(TestHookAction)
           task = ForemanTasks::Task.where(:external_id => triggered.id).first
