@@ -11,8 +11,8 @@ module ForemanTasks
       self.state          = plan.state.to_s
       self.started_at     = plan.started_at unless plan.started_at.nil?
       self.ended_at       = plan.ended_at unless plan.ended_at.nil?
-      self.start_at       = delayed_plan&.start_at if delayed_plan
-      self.start_before   = delayed_plan&.start_before if delayed_plan
+      self.start_at       = delayed_plan.start_at if delayed_plan
+      self.start_before   = delayed_plan.start_before if delayed_plan
       self.parent_task_id ||= begin
                                 if main_action.try(:caller_execution_plan_id)
                                   DynflowTask.where(:external_id => main_action.caller_execution_plan_id).first!.id

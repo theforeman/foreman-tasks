@@ -47,7 +47,7 @@ module Actions
         task.save!
       when :scheduled
         delayed_plan = world.persistence.load_delayed_plan(execution_plan.id)
-        raise Foreman::Exception, 'Plan is delayed but the delay record is missing' if delayed_plan.nil?
+        raise ::Foreman::Exception, 'Plan is delayed but the delay record is missing' if delayed_plan.nil?
         task = ::ForemanTasks::Task::DynflowTask.find_by!(:external_id => execution_plan.id)
         task.update_from_dynflow(execution_plan, delayed_plan)
       when :planning
