@@ -46,10 +46,6 @@ Style/SymbolArray:
 Style/FormatString:
   Enabled: false
 
-Rails/Present:
-  Exclude:
-    - lib/foreman_tasks_core/**/*
-
 Rails/FilePath:
   Enabled: false
 
