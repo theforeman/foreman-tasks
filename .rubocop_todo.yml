@@ -11,7 +11,6 @@
 # Include: **/*.gemspec
 Gemspec/RequiredRubyVersion:
   Exclude:
-    - 'foreman-tasks-core.gemspec'
     - 'foreman-tasks.gemspec'
 
 # Offense count: 1
@@ -37,7 +36,6 @@ Naming/MemoizedInstanceVariableName:
   Exclude:
     - 'app/controllers/foreman_tasks/recurring_logics_controller.rb'
     - 'app/lib/actions/recurring_action.rb'
-    - 'lib/foreman_tasks_core/otp_manager.rb'
 
 # Offense count: 11
 # Configuration parameters: MinNameLength, AllowNamesEndingInNumbers, AllowedNames, ForbiddenNames.
