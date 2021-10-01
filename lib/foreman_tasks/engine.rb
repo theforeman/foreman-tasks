@@ -70,6 +70,8 @@ module ForemanTasks
         register_graphql_query_field :recurring_logic, '::Types::RecurringLogic', :record_field
         register_graphql_query_field :recurring_logics, '::Types::RecurringLogic', :collection_field
 
+        register_graphql_mutation_field :cancel_recurring_logic, ::Mutations::RecurringLogics::Cancel
+
         logger :dynflow, :enabled => true
         logger :action, :enabled => true
 
