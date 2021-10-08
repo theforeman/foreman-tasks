@@ -40,4 +40,8 @@
     <th><%= N_("Purpose") %></th>
     <td><%= recurring_logic.purpose %></td>
   </tr>
+  <tr>
+    <th><%= N_("Task count") %></th>
+    <td><%= link_to(task_group.tasks.count, foreman_tasks_tasks_url(:search => "task_group.id = #{task_group.id}")) %></td>
+  </tr>
 </table>
