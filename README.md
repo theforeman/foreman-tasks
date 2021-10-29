@@ -6,7 +6,8 @@ happening/happened in your Foreman instance. A framework for asynchronous tasks 
 
 * Website: [TheForeman.org](http://theforeman.org)
 * ServerFault tag: [Foreman](http://serverfault.com/questions/tagged/foreman)
-* Issues: [foreman-tasks Redmine](http://projects.theforeman.org/projects/foreman-tasks)
+* Issues: [Foreman-tasks Redmine](http://projects.theforeman.org/projects/foreman-tasks)
+* Manual: [Foreman-tasks Manual](https://www.theforeman.org/plugins/foreman_tasks/0.8/index.html)
 * Wiki: [Foreman wiki](http://projects.theforeman.org/projects/foreman/wiki/About)
 * Community and support: #theforeman for general support, #theforeman-dev for development chat in [Freenode](irc.freenode.net)
 * Mailing lists:
@@ -155,8 +156,8 @@ Tasks cleanup
 -------------
 
 Although, the history of tasks has an auditing value, some kinds of
-tasks can grow up in number quite soon. Therefore there is a mechanism
-how to clean the tasks, using a rake command. When running without
+tasks can rapidly increase. Therefore, there is a mechanism for
+how to clean the tasks which is done by using a rake command. When running without
 any arguments, the tasks are deleted based on the default parameters
 defined in the code.
 
@@ -179,7 +180,7 @@ override the default configuration inside the configuration
 ```
 :foreman-tasks:
   :cleanup:
-# the period after witch to delete all the tasks (by default all tasks are not being deleted after some period)
+# the period after which to delete all the tasks (by default all tasks are not being deleted after some period)
     :after: 365d
 # per action settings to override the default defined in the actions (cleanup_after method)
     :actions:
@@ -194,7 +195,7 @@ to specify the search criteria for the cleanup manually:
 * `TASK_SEARCH`: scoped search filter (example: 'label =
   "Actions::Foreman::Host::ImportFacts"')
 * `AFTER`: delete tasks created after `AFTER` period. Expected format
-  is a number followed by the time unit (`s`, `h`, `m`, `y`), such as
+  is a number followed by the time unit (`s`, `h`, `d`, `m`, `y`), such as
   `10d` for 10 days (applicable only when the `TASK_SEARCH` option is
   specified)
 * `STATES`: comma separated list of task states to touch with the
