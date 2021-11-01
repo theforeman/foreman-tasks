@@ -157,7 +157,7 @@ Tasks cleanup
 
 Although the history of tasks has an auditing value, some kinds of
 tasks can rapidly increase. Therefore, there is a mechanism for
-cleaning up the tasks which is done by using a rake command. When running without
+cleaning up the tasks using a rake command. When running without
 any arguments, the tasks are deleted based on the default parameters
 defined in the code.
 
