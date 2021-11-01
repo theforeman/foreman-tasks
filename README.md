@@ -180,7 +180,7 @@ override the default configuration inside the configuration
 ```
 :foreman-tasks:
   :cleanup:
-# the period after which to delete all the tasks (by default all tasks are not being deleted after some period)
+# the period after which to delete all the tasks (by default, all tasks are not deleted after some period)
     :after: 365d
 # per action settings to override the default defined in the actions (cleanup_after method)
     :actions:
