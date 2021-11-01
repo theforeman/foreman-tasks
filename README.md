@@ -155,7 +155,7 @@ rails root directory. See `-h` for more details and options
 Tasks cleanup
 -------------
 
-Although, the history of tasks has an auditing value, some kinds of
+Although the history of tasks has an auditing value, some kinds of
 tasks can rapidly increase. Therefore, there is a mechanism for
 cleaning up the tasks which is done by using a rake command. When running without
 any arguments, the tasks are deleted based on the default parameters
