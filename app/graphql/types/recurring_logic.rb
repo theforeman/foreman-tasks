@@ -3,6 +3,8 @@ module Types
     description 'A Recurring Logic'
     model_class ::ForemanTasks::RecurringLogic
 
+    include ::Types::Concerns::MetaField
+
     global_id_field :id
     field :cron_line, String
     field :end_time, GraphQL::Types::ISO8601DateTime
