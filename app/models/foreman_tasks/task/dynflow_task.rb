@@ -5,15 +5,14 @@ module ForemanTasks
     scope :for_action, ->(action_class) { where(label: action_class.name) }
     after_validation :set_action_field
 
-    def update_from_dynflow(data)
-      utc_zone = ActiveSupport::TimeZone.new('UTC')
-      self.external_id    = data[:id]
-      self.result         = map_result(data).to_s
-      self.state          = data[:state].to_s
-      self.started_at     = string_to_time(utc_zone, data[:started_at]) unless data[:started_at].nil?
-      self.ended_at       = string_to_time(utc_zone, data[:ended_at]) unless data[:ended_at].nil?
-      self.start_at       = string_to_time(utc_zone, data[:start_at]) if data[:start_at]
-      self.start_before   = string_to_time(utc_zone, data[:start_before]) if data[:start_before]
+    def update_from_dynflow(plan, delayed_plan = nil)
+      self.external_id    = plan.id
+      self.result         = map_result(plan).to_s
+      self.state          = plan.state.to_s
+      self.started_at     = plan.started_at unless plan.started_at.nil?
+      self.ended_at       = plan.ended_at unless plan.ended_at.nil?
+      self.start_at       = delayed_plan.start_at if delayed_plan
+      self.start_before   = delayed_plan.start_before if delayed_plan
       self.parent_task_id ||= begin
                                 if main_action.try(:caller_execution_plan_id)
                                   DynflowTask.where(:external_id => main_action.caller_execution_plan_id).first!.id
@@ -221,7 +220,7 @@ module ForemanTasks
       fixed_count = 0
       logger = Foreman::Logging.logger('foreman-tasks')
       running.each do |task|
-        changes = task.update_from_dynflow(task.execution_plan.to_hash)
+        changes = task.update_from_dynflow(task.execution_plan)
         unless changes.empty?
           fixed_count += 1
           logger.warn('Task %s updated at consistency check: %s' % [task.id, changes.inspect])
@@ -236,10 +235,10 @@ module ForemanTasks
       fixed_count
     end
 
-    def self.new_for_execution_plan(execution_plan_id, data)
-      new(:external_id => execution_plan_id,
-          :state => data[:state].to_s,
-          :result => data[:result].to_s,
+    def self.new_for_execution_plan(execution_plan)
+      new(:external_id => execution_plan.id,
+          :state => execution_plan.state.to_s,
+          :result => execution_plan.result.to_s,
           :user_id => User.current.try(:id))
     end
 
@@ -258,20 +257,20 @@ module ForemanTasks
       self.action = to_label
     end
 
-    def map_result(data)
-      if state_result_transitioned?(%w[planned pending], %w[stopped error], data) ||
-         (data[:result] == :error && cancelled?)
+    def map_result(plan)
+      if state_result_transitioned?(%w[planned pending], %w[stopped error], plan) ||
+         (plan.result == :error && cancelled?)
         :cancelled
       else
-        data[:result]
+        plan.result
       end
     end
 
-    def state_result_transitioned?(from, to, data)
+    def state_result_transitioned?(from, to, plan)
       oldstate, oldresult = from
       newstate, newresult = to
-      state == oldstate && data[:state].to_s == newstate &&
-        result == oldresult && data[:result].to_s == newresult
+      state == oldstate && plan.state.to_s == newstate &&
+        result == oldresult && plan.result.to_s == newresult
     end
 
     def cancelled?

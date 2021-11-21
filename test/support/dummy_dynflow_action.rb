@@ -1,5 +1,5 @@
 module Support
-  class DummyDynflowAction < Dynflow::Action
+  class DummyDynflowAction < Actions::EntryAction
   end
 
   class DummyPauseAction < Actions::EntryAction

@@ -24,7 +24,7 @@ FactoryBot.define do
         ForemanTasks::Task.where(:external_id => execution_plan.id).delete_all
         task.update!(:external_id => execution_plan.id)
         if evaluator.sync_with_dynflow
-          task.update_from_dynflow(execution_plan.to_hash)
+          task.update_from_dynflow(execution_plan)
         end
       end
 
