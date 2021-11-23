@@ -12,7 +12,6 @@ module ForemanTasks
     end
 
     before do
-      Setting::ForemanTasks.load_defaults
       ::ForemanTasks::Task.delete_all
       load File.join(ForemanTasks::Engine.root, 'db', 'seeds.d', '30-notification_blueprints.rb')
       @admin_user = FactoryBot.create(:user, :admin)
