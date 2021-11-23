@@ -21,7 +21,6 @@ module ForemanTasks
     end
 
     before do
-      Setting::ForemanTasks.load_defaults
       ::ForemanTasks::Task.delete_all
       @task = trigger_task
       Setting[:foreman_tasks_troubleshooting_url] = sample_troubleshooting_url

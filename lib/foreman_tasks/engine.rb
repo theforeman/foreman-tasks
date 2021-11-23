@@ -5,14 +5,6 @@ module ForemanTasks
   class Engine < ::Rails::Engine
     engine_name 'foreman_tasks'
 
-    initializer 'foreman_tasks.load_default_settings', :before => :load_config_initializers do
-      require_dependency File.expand_path('../../app/models/setting/foreman_tasks.rb', __dir__) if begin
-                                                                                                         Setting.table_exists?
-                                                                                                   rescue
-                                                                                                     false
-                                                                                                       end
-    end
-
     assets_to_precompile = %w[foreman_tasks/foreman_tasks.css
                               foreman_tasks/foreman_tasks.js]
 
@@ -33,7 +25,7 @@ module ForemanTasks
 
     initializer 'foreman_tasks.register_plugin', :before => :finisher_hook do |_app|
       Foreman::Plugin.register :"foreman-tasks" do
-        requires_foreman '>= 2.6.0'
+        requires_foreman '>= 3.0.0'
         divider :top_menu, :parent => :monitor_menu, :last => true, :caption => N_('Foreman Tasks')
         menu :top_menu, :tasks,
              :url_hash => { :controller => 'foreman_tasks/tasks', :action => :index },
@@ -64,6 +56,60 @@ module ForemanTasks
         end
 
         add_all_permissions_to_default_roles
+
+        settings do
+          category(:tasks, N_('Tasks')) do
+            setting('foreman_tasks_sync_task_timeout',
+                    type: :integer,
+                    description: N_('Number of seconds to wait for synchronous task to finish.'),
+                    default: 120,
+                    full_name: N_('Sync task timeout'))
+            setting('dynflow_enable_console',
+                    type: :boolean,
+                    description: N_('Enable the dynflow console (/foreman_tasks/dynflow) for debugging'),
+                    default: true,
+                    full_name: N_('Enable dynflow console'))
+            setting('dynflow_console_require_auth',
+                    type: :boolean,
+                    description: N_('Require user to be authenticated as user with admin rights when accessing dynflow console'),
+                    default: true,
+                    full_name: N_('Require auth for dynflow console'))
+            setting('foreman_tasks_proxy_action_retry_count',
+                    type: :integer,
+                    description: N_('Number of attempts to start a task on the smart proxy before failing'),
+                    default: 4,
+                    full_name: N_('Proxy action retry count'))
+            setting('foreman_tasks_proxy_action_retry_interval',
+                    type: :integer,
+                    description: N_('Time in seconds between retries'),
+                    default: 15,
+                    full_name: N_('Proxy action retry interval'))
+            setting('foreman_tasks_proxy_batch_trigger',
+                    type: :boolean,
+                    description: N_('Allow triggering tasks on the smart proxy in batches'),
+                    default: true,
+                    full_name: N_('Allow proxy batch tasks'))
+            setting('foreman_tasks_proxy_batch_size',
+                    type: :integer,
+                    description: N_('Number of tasks which should be sent to the smart proxy in one request, if foreman_tasks_proxy_batch_trigger is enabled'),
+                    default: 100,
+                    full_name: N_('Proxy tasks batch size'))
+            setting('foreman_tasks_troubleshooting_url',
+                    type: :string,
+                    description: N_('Url pointing to the task troubleshooting documentation. '\
+                                    'It should contain %{label} placeholder, that will be replaced with normalized task label '\
+                                    '(restricted to only alphanumeric characters)). %{version} placeholder is also available.'),
+                    default: nil,
+                    full_name: N_('Tasks troubleshooting URL'))
+            setting('foreman_tasks_polling_multiplier',
+                    type: :integer,
+                    description: N_('Polling multiplier which is used to multiply the default polling intervals. '\
+                         'This can be used to prevent polling too frequently for long running tasks.'),
+                    default: 1,
+                    full_name: N_("Polling intervals multiplier"),
+                    validate: { numericality: { greater_than: 0 } })
+          end
+        end
 
         register_graphql_query_field :task, '::Types::Task', :record_field
         register_graphql_query_field :tasks, '::Types::Task', :collection_field
