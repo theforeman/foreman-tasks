@@ -3,6 +3,18 @@ import PropTypes from 'prop-types';
 import { Alert, Card, Row, Col } from 'patternfly-react';
 import { translate as __ } from 'foremanReact/common/I18n';
 
+const ConditionalLink = ({ children, link }) =>
+  link ? <a href={link}>{children}</a> : children;
+
+ConditionalLink.propTypes = {
+  children: PropTypes.node.isRequired,
+  link: PropTypes.string,
+};
+
+ConditionalLink.defaultProps = {
+  link: null,
+};
+
 const Locks = ({ locks }) => (
   <div>
     <Alert type="info">
@@ -14,20 +26,22 @@ const Locks = ({ locks }) => (
       <Row>
         {locks.map((lock, key) => (
           <Col xs={6} sm={4} md={4} key={key}>
-            <Card className="card-pf-aggregate-status" accented>
-              <Card.Title>
-                <span
-                  className={`fa ${
-                    lock.exclusive ? 'fa-lock' : 'fa-unlock-alt'
-                  }`}
-                />
-                {lock.resource_type}
-              </Card.Title>
-              <Card.Body>
-                {`id:${lock.resource_id}`}
-                <br />
-              </Card.Body>
-            </Card>
+            <ConditionalLink link={lock.link}>
+              <Card className="card-pf-aggregate-status" accented>
+                <Card.Title>
+                  <span
+                    className={`fa ${
+                      lock.exclusive ? 'fa-lock' : 'fa-unlock-alt'
+                    }`}
+                  />
+                  {lock.resource_type}
+                </Card.Title>
+                <Card.Body>
+                  {`id:${lock.resource_id}`}
+                  <br />
+                </Card.Body>
+              </Card>
+            </ConditionalLink>
           </Col>
         ))}
       </Row>
