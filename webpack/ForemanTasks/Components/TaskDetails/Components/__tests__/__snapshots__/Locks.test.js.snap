@@ -25,29 +25,33 @@ exports[`Locks rendering render with Props 1`] = `
         sm={4}
         xs={6}
       >
-        <Card
-          accented={true}
-          aggregated={false}
-          aggregatedMini={false}
-          cardRef={null}
-          className="card-pf-aggregate-status"
-          matchHeight={false}
+        <ConditionalLink
+          link={null}
         >
-          <CardTitle
-            className=""
+          <Card
+            accented={true}
+            aggregated={false}
+            aggregatedMini={false}
+            cardRef={null}
+            className="card-pf-aggregate-status"
+            matchHeight={false}
           >
-            <span
-              className="fa fa-unlock-alt"
-            />
-            User
-          </CardTitle>
-          <CardBody
-            className=""
-          >
-            id:4
-            <br />
-          </CardBody>
-        </Card>
+            <CardTitle
+              className=""
+            >
+              <span
+                className="fa fa-unlock-alt"
+              />
+              User
+            </CardTitle>
+            <CardBody
+              className=""
+            >
+              id:4
+              <br />
+            </CardBody>
+          </Card>
+        </ConditionalLink>
       </Col>
       <Col
         bsClass="col"
@@ -57,29 +61,33 @@ exports[`Locks rendering render with Props 1`] = `
         sm={4}
         xs={6}
       >
-        <Card
-          accented={true}
-          aggregated={false}
-          aggregatedMini={false}
-          cardRef={null}
-          className="card-pf-aggregate-status"
-          matchHeight={false}
+        <ConditionalLink
+          link={null}
         >
-          <CardTitle
-            className=""
+          <Card
+            accented={true}
+            aggregated={false}
+            aggregatedMini={false}
+            cardRef={null}
+            className="card-pf-aggregate-status"
+            matchHeight={false}
           >
-            <span
-              className="fa fa-unlock-alt"
-            />
-            User
-          </CardTitle>
-          <CardBody
-            className=""
-          >
-            id:2
-            <br />
-          </CardBody>
-        </Card>
+            <CardTitle
+              className=""
+            >
+              <span
+                className="fa fa-unlock-alt"
+              />
+              User
+            </CardTitle>
+            <CardBody
+              className=""
+            >
+              id:2
+              <br />
+            </CardBody>
+          </Card>
+        </ConditionalLink>
       </Col>
     </Row>
   </CardGrid>
