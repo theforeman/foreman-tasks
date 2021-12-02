@@ -1,5 +1,5 @@
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
-import { addToast } from 'foremanReact/redux/actions/toasts';
+import { addToast } from 'foremanReact/components/ToastsList';
 import { TASKS_DASHBOARD_JS_QUERY_MODES } from '../TasksDashboard/TasksDashboardConstants';
 import { timeToHoursNumber } from '../TasksDashboard/TasksDashboardHelper';
 import {

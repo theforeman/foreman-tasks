@@ -1,6 +1,6 @@
 import { sprintf } from 'foremanReact/common/I18n';
 import { API } from 'foremanReact/redux/API';
-import { addToast } from 'foremanReact/redux/actions/toasts';
+import { addToast } from 'foremanReact/components/ToastsList';
 import {
   TASKS_RESUME_REQUEST,
   TASKS_RESUME_SUCCESS,

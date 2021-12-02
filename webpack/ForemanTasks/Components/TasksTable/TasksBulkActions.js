@@ -1,5 +1,5 @@
 import { API } from 'foremanReact/redux/API';
-import { addToast } from 'foremanReact/redux/actions/toasts';
+import { addToast } from 'foremanReact/components/ToastsList';
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
 import {
   BULK_CANCEL_PATH,
