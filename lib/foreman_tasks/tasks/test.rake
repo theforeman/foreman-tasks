@@ -11,33 +11,11 @@ namespace :test do
   end
 end
 
-namespace :foreman_tasks do
-  task :rubocop do
-    begin
-      require 'rubocop/rake_task'
-      RuboCop::RakeTask.new(:rubocop_foreman_tasks) do |task|
-        task.patterns = [
-          "#{ForemanTasks::Engine.root}/Gemfile",
-          "#{ForemanTasks::Engine.root}/*.gemspec",
-          "#{ForemanTasks::Engine.root}/{bin,script}/*",
-          "#{ForemanTasks::Engine.root}/{app,config,db,lib,test}/**/*.rb",
-          "#{ForemanTasks::Engine.root}/app/**/*.rabl",
-          "#{ForemanTasks::Engine.root}/lib/**/*.rake",
-        ]
-      end
-    rescue
-      puts 'Rubocop not loaded.'
-    end
-
-    Rake::Task['rubocop_foreman_tasks'].invoke
-  end
-end
-
 Rake::Task[:test].enhance do
   Rake::Task['test:foreman_tasks'].invoke
 end
 
 load 'tasks/jenkins.rake'
 if Rake::Task.task_defined?(:'jenkins:unit')
-  Rake::Task['jenkins:unit'].enhance ['foreman_tasks:rubocop', 'test:foreman_tasks']
+  Rake::Task['jenkins:unit'].enhance ['test:foreman_tasks']
 end
