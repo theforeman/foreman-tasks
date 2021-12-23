@@ -21,7 +21,6 @@ export const TasksTableQueryReducer = (state = initialState, action) => {
   const { type, payload, response } = action;
   const {
     subtotal,
-    page,
     per_page: perPageString,
     action_name: actionName,
     can_edit: canEdit,
@@ -34,10 +33,7 @@ export const TasksTableQueryReducer = (state = initialState, action) => {
       return Immutable.merge(state, {
         itemCount: subtotal,
         actionName,
-        pagination: {
-          page: Number(page),
-          perPage: Number(perPageString),
-        },
+        perPage: Number(perPageString),
         selectedRows: [],
         permissions: {
           edit: canEdit,

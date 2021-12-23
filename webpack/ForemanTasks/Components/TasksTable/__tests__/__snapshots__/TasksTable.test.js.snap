@@ -20,18 +20,8 @@ exports[`TasksTable rendering render with loading Props 1`] = `
       ]
     }
   />
-  <PaginationWrapper
-    className="tasks-pagination"
-    dropdownButtonId="tasks-table-dropdown"
+  <Pagination
     itemCount={2}
-    onChange={[Function]}
-    pagination={
-      Object {
-        "page": 1,
-        "perPage": 10,
-      }
-    }
-    viewType="table"
   />
 </div>
 `;
@@ -49,18 +39,8 @@ exports[`TasksTable rendering render with minimal Props 1`] = `
       ]
     }
   />
-  <PaginationWrapper
-    className="tasks-pagination"
-    dropdownButtonId="tasks-table-dropdown"
+  <Pagination
     itemCount={2}
-    onChange={[Function]}
-    pagination={
-      Object {
-        "page": 1,
-        "perPage": 10,
-      }
-    }
-    viewType="table"
   />
 </div>
 `;

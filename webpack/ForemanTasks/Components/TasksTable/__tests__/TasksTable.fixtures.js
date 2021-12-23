@@ -11,10 +11,7 @@ export const minProps = {
   unselectRow: jest.fn(),
   reloadPage: jest.fn(),
   selectedRows: [],
-  pagination: {
-    page: 1,
-    perPage: 10,
-  },
+  perPage: 10,
   history: { location: { search: '' } },
   results: ['a', 'b'],
   sort: {

@@ -15,12 +15,7 @@ exports[`TasksIndexPage rendering render with minimal props 1`] = `
   openClickedModal={[MockFunction]}
   openModal={[MockFunction]}
   openModalAction={[MockFunction]}
-  pagination={
-    Object {
-      "page": 1,
-      "perPage": 10,
-    }
-  }
+  perPage={10}
   reloadPage={[MockFunction]}
   results={
     Array [
