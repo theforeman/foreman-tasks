@@ -119,13 +119,8 @@ exports[`TasksTablePage rendering render with Breadcrubs and edit permissions 1`
       itemCount={2}
       openClickedModal={[MockFunction]}
       openModal={[Function]}
-      pagination={
-        Object {
-          "page": 1,
-          "perPage": 10,
-        }
-      }
       parentTaskID={null}
+      perPage={10}
       permissions={
         Object {
           "edit": false,
@@ -259,13 +254,8 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
       itemCount={2}
       openClickedModal={[MockFunction]}
       openModal={[Function]}
-      pagination={
-        Object {
-          "page": 1,
-          "perPage": 10,
-        }
-      }
       parentTaskID={null}
+      perPage={10}
       permissions={
         Object {
           "edit": false,

@@ -55,10 +55,7 @@ Object {
   "tasksTableQuery": Object {
     "actionName": undefined,
     "itemCount": 120,
-    "pagination": Object {
-      "page": 3,
-      "perPage": 12,
-    },
+    "perPage": 12,
     "permissions": Object {
       "edit": undefined,
     },

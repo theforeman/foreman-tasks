@@ -12,8 +12,8 @@ export const selectTasksTableContent = state =>
 export const selectTasksTableQuery = state =>
   selectTasksTable(state).tasksTableQuery || {};
 
-export const selectPagitation = state =>
-  selectTasksTableQuery(state).pagination || {};
+export const selectPerPage = state =>
+  selectTasksTableQuery(state).perPage || 20;
 
 export const selectItemCount = state =>
   selectTasksTableQuery(state).itemCount || 0;

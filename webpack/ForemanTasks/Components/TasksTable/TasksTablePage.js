@@ -99,10 +99,10 @@ const TasksTablePage = ({
         <React.Fragment>
           {props.permissions.edit &&
             showSelectAll &&
-            props.itemCount >= props.pagination.perPage && (
+            props.itemCount >= props.perPage && (
               <SelectAllAlert
                 itemCount={props.itemCount}
-                perPage={props.pagination.perPage}
+                perPage={props.perPage}
                 selectAllRows={selectAllRows}
                 unselectAllRows={props.unselectAllRows}
                 allRowsSelected={props.allRowsSelected}
@@ -118,9 +118,8 @@ const TasksTablePage = ({
 TasksTablePage.propTypes = {
   allRowsSelected: PropTypes.bool,
   itemCount: PropTypes.number.isRequired,
-  pagination: PropTypes.shape({
-    perPage: PropTypes.number,
-  }),
+  perPage: PropTypes.number,
+
   selectAllRows: PropTypes.func.isRequired,
   results: PropTypes.array.isRequired,
   getTableItems: PropTypes.func.isRequired,
@@ -142,10 +141,7 @@ TasksTablePage.propTypes = {
 };
 
 TasksTablePage.defaultProps = {
-  pagination: {
-    page: 1,
-    perPage: 20,
-  },
+  perPage: 20,
   allRowsSelected: false,
   actionName: '',
   status: STATUS.PENDING,
