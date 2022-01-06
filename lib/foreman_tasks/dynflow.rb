@@ -17,7 +17,7 @@ module ForemanTasks
         set(:custom_navigation) do
           { _('Back to tasks') => "/#{ForemanTasks::TasksController.controller_path}" }
         end
-        set(:world) { Rails.application.dynflow.world }
+        set(:world) { ::Rails.application.dynflow.world }
       end
     end
   end
