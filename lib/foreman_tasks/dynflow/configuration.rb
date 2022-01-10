@@ -1,4 +1,4 @@
-require File.expand_path('lib/foreman/dynflow/configuration', Rails.root)
+require File.expand_path('lib/foreman/dynflow/configuration', ::Rails.root)
 
 module ForemanTasks
   # Import all Dynflow configuration from Foreman, and add our own for Tasks

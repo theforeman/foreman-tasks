@@ -7,7 +7,7 @@ module Actions
 
       def log_task_state_change(execution_plan)
         return unless root_action?
-        logger = Rails.application.dynflow.world.action_logger
+        logger = ::Rails.application.dynflow.world.action_logger
         task_id = ForemanTasks::Task::DynflowTask.where(external_id: execution_plan.id).pluck(:id).first
 
         task_id_parts = []
