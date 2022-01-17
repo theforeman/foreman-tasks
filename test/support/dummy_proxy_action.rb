@@ -40,7 +40,7 @@ module Support
       def launch_tasks(operation, args = {})
         @log[:trigger_task] << [operation, args]
         @task_triggered.fulfill(true)
-        { 'task_id' => @uuid, 'result' => 'success' }
+        { 'task_id' => @uuid, 'result' => 'success', 'parent' => { 'task_id' => @uuid } }
       end
     end
 

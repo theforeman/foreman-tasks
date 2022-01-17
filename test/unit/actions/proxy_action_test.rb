@@ -1,4 +1,5 @@
 require 'foreman_tasks_test_helper'
+require 'ostruct'
 
 module ForemanTasks
   class ProxyActionTest <  ActiveSupport::TestCase
@@ -22,24 +23,29 @@ module ForemanTasks
                                          'foo' => 'bar',
                                          'secrets' => secrets,
                                          'use_batch_triggering' => batch_triggering)
+        RemoteTask.any_instance.stubs(:action).returns(@action)
+        RemoteTask.any_instance.stubs(:task).returns(OpenStruct.new(:id => Support::DummyProxyAction.proxy.uuid))
+        @run_step_id = @action.run_step_id
+
         @action = run_action(@action)
       end
 
       describe 'first run' do
         it 'triggers the corresponding action on the proxy' do
           proxy_call = Support::DummyProxyAction.proxy.log[:trigger_task].first
-          expected_call = ['single',
-                           { :action_class => 'Proxy::DummyAction',
-                             :action_input =>
-                             { 'foo' => 'bar',
-                               'secrets' => secrets,
-                               'connection_options' =>
-                               { 'retry_interval' => 15, 'retry_count' => 4,
-                                 'proxy_batch_triggering' => batch_triggering },
-                               'use_batch_triggering' => batch_triggering,
-                               'proxy_url' => 'proxy.example.com',
-                               'proxy_action_name' => 'Proxy::DummyAction',
-                               'callback' => { 'task_id' => Support::DummyProxyAction.proxy.uuid, 'step_id' => @action.run_step_id } } }]
+          action_input =
+            { :action_class => 'Proxy::DummyAction',
+              :action_input =>
+                { 'foo' => 'bar',
+                  'secrets' => secrets,
+                  'connection_options' =>
+                    { 'retry_interval' => 15, 'retry_count' => 4,
+                      'proxy_batch_triggering' => batch_triggering },
+                  'use_batch_triggering' => batch_triggering,
+                  'proxy_url' => 'proxy.example.com',
+                  'proxy_action_name' => 'Proxy::DummyAction',
+                  'callback' => { 'task_id' => Support::DummyProxyAction.proxy.uuid, 'step_id' => @run_step_id } } }
+          expected_call = ['support', { @action.execution_plan_id => action_input }]
           _(proxy_call).must_equal(expected_call)
         end
 
@@ -73,7 +79,7 @@ module ForemanTasks
       describe 'cancel' do
         it 'sends the cancel event to the proxy when the cancel event is sent for the first time' do
           action = run_action(@action, ::Dynflow::Action::Cancellable::Cancel)
-          _(Support::DummyProxyAction.proxy.log[:cancel_task].first).must_equal [Support::DummyProxyAction.proxy.uuid]
+          _(Support::DummyProxyAction.proxy.log[:cancel_task].first).must_equal [action.execution_plan_id]
           _(action.state).must_equal :suspended
         end
 

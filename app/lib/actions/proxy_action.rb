@@ -67,7 +67,7 @@ module Actions
     def trigger_proxy_task
       suspend do |_suspended_action|
         remote_task = prepare_remote_task
-        remote_task.trigger(proxy_action_name, proxy_input)
+        ForemanTasks::RemoteTask.batch_trigger(remote_task.operation, [remote_task])
         output[:proxy_task_id] = remote_task.remote_task_id
       end
     end
