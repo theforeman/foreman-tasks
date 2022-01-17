@@ -192,14 +192,13 @@ module ForemanTasks
           _(task.state).must_equal 'running'
           _(task.result).must_equal 'pending'
 
-          callback = Support::DummyProxyAction.proxy.log[:trigger_task].first[1][:action_input][:callback]
+          callback = Support::DummyProxyAction.proxy.log[:trigger_task].first[1].first[1][:action_input][:callback]
           post :callback, params: { 'callback' => callback, 'data' => { 'result' => 'success' } }
           triggered.finished.wait(5)
 
           task.reload
           _(task.state).must_equal 'stopped'
           _(task.result).must_equal 'success'
-          _(task.main_action.output['proxy_task_id']).must_equal Support::DummyProxyAction.proxy.uuid
           _(task.main_action.output['proxy_output']).must_equal('result' => 'success')
         end
       end
