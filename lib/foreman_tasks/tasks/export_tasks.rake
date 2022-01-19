@@ -300,7 +300,7 @@ namespace :foreman_tasks do
       end
     end
 
-    SKIP_ERRORS = ['true', '1', 'y', 'yes'].include? ENV['SKIP_FAILED'].downcase
+    SKIP_ERRORS = ['true', '1', 'y', 'yes'].include? (ENV['SKIP_FAILED'] || '').downcase
 
     filter = if ENV['TASK_SEARCH'].nil? && ENV['TASK_DAYS'].nil?
                "started_at > \"#{7.days.ago.to_s(:db)}\" || " \
