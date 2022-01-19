@@ -21,6 +21,21 @@ function build_rake() {
     echo
 }
 
+function incorrect_usage() {
+    echo "$1" >&2
+    echo
+    usage
+
+    exit 1
+}
+
+function validate_options!() {
+    if [ -z "$TASK_SEARCH" ]; then
+        [ -n "$AFTER" ] && incorrect_usage "Error: -a|--after cannot be used without -s|--search"
+        [ -n "$STATES" ] && incorrect_usage "Error: -S|--states cannot be used without -s|--search"
+    fi
+}
+
 function usage() {
         cat << EOF
 Usage: $PROGNAME [script_options...] [options...]
@@ -43,8 +58,8 @@ EOF
         echo Cleanup options:
         cat <<EOF | column -s\& -t
 -B|--batch-size BATCH_SIZE & process tasks in batches of BATCH_SIZE, 1000 by default
--S|--states STATES & operate on tasks in STATES, comma separated list of states, set to all to operate on tasks in any state
--a|--after AGE & operate on tasks older than AGE. Expected format is a number followed by the time unit (s,h,m,y), such as '10d' for 10 days
+-S|--states STATES & operate on tasks in STATES, comma separated list of states, set to all to operate on tasks in any state. Has to be used together with -s|--search
+-a|--after AGE & operate on tasks older than AGE. Expected format is a number followed by the time unit (s,h,m,y), such as '10d' for 10 days. Has to be used together with -s|--search
 -b|--backup & backup deleted tasks
 -n|--noop & do a dry run, print what would be done
 -s|--search QUERY & use QUERY in scoped search format to match tasks to delete
@@ -118,6 +133,8 @@ while true; do
     esac
     shift
 done
+
+validate_options!
 
 if [ "$EXECUTE" -eq 1 ]; then
     build_rake | sh
