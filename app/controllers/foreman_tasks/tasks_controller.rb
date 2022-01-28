@@ -72,17 +72,15 @@ module ForemanTasks
     def unlock
       task = find_dynflow_task
       if task.paused?
-        task.state = :stopped
-        task.save!
-        render json: { statusText: 'OK' }
+        force_unlock(task)
       else
         render json: {}, status: :bad_request
       end
     end
 
-    def force_unlock
-      task       = find_dynflow_task
+    def force_unlock(task = find_dynflow_task)
       task.state = :stopped
+      task.locks.destroy_all
       task.save!
       render json: { statusText: 'OK' }
     end
