@@ -69,7 +69,7 @@ module ForemanTasks
 
     def unlock
       if @dynflow_task.paused?
-        unlock_task(@dynflow_task)
+        @dynflow_task.halt
         render json: { statusText: 'OK' }
       else
         render json: {}, status: :bad_request
@@ -77,8 +77,13 @@ module ForemanTasks
     end
 
     def force_unlock
-      unlock_task(@dynflow_task)
-      render json: { statusText: 'OK' }
+      if @dynflow_task.pending?
+        @dynflow_task.halt
+        render json: { statusText: 'OK' }
+      else
+        # Cannot halt an already stopped task
+        render json: {}, status: :bad_request
+      end
     end
 
     # we need do this to make the Foreman helpers working properly
@@ -91,12 +96,6 @@ module ForemanTasks
     end
 
     private
-
-    def unlock_task(task)
-      task.state = :stopped
-      task.locks.destroy_all
-      task.save!
-    end
 
     def respond_with_tasks(scope)
       @tasks = filter(scope, paginate: false).with_duration
