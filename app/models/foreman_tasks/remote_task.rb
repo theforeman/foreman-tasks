@@ -18,7 +18,8 @@ module ForemanTasks
       response = begin
                    proxy.launch_tasks('single', :action_class => proxy_action_name, :action_input => input)
                  rescue RestClient::Exception => e
-                   logger.warn "Could not trigger task on the smart proxy: #{e.message}"
+                   logger.warn "Could not trigger task on the smart proxy"
+                   logger.warn e
                    {}
                  end
       update_from_batch_trigger(response)
