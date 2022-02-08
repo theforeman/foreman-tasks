@@ -241,35 +241,42 @@ namespace :foreman_tasks do
       end
     end
 
-    def csv_export(export_filename, tasks)
+    def csv_export(export_filename, id_scope, task_scope)
       CSV.open(export_filename, 'wb') do |csv|
         csv << %w[id state type label result parent_task_id started_at ended_at duration]
-        tasks.find_each do |task|
-          with_error_handling(task) do
-            csv << [task.id, task.state, task.type, task.label, task.result,
-                    task.parent_task_id, task.started_at, task.ended_at, task.duration]
+        id_scope.pluck(:id).each_slice(1000).each do |ids|
+          task_scope.where(id: ids).each do |task|
+            with_error_handling(task) do
+              csv << [task.id, task.state, task.type, task.label, task.result,
+                      task.parent_task_id, task.started_at, task.ended_at, task.duration]
+            end
           end
         end
       end
     end
 
-    def html_export(workdir, tasks)
+    def html_export(workdir, id_scope, task_scope)
       PageHelper.copy_assets(workdir)
 
+      ids = id_scope.pluck(:id)
       renderer = TaskRender.new
-      total = tasks.count(:all)
+      count = 0
+      total = ids.count
       index = File.open(File.join(workdir, 'index.html'), 'w')
 
       File.open(File.join(workdir, 'index.html'), 'w') do |index|
         PageHelper.pagify(index) do |io|
           PageHelper.generate_with_index(io) do |index|
-            tasks.find_each.each_with_index do |task, count|
-              content = with_error_handling(task) { renderer.render_task(task) }
-              if content
-                File.open(File.join(workdir, "#{task.id}.html"), 'w') { |file| PageHelper.pagify(file, content) }
-                with_error_handling(task, _('task index entry')) { PageHelper.generate_index_entry(index, task) }
+            ids.each_slice(1000).each do |ids|
+              task_scope.where(id: ids).each do |task|
+                content = with_error_handling(task) { renderer.render_task(task) }
+                if content
+                  File.open(File.join(workdir, "#{task.id}.html"), 'w') { |file| PageHelper.pagify(file, content) }
+                  with_error_handling(task, _('task index entry')) { PageHelper.generate_index_entry(index, task) }
+                end
+                count += 1
+                puts "#{count}/#{total}"
               end
-              puts "#{count + 1}/#{total}"
             end
           end
         end
@@ -317,21 +324,22 @@ namespace :foreman_tasks do
     format = ENV['TASK_FORMAT'] || 'html'
     export_filename = ENV['TASK_FILE'] || generate_filename(format)
 
-    tasks = ForemanTasks::Task.search_for(filter).order(:started_at => :desc).with_duration.distinct
+    task_scope = ForemanTasks::Task.search_for(filter).with_duration.order(:started_at => :desc)
+    id_scope = task_scope.group(:id, :started_at)
 
     puts _("Exporting all tasks matching filter #{filter}")
-    puts _("Gathering #{tasks.count(:all)} tasks.")
+    puts _("Gathering #{id_scope.count(:all).count} tasks.")
     case format
     when 'html'
       Dir.mktmpdir('task-export') do |tmp_dir|
-        html_export(tmp_dir, tasks)
+        html_export(tmp_dir, id_scope, task_scope)
         system("tar", "czf", export_filename, tmp_dir)
       end
     when 'html-dir'
       FileUtils.mkdir_p(export_filename)
-      html_export(export_filename, tasks)
+      html_export(export_filename, id_scope, task_scope)
     when 'csv'
-      csv_export(export_filename, tasks)
+      csv_export(export_filename, id_scope, task_scope)
     else
       raise "Unkonwn export format '#{format}'"
     end
