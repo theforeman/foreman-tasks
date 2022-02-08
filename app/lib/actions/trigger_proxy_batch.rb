@@ -40,7 +40,8 @@ module Actions
       end
       output[:planned_count] += batch.size
     rescue => e
-      action_logger.warn "Could not trigger task on the smart proxy: #{e.message}"
+      action_logger.warn "Could not trigger task on the smart proxy"
+      action_logger.warn e
       batch.each { |remote_task| remote_task.update_from_batch_trigger({}) }
       output[:failed_count] += batch.size
     end
