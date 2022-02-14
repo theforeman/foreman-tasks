@@ -32,7 +32,7 @@ module ForemanTasks
                                                        :action_class => remote_task.proxy_action_name })
         end
         results = remote_tasks.first.proxy.launch_tasks(operation, input_hash)
-        remote_tasks.each do |remote_task|
+        group.each do |remote_task|
           remote_task.update_from_batch_trigger results.fetch(remote_task.execution_plan_id, {}),
                                                 results.fetch('parent', {})
         end
