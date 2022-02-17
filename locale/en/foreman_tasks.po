@@ -56,6 +56,9 @@ msgstr ""
 msgid "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved."
 msgstr ""
 
+msgid "A special label for tracking a recurring job. There can be only one active job with a given purpose at a time."
+msgstr ""
+
 msgid "Action"
 msgstr ""
 
@@ -66,6 +69,9 @@ msgid "Active"
 msgstr ""
 
 msgid "Active Filters:"
+msgstr ""
+
+msgid "Active or disabled recurring logic with purpose %s already exists"
 msgstr ""
 
 msgid "All %s tasks are selected. "
@@ -276,6 +282,9 @@ msgstr ""
 msgid "Fri"
 msgstr ""
 
+msgid "I understand that this may cause harm and have working database backups of all backend services."
+msgstr ""
+
 msgid "ID"
 msgstr ""
 
@@ -427,9 +436,6 @@ msgstr ""
 msgid "Polling multiplier which is used to multiply the default polling intervals. This can be used to prevent polling too frequently for long running tasks."
 msgstr ""
 
-msgid "Preupgrade job"
-msgstr ""
-
 msgid "Proxy action retry count"
 msgstr ""
 
@@ -440,6 +446,9 @@ msgid "Proxy task gone missing from the smart proxy"
 msgstr ""
 
 msgid "Proxy tasks batch size"
+msgstr ""
+
+msgid "Purpose"
 msgstr ""
 
 msgid "Raw"
@@ -485,6 +494,9 @@ msgid "Required lock is already taken by other running tasks."
 msgstr ""
 
 msgid "Resource search_params requires resource_type and resource_id to be specified"
+msgstr ""
+
+msgid "Resources for %s task(s) will be unlocked and will not prevent other tasks from being run. As the task(s) might be still running, it should be avoided to use this unless you are really sure the task(s) got stuck."
 msgstr ""
 
 msgid "Result"
@@ -663,6 +675,12 @@ msgstr[1] ""
 msgid "This action will delete all cancelled recurring logics. Please note that this action can't be reversed."
 msgstr ""
 
+msgid "This will %(action)s %(number)s task(s), putting them in the %(state)s state. Are you sure?"
+msgstr ""
+
+msgid "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed."
+msgstr ""
+
 msgid "Thu"
 msgstr ""
 
@@ -717,6 +735,9 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
+msgid "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource"
+msgstr ""
+
 msgid "You do not have permission"
 msgstr ""
 
@@ -756,6 +777,9 @@ msgstr ""
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is month (range: 1-12)"
+msgstr ""
+
+msgid "is not a valid format"
 msgstr ""
 
 msgid "last"

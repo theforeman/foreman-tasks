@@ -57,6 +57,9 @@ msgstr "Le paramètre :after dans la section de nettoyage des tâches est obsol�
 msgid "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved."
 msgstr "Une tâche en pause représente un processus qui ne s'est pas terminé correctement. Toute tâche en état de pause peut entraîner une incohérence potentielle et doit être résolue."
 
+msgid "A special label for tracking a recurring job. There can be only one active job with a given purpose at a time."
+msgstr ""
+
 msgid "Action"
 msgstr "Action"
 
@@ -68,6 +71,9 @@ msgstr "Actif"
 
 msgid "Active Filters:"
 msgstr "Filtres actifs :"
+
+msgid "Active or disabled recurring logic with purpose %s already exists"
+msgstr ""
 
 msgid "All %s tasks are selected. "
 msgstr "Toutes les tâches %s sont sélectionnées. "
@@ -277,6 +283,9 @@ msgstr "Tâches Foreman"
 msgid "Fri"
 msgstr "Ven."
 
+msgid "I understand that this may cause harm and have working database backups of all backend services."
+msgstr ""
+
 msgid "ID"
 msgstr "ID"
 
@@ -428,9 +437,6 @@ msgstr "Multiplicateur des intervalles de sondage"
 msgid "Polling multiplier which is used to multiply the default polling intervals. This can be used to prevent polling too frequently for long running tasks."
 msgstr "Multiplicateur de sondage qui est utilisé pour multiplier les intervalles de sondage par défaut. Il peut être utilisé pour éviter que les sondages ne soient trop fréquents pour des tâches de longue durée."
 
-msgid "Preupgrade job"
-msgstr ""
-
 msgid "Proxy action retry count"
 msgstr ""
 
@@ -441,6 +447,9 @@ msgid "Proxy task gone missing from the smart proxy"
 msgstr "Tâches de proxy manquantes du smart proxy"
 
 msgid "Proxy tasks batch size"
+msgstr ""
+
+msgid "Purpose"
 msgstr ""
 
 msgid "Raw"
@@ -487,6 +496,9 @@ msgstr "Le verrouillage requis est déjà utilisé par d'autres tâches en cours
 
 msgid "Resource search_params requires resource_type and resource_id to be specified"
 msgstr "Ressource search_params a besoin que resource_type et resource_id soient spécifiés"
+
+msgid "Resources for %s task(s) will be unlocked and will not prevent other tasks from being run. As the task(s) might be still running, it should be avoided to use this unless you are really sure the task(s) got stuck."
+msgstr ""
 
 msgid "Result"
 msgstr "Résultat"
@@ -664,6 +676,12 @@ msgstr[1] "Il y a %{compte} de tâches en pause dans le système qui nécessiten
 msgid "This action will delete all cancelled recurring logics. Please note that this action can't be reversed."
 msgstr "Cette action supprimera toutes les logiques récurrentes annulées. Veuillez noter que cette action ne peut pas être annulée."
 
+msgid "This will %(action)s %(number)s task(s), putting them in the %(state)s state. Are you sure?"
+msgstr ""
+
+msgid "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed."
+msgstr ""
+
 msgid "Thu"
 msgstr "Jeu."
 
@@ -718,6 +736,9 @@ msgstr "En se concentrant sur la dernière"
 msgid "Yes"
 msgstr "Oui"
 
+msgid "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource"
+msgstr ""
+
 msgid "You do not have permission"
 msgstr ""
 
@@ -758,6 +779,9 @@ msgstr "est minute (plage: 0-59)"
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is month (range: 1-12)"
 msgstr "est mois (Plage: 1-12)"
+
+msgid "is not a valid format"
+msgstr ""
 
 msgid "last"
 msgstr "dernier"

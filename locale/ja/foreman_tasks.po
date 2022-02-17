@@ -57,6 +57,9 @@ msgstr "タスク消去のセクションの :after の設定は非推奨にな�
 msgid "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved."
 msgstr "一時停止タスクは、適切に終了していないプロセスを表します。一時停止状態のタスクは、一貫性に欠ける可能性があり、解決する必要があります。"
 
+msgid "A special label for tracking a recurring job. There can be only one active job with a given purpose at a time."
+msgstr ""
+
 msgid "Action"
 msgstr "アクション"
 
@@ -68,6 +71,9 @@ msgstr "アクティブ"
 
 msgid "Active Filters:"
 msgstr "アクティブなフィルター:"
+
+msgid "Active or disabled recurring logic with purpose %s already exists"
+msgstr ""
 
 msgid "All %s tasks are selected. "
 msgstr "%s の全タスクを選択します。"
@@ -277,6 +283,9 @@ msgstr "Foreman タスク"
 msgid "Fri"
 msgstr "金"
 
+msgid "I understand that this may cause harm and have working database backups of all backend services."
+msgstr ""
+
 msgid "ID"
 msgstr "ID"
 
@@ -428,9 +437,6 @@ msgstr "ポーリングの間隔乗数"
 msgid "Polling multiplier which is used to multiply the default polling intervals. This can be used to prevent polling too frequently for long running tasks."
 msgstr "デフォルトのポーリングの間隔を乗算するときに使用するポーリング乗数。この乗数を使用して、長期間にわたり実行中のタスクが頻繁にポーリングされるのを回避します。"
 
-msgid "Preupgrade job"
-msgstr ""
-
 msgid "Proxy action retry count"
 msgstr ""
 
@@ -441,6 +447,9 @@ msgid "Proxy task gone missing from the smart proxy"
 msgstr "Smart Proxy のプロキシータスクが見つかりません"
 
 msgid "Proxy tasks batch size"
+msgstr ""
+
+msgid "Purpose"
 msgstr ""
 
 msgid "Raw"
@@ -487,6 +496,9 @@ msgstr "必要なロックは、実行中の他のタスクにより取得済み
 
 msgid "Resource search_params requires resource_type and resource_id to be specified"
 msgstr "リソース search_params では resource_type と resource_id を指定する必要があります"
+
+msgid "Resources for %s task(s) will be unlocked and will not prevent other tasks from being run. As the task(s) might be still running, it should be avoided to use this unless you are really sure the task(s) got stuck."
+msgstr ""
 
 msgid "Result"
 msgstr "結果"
@@ -664,6 +676,12 @@ msgstr[1] ""
 msgid "This action will delete all cancelled recurring logics. Please note that this action can't be reversed."
 msgstr "このアクションは、キャンセル済みの再帰論理をすべて削除します。この操作は元に戻すことはできません。注意してください。"
 
+msgid "This will %(action)s %(number)s task(s), putting them in the %(state)s state. Are you sure?"
+msgstr ""
+
+msgid "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed."
+msgstr ""
+
 msgid "Thu"
 msgstr "木"
 
@@ -718,6 +736,9 @@ msgstr "フォーカスする時間: 過去 "
 msgid "Yes"
 msgstr "はい"
 
+msgid "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource"
+msgstr ""
+
 msgid "You do not have permission"
 msgstr ""
 
@@ -758,6 +779,9 @@ msgstr "分 (範囲: 0〜59)"
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is month (range: 1-12)"
 msgstr "月 (範囲: 1〜12)"
+
+msgid "is not a valid format"
+msgstr ""
 
 msgid "last"
 msgstr "過去"
