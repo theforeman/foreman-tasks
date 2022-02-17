@@ -56,6 +56,9 @@ msgstr "：在任务清理部分中的设置弃用之后，使用 :after in : �
 msgid "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved."
 msgstr "暂停的任务代表未正确完成的进程。任何处于暂停状态的任务都可能导致潜在的不一致，需要被解决。"
 
+msgid "A special label for tracking a recurring job. There can be only one active job with a given purpose at a time."
+msgstr ""
+
 msgid "Action"
 msgstr "行动"
 
@@ -67,6 +70,9 @@ msgstr "活性"
 
 msgid "Active Filters:"
 msgstr "活跃的过滤器："
+
+msgid "Active or disabled recurring logic with purpose %s already exists"
+msgstr ""
 
 msgid "All %s tasks are selected. "
 msgstr "已选择所有％s任务。 "
@@ -276,6 +282,9 @@ msgstr "Foreman 任务"
 msgid "Fri"
 msgstr "周五"
 
+msgid "I understand that this may cause harm and have working database backups of all backend services."
+msgstr ""
+
 msgid "ID"
 msgstr "ID"
 
@@ -427,9 +436,6 @@ msgstr "轮询间隔乘数"
 msgid "Polling multiplier which is used to multiply the default polling intervals. This can be used to prevent polling too frequently for long running tasks."
 msgstr "轮询乘数，用于乘以默认轮询间隔。这可用于防止对长时间运行的任务进行过于频繁的轮询。"
 
-msgid "Preupgrade job"
-msgstr ""
-
 msgid "Proxy action retry count"
 msgstr ""
 
@@ -440,6 +446,9 @@ msgid "Proxy task gone missing from the smart proxy"
 msgstr "代理任务在智能代理中丢失"
 
 msgid "Proxy tasks batch size"
+msgstr ""
+
+msgid "Purpose"
 msgstr ""
 
 msgid "Raw"
@@ -486,6 +495,9 @@ msgstr "所需的锁定已由其他正在运行的任务获取。"
 
 msgid "Resource search_params requires resource_type and resource_id to be specified"
 msgstr "資源 search_params 需要指定 resource_type 與 resource_id"
+
+msgid "Resources for %s task(s) will be unlocked and will not prevent other tasks from being run. As the task(s) might be still running, it should be avoided to use this unless you are really sure the task(s) got stuck."
+msgstr ""
 
 msgid "Result"
 msgstr "结果"
@@ -663,6 +675,12 @@ msgstr[1] ""
 msgid "This action will delete all cancelled recurring logics. Please note that this action can't be reversed."
 msgstr "此操作将删除所有取消的重复逻辑。请注意，此操作无法撤消。"
 
+msgid "This will %(action)s %(number)s task(s), putting them in the %(state)s state. Are you sure?"
+msgstr ""
+
+msgid "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed."
+msgstr ""
+
 msgid "Thu"
 msgstr "周四"
 
@@ -717,6 +735,9 @@ msgstr "专注于最后"
 msgid "Yes"
 msgstr "是"
 
+msgid "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource"
+msgstr ""
+
 msgid "You do not have permission"
 msgstr ""
 
@@ -757,6 +778,9 @@ msgstr "是分鐘（範圍：0-59）"
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is month (range: 1-12)"
 msgstr "是月份（範圍：1-12）"
+
+msgid "is not a valid format"
+msgstr ""
 
 msgid "last"
 msgstr "最近"
