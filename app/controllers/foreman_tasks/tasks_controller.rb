@@ -4,6 +4,8 @@ module ForemanTasks
     include Foreman::Controller::CsvResponder
     include ForemanTasks::FindTasksCommon
 
+    before_action :find_dynflow_task, only: [:unlock, :force_unlock, :cancel, :cancel_step, :resume]
+
     def show
       @task = resource_base.find(params[:id])
       render :layout => !request.xhr?
@@ -31,8 +33,7 @@ module ForemanTasks
     end
 
     def cancel_step
-      task = find_dynflow_task
-      result = ForemanTasks.dynflow.world.event(task.external_id, params[:step_id].to_i, ::Dynflow::Action::Cancellable::Cancel).wait
+      result = ForemanTasks.dynflow.world.event(@dynflow_task.external_id, params[:step_id].to_i, ::Dynflow::Action::Cancellable::Cancel).wait
       if result.rejected?
         render json: { error: result.reason }, status: :bad_request
       else
@@ -41,8 +42,7 @@ module ForemanTasks
     end
 
     def cancel
-      task = find_dynflow_task
-      if task.cancel
+      if @dynflow_task.cancel
         render json: { statusText: 'OK' }
       else
         render json: {}, status: :bad_request
@@ -50,19 +50,17 @@ module ForemanTasks
     end
 
     def abort
-      task = find_dynflow_task
-      if task.abort
+      if @dynflow_task.abort
         flash[:info] = _('Trying to abort the task')
       else
         flash[:warning] = _('The task cannot be aborted at the moment.')
       end
-      redirect_back(:fallback_location => foreman_tasks_task_path(task))
+      redirect_back(:fallback_location => foreman_tasks_task_path(@dynflow_task))
     end
 
     def resume
-      task = find_dynflow_task
-      if task.resumable?
-        ForemanTasks.dynflow.world.execute(task.execution_plan.id)
+      if @dynflow_task.resumable?
+        ForemanTasks.dynflow.world.execute(@dynflow_task.execution_plan.id)
         render json: { statusText: 'OK' }
       else
         render json: {}, status: :bad_request
@@ -70,18 +68,16 @@ module ForemanTasks
     end
 
     def unlock
-      task = find_dynflow_task
-      if task.paused?
-        force_unlock(task)
+      if @dynflow_task.paused?
+        unlock_task(@dynflow_task)
+        render json: { statusText: 'OK' }
       else
         render json: {}, status: :bad_request
       end
     end
 
-    def force_unlock(task = find_dynflow_task)
-      task.state = :stopped
-      task.locks.destroy_all
-      task.save!
+    def force_unlock
+      unlock_task(@dynflow_task)
       render json: { statusText: 'OK' }
     end
 
@@ -95,6 +91,12 @@ module ForemanTasks
     end
 
     private
+
+    def unlock_task(task)
+      task.state = :stopped
+      task.locks.destroy_all
+      task.save!
+    end
 
     def respond_with_tasks(scope)
       @tasks = filter(scope, paginate: false).with_duration
@@ -121,7 +123,7 @@ module ForemanTasks
     end
 
     def find_dynflow_task
-      resource_scope.where(:type => 'ForemanTasks::Task::DynflowTask').find(params[:id])
+      @dynflow_task = resource_scope.where(:type => 'ForemanTasks::Task::DynflowTask').find(params[:id])
     end
 
     def filter(scope, paginate: true)
