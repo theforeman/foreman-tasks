@@ -27,7 +27,7 @@ module ForemanTasks
     end
 
     def self.batch_trigger(operation, remote_tasks)
-      remote_tasks.group_by(&:proxy_url).values.map do |group|
+      remote_tasks.group_by(&:proxy_url).each_value do |group|
         input_hash = group.reduce({}) do |acc, remote_task|
           acc.merge(remote_task.execution_plan_id => { :action_input => remote_task.proxy_input,
                                                        :action_class => remote_task.proxy_action_name })
