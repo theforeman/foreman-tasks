@@ -9,6 +9,7 @@ AllCops:
   Exclude:
     - 'node_modules/**/*'
     - 'locale/*'
+    - 'vendor/**/*'
   TargetRubyVersion: 2.5
 
 Lint/ShadowingOuterLocalVariable:
