@@ -9,6 +9,9 @@ namespace :test do
 
     Rake::Task[test_task.name].invoke
   end
+
+  desc 'Alias for test:foreman_tasks'
+  task :'foreman-tasks' => :foreman_tasks
 end
 
 Rake::Task[:test].enhance do
