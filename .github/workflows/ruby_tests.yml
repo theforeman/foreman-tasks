@@ -36,8 +36,8 @@ jobs:
       - run: sudo apt-get install build-essential libcurl4-openssl-dev zlib1g-dev libpq-dev
       - uses: actions/checkout@v2
         with:
-          repository: theforeman/foreman
-          ref: ${{ matrix.foreman-core-branch }}
+          repository: ehelms/foreman
+          ref: upgrade-rails-6.0.4.7
       - uses: actions/checkout@v2
         with:
           path: foreman-tasks
