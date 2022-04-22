@@ -219,19 +219,26 @@ module ForemanTasks
     def self.consistency_check
       fixed_count = 0
       logger = Foreman::Logging.logger('foreman-tasks')
-      running.each do |task|
-        changes = task.update_from_dynflow(task.execution_plan)
-        unless changes.empty?
-          fixed_count += 1
-          logger.warn('Task %s updated at consistency check: %s' % [task.id, changes.inspect])
+
+      # Dynflow execution plans which are not stopped at this point should
+      # eventually get moving and their tasks should eventually get back in sync
+      # as the execution plans run
+      self.joins('LEFT JOIN dynflow_execution_plans ON foreman_tasks_tasks.external_id = dynflow_execution_plans.uuid::varchar')
+          .where('foreman_tasks_tasks.state_updated_at < dynflow_execution_plans.ended_at')
+          .find_each do |task|
+        begin
+          changes = task.update_from_dynflow(task.execution_plan.to_hash)
+          unless changes.empty?
+            fixed_count += 1
+            logger.warn('Task %s updated at consistency check: %s' % [task.id, changes.inspect])
+          end
+        rescue => e
+          task.update(:state => 'stopped', :result => 'error')
+          Foreman::Logging.exception("Failed at consistency check for task #{task.id}", e, :logger => 'foreman-tasks')
         end
-      rescue => e
-        # if we fail updating the data from dynflow, it usually means there is something
-        # odd with the data consistency and at this point it is not possible to resume, switching
-        # the task to stopped/error
-        task.update(:state => 'stopped', :result => 'error')
-        Foreman::Logging.exception("Failed at consistency check for task #{task.id}", e, :logger => 'foreman-tasks')
       end
+      # Wipe tasks left behind by now stopped tasks
+      ForemanTasks::Lock.left_joins(:task).merge(self.where(:state => 'stopped')).destroy_all
       fixed_count
     end
 
