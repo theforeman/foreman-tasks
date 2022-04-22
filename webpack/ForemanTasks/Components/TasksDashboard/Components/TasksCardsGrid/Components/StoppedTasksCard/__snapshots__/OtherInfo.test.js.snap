@@ -4,43 +4,27 @@ exports[`OtherInfo render 1`] = `
 <span
   className=""
 >
-  <OverlayTrigger
-    defaultOverlayShown={false}
-    overlay={
-      <Tooltip
-        bsClass="tooltip"
-        id="stopped-tooltip"
-        placement="right"
-      >
-        Other includes all stopped tasks that are cancelled or pending
-      </Tooltip>
-    }
-    placement="bottom"
-    trigger={
-      Array [
-        "hover",
-        "focus",
-      ]
-    }
+  <Tooltip
+    content="Other includes all stopped tasks that are cancelled or pending"
+    id="stopped-tooltip"
+    position="bottom"
   >
     <span>
-      <Icon
-        name="info"
-        type="pf"
+      <InfoCircleIcon
+        className="pficon"
+        color="currentColor"
+        noVerticalAlign={false}
+        size="sm"
       />
       <span>
         Other:
          
       </span>
     </span>
-  </OverlayTrigger>
+  </Tooltip>
   <Button
-    active={false}
-    block={false}
-    bsClass="btn"
-    bsStyle="link"
-    disabled={false}
     onClick={[Function]}
+    variant="link"
   >
     7
   </Button>

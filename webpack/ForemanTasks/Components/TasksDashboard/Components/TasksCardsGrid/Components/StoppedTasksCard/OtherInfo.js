@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import { Icon, Button, OverlayTrigger, Tooltip } from 'patternfly-react';
+import { Button, Tooltip, TooltipPosition } from '@patternfly/react-core';
+import { InfoCircleIcon } from '@patternfly/react-icons';
 import { translate as __ } from 'foremanReact/common/I18n';
 import {
   TASKS_DASHBOARD_AVAILABLE_QUERY_STATES,
@@ -10,30 +11,26 @@ import {
 } from '../../../../TasksDashboardConstants';
 import { queryPropType } from '../../../../TasksDashboardPropTypes';
 
-const tooltip = (
-  <Tooltip id="stopped-tooltip">
-    {__('Other includes all stopped tasks that are cancelled or pending')}
-  </Tooltip>
-);
-
 export const OtherInfo = ({ updateQuery, otherCount, query }) => {
   const { OTHER } = TASKS_DASHBOARD_AVAILABLE_QUERY_RESULTS;
   const { STOPPED } = TASKS_DASHBOARD_AVAILABLE_QUERY_STATES;
   const active = query.state === STOPPED && query.result === OTHER;
   return (
     <span className={classNames(active && 'other-active')}>
-      <OverlayTrigger
-        overlay={tooltip}
-        trigger={['hover', 'focus']}
-        placement="bottom"
+      <Tooltip
+        id="stopped-tooltip"
+        content={__(
+          'Other includes all stopped tasks that are cancelled or pending'
+        )}
+        position={TooltipPosition.bottom}
       >
         <span>
-          <Icon type="pf" name="info" />
+          <InfoCircleIcon className="pficon" />
           <span>{__('Other:')} </span>
         </span>
-      </OverlayTrigger>
+      </Tooltip>
       <Button
-        bsStyle="link"
+        variant="link"
         onClick={() =>
           updateQuery({
             state: STOPPED,
