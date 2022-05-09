@@ -39,23 +39,18 @@ namespace :foreman_tasks do
 
     desc 'Show the current configuration for auto-cleanup'
     task :config => ['environment', 'dynflow:client'] do
-      if ForemanTasks::Cleaner.cleanup_settings[:after]
-        puts _('The tasks will be deleted after %{after}') % { :after => ForemanTasks::Cleaner.cleanup_settings[:after] }
-      else
-        puts _('Global period for cleaning up tasks is not set')
-      end
-
       if ForemanTasks::Cleaner.actions_with_default_cleanup.empty?
         puts _('No actions are configured to be cleaned automatically')
       else
         puts _('The following actions are configured to be deleted automatically after some time:')
-        printf("%-50s %s\n", _('name'), _('delete after'))
+        printf("%-75s %-20s %-50s\n", _('name'), _('delete after'), _('filter'))
         ForemanTasks::Cleaner.actions_with_default_cleanup.each do |action, after|
-          printf("%-50s %s\n", action.name, after)
+          klass = action.klass
+          printf("%-75s %-20s %-50s\n", klass.try(:name) || klass, action.after, action.condition)
         end
       end
       puts
-      by_rules = ForemanTasks::Cleaner.actions_by_rules(ForemanTasks::Cleaner.actions_with_default_cleanup)
+      by_rules = ForemanTasks::Cleaner.actions_by_rules(ForemanTasks::CompositeActionRule.new(*ForemanTasks::Cleaner.actions_with_default_cleanup))
       if by_rules.empty?
         puts _('No cleanup rules are configured')
       else

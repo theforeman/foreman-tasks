@@ -27,16 +27,23 @@
 #
   :cleanup:
 #
-# the period after which to delete all the tasks (by default all tasks are not being deleted after some period)
-# will be deprecated in Foreman 1.18 and the use of rules is recommended.
-#
-#     :after: 30d
-#
 # per action settings to override the default defined in the actions (self.cleanup_after method)
 #
 #    :actions:
 #      - :name: Actions::Foreman::Host::ImportFacts
 #        :after: 10d
+#      # Actions name can also be a list of names
+#      - :name:
+#          - Actions::Katello::Host::Erratum::Install
+#          - Actions::Katello::Host::Erratum::ApplicableErrataInstall
+#        :after: 90d
+#      # Actions can also define a condition
+#      - :name:
+#          - Actions::RemoteExecution::RunHostJob
+#          - Actions::RemoteExecution::RunHostsJob
+#        :filter: remote_execution_feature.label = katello_errata_install
+#        :after: 90d
+
 #
 # Rules defined in this section by default don't operate
 # on tasks specified in the actions section. This behavior

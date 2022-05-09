@@ -2,6 +2,50 @@ require 'csv'
 
 module ForemanTasks
   # Represents the cleanup mechanism for tasks
+  class ActionRule
+    attr_reader :klass, :after, :condition
+    def initialize(klass, after, condition = nil)
+      @klass = klass
+      @after = after
+      @condition = condition
+    end
+
+    def exclude_search
+      "NOT (#{include_search})"
+    end
+
+    def include_search
+      parts = if klass.is_a? Array
+                ["label ^ (#{klass.join(', ')})"]
+              else
+                ["label = \"#{klass}\""]
+              end
+      parts << "(#{@condition})" if @condition
+      '(' + parts.join(' AND ') + ')'
+    end
+
+    def self.compose_include_rules(rules)
+      rules.group_by { |rule| [rule.after, rule.condition] }
+        .map do |(after, condition), rules|
+        ActionRule.new(rules.map(&:klass), after, condition)
+      end
+    end
+  end
+
+  class CompositeActionRule
+    def initialize(*rules)
+      @rules = rules
+    end
+
+    def exclude_search
+      partial_condition = @rules.group_by(&:condition)
+        .map do |condition, rules|
+        ActionRule.new(rules.map(&:klass), nil, condition).include_search
+      end.join(' OR ')
+      "NOT (#{partial_condition})"
+    end
+  end
+
   class Cleaner
     def self.run(options)
       if options.key?(:filter)
@@ -12,36 +56,29 @@ module ForemanTasks
             raise "The option #{invalid_option} is not valid unless the filter specified"
           end
         end
-        if cleanup_settings[:after]
-          Foreman::Deprecation.deprecation_warning('1.18', _(':after setting in tasks cleanup section is deprecated, use :after in :rules section to set the value. to cleanup rules'))
-          new(options.merge(:filter => '', :after => cleanup_settings[:after])).delete
-        end
         with_periods = actions_with_default_cleanup
-        with_periods.each do |action_class, period|
-          new(options.merge(:filter => "label = #{action_class.name}", :after => period)).delete
+        ActionRule.compose_include_rules(with_periods).each do |rule|
+          new(options.merge(:filter => rule.include_search, :after => rule.after)).delete
         end
-        actions_by_rules(with_periods).each do |hash|
+        actions_by_rules(CompositeActionRule.new(*with_periods)).each do |hash|
           new(options.merge(hash)).delete
         end
       end
     end
 
     def self.actions_with_default_cleanup
-      actions_with_periods = {}
-      if cleanup_settings[:actions]
-        cleanup_settings[:actions].each do |action|
-          action_class = action[:name].constantize
-          actions_with_periods[action_class] = action[:after]
-        rescue => e
-          Foreman::Logging.exception("Error handling #{action} cleanup settings", e)
+      actions = (cleanup_settings[:actions] || []).flat_map do |action|
+        Array(action[:name]).map do |klass|
+          ActionRule.new(klass.safe_constantize || klass, action[:after], action[:filter])
         end
-      end
-      (ForemanTasks.dynflow.world.action_classes - actions_with_periods.keys).each do |action_class|
-        if action_class.respond_to?(:cleanup_after)
-          actions_with_periods[action_class] = action_class.cleanup_after
-        end
-      end
-      actions_with_periods
+      rescue => e
+        Foreman::Logging.exception("Error handling #{action} cleanup settings", e)
+        nil
+      end.compact
+      hardcoded = (ForemanTasks.dynflow.world.action_classes - actions.map(&:klass))
+                    .select { |klass| klass.respond_to?(:cleanup_after) || klass.respond_to?(:cleanup_rules) }
+                    .flat_map { |klass| klass.respond_to?(:cleanup_rules) ? klass.cleanup_rules : ActionRule.new(klass, klass.cleanup_after) }
+      actions + hardcoded
     end
 
     def self.cleanup_settings
@@ -49,8 +86,8 @@ module ForemanTasks
       @cleanup_settings = SETTINGS[:'foreman-tasks'] && SETTINGS[:'foreman-tasks'][:cleanup] || {}
     end
 
-    def self.actions_by_rules(actions_with_periods)
-      disable_actions_with_periods = "label !^ (#{actions_with_periods.keys.join(', ')})"
+    def self.actions_by_rules(action_rules)
+      disable_actions_with_periods = "(#{action_rules.exclude_search})"
       cleanup_settings.fetch(:rules, []).map do |hash|
         next if hash[:after].nil?
         conditions = []
