@@ -42,17 +42,17 @@ module ForemanTasks
         security_block :foreman_tasks do |_map|
           permission :view_foreman_tasks, { :'foreman_tasks/tasks' => [:auto_complete_search, :sub_tasks, :index, :summary, :summary_sub_tasks, :show],
                                             :'foreman_tasks/react' => [:index],
-                                            :'foreman_tasks/api/tasks' => [:bulk_search, :show, :index, :summary, :summary_sub_tasks, :details, :sub_tasks] }, :resource_type => ForemanTasks::Task.name
+                                            :'foreman_tasks/api/tasks' => [:bulk_search, :show, :index, :summary, :summary_sub_tasks, :details, :sub_tasks] }, :resource_type => 'ForemanTasks::Task'
           permission :edit_foreman_tasks, { :'foreman_tasks/tasks' => [:resume, :unlock, :force_unlock, :cancel_step, :cancel, :abort],
-                                            :'foreman_tasks/api/tasks' => [:bulk_resume, :bulk_cancel, :bulk_stop] }, :resource_type => ForemanTasks::Task.name
+                                            :'foreman_tasks/api/tasks' => [:bulk_resume, :bulk_cancel, :bulk_stop] }, :resource_type => 'ForemanTasks::Task'
 
-          permission :create_recurring_logics, {}, :resource_type => ForemanTasks::RecurringLogic.name
+          permission :create_recurring_logics, {}, :resource_type => 'ForemanTasks::RecurringLogic'
 
           permission :view_recurring_logics, { :'foreman_tasks/recurring_logics' => [:auto_complete_search, :index, :show],
-                                               :'foreman_tasks/api/recurring_logics' => [:index, :show] }, :resource_type => ForemanTasks::RecurringLogic.name
+                                               :'foreman_tasks/api/recurring_logics' => [:index, :show] }, :resource_type => 'ForemanTasks::RecurringLogic'
 
           permission :edit_recurring_logics, { :'foreman_tasks/recurring_logics' => [:cancel, :enable, :disable, :clear_cancelled],
-                                               :'foreman_tasks/api/recurring_logics' => [:cancel, :update, :bulk_destroy] }, :resource_type => ForemanTasks::RecurringLogic.name
+                                               :'foreman_tasks/api/recurring_logics' => [:cancel, :update, :bulk_destroy] }, :resource_type => 'ForemanTasks::RecurringLogic'
         end
 
         add_all_permissions_to_default_roles
@@ -116,7 +116,7 @@ module ForemanTasks
         register_graphql_query_field :recurring_logic, '::Types::RecurringLogic', :record_field
         register_graphql_query_field :recurring_logics, '::Types::RecurringLogic', :collection_field
 
-        register_graphql_mutation_field :cancel_recurring_logic, ::Mutations::RecurringLogics::Cancel
+        register_graphql_mutation_field :cancel_recurring_logic, '::Mutations::RecurringLogics::Cancel'
 
         logger :dynflow, :enabled => true
         logger :action, :enabled => true
