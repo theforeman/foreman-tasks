@@ -96,7 +96,8 @@ module ForemanTasks
           task = ForemanTasks::Task.with_duration.find(FactoryBot.create(:some_task).id)
           get(:index, params: {}, session: set_session_user)
           assert_response :success
-          assert_include response.body.lines[1], task.duration
+          row = CSV.parse(response.body, headers: true).first
+          assert_include row['Duration'], task.duration.in_seconds.to_s
         end
       end
 
@@ -126,7 +127,8 @@ module ForemanTasks
           child.save!
           get(:sub_tasks, params: { id: parent.id }, session: set_session_user)
           assert_response :success
-          assert_include response.body.lines[1], child.duration
+          row = CSV.parse(response.body, headers: true).first
+          assert_include row['Duration'], child.duration.in_seconds.to_s
         end
       end
 
