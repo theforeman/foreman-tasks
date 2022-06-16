@@ -26,7 +26,7 @@ module ForemanTasks
 
     def self.compose_include_rules(rules)
       rules.group_by { |rule| [rule.after, rule.condition] }
-        .map do |(after, condition), rules|
+           .map do |(after, condition), rules|
         ActionRule.new(rules.map(&:klass), after, condition)
       end
     end
@@ -39,7 +39,7 @@ module ForemanTasks
 
     def exclude_search
       partial_condition = @rules.group_by(&:condition)
-        .map do |condition, rules|
+                                .map do |condition, rules|
         ActionRule.new(rules.map(&:klass), nil, condition).include_search
       end.join(' OR ')
       "NOT (#{partial_condition})"
@@ -67,17 +67,18 @@ module ForemanTasks
     end
 
     def self.actions_with_default_cleanup
-      actions = (cleanup_settings[:actions] || []).flat_map do |action|
+      actions = cleanup_settings.fetch(:actions, [])
+                                .flat_map do |action|
         Array(action[:name]).map do |klass|
           ActionRule.new(klass.safe_constantize || klass, action[:after], action[:filter])
         end
-      rescue => e
-        Foreman::Logging.exception("Error handling #{action} cleanup settings", e)
-        nil
+                rescue => e
+                  Foreman::Logging.exception("Error handling #{action} cleanup settings", e)
+                  nil
       end.compact
       hardcoded = (ForemanTasks.dynflow.world.action_classes - actions.map(&:klass))
-                    .select { |klass| klass.respond_to?(:cleanup_after) || klass.respond_to?(:cleanup_rules) }
-                    .flat_map { |klass| klass.respond_to?(:cleanup_rules) ? klass.cleanup_rules : ActionRule.new(klass, klass.cleanup_after) }
+                  .select { |klass| klass.respond_to?(:cleanup_after) || klass.respond_to?(:cleanup_rules) }
+                  .flat_map { |klass| klass.respond_to?(:cleanup_rules) ? klass.cleanup_rules : ActionRule.new(klass, klass.cleanup_after) }
       actions + hardcoded
     end
 

@@ -44,7 +44,7 @@ namespace :foreman_tasks do
       else
         puts _('The following actions are configured to be deleted automatically after some time:')
         printf("%-75s %-20s %-50s\n", _('name'), _('delete after'), _('filter'))
-        ForemanTasks::Cleaner.actions_with_default_cleanup.each do |action, after|
+        ForemanTasks::Cleaner.actions_with_default_cleanup.each do |action, _after|
           klass = action.klass
           printf("%-75s %-20s %-50s\n", klass.try(:name) || klass, action.after, action.condition)
         end
