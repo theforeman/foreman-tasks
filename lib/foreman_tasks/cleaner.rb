@@ -88,7 +88,7 @@ module ForemanTasks
     end
 
     def self.actions_by_rules(action_rules)
-      disable_actions_with_periods = "(#{action_rules.exclude_search})"
+      disable_actions_with_periods = action_rules.exclude_search
       cleanup_settings.fetch(:rules, []).map do |hash|
         next if hash[:after].nil?
         conditions = []
