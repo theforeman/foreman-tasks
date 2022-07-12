@@ -155,10 +155,22 @@ module Actions
       if output.key?(:proxy_output) || state == :error
         output.fetch(:proxy_output, {})
       elsif live && proxy_task_id
-        response = proxy.status_of_task(proxy_task_id)
+        response = ::Rails.cache.fetch("proxy-task-status-#{proxy_task_id}") do
+          proxy.status_of_task(proxy_task_id)
+        end
         get_proxy_data(response)
       else
         {}
+      end
+    end
+
+    def batch_proxy_output
+      if output.key?(:proxy_output) || state == :error
+        { :source => :local, :output => output.fetch(:proxy_output, {}) }
+      elsif proxy_task_id
+        { :source => :remote, :proxy_url => input[:proxy_url], :proxy_task_id => proxy_task_id }
+      else
+        { :source => :default, :output => {} }
       end
     end
 
