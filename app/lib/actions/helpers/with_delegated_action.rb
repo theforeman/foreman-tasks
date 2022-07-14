@@ -3,7 +3,7 @@ module Actions
     module WithDelegatedAction
       include ::Actions::Helpers::WithContinuousOutput
 
-      def plan_delegated_action(proxy, klass, options)
+      def plan_delegated_action(proxy, klass, options, proxy_action_class: ::Actions::ProxyAction)
         case proxy
         when :not_defined
           if klass.is_a?(String)
@@ -14,7 +14,7 @@ module Actions
         when :not_available
           raise Foreman::Exception, _('All proxies with the required feature are unavailable at the moment')
         when ::SmartProxy
-          delegated_action = plan_action(::Actions::ProxyAction, proxy, klass, options)
+          delegated_action = plan_action(proxy_action_class, proxy, klass, options)
         end
 
         input[:delegated_action_id] = delegated_action.id
