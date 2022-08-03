@@ -42,7 +42,7 @@ module Actions
     rescue => e
       action_logger.warn "Could not trigger task on the smart proxy"
       action_logger.warn e
-      batch.each { |remote_task| remote_task.update_from_batch_trigger({}) }
+      batch.each { |remote_task| remote_task.update_from_batch_trigger({ 'exception' => e }) }
       output[:failed_count] += batch.size
     end
 

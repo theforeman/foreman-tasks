@@ -49,10 +49,11 @@ module ForemanTasks
         self.parent_task_id = parent['task_id']
         self.state = 'parent-triggered'
       else
+        exception = data['exception']
         # Tell the action the task on the smart proxy stopped
         ForemanTasks.dynflow.world.event execution_plan_id,
                                          step_id,
-                                         ::Actions::ProxyAction::ProxyActionStopped.new,
+                                         ::Actions::ProxyAction::ProxyActionStoppedEvent[exception],
                                          optional: true
       end
       save!
