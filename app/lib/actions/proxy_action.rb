@@ -102,6 +102,8 @@ module Actions
       else
         suspend
       end
+    rescue RestClient::NotFound
+      on_proxy_action_missing
     end
 
     def cancel_proxy_task
