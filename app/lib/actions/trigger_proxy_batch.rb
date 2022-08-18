@@ -42,6 +42,9 @@ module Actions
     rescue => e
       action_logger.warn "Could not trigger task on the smart proxy"
       action_logger.warn e
+      # The response contains non-serializable objects
+      # TypeError: no _dump_data is defined for class Monitor
+      e.response = nil
       batch.each { |remote_task| remote_task.update_from_batch_trigger({ 'exception' => e }) }
       output[:failed_count] += batch.size
     end
