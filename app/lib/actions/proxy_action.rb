@@ -22,7 +22,15 @@ module Actions
       end
     end
 
-    class ProxyActionStopped; end
+    class ProxyActionStopped < RuntimeError
+      def backtrace
+        []
+      end
+    end
+
+    ProxyActionStoppedEvent = ::Algebrick.type do
+      fields! exception: type { variants NilClass, Exception }
+    end
 
     def plan(proxy, klass, options)
       options[:connection_options] ||= {}
@@ -52,8 +60,8 @@ module Actions
           on_data(event.data, event.meta)
         when ProxyActionMissing
           on_proxy_action_missing
-        when ProxyActionStopped
-          on_proxy_action_stopped
+        when ProxyActionStoppedEvent
+          on_proxy_action_stopped(event)
         else
           raise "Unexpected event #{event.inspect}"
         end
@@ -94,6 +102,8 @@ module Actions
       else
         suspend
       end
+    rescue RestClient::NotFound
+      on_proxy_action_missing
     end
 
     def cancel_proxy_task
@@ -133,8 +143,12 @@ module Actions
       error! ProxyActionMissing.new(_('Proxy task gone missing from the smart proxy'))
     end
 
-    def on_proxy_action_stopped
-      check_task_status
+    def on_proxy_action_stopped(event)
+      if event.exception
+        error! ProxyActionStopped.new(_('Failed to trigger task on the smart proxy: ') + event.exception.message)
+      else
+        check_task_status
+      end
     end
 
     # @override String name of an action to be triggered on server
