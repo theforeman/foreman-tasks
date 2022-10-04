@@ -28,7 +28,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        foreman-core-branch: [develop]
+        foreman-core-branch: [refs-32685-use-actual-model]
         ruby-version: [2.7]
         node-version: [12]
     steps:
@@ -36,7 +36,7 @@ jobs:
       - run: sudo apt-get install build-essential libcurl4-openssl-dev zlib1g-dev libpq-dev
       - uses: actions/checkout@v2
         with:
-          repository: theforeman/foreman
+          repository: ofedoren/foreman
           ref: ${{ matrix.foreman-core-branch }}
       - uses: actions/checkout@v2
         with:
