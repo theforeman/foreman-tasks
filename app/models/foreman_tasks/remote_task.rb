@@ -7,7 +7,7 @@ module ForemanTasks
                       :foreign_key => :execution_plan_id,
                       :inverse_of  => :remote_tasks
 
-    scope :triggered, -> { where(:state => 'triggered') }
+    scope :triggered, -> { where(:state => ['triggered', 'parent-triggered']) }
     scope :pending,   -> { where(:state => 'new') }
     scope :external,  -> { where(:state => 'external') }
 
