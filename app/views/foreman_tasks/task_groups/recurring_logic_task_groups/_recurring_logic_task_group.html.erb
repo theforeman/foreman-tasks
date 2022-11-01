@@ -1,47 +1,47 @@
 <% recurring_logic = task_group.recurring_logic -%>
 <table class='<%= table_css_classes('table-condensed') %>'>
   <tr>
-    <th>ID</th>
+    <th><%= _('ID') %></th>
     <td><%= link_to(recurring_logic.id, recurring_logic) %></td>
   </tr>
   <tr>
-    <th><%= N_("Cron line") %></th>
+    <th><%= _("Cron line") %></th>
     <td><%= recurring_logic.cron_line %></td>
   </tr>
   <tr>
-    <th><%= N_("Action") %></th>
+    <th><%= _("Action") %></th>
     <td><%= format_task_input(recurring_logic.tasks.last) %></td>
   </tr>
   <tr>
-    <th><%= N_("Last occurrence") %></th>
+    <th><%= _("Last occurrence") %></th>
     <td><%= recurring_logic.tasks.order(:started_at).where('started_at IS NOT NULL').last.try(:started_at) || '-' %></td>
   </tr>
   <tr>
-    <th><%= N_("Next occurrence") %></th>
+    <th><%= _("Next occurrence") %></th>
     <td><%= recurring_logic_next_occurrence recurring_logic %></td>
   </tr>
   <tr>
-    <th><%= N_("Current iteration") %></th>
+    <th><%= _("Current iteration") %></th>
     <td><%= recurring_logic.iteration %></td>
   </tr>
   <tr>
-    <th><%= N_("Iteration limit") %></th>
+    <th><%= _("Iteration limit") %></th>
     <td><%= format_recurring_logic_limit recurring_logic.max_iteration %></td>
   </tr>
   <tr>
-    <th><%= N_("Repeat until") %></th>
+    <th><%= _("Repeat until") %></th>
     <td><%= format_recurring_logic_limit recurring_logic.end_time.try(:in_time_zone) %></td>
   </tr>
   <tr>
-    <th><%= N_("State") %></th>
+    <th><%= _("State") %></th>
     <td><%= recurring_logic_state(recurring_logic) %></td>
   </tr>
   <tr>
-    <th><%= N_("Purpose") %></th>
+    <th><%= _("Purpose") %></th>
     <td><%= recurring_logic.purpose %></td>
   </tr>
   <tr>
-    <th><%= N_("Task count") %></th>
+    <th><%= _("Task count") %></th>
     <td><%= link_to(task_group.tasks.count, foreman_tasks_tasks_url(:search => "task_group.id = #{task_group.id}")) %></td>
   </tr>
 </table>
