@@ -51,9 +51,6 @@ msgstr "12 時間"
 msgid "24h"
 msgstr "24 時間"
 
-msgid ":after setting in tasks cleanup section is deprecated, use :after in :rules section to set the value. to cleanup rules"
-msgstr "タスク消去のセクションの :after の設定は非推奨になりました。:rule セクションで :after を使用して値を設定し、ルールを消去してください。"
-
 msgid "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved."
 msgstr "一時停止タスクは、適切に終了していないプロセスを表します。一時停止状態のタスクは、一貫性に欠ける可能性があり、解決する必要があります。"
 
@@ -261,6 +258,9 @@ msgstr "%{url} でのプロキシータスクをチェックできませんで�
 
 msgid "Failed to initialize"
 msgstr "初期化に失敗しました"
+
+msgid "Failed to trigger task on the smart proxy: "
+msgstr ""
 
 msgid "Finished"
 msgstr "終了"
@@ -471,9 +471,6 @@ msgid "Recurring logics"
 msgstr "再帰論理"
 
 msgid "Refresh Data"
-msgstr ""
-
-msgid "Remote action:"
 msgstr ""
 
 msgid "Repeat N times"

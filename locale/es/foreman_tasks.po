@@ -1,0 +1,874 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the foreman_tasks package.
+#
+# Translators:
+# Cha'gara Casanova <jlozada2426@gmail.com>, 2016
+# francis <hackgo@gmail.com>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Foreman\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2016-02-12 14:04+0000\n"
+"Last-Translator: francis <hackgo@gmail.com>, 2017\n"
+"Language-Team: Spanish (http://www.transifex.com/foreman/foreman/language/es/)"
+"\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 :"
+" 2;\n"
+
+msgid "${taskReload ? 'Stop' : 'Start'}  auto-reloading"
+msgstr "${taskReload ? 'Stop' : 'Start'} auto-recarga"
+
+msgid "%(last)s Last %(time)s"
+msgstr "%(last)s Última %(time)s"
+
+msgid "%(older)s Older %(time)s"
+msgstr "%(older)s Mayor %(time)s"
+
+msgid "%s Selected Tasks"
+msgstr "%s Tareas seleccionadas"
+
+msgid "%s is not valid format of cron line"
+msgstr "%s no es válido el formato de la línea cron"
+
+msgid "%{total} task(s), %{success} success, %{failed} fail"
+msgstr "%{total} tarea(s), %{success} éxito, %{failed} fallo"
+
+msgid "%{value} is not allowed input type"
+msgstr "%{value} no es un tipo de entrada permitido"
+
+msgid "%{value} is not allowed triggering mode"
+msgstr "%{value} no está permitido el modo de activación"
+
+msgid "%{value} is wrong format"
+msgstr "%{value} es un formato incorrecto"
+
+msgid "12h"
+msgstr "12 h"
+
+msgid "24h"
+msgstr "24 h"
+
+msgid "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved."
+msgstr "Una tarea pausada representa un proceso que no ha terminado correctamente. Cualquier tarea en estado de pausa puede llevar a una potencial inconsistencia y debe ser resuelta."
+
+msgid "A special label for tracking a recurring job. There can be only one active job with a given purpose at a time."
+msgstr "Una etiqueta especial para el seguimiento de un trabajo recurrente. Sólo puede haber un trabajo activo con un propósito determinado a la vez."
+
+msgid "Action"
+msgstr "Acción"
+
+msgid "Action with sub plans"
+msgstr "Acción con subplanes"
+
+msgid "Active"
+msgstr "Activo"
+
+msgid "Active Filters:"
+msgstr "Filtros activos:"
+
+msgid "Active or disabled recurring logic with purpose %s already exists"
+msgstr "Lógica recurrente activa o desactivada con el propósito %s ya existe"
+
+msgid "All %s tasks are selected. "
+msgstr "Se seleccionan todas las tareas de %s. "
+
+msgid "All proxies with the required feature are unavailable at the moment"
+msgstr "Ningún proxy con función obligatoria está disponible en este momento"
+
+msgid "Allow proxy batch tasks"
+msgstr "Permitir las tareas por lotes del proxy"
+
+msgid "Allow triggering tasks on the smart proxy in batches"
+msgstr "Permitir tareas de activación en el proxy inteligente en lotes"
+
+msgid "Associated resources"
+msgstr "Recursos asociados"
+
+#. TRANSLATORS: Time widget for when a task should start
+msgid "At"
+msgstr "En"
+
+msgid "Back to tasks"
+msgstr "Volver a las tareas"
+
+msgid "Backtrace"
+msgstr "Seguimiento hacia atrás"
+
+msgid "Bulk action"
+msgstr "Acción masiva"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Cancel Selected"
+msgstr "Cancelar lo seleccionado"
+
+msgid "Cancel enforced: the task might be still running on the proxy"
+msgstr "Cancelación ejecutada: es posible que la tarea aún se esté ejecutando en el proxy."
+
+msgid "Cancel recurring logic"
+msgstr "Cancelar lógica recurrente"
+
+msgid "Cancel selected cancellable tasks"
+msgstr "Cancelar las tareas seleccionadas que se pueden cancelar"
+
+msgid "Cancel selected tasks"
+msgstr "Cancelar las tareas seleccionadas"
+
+msgid "Cancel specific tasks by ID"
+msgstr "Cancelar las tareas específicas por ID"
+
+msgid "Cancel tasks matching search string"
+msgstr "Cancelar las tareas que coincidan con la secuencia de búsqueda"
+
+msgid "Canceling selected tasks, this might take a while"
+msgstr "Cancelando las tareas seleccionadas; esto puede tardar un poco"
+
+msgid "Canceling with force selected tasks, this might take a while"
+msgstr "Cancelando las tareas seleccionadas a la fuerza; esto puede tardar un poco"
+
+msgid "Cancelled"
+msgstr "Cancelado"
+
+msgid "Cannot cancel tasks at the moment"
+msgstr "No se puede cancelar tareas en este momento"
+
+msgid "Cannot force cancel tasks at the moment"
+msgstr "No se puede forzar la cancelación de tareas en este momento"
+
+msgid "Cannot resume tasks at the moment"
+msgstr "No se puede reanudar las tareas en este momento"
+
+msgid "Cannot update a cancelled Recurring Logic."
+msgstr "No se puede actualizar una lógica recurrente cancelada."
+
+msgid "Changing request id %{request_id} to saved id %{saved_id}"
+msgstr "Cambio de id de solicitud %{request_id} a id guardado %{saved_id}"
+
+msgid "Clear All Filters"
+msgstr "Borrar todos los filtros"
+
+msgid "Clear Cancelled"
+msgstr "Eliminar canceladas"
+
+msgid "Complete"
+msgstr "Completa"
+
+msgid "Conflicts with tasks:"
+msgstr "Conflictos con las tareas:"
+
+msgid "Could not cancel step."
+msgstr "No se pudo cancelar el paso."
+
+msgid "Could not receive data: ${APIerror && APIerror.message}"
+msgstr "No se han podido recibir datos: ${APIerror && APIerror.message}"
+
+msgid "Could not receive data: ${error && error.message}"
+msgstr "No se han podido recibir datos: ${error && error.message}"
+
+msgid "Cron line"
+msgstr "Línea Cron"
+
+msgid "Cron line format 'a b c d e', where: %s"
+msgstr "Formato de línea Cron 'a b c d e', donde: %s"
+
+msgid "Current iteration"
+msgstr "Iteración actual"
+
+msgid "Data to be sent to the action"
+msgstr "Datos que se deben enviar a la acción"
+
+msgid "Days"
+msgstr "Días"
+
+msgid "Days of week"
+msgstr "Días de la semana"
+
+msgid "Delayed"
+msgstr "Demorada"
+
+msgid "Delete recurring logics by search query"
+msgstr "Eliminar lógicas recurrentes mediante una consulta de búsqueda"
+
+msgid "Details"
+msgstr "Detalles"
+
+msgid "Details of %s task"
+msgstr "Detalles de la tarea %s "
+
+msgid "Disable"
+msgstr "Deshabilitar"
+
+msgid "Disabled"
+msgstr "Deshabilitado"
+
+msgid "Duration"
+msgstr "Duración"
+
+msgid "Dynflow console"
+msgstr "Consola de flujo dinámico"
+
+msgid "Empty bulk action"
+msgstr "Acción en conjunto vacía"
+
+msgid "Enable"
+msgstr "Habilitar"
+
+msgid "Enable dynflow console"
+msgstr "Activar la consola dynflow"
+
+msgid "Enable the dynflow console (/foreman_tasks/dynflow) for debugging"
+msgstr "Habilitar la consola de flujo dinámico (/foreman_tasks/dynflow) para depurar"
+
+msgid "Ends"
+msgstr "Finales"
+
+msgid "Ends at"
+msgstr "Finaliza a las"
+
+msgid "Errors"
+msgstr "Errores"
+
+msgid "Errors:"
+msgstr "Errores:"
+
+msgid "Event delivered by request %{request_id}"
+msgstr "Evento entregado a petición %.{request_id}"
+
+msgid "Exception"
+msgstr "Excepción"
+
+msgid "Execute now"
+msgstr "Ejecutar ahora"
+
+msgid "Execution plan data not available "
+msgstr "Datos del plan de ejecución no disponibles"
+
+msgid "Export All"
+msgstr "Exportar todo"
+
+msgid "External Id"
+msgstr "ID externo"
+
+msgid "Failed to check on tasks on proxy at %{url}: %{exception}"
+msgstr "Fallo en la comprobación de tareas en el proxy en %{url}: %{exception}"
+
+msgid "Failed to initialize"
+msgstr "Falló al inicializar"
+
+msgid "Failed to trigger task on the smart proxy: "
+msgstr ""
+
+msgid "Finished"
+msgstr "Finalizado"
+
+msgid "Force Cancel"
+msgstr "Forzar cancelación"
+
+msgid "Force Cancel Selected"
+msgstr "Forzar cancelación de lo seleccionado"
+
+msgid "Force Cancel selected tasks"
+msgstr "Forzar cancelación de tareas seleccionadas"
+
+msgid "Force Unlock"
+msgstr "Forzar desbloqueo"
+
+msgid "Foreman Tasks"
+msgstr "Tareas de Foreman"
+
+msgid "Fri"
+msgstr "Vie"
+
+msgid "I understand that this may cause harm and have working database backups of all backend services."
+msgstr "Comprendo que esto puede provocar un daño y generar copias de seguridad de la base de datos en funcionamiento de todos los servicios en segundo plano."
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Id"
+msgstr "ID"
+
+msgid "Immediate"
+msgstr "Inmediato"
+
+msgid "Import Puppet classes"
+msgstr "Importar clases Puppet"
+
+msgid "Import facts"
+msgstr "Importar datos"
+
+msgid "Indicates that the action should be cancelled if it cannot be started before this time."
+msgstr "Indica que la acción se debe cancelar si no se puede iniciar antes de este momento."
+
+msgid "Initialization error: %s"
+msgstr "Error de inicialización: %s"
+
+msgid "Input"
+msgstr "Entrada"
+
+msgid "Iteration limit"
+msgstr "Límite de iteración"
+
+msgid "Label"
+msgstr "Etiqueta"
+
+msgid "Last occurrence"
+msgstr "Última ocurrencia"
+
+msgid "Last start time"
+msgstr "Hora del último inicio"
+
+msgid "Latest Warning/Error Tasks"
+msgstr "Última advertencia/Tareas con error"
+
+msgid "Less than a second"
+msgstr "Menos de un segundo"
+
+msgid "List of tasks"
+msgstr "Lista de tareas"
+
+msgid "List recurring logics"
+msgstr "Listar lógicas recurrentes"
+
+msgid "List tasks"
+msgstr "Listar tareas"
+
+msgid "Locks"
+msgstr "Bloqueos"
+
+msgid "Mon"
+msgstr "Lun"
+
+msgid "More than"
+msgstr "Más de"
+
+msgid "N/A"
+msgstr "N/C"
+
+msgid "Name"
+msgstr "Nombre"
+
+msgid "Never"
+msgstr "Nunca"
+
+msgid "Next occurrence"
+msgstr "Siguiente ocurrencia"
+
+msgid "No"
+msgstr "No"
+
+msgid "No Tasks"
+msgstr "No hay tareas"
+
+msgid "No errors"
+msgstr "No hay errores"
+
+msgid "No proxy defined for execution"
+msgstr "No se definió un proxy para la ejecución"
+
+msgid "No running steps"
+msgstr "No hay pasos de ejecución"
+
+msgid "No start or end dates"
+msgstr "No hay fechas de inicio ni de finalización"
+
+msgid "No task could be started"
+msgstr "No se pudieron iniciar tareas"
+
+msgid "No. of Tasks"
+msgstr "Cantidad de tareas"
+
+msgid "Not all the selected tasks can be cancelled"
+msgstr "No todas las tareas seleccionadas se pueden cancelar"
+
+msgid "Not all the selected tasks can be resumed"
+msgstr "No se puede reanudar todas las tareas seleccionadas"
+
+msgid "Number of attempts to start a task on the smart proxy before failing"
+msgstr "Cantidad de intentos de inicio de una tarea en el proxy inteligente antes de generar un error"
+
+msgid "Number of seconds to wait for synchronous task to finish."
+msgstr "Cantidad de segundos que se debe esperar para que finalice la tarea sincrónica."
+
+msgid "Number of tasks which should be sent to the smart proxy in one request, if foreman_tasks_proxy_batch_trigger is enabled"
+msgstr "Cantidad de tareas que deben enviarse al proxy inteligente en una solicitud, si el foreman_tasks_proxy_batch_trigger está activado"
+
+#. TRANSLATORS: Button text for saying when a task should end
+msgid "On"
+msgstr "Activar"
+
+msgid "Operation"
+msgstr "Operación"
+
+msgid "Other includes all stopped tasks that are cancelled or pending"
+msgstr "Otros incluye todas las tareas paradas que están canceladas o pendientes"
+
+msgid "Other:"
+msgstr "Otros:"
+
+msgid "Output"
+msgstr "Salida"
+
+msgid "Output:"
+msgstr "Salida:"
+
+msgid "Parent task"
+msgstr "Tarea padre"
+
+msgid "Paused"
+msgstr "Pausado"
+
+msgid "Please inspect their state, fix their errors and resume them."
+msgstr "Inspeccione su estado, corrija los errores y reanúdelas."
+
+msgid "Please provide a search parameter in the request"
+msgstr "Proporcione un parámetro de búsqueda en la solicitud"
+
+msgid "Please provide at least one of search or task_ids parameters in the request"
+msgstr "Proporcione al menos uno de los parámetros de búsqueda o task_ids en la solicitud"
+
+msgid "Polling intervals multiplier"
+msgstr "Multiplicador de intervalos de sondeo"
+
+msgid "Polling multiplier which is used to multiply the default polling intervals. This can be used to prevent polling too frequently for long running tasks."
+msgstr "Multiplicador de sondeo que se utiliza para multiplicar los intervalos de sondeos predeterminados. Esto puede utilizarse para evitar que los sondeos se realicen con demasiada frecuencia en tareas de larga duración."
+
+msgid "Proxy action retry count"
+msgstr "Recuento de reintentos de acciones proxy"
+
+msgid "Proxy action retry interval"
+msgstr "Intervalo de reintento de la acción proxy"
+
+msgid "Proxy task gone missing from the smart proxy"
+msgstr "La tarea de proxy falta en el proxy inteligente"
+
+msgid "Proxy tasks batch size"
+msgstr "Tamaño del lote de tareas proxy"
+
+msgid "Purpose"
+msgstr "Propósito"
+
+msgid "Raw"
+msgstr "Sin procesar"
+
+msgid "Raw input"
+msgstr "Entrada sin procesar"
+
+msgid "Raw output"
+msgstr "Salida sin procesar"
+
+msgid "Recurring Logics"
+msgstr "Lógicas recurrentes"
+
+msgid "Recurring logic"
+msgstr "Lógica recurrente"
+
+msgid "Recurring logics"
+msgstr "Lógicas recurrentes"
+
+msgid "Refresh Data"
+msgstr "Actualizar datos"
+
+msgid "Repeat N times"
+msgstr "Repetir N veces"
+
+msgid "Repeat until"
+msgstr "Repetir hasta"
+
+msgid "Repeats"
+msgstr "Se repite"
+
+msgid "Require auth for dynflow console"
+msgstr "Requerir autenticidad para la consola dynflow"
+
+msgid "Require user to be authenticated as user with admin rights when accessing dynflow console"
+msgstr "El usuario debe autenticarse como usuario con derechos de administrador al acceder a la consola de flujo dinámico"
+
+msgid "Required lock is already taken by other running tasks."
+msgstr "El bloqueo requerido ya está ocupado por otras tareas en ejecución."
+
+msgid "Resource search_params requires resource_type and resource_id to be specified"
+msgstr "search_params del recurso requiere que se especifique resource_type y resource_id."
+
+msgid "Resources for %s task(s) will be unlocked and will not prevent other tasks from being run. As the task(s) might be still running, it should be avoided to use this unless you are really sure the task(s) got stuck."
+msgstr "Los recursos de la(s) tarea(s) %s se desbloquearán y no impedirán la ejecución de otras tareas. Como la(s) tarea(s) podría(n) estar aún en ejecución, se debe evitar utilizar esta opción a menos que se esté realmente seguro de que la(s) tarea(s) se ha(n) atascado."
+
+msgid "Result"
+msgstr "Resultado:"
+
+msgid "Resume"
+msgstr "Reanudar"
+
+msgid "Resume Selected"
+msgstr "Reanudar lo seleccionado "
+
+msgid "Resume all paused error tasks"
+msgstr "Reanudar las tareas de error en pausa"
+
+msgid "Resume selected tasks"
+msgstr "Reanudar las tareas seleccionadas"
+
+msgid "Resume specific tasks by ID"
+msgstr "Reanudar las tareas específicas por ID"
+
+msgid "Resume tasks matching search string"
+msgstr "Reanudar las tareas que coinciden con la secuencia de búsqueda"
+
+msgid "Resuming selected tasks, this might take a while"
+msgstr "Reanudando las tareas seleccionadas; esto puede tardar un poco"
+
+msgid "Running"
+msgstr "Ejecutando"
+
+msgid "Running Steps"
+msgstr "Pasos de ejecución"
+
+msgid "Sat"
+msgstr "Sáb."
+
+msgid "Schedule"
+msgstr "Programa"
+
+msgid "Schedule future execution"
+msgstr "Programar futura ejecución"
+
+msgid "Scheduled"
+msgstr "Programado"
+
+msgid "Search query"
+msgstr "Consulta de búsqueda"
+
+msgid "See %{link} for more details on how to resolve the issue"
+msgstr "Consulte %{link} para obtener más detalles sobre cómo resolver el problema"
+
+msgid "Select Action"
+msgstr "Seleccionar una acción"
+
+msgid "Select All"
+msgstr "Seleccionar todo"
+
+msgid "Select row"
+msgstr "Seleccionar fila"
+
+msgid "Send data to the task from external executor (such as smart_proxy_dynflow)"
+msgstr "Enviar datos a la tarea desde el ejecutor externo (como smart_proxy_dynflow)"
+
+msgid "Set up recurring execution"
+msgstr "Configurar la ejecución recurrente"
+
+msgid "Setting is off"
+msgstr "El ajuste está desactivado"
+
+msgid "Show recurring logic details"
+msgstr "Mostrar detalles de lógica recurrente"
+
+msgid "Start at"
+msgstr "Iniciar en"
+
+msgid "Start before"
+msgstr "Iniciar antes"
+
+msgid "Started"
+msgstr "Inició"
+
+msgid "Started at"
+msgstr "Iniciado el"
+
+msgid "State"
+msgstr "Estado"
+
+msgid "Step Canceled"
+msgstr "Paso cancelado"
+
+msgid "Stop selected stoppable tasks"
+msgstr "Detener las tareas detenibles seleccionadas"
+
+msgid "Stop specific tasks by ID"
+msgstr "Detener las tareas específicas por ID"
+
+msgid "Stop tasks matching search string"
+msgstr "Detener las tareas que coincidan con la secuencia de búsqueda"
+
+msgid "Stopped"
+msgstr "Detenido"
+
+msgid "Sub tasks"
+msgstr "Subtareas"
+
+msgid "Sub tasks of %s"
+msgstr "Tareas secundarias de %s"
+
+msgid "Sun"
+msgstr "Dom"
+
+msgid "Sync task timeout"
+msgstr "Tiempo de espera de la tarea de sincronización"
+
+msgid "Task"
+msgstr "Tarea"
+
+msgid "Task Details"
+msgstr "Detalles de tareas"
+
+msgid "Task Status"
+msgstr "Estado de la tarea"
+
+msgid "Task aborted: the task might be still running on the proxy"
+msgstr "Tarea abortada: la tarea puede estar en ejecución en el proxy"
+
+msgid "Task cannot be canceled"
+msgstr "La tarea no se puede cancelar"
+
+msgid "Task count"
+msgstr "Conteo de tareas"
+
+msgid "Task group common"
+msgstr "Grupo de tareas común"
+
+msgid "Task search_params requires task_id to be specified"
+msgstr "search_params de la tarea requiere que se especifique el task_id."
+
+msgid "Task was canceled"
+msgstr "La tarea fue cancelada"
+
+msgid "Tasks"
+msgstr "Tareas"
+
+msgid "Tasks troubleshooting URL"
+msgstr "URL de resolución de problemas de tareas"
+
+msgid "The ID of the step inside the execution plan to send the event to"
+msgstr "El ID del paso dentro del plan de ejecución para enviar el evento a"
+
+msgid "The recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task."
+msgstr "El enfoque recomendado es investigar los mensajes de error que aparecen a continuación y, en la pestaña de \"errores\", abordar la causa principal del problema y reanudar la tarea."
+
+msgid "The recurring logic was disabled."
+msgstr "La lógica recurrente fue desactivada."
+
+msgid "The recurring logic was enabled."
+msgstr "Se ha activado la lógica recurrente."
+
+msgid "The smart proxy task %s failed."
+msgstr "La tarea del proxy inteligente %s ha fallado."
+
+msgid "The targets are of different types"
+msgstr "El tipo de los destinos es diferente."
+
+msgid "The task cannot be aborted at the moment."
+msgstr "No es posible abortar la tarea en este momento."
+
+msgid "The task could not be started"
+msgstr "No se pudo iniciar la tarea"
+
+msgid "There is %{count} paused task in the system that need attention"
+msgid_plural "There are %{count} paused tasks in the system that need attention"
+msgstr[0] "Hay %{count} tarea pausada en el sistema que requieren atención"
+msgstr[1] "Hay %{count} tareas pausadas en el sistema que requieren atención"
+msgstr[2] "Hay %{count} tareas pausadas en el sistema que requieren atención"
+
+msgid "This action will delete all cancelled recurring logics. Please note that this action can't be reversed."
+msgstr "Esta acción eliminará todas las lógicas recurrentes canceladas. Tenga en cuenta que esta acción no puede revertirse."
+
+msgid "This will %(action)s %(number)s task(s), putting them in the %(state)s state. Are you sure?"
+msgstr "Esto será %(action)s %(number)s tarea(s), poniéndolas en el estado %(state)s. ¿Está usted seguro?"
+
+msgid "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed."
+msgstr "Esto desbloqueará los recursos contra los que se está ejecutando la tarea. Tenga en cuenta que esto puede provocar un estado inconsistente y se debe utilizar con precaución, después de asegurarse de que la tarea no se puede reanudar."
+
+msgid "Thu"
+msgstr "Jue"
+
+msgid "Time in seconds between retries"
+msgstr "Tiempo en segundos entre reintentos"
+
+msgid "Total"
+msgstr "Total"
+
+msgid "Troubleshooting"
+msgstr "Resolución de problemas"
+
+msgid "Trying to abort the task"
+msgstr "Intentando abortar la tarea"
+
+msgid "Trying to cancel step"
+msgstr "Intentando cancelar el paso"
+
+msgid "Tue"
+msgstr "Mar"
+
+msgid "Type %s for search_params is not supported"
+msgstr "El tipo %s para search_params no es compatible"
+
+msgid "UUID of the task"
+msgstr "UUID de la tarea"
+
+msgid "Undo selection"
+msgstr "Deshacer la selección"
+
+msgid "Unlimited"
+msgstr "Ilimitado"
+
+msgid "Unlock"
+msgstr "Desbloquear"
+
+msgid "Update recurring logic"
+msgstr "Actualizar lógica recurrente"
+
+msgid "Url pointing to the task troubleshooting documentation. It should contain %{label} placeholder, that will be replaced with normalized task label (restricted to only alphanumeric characters)). %{version} placeholder is also available."
+msgstr "Url que apunta a la documentación de resolución de problemas de la tarea. Debe contener el marcador de posición %{label}, que será sustituido por la etiqueta normalizada de la tarea (restringida sólo a caracteres alfanuméricos)). También está disponible el marcador de posición %{version}."
+
+msgid "User search_params requires user_id to be specified"
+msgstr "search_params del usuario requiere que se especifique el user_id."
+
+msgid "Wed"
+msgstr "Mié"
+
+msgid "With focus on last"
+msgstr "Con el enfoque en el último"
+
+msgid "Yes"
+msgstr "Sí"
+
+msgid "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource"
+msgstr "Puede encontrar los bloqueos de recurso en esta página. Un bloqueo exclusivo marcado con el icono de un candado bloqueado significa que ninguna otra tarea puede usar el recurso bloqueado mientras la tarea esté en ejecución. El bloqueo no exclusivo marcado con el icono de un candado desbloqueado significa que las otras tareas pueden acceder al recurso de manera libre; solo se usa para indicar la relación de esta tarea con el recurso"
+
+msgid "You do not have permission"
+msgstr "No tiene permiso"
+
+msgid "activation key"
+msgstr "Llave de activación"
+
+msgid "cannot be cancelled with force at the moment."
+msgstr "no se puede cancelar a la fuerza en este momento."
+
+msgid "content view"
+msgstr "Vista de contenido"
+
+msgid "content view version"
+msgstr "Versión de vista de contenido"
+
+msgid "could not be resumed"
+msgstr "no se pudo reanudar"
+
+msgid "error"
+msgstr "error"
+
+#. TRANSLATORS: this translation is referring to an option which is a time interval
+msgid "is day of month (range: 1-31)"
+msgstr "es día del mes (rango: 1-31)"
+
+#. TRANSLATORS: this translation is referring to an option which is a time interval
+msgid "is day of week (range: 0-6)"
+msgstr "es día de la semana (rango: 0-6)"
+
+#. TRANSLATORS: this translation is referring to an option which is a time interval
+msgid "is hour (range: 0-23)"
+msgstr "es hora (rango: 0-23)"
+
+#. TRANSLATORS: this translation is referring to an option which is a time interval
+msgid "is minute (range: 0-59)"
+msgstr "es minuto (rango: 0-59)"
+
+#. TRANSLATORS: this translation is referring to an option which is a time interval
+msgid "is month (range: 1-12)"
+msgstr "es mes (rango: 1-12)"
+
+msgid "is not a valid format"
+msgstr "no es un formato válido"
+
+msgid "last"
+msgstr "último"
+
+msgid "mode"
+msgstr "modo"
+
+msgid "mode has to be one of %{allowed_modes}"
+msgstr "modo tiene que ser uno de %{allowed_modes}"
+
+msgid "older"
+msgstr "más antiguo"
+
+msgid "organization"
+msgstr "Organización"
+
+msgid "other"
+msgstr "otros"
+
+msgid "paused"
+msgstr "pausado"
+
+msgid "product"
+msgstr "Producto"
+
+msgid "repository"
+msgstr "Repositorio"
+
+msgid "resources cannot be unlocked at the moment."
+msgstr "los recursos no pueden desbloquearse en este momento."
+
+msgid "resources were unlocked "
+msgstr "los recursos se desbloquearon "
+
+msgid "resources were unlocked with force."
+msgstr "los recursos se desbloquearon a la fuerza."
+
+msgid "result"
+msgstr "resultado"
+
+msgid "running"
+msgstr "en ejecución"
+
+msgid "scheduled"
+msgstr "programado"
+
+msgid "seconds"
+msgstr "segundos"
+
+msgid "state"
+msgstr "Estado"
+
+msgid "stopped"
+msgstr "detenido"
+
+msgid "success"
+msgstr "éxito"
+
+msgid "system"
+msgstr "sistema"
+
+msgid "task has to be cancellable"
+msgstr "la tarea se debe poder cancelar"
+
+msgid "task has to be resumable"
+msgstr "la tarea se debe poder reanudar"
+
+msgid "tasks."
+msgstr "tareas."
+
+msgid "time"
+msgstr "hora"
+
+msgid "troubleshooting documentation"
+msgstr "documentación de la resolución de problemas"
+
+msgid "user"
+msgstr "usuario"
+
+msgid "warning"
+msgstr "advertencia"
+
+msgid "was cancelled"
+msgstr "se canceló"
+
+msgid "was resumed"
+msgstr "se reanudó"
+
+msgid "week"
+msgstr "semana"

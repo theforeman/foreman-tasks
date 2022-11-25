@@ -1,0 +1,871 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the foreman_tasks package.
+#
+# Translators:
+# NorwayFun <temuri.doghonadze@gmail.com>, 2022
+msgid ""
+msgstr ""
+"Project-Id-Version: Foreman\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2016-02-12 14:04+0000\n"
+"Last-Translator: NorwayFun <temuri.doghonadze@gmail.com>, 2022\n"
+"Language-Team: Georgian (http://www.transifex.com/foreman/foreman/language/ka/"
+")\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ka\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+msgid "${taskReload ? 'Stop' : 'Start'}  auto-reloading"
+msgstr "ავტომატური ჩატვირთვის ${taskReload ? 'გაჩერება' : 'გაშვება'}"
+
+msgid "%(last)s Last %(time)s"
+msgstr "%(last)s ბოლო %(time)-ჯერ"
+
+msgid "%(older)s Older %(time)s"
+msgstr "%(older)s %(time)-ჯერ ძველი"
+
+msgid "%s Selected Tasks"
+msgstr "%s მონიშნული ამოცანა"
+
+msgid "%s is not valid format of cron line"
+msgstr "%s cron-ის სწორ ხაზის სწორი ფორმატი არაა"
+
+msgid "%{total} task(s), %{success} success, %{failed} fail"
+msgstr "%{total} ამოცანა, %{success} წარმატებით, %{failed} წარუმატებელი"
+
+msgid "%{value} is not allowed input type"
+msgstr "%{value} არ წარმოადგენს შეყვანის სწორ ტიპს"
+
+msgid "%{value} is not allowed triggering mode"
+msgstr "%{value} ტრიგერის რეჟიმში დაუშვებელია"
+
+msgid "%{value} is wrong format"
+msgstr "%{value} არასწორ ფორმატშია"
+
+msgid "12h"
+msgstr "12სთ"
+
+msgid "24h"
+msgstr "24სთ"
+
+msgid "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved."
+msgstr "შეჩერებული ამოცანა წარმოადგენს პროცესს, რომელიც სწორად არ დასრულებულა. შეჩერებულ მდგომარეობაში მყოფმა ნებისმიერმა ამოცანამ შეიძლება გამოიწვიოს პოტენციური შეუსაბამობა და საჭიროებს გადაჭრას."
+
+msgid "A special label for tracking a recurring job. There can be only one active job with a given purpose at a time."
+msgstr "სპეციალური ჭდე განმეორებადი დავალების ტრკინგისთვის. მოცემული დანიშნულებით შეიძლება მხოლოდ ერთი აქტიური დავალება არსებობდეს."
+
+msgid "Action"
+msgstr "მოქმედება"
+
+msgid "Action with sub plans"
+msgstr "ქმედება ქვე-გეგმებით"
+
+msgid "Active"
+msgstr "აქტიური"
+
+msgid "Active Filters:"
+msgstr "აქტიური ფილტრები:"
+
+msgid "Active or disabled recurring logic with purpose %s already exists"
+msgstr "აქტიური ან გამრთული განმეორებადი ლოგიკა დანიშნულებით %s უკვე არსებობს"
+
+msgid "All %s tasks are selected. "
+msgstr "მონიშნულია ყველა %s ამოცანა. "
+
+msgid "All proxies with the required feature are unavailable at the moment"
+msgstr "მოთხოვნილი ფუნქციების მქონე ყველა პროქსი ამჟამად მიუწვდომელია"
+
+msgid "Allow proxy batch tasks"
+msgstr "პროქსისთვის მრავალი ამოცანის ერთად გაგზავნა"
+
+msgid "Allow triggering tasks on the smart proxy in batches"
+msgstr "ჭკვიან პროქსიზე ამოცანების ჯგუფებად გაშვების ჩართვა"
+
+msgid "Associated resources"
+msgstr "ასოცირებული რესურსები"
+
+#. TRANSLATORS: Time widget for when a task should start
+msgid "At"
+msgstr "დრო"
+
+msgid "Back to tasks"
+msgstr "ამოცანებზე დაბრუნება"
+
+msgid "Backtrace"
+msgstr "შეცდომის მიდევნება"
+
+msgid "Bulk action"
+msgstr "მასობრივი ქმედება"
+
+msgid "Cancel"
+msgstr "გაუქმება"
+
+msgid "Cancel Selected"
+msgstr "მონიშნულის გაუქმება"
+
+msgid "Cancel enforced: the task might be still running on the proxy"
+msgstr "გაუქმება შესრულებულია: ამოცანა შესაძლოა პროქსიზე ჯერ კიდევ გაშვებული იყოს"
+
+msgid "Cancel recurring logic"
+msgstr "განმეორებადი ლოგიკის გაუქმება"
+
+msgid "Cancel selected cancellable tasks"
+msgstr "მონიშნული გაუქმებადი ამოცანების გაუქმება"
+
+msgid "Cancel selected tasks"
+msgstr "მონიშნული ამოცანების გაუქმება"
+
+msgid "Cancel specific tasks by ID"
+msgstr "ID-ით მითითებული ამოცანის გაუქმება"
+
+msgid "Cancel tasks matching search string"
+msgstr "საძებნ სტრიქონზე დამთხვეული ამოცანების გაუქმება"
+
+msgid "Canceling selected tasks, this might take a while"
+msgstr "მიმდინარეობს მონიშნული ამოცანების გაუქმება. შეიძლება დიდი დრო დასჭირდეს"
+
+msgid "Canceling with force selected tasks, this might take a while"
+msgstr "მიმდინარეობს მონიშნული ამოცანების ძალით გაუქმება. შეიძლება დიდი დრო დასჭირდეს"
+
+msgid "Cancelled"
+msgstr "შეწყვეტილია"
+
+msgid "Cannot cancel tasks at the moment"
+msgstr "ამჟამად ამოცანების გაუქმება შეუძლებელია"
+
+msgid "Cannot force cancel tasks at the moment"
+msgstr "ამჟამად ამოცანების ძალთ გაუქმება შეუძლებელია"
+
+msgid "Cannot resume tasks at the moment"
+msgstr "ამჟამად ამოცანების გაგრძელება შეუძლებელია"
+
+msgid "Cannot update a cancelled Recurring Logic."
+msgstr "გაუქმებული განმეორებადი ლოგიკის განახლება შეუძლებელია."
+
+msgid "Changing request id %{request_id} to saved id %{saved_id}"
+msgstr "მოთხოვნის id-ის %{request_id} ცვლილება შენახულ ID_ზე %{saved_id}"
+
+msgid "Clear All Filters"
+msgstr "ყველა ფილტრის გასუფთავება"
+
+msgid "Clear Cancelled"
+msgstr "გაუქმებულების გასუფთავება"
+
+msgid "Complete"
+msgstr "დასრულებულია"
+
+msgid "Conflicts with tasks:"
+msgstr "კონფლიქტი ამოცანებთან:"
+
+msgid "Could not cancel step."
+msgstr "ბიჯის გაუქმების შეცდომა."
+
+msgid "Could not receive data: ${APIerror && APIerror.message}"
+msgstr "მონაცემების მიღების შეცდომა: ${APIerror && APIerror.message}"
+
+msgid "Could not receive data: ${error && error.message}"
+msgstr "მონაცემების მიღების შეცდომა: ${error && error.message}"
+
+msgid "Cron line"
+msgstr "Cron-ის სტრიქონი"
+
+msgid "Cron line format 'a b c d e', where: %s"
+msgstr "Cron ხაზის ფორმატი 'a b c d e', სადაც: %s"
+
+msgid "Current iteration"
+msgstr "მიმდინარე იტერაცია"
+
+msgid "Data to be sent to the action"
+msgstr "ამ ქმედებისთვის გაგზავნილი მონაცემები"
+
+msgid "Days"
+msgstr "დღე"
+
+msgid "Days of week"
+msgstr "კვირის დღე"
+
+msgid "Delayed"
+msgstr "დაყოვნებული"
+
+msgid "Delete recurring logics by search query"
+msgstr "გამეორებადი ლოგიკის თითოეული საძებნი სტრიქონით წაშლა"
+
+msgid "Details"
+msgstr "დეტალები"
+
+msgid "Details of %s task"
+msgstr "%s ამოცანის დეტალები"
+
+msgid "Disable"
+msgstr "გამორთვა"
+
+msgid "Disabled"
+msgstr "გამორთულია"
+
+msgid "Duration"
+msgstr "ხანგრძლოვობა"
+
+msgid "Dynflow console"
+msgstr "Dynflow-ის კონსოლი"
+
+msgid "Empty bulk action"
+msgstr "მასობრივი ქმედება ცარიელია"
+
+msgid "Enable"
+msgstr "ჩართვა"
+
+msgid "Enable dynflow console"
+msgstr "Dynflow-ის კონსოლის ჩართვა"
+
+msgid "Enable the dynflow console (/foreman_tasks/dynflow) for debugging"
+msgstr "გასამართად dynflow-ის კონსოლის (/foreman_tasks/dynflow) ჩართვა"
+
+msgid "Ends"
+msgstr "საბოლოო"
+
+msgid "Ends at"
+msgstr "დასრულების დრო"
+
+msgid "Errors"
+msgstr "შედომები"
+
+msgid "Errors:"
+msgstr "შეცდომები:"
+
+msgid "Event delivered by request %{request_id}"
+msgstr "მოვლენა მოწოდებულია მოთხოვნის მიერ: %{request_id}"
+
+msgid "Exception"
+msgstr "გამონაკლისი"
+
+msgid "Execute now"
+msgstr "ახლა შესრულება"
+
+msgid "Execution plan data not available "
+msgstr "გაშვების გეგმის მონაცემები მიუწვდომელია "
+
+msgid "Export All"
+msgstr "ყველაფრის გატანა"
+
+msgid "External Id"
+msgstr "გარე Id"
+
+msgid "Failed to check on tasks on proxy at %{url}: %{exception}"
+msgstr "ვერ მოხერხდა ამოცანების შემოწმება პროქსიზე %{url}: %{exception}"
+
+msgid "Failed to initialize"
+msgstr "ინიციალიზაციის შეცდომა"
+
+msgid "Failed to trigger task on the smart proxy: "
+msgstr ""
+
+msgid "Finished"
+msgstr "დასრულებულია"
+
+msgid "Force Cancel"
+msgstr "ძალით გაუქმება"
+
+msgid "Force Cancel Selected"
+msgstr "მონიშნულების ძალით გაუქმება"
+
+msgid "Force Cancel selected tasks"
+msgstr "მონიშნული ამოცანების ძალით გაუქმება"
+
+msgid "Force Unlock"
+msgstr "ძალით განბლოკვა"
+
+msgid "Foreman Tasks"
+msgstr "Foreman-ის ამოცანები"
+
+msgid "Fri"
+msgstr "პარ"
+
+msgid "I understand that this may cause harm and have working database backups of all backend services."
+msgstr "მე მესმის, რომ ამას ზიანის მოტანა შეუძლია და მაქვს უკანაბოლოს სერვისების ყველა მუშა მონაცემთა ბაზის მარქაფი."
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Id"
+msgstr "ID"
+
+msgid "Immediate"
+msgstr "უეცარი"
+
+msgid "Import Puppet classes"
+msgstr "Puppet-ის კლასების შემოტანა"
+
+msgid "Import facts"
+msgstr "ფაქტების შემოტანა"
+
+msgid "Indicates that the action should be cancelled if it cannot be started before this time."
+msgstr "მიუთითებს, რომ მოქმედება უნდა გაუქმდეს, თუ მისი დაწყება ამ დრომდე შეუძლებელია."
+
+msgid "Initialization error: %s"
+msgstr "ინიციალიზაციის შეცდომა: %s"
+
+msgid "Input"
+msgstr "შეყვანა"
+
+msgid "Iteration limit"
+msgstr "იტერაციის ლიმიტი"
+
+msgid "Label"
+msgstr "ჭდე"
+
+msgid "Last occurrence"
+msgstr "წინა შედეგი"
+
+msgid "Last start time"
+msgstr "ბოლო გასვების დრო"
+
+msgid "Latest Warning/Error Tasks"
+msgstr "უახლესი გაფრთხილება/შეცდომის ამოცანები"
+
+msgid "Less than a second"
+msgstr "წამზე ნაკლები"
+
+msgid "List of tasks"
+msgstr "ამოცანების სია"
+
+msgid "List recurring logics"
+msgstr "განმეორებადი ლოგიკის სია"
+
+msgid "List tasks"
+msgstr "ამოცანების სია"
+
+msgid "Locks"
+msgstr "დაბლოკვები"
+
+msgid "Mon"
+msgstr "მოუ"
+
+msgid "More than"
+msgstr "მეტი, ვიდრე"
+
+msgid "N/A"
+msgstr "N/A"
+
+msgid "Name"
+msgstr "სახელი"
+
+msgid "Never"
+msgstr "არასდროს"
+
+msgid "Next occurrence"
+msgstr "შემდეგი შედეგი"
+
+msgid "No"
+msgstr "არა"
+
+msgid "No Tasks"
+msgstr "ამოცანების გარეშე"
+
+msgid "No errors"
+msgstr "შეცდომების გარეშე"
+
+msgid "No proxy defined for execution"
+msgstr "გასაშვები პროქსი მითითებული არაა"
+
+msgid "No running steps"
+msgstr "გაშვებული ნაბიჯების გარეე"
+
+msgid "No start or end dates"
+msgstr "საწყისი და საბოლოო თარიღების გარეშე"
+
+msgid "No task could be started"
+msgstr "ამოცანის გაშვება შეუძლებელია"
+
+msgid "No. of Tasks"
+msgstr "ამოცანების რიცხვი"
+
+msgid "Not all the selected tasks can be cancelled"
+msgstr "ყველა მონიშნული ამოცანა არ გაუქმებულა"
+
+msgid "Not all the selected tasks can be resumed"
+msgstr "ყველა ამოცანა არ გაგრძელებულა"
+
+msgid "Number of attempts to start a task on the smart proxy before failing"
+msgstr "ჭკვიან პროქსიზე ამოცანის შენიშვნის მქონედ მონიშვნამდე, გაშვების მცდელობების რიცხვი"
+
+msgid "Number of seconds to wait for synchronous task to finish."
+msgstr "სინქრონული ამოცანის დასრულების მოლოდინის დრო წამებში."
+
+msgid "Number of tasks which should be sent to the smart proxy in one request, if foreman_tasks_proxy_batch_trigger is enabled"
+msgstr "ამოცანების რიცხვი, რომელიც ერთ მოთხოვნაში ეგზავნება ჭკვიან პროქსის, თუ foreman_tasks_proxy_batch_trigger ჩართულია"
+
+#. TRANSLATORS: Button text for saying when a task should end
+msgid "On"
+msgstr "დრო"
+
+msgid "Operation"
+msgstr "ოეპრაცია"
+
+msgid "Other includes all stopped tasks that are cancelled or pending"
+msgstr "სხვები შეიცავს ყველა გაჩერებულ ამოცანას, რომლებიც გაუქმებულია ან მოლოდინში"
+
+msgid "Other:"
+msgstr "სხვა:"
+
+msgid "Output"
+msgstr "გამოტანა"
+
+msgid "Output:"
+msgstr "გამოტანა:"
+
+msgid "Parent task"
+msgstr "მშობელი ამოცანა"
+
+msgid "Paused"
+msgstr "შეჩერებულია"
+
+msgid "Please inspect their state, fix their errors and resume them."
+msgstr "გადაამოწმეთ მათი მდგომარეობა, გაასწორეთ მათი შეცდომები და გააგრძელეთ მათი მუშაობა."
+
+msgid "Please provide a search parameter in the request"
+msgstr "მოთხოვნაში აუცილებელია ძებნის პარამეტრის მითითება"
+
+msgid "Please provide at least one of search or task_ids parameters in the request"
+msgstr "გთხოვთ, მოთხოვნაში მიუთითოთ ძიების ან task_ids პარამეტრიდან მინიმუმ ერთი"
+
+msgid "Polling intervals multiplier"
+msgstr "კენჭისყრის ინტერვალების მამრავლი"
+
+msgid "Polling multiplier which is used to multiply the default polling intervals. This can be used to prevent polling too frequently for long running tasks."
+msgstr "კენჭისყრის მამრავლი, რომელიც ნაგულისხმები კენჭისყრის ინტერვალების გასამრავლებლად გამოიყენება. შეიძლება გამოყენებულ იქნას ზედმეტად ხშირი კენჭისყრის თავიდან ასაცილებლად ხანგრძლივი დავალებების შესრულებისთვის."
+
+msgid "Proxy action retry count"
+msgstr "პროქსის ქმედების თავიდან ცდების რაოდენობა"
+
+msgid "Proxy action retry interval"
+msgstr "პროქსის ქმედების თავიდან ცდის ინტერვალი"
+
+msgid "Proxy task gone missing from the smart proxy"
+msgstr "პროქსის ამოცანა ჭკვიანი პროქსიზე გაშვებული არაა"
+
+msgid "Proxy tasks batch size"
+msgstr "პროქსისთვის გაგზავნილი ამოცანების პაკეტის ზომა"
+
+msgid "Purpose"
+msgstr "მიზანი"
+
+msgid "Raw"
+msgstr "დაუმუშავებელი"
+
+msgid "Raw input"
+msgstr "პირდაპირი შეტანა"
+
+msgid "Raw output"
+msgstr "პირდაპირი გამოტანა"
+
+msgid "Recurring Logics"
+msgstr "განმეორებადი ლოგიკა"
+
+msgid "Recurring logic"
+msgstr "განეორებადი ლოგიკა"
+
+msgid "Recurring logics"
+msgstr "განმეორებადი ლოგიკები"
+
+msgid "Refresh Data"
+msgstr "მონაცემების განახლება"
+
+msgid "Repeat N times"
+msgstr "N-ჯერ გამეორება"
+
+msgid "Repeat until"
+msgstr "გამეორება, სანამ"
+
+msgid "Repeats"
+msgstr "გამეორება"
+
+msgid "Require auth for dynflow console"
+msgstr "Dynflow-ის კონსოლის ავთენტიკაციის ჩართვა"
+
+msgid "Require user to be authenticated as user with admin rights when accessing dynflow console"
+msgstr "Dynflow კონსოლზე წვდომისას მომხმარებლისთვის ადმინისტრატორის უფლებების აუცილებლად ქონის მოთხოვნა"
+
+msgid "Required lock is already taken by other running tasks."
+msgstr "საჭირო დაბლოკვა უკვე მიღებულია სხვა გაშვებული ამოცანის მიერ."
+
+msgid "Resource search_params requires resource_type and resource_id to be specified"
+msgstr "რესურსის search_params საჭიროებს resource_type და resource_id მითითებას"
+
+msgid "Resources for %s task(s) will be unlocked and will not prevent other tasks from being run. As the task(s) might be still running, it should be avoided to use this unless you are really sure the task(s) got stuck."
+msgstr "რესურსები %s ამოცან(ებ)ისთვის განბლოკილი იქნება და ხელს არ შეუშლის სხვა ამოცანების შესრულებას. იმის გამო, რომ ამოცან(ებ)ი შესაძლოა ჯერ კიდევ გაშვებული იყოს, თავიდან უნდა იქნას აცილებული ამის გამოყენება, თუ ნამდვილად არ ხართ დარწმუნებული, რომ დავალება(ებ)ი გაჭედილია."
+
+msgid "Result"
+msgstr "შედეგი"
+
+msgid "Resume"
+msgstr "გაგრძელება"
+
+msgid "Resume Selected"
+msgstr "მონიშნულების გაუქმება"
+
+msgid "Resume all paused error tasks"
+msgstr "ყველა შეცდომის მდგომარეობაში შეჩერებული ამოცანის გაგრძელება"
+
+msgid "Resume selected tasks"
+msgstr "მონიშნული ამოცანების გაუქმება"
+
+msgid "Resume specific tasks by ID"
+msgstr "ID-ით მითითებული ამოცანების გაგრძელება"
+
+msgid "Resume tasks matching search string"
+msgstr "საძებნ სტრიქონზე დამთხვეული ამოცანების გაგრძელება"
+
+msgid "Resuming selected tasks, this might take a while"
+msgstr "მითითებული ამოცანების გაგრძელება. შეიძლება დიდი დრო დასჭირდეს"
+
+msgid "Running"
+msgstr "მიმდინარეობს შესრულება"
+
+msgid "Running Steps"
+msgstr "გაშვებული ნაბიჯები"
+
+msgid "Sat"
+msgstr "შაბ"
+
+msgid "Schedule"
+msgstr "განრიგი"
+
+msgid "Schedule future execution"
+msgstr "გასაშვებ განრიგში ჩამატება"
+
+msgid "Scheduled"
+msgstr "დაგეგმილია"
+
+msgid "Search query"
+msgstr "საძებნი სტრიქონი"
+
+msgid "See %{link} for more details on how to resolve the issue"
+msgstr "ამ პრობლემის გადასაწყვეტად იხილეთ %{link}"
+
+msgid "Select Action"
+msgstr "აირჩიეთ ქმედება"
+
+msgid "Select All"
+msgstr "ყველას მონიშვნა"
+
+msgid "Select row"
+msgstr "აირჩიეთ მწკრივი"
+
+msgid "Send data to the task from external executor (such as smart_proxy_dynflow)"
+msgstr "ამოცანის გაგზავნა გარე შემსრულებლიდან (როგორიცაა smart_proxy_dynflow)"
+
+msgid "Set up recurring execution"
+msgstr "განმეორებადი გაშვების მორგება"
+
+msgid "Setting is off"
+msgstr "პარამეტრი გამორთულია"
+
+msgid "Show recurring logic details"
+msgstr "განმეორებადი ლოგიკის დეტალების ჩვენება"
+
+msgid "Start at"
+msgstr "დასაწყისი"
+
+msgid "Start before"
+msgstr "მითითებულ დრომდე გასვება"
+
+msgid "Started"
+msgstr "დაიწყო"
+
+msgid "Started at"
+msgstr "დაწყებული"
+
+msgid "State"
+msgstr "State"
+
+msgid "Step Canceled"
+msgstr "ბიჯი გაუქმებულია"
+
+msgid "Stop selected stoppable tasks"
+msgstr "მონიშნული გაჩერებადი ამოცანების გაჩერება"
+
+msgid "Stop specific tasks by ID"
+msgstr "ID-ით მითითებული ამოცანების გაჩერება"
+
+msgid "Stop tasks matching search string"
+msgstr "საძებნ სტრიქონზე დამთხვეული ამოცანების გაჩერება"
+
+msgid "Stopped"
+msgstr "გაჩერებულია"
+
+msgid "Sub tasks"
+msgstr "ქვეამოცანები"
+
+msgid "Sub tasks of %s"
+msgstr "%s-ის ქვეამოცანები"
+
+msgid "Sun"
+msgstr "მზე"
+
+msgid "Sync task timeout"
+msgstr "ამოცანის სინქის ვადა"
+
+msgid "Task"
+msgstr "დავალება"
+
+msgid "Task Details"
+msgstr "ამოცანის დეტალები"
+
+msgid "Task Status"
+msgstr "ამოცანის სტატუსი"
+
+msgid "Task aborted: the task might be still running on the proxy"
+msgstr "ამოცანა გაუქმდა: ამოცანა პროქსიზე შესაძლოა ჯერ კიდევ გაშვებული იყოს"
+
+msgid "Task cannot be canceled"
+msgstr "ამოცანის გაუქმება შეუძლებელია"
+
+msgid "Task count"
+msgstr "ამოცანების რიცხვი"
+
+msgid "Task group common"
+msgstr "საერთო სამუშაო ჯგუფი"
+
+msgid "Task search_params requires task_id to be specified"
+msgstr "ამოცანის search_params task_id-ის მითითებას მოითხოვს"
+
+msgid "Task was canceled"
+msgstr "ამოცანა გაუქმდა"
+
+msgid "Tasks"
+msgstr "Tasks"
+
+msgid "Tasks troubleshooting URL"
+msgstr "ამოცანის პრობლემების გადაწყვეტის URL"
+
+msgid "The ID of the step inside the execution plan to send the event to"
+msgstr "მოვლენის გაგზავნის შესრულების გეგმის საფეხურის ID"
+
+msgid "The recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task."
+msgstr "რეკომენდირებული მიდგომაა შეცდომის შეტყობინებების გამოკვლევა და „შეცდომების“ ჩანართში, პრობლემის ძირითადი მიზეზის აღმოფხვრა და ამოცანა გაგრძელება."
+
+msgid "The recurring logic was disabled."
+msgstr "განმეორებადი ლოგიკა გამორთულია."
+
+msgid "The recurring logic was enabled."
+msgstr "განმეორებადი ლოგიკა ჩართულია."
+
+msgid "The smart proxy task %s failed."
+msgstr "ჭკვიანი პროქსის ამოცანის შეცდომა: %s."
+
+msgid "The targets are of different types"
+msgstr "სამიზნეები სხვადასხვა ტიპისაა"
+
+msgid "The task cannot be aborted at the moment."
+msgstr "ამჟამად ამოცანის გაუქმება შეუძლებელია."
+
+msgid "The task could not be started"
+msgstr "ამოცანის გაშვება შეუძლებელია"
+
+msgid "There is %{count} paused task in the system that need attention"
+msgid_plural "There are %{count} paused tasks in the system that need attention"
+msgstr[0] "სისტემაში არსებობს %{count} შეჩერებული ამოცანა, რომელსაც ყურადღება სჭირდება"
+msgstr[1] "სისტემაში არსებობს %{count} შეჩერებული ამოცანა, რომელსაც ყურადღება სჭირდება"
+
+msgid "This action will delete all cancelled recurring logics. Please note that this action can't be reversed."
+msgstr "ეს ქმედება წაშლის ყველა გაუქმებულ განმეორებად ლოგიკას. გაითვალისწინეთ, რომ ქმედების დაბრუნება შეუძლებელია."
+
+msgid "This will %(action)s %(number)s task(s), putting them in the %(state)s state. Are you sure?"
+msgstr "%(action)s %(number)s ამოცანას, მათ %(state)s მდგომარეობაში გადაიყვანს. დარწმუნებული ბრძანდებით?"
+
+msgid "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed."
+msgstr "ეს განბლოკავს რესურსებს, რომლებზეც ამოცანა მუშაობს. გაითვალისწინეთ, რომ ამან შეიძლება გამოიწვიოს არათანმიმდევრული მდგომარეობა და უნდა იქნას გამოყენებული სიფრთხილით, მას შემდეგ რაც დარწმუნდებით, რომ დავალება ვერ გაგრძელდება."
+
+msgid "Thu"
+msgstr "ხუთ"
+
+msgid "Time in seconds between retries"
+msgstr "დრო თავიდან ცდებს სორის"
+
+msgid "Total"
+msgstr "ჯამში"
+
+msgid "Troubleshooting"
+msgstr "პრობლემების გადაჭრა"
+
+msgid "Trying to abort the task"
+msgstr "ამოცანის შეწყვეტის ცდა"
+
+msgid "Trying to cancel step"
+msgstr "ბიჯის გაუქმების მცდელობა"
+
+msgid "Tue"
+msgstr "სამ"
+
+msgid "Type %s for search_params is not supported"
+msgstr "ტიპი %s search_params-ისთვის არ არის მხარდაჭერილი"
+
+msgid "UUID of the task"
+msgstr "ამოცანის UUID"
+
+msgid "Undo selection"
+msgstr "მონიშნულის დაბრუნება"
+
+msgid "Unlimited"
+msgstr "შეუზღუდავი"
+
+msgid "Unlock"
+msgstr "განბლოკვა"
+
+msgid "Update recurring logic"
+msgstr "განეორებადი ლოგიკის განახლება"
+
+msgid "Url pointing to the task troubleshooting documentation. It should contain %{label} placeholder, that will be replaced with normalized task label (restricted to only alphanumeric characters)). %{version} placeholder is also available."
+msgstr "ამოცანების პრობლემების გადაწყვეტის დოკუმენტაციის URL-ი. უნდა შეიცავდეს %{label} ჩანაცვლების ადგილს, რომელიც შეიცვლება ნორმალიზებული დავალების ჭდით (შეიზღუდება მხოლოდ ალფანუმერული სიმბოლოებით)). %{version} ჩანაცვლება ასევე ხელმისაწვდომია."
+
+msgid "User search_params requires user_id to be specified"
+msgstr "მომხმარებლის search_params მოითხოვს user_id-ის მითითებას"
+
+msgid "Wed"
+msgstr "ოთხ"
+
+msgid "With focus on last"
+msgstr "ფოკუსით ბოლოზე"
+
+msgid "Yes"
+msgstr "დიახ"
+
+msgid "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource"
+msgstr "ამ გვერდზე შეგიძლიათ იპოვოთ რესურსების ბლოკები. ბლოკის ხატით მონიშნული ექსკლუზიური ბლოკი ნიშნავს, რომ არცერთ სხვა ამოცანას არ შეუძლია გამოიყენოს დაბლოკილი რესურსი ამ ამოცანის შესრულებისას. განბლოკილი ხატულით მონიშნული არაექსკლუზიური ბლოკი ნიშნავს, რომ სხვა ამოცანებს შეუძლიათ რესურსზე თავისუფლად წვდომა, ის გამოიყენება მხოლოდ ამ ამოცანის რესურსთან მიმართების მითითებისთვის"
+
+msgid "You do not have permission"
+msgstr "წვდომა არ გაგაჩნიათ"
+
+msgid "activation key"
+msgstr "აქტივაციის გასაღები"
+
+msgid "cannot be cancelled with force at the moment."
+msgstr "ამჟამად რესურსების ძალით განბლოკვა შეუძლებელია."
+
+msgid "content view"
+msgstr "შემცველობის ხედი"
+
+msgid "content view version"
+msgstr "შემცველობის ხედის ვერსია"
+
+msgid "could not be resumed"
+msgstr "გაგრძელება შეუძლებელია"
+
+msgid "error"
+msgstr "შეცდომა"
+
+#. TRANSLATORS: this translation is referring to an option which is a time interval
+msgid "is day of month (range: 1-31)"
+msgstr "თვის დღე (1-31)"
+
+#. TRANSLATORS: this translation is referring to an option which is a time interval
+msgid "is day of week (range: 0-6)"
+msgstr "კვირის დღე (0-6)"
+
+#. TRANSLATORS: this translation is referring to an option which is a time interval
+msgid "is hour (range: 0-23)"
+msgstr "საათი (0-23)"
+
+#. TRANSLATORS: this translation is referring to an option which is a time interval
+msgid "is minute (range: 0-59)"
+msgstr "წუთი (0-59)"
+
+#. TRANSLATORS: this translation is referring to an option which is a time interval
+msgid "is month (range: 1-12)"
+msgstr "თვე (1-120)"
+
+msgid "is not a valid format"
+msgstr "არასწორი ფორმატია"
+
+msgid "last"
+msgstr "ბოლო"
+
+msgid "mode"
+msgstr "რეჟიმი"
+
+msgid "mode has to be one of %{allowed_modes}"
+msgstr "რეჟიმი შეიძლება იყოს ერთ ერთი %{allowed_modes} -დან"
+
+msgid "older"
+msgstr "ძველი"
+
+msgid "organization"
+msgstr "ორგანიზაცია"
+
+msgid "other"
+msgstr "სხვა"
+
+msgid "paused"
+msgstr "შეჩერებული"
+
+msgid "product"
+msgstr "პროდუქტი"
+
+msgid "repository"
+msgstr "რეპოზიტორია"
+
+msgid "resources cannot be unlocked at the moment."
+msgstr "ამჟამად რესურსების განბლოკვა შეუძლებელია."
+
+msgid "resources were unlocked "
+msgstr "რესურსი განბლოკილია "
+
+msgid "resources were unlocked with force."
+msgstr "რესურსები ძალით იქნა განბლოკილი."
+
+msgid "result"
+msgstr "შედეგი"
+
+msgid "running"
+msgstr "გაშვებულია"
+
+msgid "scheduled"
+msgstr "დაგეგმილი"
+
+msgid "seconds"
+msgstr "წამი"
+
+msgid "state"
+msgstr "მდგომარეობა"
+
+msgid "stopped"
+msgstr "stopped"
+
+msgid "success"
+msgstr "წარმატება"
+
+msgid "system"
+msgstr "სისტემა"
+
+msgid "task has to be cancellable"
+msgstr "ამოცანა გაუქმებადი უნდა იყოს"
+
+msgid "task has to be resumable"
+msgstr "ამოცანა გაგრძელებადი უნდა იყოს"
+
+msgid "tasks."
+msgstr "ამოცანა."
+
+msgid "time"
+msgstr "დრო"
+
+msgid "troubleshooting documentation"
+msgstr "პრობლემების გადაჭრის დოკუმენტაცია"
+
+msgid "user"
+msgstr "მომხმარებელი"
+
+msgid "warning"
+msgstr "გაფრთხილება"
+
+msgid "was cancelled"
+msgstr "გაუქმდა"
+
+msgid "was resumed"
+msgstr "გაგრძელდა"
+
+msgid "week"
+msgstr "კვირა"

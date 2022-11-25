@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_tasks 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-17 10:55+0100\n"
-"PO-Revision-Date: 2022-02-17 10:55+0100\n"
+"POT-Creation-Date: 2022-11-25 16:10+0100\n"
+"PO-Revision-Date: 2022-11-25 16:10+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -131,11 +131,11 @@ msgstr ""
 msgid "The recurring logic was disabled."
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/tasks_controller.rb:55
+#: ../app/controllers/foreman_tasks/tasks_controller.rb:54
 msgid "Trying to abort the task"
 msgstr ""
 
-#: ../app/controllers/foreman_tasks/tasks_controller.rb:57
+#: ../app/controllers/foreman_tasks/tasks_controller.rb:56
 msgid "The task cannot be aborted at the moment."
 msgstr ""
 
@@ -324,11 +324,11 @@ msgstr ""
 msgid "The targets are of different types"
 msgstr ""
 
-#: ../app/lib/actions/foreman/host/import_facts.rb:48 action_names.rb:3
+#: ../app/lib/actions/foreman/host/import_facts.rb:48 action_names.rb:4
 msgid "Import facts"
 msgstr ""
 
-#: ../app/lib/actions/foreman/puppetclass/import.rb:18 action_names.rb:2
+#: ../app/lib/actions/foreman/puppetclass/import.rb:18 action_names.rb:3
 msgid "Import Puppet classes"
 msgstr ""
 
@@ -384,27 +384,31 @@ msgstr ""
 msgid "Failed to check on tasks on proxy at %{url}: %{exception}"
 msgstr ""
 
-#: ../app/lib/actions/proxy_action.rb:90
+#: ../app/lib/actions/proxy_action.rb:98
 msgid "The smart proxy task %s failed."
 msgstr ""
 
-#: ../app/lib/actions/proxy_action.rb:101
+#: ../app/lib/actions/proxy_action.rb:111
 msgid "Cancel enforced: the task might be still running on the proxy"
 msgstr ""
 
-#: ../app/lib/actions/proxy_action.rb:111
+#: ../app/lib/actions/proxy_action.rb:121
 msgid "Task aborted: the task might be still running on the proxy"
 msgstr ""
 
-#: ../app/lib/actions/proxy_action.rb:121
+#: ../app/lib/actions/proxy_action.rb:131
 msgid "Event delivered by request %{request_id}"
 msgstr ""
 
-#: ../app/lib/actions/proxy_action.rb:133
+#: ../app/lib/actions/proxy_action.rb:143
 msgid "Proxy task gone missing from the smart proxy"
 msgstr ""
 
-#: ../app/lib/actions/proxy_action.rb:168
+#: ../app/lib/actions/proxy_action.rb:148
+msgid "Failed to trigger task on the smart proxy: "
+msgstr ""
+
+#: ../app/lib/actions/proxy_action.rb:182
 msgid "Initialization error: %s"
 msgstr ""
 
@@ -567,6 +571,7 @@ msgstr ""
 
 #: ../app/views/foreman_tasks/recurring_logics/index.html.erb:40
 #: ../app/views/foreman_tasks/task_groups/_common.html.erb:4
+#: ../app/views/foreman_tasks/task_groups/recurring_logic_task_groups/_recurring_logic_task_group.html.erb:4
 msgid "ID"
 msgstr ""
 
@@ -677,12 +682,6 @@ msgstr ""
 
 #: ../db/seeds.d/30-notification_blueprints.rb:27
 msgid "Task Details"
-msgstr ""
-
-#: ../lib/foreman_tasks/cleaner.rb:16
-msgid ""
-":after setting in tasks cleanup section is deprecated, use :after in :rules se"
-"ction to set the value. to cleanup rules"
 msgstr ""
 
 #: ../lib/foreman_tasks/dynflow.rb:18
@@ -1015,12 +1014,12 @@ msgid "Total"
 msgstr ""
 
 #:
-#: ../webpack/ForemanTasks/Components/TasksDashboard/Components/TasksCardsGrid/Components/StoppedTasksCard/OtherInfo.js:15
+#: ../webpack/ForemanTasks/Components/TasksDashboard/Components/TasksCardsGrid/Components/StoppedTasksCard/OtherInfo.js:22
 msgid "Other includes all stopped tasks that are cancelled or pending"
 msgstr ""
 
 #:
-#: ../webpack/ForemanTasks/Components/TasksDashboard/Components/TasksCardsGrid/Components/StoppedTasksCard/OtherInfo.js:32
+#: ../webpack/ForemanTasks/Components/TasksDashboard/Components/TasksCardsGrid/Components/StoppedTasksCard/OtherInfo.js:29
 msgid "Other:"
 msgstr ""
 
@@ -1305,10 +1304,6 @@ msgstr ""
 msgid "Force Cancel"
 msgstr ""
 
-#: action_names.rb:4
+#: action_names.rb:2
 msgid "Action with sub plans"
-msgstr ""
-
-#: action_names.rb:5
-msgid "Remote action:"
 msgstr ""

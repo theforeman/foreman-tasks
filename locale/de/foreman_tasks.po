@@ -1,0 +1,873 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the foreman_tasks package.
+#
+# Translators:
+# Crited <Alexander.Stoll@netways.de>, 2019
+# Ettore Atalan <atalanttore@googlemail.com>, 2016-2017
+# Nonof Yourbusiness <jonasschell@ocupe.org>, 2019
+# Patrick Dolinic, 2021
+msgid ""
+msgstr ""
+"Project-Id-Version: Foreman\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2016-02-12 14:04+0000\n"
+"Last-Translator: Patrick Dolinic, 2021\n"
+"Language-Team: German (http://www.transifex.com/foreman/foreman/language/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "${taskReload ? 'Stop' : 'Start'}  auto-reloading"
+msgstr "${taskReload ? 'Stop': 'Start'} automatisches Nachladen"
+
+msgid "%(last)s Last %(time)s"
+msgstr "%(last)s Zuletzt %(time)s"
+
+msgid "%(older)s Older %(time)s"
+msgstr "%(older)s Older %(time)s"
+
+msgid "%s Selected Tasks"
+msgstr " %s Selected Tasks"
+
+msgid "%s is not valid format of cron line"
+msgstr "%s ist ungültiges Cron-Zeilen-Format"
+
+msgid "%{total} task(s), %{success} success, %{failed} fail"
+msgstr "%{total} Aufgabe(n), %{success} Erfolg, %{failed} Fehler"
+
+msgid "%{value} is not allowed input type"
+msgstr "%{value} ist kein erlaubter Eingabetyp"
+
+msgid "%{value} is not allowed triggering mode"
+msgstr "%{value} ist kein erlaubter Auslösungsmodus"
+
+msgid "%{value} is wrong format"
+msgstr "%{value} ist falsches Format"
+
+msgid "12h"
+msgstr "12h"
+
+msgid "24h"
+msgstr "24h"
+
+msgid "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved."
+msgstr "Eine angehaltene Aufgabe stellt einen Prozess dar, der nicht ordnungsgemäß abgeschlossen wurde. Jede Aufgabe im angehaltenen Zustand kann zu potenziellen Inkonsistenzen führen und muss gelöst werden."
+
+msgid "A special label for tracking a recurring job. There can be only one active job with a given purpose at a time."
+msgstr ""
+
+msgid "Action"
+msgstr "Aktion"
+
+msgid "Action with sub plans"
+msgstr "Aktion mit Unterplänen"
+
+msgid "Active"
+msgstr "Aktiv"
+
+msgid "Active Filters:"
+msgstr "Aktive Filter:"
+
+msgid "Active or disabled recurring logic with purpose %s already exists"
+msgstr ""
+
+msgid "All %s tasks are selected. "
+msgstr "Alle %s Aufgaben sind ausgewählt."
+
+msgid "All proxies with the required feature are unavailable at the moment"
+msgstr "Alle Proxys mit dem genannten Feature sind nicht verfügbar "
+
+msgid "Allow proxy batch tasks"
+msgstr "Proxy-Batch-Aufgaben zulassen"
+
+msgid "Allow triggering tasks on the smart proxy in batches"
+msgstr "Auslösen von Aufgaben auf dem Smart Proxy in Stapeln zulassen"
+
+msgid "Associated resources"
+msgstr "Zugehörige Ressourcen "
+
+#. TRANSLATORS: Time widget for when a task should start
+msgid "At"
+msgstr "Um"
+
+msgid "Back to tasks"
+msgstr "Zurück zu Jobs"
+
+msgid "Backtrace"
+msgstr "Ablaufverfolgung"
+
+msgid "Bulk action"
+msgstr "Massenaktion"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Cancel Selected"
+msgstr "Ausgewählte abbrechen"
+
+msgid "Cancel enforced: the task might be still running on the proxy"
+msgstr "Abbruch erzwungen: die Aufgabe läuft vielleicht noch auf dem Proxy"
+
+msgid "Cancel recurring logic"
+msgstr "Wiederholungslogik abbrechen"
+
+msgid "Cancel selected cancellable tasks"
+msgstr "Ausgewählte stornierbare Aufgaben abbrechen"
+
+msgid "Cancel selected tasks"
+msgstr "Ausgewählte Aufgaben abbrechen"
+
+msgid "Cancel specific tasks by ID"
+msgstr "Abbrechen bestimmter Aufgaben nach ID"
+
+msgid "Cancel tasks matching search string"
+msgstr "Abbrechen von Aufgaben, die mit der Suchzeichenfolge übereinstimmen"
+
+msgid "Canceling selected tasks, this might take a while"
+msgstr "Das Abbrechen ausgewählter Aufgaben kann eine Weile dauern"
+
+msgid "Canceling with force selected tasks, this might take a while"
+msgstr "Abbrechen mit ausgewählten Aufgaben erzwingen, dies kann eine Weile dauern"
+
+msgid "Cancelled"
+msgstr "Abgebrochen"
+
+msgid "Cannot cancel tasks at the moment"
+msgstr "Aufgaben können momentan nicht abgebrochen werden"
+
+msgid "Cannot force cancel tasks at the moment"
+msgstr "Abbrechen von Aufgaben kann momentan nicht erzwungen werden"
+
+msgid "Cannot resume tasks at the moment"
+msgstr "Kann Aufgaben im Moment nicht fortsetzen"
+
+msgid "Cannot update a cancelled Recurring Logic."
+msgstr "Abgebrochene wiederkehrende Jobs können nicht aktualisiert werden."
+
+msgid "Changing request id %{request_id} to saved id %{saved_id}"
+msgstr "Anfrage-ID %{request_id} in gespeicherte ID %{saved_id} ändern"
+
+msgid "Clear All Filters"
+msgstr "Alle Filter löschen"
+
+msgid "Clear Cancelled"
+msgstr "Clear abgebrochen "
+
+msgid "Complete"
+msgstr "Vollständig"
+
+msgid "Conflicts with tasks:"
+msgstr "Konflikt mit Aufgaben:"
+
+msgid "Could not cancel step."
+msgstr "Schritt konnte nicht abgebrochen werden."
+
+msgid "Could not receive data: ${APIerror && APIerror.message}"
+msgstr "Daten konnten nicht empfangen werden: ${APIerror && APIerror.message}"
+
+msgid "Could not receive data: ${error && error.message}"
+msgstr "Konnte Daten nicht erhalten: ${error && error.message}"
+
+msgid "Cron line"
+msgstr "Cron-Zeile"
+
+msgid "Cron line format 'a b c d e', where: %s"
+msgstr "Format der Cron-Zeile 'a b c d e', wobei: %s"
+
+msgid "Current iteration"
+msgstr "Aktuelle Wiederholung "
+
+msgid "Data to be sent to the action"
+msgstr "An die Aktion zu sendende Daten"
+
+msgid "Days"
+msgstr "Tage"
+
+msgid "Days of week"
+msgstr "Wochentage"
+
+msgid "Delayed"
+msgstr "Verzögert"
+
+msgid "Delete recurring logics by search query"
+msgstr "Wiederkehrende Logiken per Suchanfrage löschen"
+
+msgid "Details"
+msgstr "Details"
+
+msgid "Details of %s task"
+msgstr "Details der Aufgabe %s"
+
+msgid "Disable"
+msgstr "Deaktivieren"
+
+msgid "Disabled"
+msgstr "Deaktiviert"
+
+msgid "Duration"
+msgstr "Dauer"
+
+msgid "Dynflow console"
+msgstr "Dynflow-Konsole"
+
+msgid "Empty bulk action"
+msgstr "Massenaktion leer"
+
+msgid "Enable"
+msgstr "Aktivieren"
+
+msgid "Enable dynflow console"
+msgstr "Dynamische Konsole aktivieren"
+
+msgid "Enable the dynflow console (/foreman_tasks/dynflow) for debugging"
+msgstr "Dynflow-Konsole (/foreman_tasks/dynflow) für die Fehlerdiagnose aktivieren"
+
+msgid "Ends"
+msgstr "Ende"
+
+msgid "Ends at"
+msgstr "Endet um"
+
+msgid "Errors"
+msgstr "Fehler"
+
+msgid "Errors:"
+msgstr "Fehler:"
+
+msgid "Event delivered by request %{request_id}"
+msgstr "Ereignis geliefert auf Anfrage %{request_id}"
+
+msgid "Exception"
+msgstr "Ausnahme"
+
+msgid "Execute now"
+msgstr "Jetzt ausführen"
+
+msgid "Execution plan data not available "
+msgstr "Ausführungsplandaten nicht verfügbar"
+
+msgid "Export All"
+msgstr "Alle exportieren"
+
+msgid "External Id"
+msgstr "Externe-ID"
+
+msgid "Failed to check on tasks on proxy at %{url}: %{exception}"
+msgstr "Fehler bei der Prüfung auf Jobs auf dem Proxy %{url}: %{exception}"
+
+msgid "Failed to initialize"
+msgstr "Initialisierung fehlgeschlagen"
+
+msgid "Failed to trigger task on the smart proxy: "
+msgstr ""
+
+msgid "Finished"
+msgstr "Abgeschlossen"
+
+msgid "Force Cancel"
+msgstr "Abbrechen erzwingen"
+
+msgid "Force Cancel Selected"
+msgstr "Abbrechen Ausgewählt erzwingen"
+
+msgid "Force Cancel selected tasks"
+msgstr "Ausgewählte Aufgaben abbrechen erzwingen"
+
+msgid "Force Unlock"
+msgstr "Entsperren erzwingen"
+
+msgid "Foreman Tasks"
+msgstr "Foreman Tasks"
+
+msgid "Fri"
+msgstr "Fr"
+
+msgid "I understand that this may cause harm and have working database backups of all backend services."
+msgstr "Mir ist bewusst, dass dieser Vorgang Schaden verursachen kann und ich verfüge über funktionsfähige Sicherungskopien der Datenbanken aller Backend-Dienste."
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Id"
+msgstr "ID"
+
+msgid "Immediate"
+msgstr "Unmittelbar"
+
+msgid "Import Puppet classes"
+msgstr "Puppet-Klassen importieren"
+
+msgid "Import facts"
+msgstr "Fakten importieren"
+
+msgid "Indicates that the action should be cancelled if it cannot be started before this time."
+msgstr "Gibt an, dass die Aktion abgebrochen werden soll, wenn sie nicht vor diesem Zeitpunkt gestartet werden kann."
+
+msgid "Initialization error: %s"
+msgstr "Initialisierungsfehler: %s"
+
+msgid "Input"
+msgstr "Eingang"
+
+msgid "Iteration limit"
+msgstr "Wiederholungslimit"
+
+msgid "Label"
+msgstr "Kennung"
+
+msgid "Last occurrence"
+msgstr "Zuletzt vorgekommen"
+
+msgid "Last start time"
+msgstr "Letzte Startzeit"
+
+msgid "Latest Warning/Error Tasks"
+msgstr "Letzte Warnung/Fehler-Aufgaben"
+
+msgid "Less than a second"
+msgstr "Weniger als eine Sekunde"
+
+msgid "List of tasks"
+msgstr "Liste der Aufgaben"
+
+msgid "List recurring logics"
+msgstr "Wiederholungslogik auflisten"
+
+msgid "List tasks"
+msgstr "Aufgaben auflisten"
+
+msgid "Locks"
+msgstr "Sperren"
+
+msgid "Mon"
+msgstr "Mo"
+
+msgid "More than"
+msgstr "Mehr als"
+
+msgid "N/A"
+msgstr "k.A."
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Never"
+msgstr "Nie"
+
+msgid "Next occurrence"
+msgstr "Nächstes Vorkommen"
+
+msgid "No"
+msgstr "Nein"
+
+msgid "No Tasks"
+msgstr "Keine Aufgaben"
+
+msgid "No errors"
+msgstr "Keine Fehler"
+
+msgid "No proxy defined for execution"
+msgstr "Kein Proxy zur Ausführung angegeben"
+
+msgid "No running steps"
+msgstr "Keine laufenden Schritte"
+
+msgid "No start or end dates"
+msgstr "Kein Start- oder Enddatum"
+
+msgid "No task could be started"
+msgstr "Keine Jobs konnten gestartet werden"
+
+msgid "No. of Tasks"
+msgstr "Nr. der Aufgaben"
+
+msgid "Not all the selected tasks can be cancelled"
+msgstr "Nicht alle ausgewählten Aufgaben können abgebrochen werden"
+
+msgid "Not all the selected tasks can be resumed"
+msgstr "Nicht alle ausgewählten Aufgaben können wieder aufgenommen werden"
+
+msgid "Number of attempts to start a task on the smart proxy before failing"
+msgstr "Anzahl von Versuchen eine Aufgabe auf dem Smart-Proxy zu starten, bevor sie fehlschlägt"
+
+msgid "Number of seconds to wait for synchronous task to finish."
+msgstr "Anzahl der Sekunden, die für synchronen Job gewartet werden."
+
+msgid "Number of tasks which should be sent to the smart proxy in one request, if foreman_tasks_proxy_batch_trigger is enabled"
+msgstr "Anzahl der Aufgaben, die in einer Anfrage an den Smart Proxy gesendet werden sollen, wenn foreman_tasks_proxy_batch_trigger aktiviert ist"
+
+#. TRANSLATORS: Button text for saying when a task should end
+msgid "On"
+msgstr "Am"
+
+msgid "Operation"
+msgstr "Vorgang"
+
+msgid "Other includes all stopped tasks that are cancelled or pending"
+msgstr "Sonstige umfasst alle angehaltenen Aufgaben, die abgebrochen oder ausstehend sind"
+
+msgid "Other:"
+msgstr "Sonstiges:"
+
+msgid "Output"
+msgstr "Ausgabe"
+
+msgid "Output:"
+msgstr "Ausgabe:"
+
+msgid "Parent task"
+msgstr "Übergeordnete Aufgabe"
+
+msgid "Paused"
+msgstr "Pausiert"
+
+msgid "Please inspect their state, fix their errors and resume them."
+msgstr "bitte überprüfen Sie den Status, beheben Sie die Fehler und setzen Sie die Aufgaben dann fort."
+
+msgid "Please provide a search parameter in the request"
+msgstr "Bitte geben Sie einen Suchparameter in der Anfrage an"
+
+msgid "Please provide at least one of search or task_ids parameters in the request"
+msgstr "Bitte geben Sie mindestens einen der Parameter search oder task_ids in der Anfrage an"
+
+msgid "Polling intervals multiplier"
+msgstr "Abfrageintervall-Multiplikator"
+
+msgid "Polling multiplier which is used to multiply the default polling intervals. This can be used to prevent polling too frequently for long running tasks."
+msgstr "Polling-Multiplikator, der verwendet wird, um die Standard-Polling-Intervalle zu multiplizieren. Dies kann verwendet werden, um zu häufiges Abfragen für lang laufende Aufgaben zu verhindern."
+
+msgid "Proxy action retry count"
+msgstr "Anzahl der Wiederholungsversuche für Proxy-Aktionen"
+
+msgid "Proxy action retry interval"
+msgstr "Wiederholungsintervall für Proxy-Aktionen"
+
+msgid "Proxy task gone missing from the smart proxy"
+msgstr "Proxy Job auf Smart-Proxy verschwunden"
+
+msgid "Proxy tasks batch size"
+msgstr "Batchgröße für Proxy-Aufgaben"
+
+msgid "Purpose"
+msgstr ""
+
+msgid "Raw"
+msgstr "Raw"
+
+msgid "Raw input"
+msgstr "Raw-Eingabe"
+
+msgid "Raw output"
+msgstr "Raw-Ausgabe"
+
+msgid "Recurring Logics"
+msgstr "Wiederkehrende Jobs"
+
+msgid "Recurring logic"
+msgstr "Wiederholungslogik"
+
+msgid "Recurring logics"
+msgstr "Wiederholungslogik"
+
+msgid "Refresh Data"
+msgstr "Daten aktualisieren"
+
+msgid "Repeat N times"
+msgstr "n-mal wiederholen"
+
+msgid "Repeat until"
+msgstr "Wiederholen bis"
+
+msgid "Repeats"
+msgstr "Wiederholungen "
+
+msgid "Require auth for dynflow console"
+msgstr "Authentifizierung für Dynflow-Konsole erforderlich"
+
+msgid "Require user to be authenticated as user with admin rights when accessing dynflow console"
+msgstr "Beim Zugriff auf die Dynflow-Konsole muss der Benutzer als Admin-Benutzer angemeldet sein "
+
+msgid "Required lock is already taken by other running tasks."
+msgstr "Erforderliche Sperre wird bereits von anderen Aufgaben verwendet."
+
+msgid "Resource search_params requires resource_type and resource_id to be specified"
+msgstr "Ressourcen-Suchparameter erfordert die Angabe von Ressourcentyp und Ressourcen-ID"
+
+msgid "Resources for %s task(s) will be unlocked and will not prevent other tasks from being run. As the task(s) might be still running, it should be avoided to use this unless you are really sure the task(s) got stuck."
+msgstr ""
+
+msgid "Result"
+msgstr "Ergebnis"
+
+msgid "Resume"
+msgstr "Fortsetzen"
+
+msgid "Resume Selected"
+msgstr "Ausgewählte fortsetzen"
+
+msgid "Resume all paused error tasks"
+msgstr "Alle angehaltenen Fehleraufgaben fortsetzen"
+
+msgid "Resume selected tasks"
+msgstr "Ausgewählte Aufgaben fortsetzen"
+
+msgid "Resume specific tasks by ID"
+msgstr "Bestimmte Aufgaben nach ID fortsetzen"
+
+msgid "Resume tasks matching search string"
+msgstr "Aufgaben fortsetzen, die dem Suchbegriff entsprechen"
+
+msgid "Resuming selected tasks, this might take a while"
+msgstr "Das Fortsetzen ausgewählter Aufgaben kann eine Weile dauern"
+
+msgid "Running"
+msgstr "Läuft"
+
+msgid "Running Steps"
+msgstr "Laufende Schritte "
+
+msgid "Sat"
+msgstr "Sa"
+
+msgid "Schedule"
+msgstr "Plan"
+
+msgid "Schedule future execution"
+msgstr "Zukünftige Ausführung bestimmen"
+
+msgid "Scheduled"
+msgstr "Geplant"
+
+msgid "Search query"
+msgstr "Suchanfrage"
+
+msgid "See %{link} for more details on how to resolve the issue"
+msgstr "Weitere Informationen zur Behebung des Problems finden Sie unter %{link}."
+
+msgid "Select Action"
+msgstr "Aktion auswählen"
+
+msgid "Select All"
+msgstr "Alle auswählen"
+
+msgid "Select row"
+msgstr "Zeile auswählen"
+
+msgid "Send data to the task from external executor (such as smart_proxy_dynflow)"
+msgstr "Daten von externem Executor (wie smart_proxy_dynflow) an Aufgabe senden"
+
+msgid "Set up recurring execution"
+msgstr "Wiederholte Ausführung einrichten"
+
+msgid "Setting is off"
+msgstr "Einstellung ist aus"
+
+msgid "Show recurring logic details"
+msgstr "Details der Wiederholungslogik anzeigen"
+
+msgid "Start at"
+msgstr "Startet um "
+
+msgid "Start before"
+msgstr "Startet vor"
+
+msgid "Started"
+msgstr "Gestartet"
+
+msgid "Started at"
+msgstr "Gestartet um"
+
+msgid "State"
+msgstr "Status"
+
+msgid "Step Canceled"
+msgstr "Schritt abgebrochen"
+
+msgid "Stop selected stoppable tasks"
+msgstr "Ausgewählte stoppbare Aufgaben stoppen"
+
+msgid "Stop specific tasks by ID"
+msgstr "Stoppen Sie bestimmte Aufgaben nach ID"
+
+msgid "Stop tasks matching search string"
+msgstr "Stoppen Sie Aufgaben, die mit der Suchzeichenfolge übereinstimmen"
+
+msgid "Stopped"
+msgstr "Gestoppt"
+
+msgid "Sub tasks"
+msgstr "Unteraufgabe"
+
+msgid "Sub tasks of %s"
+msgstr "Unteraufgaben von %s."
+
+msgid "Sun"
+msgstr "So"
+
+msgid "Sync task timeout"
+msgstr "Zeitüberschreitung für Synchronisierungsaufgabe"
+
+msgid "Task"
+msgstr "Aufgabe"
+
+msgid "Task Details"
+msgstr "Taskdetails"
+
+msgid "Task Status"
+msgstr "Aufgabenstatus"
+
+msgid "Task aborted: the task might be still running on the proxy"
+msgstr "Job abgebrochen: Der Job könnte noch auf dem Proxy laufen"
+
+msgid "Task cannot be canceled"
+msgstr "Aufgabe kann nicht abgebrochen werden"
+
+msgid "Task count"
+msgstr "Anzahl der Aufgaben"
+
+msgid "Task group common"
+msgstr "Gemeinsame Aufgabengruppen"
+
+msgid "Task search_params requires task_id to be specified"
+msgstr "Suchparameter der Aufgaben erfordert die Angabe der Aufgaben-ID"
+
+msgid "Task was canceled"
+msgstr "Aufgabe wurde abgebrochen"
+
+msgid "Tasks"
+msgstr "Aufgaben"
+
+msgid "Tasks troubleshooting URL"
+msgstr "URL zur Fehlerbehebung bei Aufgaben"
+
+msgid "The ID of the step inside the execution plan to send the event to"
+msgstr "Die ID des jeweiligen Schrittes im Ausführungsplan, an die das Ereignis gesendet werden soll"
+
+msgid "The recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task."
+msgstr "Der empfohlene Ansatz besteht darin, die folgenden Fehlermeldungen und auf der Registerkarte \"Fehler\" zu untersuchen, die Hauptursache des Problems zu beheben und die Aufgabe fortzusetzen."
+
+msgid "The recurring logic was disabled."
+msgstr "Die wiederkehrende Logik wurde deaktiviert."
+
+msgid "The recurring logic was enabled."
+msgstr "Die wiederkehrende Logik wurde aktiviert."
+
+msgid "The smart proxy task %s failed."
+msgstr "Die Smart-Proxy Aufgabe  %s ist fehlgeschlagen."
+
+msgid "The targets are of different types"
+msgstr "Die Ziele haben verschiedene Typen"
+
+msgid "The task cannot be aborted at the moment."
+msgstr "Der Job kann nicht abgebrochen werden."
+
+msgid "The task could not be started"
+msgstr "Der Job konnte nicht gestartet werden."
+
+msgid "There is %{count} paused task in the system that need attention"
+msgid_plural "There are %{count} paused tasks in the system that need attention"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "This action will delete all cancelled recurring logics. Please note that this action can't be reversed."
+msgstr "Diese Aktion löscht alle abgebrochenen wiederkehrenden Logiken. Beachten Sie, dass diese Aktion nicht rückgängig gemacht werden kann."
+
+msgid "This will %(action)s %(number)s task(s), putting them in the %(state)s state. Are you sure?"
+msgstr ""
+
+msgid "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed."
+msgstr "Entsperrt die Ressourcen, gegen die die Aufgabe läuft. Bitte beachten Sie, dass dieser Vorgang zu einem inkonsistenten Zustand führen kann und mit Vorsicht verwendet werden sollte. Zuerst sollten Sie sicherstellen, dass die Aufgabe nicht fortgesetzt werden kann. "
+
+msgid "Thu"
+msgstr "Do"
+
+msgid "Time in seconds between retries"
+msgstr "Zeit in Sekunden zwischen erneuten Versuchen "
+
+msgid "Total"
+msgstr "Gesamt"
+
+msgid "Troubleshooting"
+msgstr "Fehlerbehebung"
+
+msgid "Trying to abort the task"
+msgstr "Versuche Jobabbruch"
+
+msgid "Trying to cancel step"
+msgstr "Versuch, Schritt abzubrechen"
+
+msgid "Tue"
+msgstr "Di"
+
+msgid "Type %s for search_params is not supported"
+msgstr "Typ %s wird für Suchparameter nicht unterstützt"
+
+msgid "UUID of the task"
+msgstr "UUID der Aufgabe"
+
+msgid "Undo selection"
+msgstr "Auswahl zurücksetzen"
+
+msgid "Unlimited"
+msgstr "Unbegrenzt"
+
+msgid "Unlock"
+msgstr "Entsperren"
+
+msgid "Update recurring logic"
+msgstr "Wiederholungslogik ak­tu­a­li­sie­ren"
+
+msgid "Url pointing to the task troubleshooting documentation. It should contain %{label} placeholder, that will be replaced with normalized task label (restricted to only alphanumeric characters)). %{version} placeholder is also available."
+msgstr "URL, die auf die Dokumentation zur Fehlerbehebung bei Aufgaben verweist. Es sollte den Platzhalter %{label} enthalten, der durch ein normalisiertes Aufgabenlabel ersetzt wird (nur auf alphanumerische Zeichen beschränkt). Der Platzhalter %{version} ist ebenfalls verfügbar."
+
+msgid "User search_params requires user_id to be specified"
+msgstr "Benutzer-Suchparameter erfordert die Angabe der Benutzer-ID"
+
+msgid "Wed"
+msgstr "Mi"
+
+msgid "With focus on last"
+msgstr "Mit Fokus auf den letzten"
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource"
+msgstr ""
+
+msgid "You do not have permission"
+msgstr "Sie haben keine Berechtigung"
+
+msgid "activation key"
+msgstr "Aktivierungsschlüssel"
+
+msgid "cannot be cancelled with force at the moment."
+msgstr "kann derzeit nicht mit Gewalt storniert werden."
+
+msgid "content view"
+msgstr "Inhaltsansicht"
+
+msgid "content view version"
+msgstr "Version der Inhaltsansicht"
+
+msgid "could not be resumed"
+msgstr "konnte nicht wieder aufgenommen werden"
+
+msgid "error"
+msgstr "Error"
+
+#. TRANSLATORS: this translation is referring to an option which is a time interval
+msgid "is day of month (range: 1-31)"
+msgstr "Tag des Monats (im Bereich: 1-31)"
+
+#. TRANSLATORS: this translation is referring to an option which is a time interval
+msgid "is day of week (range: 0-6)"
+msgstr "Wochentag (im Bereich: 0-6)"
+
+#. TRANSLATORS: this translation is referring to an option which is a time interval
+msgid "is hour (range: 0-23)"
+msgstr "Stunde (im Bereich: 0-23)"
+
+#. TRANSLATORS: this translation is referring to an option which is a time interval
+msgid "is minute (range: 0-59)"
+msgstr "Minute (im Bereich: 0-59)"
+
+#. TRANSLATORS: this translation is referring to an option which is a time interval
+msgid "is month (range: 1-12)"
+msgstr "Monat (im Bereich: 1-12)"
+
+msgid "is not a valid format"
+msgstr ""
+
+msgid "last"
+msgstr "letzte"
+
+msgid "mode"
+msgstr "Modus"
+
+msgid "mode has to be one of %{allowed_modes}"
+msgstr "Modus muss einer von %{allowed_modes} sein"
+
+msgid "older"
+msgstr "älter"
+
+msgid "organization"
+msgstr "Organisation"
+
+msgid "other"
+msgstr "Sonstiges"
+
+msgid "paused"
+msgstr "pausiert"
+
+msgid "product"
+msgstr "Produkt"
+
+msgid "repository"
+msgstr "Repository"
+
+msgid "resources cannot be unlocked at the moment."
+msgstr "Ressourcen können derzeit nicht freigeschaltet werden."
+
+msgid "resources were unlocked "
+msgstr "Ressourcen wurden freigeschaltet"
+
+msgid "resources were unlocked with force."
+msgstr "Ressourcen wurden mit Gewalt erschlossen."
+
+msgid "result"
+msgstr "Ergebnis"
+
+msgid "running"
+msgstr "wird ausgeführt"
+
+msgid "scheduled"
+msgstr "geplant"
+
+msgid "seconds"
+msgstr "Sekunden"
+
+msgid "state"
+msgstr "Status"
+
+msgid "stopped"
+msgstr "gestoppt"
+
+msgid "success"
+msgstr "erfolgreich"
+
+msgid "system"
+msgstr "System"
+
+msgid "task has to be cancellable"
+msgstr "Aufgabe muss stornierbar sein"
+
+msgid "task has to be resumable"
+msgstr "Aufgabe muss wiederaufsetzbar sein"
+
+msgid "tasks."
+msgstr "Aufgaben."
+
+msgid "time"
+msgstr "Zeit"
+
+msgid "troubleshooting documentation"
+msgstr "Dokumentation zur Fehlerbehebung"
+
+msgid "user"
+msgstr "Benutzer"
+
+msgid "warning"
+msgstr "Warnung"
+
+msgid "was cancelled"
+msgstr "fällt aus"
+
+msgid "was resumed"
+msgstr "wurde wieder aufgenommen"
+
+msgid "week"
+msgstr "Woche"

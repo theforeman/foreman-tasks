@@ -51,9 +51,6 @@ msgstr "12h"
 msgid "24h"
 msgstr "24h"
 
-msgid ":after setting in tasks cleanup section is deprecated, use :after in :rules section to set the value. to cleanup rules"
-msgstr "Le paramètre :after dans la section de nettoyage des tâches est obsolète. Utilisez :after dans la section :rules afin de définir la valeur pour nettoyer les règles"
-
 msgid "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved."
 msgstr "Une tâche en pause représente un processus qui ne s'est pas terminé correctement. Toute tâche en état de pause peut entraîner une incohérence potentielle et doit être résolue."
 
@@ -261,6 +258,9 @@ msgstr "N'a pu vérifier les tâches du proxy à %{url}: %{exception}"
 
 msgid "Failed to initialize"
 msgstr "L'initialisation a échoué"
+
+msgid "Failed to trigger task on the smart proxy: "
+msgstr ""
 
 msgid "Finished"
 msgstr "TerminÃ©"
@@ -471,9 +471,6 @@ msgid "Recurring logics"
 msgstr "Logiques périodiques"
 
 msgid "Refresh Data"
-msgstr ""
-
-msgid "Remote action:"
 msgstr ""
 
 msgid "Repeat N times"
