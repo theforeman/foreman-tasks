@@ -84,7 +84,7 @@ module ForemanTasks
 
     def self.cleanup_settings
       return @cleanup_settings if @cleanup_settings
-      @cleanup_settings = SETTINGS[:'foreman-tasks'] && SETTINGS[:'foreman-tasks'][:cleanup] || {}
+      @cleanup_settings = SETTINGS.dig(:'foreman-tasks', :cleanup) || {}
     end
 
     def self.actions_by_rules(action_rules)

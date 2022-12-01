@@ -16,7 +16,7 @@ module ForemanTasks
         :backup_deleted_plans => true,
         :backup_dir => default_backup_dir,
       }
-      settings = SETTINGS[:'foreman-tasks'] && SETTINGS[:'foreman-tasks'][:backup]
+      settings = SETTINGS.dig(:'foreman-tasks', :backup)
       backup_options.merge!(settings) if settings
       @backup_settings = with_environment_override backup_options
     end
