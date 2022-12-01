@@ -1,5 +1,5 @@
 <% title _("Recurring logics") %>
-<% title_actions SETTINGS[:version].short <= '1.13' ? help_path : help_button %>
+<% title_actions help_button %>
 
 <% if @errors %>
 <%= alert(:class => 'alert-info', :id => 'multiple-alert', :close => false, :header => '', :text => @errors) %>
