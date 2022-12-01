@@ -8,12 +8,7 @@ module Actions
 
         def plan(_host_type, host_name, facts, certname, proxy_id)
           facts['domain'].try(:downcase!)
-          host = if SETTINGS[:version].short > '1.16'
-                   ::Host::Managed.import_host(host_name, certname)
-                 else
-                   # backwards compatibility
-                   ::Host::Managed.import_host(host_name, facts['_type'], certname, proxy_id)
-                 end
+          host = ::Host::Managed.import_host(host_name, certname)
           host.save(:validate => false) if host.new_record?
           action_subject(host, :facts => facts.to_unsafe_h, :proxy_id => proxy_id)
           if host.build?
