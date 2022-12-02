@@ -16,6 +16,7 @@ if gettext_find_task
                  .all_action_names
                  .uniq
                  .map { |n| %[_("#{n}")] }
+                 .sort
                  .join("\n")
     end
   end
