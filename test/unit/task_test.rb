@@ -182,17 +182,14 @@ class TasksTest < ActiveSupport::TestCase
   end
 
   describe 'consistency check' do
-    let(:consistent_task) { FactoryBot.create(:dynflow_task, :sync_with_dynflow => true) }
-    let(:inconsistent_task) { FactoryBot.create(:dynflow_task, :inconsistent_dynflow_task) }
-
     it 'ensures the tasks marked as running are really running in Dynflow' do
-      _(consistent_task.state).must_equal 'planned'
-      _(inconsistent_task.state).must_equal 'running'
+      task = ForemanTasks.sync_task(Support::DummyDynflowAction)
+      task.update(:state => 'running') # Updating state updates the timestamp
+      task.update(:state_updated_at => Time.zone.now - 5.minutes)
 
       ForemanTasks::Task::DynflowTask.consistency_check
-
-      _(consistent_task.reload.state).must_equal 'planned'
-      _(inconsistent_task.reload.state).must_equal 'planned'
+      task.reload
+      _(task.state).must_equal 'stopped'
     end
   end
 

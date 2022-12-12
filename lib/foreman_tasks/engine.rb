@@ -168,6 +168,9 @@ module ForemanTasks
         world.middleware.use Actions::Middleware::KeepCurrentRequestID
         world.middleware.use ::Actions::Middleware::LoadSettingValues
       end
+      ::ForemanTasks.dynflow.config.on_init(true) do
+        ::ForemanTasks::Task::DynflowTask.consistency_check
+      end
     end
 
     # to enable async Foreman operations using Dynflow
