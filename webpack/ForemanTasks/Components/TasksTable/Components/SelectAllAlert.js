@@ -1,3 +1,4 @@
+import { FormattedMessage } from 'react-intl';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Alert, Button } from 'patternfly-react';
@@ -17,14 +18,19 @@ export const SelectAllAlert = ({
         Math.min(itemCount, perPage)
       )}
       <Button bsStyle="link" onClick={selectAllRows}>
-        {__('Select All')}
-        <b> {itemCount} </b> {__('tasks.')}
+        <FormattedMessage
+          id="select-all-tasks"
+          values={{
+            count: <b>{itemCount}</b>,
+          }}
+          defaultMessage={__('Select all {count} tasks')}
+        />
       </Button>
     </React.Fragment>
   );
   const undoSelectText = (
     <React.Fragment>
-      {sprintf(__(`All %s tasks are selected. `), itemCount)}
+      {sprintf(__('All %s tasks are selected.'), itemCount)}
       <Button bsStyle="link" onClick={unselectAllRows}>
         {__('Undo selection')}
       </Button>

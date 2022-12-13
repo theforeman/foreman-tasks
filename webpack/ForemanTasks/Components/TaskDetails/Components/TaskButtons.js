@@ -48,7 +48,7 @@ export const TaskButtons = ({
         <span
           className={`glyphicon glyphicon-refresh ${taskReload ? 'spin' : ''}`}
         />
-        {__(`${taskReload ? 'Stop' : 'Start'}  auto-reloading`)}
+        {taskReload ? __('Stop auto-reloading') : __('Start auto-reloading')}
       </Button>
       <Button
         className="dynflow-button"

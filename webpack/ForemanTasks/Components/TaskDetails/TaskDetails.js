@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Tab, Tabs } from 'patternfly-react';
-import { translate as __ } from 'foremanReact/common/I18n';
+import { translate as __, sprintf } from 'foremanReact/common/I18n';
 import { STATUS } from 'foremanReact/constants';
 import MessageBox from 'foremanReact/components/common/MessageBox';
 import Task from './Components/Task';
@@ -49,7 +49,7 @@ const TaskDetails = ({
       <MessageBox
         key="task-details-error"
         icontype="error-circle-o"
-        msg={__(`Could not receive data: ${APIerror && APIerror.message}`)}
+        msg={sprintf(__('Could not receive data: %s'), APIerror?.message)}
       />
     );
   }

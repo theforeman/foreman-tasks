@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Table } from 'foremanReact/components/common/table';
 import { STATUS } from 'foremanReact/constants';
 import MessageBox from 'foremanReact/components/common/MessageBox';
-import { translate as __ } from 'foremanReact/common/I18n';
+import { translate as __, sprintf } from 'foremanReact/common/I18n';
 import Pagination from 'foremanReact/components/Pagination';
 import { getURIQuery } from 'foremanReact/common/helpers';
 import createTasksTableSchema from './TasksTableSchema';
@@ -68,7 +68,7 @@ const TasksTable = ({
       <MessageBox
         key="tasks-table-error"
         icontype="error-circle-o"
-        msg={__(`Could not receive data: ${error && error.message}`)}
+        msg={sprintf(__('Could not receive data: %s'), error?.message)}
       />
     );
   }
