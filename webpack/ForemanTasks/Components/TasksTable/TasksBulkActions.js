@@ -53,7 +53,7 @@ const handleErrorResume = (error, dispatch) => {
   dispatch({ type: TASKS_RESUME_FAILURE, error });
   dispatch(
     addToast(
-      errorToastData(`${__(`Cannot resume tasks at the moment`)} ${error}`)
+      errorToastData(`${__('Cannot resume tasks at the moment')} ${error}`)
     )
   );
 };
@@ -112,7 +112,7 @@ const handleErrorCancel = (error, dispatch) => {
   dispatch({ type: TASKS_CANCEL_FAILURE, error });
   dispatch(
     addToast(
-      errorToastData(`${__(`Cannot cancel tasks at the moment`)} ${error}`)
+      errorToastData(`${__('Cannot cancel tasks at the moment')} ${error}`)
     )
   );
 };
@@ -175,7 +175,7 @@ const handleErrorForceCancel = (error, dispatch) => {
   dispatch(
     addToast(
       errorToastData(
-        `${__(`Cannot force cancel tasks at the moment`)} ${error}`
+        `${__('Cannot force cancel tasks at the moment')} ${error}`
       )
     )
   );

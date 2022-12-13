@@ -4,7 +4,7 @@ exports[`TasksTable rendering render with error Props 1`] = `
 <MessageBox
   icontype="error-circle-o"
   key="tasks-table-error"
-  msg="Could not receive data: null"
+  msg="Could not receive data: "
 />
 `;
 

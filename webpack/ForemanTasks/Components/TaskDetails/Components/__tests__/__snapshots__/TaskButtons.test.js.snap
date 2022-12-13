@@ -19,7 +19,7 @@ exports[`Task rendering render with minimal Props 1`] = `
     <span
       className="glyphicon glyphicon-refresh "
     />
-    Start  auto-reloading
+    Start auto-reloading
   </Button>
   <Button
     active={false}
@@ -118,7 +118,7 @@ exports[`Task rendering render with some Props 1`] = `
     <span
       className="glyphicon glyphicon-refresh spin"
     />
-    Stop  auto-reloading
+    Stop auto-reloading
   </Button>
   <Button
     active={false}

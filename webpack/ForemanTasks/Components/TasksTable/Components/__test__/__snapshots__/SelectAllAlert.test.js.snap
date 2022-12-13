@@ -6,7 +6,7 @@ exports[`SelectAllAlert renders SelectAllAlert with all rows selected 1`] = `
   onDismiss={null}
   type="info"
 >
-  All 7 tasks are selected. 
+  All 7 tasks are selected.
   <Button
     active={false}
     block={false}
@@ -35,14 +35,17 @@ exports[`SelectAllAlert renders SelectAllAlert with perPage > itemCout 1`] = `
     disabled={false}
     onClick={[MockFunction]}
   >
-    Select All
-    <b>
-       
-      7
-       
-    </b>
-     
-    tasks.
+    <FormattedMessage
+      defaultMessage="Select all {count} tasks"
+      id="select-all-tasks"
+      values={
+        Object {
+          "count": <b>
+            7
+          </b>,
+        }
+      }
+    />
   </Button>
 </Alert>
 `;
@@ -62,14 +65,17 @@ exports[`SelectAllAlert renders SelectAllAlert without all rows selected 1`] = `
     disabled={false}
     onClick={[MockFunction]}
   >
-    Select All
-    <b>
-       
-      7
-       
-    </b>
-     
-    tasks.
+    <FormattedMessage
+      defaultMessage="Select all {count} tasks"
+      id="select-all-tasks"
+      values={
+        Object {
+          "count": <b>
+            7
+          </b>,
+        }
+      }
+    />
   </Button>
 </Alert>
 `;
