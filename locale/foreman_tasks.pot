@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_tasks 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-25 16:10+0100\n"
-"PO-Revision-Date: 2022-11-25 16:10+0100\n"
+"POT-Creation-Date: 2022-12-16 14:29+0100\n"
+"PO-Revision-Date: 2022-12-16 14:29+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -324,7 +324,7 @@ msgstr ""
 msgid "The targets are of different types"
 msgstr ""
 
-#: ../app/lib/actions/foreman/host/import_facts.rb:48 action_names.rb:4
+#: ../app/lib/actions/foreman/host/import_facts.rb:43 action_names.rb:4
 msgid "Import facts"
 msgstr ""
 

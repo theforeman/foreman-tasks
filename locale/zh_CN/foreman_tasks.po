@@ -5,10 +5,10 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_tasks 0.3.4\n"
+"Project-Id-Version: foreman_tasks 7.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2020-06-22 15:13+0000\n"
-"Last-Translator: Amit Upadhye <aupadhye@redhat.com>\n"
+"PO-Revision-Date: 2016-02-12 14:04+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/foreman/foreman/langu"
 "age/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -21,70 +21,70 @@ msgid "${taskReload ? 'Stop' : 'Start'}  auto-reloading"
 msgstr "${taskReload ? 'Stop' : 'Start'}  自动重新加载"
 
 msgid "%(last)s Last %(time)s"
-msgstr "%(last)s 最近 %(time)s"
+msgstr "%(last)s 最后 %(time)s"
 
 msgid "%(older)s Older %(time)s"
 msgstr "%(older)s 较老 %(time)s"
 
 msgid "%s Selected Tasks"
-msgstr ""
+msgstr "%s 选择的任务"
 
 msgid "%s is not valid format of cron line"
-msgstr "%s 不是 cron 行的正確格式"
+msgstr "%s 不是正确的 cron 行"
 
 msgid "%{total} task(s), %{success} success, %{failed} fail"
-msgstr "%{total} 任務，%{success} 成功，%{failed} 失敗"
+msgstr "%{total} 任务），%{success}成功，%{failed}失败"
 
 msgid "%{value} is not allowed input type"
-msgstr "%{value} 並非允許的輸入類型"
+msgstr "%{value} 不允许输入类型"
 
 msgid "%{value} is not allowed triggering mode"
-msgstr "%{value} 並不允許觸發模式"
+msgstr "%{value} 不允许触发模式"
 
 msgid "%{value} is wrong format"
-msgstr "%{value} 的格式錯誤"
+msgstr "%{value} 格式错误"
 
 msgid "12h"
-msgstr "12h"
+msgstr "12 小时"
 
 msgid "24h"
-msgstr "24h"
+msgstr "24 小时"
 
 msgid "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved."
 msgstr "暂停的任务代表未正确完成的进程。任何处于暂停状态的任务都可能导致潜在的不一致，需要被解决。"
 
 msgid "A special label for tracking a recurring job. There can be only one active job with a given purpose at a time."
-msgstr ""
+msgstr "用于跟踪周期性作业的特殊标签。一次只能有一个具有给定目的的活跃作业。"
 
 msgid "Action"
-msgstr "行动"
+msgstr "操作"
 
 msgid "Action with sub plans"
-msgstr "有子計畫的動作"
+msgstr "有子计划的操作"
 
 msgid "Active"
-msgstr "活性"
+msgstr "活跃"
 
 msgid "Active Filters:"
 msgstr "活跃的过滤器："
 
 msgid "Active or disabled recurring logic with purpose %s already exists"
-msgstr ""
+msgstr "带有目的 %s 的活跃或禁用的周期性逻辑已存在"
 
 msgid "All %s tasks are selected. "
-msgstr "已选择所有％s任务。 "
+msgstr "已选择所有%s任务。 "
 
 msgid "All proxies with the required feature are unavailable at the moment"
 msgstr "具备所需功能的所有代理暂时都不可用"
 
 msgid "Allow proxy batch tasks"
-msgstr ""
+msgstr "允许代理批处理任务"
 
 msgid "Allow triggering tasks on the smart proxy in batches"
-msgstr "允许批量触发智能代理上的任务"
+msgstr "允许以批量形式触发智能代理上的任务"
 
 msgid "Associated resources"
-msgstr "相聯資源"
+msgstr "相关的资源"
 
 #. TRANSLATORS: Time widget for when a task should start
 msgid "At"
@@ -94,10 +94,10 @@ msgid "Back to tasks"
 msgstr "返回到任务"
 
 msgid "Backtrace"
-msgstr "追蹤"
+msgstr "回溯"
 
 msgid "Bulk action"
-msgstr "批次動作"
+msgstr "批量操作"
 
 msgid "Cancel"
 msgstr "取消"
@@ -106,19 +106,19 @@ msgid "Cancel Selected"
 msgstr "取消选择"
 
 msgid "Cancel enforced: the task might be still running on the proxy"
-msgstr "強制取消：任務可能還在代理伺服器上執行"
+msgstr "强制取消：任务可能仍在代理服务器上运行"
 
 msgid "Cancel recurring logic"
-msgstr "取消週期邏輯"
+msgstr "取消重复逻辑"
 
 msgid "Cancel selected cancellable tasks"
-msgstr ""
+msgstr "取消所选的可取消的任务"
 
 msgid "Cancel selected tasks"
 msgstr "取消选择的任务"
 
 msgid "Cancel specific tasks by ID"
-msgstr "取消通过 ID 指定的特定任务"
+msgstr "根据 ID 取消特定任务"
 
 msgid "Cancel tasks matching search string"
 msgstr "取消与搜索字符串匹配的任务"
@@ -127,7 +127,7 @@ msgid "Canceling selected tasks, this might take a while"
 msgstr "取消所选任务，这可能需要一段时间"
 
 msgid "Canceling with force selected tasks, this might take a while"
-msgstr ""
+msgstr "取消强制选择的任务，这可能需要一段时间"
 
 msgid "Cancelled"
 msgstr "已取消"
@@ -136,7 +136,7 @@ msgid "Cannot cancel tasks at the moment"
 msgstr "目前无法取消任务"
 
 msgid "Cannot force cancel tasks at the moment"
-msgstr ""
+msgstr "目前无法强制取消任务"
 
 msgid "Cannot resume tasks at the moment"
 msgstr "目前无法恢复任务"
@@ -160,13 +160,13 @@ msgid "Conflicts with tasks:"
 msgstr "与任务冲突 :"
 
 msgid "Could not cancel step."
-msgstr ""
+msgstr "无法取消步骤。"
 
 msgid "Could not receive data: ${APIerror && APIerror.message}"
-msgstr ""
+msgstr "无法接收数据：${APIerror && APIerror.message}"
 
 msgid "Could not receive data: ${error && error.message}"
-msgstr "无法接收数据: ${error && error.message}"
+msgstr "无法接收数据：${error && error.message}"
 
 msgid "Cron line"
 msgstr "Cron 行"
@@ -178,37 +178,37 @@ msgid "Current iteration"
 msgstr "現有重述"
 
 msgid "Data to be sent to the action"
-msgstr "要發送到動作的資料"
+msgstr "发送到操作的数据"
 
 msgid "Days"
 msgstr "天"
 
 msgid "Days of week"
-msgstr "星期幾"
+msgstr "星期几"
 
 msgid "Delayed"
-msgstr "已延遲"
+msgstr "延迟"
 
 msgid "Delete recurring logics by search query"
 msgstr "通过搜索查询删除重复逻辑"
 
 msgid "Details"
-msgstr "细节"
+msgstr "详情"
 
 msgid "Details of %s task"
-msgstr "％s 任务的详细信息"
+msgstr "%s 任务的详细信息"
 
 msgid "Disable"
 msgstr "禁用"
 
 msgid "Disabled"
-msgstr "残"
+msgstr "禁用"
 
 msgid "Duration"
-msgstr "Duration"
+msgstr "持续时间"
 
 msgid "Dynflow console"
-msgstr "Dynflow 主控台"
+msgstr "Dynflow 控制台"
 
 msgid "Empty bulk action"
 msgstr "清空批次動作"
@@ -217,16 +217,16 @@ msgid "Enable"
 msgstr "启用"
 
 msgid "Enable dynflow console"
-msgstr ""
+msgstr "启用 dynflow 控制台"
 
 msgid "Enable the dynflow console (/foreman_tasks/dynflow) for debugging"
-msgstr "啟用 dynflow 主控台（/foreman_tasks/dynflow）作為偵錯使用"
+msgstr "启用 dynflow 控制台（/foreman_tasks/dynflow）用于故障排除"
 
 msgid "Ends"
-msgstr "完"
+msgstr "结束"
 
 msgid "Ends at"
-msgstr "結束於"
+msgstr "结束于"
 
 msgid "Errors"
 msgstr "错误"
@@ -241,7 +241,7 @@ msgid "Exception"
 msgstr "例外"
 
 msgid "Execute now"
-msgstr "立即執行"
+msgstr "立即执行"
 
 msgid "Execution plan data not available "
 msgstr "未可用执行计划数据"
@@ -256,25 +256,25 @@ msgid "Failed to check on tasks on proxy at %{url}: %{exception}"
 msgstr "无法检查在 %{url} 代理中的任务: %{exception}"
 
 msgid "Failed to initialize"
-msgstr "無法初始化"
+msgstr "初始化失败"
 
 msgid "Failed to trigger task on the smart proxy: "
-msgstr ""
+msgstr "在智能代理中触发任务失败： "
 
 msgid "Finished"
 msgstr "完成"
 
 msgid "Force Cancel"
-msgstr ""
+msgstr "强制取消"
 
 msgid "Force Cancel Selected"
-msgstr ""
+msgstr "强制取消选择"
 
 msgid "Force Cancel selected tasks"
-msgstr ""
+msgstr "强制取消选择的任务"
 
 msgid "Force Unlock"
-msgstr "強制解除鎖定"
+msgstr "强制解除锁定"
 
 msgid "Foreman Tasks"
 msgstr "Foreman 任务"
@@ -283,7 +283,7 @@ msgid "Fri"
 msgstr "周五"
 
 msgid "I understand that this may cause harm and have working database backups of all backend services."
-msgstr ""
+msgstr "我理解这可能会导致损害，并对所有后端服务具有可以正常工作的数据库备份。"
 
 msgid "ID"
 msgstr "ID"
@@ -295,16 +295,16 @@ msgid "Immediate"
 msgstr "立即"
 
 msgid "Import Puppet classes"
-msgstr "匯入 Puppet 類別"
+msgstr "导入 Puppet 类"
 
 msgid "Import facts"
-msgstr "匯入詳情"
+msgstr "导入事实"
 
 msgid "Indicates that the action should be cancelled if it cannot be started before this time."
-msgstr "這表示如果不能在這時間之前開始，就應該取消動作。"
+msgstr "这代表，如果操作无法在这个时间前开始则操作应该被取消。"
 
 msgid "Initialization error: %s"
-msgstr "初始化錯誤：%s"
+msgstr "初始化错误：%s"
 
 msgid "Input"
 msgstr "输入"
@@ -313,31 +313,31 @@ msgid "Iteration limit"
 msgstr "重述限制"
 
 msgid "Label"
-msgstr "標籤"
+msgstr "标签"
 
 msgid "Last occurrence"
-msgstr "最後一次發生"
+msgstr "最后一次发生"
 
 msgid "Last start time"
 msgstr "最后的开始时间"
 
 msgid "Latest Warning/Error Tasks"
-msgstr "最新的警告 / 錯誤任務"
+msgstr "最新的警告/错误任务"
 
 msgid "Less than a second"
-msgstr "不到一秒"
+msgstr "少于一秒"
 
 msgid "List of tasks"
 msgstr "任务清单"
 
 msgid "List recurring logics"
-msgstr "列出週期邏輯"
+msgstr "列出重复逻辑"
 
 msgid "List tasks"
-msgstr "列出任務"
+msgstr "列出任务"
 
 msgid "Locks"
-msgstr "鎖"
+msgstr "锁"
 
 msgid "Mon"
 msgstr "周一"
@@ -346,31 +346,31 @@ msgid "More than"
 msgstr "多于"
 
 msgid "N/A"
-msgstr "N / A"
+msgstr "不适用"
 
 msgid "Name"
-msgstr "名稱"
+msgstr "名称"
 
 msgid "Never"
 msgstr "决不"
 
 msgid "Next occurrence"
-msgstr "下次發生"
+msgstr "下次发生"
 
 msgid "No"
-msgstr "没有"
+msgstr "否"
 
 msgid "No Tasks"
 msgstr "没有任务"
 
 msgid "No errors"
-msgstr "無錯誤"
+msgstr "无错误"
 
 msgid "No proxy defined for execution"
 msgstr "没有为执行定义代理"
 
 msgid "No running steps"
-msgstr "沒有執行步驟"
+msgstr "没有运行步骤"
 
 msgid "No start or end dates"
 msgstr "没有开始或结束日期"
@@ -379,7 +379,7 @@ msgid "No task could be started"
 msgstr "无法启动任何任务"
 
 msgid "No. of Tasks"
-msgstr "任務編號"
+msgstr "任务号"
 
 msgid "Not all the selected tasks can be cancelled"
 msgstr "并非所有选定的任务都可以取消"
@@ -388,7 +388,7 @@ msgid "Not all the selected tasks can be resumed"
 msgstr "并非所有选定的任务都可以恢复"
 
 msgid "Number of attempts to start a task on the smart proxy before failing"
-msgstr "在智慧代理上啟動任務的嘗試次數"
+msgstr "失败前在智能代理上尝试启动一个任务的次数"
 
 msgid "Number of seconds to wait for synchronous task to finish."
 msgstr "等待同步任务完成的秒数。"
@@ -404,10 +404,10 @@ msgid "Operation"
 msgstr "操作"
 
 msgid "Other includes all stopped tasks that are cancelled or pending"
-msgstr ""
+msgstr "其他包括已取消或待处理的所有已停止任务"
 
 msgid "Other:"
-msgstr ""
+msgstr "其他："
 
 msgid "Output"
 msgstr "输出"
@@ -416,10 +416,10 @@ msgid "Output:"
 msgstr "输出："
 
 msgid "Parent task"
-msgstr "父任務"
+msgstr "父任务"
 
 msgid "Paused"
-msgstr "已暫停"
+msgstr "暂停"
 
 msgid "Please inspect their state, fix their errors and resume them."
 msgstr "请检查其状态，纠正其错误，然后恢复它们。"
@@ -437,19 +437,19 @@ msgid "Polling multiplier which is used to multiply the default polling interval
 msgstr "轮询乘数，用于乘以默认轮询间隔。这可用于防止对长时间运行的任务进行过于频繁的轮询。"
 
 msgid "Proxy action retry count"
-msgstr ""
+msgstr "代理操作重试计数"
 
 msgid "Proxy action retry interval"
-msgstr ""
+msgstr "代理操作重试间隔"
 
 msgid "Proxy task gone missing from the smart proxy"
 msgstr "代理任务在智能代理中丢失"
 
 msgid "Proxy tasks batch size"
-msgstr ""
+msgstr "代理任务批处理大小"
 
 msgid "Purpose"
-msgstr ""
+msgstr "目的"
 
 msgid "Raw"
 msgstr "Raw"
@@ -464,25 +464,25 @@ msgid "Recurring Logics"
 msgstr "重复逻辑"
 
 msgid "Recurring logic"
-msgstr "週期邏輯"
+msgstr "重复逻辑"
 
 msgid "Recurring logics"
-msgstr "週期邏輯"
+msgstr "重复逻辑"
 
 msgid "Refresh Data"
-msgstr ""
+msgstr "刷新数据"
 
 msgid "Repeat N times"
-msgstr "重複 N 次"
+msgstr "重复 N 次"
 
 msgid "Repeat until"
-msgstr "重複直到"
+msgstr "重复直到"
 
 msgid "Repeats"
-msgstr "重複"
+msgstr "重复"
 
 msgid "Require auth for dynflow console"
-msgstr ""
+msgstr "dynflow 控制台需要验证"
 
 msgid "Require user to be authenticated as user with admin rights when accessing dynflow console"
 msgstr "存取 dynflow 主控台時，需要使用者授權成為擁有 admin 權限的使用者"
@@ -491,10 +491,10 @@ msgid "Required lock is already taken by other running tasks."
 msgstr "所需的锁定已由其他正在运行的任务获取。"
 
 msgid "Resource search_params requires resource_type and resource_id to be specified"
-msgstr "資源 search_params 需要指定 resource_type 與 resource_id"
+msgstr "资源 search_params 需要指定 resource_type 和 resource_id"
 
 msgid "Resources for %s task(s) will be unlocked and will not prevent other tasks from being run. As the task(s) might be still running, it should be avoided to use this unless you are really sure the task(s) got stuck."
-msgstr ""
+msgstr "%s 任务的资源将被取消锁定，将不会阻止其他任务运行。因为任务可能仍在运行，除非您完全确定任务已卡住，否则应避免使用这个功能。"
 
 msgid "Result"
 msgstr "结果"
@@ -503,19 +503,19 @@ msgid "Resume"
 msgstr "恢复"
 
 msgid "Resume Selected"
-msgstr "继续选择"
+msgstr "恢复选择"
 
 msgid "Resume all paused error tasks"
-msgstr "繼續所有處於暫停狀態的錯誤任務"
+msgstr "恢复所有暂停的错误任务"
 
 msgid "Resume selected tasks"
 msgstr "恢复选择的任务"
 
 msgid "Resume specific tasks by ID"
-msgstr "透過 ID 繼續特定任務"
+msgstr "根据 ID 恢复特定任务"
 
 msgid "Resume tasks matching search string"
-msgstr "繼續符合搜尋字串的任務"
+msgstr "恢复与搜索字符串匹配的任务"
 
 msgid "Resuming selected tasks, this might take a while"
 msgstr "恢复所选任务，这可能需要一段时间"
@@ -524,16 +524,16 @@ msgid "Running"
 msgstr "執行中"
 
 msgid "Running Steps"
-msgstr "執行中的步驟"
+msgstr "运行步骤"
 
 msgid "Sat"
-msgstr "週六"
+msgstr "周六"
 
 msgid "Schedule"
-msgstr "排程"
+msgstr "调度"
 
 msgid "Schedule future execution"
-msgstr "排程未來的執行"
+msgstr "调度未来的执行"
 
 msgid "Scheduled"
 msgstr "调度的"
@@ -542,10 +542,10 @@ msgid "Search query"
 msgstr "搜索查询"
 
 msgid "See %{link} for more details on how to resolve the issue"
-msgstr "有关如何解决此问题的更多详细信息，请参见％{link}"
+msgstr "有关如何解决此问题的更多详细信息，请参见%{link}"
 
 msgid "Select Action"
-msgstr "選擇動作"
+msgstr "选择操作"
 
 msgid "Select All"
 msgstr "选择所有"
@@ -554,22 +554,22 @@ msgid "Select row"
 msgstr "选择行"
 
 msgid "Send data to the task from external executor (such as smart_proxy_dynflow)"
-msgstr "從外部執行者（例如 smart_proxy_dynflow）發送資料到任務"
+msgstr "从外部执行者发送到的任务（例如 smart_proxy_dynflow）"
 
 msgid "Set up recurring execution"
-msgstr "設定週期執行"
+msgstr "设置重复逻辑"
 
 msgid "Setting is off"
-msgstr ""
+msgstr "设置已关闭"
 
 msgid "Show recurring logic details"
-msgstr "顯示週期邏輯的詳情"
+msgstr "显示重复逻辑详情"
 
 msgid "Start at"
-msgstr "開始於"
+msgstr "开始于"
 
 msgid "Start before"
-msgstr "在這之前開始"
+msgstr "在此时间前开始"
 
 msgid "Started"
 msgstr "已启动"
@@ -578,25 +578,25 @@ msgid "Started at"
 msgstr "起始於"
 
 msgid "State"
-msgstr "州"
+msgstr "状态"
 
 msgid "Step Canceled"
-msgstr ""
+msgstr "步骤已取消"
 
 msgid "Stop selected stoppable tasks"
-msgstr ""
+msgstr "停止所选的可停止的任务"
 
 msgid "Stop specific tasks by ID"
-msgstr ""
+msgstr "停止通过 ID 指定的特定任务"
 
 msgid "Stop tasks matching search string"
-msgstr ""
+msgstr "停止与搜索字符串匹配的任务"
 
 msgid "Stopped"
 msgstr "停止"
 
 msgid "Sub tasks"
-msgstr "子任務"
+msgstr "子任务"
 
 msgid "Sub tasks of %s"
 msgstr "%s 的子任务"
@@ -605,13 +605,13 @@ msgid "Sun"
 msgstr "周日"
 
 msgid "Sync task timeout"
-msgstr ""
+msgstr "同步任务超时"
 
 msgid "Task"
-msgstr "任務"
+msgstr "任务"
 
 msgid "Task Details"
-msgstr "工作詳細資料"
+msgstr "任务详情"
 
 msgid "Task Status"
 msgstr "任务状态"
@@ -620,16 +620,16 @@ msgid "Task aborted: the task might be still running on the proxy"
 msgstr "被中止的任务：该任务可能仍在代理服务器中运行"
 
 msgid "Task cannot be canceled"
-msgstr ""
+msgstr "任务无法取消"
 
 msgid "Task count"
 msgstr "任务计数"
 
 msgid "Task group common"
-msgstr "任務群組的一般事項"
+msgstr "任务组一般事项"
 
 msgid "Task search_params requires task_id to be specified"
-msgstr "任務 search_params 需要指定 task_id"
+msgstr "任务 search_params 需要指定 task_id"
 
 msgid "Task was canceled"
 msgstr "任务已取消"
@@ -638,78 +638,77 @@ msgid "Tasks"
 msgstr "任务"
 
 msgid "Tasks troubleshooting URL"
-msgstr ""
+msgstr "任务故障排除 URL"
 
 msgid "The ID of the step inside the execution plan to send the event to"
-msgstr "執行計畫中要發送事件的步驟 ID"
+msgstr "执行计划中的步骤 ID 要发送事件到"
 
 msgid "The recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task."
 msgstr "推荐的方法是调查下面和“错误”选项卡中的错误消息，解决造成问题的主要原因，然后继续执行任务。"
 
 msgid "The recurring logic was disabled."
-msgstr ""
+msgstr "重复逻辑已被禁用。"
 
 msgid "The recurring logic was enabled."
-msgstr ""
+msgstr "重复逻辑已启用。"
 
 msgid "The smart proxy task %s failed."
-msgstr "智慧型代理任務 %s 失敗。"
+msgstr "智能代理任务 %s 失败。"
 
 msgid "The targets are of different types"
-msgstr "目標類型不同"
+msgstr "目标为不同的类型"
 
 msgid "The task cannot be aborted at the moment."
-msgstr "目前无法中止该任务。"
+msgstr "目前无法中止任务。"
 
 msgid "The task could not be started"
 msgstr "无法启动该任务"
 
 msgid "There is %{count} paused task in the system that need attention"
 msgid_plural "There are %{count} paused tasks in the system that need attention"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "系统中有%{count}个暂停的任务需要注意"
 
 msgid "This action will delete all cancelled recurring logics. Please note that this action can't be reversed."
 msgstr "此操作将删除所有取消的重复逻辑。请注意，此操作无法撤消。"
 
 msgid "This will %(action)s %(number)s task(s), putting them in the %(state)s state. Are you sure?"
-msgstr ""
+msgstr "这将 %(action)s %(number)s 任务，把它们置于 %(state)s 状态。确定吗？"
 
 msgid "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed."
-msgstr ""
+msgstr "这将解锁任务正在针对其运行的资源。请注意，这可能会导致状态不一致，应该谨慎使用，然后再确保任务无法恢复。"
 
 msgid "Thu"
 msgstr "周四"
 
 msgid "Time in seconds between retries"
-msgstr "重試之間的時間（秒）"
+msgstr "重试间的间隔时间（秒）"
 
 msgid "Total"
-msgstr "總計"
+msgstr "总计"
 
 msgid "Troubleshooting"
 msgstr "故障排除"
 
 msgid "Trying to abort the task"
-msgstr "尝试中止该任务"
+msgstr "尝试中止任务"
 
 msgid "Trying to cancel step"
-msgstr ""
+msgstr "试图取消步骤"
 
 msgid "Tue"
 msgstr "周二"
 
 msgid "Type %s for search_params is not supported"
-msgstr "不支援 search_params 的 %s"
+msgstr "search_params 的 类型 %s 不被支持"
 
 msgid "UUID of the task"
-msgstr "任務的 UUID"
+msgstr "任务的 UUID"
 
 msgid "Undo selection"
 msgstr "撤销选择"
 
 msgid "Unlimited"
-msgstr "無限制"
+msgstr "无限制"
 
 msgid "Unlock"
 msgstr "开锁"
@@ -718,7 +717,7 @@ msgid "Update recurring logic"
 msgstr "更新周期性逻辑"
 
 msgid "Url pointing to the task troubleshooting documentation. It should contain %{label} placeholder, that will be replaced with normalized task label (restricted to only alphanumeric characters)). %{version} placeholder is also available."
-msgstr "指向任务故障排除文档的 URL。它应该包含％{label} 占位符，它将被标准化的任务标签（仅限字母数字字符）替换。还可以使用 ％{version} 占位符。"
+msgstr "指向任务故障排除文档的 URL。它应该包含%{label} 占位符，它将被标准化的任务标签（仅限字母数字字符）替换。还可以使用 %{version} 占位符。"
 
 msgid "User search_params requires user_id to be specified"
 msgstr "使用者 search_params 需要指定 user_id"
@@ -733,22 +732,22 @@ msgid "Yes"
 msgstr "是"
 
 msgid "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource"
-msgstr ""
+msgstr "您可以在本页中找到资源锁。标有已锁图标的独占锁表示此任务运行时其他任务都不能使用已锁定的资源。标有未锁图标的非独占锁表示其他任务可以自由访问该资源，它仅用于指出此任务与该资源的关系"
 
 msgid "You do not have permission"
-msgstr ""
+msgstr "您没有权限"
 
 msgid "activation key"
-msgstr "啟動金鑰"
+msgstr "激活码"
 
 msgid "cannot be cancelled with force at the moment."
-msgstr ""
+msgstr "目前无法强行取消。"
 
 msgid "content view"
-msgstr "內容視域"
+msgstr "内容视图"
 
 msgid "content view version"
-msgstr "內容視域版本"
+msgstr "内容视图版本"
 
 msgid "could not be resumed"
 msgstr "无法恢复"
@@ -758,26 +757,26 @@ msgstr "错误"
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is day of month (range: 1-31)"
-msgstr "是日期（範圍：1-31）"
+msgstr "日期（范围：1-31）"
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is day of week (range: 0-6)"
-msgstr "是星期幾（範圍：0-6）"
+msgstr "星期几（范围：0-6）"
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is hour (range: 0-23)"
-msgstr "是小時（範圍：0-23）"
+msgstr "小时（范围：0-23）"
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is minute (range: 0-59)"
-msgstr "是分鐘（範圍：0-59）"
+msgstr "分钟（范围：0-59）"
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is month (range: 1-12)"
-msgstr "是月份（範圍：1-12）"
+msgstr "月份（范围：1-12）"
 
 msgid "is not a valid format"
-msgstr ""
+msgstr "不是有效格式"
 
 msgid "last"
 msgstr "最近"
@@ -786,40 +785,40 @@ msgid "mode"
 msgstr "模式"
 
 msgid "mode has to be one of %{allowed_modes}"
-msgstr "模式必须是其中一个 %{allowed_modes}"
+msgstr "模式必须是 %{allowed_modes} 之一"
 
 msgid "older"
 msgstr "较老"
 
 msgid "organization"
-msgstr "組織"
+msgstr "机构"
 
 msgid "other"
-msgstr ""
+msgstr "其他"
 
 msgid "paused"
 msgstr "暂停"
 
 msgid "product"
-msgstr "產品"
+msgstr "产品"
 
 msgid "repository"
-msgstr "軟體庫"
+msgstr "软件仓库"
 
 msgid "resources cannot be unlocked at the moment."
-msgstr ""
+msgstr "目前无法解锁资源。"
 
 msgid "resources were unlocked "
-msgstr ""
+msgstr "资源已解锁 "
 
 msgid "resources were unlocked with force."
-msgstr ""
+msgstr "资源被强行解锁。"
 
 msgid "result"
 msgstr "结果"
 
 msgid "running"
-msgstr "赛跑"
+msgstr "运行"
 
 msgid "scheduled"
 msgstr "调度"
