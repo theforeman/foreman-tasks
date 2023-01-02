@@ -72,7 +72,6 @@ Foreman::Application.routes.draw do
         require 'sidekiq/web'
         redis_url = ENV['DYNFLOW_REDIS_URL'] || SETTINGS.dig(:dynflow, :redis_url)
         Sidekiq.redis = { url: redis_url }
-        Sidekiq::Web.set :sessions, false
         mount Sidekiq::Web => '/sidekiq', :constraints => ForemanTasks::Dynflow::SidekiqConsoleConstraint.new
       end
     end
