@@ -20,9 +20,6 @@ msgstr ""
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "${taskReload ? 'Stop' : 'Start'}  auto-reloading"
-msgstr "${taskReload ? 'Stop': 'Start'} automatisches Nachladen"
-
 msgid "%(last)s Last %(time)s"
 msgstr "%(last)s Zuletzt %(time)s"
 
@@ -74,8 +71,8 @@ msgstr "Aktive Filter:"
 msgid "Active or disabled recurring logic with purpose %s already exists"
 msgstr ""
 
-msgid "All %s tasks are selected. "
-msgstr "Alle %s Aufgaben sind ausgewählt."
+msgid "All %s tasks are selected."
+msgstr ""
 
 msgid "All proxies with the required feature are unavailable at the moment"
 msgstr "Alle Proxys mit dem genannten Feature sind nicht verfügbar "
@@ -165,11 +162,8 @@ msgstr "Konflikt mit Aufgaben:"
 msgid "Could not cancel step."
 msgstr "Schritt konnte nicht abgebrochen werden."
 
-msgid "Could not receive data: ${APIerror && APIerror.message}"
-msgstr "Daten konnten nicht empfangen werden: ${APIerror && APIerror.message}"
-
-msgid "Could not receive data: ${error && error.message}"
-msgstr "Konnte Daten nicht erhalten: ${error && error.message}"
+msgid "Could not receive data: %s"
+msgstr ""
 
 msgid "Cron line"
 msgstr "Cron-Zeile"
@@ -550,8 +544,8 @@ msgstr "Weitere Informationen zur Behebung des Problems finden Sie unter %{link}
 msgid "Select Action"
 msgstr "Aktion auswählen"
 
-msgid "Select All"
-msgstr "Alle auswählen"
+msgid "Select all {count} tasks"
+msgstr ""
 
 msgid "Select row"
 msgstr "Zeile auswählen"
@@ -571,6 +565,9 @@ msgstr "Details der Wiederholungslogik anzeigen"
 msgid "Start at"
 msgstr "Startet um "
 
+msgid "Start auto-reloading"
+msgstr ""
+
 msgid "Start before"
 msgstr "Startet vor"
 
@@ -585,6 +582,9 @@ msgstr "Status"
 
 msgid "Step Canceled"
 msgstr "Schritt abgebrochen"
+
+msgid "Stop auto-reloading"
+msgstr ""
 
 msgid "Stop selected stoppable tasks"
 msgstr "Ausgewählte stoppbare Aufgaben stoppen"
@@ -847,9 +847,6 @@ msgstr "Aufgabe muss stornierbar sein"
 
 msgid "task has to be resumable"
 msgstr "Aufgabe muss wiederaufsetzbar sein"
-
-msgid "tasks."
-msgstr "Aufgaben."
 
 msgid "time"
 msgstr "Zeit"

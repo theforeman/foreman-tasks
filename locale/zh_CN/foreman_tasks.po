@@ -17,9 +17,6 @@ msgstr ""
 "Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-msgid "${taskReload ? 'Stop' : 'Start'}  auto-reloading"
-msgstr "${taskReload ? 'Stop' : 'Start'}  自动重新加载"
-
 msgid "%(last)s Last %(time)s"
 msgstr "%(last)s 最后 %(time)s"
 
@@ -71,8 +68,8 @@ msgstr "活跃的过滤器："
 msgid "Active or disabled recurring logic with purpose %s already exists"
 msgstr "带有目的 %s 的活跃或禁用的周期性逻辑已存在"
 
-msgid "All %s tasks are selected. "
-msgstr "已选择所有%s任务。 "
+msgid "All %s tasks are selected."
+msgstr ""
 
 msgid "All proxies with the required feature are unavailable at the moment"
 msgstr "具备所需功能的所有代理暂时都不可用"
@@ -162,11 +159,8 @@ msgstr "与任务冲突 :"
 msgid "Could not cancel step."
 msgstr "无法取消步骤。"
 
-msgid "Could not receive data: ${APIerror && APIerror.message}"
-msgstr "无法接收数据：${APIerror && APIerror.message}"
-
-msgid "Could not receive data: ${error && error.message}"
-msgstr "无法接收数据：${error && error.message}"
+msgid "Could not receive data: %s"
+msgstr ""
 
 msgid "Cron line"
 msgstr "Cron 行"
@@ -547,8 +541,8 @@ msgstr "有关如何解决此问题的更多详细信息，请参见%{link}"
 msgid "Select Action"
 msgstr "选择操作"
 
-msgid "Select All"
-msgstr "选择所有"
+msgid "Select all {count} tasks"
+msgstr ""
 
 msgid "Select row"
 msgstr "选择行"
@@ -568,6 +562,9 @@ msgstr "显示重复逻辑详情"
 msgid "Start at"
 msgstr "开始于"
 
+msgid "Start auto-reloading"
+msgstr ""
+
 msgid "Start before"
 msgstr "在此时间前开始"
 
@@ -582,6 +579,9 @@ msgstr "状态"
 
 msgid "Step Canceled"
 msgstr "步骤已取消"
+
+msgid "Stop auto-reloading"
+msgstr ""
 
 msgid "Stop selected stoppable tasks"
 msgstr "停止所选的可停止的任务"
@@ -843,9 +843,6 @@ msgstr "任务必须可取消"
 
 msgid "task has to be resumable"
 msgstr "任务必须是可恢复的"
-
-msgid "tasks."
-msgstr "任务。"
 
 msgid "time"
 msgstr "时间"

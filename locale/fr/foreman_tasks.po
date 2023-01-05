@@ -19,9 +19,6 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 100000"
 "0 == 0 ? 1 : 2;\n"
 
-msgid "${taskReload ? 'Stop' : 'Start'}  auto-reloading"
-msgstr "${taskReload ? 'Stop' : 'Start'}  auto-reloading"
-
 msgid "%(last)s Last %(time)s"
 msgstr "%(last)s Dernier %(time)s"
 
@@ -73,8 +70,8 @@ msgstr "Filtres actifs :"
 msgid "Active or disabled recurring logic with purpose %s already exists"
 msgstr "La logique récurrente active ou désactivée avec l'objectif %s existe déjà."
 
-msgid "All %s tasks are selected. "
-msgstr "Toutes les tâches %s sont sélectionnées. "
+msgid "All %s tasks are selected."
+msgstr ""
 
 msgid "All proxies with the required feature are unavailable at the moment"
 msgstr "Les proxys possédant les fonctionnalités demandées ne sont pas disponibles actuellement"
@@ -164,11 +161,8 @@ msgstr "Conflits avec les tâches :"
 msgid "Could not cancel step."
 msgstr "N’a pas pu annuler l'étape."
 
-msgid "Could not receive data: ${APIerror && APIerror.message}"
-msgstr "Impossible de recevoir les données : ${APIerror&& APIerror.message}"
-
-msgid "Could not receive data: ${error && error.message}"
-msgstr "Impossible de recevoir les données : ${error && error.message}"
+msgid "Could not receive data: %s"
+msgstr ""
 
 msgid "Cron line"
 msgstr "Ligne Cron"
@@ -549,8 +543,8 @@ msgstr "Voir %{link} pour plus de détails sur la manière de résoudre le probl
 msgid "Select Action"
 msgstr "Choisir l'action"
 
-msgid "Select All"
-msgstr "Tout sélectionner"
+msgid "Select all {count} tasks"
+msgstr ""
 
 msgid "Select row"
 msgstr "Sélectionner une ligne"
@@ -570,6 +564,9 @@ msgstr "Afficher les détails des logiques récurrentes"
 msgid "Start at"
 msgstr "Démarre à"
 
+msgid "Start auto-reloading"
+msgstr ""
+
 msgid "Start before"
 msgstr "Démarre avant"
 
@@ -584,6 +581,9 @@ msgstr "État"
 
 msgid "Step Canceled"
 msgstr "Étape annulée"
+
+msgid "Stop auto-reloading"
+msgstr ""
 
 msgid "Stop selected stoppable tasks"
 msgstr "Arrêter les tâches sélectionnées pouvant être arrêtées"
@@ -847,9 +847,6 @@ msgstr "la tâche doit pouvoir être annulée"
 
 msgid "task has to be resumable"
 msgstr "la tâche doit pouvoir être reprise"
-
-msgid "tasks."
-msgstr "tâches."
 
 msgid "time"
 msgstr "heure"

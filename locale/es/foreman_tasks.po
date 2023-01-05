@@ -20,9 +20,6 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 :"
 " 2;\n"
 
-msgid "${taskReload ? 'Stop' : 'Start'}  auto-reloading"
-msgstr "${taskReload ? 'Stop' : 'Start'} auto-recarga"
-
 msgid "%(last)s Last %(time)s"
 msgstr "%(last)s Última %(time)s"
 
@@ -74,8 +71,8 @@ msgstr "Filtros activos:"
 msgid "Active or disabled recurring logic with purpose %s already exists"
 msgstr "Lógica recurrente activa o desactivada con el propósito %s ya existe"
 
-msgid "All %s tasks are selected. "
-msgstr "Se seleccionan todas las tareas de %s. "
+msgid "All %s tasks are selected."
+msgstr ""
 
 msgid "All proxies with the required feature are unavailable at the moment"
 msgstr "Ningún proxy con función obligatoria está disponible en este momento"
@@ -165,11 +162,8 @@ msgstr "Conflictos con las tareas:"
 msgid "Could not cancel step."
 msgstr "No se pudo cancelar el paso."
 
-msgid "Could not receive data: ${APIerror && APIerror.message}"
-msgstr "No se han podido recibir datos: ${APIerror && APIerror.message}"
-
-msgid "Could not receive data: ${error && error.message}"
-msgstr "No se han podido recibir datos: ${error && error.message}"
+msgid "Could not receive data: %s"
+msgstr ""
 
 msgid "Cron line"
 msgstr "Línea Cron"
@@ -550,8 +544,8 @@ msgstr "Consulte %{link} para obtener más detalles sobre cómo resolver el prob
 msgid "Select Action"
 msgstr "Seleccionar una acción"
 
-msgid "Select All"
-msgstr "Seleccionar todo"
+msgid "Select all {count} tasks"
+msgstr ""
 
 msgid "Select row"
 msgstr "Seleccionar fila"
@@ -571,6 +565,9 @@ msgstr "Mostrar detalles de lógica recurrente"
 msgid "Start at"
 msgstr "Iniciar en"
 
+msgid "Start auto-reloading"
+msgstr ""
+
 msgid "Start before"
 msgstr "Iniciar antes"
 
@@ -585,6 +582,9 @@ msgstr "Estado"
 
 msgid "Step Canceled"
 msgstr "Paso cancelado"
+
+msgid "Stop auto-reloading"
+msgstr ""
 
 msgid "Stop selected stoppable tasks"
 msgstr "Detener las tareas detenibles seleccionadas"
@@ -848,9 +848,6 @@ msgstr "la tarea se debe poder cancelar"
 
 msgid "task has to be resumable"
 msgstr "la tarea se debe poder reanudar"
-
-msgid "tasks."
-msgstr "tareas."
 
 msgid "time"
 msgstr "hora"

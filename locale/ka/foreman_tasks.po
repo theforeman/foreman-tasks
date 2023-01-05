@@ -18,9 +18,6 @@ msgstr ""
 "Language: ka\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-msgid "${taskReload ? 'Stop' : 'Start'}  auto-reloading"
-msgstr "ავტომატური ჩატვირთვის ${taskReload ? 'გაჩერება' : 'გაშვება'}"
-
 msgid "%(last)s Last %(time)s"
 msgstr "%(last)s ბოლო %(time)-ჯერ"
 
@@ -72,8 +69,8 @@ msgstr "აქტიური ფილტრები:"
 msgid "Active or disabled recurring logic with purpose %s already exists"
 msgstr "აქტიური ან გამრთული განმეორებადი ლოგიკა დანიშნულებით %s უკვე არსებობს"
 
-msgid "All %s tasks are selected. "
-msgstr "მონიშნულია ყველა %s ამოცანა. "
+msgid "All %s tasks are selected."
+msgstr ""
 
 msgid "All proxies with the required feature are unavailable at the moment"
 msgstr "მოთხოვნილი ფუნქციების მქონე ყველა პროქსი ამჟამად მიუწვდომელია"
@@ -163,11 +160,8 @@ msgstr "კონფლიქტი ამოცანებთან:"
 msgid "Could not cancel step."
 msgstr "ბიჯის გაუქმების შეცდომა."
 
-msgid "Could not receive data: ${APIerror && APIerror.message}"
-msgstr "მონაცემების მიღების შეცდომა: ${APIerror && APIerror.message}"
-
-msgid "Could not receive data: ${error && error.message}"
-msgstr "მონაცემების მიღების შეცდომა: ${error && error.message}"
+msgid "Could not receive data: %s"
+msgstr ""
 
 msgid "Cron line"
 msgstr "Cron-ის სტრიქონი"
@@ -548,8 +542,8 @@ msgstr "ამ პრობლემის გადასაწყვეტა�
 msgid "Select Action"
 msgstr "აირჩიეთ ქმედება"
 
-msgid "Select All"
-msgstr "ყველას მონიშვნა"
+msgid "Select all {count} tasks"
+msgstr ""
 
 msgid "Select row"
 msgstr "აირჩიეთ მწკრივი"
@@ -569,6 +563,9 @@ msgstr "განმეორებადი ლოგიკის დეტა�
 msgid "Start at"
 msgstr "დასაწყისი"
 
+msgid "Start auto-reloading"
+msgstr ""
+
 msgid "Start before"
 msgstr "მითითებულ დრომდე გასვება"
 
@@ -583,6 +580,9 @@ msgstr "State"
 
 msgid "Step Canceled"
 msgstr "ბიჯი გაუქმებულია"
+
+msgid "Stop auto-reloading"
+msgstr ""
 
 msgid "Stop selected stoppable tasks"
 msgstr "მონიშნული გაჩერებადი ამოცანების გაჩერება"
@@ -845,9 +845,6 @@ msgstr "ამოცანა გაუქმებადი უნდა იყ
 
 msgid "task has to be resumable"
 msgstr "ამოცანა გაგრძელებადი უნდა იყოს"
-
-msgid "tasks."
-msgstr "ამოცანა."
 
 msgid "time"
 msgstr "დრო"

@@ -18,9 +18,6 @@ msgstr ""
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-msgid "${taskReload ? 'Stop' : 'Start'}  auto-reloading"
-msgstr "${taskReload ? 'Stop' : 'Start'}  自動再読み込み"
-
 msgid "%(last)s Last %(time)s"
 msgstr "過去 %(time)s で %(last)s 件"
 
@@ -72,8 +69,8 @@ msgstr "アクティブなフィルター:"
 msgid "Active or disabled recurring logic with purpose %s already exists"
 msgstr "目的が %s のアクティブまたは無効な再帰論理がすでに存在します"
 
-msgid "All %s tasks are selected. "
-msgstr "%s の全タスクを選択します。 "
+msgid "All %s tasks are selected."
+msgstr ""
 
 msgid "All proxies with the required feature are unavailable at the moment"
 msgstr "現在、必要な機能があるすべてのプロキシーが利用できません"
@@ -163,11 +160,8 @@ msgstr "タスクとの競合:"
 msgid "Could not cancel step."
 msgstr "ステップをキャンセルできませんでした。"
 
-msgid "Could not receive data: ${APIerror && APIerror.message}"
-msgstr "データを受信できませんでした: ${APIerror && APIerror.message}"
-
-msgid "Could not receive data: ${error && error.message}"
-msgstr "データを受信できませんでした: ${error && error.message}"
+msgid "Could not receive data: %s"
+msgstr ""
 
 msgid "Cron line"
 msgstr "cron 行"
@@ -548,8 +542,8 @@ msgstr "問題解決の詳細については、%{link} を参照してくださ�
 msgid "Select Action"
 msgstr "アクションの選択"
 
-msgid "Select All"
-msgstr "すべてを選択"
+msgid "Select all {count} tasks"
+msgstr ""
 
 msgid "Select row"
 msgstr "行の選択"
@@ -569,6 +563,9 @@ msgstr "再帰論理の詳細表示"
 msgid "Start at"
 msgstr "開始時刻"
 
+msgid "Start auto-reloading"
+msgstr ""
+
 msgid "Start before"
 msgstr "次の時刻よりも前に開始"
 
@@ -583,6 +580,9 @@ msgstr "状態"
 
 msgid "Step Canceled"
 msgstr "ステップがキャンセルされました"
+
+msgid "Stop auto-reloading"
+msgstr ""
 
 msgid "Stop selected stoppable tasks"
 msgstr "選択した停止可能なタスクを停止"
@@ -844,9 +844,6 @@ msgstr "タスクはキャンセル可能でなければなりません"
 
 msgid "task has to be resumable"
 msgstr "タスクは再開可能でなければなりません"
-
-msgid "tasks."
-msgstr "タスク。"
 
 msgid "time"
 msgstr "時間"

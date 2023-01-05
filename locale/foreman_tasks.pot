@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_tasks 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-16 14:29+0100\n"
-"PO-Revision-Date: 2022-12-16 14:29+0100\n"
+"POT-Creation-Date: 2023-02-15 19:50+0100\n"
+"PO-Revision-Date: 2023-02-15 19:50+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -424,24 +424,24 @@ msgstr ""
 msgid "Conflicts with tasks:"
 msgstr ""
 
-#: ../app/models/foreman_tasks/recurring_logic.rb:141
+#: ../app/models/foreman_tasks/recurring_logic.rb:149
 msgid "Active"
 msgstr ""
 
-#: ../app/models/foreman_tasks/recurring_logic.rb:143
+#: ../app/models/foreman_tasks/recurring_logic.rb:151
 msgid "Cancelled"
 msgstr ""
 
-#: ../app/models/foreman_tasks/recurring_logic.rb:145
+#: ../app/models/foreman_tasks/recurring_logic.rb:153
 msgid "Finished"
 msgstr ""
 
-#: ../app/models/foreman_tasks/recurring_logic.rb:147
+#: ../app/models/foreman_tasks/recurring_logic.rb:155
 #: ../webpack/ForemanTasks/Components/TasksTable/TasksTableSelectors.js:39
 msgid "Disabled"
 msgstr ""
 
-#: ../app/models/foreman_tasks/recurring_logic.rb:149
+#: ../app/models/foreman_tasks/recurring_logic.rb:157
 #: ../app/models/foreman_tasks/task.rb:130
 #: ../app/views/foreman_tasks/tasks/dashboard/_latest_tasks_in_error_warning.html.erb:14
 #: ../app/views/foreman_tasks/tasks/dashboard/_tasks_status.html.erb:14
@@ -919,7 +919,11 @@ msgid "Setting is off"
 msgstr ""
 
 #: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskButtons.js:51
-msgid "${taskReload ? 'Stop' : 'Start'}  auto-reloading"
+msgid "Stop auto-reloading"
+msgstr ""
+
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskButtons.js:51
+msgid "Start auto-reloading"
 msgstr ""
 
 #: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskButtons.js:62
@@ -956,7 +960,8 @@ msgid "Errors:"
 msgstr ""
 
 #: ../webpack/ForemanTasks/Components/TaskDetails/TaskDetails.js:52
-msgid "Could not receive data: ${APIerror && APIerror.message}"
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTable.js:71
+msgid "Could not receive data: %s"
 msgstr ""
 
 #: ../webpack/ForemanTasks/Components/TaskDetails/TaskDetails.js:61
@@ -1196,22 +1201,17 @@ msgid "Yes"
 msgstr ""
 
 #:
-#: ../webpack/ForemanTasks/Components/TasksTable/Components/SelectAllAlert.js:20
-msgid "Select All"
+#: ../webpack/ForemanTasks/Components/TasksTable/Components/SelectAllAlert.js:26
+msgid "Select all {count} tasks"
 msgstr ""
 
 #:
-#: ../webpack/ForemanTasks/Components/TasksTable/Components/SelectAllAlert.js:21
-msgid "tasks."
+#: ../webpack/ForemanTasks/Components/TasksTable/Components/SelectAllAlert.js:33
+msgid "All %s tasks are selected."
 msgstr ""
 
 #:
-#: ../webpack/ForemanTasks/Components/TasksTable/Components/SelectAllAlert.js:27
-msgid "All %s tasks are selected. "
-msgstr ""
-
-#:
-#: ../webpack/ForemanTasks/Components/TasksTable/Components/SelectAllAlert.js:29
+#: ../webpack/ForemanTasks/Components/TasksTable/Components/SelectAllAlert.js:35
 msgid "Undo selection"
 msgstr ""
 
@@ -1254,10 +1254,6 @@ msgstr ""
 
 #: ../webpack/ForemanTasks/Components/TasksTable/TasksBulkActions.js:255
 msgid "Canceling with force selected tasks, this might take a while"
-msgstr ""
-
-#: ../webpack/ForemanTasks/Components/TasksTable/TasksTable.js:71
-msgid "Could not receive data: ${error && error.message}"
 msgstr ""
 
 #: ../webpack/ForemanTasks/Components/TasksTable/TasksTable.js:81
