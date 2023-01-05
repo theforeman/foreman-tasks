@@ -16,9 +16,6 @@ msgstr ""
 "Language: ko\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-msgid "${taskReload ? 'Stop' : 'Start'}  auto-reloading"
-msgstr ""
-
 msgid "%(last)s Last %(time)s"
 msgstr ""
 
@@ -70,7 +67,7 @@ msgstr ""
 msgid "Active or disabled recurring logic with purpose %s already exists"
 msgstr ""
 
-msgid "All %s tasks are selected. "
+msgid "All %s tasks are selected."
 msgstr ""
 
 msgid "All proxies with the required feature are unavailable at the moment"
@@ -161,10 +158,7 @@ msgstr "태스크 충돌:"
 msgid "Could not cancel step."
 msgstr ""
 
-msgid "Could not receive data: ${APIerror && APIerror.message}"
-msgstr ""
-
-msgid "Could not receive data: ${error && error.message}"
+msgid "Could not receive data: %s"
 msgstr ""
 
 msgid "Cron line"
@@ -546,8 +540,8 @@ msgstr ""
 msgid "Select Action"
 msgstr "작업 선택 "
 
-msgid "Select All"
-msgstr "모두 선택 "
+msgid "Select all {count} tasks"
+msgstr ""
 
 msgid "Select row"
 msgstr ""
@@ -567,6 +561,9 @@ msgstr "반복 로직 정보 표시"
 msgid "Start at"
 msgstr "시작 일시"
 
+msgid "Start auto-reloading"
+msgstr ""
+
 msgid "Start before"
 msgstr "다음 시간 전에 시작"
 
@@ -580,6 +577,9 @@ msgid "State"
 msgstr "상태 "
 
 msgid "Step Canceled"
+msgstr ""
+
+msgid "Stop auto-reloading"
 msgstr ""
 
 msgid "Stop selected stoppable tasks"
@@ -842,9 +842,6 @@ msgid "task has to be cancellable"
 msgstr ""
 
 msgid "task has to be resumable"
-msgstr ""
-
-msgid "tasks."
 msgstr ""
 
 msgid "time"

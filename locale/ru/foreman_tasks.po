@@ -20,9 +20,6 @@ msgstr ""
 "4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=1"
 "1 && n%100<=14)? 2 : 3);\n"
 
-msgid "${taskReload ? 'Stop' : 'Start'}  auto-reloading"
-msgstr ""
-
 msgid "%(last)s Last %(time)s"
 msgstr ""
 
@@ -74,7 +71,7 @@ msgstr ""
 msgid "Active or disabled recurring logic with purpose %s already exists"
 msgstr ""
 
-msgid "All %s tasks are selected. "
+msgid "All %s tasks are selected."
 msgstr ""
 
 msgid "All proxies with the required feature are unavailable at the moment"
@@ -165,10 +162,7 @@ msgstr "Конфликт с задачами:"
 msgid "Could not cancel step."
 msgstr ""
 
-msgid "Could not receive data: ${APIerror && APIerror.message}"
-msgstr ""
-
-msgid "Could not receive data: ${error && error.message}"
+msgid "Could not receive data: %s"
 msgstr ""
 
 msgid "Cron line"
@@ -550,8 +544,8 @@ msgstr ""
 msgid "Select Action"
 msgstr "Действия"
 
-msgid "Select All"
-msgstr "Выбрать все"
+msgid "Select all {count} tasks"
+msgstr ""
 
 msgid "Select row"
 msgstr ""
@@ -571,6 +565,9 @@ msgstr "Показать параметры периодического вып�
 msgid "Start at"
 msgstr "Время запуска"
 
+msgid "Start auto-reloading"
+msgstr ""
+
 msgid "Start before"
 msgstr "Не позже чем"
 
@@ -584,6 +581,9 @@ msgid "State"
 msgstr "Состояние"
 
 msgid "Step Canceled"
+msgstr ""
+
+msgid "Stop auto-reloading"
 msgstr ""
 
 msgid "Stop selected stoppable tasks"
@@ -846,9 +846,6 @@ msgid "task has to be cancellable"
 msgstr ""
 
 msgid "task has to be resumable"
-msgstr ""
-
-msgid "tasks."
 msgstr ""
 
 msgid "time"
