@@ -29,6 +29,14 @@ module ForemanTasks
       %w[active disabled finished cancelled failed]
     end
 
+    def last_task
+      tasks.order(:started_at).where.not(started_at: nil).last
+    end
+
+    def next_task
+      tasks.order(:start_at).where(started_at: nil).last
+    end
+
     def enabled=(value)
       task = tasks.find_by(:state => :scheduled)
       if task

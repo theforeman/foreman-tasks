@@ -52,8 +52,8 @@ module ForemanTasks
       default = '-'
       return default if recurring_logic.done? || recurring_logic.disabled?
 
-      last_task = recurring_logic.tasks.order(:start_at).last
-      last_task ? last_task.start_at : default
+      upcoming_task = recurring_logic.next_task
+      upcoming_task ? upcoming_task.start_at : default
     end
 
     def time_f(f, attr, field_options = {}, time_options = {}, html_options = {})
