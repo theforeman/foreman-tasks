@@ -56,7 +56,7 @@
       <td><%= recurring_logic.cron_line %></td>
       <td><%= link_to(recurring_logic.tasks.count, foreman_tasks_tasks_url(:search => "task_group.id = #{recurring_logic.task_group.id}")) %></td>
       <td><%= format_task_input(recurring_logic.tasks.first) %></td>
-      <td><%= recurring_logic.tasks.order(:started_at).where('started_at IS NOT NULL').last.try(:started_at) || "-" %></td>
+      <td><%= recurring_logic.last_task.try(:started_at) || "-" %></td>
       <td><%= recurring_logic_next_occurrence recurring_logic %></td>
       <td><%= recurring_logic.iteration %></td>
       <td><%= format_recurring_logic_limit recurring_logic.max_iteration %></td>
