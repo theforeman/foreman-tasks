@@ -51,7 +51,7 @@ module Actions
 
       def notify(event, tasks)
         tasks.each do |task|
-          action.plan_event(event, execution_plan_id: task.execution_plan_id, step_id: task.step_id)
+          action.plan_event(event, execution_plan_id: task.execution_plan_id, step_id: task.step_id, optional: true)
         end
       end
 
