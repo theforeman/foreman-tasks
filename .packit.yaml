@@ -18,7 +18,7 @@ actions:
   post-upstream-clone:
     - "wget https://raw.githubusercontent.com/theforeman/foreman-packaging/rpm/develop/packages/plugins/rubygem-foreman-tasks/rubygem-foreman-tasks.spec -O rubygem-foreman-tasks.spec"
     - "wget https://raw.githubusercontent.com/theforeman/foreman-packaging/rpm/develop/packages/plugins/rubygem-foreman-tasks/foreman-tasks.logrotate -O foreman-tasks.logrotate"
-  get-current-version: "grep -Po '\d+\.\d+\.\d+' lib/foreman_tasks/version.rb"
+  get-current-version: "grep -Po '\\d+\\.\\d+\\.\\d+' lib/foreman_tasks/version.rb"
 
 jobs:
   - job: copr_build
