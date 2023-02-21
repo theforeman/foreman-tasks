@@ -1,0 +1,35 @@
+# See the documentation for more information:
+# https://packit.dev/docs/configuration/
+
+specfile_path: rubygem-foreman-tasks.spec
+
+# add or remove files that should be synced
+files_to_sync:
+    - rubygem-foreman-tasks.spec
+    - foreman-tasks.logrotate
+    - .packit.yaml
+
+# name in upstream package repository or registry (e.g. in PyPI)
+upstream_package_name: foreman-tasks
+# downstream (Fedora) RPM package name
+downstream_package_name: rubygem-foreman-tasks
+
+actions:
+  post-upstream-clone:
+    - "wget https://raw.githubusercontent.com/theforeman/foreman-packaging/rpm/develop/packages/plugins/rubygem-foreman-tasks/rubygem-foreman-tasks.spec -O rubygem-foreman-tasks.spec"
+    - "wget https://raw.githubusercontent.com/theforeman/foreman-packaging/rpm/develop/packages/plugins/rubygem-foreman-tasks/foreman-tasks.logrotate -O foreman-tasks.logrotate"
+  get-current-version: "grep -Po '\d+\.\d+\.\d+' lib/foreman_tasks/version.rb"
+
+jobs:
+  - job: copr_build
+    trigger: pull_request
+    targets:
+      centos-stream-8:
+        additional_modules: "foreman:el8,ruby:2.7,nodejs:12"
+        additional_repos:
+          - http://koji.katello.org/releases/yum/foreman-nightly/el8/x86_64/
+          - http://yum.theforeman.org/plugins/nightly/el8/x86_64/
+    module_hotfixes: true
+
+srpm_build_deps:
+  - wget
