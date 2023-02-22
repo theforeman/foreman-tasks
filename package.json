@@ -23,18 +23,18 @@
     "url": "http://projects.theforeman.org/projects/foreman-tasks/issues"
   },
   "peerDependencies": {
-    "@theforeman/vendor": "^10.1.0"
+    "@theforeman/vendor": ">= 10.1.0"
   },
   "dependencies": {
     "c3": "^0.4.11"
   },
   "devDependencies": {
     "@babel/core": "^7.7.0",
-    "@theforeman/builder": "^10.1.0",
-    "@theforeman/eslint-plugin-foreman": "^10.1.0",
-    "@theforeman/stories": "^10.1.0",
-    "@theforeman/test": "^10.1.0",
-    "@theforeman/vendor-dev": "^10.1.0",
+    "@theforeman/builder": ">= 10.1.0",
+    "@theforeman/eslint-plugin-foreman": ">= 10.1.0",
+    "@theforeman/stories": ">= 10.1.0",
+    "@theforeman/test": ">= 10.1.0",
+    "@theforeman/vendor-dev": ">= 10.1.0",
     "babel-eslint": "^10.0.3",
     "eslint": "^6.7.2",
     "jed": "^1.1.1",
