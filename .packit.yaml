@@ -18,7 +18,8 @@ actions:
   post-upstream-clone:
     - "wget https://raw.githubusercontent.com/theforeman/foreman-packaging/rpm/develop/packages/plugins/rubygem-foreman-tasks/rubygem-foreman-tasks.spec -O rubygem-foreman-tasks.spec"
     - "wget https://raw.githubusercontent.com/theforeman/foreman-packaging/rpm/develop/packages/plugins/rubygem-foreman-tasks/foreman-tasks.logrotate -O foreman-tasks.logrotate"
-  get-current-version: "ruby -I lib/ -r foreman_tasks/version -e 'puts ForemanTasks::VERSION'"
+  get-current-version:
+    - ruby -rrubygems -e 'puts Gem::Specification::load(Dir.glob("*.gemspec").first).version'
   create-archive:
     - gem build foreman-tasks.gemspec
     - bash -c "ls -1t ./foreman-tasks-*.gem | head -n 1"
@@ -28,7 +29,7 @@ jobs:
     trigger: pull_request
     targets:
       centos-stream-8:
-        additional_modules: "foreman:el8,ruby:2.7,nodejs:12"
+        additional_modules: "foreman:el8,nodejs:12"
         additional_repos:
           - http://koji.katello.org/releases/yum/foreman-nightly/el8/x86_64/
           - http://yum.theforeman.org/plugins/nightly/el8/x86_64/
