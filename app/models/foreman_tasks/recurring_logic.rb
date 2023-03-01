@@ -1,5 +1,5 @@
 module ForemanTasks
-  require 'parse-cron'
+  require 'fugit'
 
   class RecurringLogic < ApplicationRecord
     include Authorizable
@@ -96,11 +96,11 @@ module ForemanTasks
     end
 
     def next_occurrence_time(time = Time.zone.now)
-      @parser ||= CronParser.new(cron_line, Time.zone)
+      @parser ||= Fugit.parse_cron(cron_line)
       # @parser.next(start_time) is not inclusive of the start_time hence stepping back one run to include checking start_time for the first run.
-      before_next = @parser.next(@parser.last(time.in_time_zone))
-      return before_next if before_next >= time && tasks.count == 0
-      @parser.next(time)
+      before_next = @parser.next_time(@parser.previous_time(time.iso8601))
+      return before_next.utc.localtime if before_next >= time && tasks.count == 0
+      @parser.next_time(time).utc.localtime
     end
 
     def generate_delay_options(time = Time.zone.now, options = {})

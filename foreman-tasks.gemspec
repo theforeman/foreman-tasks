@@ -27,8 +27,8 @@ same resource. It also optionally provides Dynflow infrastructure for using it f
   s.extra_rdoc_files = Dir['README*', 'LICENSE']
 
   s.add_dependency "dynflow", '>= 1.6.0'
+  s.add_dependency 'fugit', '~> 1.8'
   s.add_dependency "get_process_mem" # for memory polling
-  s.add_dependency "parse-cron", '~> 0.1.4'
   s.add_dependency "sinatra" # for Dynflow web console
 
   s.add_development_dependency 'factory_bot_rails', '~> 4.8.0'
