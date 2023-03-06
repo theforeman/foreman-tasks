@@ -162,6 +162,10 @@ module ForemanTasks
     initializer 'foreman_tasks.require_dynflow', :before => 'foreman_tasks.initialize_dynflow' do |_app|
       ForemanTasks.dynflow.require!
       ::ForemanTasks.dynflow.config.on_init(false) do |world|
+        if ::Rails.env.development?
+          world.middleware.use ::Actions::Middleware::CheckActionStorageSize
+          world.middleware.use ::Actions::Middleware::CheckActionStorageContents
+        end
         world.middleware.use Actions::Middleware::KeepCurrentTaxonomies
         world.middleware.use Actions::Middleware::KeepCurrentUser, :before => ::Dynflow::Middleware::Common::Transaction
         world.middleware.use Actions::Middleware::KeepCurrentTimezone
