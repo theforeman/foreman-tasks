@@ -1,5 +1,7 @@
 module Actions
   class CheckLongRunningTasks < ::Actions::EntryAction
+    include Actions::RecurringAction
+
     INTERVAL = 2.days
     STATES = ['running', 'paused'].freeze
 

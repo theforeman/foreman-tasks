@@ -162,6 +162,7 @@ module ForemanTasks
         world.middleware.use Actions::Middleware::KeepCurrentTimezone
         world.middleware.use Actions::Middleware::KeepCurrentRequestID
         world.middleware.use ::Actions::Middleware::LoadSettingValues
+        ForemanTasks.register_scheduled_task(Actions::CheckLongRunningTasks, ENV['FOREMAN_TASKS_CHECK_LONG_RUNNING_TASKS_CRONLINE'] || '0 0 * * *')
       end
       ::ForemanTasks.dynflow.config.on_init(true) do
         ::ForemanTasks::Task::DynflowTask.consistency_check
