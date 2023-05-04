@@ -14,6 +14,8 @@ upstream_package_name: foreman-tasks
 # downstream (Fedora) RPM package name
 downstream_package_name: rubygem-foreman-tasks
 
+upstream_tag_template: v{version}
+
 actions:
   post-upstream-clone:
     - "wget https://raw.githubusercontent.com/theforeman/foreman-packaging/rpm/develop/packages/plugins/rubygem-foreman-tasks/rubygem-foreman-tasks.spec -O rubygem-foreman-tasks.spec"
