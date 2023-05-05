@@ -17,7 +17,7 @@ if gettext_find_task
                  .uniq
                  .map { |n| %[_("#{n}")] }
                  .sort
-                 .join("\n")
+                 .join("\n") + "\n"
     end
   end
 
