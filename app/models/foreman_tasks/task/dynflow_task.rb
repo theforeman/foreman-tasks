@@ -251,6 +251,10 @@ module ForemanTasks
       superclass.model_name
     end
 
+    def halt
+      ::ForemanTasks.dynflow.world.halt(external_id)
+    end
+
     private
 
     def string_to_time(zone, time)
