@@ -54,6 +54,17 @@ class RecurringLogicsTest < ActiveSupport::TestCase
       _(ForemanTasks::RecurringLogic.cronline_hash(:monthly, time_hash, days, days_of_week)).must_equal expected_result_monthly
     end
 
+    it 'validates cronline correctly' do
+      recurring_logic = ::ForemanTasks::RecurringLogic.new_from_cronline('* * * * abc')
+      assert_not recurring_logic.valid_cronline?
+      recurring_logic = ::ForemanTasks::RecurringLogic.new_from_cronline(nil)
+      assert_not recurring_logic.valid_cronline?
+      recurring_logic = ::ForemanTasks::RecurringLogic.new_from_cronline('* * * * *')
+      assert recurring_logic.valid_cronline?
+      recurring_logic = ::ForemanTasks::RecurringLogic.new_from_cronline('0 22 * * mon-fri')
+      assert recurring_logic.valid_cronline?
+    end
+
     it 'can have limited number of repeats' do
       parser = ForemanTasks::RecurringLogic.new_from_cronline('* * * * *')
       parser.state = 'active'
