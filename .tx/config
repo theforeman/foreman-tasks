@@ -1,8 +1,10 @@
 [main]
 host = https://www.transifex.com
 
-[foreman.foreman_tasks]
+[o:foreman:p:foreman:r:foreman_tasks]
 file_filter = locale/<lang>/foreman_tasks.edit.po
 source_file = locale/foreman_tasks.pot
 source_lang = en
 type = PO
+minimum_perc = 0
+resource_name = foreman_tasks
