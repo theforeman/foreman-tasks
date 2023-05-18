@@ -7,11 +7,11 @@
 # francis <hackgo@gmail.com>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_tasks 7.1.0\n"
+"Project-Id-Version: foreman_tasks 8.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-12 14:04+0000\n"
 "Last-Translator: francis <hackgo@gmail.com>, 2017\n"
-"Language-Team: Spanish (http://www.transifex.com/foreman/foreman/language/es/)"
+"Language-Team: Spanish (http://app.transifex.com/foreman/foreman/language/es/)"
 "\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,25 +24,25 @@ msgid "%(last)s Last %(time)s"
 msgstr "%(last)s Última %(time)s"
 
 msgid "%(older)s Older %(time)s"
-msgstr "%(older)s Mayor %(time)s"
+msgstr "%(older)s Más antiguos %(time)s"
 
 msgid "%s Selected Tasks"
 msgstr "%s Tareas seleccionadas"
 
 msgid "%s is not valid format of cron line"
-msgstr "%s no es válido el formato de la línea cron"
+msgstr "%s no es un formato válido de línea cron"
 
 msgid "%{total} task(s), %{success} success, %{failed} fail"
 msgstr "%{total} tarea(s), %{success} éxito, %{failed} fallo"
 
 msgid "%{value} is not allowed input type"
-msgstr "%{value} no es un tipo de entrada permitido"
+msgstr "%{value} no se permite el tipo de entrada"
 
 msgid "%{value} is not allowed triggering mode"
-msgstr "%{value} no está permitido el modo de activación"
+msgstr "%{value} no se permite el modo de activación"
 
 msgid "%{value} is wrong format"
-msgstr "%{value} es un formato incorrecto"
+msgstr "%{value} formato incorrecto"
 
 msgid "12h"
 msgstr "12 h"
@@ -69,7 +69,7 @@ msgid "Active Filters:"
 msgstr "Filtros activos:"
 
 msgid "Active or disabled recurring logic with purpose %s already exists"
-msgstr "Lógica recurrente activa o desactivada con el propósito %s ya existe"
+msgstr "Lógica recurrente activa o desactivada con finalidad %s ya existe"
 
 msgid "All %s tasks are selected."
 msgstr ""
@@ -78,7 +78,7 @@ msgid "All proxies with the required feature are unavailable at the moment"
 msgstr "Ningún proxy con función obligatoria está disponible en este momento"
 
 msgid "Allow proxy batch tasks"
-msgstr "Permitir las tareas por lotes del proxy"
+msgstr "Permitir tareas proxy por lotes"
 
 msgid "Allow triggering tasks on the smart proxy in batches"
 msgstr "Permitir tareas de activación en el proxy inteligente en lotes"
@@ -112,7 +112,7 @@ msgid "Cancel recurring logic"
 msgstr "Cancelar lógica recurrente"
 
 msgid "Cancel selected cancellable tasks"
-msgstr "Cancelar las tareas seleccionadas que se pueden cancelar"
+msgstr "Cancelar las tareas cancelables seleccionadas"
 
 msgid "Cancel selected tasks"
 msgstr "Cancelar las tareas seleccionadas"
@@ -145,7 +145,7 @@ msgid "Cannot update a cancelled Recurring Logic."
 msgstr "No se puede actualizar una lógica recurrente cancelada."
 
 msgid "Changing request id %{request_id} to saved id %{saved_id}"
-msgstr "Cambio de id de solicitud %{request_id} a id guardado %{saved_id}"
+msgstr "Cambio del id de solicitud %{request_id} al id guardado %.{saved_id}"
 
 msgid "Clear All Filters"
 msgstr "Borrar todos los filtros"
@@ -169,7 +169,7 @@ msgid "Cron line"
 msgstr "Línea Cron"
 
 msgid "Cron line format 'a b c d e', where: %s"
-msgstr "Formato de línea Cron 'a b c d e', donde: %s"
+msgstr "Cron formato de línea 'a b c d e', donde: %s"
 
 msgid "Current iteration"
 msgstr "Iteración actual"
@@ -250,7 +250,7 @@ msgid "External Id"
 msgstr "ID externo"
 
 msgid "Failed to check on tasks on proxy at %{url}: %{exception}"
-msgstr "Fallo en la comprobación de tareas en el proxy en %{url}: %{exception}"
+msgstr "Error al comprobar las tareas en el proxy en %{url}: %{exception}"
 
 msgid "Failed to initialize"
 msgstr "Falló al inicializar"
@@ -479,7 +479,7 @@ msgid "Repeats"
 msgstr "Se repite"
 
 msgid "Require auth for dynflow console"
-msgstr "Requerir autenticidad para la consola dynflow"
+msgstr "Requerir auth para la consola dynflow"
 
 msgid "Require user to be authenticated as user with admin rights when accessing dynflow console"
 msgstr "El usuario debe autenticarse como usuario con derechos de administrador al acceder a la consola de flujo dinámico"
@@ -491,7 +491,7 @@ msgid "Resource search_params requires resource_type and resource_id to be speci
 msgstr "search_params del recurso requiere que se especifique resource_type y resource_id."
 
 msgid "Resources for %s task(s) will be unlocked and will not prevent other tasks from being run. As the task(s) might be still running, it should be avoided to use this unless you are really sure the task(s) got stuck."
-msgstr "Los recursos de la(s) tarea(s) %s se desbloquearán y no impedirán la ejecución de otras tareas. Como la(s) tarea(s) podría(n) estar aún en ejecución, se debe evitar utilizar esta opción a menos que se esté realmente seguro de que la(s) tarea(s) se ha(n) atascado."
+msgstr "Los recursos de la(s) tarea(s) %s se desbloquearán y no impedirán la ejecución de otras tareas. Dado que la(s) tarea(s) puede(n) estar aún en ejecución, debe evitarse utilizar esta opción a menos que se esté realmente seguro de que la(s) tarea(s) se ha(n) quedado bloqueada(s)."
 
 msgid "Result"
 msgstr "Resultado:"
@@ -539,7 +539,7 @@ msgid "Search query"
 msgstr "Consulta de búsqueda"
 
 msgid "See %{link} for more details on how to resolve the issue"
-msgstr "Consulte %{link} para obtener más detalles sobre cómo resolver el problema"
+msgstr "Consulte %{link} para obtener más información sobre cómo resolver el problema."
 
 msgid "Select Action"
 msgstr "Seleccionar una acción"
@@ -566,7 +566,7 @@ msgid "Start at"
 msgstr "Iniciar en"
 
 msgid "Start auto-reloading"
-msgstr ""
+msgstr "Iniciar recarga automática"
 
 msgid "Start before"
 msgstr "Iniciar antes"
@@ -584,7 +584,7 @@ msgid "Step Canceled"
 msgstr "Paso cancelado"
 
 msgid "Stop auto-reloading"
-msgstr ""
+msgstr "Detener recarga automática"
 
 msgid "Stop selected stoppable tasks"
 msgstr "Detener las tareas detenibles seleccionadas"
@@ -602,7 +602,7 @@ msgid "Sub tasks"
 msgstr "Subtareas"
 
 msgid "Sub tasks of %s"
-msgstr "Tareas secundarias de %s"
+msgstr "Subtareas de %s"
 
 msgid "Sun"
 msgstr "Dom"
@@ -641,7 +641,7 @@ msgid "Tasks"
 msgstr "Tareas"
 
 msgid "Tasks troubleshooting URL"
-msgstr "URL de resolución de problemas de tareas"
+msgstr "URL de resolución de problemas"
 
 msgid "The ID of the step inside the execution plan to send the event to"
 msgstr "El ID del paso dentro del plan de ejecución para enviar el evento a"
@@ -650,13 +650,13 @@ msgid "The recommended approach is to investigate the error messages below and i
 msgstr "El enfoque recomendado es investigar los mensajes de error que aparecen a continuación y, en la pestaña de \"errores\", abordar la causa principal del problema y reanudar la tarea."
 
 msgid "The recurring logic was disabled."
-msgstr "La lógica recurrente fue desactivada."
+msgstr "La lógica recurrente estaba desactivada."
 
 msgid "The recurring logic was enabled."
 msgstr "Se ha activado la lógica recurrente."
 
 msgid "The smart proxy task %s failed."
-msgstr "La tarea del proxy inteligente %s ha fallado."
+msgstr "La tarea de proxy inteligente %s ha fallado."
 
 msgid "The targets are of different types"
 msgstr "El tipo de los destinos es diferente."
@@ -669,15 +669,15 @@ msgstr "No se pudo iniciar la tarea"
 
 msgid "There is %{count} paused task in the system that need attention"
 msgid_plural "There are %{count} paused tasks in the system that need attention"
-msgstr[0] "Hay %{count} tarea pausada en el sistema que requieren atención"
-msgstr[1] "Hay %{count} tareas pausadas en el sistema que requieren atención"
-msgstr[2] "Hay %{count} tareas pausadas en el sistema que requieren atención"
+msgstr[0] "Hay %{count} tareas en pausa en el sistema que necesitan atención"
+msgstr[1] "Hay %{count} tareas en pausa en el sistema que necesitan atención"
+msgstr[2] "Hay %{count} tareas en pausa en el sistema que necesitan atención"
 
 msgid "This action will delete all cancelled recurring logics. Please note that this action can't be reversed."
 msgstr "Esta acción eliminará todas las lógicas recurrentes canceladas. Tenga en cuenta que esta acción no puede revertirse."
 
 msgid "This will %(action)s %(number)s task(s), putting them in the %(state)s state. Are you sure?"
-msgstr "Esto será %(action)s %(number)s tarea(s), poniéndolas en el estado %(state)s. ¿Está usted seguro?"
+msgstr "Esto %(action)s %(number)s tarea(s), poniéndolos en el estado %(state)s. ¿Está seguro?"
 
 msgid "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed."
 msgstr "Esto desbloqueará los recursos contra los que se está ejecutando la tarea. Tenga en cuenta que esto puede provocar un estado inconsistente y se debe utilizar con precaución, después de asegurarse de que la tarea no se puede reanudar."
@@ -704,7 +704,7 @@ msgid "Tue"
 msgstr "Mar"
 
 msgid "Type %s for search_params is not supported"
-msgstr "El tipo %s para search_params no es compatible"
+msgstr "No se admite el tipo %s para search_params"
 
 msgid "UUID of the task"
 msgstr "UUID de la tarea"
@@ -722,7 +722,7 @@ msgid "Update recurring logic"
 msgstr "Actualizar lógica recurrente"
 
 msgid "Url pointing to the task troubleshooting documentation. It should contain %{label} placeholder, that will be replaced with normalized task label (restricted to only alphanumeric characters)). %{version} placeholder is also available."
-msgstr "Url que apunta a la documentación de resolución de problemas de la tarea. Debe contener el marcador de posición %{label}, que será sustituido por la etiqueta normalizada de la tarea (restringida sólo a caracteres alfanuméricos)). También está disponible el marcador de posición %{version}."
+msgstr "Url que apunta a la documentación de resolución de problemas de la tarea. Debe contener el marcador de posición %{label}, que se sustituirá por la etiqueta normalizada de la tarea (restringida únicamente a caracteres alfanuméricos)). También está disponible el marcador de posición %{version}."
 
 msgid "User search_params requires user_id to be specified"
 msgstr "search_params del usuario requiere que se especifique el user_id."
@@ -790,7 +790,7 @@ msgid "mode"
 msgstr "modo"
 
 msgid "mode has to be one of %{allowed_modes}"
-msgstr "modo tiene que ser uno de %{allowed_modes}"
+msgstr "modo tiene que ser uno de %.{allowed_modes}"
 
 msgid "older"
 msgstr "más antiguo"

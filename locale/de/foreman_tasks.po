@@ -4,16 +4,16 @@
 #
 # Translators:
 # Crited <Alexander.Stoll@netways.de>, 2019
-# Ettore Atalan <atalanttore@googlemail.com>, 2016-2017
+# Ettore Atalan <atalanttore@googlemail.com>, 2016-2017,2023
 # Nonof Yourbusiness <jonasschell@ocupe.org>, 2019
 # Patrick Dolinic, 2021
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_tasks 7.1.0\n"
+"Project-Id-Version: foreman_tasks 8.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-12 14:04+0000\n"
-"Last-Translator: Patrick Dolinic, 2021\n"
-"Language-Team: German (http://www.transifex.com/foreman/foreman/language/de/)\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2016-2017,2023\n"
+"Language-Team: German (http://app.transifex.com/foreman/foreman/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -27,7 +27,7 @@ msgid "%(older)s Older %(time)s"
 msgstr "%(older)s Older %(time)s"
 
 msgid "%s Selected Tasks"
-msgstr " %s Selected Tasks"
+msgstr " %s ausgewählte Aufgaben"
 
 msgid "%s is not valid format of cron line"
 msgstr "%s ist ungültiges Cron-Zeilen-Format"
@@ -91,7 +91,7 @@ msgid "At"
 msgstr "Um"
 
 msgid "Back to tasks"
-msgstr "Zurück zu Jobs"
+msgstr "Zurück zu Aufgaben"
 
 msgid "Backtrace"
 msgstr "Ablaufverfolgung"
@@ -274,7 +274,7 @@ msgid "Force Unlock"
 msgstr "Entsperren erzwingen"
 
 msgid "Foreman Tasks"
-msgstr "Foreman Tasks"
+msgstr "Foreman-Aufgaben"
 
 msgid "Fri"
 msgstr "Fr"
@@ -373,7 +373,7 @@ msgid "No start or end dates"
 msgstr "Kein Start- oder Enddatum"
 
 msgid "No task could be started"
-msgstr "Keine Jobs konnten gestartet werden"
+msgstr "Es konnte keine Aufgabe gestartet werden"
 
 msgid "No. of Tasks"
 msgstr "Nr. der Aufgaben"
@@ -566,7 +566,7 @@ msgid "Start at"
 msgstr "Startet um "
 
 msgid "Start auto-reloading"
-msgstr ""
+msgstr "Automatisches Neuladen starten"
 
 msgid "Start before"
 msgstr "Startet vor"
@@ -584,7 +584,7 @@ msgid "Step Canceled"
 msgstr "Schritt abgebrochen"
 
 msgid "Stop auto-reloading"
-msgstr ""
+msgstr "Automatisches Neuladen anhalten"
 
 msgid "Stop selected stoppable tasks"
 msgstr "Ausgewählte stoppbare Aufgaben stoppen"
@@ -614,7 +614,7 @@ msgid "Task"
 msgstr "Aufgabe"
 
 msgid "Task Details"
-msgstr "Taskdetails"
+msgstr "Aufgabendetails"
 
 msgid "Task Status"
 msgstr "Aufgabenstatus"
@@ -662,10 +662,10 @@ msgid "The targets are of different types"
 msgstr "Die Ziele haben verschiedene Typen"
 
 msgid "The task cannot be aborted at the moment."
-msgstr "Der Job kann nicht abgebrochen werden."
+msgstr "Die Aufgabe kann im Moment nicht abgebrochen werden."
 
 msgid "The task could not be started"
-msgstr "Der Job konnte nicht gestartet werden."
+msgstr "Die Aufgabe konnte nicht gestartet werden."
 
 msgid "There is %{count} paused task in the system that need attention"
 msgid_plural "There are %{count} paused tasks in the system that need attention"
@@ -694,7 +694,7 @@ msgid "Troubleshooting"
 msgstr "Fehlerbehebung"
 
 msgid "Trying to abort the task"
-msgstr "Versuche Jobabbruch"
+msgstr "Versuch des Abbruchs der Aufgabe"
 
 msgid "Trying to cancel step"
 msgstr "Versuch, Schritt abzubrechen"
