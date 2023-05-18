@@ -6,11 +6,11 @@
 # Kazuki Omo <kazuki.omo@gmail.com>, 2019
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_tasks 7.1.0\n"
+"Project-Id-Version: foreman_tasks 8.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-12 14:04+0000\n"
 "Last-Translator: Kazuki Omo <kazuki.omo@gmail.com>, 2019\n"
-"Language-Team: Japanese (http://www.transifex.com/foreman/foreman/language/ja/"
+"Language-Team: Japanese (http://app.transifex.com/foreman/foreman/language/ja/"
 ")\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -128,7 +128,7 @@ msgid "Canceling with force selected tasks, this might take a while"
 msgstr "選択したタスクを強制的にキャンセルしています。しばらく時間がかかる場合があります"
 
 msgid "Cancelled"
-msgstr "キャンセル"
+msgstr "キャンセル済み"
 
 msgid "Cannot cancel tasks at the moment"
 msgstr "現在、タスクをキャンセルできません"
@@ -197,7 +197,7 @@ msgid "Disable"
 msgstr "無効化"
 
 msgid "Disabled"
-msgstr "無効"
+msgstr "無効化済み"
 
 msgid "Duration"
 msgstr "期間"
@@ -233,13 +233,13 @@ msgid "Event delivered by request %{request_id}"
 msgstr "要求 ％{request_id} で配信されたイベント"
 
 msgid "Exception"
-msgstr "Exception"
+msgstr "例外"
 
 msgid "Execute now"
 msgstr "今すぐ実行"
 
 msgid "Execution plan data not available "
-msgstr "利用可能な実行プランデータはありません"
+msgstr "利用可能な実行プランデータはありません "
 
 msgid "Export All"
 msgstr "すべてエクスポート"
@@ -254,7 +254,7 @@ msgid "Failed to initialize"
 msgstr "初期化に失敗しました"
 
 msgid "Failed to trigger task on the smart proxy: "
-msgstr ""
+msgstr "Smart Proxyでタスクのトリガーに失敗しました:"
 
 msgid "Finished"
 msgstr "終了"
@@ -329,7 +329,7 @@ msgid "List recurring logics"
 msgstr "再帰論理の一覧表示"
 
 msgid "List tasks"
-msgstr "タスクの一覧を表示します。"
+msgstr "タスクを一覧表示する"
 
 msgid "Locks"
 msgstr "ロック"
@@ -377,7 +377,7 @@ msgid "No. of Tasks"
 msgstr "タスク数"
 
 msgid "Not all the selected tasks can be cancelled"
-msgstr "選択したタスクを一括でキャンセルできません"
+msgstr "選択したすべてのタスクをキャンセルできるわけではありません"
 
 msgid "Not all the selected tasks can be resumed"
 msgstr "選択したタスクを一括で再開できません"
@@ -389,7 +389,7 @@ msgid "Number of seconds to wait for synchronous task to finish."
 msgstr "同期タスクが完了するまで待機する秒数"
 
 msgid "Number of tasks which should be sent to the smart proxy in one request, if foreman_tasks_proxy_batch_trigger is enabled"
-msgstr "foreman_tasks_proxy_batch_trigger が有効な場合に、1つの要求で Smart Proxy に送信する必要があるタスクの数"
+msgstr "foreman_tasks_proxy_batch_trigger が有効な場合に、1 つの要求で Smart Proxy に送信する必要があるタスクの数"
 
 #. TRANSLATORS: Button text for saying when a task should end
 msgid "On"
@@ -423,13 +423,13 @@ msgid "Please provide a search parameter in the request"
 msgstr "要求で検索パラメーターを指定してください。"
 
 msgid "Please provide at least one of search or task_ids parameters in the request"
-msgstr "要求で検索パラメーターまたは task_ids パラメーターを 1 つ指定してください。"
+msgstr "要求で検索パラメーターまたは task_ids パラメーターのうち少なくとも 1 つ指定してください。"
 
 msgid "Polling intervals multiplier"
 msgstr "ポーリングの間隔乗数"
 
 msgid "Polling multiplier which is used to multiply the default polling intervals. This can be used to prevent polling too frequently for long running tasks."
-msgstr "デフォルトのポーリングの間隔を乗算するときに使用するポーリング乗数。この乗数を使用して、長期間にわたり実行中のタスクが頻繁にポーリングされるのを回避します。"
+msgstr "デフォルトのポーリングの間隔を乗算するときに使用するポーリング乗数。これを使用して、長期間にわたり実行中のタスクが頻繁にポーリングされるのを回避できます。"
 
 msgid "Proxy action retry count"
 msgstr "プロキシーアクションの再試行回数"
@@ -564,7 +564,7 @@ msgid "Start at"
 msgstr "開始時刻"
 
 msgid "Start auto-reloading"
-msgstr ""
+msgstr "自動リロードを開始"
 
 msgid "Start before"
 msgstr "次の時刻よりも前に開始"
@@ -582,7 +582,7 @@ msgid "Step Canceled"
 msgstr "ステップがキャンセルされました"
 
 msgid "Stop auto-reloading"
-msgstr ""
+msgstr "自動リロードを停止"
 
 msgid "Stop selected stoppable tasks"
 msgstr "選択した停止可能なタスクを停止"
@@ -660,7 +660,7 @@ msgid "The targets are of different types"
 msgstr "ターゲットは異なるタイプです"
 
 msgid "The task cannot be aborted at the moment."
-msgstr "現在、タスクは中断できません。"
+msgstr "現在、タスクを中断できません。"
 
 msgid "The task could not be started"
 msgstr "タスクを開始できませんでした"
@@ -670,7 +670,7 @@ msgid_plural "There are %{count} paused tasks in the system that need attention"
 msgstr[0] "システムには、注意が必要な一時停止タスクが %{count} 件あります"
 
 msgid "This action will delete all cancelled recurring logics. Please note that this action can't be reversed."
-msgstr "このアクションは、キャンセル済みの再帰論理をすべて削除します。この操作は元に戻すことはできません。注意してください。"
+msgstr "このアクションは、キャンセル済みの再帰論理をすべて削除します。この操作は元に戻すことはできない点に注意してください。"
 
 msgid "This will %(action)s %(number)s task(s), putting them in the %(state)s state. Are you sure?"
 msgstr "これにより %(number)s 件のタスクに対して %(action)s が実行され、タスクは %(state)s 状態になります。実行してもよろしいですか?"
@@ -718,7 +718,7 @@ msgid "Update recurring logic"
 msgstr "再帰論理の更新"
 
 msgid "Url pointing to the task troubleshooting documentation. It should contain %{label} placeholder, that will be replaced with normalized task label (restricted to only alphanumeric characters)). %{version} placeholder is also available."
-msgstr "タスクのトラブルシューティングドキュメントを参照する URL。これには %{label} プレースホルダーを含める必要があります。これは、正規化されたタスクラベル (英数字のみに制限) に置き換えられます。また、%{version} プレースホルダーも利用できます。"
+msgstr "タスクのトラブルシューティングドキュメントを参照する URL。%{label} プレースホルダーを含める必要があります。これは、正規化されたタスクラベル (英数字のみ) に置き換えられます。また、%{version} プレースホルダーも利用できます。"
 
 msgid "User search_params requires user_id to be specified"
 msgstr "ユーザー search_params では user_id を指定する必要があります"
@@ -727,7 +727,7 @@ msgid "Wed"
 msgstr "水"
 
 msgid "With focus on last"
-msgstr "フォーカスする時間: 過去 "
+msgstr "フォーカスする時間: 過去"
 
 msgid "Yes"
 msgstr "はい"
@@ -758,23 +758,23 @@ msgstr "エラー"
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is day of month (range: 1-31)"
-msgstr "日 (範囲: 1〜31)"
+msgstr "日 (範囲: 1 - 31)"
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is day of week (range: 0-6)"
-msgstr "曜日 (範囲: 0〜6)"
+msgstr "曜日 (範囲: 0 - 6)"
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is hour (range: 0-23)"
-msgstr "時間 (範囲: 0〜23)"
+msgstr "時間 (範囲: 0 - 23)"
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is minute (range: 0-59)"
-msgstr "分 (範囲: 0〜59)"
+msgstr "分 (範囲: 0 - 59)"
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is month (range: 1-12)"
-msgstr "月 (範囲: 1〜12)"
+msgstr "月 (範囲: 1 - 12)"
 
 msgid "is not a valid format"
 msgstr "有効な形式ではありません"
@@ -852,7 +852,7 @@ msgid "troubleshooting documentation"
 msgstr "トラブルシューティングドキュメント"
 
 msgid "user"
-msgstr "ユーザー"
+msgstr "user"
 
 msgid "warning"
 msgstr "警告!"

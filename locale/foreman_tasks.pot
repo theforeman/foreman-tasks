@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_tasks 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-15 19:50+0100\n"
-"PO-Revision-Date: 2023-02-15 19:50+0100\n"
+"POT-Creation-Date: 2023-05-18 08:15+0000\n"
+"PO-Revision-Date: 2023-05-18 08:15+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -162,7 +162,7 @@ msgstr ""
 #: ../db/seeds.d/30-notification_blueprints.rb:33
 #: ../db/seeds.d/30-notification_blueprints.rb:40
 #: ../db/seeds.d/30-notification_blueprints.rb:47
-#: ../lib/foreman_tasks/engine.rb:32 ../lib/foreman_tasks/engine.rb:61
+#: ../lib/foreman_tasks/engine.rb:25 ../lib/foreman_tasks/engine.rb:54
 #: ../webpack/ForemanTasks/Components/TasksTable/SubTasksPage.js:10
 #: ../webpack/ForemanTasks/Components/TasksTable/TasksIndexPage.js:7
 #: ../webpack/ForemanTasks/Components/TasksTable/TasksTablePage.js:150
@@ -638,7 +638,7 @@ msgstr ""
 
 #:
 #: ../app/views/foreman_tasks/tasks/dashboard/_latest_tasks_in_error_warning.html.erb:1
-#: ../lib/foreman_tasks/engine.rb:130
+#: ../lib/foreman_tasks/engine.rb:123
 msgid "Latest Warning/Error Tasks"
 msgstr ""
 
@@ -660,7 +660,7 @@ msgid "Started"
 msgstr ""
 
 #: ../app/views/foreman_tasks/tasks/dashboard/_tasks_status.html.erb:1
-#: ../lib/foreman_tasks/engine.rb:129
+#: ../lib/foreman_tasks/engine.rb:122
 msgid "Task Status"
 msgstr ""
 
@@ -688,92 +688,92 @@ msgstr ""
 msgid "Back to tasks"
 msgstr ""
 
-#: ../lib/foreman_tasks/engine.rb:29
+#: ../lib/foreman_tasks/engine.rb:22
 msgid "Foreman Tasks"
 msgstr ""
 
-#: ../lib/foreman_tasks/engine.rb:38
+#: ../lib/foreman_tasks/engine.rb:31
 msgid "Recurring Logics"
 msgstr ""
 
-#: ../lib/foreman_tasks/engine.rb:64
+#: ../lib/foreman_tasks/engine.rb:57
 msgid "Number of seconds to wait for synchronous task to finish."
 msgstr ""
 
-#: ../lib/foreman_tasks/engine.rb:66
+#: ../lib/foreman_tasks/engine.rb:59
 msgid "Sync task timeout"
 msgstr ""
 
-#: ../lib/foreman_tasks/engine.rb:69
+#: ../lib/foreman_tasks/engine.rb:62
 msgid "Enable the dynflow console (/foreman_tasks/dynflow) for debugging"
 msgstr ""
 
-#: ../lib/foreman_tasks/engine.rb:71
+#: ../lib/foreman_tasks/engine.rb:64
 msgid "Enable dynflow console"
 msgstr ""
 
-#: ../lib/foreman_tasks/engine.rb:74
+#: ../lib/foreman_tasks/engine.rb:67
 msgid ""
 "Require user to be authenticated as user with admin rights when accessing dynf"
 "low console"
 msgstr ""
 
-#: ../lib/foreman_tasks/engine.rb:76
+#: ../lib/foreman_tasks/engine.rb:69
 msgid "Require auth for dynflow console"
 msgstr ""
 
-#: ../lib/foreman_tasks/engine.rb:79
+#: ../lib/foreman_tasks/engine.rb:72
 msgid "Number of attempts to start a task on the smart proxy before failing"
 msgstr ""
 
-#: ../lib/foreman_tasks/engine.rb:81
+#: ../lib/foreman_tasks/engine.rb:74
 msgid "Proxy action retry count"
 msgstr ""
 
-#: ../lib/foreman_tasks/engine.rb:84
+#: ../lib/foreman_tasks/engine.rb:77
 msgid "Time in seconds between retries"
 msgstr ""
 
-#: ../lib/foreman_tasks/engine.rb:86
+#: ../lib/foreman_tasks/engine.rb:79
 msgid "Proxy action retry interval"
 msgstr ""
 
-#: ../lib/foreman_tasks/engine.rb:89
+#: ../lib/foreman_tasks/engine.rb:82
 msgid "Allow triggering tasks on the smart proxy in batches"
 msgstr ""
 
-#: ../lib/foreman_tasks/engine.rb:91
+#: ../lib/foreman_tasks/engine.rb:84
 msgid "Allow proxy batch tasks"
 msgstr ""
 
-#: ../lib/foreman_tasks/engine.rb:94
+#: ../lib/foreman_tasks/engine.rb:87
 msgid ""
 "Number of tasks which should be sent to the smart proxy in one request, if for"
 "eman_tasks_proxy_batch_trigger is enabled"
 msgstr ""
 
-#: ../lib/foreman_tasks/engine.rb:96
+#: ../lib/foreman_tasks/engine.rb:89
 msgid "Proxy tasks batch size"
 msgstr ""
 
-#: ../lib/foreman_tasks/engine.rb:99
+#: ../lib/foreman_tasks/engine.rb:92
 msgid ""
 "Url pointing to the task troubleshooting documentation. It should contain %{la"
 "bel} placeholder, that will be replaced with normalized task label (restricted"
 " to only alphanumeric characters)). %{version} placeholder is also available."
 msgstr ""
 
-#: ../lib/foreman_tasks/engine.rb:103
+#: ../lib/foreman_tasks/engine.rb:96
 msgid "Tasks troubleshooting URL"
 msgstr ""
 
-#: ../lib/foreman_tasks/engine.rb:106
+#: ../lib/foreman_tasks/engine.rb:99
 msgid ""
 "Polling multiplier which is used to multiply the default polling intervals. Th"
 "is can be used to prevent polling too frequently for long running tasks."
 msgstr ""
 
-#: ../lib/foreman_tasks/engine.rb:109
+#: ../lib/foreman_tasks/engine.rb:102
 msgid "Polling intervals multiplier"
 msgstr ""
 

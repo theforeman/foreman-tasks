@@ -7,11 +7,11 @@
 # Claer <transiblu@claer.hammock.fr>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_tasks 7.1.0\n"
+"Project-Id-Version: foreman_tasks 8.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-12 14:04+0000\n"
 "Last-Translator: Claer <transiblu@claer.hammock.fr>, 2016\n"
-"Language-Team: French (http://www.transifex.com/foreman/foreman/language/fr/)\n"
+"Language-Team: French (http://app.transifex.com/foreman/foreman/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -565,7 +565,7 @@ msgid "Start at"
 msgstr "Démarre à"
 
 msgid "Start auto-reloading"
-msgstr ""
+msgstr "Démarrer le rechargement automatique"
 
 msgid "Start before"
 msgstr "Démarre avant"
@@ -583,7 +583,7 @@ msgid "Step Canceled"
 msgstr "Étape annulée"
 
 msgid "Stop auto-reloading"
-msgstr ""
+msgstr "Arrêter le rechargement automatique"
 
 msgid "Stop selected stoppable tasks"
 msgstr "Arrêter les tâches sélectionnées pouvant être arrêtées"
