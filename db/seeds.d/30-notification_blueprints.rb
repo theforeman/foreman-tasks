@@ -49,6 +49,13 @@ blueprints = [
     level: 'info',
     message: "DYNAMIC",
   },
+
+  {
+    group: N_('Tasks'),
+    name: 'tasks_running_long',
+    message: 'DYNAMIC',
+    level: 'warning',
+  },
 ]
 
 blueprints.each { |blueprint| UINotifications::Seed.new(blueprint).configure }
