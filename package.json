@@ -9,11 +9,7 @@
     "test": "tfm-test --plugin",
     "test:watch": "tfm-test --plugin --watchAll",
     "test:current": "tfm-test --plugin --watch",
-    "publish-coverage": "tfm-publish-coverage",
-    "stories": "tfm-stories --plugin",
-    "stories:build": "tfm-build-stories --plugin",
-    "stories:deploy": "surge --project .storybook-dist",
-    "create-react-component": "yo react-domain"
+    "publish-coverage": "tfm-publish-coverage"
   },
   "repository": {
     "type": "git",
@@ -23,18 +19,17 @@
     "url": "http://projects.theforeman.org/projects/foreman-tasks/issues"
   },
   "peerDependencies": {
-    "@theforeman/vendor": ">= 10.1.0"
+    "@theforeman/vendor": ">= 12.1.1"
   },
   "dependencies": {
     "c3": "^0.4.11"
   },
   "devDependencies": {
     "@babel/core": "^7.7.0",
-    "@theforeman/builder": ">= 10.1.0",
-    "@theforeman/eslint-plugin-foreman": ">= 10.1.0",
-    "@theforeman/stories": ">= 10.1.0",
-    "@theforeman/test": ">= 10.1.0",
-    "@theforeman/vendor-dev": ">= 10.1.0",
+    "@theforeman/builder": ">= 12.1.1",
+    "@theforeman/eslint-plugin-foreman": ">= 12.1.1",
+    "@theforeman/test": ">= 12.1.1",
+    "@theforeman/vendor-dev": ">= 12.1.1",
     "babel-eslint": "^10.0.3",
     "eslint": "^6.7.2",
     "jed": "^1.1.1",
