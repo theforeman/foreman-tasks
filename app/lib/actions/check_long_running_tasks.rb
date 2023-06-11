@@ -9,7 +9,11 @@ module Actions
       time = Time.now.utc
       cutoff = time - INTERVAL
       notification = ::ForemanTasks::TasksMailNotification.find_by(name: "long_running_tasks")
-      users = User.where(id: UserMailNotification.where(mail_notification_id: notification.id))
+      org_admin_role = Role.find_by(name: 'Organization admin')
+      users = User.left_joins(:roles)
+                  .where(id: UserMailNotification.where(mail_notification_id: notification.id).select(:host_id))
+                  .or(User.where(admin: true))
+                  .or(User.where(id: UserRole.where(id: [org_admin_role.id] + org_admin_role.cloned_role_ids).select(:owner_id)))
 
       query = "state ^ (#{STATES.join(', ')}) AND state_updated_at <= \"#{cutoff}\""
       users.each do |user|
