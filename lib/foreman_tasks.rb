@@ -65,6 +65,7 @@ module ForemanTasks
   def self.register_scheduled_task(task_class, cronline)
     ForemanTasks::RecurringLogic.transaction(isolation: :serializable) do
       return if ForemanTasks::RecurringLogic.joins(:tasks)
+                                            .where(state: 'active')
                                             .merge(ForemanTasks::Task.where(label: task_class.name))
                                             .exists?
 
