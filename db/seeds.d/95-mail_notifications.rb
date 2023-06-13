@@ -18,7 +18,7 @@ notifications.each do |notification|
     created_notification = ForemanTasks::TasksMailNotification.create(notification)
     if created_notification.nil? || created_notification.errors.any?
       raise ::Foreman::Exception.new(N_("Unable to create mail notification: %s"),
-                                     format_errors(created_notification))
+                                     SeedHelper.format_errors(created_notification))
     end
   end
 end
