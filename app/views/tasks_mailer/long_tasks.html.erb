@@ -1,0 +1,29 @@
+<p>
+<%= _("Tasks lingering in states %{states} since %{time}") % {
+  time: @report.time - @report.interval,
+  states: @report.states.join(', ')
+} %>
+</p>
+
+<div class="dashboard">
+  <table>
+    <tr>
+      <th>_("ID")</th>
+      <th>_("Action")</th>
+      <th>_("Label")</th>
+      <th>_("State")</th>
+      <th>_("State updated at")</th>
+    </tr>
+    <% @report.tasks.each do |task| %>
+      <tr>
+        <td><%= link_to task.id, foreman_tasks_task_url(task) %></td>
+        <td><%= task.action %></td>
+        <td><%= task.label %></td>
+        <td><%= task.state %></td>
+        <td><%= task.state_updated_at %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<%= link_to 'More details', foreman_tasks_tasks_url(search: @report.query) %>

@@ -162,6 +162,7 @@ module ForemanTasks
         world.middleware.use Actions::Middleware::KeepCurrentTimezone
         world.middleware.use Actions::Middleware::KeepCurrentRequestID
         world.middleware.use ::Actions::Middleware::LoadSettingValues
+        ForemanTasks.register_scheduled_task(Actions::CheckLongRunningTasks, ENV['FOREMAN_TASKS_CHECK_LONG_RUNNING_TASKS_CRONLINE'] || '0 0 * * *')
       end
       ::ForemanTasks.dynflow.config.on_init(true) do
         ::ForemanTasks::Task::DynflowTask.consistency_check
@@ -186,7 +187,7 @@ module ForemanTasks
     end
 
     rake_tasks do
-      %w[dynflow.rake test.rake export_tasks.rake cleanup.rake generate_task_actions.rake].each do |rake_file|
+      %w[dynflow.rake test.rake export_tasks.rake cleanup.rake generate_task_actions.rake reschedule_long_running_tasks_checker.rake].each do |rake_file|
         full_path = File.expand_path("../tasks/#{rake_file}", __FILE__)
         load full_path if File.exist?(full_path)
       end
