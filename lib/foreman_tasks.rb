@@ -61,4 +61,20 @@ module ForemanTasks
     result = dynflow.world.delay action, delay_options, *args
     ForemanTasks::Task::DynflowTask.where(:external_id => result.id).first!
   end
+
+  def self.register_scheduled_task(task_class, cronline)
+    ForemanTasks::RecurringLogic.transaction(isolation: :serializable) do
+      return if ForemanTasks::RecurringLogic.joins(:tasks)
+                                            .where(state: 'active')
+                                            .merge(ForemanTasks::Task.where(label: task_class.name))
+                                            .exists?
+
+      User.as_anonymous_admin do
+        recurring_logic = ForemanTasks::RecurringLogic.new_from_cronline(cronline)
+        recurring_logic.save!
+        recurring_logic.start(task_class)
+      end
+    end
+  rescue ActiveRecord::TransactionIsolationError # rubocop:disable Lint/SuppressedException
+  end
 end
