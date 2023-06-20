@@ -11,7 +11,7 @@ module Actions
       tasks = ForemanTasks::Task.where(id: report.task_uuids)
       report.user = User.current
       report.tasks = tasks
-      ::UINotifications::Tasks::TasksRunningLong.new.deliver!
+      ::UINotifications::Tasks::TasksRunningLong.new(report).deliver!
       TasksMailer.long_tasks(report).deliver_now
     end
 
