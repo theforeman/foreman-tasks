@@ -11,7 +11,7 @@ module Actions
       notification = ::ForemanTasks::TasksMailNotification.find_by(name: "long_running_tasks")
       org_admin_role = Role.find_by(name: 'Organization admin')
       users = User.left_joins(:roles)
-                  .where(id: UserMailNotification.where(mail_notification_id: notification.id).select(:host_id))
+                  .where(id: UserMailNotification.where(mail_notification_id: notification.id).select(:role_id))
                   .or(User.where(admin: true))
                   .or(User.where(id: UserRole.where(id: [org_admin_role.id] + org_admin_role.cloned_role_ids).select(:owner_id)))
 
