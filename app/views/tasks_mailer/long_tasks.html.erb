@@ -8,11 +8,11 @@
 <div class="dashboard">
   <table>
     <tr>
-      <th>_("ID")</th>
-      <th>_("Action")</th>
-      <th>_("Label")</th>
-      <th>_("State")</th>
-      <th>_("State updated at")</th>
+      <th><%= _("ID") %></th>
+      <th><%= _("Action") %></th>
+      <th><%= _("Label") %></th>
+      <th><%= _("State") %></th>
+      <th><%= _("State updated at") %></th>
     </tr>
     <% @report.tasks.each do |task| %>
       <tr>
@@ -26,4 +26,4 @@
   </table>
 </div>
 
-<%= link_to 'More details', foreman_tasks_tasks_url(search: @report.query) %>
+<%= link_to _('More details'), foreman_tasks_tasks_url(search: @report.query) %>

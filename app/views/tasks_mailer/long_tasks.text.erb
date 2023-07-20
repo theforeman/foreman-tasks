@@ -6,11 +6,11 @@
 More details: <%= foreman_tasks_tasks_url(search: @report.query) %>
 
 <% @report.tasks.each do |task| %>
-ID: <%= task.id %>
-Action: <%= task.action %>
-Label: <%= task.label %>
-State: <%= task.state %>
-State updated at: <%= task.state_updated_at %>
-Details: <%= foreman_tasks_task_url(task) %>
+<%= _('ID') %>: <%= task.id %>
+<%= _('Action') %>: <%= task.action %>
+<%= _('Label') %>: <%= task.label %>
+<%= _('State') %>: <%= task.state %>
+<%= _('State updated at') %>: <%= task.state_updated_at %>
+<%= _('Details') %>: <%= foreman_tasks_task_url(task) %>
 
 <% end %>
