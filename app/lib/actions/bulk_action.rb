@@ -1,7 +1,5 @@
 module Actions
   class BulkAction < Actions::ActionWithSubPlans
-    include Dynflow::Action::WithBulkSubPlans
-
     # == Parameters:
     # actions_class::
     #   Class of action to trigger on targets
@@ -9,12 +7,13 @@ module Actions
     #   Array of objects on which the action_class should be triggered
     # *args::
     #   Arguments that all the targets share
-    def plan(action_class, targets, *args)
+    def plan(action_class, targets, *args, concurrency_limit: nil, **kwargs)
       check_targets!(targets)
+      limit_concurrency_level!(concurrency_limit) if concurrency_limit
       plan_self(:action_class => action_class.to_s,
                 :target_ids => targets.map(&:id),
                 :target_class => targets.first.class.to_s,
-                :args => args)
+                :args => args + [kwargs])
     end
 
     def run(event = nil)
