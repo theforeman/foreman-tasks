@@ -25,6 +25,11 @@ module Actions
         pass(*args)
       end
 
+      def hook(*args)
+        reload_setting_values
+        pass(*args)
+      end
+
       private
 
       def reload_setting_values
