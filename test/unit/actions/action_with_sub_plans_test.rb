@@ -20,6 +20,10 @@ module ForemanTasks
         user = User.find(input[:user_id])
         trigger(ChildAction, user)
       end
+
+      def total_count
+        1
+      end
     end
 
     class ChildAction < Actions::EntryAction

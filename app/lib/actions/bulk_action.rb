@@ -13,7 +13,8 @@ module Actions
       plan_self(:action_class => action_class.to_s,
                 :target_ids => targets.map(&:id),
                 :target_class => targets.first.class.to_s,
-                :args => args + [kwargs])
+                :args => args,
+                :kwargs => kwargs)
     end
 
     def run(event = nil)
@@ -50,7 +51,7 @@ module Actions
       missing = Array.new((current_batch - targets.map(&:id)).count) { nil }
 
       (targets + missing).map do |target|
-        trigger(action_class, target, *input[:args])
+        trigger(action_class, target, *input[:args], **input[:kwargs])
       end
     end
 

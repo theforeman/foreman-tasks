@@ -27,6 +27,10 @@ module ForemanTasks
       def create_sub_plans
         Array.new(input[:count]) { |i| trigger InheritingChildAction, i + 2 }
       end
+
+      def total_count
+        input[:count]
+      end
     end
 
     class ChildAction < Actions::EntryAction
