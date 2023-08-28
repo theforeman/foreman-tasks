@@ -1,3 +1,3 @@
 module ForemanTasks
-  VERSION = '8.0.2'.freeze
+  VERSION = '8.2.0'.freeze
 end
