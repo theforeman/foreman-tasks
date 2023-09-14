@@ -41,5 +41,9 @@ module Actions
     def humanized_name
       _('Check for long running tasks')
     end
+
+    def rescue_strategy_for_self
+      Dynflow::Action::Rescue::Skip
+    end
   end
 end

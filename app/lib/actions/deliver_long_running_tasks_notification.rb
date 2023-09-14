@@ -18,5 +18,9 @@ module Actions
     def humanized_name
       _('Deliver notifications about long running tasks')
     end
+
+    def rescue_strategy_for_self
+      ::Dynflow::Action::Rescue::Skip
+    end
   end
 end
