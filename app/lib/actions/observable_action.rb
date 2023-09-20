@@ -36,7 +36,7 @@ module Actions
       end
 
       def event_names
-        [event_name_base + '_' + event_name_suffix(:success)]
+        [:success, :failure].map { |suffix| event_name_base + '_' + event_name_suffix(suffix) }
       end
 
       def namespaced_event_names
@@ -51,7 +51,16 @@ module Actions
     def self.included(base)
       base.extend ClassMethods
       base.include ::Foreman::Observable
-      base.execution_plan_hooks.use :emit_event, :on => :success
+      base.execution_plan_hooks.use :emit_event_success, :on => :success
+      base.execution_plan_hooks.use :emit_event_failure, :on => :failure
+    end
+
+    def emit_event_success(execution_plan)
+      emit_event(execution_plan, :success)
+    end
+
+    def emit_event_failure(execution_plan)
+      emit_event(execution_plan, :failure)
     end
 
     def emit_event(execution_plan, hook = :success)
