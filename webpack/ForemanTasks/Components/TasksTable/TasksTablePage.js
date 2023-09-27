@@ -123,7 +123,7 @@ TasksTablePage.propTypes = {
   selectAllRows: PropTypes.func.isRequired,
   results: PropTypes.array.isRequired,
   getTableItems: PropTypes.func.isRequired,
-  getBreadcrumbs: PropTypes.func.isRequired,
+  getBreadcrumbs: PropTypes.func,
   actionName: PropTypes.string,
   status: PropTypes.oneOf(Object.keys(STATUS)),
   history: PropTypes.object.isRequired,
@@ -143,6 +143,7 @@ TasksTablePage.propTypes = {
 TasksTablePage.defaultProps = {
   perPage: 20,
   allRowsSelected: false,
+  getBreadcrumbs: () => null,
   actionName: '',
   status: STATUS.PENDING,
   selectedRows: [],
