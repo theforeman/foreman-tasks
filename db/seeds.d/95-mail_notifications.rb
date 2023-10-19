@@ -20,5 +20,19 @@ notifications.each do |notification|
       raise ::Foreman::Exception.new(N_("Unable to create mail notification: %s"),
                                      SeedHelper.format_errors(created_notification))
     end
+
+    org_admin_role = Role.find_by(name: 'Organization admin')
+
+    users = User.left_joins(:roles)
+                .joins(:auth_source)
+                .where(admin: true)
+                .or(User.where(id: UserRole.where(id: [org_admin_role.id] + org_admin_role.cloned_role_ids).select(:owner_id)))
+                .where.not(auth_source: { name: 'Hidden' })
+    users.each do |user|
+      mail = UserMailNotification.create(mail_notification_id: created_notification.id, user_id: user.id, interval: 'Subscribe')
+      if mail.nil? || mail.errors.any?
+        raise ::Foreman::Exception.new(N_("Unable to enable mail notification to user '%s': %s"), user.login, SeedHelper.format_errors(mail))
+      end
+    end
   end
 end
