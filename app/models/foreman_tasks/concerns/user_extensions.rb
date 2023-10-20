@@ -13,11 +13,13 @@ module ForemanTasks
       end
 
       def attach_task_mail_notifications
-        org_admin_role = Role.find_by(name: 'Organization admin')
-        admin_role_ids = ([org_admin_role.id] + org_admin_role.cloned_role_ids)
-        role_ids = roles.map(&:id)
+        return if ::ForemanSeeder.is_seeding
 
-        return unless admin || (role_ids & admin_role_ids).any?
+        org_admin_role = Role.find_by(name: 'Organization admin')
+        admin_by_role = org_admin_role &&
+                        (roles.map(&:id) & ([org_admin_role.id] + org_admin_role.cloned_role_ids)).any?
+
+        return unless admin || admin_by_role
 
         notification = MailNotification.find_by(name: 'long_running_tasks')
         return if notification.nil?
