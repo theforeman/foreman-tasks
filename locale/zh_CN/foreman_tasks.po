@@ -29,6 +29,9 @@ msgstr "%s 选择的任务"
 msgid "%s is not valid format of cron line"
 msgstr "%s 不是正确的 cron 行"
 
+msgid "%{count} tasks are in running or paused state for more than a day"
+msgstr ""
+
 msgid "%{total} task(s), %{success} success, %{failed} fail"
 msgstr "%{total} 任务），%{success}成功，%{failed}失败"
 
@@ -46,6 +49,9 @@ msgstr "12 小时"
 
 msgid "24h"
 msgstr "24 小时"
+
+msgid "A notification when tasks run for suspiciously long time"
+msgstr ""
 
 msgid "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved."
 msgstr "暂停的任务代表未正确完成的进程。任何处于暂停状态的任务都可能导致潜在的不一致，需要被解决。"
@@ -144,6 +150,9 @@ msgstr "无法更新一个已取消的周期性逻辑"
 msgid "Changing request id %{request_id} to saved id %{saved_id}"
 msgstr "将请求 id %{request_id} 改为保存的 id %{saved_id}"
 
+msgid "Check for long running tasks"
+msgstr ""
+
 msgid "Clear All Filters"
 msgstr "清除所有过滤器"
 
@@ -185,6 +194,9 @@ msgstr "延迟"
 
 msgid "Delete recurring logics by search query"
 msgstr "通过搜索查询删除重复逻辑"
+
+msgid "Deliver notifications about long running tasks"
+msgstr ""
 
 msgid "Details"
 msgstr "详情"
@@ -333,8 +345,14 @@ msgstr "列出任务"
 msgid "Locks"
 msgstr "锁"
 
+msgid "Long running tasks"
+msgstr ""
+
 msgid "Mon"
 msgstr "周一"
+
+msgid "More details"
+msgstr ""
 
 msgid "More than"
 msgstr "多于"
@@ -577,6 +595,9 @@ msgstr "起始於"
 msgid "State"
 msgstr "状态"
 
+msgid "State updated at"
+msgstr ""
+
 msgid "Step Canceled"
 msgstr "步骤已取消"
 
@@ -600,6 +621,9 @@ msgstr "子任务"
 
 msgid "Sub tasks of %s"
 msgstr "%s 的子任务"
+
+msgid "Subscribe"
+msgstr ""
 
 msgid "Sun"
 msgstr "周日"
@@ -636,6 +660,12 @@ msgstr "任务已取消"
 
 msgid "Tasks"
 msgstr "任务"
+
+msgid "Tasks lingering in states %{states} since %{time}"
+msgstr ""
+
+msgid "Tasks pending since %s"
+msgstr ""
 
 msgid "Tasks troubleshooting URL"
 msgstr "任务故障排除 URL"
@@ -703,6 +733,12 @@ msgstr "search_params 的 类型 %s 不被支持"
 
 msgid "UUID of the task"
 msgstr "任务的 UUID"
+
+msgid "Unable to create mail notification: %s"
+msgstr ""
+
+msgid "Unable to enable mail notification to user '%s': %s"
+msgstr ""
 
 msgid "Undo selection"
 msgstr "撤销选择"

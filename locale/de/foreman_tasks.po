@@ -32,6 +32,9 @@ msgstr " %s ausgewählte Aufgaben"
 msgid "%s is not valid format of cron line"
 msgstr "%s ist ungültiges Cron-Zeilen-Format"
 
+msgid "%{count} tasks are in running or paused state for more than a day"
+msgstr ""
+
 msgid "%{total} task(s), %{success} success, %{failed} fail"
 msgstr "%{total} Aufgabe(n), %{success} Erfolg, %{failed} Fehler"
 
@@ -49,6 +52,9 @@ msgstr "12h"
 
 msgid "24h"
 msgstr "24h"
+
+msgid "A notification when tasks run for suspiciously long time"
+msgstr ""
 
 msgid "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved."
 msgstr "Eine angehaltene Aufgabe stellt einen Prozess dar, der nicht ordnungsgemäß abgeschlossen wurde. Jede Aufgabe im angehaltenen Zustand kann zu potenziellen Inkonsistenzen führen und muss gelöst werden."
@@ -147,6 +153,9 @@ msgstr "Abgebrochene wiederkehrende Jobs können nicht aktualisiert werden."
 msgid "Changing request id %{request_id} to saved id %{saved_id}"
 msgstr "Anfrage-ID %{request_id} in gespeicherte ID %{saved_id} ändern"
 
+msgid "Check for long running tasks"
+msgstr ""
+
 msgid "Clear All Filters"
 msgstr "Alle Filter löschen"
 
@@ -188,6 +197,9 @@ msgstr "Verzögert"
 
 msgid "Delete recurring logics by search query"
 msgstr "Wiederkehrende Logiken per Suchanfrage löschen"
+
+msgid "Deliver notifications about long running tasks"
+msgstr ""
 
 msgid "Details"
 msgstr "Details"
@@ -336,8 +348,14 @@ msgstr "Aufgaben auflisten"
 msgid "Locks"
 msgstr "Sperren"
 
+msgid "Long running tasks"
+msgstr ""
+
 msgid "Mon"
 msgstr "Mo"
+
+msgid "More details"
+msgstr ""
 
 msgid "More than"
 msgstr "Mehr als"
@@ -580,6 +598,9 @@ msgstr "Gestartet um"
 msgid "State"
 msgstr "Status"
 
+msgid "State updated at"
+msgstr ""
+
 msgid "Step Canceled"
 msgstr "Schritt abgebrochen"
 
@@ -603,6 +624,9 @@ msgstr "Unteraufgabe"
 
 msgid "Sub tasks of %s"
 msgstr "Unteraufgaben von %s."
+
+msgid "Subscribe"
+msgstr ""
 
 msgid "Sun"
 msgstr "So"
@@ -639,6 +663,12 @@ msgstr "Aufgabe wurde abgebrochen"
 
 msgid "Tasks"
 msgstr "Aufgaben"
+
+msgid "Tasks lingering in states %{states} since %{time}"
+msgstr ""
+
+msgid "Tasks pending since %s"
+msgstr ""
 
 msgid "Tasks troubleshooting URL"
 msgstr "URL zur Fehlerbehebung bei Aufgaben"
@@ -707,6 +737,12 @@ msgstr "Typ %s wird für Suchparameter nicht unterstützt"
 
 msgid "UUID of the task"
 msgstr "UUID der Aufgabe"
+
+msgid "Unable to create mail notification: %s"
+msgstr ""
+
+msgid "Unable to enable mail notification to user '%s': %s"
+msgstr ""
 
 msgid "Undo selection"
 msgstr "Auswahl zurücksetzen"

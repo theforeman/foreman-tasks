@@ -30,6 +30,9 @@ msgstr "選択したタスク %s件"
 msgid "%s is not valid format of cron line"
 msgstr "%s は有効な cron 行の形式ではありません"
 
+msgid "%{count} tasks are in running or paused state for more than a day"
+msgstr ""
+
 msgid "%{total} task(s), %{success} success, %{failed} fail"
 msgstr "タスク %{total} 件、成功 %{success} 件、失敗 %{failed} 件"
 
@@ -47,6 +50,9 @@ msgstr "12 時間"
 
 msgid "24h"
 msgstr "24 時間"
+
+msgid "A notification when tasks run for suspiciously long time"
+msgstr ""
 
 msgid "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved."
 msgstr "一時停止タスクは、適切に終了していないプロセスを表します。一時停止状態のタスクは、一貫性に欠ける可能性があり、解決する必要があります。"
@@ -145,6 +151,9 @@ msgstr "取り消された再帰論理を更新できません"
 msgid "Changing request id %{request_id} to saved id %{saved_id}"
 msgstr "要求 ID %{request_id} を保存済み ID %{saved_id} に変更しています"
 
+msgid "Check for long running tasks"
+msgstr ""
+
 msgid "Clear All Filters"
 msgstr "すべてのフィルターを消去"
 
@@ -186,6 +195,9 @@ msgstr "遅延"
 
 msgid "Delete recurring logics by search query"
 msgstr "検索クエリーでの再帰論理の削除"
+
+msgid "Deliver notifications about long running tasks"
+msgstr ""
 
 msgid "Details"
 msgstr "詳細"
@@ -334,8 +346,14 @@ msgstr "タスクを一覧表示する"
 msgid "Locks"
 msgstr "ロック"
 
+msgid "Long running tasks"
+msgstr ""
+
 msgid "Mon"
 msgstr "月"
+
+msgid "More details"
+msgstr ""
 
 msgid "More than"
 msgstr "以下の値を超える"
@@ -578,6 +596,9 @@ msgstr "開始時刻"
 msgid "State"
 msgstr "状態"
 
+msgid "State updated at"
+msgstr ""
+
 msgid "Step Canceled"
 msgstr "ステップがキャンセルされました"
 
@@ -601,6 +622,9 @@ msgstr "サブタスク"
 
 msgid "Sub tasks of %s"
 msgstr "%s のサブタスク"
+
+msgid "Subscribe"
+msgstr ""
 
 msgid "Sun"
 msgstr "日"
@@ -637,6 +661,12 @@ msgstr "タスクがキャンセルされました"
 
 msgid "Tasks"
 msgstr "タスク"
+
+msgid "Tasks lingering in states %{states} since %{time}"
+msgstr ""
+
+msgid "Tasks pending since %s"
+msgstr ""
 
 msgid "Tasks troubleshooting URL"
 msgstr "URL のトラブルシューティングタスク"
@@ -704,6 +734,12 @@ msgstr "search_params のタイプ %s はサポートされていません"
 
 msgid "UUID of the task"
 msgstr "タスクの UUID"
+
+msgid "Unable to create mail notification: %s"
+msgstr ""
+
+msgid "Unable to enable mail notification to user '%s': %s"
+msgstr ""
 
 msgid "Undo selection"
 msgstr "元に戻す"

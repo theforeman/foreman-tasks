@@ -28,6 +28,9 @@ msgstr ""
 msgid "%s is not valid format of cron line"
 msgstr "%s은(는) 유효한 cron 줄 형식이 아닙니다."
 
+msgid "%{count} tasks are in running or paused state for more than a day"
+msgstr ""
+
 msgid "%{total} task(s), %{success} success, %{failed} fail"
 msgstr "%{total}개 태스크, %{success}개 성공, %{failed}개 실패"
 
@@ -44,6 +47,9 @@ msgid "12h"
 msgstr ""
 
 msgid "24h"
+msgstr ""
+
+msgid "A notification when tasks run for suspiciously long time"
 msgstr ""
 
 msgid "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved."
@@ -143,6 +149,9 @@ msgstr ""
 msgid "Changing request id %{request_id} to saved id %{saved_id}"
 msgstr ""
 
+msgid "Check for long running tasks"
+msgstr ""
+
 msgid "Clear All Filters"
 msgstr ""
 
@@ -183,6 +192,9 @@ msgid "Delayed"
 msgstr "지연"
 
 msgid "Delete recurring logics by search query"
+msgstr ""
+
+msgid "Deliver notifications about long running tasks"
 msgstr ""
 
 msgid "Details"
@@ -332,8 +344,14 @@ msgstr "태스크 나열"
 msgid "Locks"
 msgstr "잠금"
 
+msgid "Long running tasks"
+msgstr ""
+
 msgid "Mon"
 msgstr "월"
+
+msgid "More details"
+msgstr ""
 
 msgid "More than"
 msgstr ""
@@ -576,6 +594,9 @@ msgstr "시작 일시"
 msgid "State"
 msgstr "상태 "
 
+msgid "State updated at"
+msgstr ""
+
 msgid "Step Canceled"
 msgstr ""
 
@@ -598,6 +619,9 @@ msgid "Sub tasks"
 msgstr "하위 태스크"
 
 msgid "Sub tasks of %s"
+msgstr ""
+
+msgid "Subscribe"
 msgstr ""
 
 msgid "Sun"
@@ -635,6 +659,12 @@ msgstr ""
 
 msgid "Tasks"
 msgstr "작업"
+
+msgid "Tasks lingering in states %{states} since %{time}"
+msgstr ""
+
+msgid "Tasks pending since %s"
+msgstr ""
 
 msgid "Tasks troubleshooting URL"
 msgstr ""
@@ -703,6 +733,12 @@ msgstr "%s 유형은 search_params에 대해 지원되지 않습니다."
 
 msgid "UUID of the task"
 msgstr "태스크의 UUID"
+
+msgid "Unable to create mail notification: %s"
+msgstr ""
+
+msgid "Unable to enable mail notification to user '%s': %s"
+msgstr ""
 
 msgid "Undo selection"
 msgstr ""
