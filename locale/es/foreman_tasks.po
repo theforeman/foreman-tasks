@@ -32,6 +32,9 @@ msgstr "%s Tareas seleccionadas"
 msgid "%s is not valid format of cron line"
 msgstr "%s no es un formato válido de línea cron"
 
+msgid "%{count} tasks are in running or paused state for more than a day"
+msgstr ""
+
 msgid "%{total} task(s), %{success} success, %{failed} fail"
 msgstr "%{total} tarea(s), %{success} éxito, %{failed} fallo"
 
@@ -49,6 +52,9 @@ msgstr "12 h"
 
 msgid "24h"
 msgstr "24 h"
+
+msgid "A notification when tasks run for suspiciously long time"
+msgstr ""
 
 msgid "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved."
 msgstr "Una tarea pausada representa un proceso que no ha terminado correctamente. Cualquier tarea en estado de pausa puede llevar a una potencial inconsistencia y debe ser resuelta."
@@ -147,6 +153,9 @@ msgstr "No se puede actualizar una lógica recurrente cancelada."
 msgid "Changing request id %{request_id} to saved id %{saved_id}"
 msgstr "Cambio del id de solicitud %{request_id} al id guardado %.{saved_id}"
 
+msgid "Check for long running tasks"
+msgstr ""
+
 msgid "Clear All Filters"
 msgstr "Borrar todos los filtros"
 
@@ -188,6 +197,9 @@ msgstr "Demorada"
 
 msgid "Delete recurring logics by search query"
 msgstr "Eliminar lógicas recurrentes mediante una consulta de búsqueda"
+
+msgid "Deliver notifications about long running tasks"
+msgstr ""
 
 msgid "Details"
 msgstr "Detalles"
@@ -336,8 +348,14 @@ msgstr "Listar tareas"
 msgid "Locks"
 msgstr "Bloqueos"
 
+msgid "Long running tasks"
+msgstr ""
+
 msgid "Mon"
 msgstr "Lun"
+
+msgid "More details"
+msgstr ""
 
 msgid "More than"
 msgstr "Más de"
@@ -580,6 +598,9 @@ msgstr "Iniciado el"
 msgid "State"
 msgstr "Estado"
 
+msgid "State updated at"
+msgstr ""
+
 msgid "Step Canceled"
 msgstr "Paso cancelado"
 
@@ -603,6 +624,9 @@ msgstr "Subtareas"
 
 msgid "Sub tasks of %s"
 msgstr "Subtareas de %s"
+
+msgid "Subscribe"
+msgstr ""
 
 msgid "Sun"
 msgstr "Dom"
@@ -639,6 +663,12 @@ msgstr "La tarea fue cancelada"
 
 msgid "Tasks"
 msgstr "Tareas"
+
+msgid "Tasks lingering in states %{states} since %{time}"
+msgstr ""
+
+msgid "Tasks pending since %s"
+msgstr ""
 
 msgid "Tasks troubleshooting URL"
 msgstr "URL de resolución de problemas"
@@ -708,6 +738,12 @@ msgstr "No se admite el tipo %s para search_params"
 
 msgid "UUID of the task"
 msgstr "UUID de la tarea"
+
+msgid "Unable to create mail notification: %s"
+msgstr ""
+
+msgid "Unable to enable mail notification to user '%s': %s"
+msgstr ""
 
 msgid "Undo selection"
 msgstr "Deshacer la selección"

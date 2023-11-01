@@ -3,7 +3,6 @@
 # This file is distributed under the same license as the foreman_tasks package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: foreman_tasks 1.0.0\n"
@@ -29,6 +28,9 @@ msgstr ""
 msgid "%s is not valid format of cron line"
 msgstr ""
 
+msgid "%{count} tasks are in running or paused state for more than a day"
+msgstr ""
+
 msgid "%{total} task(s), %{success} success, %{failed} fail"
 msgstr ""
 
@@ -45,6 +47,9 @@ msgid "12h"
 msgstr ""
 
 msgid "24h"
+msgstr ""
+
+msgid "A notification when tasks run for suspiciously long time"
 msgstr ""
 
 msgid "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved."
@@ -144,6 +149,9 @@ msgstr ""
 msgid "Changing request id %{request_id} to saved id %{saved_id}"
 msgstr ""
 
+msgid "Check for long running tasks"
+msgstr ""
+
 msgid "Clear All Filters"
 msgstr ""
 
@@ -184,6 +192,9 @@ msgid "Delayed"
 msgstr ""
 
 msgid "Delete recurring logics by search query"
+msgstr ""
+
+msgid "Deliver notifications about long running tasks"
 msgstr ""
 
 msgid "Details"
@@ -333,7 +344,13 @@ msgstr ""
 msgid "Locks"
 msgstr ""
 
+msgid "Long running tasks"
+msgstr ""
+
 msgid "Mon"
+msgstr ""
+
+msgid "More details"
 msgstr ""
 
 msgid "More than"
@@ -577,6 +594,9 @@ msgstr ""
 msgid "State"
 msgstr ""
 
+msgid "State updated at"
+msgstr ""
+
 msgid "Step Canceled"
 msgstr ""
 
@@ -599,6 +619,9 @@ msgid "Sub tasks"
 msgstr ""
 
 msgid "Sub tasks of %s"
+msgstr ""
+
+msgid "Subscribe"
 msgstr ""
 
 msgid "Sun"
@@ -635,6 +658,12 @@ msgid "Task was canceled"
 msgstr ""
 
 msgid "Tasks"
+msgstr ""
+
+msgid "Tasks lingering in states %{states} since %{time}"
+msgstr ""
+
+msgid "Tasks pending since %s"
 msgstr ""
 
 msgid "Tasks troubleshooting URL"
@@ -703,6 +732,12 @@ msgid "Type %s for search_params is not supported"
 msgstr ""
 
 msgid "UUID of the task"
+msgstr ""
+
+msgid "Unable to create mail notification: %s"
+msgstr ""
+
+msgid "Unable to enable mail notification to user '%s': %s"
 msgstr ""
 
 msgid "Undo selection"

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_tasks 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-18 08:15+0000\n"
-"PO-Revision-Date: 2023-05-18 08:15+0000\n"
+"POT-Creation-Date: 2023-11-01 11:07+0100\n"
+"PO-Revision-Date: 2023-11-01 11:07+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -162,6 +162,7 @@ msgstr ""
 #: ../db/seeds.d/30-notification_blueprints.rb:33
 #: ../db/seeds.d/30-notification_blueprints.rb:40
 #: ../db/seeds.d/30-notification_blueprints.rb:47
+#: ../db/seeds.d/30-notification_blueprints.rb:54
 #: ../lib/foreman_tasks/engine.rb:25 ../lib/foreman_tasks/engine.rb:54
 #: ../webpack/ForemanTasks/Components/TasksTable/SubTasksPage.js:10
 #: ../webpack/ForemanTasks/Components/TasksTable/TasksIndexPage.js:7
@@ -324,11 +325,20 @@ msgstr ""
 msgid "The targets are of different types"
 msgstr ""
 
-#: ../app/lib/actions/foreman/host/import_facts.rb:43 action_names.rb:4
+#: ../app/lib/actions/check_long_running_tasks.rb:40 action_names.rb:3
+msgid "Check for long running tasks"
+msgstr ""
+
+#: ../app/lib/actions/deliver_long_running_tasks_notification.rb:19
+#: action_names.rb:4
+msgid "Deliver notifications about long running tasks"
+msgstr ""
+
+#: ../app/lib/actions/foreman/host/import_facts.rb:43 action_names.rb:6
 msgid "Import facts"
 msgstr ""
 
-#: ../app/lib/actions/foreman/puppetclass/import.rb:18 action_names.rb:3
+#: ../app/lib/actions/foreman/puppetclass/import.rb:18 action_names.rb:5
 msgid "Import Puppet classes"
 msgstr ""
 
@@ -412,6 +422,10 @@ msgstr ""
 msgid "Initialization error: %s"
 msgstr ""
 
+#: ../app/mailers/tasks_mailer.rb:9
+msgid "Tasks pending since %s"
+msgstr ""
+
 #: ../app/models/foreman_tasks/lock.rb:7
 msgid "Required lock is already taken by other running tasks."
 msgstr ""
@@ -472,6 +486,10 @@ msgstr ""
 #: ../app/models/foreman_tasks/task_groups/recurring_logic_task_group.rb:9
 #: ../app/views/foreman_tasks/recurring_logics/show.html.erb:1
 msgid "Recurring logic"
+msgstr ""
+
+#: ../app/models/foreman_tasks/tasks_mail_notification.rb:3
+msgid "Subscribe"
 msgstr ""
 
 #: ../app/models/foreman_tasks/triggering.rb:29
@@ -537,6 +555,15 @@ msgid_plural "There are %{count} paused tasks in the system that need attention"
 msgstr[0] ""
 msgstr[1] ""
 
+#: ../app/services/ui_notifications/tasks/tasks_running_long.rb:18
+#: ../db/seeds.d/95-mail_notifications.rb:1
+msgid "Long running tasks"
+msgstr ""
+
+#: ../app/services/ui_notifications/tasks/tasks_running_long.rb:29
+msgid "%{count} tasks are in running or paused state for more than a day"
+msgstr ""
+
 #: ../app/views/common/_trigger_form.html.erb:2
 msgid "Schedule"
 msgstr ""
@@ -572,6 +599,8 @@ msgstr ""
 #: ../app/views/foreman_tasks/recurring_logics/index.html.erb:40
 #: ../app/views/foreman_tasks/task_groups/_common.html.erb:4
 #: ../app/views/foreman_tasks/task_groups/recurring_logic_task_groups/_recurring_logic_task_group.html.erb:4
+#: ../app/views/tasks_mailer/long_tasks.html.erb:11
+#: ../app/views/tasks_mailer/long_tasks.text.erb:9
 msgid "ID"
 msgstr ""
 
@@ -583,6 +612,8 @@ msgstr ""
 
 #: ../app/views/foreman_tasks/recurring_logics/index.html.erb:43
 #: ../app/views/foreman_tasks/task_groups/recurring_logic_task_groups/_recurring_logic_task_group.html.erb:12
+#: ../app/views/tasks_mailer/long_tasks.html.erb:12
+#: ../app/views/tasks_mailer/long_tasks.text.erb:10
 #: ../webpack/ForemanTasks/Components/TaskDetails/Components/Errors.js:18
 #: ../webpack/ForemanTasks/Components/TaskDetails/Components/RunningSteps.js:35
 #: ../webpack/ForemanTasks/Components/TasksTable/TasksTableSchema.js:56
@@ -618,6 +649,8 @@ msgstr ""
 #: ../app/views/foreman_tasks/task_groups/recurring_logic_task_groups/_recurring_logic_task_group.html.erb:36
 #: ../app/views/foreman_tasks/tasks/dashboard/_latest_tasks_in_error_warning.html.erb:5
 #: ../app/views/foreman_tasks/tasks/dashboard/_tasks_status.html.erb:4
+#: ../app/views/tasks_mailer/long_tasks.html.erb:14
+#: ../app/views/tasks_mailer/long_tasks.text.erb:12
 #: ../webpack/ForemanTasks/Components/TaskDetails/Components/RunningSteps.js:40
 #: ../webpack/ForemanTasks/Components/TaskDetails/Components/TaskInfo.js:130
 #: ../webpack/ForemanTasks/Components/TasksTable/TasksTableSchema.js:61
@@ -625,6 +658,7 @@ msgid "State"
 msgstr ""
 
 #: ../app/views/foreman_tasks/recurring_logics/show.html.erb:6
+#: ../app/views/tasks_mailer/long_tasks.text.erb:14
 msgid "Details"
 msgstr ""
 
@@ -676,12 +710,44 @@ msgstr ""
 msgid "Details of %s task"
 msgstr ""
 
+#: ../app/views/tasks_mailer/long_tasks.html.erb:2
+#: ../app/views/tasks_mailer/long_tasks.text.erb:1
+msgid "Tasks lingering in states %{states} since %{time}"
+msgstr ""
+
+#: ../app/views/tasks_mailer/long_tasks.html.erb:13
+#: ../app/views/tasks_mailer/long_tasks.text.erb:11
+#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Raw.js:14
+msgid "Label"
+msgstr ""
+
+#: ../app/views/tasks_mailer/long_tasks.html.erb:15
+#: ../app/views/tasks_mailer/long_tasks.text.erb:13
+msgid "State updated at"
+msgstr ""
+
+#: ../app/views/tasks_mailer/long_tasks.html.erb:29
+msgid "More details"
+msgstr ""
+
 #: ../db/seeds.d/30-notification_blueprints.rb:12
 msgid "List of tasks"
 msgstr ""
 
 #: ../db/seeds.d/30-notification_blueprints.rb:27
 msgid "Task Details"
+msgstr ""
+
+#: ../db/seeds.d/95-mail_notifications.rb:6
+msgid "A notification when tasks run for suspiciously long time"
+msgstr ""
+
+#: ../db/seeds.d/95-mail_notifications.rb:20
+msgid "Unable to create mail notification: %s"
+msgstr ""
+
+#: ../db/seeds.d/95-mail_notifications.rb:34
+msgid "Unable to enable mail notification to user '%s': %s"
 msgstr ""
 
 #: ../lib/foreman_tasks/dynflow.rb:18
@@ -882,10 +948,6 @@ msgstr ""
 
 #: ../webpack/ForemanTasks/Components/TaskDetails/Components/Raw.js:10
 msgid "Id"
-msgstr ""
-
-#: ../webpack/ForemanTasks/Components/TaskDetails/Components/Raw.js:14
-msgid "Label"
 msgstr ""
 
 #: ../webpack/ForemanTasks/Components/TaskDetails/Components/Raw.js:19

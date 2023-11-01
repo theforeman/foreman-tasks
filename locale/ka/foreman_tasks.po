@@ -32,6 +32,9 @@ msgstr "%s მონიშნული ამოცანა"
 msgid "%s is not valid format of cron line"
 msgstr "%s cron-ის სწორ ხაზის სწორი ფორმატი არაა"
 
+msgid "%{count} tasks are in running or paused state for more than a day"
+msgstr ""
+
 msgid "%{total} task(s), %{success} success, %{failed} fail"
 msgstr "%{total} ამოცანა, %{success} წარმატებით, %{failed} წარუმატებელი"
 
@@ -49,6 +52,9 @@ msgstr "12სთ"
 
 msgid "24h"
 msgstr "24სთ"
+
+msgid "A notification when tasks run for suspiciously long time"
+msgstr ""
 
 msgid "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved."
 msgstr "შეჩერებული ამოცანა წარმოადგენს პროცესს, რომელიც სწორად არ დასრულებულა. შეჩერებულ მდგომარეობაში მყოფმა ნებისმიერმა ამოცანამ შეიძლება გამოიწვიოს პოტენციური შეუსაბამობა და საჭიროებს გადაჭრას."
@@ -147,6 +153,9 @@ msgstr "გაუქმებული განმეორებადი ლ�
 msgid "Changing request id %{request_id} to saved id %{saved_id}"
 msgstr "მოთხოვნის id-ის %{request_id} ცვლილება შენახულ ID_ზე %{saved_id}"
 
+msgid "Check for long running tasks"
+msgstr ""
+
 msgid "Clear All Filters"
 msgstr "ყველა ფილტრის გასუფთავება"
 
@@ -188,6 +197,9 @@ msgstr "დაყოვნებული"
 
 msgid "Delete recurring logics by search query"
 msgstr "გამეორებადი ლოგიკის თითოეული საძებნი სტრიქონით წაშლა"
+
+msgid "Deliver notifications about long running tasks"
+msgstr ""
 
 msgid "Details"
 msgstr "დეტალები"
@@ -336,8 +348,14 @@ msgstr "ამოცანების სია"
 msgid "Locks"
 msgstr "დაბლოკვები"
 
+msgid "Long running tasks"
+msgstr ""
+
 msgid "Mon"
 msgstr "მოუ"
+
+msgid "More details"
+msgstr ""
 
 msgid "More than"
 msgstr "მეტი, ვიდრე"
@@ -580,6 +598,9 @@ msgstr "დაწყებული"
 msgid "State"
 msgstr "State"
 
+msgid "State updated at"
+msgstr ""
+
 msgid "Step Canceled"
 msgstr "ბიჯი გაუქმებულია"
 
@@ -603,6 +624,9 @@ msgstr "ქვეამოცანები"
 
 msgid "Sub tasks of %s"
 msgstr "%s-ის ქვეამოცანები"
+
+msgid "Subscribe"
+msgstr ""
 
 msgid "Sun"
 msgstr "მზე"
@@ -639,6 +663,12 @@ msgstr "ამოცანა გაუქმდა"
 
 msgid "Tasks"
 msgstr "Tasks"
+
+msgid "Tasks lingering in states %{states} since %{time}"
+msgstr ""
+
+msgid "Tasks pending since %s"
+msgstr ""
 
 msgid "Tasks troubleshooting URL"
 msgstr "ამოცანის პრობლემების გადაწყვეტის URL"
@@ -707,6 +737,12 @@ msgstr "ტიპი %s search_params-ისთვის არ არის მ
 
 msgid "UUID of the task"
 msgstr "ამოცანის UUID"
+
+msgid "Unable to create mail notification: %s"
+msgstr ""
+
+msgid "Unable to enable mail notification to user '%s': %s"
+msgstr ""
 
 msgid "Undo selection"
 msgstr "მონიშნულის დაბრუნება"

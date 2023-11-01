@@ -31,6 +31,9 @@ msgstr "%s tâches sélectionnées"
 msgid "%s is not valid format of cron line"
 msgstr "%s n'est pas un format valide de ligne cron"
 
+msgid "%{count} tasks are in running or paused state for more than a day"
+msgstr ""
+
 msgid "%{total} task(s), %{success} success, %{failed} fail"
 msgstr "%{total} tâche(s), %{success} succès, %{failed} échec"
 
@@ -48,6 +51,9 @@ msgstr "12h"
 
 msgid "24h"
 msgstr "24h"
+
+msgid "A notification when tasks run for suspiciously long time"
+msgstr ""
 
 msgid "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved."
 msgstr "Une tâche en pause représente un processus qui ne s'est pas terminé correctement. Toute tâche en état de pause peut entraîner une incohérence potentielle et doit être résolue."
@@ -146,6 +152,9 @@ msgstr "Impossible de mettre à jour une logique récurrente annulée."
 msgid "Changing request id %{request_id} to saved id %{saved_id}"
 msgstr "Changement de l'id de la demande %{request_id} en id %{saved_id} sauvegardée"
 
+msgid "Check for long running tasks"
+msgstr ""
+
 msgid "Clear All Filters"
 msgstr "Afficher tous les filtres"
 
@@ -187,6 +196,9 @@ msgstr "Retardé"
 
 msgid "Delete recurring logics by search query"
 msgstr "Supprimer les logiques récurrentes par requête de recherche"
+
+msgid "Deliver notifications about long running tasks"
+msgstr ""
 
 msgid "Details"
 msgstr "Détails"
@@ -335,8 +347,14 @@ msgstr "Lister les tâches"
 msgid "Locks"
 msgstr "Verrous"
 
+msgid "Long running tasks"
+msgstr ""
+
 msgid "Mon"
 msgstr "Lun."
+
+msgid "More details"
+msgstr ""
 
 msgid "More than"
 msgstr "Plus de"
@@ -579,6 +597,9 @@ msgstr "Démarré à"
 msgid "State"
 msgstr "État"
 
+msgid "State updated at"
+msgstr ""
+
 msgid "Step Canceled"
 msgstr "Étape annulée"
 
@@ -602,6 +623,9 @@ msgstr "Sous-tâches"
 
 msgid "Sub tasks of %s"
 msgstr "Sous-tâches de %s"
+
+msgid "Subscribe"
+msgstr ""
 
 msgid "Sun"
 msgstr "Dim."
@@ -638,6 +662,12 @@ msgstr "La tâche a été annulée"
 
 msgid "Tasks"
 msgstr "Tâches"
+
+msgid "Tasks lingering in states %{states} since %{time}"
+msgstr ""
+
+msgid "Tasks pending since %s"
+msgstr ""
 
 msgid "Tasks troubleshooting URL"
 msgstr "URL de résolution de problème"
@@ -707,6 +737,12 @@ msgstr "Type %s n'est pas supporté pour search_params"
 
 msgid "UUID of the task"
 msgstr "UUID de la tâche"
+
+msgid "Unable to create mail notification: %s"
+msgstr ""
+
+msgid "Unable to enable mail notification to user '%s': %s"
+msgstr ""
 
 msgid "Undo selection"
 msgstr "Annuler la sélection"

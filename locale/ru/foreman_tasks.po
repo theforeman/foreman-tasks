@@ -32,6 +32,9 @@ msgstr ""
 msgid "%s is not valid format of cron line"
 msgstr "Недопустимый формат cron: %s"
 
+msgid "%{count} tasks are in running or paused state for more than a day"
+msgstr ""
+
 msgid "%{total} task(s), %{success} success, %{failed} fail"
 msgstr "Всего задач: %{total}; из них успешно %{success}, неудачно %{failed}"
 
@@ -48,6 +51,9 @@ msgid "12h"
 msgstr ""
 
 msgid "24h"
+msgstr ""
+
+msgid "A notification when tasks run for suspiciously long time"
 msgstr ""
 
 msgid "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved."
@@ -147,6 +153,9 @@ msgstr ""
 msgid "Changing request id %{request_id} to saved id %{saved_id}"
 msgstr ""
 
+msgid "Check for long running tasks"
+msgstr ""
+
 msgid "Clear All Filters"
 msgstr ""
 
@@ -187,6 +196,9 @@ msgid "Delayed"
 msgstr "Отложенный"
 
 msgid "Delete recurring logics by search query"
+msgstr ""
+
+msgid "Deliver notifications about long running tasks"
 msgstr ""
 
 msgid "Details"
@@ -336,8 +348,14 @@ msgstr "Список задач"
 msgid "Locks"
 msgstr "Блокировки"
 
+msgid "Long running tasks"
+msgstr ""
+
 msgid "Mon"
 msgstr "Пн"
+
+msgid "More details"
+msgstr ""
 
 msgid "More than"
 msgstr ""
@@ -580,6 +598,9 @@ msgstr "Время начала"
 msgid "State"
 msgstr "Состояние"
 
+msgid "State updated at"
+msgstr ""
+
 msgid "Step Canceled"
 msgstr ""
 
@@ -602,6 +623,9 @@ msgid "Sub tasks"
 msgstr "Подзадачи"
 
 msgid "Sub tasks of %s"
+msgstr ""
+
+msgid "Subscribe"
 msgstr ""
 
 msgid "Sun"
@@ -639,6 +663,12 @@ msgstr ""
 
 msgid "Tasks"
 msgstr "Задачи"
+
+msgid "Tasks lingering in states %{states} since %{time}"
+msgstr ""
+
+msgid "Tasks pending since %s"
+msgstr ""
 
 msgid "Tasks troubleshooting URL"
 msgstr ""
@@ -707,6 +737,12 @@ msgstr "search_params не поддерживает тип %s"
 
 msgid "UUID of the task"
 msgstr "UUUID задачи"
+
+msgid "Unable to create mail notification: %s"
+msgstr ""
+
+msgid "Unable to enable mail notification to user '%s': %s"
+msgstr ""
 
 msgid "Undo selection"
 msgstr "Отменить выбор"

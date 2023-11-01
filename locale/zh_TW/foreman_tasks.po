@@ -29,6 +29,9 @@ msgstr ""
 msgid "%s is not valid format of cron line"
 msgstr "%s 不是 cron 行的正確格式"
 
+msgid "%{count} tasks are in running or paused state for more than a day"
+msgstr ""
+
 msgid "%{total} task(s), %{success} success, %{failed} fail"
 msgstr "%{total} 任務，%{success} 成功，%{failed} 失敗"
 
@@ -45,6 +48,9 @@ msgid "12h"
 msgstr ""
 
 msgid "24h"
+msgstr ""
+
+msgid "A notification when tasks run for suspiciously long time"
 msgstr ""
 
 msgid "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved."
@@ -144,6 +150,9 @@ msgstr ""
 msgid "Changing request id %{request_id} to saved id %{saved_id}"
 msgstr ""
 
+msgid "Check for long running tasks"
+msgstr ""
+
 msgid "Clear All Filters"
 msgstr ""
 
@@ -184,6 +193,9 @@ msgid "Delayed"
 msgstr "已延遲"
 
 msgid "Delete recurring logics by search query"
+msgstr ""
+
+msgid "Deliver notifications about long running tasks"
 msgstr ""
 
 msgid "Details"
@@ -333,8 +345,14 @@ msgstr "列出任務"
 msgid "Locks"
 msgstr "鎖"
 
+msgid "Long running tasks"
+msgstr ""
+
 msgid "Mon"
 msgstr "週一"
+
+msgid "More details"
+msgstr ""
 
 msgid "More than"
 msgstr ""
@@ -577,6 +595,9 @@ msgstr "起始於"
 msgid "State"
 msgstr "狀態"
 
+msgid "State updated at"
+msgstr ""
+
 msgid "Step Canceled"
 msgstr ""
 
@@ -599,6 +620,9 @@ msgid "Sub tasks"
 msgstr "子任務"
 
 msgid "Sub tasks of %s"
+msgstr ""
+
+msgid "Subscribe"
 msgstr ""
 
 msgid "Sun"
@@ -636,6 +660,12 @@ msgstr ""
 
 msgid "Tasks"
 msgstr "工作"
+
+msgid "Tasks lingering in states %{states} since %{time}"
+msgstr ""
+
+msgid "Tasks pending since %s"
+msgstr ""
 
 msgid "Tasks troubleshooting URL"
 msgstr ""
@@ -704,6 +734,12 @@ msgstr "不支援 search_params 的 %s"
 
 msgid "UUID of the task"
 msgstr "任務的 UUID"
+
+msgid "Unable to create mail notification: %s"
+msgstr ""
+
+msgid "Unable to enable mail notification to user '%s': %s"
+msgstr ""
 
 msgid "Undo selection"
 msgstr ""
