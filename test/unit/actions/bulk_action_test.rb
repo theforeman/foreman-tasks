@@ -64,6 +64,15 @@ module ForemanTasks
         _(task.input[:kw_string]).must_equal 7
         _(task.input[:kw_symbol]).must_equal 7
       end
+
+      specify 'it allows setting concurrency limit' do
+        Target.expects(:unscoped).returns(Target)
+        Target.expects(:where).with(:id => targets.map(&:id)).returns(targets)
+
+        triggered = ForemanTasks.trigger(ParentAction, ChildAction, targets, concurrency_limit: 25)
+        task = ForemanTasks::Task.where(:external_id => triggered.id).first
+        _(task.execution_plan.entry_action.concurrency_limit).must_equal 25
+      end
     end
   end
 end
