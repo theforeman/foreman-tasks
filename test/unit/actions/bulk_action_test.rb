@@ -16,6 +16,12 @@ module ForemanTasks
       end
     end
 
+    class KwArgChildAction < Actions::EntryAction
+      def plan(_target, options = {})
+        plan_self(kw_string: options['kw'], kw_symbol: options[:kw])
+      end
+    end
+
     describe Actions::BulkAction do
       include ForemanTasks::TestHelpers::WithInThreadExecutor
 
@@ -45,6 +51,18 @@ module ForemanTasks
         success, failed = task.sub_tasks.partition { |sub_task| sub_task.result == 'success' }
         _(success.count).must_equal 4
         _(failed.count).must_equal 1
+      end
+
+      specify "it handles keyword arguments as indifferent hashes when they're being flattened" do
+        Target.expects(:unscoped).returns(Target)
+        Target.expects(:where).with(:id => targets.map(&:id)).returns(targets)
+
+        triggered = ForemanTasks.trigger(ParentAction, KwArgChildAction, targets, kw: 7)
+        task = ForemanTasks::Task.where(:external_id => triggered.id).first
+        wait_for { task.reload.state == 'stopped' }
+        task = task.sub_tasks.first
+        _(task.input[:kw_string]).must_equal 7
+        _(task.input[:kw_symbol]).must_equal 7
       end
     end
   end

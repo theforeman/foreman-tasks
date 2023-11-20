@@ -50,8 +50,11 @@ module Actions
 
       missing = Array.new((current_batch - targets.map(&:id)).count) { nil }
 
+      args = input[:args]
+      args += [input[:kwargs]] unless input[:kwargs].empty?
+
       (targets + missing).map do |target|
-        trigger(action_class, target, *input[:args], **input[:kwargs])
+        trigger(action_class, target, *args)
       end
     end
 
