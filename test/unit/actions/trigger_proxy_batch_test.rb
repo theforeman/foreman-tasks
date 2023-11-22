@@ -32,6 +32,13 @@ module ForemanTasks
           triggered.output[:planned_count] = ((total_count - 1) / batch_size) * batch_size
           run_action(triggered)
         end
+
+        it "finishes after the last batch even if the counts don't match" do
+          Actions::TriggerProxyBatch.any_instance.expects(:trigger_remote_tasks_batch).once
+          triggered.output[:planned_count] = 0
+          action = run_action(triggered, Actions::TriggerProxyBatch::TriggerLastBatch)
+          _(action.state).must_equal :success
+        end
       end
 
       describe '#trigger_remote_tasks_batch' do
