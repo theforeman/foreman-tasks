@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_tasks 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-01 11:07+0100\n"
-"PO-Revision-Date: 2023-11-01 11:07+0100\n"
+"POT-Creation-Date: 2023-11-28 22:09+0100\n"
+"PO-Revision-Date: 2023-11-28 22:09+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -165,8 +165,7 @@ msgstr ""
 #: ../db/seeds.d/30-notification_blueprints.rb:54
 #: ../lib/foreman_tasks/engine.rb:25 ../lib/foreman_tasks/engine.rb:54
 #: ../webpack/ForemanTasks/Components/TasksTable/SubTasksPage.js:10
-#: ../webpack/ForemanTasks/Components/TasksTable/TasksIndexPage.js:7
-#: ../webpack/ForemanTasks/Components/TasksTable/TasksTablePage.js:150
+#: ../webpack/ForemanTasks/Components/TasksTable/TasksTablePage.js:151
 msgid "Tasks"
 msgstr ""
 
@@ -317,11 +316,11 @@ msgstr ""
 msgid "Bulk action"
 msgstr ""
 
-#: ../app/lib/actions/bulk_action.rb:59
+#: ../app/lib/actions/bulk_action.rb:62
 msgid "Empty bulk action"
 msgstr ""
 
-#: ../app/lib/actions/bulk_action.rb:61
+#: ../app/lib/actions/bulk_action.rb:64
 msgid "The targets are of different types"
 msgstr ""
 
