@@ -1,68 +1,19 @@
-name: Ruby Testing
-on: [pull_request]
-env:
-  RAILS_ENV: test
-  DATABASE_URL: postgresql://postgres:@localhost/test
-  DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: true
-  BUNDLE_WITHOUT: "journald:development:console:mysql2:sqlite:libvirt"
+name: CI
+
+on: pull_request
+
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.ref_name }}-${{ github.workflow }}
   cancel-in-progress: true
+
 jobs:
   rubocop:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 2.7
-          bundler-cache: true
-      - name: Run rubocop
-        run: bundle exec rubocop
-  test_ruby:
-    runs-on: ubuntu-latest
+    name: Rubocop
+    uses: theforeman/actions/.github/workflows/rubocop.yml@v0
+
+  test:
+    name: Ruby
     needs: rubocop
-    timeout-minutes: 15
-    services:
-      postgres:
-        image: postgres:12.1
-        ports: ['5432:5432']
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-    strategy:
-      fail-fast: false
-      matrix:
-        foreman-core-branch: [develop]
-        ruby-version: [2.7]
-        node-version: [12]
-    steps:
-      - run: sudo apt-get update
-      - run: sudo apt-get install build-essential libcurl4-openssl-dev zlib1g-dev libpq-dev
-      - uses: actions/checkout@v2
-        with:
-          repository: theforeman/foreman
-          ref: ${{ matrix.foreman-core-branch }}
-      - uses: actions/checkout@v2
-        with:
-          path: foreman-tasks
-      - name: Setup Plugin in Foreman
-        run: |
-          echo "gem 'foreman-tasks', path: './foreman-tasks'" > bundler.d/foreman-tasks.local.rb
-          echo "gem 'sqlite3'" >> bundler.d/foreman-tasks.local.rb
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby-version }}
-          bundler-cache: true
-      - name: Setup Node
-        uses: actions/setup-node@v1
-        with:
-          node-version:  ${{ matrix.node-version }}
-      - name: Prepare test env
-        run: |
-          bundle exec rake db:create
-          bundle exec rake db:migrate
-      - name: Run plugin tests
-        run: |
-          bundle exec rake test:foreman_tasks
-          bundle exec rake test TEST="test/unit/foreman/access_permissions_test.rb"
+    uses: theforeman/actions/.github/workflows/foreman_plugin.yml@v0
+    with:
+      plugin: foreman-tasks
