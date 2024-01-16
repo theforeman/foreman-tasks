@@ -11,12 +11,12 @@ module ForemanTasks
       [:subnet, :fallback, :global]
     end
 
-    def available_proxies(*_args)
+    def available_proxies(*_args, **_kwargs)
       raise NotImplementedError
     end
 
-    def determine_proxy(*args)
-      available_proxies = self.available_proxies(*args)
+    def determine_proxy(*args, **kwargs)
+      available_proxies = self.available_proxies(*args, **kwargs)
       return :not_defined if available_proxies.empty? || available_proxies.values.all?(&:empty?)
       proxy = nil
 
