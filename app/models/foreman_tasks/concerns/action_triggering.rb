@@ -23,12 +23,12 @@ module ForemanTasks
       # @override
       def destroy_action; end
 
-      def save(*args)
-        dynflow_task_wrap(:save) { super(*args) }
+      def save(...)
+        dynflow_task_wrap(:save) { super(...) }
       end
 
-      def save!(*args)
-        dynflow_task_wrap(:save) { super(*args) }
+      def save!(...)
+        dynflow_task_wrap(:save) { super(...) }
       end
 
       def destroy
@@ -37,14 +37,14 @@ module ForemanTasks
 
       # In order to use host.<attribute>_changed?, we must assign_attributes to
       # the host record for these update and update! methods.
-      def update(*args)
-        assign_attributes(*args)
+      def update(...)
+        assign_attributes(...)
         dynflow_task_wrap(:save) { save }
       end
       alias update_attributes update
 
-      def update!(*args)
-        assign_attributes(*args)
+      def update!(...)
+        assign_attributes(...)
         dynflow_task_wrap(:save) { save! }
       end
       alias update_attributes! update!
@@ -88,9 +88,9 @@ module ForemanTasks
       # We do it separately from the execution phase, because the transaction
       # of planning phase is expected to be commited when execution occurs. Also
       # we want to be able to rollback the whole db operation when planning fails.
-      def plan_action(action_class, *args)
+      def plan_action(action_class, *args, **kwargs)
         return if ForemanTasks.dynflow.config.disable_active_record_actions
-        @execution_plan = ::ForemanTasks.dynflow.world.plan(action_class, *args)
+        @execution_plan = ::ForemanTasks.dynflow.world.plan(action_class, *args, **kwargs)
         raise @execution_plan.errors.first if @execution_plan.error?
       end
 
