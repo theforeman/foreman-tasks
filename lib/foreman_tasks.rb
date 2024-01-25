@@ -16,14 +16,14 @@ module ForemanTasks
     @dynflow ||= ForemanTasks::Dynflow.new(nil, ForemanTasks::Dynflow::Configuration.new)
   end
 
-  def self.trigger(action, *args, &block)
-    dynflow.world.trigger action, *args, &block
+  def self.trigger(action, *args, **kwargs, &block)
+    dynflow.world.trigger action, *args, **kwargs, &block
   end
 
-  def self.trigger_task(async, action, *args, &block)
+  def self.trigger_task(async, action, *args, **kwargs, &block)
     rails_safe_trigger_task do
       Match! async, true, false
-      match trigger(action, *args, &block),
+      match trigger(action, *args, **kwargs, &block),
             (on ::Dynflow::World::PlaningFailed.call(error: ~any) do |error|
               raise error
             end),
@@ -47,18 +47,18 @@ module ForemanTasks
     end
   end
 
-  def self.async_task(action, *args, &block)
-    trigger_task true, action, *args, &block
+  def self.async_task(action, *args, **kwargs, &block)
+    trigger_task true, action, *args, **kwargs, &block
   end
 
-  def self.sync_task(action, *args, &block)
-    trigger_task(false, action, *args, &block).tap do |task|
+  def self.sync_task(action, *args, **kwargs, &block)
+    trigger_task(false, action, *args, **kwargs, &block).tap do |task|
       raise TaskError, task if task.execution_plan.error? || task.execution_plan.result == :warning
     end
   end
 
-  def self.delay(action, delay_options, *args)
-    result = dynflow.world.delay action, delay_options, *args
+  def self.delay(action, delay_options, *args, **kwargs)
+    result = dynflow.world.delay action, delay_options, *args, **kwargs
     ForemanTasks::Task::DynflowTask.where(:external_id => result.id).first!
   end
 
