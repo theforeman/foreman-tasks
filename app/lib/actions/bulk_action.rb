@@ -9,7 +9,8 @@ module Actions
     #   Arguments that all the targets share
     def plan(action_class, targets, *args, concurrency_limit: nil, **kwargs)
       check_targets!(targets)
-      limit_concurrency_level!(concurrency_limit) if concurrency_limit
+      extracted_concurrency_limit = extract_concurrency_limit(args, concurrency_limit)
+      limit_concurrency_level!(extracted_concurrency_limit) if extracted_concurrency_limit
       plan_self(:action_class => action_class.to_s,
                 :target_ids => targets.map(&:id),
                 :target_class => targets.first.class.to_s,
@@ -71,6 +72,12 @@ module Actions
 
     def total_count
       input[:target_ids].count
+    end
+
+    private
+
+    def extract_concurrency_limit(args = [], limit = nil)
+      args.find { |arg| arg.is_a?(Hash) && arg.key?(:concurrency_limit) }&.fetch(:concurrency_limit) || limit
     end
   end
 end

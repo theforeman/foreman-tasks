@@ -23,12 +23,12 @@ module ForemanTasks
       # @override
       def destroy_action; end
 
-      def save(*args)
-        dynflow_task_wrap(:save) { super(*args) }
+      def save(...)
+        dynflow_task_wrap(:save) { super(...) }
       end
 
-      def save!(*args)
-        dynflow_task_wrap(:save) { super(*args) }
+      def save!(...)
+        dynflow_task_wrap(:save) { super(...) }
       end
 
       def destroy
@@ -37,14 +37,14 @@ module ForemanTasks
 
       # In order to use host.<attribute>_changed?, we must assign_attributes to
       # the host record for these update and update! methods.
-      def update(*args)
-        assign_attributes(*args)
+      def update(...)
+        assign_attributes(...)
         dynflow_task_wrap(:save) { save }
       end
       alias update_attributes update
 
-      def update!(*args)
-        assign_attributes(*args)
+      def update!(...)
+        assign_attributes(...)
         dynflow_task_wrap(:save) { save! }
       end
       alias update_attributes! update!

@@ -10,7 +10,7 @@ AllCops:
     - 'node_modules/**/*'
     - 'locale/*'
     - 'vendor/**/*'
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 2.7
 
 Lint/ShadowingOuterLocalVariable:
   Enabled: false
