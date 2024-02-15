@@ -48,15 +48,15 @@ module ForemanTasks
       end
 
       specify 'the sub-plan stores the information about its parent' do
-        _(task.sub_tasks.size).must_equal 1
-        _(task.sub_tasks.first.label).must_equal ChildAction.name
+        assert_equal 1, task.sub_tasks.size
+        assert_equal ChildAction.name, task.sub_tasks.first.label
       end
 
       specify "the locks of the sub-plan don't colide with the locks of its parent" do
         child_task = task.sub_tasks.first
-        assert_not(child_task.locks.any?, "the lock is ensured by the parent")
+        refute child_task.locks.any?, "the lock is ensured by the parent"
         found = ForemanTasks::Link.for_resource(user).where(:task_id => child_task.id).any?
-        assert(found, "the action is linked properly")
+        assert found, "the action is linked properly"
       end
     end
   end

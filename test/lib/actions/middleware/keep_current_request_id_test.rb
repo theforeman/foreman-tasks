@@ -29,21 +29,21 @@ module ForemanTasks
       it 'stores the id on planning' do
         ::Logging.mdc['request'] = expected_id
         action = create_and_plan_action(DummyAction)
-        _(action.input[:current_request_id]).must_equal expected_id
+        assert_equal expected_id, action.input[:current_request_id]
       end
 
       it 'restores the id for run' do
         ::Logging.mdc['request'] = expected_id
         action = create_and_plan_action(DummyAction, true)
         action = run_action action
-        _(action.output[:run_result]).must_equal expected_id
+        assert_equal expected_id, action.output[:run_result]
       end
 
       it 'restores the id for finalize' do
         ::Logging.mdc['request'] = expected_id
         action = create_and_plan_action(DummyAction, true)
         action = finalize_action(run_action(action))
-        _(action.output[:finalize_result]).must_equal expected_id
+        assert_equal expected_id, action.output[:finalize_result]
       end
     end
   end

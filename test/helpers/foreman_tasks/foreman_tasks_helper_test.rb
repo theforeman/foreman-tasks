@@ -10,9 +10,9 @@ module ForemanTasks
       it 'prepares items for index correctly' do
         stubs(:action_name).returns('index')
         items = breadcrumb_items
-        _(items.count).must_equal 1
-        _(items.first[:caption]).must_equal 'Tasks'
-        _(items.first[:url]).must_be_nil
+        assert_equal 1, items.count
+        assert_equal 'Tasks', items.first[:caption]
+        assert_nil items.first[:url]
       end
 
       it 'prepares items for show correctly' do
@@ -20,8 +20,8 @@ module ForemanTasks
         @task.action = 'A task'
         stubs(:action_name).returns('show')
         items = breadcrumb_items
-        _(items.map { |i| i[:caption] }).must_equal ['Tasks', 'A task']
-        _(items.last[:url]).must_be_nil
+        assert_equal ['Tasks', 'A task'], items.map { |i| i[:caption] }
+        assert_nil items.last[:url]
       end
 
       it 'prepares items for sub tasks correctly' do
@@ -31,8 +31,8 @@ module ForemanTasks
         @task.action = 'A task'
         stubs(:action_name).returns('sub_tasks')
         items = breadcrumb_items
-        _(items.map { |i| i[:caption] }).must_equal ['Tasks', 'A task', 'Sub tasks']
-        _(items.last[:url]).must_be_nil
+        assert_equal ['Tasks', 'A task', 'Sub tasks'], items.map { |i| i[:caption] }
+        assert_nil items.last[:url]
       end
     end
   end

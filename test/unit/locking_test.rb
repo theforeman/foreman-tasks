@@ -32,14 +32,14 @@ module ForemanTasks
 
         it 'can lock a resource for a single task only once' do
           Lock.lock!(resource, task1)
-          _(Lock.for_resource(resource).count).must_equal 1
+          assert_equal 1, Lock.for_resource(resource).count
           Lock.lock!(resource, task1)
-          _(Lock.for_resource(resource).count).must_equal 1
+          assert_equal 1, Lock.for_resource(resource).count
         end
 
         it 'cannot lock a resource for multiple tasks' do
           lock = Lock.lock!(resource, task1)
-          _(Lock.colliding_locks(resource, task2)).must_equal [lock]
+          assert_equal [lock], Lock.colliding_locks(resource, task2)
           assert_raises Lock::LockConflict do
             Lock.lock!(resource, task2)
           end
@@ -52,13 +52,13 @@ module ForemanTasks
           exception = assert_raises Lock::LockConflict do
             Lock.lock!(resource, task2)
           end
-          _(exception.message).must_match(/#{lock.task_id}/)
+          assert_match(/#{lock.task_id}/, exception.message)
         end
 
         it 'creates a link when creating a lock for a resource' do
           Lock.lock!(resource, task1)
           link = Link.for_resource(resource).first
-          _(link.task_id).must_equal task1.id
+          assert_equal task1.id, link.task_id
         end
       end
 
@@ -69,15 +69,15 @@ module ForemanTasks
 
         it 'can link a resource for a single task only once' do
           Link.link!(resource, task1)
-          _(Link.for_resource(resource).count).must_equal 1
+          assert_equal 1, Link.for_resource(resource).count
           Link.link!(resource, task1)
-          _(Link.for_resource(resource).count).must_equal 1
+          assert_equal 1, Link.for_resource(resource).count
         end
 
         it 'can link a resource to multiple tasks' do
           Link.link!(resource, task1)
           Link.link!(resource, task2)
-          _(Link.for_resource(resource).count).must_equal 2
+          assert_equal 2, Link.for_resource(resource).count
         end
       end
     end

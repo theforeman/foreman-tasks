@@ -17,14 +17,14 @@ module ForemanTasks
           get :index
           assert_response :success
           data = JSON.parse(response.body)
-          _(data['results'].count).must_equal 5
+          assert_equal 5, data['results'].count
         end
 
         it 'supports searching' do
           get :index, params: { :search => 'label = Actions::User::Create' }
           assert_response :success
           data = JSON.parse(response.body)
-          _(data['results'].count).must_equal 5
+          assert_equal 5, data['results'].count
         end
 
         it 'renders task ids when searching by resource id' do
@@ -33,15 +33,15 @@ module ForemanTasks
           get :index, params: { :search => "label = Actions::Katello::Product::Create and resource_id = 1" }
           assert_response :success
           data = JSON.parse(response.body)
-          _(data['results'].first["id"]).must_equal task.id
+          assert_equal task.id, data['results'].first["id"]
         end
 
         it 'supports ordering by duration' do
           get :index, params: { :sort_by => 'duration' }
           assert_response :success
           data = JSON.parse(response.body)
-          _(data.dig('sort', 'by')).must_equal 'duration'
-          _(data['results'].count).must_equal 5
+          assert_equal 'duration', data.dig('sort', 'by')
+          assert_equal 5, data['results'].count
         end
 
         context 'with current taxonomies' do
@@ -53,9 +53,9 @@ module ForemanTasks
             get :index, params: { organization_id: org1.id }
             assert_response :success
             results = JSON.parse(response.body)['results']
-            _(results.count).must_equal 6
-            _(results.map { |r| r['id'] }).must_include org1_task.id
-            _(results.map { |r| r['id'] }).wont_include org2_task.id
+            assert_equal 6, results.count
+            assert_includes results.map { |r| r['id'] }, org1_task.id
+            refute_includes results.map { |r| r['id'] }, org2_task.id
           end
         end
       end
@@ -66,7 +66,7 @@ module ForemanTasks
           post :bulk_search, params: { :searches => [{ :type => "task", :task_id => task.id, :search_id => "1" }] }
           assert_response :success
           data = JSON.parse(response.body)
-          _(data[0]['results'][0]['id']).must_equal task.id
+          assert_equal task.id, data[0]['results'][0]['id']
         end
 
         it 'can search for a specific resource' do
@@ -77,7 +77,7 @@ module ForemanTasks
 
           assert_response :success
           data = JSON.parse(response.body)
-          _(data[0]['results'][0]['id']).must_equal task.id
+          assert_equal task.id, data[0]['results'][0]['id']
         end
       end
 
@@ -108,7 +108,7 @@ module ForemanTasks
           get :show, params: { id: task.id }, session: set_session_user
           assert_response :success
           data = JSON.parse(response.body)
-          _(data['duration']).must_equal task.duration.in_seconds.to_s
+          assert_equal task.duration.in_seconds.to_s, data['duration']
         end
       end
 
@@ -118,7 +118,7 @@ module ForemanTasks
           get :index, session: set_session_user
           assert_response :success
           data = JSON.parse(response.body)
-          _(data['results'][0]['duration']).must_equal task.duration.in_seconds.to_s
+          assert_equal task.duration.in_seconds.to_s, data['results'][0]['duration']
         end
       end
 
@@ -176,30 +176,30 @@ module ForemanTasks
 
       describe 'POST /tasks/callback' do
         it 'passes the data to the corresponding action' do
-          Support::DummyProxyAction.reset
-          ForemanTasks::RemoteTask.any_instance
-                                  .expects(:proxy)
-                                  .returns(Support::DummyProxyAction.proxy)
+            Support::DummyProxyAction.reset
+            ForemanTasks::RemoteTask.any_instance
+                        .expects(:proxy)
+                        .returns(Support::DummyProxyAction.proxy)
 
-          triggered = ForemanTasks.trigger(Support::DummyProxyAction,
-                                           Support::DummyProxyAction.proxy,
-                                           'Proxy::DummyAction',
-                                           'foo' => 'bar')
-          Support::DummyProxyAction.proxy.task_triggered.wait(5)
-          wait_for { ForemanTasks::Task.find_by(external_id: triggered.id).state == 'running' }
+            triggered = ForemanTasks.trigger(Support::DummyProxyAction,
+                             Support::DummyProxyAction.proxy,
+                             'Proxy::DummyAction',
+                             'foo' => 'bar')
+            Support::DummyProxyAction.proxy.task_triggered.wait(5)
+            wait_for { ForemanTasks::Task.find_by(external_id: triggered.id).state == 'running' }
 
-          task = ForemanTasks::Task.where(:external_id => triggered.id).first
-          _(task.state).must_equal 'running'
-          _(task.result).must_equal 'pending'
+            task = ForemanTasks::Task.where(:external_id => triggered.id).first
+            assert_equal 'running', task.state
+            assert_equal 'pending', task.result
 
-          callback = Support::DummyProxyAction.proxy.log[:trigger_task].first[1].first[1][:action_input][:callback]
-          post :callback, params: { 'callback' => callback, 'data' => { 'result' => 'success' } }
-          triggered.finished.wait(5)
+            callback = Support::DummyProxyAction.proxy.log[:trigger_task].first[1].first[1][:action_input][:callback]
+            post :callback, params: { 'callback' => callback, 'data' => { 'result' => 'success' } }
+            triggered.finished.wait(5)
 
-          task.reload
-          _(task.state).must_equal 'stopped'
-          _(task.result).must_equal 'success'
-          _(task.main_action.output['proxy_output']).must_equal('result' => 'success')
+            task.reload
+            assert_equal 'stopped', task.state
+            assert_equal 'success', task.result
+            assert_equal({ 'result' => 'success' }, task.main_action.output['proxy_output'])
         end
       end
     end
