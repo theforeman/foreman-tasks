@@ -48,17 +48,17 @@ class RecurringLogicsTest < ActiveSupport::TestCase
       expected_result_daily = { :minutes => minutes, :hours => hours }
       expected_result_weekly = { :minutes => minutes, :hours => hours, :days_of_week => '1,4,6' }
       expected_result_monthly = { :minutes => minutes, :hours => hours, :days => days }
-      assert_equal expected_result_hourly, ForemanTasks::RecurringLogic.cronline_hash(:hourly,  time_hash, days, days_of_week)
-      assert_equal expected_result_daily, ForemanTasks::RecurringLogic.cronline_hash(:daily,   time_hash, days, days_of_week)
-      assert_equal expected_result_weekly, ForemanTasks::RecurringLogic.cronline_hash(:weekly,  time_hash, days, days_of_week)
+      assert_equal expected_result_hourly, ForemanTasks::RecurringLogic.cronline_hash(:hourly, time_hash, days, days_of_week)
+      assert_equal expected_result_daily, ForemanTasks::RecurringLogic.cronline_hash(:daily, time_hash, days, days_of_week)
+      assert_equal expected_result_weekly, ForemanTasks::RecurringLogic.cronline_hash(:weekly, time_hash, days, days_of_week)
       assert_equal expected_result_monthly, ForemanTasks::RecurringLogic.cronline_hash(:monthly, time_hash, days, days_of_week)
     end
 
     it 'validates cronline correctly' do
       recurring_logic = ::ForemanTasks::RecurringLogic.new_from_cronline('* * * * abc')
-      refute recurring_logic.valid_cronline?
+      assert_not recurring_logic.valid_cronline?
       recurring_logic = ::ForemanTasks::RecurringLogic.new_from_cronline(nil)
-      refute recurring_logic.valid_cronline?
+      assert_not recurring_logic.valid_cronline?
       recurring_logic = ::ForemanTasks::RecurringLogic.new_from_cronline('* * * * *')
       assert recurring_logic.valid_cronline?
       recurring_logic = ::ForemanTasks::RecurringLogic.new_from_cronline('0 22 * * mon-fri')
@@ -71,15 +71,15 @@ class RecurringLogicsTest < ActiveSupport::TestCase
       assert parser.can_continue?
       parser.max_iteration = 5
       parser.expects(:iteration).twice.returns(5)
-      refute parser.can_continue?
+      assert_not parser.can_continue?
       parser.max_iteration = nil
       time = Time.utc(2015, 9, 29, 15, 0)
       parser.end_time = time
-      refute parser.can_continue?(time)
+      assert_not parser.can_continue?(time)
       parser.end_time = time + 120
       assert parser.can_continue?(time)
       parser.max_iteration = 5
-      refute parser.can_continue?(time)
+      assert_not parser.can_continue?(time)
     end
 
     it 'generates delay options' do
@@ -185,17 +185,17 @@ class RecurringLogicsTest < ActiveSupport::TestCase
 
       it 'is invalid when end time in past' do
         logic.end_time = (Time.zone.now - 120)
-        refute logic.valid?
+        assert_not logic.valid?
       end
 
       it 'is invalid when iteration limit < 1' do
         logic.max_iteration = 0
-        refute logic.valid?
+        assert_not logic.valid?
       end
 
       it 'is valid when in active state' do
         logic.end_time = (Time.zone.now - 120)
-        refute logic.valid?
+        assert_not logic.valid?
         logic.state = 'active'
         assert logic.valid?
       end

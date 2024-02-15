@@ -98,7 +98,7 @@ module ForemanTasks
 
       it 'saves the data comming from the proxy to the output and finishes' do
         action = run_action(@action, ::Actions::ProxyAction::CallbackData.new('result' => 'success'))
-        assert_equal({'result' => 'success'}, action.output[:proxy_output])
+        assert_equal({ 'result' => 'success' }, action.output[:proxy_output])
       end
 
       it 'handles connection errors' do
@@ -141,7 +141,7 @@ module ForemanTasks
         action.world.stubs(:persistence).returns(persistence)
         action.wipe_secrets!(nil)
 
-        refute action.input.key?(:secrets)
+        assert_not action.input.key?(:secrets)
       end
     end
   end

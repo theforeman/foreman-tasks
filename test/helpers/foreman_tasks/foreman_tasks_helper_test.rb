@@ -20,7 +20,7 @@ module ForemanTasks
         @task.action = 'A task'
         stubs(:action_name).returns('show')
         items = breadcrumb_items
-        assert_equal ['Tasks', 'A task'], items.map { |i| i[:caption] }
+        assert_equal(['Tasks', 'A task'], items.map { |i| i[:caption] })
         assert_nil items.last[:url]
       end
 
@@ -31,7 +31,7 @@ module ForemanTasks
         @task.action = 'A task'
         stubs(:action_name).returns('sub_tasks')
         items = breadcrumb_items
-        assert_equal ['Tasks', 'A task', 'Sub tasks'], items.map { |i| i[:caption] }
+        assert_equal(['Tasks', 'A task', 'Sub tasks'], items.map { |i| i[:caption] })
         assert_nil items.last[:url]
       end
     end

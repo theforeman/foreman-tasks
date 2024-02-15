@@ -26,10 +26,10 @@ class TasksTest < ActiveSupport::TestCase
       assert_equal tasks_to_keep.map(&:id).sort, ForemanTasks::Task.where(id: tasks_to_keep).order(:id).map(&:id)
 
       assert_equal 0, ForemanTasks.dynflow.world.persistence
-                  .find_execution_plans(filters: { 'uuid' => tasks_to_delete.map(&:external_id) }).size
+                                  .find_execution_plans(filters: { 'uuid' => tasks_to_delete.map(&:external_id) }).size
 
       assert_equal tasks_to_keep.size, ForemanTasks.dynflow.world.persistence
-                  .find_execution_plans(filters: { 'uuid' => tasks_to_keep.map(&:external_id) }).size
+                                                   .find_execution_plans(filters: { 'uuid' => tasks_to_keep.map(&:external_id) }).size
     end
 
     describe "#orphaned_dynflow_tasks" do
@@ -71,7 +71,7 @@ class TasksTest < ActiveSupport::TestCase
       assert_equal tasks_to_keep, ForemanTasks::Task.where(id: tasks_to_keep)
 
       assert_nil ForemanTasks::Link.find_by(id: link_to_delete.id)
-      refute_nil ForemanTasks::Link.find_by(id: link_to_keep.id)
+      assert_not_nil ForemanTasks::Link.find_by(id: link_to_keep.id)
     end
 
     it 'supports passing empty filter (just delete all)' do

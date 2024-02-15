@@ -55,7 +55,7 @@ module ForemanTasks
             results = JSON.parse(response.body)['results']
             assert_equal 6, results.count
             assert_includes results.map { |r| r['id'] }, org1_task.id
-            refute_includes results.map { |r| r['id'] }, org2_task.id
+            assert_not_includes results.map { |r| r['id'] }, org2_task.id
           end
         end
       end
@@ -176,30 +176,30 @@ module ForemanTasks
 
       describe 'POST /tasks/callback' do
         it 'passes the data to the corresponding action' do
-            Support::DummyProxyAction.reset
-            ForemanTasks::RemoteTask.any_instance
-                        .expects(:proxy)
-                        .returns(Support::DummyProxyAction.proxy)
+          Support::DummyProxyAction.reset
+          ForemanTasks::RemoteTask.any_instance
+                                  .expects(:proxy)
+                                  .returns(Support::DummyProxyAction.proxy)
 
-            triggered = ForemanTasks.trigger(Support::DummyProxyAction,
-                             Support::DummyProxyAction.proxy,
-                             'Proxy::DummyAction',
-                             'foo' => 'bar')
-            Support::DummyProxyAction.proxy.task_triggered.wait(5)
-            wait_for { ForemanTasks::Task.find_by(external_id: triggered.id).state == 'running' }
+          triggered = ForemanTasks.trigger(Support::DummyProxyAction,
+                                           Support::DummyProxyAction.proxy,
+                                           'Proxy::DummyAction',
+                                           'foo' => 'bar')
+          Support::DummyProxyAction.proxy.task_triggered.wait(5)
+          wait_for { ForemanTasks::Task.find_by(external_id: triggered.id).state == 'running' }
 
-            task = ForemanTasks::Task.where(:external_id => triggered.id).first
-            assert_equal 'running', task.state
-            assert_equal 'pending', task.result
+          task = ForemanTasks::Task.where(:external_id => triggered.id).first
+          assert_equal 'running', task.state
+          assert_equal 'pending', task.result
 
-            callback = Support::DummyProxyAction.proxy.log[:trigger_task].first[1].first[1][:action_input][:callback]
-            post :callback, params: { 'callback' => callback, 'data' => { 'result' => 'success' } }
-            triggered.finished.wait(5)
+          callback = Support::DummyProxyAction.proxy.log[:trigger_task].first[1].first[1][:action_input][:callback]
+          post :callback, params: { 'callback' => callback, 'data' => { 'result' => 'success' } }
+          triggered.finished.wait(5)
 
-            task.reload
-            assert_equal 'stopped', task.state
-            assert_equal 'success', task.result
-            assert_equal({ 'result' => 'success' }, task.main_action.output['proxy_output'])
+          task.reload
+          assert_equal 'stopped', task.state
+          assert_equal 'success', task.result
+          assert_equal({ 'result' => 'success' }, task.main_action.output['proxy_output'])
         end
       end
     end

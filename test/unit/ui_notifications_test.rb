@@ -24,13 +24,13 @@ module ForemanTasks
         notification = user_notifications(admin_user).first
         assert_equal "There is 1 paused task in the system that need attention", notification.message
         links = notification.actions['links']
-        assert_includes(links, {'href' => '/foreman_tasks/tasks?search=state%3Dpaused',
-                                'title' => 'List of tasks'})
-        assert_includes(links, {'name' => 'troubleshooting',
+        assert_includes(links, { 'href' => '/foreman_tasks/tasks?search=state%3Dpaused',
+                                'title' => 'List of tasks' })
+        assert_includes(links, { 'name' => 'troubleshooting',
                                 'title' => 'Troubleshooting Documentation',
                                 'description' => 'See %{link} for more details on how to resolve the issue',
                                 'href' => "https://theforeman.org/manuals/#{SETTINGS[:version].short}/tasks_troubleshooting.html#",
-                                'external' => true})
+                                'external' => true })
       end
 
       it 'aggregates the notification when multiple tasks get paused' do

@@ -54,7 +54,7 @@ module ForemanTasks
 
       specify "the locks of the sub-plan don't colide with the locks of its parent" do
         child_task = task.sub_tasks.first
-        refute child_task.locks.any?, "the lock is ensured by the parent"
+        assert_not child_task.locks.any?, "the lock is ensured by the parent"
         found = ForemanTasks::Link.for_resource(user).where(:task_id => child_task.id).any?
         assert found, "the action is linked properly"
       end

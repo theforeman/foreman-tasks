@@ -10,14 +10,14 @@ class TriggeringTest < ActiveSupport::TestCase
       triggering = FactoryBot.build(:triggering, :future)
       assert_predicate(triggering, :valid?)
       triggering.start_before = triggering.start_at - 120
-      refute_predicate(triggering, :valid?)
+      assert_not_predicate(triggering, :valid?)
     end
 
     it 'is invalid when recurring logic is invalid' do
       triggering = FactoryBot.build(:triggering, :recurring)
       assert_predicate(triggering, :valid?)
       triggering.recurring_logic.stubs(:valid?).returns(false)
-      refute_predicate(triggering, :valid?)
+      assert_not_predicate(triggering, :valid?)
     end
 
     it 'is valid when recurring logic has purpose' do
@@ -30,7 +30,7 @@ class TriggeringTest < ActiveSupport::TestCase
       FactoryBot.create(:recurring_logic, :purpose => 'test', :state => 'active')
       logic = FactoryBot.build(:recurring_logic, :purpose => 'test', :state => 'active')
       triggering = FactoryBot.build(:triggering, :recurring_logic => logic, :mode => :recurring, :input_type => :cronline, :cronline => '* * * * *')
-      refute_predicate(triggering, :valid?)
+      assert_not_predicate(triggering, :valid?)
     end
 
     it 'is valid when recurring logic with given purpose exists and is not active or disabled' do
