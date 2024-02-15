@@ -50,7 +50,7 @@ module ForemanTasks
       end
 
       specify 'it triggers the repeat when task is cancelled' do
-        assert recurring_task.delayed?
+        assert_predicate recurring_task, :delayed?
         assert_equal 1, recurring_logic.tasks.count
         cancelled_events = recurring_task.execution_plan.cancel
         cancelled_events.each(&:wait!)

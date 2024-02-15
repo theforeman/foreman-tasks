@@ -284,10 +284,10 @@ class TasksTest < ActiveSupport::TestCase
     let(:task) { FactoryBot.create(:some_task) }
 
     it 'can indicate it is delayed' do
-      assert_not task.delayed?
+      assert_not_predicate task, :delayed?
       assert_equal 'Immediate', task.execution_type
       task.start_at = Time.now.utc + 100
-      assert task.delayed?
+      assert_predicate task, :delayed?
       assert_equal 'Delayed', task.execution_type
     end
   end

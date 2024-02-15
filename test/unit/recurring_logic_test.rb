@@ -180,24 +180,24 @@ class RecurringLogicsTest < ActiveSupport::TestCase
       let(:logic) { FactoryBot.build(:recurring_logic) }
 
       it 'is valid by default' do
-        assert logic.valid?
+        assert_predicate logic, :valid?
       end
 
       it 'is invalid when end time in past' do
         logic.end_time = (Time.zone.now - 120)
-        assert_not logic.valid?
+        assert_not_predicate logic, :valid?
       end
 
       it 'is invalid when iteration limit < 1' do
         logic.max_iteration = 0
-        assert_not logic.valid?
+        assert_not_predicate logic, :valid?
       end
 
       it 'is valid when in active state' do
         logic.end_time = (Time.zone.now - 120)
-        assert_not logic.valid?
+        assert_not_predicate logic, :valid?
         logic.state = 'active'
-        assert logic.valid?
+        assert_predicate logic, :valid?
       end
     end
   end
