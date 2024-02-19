@@ -46,17 +46,17 @@ module ForemanTasks
                   'proxy_action_name' => 'Proxy::DummyAction',
                   'callback' => { 'task_id' => Support::DummyProxyAction.proxy.uuid, 'step_id' => @run_step_id } } }
           expected_call = ['support', { @action.execution_plan_id => action_input }]
-          _(proxy_call).must_equal(expected_call)
+          assert_equal expected_call, proxy_call
         end
 
         describe 'with batch triggering' do
           let(:batch_triggering) { true }
           it 'create remote tasks for batch triggering' do
             task = RemoteTask.first
-            _(task.state).must_equal 'new'
-            _(task.execution_plan_id).must_equal @action.execution_plan_id
-            _(task.operation).must_equal 'support'
-            _(task.remote_task_id).must_be :nil?
+            assert_equal 'new', task.state
+            assert_equal @action.execution_plan_id, task.execution_plan_id
+            assert_equal 'support', task.operation
+            assert_nil task.remote_task_id
           end
         end
       end
@@ -65,22 +65,22 @@ module ForemanTasks
         it "doesn't trigger the corresponding action again on the proxy" do
           action = run_action(@action)
 
-          _(action.state).must_equal :suspended
+          assert_equal :suspended, action.state
 
-          _(Support::DummyProxyAction.proxy.log[:trigger_task].size).must_equal 1
+          assert_equal 1, Support::DummyProxyAction.proxy.log[:trigger_task].size
         end
       end
 
       it 'supports skipping' do
         action = run_action(@action, ::Dynflow::Action::Skip)
-        _(action.state).must_equal :success
+        assert_equal :success, action.state
       end
 
       describe 'cancel' do
         it 'sends the cancel event to the proxy when the cancel event is sent for the first time' do
           action = run_action(@action, ::Dynflow::Action::Cancellable::Cancel)
-          _(Support::DummyProxyAction.proxy.log[:cancel_task].first).must_equal [action.execution_plan_id]
-          _(action.state).must_equal :suspended
+          assert_equal [action.execution_plan_id], Support::DummyProxyAction.proxy.log[:cancel_task].first
+          assert_equal :suspended, action.state
         end
 
         it 'cancels the action immediatelly when cancel event is sent for the second time' do
@@ -91,14 +91,14 @@ module ForemanTasks
                     e
                   end
 
-          _(Support::DummyProxyAction.proxy.log[:cancel_task].size).must_equal 1
-          _(error.message).must_match 'Cancel enforced'
+          assert_equal 1, Support::DummyProxyAction.proxy.log[:cancel_task].size
+          assert_match 'Cancel enforced', error.message
         end
       end
 
       it 'saves the data comming from the proxy to the output and finishes' do
         action = run_action(@action, ::Actions::ProxyAction::CallbackData.new('result' => 'success'))
-        _(action.output[:proxy_output]).must_equal('result' => 'success')
+        assert_equal({ 'result' => 'success' }, action.output[:proxy_output])
       end
 
       it 'handles connection errors' do
@@ -112,12 +112,12 @@ module ForemanTasks
           end
         end
         action = run_stubbed_action.call action
-        _(action.state).must_equal :suspended
-        _(action.world.clock.pending_pings.length).must_equal 1
-        _(action.output[:metadata][:failed_proxy_tasks].length).must_equal 1
+        assert_equal :suspended, action.state
+        assert_equal 1, action.world.clock.pending_pings.length
+        assert_equal 1, action.output[:metadata][:failed_proxy_tasks].length
         2.times { action.output[:metadata][:failed_proxy_tasks] << {} }
-        _(proc { action = run_stubbed_action.call action }).must_raise(Errno::ECONNREFUSED)
-        _(action.state).must_equal :error
+        assert_raises(Errno::ECONNREFUSED) { run_stubbed_action.call action }
+        assert_equal :error, action.state
       end
 
       it 'hides secrets' do
@@ -127,12 +127,12 @@ module ForemanTasks
                                                        'foo' => 'bar',
                                                        'secrets' => secrets)
         task = ForemanTasks::Task.where(:external_id => triggered.id).first
-        _(task.input[:secrets]).must_equal 'Secrets hidden'
+        assert_equal 'Secrets hidden', task.input[:secrets]
         triggered.future.wait # Wait for the task to get triggered before leaving the test
       end
 
       it 'wipes secrets' do
-        _(@action.input[:secrets]).must_equal secrets
+        assert_equal secrets, @action.input[:secrets]
         action = run_action(@action, ::Actions::ProxyAction::CallbackData.new('result' => 'success'))
 
         # #wipe_secrets! gets called as a hook, hooks are not triggered when using action testing helpers

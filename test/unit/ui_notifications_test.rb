@@ -22,33 +22,33 @@ module ForemanTasks
       it 'notifies all admins about current amount of paused tasks when some paused task occurs' do
         trigger_task
         notification = user_notifications(admin_user).first
-        _(notification.message).must_equal "There is 1 paused task in the system that need attention"
+        assert_equal "There is 1 paused task in the system that need attention", notification.message
         links = notification.actions['links']
-        _(links).must_include('href' => '/foreman_tasks/tasks?search=state%3Dpaused',
-                           'title' => 'List of tasks')
-        _(links).must_include('name' => 'troubleshooting',
-                           'title' => 'Troubleshooting Documentation',
-                           'description' => 'See %{link} for more details on how to resolve the issue',
-                           'href' => "https://theforeman.org/manuals/#{SETTINGS[:version].short}/tasks_troubleshooting.html#",
-                           'external' => true)
+        assert_includes(links, { 'href' => '/foreman_tasks/tasks?search=state%3Dpaused',
+                                'title' => 'List of tasks' })
+        assert_includes(links, { 'name' => 'troubleshooting',
+                                'title' => 'Troubleshooting Documentation',
+                                'description' => 'See %{link} for more details on how to resolve the issue',
+                                'href' => "https://theforeman.org/manuals/#{SETTINGS[:version].short}/tasks_troubleshooting.html#",
+                                'external' => true })
       end
 
       it 'aggregates the notification when multiple tasks get paused' do
         trigger_task
         recipient1 = NotificationRecipient.find_by(user_id: admin_user)
-        _(recipient1.notification.message).must_match(/1 paused task/)
+        assert_match(/1 paused task/, recipient1.notification.message)
 
         new_admin_user = FactoryBot.create(:user, :admin)
 
         trigger_task
 
-        _(NotificationRecipient.find_by(id: recipient1.id)).must_be_nil
-        _(Notification.find_by(id: recipient1.notification.id)).must_be_nil
+        assert_nil NotificationRecipient.find_by(id: recipient1.id)
+        assert_nil Notification.find_by(id: recipient1.notification.id)
         recipient2 = NotificationRecipient.find_by(user_id: admin_user)
-        _(recipient2.notification.message).must_match(/2 paused tasks/)
+        assert_match(/2 paused tasks/, recipient2.notification.message)
 
         new_recipient = NotificationRecipient.find_by(user_id: new_admin_user)
-        _(new_recipient.notification).must_equal recipient2.notification
+        assert_equal recipient2.notification, new_recipient.notification
       end
     end
 
@@ -58,15 +58,14 @@ module ForemanTasks
         notifications = user_notifications(task_owner)
         assert_equal 1, notifications.size, 'Only notification for the main action should be triggered'
         notification = notifications.first
-        _(notification.message).must_equal "The task 'Dummy pause action' got paused"
+        assert_equal "The task 'Dummy pause action' got paused", notification.message
         links = notification.actions['links']
-        _(links).must_include("href" => "/foreman_tasks/tasks/#{task.id}",
-                           "title" => "Task Details")
-        _(links).must_include('name' => 'troubleshooting',
-                           'title' => 'Troubleshooting Documentation',
-                           'description' => 'See %{link} for more details on how to resolve the issue',
-                           'href' => "https://theforeman.org/manuals/#{SETTINGS[:version].short}/tasks_troubleshooting.html#Support::DummyPauseAction",
-                           'external' => true)
+        assert_includes(links, "href" => "/foreman_tasks/tasks/#{task.id}", "title" => "Task Details")
+        assert_includes(links, 'name' => 'troubleshooting',
+                        'title' => 'Troubleshooting Documentation',
+                        'description' => 'See %{link} for more details on how to resolve the issue',
+                        'href' => "https://theforeman.org/manuals/#{SETTINGS[:version].short}/tasks_troubleshooting.html#Support::DummyPauseAction",
+                        'external' => true)
       end
     end
 

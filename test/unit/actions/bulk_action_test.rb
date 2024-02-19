@@ -37,20 +37,20 @@ module ForemanTasks
         Target.expects(:unscoped).returns(Target)
         Target.expects(:where).with(:id => targets.map(&:id)).returns(targets)
 
-        _(task.sub_tasks.count).must_equal targets.count
+        assert_equal targets.count, task.sub_tasks.count
         success, failed = task.sub_tasks.partition { |sub_task| sub_task.result == 'success' }
-        _(failed).must_be :empty?
-        _(success.count).must_equal 5
+        assert_empty failed
+        assert_equal 5, success.count
       end
 
       specify 'it plans a task for each target even if target cannot be found' do
         Target.expects(:unscoped).returns(Target)
         Target.expects(:where).with(:id => targets.map(&:id)).returns(targets.take(4))
 
-        _(task.sub_tasks.count).must_equal targets.count
+        assert_equal targets.count, task.sub_tasks.count
         success, failed = task.sub_tasks.partition { |sub_task| sub_task.result == 'success' }
-        _(success.count).must_equal 4
-        _(failed.count).must_equal 1
+        assert_equal 4, success.count
+        assert_equal 1, failed.count
       end
 
       specify "it handles keyword arguments as indifferent hashes when they're being flattened" do
@@ -61,8 +61,8 @@ module ForemanTasks
         task = ForemanTasks::Task.where(:external_id => triggered.id).first
         wait_for { task.reload.state == 'stopped' }
         task = task.sub_tasks.first
-        _(task.input[:kw_string]).must_equal 7
-        _(task.input[:kw_symbol]).must_equal 7
+        assert_equal 7, task.input[:kw_string]
+        assert_equal 7, task.input[:kw_symbol]
       end
 
       specify 'it allows setting concurrency limit' do
@@ -71,7 +71,7 @@ module ForemanTasks
 
         triggered = ForemanTasks.trigger(ParentAction, ChildAction, targets, concurrency_limit: 25)
         task = ForemanTasks::Task.where(:external_id => triggered.id).first
-        _(task.execution_plan.entry_action.concurrency_limit).must_equal 25
+        assert_equal 25, task.execution_plan.entry_action.concurrency_limit
       end
     end
   end

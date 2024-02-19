@@ -28,8 +28,8 @@ module ForemanTasks
 
     it 'generates html from the main action troubleshooting_info' do
       generated_html = subject.generate_html
-      _(generated_html).must_include "A paused task represents a process that has not finished properly"
-      _(generated_html).must_include %(See <a href="#{expected_troubleshooting_url}">troubleshooting documentation</a> for more details on how to resolve the issue)
+      assert_includes generated_html, "A paused task represents a process that has not finished properly"
+      assert_includes generated_html, %(See <a href="#{expected_troubleshooting_url}">troubleshooting documentation</a> for more details on how to resolve the issue)
     end
 
     it 'exposes link details' do
@@ -47,10 +47,10 @@ module ForemanTasks
 
       it 'includes additional description in generated html' do
         generated_html = subject.generate_html
-        _(generated_html).must_include 'A paused task represents a process that has not finished properly'
-        _(generated_html).must_match %r{See <a href=".*">troubleshooting documentation</a> for more details on how to resolve the issue}
-        _(generated_html).must_include 'This task requires special handling'
-        _(generated_html).must_include 'Investigate <a href="/additional_troubleshooting_page">custom link</a> on more details for this custom error'
+        assert_includes generated_html, 'A paused task represents a process that has not finished properly'
+        assert_match %r{See <a href=".*">troubleshooting documentation</a> for more details on how to resolve the issue}, generated_html
+        assert_includes generated_html, 'This task requires special handling'
+        assert_includes generated_html, 'Investigate <a href="/additional_troubleshooting_page">custom link</a> on more details for this custom error'
       end
 
       it 'includes additional links' do

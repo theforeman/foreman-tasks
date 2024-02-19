@@ -32,8 +32,8 @@ class TasksTest < ActiveSupport::TestCase
       end
 
       it 'cannot search by arbitrary key' do
-        _(proc { ForemanTasks::Task.search_for('user.my_key ~ 5') }).must_raise(ScopedSearch::QueryNotSupported)
-        _(proc { ForemanTasks::Task.search_for('user. = 5') }).must_raise(ScopedSearch::QueryNotSupported)
+        assert_raises(ScopedSearch::QueryNotSupported) { ForemanTasks::Task.search_for('user.my_key ~ 5') }
+        assert_raises(ScopedSearch::QueryNotSupported) { ForemanTasks::Task.search_for('user. = 5') }
       end
 
       test 'can search the tasks by negated user' do
@@ -59,8 +59,8 @@ class TasksTest < ActiveSupport::TestCase
       end
 
       test 'cannot glob on user\'s id' do
-        _(proc { ForemanTasks::Task.search_for("user.id ~ something") }).must_raise(ScopedSearch::QueryNotSupported)
-        _(proc { ForemanTasks::Task.search_for("user.id ~ 5") }).must_raise(ScopedSearch::QueryNotSupported)
+        assert_raises(ScopedSearch::QueryNotSupported) { ForemanTasks::Task.search_for("user.id ~ something") }
+        assert_raises(ScopedSearch::QueryNotSupported) { ForemanTasks::Task.search_for("user.id ~ 5") }
       end
 
       test 'can search the tasks by user with wildcards' do
@@ -105,28 +105,28 @@ class TasksTest < ActiveSupport::TestCase
 
       it 'can search by seconds ' do
         skip unless on_postgresql?
-        _(scope.search_for('duration < 2')).must_be :empty?
-        _(scope.search_for('duration = 2')).must_equal [@task_one, @task_two]
-        _(scope.search_for('duration < "2 seconds"')).must_be :empty?
-        _(scope.search_for('duration > "2 seconds"')).must_be :empty?
-        _(scope.search_for('duration = "2 seconds"')).must_equal [@task_one, @task_two]
-        _(scope.search_for('duration <= "2 seconds"')).must_equal [@task_one, @task_two]
-        _(scope.search_for('duration >= "2 seconds"')).must_equal [@task_one, @task_two]
+        assert_empty scope.search_for('duration < 2')
+        assert_equal [@task_one, @task_two], scope.search_for('duration = 2')
+        assert_empty scope.search_for('duration < "2 seconds"')
+        assert_empty scope.search_for('duration > "2 seconds"')
+        assert_equal [@task_one, @task_two], scope.search_for('duration = "2 seconds"')
+        assert_equal [@task_one, @task_two], scope.search_for('duration <= "2 seconds"')
+        assert_equal [@task_one, @task_two], scope.search_for('duration >= "2 seconds"')
       end
 
       it 'can search by other time intervals' do
         skip unless on_postgresql?
         %w[minutes hours days months years].each do |interval|
-          _(scope.search_for("duration < \"2 #{interval}\"")).must_equal [@task_one, @task_two]
-          _(scope.search_for("duration > \"2 #{interval}\"")).must_be :empty?
-          _(scope.search_for("duration = \"2 #{interval}\"")).must_be :empty?
-          _(scope.search_for("duration <= \"2 #{interval}\"")).must_equal [@task_one, @task_two]
-          _(scope.search_for("duration >= \"2 #{interval}\"")).must_be :empty?
+          assert_equal [@task_one, @task_two], scope.search_for("duration < \"2 #{interval}\"")
+          assert_empty scope.search_for("duration > \"2 #{interval}\"")
+          assert_empty scope.search_for("duration = \"2 #{interval}\"")
+          assert_equal [@task_one, @task_two], scope.search_for("duration <= \"2 #{interval}\"")
+          assert_empty scope.search_for("duration >= \"2 #{interval}\"")
         end
       end
 
       it 'raises an exception if duration is unknown' do
-        _(proc { ForemanTasks::Task.search_for('duration = "25 potatoes"') }).must_raise ScopedSearch::QueryNotSupported
+        assert_raises(ScopedSearch::QueryNotSupported) { ForemanTasks::Task.search_for('duration = "25 potatoes"') }
       end
     end
 
@@ -144,7 +144,7 @@ class TasksTest < ActiveSupport::TestCase
   describe 'users' do
     test 'users can be deleted even if they have tasks assigned' do
       user = FactoryBot.create(:user)
-      FactoryBot.create(:some_task, :user => user)
+      FactoryBot.create(:some_task, user: user)
       user.destroy!
     end
   end
@@ -152,14 +152,14 @@ class TasksTest < ActiveSupport::TestCase
   describe 'state_updated_at' do
     it 'updates the state_updated_at when the state changes' do
       task = FactoryBot.create(:some_task)
-      assert task.state_updated_at > Time.now.utc - 1.minute, "Newly created task has to have state_updated_at set"
+      assert_operator task.state_updated_at, :>, Time.now.utc - 1.minute, "Newly created task has to have state_updated_at set"
       task.update(state_updated_at: nil)
       task.result = 'error'
       task.save
-      assert_not task.state_updated_at, "Other than state change should not affect 'state_updated_at'"
+      assert_nil task.state_updated_at, "Other than state change should not affect 'state_updated_at'"
       task.state = 'running'
       task.save
-      assert task.state_updated_at, "State change should set 'state_updated_at'"
+      assert_not_nil task.state_updated_at, "State change should set 'state_updated_at'"
     end
   end
 
@@ -171,7 +171,7 @@ class TasksTest < ActiveSupport::TestCase
       permission = FactoryBot.build(:permission)
       permission.resource_type = 'ForemanTasks::Task'
       permission.save!
-      FactoryBot.create(:filter, :role => role, :permissions => [permission])
+      FactoryBot.create(:filter, role: role, permissions: [permission])
 
       User.current = user
       task = FactoryBot.create(:dynflow_task)
@@ -184,21 +184,21 @@ class TasksTest < ActiveSupport::TestCase
   describe 'consistency check' do
     it 'ensures the tasks marked as running are really running in Dynflow' do
       task = ForemanTasks.sync_task(Support::DummyDynflowAction)
-      task.update(:state => 'running') # Updating state updates the timestamp
-      task.update(:state_updated_at => Time.zone.now - 5.minutes)
+      task.update(state: 'running') # Updating state updates the timestamp
+      task.update(state_updated_at: Time.zone.now - 5.minutes)
 
       ForemanTasks::Task::DynflowTask.consistency_check
       task.reload
-      _(task.state).must_equal 'stopped'
+      assert_equal 'stopped', task.state
     end
   end
 
   describe 'active job task' do
     it 'when scheduled to the future, the label and action is set properly' do
-      job = Support::DummyActiveJob.set(:wait => 12.hours).perform_later
-      task = ForemanTasks::Task.find_by!(:external_id => job.provider_job_id)
-      _(task.action).must_equal "Dummy action"
-      _(task.label).must_equal "Support::DummyActiveJob"
+      job = Support::DummyActiveJob.set(wait: 12.hours).perform_later
+      task = ForemanTasks::Task.find_by!(external_id: job.provider_job_id)
+      assert_equal "Dummy action", task.action
+      assert_equal "Support::DummyActiveJob", task.label
     end
   end
 
@@ -214,9 +214,9 @@ class TasksTest < ActiveSupport::TestCase
     end
 
     it 'handles the error while loading the task and does not propagate errors unless necessary' do
-      task.cancellable?
-      task.resumable?
-      task.main_action
+      assert_nothing_raised { task.cancellable? }
+      assert_nothing_raised { task.resumable? }
+      assert_nothing_raised { task.main_action }
       assert_equal 'Support::DummyDynflowAction', task.get_humanized(:humanized_name)
       assert_equal 0, task.progress
       assert_raises(KeyError) { task.cancel }
@@ -226,19 +226,19 @@ class TasksTest < ActiveSupport::TestCase
   describe 'subtask count querying' do
     let(:result_base) do
       {
-        :error     => 0,
-        :warning   => 0,
-        :total     => 0,
-        :success   => 0,
-        :cancelled => 0,
-        :pending   => 0,
+        error: 0,
+        warning: 0,
+        total: 0,
+        success: 0,
+        cancelled: 0,
+        pending: 0,
       }
     end
     let(:task) { FactoryBot.create(:dynflow_task) }
 
     describe 'without sub tasks' do
       it 'calculates the progress report correctly' do
-        _(task.sub_tasks_counts).must_equal result_base
+        assert_equal result_base, task.sub_tasks_counts
       end
     end
 
@@ -248,22 +248,22 @@ class TasksTest < ActiveSupport::TestCase
       before { task.sub_tasks = [success, failed] }
 
       it 'calculate the progress report correctly' do
-        expected_result = result_base.merge(:success => 1, :error => 1, :total => 2)
-        _(task.sub_tasks_counts).must_equal expected_result
+        expected_result = result_base.merge(success: 1, error: 1, total: 2)
+        assert_equal expected_result, task.sub_tasks_counts
       end
 
       it 'calculates the progress report correctly when using batch planning' do
-        result_base = self.result_base.merge(:success => 1, :error => 1, :total => 25)
-        fake_action = OpenStruct.new(:total_count => 25)
+        result_base = self.result_base.merge(success: 1, error: 1, total: 25)
+        fake_action = OpenStruct.new(total_count: 25)
         task.stubs(:main_action).returns(fake_action)
 
         task.state = 'stopped'
-        expected_result = result_base.merge(:cancelled => 23)
-        _(task.sub_tasks_counts).must_equal expected_result
+        expected_result = result_base.merge(cancelled: 23)
+        assert_equal expected_result, task.sub_tasks_counts
 
         task.state = 'pending'
-        expected_result = result_base.merge(:pending => 23)
-        _(task.sub_tasks_counts).must_equal expected_result
+        expected_result = result_base.merge(pending: 23)
+        assert_equal expected_result, task.sub_tasks_counts
       end
     end
   end
@@ -284,11 +284,11 @@ class TasksTest < ActiveSupport::TestCase
     let(:task) { FactoryBot.create(:some_task) }
 
     it 'can indicate it is delayed' do
-      assert_not task.delayed?
-      _(task.execution_type).must_equal 'Immediate'
+      assert_not_predicate task, :delayed?
+      assert_equal 'Immediate', task.execution_type
       task.start_at = Time.now.utc + 100
-      assert task.delayed?
-      _(task.execution_type).must_equal 'Delayed'
+      assert_predicate task, :delayed?
+      assert_equal 'Delayed', task.execution_type
     end
   end
 

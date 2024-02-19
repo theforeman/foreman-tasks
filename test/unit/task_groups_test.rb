@@ -59,18 +59,18 @@ module ForemanTasks
 
       it 'has the task group assigned' do
         task = spawn_task.call ChildAction
-        _(task.task_groups.map(&:id)).must_equal [1]
+        assert_equal [1], task.task_groups.map(&:id)
       end
 
       it 'tasks inherit task groups correctly' do
         children_count = 3
         task = spawn_task.call ParentAction, children_count
         # Parent task has task groups of its children
-        _(task.task_groups.map(&:id).sort).must_equal [1, 2, 3, 4]
+        assert_equal [1, 2, 3, 4], task.task_groups.map(&:id).sort
         # Children have the parent's and their own, they don't have their siblings' task groups
-        _(task.sub_tasks.count).must_equal children_count
+        assert_equal children_count, task.sub_tasks.count
         task.sub_tasks.each do |sub_task|
-          _(sub_task.task_groups.map(&:id).sort).must_equal [1, sub_task.input[:id]].sort
+          assert_equal [1, sub_task.input[:id]].sort, sub_task.task_groups.map(&:id).sort
         end
       end
     end

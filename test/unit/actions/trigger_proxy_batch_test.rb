@@ -13,8 +13,8 @@ module ForemanTasks
       describe 'triggering' do
         it 'doesnt run anything on trigger' do
           Actions::TriggerProxyBatch.any_instance.expects(:trigger_remote_tasks_batch).never
-          _(triggered.state).must_equal :suspended
-          _(triggered.output[:planned_count]).must_equal 0
+          assert_equal :suspended, triggered.state
+          assert_equal 0, triggered.output[:planned_count]
         end
 
         it 'triggers remote tasks on TriggerNextBatch' do
@@ -37,7 +37,7 @@ module ForemanTasks
           Actions::TriggerProxyBatch.any_instance.expects(:trigger_remote_tasks_batch).once
           triggered.output[:planned_count] = 0
           action = run_action(triggered, Actions::TriggerProxyBatch::TriggerLastBatch)
-          _(action.state).must_equal :success
+          assert_equal :success, action.state
         end
       end
 
@@ -57,7 +57,7 @@ module ForemanTasks
           ForemanTasks::RemoteTask.expects(:batch_trigger).with(proxy_operation_name, grouped_remote_batch)
 
           triggered.trigger_remote_tasks_batch
-          _(triggered.output[:planned_count]).must_equal(batch_size)
+          assert_equal batch_size, triggered.output[:planned_count]
         end
       end
     end
