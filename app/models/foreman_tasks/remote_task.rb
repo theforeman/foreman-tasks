@@ -42,6 +42,9 @@ module ForemanTasks
     end
 
     def update_from_batch_trigger(data, parent = {})
+      # The ID might get overwritten later, but it is a sane default in case of async
+      # triggering where we only get an id of a remote parent
+      self.remote_task_id = execution_plan_id
       if data['result'] == 'success'
         self.remote_task_id = data['task_id']
         self.state = 'triggered'
