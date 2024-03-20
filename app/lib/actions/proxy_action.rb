@@ -93,15 +93,8 @@ module Actions
 
     def check_task_status
       response = proxy.status_of_task(proxy_task_id)
-      if %w[stopped paused].include? response['state']
-        if response['result'] == 'error'
-          raise ::Foreman::Exception, _('The smart proxy task %s failed.') % proxy_task_id
-        else
-          on_data(get_proxy_data(response))
-        end
-      else
-        suspend
-      end
+      on_data(get_proxy_data(response))
+      suspend unless %w[stopped paused].include? response['state']
     rescue RestClient::NotFound
       on_proxy_action_missing
     end
