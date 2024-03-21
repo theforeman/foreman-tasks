@@ -46,7 +46,7 @@ module Actions
         notify ::Actions::ProxyAction::ProxyActionMissing.new, missing if missing.any?
 
         stopped = present.select { |task| %w[stopped paused].include? results.dig(task.remote_task_id, 'state') }
-        notify ::Actions::ProxyAction::ProxyActionStopped.new, stopped if stopped.any?
+        notify ::Actions::ProxyAction::ProxyActionStoppedEvent[nil], stopped if stopped.any?
       end
 
       def notify(event, tasks)
