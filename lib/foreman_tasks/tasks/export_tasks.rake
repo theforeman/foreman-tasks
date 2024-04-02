@@ -51,7 +51,7 @@ namespace :foreman_tasks do
       end
 
       def template(filename)
-        File.join(Gem::Specification.find_by_name('dynflow').gem_dir, 'web', 'views', "#{filename}.erb") # rubocop:disable Rails/DynamicFindBy
+        File.join(Gem::Specification.find_by_name('dynflow').gem_dir, 'web', 'views', "#{filename}.erb")
       end
 
       def erb(file, options = {})
@@ -216,7 +216,7 @@ namespace :foreman_tasks do
          'javascripts/application.js',
          'vendor/bootstrap/css/bootstrap.css',
          'stylesheets/application.css'].each do |file|
-          filename = File.join(Gem::Specification.find_by_name('dynflow').gem_dir, 'web', 'assets', file) # rubocop:disable Rails/DynamicFindBy
+          filename = File.join(Gem::Specification.find_by_name('dynflow').gem_dir, 'web', 'assets', file)
           FileUtils.copy_file(filename, File.join(tmp_dir, File.basename(file)))
         end
       end

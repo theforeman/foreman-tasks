@@ -1,9 +1,8 @@
-require:
-  - rubocop-minitest
-  - rubocop-performance
-  - rubocop-rails
-
 inherit_from: .rubocop_todo.yml
+
+inherit_gem:
+  theforeman-rubocop:
+    - lenient.yml
 
 AllCops:
   Exclude:
@@ -15,23 +14,8 @@ AllCops:
 Lint/ShadowingOuterLocalVariable:
   Enabled: false
 
-Rails:
-  Enabled: true
-
-# Don't prefer is_a? over kind_of?
-Style/ClassCheck:
-  Enabled: false
-
-# Don't enforce documentation
-Style/Documentation:
-  Enabled: false
-
 # Support both ruby19 and hash_rockets
 Style/HashSyntax:
-  Enabled: false
-
-# Both double and single quotes are OK
-Style/StringLiterals:
   Enabled: false
 
 # Don't enforce frozen string literals
@@ -61,20 +45,16 @@ Layout/LineLength:
 
 Naming/FileName:
   Exclude:
-    - '*.gemspec'
+    - "*.gemspec"
     - Gemfile
     - db/seeds.d/*
     - lib/foreman-tasks.rb
     - gemfile.d/foreman-tasks.rb
 
-
 Layout/HeredocIndentation:
   Exclude:
-    - '*.gemspec'
+    - "*.gemspec"
     - bin/*
-
-Layout/EmptyLineAfterGuardClause:
-  Enabled: false
 
 Style/RescueStandardError:
   Enabled: false
@@ -111,12 +91,3 @@ Rails/HelperInstanceVariable:
 
 Naming/RescuedExceptionsVariableName:
   Enabled: false
-
-Style/WordArray:
-  Enabled: false
-
-Style/TrailingCommaInArrayLiteral:
-  EnforcedStyleForMultiline: comma
-
-Style/TrailingCommaInHashLiteral:
-  EnforcedStyleForMultiline: comma
