@@ -13,19 +13,6 @@ module ForemanTasks
 
     delegate :proxy_action_name, :to => :action
 
-    # Triggers a task on the proxy "the old way"
-    def trigger(proxy_action_name, input)
-      response = begin
-                   proxy.launch_tasks('single', :action_class => proxy_action_name, :action_input => input)
-                 rescue RestClient::Exception => e
-                   logger.warn "Could not trigger task on the smart proxy"
-                   logger.warn e
-                   {}
-                 end
-      update_from_batch_trigger(response)
-      save!
-    end
-
     def self.batch_trigger(operation, remote_tasks)
       remote_tasks.group_by(&:proxy_url).each_value do |group|
         input_hash = group.reduce({}) do |acc, remote_task|

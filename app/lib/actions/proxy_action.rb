@@ -32,58 +32,34 @@ module Actions
       fields! exception: type { variants NilClass, Exception }
     end
 
-    def plan(proxy, klass, options)
-      options[:connection_options] ||= {}
-      default_connection_options.each do |key, value|
-        options[:connection_options][key] = value unless options[:connection_options].key?(key)
-      end
-      plan_self(options.merge(:proxy_url => proxy.url, :proxy_action_name => klass.to_s))
-      # Just saving the RemoteTask is enough when using batch triggering
-      # It will be picked up by the ProxyBatchTriggering middleware
-      if input[:use_batch_triggering] && input.dig(:connection_options, :proxy_batch_triggering)
-        prepare_remote_task.save!
-      end
+    def plan(proxy, _klass, options)
+      plan_self(options)
+      prepare_remote_task(proxy).save!
     end
 
     def run(event = nil)
-      with_connection_error_handling(event) do |event|
-        case event
-        when nil
-          start_or_resume
-        when ::Dynflow::Action::Skip
-          # do nothing
-        when ::Dynflow::Action::Cancellable::Cancel
-          cancel_proxy_task
-        when ::Dynflow::Action::Cancellable::Abort
-          abort_proxy_task
-        when CallbackData
-          on_data(event.data, event.meta)
-        when ProxyActionMissing
-          on_proxy_action_missing
-        when ProxyActionStoppedEvent
-          on_proxy_action_stopped(event)
-        else
-          raise "Unexpected event #{event.inspect}"
-        end
+      case event
+      when nil
+        start_or_resume
+      when ::Dynflow::Action::Skip
+        # do nothing
+      when ::Dynflow::Action::Cancellable::Cancel
+        cancel_proxy_task
+      when ::Dynflow::Action::Cancellable::Abort
+        abort_proxy_task
+      when CallbackData
+        on_data(event.data, event.meta)
+      when ProxyActionMissing
+        on_proxy_action_missing
+      when ProxyActionStoppedEvent
+        on_proxy_action_stopped(event)
+      else
+        raise "Unexpected event #{event.inspect}"
       end
     end
 
     def remote_task
       @remote_task ||= ForemanTasks::RemoteTask.find_by(:execution_plan_id => execution_plan_id, :step_id => run_step_id)
-    end
-
-    def trigger_proxy_task
-      suspend do |_suspended_action|
-        remote_task = prepare_remote_task
-        ForemanTasks::RemoteTask.batch_trigger(remote_task.operation, [remote_task])
-        output[:proxy_task_id] = remote_task.remote_task_id
-      end
-    end
-
-    def trigger_remote_task
-      suspend do |_suspended_action|
-        ForemanTasks::RemoteTask.batch_trigger(remote_task.operation, [remote_task])
-      end
     end
 
     def proxy_input(task_id = task.id)
@@ -178,11 +154,7 @@ module Actions
 
     # The proxy action is able to contribute to continuous output
     def fill_continuous_output(continuous_output)
-      failed_proxy_tasks.each do |failure_data|
-        message = _('Initialization error: %s') %
-                  "#{failure_data[:exception_class]} - #{failure_data[:exception_message]}"
-        continuous_output.add_output(message, 'debug', failure_data[:timestamp])
-      end
+      # TODO? Should this be removed completely?
     end
 
     def proxy_output=(output)
@@ -194,19 +166,6 @@ module Actions
       output[:metadata]
     end
 
-    def metadata=(thing)
-      output[:metadata] ||= {}
-      output[:metadata] = thing
-    end
-
-    def default_connection_options
-      # Fails if the plan is not finished within 60 seconds from the first task trigger attempt on the smart proxy
-      # If the triggering fails, it retries 3 more times with 15 second delays
-      { :retry_interval => Setting['foreman_tasks_proxy_action_retry_interval'] || 15,
-        :retry_count    => Setting['foreman_tasks_proxy_action_retry_count'] || 4,
-        :proxy_batch_triggering => Setting['foreman_tasks_proxy_batch_trigger'] || false }
-    end
-
     def clean_remote_task(*_args)
       remote_task.destroy! if remote_task
     end
@@ -214,15 +173,7 @@ module Actions
     private
 
     def start_or_resume
-      if remote_task
-        if remote_task.state == 'external'
-          trigger_remote_task
-        else
-          on_resume
-        end
-      else
-        trigger_proxy_task
-      end
+      on_resume if remote_task
       suspend
     end
 
@@ -231,49 +182,12 @@ module Actions
                          .try(:fetch, 'output', {}) || {}
     end
 
-    def failed_proxy_tasks
-      metadata[:failed_proxy_tasks] ||= []
-    end
-
-    def with_connection_error_handling(event = nil)
-      yield event
-    rescue ::RestClient::Exception, Errno::ECONNREFUSED, Errno::EHOSTUNREACH, Errno::ETIMEDOUT => e
-      if event.class == CallbackData
-        raise e
-      else
-        handle_connection_exception(e, event)
-      end
-    end
-
-    def format_exception(exception)
-      { :proxy_task_id => proxy_task_id,
-        :exception_class => exception.class.name,
-        :exception_message => exception.message,
-        :timestamp => Time.now.to_f }
-    end
-
-    def handle_connection_exception(exception, event = nil)
-      options = input[:connection_options]
-      failed_proxy_tasks << format_exception(exception)
-      output[:proxy_task_id] = nil
-      if failed_proxy_tasks.count < options[:retry_count]
-        suspend do |suspended_action|
-          @world.clock.ping suspended_action,
-                            Time.now.getlocal + options[:retry_interval],
-                            event
-        end
-      else
-        raise exception
-      end
-    end
-
-    def prepare_remote_task
-      state = input[:use_concurrency_control] ? 'external' : 'new'
+    def prepare_remote_task(proxy)
       ::ForemanTasks::RemoteTask.new(:execution_plan_id => execution_plan_id,
-                                     :proxy_url => input[:proxy_url],
+                                     :proxy_url => proxy.url,
                                      :step_id => run_step_id,
                                      :operation => proxy_operation_name,
-                                     :state => state)
+                                     :state => 'new')
     end
 
     def proxy_task_id

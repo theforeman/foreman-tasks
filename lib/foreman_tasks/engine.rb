@@ -77,14 +77,9 @@ module ForemanTasks
                     description: N_('Time in seconds between retries'),
                     default: 15,
                     full_name: N_('Proxy action retry interval'))
-            setting('foreman_tasks_proxy_batch_trigger',
-                    type: :boolean,
-                    description: N_('Allow triggering tasks on the smart proxy in batches'),
-                    default: true,
-                    full_name: N_('Allow proxy batch tasks'))
             setting('foreman_tasks_proxy_batch_size',
                     type: :integer,
-                    description: N_('Number of tasks which should be sent to the smart proxy in one request, if foreman_tasks_proxy_batch_trigger is enabled'),
+                    description: N_('Number of tasks which should be sent to the smart proxy in one request'),
                     default: 100,
                     full_name: N_('Proxy tasks batch size'))
             setting('foreman_tasks_troubleshooting_url',
