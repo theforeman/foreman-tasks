@@ -181,8 +181,7 @@ module ForemanTasks
                                   .expects(:proxy)
                                   .returns(Support::DummyProxyAction.proxy)
 
-          triggered = ForemanTasks.trigger(Support::DummyProxyAction,
-                                           Support::DummyProxyAction.proxy,
+          triggered = ForemanTasks.trigger(Support::DummyProxyAction.proxy,
                                            'Proxy::DummyAction',
                                            'foo' => 'bar')
           Support::DummyProxyAction.proxy.task_triggered.wait(5)

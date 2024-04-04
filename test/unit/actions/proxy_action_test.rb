@@ -17,8 +17,7 @@ module ForemanTasks
         Setting.stubs(:[]).with('foreman_tasks_proxy_action_retry_interval')
         Setting.stubs(:[]).with('foreman_tasks_proxy_action_retry_count')
         Setting.stubs(:[]).with('foreman_tasks_proxy_batch_trigger').returns(batch_triggering)
-        @action = create_and_plan_action(Support::DummyProxyAction,
-                                         Support::DummyProxyAction.proxy,
+        @action = create_and_plan_action(Support::DummyProxyAction.proxy,
                                          'Proxy::DummyAction',
                                          'foo' => 'bar',
                                          'secrets' => secrets,

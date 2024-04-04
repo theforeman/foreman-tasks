@@ -3,18 +3,14 @@ module Actions
     module WithDelegatedAction
       include ::Actions::Helpers::WithContinuousOutput
 
-      def plan_delegated_action(proxy, klass, options, proxy_action_class: ::Actions::ProxyAction)
+      def plan_delegated_action(proxy, options, proxy_action_class: ::Actions::ProxyAction)
         case proxy
-        when :not_defined
-          if klass.is_a?(String)
-            raise Foreman::Exception, _('No proxy defined for execution')
-          else
-            delegated_action = plan_action(klass, options)
-          end
+        when ::SmartProxy
+          delegated_action = plan_action(proxy_action_class, proxy, options)
         when :not_available
           raise Foreman::Exception, _('All proxies with the required feature are unavailable at the moment')
-        when ::SmartProxy
-          delegated_action = plan_action(proxy_action_class, proxy, klass, options)
+        else
+          raise Foreman::Exception, _('No proxy defined for execution')
         end
 
         input[:delegated_action_id] = delegated_action.id
@@ -39,8 +35,6 @@ module Actions
                               {}
                             when ::Actions::ProxyAction
                               action.proxy_output(true)
-                            else
-                              action.output
                             end
       end
 

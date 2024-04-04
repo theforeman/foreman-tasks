@@ -32,7 +32,7 @@ module Actions
       fields! exception: type { variants NilClass, Exception }
     end
 
-    def plan(proxy, _klass, options)
+    def plan(proxy, options)
       plan_self(options)
       prepare_remote_task(proxy).save!
     end
