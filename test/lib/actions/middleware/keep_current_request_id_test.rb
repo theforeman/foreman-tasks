@@ -1,9 +1,9 @@
 require 'foreman_tasks_test_helper'
 
 module ForemanTasks
-  class KeepCurrentRequestIDTest < ActiveSupport::TestCase
+  class KeepCurrentRequestIdTest < ActiveSupport::TestCase
     class DummyAction < Actions::EntryAction
-      middleware.use ::Actions::Middleware::KeepCurrentRequestID
+      middleware.use ::Actions::Middleware::KeepCurrentRequestId
 
       def plan(plan = false)
         plan_self if plan
@@ -18,7 +18,7 @@ module ForemanTasks
       end
     end
 
-    describe Actions::Middleware::KeepCurrentRequestID do
+    describe Actions::Middleware::KeepCurrentRequestId do
       include ::Dynflow::Testing
 
       before { @old_id = ::Logging.mdc['request'] }
