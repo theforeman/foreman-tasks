@@ -20,3 +20,4 @@ jobs:
     uses: theforeman/actions/.github/workflows/foreman_plugin.yml@v0
     with:
       plugin: foreman-tasks
+      foreman_version: refs/pull/10131/head
