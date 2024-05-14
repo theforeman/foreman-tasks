@@ -1,6 +1,6 @@
 module Actions
   module Middleware
-    class KeepCurrentRequestID < Dynflow::Middleware
+    class KeepCurrentRequestId < Dynflow::Middleware
       def delay(*args)
         pass(*args).tap { store_current_request_id }
       end
