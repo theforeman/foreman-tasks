@@ -42,7 +42,9 @@ export const cancelStep = (taskId, stepId) => async dispatch => {
       key: TASK_STEP_CANCEL,
       url: foremanTasksPath(`${taskId}/cancel_step?step_id=${stepId}`),
       handleSuccess: () => {
-        dispatch(addToast(successToastData(`${stepId} {__('Step Canceled')}`)));
+        dispatch(
+          addToast(successToastData(`${stepId} ${__('Step Canceled')}`))
+        );
       },
       handleError: error => {
         dispatch(
