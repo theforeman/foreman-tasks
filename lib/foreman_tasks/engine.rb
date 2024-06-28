@@ -18,7 +18,7 @@ module ForemanTasks
 
     initializer 'foreman_tasks.register_plugin', :before => :finisher_hook do |_app|
       Foreman::Plugin.register :"foreman-tasks" do
-        requires_foreman '>= 3.9'
+        requires_foreman '>= 3.12'
         divider :top_menu, :parent => :monitor_menu, :last => true, :caption => N_('Foreman Tasks')
         menu :top_menu, :tasks,
              :url_hash => { :controller => 'foreman_tasks/tasks', :action => :index },
@@ -160,7 +160,7 @@ module ForemanTasks
         world.middleware.use Actions::Middleware::KeepCurrentTaxonomies
         world.middleware.use Actions::Middleware::KeepCurrentUser, :before => ::Dynflow::Middleware::Common::Transaction
         world.middleware.use Actions::Middleware::KeepCurrentTimezone
-        world.middleware.use Actions::Middleware::KeepCurrentRequestID
+        world.middleware.use Actions::Middleware::KeepCurrentRequestId
         world.middleware.use ::Actions::Middleware::LoadSettingValues
         ForemanTasks.register_scheduled_task(Actions::CheckLongRunningTasks, ENV['FOREMAN_TASKS_CHECK_LONG_RUNNING_TASKS_CRONLINE'] || '0 0 * * *')
       end
