@@ -17,149 +17,170 @@
         "domain": "foreman_tasks",
         "plural_forms": "nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);"
       },
-      "List recurring logics": [
-        "Показать правила периодического выполнения"
-      ],
-      "Show recurring logic details": [
-        "Показать параметры периодического выполнения"
-      ],
-      "Update recurring logic": [
+      "%(last)s Last %(time)s": [
         ""
       ],
-      "Cancel recurring logic": [
-        "Отменить периодическое выполнение"
-      ],
-      "Delete recurring logics by search query": [
+      "%(older)s Older %(time)s": [
         ""
       ],
-      "Search query": [
-        "Поисковый запрос"
-      ],
-      "Please provide a search parameter in the request": [
+      "%s Selected Tasks": [
         ""
       ],
-      "Resume all paused error tasks": [
-        "Возобновить все приостановленные задачи"
+      "%s is not valid format of cron line": [
+        "Недопустимый формат cron: %s"
       ],
-      "Resume tasks matching search string": [
-        "Возобновить задачи, соответствующие строке поиска"
-      ],
-      "Resume specific tasks by ID": [
-        "Возобновить выборочные задачи по идентификатору"
-      ],
-      "Cancel selected cancellable tasks": [
+      "%{count} tasks are in running or paused state for more than a day": [
         ""
       ],
-      "Cancel tasks matching search string": [
+      "%{total} task(s), %{success} success, %{failed} fail": [
+        "Всего задач: %{total}; из них успешно %{success}, неудачно %{failed}"
+      ],
+      "%{value} is not allowed input type": [
+        "Недопустимый выбор: %{value}"
+      ],
+      "%{value} is not allowed triggering mode": [
+        "Недопустимый режим активации: %{value} "
+      ],
+      "%{value} is wrong format": [
+        "Недопустимый формат: %{value}"
+      ],
+      "12h": [
         ""
       ],
-      "Cancel specific tasks by ID": [
+      "24h": [
         ""
       ],
-      "Please provide at least one of search or task_ids parameters in the request": [
+      "A notification when tasks run for suspiciously long time": [
         ""
       ],
-      "Stop selected stoppable tasks": [
-        ""
-      ],
-      "Stop tasks matching search string": [
-        ""
-      ],
-      "Stop specific tasks by ID": [
-        ""
-      ],
-      "List tasks": [
-        "Список задач"
-      ],
-      "UUID of the task": [
-        "UUUID задачи"
-      ],
-      "The ID of the step inside the execution plan to send the event to": [
-        "Идентификатор этапа в плане исполнения, которому будет отправлено событие"
-      ],
-      "Data to be sent to the action": [
-        "Данные для передачи действию"
-      ],
-      "Send data to the task from external executor (such as smart_proxy_dynflow)": [
-        "Отправить задаче данные от внешнего исполнителя (например, от smart_proxy_dynflow)"
-      ],
-      "User search_params requires user_id to be specified": [
-        "Для того чтобы настроить search_params для пользователя, необходимо установить user_id"
-      ],
-      "Resource search_params requires resource_type and resource_id to be specified": [
-        "Для того чтобы настроить search_params для ресурса, необходимо установить resource_id"
-      ],
-      "Task search_params requires task_id to be specified": [
-        "Для того чтобы настроить search_params для задачи, необходимо установить task_id"
-      ],
-      "Type %s for search_params is not supported": [
-        "search_params не поддерживает тип %s"
-      ],
-      "The recurring logic was enabled.": [
-        ""
-      ],
-      "The recurring logic was disabled.": [
-        ""
-      ],
-      "Trying to abort the task": [
-        ""
-      ],
-      "The task cannot be aborted at the moment.": [
-        ""
-      ],
-      "Enable": [
-        "Включить"
-      ],
-      "Disable": [
-        "Отключить"
-      ],
-      "Cancel": [
-        "Отмена"
-      ],
-      "Tasks": [
-        "Задачи"
-      ],
-      "Sub tasks": [
-        "Подзадачи"
-      ],
-      "Start at": [
-        "Время запуска"
-      ],
-      "Start before": [
-        "Не позже чем"
-      ],
-      "Indicates that the action should be cancelled if it cannot be started before this time.": [
-        "Обозначает, что действие следует отменить, если оно не будет запущено до указанного времени."
-      ],
-      "Repeats": [
-        "Повторяется"
-      ],
-      "Purpose": [
+      "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved.": [
         ""
       ],
       "A special label for tracking a recurring job. There can be only one active job with a given purpose at a time.": [
         ""
       ],
-      "is minute (range: 0-59)": [
-        "— минуты (0–59)"
+      "Action": [
+        "Действие"
       ],
-      "is hour (range: 0-23)": [
-        "— часы (1–24)"
+      "Action with sub plans": [
+        "Действия с подпланами"
       ],
-      "is day of month (range: 1-31)": [
-        "— день месяца (1–31)"
+      "Active": [
+        "Активно"
       ],
-      "is month (range: 1-12)": [
-        "— месяц (1–12)"
+      "Active Filters:": [
+        ""
       ],
-      "is day of week (range: 0-6)": [
-        "— день недели (0–6)"
+      "Active or disabled recurring logic with purpose %s already exists": [
+        ""
+      ],
+      "All %s tasks are selected.": [
+        ""
+      ],
+      "All proxies with the required feature are unavailable at the moment": [
+        ""
+      ],
+      "Allow proxy batch tasks": [
+        ""
+      ],
+      "Allow triggering tasks on the smart proxy in batches": [
+        ""
+      ],
+      "Associated resources": [
+        "Связанные ресурсы"
+      ],
+      "At": [
+        "в"
+      ],
+      "Back to tasks": [
+        ""
+      ],
+      "Backtrace": [
+        "Стек вызовов"
+      ],
+      "Bulk action": [
+        "Групповое действие"
+      ],
+      "Cancel": [
+        "Отмена"
+      ],
+      "Cancel Selected": [
+        ""
+      ],
+      "Cancel enforced: the task might be still running on the proxy": [
+        "Принудительная отмена: возможно, задача продолжает выполнение на прокси."
+      ],
+      "Cancel recurring logic": [
+        "Отменить периодическое выполнение"
+      ],
+      "Cancel selected cancellable tasks": [
+        ""
+      ],
+      "Cancel selected tasks": [
+        ""
+      ],
+      "Cancel specific tasks by ID": [
+        ""
+      ],
+      "Cancel tasks matching search string": [
+        ""
+      ],
+      "Canceling selected tasks, this might take a while": [
+        ""
+      ],
+      "Canceling with force selected tasks, this might take a while": [
+        ""
+      ],
+      "Cancelled": [
+        "Отменено"
+      ],
+      "Cannot cancel tasks at the moment": [
+        ""
+      ],
+      "Cannot force cancel tasks at the moment": [
+        ""
+      ],
+      "Cannot resume tasks at the moment": [
+        ""
+      ],
+      "Cannot update a cancelled Recurring Logic.": [
+        ""
+      ],
+      "Changing request id %{request_id} to saved id %{saved_id}": [
+        ""
+      ],
+      "Check for long running tasks": [
+        ""
+      ],
+      "Clear All Filters": [
+        ""
+      ],
+      "Clear Cancelled": [
+        ""
+      ],
+      "Complete": [
+        ""
+      ],
+      "Conflicts with tasks:": [
+        "Конфликт с задачами:"
+      ],
+      "Could not cancel step.": [
+        ""
+      ],
+      "Could not receive data: %s": [
+        ""
+      ],
+      "Cron line": [
+        "Cron"
       ],
       "Cron line format 'a b c d e', where: %s": [
         "Строка cron определяется в формате «a b c d e», где %s"
       ],
-      "Cron line": [
-        "Cron"
+      "Current iteration": [
+        "Текущая итерация"
+      ],
+      "Data to be sent to the action": [
+        "Данные для передачи действию"
       ],
       "Days": [
         "Дни"
@@ -167,549 +188,230 @@
       "Days of week": [
         "Дни недели"
       ],
-      "Mon": [
-        "Пн"
+      "Delayed": [
+        "Отложенный"
       ],
-      "Tue": [
-        "Вт"
-      ],
-      "Wed": [
-        "Ср"
-      ],
-      "Thu": [
-        "Чт"
-      ],
-      "Fri": [
-        "Пт"
-      ],
-      "Sat": [
-        "Сб"
-      ],
-      "Sun": [
-        "Вс"
-      ],
-      "At": [
-        "в"
-      ],
-      "Repeat N times": [
-        "Количество повторений"
-      ],
-      "Ends": [
-        "Заканчивается"
-      ],
-      "Never": [
-        "Никогда"
-      ],
-      "On": [
-        "Настроить"
-      ],
-      "Ends at": [
-        "Время окончания"
-      ],
-      "Unlimited": [
-        "∞"
-      ],
-      "%{total} task(s), %{success} success, %{failed} fail": [
-        "Всего задач: %{total}; из них успешно %{success}, неудачно %{failed}"
-      ],
-      "Bulk action": [
-        "Групповое действие"
-      ],
-      "Empty bulk action": [
-        "Пустое групповое действие"
-      ],
-      "The targets are of different types": [
-        "Попытка выполнения действия над разными типами объектов"
-      ],
-      "Check for long running tasks": [
+      "Delete recurring logics by search query": [
         ""
       ],
       "Deliver notifications about long running tasks": [
         ""
       ],
-      "Import facts": [
-        "Импорт фактов"
-      ],
-      "Import Puppet classes": [
-        "Импорт классов Puppet"
-      ],
-      "activation key": [
-        "ключ активации"
-      ],
-      "user": [
-        "пользователь"
-      ],
-      "repository": [
-        "репозиторий"
-      ],
-      "content view version": [
-        "версия представления"
-      ],
-      "content view": [
-        "представление"
-      ],
-      "product": [
-        "продукт"
-      ],
-      "system": [
-        "система"
-      ],
-      "organization": [
-        "организация"
-      ],
-      "Failed to initialize": [
-        "Не удалось инициализировать"
-      ],
-      "No proxy defined for execution": [
-        ""
-      ],
-      "All proxies with the required feature are unavailable at the moment": [
-        ""
-      ],
-      "Changing request id %{request_id} to saved id %{saved_id}": [
-        ""
-      ],
-      "Failed to check on tasks on proxy at %{url}: %{exception}": [
-        ""
-      ],
-      "The smart proxy task %s failed.": [
-        "Ошибка выполнения задачи %s на смарт-прокси."
-      ],
-      "Cancel enforced: the task might be still running on the proxy": [
-        "Принудительная отмена: возможно, задача продолжает выполнение на прокси."
-      ],
-      "Task aborted: the task might be still running on the proxy": [
-        ""
-      ],
-      "Event delivered by request %{request_id}": [
-        ""
-      ],
-      "Proxy task gone missing from the smart proxy": [
-        ""
-      ],
-      "Failed to trigger task on the smart proxy: ": [
-        ""
-      ],
-      "Initialization error: %s": [
-        "Ошибка инициализации: %s"
-      ],
-      "Tasks pending since %s": [
-        ""
-      ],
-      "Required lock is already taken by other running tasks.": [
-        "Ресурс блокируется другими задачами."
-      ],
-      "Please inspect their state, fix their errors and resume them.": [
-        "Проверьте их состояние, исправьте ошибки и перезапустите еще раз."
-      ],
-      "Conflicts with tasks:": [
-        "Конфликт с задачами:"
-      ],
-      "Active": [
-        "Активно"
-      ],
-      "Cancelled": [
-        "Отменено"
-      ],
-      "Finished": [
-        "Завершено"
-      ],
-      "Disabled": [
-        "Отключено"
-      ],
-      "N/A": [
-        "Недоступно"
-      ],
-      "Cannot update a cancelled Recurring Logic.": [
-        ""
-      ],
-      "Delayed": [
-        "Отложенный"
-      ],
-      "Immediate": [
-        "Немедленный"
-      ],
-      "Recurring logic": [
-        "Периодическое выполнение"
-      ],
-      "Subscribe": [
-        ""
-      ],
-      "%{value} is not allowed triggering mode": [
-        "Недопустимый режим активации: %{value} "
-      ],
-      "%{value} is not allowed input type": [
-        "Недопустимый выбор: %{value}"
-      ],
-      "%{value} is wrong format": [
-        "Недопустимый формат: %{value}"
-      ],
-      "mode has to be one of %{allowed_modes}": [
-        ""
-      ],
-      "is not a valid format": [
-        ""
-      ],
-      "No task could be started": [
-        ""
-      ],
-      "Active or disabled recurring logic with purpose %s already exists": [
-        ""
-      ],
-      "%s is not valid format of cron line": [
-        "Недопустимый формат cron: %s"
-      ],
-      "The task could not be started": [
-        ""
-      ],
-      "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved.": [
-        ""
-      ],
-      "The recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task.": [
-        ""
-      ],
-      "troubleshooting documentation": [
-        ""
-      ],
-      "See %{link} for more details on how to resolve the issue": [
-        ""
-      ],
-      "There is %{count} paused task in the system that need attention": [
-        "",
-        ""
-      ],
-      "Long running tasks": [
-        ""
-      ],
-      "%{count} tasks are in running or paused state for more than a day": [
-        ""
-      ],
-      "Schedule": [
-        "Расписание"
-      ],
-      "Execute now": [
-        "Запустить сейчас"
-      ],
-      "Schedule future execution": [
-        "Настроить время запуска"
-      ],
-      "Set up recurring execution": [
-        "Настроить многократное выполнение"
-      ],
-      "Recurring logics": [
-        "Правила периодического выполнения"
-      ],
-      "Clear Cancelled": [
-        ""
-      ],
-      "This action will delete all cancelled recurring logics. Please note that this action can't be reversed.": [
-        ""
-      ],
-      "ID": [
-        "Идентификатор"
-      ],
-      "Task count": [
-        "Количество задач"
-      ],
-      "Action": [
-        "Действие"
-      ],
-      "Last occurrence": [
-        "Последнее событие"
-      ],
-      "Next occurrence": [
-        "Следующее событие"
-      ],
-      "Current iteration": [
-        "Текущая итерация"
-      ],
-      "Iteration limit": [
-        "Максимальное число итераций"
-      ],
-      "Repeat until": [
-        "Повторять до"
-      ],
-      "State": [
-        "Состояние"
-      ],
       "Details": [
         "Свойства"
-      ],
-      "Task group common": [
-        "Общие для групп"
-      ],
-      "Associated resources": [
-        "Связанные ресурсы"
-      ],
-      "Latest Warning/Error Tasks": [
-        "Последние предупреждения и ошибки"
-      ],
-      "Name": [
-        "Название"
-      ],
-      "Result": [
-        "Результат"
-      ],
-      "Started": [
-        ""
-      ],
-      "Task Status": [
-        "Статус задачи"
-      ],
-      "No. of Tasks": [
-        "Число задач"
-      ],
-      "Last start time": [
-        ""
       ],
       "Details of %s task": [
         ""
       ],
-      "Tasks lingering in states %{states} since %{time}": [
-        ""
+      "Disable": [
+        "Отключить"
       ],
-      "Label": [
-        "Метка"
+      "Disabled": [
+        "Отключено"
       ],
-      "State updated at": [
-        ""
+      "Duration": [
+        "Продолжительность"
       ],
-      "More details": [
-        ""
+      "Dynflow console": [
+        "Консоль Dynflow"
       ],
-      "List of tasks": [
-        ""
+      "Empty bulk action": [
+        "Пустое групповое действие"
       ],
-      "Task Details": [
-        "Описание задачи"
+      "Enable": [
+        "Включить"
       ],
-      "A notification when tasks run for suspiciously long time": [
-        ""
-      ],
-      "Unable to create mail notification: %s": [
-        ""
-      ],
-      "Unable to enable mail notification to user '%s': %s": [
-        ""
-      ],
-      "Back to tasks": [
-        ""
-      ],
-      "Foreman Tasks": [
-        ""
-      ],
-      "Recurring Logics": [
-        ""
-      ],
-      "Number of seconds to wait for synchronous task to finish.": [
-        ""
-      ],
-      "Sync task timeout": [
+      "Enable dynflow console": [
         ""
       ],
       "Enable the dynflow console (/foreman_tasks/dynflow) for debugging": [
         "Разрешить отладку в консоли Dynflow (/foreman_tasks/dynflow)"
       ],
-      "Enable dynflow console": [
+      "Ends": [
+        "Заканчивается"
+      ],
+      "Ends at": [
+        "Время окончания"
+      ],
+      "Errors": [
+        "Ошибки"
+      ],
+      "Errors:": [
         ""
       ],
-      "Require user to be authenticated as user with admin rights when accessing dynflow console": [
-        "Разрешать доступ к консоли Dynflow только пользователям с правами администратора"
-      ],
-      "Require auth for dynflow console": [
+      "Event delivered by request %{request_id}": [
         ""
       ],
-      "Number of attempts to start a task on the smart proxy before failing": [
-        "Максимальное число повторных попыток запуска задачи на капсуле"
+      "Exception": [
+        "Исключение"
       ],
-      "Proxy action retry count": [
+      "Execute now": [
+        "Запустить сейчас"
+      ],
+      "Execution plan data not available ": [
         ""
       ],
-      "Time in seconds between retries": [
-        "Интервал повтора (в секундах)"
-      ],
-      "Proxy action retry interval": [
+      "Export All": [
         ""
       ],
-      "Allow triggering tasks on the smart proxy in batches": [
+      "External Id": [
+        "Внешний идентификатор"
+      ],
+      "Failed to check on tasks on proxy at %{url}: %{exception}": [
         ""
       ],
-      "Allow proxy batch tasks": [
+      "Failed to initialize": [
+        "Не удалось инициализировать"
+      ],
+      "Failed to trigger task on the smart proxy: ": [
         ""
       ],
-      "Number of tasks which should be sent to the smart proxy in one request, if foreman_tasks_proxy_batch_trigger is enabled": [
+      "Finished": [
+        "Завершено"
+      ],
+      "Force Cancel": [
         ""
       ],
-      "Proxy tasks batch size": [
+      "Force Cancel Selected": [
         ""
       ],
-      "Url pointing to the task troubleshooting documentation. It should contain %{label} placeholder, that will be replaced with normalized task label (restricted to only alphanumeric characters)). %{version} placeholder is also available.": [
+      "Force Cancel selected tasks": [
         ""
-      ],
-      "Tasks troubleshooting URL": [
-        ""
-      ],
-      "Polling multiplier which is used to multiply the default polling intervals. This can be used to prevent polling too frequently for long running tasks.": [
-        ""
-      ],
-      "Polling intervals multiplier": [
-        ""
-      ],
-      "was resumed": [
-        ""
-      ],
-      "could not be resumed": [
-        ""
-      ],
-      "task has to be resumable": [
-        ""
-      ],
-      "was cancelled": [
-        ""
-      ],
-      "task has to be cancellable": [
-        ""
-      ],
-      "resources were unlocked with force.": [
-        ""
-      ],
-      "cannot be cancelled with force at the moment.": [
-        ""
-      ],
-      "resources were unlocked ": [
-        ""
-      ],
-      "resources cannot be unlocked at the moment.": [
-        ""
-      ],
-      "I understand that this may cause harm and have working database backups of all backend services.": [
-        "Я осознаю, что эта операция может повредить данные, и подтверждаю, что у меня есть резервные копии баз данных для всех базовых служб."
-      ],
-      "Unlock": [
-        "Разблокировать"
-      ],
-      "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed.": [
-        "В результате выполнения этого действия ресурсы, занятые этой задачей, будут разблокированы. Стоит помнить, что это может оставить данные в несогласованном состоянии, поэтому должно использоваться с осторожностью, и только если продолжение выполнения задачи обычными способами невозможно."
       ],
       "Force Unlock": [
         "Принудительно разблокировать"
       ],
-      "Resources for %s task(s) will be unlocked and will not prevent other tasks from being run. As the task(s) might be still running, it should be avoided to use this unless you are really sure the task(s) got stuck.": [
+      "Foreman Tasks": [
         ""
       ],
-      "Execution plan data not available ": [
+      "Fri": [
+        "Пт"
+      ],
+      "I understand that this may cause harm and have working database backups of all backend services.": [
+        "Я осознаю, что эта операция может повредить данные, и подтверждаю, что у меня есть резервные копии баз данных для всех базовых служб."
+      ],
+      "ID": [
+        "Идентификатор"
+      ],
+      "Id": [
+        "Идентификатор"
+      ],
+      "Immediate": [
+        "Немедленный"
+      ],
+      "Import Puppet classes": [
+        "Импорт классов Puppet"
+      ],
+      "Import facts": [
+        "Импорт фактов"
+      ],
+      "Indicates that the action should be cancelled if it cannot be started before this time.": [
+        "Обозначает, что действие следует отменить, если оно не будет запущено до указанного времени."
+      ],
+      "Initialization error: %s": [
+        "Ошибка инициализации: %s"
+      ],
+      "Input": [
+        "Вход"
+      ],
+      "Iteration limit": [
+        "Максимальное число итераций"
+      ],
+      "Label": [
+        "Метка"
+      ],
+      "Last occurrence": [
+        "Последнее событие"
+      ],
+      "Last start time": [
+        ""
+      ],
+      "Latest Warning/Error Tasks": [
+        "Последние предупреждения и ошибки"
+      ],
+      "Less than a second": [
+        ""
+      ],
+      "List of tasks": [
+        ""
+      ],
+      "List recurring logics": [
+        "Показать правила периодического выполнения"
+      ],
+      "List tasks": [
+        "Список задач"
+      ],
+      "Locks": [
+        "Блокировки"
+      ],
+      "Long running tasks": [
+        ""
+      ],
+      "Mon": [
+        "Пн"
+      ],
+      "More details": [
+        ""
+      ],
+      "More than": [
+        ""
+      ],
+      "N/A": [
+        "Недоступно"
+      ],
+      "Name": [
+        "Название"
+      ],
+      "Never": [
+        "Никогда"
+      ],
+      "Next occurrence": [
+        "Следующее событие"
+      ],
+      "No": [
+        "Нет"
+      ],
+      "No Tasks": [
         ""
       ],
       "No errors": [
         "Нет ошибок"
       ],
-      "Input": [
-        "Вход"
-      ],
-      "Output": [
-        "Вывод"
-      ],
-      "Exception": [
-        "Исключение"
-      ],
-      "Backtrace": [
-        "Стек вызовов"
-      ],
-      "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource": [
+      "No proxy defined for execution": [
         ""
-      ],
-      "Id": [
-        "Идентификатор"
-      ],
-      "Duration": [
-        "Продолжительность"
-      ],
-      "Raw input": [
-        "Необработанные исходные данные"
-      ],
-      "Raw output": [
-        "Необработанный вывод"
-      ],
-      "External Id": [
-        "Внешний идентификатор"
       ],
       "No running steps": [
         "Нет действий."
       ],
-      "You do not have permission": [
+      "No start or end dates": [
         ""
       ],
-      "Setting is off": [
+      "No task could be started": [
         ""
       ],
-      "Stop auto-reloading": [
-        "Отменить автоматическое обновление"
+      "No. of Tasks": [
+        "Число задач"
       ],
-      "Start auto-reloading": [
-        "Включить автоматическое обновление"
-      ],
-      "Dynflow console": [
-        "Консоль Dynflow"
-      ],
-      "Resume": [
-        "Возобновить"
-      ],
-      "Parent task": [
-        "Родительская задача"
-      ],
-      "seconds": [
-        "секунд"
-      ],
-      "Complete": [
+      "Not all the selected tasks can be cancelled": [
         ""
       ],
-      "Troubleshooting": [
-        "Диагностика"
-      ],
-      "Output:": [
+      "Not all the selected tasks can be resumed": [
         ""
       ],
-      "Errors:": [
+      "Number of attempts to start a task on the smart proxy before failing": [
+        "Максимальное число повторных попыток запуска задачи на капсуле"
+      ],
+      "Number of seconds to wait for synchronous task to finish.": [
         ""
       ],
-      "Could not receive data: %s": [
+      "Number of tasks which should be sent to the smart proxy in one request, if foreman_tasks_proxy_batch_trigger is enabled": [
         ""
       ],
-      "Task": [
-        "Задача"
+      "On": [
+        "Настроить"
       ],
-      "Running Steps": [
-        "Последовательность действий"
-      ],
-      "Errors": [
-        "Ошибки"
-      ],
-      "Locks": [
-        "Блокировки"
-      ],
-      "Raw": [
-        "Необработанные параметры"
-      ],
-      "Trying to cancel step": [
-        ""
-      ],
-      "Step Canceled": [
-        ""
-      ],
-      "Could not cancel step.": [
-        ""
-      ],
-      "Paused": [
-        "Приостановлена"
-      ],
-      "Running": [
-        "Работает"
-      ],
-      "Scheduled": [
-        ""
-      ],
-      "Total": [
-        "Всего"
+      "Operation": [
+        "Операция"
       ],
       "Other includes all stopped tasks that are cancelled or pending": [
         ""
@@ -717,182 +419,480 @@
       "Other:": [
         ""
       ],
-      "Stopped": [
+      "Output": [
+        "Вывод"
+      ],
+      "Output:": [
         ""
       ],
-      "%(last)s Last %(time)s": [
+      "Parent task": [
+        "Родительская задача"
+      ],
+      "Paused": [
+        "Приостановлена"
+      ],
+      "Please inspect their state, fix their errors and resume them.": [
+        "Проверьте их состояние, исправьте ошибки и перезапустите еще раз."
+      ],
+      "Please provide a search parameter in the request": [
         ""
       ],
-      "%(older)s Older %(time)s": [
+      "Please provide at least one of search or task_ids parameters in the request": [
         ""
       ],
-      "Active Filters:": [
+      "Polling intervals multiplier": [
         ""
       ],
-      "Clear All Filters": [
+      "Polling multiplier which is used to multiply the default polling intervals. This can be used to prevent polling too frequently for long running tasks.": [
         ""
       ],
-      "With focus on last": [
+      "Proxy action retry count": [
         ""
       ],
-      "state": [
-        "состояние"
-      ],
-      "result": [
+      "Proxy action retry interval": [
         ""
       ],
-      "mode": [
+      "Proxy task gone missing from the smart proxy": [
         ""
       ],
-      "time": [
+      "Proxy tasks batch size": [
         ""
       ],
-      "running": [
-        "выполняется"
-      ],
-      "paused": [
+      "Purpose": [
         ""
       ],
-      "stopped": [
+      "Raw": [
+        "Необработанные параметры"
+      ],
+      "Raw input": [
+        "Необработанные исходные данные"
+      ],
+      "Raw output": [
+        "Необработанный вывод"
+      ],
+      "Recurring Logics": [
         ""
       ],
-      "scheduled": [
+      "Recurring logic": [
+        "Периодическое выполнение"
+      ],
+      "Recurring logics": [
+        "Правила периодического выполнения"
+      ],
+      "Refresh Data": [
         ""
       ],
-      "error": [
+      "Repeat N times": [
+        "Количество повторений"
+      ],
+      "Repeat until": [
+        "Повторять до"
+      ],
+      "Repeats": [
+        "Повторяется"
+      ],
+      "Require auth for dynflow console": [
         ""
       ],
-      "warning": [
+      "Require user to be authenticated as user with admin rights when accessing dynflow console": [
+        "Разрешать доступ к консоли Dynflow только пользователям с правами администратора"
+      ],
+      "Required lock is already taken by other running tasks.": [
+        "Ресурс блокируется другими задачами."
+      ],
+      "Resource search_params requires resource_type and resource_id to be specified": [
+        "Для того чтобы настроить search_params для ресурса, необходимо установить resource_id"
+      ],
+      "Resources for %s task(s) will be unlocked and will not prevent other tasks from being run. As the task(s) might be still running, it should be avoided to use this unless you are really sure the task(s) got stuck.": [
         ""
       ],
-      "success": [
-        "успешно"
+      "Result": [
+        "Результат"
       ],
-      "other": [
+      "Resume": [
+        "Возобновить"
+      ],
+      "Resume Selected": [
         ""
       ],
-      "last": [
+      "Resume all paused error tasks": [
+        "Возобновить все приостановленные задачи"
+      ],
+      "Resume selected tasks": [
         ""
       ],
-      "older": [
+      "Resume specific tasks by ID": [
+        "Возобновить выборочные задачи по идентификатору"
+      ],
+      "Resume tasks matching search string": [
+        "Возобновить задачи, соответствующие строке поиска"
+      ],
+      "Resuming selected tasks, this might take a while": [
         ""
       ],
-      "24h": [
+      "Running": [
+        "Работает"
+      ],
+      "Running Steps": [
+        "Последовательность действий"
+      ],
+      "Sat": [
+        "Сб"
+      ],
+      "Schedule": [
+        "Расписание"
+      ],
+      "Schedule future execution": [
+        "Настроить время запуска"
+      ],
+      "Scheduled": [
         ""
       ],
-      "12h": [
-        ""
+      "Search query": [
+        "Поисковый запрос"
       ],
-      "week": [
+      "See %{link} for more details on how to resolve the issue": [
         ""
       ],
       "Select Action": [
         "Действия"
       ],
-      "Cancel selected tasks": [
-        ""
-      ],
-      "Cancel Selected": [
-        ""
-      ],
-      "Resume selected tasks": [
-        ""
-      ],
-      "Resume Selected": [
-        ""
-      ],
-      "Force Cancel selected tasks": [
-        ""
-      ],
-      "Force Cancel Selected": [
-        ""
-      ],
-      "%s Selected Tasks": [
-        ""
-      ],
-      "This will %(action)s %(number)s task(s), putting them in the %(state)s state. Are you sure?": [
-        ""
-      ],
-      "No": [
-        "Нет"
-      ],
-      "Yes": [
-        "Да"
-      ],
       "Select all {count} tasks": [
         ""
-      ],
-      "All %s tasks are selected.": [
-        ""
-      ],
-      "Undo selection": [
-        "Отменить выбор"
       ],
       "Select row": [
         ""
       ],
-      "Sub tasks of %s": [
+      "Send data to the task from external executor (such as smart_proxy_dynflow)": [
+        "Отправить задаче данные от внешнего исполнителя (например, от smart_proxy_dynflow)"
+      ],
+      "Set up recurring execution": [
+        "Настроить многократное выполнение"
+      ],
+      "Setting is off": [
         ""
       ],
-      "Cannot resume tasks at the moment": [
-        ""
+      "Show recurring logic details": [
+        "Показать параметры периодического выполнения"
       ],
-      "Not all the selected tasks can be resumed": [
-        ""
+      "Start at": [
+        "Время запуска"
       ],
-      "Resuming selected tasks, this might take a while": [
-        ""
+      "Start auto-reloading": [
+        "Включить автоматическое обновление"
       ],
-      "Cannot cancel tasks at the moment": [
-        ""
+      "Start before": [
+        "Не позже чем"
       ],
-      "Canceling selected tasks, this might take a while": [
-        ""
-      ],
-      "Not all the selected tasks can be cancelled": [
-        ""
-      ],
-      "Cannot force cancel tasks at the moment": [
-        ""
-      ],
-      "Canceling with force selected tasks, this might take a while": [
-        ""
-      ],
-      "No Tasks": [
-        ""
-      ],
-      "No start or end dates": [
-        ""
-      ],
-      "Task was canceled": [
-        ""
-      ],
-      "More than": [
-        ""
-      ],
-      "Less than a second": [
-        ""
-      ],
-      "Refresh Data": [
-        ""
-      ],
-      "Export All": [
+      "Started": [
         ""
       ],
       "Started at": [
         "Время начала"
       ],
-      "Operation": [
-        "Операция"
+      "State": [
+        "Состояние"
+      ],
+      "State updated at": [
+        ""
+      ],
+      "Step Canceled": [
+        ""
+      ],
+      "Stop auto-reloading": [
+        "Отменить автоматическое обновление"
+      ],
+      "Stop selected stoppable tasks": [
+        ""
+      ],
+      "Stop specific tasks by ID": [
+        ""
+      ],
+      "Stop tasks matching search string": [
+        ""
+      ],
+      "Stopped": [
+        ""
+      ],
+      "Sub tasks": [
+        "Подзадачи"
+      ],
+      "Sub tasks of %s": [
+        ""
+      ],
+      "Subscribe": [
+        ""
+      ],
+      "Sun": [
+        "Вс"
+      ],
+      "Sync task timeout": [
+        ""
+      ],
+      "Task": [
+        "Задача"
+      ],
+      "Task Details": [
+        "Описание задачи"
+      ],
+      "Task Status": [
+        "Статус задачи"
+      ],
+      "Task aborted: the task might be still running on the proxy": [
+        ""
       ],
       "Task cannot be canceled": [
         ""
       ],
-      "Force Cancel": [
+      "Task count": [
+        "Количество задач"
+      ],
+      "Task group common": [
+        "Общие для групп"
+      ],
+      "Task search_params requires task_id to be specified": [
+        "Для того чтобы настроить search_params для задачи, необходимо установить task_id"
+      ],
+      "Task was canceled": [
         ""
       ],
-      "Action with sub plans": [
-        "Действия с подпланами"
+      "Tasks": [
+        "Задачи"
+      ],
+      "Tasks lingering in states %{states} since %{time}": [
+        ""
+      ],
+      "Tasks pending since %s": [
+        ""
+      ],
+      "Tasks troubleshooting URL": [
+        ""
+      ],
+      "The ID of the step inside the execution plan to send the event to": [
+        "Идентификатор этапа в плане исполнения, которому будет отправлено событие"
+      ],
+      "The recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task.": [
+        ""
+      ],
+      "The recurring logic was disabled.": [
+        ""
+      ],
+      "The recurring logic was enabled.": [
+        ""
+      ],
+      "The smart proxy task %s failed.": [
+        "Ошибка выполнения задачи %s на смарт-прокси."
+      ],
+      "The targets are of different types": [
+        "Попытка выполнения действия над разными типами объектов"
+      ],
+      "The task cannot be aborted at the moment.": [
+        ""
+      ],
+      "The task could not be started": [
+        ""
+      ],
+      "There is %{count} paused task in the system that need attention": [
+        "",
+        ""
+      ],
+      "This action will delete all cancelled recurring logics. Please note that this action can't be reversed.": [
+        ""
+      ],
+      "This will %(action)s %(number)s task(s), putting them in the %(state)s state. Are you sure?": [
+        ""
+      ],
+      "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed.": [
+        "В результате выполнения этого действия ресурсы, занятые этой задачей, будут разблокированы. Стоит помнить, что это может оставить данные в несогласованном состоянии, поэтому должно использоваться с осторожностью, и только если продолжение выполнения задачи обычными способами невозможно."
+      ],
+      "Thu": [
+        "Чт"
+      ],
+      "Time in seconds between retries": [
+        "Интервал повтора (в секундах)"
+      ],
+      "Total": [
+        "Всего"
+      ],
+      "Troubleshooting": [
+        "Диагностика"
+      ],
+      "Trying to abort the task": [
+        ""
+      ],
+      "Trying to cancel step": [
+        ""
+      ],
+      "Tue": [
+        "Вт"
+      ],
+      "Type %s for search_params is not supported": [
+        "search_params не поддерживает тип %s"
+      ],
+      "UUID of the task": [
+        "UUUID задачи"
+      ],
+      "Unable to create mail notification: %s": [
+        ""
+      ],
+      "Unable to enable mail notification to user '%s': %s": [
+        ""
+      ],
+      "Undo selection": [
+        "Отменить выбор"
+      ],
+      "Unlimited": [
+        "∞"
+      ],
+      "Unlock": [
+        "Разблокировать"
+      ],
+      "Update recurring logic": [
+        ""
+      ],
+      "Url pointing to the task troubleshooting documentation. It should contain %{label} placeholder, that will be replaced with normalized task label (restricted to only alphanumeric characters)). %{version} placeholder is also available.": [
+        ""
+      ],
+      "User search_params requires user_id to be specified": [
+        "Для того чтобы настроить search_params для пользователя, необходимо установить user_id"
+      ],
+      "Wed": [
+        "Ср"
+      ],
+      "With focus on last": [
+        ""
+      ],
+      "Yes": [
+        "Да"
+      ],
+      "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource": [
+        ""
+      ],
+      "You do not have permission": [
+        ""
+      ],
+      "activation key": [
+        "ключ активации"
+      ],
+      "cannot be cancelled with force at the moment.": [
+        ""
+      ],
+      "content view": [
+        "представление"
+      ],
+      "content view version": [
+        "версия представления"
+      ],
+      "could not be resumed": [
+        ""
+      ],
+      "error": [
+        ""
+      ],
+      "is day of month (range: 1-31)": [
+        "— день месяца (1–31)"
+      ],
+      "is day of week (range: 0-6)": [
+        "— день недели (0–6)"
+      ],
+      "is hour (range: 0-23)": [
+        "— часы (1–24)"
+      ],
+      "is minute (range: 0-59)": [
+        "— минуты (0–59)"
+      ],
+      "is month (range: 1-12)": [
+        "— месяц (1–12)"
+      ],
+      "is not a valid format": [
+        ""
+      ],
+      "last": [
+        ""
+      ],
+      "mode": [
+        ""
+      ],
+      "mode has to be one of %{allowed_modes}": [
+        ""
+      ],
+      "older": [
+        ""
+      ],
+      "organization": [
+        "организация"
+      ],
+      "other": [
+        ""
+      ],
+      "paused": [
+        ""
+      ],
+      "product": [
+        "продукт"
+      ],
+      "repository": [
+        "репозиторий"
+      ],
+      "resources cannot be unlocked at the moment.": [
+        ""
+      ],
+      "resources were unlocked ": [
+        ""
+      ],
+      "resources were unlocked with force.": [
+        ""
+      ],
+      "result": [
+        ""
+      ],
+      "running": [
+        "выполняется"
+      ],
+      "scheduled": [
+        ""
+      ],
+      "seconds": [
+        "секунд"
+      ],
+      "state": [
+        "состояние"
+      ],
+      "stopped": [
+        ""
+      ],
+      "success": [
+        "успешно"
+      ],
+      "system": [
+        "система"
+      ],
+      "task has to be cancellable": [
+        ""
+      ],
+      "task has to be resumable": [
+        ""
+      ],
+      "time": [
+        ""
+      ],
+      "troubleshooting documentation": [
+        ""
+      ],
+      "user": [
+        "пользователь"
+      ],
+      "warning": [
+        ""
+      ],
+      "was cancelled": [
+        ""
+      ],
+      "was resumed": [
+        ""
+      ],
+      "week": [
+        ""
       ]
     }
   }

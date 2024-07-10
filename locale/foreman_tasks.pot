@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_tasks 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-28 22:09+0100\n"
-"PO-Revision-Date: 2023-11-28 22:09+0100\n"
+"POT-Creation-Date: 2024-07-10 19:55+0200\n"
+"PO-Revision-Date: 2024-07-10 19:55+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -312,15 +312,15 @@ msgstr ""
 msgid "%{total} task(s), %{success} success, %{failed} fail"
 msgstr ""
 
-#: ../app/lib/actions/bulk_action.rb:28
+#: ../app/lib/actions/bulk_action.rb:29
 msgid "Bulk action"
 msgstr ""
 
-#: ../app/lib/actions/bulk_action.rb:62
+#: ../app/lib/actions/bulk_action.rb:63
 msgid "Empty bulk action"
 msgstr ""
 
-#: ../app/lib/actions/bulk_action.rb:64
+#: ../app/lib/actions/bulk_action.rb:65
 msgid "The targets are of different types"
 msgstr ""
 
@@ -1049,11 +1049,11 @@ msgstr ""
 msgid "Trying to cancel step"
 msgstr ""
 
-#: ../webpack/ForemanTasks/Components/TaskDetails/TaskDetailsActions.js:45
+#: ../webpack/ForemanTasks/Components/TaskDetails/TaskDetailsActions.js:46
 msgid "Step Canceled"
 msgstr ""
 
-#: ../webpack/ForemanTasks/Components/TaskDetails/TaskDetailsActions.js:51
+#: ../webpack/ForemanTasks/Components/TaskDetails/TaskDetailsActions.js:53
 msgid "Could not cancel step."
 msgstr ""
 
