@@ -7,7 +7,7 @@
 # Claer <transiblu@claer.hammock.fr>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_tasks 8.0.1\n"
+"Project-Id-Version: foreman_tasks 9.2.2\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-12 14:04+0000\n"
 "Last-Translator: Claer <transiblu@claer.hammock.fr>, 2016\n"
@@ -32,7 +32,7 @@ msgid "%s is not valid format of cron line"
 msgstr "%s n'est pas un format valide de ligne cron"
 
 msgid "%{count} tasks are in running or paused state for more than a day"
-msgstr ""
+msgstr "%{count} les tâches sont en cours d'exécution ou en pause depuis plus d'une journée"
 
 msgid "%{total} task(s), %{success} success, %{failed} fail"
 msgstr "%{total} tâche(s), %{success} succès, %{failed} échec"
@@ -53,7 +53,7 @@ msgid "24h"
 msgstr "24h"
 
 msgid "A notification when tasks run for suspiciously long time"
-msgstr ""
+msgstr "Une notification lorsque les tâches s'exécutent pendant une durée suspecte"
 
 msgid "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved."
 msgstr "Une tâche en pause représente un processus qui ne s'est pas terminé correctement. Toute tâche en état de pause peut entraîner une incohérence potentielle et doit être résolue."
@@ -74,10 +74,10 @@ msgid "Active Filters:"
 msgstr "Filtres actifs :"
 
 msgid "Active or disabled recurring logic with purpose %s already exists"
-msgstr "La logique récurrente active ou désactivée avec l'objectif %s existe déjà."
+msgstr "La logique récurrente active ou désactivée avec l'objectif %s existe déjà"
 
 msgid "All %s tasks are selected."
-msgstr ""
+msgstr "Toutes les tâches %s sont sélectionnées."
 
 msgid "All proxies with the required feature are unavailable at the moment"
 msgstr "Les proxys possédant les fonctionnalités demandées ne sont pas disponibles actuellement"
@@ -150,10 +150,10 @@ msgid "Cannot update a cancelled Recurring Logic."
 msgstr "Impossible de mettre à jour une logique récurrente annulée."
 
 msgid "Changing request id %{request_id} to saved id %{saved_id}"
-msgstr "Changement de l'id de la demande %{request_id} en id %{saved_id} sauvegardée"
+msgstr "Changement de l'id de la demande %%{request_id} en id %%{saved_id} sauvegardée"
 
 msgid "Check for long running tasks"
-msgstr ""
+msgstr "Rechercher les tâches de longue durée"
 
 msgid "Clear All Filters"
 msgstr "Afficher tous les filtres"
@@ -171,7 +171,7 @@ msgid "Could not cancel step."
 msgstr "N’a pas pu annuler l'étape."
 
 msgid "Could not receive data: %s"
-msgstr ""
+msgstr "Impossible de recevoir les données : %s"
 
 msgid "Cron line"
 msgstr "Ligne Cron"
@@ -198,13 +198,13 @@ msgid "Delete recurring logics by search query"
 msgstr "Supprimer les logiques récurrentes par requête de recherche"
 
 msgid "Deliver notifications about long running tasks"
-msgstr ""
+msgstr "Envoyez des notifications sur les tâches de longue durée"
 
 msgid "Details"
 msgstr "Détails"
 
 msgid "Details of %s task"
-msgstr "Détails de la tâche %s "
+msgstr "Détails de la tâche %s"
 
 msgid "Disable"
 msgstr "Désactiver"
@@ -243,7 +243,7 @@ msgid "Errors:"
 msgstr "Erreurs :"
 
 msgid "Event delivered by request %{request_id}"
-msgstr "Événement livré sur demande %{request_id}"
+msgstr "Événement livré sur demande %%{request_id}"
 
 msgid "Exception"
 msgstr "Exception"
@@ -255,7 +255,7 @@ msgid "Execution plan data not available "
 msgstr "Données du plan d'exécution non disponibles"
 
 msgid "Export All"
-msgstr "Tout Exporter"
+msgstr "Tout exporter"
 
 msgid "External Id"
 msgstr "Id Externe"
@@ -267,7 +267,7 @@ msgid "Failed to initialize"
 msgstr "L'initialisation a échoué"
 
 msgid "Failed to trigger task on the smart proxy: "
-msgstr ""
+msgstr "Échec du déclenchement de la tâche sur le proxy intelligent : "
 
 msgid "Finished"
 msgstr "Terminé"
@@ -288,7 +288,7 @@ msgid "Foreman Tasks"
 msgstr "Tâches Foreman"
 
 msgid "Fri"
-msgstr "Ven."
+msgstr "Ven"
 
 msgid "I understand that this may cause harm and have working database backups of all backend services."
 msgstr "Je comprends que cela risque de créer des dommages et toutes mes bases de données en cours sont sauvegardées pour tous les services de backend."
@@ -348,13 +348,13 @@ msgid "Locks"
 msgstr "Verrous"
 
 msgid "Long running tasks"
-msgstr ""
+msgstr "Tâches de longue durée"
 
 msgid "Mon"
-msgstr "Lun."
+msgstr "Lun"
 
 msgid "More details"
-msgstr ""
+msgstr "Plus de détails"
 
 msgid "More than"
 msgstr "Plus de"
@@ -381,7 +381,7 @@ msgid "No errors"
 msgstr "Aucune erreur"
 
 msgid "No proxy defined for execution"
-msgstr "Aucun proxy Puppet défini  pour l'exécution"
+msgstr "Aucun proxy défini pour l'exécution"
 
 msgid "No running steps"
 msgstr "Aucune étape en cours"
@@ -499,7 +499,7 @@ msgid "Require auth for dynflow console"
 msgstr "Exiger l'authentification pour la console dynflow"
 
 msgid "Require user to be authenticated as user with admin rights when accessing dynflow console"
-msgstr "Exige que l'utilisateur soir authentifié en tant qu'utilisateur avec un accès admin pour accéder à la concole dynflow"
+msgstr "Exige que l'utilisateur soir authentifié en tant qu'utilisateur avec un accès admin pour accéder à la console dynflow"
 
 msgid "Required lock is already taken by other running tasks."
 msgstr "Le verrouillage requis est déjà utilisé par d'autres tâches en cours."
@@ -541,7 +541,7 @@ msgid "Running Steps"
 msgstr "Étapes en cours"
 
 msgid "Sat"
-msgstr "Sam."
+msgstr "Sam"
 
 msgid "Schedule"
 msgstr "Programmer"
@@ -562,13 +562,13 @@ msgid "Select Action"
 msgstr "Choisir l'action"
 
 msgid "Select all {count} tasks"
-msgstr ""
+msgstr "Sélectionner toutes les tâches {count} "
 
 msgid "Select row"
 msgstr "Sélectionner une ligne"
 
 msgid "Send data to the task from external executor (such as smart_proxy_dynflow)"
-msgstr "Envoie les données à la tâche à partir d'un exécuteur exérieur (tel que smart_proxy_dynflow)"
+msgstr "Envoie les données à la tâche à partir d'un exécuteur extérieur (tel que smart_proxy_dynflow)"
 
 msgid "Set up recurring execution"
 msgstr "Mettre en place une exécution périodique"
@@ -598,7 +598,7 @@ msgid "State"
 msgstr "État"
 
 msgid "State updated at"
-msgstr ""
+msgstr "État mis à jour à"
 
 msgid "Step Canceled"
 msgstr "Étape annulée"
@@ -610,7 +610,7 @@ msgid "Stop selected stoppable tasks"
 msgstr "Arrêter les tâches sélectionnées pouvant être arrêtées"
 
 msgid "Stop specific tasks by ID"
-msgstr "Annuler les tâches spécifiques par ID"
+msgstr "Arrêter les tâches spécifiques par ID"
 
 msgid "Stop tasks matching search string"
 msgstr "Annuler toutes le tâches correspondant à la chaîne de recherche"
@@ -625,10 +625,10 @@ msgid "Sub tasks of %s"
 msgstr "Sous-tâches de %s"
 
 msgid "Subscribe"
-msgstr ""
+msgstr "S'abonner"
 
 msgid "Sun"
-msgstr "Dim."
+msgstr "Dim"
 
 msgid "Sync task timeout"
 msgstr "Délai d'attente de la tâche de synchronisation"
@@ -664,10 +664,10 @@ msgid "Tasks"
 msgstr "Tâches"
 
 msgid "Tasks lingering in states %{states} since %{time}"
-msgstr ""
+msgstr "Tâches persistantes dans les États%{states} depuis %{time}"
 
 msgid "Tasks pending since %s"
-msgstr ""
+msgstr "Tâches en attente depuis %s"
 
 msgid "Tasks troubleshooting URL"
 msgstr "URL de résolution de problème"
@@ -712,7 +712,7 @@ msgid "This will unlock the resources that the task is running against. Please n
 msgstr "Cela débloquera les ressources avec lesquelles la tâche s'exécute. Veuillez noter que ceci peut conduire à un état incohérent et doit être utilisé avec prudence, après s'être assuré que la tâche ne peut pas être terminée."
 
 msgid "Thu"
-msgstr "Jeu."
+msgstr "Jeu"
 
 msgid "Time in seconds between retries"
 msgstr "Durée en secondes entre les tentatives"
@@ -730,7 +730,7 @@ msgid "Trying to cancel step"
 msgstr "Tentative d'annulation de l'étape"
 
 msgid "Tue"
-msgstr "Mar."
+msgstr "Mar"
 
 msgid "Type %s for search_params is not supported"
 msgstr "Type %s n'est pas supporté pour search_params"
@@ -739,10 +739,10 @@ msgid "UUID of the task"
 msgstr "UUID de la tâche"
 
 msgid "Unable to create mail notification: %s"
-msgstr ""
+msgstr "Impossible de créer une notification par e-mail : %s"
 
 msgid "Unable to enable mail notification to user '%s': %s"
-msgstr ""
+msgstr "Impossible d'activer la notification par courrier électronique à l'utilisateur '%s ' : %s"
 
 msgid "Undo selection"
 msgstr "Annuler la sélection"
@@ -763,7 +763,7 @@ msgid "User search_params requires user_id to be specified"
 msgstr "Utilisateur search_params a besoin que user_id soit spécifié"
 
 msgid "Wed"
-msgstr "Mer."
+msgstr "Mer"
 
 msgid "With focus on last"
 msgstr "En se concentrant sur la dernière"
@@ -772,7 +772,7 @@ msgid "Yes"
 msgstr "Oui"
 
 msgid "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource"
-msgstr "Vous pouvez trouver des verrous de ressources sur cette page. Un verrou exclusif marqué avec une icône verrouillée signifie qu’aucun une autre tâche ne peut utiliser la ressource verrouillée pendant l’exécution de cette tâche. Un verrou non exclusif marqué avec un icône déverrouillé signifie que d'autres tâches peuvent librement accéder à la ressource. N’est utilisé que pour indiquer la relation de cette tâche avec la ressource."
+msgstr "Vous pouvez trouver des verrous de ressources sur cette page. Un verrou exclusif marqué avec une icône verrouillée signifie qu’aucun une autre tâche ne peut utiliser la ressource verrouillée pendant l’exécution de cette tâche. Un verrou non exclusif marqué avec un icône déverrouillé signifie que d'autres tâches peuvent librement accéder à la ressource. N’est utilisé que pour indiquer la relation de cette tâche avec la ressource"
 
 msgid "You do not have permission"
 msgstr "Vous ne disposez pas des droits nécessaires"
@@ -825,7 +825,7 @@ msgid "mode"
 msgstr "mode"
 
 msgid "mode has to be one of %{allowed_modes}"
-msgstr "mode doit être un parmi %{allowed_modes}"
+msgstr "mode doit être un parmi %%{allowed_modes}"
 
 msgid "older"
 msgstr "plus ancien"
@@ -852,7 +852,7 @@ msgid "resources were unlocked "
 msgstr "les ressources ont été déverrouillées"
 
 msgid "resources were unlocked with force."
-msgstr "les ressources de la tâche ont été déverrouillées en force"
+msgstr "les ressources de la tâche ont été déverrouillées en force."
 
 msgid "result"
 msgstr "résultat"
@@ -867,7 +867,7 @@ msgid "seconds"
 msgstr "secondes"
 
 msgid "state"
-msgstr "État "
+msgstr "état"
 
 msgid "stopped"
 msgstr "arrêté"
@@ -897,7 +897,7 @@ msgid "warning"
 msgstr "avertissement"
 
 msgid "was cancelled"
-msgstr "a été annulée."
+msgstr "a été annulée"
 
 msgid "was resumed"
 msgstr "a été reprise"

@@ -5,7 +5,7 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_tasks 8.0.1\n"
+"Project-Id-Version: foreman_tasks 9.2.2\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-12 14:04+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -352,7 +352,7 @@ msgid "Mon"
 msgstr "週一"
 
 msgid "More details"
-msgstr ""
+msgstr "更多詳細資訊"
 
 msgid "More than"
 msgstr ""
@@ -623,7 +623,7 @@ msgid "Sub tasks of %s"
 msgstr ""
 
 msgid "Subscribe"
-msgstr ""
+msgstr "訂閱"
 
 msgid "Sun"
 msgstr "週日"

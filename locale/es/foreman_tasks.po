@@ -7,7 +7,7 @@
 # francis <hackgo@gmail.com>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_tasks 8.0.1\n"
+"Project-Id-Version: foreman_tasks 9.2.2\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-12 14:04+0000\n"
 "Last-Translator: francis <hackgo@gmail.com>, 2017\n"
@@ -21,16 +21,16 @@ msgstr ""
 " 2;\n"
 
 msgid "%(last)s Last %(time)s"
-msgstr "%(last)s Última %(time)s"
+msgstr "último"
 
 msgid "%(older)s Older %(time)s"
-msgstr "%(older)s Más antiguos %(time)s"
+msgstr "más antiguo"
 
 msgid "%s Selected Tasks"
 msgstr "%s Tareas seleccionadas"
 
 msgid "%s is not valid format of cron line"
-msgstr "%s no es un formato válido de línea cron"
+msgstr "%s no tiene formato válido de la línea Cron."
 
 msgid "%{count} tasks are in running or paused state for more than a day"
 msgstr ""
@@ -178,7 +178,7 @@ msgid "Cron line"
 msgstr "Línea Cron"
 
 msgid "Cron line format 'a b c d e', where: %s"
-msgstr "Cron formato de línea 'a b c d e', donde: %s"
+msgstr "Formato de la línea Cron 'a b c d e', donde: %s"
 
 msgid "Current iteration"
 msgstr "Iteración actual"
@@ -355,7 +355,7 @@ msgid "Mon"
 msgstr "Lun"
 
 msgid "More details"
-msgstr ""
+msgstr "Más información"
 
 msgid "More than"
 msgstr "Más de"
@@ -422,7 +422,7 @@ msgid "Other includes all stopped tasks that are cancelled or pending"
 msgstr "Otros incluye todas las tareas paradas que están canceladas o pendientes"
 
 msgid "Other:"
-msgstr "Otros:"
+msgstr "Otro"
 
 msgid "Output"
 msgstr "Salida"
@@ -509,7 +509,7 @@ msgid "Resource search_params requires resource_type and resource_id to be speci
 msgstr "search_params del recurso requiere que se especifique resource_type y resource_id."
 
 msgid "Resources for %s task(s) will be unlocked and will not prevent other tasks from being run. As the task(s) might be still running, it should be avoided to use this unless you are really sure the task(s) got stuck."
-msgstr "Los recursos de la(s) tarea(s) %s se desbloquearán y no impedirán la ejecución de otras tareas. Dado que la(s) tarea(s) puede(n) estar aún en ejecución, debe evitarse utilizar esta opción a menos que se esté realmente seguro de que la(s) tarea(s) se ha(n) quedado bloqueada(s)."
+msgstr "Los recursos se desbloquearán y no se evitará que otras tareas se ejecuten. Dado que es posible que la tarea se esté ejecutando, se debe evitar el uso de esta acción a menos que se esté realmente seguro de que la tarea se atascó."
 
 msgid "Result"
 msgstr "Resultado:"
@@ -626,7 +626,7 @@ msgid "Sub tasks of %s"
 msgstr "Subtareas de %s"
 
 msgid "Subscribe"
-msgstr ""
+msgstr "Suscribir"
 
 msgid "Sun"
 msgstr "Dom"
@@ -734,13 +734,13 @@ msgid "Tue"
 msgstr "Mar"
 
 msgid "Type %s for search_params is not supported"
-msgstr "No se admite el tipo %s para search_params"
+msgstr "El tipo %s para search_params no se admite."
 
 msgid "UUID of the task"
 msgstr "UUID de la tarea"
 
 msgid "Unable to create mail notification: %s"
-msgstr ""
+msgstr "No se pudo crear la notificación de correo: %s"
 
 msgid "Unable to enable mail notification to user '%s': %s"
 msgstr ""
@@ -758,7 +758,7 @@ msgid "Update recurring logic"
 msgstr "Actualizar lógica recurrente"
 
 msgid "Url pointing to the task troubleshooting documentation. It should contain %{label} placeholder, that will be replaced with normalized task label (restricted to only alphanumeric characters)). %{version} placeholder is also available."
-msgstr "Url que apunta a la documentación de resolución de problemas de la tarea. Debe contener el marcador de posición %{label}, que se sustituirá por la etiqueta normalizada de la tarea (restringida únicamente a caracteres alfanuméricos)). También está disponible el marcador de posición %{version}."
+msgstr "URL que lleva a la documentación de la tarea de resolución de problemas. Debe contener el marcador de posición %{label}, que será reemplazado por la etiqueta de tarea normalizada (restringida solo a caracteres alfanuméricos). También está disponible el marcador de posición %{versión}."
 
 msgid "User search_params requires user_id to be specified"
 msgstr "search_params del usuario requiere que se especifique el user_id."
@@ -835,7 +835,7 @@ msgid "organization"
 msgstr "Organización"
 
 msgid "other"
-msgstr "otros"
+msgstr "Otro"
 
 msgid "paused"
 msgstr "pausado"

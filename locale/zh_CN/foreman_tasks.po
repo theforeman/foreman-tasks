@@ -5,7 +5,7 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_tasks 8.0.1\n"
+"Project-Id-Version: foreman_tasks 9.2.2\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-12 14:04+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -30,7 +30,7 @@ msgid "%s is not valid format of cron line"
 msgstr "%s 不是正确的 cron 行"
 
 msgid "%{count} tasks are in running or paused state for more than a day"
-msgstr ""
+msgstr "%{count} 任务处于 running 或 paused 状态，持续超过一天"
 
 msgid "%{total} task(s), %{success} success, %{failed} fail"
 msgstr "%{total} 任务），%{success}成功，%{failed}失败"
@@ -51,7 +51,7 @@ msgid "24h"
 msgstr "24 小时"
 
 msgid "A notification when tasks run for suspiciously long time"
-msgstr ""
+msgstr "任务运行很长时间时发出的通知"
 
 msgid "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved."
 msgstr "暂停的任务代表未正确完成的进程。任何处于暂停状态的任务都可能导致潜在的不一致，需要被解决。"
@@ -75,7 +75,7 @@ msgid "Active or disabled recurring logic with purpose %s already exists"
 msgstr "带有目的 %s 的活跃或禁用的周期性逻辑已存在"
 
 msgid "All %s tasks are selected."
-msgstr ""
+msgstr "已选择所有%s任务。"
 
 msgid "All proxies with the required feature are unavailable at the moment"
 msgstr "具备所需功能的所有代理暂时都不可用"
@@ -145,13 +145,13 @@ msgid "Cannot resume tasks at the moment"
 msgstr "目前无法恢复任务"
 
 msgid "Cannot update a cancelled Recurring Logic."
-msgstr "无法更新一个已取消的周期性逻辑"
+msgstr "无法更新一个已取消的周期性逻辑。"
 
 msgid "Changing request id %{request_id} to saved id %{saved_id}"
-msgstr "将请求 id %{request_id} 改为保存的 id %{saved_id}"
+msgstr "将请求 id %%{request_id} 改为保存的 id %%{saved_id}"
 
 msgid "Check for long running tasks"
-msgstr ""
+msgstr "检查长时间运行的任务"
 
 msgid "Clear All Filters"
 msgstr "清除所有过滤器"
@@ -169,7 +169,7 @@ msgid "Could not cancel step."
 msgstr "无法取消步骤。"
 
 msgid "Could not receive data: %s"
-msgstr ""
+msgstr "无法接收数据：$%s"
 
 msgid "Cron line"
 msgstr "Cron 行"
@@ -196,7 +196,7 @@ msgid "Delete recurring logics by search query"
 msgstr "通过搜索查询删除重复逻辑"
 
 msgid "Deliver notifications about long running tasks"
-msgstr ""
+msgstr "提供有关长时间运行的任务的通知"
 
 msgid "Details"
 msgstr "详情"
@@ -241,7 +241,7 @@ msgid "Errors:"
 msgstr "错误："
 
 msgid "Event delivered by request %{request_id}"
-msgstr "由请求 %{request_id} 发送的事件"
+msgstr "由请求 %%{request_id} 发送的事件"
 
 msgid "Exception"
 msgstr "例外"
@@ -346,13 +346,13 @@ msgid "Locks"
 msgstr "锁"
 
 msgid "Long running tasks"
-msgstr ""
+msgstr "长时间运行的任务"
 
 msgid "Mon"
 msgstr "周一"
 
 msgid "More details"
-msgstr ""
+msgstr "更多细节"
 
 msgid "More than"
 msgstr "多于"
@@ -560,7 +560,7 @@ msgid "Select Action"
 msgstr "选择操作"
 
 msgid "Select all {count} tasks"
-msgstr ""
+msgstr "选择所有 {count} 任务"
 
 msgid "Select row"
 msgstr "选择行"
@@ -581,7 +581,7 @@ msgid "Start at"
 msgstr "开始于"
 
 msgid "Start auto-reloading"
-msgstr "开始自动重新载入"
+msgstr "開始自動載入"
 
 msgid "Start before"
 msgstr "在此时间前开始"
@@ -596,13 +596,13 @@ msgid "State"
 msgstr "状态"
 
 msgid "State updated at"
-msgstr ""
+msgstr "状态更新于"
 
 msgid "Step Canceled"
 msgstr "步骤已取消"
 
 msgid "Stop auto-reloading"
-msgstr "停止自动重新载入"
+msgstr "停止自動重新載入"
 
 msgid "Stop selected stoppable tasks"
 msgstr "停止所选的可停止的任务"
@@ -623,7 +623,7 @@ msgid "Sub tasks of %s"
 msgstr "%s 的子任务"
 
 msgid "Subscribe"
-msgstr ""
+msgstr "订阅"
 
 msgid "Sun"
 msgstr "周日"
@@ -662,10 +662,10 @@ msgid "Tasks"
 msgstr "任务"
 
 msgid "Tasks lingering in states %{states} since %{time}"
-msgstr ""
+msgstr "自 %{time} 开始，任务处于 %{states} 状态"
 
 msgid "Tasks pending since %s"
-msgstr ""
+msgstr "自 %s 的待处理的任务"
 
 msgid "Tasks troubleshooting URL"
 msgstr "任务故障排除 URL"
@@ -735,10 +735,10 @@ msgid "UUID of the task"
 msgstr "任务的 UUID"
 
 msgid "Unable to create mail notification: %s"
-msgstr ""
+msgstr "无法创建邮件通知：%s"
 
 msgid "Unable to enable mail notification to user '%s': %s"
-msgstr ""
+msgstr "无法启用发给用户 '%s' 的邮件通知：%s"
 
 msgid "Undo selection"
 msgstr "撤销选择"
@@ -821,7 +821,7 @@ msgid "mode"
 msgstr "模式"
 
 msgid "mode has to be one of %{allowed_modes}"
-msgstr "模式必须是 %{allowed_modes} 之一"
+msgstr "模式必须是 %%{allowed_modes} 之一"
 
 msgid "older"
 msgstr "较老"
@@ -893,7 +893,7 @@ msgid "warning"
 msgstr "警告"
 
 msgid "was cancelled"
-msgstr "已取消。"
+msgstr "已取消"
 
 msgid "was resumed"
 msgstr "被恢复"

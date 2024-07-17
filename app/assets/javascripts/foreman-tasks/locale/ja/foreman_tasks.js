@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman_tasks 8.0.1",
+        "Project-Id-Version": "foreman_tasks 9.2.2",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-12 14:04+0000",
         "Last-Translator": "Kazuki Omo <kazuki.omo@gmail.com>, 2019",
@@ -30,7 +30,7 @@
         "%s は有効な cron 行の形式ではありません"
       ],
       "%{count} tasks are in running or paused state for more than a day": [
-        ""
+        "%{count} 個のタスクが 1 日以上実行中または一時停止状態です"
       ],
       "%{total} task(s), %{success} success, %{failed} fail": [
         "タスク %{total} 件、成功 %{success} 件、失敗 %{failed} 件"
@@ -51,7 +51,7 @@
         "24 時間"
       ],
       "A notification when tasks run for suspiciously long time": [
-        ""
+        "タスクの実行時間が異常に長い場合の通知"
       ],
       "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved.": [
         "一時停止タスクは、適切に終了していないプロセスを表します。一時停止状態のタスクは、一貫性に欠ける可能性があり、解決する必要があります。"
@@ -75,7 +75,7 @@
         "目的が %s のアクティブまたは無効な再帰論理がすでに存在します"
       ],
       "All %s tasks are selected.": [
-        ""
+        "%s の全タスクを選択します。"
       ],
       "All proxies with the required feature are unavailable at the moment": [
         "現在、必要な機能があるすべてのプロキシーが利用できません"
@@ -147,10 +147,10 @@
         "取り消された再帰論理を更新できません"
       ],
       "Changing request id %{request_id} to saved id %{saved_id}": [
-        "要求 ID %{request_id} を保存済み ID %{saved_id} に変更しています"
+        "要求 ID %%{request_id} を保存済み ID %%{saved_id} に変更しています"
       ],
       "Check for long running tasks": [
-        ""
+        "長時間実行中のタスクの確認"
       ],
       "Clear All Filters": [
         "すべてのフィルターを消去"
@@ -168,7 +168,7 @@
         "ステップをキャンセルできませんでした。"
       ],
       "Could not receive data: %s": [
-        ""
+        "データを受信できませんでした: %s"
       ],
       "Cron line": [
         "cron 行"
@@ -195,7 +195,7 @@
         "検索クエリーでの再帰論理の削除"
       ],
       "Deliver notifications about long running tasks": [
-        ""
+        "長時間実行中のタスクに関する通知の配信"
       ],
       "Details": [
         "詳細"
@@ -240,7 +240,7 @@
         "エラー:"
       ],
       "Event delivered by request %{request_id}": [
-        "要求 ％{request_id} で配信されたイベント"
+        "要求 ％%{request_id} で配信されたイベント"
       ],
       "Exception": [
         "例外"
@@ -345,13 +345,13 @@
         "ロック"
       ],
       "Long running tasks": [
-        ""
+        "長時間実行中のタスク"
       ],
       "Mon": [
         "月"
       ],
       "More details": [
-        ""
+        "詳細"
       ],
       "More than": [
         "以下の値を超える"
@@ -408,7 +408,7 @@
         "foreman_tasks_proxy_batch_trigger が有効な場合に、1 つの要求で Smart Proxy に送信する必要があるタスクの数"
       ],
       "On": [
-        "オン"
+        "次の時刻に開始"
       ],
       "Operation": [
         "操作"
@@ -558,7 +558,7 @@
         "アクションの選択"
       ],
       "Select all {count} tasks": [
-        ""
+        "{count} 件のタスクをすべて選択"
       ],
       "Select row": [
         "行の選択"
@@ -594,7 +594,7 @@
         "状態"
       ],
       "State updated at": [
-        ""
+        "状態の更新"
       ],
       "Step Canceled": [
         "ステップがキャンセルされました"
@@ -621,7 +621,7 @@
         "%s のサブタスク"
       ],
       "Subscribe": [
-        ""
+        "サブスクライプ"
       ],
       "Sun": [
         "日"
@@ -660,10 +660,10 @@
         "タスク"
       ],
       "Tasks lingering in states %{states} since %{time}": [
-        ""
+        "%{time} 以降 %{states} 状態のままのタスク"
       ],
       "Tasks pending since %s": [
-        ""
+        "%s 以降の保留中のタスク"
       ],
       "Tasks troubleshooting URL": [
         "URL のトラブルシューティングタスク"
@@ -732,10 +732,10 @@
         "タスクの UUID"
       ],
       "Unable to create mail notification: %s": [
-        ""
+        "メールの通知を作成できません: %s"
       ],
       "Unable to enable mail notification to user '%s': %s": [
-        ""
+        "ユーザー '%s' へのメール通知を有効にできません: %s"
       ],
       "Undo selection": [
         "元に戻す"
@@ -813,7 +813,7 @@
         "モード"
       ],
       "mode has to be one of %{allowed_modes}": [
-        "モードは %{allowed_modes} のいずれかである必要があります"
+        "モードは %%{allowed_modes} のいずれかである必要があります"
       ],
       "older": [
         "前"

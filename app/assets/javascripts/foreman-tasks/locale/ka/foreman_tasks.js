@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman_tasks 8.0.1",
+        "Project-Id-Version": "foreman_tasks 9.2.2",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-12 14:04+0000",
         "Last-Translator": "Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022",
@@ -30,7 +30,7 @@
         "%s cron-ის სწორ ხაზის სწორი ფორმატი არაა"
       ],
       "%{count} tasks are in running or paused state for more than a day": [
-        ""
+        "%{count} ამოცანა დღეზე მეტია გაშვებული ან შეჩერებულია"
       ],
       "%{total} task(s), %{success} success, %{failed} fail": [
         "%{total} ამოცანა, %{success} წარმატებით, %{failed} წარუმატებელი"
@@ -51,7 +51,7 @@
         "24სთ"
       ],
       "A notification when tasks run for suspiciously long time": [
-        ""
+        "გაფრთხილება, როცა ამოცანები საეჭვოდ დიდხანსაა გაშვებული"
       ],
       "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved.": [
         "შეჩერებული ამოცანა წარმოადგენს პროცესს, რომელიც სწორად არ დასრულებულა. შეჩერებულ მდგომარეობაში მყოფმა ნებისმიერმა ამოცანამ შეიძლება გამოიწვიოს პოტენციური შეუსაბამობა და საჭიროებს გადაჭრას."
@@ -150,7 +150,7 @@
         "მოთხოვნის id-ის %{request_id} ცვლილება შენახულ ID_ზე %{saved_id}"
       ],
       "Check for long running tasks": [
-        ""
+        "დიდხანს გაშვებულ ამოცანებზე შემოწმება"
       ],
       "Clear All Filters": [
         "ყველა ფილტრის გასუფთავება"
@@ -195,7 +195,7 @@
         "გამეორებადი ლოგიკის თითოეული საძებნი სტრიქონით წაშლა"
       ],
       "Deliver notifications about long running tasks": [
-        ""
+        "შეტყობინება დიდხანს გაშვებული ამოცანების შესახებ"
       ],
       "Details": [
         "დეტალები"
@@ -345,13 +345,13 @@
         "დაბლოკვები"
       ],
       "Long running tasks": [
-        ""
+        "დიდხანს გაშვებულ ამოცანები"
       ],
       "Mon": [
         "მოუ"
       ],
       "More details": [
-        ""
+        "მეტი დეტალი"
       ],
       "More than": [
         "მეტი, ვიდრე"
@@ -594,7 +594,7 @@
         "State"
       ],
       "State updated at": [
-        ""
+        "მდგომარეობის განახლების დრო"
       ],
       "Step Canceled": [
         "ბიჯი გაუქმებულია"
@@ -621,7 +621,7 @@
         "%s-ის ქვეამოცანები"
       ],
       "Subscribe": [
-        ""
+        "ხელმოწერა"
       ],
       "Sun": [
         "მზე"
@@ -660,10 +660,10 @@
         "Tasks"
       ],
       "Tasks lingering in states %{states} since %{time}": [
-        ""
+        "ამოცანები, რომლებიც დიდხანს არიან მდგომარეობებში %{states} დრო %{time}"
       ],
       "Tasks pending since %s": [
-        ""
+        "ამოცანები, რომლებიც რიგშია %s-ის შემდეგ"
       ],
       "Tasks troubleshooting URL": [
         "ამოცანის პრობლემების გადაწყვეტის URL"
@@ -733,10 +733,10 @@
         "ამოცანის UUID"
       ],
       "Unable to create mail notification: %s": [
-        ""
+        "ელფოსტის შეტყობინების შექმნის შეცდომა: %s"
       ],
       "Unable to enable mail notification to user '%s': %s": [
-        ""
+        "შეცდომა ელფოსტის გაფრთხილებების ჩართვისას მომხმარებლისთვის '%s': %s"
       ],
       "Undo selection": [
         "მონიშნულის დაბრუნება"

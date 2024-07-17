@@ -6,7 +6,7 @@
 # Yulia <yulia.poyarkova@redhat.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_tasks 8.0.1\n"
+"Project-Id-Version: foreman_tasks 9.2.2\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-12 14:04+0000\n"
 "Last-Translator: Yulia <yulia.poyarkova@redhat.com>, 2016\n"
@@ -355,7 +355,7 @@ msgid "Mon"
 msgstr "Пн"
 
 msgid "More details"
-msgstr ""
+msgstr "Подробности"
 
 msgid "More than"
 msgstr ""
@@ -626,7 +626,7 @@ msgid "Sub tasks of %s"
 msgstr ""
 
 msgid "Subscribe"
-msgstr ""
+msgstr "Подписаться"
 
 msgid "Sun"
 msgstr "Вс"

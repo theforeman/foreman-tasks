@@ -6,7 +6,7 @@
 # Kazuki Omo <kazuki.omo@gmail.com>, 2019
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_tasks 8.0.1\n"
+"Project-Id-Version: foreman_tasks 9.2.2\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-12 14:04+0000\n"
 "Last-Translator: Kazuki Omo <kazuki.omo@gmail.com>, 2019\n"
@@ -31,7 +31,7 @@ msgid "%s is not valid format of cron line"
 msgstr "%s は有効な cron 行の形式ではありません"
 
 msgid "%{count} tasks are in running or paused state for more than a day"
-msgstr ""
+msgstr "%{count} 個のタスクが 1 日以上実行中または一時停止状態です"
 
 msgid "%{total} task(s), %{success} success, %{failed} fail"
 msgstr "タスク %{total} 件、成功 %{success} 件、失敗 %{failed} 件"
@@ -52,7 +52,7 @@ msgid "24h"
 msgstr "24 時間"
 
 msgid "A notification when tasks run for suspiciously long time"
-msgstr ""
+msgstr "タスクの実行時間が異常に長い場合の通知"
 
 msgid "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved."
 msgstr "一時停止タスクは、適切に終了していないプロセスを表します。一時停止状態のタスクは、一貫性に欠ける可能性があり、解決する必要があります。"
@@ -76,7 +76,7 @@ msgid "Active or disabled recurring logic with purpose %s already exists"
 msgstr "目的が %s のアクティブまたは無効な再帰論理がすでに存在します"
 
 msgid "All %s tasks are selected."
-msgstr ""
+msgstr "%s の全タスクを選択します。"
 
 msgid "All proxies with the required feature are unavailable at the moment"
 msgstr "現在、必要な機能があるすべてのプロキシーが利用できません"
@@ -149,10 +149,10 @@ msgid "Cannot update a cancelled Recurring Logic."
 msgstr "取り消された再帰論理を更新できません"
 
 msgid "Changing request id %{request_id} to saved id %{saved_id}"
-msgstr "要求 ID %{request_id} を保存済み ID %{saved_id} に変更しています"
+msgstr "要求 ID %%{request_id} を保存済み ID %%{saved_id} に変更しています"
 
 msgid "Check for long running tasks"
-msgstr ""
+msgstr "長時間実行中のタスクの確認"
 
 msgid "Clear All Filters"
 msgstr "すべてのフィルターを消去"
@@ -170,7 +170,7 @@ msgid "Could not cancel step."
 msgstr "ステップをキャンセルできませんでした。"
 
 msgid "Could not receive data: %s"
-msgstr ""
+msgstr "データを受信できませんでした: %s"
 
 msgid "Cron line"
 msgstr "cron 行"
@@ -197,7 +197,7 @@ msgid "Delete recurring logics by search query"
 msgstr "検索クエリーでの再帰論理の削除"
 
 msgid "Deliver notifications about long running tasks"
-msgstr ""
+msgstr "長時間実行中のタスクに関する通知の配信"
 
 msgid "Details"
 msgstr "詳細"
@@ -242,7 +242,7 @@ msgid "Errors:"
 msgstr "エラー:"
 
 msgid "Event delivered by request %{request_id}"
-msgstr "要求 ％{request_id} で配信されたイベント"
+msgstr "要求 ％%{request_id} で配信されたイベント"
 
 msgid "Exception"
 msgstr "例外"
@@ -347,13 +347,13 @@ msgid "Locks"
 msgstr "ロック"
 
 msgid "Long running tasks"
-msgstr ""
+msgstr "長時間実行中のタスク"
 
 msgid "Mon"
 msgstr "月"
 
 msgid "More details"
-msgstr ""
+msgstr "詳細"
 
 msgid "More than"
 msgstr "以下の値を超える"
@@ -411,7 +411,7 @@ msgstr "foreman_tasks_proxy_batch_trigger が有効な場合に、1 つの要求
 
 #. TRANSLATORS: Button text for saying when a task should end
 msgid "On"
-msgstr "オン"
+msgstr "次の時刻に開始"
 
 msgid "Operation"
 msgstr "操作"
@@ -561,7 +561,7 @@ msgid "Select Action"
 msgstr "アクションの選択"
 
 msgid "Select all {count} tasks"
-msgstr ""
+msgstr "{count} 件のタスクをすべて選択"
 
 msgid "Select row"
 msgstr "行の選択"
@@ -597,7 +597,7 @@ msgid "State"
 msgstr "状態"
 
 msgid "State updated at"
-msgstr ""
+msgstr "状態の更新"
 
 msgid "Step Canceled"
 msgstr "ステップがキャンセルされました"
@@ -624,7 +624,7 @@ msgid "Sub tasks of %s"
 msgstr "%s のサブタスク"
 
 msgid "Subscribe"
-msgstr ""
+msgstr "サブスクライプ"
 
 msgid "Sun"
 msgstr "日"
@@ -663,10 +663,10 @@ msgid "Tasks"
 msgstr "タスク"
 
 msgid "Tasks lingering in states %{states} since %{time}"
-msgstr ""
+msgstr "%{time} 以降 %{states} 状態のままのタスク"
 
 msgid "Tasks pending since %s"
-msgstr ""
+msgstr "%s 以降の保留中のタスク"
 
 msgid "Tasks troubleshooting URL"
 msgstr "URL のトラブルシューティングタスク"
@@ -736,10 +736,10 @@ msgid "UUID of the task"
 msgstr "タスクの UUID"
 
 msgid "Unable to create mail notification: %s"
-msgstr ""
+msgstr "メールの通知を作成できません: %s"
 
 msgid "Unable to enable mail notification to user '%s': %s"
-msgstr ""
+msgstr "ユーザー '%s' へのメール通知を有効にできません: %s"
 
 msgid "Undo selection"
 msgstr "元に戻す"
@@ -822,7 +822,7 @@ msgid "mode"
 msgstr "モード"
 
 msgid "mode has to be one of %{allowed_modes}"
-msgstr "モードは %{allowed_modes} のいずれかである必要があります"
+msgstr "モードは %%{allowed_modes} のいずれかである必要があります"
 
 msgid "older"
 msgstr "前"

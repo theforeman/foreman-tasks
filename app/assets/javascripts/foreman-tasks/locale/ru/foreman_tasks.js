@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman_tasks 8.0.1",
+        "Project-Id-Version": "foreman_tasks 9.2.2",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-12 14:04+0000",
         "Last-Translator": "Yulia <yulia.poyarkova@redhat.com>, 2016",
@@ -351,7 +351,7 @@
         "Пн"
       ],
       "More details": [
-        ""
+        "Подробности"
       ],
       "More than": [
         ""
@@ -621,7 +621,7 @@
         ""
       ],
       "Subscribe": [
-        ""
+        "Подписаться"
       ],
       "Sun": [
         "Вс"

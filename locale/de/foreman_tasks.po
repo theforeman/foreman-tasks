@@ -6,10 +6,10 @@
 # Crited <Alexander.Stoll@netways.de>, 2019
 # Ettore Atalan <atalanttore@googlemail.com>, 2016-2017,2023
 # Nonof Yourbusiness <jonasschell@ocupe.org>, 2019
-# Patrick Dolinic, 2021
+# pdolinic, 2021
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_tasks 8.0.1\n"
+"Project-Id-Version: foreman_tasks 9.2.2\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-12 14:04+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2016-2017,2023\n"
@@ -355,7 +355,7 @@ msgid "Mon"
 msgstr "Mo"
 
 msgid "More details"
-msgstr ""
+msgstr "Weitere Details"
 
 msgid "More than"
 msgstr "Mehr als"
@@ -626,7 +626,7 @@ msgid "Sub tasks of %s"
 msgstr "Unteraufgaben von %s."
 
 msgid "Subscribe"
-msgstr ""
+msgstr "Abonnieren"
 
 msgid "Sun"
 msgstr "So"
@@ -739,7 +739,7 @@ msgid "UUID of the task"
 msgstr "UUID der Aufgabe"
 
 msgid "Unable to create mail notification: %s"
-msgstr ""
+msgstr "Unable to create mail notification: %s"
 
 msgid "Unable to enable mail notification to user '%s': %s"
 msgstr ""

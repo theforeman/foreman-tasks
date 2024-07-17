@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman_tasks 8.0.1",
+        "Project-Id-Version": "foreman_tasks 9.2.2",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-12 14:04+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
@@ -30,7 +30,7 @@
         "%s 不是正确的 cron 行"
       ],
       "%{count} tasks are in running or paused state for more than a day": [
-        ""
+        "%{count} 任务处于 running 或 paused 状态，持续超过一天"
       ],
       "%{total} task(s), %{success} success, %{failed} fail": [
         "%{total} 任务），%{success}成功，%{failed}失败"
@@ -51,7 +51,7 @@
         "24 小时"
       ],
       "A notification when tasks run for suspiciously long time": [
-        ""
+        "任务运行很长时间时发出的通知"
       ],
       "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved.": [
         "暂停的任务代表未正确完成的进程。任何处于暂停状态的任务都可能导致潜在的不一致，需要被解决。"
@@ -75,7 +75,7 @@
         "带有目的 %s 的活跃或禁用的周期性逻辑已存在"
       ],
       "All %s tasks are selected.": [
-        ""
+        "已选择所有%s任务。"
       ],
       "All proxies with the required feature are unavailable at the moment": [
         "具备所需功能的所有代理暂时都不可用"
@@ -144,13 +144,13 @@
         "目前无法恢复任务"
       ],
       "Cannot update a cancelled Recurring Logic.": [
-        "无法更新一个已取消的周期性逻辑"
+        "无法更新一个已取消的周期性逻辑。"
       ],
       "Changing request id %{request_id} to saved id %{saved_id}": [
-        "将请求 id %{request_id} 改为保存的 id %{saved_id}"
+        "将请求 id %%{request_id} 改为保存的 id %%{saved_id}"
       ],
       "Check for long running tasks": [
-        ""
+        "检查长时间运行的任务"
       ],
       "Clear All Filters": [
         "清除所有过滤器"
@@ -168,7 +168,7 @@
         "无法取消步骤。"
       ],
       "Could not receive data: %s": [
-        ""
+        "无法接收数据：$%s"
       ],
       "Cron line": [
         "Cron 行"
@@ -195,7 +195,7 @@
         "通过搜索查询删除重复逻辑"
       ],
       "Deliver notifications about long running tasks": [
-        ""
+        "提供有关长时间运行的任务的通知"
       ],
       "Details": [
         "详情"
@@ -240,7 +240,7 @@
         "错误："
       ],
       "Event delivered by request %{request_id}": [
-        "由请求 %{request_id} 发送的事件"
+        "由请求 %%{request_id} 发送的事件"
       ],
       "Exception": [
         "例外"
@@ -345,13 +345,13 @@
         "锁"
       ],
       "Long running tasks": [
-        ""
+        "长时间运行的任务"
       ],
       "Mon": [
         "周一"
       ],
       "More details": [
-        ""
+        "更多细节"
       ],
       "More than": [
         "多于"
@@ -558,7 +558,7 @@
         "选择操作"
       ],
       "Select all {count} tasks": [
-        ""
+        "选择所有 {count} 任务"
       ],
       "Select row": [
         "选择行"
@@ -579,7 +579,7 @@
         "开始于"
       ],
       "Start auto-reloading": [
-        "开始自动重新载入"
+        "開始自動載入"
       ],
       "Start before": [
         "在此时间前开始"
@@ -594,13 +594,13 @@
         "状态"
       ],
       "State updated at": [
-        ""
+        "状态更新于"
       ],
       "Step Canceled": [
         "步骤已取消"
       ],
       "Stop auto-reloading": [
-        "停止自动重新载入"
+        "停止自動重新載入"
       ],
       "Stop selected stoppable tasks": [
         "停止所选的可停止的任务"
@@ -621,7 +621,7 @@
         "%s 的子任务"
       ],
       "Subscribe": [
-        ""
+        "订阅"
       ],
       "Sun": [
         "周日"
@@ -660,10 +660,10 @@
         "任务"
       ],
       "Tasks lingering in states %{states} since %{time}": [
-        ""
+        "自 %{time} 开始，任务处于 %{states} 状态"
       ],
       "Tasks pending since %s": [
-        ""
+        "自 %s 的待处理的任务"
       ],
       "Tasks troubleshooting URL": [
         "任务故障排除 URL"
@@ -732,10 +732,10 @@
         "任务的 UUID"
       ],
       "Unable to create mail notification: %s": [
-        ""
+        "无法创建邮件通知：%s"
       ],
       "Unable to enable mail notification to user '%s': %s": [
-        ""
+        "无法启用发给用户 '%s' 的邮件通知：%s"
       ],
       "Undo selection": [
         "撤销选择"
@@ -813,7 +813,7 @@
         "模式"
       ],
       "mode has to be one of %{allowed_modes}": [
-        "模式必须是 %{allowed_modes} 之一"
+        "模式必须是 %%{allowed_modes} 之一"
       ],
       "older": [
         "较老"
@@ -885,7 +885,7 @@
         "警告"
       ],
       "was cancelled": [
-        "已取消。"
+        "已取消"
       ],
       "was resumed": [
         "被恢复"

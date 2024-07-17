@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman_tasks 8.0.1",
+        "Project-Id-Version": "foreman_tasks 9.2.2",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-12 14:04+0000",
         "Last-Translator": "Luiz Henrique Vasconcelos <luizvasconceloss@yahoo.com.br>, 2017-2018",
@@ -18,13 +18,13 @@
         "plural_forms": "nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;"
       },
       "%(last)s Last %(time)s": [
-        "%(last)s Último %(time)s"
+        "último"
       ],
       "%(older)s Older %(time)s": [
-        "%(older)s Mais antigo %(time)s"
+        "mais antigo"
       ],
       "%s Selected Tasks": [
-        "%s Tarefas selecionadas"
+        "%s tarefas selecionadas"
       ],
       "%s is not valid format of cron line": [
         "%s não é um formato válido de cron line"
@@ -174,7 +174,7 @@
         "Cron line"
       ],
       "Cron line format 'a b c d e', where: %s": [
-        "Cron line format 'a b c d e', onde: %s"
+        "Formato cron line 'a b c d e', onde: %s"
       ],
       "Current iteration": [
         "Iteração atual"
@@ -351,7 +351,7 @@
         "Seg"
       ],
       "More details": [
-        ""
+        "Mais detalhes"
       ],
       "More than": [
         "Mais do que"
@@ -417,7 +417,7 @@
         "Outras incluem todas as tarefas paradas que são canceladas ou pendentes"
       ],
       "Other:": [
-        "Outros:"
+        "Outros"
       ],
       "Output": [
         "Saída"
@@ -504,7 +504,7 @@
         "Recurso search_params necessita que resource_type e resource_id sejam especificados "
       ],
       "Resources for %s task(s) will be unlocked and will not prevent other tasks from being run. As the task(s) might be still running, it should be avoided to use this unless you are really sure the task(s) got stuck.": [
-        "Os recursos para %s tarefa(s) serão desbloqueados e não impedirão que outras tarefas sejam executadas. Como a(s) tarefa(s) ainda pode(m) estar(em) em execução, deve(m) ser evitada(s) a menos que você esteja realmente certo de que a(s) tarefa(s) ficou(ão) presa(s)."
+        "Os recursos serão desbloqueados e não impedirão outras tarefas de serem executadas. Como a tarefa ainda pode estar em execução, deve-se evitar o uso disto, a menos que você tenha certeza que esta tarefa está paralisada"
       ],
       "Result": [
         "Resultado"
@@ -621,7 +621,7 @@
         "Subtarefas de %s"
       ],
       "Subscribe": [
-        ""
+        "Inscrever-se"
       ],
       "Sun": [
         "Dom"
@@ -728,13 +728,13 @@
         "Ter"
       ],
       "Type %s for search_params is not supported": [
-        "Tipo %s para search_params não é suportado"
+        "Tipo %s para search_params não possui suporte"
       ],
       "UUID of the task": [
         "UUID da tarefa"
       ],
       "Unable to create mail notification: %s": [
-        ""
+        "Não é possível criar a notificação de e-mail: %s"
       ],
       "Unable to enable mail notification to user '%s': %s": [
         ""
@@ -752,7 +752,7 @@
         "Atualizar lógica recorrente"
       ],
       "Url pointing to the task troubleshooting documentation. It should contain %{label} placeholder, that will be replaced with normalized task label (restricted to only alphanumeric characters)). %{version} placeholder is also available.": [
-        "Url apontando para a documentação de solução de problemas da tarefa. Ela deve conter %{label} placeholder, que será substituído por uma etiqueta de tarefa normalizada (restrita apenas a caracteres alfanuméricos). %{version} placeholder também está disponível."
+        "URL que aponta para a documentação de solução de problemas de tarefa. Ela deve conter o espaço reservado %{label}, que será substituído por um rótulo de tarefa normalizado (restrito apenas a caracteres alfanuméricos). O espaço reservado %{version} também está disponível."
       ],
       "User search_params requires user_id to be specified": [
         "Usuário search_params necessita que user_id seja especificado "
@@ -824,7 +824,7 @@
         "organização"
       ],
       "other": [
-        "outros"
+        "Outros"
       ],
       "paused": [
         "pausado"

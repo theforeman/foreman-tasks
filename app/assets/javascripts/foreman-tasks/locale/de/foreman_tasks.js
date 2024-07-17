@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman_tasks 8.0.1",
+        "Project-Id-Version": "foreman_tasks 9.2.2",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-12 14:04+0000",
         "Last-Translator": "Ettore Atalan <atalanttore@googlemail.com>, 2016-2017,2023",
@@ -351,7 +351,7 @@
         "Mo"
       ],
       "More details": [
-        ""
+        "Weitere Details"
       ],
       "More than": [
         "Mehr als"
@@ -621,7 +621,7 @@
         "Unteraufgaben von %s."
       ],
       "Subscribe": [
-        ""
+        "Abonnieren"
       ],
       "Sun": [
         "So"
@@ -733,7 +733,7 @@
         "UUID der Aufgabe"
       ],
       "Unable to create mail notification: %s": [
-        ""
+        "Unable to create mail notification: %s"
       ],
       "Unable to enable mail notification to user '%s': %s": [
         ""

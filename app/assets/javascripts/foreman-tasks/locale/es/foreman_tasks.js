@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman_tasks 8.0.1",
+        "Project-Id-Version": "foreman_tasks 9.2.2",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-12 14:04+0000",
         "Last-Translator": "francis <hackgo@gmail.com>, 2017",
@@ -18,16 +18,16 @@
         "plural_forms": "nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;"
       },
       "%(last)s Last %(time)s": [
-        "%(last)s Última %(time)s"
+        "último"
       ],
       "%(older)s Older %(time)s": [
-        "%(older)s Más antiguos %(time)s"
+        "más antiguo"
       ],
       "%s Selected Tasks": [
         "%s Tareas seleccionadas"
       ],
       "%s is not valid format of cron line": [
-        "%s no es un formato válido de línea cron"
+        "%s no tiene formato válido de la línea Cron."
       ],
       "%{count} tasks are in running or paused state for more than a day": [
         ""
@@ -174,7 +174,7 @@
         "Línea Cron"
       ],
       "Cron line format 'a b c d e', where: %s": [
-        "Cron formato de línea 'a b c d e', donde: %s"
+        "Formato de la línea Cron 'a b c d e', donde: %s"
       ],
       "Current iteration": [
         "Iteración actual"
@@ -351,7 +351,7 @@
         "Lun"
       ],
       "More details": [
-        ""
+        "Más información"
       ],
       "More than": [
         "Más de"
@@ -417,7 +417,7 @@
         "Otros incluye todas las tareas paradas que están canceladas o pendientes"
       ],
       "Other:": [
-        "Otros:"
+        "Otro"
       ],
       "Output": [
         "Salida"
@@ -504,7 +504,7 @@
         "search_params del recurso requiere que se especifique resource_type y resource_id."
       ],
       "Resources for %s task(s) will be unlocked and will not prevent other tasks from being run. As the task(s) might be still running, it should be avoided to use this unless you are really sure the task(s) got stuck.": [
-        "Los recursos de la(s) tarea(s) %s se desbloquearán y no impedirán la ejecución de otras tareas. Dado que la(s) tarea(s) puede(n) estar aún en ejecución, debe evitarse utilizar esta opción a menos que se esté realmente seguro de que la(s) tarea(s) se ha(n) quedado bloqueada(s)."
+        "Los recursos se desbloquearán y no se evitará que otras tareas se ejecuten. Dado que es posible que la tarea se esté ejecutando, se debe evitar el uso de esta acción a menos que se esté realmente seguro de que la tarea se atascó."
       ],
       "Result": [
         "Resultado:"
@@ -621,7 +621,7 @@
         "Subtareas de %s"
       ],
       "Subscribe": [
-        ""
+        "Suscribir"
       ],
       "Sun": [
         "Dom"
@@ -728,13 +728,13 @@
         "Mar"
       ],
       "Type %s for search_params is not supported": [
-        "No se admite el tipo %s para search_params"
+        "El tipo %s para search_params no se admite."
       ],
       "UUID of the task": [
         "UUID de la tarea"
       ],
       "Unable to create mail notification: %s": [
-        ""
+        "No se pudo crear la notificación de correo: %s"
       ],
       "Unable to enable mail notification to user '%s': %s": [
         ""
@@ -752,7 +752,7 @@
         "Actualizar lógica recurrente"
       ],
       "Url pointing to the task troubleshooting documentation. It should contain %{label} placeholder, that will be replaced with normalized task label (restricted to only alphanumeric characters)). %{version} placeholder is also available.": [
-        "Url que apunta a la documentación de resolución de problemas de la tarea. Debe contener el marcador de posición %{label}, que se sustituirá por la etiqueta normalizada de la tarea (restringida únicamente a caracteres alfanuméricos)). También está disponible el marcador de posición %{version}."
+        "URL que lleva a la documentación de la tarea de resolución de problemas. Debe contener el marcador de posición %{label}, que será reemplazado por la etiqueta de tarea normalizada (restringida solo a caracteres alfanuméricos). También está disponible el marcador de posición %{versión}."
       ],
       "User search_params requires user_id to be specified": [
         "search_params del usuario requiere que se especifique el user_id."
@@ -824,7 +824,7 @@
         "Organización"
       ],
       "other": [
-        "otros"
+        "Otro"
       ],
       "paused": [
         "pausado"

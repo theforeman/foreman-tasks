@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman_tasks 8.0.1",
+        "Project-Id-Version": "foreman_tasks 9.2.2",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-12 14:04+0000",
         "Last-Translator": "Claer <transiblu@claer.hammock.fr>, 2016",
@@ -30,7 +30,7 @@
         "%s n'est pas un format valide de ligne cron"
       ],
       "%{count} tasks are in running or paused state for more than a day": [
-        ""
+        "%{count} les tâches sont en cours d'exécution ou en pause depuis plus d'une journée"
       ],
       "%{total} task(s), %{success} success, %{failed} fail": [
         "%{total} tâche(s), %{success} succès, %{failed} échec"
@@ -51,7 +51,7 @@
         "24h"
       ],
       "A notification when tasks run for suspiciously long time": [
-        ""
+        "Une notification lorsque les tâches s'exécutent pendant une durée suspecte"
       ],
       "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved.": [
         "Une tâche en pause représente un processus qui ne s'est pas terminé correctement. Toute tâche en état de pause peut entraîner une incohérence potentielle et doit être résolue."
@@ -72,10 +72,10 @@
         "Filtres actifs :"
       ],
       "Active or disabled recurring logic with purpose %s already exists": [
-        "La logique récurrente active ou désactivée avec l'objectif %s existe déjà."
+        "La logique récurrente active ou désactivée avec l'objectif %s existe déjà"
       ],
       "All %s tasks are selected.": [
-        ""
+        "Toutes les tâches %s sont sélectionnées."
       ],
       "All proxies with the required feature are unavailable at the moment": [
         "Les proxys possédant les fonctionnalités demandées ne sont pas disponibles actuellement"
@@ -147,10 +147,10 @@
         "Impossible de mettre à jour une logique récurrente annulée."
       ],
       "Changing request id %{request_id} to saved id %{saved_id}": [
-        "Changement de l'id de la demande %{request_id} en id %{saved_id} sauvegardée"
+        "Changement de l'id de la demande %%{request_id} en id %%{saved_id} sauvegardée"
       ],
       "Check for long running tasks": [
-        ""
+        "Rechercher les tâches de longue durée"
       ],
       "Clear All Filters": [
         "Afficher tous les filtres"
@@ -168,7 +168,7 @@
         "N’a pas pu annuler l'étape."
       ],
       "Could not receive data: %s": [
-        ""
+        "Impossible de recevoir les données : %s"
       ],
       "Cron line": [
         "Ligne Cron"
@@ -195,13 +195,13 @@
         "Supprimer les logiques récurrentes par requête de recherche"
       ],
       "Deliver notifications about long running tasks": [
-        ""
+        "Envoyez des notifications sur les tâches de longue durée"
       ],
       "Details": [
         "Détails"
       ],
       "Details of %s task": [
-        "Détails de la tâche %s "
+        "Détails de la tâche %s"
       ],
       "Disable": [
         "Désactiver"
@@ -240,7 +240,7 @@
         "Erreurs :"
       ],
       "Event delivered by request %{request_id}": [
-        "Événement livré sur demande %{request_id}"
+        "Événement livré sur demande %%{request_id}"
       ],
       "Exception": [
         "Exception"
@@ -252,7 +252,7 @@
         "Données du plan d'exécution non disponibles"
       ],
       "Export All": [
-        "Tout Exporter"
+        "Tout exporter"
       ],
       "External Id": [
         "Id Externe"
@@ -264,7 +264,7 @@
         "L'initialisation a échoué"
       ],
       "Failed to trigger task on the smart proxy: ": [
-        ""
+        "Échec du déclenchement de la tâche sur le proxy intelligent : "
       ],
       "Finished": [
         "Terminé"
@@ -285,7 +285,7 @@
         "Tâches Foreman"
       ],
       "Fri": [
-        "Ven."
+        "Ven"
       ],
       "I understand that this may cause harm and have working database backups of all backend services.": [
         "Je comprends que cela risque de créer des dommages et toutes mes bases de données en cours sont sauvegardées pour tous les services de backend."
@@ -345,13 +345,13 @@
         "Verrous"
       ],
       "Long running tasks": [
-        ""
+        "Tâches de longue durée"
       ],
       "Mon": [
-        "Lun."
+        "Lun"
       ],
       "More details": [
-        ""
+        "Plus de détails"
       ],
       "More than": [
         "Plus de"
@@ -378,7 +378,7 @@
         "Aucune erreur"
       ],
       "No proxy defined for execution": [
-        "Aucun proxy Puppet défini  pour l'exécution"
+        "Aucun proxy défini pour l'exécution"
       ],
       "No running steps": [
         "Aucune étape en cours"
@@ -495,7 +495,7 @@
         "Exiger l'authentification pour la console dynflow"
       ],
       "Require user to be authenticated as user with admin rights when accessing dynflow console": [
-        "Exige que l'utilisateur soir authentifié en tant qu'utilisateur avec un accès admin pour accéder à la concole dynflow"
+        "Exige que l'utilisateur soir authentifié en tant qu'utilisateur avec un accès admin pour accéder à la console dynflow"
       ],
       "Required lock is already taken by other running tasks.": [
         "Le verrouillage requis est déjà utilisé par d'autres tâches en cours."
@@ -537,7 +537,7 @@
         "Étapes en cours"
       ],
       "Sat": [
-        "Sam."
+        "Sam"
       ],
       "Schedule": [
         "Programmer"
@@ -558,13 +558,13 @@
         "Choisir l'action"
       ],
       "Select all {count} tasks": [
-        ""
+        "Sélectionner toutes les tâches {count} "
       ],
       "Select row": [
         "Sélectionner une ligne"
       ],
       "Send data to the task from external executor (such as smart_proxy_dynflow)": [
-        "Envoie les données à la tâche à partir d'un exécuteur exérieur (tel que smart_proxy_dynflow)"
+        "Envoie les données à la tâche à partir d'un exécuteur extérieur (tel que smart_proxy_dynflow)"
       ],
       "Set up recurring execution": [
         "Mettre en place une exécution périodique"
@@ -594,7 +594,7 @@
         "État"
       ],
       "State updated at": [
-        ""
+        "État mis à jour à"
       ],
       "Step Canceled": [
         "Étape annulée"
@@ -606,7 +606,7 @@
         "Arrêter les tâches sélectionnées pouvant être arrêtées"
       ],
       "Stop specific tasks by ID": [
-        "Annuler les tâches spécifiques par ID"
+        "Arrêter les tâches spécifiques par ID"
       ],
       "Stop tasks matching search string": [
         "Annuler toutes le tâches correspondant à la chaîne de recherche"
@@ -621,10 +621,10 @@
         "Sous-tâches de %s"
       ],
       "Subscribe": [
-        ""
+        "S'abonner"
       ],
       "Sun": [
-        "Dim."
+        "Dim"
       ],
       "Sync task timeout": [
         "Délai d'attente de la tâche de synchronisation"
@@ -660,10 +660,10 @@
         "Tâches"
       ],
       "Tasks lingering in states %{states} since %{time}": [
-        ""
+        "Tâches persistantes dans les États%{states} depuis %{time}"
       ],
       "Tasks pending since %s": [
-        ""
+        "Tâches en attente depuis %s"
       ],
       "Tasks troubleshooting URL": [
         "URL de résolution de problème"
@@ -707,7 +707,7 @@
         "Cela débloquera les ressources avec lesquelles la tâche s'exécute. Veuillez noter que ceci peut conduire à un état incohérent et doit être utilisé avec prudence, après s'être assuré que la tâche ne peut pas être terminée."
       ],
       "Thu": [
-        "Jeu."
+        "Jeu"
       ],
       "Time in seconds between retries": [
         "Durée en secondes entre les tentatives"
@@ -725,7 +725,7 @@
         "Tentative d'annulation de l'étape"
       ],
       "Tue": [
-        "Mar."
+        "Mar"
       ],
       "Type %s for search_params is not supported": [
         "Type %s n'est pas supporté pour search_params"
@@ -734,10 +734,10 @@
         "UUID de la tâche"
       ],
       "Unable to create mail notification: %s": [
-        ""
+        "Impossible de créer une notification par e-mail : %s"
       ],
       "Unable to enable mail notification to user '%s': %s": [
-        ""
+        "Impossible d'activer la notification par courrier électronique à l'utilisateur '%s ' : %s"
       ],
       "Undo selection": [
         "Annuler la sélection"
@@ -758,7 +758,7 @@
         "Utilisateur search_params a besoin que user_id soit spécifié"
       ],
       "Wed": [
-        "Mer."
+        "Mer"
       ],
       "With focus on last": [
         "En se concentrant sur la dernière"
@@ -767,7 +767,7 @@
         "Oui"
       ],
       "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource": [
-        "Vous pouvez trouver des verrous de ressources sur cette page. Un verrou exclusif marqué avec une icône verrouillée signifie qu’aucun une autre tâche ne peut utiliser la ressource verrouillée pendant l’exécution de cette tâche. Un verrou non exclusif marqué avec un icône déverrouillé signifie que d'autres tâches peuvent librement accéder à la ressource. N’est utilisé que pour indiquer la relation de cette tâche avec la ressource."
+        "Vous pouvez trouver des verrous de ressources sur cette page. Un verrou exclusif marqué avec une icône verrouillée signifie qu’aucun une autre tâche ne peut utiliser la ressource verrouillée pendant l’exécution de cette tâche. Un verrou non exclusif marqué avec un icône déverrouillé signifie que d'autres tâches peuvent librement accéder à la ressource. N’est utilisé que pour indiquer la relation de cette tâche avec la ressource"
       ],
       "You do not have permission": [
         "Vous ne disposez pas des droits nécessaires"
@@ -815,7 +815,7 @@
         "mode"
       ],
       "mode has to be one of %{allowed_modes}": [
-        "mode doit être un parmi %{allowed_modes}"
+        "mode doit être un parmi %%{allowed_modes}"
       ],
       "older": [
         "plus ancien"
@@ -842,7 +842,7 @@
         "les ressources ont été déverrouillées"
       ],
       "resources were unlocked with force.": [
-        "les ressources de la tâche ont été déverrouillées en force"
+        "les ressources de la tâche ont été déverrouillées en force."
       ],
       "result": [
         "résultat"
@@ -857,7 +857,7 @@
         "secondes"
       ],
       "state": [
-        "État "
+        "état"
       ],
       "stopped": [
         "arrêté"
@@ -887,7 +887,7 @@
         "avertissement"
       ],
       "was cancelled": [
-        "a été annulée."
+        "a été annulée"
       ],
       "was resumed": [
         "a été reprise"
