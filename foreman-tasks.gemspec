@@ -33,4 +33,5 @@ same resource. It also optionally provides Dynflow infrastructure for using it f
 
   s.add_development_dependency 'factory_bot_rails', '~> 4.8.0'
   s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'theforeman-rubocop', '~> 0.1.0'
 end
