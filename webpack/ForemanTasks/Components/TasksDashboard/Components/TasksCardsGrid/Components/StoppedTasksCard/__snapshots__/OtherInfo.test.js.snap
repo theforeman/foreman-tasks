@@ -12,9 +12,6 @@ exports[`OtherInfo render 1`] = `
     <span>
       <InfoCircleIcon
         className="pficon"
-        color="currentColor"
-        noVerticalAlign={false}
-        size="sm"
       />
       <span>
         Other:
