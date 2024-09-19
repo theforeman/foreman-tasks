@@ -14,6 +14,8 @@ if gettext_find_task
                 .select do |action|
         src, = Object.const_source_location(action.to_s)
         src.start_with? @engine.root.to_s
+      rescue
+        warn "Unable to find plugin for action '#{action}'"
       end
 
       if klasses.any?
