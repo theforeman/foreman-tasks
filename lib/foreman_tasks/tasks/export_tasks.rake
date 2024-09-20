@@ -310,15 +310,15 @@ namespace :foreman_tasks do
     SKIP_ERRORS = ['true', '1', 'y', 'yes'].include? (ENV['SKIP_FAILED'] || '').downcase
 
     filter = if ENV['TASK_SEARCH'].nil? && ENV['TASK_DAYS'].nil?
-               "started_at > \"#{7.days.ago.to_s(:db)}\" || " \
-                 "(result != success && started_at > \"#{60.days.ago.to_s(:db)})\""
+               "started_at > \"#{7.days.ago.to_formatted_s(:db)}\" || " \
+                 "(result != success && started_at > \"#{60.days.ago.to_formatted_s(:db)})\""
              else
                ENV['TASK_SEARCH'] || ''
              end
 
     if (days = ENV['TASK_DAYS'])
       filter += ' && ' unless filter == ''
-      filter += "started_at > \"#{days.to_i.days.ago.to_s(:db)}\""
+      filter += "started_at > \"#{days.to_i.days.ago.to_formatted_s(:db)}\""
     end
 
     format = ENV['TASK_FORMAT'] || 'html'

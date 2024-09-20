@@ -252,7 +252,7 @@ module ForemanTasks
 
     def prepare_filter
       filter_parts = [filter]
-      filter_parts << %(started_at < "#{after.ago.to_s(:db)}") if after > 0
+      filter_parts << %(started_at < "#{after.ago.to_formatted_s(:db)}") if after > 0
       filter_parts << "state ^ (#{states.join(',')})" if states.any?
       filter_parts.select(&:present?).map { |segment| "(#{segment})" }.join(' AND ')
     end
