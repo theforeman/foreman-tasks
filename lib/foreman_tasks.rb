@@ -33,7 +33,7 @@ module ForemanTasks
                 finished.wait(timeout)
                 task = ForemanTasks::Task::DynflowTask.where(:external_id => id).first
                 if task.nil? || (!task.paused? && task.pending?)
-                  raise TimeoutError, "The time waiting for task #{task.try(:id)} to finish exceeded the 'foreman_tasks_sync_task_timeout' (#{timeout}s)"
+                  raise Timeout::Error, "The time waiting for task #{task.try(:id)} to finish exceeded the 'foreman_tasks_sync_task_timeout' (#{timeout}s)"
                 end
               end
               task || ForemanTasks::Task::DynflowTask.where(:external_id => id).first!
