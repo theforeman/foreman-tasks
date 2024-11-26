@@ -128,4 +128,3 @@ module ForemanTasks
     end
   end
 end
-future
