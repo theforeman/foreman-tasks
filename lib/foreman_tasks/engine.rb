@@ -19,7 +19,7 @@ module ForemanTasks
     initializer 'foreman_tasks.register_plugin', :before => :finisher_hook do |app|
       app.reloader.to_prepare do
         Foreman::Plugin.register :"foreman-tasks" do
-          requires_foreman '>= 3.13'
+          requires_foreman '>= 3.15'
           divider :top_menu, :parent => :monitor_menu, :last => true, :caption => N_('Foreman Tasks')
           menu :top_menu, :tasks,
                :url_hash => { :controller => 'foreman_tasks/tasks', :action => :index },
