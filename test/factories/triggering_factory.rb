@@ -3,7 +3,7 @@ FactoryBot.define do
     mode { :immediate }
 
     trait :future do
-      time = Time.zone.now
+      time = Time.zone.now + 1.year
       mode { :future }
       start_at { time }
       start_at_raw { time.strftime(ForemanTasks::Triggering::TIME_FORMAT) }
