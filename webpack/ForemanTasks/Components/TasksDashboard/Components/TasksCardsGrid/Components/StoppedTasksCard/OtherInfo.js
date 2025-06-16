@@ -30,6 +30,7 @@ export const OtherInfo = ({ updateQuery, otherCount, query }) => {
         </span>
       </Tooltip>
       <Button
+        ouiaId="stopped-other-tasks-button"
         variant="link"
         onClick={() =>
           updateQuery({

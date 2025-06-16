@@ -21,6 +21,7 @@ exports[`OtherInfo render 1`] = `
   </Tooltip>
   <Button
     onClick={[Function]}
+    ouiaId="stopped-other-tasks-button"
     variant="link"
   >
     7
