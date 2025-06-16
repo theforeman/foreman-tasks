@@ -124,7 +124,7 @@ module ForemanTasks
     end
 
     def start_at_is_not_past
-      errors.add(:start_at, _('is in the past')) if !start_at.nil? && Time.zone.parse(start_at_raw) < Time.zone.now
+      errors.add(:start_at, _('is in the past')) if !start_at.nil? && start_at < Time.zone.now
     end
   end
 end

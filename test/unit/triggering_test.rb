@@ -10,7 +10,14 @@ class TriggeringTest < ActiveSupport::TestCase
       triggering = FactoryBot.build(:triggering, :future)
       assert_predicate(triggering, :valid?)
       triggering.start_before = triggering.start_at - 120
-      assert_not_predicate(triggering, :valid?).returns(false)
+      assert_not_predicate(triggering, :valid?)
+    end
+
+    it 'is invalid when future execution is in the past' do
+      triggering = FactoryBot.build(:triggering, :future)
+      assert_predicate(triggering, :valid?)
+      triggering.start_at = Time.zone.now - 1.day
+      assert_not_predicate(triggering, :valid?)
     end
 
     it 'is invalid when recurring logic is invalid' do
