@@ -23,8 +23,17 @@ module Actions
     end
 
     def humanized_name
-      if task.sub_tasks.first
-        task.sub_tasks.first.humanized[:action]
+      sub_task = begin
+        task.sub_tasks.first
+      rescue ActiveRecord::RecordNotFound
+        # #task raises if the action has no task linked to it
+        # While it shouldn't happen, there's not much of a difference
+        # between a action not having a task and an action having a
+        # task but no sub tasks
+      end
+
+      if sub_task
+        sub_task.humanized[:action]
       else
         _('Bulk action')
       end
