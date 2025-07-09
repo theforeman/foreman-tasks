@@ -23,11 +23,7 @@ module Actions
     end
 
     def humanized_name
-      if task.sub_tasks.first
-        task.sub_tasks.first.humanized[:action]
-      else
-        _('Bulk action')
-      end
+      with_sub_task { |t| t.humanized[:action] } || _('Bulk action')
     end
 
     def rescue_strategy
@@ -35,8 +31,7 @@ module Actions
     end
 
     def humanized_input
-      a_sub_task = task.sub_tasks.first
-      if a_sub_task
+      with_sub_task do |a_sub_task|
         [a_sub_task.humanized[:action].to_s.downcase] +
           Array(a_sub_task.humanized[:input]) + ['...']
       end
@@ -78,6 +73,18 @@ module Actions
 
     def extract_concurrency_limit(args = [], limit = nil)
       args.find { |arg| arg.is_a?(Hash) && arg.key?(:concurrency_limit) }&.fetch(:concurrency_limit) || limit
+    end
+
+    def with_sub_task
+      sub_task = begin
+        task.sub_tasks.first
+      rescue ActiveRecord::RecordNotFound
+        # #task raises if the action has no task linked to it
+        # While it shouldn't happen, there's not much of a difference
+        # between a action not having a task and an action having a
+        # task but no sub tasks
+      end
+      yield sub_task if sub_task
     end
   end
 end
