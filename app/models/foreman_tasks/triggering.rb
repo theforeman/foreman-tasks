@@ -38,7 +38,7 @@ module ForemanTasks
                                :if => proc { |t| t.recurring? && t.input_type == :monthly } }
     validate :can_start_recurring, :if => :recurring?
     validate :can_start_future, :if => :future?
-    validate :start_at_is_not_past
+    validate :start_at_is_not_past, :if => ->(triggering) { (triggering.future? || (triggering.recurring? && triggering.start_at_raw)) && triggering.start_at_changed? }
 
     def self.new_from_params(params = {})
       new(params.except(:mode, :start_at, :start_before)).tap do |triggering|

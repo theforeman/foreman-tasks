@@ -48,6 +48,22 @@ class TriggeringTest < ActiveSupport::TestCase
       triggering = FactoryBot.build(:triggering, :recurring_logic => logic, :mode => :recurring, :input_type => :cronline, :cronline => '* * * * *')
       assert_predicate(triggering, :valid?)
     end
+
+    it 'is valid by default' do
+      triggering = ForemanTasks::Triggering.new_from_params
+      assert triggering.save
+      # Save pre-fills start_at, which may eventually become in the past, but that should be irrelevant for type=immediate
+      assert triggering.valid?
+    end
+
+    it 'stays valid once created' do
+      triggering = ForemanTasks::Triggering.new_from_params({ :mode => "future" })
+      triggering.start_at = Time.zone.now + 1.second
+      triggering.save!
+      assert_predicate(triggering, :valid?)
+      Time.zone.expects(:now).never # No time comparisons should be done as nothing changed
+      assert_predicate(triggering, :valid?)
+    end
   end
 
   it 'cannot have mode set to arbitrary value' do
