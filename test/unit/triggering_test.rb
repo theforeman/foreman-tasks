@@ -52,8 +52,8 @@ class TriggeringTest < ActiveSupport::TestCase
     it 'is valid by default' do
       triggering = ForemanTasks::Triggering.new_from_params
       assert triggering.save
-      # Save pre-fills start_at, which may eventually become in the past, but that should be irrelevant for type=immediate
-      assert triggering.valid?
+      assert_predicate triggering.start_at, :blank?
+      assert_predicate triggering, :valid?
     end
 
     it 'stays valid once created' do
