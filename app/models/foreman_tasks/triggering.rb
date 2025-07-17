@@ -8,11 +8,9 @@ module ForemanTasks
     graphql_type '::Types::Triggering'
 
     before_save do
-      if future?
+      unless immediate?
         parse_start_at!
         parse_start_before!
-      else
-        self.start_at ||= Time.zone.now
       end
     end
 
@@ -31,21 +29,20 @@ module ForemanTasks
                            :inclusion => { :in => ALLOWED_INPUT_TYPES,
                                            :message => _('%{value} is not allowed input type') }
     validates :start_at_raw, format: { :with => TIME_REGEXP, :if => ->(triggering) { triggering.future? || (triggering.recurring? && triggering.start_at_raw) },
-                                       :message => _('%{value} is wrong format') }
+                                       :message => _('%{value} is wrong format'), :allow_blank => true }
     validates :start_before_raw, format: { :with => TIME_REGEXP, :if => :future?,
                                            :message => _('%{value} is wrong format'), :allow_blank => true }
     validates :days, format: { :with => DAYS_REGEXP,
                                :if => proc { |t| t.recurring? && t.input_type == :monthly } }
     validate :can_start_recurring, :if => :recurring?
     validate :can_start_future, :if => :future?
-    validate :start_at_is_not_past
+    validate :start_at_is_not_past, :if => ->(triggering) { triggering.start_at_relevant? && triggering.start_at_changed? }
 
     def self.new_from_params(params = {})
       new(params.except(:mode, :start_at, :start_before)).tap do |triggering|
         triggering.mode = params.fetch(:mode, :immediate).to_sym
         triggering.input_type = params.fetch(:input_type, :daily).to_sym
         triggering.end_time_limited = params[:end_time_limited] == 'true'
-        triggering.start_at_raw ||= Time.zone.now.strftime(TIME_FORMAT)
         triggering.recurring_logic = ::ForemanTasks::RecurringLogic.new_from_triggering(triggering) if triggering.recurring?
       end
     end
@@ -77,7 +74,7 @@ module ForemanTasks
 
     def delay_options
       {
-        :start_at => start_at.utc,
+        :start_at => start_at.try(:utc),
         :start_before => start_before.try(:utc),
       }
     end
@@ -106,6 +103,11 @@ module ForemanTasks
 
     def parse_start_before!
       self.start_before ||= Time.zone.parse(start_before_raw) if start_before_raw.present?
+    end
+
+    # start_at is required for future execution and optional for recurring execution
+    def start_at_relevant?
+      future? || (recurring? && (start_at || start_at_raw))
     end
 
     private
