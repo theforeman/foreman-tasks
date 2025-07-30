@@ -202,6 +202,47 @@ module ForemanTasks
           assert_equal({ 'result' => 'success' }, task.main_action.output['proxy_output'])
         end
       end
+
+      describe 'POST /api/tasks/bulk_stop' do
+        it 'requires search or task_ids parameter' do
+          post :bulk_stop
+          assert_response :bad_request
+          data = JSON.parse(response.body)
+          assert_includes data['error']['message'], 'Please provide at least one of search or task_ids parameters'
+        end
+
+        it 'stops tasks by task_ids and calls halt' do
+          task1 = FactoryBot.create(:task_with_locks, :user_create_task, state: 'running')
+          task2 = FactoryBot.create(:dynflow_task, :user_create_task, state: 'pending')
+          task3 = FactoryBot.create(:dynflow_task, :user_create_task, state: 'stopped')
+          post :bulk_stop, params: { task_ids: [task1.id, task2.id, task3.id] }
+          assert_response :success
+          data = JSON.parse(response.body)
+          assert_equal 3, data['total']
+          assert_equal 2, data['stopped_length']
+          assert_equal 1, data['skipped_length']
+          wait_for { task1.reload.state == 'stopped' }
+          wait_for { task2.reload.state == 'stopped' }
+          assert_predicate task1.locks, :empty?
+        end
+
+        it 'stops tasks by search query' do
+          task1 = FactoryBot.create(:task_with_locks, :user_create_task, state: 'running')
+          task2 = FactoryBot.create(:dynflow_task, :user_create_task, state: 'pending')
+
+          UINotifications::Tasks::TaskBulkStop.any_instance.expects(:deliver!)
+
+          post :bulk_stop, params: { search: 'label = Actions::User::Create' }
+          assert_response :success
+          data = JSON.parse(response.body)
+          assert_equal 2, data['total']
+          assert_equal 2, data['stopped_length']
+          assert_equal 0, data['skipped_length']
+          wait_for { task1.reload.state == 'stopped' }
+          wait_for { task2.reload.state == 'stopped' }
+          assert_predicate task1.locks, :empty?
+        end
+      end
     end
   end
 end
