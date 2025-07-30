@@ -160,7 +160,7 @@ module ForemanTasks
         to_stop_length = to_stop.count
         skipped_length = total_length - to_stop_length
 
-        to_stop.find_each { |task| task.update(state: :stopped) }
+        to_stop.find_each(&:halt)
 
         if params[:search]
           notification = UINotifications::Tasks::TaskBulkStop.new(filtered_scope.first, to_stop_length, skipped_length)
