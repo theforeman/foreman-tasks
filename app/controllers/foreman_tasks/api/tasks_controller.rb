@@ -308,17 +308,14 @@ module ForemanTasks
       end
 
       def find_task
-        @task = resource_scope.with_duration.find(params[:id])
+        @task = resource_scope.select_duration.find(params[:id])
       end
 
       def resource_scope(_options = {})
         scope = ForemanTasks::Task.authorized("#{action_permission}_foreman_tasks")
         scope = scope.where(:parent_task_id => params[:parent_task_id]) if params[:parent_task_id]
+        scope = scope.select_duration if params[:action] == 'index'
         scope
-      end
-
-      def resource_scope_for_index(*args)
-        super.with_duration.distinct
       end
 
       def controller_permission
