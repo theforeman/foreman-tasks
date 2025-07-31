@@ -78,7 +78,7 @@ module ForemanTasks
                                  :"foreman_tasks_links.resource_type" => resource.class.name)
            end)
     scope :for_action_types, (->(action_types) { where('foreman_tasks_tasks.label IN (?)', Array(action_types)) })
-    scope :with_duration, -> { select("foreman_tasks_tasks.*, coalesce(ended_at, current_timestamp) - coalesce(coalesce(started_at, ended_at), current_timestamp) as duration") }
+    virtual_column_scope :select_duration, -> { select("foreman_tasks_tasks.*, coalesce(ended_at, current_timestamp) - coalesce(coalesce(started_at, ended_at), current_timestamp) as duration") }
 
     apipie :class, "A class representing #{model_name.human} object" do
       name 'Task'
