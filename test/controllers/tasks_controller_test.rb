@@ -93,7 +93,7 @@ module ForemanTasks
 
       describe 'index' do
         it 'shows duration column' do
-          task = ForemanTasks::Task.with_duration.find(FactoryBot.create(:some_task).id)
+          task = ForemanTasks::Task.select_duration.find(FactoryBot.create(:some_task).id)
           get(:index, params: {}, session: set_session_user)
           assert_response :success
           row = CSV.parse(response.body, headers: true).first
@@ -122,7 +122,7 @@ module ForemanTasks
 
         it 'shows duration column' do
           parent = ForemanTasks::Task.find(FactoryBot.create(:some_task).id)
-          child = ForemanTasks::Task.with_duration.find(FactoryBot.create(:some_task).id)
+          child = ForemanTasks::Task.select_duration.find(FactoryBot.create(:some_task).id)
           child.parent_task_id = parent.id
           child.save!
           get(:sub_tasks, params: { id: parent.id }, session: set_session_user)
