@@ -64,6 +64,14 @@ class TriggeringTest < ActiveSupport::TestCase
       Time.zone.expects(:now).never # No time comparisons should be done as nothing changed
       assert_predicate(triggering, :valid?)
     end
+
+    it 'requires start-at for future executions' do
+      triggering = ForemanTasks::Triggering.new_from_params({ :mode => "future" })
+      triggering.start_before = Time.zone.now + 1.hour
+      assert_not_predicate(triggering, :valid?)
+      triggering.start_at = Time.zone.now + 1.second
+      assert_predicate(triggering, :valid?)
+    end
   end
 
   it 'cannot have mode set to arbitrary value' do
