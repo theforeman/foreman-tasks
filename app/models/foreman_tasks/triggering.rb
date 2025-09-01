@@ -122,6 +122,7 @@ module ForemanTasks
     def can_start_future
       parse_start_before!
       parse_start_at!
+      return errors.add(:start_at, _('must be set')) if start_at.nil?
       errors.add(:start_before_raw, _('The task could not be started')) if !start_before.nil? && start_before < start_at
     end
 
