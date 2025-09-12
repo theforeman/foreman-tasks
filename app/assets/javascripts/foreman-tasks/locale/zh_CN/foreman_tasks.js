@@ -797,6 +797,9 @@
       "is hour (range: 0-23)": [
         "小时（范围：0-23）"
       ],
+      "is in the past": [
+        ""
+      ],
       "is minute (range: 0-59)": [
         "分钟（范围：0-59）"
       ],
@@ -814,6 +817,9 @@
       ],
       "mode has to be one of %{allowed_modes}": [
         "模式必须是 %%{allowed_modes} 之一"
+      ],
+      "must be set": [
+        ""
       ],
       "older": [
         "较老"

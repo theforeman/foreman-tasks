@@ -798,6 +798,9 @@
       "is hour (range: 0-23)": [
         "— часы (1–24)"
       ],
+      "is in the past": [
+        ""
+      ],
       "is minute (range: 0-59)": [
         "— минуты (0–59)"
       ],
@@ -814,6 +817,9 @@
         ""
       ],
       "mode has to be one of %{allowed_modes}": [
+        ""
+      ],
+      "must be set": [
         ""
       ],
       "older": [

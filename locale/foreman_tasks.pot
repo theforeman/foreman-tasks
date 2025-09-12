@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_tasks 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 17:08+0200\n"
-"PO-Revision-Date: 2024-07-17 17:08+0200\n"
+"POT-Creation-Date: 2025-09-12 13:20+0200\n"
+"PO-Revision-Date: 2025-09-12 13:20+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -312,32 +312,32 @@ msgstr ""
 msgid "%{total} task(s), %{success} success, %{failed} fail"
 msgstr ""
 
-#: ../app/lib/actions/bulk_action.rb:29
+#: ../app/lib/actions/bulk_action.rb:26 action_names.rb:3
 msgid "Bulk action"
 msgstr ""
 
-#: ../app/lib/actions/bulk_action.rb:63
+#: ../app/lib/actions/bulk_action.rb:58
 msgid "Empty bulk action"
 msgstr ""
 
-#: ../app/lib/actions/bulk_action.rb:65
+#: ../app/lib/actions/bulk_action.rb:60
 msgid "The targets are of different types"
 msgstr ""
 
-#: ../app/lib/actions/check_long_running_tasks.rb:40 action_names.rb:3
+#: ../app/lib/actions/check_long_running_tasks.rb:40 action_names.rb:4
 msgid "Check for long running tasks"
 msgstr ""
 
 #: ../app/lib/actions/deliver_long_running_tasks_notification.rb:19
-#: action_names.rb:4
+#: action_names.rb:5
 msgid "Deliver notifications about long running tasks"
 msgstr ""
 
-#: ../app/lib/actions/foreman/host/import_facts.rb:43 action_names.rb:6
+#: ../app/lib/actions/foreman/host/import_facts.rb:43 action_names.rb:7
 msgid "Import facts"
 msgstr ""
 
-#: ../app/lib/actions/foreman/puppetclass/import.rb:18 action_names.rb:5
+#: ../app/lib/actions/foreman/puppetclass/import.rb:18 action_names.rb:6
 msgid "Import Puppet classes"
 msgstr ""
 
@@ -491,41 +491,49 @@ msgstr ""
 msgid "Subscribe"
 msgstr ""
 
-#: ../app/models/foreman_tasks/triggering.rb:29
+#: ../app/models/foreman_tasks/triggering.rb:27
 msgid "%{value} is not allowed triggering mode"
 msgstr ""
 
-#: ../app/models/foreman_tasks/triggering.rb:32
+#: ../app/models/foreman_tasks/triggering.rb:30
 msgid "%{value} is not allowed input type"
 msgstr ""
 
+#: ../app/models/foreman_tasks/triggering.rb:32
 #: ../app/models/foreman_tasks/triggering.rb:34
-#: ../app/models/foreman_tasks/triggering.rb:36
 msgid "%{value} is wrong format"
 msgstr ""
 
-#: ../app/models/foreman_tasks/triggering.rb:60
+#: ../app/models/foreman_tasks/triggering.rb:58
 msgid "mode has to be one of %{allowed_modes}"
 msgstr ""
 
-#: ../app/models/foreman_tasks/triggering.rb:103
+#: ../app/models/foreman_tasks/triggering.rb:101
 msgid "is not a valid format"
 msgstr ""
 
-#: ../app/models/foreman_tasks/triggering.rb:114
+#: ../app/models/foreman_tasks/triggering.rb:117
 msgid "No task could be started"
 msgstr ""
 
-#: ../app/models/foreman_tasks/triggering.rb:115
+#: ../app/models/foreman_tasks/triggering.rb:118
 msgid "Active or disabled recurring logic with purpose %s already exists"
 msgstr ""
 
-#: ../app/models/foreman_tasks/triggering.rb:116
+#: ../app/models/foreman_tasks/triggering.rb:119
 msgid "%s is not valid format of cron line"
 msgstr ""
 
-#: ../app/models/foreman_tasks/triggering.rb:122
+#: ../app/models/foreman_tasks/triggering.rb:125
+msgid "must be set"
+msgstr ""
+
+#: ../app/models/foreman_tasks/triggering.rb:126
 msgid "The task could not be started"
+msgstr ""
+
+#: ../app/models/foreman_tasks/triggering.rb:130
+msgid "is in the past"
 msgstr ""
 
 #: ../app/services/foreman_tasks/troubleshooting_help_generator.rb:67

@@ -804,6 +804,9 @@ msgstr "曜日 (範囲: 0 - 6)"
 msgid "is hour (range: 0-23)"
 msgstr "時間 (範囲: 0 - 23)"
 
+msgid "is in the past"
+msgstr ""
+
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is minute (range: 0-59)"
 msgstr "分 (範囲: 0 - 59)"
@@ -823,6 +826,9 @@ msgstr "モード"
 
 msgid "mode has to be one of %{allowed_modes}"
 msgstr "モードは %%{allowed_modes} のいずれかである必要があります"
+
+msgid "must be set"
+msgstr ""
 
 msgid "older"
 msgstr "前"

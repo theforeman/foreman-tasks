@@ -798,6 +798,9 @@
       "is hour (range: 0-23)": [
         "Stunde (im Bereich: 0-23)"
       ],
+      "is in the past": [
+        ""
+      ],
       "is minute (range: 0-59)": [
         "Minute (im Bereich: 0-59)"
       ],
@@ -815,6 +818,9 @@
       ],
       "mode has to be one of %{allowed_modes}": [
         "Modus muss einer von %{allowed_modes} sein"
+      ],
+      "must be set": [
+        ""
       ],
       "older": [
         "älter"
