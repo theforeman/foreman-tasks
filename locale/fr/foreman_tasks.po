@@ -807,6 +807,9 @@ msgstr "est jour de la semaine (plage: 0-6)"
 msgid "is hour (range: 0-23)"
 msgstr "est heure (plage: 0-23)"
 
+msgid "is in the past"
+msgstr ""
+
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is minute (range: 0-59)"
 msgstr "est minute (plage: 0-59)"
@@ -826,6 +829,9 @@ msgstr "mode"
 
 msgid "mode has to be one of %{allowed_modes}"
 msgstr "mode doit être un parmi %%{allowed_modes}"
+
+msgid "must be set"
+msgstr ""
 
 msgid "older"
 msgstr "plus ancien"

@@ -798,6 +798,9 @@
       "is hour (range: 0-23)": [
         "საათი (0-23)"
       ],
+      "is in the past": [
+        ""
+      ],
       "is minute (range: 0-59)": [
         "წუთი (0-59)"
       ],
@@ -815,6 +818,9 @@
       ],
       "mode has to be one of %{allowed_modes}": [
         "რეჟიმი შეიძლება იყოს ერთ ერთი %{allowed_modes} -დან"
+      ],
+      "must be set": [
+        ""
       ],
       "older": [
         "ძველი"

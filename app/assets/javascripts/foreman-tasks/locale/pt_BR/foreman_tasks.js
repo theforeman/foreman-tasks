@@ -799,6 +799,9 @@
       "is hour (range: 0-23)": [
         "é a hora (intervalo: 0-23)"
       ],
+      "is in the past": [
+        ""
+      ],
       "is minute (range: 0-59)": [
         "é o minuto (intervalo: 0-59) "
       ],
@@ -816,6 +819,9 @@
       ],
       "mode has to be one of %{allowed_modes}": [
         "modo tem que ser um de %{allowed_modes}"
+      ],
+      "must be set": [
+        ""
       ],
       "older": [
         "mais antigo"

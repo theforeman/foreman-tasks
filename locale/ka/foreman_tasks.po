@@ -807,6 +807,9 @@ msgstr "კვირის დღე (0-6)"
 msgid "is hour (range: 0-23)"
 msgstr "საათი (0-23)"
 
+msgid "is in the past"
+msgstr ""
+
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is minute (range: 0-59)"
 msgstr "წუთი (0-59)"
@@ -826,6 +829,9 @@ msgstr "რეჟიმი"
 
 msgid "mode has to be one of %{allowed_modes}"
 msgstr "რეჟიმი შეიძლება იყოს ერთ ერთი %{allowed_modes} -დან"
+
+msgid "must be set"
+msgstr ""
 
 msgid "older"
 msgstr "ძველი"

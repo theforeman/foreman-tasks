@@ -803,6 +803,9 @@ msgstr "요일(범위: 0-6)"
 msgid "is hour (range: 0-23)"
 msgstr "시간(범위: 0-23)"
 
+msgid "is in the past"
+msgstr ""
+
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is minute (range: 0-59)"
 msgstr "분(범위: 0-59)"
@@ -821,6 +824,9 @@ msgid "mode"
 msgstr ""
 
 msgid "mode has to be one of %{allowed_modes}"
+msgstr ""
+
+msgid "must be set"
 msgstr ""
 
 msgid "older"

@@ -803,6 +803,9 @@ msgstr "星期几（范围：0-6）"
 msgid "is hour (range: 0-23)"
 msgstr "小时（范围：0-23）"
 
+msgid "is in the past"
+msgstr ""
+
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is minute (range: 0-59)"
 msgstr "分钟（范围：0-59）"
@@ -822,6 +825,9 @@ msgstr "模式"
 
 msgid "mode has to be one of %{allowed_modes}"
 msgstr "模式必须是 %%{allowed_modes} 之一"
+
+msgid "must be set"
+msgstr ""
 
 msgid "older"
 msgstr "较老"

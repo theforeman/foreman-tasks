@@ -799,6 +799,9 @@
       "is hour (range: 0-23)": [
         "est heure (plage: 0-23)"
       ],
+      "is in the past": [
+        ""
+      ],
       "is minute (range: 0-59)": [
         "est minute (plage: 0-59)"
       ],
@@ -816,6 +819,9 @@
       ],
       "mode has to be one of %{allowed_modes}": [
         "mode doit être un parmi %%{allowed_modes}"
+      ],
+      "must be set": [
+        ""
       ],
       "older": [
         "plus ancien"
