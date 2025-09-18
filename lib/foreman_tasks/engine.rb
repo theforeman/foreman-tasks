@@ -93,7 +93,8 @@ module ForemanTasks
                                     'It should contain %{label} placeholder, that will be replaced with normalized task label '\
                                     '(restricted to only alphanumeric characters)). %{version} placeholder is also available.'),
                     default: nil,
-                    full_name: N_('Tasks troubleshooting URL'))
+                    full_name: N_('Tasks troubleshooting URL'),
+                    validate: ->(value) { ForemanTasks.troubleshooting_url_with_placeholders(value) })
             setting('foreman_tasks_polling_multiplier',
                     type: :integer,
                     description: N_('Polling multiplier which is used to multiply the default polling intervals. '\
@@ -203,5 +204,21 @@ module ForemanTasks
 
   def use_relative_model_naming
     true
+  end
+
+  def self.troubleshooting_url_with_placeholders(value)
+    return true if value.blank?
+    test_url = value.dup
+    test_url.gsub!(/%\{label\}/, 'validation_label')
+    test_url.gsub!(/%\{version\}/, '1.0')
+    begin
+      uri = URI.parse(test_url)
+      unless (uri.is_a?(URI::HTTP) || uri.is_a?(URI::HTTPS)) && !uri.host.nil?
+        raise URI::InvalidURIError
+      end
+      true
+    rescue URI::InvalidURIError
+      raise Foreman::SettingValueException, N_("Invalid URL")
+    end
   end
 end
