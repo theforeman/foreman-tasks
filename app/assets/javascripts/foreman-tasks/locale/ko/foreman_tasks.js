@@ -62,9 +62,6 @@
       "Action": [
         "동작"
       ],
-      "Action with sub plans": [
-        "하위 계획이 있는 작업"
-      ],
       "Active": [
         "활성"
       ],
@@ -313,6 +310,9 @@
       ],
       "Input": [
         "입력"
+      ],
+      "Invalid URL": [
+        ""
       ],
       "Iteration limit": [
         "반복 제한"

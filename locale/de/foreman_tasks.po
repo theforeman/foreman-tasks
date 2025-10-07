@@ -65,9 +65,6 @@ msgstr ""
 msgid "Action"
 msgstr "Aktion"
 
-msgid "Action with sub plans"
-msgstr "Aktion mit Unterplänen"
-
 msgid "Active"
 msgstr "Aktiv"
 
@@ -317,6 +314,9 @@ msgstr "Initialisierungsfehler: %s"
 
 msgid "Input"
 msgstr "Eingang"
+
+msgid "Invalid URL"
+msgstr ""
 
 msgid "Iteration limit"
 msgstr "Wiederholungslimit"

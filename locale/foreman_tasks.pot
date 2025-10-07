@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_tasks 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-12 13:20+0200\n"
-"PO-Revision-Date: 2025-09-12 13:20+0200\n"
+"POT-Creation-Date: 2025-10-07 14:51+0200\n"
+"PO-Revision-Date: 2025-10-07 14:51+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -312,7 +312,7 @@ msgstr ""
 msgid "%{total} task(s), %{success} success, %{failed} fail"
 msgstr ""
 
-#: ../app/lib/actions/bulk_action.rb:26 action_names.rb:3
+#: ../app/lib/actions/bulk_action.rb:26
 msgid "Bulk action"
 msgstr ""
 
@@ -324,20 +324,19 @@ msgstr ""
 msgid "The targets are of different types"
 msgstr ""
 
-#: ../app/lib/actions/check_long_running_tasks.rb:40 action_names.rb:4
+#: ../app/lib/actions/check_long_running_tasks.rb:40
 msgid "Check for long running tasks"
 msgstr ""
 
 #: ../app/lib/actions/deliver_long_running_tasks_notification.rb:19
-#: action_names.rb:5
 msgid "Deliver notifications about long running tasks"
 msgstr ""
 
-#: ../app/lib/actions/foreman/host/import_facts.rb:43 action_names.rb:7
+#: ../app/lib/actions/foreman/host/import_facts.rb:43
 msgid "Import facts"
 msgstr ""
 
-#: ../app/lib/actions/foreman/puppetclass/import.rb:18 action_names.rb:6
+#: ../app/lib/actions/foreman/puppetclass/import.rb:18
 msgid "Import Puppet classes"
 msgstr ""
 
@@ -679,7 +678,7 @@ msgstr ""
 
 #:
 #: ../app/views/foreman_tasks/tasks/dashboard/_latest_tasks_in_error_warning.html.erb:1
-#: ../lib/foreman_tasks/engine.rb:123
+#: ../lib/foreman_tasks/engine.rb:124
 msgid "Latest Warning/Error Tasks"
 msgstr ""
 
@@ -701,7 +700,7 @@ msgid "Started"
 msgstr ""
 
 #: ../app/views/foreman_tasks/tasks/dashboard/_tasks_status.html.erb:1
-#: ../lib/foreman_tasks/engine.rb:122
+#: ../lib/foreman_tasks/engine.rb:123
 msgid "Task Status"
 msgstr ""
 
@@ -840,14 +839,18 @@ msgstr ""
 msgid "Tasks troubleshooting URL"
 msgstr ""
 
-#: ../lib/foreman_tasks/engine.rb:99
+#: ../lib/foreman_tasks/engine.rb:100
 msgid ""
 "Polling multiplier which is used to multiply the default polling intervals. Th"
 "is can be used to prevent polling too frequently for long running tasks."
 msgstr ""
 
-#: ../lib/foreman_tasks/engine.rb:102
+#: ../lib/foreman_tasks/engine.rb:103
 msgid "Polling intervals multiplier"
+msgstr ""
+
+#: ../lib/foreman_tasks/engine.rb:221
+msgid "Invalid URL"
 msgstr ""
 
 #: ../webpack/ForemanTasks/Components/TaskActions/TaskActionHelpers.js:44
@@ -1367,8 +1370,4 @@ msgstr ""
 
 #: ../webpack/ForemanTasks/Components/common/ActionButtons/ActionButton.js:41
 msgid "Force Cancel"
-msgstr ""
-
-#: action_names.rb:2
-msgid "Action with sub plans"
 msgstr ""

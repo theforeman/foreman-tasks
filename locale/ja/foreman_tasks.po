@@ -63,9 +63,6 @@ msgstr "繰り返しジョブを追跡するための特別なラベル。特定
 msgid "Action"
 msgstr "アクション"
 
-msgid "Action with sub plans"
-msgstr "サブプランによるアクション"
-
 msgid "Active"
 msgstr "アクティブ"
 
@@ -315,6 +312,9 @@ msgstr "初期化エラー: %s"
 
 msgid "Input"
 msgstr "入力"
+
+msgid "Invalid URL"
+msgstr ""
 
 msgid "Iteration limit"
 msgstr "繰り返し制限"

@@ -65,9 +65,6 @@ msgstr ""
 msgid "Action"
 msgstr "Действие"
 
-msgid "Action with sub plans"
-msgstr "Действия с подпланами"
-
 msgid "Active"
 msgstr "Активно"
 
@@ -317,6 +314,9 @@ msgstr "Ошибка инициализации: %s"
 
 msgid "Input"
 msgstr "Вход"
+
+msgid "Invalid URL"
+msgstr ""
 
 msgid "Iteration limit"
 msgstr "Максимальное число итераций"

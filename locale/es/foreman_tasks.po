@@ -65,9 +65,6 @@ msgstr "Una etiqueta especial para el seguimiento de un trabajo recurrente. Sól
 msgid "Action"
 msgstr "Acción"
 
-msgid "Action with sub plans"
-msgstr "Acción con subplanes"
-
 msgid "Active"
 msgstr "Activo"
 
@@ -317,6 +314,9 @@ msgstr "Error de inicialización: %s"
 
 msgid "Input"
 msgstr "Entrada"
+
+msgid "Invalid URL"
+msgstr ""
 
 msgid "Iteration limit"
 msgstr "Límite de iteración"
