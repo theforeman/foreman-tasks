@@ -62,9 +62,6 @@
       "Action": [
         "Ação"
       ],
-      "Action with sub plans": [
-        "Ação com subplanos "
-      ],
       "Active": [
         "Ativo"
       ],
@@ -313,6 +310,9 @@
       ],
       "Input": [
         "Entrada"
+      ],
+      "Invalid URL": [
+        ""
       ],
       "Iteration limit": [
         "Limite de iteração"

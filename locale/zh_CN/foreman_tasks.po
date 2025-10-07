@@ -62,9 +62,6 @@ msgstr "用于跟踪周期性作业的特殊标签。一次只能有一个具有
 msgid "Action"
 msgstr "操作"
 
-msgid "Action with sub plans"
-msgstr "有子计划的操作"
-
 msgid "Active"
 msgstr "活跃"
 
@@ -314,6 +311,9 @@ msgstr "初始化错误：%s"
 
 msgid "Input"
 msgstr "输入"
+
+msgid "Invalid URL"
+msgstr ""
 
 msgid "Iteration limit"
 msgstr "重述限制"

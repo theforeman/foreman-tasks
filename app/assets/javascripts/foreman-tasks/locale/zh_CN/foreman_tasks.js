@@ -62,9 +62,6 @@
       "Action": [
         "操作"
       ],
-      "Action with sub plans": [
-        "有子计划的操作"
-      ],
       "Active": [
         "活跃"
       ],
@@ -313,6 +310,9 @@
       ],
       "Input": [
         "输入"
+      ],
+      "Invalid URL": [
+        ""
       ],
       "Iteration limit": [
         "重述限制"

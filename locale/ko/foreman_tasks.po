@@ -61,9 +61,6 @@ msgstr ""
 msgid "Action"
 msgstr "동작"
 
-msgid "Action with sub plans"
-msgstr "하위 계획이 있는 작업"
-
 msgid "Active"
 msgstr "활성"
 
@@ -313,6 +310,9 @@ msgstr "초기화 오류: %s"
 
 msgid "Input"
 msgstr "입력"
+
+msgid "Invalid URL"
+msgstr ""
 
 msgid "Iteration limit"
 msgstr "반복 제한"

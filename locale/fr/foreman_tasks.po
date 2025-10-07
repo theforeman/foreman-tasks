@@ -64,9 +64,6 @@ msgstr "Une balise spéciale pour le suivi d'un travail récurrent. Il ne peut y
 msgid "Action"
 msgstr "Action"
 
-msgid "Action with sub plans"
-msgstr "Action avec sous-plans"
-
 msgid "Active"
 msgstr "Actif"
 
@@ -316,6 +313,9 @@ msgstr "Erreur d'initialisation : %s"
 
 msgid "Input"
 msgstr "Entrée"
+
+msgid "Invalid URL"
+msgstr ""
 
 msgid "Iteration limit"
 msgstr "Limite de l'itération"

@@ -62,9 +62,6 @@
       "Action": [
         "動作"
       ],
-      "Action with sub plans": [
-        "有子計畫的動作"
-      ],
       "Active": [
         "啟用中"
       ],
@@ -313,6 +310,9 @@
       ],
       "Input": [
         "輸入"
+      ],
+      "Invalid URL": [
+        ""
       ],
       "Iteration limit": [
         "重述限制"
