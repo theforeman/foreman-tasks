@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import URI from 'urijs';
 import { getURIsearch } from 'foremanReact/common/urlHelpers';
@@ -8,17 +8,25 @@ import { translate as __ } from 'foremanReact/common/I18n';
 import { getURIQuery } from 'foremanReact/common/helpers';
 import ExportButton from 'foremanReact/routes/common/PageLayout/components/ExportButton/ExportButton';
 import { STATUS } from 'foremanReact/constants';
-import { useForemanModal } from 'foremanReact/components/ForemanModal/ForemanModalHooks';
 import TasksDashboard from '../TasksDashboard';
 import TasksTable from './TasksTable';
 import { getCSVurl, updateURlQuery } from './TasksTableHelpers';
-import ConfirmModal from './Components/ConfirmModal/';
+import {
+  CancelModal,
+  ResumeModal,
+  CancelSelectedModal,
+  ResumeSelectedModal,
+  ForceUnlockModal,
+  ForceUnlockSelectedModal,
+} from './Components/ConfirmModal';
 import {
   TASKS_SEARCH_PROPS,
   CANCEL_SELECTED_MODAL,
   RESUME_SELECTED_MODAL,
   FORCE_UNLOCK_SELECTED_MODAL,
-  CONFIRM_MODAL,
+  CANCEL_MODAL,
+  RESUME_MODAL,
+  FORCE_UNLOCK_MODAL,
 } from './TasksTableConstants';
 import { ActionSelectButton } from './Components/ActionSelectButton';
 import './TasksTablePage.scss';
@@ -48,21 +56,69 @@ const TasksTablePage = ({
       updateURlQuery(newUriQuery, history);
     }
   };
-
-  const { setModalOpen, setModalClosed } = useForemanModal({
-    id: CONFIRM_MODAL,
+  const [modalStates, setModalStates] = useState({
+    [CANCEL_MODAL]: false,
+    [RESUME_MODAL]: false,
+    [CANCEL_SELECTED_MODAL]: false,
+    [RESUME_SELECTED_MODAL]: false,
+    [FORCE_UNLOCK_MODAL]: false,
+    [FORCE_UNLOCK_SELECTED_MODAL]: false,
   });
 
-  const openModal = id => openModalAction(id, setModalOpen);
+  const openModal = id => {
+    setModalStates(prev => ({
+      ...prev,
+      [id]: true,
+    }));
+  };
+
+  const closeModal = id => {
+    setModalStates(prev => ({
+      ...prev,
+      [id]: false,
+    }));
+  };
 
   return (
     <div className="tasks-table-wrapper">
-      <ConfirmModal
-        id={CONFIRM_MODAL}
+      <CancelModal
+        isModalOpen={modalStates[CANCEL_MODAL]}
+        setIsModalOpen={() => closeModal(CANCEL_MODAL)}
         url={url}
         parentTaskID={props.parentTaskID}
+      />
+      <ResumeModal
+        isModalOpen={modalStates[RESUME_MODAL]}
+        setIsModalOpen={() => closeModal(RESUME_MODAL)}
+        url={url}
+        parentTaskID={props.parentTaskID}
+      />
+      <CancelSelectedModal
+        isModalOpen={modalStates[CANCEL_SELECTED_MODAL]}
+        setIsModalOpen={() => closeModal(CANCEL_SELECTED_MODAL)}
+        url={url}
         uriQuery={uriQuery}
-        setModalClosed={setModalClosed}
+        parentTaskID={props.parentTaskID}
+      />
+      <ResumeSelectedModal
+        isModalOpen={modalStates[RESUME_SELECTED_MODAL]}
+        setIsModalOpen={() => closeModal(RESUME_SELECTED_MODAL)}
+        url={url}
+        uriQuery={uriQuery}
+        parentTaskID={props.parentTaskID}
+      />
+      <ForceUnlockModal
+        isModalOpen={modalStates[FORCE_UNLOCK_MODAL]}
+        setIsModalOpen={() => closeModal(FORCE_UNLOCK_MODAL)}
+        url={url}
+        parentTaskID={props.parentTaskID}
+      />
+      <ForceUnlockSelectedModal
+        isModalOpen={modalStates[FORCE_UNLOCK_SELECTED_MODAL]}
+        setIsModalOpen={() => closeModal(FORCE_UNLOCK_SELECTED_MODAL)}
+        url={url}
+        uriQuery={uriQuery}
+        parentTaskID={props.parentTaskID}
       />
       <PageLayout
         searchable

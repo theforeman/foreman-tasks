@@ -4,10 +4,50 @@ exports[`TasksTablePage rendering render with Breadcrubs and edit permissions 1`
 <div
   className="tasks-table-wrapper"
 >
-  <Connect(ConfirmModal)
-    id="ConfirmModal"
+  <TaskModal
+    isModalOpen={false}
     parentTaskID={null}
-    setModalClosed={[MockFunction]}
+    setIsModalOpen={[Function]}
+    url="/foreman_tasks/tasks?action=\\"some-name\\""
+  />
+  <TaskModal
+    isModalOpen={false}
+    parentTaskID={null}
+    setIsModalOpen={[Function]}
+    url="/foreman_tasks/tasks?action=\\"some-name\\""
+  />
+  <BulkTaskModal
+    isModalOpen={false}
+    parentTaskID={null}
+    setIsModalOpen={[Function]}
+    uriQuery={
+      Object {
+        "state": "stopped",
+      }
+    }
+    url="/foreman_tasks/tasks?action=\\"some-name\\""
+  />
+  <BulkTaskModal
+    isModalOpen={false}
+    parentTaskID={null}
+    setIsModalOpen={[Function]}
+    uriQuery={
+      Object {
+        "state": "stopped",
+      }
+    }
+    url="/foreman_tasks/tasks?action=\\"some-name\\""
+  />
+  <TaskModal
+    isModalOpen={false}
+    parentTaskID={null}
+    setIsModalOpen={[Function]}
+    url="/foreman_tasks/tasks?action=\\"some-name\\""
+  />
+  <BulkTaskModal
+    isModalOpen={false}
+    parentTaskID={null}
+    setIsModalOpen={[Function]}
     uriQuery={
       Object {
         "state": "stopped",
@@ -156,10 +196,50 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
 <div
   className="tasks-table-wrapper"
 >
-  <Connect(ConfirmModal)
-    id="ConfirmModal"
+  <TaskModal
+    isModalOpen={false}
     parentTaskID={null}
-    setModalClosed={[MockFunction]}
+    setIsModalOpen={[Function]}
+    url="/foreman_tasks/tasks?action=\\"some-name\\""
+  />
+  <TaskModal
+    isModalOpen={false}
+    parentTaskID={null}
+    setIsModalOpen={[Function]}
+    url="/foreman_tasks/tasks?action=\\"some-name\\""
+  />
+  <BulkTaskModal
+    isModalOpen={false}
+    parentTaskID={null}
+    setIsModalOpen={[Function]}
+    uriQuery={
+      Object {
+        "state": "stopped",
+      }
+    }
+    url="/foreman_tasks/tasks?action=\\"some-name\\""
+  />
+  <BulkTaskModal
+    isModalOpen={false}
+    parentTaskID={null}
+    setIsModalOpen={[Function]}
+    uriQuery={
+      Object {
+        "state": "stopped",
+      }
+    }
+    url="/foreman_tasks/tasks?action=\\"some-name\\""
+  />
+  <TaskModal
+    isModalOpen={false}
+    parentTaskID={null}
+    setIsModalOpen={[Function]}
+    url="/foreman_tasks/tasks?action=\\"some-name\\""
+  />
+  <BulkTaskModal
+    isModalOpen={false}
+    parentTaskID={null}
+    setIsModalOpen={[Function]}
     uriQuery={
       Object {
         "state": "stopped",

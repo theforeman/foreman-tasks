@@ -2,14 +2,18 @@
 
 exports[`Task rendering render with minimal Props 1`] = `
 <Fragment>
-  <UnlockModal
+  <UnlockConfirmationModal
     id="unlockModal"
+    isOpen={false}
     onClick={[Function]}
+    setModalClosed={[Function]}
   />
-  <ForceUnlockModal
+  <ForceUnlockConfirmationModal
     id="forceUnlockModal"
+    isOpen={false}
     onClick={[Function]}
     selectedRowsLen={1}
+    setModalClosed={[Function]}
   />
   <Grid
     bsClass="container"
@@ -26,47 +30,32 @@ exports[`Task rendering render with minimal Props 1`] = `
         cancelTaskRequest={[Function]}
         cancellable={false}
         dynflowEnableConsole={false}
-        endedAt=""
-        errors={Array []}
         externalId=""
+        forceCancelTaskRequest={[Function]}
         hasSubTasks={false}
-        help=""
         id="test"
-        output=""
         parentTask=""
-        progress={0}
-        result="error"
         resumable={false}
         resumeTaskRequest={[Function]}
-        startAt=""
-        startBefore=""
-        startedAt=""
+        setForceUnlockModalOpen={[Function]}
+        setUnlockModalOpen={[Function]}
         state=""
         taskProgressToggle={[MockFunction]}
         taskReload={false}
         taskReloadStart={[MockFunction]}
-        username=""
-        usernamePath=""
+        unlockTaskRequest={[Function]}
       />
     </Row>
     <TaskInfo
       action=""
-      canEdit={false}
-      cancelTaskRequest={[Function]}
-      cancellable={false}
-      dynflowEnableConsole={false}
       endedAt=""
       errors={Array []}
-      externalId=""
-      hasSubTasks={false}
+      forceCancelTaskRequest={[Function]}
       help=""
       id="test"
       output=""
-      parentTask=""
       progress={0}
       result="error"
-      resumable={false}
-      resumeTaskRequest={[Function]}
       startAt=""
       startBefore=""
       startedAt=""
@@ -74,6 +63,7 @@ exports[`Task rendering render with minimal Props 1`] = `
       taskProgressToggle={[MockFunction]}
       taskReload={false}
       taskReloadStart={[MockFunction]}
+      unlockTaskRequest={[Function]}
       username=""
       usernamePath=""
     />
@@ -83,14 +73,18 @@ exports[`Task rendering render with minimal Props 1`] = `
 
 exports[`Task rendering render with some Props 1`] = `
 <Fragment>
-  <UnlockModal
+  <UnlockConfirmationModal
     id="unlockModal"
+    isOpen={false}
     onClick={[Function]}
+    setModalClosed={[Function]}
   />
-  <ForceUnlockModal
+  <ForceUnlockConfirmationModal
     id="forceUnlockModal"
+    isOpen={false}
     onClick={[Function]}
     selectedRowsLen={1}
+    setModalClosed={[Function]}
   />
   <Grid
     bsClass="container"
@@ -107,39 +101,30 @@ exports[`Task rendering render with some Props 1`] = `
         cancelTaskRequest={[Function]}
         cancellable={false}
         dynflowEnableConsole={true}
-        endedAt=""
-        errors={Array []}
         externalId=""
+        forceCancelTaskRequest={[Function]}
         hasSubTasks={true}
-        help=""
         id="test"
-        output=""
         parentTask="parent-id"
-        progress={0}
-        result="error"
         resumable={false}
         resumeTaskRequest={[Function]}
-        startAt=""
-        startBefore=""
-        startedAt=""
+        setForceUnlockModalOpen={[Function]}
+        setUnlockModalOpen={[Function]}
         state="paused"
         status="RESOLVED"
         taskProgressToggle={[MockFunction]}
         taskReload={true}
         taskReloadStart={[MockFunction]}
-        username=""
-        usernamePath=""
+        unlockTaskRequest={[Function]}
       />
     </Row>
     <TaskInfo
       action=""
       canEdit={true}
-      cancelTaskRequest={[Function]}
-      cancellable={false}
       dynflowEnableConsole={true}
       endedAt=""
       errors={Array []}
-      externalId=""
+      forceCancelTaskRequest={[Function]}
       hasSubTasks={true}
       help=""
       id="test"
@@ -147,8 +132,6 @@ exports[`Task rendering render with some Props 1`] = `
       parentTask="parent-id"
       progress={0}
       result="error"
-      resumable={false}
-      resumeTaskRequest={[Function]}
       startAt=""
       startBefore=""
       startedAt=""
@@ -157,6 +140,7 @@ exports[`Task rendering render with some Props 1`] = `
       taskProgressToggle={[MockFunction]}
       taskReload={true}
       taskReloadStart={[MockFunction]}
+      unlockTaskRequest={[Function]}
       username=""
       usernamePath=""
     />

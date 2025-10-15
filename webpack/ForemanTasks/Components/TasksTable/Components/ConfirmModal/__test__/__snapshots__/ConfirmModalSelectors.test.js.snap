@@ -1,16 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TasksDashboard - Selectors should select actionState 1`] = `"some-state"`;
+exports[`TasksDashboard - Selectors should select clicked 1`] = `
+Object {
+  "taskId": "1",
+  "taskName": "test-task",
+}
+`;
 
-exports[`TasksDashboard - Selectors should select actionText 1`] = `"some-text"`;
-
-exports[`TasksDashboard - Selectors should select actionType 1`] = `"some-type"`;
-
-exports[`TasksDashboard - Selectors should select selectedRowsLen 1 1`] = `1`;
+exports[`TasksDashboard - Selectors should select selectedRowsLen 1 1`] = `3`;
 
 exports[`TasksDashboard - Selectors should select selectedRowsLen all 1`] = `3`;
 
-exports[`TasksDashboard - Selectors should select selectedRowsLen some 1`] = `3`;
+exports[`TasksDashboard - Selectors should select selectedRowsLen some 1`] = `0`;
 
 exports[`TasksDashboard - Selectors should select selectedTasks 1`] = `
 Array [
