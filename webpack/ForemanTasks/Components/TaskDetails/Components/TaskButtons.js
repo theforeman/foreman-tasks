@@ -1,12 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Col, Button } from 'patternfly-react';
-import { useForemanModal } from 'foremanReact/components/ForemanModal/ForemanModalHooks';
 import { translate as __ } from 'foremanReact/common/I18n';
-import {
-  UNLOCK_MODAL,
-  FORCE_UNLOCK_MODAL,
-} from '../../TaskActions/TaskActionsConstants';
 
 export const TaskButtons = ({
   canEdit,
@@ -24,13 +19,9 @@ export const TaskButtons = ({
   parentTask,
   cancelTaskRequest,
   resumeTaskRequest,
+  setUnlockModalOpen,
+  setForceUnlockModalOpen,
 }) => {
-  const unlockModalActions = useForemanModal({
-    id: UNLOCK_MODAL,
-  });
-  const forceUnlockModalActions = useForemanModal({
-    id: FORCE_UNLOCK_MODAL,
-  });
   const editActionsTitle = canEdit
     ? undefined
     : __('You do not have permission');
@@ -114,7 +105,9 @@ export const TaskButtons = ({
         className="unlock-button"
         bsSize="small"
         disabled={!canEdit || state !== 'paused'}
-        onClick={unlockModalActions.setModalOpen}
+        onClick={() => {
+          setUnlockModalOpen(true);
+        }}
         title={editActionsTitle}
         data-original-title={editActionsTitle}
       >
@@ -124,7 +117,7 @@ export const TaskButtons = ({
         className="force-unlock-button"
         bsSize="small"
         disabled={!canEdit || state === 'stopped'}
-        onClick={forceUnlockModalActions.setModalOpen}
+        onClick={() => setForceUnlockModalOpen(true)}
         title={editActionsTitle}
         data-original-title={editActionsTitle}
       >
@@ -134,7 +127,7 @@ export const TaskButtons = ({
   );
 };
 
-TaskButtons.propTypes = {
+export const TaskButtonspropTypes = {
   canEdit: PropTypes.bool,
   dynflowEnableConsole: PropTypes.bool,
   taskReloadStart: PropTypes.func.isRequired,
@@ -151,8 +144,7 @@ TaskButtons.propTypes = {
   cancelTaskRequest: PropTypes.func,
   resumeTaskRequest: PropTypes.func,
 };
-
-TaskButtons.defaultProps = {
+export const TaskButtonsdefaultProps = {
   canEdit: false,
   dynflowEnableConsole: false,
   taskReload: false,
@@ -165,4 +157,15 @@ TaskButtons.defaultProps = {
   parentTask: '',
   cancelTaskRequest: () => null,
   resumeTaskRequest: () => null,
+};
+
+TaskButtons.propTypes = {
+  ...TaskButtonspropTypes,
+  setUnlockModalOpen: PropTypes.func,
+  setForceUnlockModalOpen: PropTypes.func,
+};
+TaskButtons.defaultProps = {
+  setUnlockModalOpen: () => null,
+  setForceUnlockModalOpen: () => null,
+  ...TaskButtonsdefaultProps,
 };

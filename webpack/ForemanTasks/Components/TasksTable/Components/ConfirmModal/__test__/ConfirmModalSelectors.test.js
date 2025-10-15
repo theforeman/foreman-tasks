@@ -1,8 +1,6 @@
 import { testSelectorsSnapshotWithFixtures } from '@theforeman/test';
 import {
-  selectActionText,
-  selectActionState,
-  selectActionType,
+  selectClicked,
   selectSelectedTasks,
   selectSelectedRowsLen,
 } from '../ConfirmModalSelectors';
@@ -10,11 +8,6 @@ import { CANCEL_MODAL } from '../../../TasksTableConstants';
 
 const state = {
   foremanTasks: {
-    confirmModal: {
-      actionText: 'some-text',
-      actionState: 'some-state',
-      actionType: 'some-type',
-    },
     tasksTable: {
       tasksTableContent: {
         results: [
@@ -28,26 +21,44 @@ const state = {
         ],
         itemCount: 10,
       },
-      tasksTableQuery: { selectedRows: [1, 2, 3] },
+      tasksTableQuery: {
+        selectedRows: [1, 2, 3],
+        clicked: { taskId: '1', taskName: 'test-task' },
+        allRowsSelected: false,
+      },
     },
   },
 };
 
 const fixtures = {
-  'should select actionText': () => selectActionText(state),
-  'should select actionState': () => selectActionState(state),
-  'should select actionType': () => selectActionType(state),
+  'should select clicked': () => selectClicked(state),
   'should select selectedTasks': () => selectSelectedTasks(state),
   'should select selectedRowsLen 1': () =>
     selectSelectedRowsLen({
       ...state,
-      foremanTasks: { confirmModal: { actionType: CANCEL_MODAL } },
+      foremanTasks: {
+        tasksTable: {
+          ...state.foremanTasks.tasksTable,
+          tasksTableQuery: {
+            ...state.foremanTasks.tasksTable.tasksTableQuery,
+            clicked: { modalType: CANCEL_MODAL },
+          },
+        },
+      },
     }),
   'should select selectedRowsLen all': () => selectSelectedRowsLen(state),
   'should select selectedRowsLen some': () =>
     selectSelectedRowsLen({
       ...state,
-      tasksTable: { tasksTableQuery: { allRowsSelected: true } },
+      foremanTasks: {
+        tasksTable: {
+          ...state.foremanTasks.tasksTable,
+          tasksTableQuery: {
+            ...state.foremanTasks.tasksTable.tasksTableQuery,
+            allRowsSelected: true,
+          },
+        },
+      },
     }),
 };
 

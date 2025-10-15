@@ -8,8 +8,11 @@ import Pagination from 'foremanReact/components/Pagination';
 import { getURIQuery } from 'foremanReact/common/helpers';
 import createTasksTableSchema from './TasksTableSchema';
 import { updateURlQuery } from './TasksTableHelpers';
-import { RESUME_MODAL, CANCEL_MODAL } from './TasksTableConstants';
-import { FORCE_UNLOCK_MODAL } from '../TaskActions/TaskActionsConstants';
+import {
+  RESUME_MODAL,
+  CANCEL_MODAL,
+  FORCE_UNLOCK_MODAL,
+} from './TasksTableConstants';
 
 const TasksTable = ({
   getTableItems,
