@@ -6,8 +6,9 @@
 # make tx-update - download and merge translations from Transifex
 # make clean - clean everything
 #
-DOMAIN = foreman_tasks
-VERSION = $(shell ruby -e 'require "rubygems";spec = Gem::Specification::load(Dir.glob("../*.gemspec")[0]);puts spec.version')
+GEM_NAME = $(shell ruby -rrubygems -e 'puts Gem::Specification::load(Dir.glob("../*.gemspec")[0]).name')
+DOMAIN = $(shell echo $(GEM_NAME) | sed s/-/_/g)
+VERSION = $(shell ruby -rrubygems -e 'puts Gem::Specification::load(Dir.glob("../*.gemspec")[0]).version')
 POTFILE = $(DOMAIN).pot
 MOFILE = $(DOMAIN).mo
 POFILES = $(shell find . -name '$(DOMAIN).po')
@@ -31,8 +32,15 @@ all-mo: $(MOFILES)
 	cat $@
 	! grep -q msgid $@
 
-%.edit.po:
+%.edit.po: %.po.time_stamp
 	touch $@
+
+# gettext will trash the .edit.po file if the time stamp doesn't exist or is older than the po file
+%.po.time_stamp: %.po
+	touch --reference $< $@
+
+# Prevent make from treating this as an intermediate file to be cleaned up
+.PRECIOUS: %.po.time_stamp
 
 check: $(POXFILES)
 
@@ -43,15 +51,18 @@ uniq-po:
 	done
 
 tx-pull: $(EDITFILES)
-	cd .. && tx pull -f
+	# Initialize new languages
+	cd .. && tx pull -f --all --minimum-perc 50
+	# Force update all existing languages
+	cd .. && tx pull -f --minimum-perc 0
 	for f in $(EDITFILES) ; do \
-		sed -i 's/^\("Project-Id-Version: \).*$$/\1$(DOMAIN) $(VERSION)\\n"/' $$f; \
+		sed -i 's/^\("Project-Id-Version: \).*$$/\1$(GEM_NAME) $(VERSION)\\n"/' $$f; \
 	done
 
 tx-update: tx-pull
 	@echo
-	@echo Run rake plugin:gettext[$(DOMAIN)] from the Foreman installation
-	@echo then run rake plugin:po_to_json[$(DOMAIN)] from the Foreman installation
+	@echo Run rake plugin:gettext[$(GEM_NAME)] from the Foreman installation
+	@echo then run rake plugin:po_to_json[$(GEM_NAME)] from the Foreman installation
 	@echo then run make -C locale mo-files to finish
 	@echo
 
