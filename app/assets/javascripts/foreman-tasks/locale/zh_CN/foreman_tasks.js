@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman_tasks 9.2.2",
+        "Project-Id-Version": "foreman-tasks 11.0.5",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-12 14:04+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
@@ -61,6 +61,9 @@
       ],
       "Action": [
         "操作"
+      ],
+      "Action with sub plans": [
+        ""
       ],
       "Active": [
         "活跃"
@@ -144,7 +147,7 @@
         "无法更新一个已取消的周期性逻辑。"
       ],
       "Changing request id %{request_id} to saved id %{saved_id}": [
-        "将请求 id %%{request_id} 改为保存的 id %%{saved_id}"
+        "将请求 id %{request_id} 改为保存的 id %%{saved_id}"
       ],
       "Check for long running tasks": [
         "检查长时间运行的任务"
@@ -237,7 +240,7 @@
         "错误："
       ],
       "Event delivered by request %{request_id}": [
-        "由请求 %%{request_id} 发送的事件"
+        "由请求 %{request_id} 发送的事件"
       ],
       "Exception": [
         "例外"
@@ -546,7 +549,7 @@
         "调度未来的执行"
       ],
       "Scheduled": [
-        "调度的"
+        "调度"
       ],
       "Search query": [
         "搜索查询"
@@ -798,7 +801,7 @@
         "小时（范围：0-23）"
       ],
       "is in the past": [
-        ""
+        "在过去"
       ],
       "is minute (range: 0-59)": [
         "分钟（范围：0-59）"
@@ -816,10 +819,10 @@
         "模式"
       ],
       "mode has to be one of %{allowed_modes}": [
-        "模式必须是 %%{allowed_modes} 之一"
+        "模式必须是 %{allowed_modes} 之一"
       ],
       "must be set": [
-        ""
+        "必须设置"
       ],
       "older": [
         "较老"

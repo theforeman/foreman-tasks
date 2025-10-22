@@ -7,7 +7,7 @@
 # francis <hackgo@gmail.com>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_tasks 9.2.2\n"
+"Project-Id-Version: foreman-tasks 11.0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-12 14:04+0000\n"
 "Last-Translator: francis <hackgo@gmail.com>, 2017\n"
@@ -64,6 +64,9 @@ msgstr "Una etiqueta especial para el seguimiento de un trabajo recurrente. Sól
 
 msgid "Action"
 msgstr "Acción"
+
+msgid "Action with sub plans"
+msgstr ""
 
 msgid "Active"
 msgstr "Activo"

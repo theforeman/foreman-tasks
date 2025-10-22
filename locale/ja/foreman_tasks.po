@@ -6,7 +6,7 @@
 # Kazuki Omo <kazuki.omo@gmail.com>, 2019
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_tasks 9.2.2\n"
+"Project-Id-Version: foreman-tasks 11.0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-12 14:04+0000\n"
 "Last-Translator: Kazuki Omo <kazuki.omo@gmail.com>, 2019\n"
@@ -62,6 +62,9 @@ msgstr "繰り返しジョブを追跡するための特別なラベル。特定
 
 msgid "Action"
 msgstr "アクション"
+
+msgid "Action with sub plans"
+msgstr ""
 
 msgid "Active"
 msgstr "アクティブ"
@@ -146,7 +149,7 @@ msgid "Cannot update a cancelled Recurring Logic."
 msgstr "取り消された再帰論理を更新できません"
 
 msgid "Changing request id %{request_id} to saved id %{saved_id}"
-msgstr "要求 ID %%{request_id} を保存済み ID %%{saved_id} に変更しています"
+msgstr "要求 ID %{request_id} を保存済み ID %{saved_id} に変更しています"
 
 msgid "Check for long running tasks"
 msgstr "長時間実行中のタスクの確認"
@@ -239,7 +242,7 @@ msgid "Errors:"
 msgstr "エラー:"
 
 msgid "Event delivered by request %{request_id}"
-msgstr "要求 ％%{request_id} で配信されたイベント"
+msgstr "要求 %{request_id} で配信されたイベント"
 
 msgid "Exception"
 msgstr "例外"
@@ -546,7 +549,7 @@ msgid "Schedule"
 msgstr "スケジュール"
 
 msgid "Schedule future execution"
-msgstr "将来の実行をスケジュール"
+msgstr "今後の日時で実行をスケジュールする"
 
 msgid "Scheduled"
 msgstr "スケジュール済み"
@@ -624,7 +627,7 @@ msgid "Sub tasks of %s"
 msgstr "%s のサブタスク"
 
 msgid "Subscribe"
-msgstr "サブスクライプ"
+msgstr "サブスクライブ"
 
 msgid "Sun"
 msgstr "日"
@@ -805,7 +808,7 @@ msgid "is hour (range: 0-23)"
 msgstr "時間 (範囲: 0 - 23)"
 
 msgid "is in the past"
-msgstr ""
+msgstr "は過去です"
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is minute (range: 0-59)"
@@ -825,10 +828,10 @@ msgid "mode"
 msgstr "モード"
 
 msgid "mode has to be one of %{allowed_modes}"
-msgstr "モードは %%{allowed_modes} のいずれかである必要があります"
+msgstr "モードは %{allowed_modes} のいずれかである必要があります"
 
 msgid "must be set"
-msgstr ""
+msgstr "設定が必要です"
 
 msgid "older"
 msgstr "前"

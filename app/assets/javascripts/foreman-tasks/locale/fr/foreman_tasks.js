@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman_tasks 9.2.2",
+        "Project-Id-Version": "foreman-tasks 11.0.5",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-12 14:04+0000",
         "Last-Translator": "Claer <transiblu@claer.hammock.fr>, 2016",
@@ -61,6 +61,9 @@
       ],
       "Action": [
         "Action"
+      ],
+      "Action with sub plans": [
+        ""
       ],
       "Active": [
         "Actif"
@@ -144,7 +147,7 @@
         "Impossible de mettre à jour une logique récurrente annulée."
       ],
       "Changing request id %{request_id} to saved id %{saved_id}": [
-        "Changement de l'id de la demande %%{request_id} en id %%{saved_id} sauvegardée"
+        "Changement de l'id de la demande %{request_id} en id %{saved_id} sauvegardée"
       ],
       "Check for long running tasks": [
         "Rechercher les tâches de longue durée"
@@ -237,7 +240,7 @@
         "Erreurs :"
       ],
       "Event delivered by request %{request_id}": [
-        "Événement livré sur demande %%{request_id}"
+        "Événement livré sur demande %{request_id}"
       ],
       "Exception": [
         "Exception"
@@ -546,7 +549,7 @@
         "Programmer une exécution prochaine"
       ],
       "Scheduled": [
-        "Prévu"
+        "Programmé"
       ],
       "Search query": [
         "Requête de recherche"
@@ -800,7 +803,7 @@
         "est heure (plage: 0-23)"
       ],
       "is in the past": [
-        ""
+        "est dans le passé"
       ],
       "is minute (range: 0-59)": [
         "est minute (plage: 0-59)"
@@ -818,10 +821,10 @@
         "mode"
       ],
       "mode has to be one of %{allowed_modes}": [
-        "mode doit être un parmi %%{allowed_modes}"
+        "mode doit être un parmi %{allowed_modes}"
       ],
       "must be set": [
-        ""
+        "doit être défini"
       ],
       "older": [
         "plus ancien"

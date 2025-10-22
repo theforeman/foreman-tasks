@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_tasks 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-07 14:51+0200\n"
-"PO-Revision-Date: 2025-10-07 14:51+0200\n"
+"POT-Creation-Date: 2025-10-22 11:24-0400\n"
+"PO-Revision-Date: 2025-10-22 11:24-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -312,7 +312,7 @@ msgstr ""
 msgid "%{total} task(s), %{success} success, %{failed} fail"
 msgstr ""
 
-#: ../app/lib/actions/bulk_action.rb:26
+#: ../app/lib/actions/bulk_action.rb:26 action_names.rb:3
 msgid "Bulk action"
 msgstr ""
 
@@ -324,19 +324,20 @@ msgstr ""
 msgid "The targets are of different types"
 msgstr ""
 
-#: ../app/lib/actions/check_long_running_tasks.rb:40
+#: ../app/lib/actions/check_long_running_tasks.rb:40 action_names.rb:4
 msgid "Check for long running tasks"
 msgstr ""
 
 #: ../app/lib/actions/deliver_long_running_tasks_notification.rb:19
+#: action_names.rb:5
 msgid "Deliver notifications about long running tasks"
 msgstr ""
 
-#: ../app/lib/actions/foreman/host/import_facts.rb:43
+#: ../app/lib/actions/foreman/host/import_facts.rb:43 action_names.rb:7
 msgid "Import facts"
 msgstr ""
 
-#: ../app/lib/actions/foreman/puppetclass/import.rb:18
+#: ../app/lib/actions/foreman/puppetclass/import.rb:18 action_names.rb:6
 msgid "Import Puppet classes"
 msgstr ""
 
@@ -1370,4 +1371,8 @@ msgstr ""
 
 #: ../webpack/ForemanTasks/Components/common/ActionButtons/ActionButton.js:41
 msgid "Force Cancel"
+msgstr ""
+
+#: action_names.rb:2
+msgid "Action with sub plans"
 msgstr ""

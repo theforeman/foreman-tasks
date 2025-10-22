@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman_tasks 9.2.2",
+        "Project-Id-Version": "foreman-tasks 11.0.5",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-12 14:04+0000",
         "Last-Translator": "Kazuki Omo <kazuki.omo@gmail.com>, 2019",
@@ -61,6 +61,9 @@
       ],
       "Action": [
         "アクション"
+      ],
+      "Action with sub plans": [
+        ""
       ],
       "Active": [
         "アクティブ"
@@ -144,7 +147,7 @@
         "取り消された再帰論理を更新できません"
       ],
       "Changing request id %{request_id} to saved id %{saved_id}": [
-        "要求 ID %%{request_id} を保存済み ID %%{saved_id} に変更しています"
+        "要求 ID %{request_id} を保存済み ID %{saved_id} に変更しています"
       ],
       "Check for long running tasks": [
         "長時間実行中のタスクの確認"
@@ -237,7 +240,7 @@
         "エラー:"
       ],
       "Event delivered by request %{request_id}": [
-        "要求 ％%{request_id} で配信されたイベント"
+        "要求 %{request_id} で配信されたイベント"
       ],
       "Exception": [
         "例外"
@@ -543,7 +546,7 @@
         "スケジュール"
       ],
       "Schedule future execution": [
-        "将来の実行をスケジュール"
+        "今後の日時で実行をスケジュールする"
       ],
       "Scheduled": [
         "スケジュール済み"
@@ -621,7 +624,7 @@
         "%s のサブタスク"
       ],
       "Subscribe": [
-        "サブスクライプ"
+        "サブスクライブ"
       ],
       "Sun": [
         "日"
@@ -798,7 +801,7 @@
         "時間 (範囲: 0 - 23)"
       ],
       "is in the past": [
-        ""
+        "は過去です"
       ],
       "is minute (range: 0-59)": [
         "分 (範囲: 0 - 59)"
@@ -816,10 +819,10 @@
         "モード"
       ],
       "mode has to be one of %{allowed_modes}": [
-        "モードは %%{allowed_modes} のいずれかである必要があります"
+        "モードは %{allowed_modes} のいずれかである必要があります"
       ],
       "must be set": [
-        ""
+        "設定が必要です"
       ],
       "older": [
         "前"

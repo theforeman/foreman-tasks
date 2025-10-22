@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman_tasks 9.2.2",
+        "Project-Id-Version": "foreman-tasks 11.0.5",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-12 14:04+0000",
         "Last-Translator": "Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022",
@@ -61,6 +61,9 @@
       ],
       "Action": [
         "მოქმედება"
+      ],
+      "Action with sub plans": [
+        ""
       ],
       "Active": [
         "აქტიური"
