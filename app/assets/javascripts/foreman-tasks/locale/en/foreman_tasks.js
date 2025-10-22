@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman_tasks 9.2.2",
+        "Project-Id-Version": "foreman-tasks 11.0.5",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2023-05-18 08:15+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
@@ -60,6 +60,9 @@
         ""
       ],
       "Action": [
+        ""
+      ],
+      "Action with sub plans": [
         ""
       ],
       "Active": [

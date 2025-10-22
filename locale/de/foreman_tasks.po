@@ -9,7 +9,7 @@
 # pdolinic, 2021
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_tasks 9.2.2\n"
+"Project-Id-Version: foreman-tasks 11.0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-12 14:04+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2016-2017,2023\n"
@@ -64,6 +64,9 @@ msgstr ""
 
 msgid "Action"
 msgstr "Aktion"
+
+msgid "Action with sub plans"
+msgstr ""
 
 msgid "Active"
 msgstr "Aktiv"
@@ -316,7 +319,7 @@ msgid "Input"
 msgstr "Eingang"
 
 msgid "Invalid URL"
-msgstr ""
+msgstr "Ungültige URL"
 
 msgid "Iteration limit"
 msgstr "Wiederholungslimit"

@@ -6,7 +6,7 @@
 # Luiz Henrique Vasconcelos <luizvasconceloss@yahoo.com.br>, 2017-2018
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_tasks 9.2.2\n"
+"Project-Id-Version: foreman-tasks 11.0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-12 14:04+0000\n"
 "Last-Translator: Luiz Henrique Vasconcelos <luizvasconceloss@yahoo.com.br>, 20"
@@ -64,6 +64,9 @@ msgstr "Uma etiqueta especial para rastrear um trabalho recorrente. Só pode hav
 
 msgid "Action"
 msgstr "Ação"
+
+msgid "Action with sub plans"
+msgstr ""
 
 msgid "Active"
 msgstr "Ativo"

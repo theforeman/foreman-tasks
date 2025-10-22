@@ -5,7 +5,7 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_tasks 9.2.2\n"
+"Project-Id-Version: foreman-tasks 11.0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-12 14:04+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -61,6 +61,9 @@ msgstr "用于跟踪周期性作业的特殊标签。一次只能有一个具有
 
 msgid "Action"
 msgstr "操作"
+
+msgid "Action with sub plans"
+msgstr ""
 
 msgid "Active"
 msgstr "活跃"
@@ -145,7 +148,7 @@ msgid "Cannot update a cancelled Recurring Logic."
 msgstr "无法更新一个已取消的周期性逻辑。"
 
 msgid "Changing request id %{request_id} to saved id %{saved_id}"
-msgstr "将请求 id %%{request_id} 改为保存的 id %%{saved_id}"
+msgstr "将请求 id %{request_id} 改为保存的 id %%{saved_id}"
 
 msgid "Check for long running tasks"
 msgstr "检查长时间运行的任务"
@@ -238,7 +241,7 @@ msgid "Errors:"
 msgstr "错误："
 
 msgid "Event delivered by request %{request_id}"
-msgstr "由请求 %%{request_id} 发送的事件"
+msgstr "由请求 %{request_id} 发送的事件"
 
 msgid "Exception"
 msgstr "例外"
@@ -548,7 +551,7 @@ msgid "Schedule future execution"
 msgstr "调度未来的执行"
 
 msgid "Scheduled"
-msgstr "调度的"
+msgstr "调度"
 
 msgid "Search query"
 msgstr "搜索查询"
@@ -804,7 +807,7 @@ msgid "is hour (range: 0-23)"
 msgstr "小时（范围：0-23）"
 
 msgid "is in the past"
-msgstr ""
+msgstr "在过去"
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is minute (range: 0-59)"
@@ -824,10 +827,10 @@ msgid "mode"
 msgstr "模式"
 
 msgid "mode has to be one of %{allowed_modes}"
-msgstr "模式必须是 %%{allowed_modes} 之一"
+msgstr "模式必须是 %{allowed_modes} 之一"
 
 msgid "must be set"
-msgstr ""
+msgstr "必须设置"
 
 msgid "older"
 msgstr "较老"

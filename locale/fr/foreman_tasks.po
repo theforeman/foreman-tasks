@@ -7,7 +7,7 @@
 # Claer <transiblu@claer.hammock.fr>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_tasks 9.2.2\n"
+"Project-Id-Version: foreman-tasks 11.0.5\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-12 14:04+0000\n"
 "Last-Translator: Claer <transiblu@claer.hammock.fr>, 2016\n"
@@ -63,6 +63,9 @@ msgstr "Une balise spéciale pour le suivi d'un travail récurrent. Il ne peut y
 
 msgid "Action"
 msgstr "Action"
+
+msgid "Action with sub plans"
+msgstr ""
 
 msgid "Active"
 msgstr "Actif"
@@ -147,7 +150,7 @@ msgid "Cannot update a cancelled Recurring Logic."
 msgstr "Impossible de mettre à jour une logique récurrente annulée."
 
 msgid "Changing request id %{request_id} to saved id %{saved_id}"
-msgstr "Changement de l'id de la demande %%{request_id} en id %%{saved_id} sauvegardée"
+msgstr "Changement de l'id de la demande %{request_id} en id %{saved_id} sauvegardée"
 
 msgid "Check for long running tasks"
 msgstr "Rechercher les tâches de longue durée"
@@ -240,7 +243,7 @@ msgid "Errors:"
 msgstr "Erreurs :"
 
 msgid "Event delivered by request %{request_id}"
-msgstr "Événement livré sur demande %%{request_id}"
+msgstr "Événement livré sur demande %{request_id}"
 
 msgid "Exception"
 msgstr "Exception"
@@ -550,7 +553,7 @@ msgid "Schedule future execution"
 msgstr "Programmer une exécution prochaine"
 
 msgid "Scheduled"
-msgstr "Prévu"
+msgstr "Programmé"
 
 msgid "Search query"
 msgstr "Requête de recherche"
@@ -808,7 +811,7 @@ msgid "is hour (range: 0-23)"
 msgstr "est heure (plage: 0-23)"
 
 msgid "is in the past"
-msgstr ""
+msgstr "est dans le passé"
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is minute (range: 0-59)"
@@ -828,10 +831,10 @@ msgid "mode"
 msgstr "mode"
 
 msgid "mode has to be one of %{allowed_modes}"
-msgstr "mode doit être un parmi %%{allowed_modes}"
+msgstr "mode doit être un parmi %{allowed_modes}"
 
 msgid "must be set"
-msgstr ""
+msgstr "doit être défini"
 
 msgid "older"
 msgstr "plus ancien"
