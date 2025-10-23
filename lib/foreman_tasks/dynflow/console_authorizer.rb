@@ -33,9 +33,7 @@ module ForemanTasks
       # users with unlimited edit_foreman_tasks can operate with the
       # console no matter what task it is...
       edit_permission = Permission.where(:name => :edit_foreman_tasks, :resource_type => ForemanTasks::Task.name).first
-      if @user.filters.joins(:filterings).unlimited.where('filterings.permission_id' => edit_permission).first
-        true
-      end
+      @user.filters.joins(:filterings).where(:search => nil, :taxonomy_search => nil, 'filterings.permission_id' => edit_permission).exists?
     end
 
     def authorized_for_task?
