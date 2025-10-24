@@ -1,6 +1,6 @@
 import { testComponentSnapshotsWithFixtures } from '@theforeman/test';
 
-import { UnlockModal, ForceUnlockModal } from './UnlockModals';
+import { UnlockModal, ForceUnlockModal } from '../common/ClickConfirmation';
 
 const fixtures = {
   render: { taskID: 'some-id', onClick: jest.fn() },
