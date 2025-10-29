@@ -89,34 +89,20 @@ exports[`TaskDetails rendering render with min Props 1`] = `
     >
       <Task
         action=""
-        canEdit={false}
-        cancelTaskRequest={[Function]}
-        cancellable={false}
-        dynflowEnableConsole={false}
         endedAt=""
-        errors={Array []}
         externalId=""
-        hasSubTasks={false}
-        help=""
+        forceCancelTaskRequest={[Function]}
         id="a15dd820-32f1-4ced-9ab7-c0fab8234c47"
         input={Array []}
         label=""
         output={Object {}}
-        parentTask=""
-        progress={0}
-        result="error"
         resumable={false}
-        resumeTaskRequest={[Function]}
-        startAt=""
-        startBefore=""
         startedAt=""
-        state=""
         status="RESOLVED"
         taskProgressToggle={[Function]}
         taskReload={false}
         taskReloadStart={[MockFunction]}
-        username=""
-        usernamePath=""
+        unlockTaskRequest={[Function]}
       />
     </Tab>
     <Tab

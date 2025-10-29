@@ -1,4 +1,3 @@
-import { selectForemanTasks } from '../../../../ForemanTasksSelectors';
 import {
   selectTasksTableQuery,
   selectResults,
@@ -6,15 +5,7 @@ import {
   selectItemCount,
   selectAllRowsSelected,
 } from '../../TasksTableSelectors';
-import { RESUME_MODAL, CANCEL_MODAL } from '../../TasksTableConstants';
-import { FORCE_UNLOCK_MODAL } from '../../../TaskActions/TaskActionsConstants';
 
-export const selectCofirmModal = state =>
-  selectForemanTasks(state).confirmModal || {};
-
-export const selectActionType = state => selectCofirmModal(state).actionType;
-export const selectActionText = state => selectCofirmModal(state).actionText;
-export const selectActionState = state => selectCofirmModal(state).actionState;
 export const selectClicked = state =>
   selectTasksTableQuery(state).clicked || {};
 
@@ -32,13 +23,6 @@ export const selectSelectedTasks = state => {
 };
 
 export const selectSelectedRowsLen = state => {
-  if (
-    [CANCEL_MODAL, RESUME_MODAL, FORCE_UNLOCK_MODAL].includes(
-      selectActionType(state)
-    )
-  ) {
-    return 1;
-  }
   if (selectAllRowsSelected(state)) {
     return selectItemCount(state);
   }

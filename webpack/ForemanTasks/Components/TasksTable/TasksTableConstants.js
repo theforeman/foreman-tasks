@@ -16,7 +16,7 @@ export const CANCEL_MODAL = 'cancelConfirmModal';
 export const RESUME_MODAL = 'resumeConfirmModal';
 export const CANCEL_SELECTED_MODAL = 'cancelSelectedConfirmModal';
 export const RESUME_SELECTED_MODAL = 'resumeSelectedConfirmModal';
-export const CONFIRM_MODAL = 'ConfirmModal';
+export const FORCE_UNLOCK_MODAL = 'forceUnlockConfirmModal';
 export const FORCE_UNLOCK_SELECTED_MODAL = 'forceUnlockSelectedConfirmModal';
 
 export const UPDATE_CLICKED = 'UPDATE_CLICKED';
