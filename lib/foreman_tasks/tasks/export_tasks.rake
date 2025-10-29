@@ -324,7 +324,7 @@ namespace :foreman_tasks do
     format = ENV['TASK_FORMAT'] || 'html'
     export_filename = ENV['TASK_FILE'] || generate_filename(format)
 
-    task_scope = ForemanTasks::Task.search_for(filter).with_duration.order(:started_at => :desc)
+    task_scope = ForemanTasks::Task.search_for(filter).select_duration.order(:started_at => :desc)
     id_scope = task_scope.group(:id, :started_at)
 
     puts _("Exporting all tasks matching filter #{filter}")
