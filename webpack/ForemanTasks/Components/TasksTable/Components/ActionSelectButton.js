@@ -1,42 +1,43 @@
 import React from 'react';
-import { DropdownButton, MenuItem } from 'patternfly-react';
 import PropTypes from 'prop-types';
 import { translate as __ } from 'foremanReact/common/I18n';
+import { ActionButtons } from 'foremanReact/components/common/ActionButtons/ActionButtons';
 
 export const ActionSelectButton = ({
   onCancel,
   onResume,
   onForceCancel,
   disabled,
-}) => (
-  <DropdownButton
-    title={__('Select Action')}
-    disabled={disabled}
-    id="selcted-action-type"
-  >
-    <MenuItem
-      title={__('Cancel selected tasks')}
-      onClick={onCancel}
-      eventKey="1"
-    >
-      {__('Cancel Selected')}
-    </MenuItem>
-    <MenuItem
-      title={__('Resume selected tasks')}
-      onClick={onResume}
-      eventKey="2"
-    >
-      {__('Resume Selected')}
-    </MenuItem>
-    <MenuItem
-      title={__('Force Cancel selected tasks')}
-      onClick={onForceCancel}
-      eventKey="3"
-    >
-      {__('Force Cancel Selected')}
-    </MenuItem>
-  </DropdownButton>
-);
+}) => {
+  const buttons = [
+    {
+      title: __('Select Action'),
+      action: {
+        onClick: () => {},
+      },
+    },
+    {
+      title: __('Cancel Selected'),
+      action: {
+        onClick: onCancel,
+      },
+    },
+    {
+      title: __('Resume Selected'),
+      action: {
+        onClick: onResume,
+      },
+    },
+    {
+      title: __('Force Cancel Selected'),
+      action: {
+        onClick: onForceCancel,
+      },
+    },
+  ];
+
+  return <ActionButtons buttons={buttons} />;
+};
 
 ActionSelectButton.propTypes = {
   disabled: PropTypes.bool,
