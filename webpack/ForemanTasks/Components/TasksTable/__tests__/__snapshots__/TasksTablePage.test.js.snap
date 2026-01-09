@@ -109,26 +109,18 @@ exports[`TasksTablePage rendering render with Breadcrubs and edit permissions 1`
     toolbarButtons={
       <React.Fragment>
         <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="default"
-          disabled={false}
           onClick={[Function]}
+          ouiaId="tasks-table-refresh-data"
+          variant="primary"
         >
-          <Icon
-            name="refresh"
-            type="fa"
-          />
+          <Icon>
+            <RedoIcon />
+          </Icon>
            
           Refresh Data
         </Button>
         <Spinner
-          className=""
-          inline={false}
-          inverse={false}
-          loading={true}
-          size="md"
+          size="lg"
         />
         <ExportButton
           title="Export All"
@@ -284,26 +276,18 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
     toolbarButtons={
       <React.Fragment>
         <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="default"
-          disabled={false}
           onClick={[Function]}
+          ouiaId="tasks-table-refresh-data"
+          variant="primary"
         >
-          <Icon
-            name="refresh"
-            type="fa"
-          />
+          <Icon>
+            <RedoIcon />
+          </Icon>
            
           Refresh Data
         </Button>
         <Spinner
-          className=""
-          inline={false}
-          inverse={false}
-          loading={true}
-          size="md"
+          size="lg"
         />
         <ExportButton
           title="Export All"
