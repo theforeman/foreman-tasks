@@ -36,6 +36,8 @@ import {
   selectStatus,
   selectAPIError,
   selectIsLoading,
+  selectDependsOn,
+  selectBlocks,
 } from './TaskDetailsSelectors';
 
 const mapStateToProps = state => ({
@@ -71,6 +73,8 @@ const mapStateToProps = state => ({
   status: selectStatus(state),
   APIerror: selectAPIError(state),
   isLoading: selectIsLoading(state),
+  dependsOn: selectDependsOn(state),
+  blocks: selectBlocks(state),
 });
 
 const mapDispatchToProps = dispatch =>
