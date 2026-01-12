@@ -9,6 +9,7 @@ import RunningSteps from './Components/RunningSteps';
 import Errors from './Components/Errors';
 import Locks from './Components/Locks';
 import Raw from './Components/Raw';
+import Dependencies from './Components/Dependencies';
 import { getTaskID } from './TasksDetailsHelper';
 import { TaskSkeleton } from './Components/TaskSkeleton';
 
@@ -20,6 +21,8 @@ const TaskDetails = ({
   runningSteps,
   locks,
   links,
+  dependsOn,
+  blocks,
   cancelStep,
   taskReloadStart,
   taskReloadStop,
@@ -90,7 +93,10 @@ const TaskDetails = ({
         <Tab eventKey={4} disabled={isLoading} title={__('Locks')}>
           <Locks locks={locks.concat(links)} />
         </Tab>
-        <Tab eventKey={5} disabled={isLoading} title={__('Raw')}>
+        <Tab eventKey={5} disabled={isLoading} title={__('Dependencies')}>
+          <Dependencies dependsOn={dependsOn} blocks={blocks} />
+        </Tab>
+        <Tab eventKey={6} disabled={isLoading} title={__('Raw')}>
           <Raw
             id={id}
             label={props.label}
@@ -116,9 +122,12 @@ TaskDetails.propTypes = {
   taskReloadStop: PropTypes.func.isRequired,
   taskReloadStart: PropTypes.func.isRequired,
   links: PropTypes.array,
+  dependsOn: PropTypes.array,
+  blocks: PropTypes.array,
   ...Task.propTypes,
   ...Errors.propTypes,
   ...Locks.propTypes,
+  ...Dependencies.propTypes,
   ...Raw.propTypes,
 };
 TaskDetails.defaultProps = {
@@ -127,10 +136,13 @@ TaskDetails.defaultProps = {
   APIerror: null,
   status: STATUS.PENDING,
   links: [],
+  dependsOn: [],
+  blocks: [],
   ...Task.defaultProps,
   ...RunningSteps.defaultProps,
   ...Errors.defaultProps,
   ...Locks.defaultProps,
+  ...Dependencies.defaultProps,
   ...Raw.defaultProps,
 };
 

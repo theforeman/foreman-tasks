@@ -109,3 +109,9 @@ export const selectAPIError = state =>
 export const selectIsLoading = state =>
   !!selectAPIByKey(state, FOREMAN_TASK_DETAILS).response &&
   selectStatus(state) === STATUS.PENDING;
+
+export const selectDependsOn = state =>
+  selectTaskDetailsResponse(state).depends_on || [];
+
+export const selectBlocks = state =>
+  selectTaskDetailsResponse(state).blocks || [];
