@@ -18,3 +18,23 @@ node(:links) do
 end
 node(:username_path) { username_link_task(@task.owner, @task.username) }
 node(:dynflow_enable_console) { Setting['dynflow_enable_console'] }
+node(:depends_on) do
+  if @task.execution_plan
+    dynflow_uuids = ForemanTasks.dynflow.world.persistence.find_execution_plan_dependencies(@task.execution_plan.id)
+    ForemanTasks::Task.where(external_id: dynflow_uuids).map do |task|
+      { id: task.id, action: task.action, humanized: task.humanized[:action] }
+    end
+  else
+    []
+  end
+end
+node(:blocks) do
+  if @task.execution_plan
+    dynflow_uuids = ForemanTasks.dynflow.world.persistence.find_blocked_execution_plans(@task.execution_plan.id)
+    ForemanTasks::Task.where(external_id: dynflow_uuids).map do |task|
+      { id: task.id, action: task.action, humanized: task.humanized[:action] }
+    end
+  else
+    []
+  end
+end

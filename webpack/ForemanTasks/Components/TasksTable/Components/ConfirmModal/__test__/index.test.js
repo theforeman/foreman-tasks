@@ -44,8 +44,8 @@ jest.mock('../../../TasksTableSelectors', () => ({
 }));
 
 // Create a mock store
-const createMockStore = (initialState = {}) => {
-  return configureStore({
+const createMockStore = (initialState = {}) =>
+  configureStore({
     reducer: {
       foremanTasks: (state = initialState, action) => state,
     },
@@ -53,7 +53,6 @@ const createMockStore = (initialState = {}) => {
       foremanTasks: initialState,
     },
   });
-};
 
 // Test wrapper component
 const TestWrapper = ({ children, store }) => (
