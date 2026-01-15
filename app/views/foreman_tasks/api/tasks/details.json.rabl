@@ -22,13 +22,7 @@ node(:depends_on) do
   if @task.execution_plan
     dynflow_uuids = ForemanTasks.dynflow.world.persistence.find_execution_plan_dependencies(@task.execution_plan.id)
     ForemanTasks::Task.where(external_id: dynflow_uuids).map do |task|
-      {
-        id: task.id,
-        action: task.action,
-        humanized: task.humanized[:action],
-        state: task.state,
-        result: task.result
-      }
+      partial('foreman_tasks/api/tasks/dependency_summary', :object => task)
     end
   else
     []
@@ -38,13 +32,7 @@ node(:blocks) do
   if @task.execution_plan
     dynflow_uuids = ForemanTasks.dynflow.world.persistence.find_blocked_execution_plans(@task.execution_plan.id)
     ForemanTasks::Task.where(external_id: dynflow_uuids).map do |task|
-      {
-        id: task.id,
-        action: task.action,
-        humanized: task.humanized[:action],
-        state: task.state,
-        result: task.result
-      }
+      partial('foreman_tasks/api/tasks/dependency_summary', :object => task)
     end
   else
     []
