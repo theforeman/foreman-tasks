@@ -58,6 +58,16 @@ exports[`TaskDetails rendering render with loading Props 1`] = `
     <Tab
       disabled={true}
       eventKey={5}
+      title="Dependencies"
+    >
+      <Dependencies
+        blocks={Array []}
+        dependsOn={Array []}
+      />
+    </Tab>
+    <Tab
+      disabled={true}
+      eventKey={6}
       title="Raw"
     >
       <Raw
@@ -136,6 +146,15 @@ exports[`TaskDetails rendering render with min Props 1`] = `
     </Tab>
     <Tab
       eventKey={5}
+      title="Dependencies"
+    >
+      <Dependencies
+        blocks={Array []}
+        dependsOn={Array []}
+      />
+    </Tab>
+    <Tab
+      eventKey={6}
       title="Raw"
     >
       <Raw
