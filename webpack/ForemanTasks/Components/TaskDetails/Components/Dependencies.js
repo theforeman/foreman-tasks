@@ -65,7 +65,7 @@ const Dependencies = ({ dependsOn, blocks }) => (
       ouiaId="task-dependencies-info-alert"
     >
       {__(
-        'This task may have dependencies on other tasks or may be blocking other tasks from executing. Dependencies are established through task chaining relationships.'
+        'This task may have dependencies on other tasks or may be blocking other tasks from executing.'
       )}
     </Alert>
     <br />
