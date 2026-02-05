@@ -108,38 +108,37 @@ exports[`TasksTablePage rendering render with Breadcrubs and edit permissions 1`
     searchable={true}
     toolbarButtons={
       <React.Fragment>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="default"
-          disabled={false}
-          onClick={[Function]}
-        >
-          <Icon
-            name="refresh"
-            type="fa"
-          />
-           
-          Refresh Data
-        </Button>
+        <ToolbarItem>
+          <Button
+            icon={<RedoIcon />}
+            onClick={[Function]}
+            ouiaId="tasks-table-refresh-data"
+            variant="primary"
+          >
+            Refresh Data
+          </Button>
+        </ToolbarItem>
         <Spinner
-          className=""
-          inline={false}
-          inverse={false}
-          loading={true}
-          size="md"
+          size="lg"
         />
-        <ExportButton
-          title="Export All"
-          url="/foreman_tasks/tasks.csv?search=%28state%3Dstopped%29"
-        />
-        <ActionSelectButton
-          disabled={true}
-          onCancel={[Function]}
-          onForceCancel={[Function]}
-          onResume={[Function]}
-        />
+        <ToolbarItem>
+          <Button
+            component="a"
+            href="/foreman_tasks/tasks.csv?search=%28state%3Dstopped%29"
+            ouiaId="tasks-table-export-all"
+            variant="secondary"
+          >
+            Export All
+          </Button>
+        </ToolbarItem>
+        <ToolbarItem>
+          <ActionSelectButton
+            disabled={true}
+            onCancel={[Function]}
+            onForceCancel={[Function]}
+            onResume={[Function]}
+          />
+        </ToolbarItem>
       </React.Fragment>
     }
   >
@@ -283,38 +282,37 @@ exports[`TasksTablePage rendering render with minimal props 1`] = `
     searchable={true}
     toolbarButtons={
       <React.Fragment>
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="default"
-          disabled={false}
-          onClick={[Function]}
-        >
-          <Icon
-            name="refresh"
-            type="fa"
-          />
-           
-          Refresh Data
-        </Button>
+        <ToolbarItem>
+          <Button
+            icon={<RedoIcon />}
+            onClick={[Function]}
+            ouiaId="tasks-table-refresh-data"
+            variant="primary"
+          >
+            Refresh Data
+          </Button>
+        </ToolbarItem>
         <Spinner
-          className=""
-          inline={false}
-          inverse={false}
-          loading={true}
-          size="md"
+          size="lg"
         />
-        <ExportButton
-          title="Export All"
-          url="/foreman_tasks/tasks.csv?search=%28state%3Dstopped%29"
-        />
-        <ActionSelectButton
-          disabled={true}
-          onCancel={[Function]}
-          onForceCancel={[Function]}
-          onResume={[Function]}
-        />
+        <ToolbarItem>
+          <Button
+            component="a"
+            href="/foreman_tasks/tasks.csv?search=%28state%3Dstopped%29"
+            ouiaId="tasks-table-export-all"
+            variant="secondary"
+          >
+            Export All
+          </Button>
+        </ToolbarItem>
+        <ToolbarItem>
+          <ActionSelectButton
+            disabled={true}
+            onCancel={[Function]}
+            onForceCancel={[Function]}
+            onResume={[Function]}
+          />
+        </ToolbarItem>
       </React.Fragment>
     }
   >

@@ -1,6 +1,7 @@
 import React from 'react';
-import { DropdownButton, MenuItem } from 'patternfly-react';
 import PropTypes from 'prop-types';
+import { SimpleDropdown } from '@patternfly/react-templates';
+import { EllipsisVIcon } from '@patternfly/react-icons';
 import { translate as __ } from 'foremanReact/common/I18n';
 
 export const ActionSelectButton = ({
@@ -8,35 +9,35 @@ export const ActionSelectButton = ({
   onResume,
   onForceCancel,
   disabled,
-}) => (
-  <DropdownButton
-    title={__('Select Action')}
-    disabled={disabled}
-    id="selcted-action-type"
-  >
-    <MenuItem
-      title={__('Cancel selected tasks')}
-      onClick={onCancel}
-      eventKey="1"
-    >
-      {__('Cancel Selected')}
-    </MenuItem>
-    <MenuItem
-      title={__('Resume selected tasks')}
-      onClick={onResume}
-      eventKey="2"
-    >
-      {__('Resume Selected')}
-    </MenuItem>
-    <MenuItem
-      title={__('Force Cancel selected tasks')}
-      onClick={onForceCancel}
-      eventKey="3"
-    >
-      {__('Force Cancel Selected')}
-    </MenuItem>
-  </DropdownButton>
-);
+}) => {
+  const buttons = [
+    {
+      content: __('Cancel Selected'),
+      onClick: onCancel,
+      value: 1,
+    },
+    {
+      content: __('Resume Selected'),
+      onClick: onResume,
+      value: 2,
+    },
+    {
+      content: __('Force Cancel Selected'),
+      onClick: onForceCancel,
+      value: 3,
+    },
+  ];
+  return (
+    <SimpleDropdown
+      isDisabled={disabled}
+      ouiaId="tasks-table-action-select-dropdown"
+      toggleVariant="plain"
+      popperProps={{ position: 'right' }}
+      initialItems={buttons}
+      toggleContent={<EllipsisVIcon aria-hidden="true" />}
+    />
+  );
+};
 
 ActionSelectButton.propTypes = {
   disabled: PropTypes.bool,
