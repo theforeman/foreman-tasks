@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Col, Button } from 'patternfly-react';
+import { Button, Icon } from '@patternfly/react-core';
+import { SyncAltIcon } from '@patternfly/react-icons';
 import { translate as __ } from 'foremanReact/common/I18n';
 
 export const TaskButtons = ({
@@ -30,35 +31,42 @@ export const TaskButtons = ({
     : `dynflow_enable_console ${__('Setting is off')}`;
 
   return (
-    <Col xs={12}>
+    <>
       <Button
+        variant="secondary"
+        ouiaId="task-buttons-reload-button"
         className="reload-button"
-        bsSize="small"
+        size="sm"
         onClick={taskProgressToggle}
       >
-        <span
-          className={`glyphicon glyphicon-refresh ${taskReload ? 'spin' : ''}`}
-        />
+        <Icon className={taskReload ? 'spin' : ''}>
+          <SyncAltIcon />
+        </Icon>
         {taskReload ? __('Stop auto-reloading') : __('Start auto-reloading')}
       </Button>
       <Button
+        variant="secondary"
+        ouiaId="task-buttons-dynflow-button"
         className="dynflow-button"
-        bsSize="small"
+        size="sm"
+        component="a"
         href={`/foreman_tasks/dynflow/${externalId}`}
-        disabled={!dynflowEnableConsole}
-        rel="noopener noreferrer"
+        isDisabled={!dynflowEnableConsole}
         target="_blank"
+        rel="noopener noreferrer"
       >
         <span title={dynflowTitle} data-original-title={dynflowTitle}>
           {__('Dynflow console')}
         </span>
       </Button>
       <Button
+        variant="secondary"
+        ouiaId="task-buttons-resume-button"
         className="resume-button"
-        bsSize="small"
+        size="sm"
         title={editActionsTitle}
         data-original-title={editActionsTitle}
-        disabled={!canEdit || !resumable}
+        isDisabled={!canEdit || !resumable}
         onClick={() => {
           if (!taskReload) {
             taskReloadStart(id);
@@ -69,11 +77,13 @@ export const TaskButtons = ({
         {__('Resume')}
       </Button>
       <Button
+        variant="secondary"
+        ouiaId="task-buttons-cancel-button"
         className="cancel-button"
-        bsSize="small"
+        size="sm"
         title={editActionsTitle}
         data-original-title={editActionsTitle}
-        disabled={!canEdit || !cancellable}
+        isDisabled={!canEdit || !cancellable}
         onClick={() => {
           if (!taskReload) {
             taskReloadStart(id);
@@ -85,26 +95,34 @@ export const TaskButtons = ({
       </Button>
       {parentTask && (
         <Button
+          variant="secondary"
+          ouiaId="task-buttons-parent-button"
           className="parent-button"
-          bsSize="small"
+          size="sm"
           href={`/foreman_tasks/tasks/${parentTask}`}
+          component="a"
         >
           {__('Parent task')}
         </Button>
       )}
       {hasSubTasks && (
         <Button
+          variant="secondary"
+          ouiaId="task-buttons-subtask-button"
           className="subtask-button"
-          bsSize="small"
+          size="sm"
           href={`/foreman_tasks/tasks/${id}/sub_tasks`}
+          component="a"
         >
           {__('Sub tasks')}
         </Button>
       )}
       <Button
+        variant="secondary"
+        ouiaId="task-buttons-unlock-button"
         className="unlock-button"
-        bsSize="small"
-        disabled={!canEdit || state !== 'paused'}
+        size="sm"
+        isDisabled={!canEdit || state !== 'paused'}
         onClick={() => {
           setUnlockModalOpen(true);
         }}
@@ -114,16 +132,18 @@ export const TaskButtons = ({
         {__('Unlock')}
       </Button>
       <Button
+        variant="secondary"
+        ouiaId="task-buttons-force-unlock-button"
         className="force-unlock-button"
-        bsSize="small"
-        disabled={!canEdit || state === 'stopped'}
+        size="sm"
+        isDisabled={!canEdit || state === 'stopped'}
         onClick={() => setForceUnlockModalOpen(true)}
         title={editActionsTitle}
         data-original-title={editActionsTitle}
       >
         {__('Force Unlock')}
       </Button>
-    </Col>
+    </>
   );
 };
 
