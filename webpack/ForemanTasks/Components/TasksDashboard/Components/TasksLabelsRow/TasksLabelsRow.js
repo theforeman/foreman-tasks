@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, Button, Label } from 'patternfly-react';
+import { Label, LabelGroup } from '@patternfly/react-core';
 import { noop } from 'foremanReact/common/helpers';
 import { translate as __ } from 'foremanReact/common/I18n';
 
@@ -24,23 +24,18 @@ const TasksLabelsRow = ({ query, updateQuery }) => {
   const queryEntries = Object.entries(query);
 
   return (
-    <Row className="tasks-labels-row">
-      <span className="title">{__('Active Filters:')}</span>
+    <LabelGroup
+      className="tasks-labels-row"
+      categoryName={__('Active Filters')}
+      isClosable
+      onClick={() => updateQuery({})}
+    >
       {queryEntries.map(([key, value]) => (
-        <Label
-          bsStyle="info"
-          key={key}
-          onRemoveClick={() => onDeleteClick(key)}
-        >
+        <Label color="blue" key={key} onClose={() => onDeleteClick(key)}>
           {getLabelText(key, value)}
         </Label>
       ))}
-      {queryEntries.length > 0 && (
-        <Button bsStyle="link" onClick={() => updateQuery({})}>
-          {__('Clear All Filters')}
-        </Button>
-      )}
-    </Row>
+    </LabelGroup>
   );
 };
 
