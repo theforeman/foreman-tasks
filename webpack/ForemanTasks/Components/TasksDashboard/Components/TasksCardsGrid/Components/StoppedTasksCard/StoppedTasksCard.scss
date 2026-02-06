@@ -1,19 +1,5 @@
 .stopped-tasks-card {
   .stopped-table {
-    width: 100%;
-    border: none;
-    table-layout: fixed;
-
-    thead {
-      background-color: transparent;
-      background-image: none;
-      tr {
-        th {
-          font-weight: bold;
-          border: none;
-        }
-      }
-    }
 
     td,
     th {
@@ -29,12 +15,6 @@
     td {
       &.active {
         font-weight: bold;
-      }
-    }
-    .data-col {
-      &:hover {
-        cursor: pointer;
-        border: 1px solid #d1d1d1;
         background-color: #def3fe;
       }
     }
@@ -42,15 +22,5 @@
 
   .other-active {
     text-decoration: underline;
-  }
-
-  .pficon {
-    margin-right: 5px;
-  }
-
-  .btn-link {
-    font-size: 14px;
-    padding-top: 0;
-    padding-bottom: 0;
   }
 }
