@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Grid, Row } from 'patternfly-react';
 import PropTypes from 'prop-types';
 import TaskInfo from './TaskInfo';
 import {
@@ -44,17 +43,13 @@ const Task = props => {
         isOpen={forceUnlockModalOpen}
         setModalClosed={() => setForceUnlockModalOpen(false)}
       />
-      <Grid>
-        <Row>
-          <TaskButtons
-            taskReloadStart={taskReloadStart}
-            setUnlockModalOpen={setUnlockModalOpen}
-            setForceUnlockModalOpen={setForceUnlockModalOpen}
-            {...props}
-          />
-        </Row>
-        <TaskInfo {...props} />
-      </Grid>
+      <TaskButtons
+        taskReloadStart={taskReloadStart}
+        setUnlockModalOpen={setUnlockModalOpen}
+        setForceUnlockModalOpen={setForceUnlockModalOpen}
+        {...props}
+      />
+      <TaskInfo {...props} />
     </React.Fragment>
   );
 };
