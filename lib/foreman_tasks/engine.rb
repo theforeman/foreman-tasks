@@ -17,6 +17,8 @@ module ForemanTasks
     end
 
     initializer 'foreman_tasks.register_plugin', :before => :finisher_hook do
+      require 'foreman/cron'
+
       Foreman::Plugin.register :"foreman-tasks" do
         requires_foreman '>= 3.19'
         divider :top_menu, :parent => :monitor_menu, :last => true, :caption => N_('Foreman Tasks')
@@ -124,6 +126,9 @@ module ForemanTasks
         widget 'foreman_tasks/tasks/dashboard/latest_tasks_in_error_warning', :sizex => 6, :sizey => 1, :name => N_('Latest Warning/Error Tasks')
 
         register_gettext domain: "foreman_tasks"
+
+        # Register recurring task with Foreman::Cron framework
+        Foreman::Cron.register(:daily, 'foreman_tasks:cleanup')
       end
     end
 
