@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import { Button, Tooltip, TooltipPosition } from '@patternfly/react-core';
+import { Button, Tooltip, TooltipPosition, Icon } from '@patternfly/react-core';
 import { InfoCircleIcon } from '@patternfly/react-icons';
 import { translate as __ } from 'foremanReact/common/I18n';
 import {
@@ -25,8 +25,10 @@ export const OtherInfo = ({ updateQuery, otherCount, query }) => {
         position={TooltipPosition.bottom}
       >
         <span>
-          <InfoCircleIcon className="pficon" />
-          <span>{__('Other:')} </span>
+          <Icon isInline>
+            <InfoCircleIcon />
+          </Icon>{' '}
+          {__('Other:')}
         </span>
       </Tooltip>
       <Button

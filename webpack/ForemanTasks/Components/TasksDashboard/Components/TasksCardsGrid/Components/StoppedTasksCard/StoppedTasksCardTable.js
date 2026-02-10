@@ -2,7 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { capitalize } from 'lodash';
 import classNames from 'classnames';
-import { Icon, Button } from 'patternfly-react';
+import { Icon, Button } from '@patternfly/react-core';
+import {
+  ExclamationCircleIcon,
+  ExclamationTriangleIcon,
+  CheckIcon,
+} from '@patternfly/react-icons';
+import { Table, Thead, Tbody, Tr, Th, Td } from '@patternfly/react-table';
 import { translate as __ } from 'foremanReact/common/I18n';
 import {
   TASKS_DASHBOARD_AVAILABLE_QUERY_STATES,
@@ -15,9 +21,21 @@ import {
 } from '../../../../TasksDashboardPropTypes';
 
 const resultIcons = {
-  error: <Icon type="pf" name="error-circle-o" />,
-  warning: <Icon type="pf" name="warning-triangle-o" />,
-  success: <Icon type="pf" name="ok" />,
+  error: (
+    <Icon status="danger" size="sm">
+      <ExclamationCircleIcon />
+    </Icon>
+  ),
+  warning: (
+    <Icon status="warning" size="sm">
+      <ExclamationTriangleIcon />
+    </Icon>
+  ),
+  success: (
+    <Icon status="success" size="sm">
+      <CheckIcon />
+    </Icon>
+  ),
 };
 
 const StoppedTableCells = (data, query, time, updateQuery) =>
@@ -35,51 +53,68 @@ const StoppedTableCells = (data, query, time, updateQuery) =>
       state && !(state === STOPPED && !query.result) && !activeLast;
 
     return (
-      <tr key={result}>
-        <td>
-          {resultIcons[result]}
-          {capitalize(result)}
-        </td>
-        <td
+      <Tr key={result} ouiaId={`stopped-table-row-${result}`}>
+        <Td dataLabel={__('Result')}>
+          {resultIcons[result]} {capitalize(result)}
+        </Td>
+        <Td
+          dataLabel={__('Total')}
           className={classNames('data-col', {
             active: active && mode !== LAST,
             'not-focused': notFocusedTotal,
           })}
-          onClick={() => updateQuery({ state: STOPPED, result })}
         >
-          <Button bsStyle="link">{total}</Button>
-        </td>
-        <td
+          <Button
+            ouiaId={`stopped-table-button-${result}-total`}
+            variant="link"
+            onClick={() => updateQuery({ state: STOPPED, result })}
+          >
+            {total}
+          </Button>
+        </Td>
+        <Td
+          dataLabel={getQueryValueText(time)}
           className={classNames('data-col', {
             active: activeLast,
             'not-focused': notFocusedLast,
           })}
-          onClick={() =>
-            updateQuery({
-              state: STOPPED,
-              result,
-              mode: LAST,
-              time,
-            })
-          }
         >
-          <Button bsStyle="link">{last}</Button>
-        </td>
-      </tr>
+          <Button
+            ouiaId={`stopped-table-button-${result}-${time}`}
+            onClick={() =>
+              updateQuery({
+                state: STOPPED,
+                result,
+                mode: LAST,
+                time,
+              })
+            }
+            variant="link"
+          >
+            {last}
+          </Button>
+        </Td>
+      </Tr>
     );
   });
 
 export const StoppedTable = ({ data, query, time, updateQuery }) => (
-  <table className="table table-bordered table-striped stopped-table">
-    <thead>
-      <tr>
-        <th />
-        <th>{__('Total')}</th>
-        <th>{getQueryValueText(time)}</th>
-      </tr>
-    </thead>
-    <tbody>{StoppedTableCells(data, query, time, updateQuery)}</tbody>
-  </table>
+  <Table
+    ouiaId="stopped-table"
+    className="stopped-table"
+    variant="compact"
+    isStriped
+    aria-label={__('Stopped tasks by result')}
+  >
+    <Thead>
+      <Tr ouiaId="stopped-table-header">
+        <Th aria-label={__('Result')} />
+        <Th aria-label={__('Total')}>{__('Total')}</Th>
+        <Th aria-label={getQueryValueText(time)}>{getQueryValueText(time)}</Th>
+      </Tr>
+    </Thead>
+    <Tbody>{StoppedTableCells(data, query, time, updateQuery)}</Tbody>
+  </Table>
 );
 
 StoppedTable.propTypes = {
