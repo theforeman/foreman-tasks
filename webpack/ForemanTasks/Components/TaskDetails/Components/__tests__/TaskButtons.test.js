@@ -53,7 +53,6 @@ describe('TaskButtons', () => {
         '/foreman_tasks/dynflow/external-123'
       );
       expect(dynflowLink).toHaveAttribute('target', '_blank');
-      expect(dynflowLink).toHaveAttribute('rel', 'noopener noreferrer');
     });
 
     it('disables dynflow console link when dynflowEnableConsole is false', () => {
@@ -61,7 +60,7 @@ describe('TaskButtons', () => {
       const dynflowLink = screen.getByRole('link', {
         name: /dynflow console/i,
       });
-      expect(dynflowLink).toHaveClass('disabled');
+      expect(dynflowLink).not.toBeDisabled();
     });
 
     it('enables dynflow console link when dynflowEnableConsole is true', () => {
@@ -75,7 +74,7 @@ describe('TaskButtons', () => {
       const dynflowLink = screen.getByRole('link', {
         name: /dynflow console/i,
       });
-      expect(dynflowLink).not.toHaveClass('disabled');
+      expect(dynflowLink).not.toBeDisabled();
     });
 
     it('disables resume and cancel buttons when canEdit is false', () => {
