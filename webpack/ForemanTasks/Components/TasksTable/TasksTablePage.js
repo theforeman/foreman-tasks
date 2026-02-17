@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import URI from 'urijs';
 import { getURIsearch } from 'foremanReact/common/urlHelpers';
-import { Spinner, Button, Icon } from 'patternfly-react';
+import { Button, Spinner, Icon } from '@patternfly/react-core';
+import { RedoIcon } from '@patternfly/react-icons';
 import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { getURIQuery } from 'foremanReact/common/helpers';
@@ -128,10 +129,17 @@ const TasksTablePage = ({
         breadcrumbOptions={getBreadcrumbs(props.actionName)}
         toolbarButtons={
           <React.Fragment>
-            <Button onClick={() => props.reloadPage(url, props.parentTaskID)}>
-              <Icon type="fa" name="refresh" /> {__('Refresh Data')}
+            <Button
+              ouiaId="tasks-table-refresh-data"
+              variant="primary"
+              onClick={() => props.reloadPage(url, props.parentTaskID)}
+            >
+              <Icon>
+                <RedoIcon />
+              </Icon>{' '}
+              {__('Refresh Data')}
             </Button>
-            {props.status === STATUS.PENDING && <Spinner size="md" loading />}
+            {props.status === STATUS.PENDING && <Spinner size="lg" />}
             <ExportButton
               url={getCSVurl(history.location.pathname, uriQuery)}
               title={__('Export All')}
