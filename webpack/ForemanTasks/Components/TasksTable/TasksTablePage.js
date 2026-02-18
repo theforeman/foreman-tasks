@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import URI from 'urijs';
 import { getURIsearch } from 'foremanReact/common/urlHelpers';
-import { Spinner, Button, Icon } from 'patternfly-react';
+import { Button, ToolbarItem, Spinner } from '@patternfly/react-core';
+import { RedoIcon } from '@patternfly/react-icons';
 import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { getURIQuery } from 'foremanReact/common/helpers';
-import ExportButton from 'foremanReact/routes/common/PageLayout/components/ExportButton/ExportButton';
 import { STATUS } from 'foremanReact/constants';
 import TasksDashboard from '../TasksDashboard';
 import TasksTable from './TasksTable';
@@ -127,25 +127,44 @@ const TasksTablePage = ({
         header={createHeader(props.actionName)}
         breadcrumbOptions={getBreadcrumbs(props.actionName)}
         toolbarButtons={
-          <React.Fragment>
-            <Button onClick={() => props.reloadPage(url, props.parentTaskID)}>
-              <Icon type="fa" name="refresh" /> {__('Refresh Data')}
-            </Button>
-            {props.status === STATUS.PENDING && <Spinner size="md" loading />}
-            <ExportButton
-              url={getCSVurl(history.location.pathname, uriQuery)}
-              title={__('Export All')}
-            />
-            <ActionSelectButton
-              disabled={
-                !props.permissions.edit ||
-                !(props.selectedRows.length || props.allRowsSelected)
-              }
-              onCancel={() => openModal(CANCEL_SELECTED_MODAL)}
-              onResume={() => openModal(RESUME_SELECTED_MODAL)}
-              onForceCancel={() => openModal(FORCE_UNLOCK_SELECTED_MODAL)}
-            />
-          </React.Fragment>
+          <>
+            <ToolbarItem>
+              <Button
+                ouiaId="tasks-table-refresh-data"
+                variant="primary"
+                onClick={() => props.reloadPage(url, props.parentTaskID)}
+                icon={<RedoIcon />}
+              >
+                {__('Refresh Data')}
+              </Button>
+            </ToolbarItem>
+            {props.status === STATUS.PENDING && (
+              <ToolbarItem>
+                <Spinner size="lg" />
+              </ToolbarItem>
+            )}
+            <ToolbarItem>
+              <Button
+                ouiaId="tasks-table-export-all"
+                variant="secondary"
+                component="a"
+                href={getCSVurl(history.location.pathname, uriQuery)}
+              >
+                {__('Export All')}
+              </Button>
+            </ToolbarItem>
+            <ToolbarItem>
+              <ActionSelectButton
+                disabled={
+                  !props.permissions.edit ||
+                  !(props.selectedRows.length || props.allRowsSelected)
+                }
+                onCancel={() => openModal(CANCEL_SELECTED_MODAL)}
+                onResume={() => openModal(RESUME_SELECTED_MODAL)}
+                onForceCancel={() => openModal(FORCE_UNLOCK_SELECTED_MODAL)}
+              />
+            </ToolbarItem>
+          </>
         }
         searchQuery={getURIsearch()}
         beforeToolbarComponent={
