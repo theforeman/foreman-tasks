@@ -179,24 +179,12 @@ module ForemanTasks
       param :parent_task_id, :identifier, desc: 'UUID of the task'
       param_group :search_and_pagination, ::Api::V2::BaseController
       def index
-        if params[:sort_by] || params[:sort_order]
-          Foreman::Deprecation.api_deprecation_warning(
-            "The sort params sort_by and sort_order are deprecated.
-            Please use the order param instead as one string 'order=started_at desc'"
-          )
-
-          ordering_params = {
-            sort_by: params[:sort_by] || 'started_at',
-            sort_order: params[:sort_order] || 'DESC',
-          }
-          params[:order] = "#{ordering_params[:sort_by]} #{ordering_params[:sort_order]}"
-        end
         params[:order] ||= 'started_at DESC'
-        @tasks = resource_scope_for_index.order(params[:order].to_s)
+        @tasks = resource_scope_for_index
       end
 
       def search_options
-        [search_query, {}]
+        [search_query, { :order => params[:order] }]
       end
 
       def_param_group :callback_target do
@@ -320,17 +308,14 @@ module ForemanTasks
       end
 
       def find_task
-        @task = resource_scope.with_duration.find(params[:id])
+        @task = resource_scope.select_duration.find(params[:id])
       end
 
       def resource_scope(_options = {})
         scope = ForemanTasks::Task.authorized("#{action_permission}_foreman_tasks")
         scope = scope.where(:parent_task_id => params[:parent_task_id]) if params[:parent_task_id]
+        scope = scope.select_duration if params[:action] == 'index'
         scope
-      end
-
-      def resource_scope_for_index(*args)
-        super.with_duration.distinct
       end
 
       def controller_permission
