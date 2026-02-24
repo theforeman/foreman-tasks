@@ -62,6 +62,18 @@ module ForemanTasks
     ForemanTasks::Task::DynflowTask.where(:external_id => result.id).first!
   end
 
+  # Chain a task to wait for prerequisite task(s) to finish before executing.
+  # The chained task remains 'scheduled' until all prerequisites reach 'stopped' state.
+  #
+  # @param plan_uuids [String, Array<String>] UUID(s) of prerequisite execution plan(s)
+  # @param action [Class] Action class to execute
+  # @param args Arguments to pass to the action
+  # @return [ForemanTasks::Task::DynflowTask] The chained task
+  def self.chain(plan_uuids, action, *args)
+    result = dynflow.world.chain(plan_uuids, action, *args)
+    ForemanTasks::Task::DynflowTask.where(:external_id => result.id).first!
+  end
+
   def self.register_scheduled_task(task_class, cronline)
     ForemanTasks::RecurringLogic.transaction(isolation: :serializable) do
       return if ForemanTasks::RecurringLogic.joins(:tasks)
