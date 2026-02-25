@@ -62,14 +62,26 @@ module ForemanTasks
     ForemanTasks::Task::DynflowTask.where(:external_id => result.id).first!
   end
 
-  # Chain a task to wait for prerequisite task(s) to finish before executing.
-  # The chained task remains 'scheduled' until all prerequisites reach 'stopped' state.
+  # Chain a task to wait for dependency task(s) to finish before executing.
+  # The chained task remains 'scheduled' until all dependencies reach 'stopped' state.
   #
-  # @param plan_uuids [String, Array<String>] UUID(s) of prerequisite execution plan(s)
+  # @param dependencies [ForemanTasks::Task, Array<ForemanTasks::Task>, ActiveRecord::Relation]
+  #   Dependency ForemanTasks task object(s) or an ActiveRecord relation of tasks.
   # @param action [Class] Action class to execute
   # @param args Arguments to pass to the action
   # @return [ForemanTasks::Task::DynflowTask] The chained task
-  def self.chain(plan_uuids, action, *args)
+  def self.chain(dependencies, action, *args)
+    plan_uuids =
+      if dependencies.is_a?(ActiveRecord::Relation)
+        dependencies.pluck(:external_id)
+      else
+        Array(dependencies).map(&:external_id)
+      end
+
+    if plan_uuids.any?(&:blank?)
+      raise ArgumentError, 'All dependency tasks must have external_id set'
+    end
+
     result = dynflow.world.chain(plan_uuids, action, *args)
     ForemanTasks::Task::DynflowTask.where(:external_id => result.id).first!
   end
