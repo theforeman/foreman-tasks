@@ -25,5 +25,9 @@ module ForemanTasks
     def delay(action, delay_options, *args)
       foreman_tasks.delay(action, delay_options, *args)
     end
+
+    def chain(dependencies, action, *args)
+      foreman_tasks.chain(dependencies, action, *args)
+    end
   end
 end
