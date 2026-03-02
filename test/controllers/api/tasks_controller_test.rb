@@ -37,7 +37,7 @@ module ForemanTasks
         end
 
         it 'supports ordering by duration' do
-          get :index, params: { :sort_by => 'duration' }
+          get :index, params: { :order => 'duration' }
           assert_response :success
           data = JSON.parse(response.body)
           assert_equal 'duration', data.dig('sort', 'by')
@@ -104,7 +104,7 @@ module ForemanTasks
         end
 
         it 'shows duration column' do
-          task = ForemanTasks::Task.with_duration.find(FactoryBot.create(:dynflow_task).id)
+          task = ForemanTasks::Task.select_duration.find(FactoryBot.create(:dynflow_task).id)
           get :show, params: { id: task.id }, session: set_session_user
           assert_response :success
           data = JSON.parse(response.body)
@@ -114,7 +114,7 @@ module ForemanTasks
 
       describe 'GET /api/tasks/index' do
         it 'shows duration column' do
-          task = ForemanTasks::Task.with_duration.find(FactoryBot.create(:dynflow_task).id)
+          task = ForemanTasks::Task.select_duration.find(FactoryBot.create(:dynflow_task).id)
           get :index, session: set_session_user
           assert_response :success
           data = JSON.parse(response.body)

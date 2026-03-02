@@ -98,7 +98,7 @@ module ForemanTasks
     private
 
     def respond_with_tasks(scope)
-      @tasks = filter(scope, paginate: false).with_duration
+      @tasks = filter(scope, paginate: false).select_duration
       csv_response(@tasks, [:id, :action, :state, :result, 'started_at.in_time_zone', 'ended_at.in_time_zone', :duration, :username], ['Id', 'Action', 'State', 'Result', 'Started At', 'Ended At', 'Duration', 'User'])
     end
 
