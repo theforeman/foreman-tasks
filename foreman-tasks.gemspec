@@ -23,10 +23,12 @@ same resource. It also optionally provides Dynflow infrastructure for using it f
     file.end_with?("test.rake") || file == '.packit.yaml'
   end
 
+  s.required_ruby_version = '>= 3.0', '< 4'
+
   s.test_files = `git ls-files test`.split("\n")
   s.extra_rdoc_files = Dir['README*', 'LICENSE']
 
-  s.add_dependency "dynflow", '>= 1.9.0'
+  s.add_dependency "dynflow", '>= 2.0.0'
   s.add_dependency 'fugit', '~> 1.8'
   s.add_dependency "get_process_mem" # for memory polling
   s.add_dependency "sinatra" # for Dynflow web console
