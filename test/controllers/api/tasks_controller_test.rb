@@ -203,6 +203,32 @@ module ForemanTasks
         end
       end
 
+      describe 'GET /api/tasks/:id/details' do
+        it 'shows task dependencies with correct task names' do
+          # Tests https://projects.theforeman.org/issues/39130
+          dependency_task = FactoryBot.create(:dynflow_task, :user_create_task, label: 'Actions::User::Create')
+          blocking_task = FactoryBot.create(:dynflow_task, :user_create_task, label: 'Actions::User::Create')
+
+          ForemanTasks.dynflow.world.persistence.stubs(:find_execution_plan_dependencies)
+            .with(dependency_task.execution_plan.id)
+            .returns([])
+          ForemanTasks.dynflow.world.persistence.stubs(:find_blocked_execution_plans)
+            .with(dependency_task.execution_plan.id)
+            .returns([blocking_task.external_id])
+
+          get :details, params: { id: dependency_task.id }
+          assert_response :success
+
+          data = JSON.parse(response.body)
+          assert_kind_of Array, data['blocks']
+          assert_equal 1, data['blocks'].length
+
+          blocking_task_data = data['blocks'].first
+          assert_equal blocking_task.id, blocking_task_data['id']
+          assert_equal blocking_task.to_label, blocking_task_data['humanized']
+        end
+      end
+
       describe 'POST /api/tasks/bulk_stop' do
         it 'requires search or task_ids parameter' do
           post :bulk_stop
