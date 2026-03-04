@@ -1,4 +1,2 @@
-object @task
-
 attributes :id, :action, :state, :result
-node(:humanized) { @task.humanized[:action] }
+node(:humanized) { |task| task.to_label }
