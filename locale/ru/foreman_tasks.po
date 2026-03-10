@@ -6,7 +6,7 @@
 # Yulia <yulia.poyarkova@redhat.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman-tasks 11.0.5\n"
+"Project-Id-Version: foreman-tasks 12.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-12 14:04+0000\n"
 "Last-Translator: Yulia <yulia.poyarkova@redhat.com>, 2016\n"
@@ -24,9 +24,6 @@ msgid "%(last)s Last %(time)s"
 msgstr ""
 
 msgid "%(older)s Older %(time)s"
-msgstr ""
-
-msgid "%s Selected Tasks"
 msgstr ""
 
 msgid "%s is not valid format of cron line"
@@ -66,12 +63,12 @@ msgid "Action"
 msgstr "Действие"
 
 msgid "Action with sub plans"
-msgstr ""
+msgstr "Действия над подпланами"
 
 msgid "Active"
 msgstr "Активно"
 
-msgid "Active Filters:"
+msgid "Active Filters"
 msgstr ""
 
 msgid "Active or disabled recurring logic with purpose %s already exists"
@@ -102,6 +99,9 @@ msgstr ""
 msgid "Backtrace"
 msgstr "Стек вызовов"
 
+msgid "Blocks"
+msgstr ""
+
 msgid "Bulk action"
 msgstr "Групповое действие"
 
@@ -111,6 +111,12 @@ msgstr "Отмена"
 msgid "Cancel Selected"
 msgstr ""
 
+msgid "Cancel Selected Tasks"
+msgstr ""
+
+msgid "Cancel Task"
+msgstr ""
+
 msgid "Cancel enforced: the task might be still running on the proxy"
 msgstr "Принудительная отмена: возможно, задача продолжает выполнение на прокси."
 
@@ -118,9 +124,6 @@ msgid "Cancel recurring logic"
 msgstr "Отменить периодическое выполнение"
 
 msgid "Cancel selected cancellable tasks"
-msgstr ""
-
-msgid "Cancel selected tasks"
 msgstr ""
 
 msgid "Cancel specific tasks by ID"
@@ -154,9 +157,6 @@ msgid "Changing request id %{request_id} to saved id %{saved_id}"
 msgstr ""
 
 msgid "Check for long running tasks"
-msgstr ""
-
-msgid "Clear All Filters"
 msgstr ""
 
 msgid "Clear Cancelled"
@@ -199,6 +199,12 @@ msgid "Delete recurring logics by search query"
 msgstr ""
 
 msgid "Deliver notifications about long running tasks"
+msgstr ""
+
+msgid "Dependencies"
+msgstr ""
+
+msgid "Depends on"
 msgstr ""
 
 msgid "Details"
@@ -279,11 +285,14 @@ msgstr ""
 msgid "Force Cancel Selected"
 msgstr ""
 
-msgid "Force Cancel selected tasks"
-msgstr ""
-
 msgid "Force Unlock"
 msgstr "Принудительно разблокировать"
+
+msgid "Force Unlock Selected Tasks"
+msgstr ""
+
+msgid "Force Unlock Task"
+msgstr ""
 
 msgid "Foreman Tasks"
 msgstr ""
@@ -398,6 +407,9 @@ msgstr ""
 
 msgid "No. of Tasks"
 msgstr "Число задач"
+
+msgid "None"
+msgstr ""
 
 msgid "Not all the selected tasks can be cancelled"
 msgstr ""
@@ -523,11 +535,14 @@ msgstr "Возобновить"
 msgid "Resume Selected"
 msgstr ""
 
+msgid "Resume Selected Tasks"
+msgstr ""
+
+msgid "Resume Task"
+msgstr ""
+
 msgid "Resume all paused error tasks"
 msgstr "Возобновить все приостановленные задачи"
-
-msgid "Resume selected tasks"
-msgstr ""
 
 msgid "Resume specific tasks by ID"
 msgstr "Возобновить выборочные задачи по идентификатору"
@@ -561,9 +576,6 @@ msgstr "Поисковый запрос"
 
 msgid "See %{link} for more details on how to resolve the issue"
 msgstr ""
-
-msgid "Select Action"
-msgstr "Действия"
 
 msgid "Select all {count} tasks"
 msgstr ""
@@ -622,6 +634,9 @@ msgstr ""
 msgid "Stopped"
 msgstr ""
 
+msgid "Stopped tasks by result"
+msgstr ""
+
 msgid "Sub tasks"
 msgstr "Подзадачи"
 
@@ -654,6 +669,9 @@ msgstr ""
 
 msgid "Task count"
 msgstr "Количество задач"
+
+msgid "Task dependencies"
+msgstr ""
 
 msgid "Task group common"
 msgstr "Общие для групп"
@@ -708,7 +726,25 @@ msgstr[1] ""
 msgid "This action will delete all cancelled recurring logics. Please note that this action can't be reversed."
 msgstr ""
 
-msgid "This will %(action)s %(number)s task(s), putting them in the %(state)s state. Are you sure?"
+msgid "This task may have dependencies on other tasks or may be blocking other tasks from executing. Dependencies are established through task chaining relationships."
+msgstr ""
+
+msgid "This will cancel %(number)s task(s), putting them in the stopped state. Are you sure?"
+msgstr ""
+
+msgid "This will cancel task \\\"%(taskName)s\\\", putting it in the stopped state. Are you sure?"
+msgstr ""
+
+msgid "This will force unlock %(number)s task(s). This may cause harm and should be used with caution. Are you sure?"
+msgstr ""
+
+msgid "This will force unlock task \\\"%(taskName)s\\\". This may cause harm and should be used with caution. Are you sure?"
+msgstr ""
+
+msgid "This will resume %(number)s task(s), putting them in the running state. Are you sure?"
+msgstr ""
+
+msgid "This will resume task \\\"%(taskName)s\\\", putting it in the running state. Are you sure?"
 msgstr ""
 
 msgid "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed."

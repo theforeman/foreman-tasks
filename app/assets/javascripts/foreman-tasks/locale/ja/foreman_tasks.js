@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman-tasks 11.0.5",
+        "Project-Id-Version": "foreman-tasks 12.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-12 14:04+0000",
         "Last-Translator": "Kazuki Omo <kazuki.omo@gmail.com>, 2019",
@@ -22,9 +22,6 @@
       ],
       "%(older)s Older %(time)s": [
         "%(time)s より前で %(older)s 件"
-      ],
-      "%s Selected Tasks": [
-        "選択したタスク %s件"
       ],
       "%s is not valid format of cron line": [
         "%s は有効な cron 行の形式ではありません"
@@ -63,13 +60,13 @@
         "アクション"
       ],
       "Action with sub plans": [
-        ""
+        "サブプランによるアクション"
       ],
       "Active": [
         "アクティブ"
       ],
-      "Active Filters:": [
-        "アクティブなフィルター:"
+      "Active Filters": [
+        ""
       ],
       "Active or disabled recurring logic with purpose %s already exists": [
         "目的が %s のアクティブまたは無効な再帰論理がすでに存在します"
@@ -98,6 +95,9 @@
       "Backtrace": [
         "バックトレース"
       ],
+      "Blocks": [
+        ""
+      ],
       "Bulk action": [
         "一括処理"
       ],
@@ -107,6 +107,12 @@
       "Cancel Selected": [
         "選択項目をキャンセル"
       ],
+      "Cancel Selected Tasks": [
+        ""
+      ],
+      "Cancel Task": [
+        ""
+      ],
       "Cancel enforced: the task might be still running on the proxy": [
         "強制的にキャンセル: タスクはプロキシーで引き続き実行されている可能性があります"
       ],
@@ -115,9 +121,6 @@
       ],
       "Cancel selected cancellable tasks": [
         "選択したキャンセル可能なタスクをキャンセル"
-      ],
-      "Cancel selected tasks": [
-        "選択したタスクをキャンセル"
       ],
       "Cancel specific tasks by ID": [
         "ID 別に特定のタスクをキャンセル"
@@ -151,9 +154,6 @@
       ],
       "Check for long running tasks": [
         "長時間実行中のタスクの確認"
-      ],
-      "Clear All Filters": [
-        "すべてのフィルターを消去"
       ],
       "Clear Cancelled": [
         "キャンセル済みの項目を消去"
@@ -196,6 +196,12 @@
       ],
       "Deliver notifications about long running tasks": [
         "長時間実行中のタスクに関する通知の配信"
+      ],
+      "Dependencies": [
+        ""
+      ],
+      "Depends on": [
+        ""
       ],
       "Details": [
         "詳細"
@@ -275,11 +281,14 @@
       "Force Cancel Selected": [
         "選択項目を強制的にキャンセル"
       ],
-      "Force Cancel selected tasks": [
-        "選択したタスクを強制的にキャンセル"
-      ],
       "Force Unlock": [
         "強制ロック解除"
+      ],
+      "Force Unlock Selected Tasks": [
+        ""
+      ],
+      "Force Unlock Task": [
+        ""
       ],
       "Foreman Tasks": [
         "Foreman タスク"
@@ -315,7 +324,7 @@
         "入力"
       ],
       "Invalid URL": [
-        ""
+        "無効な URL"
       ],
       "Iteration limit": [
         "繰り返し制限"
@@ -394,6 +403,9 @@
       ],
       "No. of Tasks": [
         "タスク数"
+      ],
+      "None": [
+        ""
       ],
       "Not all the selected tasks can be cancelled": [
         "選択したすべてのタスクをキャンセルできるわけではありません"
@@ -518,11 +530,14 @@
       "Resume Selected": [
         "選択項目を再開"
       ],
+      "Resume Selected Tasks": [
+        ""
+      ],
+      "Resume Task": [
+        ""
+      ],
       "Resume all paused error tasks": [
         "一時停止されたすべてのエラータスクを再開"
-      ],
-      "Resume selected tasks": [
-        "選択したタスクを再開"
       ],
       "Resume specific tasks by ID": [
         "ID 別に特定のタスクを再開"
@@ -556,9 +571,6 @@
       ],
       "See %{link} for more details on how to resolve the issue": [
         "問題解決の詳細については、%{link} を参照してください"
-      ],
-      "Select Action": [
-        "アクションの選択"
       ],
       "Select all {count} tasks": [
         "{count} 件のタスクをすべて選択"
@@ -617,6 +629,9 @@
       "Stopped": [
         "停止"
       ],
+      "Stopped tasks by result": [
+        ""
+      ],
       "Sub tasks": [
         "サブタスク"
       ],
@@ -649,6 +664,9 @@
       ],
       "Task count": [
         "タスク数"
+      ],
+      "Task dependencies": [
+        ""
       ],
       "Task group common": [
         "共通のタスクグループ"
@@ -701,8 +719,26 @@
       "This action will delete all cancelled recurring logics. Please note that this action can't be reversed.": [
         "このアクションは、キャンセル済みの再帰論理をすべて削除します。この操作は元に戻すことはできない点に注意してください。"
       ],
-      "This will %(action)s %(number)s task(s), putting them in the %(state)s state. Are you sure?": [
-        "これにより %(number)s 件のタスクに対して %(action)s が実行され、タスクは %(state)s 状態になります。実行してもよろしいですか?"
+      "This task may have dependencies on other tasks or may be blocking other tasks from executing. Dependencies are established through task chaining relationships.": [
+        ""
+      ],
+      "This will cancel %(number)s task(s), putting them in the stopped state. Are you sure?": [
+        ""
+      ],
+      "This will cancel task \\\\\\\"%(taskName)s\\\\\\\", putting it in the stopped state. Are you sure?": [
+        ""
+      ],
+      "This will force unlock %(number)s task(s). This may cause harm and should be used with caution. Are you sure?": [
+        ""
+      ],
+      "This will force unlock task \\\\\\\"%(taskName)s\\\\\\\". This may cause harm and should be used with caution. Are you sure?": [
+        ""
+      ],
+      "This will resume %(number)s task(s), putting them in the running state. Are you sure?": [
+        ""
+      ],
+      "This will resume task \\\\\\\"%(taskName)s\\\\\\\", putting it in the running state. Are you sure?": [
+        ""
       ],
       "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed.": [
         "これにより、タスクが実行している対象のリソースがロック解除されます。状態が不整合になることがあるため、タスクを再開できないことを確認した後に注意して使用してください。"

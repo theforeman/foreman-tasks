@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman-tasks 11.0.5",
+        "Project-Id-Version": "foreman-tasks 12.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-12 14:04+0000",
         "Last-Translator": "Ettore Atalan <atalanttore@googlemail.com>, 2016-2017,2023",
@@ -22,9 +22,6 @@
       ],
       "%(older)s Older %(time)s": [
         "%(older)s Older %(time)s"
-      ],
-      "%s Selected Tasks": [
-        " %s ausgewählte Aufgaben"
       ],
       "%s is not valid format of cron line": [
         "%s ist ungültiges Cron-Zeilen-Format"
@@ -68,8 +65,8 @@
       "Active": [
         "Aktiv"
       ],
-      "Active Filters:": [
-        "Aktive Filter:"
+      "Active Filters": [
+        ""
       ],
       "Active or disabled recurring logic with purpose %s already exists": [
         ""
@@ -98,6 +95,9 @@
       "Backtrace": [
         "Ablaufverfolgung"
       ],
+      "Blocks": [
+        ""
+      ],
       "Bulk action": [
         "Massenaktion"
       ],
@@ -107,6 +107,12 @@
       "Cancel Selected": [
         "Ausgewählte abbrechen"
       ],
+      "Cancel Selected Tasks": [
+        ""
+      ],
+      "Cancel Task": [
+        ""
+      ],
       "Cancel enforced: the task might be still running on the proxy": [
         "Abbruch erzwungen: die Aufgabe läuft vielleicht noch auf dem Proxy"
       ],
@@ -115,9 +121,6 @@
       ],
       "Cancel selected cancellable tasks": [
         "Ausgewählte stornierbare Aufgaben abbrechen"
-      ],
-      "Cancel selected tasks": [
-        "Ausgewählte Aufgaben abbrechen"
       ],
       "Cancel specific tasks by ID": [
         "Abbrechen bestimmter Aufgaben nach ID"
@@ -151,9 +154,6 @@
       ],
       "Check for long running tasks": [
         ""
-      ],
-      "Clear All Filters": [
-        "Alle Filter löschen"
       ],
       "Clear Cancelled": [
         "Clear abgebrochen "
@@ -195,6 +195,12 @@
         "Wiederkehrende Logiken per Suchanfrage löschen"
       ],
       "Deliver notifications about long running tasks": [
+        ""
+      ],
+      "Dependencies": [
+        ""
+      ],
+      "Depends on": [
         ""
       ],
       "Details": [
@@ -275,11 +281,14 @@
       "Force Cancel Selected": [
         "Abbrechen Ausgewählt erzwingen"
       ],
-      "Force Cancel selected tasks": [
-        "Ausgewählte Aufgaben abbrechen erzwingen"
-      ],
       "Force Unlock": [
         "Entsperren erzwingen"
+      ],
+      "Force Unlock Selected Tasks": [
+        ""
+      ],
+      "Force Unlock Task": [
+        ""
       ],
       "Foreman Tasks": [
         "Foreman-Aufgaben"
@@ -394,6 +403,9 @@
       ],
       "No. of Tasks": [
         "Nr. der Aufgaben"
+      ],
+      "None": [
+        ""
       ],
       "Not all the selected tasks can be cancelled": [
         "Nicht alle ausgewählten Aufgaben können abgebrochen werden"
@@ -518,11 +530,14 @@
       "Resume Selected": [
         "Ausgewählte fortsetzen"
       ],
+      "Resume Selected Tasks": [
+        ""
+      ],
+      "Resume Task": [
+        ""
+      ],
       "Resume all paused error tasks": [
         "Alle angehaltenen Fehleraufgaben fortsetzen"
-      ],
-      "Resume selected tasks": [
-        "Ausgewählte Aufgaben fortsetzen"
       ],
       "Resume specific tasks by ID": [
         "Bestimmte Aufgaben nach ID fortsetzen"
@@ -556,9 +571,6 @@
       ],
       "See %{link} for more details on how to resolve the issue": [
         "Weitere Informationen zur Behebung des Problems finden Sie unter %{link}."
-      ],
-      "Select Action": [
-        "Aktion auswählen"
       ],
       "Select all {count} tasks": [
         ""
@@ -617,6 +629,9 @@
       "Stopped": [
         "Gestoppt"
       ],
+      "Stopped tasks by result": [
+        ""
+      ],
       "Sub tasks": [
         "Unteraufgabe"
       ],
@@ -649,6 +664,9 @@
       ],
       "Task count": [
         "Anzahl der Aufgaben"
+      ],
+      "Task dependencies": [
+        ""
       ],
       "Task group common": [
         "Gemeinsame Aufgabengruppen"
@@ -702,7 +720,25 @@
       "This action will delete all cancelled recurring logics. Please note that this action can't be reversed.": [
         "Diese Aktion löscht alle abgebrochenen wiederkehrenden Logiken. Beachten Sie, dass diese Aktion nicht rückgängig gemacht werden kann."
       ],
-      "This will %(action)s %(number)s task(s), putting them in the %(state)s state. Are you sure?": [
+      "This task may have dependencies on other tasks or may be blocking other tasks from executing. Dependencies are established through task chaining relationships.": [
+        ""
+      ],
+      "This will cancel %(number)s task(s), putting them in the stopped state. Are you sure?": [
+        ""
+      ],
+      "This will cancel task \\\\\\\"%(taskName)s\\\\\\\", putting it in the stopped state. Are you sure?": [
+        ""
+      ],
+      "This will force unlock %(number)s task(s). This may cause harm and should be used with caution. Are you sure?": [
+        ""
+      ],
+      "This will force unlock task \\\\\\\"%(taskName)s\\\\\\\". This may cause harm and should be used with caution. Are you sure?": [
+        ""
+      ],
+      "This will resume %(number)s task(s), putting them in the running state. Are you sure?": [
+        ""
+      ],
+      "This will resume task \\\\\\\"%(taskName)s\\\\\\\", putting it in the running state. Are you sure?": [
         ""
       ],
       "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed.": [
