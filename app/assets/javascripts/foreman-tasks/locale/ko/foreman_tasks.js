@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman-tasks 11.0.5",
+        "Project-Id-Version": "foreman-tasks 12.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-12 14:04+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
@@ -22,9 +22,6 @@
       ],
       "%(older)s Older %(time)s": [
         "%(older)s 이전 %(time)s"
-      ],
-      "%s Selected Tasks": [
-        "%s 선택된 작업"
       ],
       "%s is not valid format of cron line": [
         "%s은(는) 유효한 cron 줄 형식이 아닙니다."
@@ -63,13 +60,13 @@
         "동작 "
       ],
       "Action with sub plans": [
-        ""
+        "하위 계획이 있는 작업"
       ],
       "Active": [
         "활성"
       ],
-      "Active Filters:": [
-        "활성 필터:"
+      "Active Filters": [
+        ""
       ],
       "Active or disabled recurring logic with purpose %s already exists": [
         "%s 목적이 있는 활성 또는 비활성화된 반복 논리가 이미 존재합니다"
@@ -98,6 +95,9 @@
       "Backtrace": [
         "역추적"
       ],
+      "Blocks": [
+        ""
+      ],
       "Bulk action": [
         "대량 작업 "
       ],
@@ -107,6 +107,12 @@
       "Cancel Selected": [
         "선택한 작업 취소"
       ],
+      "Cancel Selected Tasks": [
+        ""
+      ],
+      "Cancel Task": [
+        ""
+      ],
       "Cancel enforced: the task might be still running on the proxy": [
         "강제 취소됨: 프록시에서 태스크가 아직 실행 중일 수 있습니다."
       ],
@@ -115,9 +121,6 @@
       ],
       "Cancel selected cancellable tasks": [
         "선택한 취소 가능한 작업 취소"
-      ],
-      "Cancel selected tasks": [
-        "선택한 작업 취소"
       ],
       "Cancel specific tasks by ID": [
         "ID로 특정 작업 취소"
@@ -151,9 +154,6 @@
       ],
       "Check for long running tasks": [
         "장기 실행 작업 확인"
-      ],
-      "Clear All Filters": [
-        "모든 필터 지우기"
       ],
       "Clear Cancelled": [
         "삭제 취소됨"
@@ -196,6 +196,12 @@
       ],
       "Deliver notifications about long running tasks": [
         "장기 실행 작업에 대한 알림 전달"
+      ],
+      "Dependencies": [
+        ""
+      ],
+      "Depends on": [
+        ""
       ],
       "Details": [
         "상세 정보 "
@@ -275,11 +281,14 @@
       "Force Cancel Selected": [
         "선택한 작업 강제 취소"
       ],
-      "Force Cancel selected tasks": [
-        "선택한 작업 강제 취소"
-      ],
       "Force Unlock": [
         "강제 잠금 해제"
+      ],
+      "Force Unlock Selected Tasks": [
+        ""
+      ],
+      "Force Unlock Task": [
+        ""
       ],
       "Foreman Tasks": [
         "Foreman 작업"
@@ -315,7 +324,7 @@
         "입력"
       ],
       "Invalid URL": [
-        ""
+        "잘못된 URL입니다"
       ],
       "Iteration limit": [
         "반복 제한"
@@ -394,6 +403,9 @@
       ],
       "No. of Tasks": [
         "작업 수"
+      ],
+      "None": [
+        ""
       ],
       "Not all the selected tasks can be cancelled": [
         "선택한 모든 작업을 취소할 수 없습니다."
@@ -518,11 +530,14 @@
       "Resume Selected": [
         "선택한 작업 재개"
       ],
+      "Resume Selected Tasks": [
+        ""
+      ],
+      "Resume Task": [
+        ""
+      ],
       "Resume all paused error tasks": [
         "일시 정지된 모든 오류 태스크 다시 시작"
-      ],
-      "Resume selected tasks": [
-        "선택한 작업 재개"
       ],
       "Resume specific tasks by ID": [
         "ID를 기준으로 특정 태스크 다시 시작"
@@ -556,9 +571,6 @@
       ],
       "See %{link} for more details on how to resolve the issue": [
         "문제를 해결하는 방법에 대한 자세한 내용은 %{link} 참조"
-      ],
-      "Select Action": [
-        "작업 선택"
       ],
       "Select all {count} tasks": [
         "모든 {count} 작업 선택"
@@ -617,6 +629,9 @@
       "Stopped": [
         "중단됨"
       ],
+      "Stopped tasks by result": [
+        ""
+      ],
       "Sub tasks": [
         "하위 태스크"
       ],
@@ -649,6 +664,9 @@
       ],
       "Task count": [
         "태스크 수"
+      ],
+      "Task dependencies": [
+        ""
       ],
       "Task group common": [
         "작업 그룹 일반"
@@ -701,8 +719,26 @@
       "This action will delete all cancelled recurring logics. Please note that this action can't be reversed.": [
         "이 작업은 취소된 모든 반복 로직을 삭제합니다. 이 작업은 되돌릴 수 없습니다."
       ],
-      "This will %(action)s %(number)s task(s), putting them in the %(state)s state. Are you sure?": [
-        "이렇게 하면 %(action)s%(number)s 작업이 수행되어 %(state)s 상태가 됩니다. 계속 진행하시겠습니까?"
+      "This task may have dependencies on other tasks or may be blocking other tasks from executing. Dependencies are established through task chaining relationships.": [
+        ""
+      ],
+      "This will cancel %(number)s task(s), putting them in the stopped state. Are you sure?": [
+        ""
+      ],
+      "This will cancel task \\\\\\\"%(taskName)s\\\\\\\", putting it in the stopped state. Are you sure?": [
+        ""
+      ],
+      "This will force unlock %(number)s task(s). This may cause harm and should be used with caution. Are you sure?": [
+        ""
+      ],
+      "This will force unlock task \\\\\\\"%(taskName)s\\\\\\\". This may cause harm and should be used with caution. Are you sure?": [
+        ""
+      ],
+      "This will resume %(number)s task(s), putting them in the running state. Are you sure?": [
+        ""
+      ],
+      "This will resume task \\\\\\\"%(taskName)s\\\\\\\", putting it in the running state. Are you sure?": [
+        ""
       ],
       "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed.": [
         "현재 태스크를 실행 중인 대상 리소스의 잠금을 해제합니다. 상태의 일관성이 저해될 수 있으므로 태스크가 다시 시작될 수 없는지를 확인한 후 신중하게 사용해야 합니다."

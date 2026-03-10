@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman-tasks 11.0.5",
+        "Project-Id-Version": "foreman-tasks 12.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-12 14:04+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
@@ -22,9 +22,6 @@
       ],
       "%(older)s Older %(time)s": [
         "%(older)s 较老 %(time)s"
-      ],
-      "%s Selected Tasks": [
-        "%s 选择的任务"
       ],
       "%s is not valid format of cron line": [
         "%s 不是正确的 cron 行"
@@ -63,13 +60,13 @@
         "操作"
       ],
       "Action with sub plans": [
-        ""
+        "有子计划的操作"
       ],
       "Active": [
         "活跃"
       ],
-      "Active Filters:": [
-        "活跃的过滤器："
+      "Active Filters": [
+        ""
       ],
       "Active or disabled recurring logic with purpose %s already exists": [
         "带有目的 %s 的活跃或禁用的周期性逻辑已存在"
@@ -98,6 +95,9 @@
       "Backtrace": [
         "回溯"
       ],
+      "Blocks": [
+        ""
+      ],
       "Bulk action": [
         "批量操作"
       ],
@@ -107,6 +107,12 @@
       "Cancel Selected": [
         "取消选择"
       ],
+      "Cancel Selected Tasks": [
+        ""
+      ],
+      "Cancel Task": [
+        ""
+      ],
       "Cancel enforced: the task might be still running on the proxy": [
         "强制取消：任务可能仍在代理服务器上运行"
       ],
@@ -115,9 +121,6 @@
       ],
       "Cancel selected cancellable tasks": [
         "取消所选的可取消的任务"
-      ],
-      "Cancel selected tasks": [
-        "取消选择的任务"
       ],
       "Cancel specific tasks by ID": [
         "根据 ID 取消特定任务"
@@ -151,9 +154,6 @@
       ],
       "Check for long running tasks": [
         "检查长时间运行的任务"
-      ],
-      "Clear All Filters": [
-        "清除所有过滤器"
       ],
       "Clear Cancelled": [
         "清除取消"
@@ -196,6 +196,12 @@
       ],
       "Deliver notifications about long running tasks": [
         "提供有关长时间运行的任务的通知"
+      ],
+      "Dependencies": [
+        ""
+      ],
+      "Depends on": [
+        ""
       ],
       "Details": [
         "详情"
@@ -275,11 +281,14 @@
       "Force Cancel Selected": [
         "强制取消选择"
       ],
-      "Force Cancel selected tasks": [
-        "强制取消选择的任务"
-      ],
       "Force Unlock": [
         "强制解除锁定"
+      ],
+      "Force Unlock Selected Tasks": [
+        ""
+      ],
+      "Force Unlock Task": [
+        ""
       ],
       "Foreman Tasks": [
         "Foreman 任务"
@@ -315,7 +324,7 @@
         "输入"
       ],
       "Invalid URL": [
-        ""
+        "无效 URL"
       ],
       "Iteration limit": [
         "重述限制"
@@ -394,6 +403,9 @@
       ],
       "No. of Tasks": [
         "任务号"
+      ],
+      "None": [
+        ""
       ],
       "Not all the selected tasks can be cancelled": [
         "并非所有选定的任务都可以取消"
@@ -518,11 +530,14 @@
       "Resume Selected": [
         "恢复选择"
       ],
+      "Resume Selected Tasks": [
+        ""
+      ],
+      "Resume Task": [
+        ""
+      ],
       "Resume all paused error tasks": [
         "恢复所有暂停的错误任务"
-      ],
-      "Resume selected tasks": [
-        "恢复选择的任务"
       ],
       "Resume specific tasks by ID": [
         "根据 ID 恢复特定任务"
@@ -556,9 +571,6 @@
       ],
       "See %{link} for more details on how to resolve the issue": [
         "有关如何解决此问题的更多详细信息，请参见%{link}"
-      ],
-      "Select Action": [
-        "选择操作"
       ],
       "Select all {count} tasks": [
         "选择所有 {count} 任务"
@@ -617,6 +629,9 @@
       "Stopped": [
         "停止"
       ],
+      "Stopped tasks by result": [
+        ""
+      ],
       "Sub tasks": [
         "子任务"
       ],
@@ -649,6 +664,9 @@
       ],
       "Task count": [
         "任务计数"
+      ],
+      "Task dependencies": [
+        ""
       ],
       "Task group common": [
         "任务组一般事项"
@@ -701,8 +719,26 @@
       "This action will delete all cancelled recurring logics. Please note that this action can't be reversed.": [
         "此操作将删除所有取消的重复逻辑。请注意，此操作无法撤消。"
       ],
-      "This will %(action)s %(number)s task(s), putting them in the %(state)s state. Are you sure?": [
-        "这将 %(action)s %(number)s 任务，把它们置于 %(state)s 状态。确定吗？"
+      "This task may have dependencies on other tasks or may be blocking other tasks from executing. Dependencies are established through task chaining relationships.": [
+        ""
+      ],
+      "This will cancel %(number)s task(s), putting them in the stopped state. Are you sure?": [
+        ""
+      ],
+      "This will cancel task \\\\\\\"%(taskName)s\\\\\\\", putting it in the stopped state. Are you sure?": [
+        ""
+      ],
+      "This will force unlock %(number)s task(s). This may cause harm and should be used with caution. Are you sure?": [
+        ""
+      ],
+      "This will force unlock task \\\\\\\"%(taskName)s\\\\\\\". This may cause harm and should be used with caution. Are you sure?": [
+        ""
+      ],
+      "This will resume %(number)s task(s), putting them in the running state. Are you sure?": [
+        ""
+      ],
+      "This will resume task \\\\\\\"%(taskName)s\\\\\\\", putting it in the running state. Are you sure?": [
+        ""
       ],
       "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed.": [
         "这将解锁任务正在针对其运行的资源。请注意，这可能会导致状态不一致，应该谨慎使用，然后再确保任务无法恢复。"

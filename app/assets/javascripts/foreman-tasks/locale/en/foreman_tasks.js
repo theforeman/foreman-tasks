@@ -3,9 +3,9 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman-tasks 11.0.5",
+        "Project-Id-Version": "foreman-tasks 12.0.0",
         "Report-Msgid-Bugs-To": "",
-        "PO-Revision-Date": "2023-05-18 08:15+0000",
+        "PO-Revision-Date": "2026-03-09 13:09+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
         "Language-Team": "LANGUAGE <LL@li.org>",
         "Language": "",
@@ -21,9 +21,6 @@
         ""
       ],
       "%(older)s Older %(time)s": [
-        ""
-      ],
-      "%s Selected Tasks": [
         ""
       ],
       "%s is not valid format of cron line": [
@@ -68,7 +65,7 @@
       "Active": [
         ""
       ],
-      "Active Filters:": [
+      "Active Filters": [
         ""
       ],
       "Active or disabled recurring logic with purpose %s already exists": [
@@ -98,6 +95,9 @@
       "Backtrace": [
         ""
       ],
+      "Blocks": [
+        ""
+      ],
       "Bulk action": [
         ""
       ],
@@ -107,6 +107,12 @@
       "Cancel Selected": [
         ""
       ],
+      "Cancel Selected Tasks": [
+        ""
+      ],
+      "Cancel Task": [
+        ""
+      ],
       "Cancel enforced: the task might be still running on the proxy": [
         ""
       ],
@@ -114,9 +120,6 @@
         ""
       ],
       "Cancel selected cancellable tasks": [
-        ""
-      ],
-      "Cancel selected tasks": [
         ""
       ],
       "Cancel specific tasks by ID": [
@@ -150,9 +153,6 @@
         ""
       ],
       "Check for long running tasks": [
-        ""
-      ],
-      "Clear All Filters": [
         ""
       ],
       "Clear Cancelled": [
@@ -195,6 +195,12 @@
         ""
       ],
       "Deliver notifications about long running tasks": [
+        ""
+      ],
+      "Dependencies": [
+        ""
+      ],
+      "Depends on": [
         ""
       ],
       "Details": [
@@ -275,10 +281,13 @@
       "Force Cancel Selected": [
         ""
       ],
-      "Force Cancel selected tasks": [
+      "Force Unlock": [
         ""
       ],
-      "Force Unlock": [
+      "Force Unlock Selected Tasks": [
+        ""
+      ],
+      "Force Unlock Task": [
         ""
       ],
       "Foreman Tasks": [
@@ -393,6 +402,9 @@
         ""
       ],
       "No. of Tasks": [
+        ""
+      ],
+      "None": [
         ""
       ],
       "Not all the selected tasks can be cancelled": [
@@ -518,10 +530,13 @@
       "Resume Selected": [
         ""
       ],
-      "Resume all paused error tasks": [
+      "Resume Selected Tasks": [
         ""
       ],
-      "Resume selected tasks": [
+      "Resume Task": [
+        ""
+      ],
+      "Resume all paused error tasks": [
         ""
       ],
       "Resume specific tasks by ID": [
@@ -555,9 +570,6 @@
         ""
       ],
       "See %{link} for more details on how to resolve the issue": [
-        ""
-      ],
-      "Select Action": [
         ""
       ],
       "Select all {count} tasks": [
@@ -617,6 +629,9 @@
       "Stopped": [
         ""
       ],
+      "Stopped tasks by result": [
+        ""
+      ],
       "Sub tasks": [
         ""
       ],
@@ -648,6 +663,9 @@
         ""
       ],
       "Task count": [
+        ""
+      ],
+      "Task dependencies": [
         ""
       ],
       "Task group common": [
@@ -702,7 +720,25 @@
       "This action will delete all cancelled recurring logics. Please note that this action can't be reversed.": [
         ""
       ],
-      "This will %(action)s %(number)s task(s), putting them in the %(state)s state. Are you sure?": [
+      "This task may have dependencies on other tasks or may be blocking other tasks from executing. Dependencies are established through task chaining relationships.": [
+        ""
+      ],
+      "This will cancel %(number)s task(s), putting them in the stopped state. Are you sure?": [
+        ""
+      ],
+      "This will cancel task \\\\\\\"%(taskName)s\\\\\\\", putting it in the stopped state. Are you sure?": [
+        ""
+      ],
+      "This will force unlock %(number)s task(s). This may cause harm and should be used with caution. Are you sure?": [
+        ""
+      ],
+      "This will force unlock task \\\\\\\"%(taskName)s\\\\\\\". This may cause harm and should be used with caution. Are you sure?": [
+        ""
+      ],
+      "This will resume %(number)s task(s), putting them in the running state. Are you sure?": [
+        ""
+      ],
+      "This will resume task \\\\\\\"%(taskName)s\\\\\\\", putting it in the running state. Are you sure?": [
         ""
       ],
       "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed.": [

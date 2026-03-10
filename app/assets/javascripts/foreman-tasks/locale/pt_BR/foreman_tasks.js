@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman-tasks 11.0.5",
+        "Project-Id-Version": "foreman-tasks 12.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-12 14:04+0000",
         "Last-Translator": "Luiz Henrique Vasconcelos <luizvasconceloss@yahoo.com.br>, 2017-2018",
@@ -22,9 +22,6 @@
       ],
       "%(older)s Older %(time)s": [
         "mais antigo"
-      ],
-      "%s Selected Tasks": [
-        "%s tarefas selecionadas"
       ],
       "%s is not valid format of cron line": [
         "%s não é um formato válido de cron line"
@@ -68,8 +65,8 @@
       "Active": [
         "Ativo"
       ],
-      "Active Filters:": [
-        "Filtros ativos:"
+      "Active Filters": [
+        ""
       ],
       "Active or disabled recurring logic with purpose %s already exists": [
         "Lógica recorrente ativa ou desativada com finalidade %s já existe"
@@ -98,6 +95,9 @@
       "Backtrace": [
         "Backtrace"
       ],
+      "Blocks": [
+        ""
+      ],
       "Bulk action": [
         "Ação em Massa"
       ],
@@ -107,6 +107,12 @@
       "Cancel Selected": [
         "Cancelar selecionado"
       ],
+      "Cancel Selected Tasks": [
+        ""
+      ],
+      "Cancel Task": [
+        ""
+      ],
       "Cancel enforced: the task might be still running on the proxy": [
         "Cancelamento forçado: a tarefa ainda pode estar em execução no proxy "
       ],
@@ -115,9 +121,6 @@
       ],
       "Cancel selected cancellable tasks": [
         "Cancelar tarefas cancelaveis selecionadas"
-      ],
-      "Cancel selected tasks": [
-        "Cancelar tarefas selecionadas"
       ],
       "Cancel specific tasks by ID": [
         "Cancelar tarefas específicas por ID"
@@ -151,9 +154,6 @@
       ],
       "Check for long running tasks": [
         ""
-      ],
-      "Clear All Filters": [
-        "Limpar todos os filtros"
       ],
       "Clear Cancelled": [
         "Limpar cancelado"
@@ -195,6 +195,12 @@
         "Excluir lógicas recorrentes por consulta de pesquisa"
       ],
       "Deliver notifications about long running tasks": [
+        ""
+      ],
+      "Dependencies": [
+        ""
+      ],
+      "Depends on": [
         ""
       ],
       "Details": [
@@ -275,11 +281,14 @@
       "Force Cancel Selected": [
         "Forçar cancelamento de selecionado"
       ],
-      "Force Cancel selected tasks": [
-        "Forçar cancelamento das tarefas selecionadas"
-      ],
       "Force Unlock": [
         "Forçar Desbloqueio"
+      ],
+      "Force Unlock Selected Tasks": [
+        ""
+      ],
+      "Force Unlock Task": [
+        ""
       ],
       "Foreman Tasks": [
         "Tarefas do Foreman"
@@ -394,6 +403,9 @@
       ],
       "No. of Tasks": [
         "Número de Tarefas"
+      ],
+      "None": [
+        ""
       ],
       "Not all the selected tasks can be cancelled": [
         "Nem todas as tarefas selecionadas podem ser canceladas"
@@ -518,11 +530,14 @@
       "Resume Selected": [
         "Retomar selecionado"
       ],
+      "Resume Selected Tasks": [
+        ""
+      ],
+      "Resume Task": [
+        ""
+      ],
       "Resume all paused error tasks": [
         "Retomar todas as tarefas com erro em pausa "
-      ],
-      "Resume selected tasks": [
-        "Retomar tarefas selecionadas"
       ],
       "Resume specific tasks by ID": [
         "Retomar tarefas específicas por ID "
@@ -556,9 +571,6 @@
       ],
       "See %{link} for more details on how to resolve the issue": [
         "Veja %{link} para mais detalhes sobre como resolver a questão"
-      ],
-      "Select Action": [
-        "Selecionar Ação"
       ],
       "Select all {count} tasks": [
         ""
@@ -617,6 +629,9 @@
       "Stopped": [
         "Parado"
       ],
+      "Stopped tasks by result": [
+        ""
+      ],
       "Sub tasks": [
         "Subtarefas "
       ],
@@ -649,6 +664,9 @@
       ],
       "Task count": [
         "Contagem de Tarefas"
+      ],
+      "Task dependencies": [
+        ""
       ],
       "Task group common": [
         "Grupo de tarefas comuns"
@@ -703,8 +721,26 @@
       "This action will delete all cancelled recurring logics. Please note that this action can't be reversed.": [
         "Esta ação excluirá todas as lógicas recorrentes canceladas. Observe que não é possível reverter essa ação."
       ],
-      "This will %(action)s %(number)s task(s), putting them in the %(state)s state. Are you sure?": [
-        "Isto irá %(action)s %(number)s tarefa(s), colocando-as no estado %(state)s. Você tem certeza?"
+      "This task may have dependencies on other tasks or may be blocking other tasks from executing. Dependencies are established through task chaining relationships.": [
+        ""
+      ],
+      "This will cancel %(number)s task(s), putting them in the stopped state. Are you sure?": [
+        ""
+      ],
+      "This will cancel task \\\\\\\"%(taskName)s\\\\\\\", putting it in the stopped state. Are you sure?": [
+        ""
+      ],
+      "This will force unlock %(number)s task(s). This may cause harm and should be used with caution. Are you sure?": [
+        ""
+      ],
+      "This will force unlock task \\\\\\\"%(taskName)s\\\\\\\". This may cause harm and should be used with caution. Are you sure?": [
+        ""
+      ],
+      "This will resume %(number)s task(s), putting them in the running state. Are you sure?": [
+        ""
+      ],
+      "This will resume task \\\\\\\"%(taskName)s\\\\\\\", putting it in the running state. Are you sure?": [
+        ""
       ],
       "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed.": [
         "Desbloqueará os recursos executados pela tarefa. Por favor, observe que isto pode gerar um estado inconsistente e deve ser usado com cuidado, após certificar-se de que a tarefa não pode ser restaurada. "

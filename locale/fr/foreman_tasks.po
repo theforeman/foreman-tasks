@@ -7,7 +7,7 @@
 # Claer <transiblu@claer.hammock.fr>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman-tasks 11.0.5\n"
+"Project-Id-Version: foreman-tasks 12.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-12 14:04+0000\n"
 "Last-Translator: Claer <transiblu@claer.hammock.fr>, 2016\n"
@@ -24,9 +24,6 @@ msgstr "%(last)s Dernier %(time)s"
 
 msgid "%(older)s Older %(time)s"
 msgstr "%(older)s Plus ancien %(time)s"
-
-msgid "%s Selected Tasks"
-msgstr "%s tâches sélectionnées"
 
 msgid "%s is not valid format of cron line"
 msgstr "%s n'est pas un format valide de ligne cron"
@@ -65,13 +62,13 @@ msgid "Action"
 msgstr "Action"
 
 msgid "Action with sub plans"
-msgstr ""
+msgstr "Action avec des sous-plans"
 
 msgid "Active"
 msgstr "Actif"
 
-msgid "Active Filters:"
-msgstr "Filtres actifs :"
+msgid "Active Filters"
+msgstr ""
 
 msgid "Active or disabled recurring logic with purpose %s already exists"
 msgstr "La logique récurrente active ou désactivée avec l'objectif %s existe déjà"
@@ -101,6 +98,9 @@ msgstr "Retour aux tâches"
 msgid "Backtrace"
 msgstr "Backtrace"
 
+msgid "Blocks"
+msgstr ""
+
 msgid "Bulk action"
 msgstr "Actions par lots"
 
@@ -110,6 +110,12 @@ msgstr "Annuler"
 msgid "Cancel Selected"
 msgstr "Annuler la sélection"
 
+msgid "Cancel Selected Tasks"
+msgstr ""
+
+msgid "Cancel Task"
+msgstr ""
+
 msgid "Cancel enforced: the task might be still running on the proxy"
 msgstr "Annulation forcée : la tâche peut-être en cours d'exécution sur le proxy"
 
@@ -118,9 +124,6 @@ msgstr "Annuler la logique récurrente"
 
 msgid "Cancel selected cancellable tasks"
 msgstr "Annuler les tâches annulables sélectionnées"
-
-msgid "Cancel selected tasks"
-msgstr "Annuler des tâches sélectionnées"
 
 msgid "Cancel specific tasks by ID"
 msgstr "Annuler les tâches spécifiques par ID"
@@ -154,9 +157,6 @@ msgstr "Changement de l'id de la demande %{request_id} en id %{saved_id} sauvega
 
 msgid "Check for long running tasks"
 msgstr "Rechercher les tâches de longue durée"
-
-msgid "Clear All Filters"
-msgstr "Afficher tous les filtres"
 
 msgid "Clear Cancelled"
 msgstr "Suppression des Annulées"
@@ -199,6 +199,12 @@ msgstr "Supprimer les logiques récurrentes par requête de recherche"
 
 msgid "Deliver notifications about long running tasks"
 msgstr "Envoyez des notifications sur les tâches de longue durée"
+
+msgid "Dependencies"
+msgstr ""
+
+msgid "Depends on"
+msgstr ""
 
 msgid "Details"
 msgstr "Détails"
@@ -278,11 +284,14 @@ msgstr "Annulation forcée"
 msgid "Force Cancel Selected"
 msgstr "Annuler en force la sélection"
 
-msgid "Force Cancel selected tasks"
-msgstr "Annuler en force des tâches sélectionnées"
-
 msgid "Force Unlock"
 msgstr "Forcer le déverrouillage"
+
+msgid "Force Unlock Selected Tasks"
+msgstr ""
+
+msgid "Force Unlock Task"
+msgstr ""
 
 msgid "Foreman Tasks"
 msgstr "Tâches Foreman"
@@ -318,7 +327,7 @@ msgid "Input"
 msgstr "Entrée"
 
 msgid "Invalid URL"
-msgstr ""
+msgstr "URL non valide"
 
 msgid "Iteration limit"
 msgstr "Limite de l'itération"
@@ -397,6 +406,9 @@ msgstr "Aucune tâche n'a pu démarrer"
 
 msgid "No. of Tasks"
 msgstr "No. de tâches"
+
+msgid "None"
+msgstr ""
 
 msgid "Not all the selected tasks can be cancelled"
 msgstr "Toutes les tâches sélectionnées ne peuvent pas être annulées"
@@ -522,11 +534,14 @@ msgstr "Continuez"
 msgid "Resume Selected"
 msgstr "Reprendre Sélectionné"
 
+msgid "Resume Selected Tasks"
+msgstr ""
+
+msgid "Resume Task"
+msgstr ""
+
 msgid "Resume all paused error tasks"
 msgstr "Reprendre toutes les tâches en attente avec des erreurs"
-
-msgid "Resume selected tasks"
-msgstr "Reprendre les tâches sélectionnées"
 
 msgid "Resume specific tasks by ID"
 msgstr "Reprendre les tâches spécifiques par ID"
@@ -560,9 +575,6 @@ msgstr "Requête de recherche"
 
 msgid "See %{link} for more details on how to resolve the issue"
 msgstr "Voir %{link} pour plus de détails sur la manière de résoudre le problème"
-
-msgid "Select Action"
-msgstr "Choisir l'action"
 
 msgid "Select all {count} tasks"
 msgstr "Sélectionner toutes les tâches {count} "
@@ -621,6 +633,9 @@ msgstr "Annuler toutes le tâches correspondant à la chaîne de recherche"
 msgid "Stopped"
 msgstr "Arrêté"
 
+msgid "Stopped tasks by result"
+msgstr ""
+
 msgid "Sub tasks"
 msgstr "Sous-tâches"
 
@@ -653,6 +668,9 @@ msgstr "La tâche ne peut pas être annulée"
 
 msgid "Task count"
 msgstr "Nombre de tâches"
+
+msgid "Task dependencies"
+msgstr ""
 
 msgid "Task group common"
 msgstr "Ressources communes du groupe de tâches"
@@ -708,8 +726,26 @@ msgstr[2] "Il y a %{count} tâches en pause dans le système qui nécessitent un
 msgid "This action will delete all cancelled recurring logics. Please note that this action can't be reversed."
 msgstr "Cette action supprimera toutes les logiques récurrentes annulées. Veuillez noter que cette action ne peut pas être annulée."
 
-msgid "This will %(action)s %(number)s task(s), putting them in the %(state)s state. Are you sure?"
-msgstr "Cela permettra à %(action)s %(number)s tâche(s), les mettant dans l'état %(state)s. Vous êtes sûr ?"
+msgid "This task may have dependencies on other tasks or may be blocking other tasks from executing. Dependencies are established through task chaining relationships."
+msgstr ""
+
+msgid "This will cancel %(number)s task(s), putting them in the stopped state. Are you sure?"
+msgstr ""
+
+msgid "This will cancel task \\\"%(taskName)s\\\", putting it in the stopped state. Are you sure?"
+msgstr ""
+
+msgid "This will force unlock %(number)s task(s). This may cause harm and should be used with caution. Are you sure?"
+msgstr ""
+
+msgid "This will force unlock task \\\"%(taskName)s\\\". This may cause harm and should be used with caution. Are you sure?"
+msgstr ""
+
+msgid "This will resume %(number)s task(s), putting them in the running state. Are you sure?"
+msgstr ""
+
+msgid "This will resume task \\\"%(taskName)s\\\", putting it in the running state. Are you sure?"
+msgstr ""
 
 msgid "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed."
 msgstr "Cela débloquera les ressources avec lesquelles la tâche s'exécute. Veuillez noter que ceci peut conduire à un état incohérent et doit être utilisé avec prudence, après s'être assuré que la tâche ne peut pas être terminée."
