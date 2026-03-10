@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman-tasks 11.0.5",
+        "Project-Id-Version": "foreman-tasks 12.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-12 14:04+0000",
         "Last-Translator": "francis <hackgo@gmail.com>, 2017",
@@ -22,9 +22,6 @@
       ],
       "%(older)s Older %(time)s": [
         "más antiguo"
-      ],
-      "%s Selected Tasks": [
-        "%s Tareas seleccionadas"
       ],
       "%s is not valid format of cron line": [
         "%s no tiene formato válido de la línea Cron."
@@ -68,8 +65,8 @@
       "Active": [
         "Activo"
       ],
-      "Active Filters:": [
-        "Filtros activos:"
+      "Active Filters": [
+        ""
       ],
       "Active or disabled recurring logic with purpose %s already exists": [
         "Lógica recurrente activa o desactivada con finalidad %s ya existe"
@@ -98,6 +95,9 @@
       "Backtrace": [
         "Seguimiento hacia atrás"
       ],
+      "Blocks": [
+        ""
+      ],
       "Bulk action": [
         "Acción masiva"
       ],
@@ -107,6 +107,12 @@
       "Cancel Selected": [
         "Cancelar lo seleccionado"
       ],
+      "Cancel Selected Tasks": [
+        ""
+      ],
+      "Cancel Task": [
+        ""
+      ],
       "Cancel enforced: the task might be still running on the proxy": [
         "Cancelación ejecutada: es posible que la tarea aún se esté ejecutando en el proxy."
       ],
@@ -115,9 +121,6 @@
       ],
       "Cancel selected cancellable tasks": [
         "Cancelar las tareas cancelables seleccionadas"
-      ],
-      "Cancel selected tasks": [
-        "Cancelar las tareas seleccionadas"
       ],
       "Cancel specific tasks by ID": [
         "Cancelar las tareas específicas por ID"
@@ -151,9 +154,6 @@
       ],
       "Check for long running tasks": [
         ""
-      ],
-      "Clear All Filters": [
-        "Borrar todos los filtros"
       ],
       "Clear Cancelled": [
         "Eliminar canceladas"
@@ -195,6 +195,12 @@
         "Eliminar lógicas recurrentes mediante una consulta de búsqueda"
       ],
       "Deliver notifications about long running tasks": [
+        ""
+      ],
+      "Dependencies": [
+        ""
+      ],
+      "Depends on": [
         ""
       ],
       "Details": [
@@ -275,11 +281,14 @@
       "Force Cancel Selected": [
         "Forzar cancelación de lo seleccionado"
       ],
-      "Force Cancel selected tasks": [
-        "Forzar cancelación de tareas seleccionadas"
-      ],
       "Force Unlock": [
         "Forzar desbloqueo"
+      ],
+      "Force Unlock Selected Tasks": [
+        ""
+      ],
+      "Force Unlock Task": [
+        ""
       ],
       "Foreman Tasks": [
         "Tareas de Foreman"
@@ -394,6 +403,9 @@
       ],
       "No. of Tasks": [
         "Cantidad de tareas"
+      ],
+      "None": [
+        ""
       ],
       "Not all the selected tasks can be cancelled": [
         "No todas las tareas seleccionadas se pueden cancelar"
@@ -518,11 +530,14 @@
       "Resume Selected": [
         "Reanudar lo seleccionado "
       ],
+      "Resume Selected Tasks": [
+        ""
+      ],
+      "Resume Task": [
+        ""
+      ],
       "Resume all paused error tasks": [
         "Reanudar las tareas de error en pausa"
-      ],
-      "Resume selected tasks": [
-        "Reanudar las tareas seleccionadas"
       ],
       "Resume specific tasks by ID": [
         "Reanudar las tareas específicas por ID"
@@ -556,9 +571,6 @@
       ],
       "See %{link} for more details on how to resolve the issue": [
         "Consulte %{link} para obtener más información sobre cómo resolver el problema."
-      ],
-      "Select Action": [
-        "Seleccionar una acción"
       ],
       "Select all {count} tasks": [
         ""
@@ -617,6 +629,9 @@
       "Stopped": [
         "Detenido"
       ],
+      "Stopped tasks by result": [
+        ""
+      ],
       "Sub tasks": [
         "Subtareas"
       ],
@@ -649,6 +664,9 @@
       ],
       "Task count": [
         "Conteo de tareas"
+      ],
+      "Task dependencies": [
+        ""
       ],
       "Task group common": [
         "Grupo de tareas común"
@@ -703,8 +721,26 @@
       "This action will delete all cancelled recurring logics. Please note that this action can't be reversed.": [
         "Esta acción eliminará todas las lógicas recurrentes canceladas. Tenga en cuenta que esta acción no puede revertirse."
       ],
-      "This will %(action)s %(number)s task(s), putting them in the %(state)s state. Are you sure?": [
-        "Esto %(action)s %(number)s tarea(s), poniéndolos en el estado %(state)s. ¿Está seguro?"
+      "This task may have dependencies on other tasks or may be blocking other tasks from executing. Dependencies are established through task chaining relationships.": [
+        ""
+      ],
+      "This will cancel %(number)s task(s), putting them in the stopped state. Are you sure?": [
+        ""
+      ],
+      "This will cancel task \\\\\\\"%(taskName)s\\\\\\\", putting it in the stopped state. Are you sure?": [
+        ""
+      ],
+      "This will force unlock %(number)s task(s). This may cause harm and should be used with caution. Are you sure?": [
+        ""
+      ],
+      "This will force unlock task \\\\\\\"%(taskName)s\\\\\\\". This may cause harm and should be used with caution. Are you sure?": [
+        ""
+      ],
+      "This will resume %(number)s task(s), putting them in the running state. Are you sure?": [
+        ""
+      ],
+      "This will resume task \\\\\\\"%(taskName)s\\\\\\\", putting it in the running state. Are you sure?": [
+        ""
       ],
       "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed.": [
         "Esto desbloqueará los recursos contra los que se está ejecutando la tarea. Tenga en cuenta que esto puede provocar un estado inconsistente y se debe utilizar con precaución, después de asegurarse de que la tarea no se puede reanudar."

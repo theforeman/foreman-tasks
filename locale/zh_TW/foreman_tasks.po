@@ -5,7 +5,7 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman-tasks 11.0.5\n"
+"Project-Id-Version: foreman-tasks 12.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-12 14:04+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -21,9 +21,6 @@ msgid "%(last)s Last %(time)s"
 msgstr ""
 
 msgid "%(older)s Older %(time)s"
-msgstr ""
-
-msgid "%s Selected Tasks"
 msgstr ""
 
 msgid "%s is not valid format of cron line"
@@ -68,7 +65,7 @@ msgstr ""
 msgid "Active"
 msgstr "啟用中"
 
-msgid "Active Filters:"
+msgid "Active Filters"
 msgstr ""
 
 msgid "Active or disabled recurring logic with purpose %s already exists"
@@ -99,6 +96,9 @@ msgstr ""
 msgid "Backtrace"
 msgstr "追蹤"
 
+msgid "Blocks"
+msgstr ""
+
 msgid "Bulk action"
 msgstr "批次動作"
 
@@ -108,6 +108,12 @@ msgstr "取消"
 msgid "Cancel Selected"
 msgstr ""
 
+msgid "Cancel Selected Tasks"
+msgstr ""
+
+msgid "Cancel Task"
+msgstr ""
+
 msgid "Cancel enforced: the task might be still running on the proxy"
 msgstr "強制取消：任務可能還在代理伺服器上執行"
 
@@ -115,9 +121,6 @@ msgid "Cancel recurring logic"
 msgstr "取消週期邏輯"
 
 msgid "Cancel selected cancellable tasks"
-msgstr ""
-
-msgid "Cancel selected tasks"
 msgstr ""
 
 msgid "Cancel specific tasks by ID"
@@ -151,9 +154,6 @@ msgid "Changing request id %{request_id} to saved id %{saved_id}"
 msgstr ""
 
 msgid "Check for long running tasks"
-msgstr ""
-
-msgid "Clear All Filters"
 msgstr ""
 
 msgid "Clear Cancelled"
@@ -196,6 +196,12 @@ msgid "Delete recurring logics by search query"
 msgstr ""
 
 msgid "Deliver notifications about long running tasks"
+msgstr ""
+
+msgid "Dependencies"
+msgstr ""
+
+msgid "Depends on"
 msgstr ""
 
 msgid "Details"
@@ -276,11 +282,14 @@ msgstr ""
 msgid "Force Cancel Selected"
 msgstr ""
 
-msgid "Force Cancel selected tasks"
-msgstr ""
-
 msgid "Force Unlock"
 msgstr "強制解除鎖定"
+
+msgid "Force Unlock Selected Tasks"
+msgstr ""
+
+msgid "Force Unlock Task"
+msgstr ""
 
 msgid "Foreman Tasks"
 msgstr ""
@@ -395,6 +404,9 @@ msgstr ""
 
 msgid "No. of Tasks"
 msgstr "任務編號"
+
+msgid "None"
+msgstr ""
 
 msgid "Not all the selected tasks can be cancelled"
 msgstr ""
@@ -520,11 +532,14 @@ msgstr "繼續"
 msgid "Resume Selected"
 msgstr ""
 
+msgid "Resume Selected Tasks"
+msgstr ""
+
+msgid "Resume Task"
+msgstr ""
+
 msgid "Resume all paused error tasks"
 msgstr "繼續所有處於暫停狀態的錯誤任務"
-
-msgid "Resume selected tasks"
-msgstr ""
 
 msgid "Resume specific tasks by ID"
 msgstr "透過 ID 繼續特定任務"
@@ -558,9 +573,6 @@ msgstr "搜尋查詢"
 
 msgid "See %{link} for more details on how to resolve the issue"
 msgstr ""
-
-msgid "Select Action"
-msgstr "選擇動作"
 
 msgid "Select all {count} tasks"
 msgstr ""
@@ -619,6 +631,9 @@ msgstr ""
 msgid "Stopped"
 msgstr ""
 
+msgid "Stopped tasks by result"
+msgstr ""
+
 msgid "Sub tasks"
 msgstr "子任務"
 
@@ -651,6 +666,9 @@ msgstr ""
 
 msgid "Task count"
 msgstr "工作數量"
+
+msgid "Task dependencies"
+msgstr ""
 
 msgid "Task group common"
 msgstr "任務群組的一般事項"
@@ -705,7 +723,25 @@ msgstr[1] ""
 msgid "This action will delete all cancelled recurring logics. Please note that this action can't be reversed."
 msgstr ""
 
-msgid "This will %(action)s %(number)s task(s), putting them in the %(state)s state. Are you sure?"
+msgid "This task may have dependencies on other tasks or may be blocking other tasks from executing. Dependencies are established through task chaining relationships."
+msgstr ""
+
+msgid "This will cancel %(number)s task(s), putting them in the stopped state. Are you sure?"
+msgstr ""
+
+msgid "This will cancel task \\\"%(taskName)s\\\", putting it in the stopped state. Are you sure?"
+msgstr ""
+
+msgid "This will force unlock %(number)s task(s). This may cause harm and should be used with caution. Are you sure?"
+msgstr ""
+
+msgid "This will force unlock task \\\"%(taskName)s\\\". This may cause harm and should be used with caution. Are you sure?"
+msgstr ""
+
+msgid "This will resume %(number)s task(s), putting them in the running state. Are you sure?"
+msgstr ""
+
+msgid "This will resume task \\\"%(taskName)s\\\", putting it in the running state. Are you sure?"
 msgstr ""
 
 msgid "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed."

@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the foreman_tasks package.
 #
 # Translators:
-# Crited <Alexander.Stoll@netways.de>, 2019
+# Alexander Stoll <Alexander.Stoll@netways.de>, 2019
 # Ettore Atalan <atalanttore@googlemail.com>, 2016-2017,2023
 # Nonof Yourbusiness <jonasschell@ocupe.org>, 2019
 # pdolinic, 2021
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman-tasks 11.0.5\n"
+"Project-Id-Version: foreman-tasks 12.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-12 14:04+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2016-2017,2023\n"
@@ -25,9 +25,6 @@ msgstr "%(last)s Zuletzt %(time)s"
 
 msgid "%(older)s Older %(time)s"
 msgstr "%(older)s Older %(time)s"
-
-msgid "%s Selected Tasks"
-msgstr " %s ausgewählte Aufgaben"
 
 msgid "%s is not valid format of cron line"
 msgstr "%s ist ungültiges Cron-Zeilen-Format"
@@ -71,8 +68,8 @@ msgstr ""
 msgid "Active"
 msgstr "Aktiv"
 
-msgid "Active Filters:"
-msgstr "Aktive Filter:"
+msgid "Active Filters"
+msgstr ""
 
 msgid "Active or disabled recurring logic with purpose %s already exists"
 msgstr ""
@@ -102,6 +99,9 @@ msgstr "Zurück zu Aufgaben"
 msgid "Backtrace"
 msgstr "Ablaufverfolgung"
 
+msgid "Blocks"
+msgstr ""
+
 msgid "Bulk action"
 msgstr "Massenaktion"
 
@@ -111,6 +111,12 @@ msgstr "Abbrechen"
 msgid "Cancel Selected"
 msgstr "Ausgewählte abbrechen"
 
+msgid "Cancel Selected Tasks"
+msgstr ""
+
+msgid "Cancel Task"
+msgstr ""
+
 msgid "Cancel enforced: the task might be still running on the proxy"
 msgstr "Abbruch erzwungen: die Aufgabe läuft vielleicht noch auf dem Proxy"
 
@@ -119,9 +125,6 @@ msgstr "Wiederholungslogik abbrechen"
 
 msgid "Cancel selected cancellable tasks"
 msgstr "Ausgewählte stornierbare Aufgaben abbrechen"
-
-msgid "Cancel selected tasks"
-msgstr "Ausgewählte Aufgaben abbrechen"
 
 msgid "Cancel specific tasks by ID"
 msgstr "Abbrechen bestimmter Aufgaben nach ID"
@@ -155,9 +158,6 @@ msgstr "Anfrage-ID %{request_id} in gespeicherte ID %{saved_id} ändern"
 
 msgid "Check for long running tasks"
 msgstr ""
-
-msgid "Clear All Filters"
-msgstr "Alle Filter löschen"
 
 msgid "Clear Cancelled"
 msgstr "Clear abgebrochen "
@@ -199,6 +199,12 @@ msgid "Delete recurring logics by search query"
 msgstr "Wiederkehrende Logiken per Suchanfrage löschen"
 
 msgid "Deliver notifications about long running tasks"
+msgstr ""
+
+msgid "Dependencies"
+msgstr ""
+
+msgid "Depends on"
 msgstr ""
 
 msgid "Details"
@@ -279,11 +285,14 @@ msgstr "Abbrechen erzwingen"
 msgid "Force Cancel Selected"
 msgstr "Abbrechen Ausgewählt erzwingen"
 
-msgid "Force Cancel selected tasks"
-msgstr "Ausgewählte Aufgaben abbrechen erzwingen"
-
 msgid "Force Unlock"
 msgstr "Entsperren erzwingen"
+
+msgid "Force Unlock Selected Tasks"
+msgstr ""
+
+msgid "Force Unlock Task"
+msgstr ""
 
 msgid "Foreman Tasks"
 msgstr "Foreman-Aufgaben"
@@ -398,6 +407,9 @@ msgstr "Es konnte keine Aufgabe gestartet werden"
 
 msgid "No. of Tasks"
 msgstr "Nr. der Aufgaben"
+
+msgid "None"
+msgstr ""
 
 msgid "Not all the selected tasks can be cancelled"
 msgstr "Nicht alle ausgewählten Aufgaben können abgebrochen werden"
@@ -523,11 +535,14 @@ msgstr "Fortsetzen"
 msgid "Resume Selected"
 msgstr "Ausgewählte fortsetzen"
 
+msgid "Resume Selected Tasks"
+msgstr ""
+
+msgid "Resume Task"
+msgstr ""
+
 msgid "Resume all paused error tasks"
 msgstr "Alle angehaltenen Fehleraufgaben fortsetzen"
-
-msgid "Resume selected tasks"
-msgstr "Ausgewählte Aufgaben fortsetzen"
 
 msgid "Resume specific tasks by ID"
 msgstr "Bestimmte Aufgaben nach ID fortsetzen"
@@ -561,9 +576,6 @@ msgstr "Suchanfrage"
 
 msgid "See %{link} for more details on how to resolve the issue"
 msgstr "Weitere Informationen zur Behebung des Problems finden Sie unter %{link}."
-
-msgid "Select Action"
-msgstr "Aktion auswählen"
 
 msgid "Select all {count} tasks"
 msgstr ""
@@ -622,6 +634,9 @@ msgstr "Stoppen Sie Aufgaben, die mit der Suchzeichenfolge übereinstimmen"
 msgid "Stopped"
 msgstr "Gestoppt"
 
+msgid "Stopped tasks by result"
+msgstr ""
+
 msgid "Sub tasks"
 msgstr "Unteraufgabe"
 
@@ -654,6 +669,9 @@ msgstr "Aufgabe kann nicht abgebrochen werden"
 
 msgid "Task count"
 msgstr "Anzahl der Aufgaben"
+
+msgid "Task dependencies"
+msgstr ""
 
 msgid "Task group common"
 msgstr "Gemeinsame Aufgabengruppen"
@@ -708,7 +726,25 @@ msgstr[1] ""
 msgid "This action will delete all cancelled recurring logics. Please note that this action can't be reversed."
 msgstr "Diese Aktion löscht alle abgebrochenen wiederkehrenden Logiken. Beachten Sie, dass diese Aktion nicht rückgängig gemacht werden kann."
 
-msgid "This will %(action)s %(number)s task(s), putting them in the %(state)s state. Are you sure?"
+msgid "This task may have dependencies on other tasks or may be blocking other tasks from executing. Dependencies are established through task chaining relationships."
+msgstr ""
+
+msgid "This will cancel %(number)s task(s), putting them in the stopped state. Are you sure?"
+msgstr ""
+
+msgid "This will cancel task \\\"%(taskName)s\\\", putting it in the stopped state. Are you sure?"
+msgstr ""
+
+msgid "This will force unlock %(number)s task(s). This may cause harm and should be used with caution. Are you sure?"
+msgstr ""
+
+msgid "This will force unlock task \\\"%(taskName)s\\\". This may cause harm and should be used with caution. Are you sure?"
+msgstr ""
+
+msgid "This will resume %(number)s task(s), putting them in the running state. Are you sure?"
+msgstr ""
+
+msgid "This will resume task \\\"%(taskName)s\\\", putting it in the running state. Are you sure?"
 msgstr ""
 
 msgid "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed."

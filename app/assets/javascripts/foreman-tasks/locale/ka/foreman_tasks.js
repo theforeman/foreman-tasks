@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman-tasks 11.0.5",
+        "Project-Id-Version": "foreman-tasks 12.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-12 14:04+0000",
         "Last-Translator": "Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022",
@@ -22,9 +22,6 @@
       ],
       "%(older)s Older %(time)s": [
         "%(older)s %(time)s-ჯერ ძველი"
-      ],
-      "%s Selected Tasks": [
-        "%s მონიშნული ამოცანა"
       ],
       "%s is not valid format of cron line": [
         "%s cron-ის სწორ ხაზის სწორი ფორმატი არაა"
@@ -63,13 +60,13 @@
         "მოქმედება"
       ],
       "Action with sub plans": [
-        ""
+        "ქმედება ქვე-გეგმებით"
       ],
       "Active": [
         "აქტიური"
       ],
-      "Active Filters:": [
-        "აქტიური ფილტრები:"
+      "Active Filters": [
+        ""
       ],
       "Active or disabled recurring logic with purpose %s already exists": [
         "აქტიური ან გამრთული განმეორებადი ლოგიკა დანიშნულებით %s უკვე არსებობს"
@@ -98,6 +95,9 @@
       "Backtrace": [
         "შეცდომის მიდევნება"
       ],
+      "Blocks": [
+        ""
+      ],
       "Bulk action": [
         "მასობრივი ქმედება"
       ],
@@ -107,6 +107,12 @@
       "Cancel Selected": [
         "მონიშნულის გაუქმება"
       ],
+      "Cancel Selected Tasks": [
+        ""
+      ],
+      "Cancel Task": [
+        ""
+      ],
       "Cancel enforced: the task might be still running on the proxy": [
         "გაუქმება შესრულებულია: ამოცანა შესაძლოა პროქსიზე ჯერ კიდევ გაშვებული იყოს"
       ],
@@ -115,9 +121,6 @@
       ],
       "Cancel selected cancellable tasks": [
         "მონიშნული გაუქმებადი ამოცანების გაუქმება"
-      ],
-      "Cancel selected tasks": [
-        "მონიშნული ამოცანების გაუქმება"
       ],
       "Cancel specific tasks by ID": [
         "ID-ით მითითებული ამოცანის გაუქმება"
@@ -151,9 +154,6 @@
       ],
       "Check for long running tasks": [
         "დიდხანს გაშვებულ ამოცანებზე შემოწმება"
-      ],
-      "Clear All Filters": [
-        "ყველა ფილტრის გასუფთავება"
       ],
       "Clear Cancelled": [
         "გაუქმებულების გასუფთავება"
@@ -196,6 +196,12 @@
       ],
       "Deliver notifications about long running tasks": [
         "შეტყობინება დიდხანს გაშვებული ამოცანების შესახებ"
+      ],
+      "Dependencies": [
+        ""
+      ],
+      "Depends on": [
+        ""
       ],
       "Details": [
         "დეტალები"
@@ -275,11 +281,14 @@
       "Force Cancel Selected": [
         "მონიშნულების ძალით გაუქმება"
       ],
-      "Force Cancel selected tasks": [
-        "მონიშნული ამოცანების ძალით გაუქმება"
-      ],
       "Force Unlock": [
         "ძალით განბლოკვა"
+      ],
+      "Force Unlock Selected Tasks": [
+        ""
+      ],
+      "Force Unlock Task": [
+        ""
       ],
       "Foreman Tasks": [
         "Foreman-ის ამოცანები"
@@ -394,6 +403,9 @@
       ],
       "No. of Tasks": [
         "ამოცანების რიცხვი"
+      ],
+      "None": [
+        ""
       ],
       "Not all the selected tasks can be cancelled": [
         "ყველა მონიშნული ამოცანა არ გაუქმებულა"
@@ -518,11 +530,14 @@
       "Resume Selected": [
         "მონიშნულების გაუქმება"
       ],
+      "Resume Selected Tasks": [
+        ""
+      ],
+      "Resume Task": [
+        ""
+      ],
       "Resume all paused error tasks": [
         "ყველა შეცდომის მდგომარეობაში შეჩერებული ამოცანის გაგრძელება"
-      ],
-      "Resume selected tasks": [
-        "მონიშნული ამოცანების გაუქმება"
       ],
       "Resume specific tasks by ID": [
         "ID-ით მითითებული ამოცანების გაგრძელება"
@@ -556,9 +571,6 @@
       ],
       "See %{link} for more details on how to resolve the issue": [
         "ამ პრობლემის გადასაწყვეტად იხილეთ %{link}"
-      ],
-      "Select Action": [
-        "აირჩიეთ ქმედება"
       ],
       "Select all {count} tasks": [
         "{count} ამოცანის მონიშვნა"
@@ -617,6 +629,9 @@
       "Stopped": [
         "გაჩერებულია"
       ],
+      "Stopped tasks by result": [
+        ""
+      ],
       "Sub tasks": [
         "ქვეამოცანები"
       ],
@@ -649,6 +664,9 @@
       ],
       "Task count": [
         "ამოცანების რიცხვი"
+      ],
+      "Task dependencies": [
+        ""
       ],
       "Task group common": [
         "საერთო სამუშაო ჯგუფი"
@@ -702,8 +720,26 @@
       "This action will delete all cancelled recurring logics. Please note that this action can't be reversed.": [
         "ეს ქმედება წაშლის ყველა გაუქმებულ განმეორებად ლოგიკას. გაითვალისწინეთ, რომ ქმედების დაბრუნება შეუძლებელია."
       ],
-      "This will %(action)s %(number)s task(s), putting them in the %(state)s state. Are you sure?": [
-        "%(action)s %(number)s ამოცანას, მათ %(state)s მდგომარეობაში გადაიყვანს. დარწმუნებული ბრძანდებით?"
+      "This task may have dependencies on other tasks or may be blocking other tasks from executing. Dependencies are established through task chaining relationships.": [
+        ""
+      ],
+      "This will cancel %(number)s task(s), putting them in the stopped state. Are you sure?": [
+        ""
+      ],
+      "This will cancel task \\\\\\\"%(taskName)s\\\\\\\", putting it in the stopped state. Are you sure?": [
+        ""
+      ],
+      "This will force unlock %(number)s task(s). This may cause harm and should be used with caution. Are you sure?": [
+        ""
+      ],
+      "This will force unlock task \\\\\\\"%(taskName)s\\\\\\\". This may cause harm and should be used with caution. Are you sure?": [
+        ""
+      ],
+      "This will resume %(number)s task(s), putting them in the running state. Are you sure?": [
+        ""
+      ],
+      "This will resume task \\\\\\\"%(taskName)s\\\\\\\", putting it in the running state. Are you sure?": [
+        ""
       ],
       "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed.": [
         "ეს განბლოკავს რესურსებს, რომლებზეც ამოცანა მუშაობს. გაითვალისწინეთ, რომ ამან შეიძლება გამოიწვიოს არათანმიმდევრული მდგომარეობა და უნდა იქნას გამოყენებული სიფრთხილით, მას შემდეგ რაც დარწმუნდებით, რომ დავალება ვერ გაგრძელდება."

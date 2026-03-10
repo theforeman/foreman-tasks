@@ -5,7 +5,7 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman-tasks 11.0.5\n"
+"Project-Id-Version: foreman-tasks 12.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-12 14:04+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -22,9 +22,6 @@ msgstr "%(last)s 最后 %(time)s"
 
 msgid "%(older)s Older %(time)s"
 msgstr "%(older)s 较老 %(time)s"
-
-msgid "%s Selected Tasks"
-msgstr "%s 选择的任务"
 
 msgid "%s is not valid format of cron line"
 msgstr "%s 不是正确的 cron 行"
@@ -63,13 +60,13 @@ msgid "Action"
 msgstr "操作"
 
 msgid "Action with sub plans"
-msgstr ""
+msgstr "有子计划的操作"
 
 msgid "Active"
 msgstr "活跃"
 
-msgid "Active Filters:"
-msgstr "活跃的过滤器："
+msgid "Active Filters"
+msgstr ""
 
 msgid "Active or disabled recurring logic with purpose %s already exists"
 msgstr "带有目的 %s 的活跃或禁用的周期性逻辑已存在"
@@ -99,6 +96,9 @@ msgstr "返回到任务"
 msgid "Backtrace"
 msgstr "回溯"
 
+msgid "Blocks"
+msgstr ""
+
 msgid "Bulk action"
 msgstr "批量操作"
 
@@ -108,6 +108,12 @@ msgstr "取消"
 msgid "Cancel Selected"
 msgstr "取消选择"
 
+msgid "Cancel Selected Tasks"
+msgstr ""
+
+msgid "Cancel Task"
+msgstr ""
+
 msgid "Cancel enforced: the task might be still running on the proxy"
 msgstr "强制取消：任务可能仍在代理服务器上运行"
 
@@ -116,9 +122,6 @@ msgstr "取消重复逻辑"
 
 msgid "Cancel selected cancellable tasks"
 msgstr "取消所选的可取消的任务"
-
-msgid "Cancel selected tasks"
-msgstr "取消选择的任务"
 
 msgid "Cancel specific tasks by ID"
 msgstr "根据 ID 取消特定任务"
@@ -152,9 +155,6 @@ msgstr "将请求 id %{request_id} 改为保存的 id %%{saved_id}"
 
 msgid "Check for long running tasks"
 msgstr "检查长时间运行的任务"
-
-msgid "Clear All Filters"
-msgstr "清除所有过滤器"
 
 msgid "Clear Cancelled"
 msgstr "清除取消"
@@ -197,6 +197,12 @@ msgstr "通过搜索查询删除重复逻辑"
 
 msgid "Deliver notifications about long running tasks"
 msgstr "提供有关长时间运行的任务的通知"
+
+msgid "Dependencies"
+msgstr ""
+
+msgid "Depends on"
+msgstr ""
 
 msgid "Details"
 msgstr "详情"
@@ -276,11 +282,14 @@ msgstr "强制取消"
 msgid "Force Cancel Selected"
 msgstr "强制取消选择"
 
-msgid "Force Cancel selected tasks"
-msgstr "强制取消选择的任务"
-
 msgid "Force Unlock"
 msgstr "强制解除锁定"
+
+msgid "Force Unlock Selected Tasks"
+msgstr ""
+
+msgid "Force Unlock Task"
+msgstr ""
 
 msgid "Foreman Tasks"
 msgstr "Foreman 任务"
@@ -316,7 +325,7 @@ msgid "Input"
 msgstr "输入"
 
 msgid "Invalid URL"
-msgstr ""
+msgstr "无效 URL"
 
 msgid "Iteration limit"
 msgstr "重述限制"
@@ -395,6 +404,9 @@ msgstr "无法启动任何任务"
 
 msgid "No. of Tasks"
 msgstr "任务号"
+
+msgid "None"
+msgstr ""
 
 msgid "Not all the selected tasks can be cancelled"
 msgstr "并非所有选定的任务都可以取消"
@@ -520,11 +532,14 @@ msgstr "恢复"
 msgid "Resume Selected"
 msgstr "恢复选择"
 
+msgid "Resume Selected Tasks"
+msgstr ""
+
+msgid "Resume Task"
+msgstr ""
+
 msgid "Resume all paused error tasks"
 msgstr "恢复所有暂停的错误任务"
-
-msgid "Resume selected tasks"
-msgstr "恢复选择的任务"
 
 msgid "Resume specific tasks by ID"
 msgstr "根据 ID 恢复特定任务"
@@ -558,9 +573,6 @@ msgstr "搜索查询"
 
 msgid "See %{link} for more details on how to resolve the issue"
 msgstr "有关如何解决此问题的更多详细信息，请参见%{link}"
-
-msgid "Select Action"
-msgstr "选择操作"
 
 msgid "Select all {count} tasks"
 msgstr "选择所有 {count} 任务"
@@ -619,6 +631,9 @@ msgstr "停止与搜索字符串匹配的任务"
 msgid "Stopped"
 msgstr "停止"
 
+msgid "Stopped tasks by result"
+msgstr ""
+
 msgid "Sub tasks"
 msgstr "子任务"
 
@@ -651,6 +666,9 @@ msgstr "任务无法取消"
 
 msgid "Task count"
 msgstr "任务计数"
+
+msgid "Task dependencies"
+msgstr ""
 
 msgid "Task group common"
 msgstr "任务组一般事项"
@@ -704,8 +722,26 @@ msgstr[0] "系统中有%{count}个暂停的任务需要注意"
 msgid "This action will delete all cancelled recurring logics. Please note that this action can't be reversed."
 msgstr "此操作将删除所有取消的重复逻辑。请注意，此操作无法撤消。"
 
-msgid "This will %(action)s %(number)s task(s), putting them in the %(state)s state. Are you sure?"
-msgstr "这将 %(action)s %(number)s 任务，把它们置于 %(state)s 状态。确定吗？"
+msgid "This task may have dependencies on other tasks or may be blocking other tasks from executing. Dependencies are established through task chaining relationships."
+msgstr ""
+
+msgid "This will cancel %(number)s task(s), putting them in the stopped state. Are you sure?"
+msgstr ""
+
+msgid "This will cancel task \\\"%(taskName)s\\\", putting it in the stopped state. Are you sure?"
+msgstr ""
+
+msgid "This will force unlock %(number)s task(s). This may cause harm and should be used with caution. Are you sure?"
+msgstr ""
+
+msgid "This will force unlock task \\\"%(taskName)s\\\". This may cause harm and should be used with caution. Are you sure?"
+msgstr ""
+
+msgid "This will resume %(number)s task(s), putting them in the running state. Are you sure?"
+msgstr ""
+
+msgid "This will resume task \\\"%(taskName)s\\\", putting it in the running state. Are you sure?"
+msgstr ""
 
 msgid "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed."
 msgstr "这将解锁任务正在针对其运行的资源。请注意，这可能会导致状态不一致，应该谨慎使用，然后再确保任务无法恢复。"

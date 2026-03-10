@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman-tasks 11.0.5",
+        "Project-Id-Version": "foreman-tasks 12.0.0",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-12 14:04+0000",
         "Last-Translator": "Claer <transiblu@claer.hammock.fr>, 2016",
@@ -22,9 +22,6 @@
       ],
       "%(older)s Older %(time)s": [
         "%(older)s Plus ancien %(time)s"
-      ],
-      "%s Selected Tasks": [
-        "%s tâches sélectionnées"
       ],
       "%s is not valid format of cron line": [
         "%s n'est pas un format valide de ligne cron"
@@ -63,13 +60,13 @@
         "Action"
       ],
       "Action with sub plans": [
-        ""
+        "Action avec des sous-plans"
       ],
       "Active": [
         "Actif"
       ],
-      "Active Filters:": [
-        "Filtres actifs :"
+      "Active Filters": [
+        ""
       ],
       "Active or disabled recurring logic with purpose %s already exists": [
         "La logique récurrente active ou désactivée avec l'objectif %s existe déjà"
@@ -98,6 +95,9 @@
       "Backtrace": [
         "Backtrace"
       ],
+      "Blocks": [
+        ""
+      ],
       "Bulk action": [
         "Actions par lots"
       ],
@@ -107,6 +107,12 @@
       "Cancel Selected": [
         "Annuler la sélection"
       ],
+      "Cancel Selected Tasks": [
+        ""
+      ],
+      "Cancel Task": [
+        ""
+      ],
       "Cancel enforced: the task might be still running on the proxy": [
         "Annulation forcée : la tâche peut-être en cours d'exécution sur le proxy"
       ],
@@ -115,9 +121,6 @@
       ],
       "Cancel selected cancellable tasks": [
         "Annuler les tâches annulables sélectionnées"
-      ],
-      "Cancel selected tasks": [
-        "Annuler des tâches sélectionnées"
       ],
       "Cancel specific tasks by ID": [
         "Annuler les tâches spécifiques par ID"
@@ -151,9 +154,6 @@
       ],
       "Check for long running tasks": [
         "Rechercher les tâches de longue durée"
-      ],
-      "Clear All Filters": [
-        "Afficher tous les filtres"
       ],
       "Clear Cancelled": [
         "Suppression des Annulées"
@@ -196,6 +196,12 @@
       ],
       "Deliver notifications about long running tasks": [
         "Envoyez des notifications sur les tâches de longue durée"
+      ],
+      "Dependencies": [
+        ""
+      ],
+      "Depends on": [
+        ""
       ],
       "Details": [
         "Détails"
@@ -275,11 +281,14 @@
       "Force Cancel Selected": [
         "Annuler en force la sélection"
       ],
-      "Force Cancel selected tasks": [
-        "Annuler en force des tâches sélectionnées"
-      ],
       "Force Unlock": [
         "Forcer le déverrouillage"
+      ],
+      "Force Unlock Selected Tasks": [
+        ""
+      ],
+      "Force Unlock Task": [
+        ""
       ],
       "Foreman Tasks": [
         "Tâches Foreman"
@@ -315,7 +324,7 @@
         "Entrée"
       ],
       "Invalid URL": [
-        ""
+        "URL non valide"
       ],
       "Iteration limit": [
         "Limite de l'itération"
@@ -394,6 +403,9 @@
       ],
       "No. of Tasks": [
         "No. de tâches"
+      ],
+      "None": [
+        ""
       ],
       "Not all the selected tasks can be cancelled": [
         "Toutes les tâches sélectionnées ne peuvent pas être annulées"
@@ -518,11 +530,14 @@
       "Resume Selected": [
         "Reprendre Sélectionné"
       ],
+      "Resume Selected Tasks": [
+        ""
+      ],
+      "Resume Task": [
+        ""
+      ],
       "Resume all paused error tasks": [
         "Reprendre toutes les tâches en attente avec des erreurs"
-      ],
-      "Resume selected tasks": [
-        "Reprendre les tâches sélectionnées"
       ],
       "Resume specific tasks by ID": [
         "Reprendre les tâches spécifiques par ID"
@@ -556,9 +571,6 @@
       ],
       "See %{link} for more details on how to resolve the issue": [
         "Voir %{link} pour plus de détails sur la manière de résoudre le problème"
-      ],
-      "Select Action": [
-        "Choisir l'action"
       ],
       "Select all {count} tasks": [
         "Sélectionner toutes les tâches {count} "
@@ -617,6 +629,9 @@
       "Stopped": [
         "Arrêté"
       ],
+      "Stopped tasks by result": [
+        ""
+      ],
       "Sub tasks": [
         "Sous-tâches"
       ],
@@ -649,6 +664,9 @@
       ],
       "Task count": [
         "Nombre de tâches"
+      ],
+      "Task dependencies": [
+        ""
       ],
       "Task group common": [
         "Ressources communes du groupe de tâches"
@@ -703,8 +721,26 @@
       "This action will delete all cancelled recurring logics. Please note that this action can't be reversed.": [
         "Cette action supprimera toutes les logiques récurrentes annulées. Veuillez noter que cette action ne peut pas être annulée."
       ],
-      "This will %(action)s %(number)s task(s), putting them in the %(state)s state. Are you sure?": [
-        "Cela permettra à %(action)s %(number)s tâche(s), les mettant dans l'état %(state)s. Vous êtes sûr ?"
+      "This task may have dependencies on other tasks or may be blocking other tasks from executing. Dependencies are established through task chaining relationships.": [
+        ""
+      ],
+      "This will cancel %(number)s task(s), putting them in the stopped state. Are you sure?": [
+        ""
+      ],
+      "This will cancel task \\\\\\\"%(taskName)s\\\\\\\", putting it in the stopped state. Are you sure?": [
+        ""
+      ],
+      "This will force unlock %(number)s task(s). This may cause harm and should be used with caution. Are you sure?": [
+        ""
+      ],
+      "This will force unlock task \\\\\\\"%(taskName)s\\\\\\\". This may cause harm and should be used with caution. Are you sure?": [
+        ""
+      ],
+      "This will resume %(number)s task(s), putting them in the running state. Are you sure?": [
+        ""
+      ],
+      "This will resume task \\\\\\\"%(taskName)s\\\\\\\", putting it in the running state. Are you sure?": [
+        ""
       ],
       "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed.": [
         "Cela débloquera les ressources avec lesquelles la tâche s'exécute. Veuillez noter que ceci peut conduire à un état incohérent et doit être utilisé avec prudence, après s'être assuré que la tâche ne peut pas être terminée."
