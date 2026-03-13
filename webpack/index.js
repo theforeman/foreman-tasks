@@ -7,7 +7,7 @@ import reducers from './ForemanTasks/ForemanTasksReducers';
 import ForemanTasks from './ForemanTasks';
 import TasksDashboard from './ForemanTasks/Components/TasksDashboard';
 import TaskDetails from './ForemanTasks/Components/TaskDetails';
-import TasksTable from './ForemanTasks/Components/TasksTable';
+import TasksTableIndexPage from './ForemanTasks/Components/TasksTable/TasksIndexPage';
 
 // register reducers
 Object.entries(reducers).forEach(([key, reducer]) =>
@@ -28,6 +28,6 @@ componentRegistry.register({
   type: TaskDetails,
 });
 componentRegistry.register({
-  name: 'TasksTable',
-  type: TasksTable,
+  name: 'TasksTableIndexPage',
+  type: TasksTableIndexPage,
 });

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TasksTable bulk actions handles bulkCancelById requests 1`] = `
+exports[`TasksBulkActions Test reloadPage callback handles bulkCancelById requests 1`] = `
 Array [
   Array [
     Object {
@@ -23,16 +23,11 @@ Array [
       "type": "TOASTS_ADD",
     },
   ],
-  Array [
-    "TASKS_TABLE",
-  ],
-  Array [
-    [Function],
-  ],
 ]
 `;
 
-exports[`TasksTable bulk actions handles bulkCancelById requests that are not cancellable 1`] = `
+
+exports[`TasksBulkActions handles bulkCancelById requests that are not cancellable 1`] = `
 Array [
   Array [
     Object {
@@ -48,7 +43,7 @@ Array [
 ]
 `;
 
-exports[`TasksTable bulk actions handles bulkCancelById requests with canEdit false 1`] = `
+exports[`TasksBulkActions handles bulkCancelById requests with canEdit false 1`] = `
 Array [
   Array [
     Object {
@@ -64,7 +59,7 @@ Array [
 ]
 `;
 
-exports[`TasksTable bulk actions handles bulkCancelBySearch requests 1`] = `
+exports[`TasksBulkActions handles bulkCancelBySearch requests 1`] = `
 Array [
   Array [
     Object {
@@ -85,7 +80,7 @@ Array [
 ]
 `;
 
-exports[`TasksTable bulk actions handles bulkForceCancelById requests 1`] = `
+exports[`TasksBulkActions Test reloadPage callback handles bulkForceCancelById requests 1`] = `
 Array [
   Array [
     Object {
@@ -119,16 +114,11 @@ Array [
       "type": "TOASTS_ADD",
     },
   ],
-  Array [
-    "TASKS_TABLE",
-  ],
-  Array [
-    [Function],
-  ],
 ]
 `;
 
-exports[`TasksTable bulk actions handles bulkForceCancelById requests that are stopped 1`] = `
+
+exports[`TasksBulkActions handles bulkForceCancelById requests that are stopped 1`] = `
 Array [
   Array [
     Object {
@@ -144,7 +134,7 @@ Array [
 ]
 `;
 
-exports[`TasksTable bulk actions handles bulkForceCancelById requests that fail 1`] = `
+exports[`TasksBulkActions handles bulkForceCancelById requests that fail 1`] = `
 Array [
   Array [
     Object {
@@ -171,7 +161,7 @@ Array [
 ]
 `;
 
-exports[`TasksTable bulk actions handles bulkForceCancelById requests with canEdit false 1`] = `
+exports[`TasksBulkActions handles bulkForceCancelById requests with canEdit false 1`] = `
 Array [
   Array [
     Object {
@@ -187,7 +177,7 @@ Array [
 ]
 `;
 
-exports[`TasksTable bulk actions handles bulkForceCancelBySearch requests 1`] = `
+exports[`TasksBulkActions handles bulkForceCancelBySearch requests 1`] = `
 Array [
   Array [
     Object {
@@ -208,7 +198,7 @@ Array [
 ]
 `;
 
-exports[`TasksTable bulk actions handles bulkResumeById requests that are not resumable 1`] = `
+exports[`TasksBulkActions handles bulkResumeById requests that are not resumable 1`] = `
 Array [
   Array [
     Object {
@@ -224,7 +214,7 @@ Array [
 ]
 `;
 
-exports[`TasksTable bulk actions handles bulkResumeById requests that fail 1`] = `
+exports[`TasksBulkActions handles bulkResumeById requests that fail 1`] = `
 Array [
   Array [
     Object {
@@ -251,7 +241,7 @@ Array [
 ]
 `;
 
-exports[`TasksTable bulk actions handles bulkResumeById requests with canEdit false 1`] = `
+exports[`TasksBulkActions handles bulkResumeById requests with canEdit false 1`] = `
 Array [
   Array [
     Object {
@@ -267,7 +257,7 @@ Array [
 ]
 `;
 
-exports[`TasksTable bulk actions handles bulkResumeBySearch requests 1`] = `
+exports[`TasksBulkActions handles bulkResumeBySearch requests 1`] = `
 Array [
   Array [
     Object {
@@ -288,7 +278,7 @@ Array [
 ]
 `;
 
-exports[`TasksTable bulk actions handles resumable bulkResumeById requests 1`] = `
+exports[`TasksBulkActions Test reloadPage callback handles resumable bulkResumeById requests 1`] = `
 Array [
   Array [
     Object {
@@ -322,16 +312,9 @@ Array [
       "type": "TOASTS_ADD",
     },
   ],
-  Array [
-    "TASKS_TABLE",
-  ],
-  Array [
-    [Function],
-  ],
 ]
 `;
-
-exports[`TasksTable bulk actions handles skipped bulkCancelById requests 1`] = `
+exports[`TasksBulkActions handles skipped bulkCancelById requests 1`] = `
 Array [
   Array [
     Object {
@@ -357,7 +340,7 @@ Array [
 ]
 `;
 
-exports[`TasksTable bulk actions handles skipped bulkResumeById requests 1`] = `
+exports[`TasksBulkActions handles skipped bulkResumeById requests 1`] = `
 Array [
   Array [
     Object {
