@@ -1,14 +1,19 @@
 import { convertDashboardQuery } from './TaskActionHelpers';
-import {
-  TASKS_DASHBOARD_JS_QUERY_MODES,
-  TASKS_DASHBOARD_AVAILABLE_TIMES,
-} from '../TasksDashboard/TasksDashboardConstants';
 
 let realDate;
 
 describe('convertDashboardQuery', () => {
+  const mockLocation = query => {
+    global.window = Object.create(window);
+    Object.defineProperty(window, 'location', {
+      value: {
+        pathname: '/foreman_tasks/tasks',
+        search: query,
+      },
+      writable: true,
+    });
+  };
   it('convertDashboardQuery should work with full query', () => {
-    // Setup
     const currentDate = new Date('2020-05-08T11:01:58.135Z');
     realDate = Date;
     global.Date = class extends Date {
@@ -20,48 +25,35 @@ describe('convertDashboardQuery', () => {
         return currentDate;
       }
     };
-    const query = {
-      time_mode: TASKS_DASHBOARD_JS_QUERY_MODES.RECENT,
-      time_horizon: TASKS_DASHBOARD_AVAILABLE_TIMES.WEEK,
-      state: 'stopped',
-      result: 'error',
-      search: 'action~job',
-    };
-    const expected =
-      '(state=stopped) and (result=error) and (action~job) and (state_updated_at>2020-05-01T11:01:58.135Z or null? state_updated_at)';
+    mockLocation('?state=stopped&result=error&search=action~job');
+    const expected = '(state=stopped) and (result=error) and (action~job)';
 
-    expect(convertDashboardQuery(query)).toEqual({ search: expected });
+    expect(convertDashboardQuery()).toEqual({ search: expected });
 
-    const query2 = {
-      ...query,
-      time_mode: TASKS_DASHBOARD_JS_QUERY_MODES.OLDER,
-    };
-    const expected2 =
-      '(state=stopped) and (result=error) and (action~job) and (state_updated_at<=2020-05-01T11:01:58.135Z)';
-    expect(convertDashboardQuery(query2)).toEqual({ search: expected2 });
-    // Cleanup
+    mockLocation('?state=stopped&result=error&search=action~job');
+    const expected2 = '(state=stopped) and (result=error) and (action~job)';
+    expect(convertDashboardQuery()).toEqual({ search: expected2 });
     global.Date = realDate;
   });
   it('convertDashboardQuery should work with only search query', () => {
-    const query = {
-      search: 'action~job',
-    };
-    expect(convertDashboardQuery(query)).toEqual({ search: '(action~job)' });
+    mockLocation('?search=action~job');
+    expect(convertDashboardQuery()).toEqual({ search: '(action~job)' });
   });
   it('convertDashboardQuery should work with no query', () => {
-    const query = {};
-    expect(convertDashboardQuery(query)).toEqual({});
+    mockLocation('');
+    expect(convertDashboardQuery()).toEqual({});
   });
   it('convertDashboardQuery should not override unknown keys', () => {
-    const query = { weather: 'nice', search: 'okay', number: 7 };
-    expect(convertDashboardQuery(query)).toEqual({
+    const query = { weather: 'nice', search: 'okay', number: '7' };
+    mockLocation('?weather=nice&search=okay&number=7');
+    expect(convertDashboardQuery()).toEqual({
       ...query,
       search: '(okay)',
     });
   });
   it('convertDashboardQuery should expand other result', () => {
-    const query = { result: 'other' };
-    expect(convertDashboardQuery(query)).toEqual({
+    mockLocation('?result=other');
+    expect(convertDashboardQuery()).toEqual({
       search: '(result ^ (pending, cancelled))',
     });
   });

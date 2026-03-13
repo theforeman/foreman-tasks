@@ -1,10 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TasksTimeRow render with minimal props 1`] = `
-<Row
-  bsClass="row"
+<div
   className="tasks-time-row"
-  componentClass="div"
 >
   <span
     className="time-label"
@@ -17,14 +15,12 @@ exports[`TasksTimeRow render with minimal props 1`] = `
     onChange={[Function]}
     selectedTime="H24"
   />
-</Row>
+</div>
 `;
 
 exports[`TasksTimeRow render with props 1`] = `
-<Row
-  bsClass="row"
+<div
   className="tasks-time-row"
-  componentClass="div"
 >
   <span
     className="time-label"
@@ -37,5 +33,5 @@ exports[`TasksTimeRow render with props 1`] = `
     onChange={[MockFunction]}
     selectedTime="WEEK"
   />
-</Row>
+</div>
 `;

@@ -17,9 +17,7 @@ import {
   TASKS_FORCE_CANCEL_SUCCESS,
   TASKS_FORCE_CANCEL_FAILURE,
 } from '../TaskActions/TaskActionsConstants';
-import { reloadPage } from './TasksTableActions';
 import {
-  convertDashboardQuery,
   resumeToastInfo,
   cancelToastInfo,
   toastDispatch,
@@ -41,11 +39,11 @@ export const bulkByIdRequest = (resumeTasks, path) => {
 export const bulkBySearchRequest = ({ query, parentTaskID, path }) => {
   const url = `/foreman_tasks/api/tasks/${path}`;
   if (parentTaskID) {
-    query.search = query.search
-      ? ` ${query.search} and parent_task_id=${parentTaskID}`
+    query = query
+      ? ` ${query} and parent_task_id=${parentTaskID}`
       : `parent_task_id=${parentTaskID}`;
   }
-  const searchParam = { search: convertDashboardQuery(query) };
+  const searchParam = { search: query };
   return API.post(url, searchParam);
 };
 
@@ -58,11 +56,7 @@ const handleErrorResume = (error, dispatch) => {
   );
 };
 
-export const bulkResumeById = ({
-  selected,
-  url,
-  parentTaskID,
-}) => async dispatch => {
+export const bulkResumeById = ({ selected, reloadPage }) => async dispatch => {
   const resumeTasks = selected.filter(task => task.isResumable && task.canEdit);
   if (resumeTasks.length < selected.length)
     dispatch(
@@ -87,7 +81,7 @@ export const bulkResumeById = ({
           });
       });
       if (data.resumed) {
-        reloadPage(url, parentTaskID)(dispatch);
+        reloadPage();
       }
     } catch (error) {
       handleErrorResume(error, dispatch);
@@ -130,11 +124,7 @@ export const bulkCancelBySearch = ({
   await bulkBySearchRequest({ query, path: BULK_CANCEL_PATH, parentTaskID });
 };
 
-export const bulkCancelById = ({
-  selected,
-  url,
-  parentTaskID,
-}) => async dispatch => {
+export const bulkCancelById = ({ selected, reloadPage }) => async dispatch => {
   const cancelTasks = selected.filter(
     task => task.isCancellable && task.canEdit
   );
@@ -162,7 +152,7 @@ export const bulkCancelById = ({
           });
       });
       if (data.cancelled) {
-        reloadPage(url, parentTaskID)(dispatch);
+        reloadPage();
       }
     } catch (error) {
       handleErrorCancel(error, dispatch);
@@ -183,8 +173,7 @@ const handleErrorForceCancel = (error, dispatch) => {
 
 export const bulkForceCancelById = ({
   selected,
-  url,
-  parentTaskID,
+  reloadPage,
 }) => async dispatch => {
   const stopTasks = selected.filter(task => task.state !== 'stopped');
   const authorisedTasks = stopTasks.filter(task => task.canEdit);
@@ -236,7 +225,7 @@ export const bulkForceCancelById = ({
           )
         );
       if (data.stopped_length > 0) {
-        reloadPage(url, parentTaskID)(dispatch);
+        reloadPage();
       }
     } catch (error) {
       handleErrorForceCancel(error, dispatch);

@@ -12,6 +12,14 @@ jest.mock('foremanReact/components/common/table', () => ({
 }));
 
 jest.mock('foremanReact/redux/API');
+jest.mock('foremanReact/components/ToastsList', () => ({
+  addToast: toast => ({
+    type: 'TOASTS_ADD',
+    payload: {
+      message: toast,
+    },
+  }),
+}));
 
 const task = ['some-id', 'some-name'];
 

@@ -14,9 +14,6 @@
 
 .tasks-dashboard-grid {
   min-height: 200px;
-  background-color: #f5f5f5;
-  margin: 5px -60px 20px -60px;
-  padding: 20px 50px;
 
   .row > div {
     @include create-tasks-dashboard-column(12, 0);

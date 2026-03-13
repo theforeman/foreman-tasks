@@ -15,11 +15,13 @@ Array [
   ],
   Array [
     Object {
-      "handleError": [Function],
-      "handleSuccess": [Function],
-      "key": "TASK_STEP_CANCEL",
-      "type": "post-some-type",
-      "url": "foreman/foreman_tasks/tasks/task-id/cancel_step?step_id=step-id",
+      "payload": Object {
+        "handleError": [Function],
+        "handleSuccess": [Function],
+        "key": "TASK_STEP_CANCEL",
+        "url": "/foreman_tasks/tasks/task-id/cancel_step?step_id=step-id",
+      },
+      "type": "API_POST",
     },
   ],
 ]
@@ -29,12 +31,14 @@ exports[`TaskDetails - Actions should start reload 1`] = `
 Array [
   Array [
     Object {
-      "handleError": [Function],
-      "handleSuccess": [Function],
       "interval": 5000,
-      "key": "FOREMAN_TASK_DETAILS",
-      "type": "get-some-type",
-      "url": "foreman/foreman_tasks/api/tasks/1/details?include_permissions",
+      "payload": Object {
+        "handleError": [Function],
+        "handleSuccess": [Function],
+        "key": "FOREMAN_TASK_DETAILS",
+        "url": "/foreman_tasks/api/tasks/1/details?include_permissions",
+      },
+      "type": "API_GET",
     },
   ],
 ]
@@ -42,6 +46,7 @@ Array [
 
 exports[`TaskDetails - Actions should stop reload 1`] = `
 Object {
-  "type": "stop",
+  "key": "FOREMAN_TASK_DETAILS",
+  "type": "STOP_INTERVAL",
 }
 `;

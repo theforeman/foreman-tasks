@@ -1,11 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TasksDashboard rendering render without Props 1`] = `
-<Grid
-  bsClass="container"
+<div
   className="tasks-dashboard-grid"
-  componentClass="div"
-  fluid={true}
 >
   <TasksTimeRow
     time="H24"
@@ -50,5 +47,5 @@ exports[`TasksDashboard rendering render without Props 1`] = `
     query={Object {}}
     updateQuery={[Function]}
   />
-</Grid>
+</div>
 `;

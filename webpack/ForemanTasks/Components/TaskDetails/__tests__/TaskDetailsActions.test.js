@@ -5,6 +5,15 @@ import {
   cancelStep,
 } from '../TaskDetailsActions';
 
+jest.mock('foremanReact/components/ToastsList', () => ({
+  addToast: toast => ({
+    type: 'TOASTS_ADD',
+    payload: {
+      message: toast,
+    },
+  }),
+}));
+
 const fixtures = {
   'should start reload': () => taskReloadStart(1),
   'should stop reload': () => taskReloadStop(),

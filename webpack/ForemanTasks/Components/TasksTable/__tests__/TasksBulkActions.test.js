@@ -15,6 +15,15 @@ jest.mock('foremanReact/components/common/table', () => ({
 
 jest.mock('foremanReact/redux/API');
 
+jest.mock('foremanReact/components/ToastsList', () => ({
+  addToast: toast => ({
+    type: 'TOASTS_ADD',
+    payload: {
+      message: toast,
+    },
+  }),
+}));
+
 const task = {
   id: 'some-id',
   name: 'some-name',
@@ -28,28 +37,7 @@ const fixtures = {
     API.post.mockImplementation(() =>
       Promise.reject(new Error('Network Error'))
     );
-    return bulkResumeById({ selected, url: 'some-url' });
-  },
-  'handles resumable bulkResumeById requests': () => {
-    const selected = [{ ...task, isResumable: true }];
-
-    API.post.mockImplementation(() => ({
-      data: {
-        resumed: [{ action: 'I am resumed' }],
-        failed: [{ action: 'I am failed' }],
-      },
-    }));
-    return bulkResumeById({ selected, url: 'some-url' });
-  },
-  'handles bulkCancelById requests': () => {
-    const selected = [{ ...task, isCancellable: true }];
-
-    API.post.mockImplementation(() => ({
-      data: {
-        cancelled: [{ action: 'I am cancelled' }],
-      },
-    }));
-    return bulkCancelById({ selected, url: 'some-url' });
+    return bulkResumeById({ selected, url: 'some-url', reloadPage: jest.fn() });
   },
   'handles skipped bulkResumeById requests': () => {
     const selected = [{ ...task, isResumable: true }];
@@ -59,52 +47,46 @@ const fixtures = {
         skipped: [{ action: 'I am skipped' }],
       },
     }));
-    return bulkResumeById({ selected, url: 'some-url' });
+    return bulkResumeById({ selected, url: 'some-url', reloadPage: jest.fn() });
   },
   'handles skipped bulkCancelById requests': () => {
     const selected = [{ ...task, isCancellable: true }];
-
     API.post.mockImplementation(() => ({
       data: {
         skipped: [{ action: 'I am skipped' }],
       },
     }));
-    return bulkCancelById({ selected, url: 'some-url' });
+    return bulkCancelById({ selected, url: 'some-url', reloadPage: jest.fn() });
   },
-
-  'handles bulkForceCancelById requests': () => {
-    const selected = [{ ...task, isCancellable: true }];
-
-    API.post.mockImplementation(() => ({
-      data: {
-        stopped_length: 2,
-        skipped_length: 4,
-      },
-    }));
-    return bulkForceCancelById({ selected, url: 'some-url' });
-  },
-
   'handles bulkForceCancelById requests that fail': () => {
     const selected = [{ ...task, isResumable: true }];
 
     API.post.mockImplementation(() =>
       Promise.reject(new Error('Network Error'))
     );
-    return bulkForceCancelById({ selected, url: 'some-url' });
+    return bulkForceCancelById({
+      selected,
+      url: 'some-url',
+      reloadPage: jest.fn(),
+    });
   },
 
   'handles bulkCancelById requests that are not cancellable': () => {
     const selected = [{ ...task, isCancellable: false }];
-    return bulkCancelById({ selected, url: 'some-url' });
+    return bulkCancelById({ selected, url: 'some-url', reloadPage: jest.fn() });
   },
   'handles bulkResumeById requests that are not resumable': () => {
     const selected = [{ ...task, isResumable: false, isCancellable: false }];
-    return bulkResumeById({ selected, url: 'some-url' });
+    return bulkResumeById({ selected, url: 'some-url', reloadPage: jest.fn() });
   },
 
   'handles bulkForceCancelById requests that are stopped': () => {
     const selected = [{ ...task, isResumable: false, state: 'stopped' }];
-    return bulkForceCancelById({ selected, url: 'some-url' });
+    return bulkForceCancelById({
+      selected,
+      url: 'some-url',
+      reloadPage: jest.fn(),
+    });
   },
 
   'handles bulkCancelBySearch requests': () => {
@@ -155,6 +137,62 @@ const fixtures = {
   },
 };
 
-describe('TasksTable bulk actions', () => {
+describe('TasksBulkActions', () => {
+  describe('Test reloadPage callback', () => {
+    it('handles resumable bulkResumeById requests', async () => {
+      const selected = [{ ...task, isResumable: true }];
+
+      API.post.mockImplementation(() => ({
+        data: {
+          resumed: [{ action: 'I am resumed' }],
+          failed: [{ action: 'I am failed' }],
+        },
+      }));
+      const reloadPage = jest.fn();
+      const action = bulkResumeById({
+        selected,
+        url: 'some-url',
+        reloadPage,
+      });
+      const dispatch = jest.fn();
+      await action(dispatch);
+      expect(reloadPage).toHaveBeenCalled();
+      expect(dispatch.mock.calls).toMatchSnapshot();
+    });
+    it('handles bulkCancelById requests', async () => {
+      const selected = [{ ...task, isCancellable: true }];
+      API.post.mockImplementation(() => ({
+        data: {
+          cancelled: [{ action: 'I am cancelled' }],
+        },
+      }));
+      const reloadPage = jest.fn();
+      const action = bulkCancelById({ selected, url: 'some-url', reloadPage });
+      const dispatch = jest.fn();
+      await action(dispatch);
+      expect(reloadPage).toHaveBeenCalled();
+      expect(dispatch.mock.calls).toMatchSnapshot();
+    });
+    it('handles bulkForceCancelById requests', async () => {
+      const selected = [{ ...task, isCancellable: true }];
+
+      API.post.mockImplementation(() => ({
+        data: {
+          stopped_length: 2,
+          skipped_length: 4,
+        },
+      }));
+      const reloadPage = jest.fn();
+      const action = bulkForceCancelById({
+        selected,
+        url: 'some-url',
+        reloadPage,
+      });
+      const dispatch = jest.fn();
+      await action(dispatch);
+      expect(reloadPage).toHaveBeenCalled();
+      expect(dispatch.mock.calls).toMatchSnapshot();
+    });
+  });
   testActionSnapshotWithFixtures(fixtures);
 });
