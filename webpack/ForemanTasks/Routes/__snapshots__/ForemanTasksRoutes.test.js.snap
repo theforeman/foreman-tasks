@@ -6,8 +6,15 @@ Object {
     "exact": true,
     "path": "/foreman_tasks/tasks",
     "render": [Function],
-    "renderResult": <TasksIndexPage
+    "renderResult": <TasksTableIndexPage
       history={Object {}}
+      match={
+        Object {
+          "params": Object {
+            "id": null,
+          },
+        }
+      }
       some="props"
     />,
   },
@@ -23,11 +30,13 @@ Object {
     "exact": true,
     "path": "/foreman_tasks/tasks/:id/sub_tasks",
     "render": [Function],
-    "renderResult": <SubTasksPage
+    "renderResult": <TasksTableIndexPage
       history={Object {}}
       match={
         Object {
-          "params": Object {},
+          "params": Object {
+            "id": null,
+          },
         }
       }
       some="props"
