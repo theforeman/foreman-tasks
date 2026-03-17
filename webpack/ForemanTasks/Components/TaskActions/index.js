@@ -24,7 +24,11 @@ import {
   toastDispatch,
 } from './TaskActionHelpers';
 
-export const cancelTaskRequest = (id, name) => async dispatch => {
+export const cancelTaskRequest = (
+  id,
+  name,
+  reloadPage = null
+) => async dispatch => {
   dispatch(addToast(infoToastData(sprintf('Trying to cancel %s task', name))));
   dispatch({ type: TASKS_CANCEL_REQUEST });
   try {
@@ -36,6 +40,9 @@ export const cancelTaskRequest = (id, name) => async dispatch => {
       toastInfo: cancelToastInfo,
       dispatch,
     });
+    if (reloadPage) {
+      reloadPage();
+    }
   } catch (error) {
     dispatch({ type: TASKS_CANCEL_FAILURE, payload: error });
     toastDispatch({
@@ -47,7 +54,11 @@ export const cancelTaskRequest = (id, name) => async dispatch => {
   }
 };
 
-export const resumeTaskRequest = (id, name) => async dispatch => {
+export const resumeTaskRequest = (
+  id,
+  name,
+  reloadPage = null
+) => async dispatch => {
   dispatch({ type: TASKS_RESUME_REQUEST });
   try {
     await API.post(`/foreman_tasks/tasks/${id}/resume`);
@@ -59,6 +70,9 @@ export const resumeTaskRequest = (id, name) => async dispatch => {
       toastInfo: resumeToastInfo,
       dispatch,
     });
+    if (reloadPage) {
+      reloadPage();
+    }
   } catch (error) {
     dispatch({ type: TASKS_RESUME_FAILURE, payload: error });
     toastDispatch({
@@ -70,7 +84,11 @@ export const resumeTaskRequest = (id, name) => async dispatch => {
   }
 };
 
-export const forceCancelTaskRequest = (id, name) => async dispatch => {
+export const forceCancelTaskRequest = (
+  id,
+  name,
+  reloadPage = null
+) => async dispatch => {
   dispatch({ type: TASKS_FORCE_CANCEL_REQUEST });
   try {
     await API.post(`/foreman_tasks/tasks/${id}/force_unlock`);
@@ -81,6 +99,9 @@ export const forceCancelTaskRequest = (id, name) => async dispatch => {
       toastInfo: forceCancelToastInfo,
       dispatch,
     });
+    if (reloadPage) {
+      reloadPage();
+    }
   } catch ({ response }) {
     dispatch({ type: TASKS_FORCE_CANCEL_FAILURE });
     toastDispatch({

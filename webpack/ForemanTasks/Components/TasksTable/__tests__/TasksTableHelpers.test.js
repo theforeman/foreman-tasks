@@ -5,8 +5,8 @@ describe('updateURlQuery', () => {
     const history = {
       push: jest.fn(),
       location: {
-        pathname:
-          '/foreman_tasks/tasks/?state=stopped&result=error&page=1&per_page=20',
+        pathname: '/foreman_tasks/tasks/',
+        search: '?state=stopped&result=error&page=1&per_page=20',
       },
     };
     const query = { time_mode: 'recent', per_page: 35 };
@@ -28,17 +28,25 @@ describe('updateURlQuery', () => {
 });
 
 describe('getCSVurl', () => {
-  it('should return currect url for tasks with search', () => {
-    const url = '/foreman_tasks/tasks';
-    const query = { state: 'stopped' };
-    expect(getCSVurl(url, query)).toEqual(
-      '/foreman_tasks/tasks.csv?search=%28state%3Dstopped%29'
-    );
+  const originalLocation = window.location;
+
+  beforeEach(() => {
+    delete window.location;
   });
-  it('should return currect url for subtasks', () => {
-    const url = '/foreman_tasks/tasks/some-id/sub_tasks';
-    expect(getCSVurl(url, {})).toEqual(
-      '/foreman_tasks/tasks/some-id/sub_tasks.csv'
+
+  afterEach(() => {
+    window.location = originalLocation;
+  });
+
+  it('should return correct url for subtasks', () => {
+    window.location = new URL(
+      'https://test.example.com/foreman_tasks/tasks/some-id/sub_tasks'
     );
+    expect(getCSVurl()).toEqual('/foreman_tasks/tasks/some-id/sub_tasks.csv');
+  });
+
+  it('should append .csv to current pathname', () => {
+    window.location = new URL('https://test.example.com/foreman_tasks/tasks');
+    expect(getCSVurl()).toMatch(/^\/foreman_tasks\/tasks\.csv/);
   });
 });

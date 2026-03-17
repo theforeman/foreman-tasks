@@ -2,10 +2,10 @@ import { translate as __ } from 'foremanReact/common/I18n';
 import { createTaskModal } from './createTaskModal';
 import { createBulkTaskModal } from './createBulkTaskModal';
 import {
-  cancelTask,
-  forceCancelTask,
-  resumeTask,
-} from '../../TasksTableActions';
+  cancelTaskRequest,
+  resumeTaskRequest,
+  forceCancelTaskRequest,
+} from '../../../TaskActions';
 import {
   bulkCancelBySearch,
   bulkCancelById,
@@ -16,7 +16,7 @@ import {
 } from '../../TasksBulkActions';
 
 export const CancelModal = createTaskModal({
-  actionCreator: cancelTask,
+  actionCreator: cancelTaskRequest,
   title: __('Cancel Task'),
   messageTemplate: __(
     'This will cancel task "%(taskName)s", putting it in the stopped state. Are you sure?'
@@ -37,7 +37,7 @@ export const CancelSelectedModal = createBulkTaskModal({
 });
 
 export const ForceUnlockModal = createTaskModal({
-  actionCreator: forceCancelTask,
+  actionCreator: forceCancelTaskRequest,
   title: __('Force Unlock Task'),
   messageTemplate: __(
     'This will force unlock task "%(taskName)s". This may cause harm and should be used with caution. Are you sure?'
@@ -58,7 +58,7 @@ export const ForceUnlockSelectedModal = createBulkTaskModal({
 });
 
 export const ResumeModal = createTaskModal({
-  actionCreator: resumeTask,
+  actionCreator: resumeTaskRequest,
   title: __('Resume Task'),
   messageTemplate: __(
     'This will resume task "%(taskName)s", putting it in the running state. Are you sure?'

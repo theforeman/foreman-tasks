@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { Provider } from 'react-redux';
@@ -12,10 +13,11 @@ import {
   ForceUnlockSelectedModal,
 } from '../index';
 
-// Mock the action creators
-jest.mock('../../../TasksTableActions', () => ({
-  cancelTask: jest.fn(() => ({ type: 'CANCEL_TASK' })),
-  resumeTask: jest.fn(() => ({ type: 'RESUME_TASK' })),
+// Mock TaskActions: return a sync thunk so dispatch doesn't receive a Promise
+jest.mock('../../../../TaskActions', () => ({
+  cancelTaskRequest: jest.fn(() => () => ({ type: 'MOCK_CANCEL' })),
+  resumeTaskRequest: jest.fn(() => () => ({ type: 'MOCK_RESUME' })),
+  forceCancelTaskRequest: jest.fn(() => () => ({ type: 'MOCK_FORCE_CANCEL' })),
 }));
 
 jest.mock('../../../TasksBulkActions', () => ({
@@ -23,29 +25,14 @@ jest.mock('../../../TasksBulkActions', () => ({
   bulkCancelById: jest.fn(() => ({ type: 'BULK_CANCEL_BY_ID' })),
   bulkResumeBySearch: jest.fn(() => ({ type: 'BULK_RESUME_BY_SEARCH' })),
   bulkResumeById: jest.fn(() => ({ type: 'BULK_RESUME_BY_ID' })),
-  bulkForceUnlockBySearch: jest.fn(() => ({
+  bulkForceCancelBySearch: jest.fn(() => ({
     type: 'BULK_FORCE_UNLOCK_BY_SEARCH',
   })),
-  bulkForceUnlockById: jest.fn(() => ({ type: 'BULK_FORCE_UNLOCK_BY_ID' })),
+  bulkForceCancelById: jest.fn(() => ({ type: 'BULK_FORCE_UNLOCK_BY_ID' })),
 }));
 
-// Mock the selectors
-jest.mock('../ConfirmModalSelectors', () => ({
-  selectClicked: jest.fn(() => ({ taskId: '123', taskName: 'Test Task' })),
-  selectSelectedTasks: jest.fn(() => [
-    { id: 1, name: 'Task 1' },
-    { id: 2, name: 'Task 2' },
-  ]),
-  selectSelectedRowsLen: jest.fn(() => 2),
-}));
-
-jest.mock('../../../TasksTableSelectors', () => ({
-  selectAllRowsSelected: jest.fn(() => false),
-}));
-
-// Create a mock store
-const createMockStore = (initialState = {}) => {
-  return configureStore({
+const createMockStore = (initialState = {}) =>
+  configureStore({
     reducer: {
       foremanTasks: (state = initialState, action) => state,
     },
@@ -53,19 +40,32 @@ const createMockStore = (initialState = {}) => {
       foremanTasks: initialState,
     },
   });
-};
 
 // Test wrapper component
 const TestWrapper = ({ children, store }) => (
   <Provider store={store}>{children}</Provider>
 );
+TestWrapper.propTypes = {
+  children: PropTypes.node.isRequired,
+  store: PropTypes.object.isRequired,
+};
+
+const defaultSelectAllOptions = {
+  selectedCount: 2,
+  areAllRowsSelected: () => false,
+  selectedResults: [
+    { id: 1, name: 'Task 1' },
+    { id: 2, name: 'Task 2' },
+  ],
+};
 
 describe('ConfirmModal Components', () => {
   const defaultProps = {
+    reloadPage: jest.fn(),
     isModalOpen: true,
     setIsModalOpen: jest.fn(),
-    url: '/api/tasks',
-    parentTaskID: 'parent-123',
+    taskId: '123',
+    taskName: 'Test Task',
   };
 
   const mockStore = createMockStore();
@@ -185,7 +185,8 @@ describe('ConfirmModal Components', () => {
   describe('CancelSelectedModal', () => {
     const selectedProps = {
       ...defaultProps,
-      uriQuery: { search: 'test' },
+      uriQuery: 'search=test',
+      selectAllOptions: defaultSelectAllOptions,
     };
 
     it('renders with correct title and content', () => {
@@ -245,7 +246,8 @@ describe('ConfirmModal Components', () => {
   describe('ResumeSelectedModal', () => {
     const selectedProps = {
       ...defaultProps,
-      uriQuery: { search: 'test' },
+      uriQuery: 'search=test',
+      selectAllOptions: defaultSelectAllOptions,
     };
 
     it('renders with correct title and content', () => {
@@ -321,7 +323,8 @@ describe('ConfirmModal Components', () => {
   describe('ForceUnlockSelectedModal', () => {
     const selectedProps = {
       ...defaultProps,
-      uriQuery: { search: 'test' },
+      uriQuery: 'search=test',
+      selectAllOptions: defaultSelectAllOptions,
     };
 
     it('renders with correct title and content', () => {

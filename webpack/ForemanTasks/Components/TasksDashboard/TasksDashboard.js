@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Grid } from 'patternfly-react';
 import { noop } from 'foremanReact/common/helpers';
 
 import TasksTimeRow from './Components/TasksTimeRow/TasksTimeRow';
@@ -26,7 +25,6 @@ class TasksDashboard extends React.Component {
       time: query.time,
       query,
     });
-
     // dont fetch if time is going to be changed
     if (!query.time || query.time === time) {
       fetchTasksSummary(time, parentTaskID);
@@ -47,7 +45,7 @@ class TasksDashboard extends React.Component {
       updateQuery(labelQuery, this.props.history);
     };
     return (
-      <Grid fluid className="tasks-dashboard-grid">
+      <div className="tasks-dashboard-grid">
         <TasksTimeRow time={time} updateTime={updateTime} />
         <TasksCardsGrid
           time={time}
@@ -56,7 +54,7 @@ class TasksDashboard extends React.Component {
           updateQuery={updateQueryHistory}
         />
         <TasksLabelsRow query={query} updateQuery={updateQueryHistory} />
-      </Grid>
+      </div>
     );
   }
 }

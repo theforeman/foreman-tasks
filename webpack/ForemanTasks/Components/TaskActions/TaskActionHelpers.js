@@ -1,5 +1,6 @@
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
 import { addToast } from 'foremanReact/components/ToastsList';
+import { getURIQuery } from 'foremanReact/common/helpers';
 import { TASKS_DASHBOARD_JS_QUERY_MODES } from '../TasksDashboard/TasksDashboardConstants';
 import { timeToHoursNumber } from '../TasksDashboard/TasksDashboardHelper';
 import {
@@ -8,7 +9,12 @@ import {
   warningToastData,
 } from '../common/ToastsHelpers';
 
-export const convertDashboardQuery = query => {
+const getTasksQuery = () => {
+  const url = window.location.pathname + window.location.search;
+  return getURIQuery(url);
+};
+
+export const convertDashboardQuery = () => {
   const {
     time_mode: timeMode,
     time_horizon: timeHorizon,
@@ -16,7 +22,7 @@ export const convertDashboardQuery = query => {
     result,
     search,
     ...rest
-  } = query;
+  } = getTasksQuery();
 
   const hours = timeToHoursNumber(timeHorizon);
   const timestamp = new Date(new Date() - hours * 60 * 60 * 1000);
