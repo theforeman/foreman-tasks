@@ -1,12 +1,19 @@
 import React from 'react';
-import { screen, within, fireEvent, waitFor } from '@testing-library/react';
+import {
+  screen,
+  within,
+  fireEvent,
+  waitFor,
+  render,
+} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { IntlProvider } from 'react-intl';
 
 import { rtlHelpers } from 'foremanReact/common/testHelpers';
 
 import TasksTableIndexPage from '../TasksIndexPage';
-import { getRowKebabItems } from '../TasksColumns';
+import { CellActionButton } from '../Components/CellActionButton';
+import { RESUME_MODAL, FORCE_UNLOCK_MODAL } from '../TasksTableConstants';
 import { tasksSuccessResponse } from './TasksTable.fixtures';
 
 const { renderWithStore } = rtlHelpers;
@@ -38,6 +45,11 @@ jest.mock('foremanReact/redux/API/API', () => ({
     delete: () => Promise.resolve({}),
     patch: () => Promise.resolve({}),
   },
+}));
+
+jest.mock('foremanReact/Root/Context/ForemanContext', () => ({
+  ...jest.requireActual('foremanReact/Root/Context/ForemanContext'),
+  useForemanPermissions: () => new Set(['edit_foreman_tasks']),
 }));
 
 const defaultProps = {
@@ -118,20 +130,16 @@ describe('TasksTableIndexPage', () => {
     );
     const forceCancelTask = results.find(r => r.state !== 'stopped');
 
-    const openKebabAndClick = async (rowActionLabel, menuItemName) => {
+    const clickRowActionButton = (rowActionLabel, buttonName) => {
       const row = screen
         .getByRole('link', { name: rowActionLabel })
         .closest('tr');
       const rowScope = within(row);
-      fireEvent.click(rowScope.getByLabelText('Kebab toggle'));
-      const item = await screen.findByRole('menuitem', {
-        name: menuItemName,
-      });
-      fireEvent.click(item);
+      fireEvent.click(rowScope.getByRole('button', { name: buttonName }));
     };
 
     const openResumeModal = async () => {
-      await openKebabAndClick(resumableTask.action, 'Resume');
+      clickRowActionButton(resumableTask.action, 'Resume');
       await waitFor(() => {
         expect(
           screen.getByRole('heading', { name: 'Resume Task' })
@@ -140,7 +148,7 @@ describe('TasksTableIndexPage', () => {
     };
 
     const openCancelModal = async () => {
-      await openKebabAndClick(cancelOnlyTask.action, 'Cancel');
+      clickRowActionButton(cancelOnlyTask.action, 'Cancel');
       await waitFor(() => {
         expect(
           screen.getByRole('heading', { name: 'Cancel Task' })
@@ -149,7 +157,7 @@ describe('TasksTableIndexPage', () => {
     };
 
     const openForceUnlockModal = async () => {
-      await openKebabAndClick(forceCancelTask.action, 'Force Cancel');
+      clickRowActionButton(forceCancelTask.action, 'Force Cancel');
       await waitFor(() => {
         expect(
           screen.getByRole('heading', { name: 'Force Unlock Task' })
@@ -161,7 +169,7 @@ describe('TasksTableIndexPage', () => {
       mockApiPost.mockClear();
     });
 
-    it('opens Resume modal when Resume is clicked in row kebab', async () => {
+    it('opens Resume modal when Resume row action button is clicked', async () => {
       renderPage();
       expect(
         screen.queryByRole('heading', { name: 'Resume Task' })
@@ -226,58 +234,101 @@ describe('TasksTableIndexPage', () => {
   });
 });
 
-describe('Table columns and actions with tasksSuccessResponse', () => {
-  const { results } = tasksSuccessResponse.response;
+describe('CellActionButton', () => {
+  const setClickedTask = jest.fn();
+  const openModal = jest.fn();
 
-  describe('getRowKebabItems', () => {
-    it('returns Resume for a resumable task when user can edit', () => {
-      const setClickedTask = jest.fn();
-      const openModal = jest.fn();
-      const getItems = getRowKebabItems(setClickedTask, openModal);
-      const resumableTask = results.find(
-        r => r.available_actions && r.available_actions.resumable
-      );
-      expect(resumableTask).toBeDefined();
-      const items = getItems({
-        ...resumableTask,
-        canEdit: resumableTask.can_edit,
-      });
-      const resumeItem = items.find(
-        i => i.title && i.title.toLowerCase().includes('resume')
-      );
-      expect(resumeItem).toBeDefined();
-      expect(typeof resumeItem.onClick).toBe('function');
-    });
+  const defaultAvailableActions = {
+    resumable: false,
+    cancellable: false,
+    stoppable: false,
+  };
 
-    it('returns Cancel for cancellable non-resumable stopped task when user can edit', () => {
-      const setClickedTask = jest.fn();
-      const openModal = jest.fn();
-      const getItems = getRowKebabItems(setClickedTask, openModal);
-      const cancelOnlyTask = results.find(
-        r =>
-          r.available_actions &&
-          r.available_actions.cancellable &&
-          !r.available_actions.resumable &&
-          r.state === 'stopped'
-      );
-      expect(cancelOnlyTask).toBeDefined();
-      const items = getItems({
-        ...cancelOnlyTask,
-        canEdit: cancelOnlyTask.can_edit,
-      });
-      const cancelItem = items.find(
-        i => i.title && i.title.toLowerCase().includes('cancel')
-      );
-      expect(cancelItem).toBeDefined();
-    });
+  const renderCellActionButton = (props = {}) => {
+    const { availableActions, ...rest } = props;
+    return render(
+      <IntlProvider locale="en">
+        <CellActionButton
+          id="task-id-1"
+          action="Fixture action"
+          canEdit
+          availableActions={availableActions ?? defaultAvailableActions}
+          setClickedTask={setClickedTask}
+          openModal={openModal}
+          {...rest}
+        />
+      </IntlProvider>
+    );
+  };
 
-    it('returns no actions when user cannot edit', () => {
-      const setClickedTask = jest.fn();
-      const openModal = jest.fn();
-      const getItems = getRowKebabItems(setClickedTask, openModal);
-      const task = { ...results[0], can_edit: false };
-      const items = getItems({ ...task, canEdit: false });
-      expect(items).toEqual([]);
+  beforeEach(() => {
+    setClickedTask.mockClear();
+    openModal.mockClear();
+  });
+
+  it('renders Resume for a resumable task when user can edit and opens resume modal on click', () => {
+    renderCellActionButton({
+      availableActions: {
+        resumable: true,
+        cancellable: false,
+        stoppable: false,
+      },
     });
+    const resumeBtn = screen.getByRole('button', { name: 'Resume' });
+    expect(resumeBtn).toBeInTheDocument();
+    fireEvent.click(resumeBtn);
+    expect(setClickedTask).toHaveBeenCalledWith({
+      id: 'task-id-1',
+      action: 'Fixture action',
+    });
+    expect(openModal).toHaveBeenCalledWith(RESUME_MODAL);
+  });
+
+  it('renders Cancel for cancellable non-resumable task when user can edit', () => {
+    renderCellActionButton({
+      availableActions: {
+        cancellable: true,
+        resumable: false,
+        stoppable: false,
+      },
+    });
+    expect(screen.getByRole('button', { name: 'Cancel' })).toBeInTheDocument();
+  });
+
+  it('renders no action buttons when user cannot edit', () => {
+    renderCellActionButton({
+      canEdit: false,
+      availableActions: { resumable: true, cancellable: true, stoppable: true },
+    });
+    expect(screen.queryByRole('button')).not.toBeInTheDocument();
+  });
+
+  it('renders disabled cancel button when no action is available', () => {
+    renderCellActionButton({
+      availableActions: {
+        resumable: false,
+        cancellable: false,
+        stoppable: false,
+      },
+    });
+    expect(screen.getByRole('button', { name: 'Cancel' })).toBeDisabled();
+  });
+
+  it('renders Force Cancel when task is stoppable and opens force unlock modal on click', () => {
+    renderCellActionButton({
+      availableActions: {
+        resumable: false,
+        cancellable: false,
+        stoppable: true,
+      },
+    });
+    const forceBtn = screen.getByRole('button', { name: 'Force Cancel' });
+    expect(forceBtn).toBeInTheDocument();
+    fireEvent.click(forceBtn);
+    expect(setClickedTask).toHaveBeenCalledWith({
+      id: 'task-id-1',
+      action: 'Fixture action',
+    });
+    expect(openModal).toHaveBeenCalledWith(FORCE_UNLOCK_MODAL);
   });
 });

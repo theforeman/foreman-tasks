@@ -35,7 +35,7 @@ import {
   FORCE_UNLOCK_SELECTED_MODAL,
   TASKS_SEARCH_PROPS,
 } from './TasksTableConstants';
-import { columns, getRowKebabItems } from './TasksColumns';
+import { columns } from './TasksColumns';
 import TasksModals from './TasksModals';
 import { ActionSelectButton } from './Components/ActionSelectButton';
 import { fetchTasksSummary } from '../TasksDashboard/TasksDashboardActions';
@@ -99,7 +99,6 @@ const TasksTableIndexPage = ({ match, history }) => {
     }));
   };
   const [clickedTask, setClickedTask] = useState(null);
-  const rowKebabItems = getRowKebabItems(setClickedTask, openModal);
   const {
     search: apiSearchQuery,
     results,
@@ -232,8 +231,7 @@ const TasksTableIndexPage = ({ match, history }) => {
         apiOptions={{ key: TASKS_API_KEY }}
         controller="foreman_tasks/tasks"
         customSearchProps={TASKS_SEARCH_PROPS}
-        columns={columns}
-        rowKebabItems={rowKebabItems}
+        columns={columns(setClickedTask, openModal, canEdit)}
         creatable={false}
         showCheckboxes
         selectOne={selectOne}

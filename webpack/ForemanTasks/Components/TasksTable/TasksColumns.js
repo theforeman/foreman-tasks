@@ -2,13 +2,9 @@ import React from 'react';
 import LongDateTime from 'foremanReact/components/common/dates/LongDateTime';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { getDuration } from './TasksTableHelpers';
-import {
-  CANCEL_MODAL,
-  RESUME_MODAL,
-  FORCE_UNLOCK_MODAL,
-} from './TasksTableConstants';
+import { CellActionButton } from './Components/CellActionButton';
 
-export const columns = {
+export const columns = (setClickedTask, openModal, canEdit) => ({
   select: {},
   action: {
     title: __('Action'),
@@ -41,45 +37,17 @@ export const columns = {
       );
     },
   },
-};
-
-export const getRowKebabItems = (setClickedTask, openModal) => ({
-  id,
-  action,
-  canEdit,
-  available_actions: { resumable, cancellable },
-  state,
-}) => {
-  const stoppable = state !== 'stopped';
-  const items = [];
-  if (!canEdit) return items;
-
-  if (cancellable) {
-    items.push({
-      title: __('Cancel'),
-      onClick: () => {
-        setClickedTask({ id, action });
-        openModal(CANCEL_MODAL);
-      },
-    });
-  }
-  if (resumable) {
-    items.push({
-      title: __('Resume'),
-      onClick: () => {
-        setClickedTask({ id, action });
-        openModal(RESUME_MODAL);
-      },
-    });
-  }
-  if (stoppable) {
-    items.push({
-      title: __('Force Cancel'),
-      onClick: () => {
-        setClickedTask({ id, action });
-        openModal(FORCE_UNLOCK_MODAL);
-      },
-    });
-  }
-  return items;
-};
+  action_button: {
+    title: __('Action'),
+    wrapper: ({ id, action, available_actions: availableActions }) => (
+      <CellActionButton
+        id={id}
+        action={action}
+        canEdit={canEdit}
+        availableActions={availableActions}
+        setClickedTask={setClickedTask}
+        openModal={openModal}
+      />
+    ),
+  },
+});
