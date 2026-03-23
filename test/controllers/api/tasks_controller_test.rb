@@ -210,11 +210,11 @@ module ForemanTasks
           blocking_task = FactoryBot.create(:dynflow_task, :user_create_task, label: 'Actions::User::Create')
 
           ForemanTasks.dynflow.world.persistence.stubs(:find_execution_plan_dependencies)
-            .with(dependency_task.execution_plan.id)
-            .returns([])
+                      .with(dependency_task.execution_plan.id)
+                      .returns([])
           ForemanTasks.dynflow.world.persistence.stubs(:find_blocked_execution_plans)
-            .with(dependency_task.execution_plan.id)
-            .returns([blocking_task.external_id])
+                      .with(dependency_task.execution_plan.id)
+                      .returns([blocking_task.external_id])
 
           get :details, params: { id: dependency_task.id }
           assert_response :success
