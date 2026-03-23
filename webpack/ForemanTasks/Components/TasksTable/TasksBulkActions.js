@@ -57,7 +57,10 @@ const handleErrorResume = (error, dispatch) => {
 };
 
 export const bulkResumeById = ({ selected, reloadPage }) => async dispatch => {
-  const resumeTasks = selected.filter(task => task.isResumable && task.canEdit);
+  const resumeTasks = selected.filter(
+    // eslint-disable-next-line camelcase
+    task => task?.available_actions?.resumable && task.can_edit
+  );
   if (resumeTasks.length < selected.length)
     dispatch(
       addToast(
@@ -126,7 +129,8 @@ export const bulkCancelBySearch = ({
 
 export const bulkCancelById = ({ selected, reloadPage }) => async dispatch => {
   const cancelTasks = selected.filter(
-    task => task.isCancellable && task.canEdit
+    // eslint-disable-next-line camelcase
+    task => task?.available_actions?.cancellable && task.can_edit
   );
   if (cancelTasks.length < selected.length)
     dispatch(
@@ -176,7 +180,7 @@ export const bulkForceCancelById = ({
   reloadPage,
 }) => async dispatch => {
   const stopTasks = selected.filter(task => task.state !== 'stopped');
-  const authorisedTasks = stopTasks.filter(task => task.canEdit);
+  const authorisedTasks = stopTasks.filter(task => task.can_edit);
   if (authorisedTasks.length < stopTasks.length)
     dispatch(
       addToast(
