@@ -238,28 +238,19 @@ describe('CellActionButton', () => {
   const setClickedTask = jest.fn();
   const openModal = jest.fn();
 
-  const defaultAvailableActions = {
-    resumable: false,
-    cancellable: false,
-    stoppable: false,
-  };
-
-  const renderCellActionButton = (props = {}) => {
-    const { availableActions, ...rest } = props;
-    return render(
+  const renderCellActionButton = (props = {}) =>
+    render(
       <IntlProvider locale="en">
         <CellActionButton
           id="task-id-1"
           action="Fixture action"
           canEdit
-          availableActions={availableActions ?? defaultAvailableActions}
           setClickedTask={setClickedTask}
           openModal={openModal}
-          {...rest}
+          {...props}
         />
       </IntlProvider>
     );
-  };
 
   beforeEach(() => {
     setClickedTask.mockClear();
@@ -268,11 +259,9 @@ describe('CellActionButton', () => {
 
   it('renders Resume for a resumable task when user can edit and opens resume modal on click', () => {
     renderCellActionButton({
-      availableActions: {
-        resumable: true,
-        cancellable: false,
-        stoppable: false,
-      },
+      resumable: true,
+      cancellable: false,
+      stoppable: false,
     });
     const resumeBtn = screen.getByRole('button', { name: 'Resume' });
     expect(resumeBtn).toBeInTheDocument();
@@ -286,11 +275,9 @@ describe('CellActionButton', () => {
 
   it('renders Cancel for cancellable non-resumable task when user can edit', () => {
     renderCellActionButton({
-      availableActions: {
-        cancellable: true,
-        resumable: false,
-        stoppable: false,
-      },
+      cancellable: true,
+      resumable: false,
+      stoppable: false,
     });
     expect(screen.getByRole('button', { name: 'Cancel' })).toBeInTheDocument();
   });
@@ -298,29 +285,27 @@ describe('CellActionButton', () => {
   it('renders no action buttons when user cannot edit', () => {
     renderCellActionButton({
       canEdit: false,
-      availableActions: { resumable: true, cancellable: true, stoppable: true },
+      resumable: true,
+      cancellable: true,
+      stoppable: true,
     });
     expect(screen.queryByRole('button')).not.toBeInTheDocument();
   });
 
   it('renders disabled cancel button when no action is available', () => {
     renderCellActionButton({
-      availableActions: {
-        resumable: false,
-        cancellable: false,
-        stoppable: false,
-      },
+      resumable: false,
+      cancellable: false,
+      stoppable: false,
     });
     expect(screen.getByRole('button', { name: 'Cancel' })).toBeDisabled();
   });
 
   it('renders Force Cancel when task is stoppable and opens force unlock modal on click', () => {
     renderCellActionButton({
-      availableActions: {
-        resumable: false,
-        cancellable: false,
-        stoppable: true,
-      },
+      resumable: false,
+      cancellable: false,
+      stoppable: true,
     });
     const forceBtn = screen.getByRole('button', { name: 'Force Cancel' });
     expect(forceBtn).toBeInTheDocument();

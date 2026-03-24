@@ -39,12 +39,15 @@ export const columns = (setClickedTask, openModal, canEdit) => ({
   },
   action_button: {
     title: __('Action'),
-    wrapper: ({ id, action, available_actions: availableActions }) => (
+    wrapper: ({ id, action, available_actions: availableActions, state }) => (
       <CellActionButton
         id={id}
         action={action}
         canEdit={canEdit}
         availableActions={availableActions}
+        cancellable={availableActions.cancellable}
+        resumable={availableActions.resumable}
+        stoppable={state !== 'stopped'}
         setClickedTask={setClickedTask}
         openModal={openModal}
       />

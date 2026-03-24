@@ -12,7 +12,9 @@ export const CellActionButton = ({
   id,
   action,
   canEdit,
-  availableActions: { resumable, cancellable, stoppable },
+  resumable,
+  cancellable,
+  stoppable,
   setClickedTask,
   openModal,
 }) => {
@@ -73,15 +75,16 @@ CellActionButton.propTypes = {
   canEdit: PropTypes.bool,
   id: PropTypes.string.isRequired,
   action: PropTypes.string.isRequired,
-  availableActions: PropTypes.shape({
-    cancellable: PropTypes.bool,
-    resumable: PropTypes.bool,
-    stoppable: PropTypes.bool,
-  }).isRequired,
+  resumable: PropTypes.bool,
+  cancellable: PropTypes.bool,
+  stoppable: PropTypes.bool,
   setClickedTask: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired,
 };
 
 CellActionButton.defaultProps = {
   canEdit: false,
+  resumable: false,
+  cancellable: false,
+  stoppable: false,
 };

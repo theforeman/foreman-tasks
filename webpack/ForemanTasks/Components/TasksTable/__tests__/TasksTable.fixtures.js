@@ -211,7 +211,6 @@ export const tasksSuccessResponse = {
         available_actions: {
           cancellable: false,
           resumable: false,
-          stoppable: true,
         },
       },
     ],
