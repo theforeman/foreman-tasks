@@ -34,9 +34,9 @@ Foreman::Application.routes.draw do
     end
     resources :tasks, :only => [:index], constraints: ->(req) { req.format == :csv }
 
-    match '/tasks' => 'react#index', :via => [:get]
-    match '/tasks/:id/sub_tasks' => 'react#index', :via => [:get]
-    match '/ex_tasks/:id' => 'react#index', :via => [:get]
+    match '/tasks', to: '/react#index', via: :get
+    match '/tasks/:id/sub_tasks', to: '/react#index', via: :get
+    match '/ex_tasks/:id', to: '/react#index', via: :get
 
     namespace :api do
       resources :recurring_logics, :only => [:index, :show, :update] do
