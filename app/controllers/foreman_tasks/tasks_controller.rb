@@ -4,7 +4,7 @@ module ForemanTasks
     include Foreman::Controller::CsvResponder
     include ForemanTasks::FindTasksCommon
 
-    before_action :find_dynflow_task, only: [:unlock, :force_unlock, :cancel, :cancel_step, :resume]
+    before_action :find_dynflow_task, only: [:unlock, :force_unlock, :cancel, :abort, :cancel_step, :resume]
 
     def show
       @task = resource_base.find(params[:id])
@@ -51,11 +51,10 @@ module ForemanTasks
 
     def abort
       if @dynflow_task.abort
-        flash[:info] = _('Trying to abort the task')
+        render json: { statusText: 'OK' }
       else
-        flash[:warning] = _('The task cannot be aborted at the moment.')
+        render json: {}, status: :bad_request
       end
-      redirect_back(:fallback_location => foreman_tasks_task_path(@dynflow_task))
     end
 
     def resume
