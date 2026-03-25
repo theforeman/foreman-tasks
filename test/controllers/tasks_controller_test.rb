@@ -168,6 +168,50 @@ module ForemanTasks
           end
         end
       end
+
+      describe 'cancel' do
+        it 'finds the dynflow task and cancels it' do
+          task = FactoryBot.create(:dynflow_task)
+          ForemanTasks::Task::DynflowTask.any_instance.stubs(:cancel).returns(true)
+
+          post(:cancel, params: { id: task.id }, session: set_session_user)
+
+          assert_response :success
+          data = JSON.parse(response.body)
+          assert_equal 'OK', data['statusText']
+        end
+
+        it 'returns bad request when task cannot be cancelled' do
+          task = FactoryBot.create(:dynflow_task)
+          ForemanTasks::Task::DynflowTask.any_instance.stubs(:cancel).returns(false)
+
+          post(:cancel, params: { id: task.id }, session: set_session_user)
+
+          assert_response :bad_request
+        end
+      end
+
+      describe 'abort' do
+        it 'finds the dynflow task and aborts it' do
+          task = FactoryBot.create(:dynflow_task)
+          ForemanTasks::Task::DynflowTask.any_instance.stubs(:abort).returns(true)
+
+          post(:abort, params: { id: task.id }, session: set_session_user)
+
+          assert_response :success
+          data = JSON.parse(response.body)
+          assert_equal 'OK', data['statusText']
+        end
+
+        it 'returns bad request when the task cannot be aborted' do
+          task = FactoryBot.create(:dynflow_task)
+          ForemanTasks::Task::DynflowTask.any_instance.stubs(:abort).returns(false)
+
+          post(:abort, params: { id: task.id }, session: set_session_user)
+
+          assert_response :bad_request
+        end
+      end
     end
   end
 end
