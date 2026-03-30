@@ -13,11 +13,6 @@ module Actions
         end
       end
 
-      # @see Lock.lock!
-      def lock!(resource, *_lock_names)
-        exclusive_lock!(resource)
-      end
-
       # @see Lock.link!
       def link!(resource)
         phase! Dynflow::Action::Plan
