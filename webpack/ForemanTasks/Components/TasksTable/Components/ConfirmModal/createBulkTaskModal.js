@@ -1,12 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
 import { sprintf } from 'foremanReact/common/I18n';
-import {
-  selectSelectedTasks,
-  selectSelectedRowsLen,
-} from './ConfirmModalSelectors';
-import { selectAllRowsSelected } from '../../TasksTableSelectors';
 import { GenericConfirmModal } from './GenericConfirmModal';
 
 export const createBulkTaskModal = ({
@@ -20,22 +14,23 @@ export const createBulkTaskModal = ({
   const BulkTaskModal = ({
     isModalOpen,
     setIsModalOpen,
-    url,
     uriQuery,
     parentTaskID,
+    selectAllOptions,
+    reloadPage,
   }) => {
-    const allRowsSelected = useSelector(selectAllRowsSelected);
-    const selectedTasks = useSelector(selectSelectedTasks);
-    const selectedRowsLen = useSelector(selectSelectedRowsLen);
-
+    const {
+      selectedCount = 0,
+      areAllRowsSelected = () => false,
+      selectedResults = [],
+    } = selectAllOptions;
+    const allRowsSelected = areAllRowsSelected();
+    const selectedTasks = selectedResults;
+    const selectedRowsLen = selectedCount;
     const handleConfirm = () =>
       allRowsSelected
         ? bulkActionBySearch({ query: uriQuery, parentTaskID })
-        : bulkActionById({
-            selected: selectedTasks,
-            url,
-            parentTaskID,
-          });
+        : bulkActionById({ selected: selectedTasks, reloadPage });
 
     return (
       <GenericConfirmModal
@@ -53,9 +48,10 @@ export const createBulkTaskModal = ({
   BulkTaskModal.propTypes = {
     isModalOpen: PropTypes.bool.isRequired,
     setIsModalOpen: PropTypes.func.isRequired,
-    url: PropTypes.string.isRequired,
-    uriQuery: PropTypes.object,
+    uriQuery: PropTypes.string,
     parentTaskID: PropTypes.string,
+    selectAllOptions: PropTypes.object.isRequired,
+    reloadPage: PropTypes.func.isRequired,
   };
 
   BulkTaskModal.defaultProps = {

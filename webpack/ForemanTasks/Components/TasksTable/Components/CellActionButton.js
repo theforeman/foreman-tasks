@@ -2,13 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { ActionButtons } from 'foremanReact/components/common/ActionButtons/ActionButtons';
+import {
+  RESUME_MODAL,
+  CANCEL_MODAL,
+  FORCE_UNLOCK_MODAL,
+} from '../TasksTableConstants';
 
-export const ActionButton = ({
-  canEdit,
+export const CellActionButton = ({
   id,
-  name,
-  availableActions: { resumable, cancellable, stoppable },
-  taskActions,
+  action,
+  canEdit,
+  resumable,
+  cancellable,
+  stoppable,
+  setClickedTask,
+  openModal,
 }) => {
   const buttons = [];
   const isTitle = canEdit && !(resumable || cancellable || stoppable);
@@ -19,7 +27,10 @@ export const ActionButton = ({
         title: __('Resume'),
         action: {
           disabled: !resumable,
-          onClick: () => taskActions.resumeTask(id, name),
+          onClick: () => {
+            setClickedTask({ id, action });
+            openModal(RESUME_MODAL);
+          },
           id: `task-resume-button-${id}`,
         },
       });
@@ -30,7 +41,10 @@ export const ActionButton = ({
         title: __('Cancel'),
         action: {
           disabled: !cancellable,
-          onClick: () => taskActions.cancelTask(id, name),
+          onClick: () => {
+            setClickedTask({ id, action });
+            openModal(CANCEL_MODAL);
+          },
           id: `task-cancel-button-${id}`,
         },
       });
@@ -41,7 +55,10 @@ export const ActionButton = ({
         title: __('Force Cancel'),
         action: {
           disabled: !stoppable,
-          onClick: () => taskActions.forceCancelTask(id, name),
+          onClick: () => {
+            setClickedTask({ id, action });
+            openModal(FORCE_UNLOCK_MODAL);
+          },
           id: `task-force-cancel-button-${id}`,
         },
       });
@@ -54,22 +71,20 @@ export const ActionButton = ({
   );
 };
 
-ActionButton.propTypes = {
+CellActionButton.propTypes = {
   canEdit: PropTypes.bool,
   id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  availableActions: PropTypes.shape({
-    cancellable: PropTypes.bool,
-    resumable: PropTypes.bool,
-    stoppable: PropTypes.bool,
-  }).isRequired,
-  taskActions: PropTypes.shape({
-    cancelTask: PropTypes.func,
-    resumeTask: PropTypes.func,
-    forceCancelTask: PropTypes.func,
-  }).isRequired,
+  action: PropTypes.string.isRequired,
+  resumable: PropTypes.bool,
+  cancellable: PropTypes.bool,
+  stoppable: PropTypes.bool,
+  setClickedTask: PropTypes.func.isRequired,
+  openModal: PropTypes.func.isRequired,
 };
 
-ActionButton.defaultProps = {
+CellActionButton.defaultProps = {
   canEdit: false,
+  resumable: false,
+  cancellable: false,
+  stoppable: false,
 };

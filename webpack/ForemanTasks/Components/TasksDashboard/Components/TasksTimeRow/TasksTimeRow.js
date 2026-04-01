@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row } from 'patternfly-react';
 import { noop } from 'foremanReact/common/helpers';
 import { translate as __ } from 'foremanReact/common/I18n';
 
@@ -10,14 +9,14 @@ import TimeDropDown from './Components/TimeDropDown/TimeDropDown';
 import './TasksTimeRow.scss';
 
 const TasksTimeRow = ({ time, updateTime }) => (
-  <Row className="tasks-time-row">
+  <div className="tasks-time-row">
     <span className="time-label">{__('With focus on last')}</span>
     <TimeDropDown
       id="tasks-dashboard-time-period-dropdown"
       selectedTime={time}
       onChange={updateTime}
     />
-  </Row>
+  </div>
 );
 
 TasksTimeRow.propTypes = {

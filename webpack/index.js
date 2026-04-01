@@ -2,23 +2,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable import/extensions */
 import componentRegistry from 'foremanReact/components/componentRegistry';
-import { registerReducer } from 'foremanReact/common/MountingService';
-import reducers from './ForemanTasks/ForemanTasksReducers';
-import ForemanTasks from './ForemanTasks';
 import TasksDashboard from './ForemanTasks/Components/TasksDashboard';
 import TaskDetails from './ForemanTasks/Components/TaskDetails';
-import TasksTable from './ForemanTasks/Components/TasksTable';
 
-// register reducers
-Object.entries(reducers).forEach(([key, reducer]) =>
-  registerReducer(key, reducer)
-);
-
-// register components
-componentRegistry.register({
-  name: 'ForemanTasks',
-  type: ForemanTasks,
-});
 componentRegistry.register({
   name: 'TasksDashboard',
   type: TasksDashboard,
@@ -26,8 +12,4 @@ componentRegistry.register({
 componentRegistry.register({
   name: 'TaskDetails',
   type: TaskDetails,
-});
-componentRegistry.register({
-  name: 'TasksTable',
-  type: TasksTable,
 });

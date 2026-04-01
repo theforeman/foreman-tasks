@@ -15,10 +15,10 @@ export const getApiPathname = url => {
   return uri.pathname().replace('foreman_tasks/', 'foreman_tasks/api/');
 };
 
-export const getCSVurl = (path, query) => {
-  let url = new URI(path);
+export const getCSVurl = () => {
+  let url = new URI(window.location.pathname);
   url = url.pathname(`${url.pathname()}.csv`);
-  url.addSearch(convertDashboardQuery(query));
+  url.addSearch(convertDashboardQuery());
   return url.toString();
 };
 
