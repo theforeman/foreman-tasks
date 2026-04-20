@@ -1,85 +1,67 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TimeDropDown render with all props 1`] = `
-<DropdownButton
+<SimpleDropdown
   className="some-class"
   id="some-id"
-  title="week"
->
-  <MenuItem
-    active={false}
-    bsClass="dropdown"
-    disabled={false}
-    divider={false}
-    header={false}
-    key="H24"
-    onClick={[Function]}
-  >
-    24h
-  </MenuItem>
-  <MenuItem
-    active={false}
-    bsClass="dropdown"
-    disabled={false}
-    divider={false}
-    header={false}
-    key="H12"
-    onClick={[Function]}
-  >
-    12h
-  </MenuItem>
-  <MenuItem
-    active={true}
-    bsClass="dropdown"
-    disabled={false}
-    divider={false}
-    header={false}
-    key="WEEK"
-    onClick={[Function]}
-  >
-    week
-  </MenuItem>
-</DropdownButton>
+  initialItems={
+    Array [
+      Object {
+        "content": "24h",
+        "onClick": [Function],
+        "value": "H24",
+      },
+      Object {
+        "content": "12h",
+        "onClick": [Function],
+        "value": "H12",
+      },
+      Object {
+        "content": "week",
+        "onClick": [Function],
+        "value": "WEEK",
+      },
+    ]
+  }
+  popperProps={
+    Object {
+      "position": "right",
+    }
+  }
+  toggleContent="week"
+  toggleVariant="plainText"
+/>
 `;
 
 exports[`TimeDropDown render with minimal props 1`] = `
-<DropdownButton
+<SimpleDropdown
   className=""
   id="some-id"
-  title="24h"
->
-  <MenuItem
-    active={true}
-    bsClass="dropdown"
-    disabled={false}
-    divider={false}
-    header={false}
-    key="H24"
-    onClick={[Function]}
-  >
-    24h
-  </MenuItem>
-  <MenuItem
-    active={false}
-    bsClass="dropdown"
-    disabled={false}
-    divider={false}
-    header={false}
-    key="H12"
-    onClick={[Function]}
-  >
-    12h
-  </MenuItem>
-  <MenuItem
-    active={false}
-    bsClass="dropdown"
-    disabled={false}
-    divider={false}
-    header={false}
-    key="WEEK"
-    onClick={[Function]}
-  >
-    week
-  </MenuItem>
-</DropdownButton>
+  initialItems={
+    Array [
+      Object {
+        "content": "24h",
+        "onClick": [Function],
+        "value": "H24",
+      },
+      Object {
+        "content": "12h",
+        "onClick": [Function],
+        "value": "H12",
+      },
+      Object {
+        "content": "week",
+        "onClick": [Function],
+        "value": "WEEK",
+      },
+    ]
+  }
+  popperProps={
+    Object {
+      "position": "right",
+    }
+  }
+  toggleContent="24h"
+  toggleVariant="plainText"
+/>
 `;
