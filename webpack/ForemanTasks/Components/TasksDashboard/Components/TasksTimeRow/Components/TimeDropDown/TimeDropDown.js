@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DropdownButton, MenuItem } from 'patternfly-react';
+import { SimpleDropdown } from '@patternfly/react-templates';
 import { noop } from 'foremanReact/common/helpers';
 
 import { TASKS_DASHBOARD_AVAILABLE_TIMES } from '../../../../TasksDashboardConstants';
@@ -9,29 +9,21 @@ import { getQueryValueText } from '../../../../TasksDashboardHelper';
 const TimeDropDown = ({ id, className, selectedTime, onChange, ...props }) => {
   const availableTimes = Object.keys(TASKS_DASHBOARD_AVAILABLE_TIMES).map(
     key => ({
-      key,
-      text: getQueryValueText(key),
-      active: key === selectedTime,
+      value: key,
+      content: getQueryValueText(key),
+      onClick: () => key === selectedTime || onChange(key),
     })
   );
 
   return (
-    <DropdownButton
+    <SimpleDropdown
       id={id}
       className={className}
-      title={getQueryValueText(selectedTime)}
+      toggleVariant="plainText"
+      toggleContent={getQueryValueText(selectedTime)}
+      initialItems={availableTimes}
       {...props}
-    >
-      {availableTimes.map(({ key, text, active }) => (
-        <MenuItem
-          key={key}
-          active={active}
-          onClick={() => active || onChange(key)}
-        >
-          {text}
-        </MenuItem>
-      ))}
-    </DropdownButton>
+    />
   );
 };
 
