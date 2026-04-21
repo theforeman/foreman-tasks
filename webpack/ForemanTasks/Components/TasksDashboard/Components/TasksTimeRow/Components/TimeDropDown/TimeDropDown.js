@@ -21,7 +21,6 @@ const TimeDropDown = ({ id, className, selectedTime, onChange, ...props }) => {
       className={className}
       toggleVariant="plainText"
       toggleContent={getQueryValueText(selectedTime)}
-      popperProps={{ position: 'right' }}
       initialItems={availableTimes}
       {...props}
     />
