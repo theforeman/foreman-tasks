@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { Card } from 'patternfly-react';
+import { Card, CardTitle, CardBody } from '@patternfly/react-core';
 import { noop } from 'foremanReact/common/helpers';
 
 import {
@@ -43,8 +43,8 @@ const TasksDonutCard = ({
       })}
       {...props}
     >
-      <Card.Title onClick={onTotalClick}>{title}</Card.Title>
-      <Card.Body>
+      <CardTitle onClick={onTotalClick}>{title}</CardTitle>
+      <CardBody className="card-pf-body">
         <TasksDonutChart
           last={data.last}
           older={data.older}
@@ -66,7 +66,7 @@ const TasksDonutCard = ({
             })
           }
         />
-      </Card.Body>
+      </CardBody>
     </Card>
   );
 };

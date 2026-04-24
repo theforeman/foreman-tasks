@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card } from 'patternfly-react';
+import { Card, CardTitle, CardBody } from '@patternfly/react-core';
 import classNames from 'classnames';
 import { noop } from 'foremanReact/common/helpers';
 import { translate as __ } from 'foremanReact/common/I18n';
@@ -33,13 +33,13 @@ const ScheduledTasksCard = ({
       {...props}
       id="scheduled-tasks-card"
     >
-      <Card.Title onClick={onClick}>{__('Scheduled')}</Card.Title>
-      <Card.Body>
+      <CardTitle onClick={onClick}>{__('Scheduled')}</CardTitle>
+      <CardBody>
         <div className="scheduled-data" onClick={onClick}>
           {data}
           <p>{__('Total')}</p>
         </div>
-      </Card.Body>
+      </CardBody>
     </Card>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card } from 'patternfly-react';
+import { Card, CardTitle, CardBody } from '@patternfly/react-core';
 import classNames from 'classnames';
 import { noop } from 'foremanReact/common/helpers';
 import { translate as __ } from 'foremanReact/common/I18n';
@@ -39,10 +39,10 @@ const StoppedTasksCard = ({
       {...props}
       id="stopped-tasks-card"
     >
-      <Card.Title onClick={() => updateQuery({ state: STOPPED })}>
+      <CardTitle onClick={() => updateQuery({ state: STOPPED })}>
         {__('Stopped')}
-      </Card.Title>
-      <Card.Body>
+      </CardTitle>
+      <CardBody>
         <React.Fragment>
           <StoppedTable
             data={data.results}
@@ -56,7 +56,7 @@ const StoppedTasksCard = ({
             query={query}
           />
         </React.Fragment>
-      </Card.Body>
+      </CardBody>
     </Card>
   );
 };

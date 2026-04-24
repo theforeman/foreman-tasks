@@ -2,19 +2,13 @@
 
 exports[`TasksDonutCard render with last selected 1`] = `
 <Card
-  accented={false}
-  aggregated={false}
-  aggregatedMini={false}
-  cardRef={null}
   className="tasks-donut-card selected-tasks-card"
-  matchHeight={false}
 >
   <CardTitle
-    className=""
     onClick={[Function]}
   />
   <CardBody
-    className=""
+    className="card-pf-body"
   >
     <TasksDonutChart
       className=""
@@ -38,19 +32,13 @@ exports[`TasksDonutCard render with last selected 1`] = `
 
 exports[`TasksDonutCard render with minimal props 1`] = `
 <Card
-  accented={false}
-  aggregated={false}
-  aggregatedMini={false}
-  cardRef={null}
   className="tasks-donut-card"
-  matchHeight={false}
 >
   <CardTitle
-    className=""
     onClick={[Function]}
   />
   <CardBody
-    className=""
+    className="card-pf-body"
   >
     <TasksDonutChart
       className=""
@@ -74,19 +62,13 @@ exports[`TasksDonutCard render with minimal props 1`] = `
 
 exports[`TasksDonutCard render with older selected 1`] = `
 <Card
-  accented={false}
-  aggregated={false}
-  aggregatedMini={false}
-  cardRef={null}
   className="tasks-donut-card selected-tasks-card"
-  matchHeight={false}
 >
   <CardTitle
-    className=""
     onClick={[Function]}
   />
   <CardBody
-    className=""
+    className="card-pf-body"
   >
     <TasksDonutChart
       className=""
@@ -110,21 +92,15 @@ exports[`TasksDonutCard render with older selected 1`] = `
 
 exports[`TasksDonutCard render with props 1`] = `
 <Card
-  accented={false}
-  aggregated={false}
-  aggregatedMini={false}
-  cardRef={null}
   className="tasks-donut-card some-classname"
-  matchHeight={false}
 >
   <CardTitle
-    className=""
     onClick={[Function]}
   >
     some title
   </CardTitle>
   <CardBody
-    className=""
+    className="card-pf-body"
   >
     <TasksDonutChart
       className=""
@@ -148,19 +124,13 @@ exports[`TasksDonutCard render with props 1`] = `
 
 exports[`TasksDonutCard render with total selected 1`] = `
 <Card
-  accented={false}
-  aggregated={false}
-  aggregatedMini={false}
-  cardRef={null}
   className="tasks-donut-card selected-tasks-card"
-  matchHeight={false}
 >
   <CardTitle
-    className=""
     onClick={[Function]}
   />
   <CardBody
-    className=""
+    className="card-pf-body"
   >
     <TasksDonutChart
       className=""

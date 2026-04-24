@@ -2,23 +2,15 @@
 
 exports[`ScheduledTasksCard render selected 1`] = `
 <Card
-  accented={false}
-  aggregated={false}
-  aggregatedMini={false}
-  cardRef={null}
   className="tasks-donut-card scheduled-tasks-card selected-tasks-card"
   id="scheduled-tasks-card"
-  matchHeight={false}
 >
   <CardTitle
-    className=""
     onClick={[Function]}
   >
     Scheduled
   </CardTitle>
-  <CardBody
-    className=""
-  >
+  <CardBody>
     <div
       className="scheduled-data"
       onClick={[Function]}
@@ -34,23 +26,15 @@ exports[`ScheduledTasksCard render selected 1`] = `
 
 exports[`ScheduledTasksCard render with minimal props 1`] = `
 <Card
-  accented={false}
-  aggregated={false}
-  aggregatedMini={false}
-  cardRef={null}
   className="tasks-donut-card scheduled-tasks-card"
   id="scheduled-tasks-card"
-  matchHeight={false}
 >
   <CardTitle
-    className=""
     onClick={[Function]}
   >
     Scheduled
   </CardTitle>
-  <CardBody
-    className=""
-  >
+  <CardBody>
     <div
       className="scheduled-data"
       onClick={[Function]}
@@ -66,23 +50,15 @@ exports[`ScheduledTasksCard render with minimal props 1`] = `
 
 exports[`ScheduledTasksCard render with props 1`] = `
 <Card
-  accented={false}
-  aggregated={false}
-  aggregatedMini={false}
-  cardRef={null}
   className="tasks-donut-card scheduled-tasks-card some-class"
   id="scheduled-tasks-card"
-  matchHeight={false}
 >
   <CardTitle
-    className=""
     onClick={[Function]}
   >
     Scheduled
   </CardTitle>
-  <CardBody
-    className=""
-  >
+  <CardBody>
     <div
       className="scheduled-data"
       onClick={[Function]}
