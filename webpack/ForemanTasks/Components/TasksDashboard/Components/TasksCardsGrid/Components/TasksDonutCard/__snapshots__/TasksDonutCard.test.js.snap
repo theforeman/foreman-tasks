@@ -3,6 +3,7 @@
 exports[`TasksDonutCard render with last selected 1`] = `
 <Card
   className="tasks-donut-card selected-tasks-card"
+  ouiaId="tasks-donut-card"
 >
   <CardTitle
     onClick={[Function]}
@@ -33,6 +34,7 @@ exports[`TasksDonutCard render with last selected 1`] = `
 exports[`TasksDonutCard render with minimal props 1`] = `
 <Card
   className="tasks-donut-card"
+  ouiaId="tasks-donut-card"
 >
   <CardTitle
     onClick={[Function]}
@@ -63,6 +65,7 @@ exports[`TasksDonutCard render with minimal props 1`] = `
 exports[`TasksDonutCard render with older selected 1`] = `
 <Card
   className="tasks-donut-card selected-tasks-card"
+  ouiaId="tasks-donut-card"
 >
   <CardTitle
     onClick={[Function]}
@@ -93,6 +96,7 @@ exports[`TasksDonutCard render with older selected 1`] = `
 exports[`TasksDonutCard render with props 1`] = `
 <Card
   className="tasks-donut-card some-classname"
+  ouiaId="tasks-donut-card"
 >
   <CardTitle
     onClick={[Function]}
@@ -125,6 +129,7 @@ exports[`TasksDonutCard render with props 1`] = `
 exports[`TasksDonutCard render with total selected 1`] = `
 <Card
   className="tasks-donut-card selected-tasks-card"
+  ouiaId="tasks-donut-card"
 >
   <CardTitle
     onClick={[Function]}

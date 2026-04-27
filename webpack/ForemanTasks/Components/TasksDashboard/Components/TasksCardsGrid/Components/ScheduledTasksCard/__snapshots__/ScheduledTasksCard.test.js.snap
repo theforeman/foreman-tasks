@@ -4,6 +4,7 @@ exports[`ScheduledTasksCard render selected 1`] = `
 <Card
   className="tasks-donut-card scheduled-tasks-card selected-tasks-card"
   id="scheduled-tasks-card"
+  ouiaId="scheduled-tasks-card"
 >
   <CardTitle
     onClick={[Function]}
@@ -28,6 +29,7 @@ exports[`ScheduledTasksCard render with minimal props 1`] = `
 <Card
   className="tasks-donut-card scheduled-tasks-card"
   id="scheduled-tasks-card"
+  ouiaId="scheduled-tasks-card"
 >
   <CardTitle
     onClick={[Function]}
@@ -52,6 +54,7 @@ exports[`ScheduledTasksCard render with props 1`] = `
 <Card
   className="tasks-donut-card scheduled-tasks-card some-class"
   id="scheduled-tasks-card"
+  ouiaId="scheduled-tasks-card"
 >
   <CardTitle
     onClick={[Function]}
