@@ -42,6 +42,7 @@ const TasksDonutCard = ({
         'not-focused': focusedOn === TASKS_DONUT_CHART_FOCUSED_ON_OPTIONS.NONE,
       })}
       {...props}
+      ouiaId="tasks-donut-card"
     >
       <CardTitle onClick={onTotalClick}>{title}</CardTitle>
       <CardBody className="card-pf-body">

@@ -38,6 +38,7 @@ const StoppedTasksCard = ({
       )}
       {...props}
       id="stopped-tasks-card"
+      ouiaId="stopped-tasks-card"
     >
       <CardTitle onClick={() => updateQuery({ state: STOPPED })}>
         {__('Stopped')}
