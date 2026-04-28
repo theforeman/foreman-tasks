@@ -8,18 +8,21 @@ export const MOCKED_DATA = {
     older: 5,
   },
   stopped: {
-    error: {
-      total: 8,
-      last: 1,
+    results: {
+      error: {
+        total: 8,
+        last: 1,
+      },
+      warning: {
+        total: 20,
+        last: 2,
+      },
+      success: {
+        total: 25,
+        last: 3,
+      },
     },
-    warning: {
-      total: 20,
-      last: 2,
-    },
-    success: {
-      total: 25,
-      last: 3,
-    },
+    other: 0,
   },
   scheduled: 1,
 };

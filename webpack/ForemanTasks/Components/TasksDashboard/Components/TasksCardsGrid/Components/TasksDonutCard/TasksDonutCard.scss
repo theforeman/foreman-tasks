@@ -6,15 +6,10 @@
     }
   }
   .pf-v5-c-card__title-text {
-    font-family: RedHatText, helvetica, arial, sans-serif;
     text-align: center;
     font-size: 180%;
     cursor: pointer;
   }
-
-  // .card-pf-body {
-  //   padding-left: 15px;
-  // }
 
   &.selected-tasks-card {
     .pf-v5-c-card__title-text {

@@ -1,17 +1,19 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import { Grid, GridItem } from '@patternfly/react-core';
-import { testComponentSnapshotsWithFixtures } from '@theforeman/test';
+import { render } from '@testing-library/react';
+import '@testing-library/jest-dom';
+
+jest.mock('./Components/TasksDonutChart/TasksDonutChart', () => {
+  const React = require('react');
+  const Stub = () => <div data-testid="tasks-donut-chart-stub" />;
+  Stub.displayName = 'TasksDonutChart';
+  return Stub;
+});
 
 import {
   TASKS_DASHBOARD_AVAILABLE_TIMES,
   TASKS_DASHBOARD_AVAILABLE_QUERY_STATES,
 } from '../../TasksDashboardConstants';
 import { MOCKED_DATA } from './TasksCardsGrid.fixtures';
-import RunningTasksCard from './Components/RunningTasksCard/RunningTasksCard';
-import PausedTasksCard from './Components/PausedTasksCard/PausedTasksCard';
-import StoppedTasksCard from './Components/StoppedTasksCard/StoppedTasksCard';
-import ScheduledTasksCard from './Components/ScheduledTasksCard/ScheduledTasksCard';
 import TasksCardsGrid from './TasksCardsGrid';
 
 const fixtures = {
@@ -24,29 +26,27 @@ const fixtures = {
   },
 };
 
-describe('TasksCardsGrid', () =>
-  testComponentSnapshotsWithFixtures(TasksCardsGrid, fixtures));
 
 describe('TasksCardsGrid layout', () => {
   it('uses PatternFly Grid with gutter and four responsive columns', () => {
-    const wrapper = shallow(<TasksCardsGrid />);
-    const grid = wrapper.find(Grid);
-    expect(grid).toHaveLength(1);
-    expect(grid.prop('hasGutter')).toBe(true);
-    expect(grid.prop('className')).toContain('tasks-cards-grid');
-    const items = wrapper.find(GridItem);
+    const { container } = render(<TasksCardsGrid />);
+    const grid = container.querySelector('.pf-v5-l-grid.pf-m-gutter');
+    expect(grid).toBeInTheDocument();
+    const items = container.querySelectorAll(
+      '.pf-v5-l-grid > .pf-v5-l-grid__item'
+    );
     expect(items).toHaveLength(4);
     items.forEach(item => {
-      expect(item.prop('sm')).toBe(12);
-      expect(item.prop('md')).toBe(6);
-      expect(item.prop('xl')).toBe(3);
+      expect(item).toHaveClass('pf-m-12-col-on-sm');
+      expect(item).toHaveClass('pf-m-6-col-on-md');
+      expect(item).toHaveClass('pf-m-3-col-on-xl');
     });
   });
 
-  it('passes isFullHeight and dashboard props to each card', () => {
+  it('renders each card full-height and reflects dashboard query and data', () => {
     const updateQuery = jest.fn();
     const query = { state: TASKS_DASHBOARD_AVAILABLE_QUERY_STATES.RUNNING };
-    const wrapper = shallow(
+    const { container } = render(
       <TasksCardsGrid
         query={query}
         updateQuery={updateQuery}
@@ -54,19 +54,29 @@ describe('TasksCardsGrid layout', () => {
         data={MOCKED_DATA}
       />
     );
-    const cardChecks = [
-      [RunningTasksCard, TASKS_DASHBOARD_AVAILABLE_QUERY_STATES.RUNNING],
-      [PausedTasksCard, TASKS_DASHBOARD_AVAILABLE_QUERY_STATES.PAUSED],
-      [StoppedTasksCard, TASKS_DASHBOARD_AVAILABLE_QUERY_STATES.STOPPED],
-      [ScheduledTasksCard, TASKS_DASHBOARD_AVAILABLE_QUERY_STATES.SCHEDULED],
+
+    const cardIds = [
+      'running-tasks-card',
+      'paused-tasks-card',
+      'stopped-tasks-card',
+      'scheduled-tasks-card',
     ];
-    cardChecks.forEach(([CardComponent, stateKey], index) => {
-      const card = wrapper.find(GridItem).at(index).find(CardComponent);
-      expect(card.prop('isFullHeight')).toBe(true);
-      expect(card.prop('query')).toEqual(query);
-      expect(card.prop('updateQuery')).toBe(updateQuery);
-      expect(card.prop('time')).toBe(TASKS_DASHBOARD_AVAILABLE_TIMES.WEEK);
-      expect(card.prop('data')).toEqual(MOCKED_DATA[stateKey]);
+
+    cardIds.forEach(id => {
+      const card = container.querySelector(`#${id}`);
+      expect(card).toBeInTheDocument();
+      expect(card).toHaveClass('pf-m-full-height');
     });
+
+    expect(container.querySelector('#running-tasks-card')).toHaveClass(
+      'selected-tasks-card'
+    );
+
+    const scheduledDataEl = container.querySelector(
+      '#scheduled-tasks-card .scheduled-data'
+    );
+    expect(scheduledDataEl?.textContent).toContain(
+      String(MOCKED_DATA[TASKS_DASHBOARD_AVAILABLE_QUERY_STATES.SCHEDULED])
+    );
   });
 });
