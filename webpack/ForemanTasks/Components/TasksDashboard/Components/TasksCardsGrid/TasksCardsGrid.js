@@ -13,9 +13,10 @@ import {
   TASKS_DASHBOARD_AVAILABLE_QUERY_STATES,
 } from '../../TasksDashboardConstants';
 import { timePropType, queryPropType } from '../../TasksDashboardPropTypes';
+import './TasksCardsGrid.scss';
 
 const TasksCardsGrid = ({ time, query, data, updateQuery }) => (
-  <Grid hasGutter>
+  <Grid hasGutter className="tasks-cards-grid">
     {[
       [TASKS_DASHBOARD_AVAILABLE_QUERY_STATES.RUNNING, RunningTasksCard],
       [TASKS_DASHBOARD_AVAILABLE_QUERY_STATES.PAUSED, PausedTasksCard],
