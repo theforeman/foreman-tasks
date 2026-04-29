@@ -1,6 +1,12 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import {
+  TASKS_DASHBOARD_AVAILABLE_TIMES,
+  TASKS_DASHBOARD_AVAILABLE_QUERY_STATES,
+} from '../../TasksDashboardConstants';
+import { MOCKED_DATA } from './TasksCardsGrid.fixtures';
+import TasksCardsGrid from './TasksCardsGrid';
 
 jest.mock('./Components/TasksDonutChart/TasksDonutChart', () => {
   const React = require('react');
@@ -9,37 +15,19 @@ jest.mock('./Components/TasksDonutChart/TasksDonutChart', () => {
   return Stub;
 });
 
-import {
-  TASKS_DASHBOARD_AVAILABLE_TIMES,
-  TASKS_DASHBOARD_AVAILABLE_QUERY_STATES,
-} from '../../TasksDashboardConstants';
-import { MOCKED_DATA } from './TasksCardsGrid.fixtures';
-import TasksCardsGrid from './TasksCardsGrid';
-
-const fixtures = {
-  'render with minimal props': {},
-  'render with props': {
-    time: TASKS_DASHBOARD_AVAILABLE_TIMES.WEEK,
-    query: { state: TASKS_DASHBOARD_AVAILABLE_QUERY_STATES.RUNNING },
-    data: MOCKED_DATA,
-    updateQuery: jest.fn(),
-  },
-};
-
-
 describe('TasksCardsGrid layout', () => {
   it('uses PatternFly Grid with gutter and four responsive columns', () => {
     const { container } = render(<TasksCardsGrid />);
-    const grid = container.querySelector('.pf-v5-l-grid.pf-m-gutter');
+    const grid = container.querySelector('.tasks-cards-grid');
     expect(grid).toBeInTheDocument();
-    const items = container.querySelectorAll(
-      '.pf-v5-l-grid > .pf-v5-l-grid__item'
-    );
+
+    const items = Array.from(grid.children);
     expect(items).toHaveLength(4);
+
     items.forEach(item => {
       expect(item).toHaveClass('pf-m-12-col-on-sm');
-      expect(item).toHaveClass('pf-m-6-col-on-md');
-      expect(item).toHaveClass('pf-m-3-col-on-xl');
+      expect(item).toHaveClass('pf-m-6-col-on-xl');
+      expect(item).toHaveClass('pf-m-3-col-on-2xl');
     });
   });
 

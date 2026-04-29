@@ -13,7 +13,6 @@ import {
   TASKS_DASHBOARD_AVAILABLE_QUERY_STATES,
 } from '../../TasksDashboardConstants';
 import { timePropType, queryPropType } from '../../TasksDashboardPropTypes';
-import './TasksCardsGrid.scss';
 
 const TasksCardsGrid = ({ time, query, data, updateQuery }) => (
   <Grid hasGutter className="tasks-cards-grid">
@@ -23,7 +22,7 @@ const TasksCardsGrid = ({ time, query, data, updateQuery }) => (
       [TASKS_DASHBOARD_AVAILABLE_QUERY_STATES.STOPPED, StoppedTasksCard],
       [TASKS_DASHBOARD_AVAILABLE_QUERY_STATES.SCHEDULED, ScheduledTasksCard],
     ].map(([key, Card]) => (
-      <GridItem key={key} sm={12} md={6} xl={3}>
+      <GridItem key={key} sm={12} xl={6} xl2={3}>
         <Card
           isFullHeight
           data={data[key]}
