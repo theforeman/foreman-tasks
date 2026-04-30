@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CardGrid } from 'patternfly-react';
+import { Grid, GridItem } from '@patternfly/react-core';
 import { noop } from 'foremanReact/common/helpers';
 
 import RunningTasksCard from './Components/RunningTasksCard/RunningTasksCard';
@@ -15,26 +15,24 @@ import {
 import { timePropType, queryPropType } from '../../TasksDashboardPropTypes';
 
 const TasksCardsGrid = ({ time, query, data, updateQuery }) => (
-  <CardGrid matchHeight fluid>
-    <CardGrid.Row>
-      {[
-        [TASKS_DASHBOARD_AVAILABLE_QUERY_STATES.RUNNING, RunningTasksCard],
-        [TASKS_DASHBOARD_AVAILABLE_QUERY_STATES.PAUSED, PausedTasksCard],
-        [TASKS_DASHBOARD_AVAILABLE_QUERY_STATES.STOPPED, StoppedTasksCard],
-        [TASKS_DASHBOARD_AVAILABLE_QUERY_STATES.SCHEDULED, ScheduledTasksCard],
-      ].map(([key, Card]) => (
-        <CardGrid.Col key={key}>
-          <Card
-            matchHeight
-            data={data[key]}
-            query={query}
-            time={time}
-            updateQuery={updateQuery}
-          />
-        </CardGrid.Col>
-      ))}
-    </CardGrid.Row>
-  </CardGrid>
+  <Grid hasGutter className="tasks-cards-grid">
+    {[
+      [TASKS_DASHBOARD_AVAILABLE_QUERY_STATES.RUNNING, RunningTasksCard],
+      [TASKS_DASHBOARD_AVAILABLE_QUERY_STATES.PAUSED, PausedTasksCard],
+      [TASKS_DASHBOARD_AVAILABLE_QUERY_STATES.STOPPED, StoppedTasksCard],
+      [TASKS_DASHBOARD_AVAILABLE_QUERY_STATES.SCHEDULED, ScheduledTasksCard],
+    ].map(([key, Card]) => (
+      <GridItem key={key} sm={12} xl={6} xl2={3}>
+        <Card
+          isFullHeight
+          data={data[key]}
+          query={query}
+          time={time}
+          updateQuery={updateQuery}
+        />
+      </GridItem>
+    ))}
+  </Grid>
 );
 
 TasksCardsGrid.propTypes = {

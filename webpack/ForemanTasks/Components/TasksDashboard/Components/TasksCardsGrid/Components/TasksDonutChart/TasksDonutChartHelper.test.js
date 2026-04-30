@@ -99,15 +99,29 @@ describe('TasksDonutChartHelper', () => {
   });
 
   it('should create chart-data', () => {
-    expect(
-      createChartData({
-        last: 1,
-        older: 3,
-        time: '24h',
-        onLastClick: jest.fn(),
-        onOlderClick: jest.fn(),
-      })
-    ).toMatchSnapshot();
+    const onLastClick = jest.fn();
+    const onOlderClick = jest.fn();
+    const result = createChartData({
+      last: 1,
+      older: 3,
+      time: '24h',
+      onLastClick,
+      onOlderClick,
+    });
+
+    expect(result.columns).toEqual([
+      [LAST, 1],
+      [OLDER, 3],
+    ]);
+    expect(result.names[LAST]).toMatch(/1/);
+    expect(result.names[LAST]).toMatch(/24h/);
+    expect(result.names[OLDER]).toMatch(/3/);
+    expect(result.names[OLDER]).toMatch(/24h/);
+
+    result.onItemClick(LAST);
+    expect(onLastClick).toHaveBeenCalledTimes(1);
+    result.onItemClick(OLDER);
+    expect(onOlderClick).toHaveBeenCalledTimes(1);
   });
 
   it('should update chart-title', () => {
