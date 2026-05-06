@@ -1,6 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Tab, Tabs } from 'patternfly-react';
+import {
+  Tabs,
+  Tab,
+  TabTitleText,
+} from '@patternfly/react-core';
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
 import { STATUS } from 'foremanReact/constants';
 import MessageBox from 'foremanReact/components/common/MessageBox';
@@ -31,6 +35,7 @@ const TaskDetails = ({
 }) => {
   const id = getTaskID();
   const { taskReload, status, isLoading } = props;
+  const [activeTabKey, setActiveTabKey] = useState(1);
 
   useEffect(() => {
     taskReloadStart(id);
@@ -58,27 +63,43 @@ const TaskDetails = ({
   }
   const resumable = executionPlan ? executionPlan.state === 'paused' : false;
   const cancellable = executionPlan ? executionPlan.cancellable : false;
+  const lockRecords = locks.concat(links);
+
+  const taskComponentProps = {
+    ...props,
+    cancellable,
+    resumable,
+    id,
+    status,
+    taskProgressToggle,
+    taskReloadStart,
+  };
+
   return (
     <div className="task-details-react well">
-      <Tabs defaultActiveKey={1} animation={false} id="task-details-tabs">
-        <Tab eventKey={1} title={__('Task')}>
+      <Tabs
+        id="task-details-tabs"
+        activeKey={activeTabKey}
+        onSelect={(_event, tabKey) => setActiveTabKey(tabKey)}
+        mountOnEnter
+      >
+        <Tab
+          eventKey={1}
+          title={<TabTitleText>{__('Task')}</TabTitleText>}
+          aria-label={__('Task')}
+        >
           {isLoading ? (
             <TaskSkeleton />
           ) : (
-            <Task
-              {...{
-                ...props,
-                cancellable,
-                resumable,
-                id,
-                status,
-                taskProgressToggle,
-                taskReloadStart,
-              }}
-            />
+            <Task {...taskComponentProps} />
           )}
         </Tab>
-        <Tab eventKey={2} disabled={isLoading} title={__('Running Steps')}>
+        <Tab
+          eventKey={2}
+          title={<TabTitleText>{__('Running Steps')}</TabTitleText>}
+          isDisabled={isLoading}
+          aria-label={__('Running Steps')}
+        >
           <RunningSteps
             runningSteps={runningSteps}
             id={id}
@@ -87,16 +108,36 @@ const TaskDetails = ({
             taskReloadStart={taskReloadStart}
           />
         </Tab>
-        <Tab eventKey={3} disabled={isLoading} title={__('Errors')}>
+        <Tab
+          eventKey={3}
+          title={<TabTitleText>{__('Errors')}</TabTitleText>}
+          isDisabled={isLoading}
+          aria-label={__('Errors')}
+        >
           <Errors executionPlan={executionPlan} failedSteps={failedSteps} />
         </Tab>
-        <Tab eventKey={4} disabled={isLoading} title={__('Locks')}>
-          <Locks locks={locks.concat(links)} />
+        <Tab
+          eventKey={4}
+          title={<TabTitleText>{__('Locks')}</TabTitleText>}
+          isDisabled={isLoading}
+          aria-label={__('Locks')}
+        >
+          <Locks locks={lockRecords} />
         </Tab>
-        <Tab eventKey={5} disabled={isLoading} title={__('Dependencies')}>
+        <Tab
+          eventKey={5}
+          title={<TabTitleText>{__('Dependencies')}</TabTitleText>}
+          isDisabled={isLoading}
+          aria-label={__('Dependencies')}
+        >
           <Dependencies dependsOn={dependsOn} blocks={blocks} />
         </Tab>
-        <Tab eventKey={6} disabled={isLoading} title={__('Raw')}>
+        <Tab
+          eventKey={6}
+          title={<TabTitleText>{__('Raw')}</TabTitleText>}
+          isDisabled={isLoading}
+          aria-label={__('Raw')}
+        >
           <Raw
             id={id}
             label={props.label}
