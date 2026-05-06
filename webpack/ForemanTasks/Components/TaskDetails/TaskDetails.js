@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Tabs,
-  Tab,
-  TabTitleText,
-} from '@patternfly/react-core';
+import { Tabs, Tab, TabTitleText } from '@patternfly/react-core';
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
 import { STATUS } from 'foremanReact/constants';
 import MessageBox from 'foremanReact/components/common/MessageBox';
@@ -79,6 +75,7 @@ const TaskDetails = ({
     <div className="task-details-react well">
       <Tabs
         id="task-details-tabs"
+        ouiaId="task-details-tabs"
         activeKey={activeTabKey}
         onSelect={(_event, tabKey) => setActiveTabKey(tabKey)}
         mountOnEnter
@@ -87,18 +84,16 @@ const TaskDetails = ({
           eventKey={1}
           title={<TabTitleText>{__('Task')}</TabTitleText>}
           aria-label={__('Task')}
+          ouiaId="task-details-tab-task"
         >
-          {isLoading ? (
-            <TaskSkeleton />
-          ) : (
-            <Task {...taskComponentProps} />
-          )}
+          {isLoading ? <TaskSkeleton /> : <Task {...taskComponentProps} />}
         </Tab>
         <Tab
           eventKey={2}
           title={<TabTitleText>{__('Running Steps')}</TabTitleText>}
           isDisabled={isLoading}
           aria-label={__('Running Steps')}
+          ouiaId="task-details-tab-running-steps"
         >
           <RunningSteps
             runningSteps={runningSteps}
@@ -113,6 +108,7 @@ const TaskDetails = ({
           title={<TabTitleText>{__('Errors')}</TabTitleText>}
           isDisabled={isLoading}
           aria-label={__('Errors')}
+          ouiaId="task-details-tab-errors"
         >
           <Errors executionPlan={executionPlan} failedSteps={failedSteps} />
         </Tab>
@@ -121,6 +117,7 @@ const TaskDetails = ({
           title={<TabTitleText>{__('Locks')}</TabTitleText>}
           isDisabled={isLoading}
           aria-label={__('Locks')}
+          ouiaId="task-details-tab-locks"
         >
           <Locks locks={lockRecords} />
         </Tab>
@@ -129,6 +126,7 @@ const TaskDetails = ({
           title={<TabTitleText>{__('Dependencies')}</TabTitleText>}
           isDisabled={isLoading}
           aria-label={__('Dependencies')}
+          ouiaId="task-details-tab-dependencies"
         >
           <Dependencies dependsOn={dependsOn} blocks={blocks} />
         </Tab>
@@ -137,6 +135,7 @@ const TaskDetails = ({
           title={<TabTitleText>{__('Raw')}</TabTitleText>}
           isDisabled={isLoading}
           aria-label={__('Raw')}
+          ouiaId="task-details-tab-raw"
         >
           <Raw
             id={id}

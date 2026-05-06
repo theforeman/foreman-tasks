@@ -25,6 +25,7 @@ const RunningSteps = ({
               <Button
                 variant="secondary"
                 size="sm"
+                ouiaId={`running-step-cancel-button-${i}`}
                 onClick={() => {
                   if (!taskReload) {
                     taskReloadStart(id);

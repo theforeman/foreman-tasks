@@ -43,9 +43,7 @@ const Errors = ({ ...props }) => {
               </span>
               <span>{__('Backtrace')}:</span>
               <span>
-                <pre>
-                  {(step.error.backtrace || []).join('\n')}
-                </pre>
+                <pre>{(step.error.backtrace || []).join('\n')}</pre>
               </span>
             </React.Fragment>
           )}
