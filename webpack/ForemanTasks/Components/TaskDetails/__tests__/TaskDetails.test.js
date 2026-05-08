@@ -1,17 +1,9 @@
-import { testComponentSnapshotsWithFixtures } from '@theforeman/test';
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
 
 import TaskDetails from '../TaskDetails';
 import { minProps } from './TaskDetails.fixtures';
-
-const fixtures = {
-  'render with loading Props': { ...minProps, isLoading: true },
-  'render with error Props': {
-    ...minProps,
-    status: 'ERROR',
-    APIerror: { message: 'some-error' },
-  },
-  'render with min Props': minProps,
-};
 
 delete window.location;
 window.location = new URL(
@@ -19,6 +11,42 @@ window.location = new URL(
 );
 
 describe('TaskDetails', () => {
-  describe('rendering', () =>
-    testComponentSnapshotsWithFixtures(TaskDetails, fixtures));
+  it('shows error message when status is ERROR', () => {
+    render(
+      <TaskDetails
+        {...minProps}
+        status="ERROR"
+        APIerror={{ message: 'some-error' }}
+      />
+    );
+    expect(
+      screen.getByText(/could not receive data: some-error/i)
+    ).toBeInTheDocument();
+  });
+
+  it('shows skeleton while loading on the Task tab', () => {
+    const { container } = render(<TaskDetails {...minProps} isLoading />);
+    expect(
+      container.querySelector('.react-loading-skeleton')
+    ).toBeInTheDocument();
+  });
+
+  it('renders six tabs with expected labels', () => {
+    render(<TaskDetails {...minProps} />);
+    expect(screen.getByRole('tab', { name: /^task$/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole('tab', { name: /running steps/i })
+    ).toBeInTheDocument();
+    expect(screen.getByRole('tab', { name: /errors/i })).toBeInTheDocument();
+    expect(screen.getByRole('tab', { name: /locks/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole('tab', { name: /dependencies/i })
+    ).toBeInTheDocument();
+    expect(screen.getByRole('tab', { name: /raw/i })).toBeInTheDocument();
+  });
+
+  it('associates tab list with task id from URL', () => {
+    render(<TaskDetails {...minProps} />);
+    expect(document.getElementById('task-details-tabs')).toBeInTheDocument();
+  });
 });
