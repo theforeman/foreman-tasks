@@ -1,59 +1,51 @@
-import { testComponentSnapshotsWithFixtures } from '@theforeman/test';
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+
+jest.mock('foremanReact/components/common/dates/RelativeDateTime', () => {
+  const React = require('react');
+  const RelativeDateTime = ({ date, defaultValue }) => (
+    <span>{date || defaultValue}</span>
+  );
+  return RelativeDateTime;
+});
 
 import TaskInfo from '../TaskInfo';
 
-const fixtures = {
-  'render without Props': { id: 'test' },
-  'render with Props': {
-    id: 'test',
-    startAt: '2019-06-17 16:04:09 +0300',
-    label: 'Actions::Katello::EventQueue::Monitor',
-    pending: true,
-    action: 'Monitor Event Queue',
-    username: 'admin',
-    startedAt: '2019-06-17 16:04:09 +0300',
-    endedAt: null,
-    state: 'paused',
-    result: 'error',
-    progress: 0.5,
-    input: {
-      locale: 'en',
-      current_request_id: null,
-      current_timezone: 'Asia/Jerusalem',
-      current_user_id: 4,
-      current_organization_id: null,
-      current_location_id: null,
-    },
-    output: {},
-    humanized: {
-      action: 'Monitor Event Queue',
-      input: '',
-      output: '',
-      errors: [
-        'Action Actions::Katello::EventQueue::Monitor is already active',
-      ],
-    },
-    cli_example: null,
-    executionPlan: {
-      state: 'paused',
-      cancellable: false,
-    },
-    help:
-      "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved.\nThe recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task.",
-    hasSubTasks: false,
-    locks: [
-      {
-        name: 'task_owner',
-        exclusive: false,
-        resource_type: 'User',
-        resource_id: 4,
-      },
-    ],
-    username_path: '<a href="/users/4-admin/edit">admin</a>',
-  },
-};
-
 describe('TaskInfo', () => {
-  describe('rendering', () =>
-    testComponentSnapshotsWithFixtures(TaskInfo, fixtures));
+  it('renders default metadata labels when given minimal props', () => {
+    render(<TaskInfo id="test" />);
+    expect(screen.getByText(/name:/i)).toBeInTheDocument();
+    expect(screen.getByText(/start at:/i)).toBeInTheDocument();
+    expect(screen.getByText(/result:/i)).toBeInTheDocument();
+  });
+
+  it('renders task fields and troubleshooting when full props are provided', () => {
+    render(
+      <TaskInfo
+        id="test"
+        startAt="2019-06-17 16:04:09 +0300"
+        label="Actions::Katello::EventQueue::Monitor"
+        action="Monitor Event Queue"
+        username="admin"
+        startedAt="2019-06-17 16:04:09 +0300"
+        endedAt={null}
+        state="paused"
+        result="error"
+        progress={0.5}
+        help={
+          "A paused task represents a process that has not finished properly. Any task in paused state can lead to potential inconsistency and needs to be resolved.\nThe recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task."
+        }
+        output={{}}
+        usernamePath=""
+      />
+    );
+    expect(screen.getByText('Monitor Event Queue')).toBeInTheDocument();
+    expect(screen.getByText(/troubleshooting/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/a paused task represents a process/i)
+    ).toBeInTheDocument();
+    expect(screen.getByText(/^paused$/)).toBeInTheDocument();
+    expect(screen.getByText(/^error$/)).toBeInTheDocument();
+  });
 });
