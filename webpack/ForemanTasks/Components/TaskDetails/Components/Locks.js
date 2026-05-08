@@ -9,6 +9,7 @@ import {
   CardTitle,
   CardBody,
 } from '@patternfly/react-core';
+import { LockIcon, LockOpenIcon } from '@patternfly/react-icons';
 import { translate as __ } from 'foremanReact/common/I18n';
 
 const ConditionalLink = ({ children, link }) =>
@@ -28,8 +29,9 @@ const Locks = ({ locks }) => (
     <Alert
       variant={AlertVariant.info}
       ouiaId="task-locks-info"
+      title={__('Locks')}
       isInline
-      className="pf-u-mb-lg"
+      className="pf-v5-u-mb-lg"
     >
       {__(
         'You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource'
@@ -41,12 +43,11 @@ const Locks = ({ locks }) => (
           <ConditionalLink link={lock.link}>
             <Card isCompact ouiaId={`task-lock-${key}`}>
               <CardTitle>
-                <span
-                  className={`pf-u-mr-sm fa ${
-                    lock.exclusive ? 'fa-lock' : 'fa-unlock-alt'
-                  }`}
-                  aria-hidden
-                />
+                {lock.exclusive ? (
+                  <LockIcon className="pf-v5-u-mr-sm" aria-hidden />
+                ) : (
+                  <LockOpenIcon className="pf-v5-u-mr-sm" aria-hidden />
+                )}
                 {lock.resource_type}
               </CardTitle>
               <CardBody>{`id:${lock.resource_id}`}</CardBody>
