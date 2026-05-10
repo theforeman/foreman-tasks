@@ -59,9 +59,6 @@
       "Action": [
         "동작 "
       ],
-      "Action with sub plans": [
-        "하위 계획이 있는 작업"
-      ],
       "Active": [
         "활성"
       ],
@@ -70,9 +67,6 @@
       ],
       "Active or disabled recurring logic with purpose %s already exists": [
         "%s 목적이 있는 활성 또는 비활성화된 반복 논리가 이미 존재합니다"
-      ],
-      "All %s tasks are selected.": [
-        "모두%s 작업이 선택되었습니다."
       ],
       "All proxies with the required feature are unavailable at the moment": [
         "현재 필요한 기능이 있는 모든 프록시를 사용할 수 없습니다."
@@ -251,6 +245,9 @@
       "Exception": [
         "예외"
       ],
+      "Exclusive resources": [
+        "독점 리소스"
+      ],
       "Execute now": [
         "지금 실행"
       ],
@@ -383,14 +380,17 @@
       "No": [
         "아니오  "
       ],
-      "No Tasks": [
-        "작업 없음"
-      ],
       "No errors": [
         "오류 없음 "
       ],
       "No proxy defined for execution": [
         "실행을 위한 프록시가 정의되지 않았습니다"
+      ],
+      "No resources": [
+        "리소스 없음"
+      ],
+      "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes.": [
+        "현재 이 작업과 관련된 리소스가 없습니다. 리소스 잠금은 충돌하는 작업이 동시에 실행되는 것을 방지합니다. 다른 작업은 이 프로세스가 완료될 때까지 기다려야 합니다."
       ],
       "No running steps": [
         "실행 중인 단계가 없습니다."
@@ -403,6 +403,9 @@
       ],
       "No. of Tasks": [
         "작업 수"
+      ],
+      "Non-exclusive resources": [
+        "비독점 리소스"
       ],
       "None": [
         ""
@@ -425,11 +428,14 @@
       "On": [
         "켜기"
       ],
-      "Operation": [
-        "작업 "
+      "Only this task can access the resource. Other tasks must wait until this process completes.": [
+        "이 리소스에는 이 작업만 액세스할 수 있습니다. 다른 작업은 이 프로세스가 완료될 때까지 기다려야 합니다."
       ],
       "Other includes all stopped tasks that are cancelled or pending": [
         "기타에는 취소되거나 보류 중인 모든 중지된 작업이 포함됩니다."
+      ],
+      "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others.": [
+        "다른 작업도 동일한 리소스에 동시에 액세스할 수 있습니다. 이 잠금은 다른 작업을 막지 않고 작업과 리소스의 관계를 추적합니다."
       ],
       "Other:": [
         "기타:"
@@ -572,12 +578,6 @@
       "See %{link} for more details on how to resolve the issue": [
         "문제를 해결하는 방법에 대한 자세한 내용은 %{link} 참조"
       ],
-      "Select all {count} tasks": [
-        "모든 {count} 작업 선택"
-      ],
-      "Select row": [
-        "행 선택"
-      ],
       "Send data to the task from external executor (such as smart_proxy_dynflow)": [
         "외부 실행자(예: smart_proxy_dynflow)의 태스크에 데이터를 전송합니다."
       ],
@@ -634,9 +634,6 @@
       ],
       "Sub tasks": [
         "하위 태스크"
-      ],
-      "Sub tasks of %s": [
-        "%s의 하위 작업"
       ],
       "Subscribe": [
         "등록 "
@@ -707,9 +704,6 @@
       "The targets are of different types": [
         "대상의 유형이 서로 다릅니다."
       ],
-      "The task cannot be aborted at the moment.": [
-        "현재로는 작업을 중단할 수 없습니다."
-      ],
       "The task could not be started": [
         "작업을 시작할 수 없습니다."
       ],
@@ -755,9 +749,6 @@
       "Troubleshooting": [
         "문제 해결 "
       ],
-      "Trying to abort the task": [
-        "작업을 중단하려고 합니다"
-      ],
       "Trying to cancel step": [
         "단계를 취소하려고 합니다"
       ],
@@ -775,9 +766,6 @@
       ],
       "Unable to enable mail notification to user '%s': %s": [
         "'%s' 사용자에게 메일 알림을 활성화할 수 없습니다: %s"
-      ],
-      "Undo selection": [
-        "선택 취소"
       ],
       "Unlimited": [
         "제한 없음 "
@@ -803,9 +791,6 @@
       "Yes": [
         "예  "
       ],
-      "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource": [
-        "이 페이지에서 리소스 잠금을 찾을 수 있습니다. 잠금 아이콘으로 표시된 배타적 잠금은 이 작업이 실행되는 동안 다른 작업이 잠긴 리소스를 사용할 수 없음을 의미합니다. 잠금 해제 아이콘으로 표시된 비배타적 잠금은 다른 작업이 리소스에 자유롭게 액세스할 수 있음을 의미하며, 이 작업과 리소스의 관계를 나타내는 데만 사용됩니다."
-      ],
       "You do not have permission": [
         "권한이 없습니다"
       ],
@@ -826,6 +811,9 @@
       ],
       "error": [
         "오류"
+      ],
+      "id: %s": [
+        "ID: %s"
       ],
       "is day of month (range: 1-31)": [
         "날짜(범위: 1-31)"

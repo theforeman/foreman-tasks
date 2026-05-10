@@ -59,9 +59,6 @@
       "Action": [
         "Action"
       ],
-      "Action with sub plans": [
-        "Action avec des sous-plans"
-      ],
       "Active": [
         "Actif"
       ],
@@ -70,9 +67,6 @@
       ],
       "Active or disabled recurring logic with purpose %s already exists": [
         "La logique récurrente active ou désactivée avec l'objectif %s existe déjà"
-      ],
-      "All %s tasks are selected.": [
-        "Toutes les tâches %s sont sélectionnées."
       ],
       "All proxies with the required feature are unavailable at the moment": [
         "Les proxys possédant les fonctionnalités demandées ne sont pas disponibles actuellement"
@@ -251,6 +245,9 @@
       "Exception": [
         "Exception"
       ],
+      "Exclusive resources": [
+        "Ressources exclusives"
+      ],
       "Execute now": [
         "Exécuter maintenant"
       ],
@@ -383,14 +380,17 @@
       "No": [
         "Non"
       ],
-      "No Tasks": [
-        "Aucune Tâche"
-      ],
       "No errors": [
         "Aucune erreur"
       ],
       "No proxy defined for execution": [
         "Aucun proxy défini pour l'exécution"
+      ],
+      "No resources": [
+        "Aucune ressource"
+      ],
+      "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes.": [
+        "Aucune ressource n'est associée à cette tâche pour le moment. Le verrouillage des ressources empêche les tâches contradictoires de s'exécuter en parallèle. Les autres tâches doivent attendre jusqu'à la fin de ce processus."
       ],
       "No running steps": [
         "Aucune étape en cours"
@@ -403,6 +403,9 @@
       ],
       "No. of Tasks": [
         "No. de tâches"
+      ],
+      "Non-exclusive resources": [
+        "Ressources non exclusives"
       ],
       "None": [
         ""
@@ -425,11 +428,14 @@
       "On": [
         "Activé"
       ],
-      "Operation": [
-        "Opération"
+      "Only this task can access the resource. Other tasks must wait until this process completes.": [
+        "Seule cette tâche peut accéder à la ressource. Les autres tâches doivent attendre jusqu'à la fin de ce processus."
       ],
       "Other includes all stopped tasks that are cancelled or pending": [
         "Autres inclut toutes les tâches arrêtées qui sont annulées ou en attente"
+      ],
+      "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others.": [
+        "D'autres tâches peuvent accéder à la ressource en même temps. Ce verrou suit l'association entre la tâche et la ressource sans en bloquer d'autres."
       ],
       "Other:": [
         "Autre :"
@@ -572,12 +578,6 @@
       "See %{link} for more details on how to resolve the issue": [
         "Voir %{link} pour plus de détails sur la manière de résoudre le problème"
       ],
-      "Select all {count} tasks": [
-        "Sélectionner toutes les tâches {count} "
-      ],
-      "Select row": [
-        "Sélectionner une ligne"
-      ],
       "Send data to the task from external executor (such as smart_proxy_dynflow)": [
         "Envoie les données à la tâche à partir d'un exécuteur extérieur (tel que smart_proxy_dynflow)"
       ],
@@ -634,9 +634,6 @@
       ],
       "Sub tasks": [
         "Sous-tâches"
-      ],
-      "Sub tasks of %s": [
-        "Sous-tâches de %s"
       ],
       "Subscribe": [
         "S'abonner"
@@ -707,9 +704,6 @@
       "The targets are of different types": [
         "Les cibles sont de types différents"
       ],
-      "The task cannot be aborted at the moment.": [
-        "Impossible d'abandonner la tâche pour l'instant."
-      ],
       "The task could not be started": [
         "La tâche n'a pas pu démarrer"
       ],
@@ -757,9 +751,6 @@
       "Troubleshooting": [
         "Résolution de problème"
       ],
-      "Trying to abort the task": [
-        "Tentative d'abandon de la tâche"
-      ],
       "Trying to cancel step": [
         "Tentative d'annulation de l'étape"
       ],
@@ -777,9 +768,6 @@
       ],
       "Unable to enable mail notification to user '%s': %s": [
         "Impossible d'activer la notification par courrier électronique à l'utilisateur '%s ' : %s"
-      ],
-      "Undo selection": [
-        "Annuler la sélection"
       ],
       "Unlimited": [
         "Illimité"
@@ -805,9 +793,6 @@
       "Yes": [
         "Oui"
       ],
-      "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource": [
-        "Vous pouvez trouver des verrous de ressources sur cette page. Un verrou exclusif marqué avec une icône verrouillée signifie qu’aucun une autre tâche ne peut utiliser la ressource verrouillée pendant l’exécution de cette tâche. Un verrou non exclusif marqué avec un icône déverrouillé signifie que d'autres tâches peuvent librement accéder à la ressource. N’est utilisé que pour indiquer la relation de cette tâche avec la ressource"
-      ],
       "You do not have permission": [
         "Vous ne disposez pas des droits nécessaires"
       ],
@@ -828,6 +813,9 @@
       ],
       "error": [
         "erreur"
+      ],
+      "id: %s": [
+        "id : %s"
       ],
       "is day of month (range: 1-31)": [
         "est jour du mois (plage: 1-31)"

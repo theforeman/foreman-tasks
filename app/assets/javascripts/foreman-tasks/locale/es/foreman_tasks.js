@@ -59,9 +59,6 @@
       "Action": [
         "Acción"
       ],
-      "Action with sub plans": [
-        ""
-      ],
       "Active": [
         "Activo"
       ],
@@ -70,9 +67,6 @@
       ],
       "Active or disabled recurring logic with purpose %s already exists": [
         "Lógica recurrente activa o desactivada con finalidad %s ya existe"
-      ],
-      "All %s tasks are selected.": [
-        ""
       ],
       "All proxies with the required feature are unavailable at the moment": [
         "Ningún proxy con función obligatoria está disponible en este momento"
@@ -251,6 +245,9 @@
       "Exception": [
         "Excepción"
       ],
+      "Exclusive resources": [
+        "Recursos exclusivos"
+      ],
       "Execute now": [
         "Ejecutar ahora"
       ],
@@ -383,14 +380,17 @@
       "No": [
         "No"
       ],
-      "No Tasks": [
-        "No hay tareas"
-      ],
       "No errors": [
         "No hay errores"
       ],
       "No proxy defined for execution": [
         "No se definió un proxy para la ejecución"
+      ],
+      "No resources": [
+        "Sin recursos"
+      ],
+      "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes.": [
+        "En este momento no hay recursos asociados con esta tarea. Al bloquear recursos se impide que tareas conflictivas se ejecuten a la vez. Las demás tareas deben esperar hasta que este proceso termine."
       ],
       "No running steps": [
         "No hay pasos de ejecución"
@@ -403,6 +403,9 @@
       ],
       "No. of Tasks": [
         "Cantidad de tareas"
+      ],
+      "Non-exclusive resources": [
+        "Recursos no exclusivos"
       ],
       "None": [
         ""
@@ -425,11 +428,14 @@
       "On": [
         "Activar"
       ],
-      "Operation": [
-        "Operación"
+      "Only this task can access the resource. Other tasks must wait until this process completes.": [
+        "Solo esta tarea puede acceder al recurso. Las demás tareas deben esperar hasta que este proceso termine."
       ],
       "Other includes all stopped tasks that are cancelled or pending": [
         "Otros incluye todas las tareas paradas que están canceladas o pendientes"
+      ],
+      "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others.": [
+        "Otras tareas pueden acceder al recurso simultáneamente. Este bloqueo refleja la relación de la tarea con el recurso sin impedir las demás."
       ],
       "Other:": [
         "Otro"
@@ -572,12 +578,6 @@
       "See %{link} for more details on how to resolve the issue": [
         "Consulte %{link} para obtener más información sobre cómo resolver el problema."
       ],
-      "Select all {count} tasks": [
-        ""
-      ],
-      "Select row": [
-        "Seleccionar fila"
-      ],
       "Send data to the task from external executor (such as smart_proxy_dynflow)": [
         "Enviar datos a la tarea desde el ejecutor externo (como smart_proxy_dynflow)"
       ],
@@ -634,9 +634,6 @@
       ],
       "Sub tasks": [
         "Subtareas"
-      ],
-      "Sub tasks of %s": [
-        "Subtareas de %s"
       ],
       "Subscribe": [
         "Suscribir"
@@ -707,9 +704,6 @@
       "The targets are of different types": [
         "El tipo de los destinos es diferente."
       ],
-      "The task cannot be aborted at the moment.": [
-        "No es posible abortar la tarea en este momento."
-      ],
       "The task could not be started": [
         "No se pudo iniciar la tarea"
       ],
@@ -757,9 +751,6 @@
       "Troubleshooting": [
         "Resolución de problemas"
       ],
-      "Trying to abort the task": [
-        "Intentando abortar la tarea"
-      ],
       "Trying to cancel step": [
         "Intentando cancelar el paso"
       ],
@@ -777,9 +768,6 @@
       ],
       "Unable to enable mail notification to user '%s': %s": [
         ""
-      ],
-      "Undo selection": [
-        "Deshacer la selección"
       ],
       "Unlimited": [
         "Ilimitado"
@@ -805,9 +793,6 @@
       "Yes": [
         "Sí"
       ],
-      "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource": [
-        "Puede encontrar los bloqueos de recurso en esta página. Un bloqueo exclusivo marcado con el icono de un candado bloqueado significa que ninguna otra tarea puede usar el recurso bloqueado mientras la tarea esté en ejecución. El bloqueo no exclusivo marcado con el icono de un candado desbloqueado significa que las otras tareas pueden acceder al recurso de manera libre; solo se usa para indicar la relación de esta tarea con el recurso"
-      ],
       "You do not have permission": [
         "No tiene permiso"
       ],
@@ -828,6 +813,9 @@
       ],
       "error": [
         "error"
+      ],
+      "id: %s": [
+        "ID: %s"
       ],
       "is day of month (range: 1-31)": [
         "es día del mes (rango: 1-31)"

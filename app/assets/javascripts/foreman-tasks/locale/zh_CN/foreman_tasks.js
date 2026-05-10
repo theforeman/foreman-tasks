@@ -59,9 +59,6 @@
       "Action": [
         "操作"
       ],
-      "Action with sub plans": [
-        "有子计划的操作"
-      ],
       "Active": [
         "活跃"
       ],
@@ -70,9 +67,6 @@
       ],
       "Active or disabled recurring logic with purpose %s already exists": [
         "带有目的 %s 的活跃或禁用的周期性逻辑已存在"
-      ],
-      "All %s tasks are selected.": [
-        "已选择所有%s任务。"
       ],
       "All proxies with the required feature are unavailable at the moment": [
         "具备所需功能的所有代理暂时都不可用"
@@ -251,6 +245,9 @@
       "Exception": [
         "例外"
       ],
+      "Exclusive resources": [
+        "独占资源"
+      ],
       "Execute now": [
         "立即执行"
       ],
@@ -383,14 +380,17 @@
       "No": [
         "否"
       ],
-      "No Tasks": [
-        "没有任务"
-      ],
       "No errors": [
         "无错误"
       ],
       "No proxy defined for execution": [
         "没有为执行定义代理"
+      ],
+      "No resources": [
+        "无资源"
+      ],
+      "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes.": [
+        "当前没有与此任务关联的资源。锁定资源可防止冲突的任务同时运行。其他任务必须等待该过程完成。"
       ],
       "No running steps": [
         "没有运行步骤"
@@ -403,6 +403,9 @@
       ],
       "No. of Tasks": [
         "任务号"
+      ],
+      "Non-exclusive resources": [
+        "非独占资源"
       ],
       "None": [
         ""
@@ -425,11 +428,14 @@
       "On": [
         "上"
       ],
-      "Operation": [
-        "操作"
+      "Only this task can access the resource. Other tasks must wait until this process completes.": [
+        "只有此任务可以访问该资源。其他任务必须等待该过程完成。"
       ],
       "Other includes all stopped tasks that are cancelled or pending": [
         "其他包括已取消或待处理的所有已停止任务"
+      ],
+      "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others.": [
+        "其他任务可以同时访问该资源。此锁定用于记录任务与资源的关系，而不会阻止其他任务。"
       ],
       "Other:": [
         "其他："
@@ -572,12 +578,6 @@
       "See %{link} for more details on how to resolve the issue": [
         "有关如何解决此问题的更多详细信息，请参见%{link}"
       ],
-      "Select all {count} tasks": [
-        "选择所有 {count} 任务"
-      ],
-      "Select row": [
-        "选择行"
-      ],
       "Send data to the task from external executor (such as smart_proxy_dynflow)": [
         "从外部执行者发送到的任务（例如 smart_proxy_dynflow）"
       ],
@@ -634,9 +634,6 @@
       ],
       "Sub tasks": [
         "子任务"
-      ],
-      "Sub tasks of %s": [
-        "%s 的子任务"
       ],
       "Subscribe": [
         "订阅"
@@ -707,9 +704,6 @@
       "The targets are of different types": [
         "目标为不同的类型"
       ],
-      "The task cannot be aborted at the moment.": [
-        "目前无法中止任务。"
-      ],
       "The task could not be started": [
         "无法启动该任务"
       ],
@@ -755,9 +749,6 @@
       "Troubleshooting": [
         "故障排除"
       ],
-      "Trying to abort the task": [
-        "尝试中止任务"
-      ],
       "Trying to cancel step": [
         "试图取消步骤"
       ],
@@ -775,9 +766,6 @@
       ],
       "Unable to enable mail notification to user '%s': %s": [
         "无法启用发给用户 '%s' 的邮件通知：%s"
-      ],
-      "Undo selection": [
-        "撤销选择"
       ],
       "Unlimited": [
         "无限制"
@@ -803,9 +791,6 @@
       "Yes": [
         "是"
       ],
-      "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource": [
-        "您可以在本页中找到资源锁。标有已锁图标的独占锁表示此任务运行时其他任务都不能使用已锁定的资源。标有未锁图标的非独占锁表示其他任务可以自由访问该资源，它仅用于指出此任务与该资源的关系"
-      ],
       "You do not have permission": [
         "您没有权限"
       ],
@@ -826,6 +811,9 @@
       ],
       "error": [
         "错误"
+      ],
+      "id: %s": [
+        "ID：%s"
       ],
       "is day of month (range: 1-31)": [
         "日期（范围：1-31）"

@@ -58,9 +58,6 @@ msgstr ""
 msgid "Action"
 msgstr ""
 
-msgid "Action with sub plans"
-msgstr ""
-
 msgid "Active"
 msgstr ""
 
@@ -68,9 +65,6 @@ msgid "Active Filters"
 msgstr ""
 
 msgid "Active or disabled recurring logic with purpose %s already exists"
-msgstr ""
-
-msgid "All %s tasks are selected."
 msgstr ""
 
 msgid "All proxies with the required feature are unavailable at the moment"
@@ -251,6 +245,9 @@ msgstr ""
 msgid "Exception"
 msgstr ""
 
+msgid "Exclusive resources"
+msgstr ""
+
 msgid "Execute now"
 msgstr ""
 
@@ -383,13 +380,16 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-msgid "No Tasks"
-msgstr ""
-
 msgid "No errors"
 msgstr ""
 
 msgid "No proxy defined for execution"
+msgstr ""
+
+msgid "No resources"
+msgstr ""
+
+msgid "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes."
 msgstr ""
 
 msgid "No running steps"
@@ -402,6 +402,9 @@ msgid "No task could be started"
 msgstr ""
 
 msgid "No. of Tasks"
+msgstr ""
+
+msgid "Non-exclusive resources"
 msgstr ""
 
 msgid "None"
@@ -426,10 +429,13 @@ msgstr ""
 msgid "On"
 msgstr ""
 
-msgid "Operation"
+msgid "Only this task can access the resource. Other tasks must wait until this process completes."
 msgstr ""
 
 msgid "Other includes all stopped tasks that are cancelled or pending"
+msgstr ""
+
+msgid "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others."
 msgstr ""
 
 msgid "Other:"
@@ -573,12 +579,6 @@ msgstr ""
 msgid "See %{link} for more details on how to resolve the issue"
 msgstr ""
 
-msgid "Select all {count} tasks"
-msgstr ""
-
-msgid "Select row"
-msgstr ""
-
 msgid "Send data to the task from external executor (such as smart_proxy_dynflow)"
 msgstr ""
 
@@ -634,9 +634,6 @@ msgid "Stopped tasks by result"
 msgstr ""
 
 msgid "Sub tasks"
-msgstr ""
-
-msgid "Sub tasks of %s"
 msgstr ""
 
 msgid "Subscribe"
@@ -708,9 +705,6 @@ msgstr ""
 msgid "The targets are of different types"
 msgstr ""
 
-msgid "The task cannot be aborted at the moment."
-msgstr ""
-
 msgid "The task could not be started"
 msgstr ""
 
@@ -758,9 +752,6 @@ msgstr ""
 msgid "Troubleshooting"
 msgstr ""
 
-msgid "Trying to abort the task"
-msgstr ""
-
 msgid "Trying to cancel step"
 msgstr ""
 
@@ -777,9 +768,6 @@ msgid "Unable to create mail notification: %s"
 msgstr ""
 
 msgid "Unable to enable mail notification to user '%s': %s"
-msgstr ""
-
-msgid "Undo selection"
 msgstr ""
 
 msgid "Unlimited"
@@ -806,9 +794,6 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-msgid "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource"
-msgstr ""
-
 msgid "You do not have permission"
 msgstr ""
 
@@ -828,6 +813,9 @@ msgid "could not be resumed"
 msgstr ""
 
 msgid "error"
+msgstr ""
+
+msgid "id: %s"
 msgstr ""
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval

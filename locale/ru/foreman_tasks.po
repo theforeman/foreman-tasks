@@ -62,9 +62,6 @@ msgstr ""
 msgid "Action"
 msgstr "Действие"
 
-msgid "Action with sub plans"
-msgstr "Действия над подпланами"
-
 msgid "Active"
 msgstr "Активно"
 
@@ -72,9 +69,6 @@ msgid "Active Filters"
 msgstr ""
 
 msgid "Active or disabled recurring logic with purpose %s already exists"
-msgstr ""
-
-msgid "All %s tasks are selected."
 msgstr ""
 
 msgid "All proxies with the required feature are unavailable at the moment"
@@ -255,6 +249,9 @@ msgstr ""
 msgid "Exception"
 msgstr "Исключение"
 
+msgid "Exclusive resources"
+msgstr "Эксклюзивные ресурсы"
+
 msgid "Execute now"
 msgstr "Запустить сейчас"
 
@@ -387,14 +384,20 @@ msgstr "Следующее событие"
 msgid "No"
 msgstr "Нет"
 
-msgid "No Tasks"
-msgstr ""
-
 msgid "No errors"
 msgstr "Нет ошибок"
 
 msgid "No proxy defined for execution"
 msgstr ""
+
+msgid "No resources"
+msgstr "Нет ресурсов"
+
+msgid "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes."
+msgstr ""
+"С этим заданием сейчас не связано ни одного ресурса. Блокировка ресурсов "
+"не дает конфликтующим заданиям выполняться одновременно. Остальным заданиям "
+"необходимо дождаться завершения этого процесса."
 
 msgid "No running steps"
 msgstr "Нет действий."
@@ -407,6 +410,9 @@ msgstr ""
 
 msgid "No. of Tasks"
 msgstr "Число задач"
+
+msgid "Non-exclusive resources"
+msgstr "Неэксклюзивные ресурсы"
 
 msgid "None"
 msgstr ""
@@ -430,11 +436,18 @@ msgstr ""
 msgid "On"
 msgstr "Настроить"
 
-msgid "Operation"
-msgstr "Операция"
+msgid "Only this task can access the resource. Other tasks must wait until this process completes."
+msgstr ""
+"К ресурсу может обращаться только это задание. Остальные задания должны "
+"дождаться завершения этого процесса."
 
 msgid "Other includes all stopped tasks that are cancelled or pending"
 msgstr ""
+
+msgid "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others."
+msgstr ""
+"Другие задания могут одновременно обращаться к ресурсу. Эта блокировка "
+"фиксирует связь между заданием и ресурсом, не мешая другим."
 
 msgid "Other:"
 msgstr ""
@@ -577,12 +590,6 @@ msgstr "Поисковый запрос"
 msgid "See %{link} for more details on how to resolve the issue"
 msgstr ""
 
-msgid "Select all {count} tasks"
-msgstr ""
-
-msgid "Select row"
-msgstr ""
-
 msgid "Send data to the task from external executor (such as smart_proxy_dynflow)"
 msgstr "Отправить задаче данные от внешнего исполнителя (например, от smart_proxy_dynflow)"
 
@@ -639,9 +646,6 @@ msgstr ""
 
 msgid "Sub tasks"
 msgstr "Подзадачи"
-
-msgid "Sub tasks of %s"
-msgstr ""
 
 msgid "Subscribe"
 msgstr "Подписаться"
@@ -712,9 +716,6 @@ msgstr "Ошибка выполнения задачи %s на смарт-про
 msgid "The targets are of different types"
 msgstr "Попытка выполнения действия над разными типами объектов"
 
-msgid "The task cannot be aborted at the moment."
-msgstr ""
-
 msgid "The task could not be started"
 msgstr ""
 
@@ -762,9 +763,6 @@ msgstr "Всего"
 msgid "Troubleshooting"
 msgstr "Диагностика"
 
-msgid "Trying to abort the task"
-msgstr ""
-
 msgid "Trying to cancel step"
 msgstr ""
 
@@ -782,9 +780,6 @@ msgstr ""
 
 msgid "Unable to enable mail notification to user '%s': %s"
 msgstr ""
-
-msgid "Undo selection"
-msgstr "Отменить выбор"
 
 msgid "Unlimited"
 msgstr "∞"
@@ -810,9 +805,6 @@ msgstr ""
 msgid "Yes"
 msgstr "Да"
 
-msgid "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource"
-msgstr ""
-
 msgid "You do not have permission"
 msgstr ""
 
@@ -833,6 +825,9 @@ msgstr ""
 
 msgid "error"
 msgstr ""
+
+msgid "id: %s"
+msgstr "id: %s"
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is day of month (range: 1-31)"

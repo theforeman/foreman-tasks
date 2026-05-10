@@ -59,9 +59,6 @@
       "Action": [
         "動作"
       ],
-      "Action with sub plans": [
-        ""
-      ],
       "Active": [
         "啟用中"
       ],
@@ -69,9 +66,6 @@
         ""
       ],
       "Active or disabled recurring logic with purpose %s already exists": [
-        ""
-      ],
-      "All %s tasks are selected.": [
         ""
       ],
       "All proxies with the required feature are unavailable at the moment": [
@@ -251,6 +245,9 @@
       "Exception": [
         "例外"
       ],
+      "Exclusive resources": [
+        "獨占資源"
+      ],
       "Execute now": [
         "立即執行"
       ],
@@ -383,14 +380,17 @@
       "No": [
         "否"
       ],
-      "No Tasks": [
-        ""
-      ],
       "No errors": [
         "無錯誤"
       ],
       "No proxy defined for execution": [
         ""
+      ],
+      "No resources": [
+        "沒有資源"
+      ],
+      "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes.": [
+        "目前沒有任何資源與此工作相关联。鎖定資源可防止衝突的工作同時執行。其他工作必須等待此流程完成。"
       ],
       "No running steps": [
         "沒有執行步驟"
@@ -403,6 +403,9 @@
       ],
       "No. of Tasks": [
         "任務編號"
+      ],
+      "Non-exclusive resources": [
+        "非獨占資源"
       ],
       "None": [
         ""
@@ -425,11 +428,14 @@
       "On": [
         "開啟"
       ],
-      "Operation": [
-        "作業"
+      "Only this task can access the resource. Other tasks must wait until this process completes.": [
+        "只有此工作可以存取該資源。其他工作必須等待此流程完成。"
       ],
       "Other includes all stopped tasks that are cancelled or pending": [
         ""
+      ],
+      "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others.": [
+        "其他工作可以同時存取該資源。此鎖定用於記錄工作與資源的關聯，而不會阻擋其他工作。"
       ],
       "Other:": [
         ""
@@ -572,12 +578,6 @@
       "See %{link} for more details on how to resolve the issue": [
         ""
       ],
-      "Select all {count} tasks": [
-        ""
-      ],
-      "Select row": [
-        ""
-      ],
       "Send data to the task from external executor (such as smart_proxy_dynflow)": [
         "從外部執行者（例如 smart_proxy_dynflow）發送資料到任務"
       ],
@@ -634,9 +634,6 @@
       ],
       "Sub tasks": [
         "子任務"
-      ],
-      "Sub tasks of %s": [
-        ""
       ],
       "Subscribe": [
         "訂閱"
@@ -707,9 +704,6 @@
       "The targets are of different types": [
         "目標類型不同"
       ],
-      "The task cannot be aborted at the moment.": [
-        ""
-      ],
       "The task could not be started": [
         ""
       ],
@@ -756,9 +750,6 @@
       "Troubleshooting": [
         "疑難排解"
       ],
-      "Trying to abort the task": [
-        ""
-      ],
       "Trying to cancel step": [
         ""
       ],
@@ -775,9 +766,6 @@
         ""
       ],
       "Unable to enable mail notification to user '%s': %s": [
-        ""
-      ],
-      "Undo selection": [
         ""
       ],
       "Unlimited": [
@@ -804,9 +792,6 @@
       "Yes": [
         "是"
       ],
-      "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource": [
-        ""
-      ],
       "You do not have permission": [
         ""
       ],
@@ -827,6 +812,9 @@
       ],
       "error": [
         ""
+      ],
+      "id: %s": [
+        "ID：%s"
       ],
       "is day of month (range: 1-31)": [
         "是日期（範圍：1-31）"
