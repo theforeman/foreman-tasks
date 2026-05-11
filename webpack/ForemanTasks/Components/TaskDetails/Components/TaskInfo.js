@@ -117,8 +117,7 @@ const TaskInfo = props => {
         title: 'Result',
         value: (
           <React.Fragment>
-            {resultIconEl(state, result)}
-            <span> {result}</span>
+            {resultIconEl(state, result)} {result}
           </React.Fragment>
         ),
       },
@@ -160,10 +159,8 @@ const TaskInfo = props => {
   const progVariant = progressVariantForResult(result);
 
   return (
-    <Grid hasGutter>
-      <GridItem span={12}>
-        <br />
-      </GridItem>
+    <Grid>
+      <GridItem span={12} className="pf-v5-u-pb-lg" />
       {details.map((items, key) => (
         <React.Fragment key={key}>
           <GridItem md={2} sm={6}>
@@ -184,9 +181,7 @@ const TaskInfo = props => {
           </GridItem>
         </React.Fragment>
       ))}
-      <GridItem span={12}>
-        <br />
-      </GridItem>
+      <GridItem span={12} className="pf-v5-u-pb-lg" />
       <GridItem span={6}>
         <div className="progress-description">
           <span className="list-group-item-heading">{__('State')}: </span>
@@ -205,9 +200,7 @@ const TaskInfo = props => {
           {...(progVariant ? { variant: progVariant } : {})}
         />
       </GridItem>
-      <GridItem span={12}>
-        <br />
-      </GridItem>
+      <GridItem span={12} className="pf-v5-u-pb-lg" />
       {help && (
         <GridItem span={12}>
           <p>

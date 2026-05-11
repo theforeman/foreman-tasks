@@ -3,7 +3,6 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 jest.mock('foremanReact/components/common/dates/RelativeDateTime', () => {
-  const React = require('react');
   const RelativeDateTime = ({ date, defaultValue }) => (
     <span>{date || defaultValue}</span>
   );
