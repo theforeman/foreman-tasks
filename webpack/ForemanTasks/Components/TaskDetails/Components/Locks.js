@@ -27,7 +27,12 @@ const LocksSection = ({
   <Card isPlain className="pf-v5-u-mb-xl" ouiaId={ouiaSectionId}>
     <CardHeader>
       <div className="pf-v5-u-display-flex pf-v5-u-align-items-center pf-v5-u-flex-nowrap pf-v5-u-gap-sm">
-        <Title headingLevel="h3" size="lg" ouiaId={`${ouiaSectionId}-title`} className="pf-v5-u-m-0 pf-v5-u-mr-sm">
+        <Title
+          headingLevel="h3"
+          size="lg"
+          ouiaId={`${ouiaSectionId}-title`}
+          className="pf-v5-u-m-0 pf-v5-u-mr-sm"
+        >
           {title}
         </Title>
         <RowIcon aria-hidden />
@@ -49,9 +54,15 @@ const LocksSection = ({
               key={`${lock.resource_type}-${lock.resource_id}-${key}`}
               ouiaId={`${ouiaSectionId}-row-${key}`}
             >
-              <Td className="pf-v5-u-min-w-0 pf-v5-u-py-sm pf-v5-u-pl-md" width={80}>
+              <Td
+                className="pf-v5-u-min-w-0 pf-v5-u-py-sm pf-v5-u-pl-md"
+                width={80}
+              >
                 <span className="pf-v5-u-display-inline-flex pf-v5-u-align-items-center pf-v5-u-flex-nowrap pf-v5-u-gap-sm pf-v5-u-min-w-0">
-                  <Icon iconSize="sm" className="pf-v5-u-flex-shrink-0 pf-v5-u-mr-xs">
+                  <Icon
+                    iconSize="sm"
+                    className="pf-v5-u-flex-shrink-0 pf-v5-u-mr-xs"
+                  >
                     <RowIcon />
                   </Icon>
                   {lock.link ? (
