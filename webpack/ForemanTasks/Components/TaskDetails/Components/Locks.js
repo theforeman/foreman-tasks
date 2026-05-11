@@ -16,7 +16,13 @@ import {
 import { LockIcon, LockOpenIcon } from '@patternfly/react-icons';
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
 
-const LocksSection = ({ title, description, items, RowIcon, ouiaSectionId }) => (
+const LocksSection = ({
+  title,
+  description,
+  items,
+  RowIcon,
+  ouiaSectionId,
+}) => (
   <Stack
     hasGutter
     className="pf-v5-u-mb-xl"
@@ -27,7 +33,7 @@ const LocksSection = ({ title, description, items, RowIcon, ouiaSectionId }) => 
       flexWrap={{ default: 'nowrap' }}
       gap={{ default: 'gapSm' }}
     >
-      <Title headingLevel="h3" size="lg">
+      <Title headingLevel="h3" size="lg" ouiaId={`${ouiaSectionId}-title`}>
         {title}
       </Title>
       <RowIcon aria-hidden />
@@ -56,7 +62,11 @@ const LocksSection = ({ title, description, items, RowIcon, ouiaSectionId }) => 
                 <RowIcon />
               </Icon>
               {lock.link ? (
-                <Text component={TextVariants.a} href={lock.link}>
+                <Text
+                  component={TextVariants.a}
+                  href={lock.link}
+                  ouiaId={`${ouiaSectionId}-resource-type-link-${key}`}
+                >
                   {lock.resource_type}
                 </Text>
               ) : (
@@ -64,9 +74,7 @@ const LocksSection = ({ title, description, items, RowIcon, ouiaSectionId }) => 
               )}
             </Flex>
           </FlexItem>
-          <FlexItem>
-            {sprintf(__('id: %s'), String(lock.resource_id))}
-          </FlexItem>
+          <FlexItem>{sprintf(__('id: %s'), String(lock.resource_id))}</FlexItem>
         </Flex>
       ))}
     </Stack>

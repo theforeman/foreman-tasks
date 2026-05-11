@@ -165,7 +165,7 @@ describe('Locks', () => {
     expect(screen.getByText('id: uuid-abc')).toBeInTheDocument();
   });
 
-  it('sets ouia ids on populated container and lock rows', () => {
+  it('sets ouia ids on populated container, sections, rows, titles, and resource links', () => {
     const { container } = render(
       <Locks
         locks={[
@@ -174,20 +174,38 @@ describe('Locks', () => {
             exclusive: false,
             resource_type: 'A',
             resource_id: 1,
-            link: null,
+            link: '/non-exclusive/1',
           },
           {
             name: 'ex',
             exclusive: true,
             resource_type: 'B',
             resource_id: 2,
-            link: null,
+            link: '/exclusive/2',
           },
         ]}
       />
     );
     expect(
       container.querySelector('[data-ouia-component-id="task-locks-populated"]')
+    ).toBeInTheDocument();
+    expect(
+      container.querySelector(
+        '[data-ouia-component-id="task-locks-non-exclusive"]'
+      )
+    ).toBeInTheDocument();
+    expect(
+      container.querySelector('[data-ouia-component-id="task-locks-exclusive"]')
+    ).toBeInTheDocument();
+    expect(
+      container.querySelector(
+        '[data-ouia-component-id="task-locks-non-exclusive-title"]'
+      )
+    ).toBeInTheDocument();
+    expect(
+      container.querySelector(
+        '[data-ouia-component-id="task-locks-exclusive-title"]'
+      )
     ).toBeInTheDocument();
     expect(
       container.querySelector(
@@ -199,5 +217,56 @@ describe('Locks', () => {
         '[data-ouia-component-id="task-locks-exclusive-row-0"]'
       )
     ).toBeInTheDocument();
+    expect(
+      container.querySelector(
+        '[data-ouia-component-id="task-locks-non-exclusive-resource-type-link-0"]'
+      )
+    ).toBeInTheDocument();
+    expect(
+      container.querySelector(
+        '[data-ouia-component-id="task-locks-exclusive-resource-type-link-0"]'
+      )
+    ).toBeInTheDocument();
+  });
+
+  it('does not render resource_type as a link when lock.link is absent', () => {
+    render(
+      <Locks
+        locks={[
+          {
+            name: 'ex',
+            exclusive: true,
+            resource_type: 'Host managed',
+            resource_id: 1,
+            link: null,
+          },
+        ]}
+      />
+    );
+    expect(
+      screen.queryByRole('link', { name: 'Host managed' })
+    ).not.toBeInTheDocument();
+    expect(screen.getByText('Host managed')).toBeInTheDocument();
+  });
+
+  it('does not set resource-type link ouia id when lock.link is absent', () => {
+    const { container } = render(
+      <Locks
+        locks={[
+          {
+            name: 'ne',
+            exclusive: false,
+            resource_type: 'Thing',
+            resource_id: 1,
+            link: null,
+          },
+        ]}
+      />
+    );
+    expect(
+      container.querySelector(
+        '[data-ouia-component-id="task-locks-non-exclusive-resource-type-link-0"]'
+      )
+    ).not.toBeInTheDocument();
   });
 });
