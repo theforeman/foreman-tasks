@@ -33,6 +33,7 @@ describe('TaskDetails', () => {
 
   it('renders six tabs with expected labels', () => {
     render(<TaskDetails {...minProps} />);
+    expect(document.getElementById('task-details-tabs')).toBeInTheDocument();
     expect(screen.getByRole('tab', { name: /^task$/i })).toBeInTheDocument();
     expect(
       screen.getByRole('tab', { name: /running steps/i })
@@ -43,10 +44,5 @@ describe('TaskDetails', () => {
       screen.getByRole('tab', { name: /dependencies/i })
     ).toBeInTheDocument();
     expect(screen.getByRole('tab', { name: /raw/i })).toBeInTheDocument();
-  });
-
-  it('associates tab list with task id from URL', () => {
-    render(<TaskDetails {...minProps} />);
-    expect(document.getElementById('task-details-tabs')).toBeInTheDocument();
   });
 });
