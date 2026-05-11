@@ -59,6 +59,9 @@
       "Action": [
         ""
       ],
+      "Action with sub plans": [
+        ""
+      ],
       "Active": [
         ""
       ],
@@ -66,6 +69,9 @@
         ""
       ],
       "Active or disabled recurring logic with purpose %s already exists": [
+        ""
+      ],
+      "All %s tasks are selected.": [
         ""
       ],
       "All proxies with the required feature are unavailable at the moment": [
@@ -245,9 +251,6 @@
       "Exception": [
         ""
       ],
-      "Exclusive resources": [
-        ""
-      ],
       "Execute now": [
         ""
       ],
@@ -380,16 +383,13 @@
       "No": [
         ""
       ],
+      "No Tasks": [
+        ""
+      ],
       "No errors": [
         ""
       ],
       "No proxy defined for execution": [
-        ""
-      ],
-      "No resources": [
-        ""
-      ],
-      "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes.": [
         ""
       ],
       "No running steps": [
@@ -402,9 +402,6 @@
         ""
       ],
       "No. of Tasks": [
-        ""
-      ],
-      "Non-exclusive resources": [
         ""
       ],
       "None": [
@@ -428,13 +425,10 @@
       "On": [
         ""
       ],
-      "Only this task can access the resource. Other tasks must wait until this process completes.": [
+      "Operation": [
         ""
       ],
       "Other includes all stopped tasks that are cancelled or pending": [
-        ""
-      ],
-      "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others.": [
         ""
       ],
       "Other:": [
@@ -578,6 +572,12 @@
       "See %{link} for more details on how to resolve the issue": [
         ""
       ],
+      "Select all {count} tasks": [
+        ""
+      ],
+      "Select row": [
+        ""
+      ],
       "Send data to the task from external executor (such as smart_proxy_dynflow)": [
         ""
       ],
@@ -633,6 +633,9 @@
         ""
       ],
       "Sub tasks": [
+        ""
+      ],
+      "Sub tasks of %s": [
         ""
       ],
       "Subscribe": [
@@ -704,6 +707,9 @@
       "The targets are of different types": [
         ""
       ],
+      "The task cannot be aborted at the moment.": [
+        ""
+      ],
       "The task could not be started": [
         ""
       ],
@@ -750,6 +756,9 @@
       "Troubleshooting": [
         ""
       ],
+      "Trying to abort the task": [
+        ""
+      ],
       "Trying to cancel step": [
         ""
       ],
@@ -766,6 +775,9 @@
         ""
       ],
       "Unable to enable mail notification to user '%s': %s": [
+        ""
+      ],
+      "Undo selection": [
         ""
       ],
       "Unlimited": [
@@ -792,6 +804,9 @@
       "Yes": [
         ""
       ],
+      "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource": [
+        ""
+      ],
       "You do not have permission": [
         ""
       ],
@@ -811,9 +826,6 @@
         ""
       ],
       "error": [
-        ""
-      ],
-      "id: %s": [
         ""
       ],
       "is day of month (range: 1-31)": [

@@ -59,6 +59,9 @@
       "Action": [
         "Действие"
       ],
+      "Action with sub plans": [
+        "Действия над подпланами"
+      ],
       "Active": [
         "Активно"
       ],
@@ -66,6 +69,9 @@
         ""
       ],
       "Active or disabled recurring logic with purpose %s already exists": [
+        ""
+      ],
+      "All %s tasks are selected.": [
         ""
       ],
       "All proxies with the required feature are unavailable at the moment": [
@@ -245,9 +251,6 @@
       "Exception": [
         "Исключение"
       ],
-      "Exclusive resources": [
-        "Эксклюзивные ресурсы"
-      ],
       "Execute now": [
         "Запустить сейчас"
       ],
@@ -380,17 +383,14 @@
       "No": [
         "Нет"
       ],
+      "No Tasks": [
+        ""
+      ],
       "No errors": [
         "Нет ошибок"
       ],
       "No proxy defined for execution": [
         ""
-      ],
-      "No resources": [
-        "Нет ресурсов"
-      ],
-      "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes.": [
-        "С этим заданием сейчас не связано ни одного ресурса. Блокировка ресурсов не дает конфликтующим заданиям выполняться одновременно. Остальным заданиям необходимо дождаться завершения этого процесса."
       ],
       "No running steps": [
         "Нет действий."
@@ -403,9 +403,6 @@
       ],
       "No. of Tasks": [
         "Число задач"
-      ],
-      "Non-exclusive resources": [
-        "Неэксклюзивные ресурсы"
       ],
       "None": [
         ""
@@ -428,14 +425,11 @@
       "On": [
         "Настроить"
       ],
-      "Only this task can access the resource. Other tasks must wait until this process completes.": [
-        "К ресурсу может обращаться только это задание. Остальные задания должны дождаться завершения этого процесса."
+      "Operation": [
+        "Операция"
       ],
       "Other includes all stopped tasks that are cancelled or pending": [
         ""
-      ],
-      "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others.": [
-        "Другие задания могут одновременно обращаться к ресурсу. Эта блокировка фиксирует связь между заданием и ресурсом, не мешая другим."
       ],
       "Other:": [
         ""
@@ -578,6 +572,12 @@
       "See %{link} for more details on how to resolve the issue": [
         ""
       ],
+      "Select all {count} tasks": [
+        ""
+      ],
+      "Select row": [
+        ""
+      ],
       "Send data to the task from external executor (such as smart_proxy_dynflow)": [
         "Отправить задаче данные от внешнего исполнителя (например, от smart_proxy_dynflow)"
       ],
@@ -634,6 +634,9 @@
       ],
       "Sub tasks": [
         "Подзадачи"
+      ],
+      "Sub tasks of %s": [
+        ""
       ],
       "Subscribe": [
         "Подписаться"
@@ -704,6 +707,9 @@
       "The targets are of different types": [
         "Попытка выполнения действия над разными типами объектов"
       ],
+      "The task cannot be aborted at the moment.": [
+        ""
+      ],
       "The task could not be started": [
         ""
       ],
@@ -750,6 +756,9 @@
       "Troubleshooting": [
         "Диагностика"
       ],
+      "Trying to abort the task": [
+        ""
+      ],
       "Trying to cancel step": [
         ""
       ],
@@ -767,6 +776,9 @@
       ],
       "Unable to enable mail notification to user '%s': %s": [
         ""
+      ],
+      "Undo selection": [
+        "Отменить выбор"
       ],
       "Unlimited": [
         "∞"
@@ -792,6 +804,9 @@
       "Yes": [
         "Да"
       ],
+      "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource": [
+        ""
+      ],
       "You do not have permission": [
         ""
       ],
@@ -812,9 +827,6 @@
       ],
       "error": [
         ""
-      ],
-      "id: %s": [
-        "id: %s"
       ],
       "is day of month (range: 1-31)": [
         "— день месяца (1–31)"

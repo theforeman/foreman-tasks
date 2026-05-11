@@ -59,6 +59,9 @@ msgstr ""
 msgid "Action"
 msgstr "動作"
 
+msgid "Action with sub plans"
+msgstr ""
+
 msgid "Active"
 msgstr "啟用中"
 
@@ -66,6 +69,9 @@ msgid "Active Filters"
 msgstr ""
 
 msgid "Active or disabled recurring logic with purpose %s already exists"
+msgstr ""
+
+msgid "All %s tasks are selected."
 msgstr ""
 
 msgid "All proxies with the required feature are unavailable at the moment"
@@ -246,9 +252,6 @@ msgstr ""
 msgid "Exception"
 msgstr "例外"
 
-msgid "Exclusive resources"
-msgstr "獨占資源"
-
 msgid "Execute now"
 msgstr "立即執行"
 
@@ -381,19 +384,14 @@ msgstr "下次發生"
 msgid "No"
 msgstr "否"
 
+msgid "No Tasks"
+msgstr ""
+
 msgid "No errors"
 msgstr "無錯誤"
 
 msgid "No proxy defined for execution"
 msgstr ""
-
-msgid "No resources"
-msgstr "沒有資源"
-
-msgid "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes."
-msgstr ""
-"目前沒有任何資源與此工作相关联。鎖定資源可防止衝突的工作同時執行。其他工作必須等"
-"待此流程完成。"
 
 msgid "No running steps"
 msgstr "沒有執行步驟"
@@ -406,9 +404,6 @@ msgstr ""
 
 msgid "No. of Tasks"
 msgstr "任務編號"
-
-msgid "Non-exclusive resources"
-msgstr "非獨占資源"
 
 msgid "None"
 msgstr ""
@@ -432,16 +427,11 @@ msgstr ""
 msgid "On"
 msgstr "開啟"
 
-msgid "Only this task can access the resource. Other tasks must wait until this process completes."
-msgstr ""
-"只有此工作可以存取該資源。其他工作必須等待此流程完成。"
+msgid "Operation"
+msgstr "作業"
 
 msgid "Other includes all stopped tasks that are cancelled or pending"
 msgstr ""
-
-msgid "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others."
-msgstr ""
-"其他工作可以同時存取該資源。此鎖定用於記錄工作與資源的關聯，而不會阻擋其他工作。"
 
 msgid "Other:"
 msgstr ""
@@ -584,6 +574,12 @@ msgstr "搜尋查詢"
 msgid "See %{link} for more details on how to resolve the issue"
 msgstr ""
 
+msgid "Select all {count} tasks"
+msgstr ""
+
+msgid "Select row"
+msgstr ""
+
 msgid "Send data to the task from external executor (such as smart_proxy_dynflow)"
 msgstr "從外部執行者（例如 smart_proxy_dynflow）發送資料到任務"
 
@@ -640,6 +636,9 @@ msgstr ""
 
 msgid "Sub tasks"
 msgstr "子任務"
+
+msgid "Sub tasks of %s"
+msgstr ""
 
 msgid "Subscribe"
 msgstr "訂閱"
@@ -710,6 +709,9 @@ msgstr "智慧型代理任務 %s 失敗。"
 msgid "The targets are of different types"
 msgstr "目標類型不同"
 
+msgid "The task cannot be aborted at the moment."
+msgstr ""
+
 msgid "The task could not be started"
 msgstr ""
 
@@ -757,6 +759,9 @@ msgstr "總數"
 msgid "Troubleshooting"
 msgstr "疑難排解"
 
+msgid "Trying to abort the task"
+msgstr ""
+
 msgid "Trying to cancel step"
 msgstr ""
 
@@ -773,6 +778,9 @@ msgid "Unable to create mail notification: %s"
 msgstr ""
 
 msgid "Unable to enable mail notification to user '%s': %s"
+msgstr ""
+
+msgid "Undo selection"
 msgstr ""
 
 msgid "Unlimited"
@@ -799,6 +807,9 @@ msgstr ""
 msgid "Yes"
 msgstr "是"
 
+msgid "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource"
+msgstr ""
+
 msgid "You do not have permission"
 msgstr ""
 
@@ -819,9 +830,6 @@ msgstr ""
 
 msgid "error"
 msgstr ""
-
-msgid "id: %s"
-msgstr "ID：%s"
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is day of month (range: 1-31)"

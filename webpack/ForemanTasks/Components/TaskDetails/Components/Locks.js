@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
+  Card,
+  CardBody,
+  CardHeader,
   EmptyState,
   EmptyStateBody,
   EmptyStateHeader,
   EmptyStateIcon,
-  Flex,
-  FlexItem,
   Icon,
-  Stack,
   Text,
   TextVariants,
   Title,
 } from '@patternfly/react-core';
+import { Table, Tbody, Tr, Td } from '@patternfly/react-table';
 import { LockIcon, LockOpenIcon } from '@patternfly/react-icons';
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
 
@@ -23,62 +24,65 @@ const LocksSection = ({
   RowIcon,
   ouiaSectionId,
 }) => (
-  <Stack
-    hasGutter
-    className="pf-v5-u-mb-xl"
-    data-ouia-component-id={ouiaSectionId}
-  >
-    <Flex
-      alignItems={{ default: 'alignItemsCenter' }}
-      flexWrap={{ default: 'nowrap' }}
-      gap={{ default: 'gapSm' }}
-    >
-      <Title headingLevel="h3" size="lg" ouiaId={`${ouiaSectionId}-title`}>
-        {title}
-      </Title>
-      <RowIcon aria-hidden />
-    </Flex>
-    <p className="pf-v5-u-color-200 pf-v5-u-mb-0 pf-v5-u-font-size-md">
-      {description}
-    </p>
-    <Stack hasGutter={false} className="pf-v5-u-w-25">
-      {items.map((lock, key) => (
-        <Flex
-          key={`${lock.resource_type}-${lock.resource_id}-${key}`}
-          alignItems={{ default: 'alignItemsCenter' }}
-          justifyContent={{ default: 'justifyContentSpaceBetween' }}
-          flexWrap={{ default: 'nowrap' }}
-          gap={{ default: 'gapMd' }}
-          className="pf-v5-u-py-sm pf-v5-u-px-md pf-v5-u-border-bottom"
-          data-ouia-component-id={`${ouiaSectionId}-row-${key}`}
-        >
-          <FlexItem>
-            <Flex
-              alignItems={{ default: 'alignItemsCenter' }}
-              gap={{ default: 'gapSm' }}
-              flexWrap={{ default: 'nowrap' }}
+  <Card isPlain className="pf-v5-u-mb-xl" ouiaId={ouiaSectionId}>
+    <CardHeader>
+      <div className="pf-v5-u-display-flex pf-v5-u-align-items-center pf-v5-u-flex-nowrap pf-v5-u-gap-sm">
+        <Title headingLevel="h3" size="lg" ouiaId={`${ouiaSectionId}-title`} className="pf-v5-u-m-0 pf-v5-u-mr-sm">
+          {title}
+        </Title>
+        <RowIcon aria-hidden />
+      </div>
+    </CardHeader>
+    <CardBody>
+      <p className="pf-v5-u-color-200 pf-v5-u-mb-md pf-v5-u-font-size-md">
+        {description}
+      </p>
+      <Table
+        aria-label={title}
+        variant="compact"
+        ouiaId={`${ouiaSectionId}-table`}
+        className="pf-v5-u-w-100-on-sm pf-v5-u-w-75-on-md pf-v5-u-w-50-on-lg pf-v5-u-w-33-on-xl"
+      >
+        <Tbody>
+          {items.map((lock, key) => (
+            <Tr
+              key={`${lock.resource_type}-${lock.resource_id}-${key}`}
+              ouiaId={`${ouiaSectionId}-row-${key}`}
             >
-              <Icon iconSize="sm">
-                <RowIcon />
-              </Icon>
-              {lock.link ? (
-                <Text
-                  component={TextVariants.a}
-                  href={lock.link}
-                  ouiaId={`${ouiaSectionId}-resource-type-link-${key}`}
-                >
-                  {lock.resource_type}
-                </Text>
-              ) : (
-                <span>{lock.resource_type}</span>
-              )}
-            </Flex>
-          </FlexItem>
-          <FlexItem>{sprintf(__('id: %s'), String(lock.resource_id))}</FlexItem>
-        </Flex>
-      ))}
-    </Stack>
-  </Stack>
+              <Td className="pf-v5-u-min-w-0 pf-v5-u-py-sm pf-v5-u-pl-md" width={80}>
+                <span className="pf-v5-u-display-inline-flex pf-v5-u-align-items-center pf-v5-u-flex-nowrap pf-v5-u-gap-sm pf-v5-u-min-w-0">
+                  <Icon iconSize="sm" className="pf-v5-u-flex-shrink-0 pf-v5-u-mr-xs">
+                    <RowIcon />
+                  </Icon>
+                  {lock.link ? (
+                    <Text
+                      className="pf-v5-u-text-truncate"
+                      component={TextVariants.a}
+                      href={lock.link}
+                      ouiaId={`${ouiaSectionId}-resource-type-link-${key}`}
+                    >
+                      {lock.resource_type}
+                    </Text>
+                  ) : (
+                    <span className="pf-v5-u-text-truncate pf-v5-u-display-block">
+                      {lock.resource_type}
+                    </span>
+                  )}
+                </span>
+              </Td>
+              <Td
+                modifier="nowrap"
+                width={20}
+                className="pf-v5-u-py-sm pf-v5-u-pl-md pf-v5-u-pr-md pf-v5-u-text-align-left"
+              >
+                {sprintf(__('id: %s'), String(lock.resource_id))}
+              </Td>
+            </Tr>
+          ))}
+        </Tbody>
+      </Table>
+    </CardBody>
+  </Card>
 );
 
 LocksSection.propTypes = {

@@ -59,6 +59,9 @@
       "Action": [
         "アクション"
       ],
+      "Action with sub plans": [
+        "サブプランによるアクション"
+      ],
       "Active": [
         "アクティブ"
       ],
@@ -67,6 +70,9 @@
       ],
       "Active or disabled recurring logic with purpose %s already exists": [
         "目的が %s のアクティブまたは無効な再帰論理がすでに存在します"
+      ],
+      "All %s tasks are selected.": [
+        "%s の全タスクを選択します。"
       ],
       "All proxies with the required feature are unavailable at the moment": [
         "現在、必要な機能があるすべてのプロキシーが利用できません"
@@ -245,9 +251,6 @@
       "Exception": [
         "例外"
       ],
-      "Exclusive resources": [
-        "排他的リソース"
-      ],
       "Execute now": [
         "今すぐ実行"
       ],
@@ -380,17 +383,14 @@
       "No": [
         "いいえ"
       ],
+      "No Tasks": [
+        "タスクなし"
+      ],
       "No errors": [
         "エラーなし"
       ],
       "No proxy defined for execution": [
         "実行用プロキシーが設定されていません"
-      ],
-      "No resources": [
-        "リソースがありません"
-      ],
-      "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes.": [
-        "このタスクに関連するリソースは現在ありません。リソースのロックは矛盾するタスクの同時実行を防ぎます。他のタスクはこの処理が終わるまで待つ必要があります。"
       ],
       "No running steps": [
         "実行中のステップがありません"
@@ -403,9 +403,6 @@
       ],
       "No. of Tasks": [
         "タスク数"
-      ],
-      "Non-exclusive resources": [
-        "非排他的リソース"
       ],
       "None": [
         ""
@@ -428,14 +425,11 @@
       "On": [
         "次の時刻に開始"
       ],
-      "Only this task can access the resource. Other tasks must wait until this process completes.": [
-        "このリソースにはこのタスクだけがアクセスできます。他のタスクは、この処理が完了するまで待つ必要があります。"
+      "Operation": [
+        "操作"
       ],
       "Other includes all stopped tasks that are cancelled or pending": [
         "その他のタスクには、キャンセルまたは保留中のすべての停止したタスクが含まれます。"
-      ],
-      "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others.": [
-        "他のタスクも同じリソースに同時アクセスできます。このロックは他をブロックせずタスクとリソースの関係を追跡するために使われます。"
       ],
       "Other:": [
         "その他:"
@@ -578,6 +572,12 @@
       "See %{link} for more details on how to resolve the issue": [
         "問題解決の詳細については、%{link} を参照してください"
       ],
+      "Select all {count} tasks": [
+        "{count} 件のタスクをすべて選択"
+      ],
+      "Select row": [
+        "行の選択"
+      ],
       "Send data to the task from external executor (such as smart_proxy_dynflow)": [
         "外部のエグゼキューター (smart_proxy_dynflow など) からタスクにデータを送信"
       ],
@@ -634,6 +634,9 @@
       ],
       "Sub tasks": [
         "サブタスク"
+      ],
+      "Sub tasks of %s": [
+        "%s のサブタスク"
       ],
       "Subscribe": [
         "サブスクライブ"
@@ -704,6 +707,9 @@
       "The targets are of different types": [
         "ターゲットは異なるタイプです"
       ],
+      "The task cannot be aborted at the moment.": [
+        "現在、タスクを中断できません。"
+      ],
       "The task could not be started": [
         "タスクを開始できませんでした"
       ],
@@ -749,6 +755,9 @@
       "Troubleshooting": [
         "トラブルシューティング"
       ],
+      "Trying to abort the task": [
+        "タスクを中断しようとしています"
+      ],
       "Trying to cancel step": [
         "ステップをキャンセルしようとしています"
       ],
@@ -766,6 +775,9 @@
       ],
       "Unable to enable mail notification to user '%s': %s": [
         "ユーザー '%s' へのメール通知を有効にできません: %s"
+      ],
+      "Undo selection": [
+        "元に戻す"
       ],
       "Unlimited": [
         "無制限"
@@ -791,6 +803,9 @@
       "Yes": [
         "はい"
       ],
+      "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource": [
+        "このページでリソースロックを見つけることができます。ロックアイコンで示された排他的ロックは、このタスクの実行中に他のタスクがロック済みリソースを使用できないことを意味します。ロック解除アイコンで示された非排他的ロックは、他のタスクがリソースを自由にアクセスできることを意味します。これは、リソースとこのタスクの関係を示すためにのみ使用されます"
+      ],
       "You do not have permission": [
         "権限がありません"
       ],
@@ -811,9 +826,6 @@
       ],
       "error": [
         "エラー"
-      ],
-      "id: %s": [
-        "ID: %s"
       ],
       "is day of month (range: 1-31)": [
         "日 (範囲: 1 - 31)"

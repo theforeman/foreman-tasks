@@ -60,6 +60,9 @@ msgstr "繰り返しジョブを追跡するための特別なラベル。特定
 msgid "Action"
 msgstr "アクション"
 
+msgid "Action with sub plans"
+msgstr "サブプランによるアクション"
+
 msgid "Active"
 msgstr "アクティブ"
 
@@ -68,6 +71,9 @@ msgstr ""
 
 msgid "Active or disabled recurring logic with purpose %s already exists"
 msgstr "目的が %s のアクティブまたは無効な再帰論理がすでに存在します"
+
+msgid "All %s tasks are selected."
+msgstr "%s の全タスクを選択します。"
 
 msgid "All proxies with the required feature are unavailable at the moment"
 msgstr "現在、必要な機能があるすべてのプロキシーが利用できません"
@@ -247,9 +253,6 @@ msgstr "要求 %{request_id} で配信されたイベント"
 msgid "Exception"
 msgstr "例外"
 
-msgid "Exclusive resources"
-msgstr "排他的リソース"
-
 msgid "Execute now"
 msgstr "今すぐ実行"
 
@@ -382,19 +385,14 @@ msgstr "次の実行"
 msgid "No"
 msgstr "いいえ"
 
+msgid "No Tasks"
+msgstr "タスクなし"
+
 msgid "No errors"
 msgstr "エラーなし"
 
 msgid "No proxy defined for execution"
 msgstr "実行用プロキシーが設定されていません"
-
-msgid "No resources"
-msgstr "リソースがありません"
-
-msgid "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes."
-msgstr ""
-"このタスクに関連するリソースは現在ありません。リソースのロックは矛盾するタスクの同時"
-"実行を防ぎます。他のタスクはこの処理が終わるまで待つ必要があります。"
 
 msgid "No running steps"
 msgstr "実行中のステップがありません"
@@ -407,9 +405,6 @@ msgstr "タスクを開始できませんでした"
 
 msgid "No. of Tasks"
 msgstr "タスク数"
-
-msgid "Non-exclusive resources"
-msgstr "非排他的リソース"
 
 msgid "None"
 msgstr ""
@@ -433,18 +428,11 @@ msgstr "foreman_tasks_proxy_batch_trigger が有効な場合に、1 つの要求
 msgid "On"
 msgstr "次の時刻に開始"
 
-msgid "Only this task can access the resource. Other tasks must wait until this process completes."
-msgstr ""
-"このリソースにはこのタスクだけがアクセスできます。他のタスクは、この処理が完了するま"
-"で待つ必要があります。"
+msgid "Operation"
+msgstr "操作"
 
 msgid "Other includes all stopped tasks that are cancelled or pending"
 msgstr "その他のタスクには、キャンセルまたは保留中のすべての停止したタスクが含まれます。"
-
-msgid "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others."
-msgstr ""
-"他のタスクも同じリソースに同時アクセスできます。このロックは他をブロックせずタ"
-"スクとリソースの関係を追跡するために使われます。"
 
 msgid "Other:"
 msgstr "その他:"
@@ -587,6 +575,12 @@ msgstr "検索クエリー"
 msgid "See %{link} for more details on how to resolve the issue"
 msgstr "問題解決の詳細については、%{link} を参照してください"
 
+msgid "Select all {count} tasks"
+msgstr "{count} 件のタスクをすべて選択"
+
+msgid "Select row"
+msgstr "行の選択"
+
 msgid "Send data to the task from external executor (such as smart_proxy_dynflow)"
 msgstr "外部のエグゼキューター (smart_proxy_dynflow など) からタスクにデータを送信"
 
@@ -643,6 +637,9 @@ msgstr ""
 
 msgid "Sub tasks"
 msgstr "サブタスク"
+
+msgid "Sub tasks of %s"
+msgstr "%s のサブタスク"
 
 msgid "Subscribe"
 msgstr "サブスクライブ"
@@ -713,6 +710,9 @@ msgstr "Smart Proxy タスク %s が失敗しました。"
 msgid "The targets are of different types"
 msgstr "ターゲットは異なるタイプです"
 
+msgid "The task cannot be aborted at the moment."
+msgstr "現在、タスクを中断できません。"
+
 msgid "The task could not be started"
 msgstr "タスクを開始できませんでした"
 
@@ -759,6 +759,9 @@ msgstr "合計"
 msgid "Troubleshooting"
 msgstr "トラブルシューティング"
 
+msgid "Trying to abort the task"
+msgstr "タスクを中断しようとしています"
+
 msgid "Trying to cancel step"
 msgstr "ステップをキャンセルしようとしています"
 
@@ -776,6 +779,9 @@ msgstr "メールの通知を作成できません: %s"
 
 msgid "Unable to enable mail notification to user '%s': %s"
 msgstr "ユーザー '%s' へのメール通知を有効にできません: %s"
+
+msgid "Undo selection"
+msgstr "元に戻す"
 
 msgid "Unlimited"
 msgstr "無制限"
@@ -801,6 +807,9 @@ msgstr "フォーカスする時間: 過去"
 msgid "Yes"
 msgstr "はい"
 
+msgid "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource"
+msgstr "このページでリソースロックを見つけることができます。ロックアイコンで示された排他的ロックは、このタスクの実行中に他のタスクがロック済みリソースを使用できないことを意味します。ロック解除アイコンで示された非排他的ロックは、他のタスクがリソースを自由にアクセスできることを意味します。これは、リソースとこのタスクの関係を示すためにのみ使用されます"
+
 msgid "You do not have permission"
 msgstr "権限がありません"
 
@@ -821,9 +830,6 @@ msgstr "再開できませんでした"
 
 msgid "error"
 msgstr "エラー"
-
-msgid "id: %s"
-msgstr "ID: %s"
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is day of month (range: 1-31)"

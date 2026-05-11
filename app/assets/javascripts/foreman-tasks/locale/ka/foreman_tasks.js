@@ -59,6 +59,9 @@
       "Action": [
         "მოქმედება"
       ],
+      "Action with sub plans": [
+        "ქმედება ქვე-გეგმებით"
+      ],
       "Active": [
         "აქტიური"
       ],
@@ -67,6 +70,9 @@
       ],
       "Active or disabled recurring logic with purpose %s already exists": [
         "აქტიური ან გამრთული განმეორებადი ლოგიკა დანიშნულებით %s უკვე არსებობს"
+      ],
+      "All %s tasks are selected.": [
+        "მონიშნულია ყველა %s ამოცანა."
       ],
       "All proxies with the required feature are unavailable at the moment": [
         "მოთხოვნილი ფუნქციების მქონე ყველა პროქსი ამჟამად მიუწვდომელია"
@@ -245,9 +251,6 @@
       "Exception": [
         "გამონაკლისი"
       ],
-      "Exclusive resources": [
-        "ექსკლუზიური რესურსები"
-      ],
       "Execute now": [
         "ახლა შესრულება"
       ],
@@ -380,17 +383,14 @@
       "No": [
         "არა"
       ],
+      "No Tasks": [
+        "ამოცანების გარეშე"
+      ],
       "No errors": [
         "შეცდომების გარეშე"
       ],
       "No proxy defined for execution": [
         "გასაშვები პროქსი მითითებული არაა"
-      ],
-      "No resources": [
-        "რესურსები არ არის"
-      ],
-      "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes.": [
-        "ამ ამოცანას არ უკავშირდება რესურსები. რესურსების ბლოკირება ხელს უშლის ერთდროულ შეუთავსებელ ამოცანებს. სხვა ამოცანებმა უნდა დაელოდონ ამ პროცესის დასასრულს."
       ],
       "No running steps": [
         "გაშვებული ნაბიჯების გარეე"
@@ -403,9 +403,6 @@
       ],
       "No. of Tasks": [
         "ამოცანების რიცხვი"
-      ],
-      "Non-exclusive resources": [
-        "არაექსკლუზიური რესურსები"
       ],
       "None": [
         ""
@@ -428,14 +425,11 @@
       "On": [
         "დრო"
       ],
-      "Only this task can access the resource. Other tasks must wait until this process completes.": [
-        "ამ რესურსზე წვდომა მხოლოდ ამ ამოცანას აქვს. სხვა ამოცანებმა უნდა დაელოდონ ამ პროცესის დასასრულს."
+      "Operation": [
+        "ოეპრაცია"
       ],
       "Other includes all stopped tasks that are cancelled or pending": [
         "სხვები შეიცავს ყველა გაჩერებულ ამოცანას, რომლებიც გაუქმებულია ან მოლოდინში"
-      ],
-      "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others.": [
-        "სხვა ამოცანებსაც შეუძლიათ რესურსზე ერთდროულად წვდომა. ეს ბლოკი ინახავს ამოცანისა და რესურსის ურთიერთობას სხვების დაბლოკვის გარეშე."
       ],
       "Other:": [
         "სხვა:"
@@ -578,6 +572,12 @@
       "See %{link} for more details on how to resolve the issue": [
         "ამ პრობლემის გადასაწყვეტად იხილეთ %{link}"
       ],
+      "Select all {count} tasks": [
+        "{count} ამოცანის მონიშვნა"
+      ],
+      "Select row": [
+        "აირჩიეთ მწკრივი"
+      ],
       "Send data to the task from external executor (such as smart_proxy_dynflow)": [
         "ამოცანის გაგზავნა გარე შემსრულებლიდან (როგორიცაა smart_proxy_dynflow)"
       ],
@@ -634,6 +634,9 @@
       ],
       "Sub tasks": [
         "ქვეამოცანები"
+      ],
+      "Sub tasks of %s": [
+        "%s-ის ქვეამოცანები"
       ],
       "Subscribe": [
         "ხელმოწერა"
@@ -704,6 +707,9 @@
       "The targets are of different types": [
         "სამიზნეები სხვადასხვა ტიპისაა"
       ],
+      "The task cannot be aborted at the moment.": [
+        "ამჟამად ამოცანის გაუქმება შეუძლებელია."
+      ],
       "The task could not be started": [
         "ამოცანის გაშვება შეუძლებელია"
       ],
@@ -750,6 +756,9 @@
       "Troubleshooting": [
         "პრობლემების გადაჭრა"
       ],
+      "Trying to abort the task": [
+        "ამოცანის შეწყვეტის ცდა"
+      ],
       "Trying to cancel step": [
         "ბიჯის გაუქმების მცდელობა"
       ],
@@ -767,6 +776,9 @@
       ],
       "Unable to enable mail notification to user '%s': %s": [
         "შეცდომა ელფოსტის გაფრთხილებების ჩართვისას მომხმარებლისთვის '%s': %s"
+      ],
+      "Undo selection": [
+        "მონიშნულის დაბრუნება"
       ],
       "Unlimited": [
         "შეუზღუდავი"
@@ -792,6 +804,9 @@
       "Yes": [
         "დიახ"
       ],
+      "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource": [
+        "ამ გვერდზე შეგიძლიათ იპოვოთ რესურსების ბლოკები. ბლოკის ხატით მონიშნული ექსკლუზიური ბლოკი ნიშნავს, რომ არცერთ სხვა ამოცანას არ შეუძლია გამოიყენოს დაბლოკილი რესურსი ამ ამოცანის შესრულებისას. განბლოკილი ხატულით მონიშნული არაექსკლუზიური ბლოკი ნიშნავს, რომ სხვა ამოცანებს შეუძლიათ რესურსზე თავისუფლად წვდომა, ის გამოიყენება მხოლოდ ამ ამოცანის რესურსთან მიმართების მითითებისთვის"
+      ],
       "You do not have permission": [
         "წვდომა არ გაგაჩნიათ"
       ],
@@ -812,9 +827,6 @@
       ],
       "error": [
         "შეცდომა"
-      ],
-      "id: %s": [
-        "იდ: %s"
       ],
       "is day of month (range: 1-31)": [
         "თვის დღე (1-31)"

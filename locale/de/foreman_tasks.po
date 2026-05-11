@@ -62,6 +62,9 @@ msgstr ""
 msgid "Action"
 msgstr "Aktion"
 
+msgid "Action with sub plans"
+msgstr ""
+
 msgid "Active"
 msgstr "Aktiv"
 
@@ -69,6 +72,9 @@ msgid "Active Filters"
 msgstr ""
 
 msgid "Active or disabled recurring logic with purpose %s already exists"
+msgstr ""
+
+msgid "All %s tasks are selected."
 msgstr ""
 
 msgid "All proxies with the required feature are unavailable at the moment"
@@ -249,9 +255,6 @@ msgstr "Ereignis geliefert auf Anfrage %{request_id}"
 msgid "Exception"
 msgstr "Ausnahme"
 
-msgid "Exclusive resources"
-msgstr "Exklusive Ressourcen"
-
 msgid "Execute now"
 msgstr "Jetzt ausführen"
 
@@ -384,20 +387,14 @@ msgstr "Nächstes Vorkommen"
 msgid "No"
 msgstr "Nein"
 
+msgid "No Tasks"
+msgstr "Keine Aufgaben"
+
 msgid "No errors"
 msgstr "Keine Fehler"
 
 msgid "No proxy defined for execution"
 msgstr "Kein Proxy zur Ausführung angegeben"
-
-msgid "No resources"
-msgstr "Keine Ressourcen"
-
-msgid "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes."
-msgstr ""
-"Mit dieser Aufgabe sind derzeit keine Ressourcen verknüpft. Durch das Sperren "
-"von Ressourcen werden widersprechende Aufgaben am gleichzeitigen Lauf gehindert. "
-"Andere Aufgaben müssen warten, bis dieser Vorgang abgeschlossen ist."
 
 msgid "No running steps"
 msgstr "Keine laufenden Schritte"
@@ -410,9 +407,6 @@ msgstr "Es konnte keine Aufgabe gestartet werden"
 
 msgid "No. of Tasks"
 msgstr "Nr. der Aufgaben"
-
-msgid "Non-exclusive resources"
-msgstr "Nicht exklusive Ressourcen"
 
 msgid "None"
 msgstr ""
@@ -436,19 +430,11 @@ msgstr "Anzahl der Aufgaben, die in einer Anfrage an den Smart Proxy gesendet we
 msgid "On"
 msgstr "Am"
 
-msgid "Only this task can access the resource. Other tasks must wait until this process completes."
-msgstr ""
-"Nur diese Aufgabe kann auf die Ressource zugreifen. Andere Aufgaben müssen "
-"warten, bis dieser Vorgang abgeschlossen ist."
+msgid "Operation"
+msgstr "Vorgang"
 
 msgid "Other includes all stopped tasks that are cancelled or pending"
 msgstr "Sonstige umfasst alle angehaltenen Aufgaben, die abgebrochen oder ausstehend sind"
-
-msgid "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others."
-msgstr ""
-"Andere Aufgaben können gleichzeitig auf die Ressource zugreifen. Diese "
-"Sperre hält nur die Zuordnung der Aufgabe zur Ressource fest, ohne andere "
-"Aufgaben zu blockieren."
 
 msgid "Other:"
 msgstr "Sonstiges:"
@@ -591,6 +577,12 @@ msgstr "Suchanfrage"
 msgid "See %{link} for more details on how to resolve the issue"
 msgstr "Weitere Informationen zur Behebung des Problems finden Sie unter %{link}."
 
+msgid "Select all {count} tasks"
+msgstr ""
+
+msgid "Select row"
+msgstr "Zeile auswählen"
+
 msgid "Send data to the task from external executor (such as smart_proxy_dynflow)"
 msgstr "Daten von externem Executor (wie smart_proxy_dynflow) an Aufgabe senden"
 
@@ -647,6 +639,9 @@ msgstr ""
 
 msgid "Sub tasks"
 msgstr "Unteraufgabe"
+
+msgid "Sub tasks of %s"
+msgstr "Unteraufgaben von %s."
 
 msgid "Subscribe"
 msgstr "Abonnieren"
@@ -717,6 +712,9 @@ msgstr "Die Smart-Proxy Aufgabe  %s ist fehlgeschlagen."
 msgid "The targets are of different types"
 msgstr "Die Ziele haben verschiedene Typen"
 
+msgid "The task cannot be aborted at the moment."
+msgstr "Die Aufgabe kann im Moment nicht abgebrochen werden."
+
 msgid "The task could not be started"
 msgstr "Die Aufgabe konnte nicht gestartet werden."
 
@@ -764,6 +762,9 @@ msgstr "Gesamt"
 msgid "Troubleshooting"
 msgstr "Fehlerbehebung"
 
+msgid "Trying to abort the task"
+msgstr "Versuch des Abbruchs der Aufgabe"
+
 msgid "Trying to cancel step"
 msgstr "Versuch, Schritt abzubrechen"
 
@@ -781,6 +782,9 @@ msgstr "Unable to create mail notification: %s"
 
 msgid "Unable to enable mail notification to user '%s': %s"
 msgstr ""
+
+msgid "Undo selection"
+msgstr "Auswahl zurücksetzen"
 
 msgid "Unlimited"
 msgstr "Unbegrenzt"
@@ -806,6 +810,9 @@ msgstr "Mit Fokus auf den letzten"
 msgid "Yes"
 msgstr "Ja"
 
+msgid "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource"
+msgstr ""
+
 msgid "You do not have permission"
 msgstr "Sie haben keine Berechtigung"
 
@@ -826,9 +833,6 @@ msgstr "konnte nicht wieder aufgenommen werden"
 
 msgid "error"
 msgstr "Error"
-
-msgid "id: %s"
-msgstr "ID: %s"
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is day of month (range: 1-31)"
