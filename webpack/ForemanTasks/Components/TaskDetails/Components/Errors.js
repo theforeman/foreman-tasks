@@ -22,9 +22,7 @@ const Errors = ({ ...props }) => {
         isInline
         ouiaId="task-errors-none"
         title={__('No errors')}
-      >
-        {__('No errors')}
-      </Alert>
+      />
     );
   return (
     <div>
