@@ -116,9 +116,9 @@ const TaskInfo = props => {
       {
         title: 'Result',
         value: (
-          <React.Fragment>
+          <span>
             {resultIconEl(state, result)} {result}
-          </React.Fragment>
+          </span>
         ),
       },
       {
@@ -203,31 +203,19 @@ const TaskInfo = props => {
       <GridItem span={12} className="pf-v5-u-pb-lg" />
       {help && (
         <GridItem span={12}>
-          <p>
-            <span>
-              <b>{__('Troubleshooting')}</b>
-            </span>
-          </p>
+          <b>{__('Troubleshooting')}</b>
           <p dangerouslySetInnerHTML={{ __html: help }} />
         </GridItem>
       )}
       {output && output.length > 0 && (
         <GridItem span={12}>
-          <p>
-            <span>
-              <b>{__('Output:')}</b>
-            </span>
-          </p>
+          <b>{__('Output:')}</b>
           <pre>{output}</pre>
         </GridItem>
       )}
       {errors && errors.length > 0 && (
         <GridItem span={12}>
-          <div>
-            <span>
-              <b>{__('Errors:')}</b>
-            </span>
-          </div>
+          <b>{__('Errors:')}</b>
           <pre>{errors}</pre>
         </GridItem>
       )}
