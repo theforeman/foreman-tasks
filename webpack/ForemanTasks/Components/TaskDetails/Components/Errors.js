@@ -9,6 +9,7 @@ const Errors = ({ ...props }) => {
     return (
       <Alert
         variant="danger"
+        isInline
         ouiaId="task-errors-plan-missing"
         title={__('Execution plan unavailable')}
       >
@@ -29,6 +30,7 @@ const Errors = ({ ...props }) => {
       {failedSteps.map((step, i) => (
         <Alert
           variant="danger"
+          isInline
           key={i}
           ouiaId={`task-error-${i}`}
           title={__('Step error')}

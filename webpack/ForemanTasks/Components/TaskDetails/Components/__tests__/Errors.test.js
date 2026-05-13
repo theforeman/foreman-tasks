@@ -7,8 +7,7 @@ import Errors from '../Errors';
 const failedStepFixture = {
   error: {
     exception_class: 'RuntimeError',
-    message:
-      'Action Actions::Katello::EventQueue::Monitor is already active',
+    message: 'Action Actions::Katello::EventQueue::Monitor is already active',
     backtrace: [
       "/home/vagrant/.gem/ruby/gems/dynflow-1.2.3/lib/dynflow/action/singleton.rb:15:in `rescue in singleton_lock!'",
       "/home/vagrant/.gem/ruby/gems/dynflow-1.2.3/lib/dynflow/action/singleton.rb:12:in `singleton_lock!'",
@@ -30,20 +29,23 @@ describe('Errors', () => {
   });
 
   it('renders success state when there are no failed steps', () => {
-    render(
-      <Errors failedSteps={[]} executionPlan={{ state: 'paused' }} />
-    );
+    render(<Errors failedSteps={[]} executionPlan={{ state: 'paused' }} />);
     const noErrors = screen.getAllByText(/^no errors$/i);
     expect(noErrors.length).toBeGreaterThanOrEqual(1);
   });
 
   it('renders failed step details when failedSteps is non-empty', () => {
-    render(
+    const { container } = render(
       <Errors
         executionPlan={{ state: 'paused', cancellable: false }}
         failedSteps={[failedStepFixture]}
       />
     );
+    const stepAlert = container.querySelector(
+      '[data-ouia-component-id="task-error-0"]'
+    );
+    expect(stepAlert).toBeInTheDocument();
+    expect(stepAlert).toHaveClass('pf-m-inline');
     expect(
       screen.getByText('Actions::Katello::EventQueue::Monitor')
     ).toBeInTheDocument();
