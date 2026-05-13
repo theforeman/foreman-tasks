@@ -1,20 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Alert } from 'patternfly-react';
+import { Alert } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
 
 const Errors = ({ ...props }) => {
   const { failedSteps, executionPlan } = props;
   if (!executionPlan)
     return (
-      <Alert type="error">{__('Execution plan data not available ')}</Alert>
+      <Alert
+        variant="danger"
+        isInline
+        ouiaId="task-errors-plan-missing"
+        title={__('Execution plan unavailable')}
+      >
+        {__('Execution plan data not available ')}
+      </Alert>
     );
   if (!failedSteps.length)
-    return <Alert type="success">{__('No errors')}</Alert>;
+    return (
+      <Alert
+        variant="success"
+        isInline
+        ouiaId="task-errors-none"
+        title={__('No errors')}
+      />
+    );
   return (
     <div>
       {failedSteps.map((step, i) => (
-        <Alert type="error" key={i}>
+        <Alert
+          variant="danger"
+          isInline
+          key={i}
+          ouiaId={`task-error-${i}`}
+          title={__('Step error')}
+        >
           <span>{__('Action')}:</span>
           <span>
             <pre>{step.action_class}</pre>
@@ -37,7 +57,7 @@ const Errors = ({ ...props }) => {
               </span>
               <span>{__('Backtrace')}:</span>
               <span>
-                <pre>{step.error.backtrace.join('\n')}</pre>
+                <pre>{(step.error.backtrace || []).join('\n')}</pre>
               </span>
             </React.Fragment>
           )}
