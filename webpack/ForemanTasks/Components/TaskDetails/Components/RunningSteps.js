@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Alert, AlertVariant, Button } from '@patternfly/react-core';
-import { translate as __ } from 'foremanReact/common/I18n';
+import { translate as __, sprintf } from 'foremanReact/common/I18n';
 
 const RunningSteps = ({
   runningSteps,
@@ -19,7 +19,7 @@ const RunningSteps = ({
           isInline
           key={step.id || i}
           ouiaId={`running-step-${i}`}
-          title={__(`Running step ${i + 1}`)}
+          title={sprintf(__('Running step %s'), i + 1)}
         >
           {step.cancellable && (
             <p>

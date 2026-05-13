@@ -2,6 +2,14 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
+jest.mock('foremanReact/common/I18n', () => ({
+  translate: str => str,
+  sprintf: (format, ...args) => {
+    let i = 0;
+    return format.replace(/%s/g, () => String(args[i++]));
+  },
+}));
+
 import RunningSteps from '../RunningSteps';
 
 const baseProps = {
@@ -42,9 +50,27 @@ describe('RunningSteps', () => {
         ]}
       />
     );
+    expect(
+      screen.getByRole('heading', { name: 'Warning alert: Running step 1' })
+    ).toBeInTheDocument();
     expect(screen.getByText('test')).toBeInTheDocument();
     expect(screen.getByText('paused')).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: /cancel/i }));
     expect(cancelStep).toHaveBeenCalledWith('task-id1', 99);
+  });
+
+  it('uses sprintf so each running step title shows a 1-based step index', () => {
+    render(
+      <RunningSteps
+        {...baseProps}
+        runningSteps={[sampleStep, { ...sampleStep, id: 2, state: 'running' }]}
+      />
+    );
+    expect(
+      screen.getByRole('heading', { name: 'Warning alert: Running step 1' })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: 'Warning alert: Running step 2' })
+    ).toBeInTheDocument();
   });
 });
