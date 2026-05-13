@@ -2,14 +2,6 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
-jest.mock('foremanReact/common/I18n', () => ({
-  translate: str => str,
-  sprintf: (format, ...args) => {
-    let i = 0;
-    return format.replace(/%s/g, () => String(args[i++]));
-  },
-}));
-
 import RunningSteps from '../RunningSteps';
 
 const baseProps = {
