@@ -8,6 +8,7 @@ import {
   EmptyStateBody,
   EmptyStateHeader,
   EmptyStateIcon,
+  Flex,
   Icon,
   Text,
   TextVariants,
@@ -26,17 +27,21 @@ const LocksSection = ({
 }) => (
   <Card isPlain className="pf-v5-u-mb-xl" ouiaId={ouiaSectionId}>
     <CardHeader>
-      <div className="pf-v5-u-display-flex pf-v5-u-align-items-center pf-v5-u-flex-nowrap pf-v5-u-gap-sm">
+      <Flex
+        alignItems={{ default: 'alignItemsCenter' }}
+        flexWrap={{ default: 'nowrap' }}
+        gap={{ default: 'gapSm' }}
+      >
         <Title
           headingLevel="h3"
           size="lg"
           ouiaId={`${ouiaSectionId}-title`}
-          className="pf-v5-u-m-0 pf-v5-u-mr-sm"
+          className="pf-v5-u-m-0"
         >
           {title}
         </Title>
         <RowIcon aria-hidden />
-      </div>
+      </Flex>
     </CardHeader>
     <CardBody>
       <p className="pf-v5-u-color-200 pf-v5-u-mb-md pf-v5-u-font-size-md">
@@ -58,11 +63,15 @@ const LocksSection = ({
                 className="pf-v5-u-min-w-0 pf-v5-u-py-sm pf-v5-u-pl-md"
                 width={80}
               >
-                <span className="pf-v5-u-display-inline-flex pf-v5-u-align-items-center pf-v5-u-flex-nowrap pf-v5-u-gap-sm pf-v5-u-min-w-0">
-                  <Icon
-                    iconSize="sm"
-                    className="pf-v5-u-flex-shrink-0 pf-v5-u-mr-xs"
-                  >
+                <Flex
+                  component="span"
+                  display={{ default: 'inlineFlex' }}
+                  alignItems={{ default: 'alignItemsCenter' }}
+                  flexWrap={{ default: 'nowrap' }}
+                  gap={{ default: 'gapSm' }}
+                  className="pf-v5-u-min-w-0"
+                >
+                  <Icon iconSize="sm" className="pf-v5-u-flex-shrink-0">
                     <RowIcon />
                   </Icon>
                   {lock.link ? (
@@ -79,7 +88,7 @@ const LocksSection = ({
                       {lock.resource_type}
                     </span>
                   )}
-                </span>
+                </Flex>
               </Td>
               <Td
                 modifier="nowrap"
@@ -110,9 +119,9 @@ const Locks = ({ locks }) => {
 
   if (locks.length === 0) {
     return (
-      <div
+      <Flex
         data-ouia-component-id="task-locks-empty"
-        className="pf-v5-u-display-flex pf-v5-u-justify-content-center"
+        justifyContent={{ default: 'justifyContentCenter' }}
       >
         <EmptyState className="pf-v5-u-w-50 pf-v5-u-pl-0 pf-v5-u-pr-0">
           <EmptyStateHeader
@@ -126,7 +135,7 @@ const Locks = ({ locks }) => {
             )}
           </EmptyStateBody>
         </EmptyState>
-      </div>
+      </Flex>
     );
   }
 
