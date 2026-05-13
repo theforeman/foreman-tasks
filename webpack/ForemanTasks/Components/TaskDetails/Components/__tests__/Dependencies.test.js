@@ -1,17 +1,20 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen, within } from '@testing-library/react';
+import '@testing-library/jest-dom';
+
 import Dependencies from '../Dependencies';
 
 describe('Dependencies', () => {
-  it('should render with no dependencies', () => {
-    const wrapper = mount(<Dependencies dependsOn={[]} blocks={[]} />);
-    expect(wrapper.find('Alert')).toHaveLength(1);
-    expect(wrapper.find('DependencyTable')).toHaveLength(2);
-    expect(wrapper.find('Table')).toHaveLength(0);
-    expect(wrapper.text()).toContain('None');
+  it('renders info alert and None for both tables when there are no tasks', () => {
+    render(<Dependencies dependsOn={[]} blocks={[]} />);
+    expect(
+      screen.getByRole('heading', { name: /task dependencies/i })
+    ).toBeInTheDocument();
+    const noneLabels = screen.getAllByText(/^none$/i);
+    expect(noneLabels.length).toBeGreaterThanOrEqual(2);
   });
 
-  it('should render with depends_on dependencies', () => {
+  it('renders depends_on tasks in the first table', () => {
     const dependsOn = [
       {
         id: '123',
@@ -28,16 +31,15 @@ describe('Dependencies', () => {
         result: 'pending',
       },
     ];
-    const wrapper = mount(<Dependencies dependsOn={dependsOn} blocks={[]} />);
-    expect(wrapper.find('Table')).toHaveLength(1);
-    expect(wrapper.find('Tbody').find('Tr')).toHaveLength(2);
-    expect(wrapper.text()).toContain('Foo Bar Action');
-    expect(wrapper.text()).toContain('Baz Qux Action');
-    expect(wrapper.text()).toContain('stopped');
-    expect(wrapper.text()).toContain('success');
+    render(<Dependencies dependsOn={dependsOn} blocks={[]} />);
+    const table = screen.getByRole('grid', { name: /depends on/i });
+    expect(within(table).getByText('Foo Bar Action')).toBeInTheDocument();
+    expect(within(table).getByText('Baz Qux Action')).toBeInTheDocument();
+    expect(within(table).getByText('stopped')).toBeInTheDocument();
+    expect(within(table).getByText('success')).toBeInTheDocument();
   });
 
-  it('should render with blocks dependencies', () => {
+  it('renders blocks in the second table', () => {
     const blocks = [
       {
         id: '789',
@@ -47,15 +49,14 @@ describe('Dependencies', () => {
         result: 'warning',
       },
     ];
-    const wrapper = mount(<Dependencies dependsOn={[]} blocks={blocks} />);
-    expect(wrapper.find('Table')).toHaveLength(1);
-    expect(wrapper.find('Tbody').find('Tr')).toHaveLength(1);
-    expect(wrapper.text()).toContain('Test Action');
-    expect(wrapper.text()).toContain('paused');
-    expect(wrapper.text()).toContain('warning');
+    render(<Dependencies dependsOn={[]} blocks={blocks} />);
+    const table = screen.getByRole('grid', { name: /^blocks$/i });
+    expect(within(table).getByText('Test Action')).toBeInTheDocument();
+    expect(within(table).getByText('paused')).toBeInTheDocument();
+    expect(within(table).getByText('warning')).toBeInTheDocument();
   });
 
-  it('should render with both dependency types', () => {
+  it('renders both tables when dependsOn and blocks are present', () => {
     const dependsOn = [
       {
         id: '123',
@@ -81,12 +82,11 @@ describe('Dependencies', () => {
         result: 'error',
       },
     ];
-    const wrapper = mount(
-      <Dependencies dependsOn={dependsOn} blocks={blocks} />
-    );
-    expect(wrapper.find('Table')).toHaveLength(2);
-    expect(wrapper.text()).toContain('Foo Action');
-    expect(wrapper.text()).toContain('Bar Action');
-    expect(wrapper.text()).toContain('Baz Action');
+    render(<Dependencies dependsOn={dependsOn} blocks={blocks} />);
+    expect(screen.getByRole('grid', { name: /depends on/i })).toBeInTheDocument();
+    expect(screen.getByText('Foo Action')).toBeInTheDocument();
+    expect(screen.getByRole('grid', { name: /^blocks$/i })).toBeInTheDocument();
+    expect(screen.getByText('Bar Action')).toBeInTheDocument();
+    expect(screen.getByText('Baz Action')).toBeInTheDocument();
   });
 });
