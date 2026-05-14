@@ -7,6 +7,8 @@ import {
   EmptyStateIcon,
   Flex,
   FlexItem,
+  Grid,
+  GridItem,
   Icon,
   Text,
   TextContent,
@@ -56,60 +58,51 @@ const LocksSection = ({
       </TextContent>
     </FlexItem>
     <FlexItem>
-      <Table
-        aria-label={title}
-        variant="compact"
-        ouiaId={`${ouiaSectionId}-table`}
-        className="pf-v5-u-w-100-on-sm pf-v5-u-w-75-on-md pf-v5-u-w-50-on-lg pf-v5-u-w-33-on-xl"
-      >
-        <Tbody>
-          {items.map((lock, key) => (
-            <Tr
-              key={`${lock.resource_type}-${lock.resource_id}-${key}`}
-              ouiaId={`${ouiaSectionId}-row-${key}`}
-            >
-              <Td
-                className="pf-v5-u-min-w-0 pf-v5-u-py-sm pf-v5-u-pl-md"
-                width={80}
-              >
-                <Flex
-                  component="span"
-                  display={{ default: 'inlineFlex' }}
-                  alignItems={{ default: 'alignItemsCenter' }}
-                  flexWrap={{ default: 'nowrap' }}
-                  gap={{ default: 'gapSm' }}
-                  className="pf-v5-u-min-w-0"
+      <Grid>
+        <GridItem span={5}>
+          <Table
+            aria-label={title}
+            variant="compact"
+            ouiaId={`${ouiaSectionId}-table`}
+          >
+            <Tbody>
+              {items.map((lock, index) => (
+                <Tr
+                  key={`${lock.resource_type}-${lock.resource_id}-${index}`}
+                  ouiaId={`${ouiaSectionId}-row-${index}`}
                 >
-                  <Icon iconSize="sm" className="pf-v5-u-flex-shrink-0">
-                    <RowIcon />
-                  </Icon>
-                  {lock.link ? (
-                    <Text
-                      className="pf-v5-u-text-truncate"
-                      component={TextVariants.a}
-                      href={lock.link}
-                      ouiaId={`${ouiaSectionId}-resource-type-link-${key}`}
+                  <Td>
+                    <Flex
+                      alignItems={{ default: 'alignItemsCenter' }}
+                      spaceItems={{ default: 'spaceItemsSm' }}
+                      flexWrap={{ default: 'nowrap' }}
                     >
-                      {lock.resource_type}
-                    </Text>
-                  ) : (
-                    <span className="pf-v5-u-text-truncate pf-v5-u-display-block">
-                      {lock.resource_type}
-                    </span>
-                  )}
-                </Flex>
-              </Td>
-              <Td
-                modifier="nowrap"
-                width={20}
-                className="pf-v5-u-py-sm pf-v5-u-pl-md pf-v5-u-pr-md pf-v5-u-text-align-left"
-              >
-                {sprintf(__('id: %s'), String(lock.resource_id))}
-              </Td>
-            </Tr>
-          ))}
-        </Tbody>
-      </Table>
+                      <FlexItem>
+                        <Icon size="sm">
+                          <RowIcon />
+                        </Icon>
+                      </FlexItem>
+                      <FlexItem>
+                        {lock.link ? (
+                          <a
+                            href={lock.link}
+                            data-ouia-component-id={`${ouiaSectionId}-resource-type-link-${index}`}
+                          >
+                            {lock.resource_type}
+                          </a>
+                        ) : (
+                          lock.resource_type
+                        )}
+                      </FlexItem>
+                    </Flex>
+                  </Td>
+                  <Td>{sprintf(__('id: %s'), String(lock.resource_id))}</Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+        </GridItem>
+      </Grid>
     </FlexItem>
   </Flex>
 );
