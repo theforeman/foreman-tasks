@@ -108,7 +108,7 @@ module ForemanTasks
           get :show, params: { id: task.id }, session: set_session_user
           assert_response :success
           data = JSON.parse(response.body)
-          assert_equal task.duration.in_seconds.to_s, data['duration']
+          assert_equal task.duration.to_f.to_s, data['duration']
         end
       end
 
@@ -118,7 +118,7 @@ module ForemanTasks
           get :index, session: set_session_user
           assert_response :success
           data = JSON.parse(response.body)
-          assert_equal task.duration.in_seconds.to_s, data['results'][0]['duration']
+          assert_equal task.duration.to_f.to_s, data['results'][0]['duration']
         end
       end
 
