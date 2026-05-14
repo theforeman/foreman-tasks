@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Card,
-  CardBody,
-  CardHeader,
   EmptyState,
   EmptyStateBody,
   EmptyStateHeader,
   EmptyStateIcon,
   Flex,
+  FlexItem,
   Icon,
   Text,
+  TextContent,
   TextVariants,
   Title,
 } from '@patternfly/react-core';
@@ -25,28 +24,38 @@ const LocksSection = ({
   RowIcon,
   ouiaSectionId,
 }) => (
-  <Card isPlain className="pf-v5-u-mb-xl" ouiaId={ouiaSectionId}>
-    <CardHeader>
+  <Flex direction={{ default: 'column' }}>
+    <FlexItem spacer={{ default: 'spacerSm' }}>
       <Flex
         alignItems={{ default: 'alignItemsCenter' }}
-        flexWrap={{ default: 'nowrap' }}
-        gap={{ default: 'gapSm' }}
+        spaceItems={{ default: 'spaceItemsSm' }}
       >
-        <Title
-          headingLevel="h3"
-          size="lg"
-          ouiaId={`${ouiaSectionId}-title`}
-          className="pf-v5-u-m-0"
-        >
-          {title}
-        </Title>
-        <RowIcon aria-hidden />
+        <FlexItem>
+          <Title
+            headingLevel="h3"
+            size="lg"
+            style={{ margin: '0' }}
+            ouiaId={`${ouiaSectionId}-title`}
+          >
+            {title}
+          </Title>
+        </FlexItem>
+        <FlexItem>
+          <RowIcon aria-hidden />
+        </FlexItem>
       </Flex>
-    </CardHeader>
-    <CardBody>
-      <p className="pf-v5-u-color-200 pf-v5-u-mb-md pf-v5-u-font-size-md">
-        {description}
-      </p>
+    </FlexItem>
+    <FlexItem>
+      <TextContent>
+        <Text
+          component={TextVariants.p}
+          ouiaId={`${ouiaSectionId}-description`}
+        >
+          {description}
+        </Text>
+      </TextContent>
+    </FlexItem>
+    <FlexItem>
       <Table
         aria-label={title}
         variant="compact"
@@ -101,8 +110,8 @@ const LocksSection = ({
           ))}
         </Tbody>
       </Table>
-    </CardBody>
-  </Card>
+    </FlexItem>
+  </Flex>
 );
 
 LocksSection.propTypes = {
@@ -140,7 +149,11 @@ const Locks = ({ locks }) => {
   }
 
   return (
-    <div data-ouia-component-id="task-locks-populated">
+    <Flex
+      direction={{ default: 'column' }}
+      gap={{ default: 'gap2xl' }}
+      data-ouia-component-id="task-locks-populated"
+    >
       {nonExclusive.length > 0 && (
         <LocksSection
           title={__('Non-exclusive resources')}
@@ -163,7 +176,7 @@ const Locks = ({ locks }) => {
           ouiaSectionId="task-locks-exclusive"
         />
       )}
-    </div>
+    </Flex>
   );
 };
 

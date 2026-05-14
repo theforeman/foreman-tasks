@@ -165,7 +165,7 @@ describe('Locks', () => {
     expect(screen.getByText('id: uuid-abc')).toBeInTheDocument();
   });
 
-  it('sets ouia ids on populated container, sections, rows, titles, and resource links', () => {
+  it('sets ouia ids on populated container, tables, rows, and resource links', () => {
     const { container } = render(
       <Locks
         locks={[
@@ -191,20 +191,12 @@ describe('Locks', () => {
     ).toBeInTheDocument();
     expect(
       container.querySelector(
-        '[data-ouia-component-id="task-locks-non-exclusive"]'
-      )
-    ).toBeInTheDocument();
-    expect(
-      container.querySelector('[data-ouia-component-id="task-locks-exclusive"]')
-    ).toBeInTheDocument();
-    expect(
-      container.querySelector(
-        '[data-ouia-component-id="task-locks-non-exclusive-title"]'
+        '[data-ouia-component-id="task-locks-non-exclusive-table"]'
       )
     ).toBeInTheDocument();
     expect(
       container.querySelector(
-        '[data-ouia-component-id="task-locks-exclusive-title"]'
+        '[data-ouia-component-id="task-locks-exclusive-table"]'
       )
     ).toBeInTheDocument();
     expect(

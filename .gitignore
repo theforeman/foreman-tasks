@@ -1,5 +1,4 @@
 .bundle/
-.cursor/*
 log/*.log
 pkg/
 test/dummy/db/*.sqlite3
