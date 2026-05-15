@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent, within } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 import Errors from '../Errors';
@@ -30,8 +30,12 @@ describe('Errors', () => {
 
   it('renders success state when there are no failed steps', () => {
     render(<Errors failedSteps={[]} executionPlan={{ state: 'paused' }} />);
-    const noErrors = screen.getAllByText(/^no errors$/i);
-    expect(noErrors.length).toBeGreaterThanOrEqual(1);
+    expect(
+      screen.getByRole('heading', { level: 2, name: /no errors found/i })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/the task finished with no errors or warnings/i)
+    ).toBeInTheDocument();
   });
 
   it('renders failed step details when failedSteps is non-empty', () => {
@@ -47,13 +51,19 @@ describe('Errors', () => {
     expect(stepAlert).toBeInTheDocument();
     expect(stepAlert).toHaveClass('pf-m-inline');
     expect(
-      screen.getByText('Actions::Katello::EventQueue::Monitor')
+      screen.getByRole('heading', {
+        level: 4,
+        name: /failed task: action actions::katello::eventqueue::monitor is already active/i,
+      })
     ).toBeInTheDocument();
-    expect(screen.getByText(/runtimeerror/i)).toBeInTheDocument();
+    fireEvent.click(
+      screen.getByRole('button', { name: /toggle error details/i })
+    );
+    const inAlert = within(stepAlert);
     expect(
-      screen.getByText(
-        /action actions::katello::eventqueue::monitor is already active/i
-      )
+      inAlert.getByText('Actions::Katello::EventQueue::Monitor')
     ).toBeInTheDocument();
+    expect(inAlert.getByText(/runtimeerror/i)).toBeInTheDocument();
+    expect(inAlert.getByText(/singleton_lock/i)).toBeInTheDocument();
   });
 });
