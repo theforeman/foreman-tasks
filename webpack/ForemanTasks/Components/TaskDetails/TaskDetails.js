@@ -96,6 +96,8 @@ const TaskDetails = ({
           ouiaId="task-details-tab-running-steps"
         >
           <RunningSteps
+            executionPlan={executionPlan}
+            result={props.result}
             runningSteps={runningSteps}
             id={id}
             cancelStep={cancelStep}
