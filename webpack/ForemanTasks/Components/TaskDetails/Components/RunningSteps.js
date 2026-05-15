@@ -1,7 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Alert, AlertVariant, Button } from '@patternfly/react-core';
+import {
+  Alert,
+  AlertVariant,
+  Button,
+  Flex,
+  FlexItem,
+  Grid,
+  GridItem,
+  Stack,
+  StackItem,
+} from '@patternfly/react-core';
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
+
+const RunningStepDetailBlock = ({ label, children }) => (
+  <GridItem span={12}>
+    <Flex
+      direction={{ default: 'column' }}
+      spaceItems={{ default: 'spaceItemsXs' }}
+    >
+      <FlexItem>
+        <strong>{label}</strong>
+      </FlexItem>
+      <FlexItem>{children}</FlexItem>
+    </Flex>
+  </GridItem>
+);
+
+RunningStepDetailBlock.propTypes = {
+  label: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
+};
 
 const RunningSteps = ({
   runningSteps,
@@ -10,55 +39,78 @@ const RunningSteps = ({
   taskReload,
   taskReloadStart,
 }) => {
-  if (!runningSteps.length) return <span>{__('No running steps')}</span>;
-  return (
-    <div>
-      {runningSteps.map((step, i) => (
-        <Alert
-          variant={AlertVariant.warning}
-          isInline
-          key={step.id || i}
-          ouiaId={`running-step-${i}`}
-          title={sprintf(__('Running step %s'), i + 1)}
-        >
-          {step.cancellable && (
-            <p>
-              <Button
-                variant="danger"
-                size="sm"
-                ouiaId={`running-step-cancel-button-${i}`}
-                onClick={() => {
-                  if (!taskReload) {
-                    taskReloadStart(id);
-                  }
-                  cancelStep(id, step.id);
-                }}
-              >
-                {__('Cancel')}
-              </Button>
-            </p>
-          )}
+  if (!runningSteps.length) {
+    return <span>{__('No running steps')}</span>;
+  }
 
-          <p>
-            <span>{__('Action')}:</span>
-            <span />
-          </p>
-          <pre>{step.action_class}</pre>
-          <p>
-            <span>{__('State')}:</span>
-            <span>{step.state}</span>
-          </p>
-          <span>{__('Input')}:</span>
-          <span>
-            <pre>{step.input}</pre>
-          </span>
-          <span>{__('Output')}:</span>
-          <span>
-            <pre>{step.output}</pre>
-          </span>
-        </Alert>
+  return (
+    <Stack hasGutter>
+      {runningSteps.map((step, i) => (
+        <StackItem key={step.id || i}>
+          <Alert
+            variant={AlertVariant.warning}
+            isInline
+            title={sprintf(__('Running step %s'), i + 1)}
+            ouiaId={`running-step-${i}`}
+          >
+            <Grid hasGutter>
+              {step.cancellable && (
+                <GridItem span={12}>
+                  <Flex>
+                    <FlexItem>
+                      <Button
+                        ouiaId={`running-step-${i}-cancel`}
+                        variant="danger"
+                        size="sm"
+                        onClick={() => {
+                          if (!taskReload) {
+                            taskReloadStart(id);
+                          }
+
+                          cancelStep(id, step.id);
+                        }}
+                      >
+                        {__('Cancel')}
+                      </Button>
+                    </FlexItem>
+                  </Flex>
+                </GridItem>
+              )}
+              <GridItem span={12}>
+                <Flex
+                  direction={{ default: 'row' }}
+                  spaceItems={{ default: 'spaceItemsSm' }}
+                  alignItems={{ default: 'alignItemsBaseline' }}
+                >
+                  <FlexItem>
+                    <strong>{`${__('Action')}:`}</strong>
+                  </FlexItem>
+                  <FlexItem>{step.action_class}</FlexItem>
+                </Flex>
+              </GridItem>
+              <GridItem span={12}>
+                <Flex
+                  direction={{ default: 'row' }}
+                  spaceItems={{ default: 'spaceItemsSm' }}
+                  alignItems={{ default: 'alignItemsBaseline' }}
+                >
+                  <FlexItem>
+                    <strong>{`${__('State')}:`}</strong>
+                  </FlexItem>
+                  <FlexItem>{step.state}</FlexItem>
+                </Flex>
+              </GridItem>
+              <RunningStepDetailBlock label={__('Input')}>
+                <pre>{step.input}</pre>
+              </RunningStepDetailBlock>
+              <RunningStepDetailBlock label={__('Output')}>
+                <pre>{step.output}</pre>
+              </RunningStepDetailBlock>
+            </Grid>
+          </Alert>
+        </StackItem>
       ))}
-    </div>
+    </Stack>
   );
 };
 
