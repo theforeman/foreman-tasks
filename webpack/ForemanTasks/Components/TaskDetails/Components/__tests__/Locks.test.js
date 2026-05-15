@@ -15,9 +15,6 @@ describe('Locks', () => {
         /no resources currently associated with this task/i
       )
     ).toBeInTheDocument();
-    expect(
-      container.querySelector('[data-ouia-component-id="task-locks-empty"]')
-    ).toBeInTheDocument();
   });
 
   it('renders non-exclusive section with rows when there are only non-exclusive locks', () => {

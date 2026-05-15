@@ -122,22 +122,18 @@ const Locks = ({ locks }) => {
 
   if (locks.length === 0) {
     return (
-      <Grid hasGutter data-ouia-component-id="task-locks-empty">
-        <GridItem span={12} xl={6} xlOffset={3}>
-          <EmptyState variant={EmptyStateVariant.full}>
-            <EmptyStateHeader
-              headingLevel="h2"
-              titleText={__('No resources')}
-              icon={<EmptyStateIcon icon={LockOpenIcon} />}
-            />
-            <EmptyStateBody>
-              {__(
-                'No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes.'
-              )}
-            </EmptyStateBody>
-          </EmptyState>
-        </GridItem>
-      </Grid>
+      <EmptyState variant={EmptyStateVariant.sm}>
+        <EmptyStateHeader
+          headingLevel="h3"
+          titleText={__('No resources')}
+          icon={<EmptyStateIcon icon={LockOpenIcon} />}
+        />
+        <EmptyStateBody>
+          {__(
+            'No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes.'
+          )}
+        </EmptyStateBody>
+      </EmptyState>
     );
   }
 
