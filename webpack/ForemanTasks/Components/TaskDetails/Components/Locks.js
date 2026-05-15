@@ -5,6 +5,7 @@ import {
   EmptyStateBody,
   EmptyStateHeader,
   EmptyStateIcon,
+  EmptyStateVariant,
   Flex,
   FlexItem,
   Grid,
@@ -121,23 +122,22 @@ const Locks = ({ locks }) => {
 
   if (locks.length === 0) {
     return (
-      <Flex
-        data-ouia-component-id="task-locks-empty"
-        justifyContent={{ default: 'justifyContentCenter' }}
-      >
-        <EmptyState className="pf-v5-u-w-50 pf-v5-u-pl-0 pf-v5-u-pr-0">
-          <EmptyStateHeader
-            headingLevel="h2"
-            titleText={__('No resources')}
-            icon={<EmptyStateIcon icon={LockOpenIcon} />}
-          />
-          <EmptyStateBody>
-            {__(
-              'No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes.'
-            )}
-          </EmptyStateBody>
-        </EmptyState>
-      </Flex>
+      <Grid hasGutter data-ouia-component-id="task-locks-empty">
+        <GridItem span={12} xl={6} xlOffset={3}>
+          <EmptyState variant={EmptyStateVariant.full}>
+            <EmptyStateHeader
+              headingLevel="h2"
+              titleText={__('No resources')}
+              icon={<EmptyStateIcon icon={LockOpenIcon} />}
+            />
+            <EmptyStateBody>
+              {__(
+                'No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes.'
+              )}
+            </EmptyStateBody>
+          </EmptyState>
+        </GridItem>
+      </Grid>
     );
   }
 
