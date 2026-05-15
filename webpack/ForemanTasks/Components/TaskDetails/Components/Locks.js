@@ -122,7 +122,7 @@ const Locks = ({ locks }) => {
 
   if (locks.length === 0) {
     return (
-      <EmptyState variant={EmptyStateVariant.sm}>
+      <EmptyState variant={EmptyStateVariant.lg}>
         <EmptyStateHeader
           headingLevel="h3"
           titleText={__('No resources')}
