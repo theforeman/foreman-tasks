@@ -4,6 +4,11 @@ import {
   Alert,
   AlertVariant,
   Button,
+  EmptyState,
+  EmptyStateBody,
+  EmptyStateHeader,
+  EmptyStateIcon,
+  EmptyStateVariant,
   Flex,
   FlexItem,
   Grid,
@@ -11,6 +16,7 @@ import {
   Stack,
   StackItem,
 } from '@patternfly/react-core';
+import { HourglassStartIcon } from '@patternfly/react-icons';
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
 
 const RunningStepDetailBlock = ({ label, children }) => (
@@ -33,13 +39,59 @@ RunningStepDetailBlock.propTypes = {
 };
 
 const RunningSteps = ({
+  executionPlan,
+  result,
   runningSteps,
   id,
   cancelStep,
   taskReload,
   taskReloadStart,
 }) => {
+  const planState = executionPlan?.state;
+  const resultIsPending = String(result) === 'pending';
+
   if (!runningSteps.length) {
+    if (planState === 'running' && resultIsPending) {
+      return (
+        <Alert
+          variant={AlertVariant.warning}
+          isInline
+          ouiaId="running-steps-suspended-pending"
+          title={__('Temporarily suspended step(s)')}
+        >
+          {__('The task is still being processed. Please wait.')}
+        </Alert>
+      );
+    }
+
+    if (planState === 'planned' && resultIsPending) {
+      return (
+        <Grid>
+          <GridItem span={12}>
+            <Flex
+              direction={{ default: 'column' }}
+              alignItems={{ default: 'alignItemsCenter' }}
+              justifyContent={{ default: 'justifyContentCenter' }}
+              fullWidth={{ default: 'fullWidth' }}
+            >
+              <FlexItem>
+                <EmptyState variant={EmptyStateVariant.full}>
+                  <EmptyStateHeader
+                    titleText={__('Planned task')}
+                    headingLevel="h2"
+                    icon={<EmptyStateIcon icon={HourglassStartIcon} />}
+                  />
+                  <EmptyStateBody>
+                    {__('The task has not started yet.')}
+                  </EmptyStateBody>
+                </EmptyState>
+              </FlexItem>
+            </Flex>
+          </GridItem>
+        </Grid>
+      );
+    }
+
     return <span>{__('No running steps')}</span>;
   }
 
@@ -115,6 +167,8 @@ const RunningSteps = ({
 };
 
 RunningSteps.propTypes = {
+  executionPlan: PropTypes.shape({ state: PropTypes.string }),
+  result: PropTypes.string,
   runningSteps: PropTypes.array,
   id: PropTypes.string.isRequired,
   cancelStep: PropTypes.func.isRequired,
@@ -124,6 +178,8 @@ RunningSteps.propTypes = {
 
 RunningSteps.defaultProps = {
   runningSteps: [],
+  executionPlan: {},
+  result: undefined,
 };
 
 export default RunningSteps;
