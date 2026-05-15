@@ -20,7 +20,9 @@ const DependencyTable = ({ title, tasks, ouiaSectionId }) => (
     <Grid hasGutter>
       <GridItem span={12} xl={8}>
         {tasks.length === 0 ? (
-          <Text component={TextVariants.small}>{__('None')}</Text>
+          <Text component={TextVariants.small} ouiaId={`${ouiaSectionId}-none`}>
+            {__('None')}
+          </Text>
         ) : (
           <Table
             aria-label={title}
@@ -36,7 +38,10 @@ const DependencyTable = ({ title, tasks, ouiaSectionId }) => (
             </Thead>
             <Tbody>
               {tasks.map(task => (
-                <Tr key={task.id} ouiaId={`${ouiaSectionId}-table-row-${task.id}`}>
+                <Tr
+                  key={task.id}
+                  ouiaId={`${ouiaSectionId}-table-row-${task.id}`}
+                >
                   <Td dataLabel={__('Name')}>
                     <Text
                       component={TextVariants.a}
