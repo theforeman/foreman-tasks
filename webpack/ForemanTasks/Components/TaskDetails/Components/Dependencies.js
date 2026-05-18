@@ -4,7 +4,6 @@ import { capitalize } from 'lodash';
 import {
   Grid,
   GridItem,
-  Stack,
   Text,
   TextVariants,
   Title,
@@ -13,7 +12,7 @@ import { Table, Thead, Tbody, Tr, Th, Td } from '@patternfly/react-table';
 import { translate as __ } from 'foremanReact/common/I18n';
 
 const DependencyTable = ({ title, tasks, ouiaSectionId }) => (
-  <Stack hasGutter>
+  <React.Fragment>
     <Title headingLevel="h3" size="lg" ouiaId={`${ouiaSectionId}-title`}>
       {title}
     </Title>
@@ -64,7 +63,7 @@ const DependencyTable = ({ title, tasks, ouiaSectionId }) => (
         )}
       </GridItem>
     </Grid>
-  </Stack>
+  </React.Fragment>
 );
 
 DependencyTable.propTypes = {
@@ -78,7 +77,7 @@ DependencyTable.defaultProps = {
 };
 
 const Dependencies = ({ dependsOn, blocks }) => (
-  <Stack hasGutter>
+  <React.Fragment>
     <DependencyTable
       title={__('Task depends on')}
       tasks={dependsOn}
@@ -89,7 +88,7 @@ const Dependencies = ({ dependsOn, blocks }) => (
       tasks={blocks}
       ouiaSectionId="task-dependencies-blocks"
     />
-  </Stack>
+  </React.Fragment>
 );
 
 Dependencies.propTypes = {
