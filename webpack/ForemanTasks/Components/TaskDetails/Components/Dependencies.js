@@ -1,55 +1,75 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { capitalize } from 'lodash';
 import {
-  Alert,
-  AlertVariant,
   Grid,
   GridItem,
+  Text,
+  TextVariants,
   Title,
 } from '@patternfly/react-core';
 import { Table, Thead, Tbody, Tr, Th, Td } from '@patternfly/react-table';
 import { translate as __ } from 'foremanReact/common/I18n';
 
-const DependencyTable = ({ title, tasks }) => {
-  const tableId = title.toLowerCase().replace(/\s+/g, '-');
-  return (
-    <div>
-      <Title headingLevel="h4" size="md" ouiaId={`${tableId}-title`}>
-        {title}
-      </Title>
-      {tasks.length === 0 ? (
-        <p className="text-muted">{__('None')}</p>
-      ) : (
-        <Table aria-label={title} variant="compact" ouiaId={`${tableId}-table`}>
-          <Thead>
-            <Tr ouiaId={`${tableId}-table-header`}>
-              <Th width={50}>{__('Action')}</Th>
-              <Th width={25}>{__('State')}</Th>
-              <Th width={25}>{__('Result')}</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {tasks.map(task => (
-              <Tr key={task.id} ouiaId={`${tableId}-table-row-${task.id}`}>
-                <Td>
-                  <a href={`/foreman_tasks/tasks/${task.id}`}>
-                    {task.humanized || task.action}
-                  </a>
-                </Td>
-                <Td>{task.state}</Td>
-                <Td>{task.result}</Td>
+const DependencyTable = ({ title, tasks, ouiaSectionId }) => (
+  <React.Fragment>
+    <Title headingLevel="h3" size="lg" ouiaId={`${ouiaSectionId}-title`}>
+      {title}
+    </Title>
+    <Grid hasGutter>
+      <GridItem span={12} xl={8}>
+        {tasks.length === 0 ? (
+          <Text component={TextVariants.small} ouiaId={`${ouiaSectionId}-none`}>
+            {__('None')}
+          </Text>
+        ) : (
+          <Table
+            aria-label={title}
+            variant="compact"
+            ouiaId={`${ouiaSectionId}-table`}
+          >
+            <Thead>
+              <Tr ouiaId={`${ouiaSectionId}-table-header`}>
+                <Th>{__('Name')}</Th>
+                <Th>{__('State')}</Th>
+                <Th>{__('Result')}</Th>
               </Tr>
-            ))}
-          </Tbody>
-        </Table>
-      )}
-    </div>
-  );
-};
+            </Thead>
+            <Tbody>
+              {tasks.map(task => (
+                <Tr
+                  key={task.id}
+                  ouiaId={`${ouiaSectionId}-table-row-${task.id}`}
+                >
+                  <Td dataLabel={__('Name')}>
+                    <Text
+                      component={TextVariants.a}
+                      href={`/foreman_tasks/tasks/${task.id}`}
+                      ouiaId={`${ouiaSectionId}-task-link-${task.id}`}
+                    >
+                      {task.humanized || task.action}
+                    </Text>
+                  </Td>
+                  <Td dataLabel={__('State')}>
+                    {capitalize(String(task.state || ''))}
+                  </Td>
+                  <Td dataLabel={__('Result')}>
+                    {capitalize(String(task.result || ''))}
+                  </Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+        )}
+      </GridItem>
+    </Grid>
+  </React.Fragment>
+);
 
 DependencyTable.propTypes = {
   title: PropTypes.string.isRequired,
   tasks: PropTypes.array,
+  ouiaSectionId: PropTypes.string.isRequired,
 };
 
 DependencyTable.defaultProps = {
@@ -57,27 +77,18 @@ DependencyTable.defaultProps = {
 };
 
 const Dependencies = ({ dependsOn, blocks }) => (
-  <div>
-    <Alert
-      variant={AlertVariant.info}
-      isInline
-      title={__('Task dependencies')}
-      ouiaId="task-dependencies-info-alert"
-    >
-      {__(
-        'This task may have dependencies on other tasks or may be blocking other tasks from executing. Dependencies are established through task chaining relationships.'
-      )}
-    </Alert>
-    <br />
-    <Grid hasGutter>
-      <GridItem span={6}>
-        <DependencyTable title={__('Depends on')} tasks={dependsOn} />
-      </GridItem>
-      <GridItem span={6}>
-        <DependencyTable title={__('Blocks')} tasks={blocks} />
-      </GridItem>
-    </Grid>
-  </div>
+  <React.Fragment>
+    <DependencyTable
+      title={__('Task depends on')}
+      tasks={dependsOn}
+      ouiaSectionId="task-dependencies-depends-on"
+    />
+    <DependencyTable
+      title={__('Task blocks')}
+      tasks={blocks}
+      ouiaSectionId="task-dependencies-blocks"
+    />
+  </React.Fragment>
 );
 
 Dependencies.propTypes = {

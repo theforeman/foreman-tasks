@@ -5,16 +5,21 @@ import '@testing-library/jest-dom';
 import Dependencies from '../Dependencies';
 
 describe('Dependencies', () => {
-  it('renders info alert and None for both tables when there are no tasks', () => {
+  it('renders both sections with empty placeholders when there are no tasks', () => {
     render(<Dependencies dependsOn={[]} blocks={[]} />);
+
     expect(
-      screen.getByRole('heading', { name: /task dependencies/i })
+      screen.getByRole('heading', { name: /task depends on/i })
     ).toBeInTheDocument();
-    const noneLabels = screen.getAllByText(/^none$/i);
-    expect(noneLabels.length).toBeGreaterThanOrEqual(2);
+    expect(
+      screen.getByRole('heading', { name: /task blocks/i })
+    ).toBeInTheDocument();
+
+    expect(screen.getAllByText(/^none$/i)).toHaveLength(2);
+    expect(screen.queryByRole('grid')).not.toBeInTheDocument();
   });
 
-  it('renders depends_on tasks in the first table', () => {
+  it('renders depends-on tasks in the first grid', () => {
     const dependsOn = [
       {
         id: '123',
@@ -31,15 +36,39 @@ describe('Dependencies', () => {
         result: 'pending',
       },
     ];
+
     render(<Dependencies dependsOn={dependsOn} blocks={[]} />);
-    const table = screen.getByRole('grid', { name: /depends on/i });
-    expect(within(table).getByText('Foo Bar Action')).toBeInTheDocument();
-    expect(within(table).getByText('Baz Qux Action')).toBeInTheDocument();
-    expect(within(table).getByText('stopped')).toBeInTheDocument();
-    expect(within(table).getByText('success')).toBeInTheDocument();
+
+    const dependsGrid = screen.getByRole('grid', {
+      name: /task depends on/i,
+    });
+    expect(screen.queryAllByRole('grid')).toHaveLength(1);
+
+    expect(
+      within(dependsGrid).getByRole('columnheader', { name: /^name$/i })
+    ).toBeInTheDocument();
+
+    const bodyRows = within(dependsGrid)
+      .getAllByRole('row')
+      .slice(1);
+    expect(bodyRows).toHaveLength(2);
+
+    expect(
+      screen.getByRole('link', { name: 'Foo Bar Action' })
+    ).toHaveAttribute('href', '/foreman_tasks/tasks/123');
+    expect(
+      screen.getByRole('link', { name: 'Baz Qux Action' })
+    ).toHaveAttribute('href', '/foreman_tasks/tasks/456');
+
+    expect(within(dependsGrid).getByText('Stopped')).toBeInTheDocument();
+    expect(within(dependsGrid).getByText('Success')).toBeInTheDocument();
+    expect(within(dependsGrid).getByText('Running')).toBeInTheDocument();
+    expect(within(dependsGrid).getByText('Pending')).toBeInTheDocument();
+
+    expect(screen.getAllByText(/^none$/i)).toHaveLength(1);
   });
 
-  it('renders blocks in the second table', () => {
+  it('renders blocks in the second grid', () => {
     const blocks = [
       {
         id: '789',
@@ -49,14 +78,28 @@ describe('Dependencies', () => {
         result: 'warning',
       },
     ];
+
     render(<Dependencies dependsOn={[]} blocks={blocks} />);
-    const table = screen.getByRole('grid', { name: /^blocks$/i });
-    expect(within(table).getByText('Test Action')).toBeInTheDocument();
-    expect(within(table).getByText('paused')).toBeInTheDocument();
-    expect(within(table).getByText('warning')).toBeInTheDocument();
+
+    const blocksGrid = screen.getByRole('grid', { name: /task blocks/i });
+    expect(screen.queryAllByRole('grid')).toHaveLength(1);
+
+    const bodyRows = within(blocksGrid)
+      .getAllByRole('row')
+      .slice(1);
+    expect(bodyRows).toHaveLength(1);
+
+    expect(screen.getByRole('link', { name: 'Test Action' })).toHaveAttribute(
+      'href',
+      '/foreman_tasks/tasks/789'
+    );
+    expect(within(blocksGrid).getByText('Paused')).toBeInTheDocument();
+    expect(within(blocksGrid).getByText('Warning')).toBeInTheDocument();
+
+    expect(screen.getAllByText(/^none$/i)).toHaveLength(1);
   });
 
-  it('renders both tables when dependsOn and blocks are present', () => {
+  it('renders both grids when dependsOn and blocks are present', () => {
     const dependsOn = [
       {
         id: '123',
@@ -82,11 +125,29 @@ describe('Dependencies', () => {
         result: 'error',
       },
     ];
+
     render(<Dependencies dependsOn={dependsOn} blocks={blocks} />);
-    expect(screen.getByRole('grid', { name: /depends on/i })).toBeInTheDocument();
-    expect(screen.getByText('Foo Action')).toBeInTheDocument();
-    expect(screen.getByRole('grid', { name: /^blocks$/i })).toBeInTheDocument();
-    expect(screen.getByText('Bar Action')).toBeInTheDocument();
-    expect(screen.getByText('Baz Action')).toBeInTheDocument();
+
+    expect(
+      screen.getByRole('grid', { name: /task depends on/i })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('grid', { name: /task blocks/i })
+    ).toBeInTheDocument();
+
+    expect(screen.getByRole('link', { name: 'Foo Action' })).toHaveAttribute(
+      'href',
+      '/foreman_tasks/tasks/123'
+    );
+    expect(screen.getByRole('link', { name: 'Bar Action' })).toHaveAttribute(
+      'href',
+      '/foreman_tasks/tasks/456'
+    );
+    expect(screen.getByRole('link', { name: 'Baz Action' })).toHaveAttribute(
+      'href',
+      '/foreman_tasks/tasks/789'
+    );
+
+    expect(screen.queryByText(/^none$/i)).not.toBeInTheDocument();
   });
 });
