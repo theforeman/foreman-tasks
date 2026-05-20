@@ -324,7 +324,7 @@ module ForemanTasks
 
       def action_permission
         case params[:action]
-        when 'bulk_search', 'summary', 'details', 'sub_tasks'
+        when 'bulk_search', 'summary', 'show', 'details', 'sub_tasks'
           :view
         when 'bulk_resume', 'bulk_cancel', 'bulk_stop'
           :edit
