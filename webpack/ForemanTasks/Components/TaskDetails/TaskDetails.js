@@ -72,7 +72,7 @@ const TaskDetails = ({
   };
 
   return (
-    <div className="task-details-react well">
+    <div className="task-details-react">
       <Tabs
         id="task-details-tabs"
         ouiaId="task-details-tabs"
