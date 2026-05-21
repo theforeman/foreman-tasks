@@ -7,15 +7,11 @@ module ForemanTasks
     before_action :find_dynflow_task, only: [:unlock, :force_unlock, :cancel, :abort, :cancel_step, :resume]
 
     def show
-      @task = task_detail_scope.find(params[:id])
+      @task = resource_scope.find(params[:id])
 
       respond_to do |format|
         format.html do
           render('react/index', :layout => 'layouts/react_application', :formats => [:html])
-        end
-
-        format.csv do
-          respond_with_tasks(Task.where(:id => @task.id))
         end
       end
     end
@@ -116,7 +112,7 @@ module ForemanTasks
 
     def action_permission
       case params[:action]
-      when 'show', 'sub_tasks', 'summary', 'summary_sub_tasks'
+      when 'sub_tasks', 'summary', 'summary_sub_tasks'
         :view
       when 'resume', 'unlock', 'force_unlock', 'cancel_step', 'cancel', 'abort'
         :edit
@@ -139,12 +135,6 @@ module ForemanTasks
       scope = scope.search_for(search, order: params[:order])
       scope = scope.paginate(page: params[:page], per_page: params[:per_page]) if paginate
       scope.distinct
-    end
-
-    # Same scoped lookup as SPA entry (authorize + taxonomy + explicit search params).
-    def task_detail_scope
-      ForemanTasks::Task.authorized('view_foreman_tasks')
-                        .search_for(search_query)
     end
   end
 end

@@ -12,7 +12,7 @@ Foreman::Application.routes.draw do
       end
     end
 
-    resources :tasks, :only => [:index] do
+    resources :tasks, :only => [:show] do
       collection do
         get 'auto_complete_search'
         get '/summary/:recent_timeframe', action: 'summary'
