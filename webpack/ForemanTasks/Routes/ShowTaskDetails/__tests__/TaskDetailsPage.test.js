@@ -12,6 +12,8 @@ import intervalsReducer from 'foremanReact/redux/middlewares/IntervalMiddleware/
 import { FOREMAN_TASK_DETAILS } from '../../../Components/TaskDetails/TaskDetailsConstants';
 import TaskDetailsPage from '../TaskDetailsPage';
 
+const TASK_DETAILS_TITLE_ROW_OUIA_ID = 'foreman-tasks-task-details-title-row';
+
 const routerPropsBase = {
   history: { push: jest.fn(), replace: jest.fn(), go: jest.fn() },
   location: {
@@ -97,10 +99,12 @@ function breadcrumbTitleHeadings() {
   );
 }
 
-/** Title strip (`customHeader`): `Flex` sets `data-ouia-component-id` (same pattern as Locks). */
+/**
+ * Title row (`customHeader` root `Flex`): same OUIA pattern as `Locks.test.js`.
+ */
 function taskDetailsTitleRegion(container) {
   const el = container.querySelector(
-    '[data-ouia-component-id="foreman-tasks-task-details-title-row"]'
+    `[data-ouia-component-id="${TASK_DETAILS_TITLE_ROW_OUIA_ID}"]`
   );
 
   expect(el).toBeTruthy();
@@ -125,7 +129,6 @@ describe('TaskDetailsPage', () => {
 
   it('shows generic title and breadcrumb from route id when action is unset', () => {
     const page = renderPage({});
-
     expectToolbarHeadingText('Task details');
 
     expect(screen.getByRole('navigation', { name: 'Breadcrumb' })).toHaveTextContent(
@@ -162,7 +165,7 @@ describe('TaskDetailsPage', () => {
   });
 
   it('shows error status styling in the heading when task is stopped with error result', () => {
-    const page =renderPage({
+    const page = renderPage({
       action: 'Some action',
       state: 'stopped',
       result: 'error',

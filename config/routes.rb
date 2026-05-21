@@ -49,7 +49,7 @@ Foreman::Application.routes.draw do
         end
       end
 
-      resources :tasks, :only => [:index, :show] do
+      resources :tasks, :only => [:show, :index] do
         member do
           get :details
         end
