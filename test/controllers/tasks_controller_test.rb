@@ -95,7 +95,7 @@ module ForemanTasks
           get :show, params: { id: task.id }, session: set_session_user
 
           assert_response :success
-          assert_includes @response.headers['X-Request-Path'].to_s, task.id.to_s
+          assert_includes @response.body, '/webpack/'
         end
       end
 

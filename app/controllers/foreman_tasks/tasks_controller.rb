@@ -11,8 +11,6 @@ module ForemanTasks
 
       respond_to do |format|
         format.html do
-          response.headers['X-Request-Path'] = request.path
-
           render('react/index', :layout => 'layouts/react_application', :formats => [:html])
         end
 
@@ -145,14 +143,8 @@ module ForemanTasks
 
     # Same scoped lookup as SPA entry (authorize + taxonomy + explicit search params).
     def task_detail_scope
-      scope = ForemanTasks::Task.authorized('view_foreman_tasks')
-      sq = search_query
-
-      if sq.blank?
-        scope
-      else
-        scope.search_for(sq)
-      end
+      ForemanTasks::Task.authorized('view_foreman_tasks')
+                        .search_for(search_query)
     end
   end
 end
