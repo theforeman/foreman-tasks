@@ -9,11 +9,7 @@ module ForemanTasks
     def show
       @task = resource_scope.find(params[:id])
 
-      respond_to do |format|
-        format.html do
-          render('react/index', :layout => 'layouts/react_application', :formats => [:html])
-        end
-      end
+      render('react/index', :layout => 'layouts/react_application')
     end
 
     def index

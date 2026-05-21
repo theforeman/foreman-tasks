@@ -35,7 +35,7 @@ Foreman::Application.routes.draw do
     resources :tasks, :only => [:index], constraints: ->(req) { req.format == :csv }
 
     match '/tasks', to: '/react#index', via: :get
-    get '/tasks/:id', :to => 'tasks#show', :defaults => { :format => 'html' }
+    get '/tasks/:id', :to => 'tasks#show'
     match '/tasks/:id/sub_tasks', to: '/react#index', via: :get
 
     namespace :api do
