@@ -173,12 +173,6 @@ const TaskInfo = props => {
           <pre>{output}</pre>
         </GridItem>
       )}
-      {errors && errors.length > 0 && (
-        <GridItem span={12}>
-          <b>{__('Errors:')}</b>
-          <pre>{errors}</pre>
-        </GridItem>
-      )}
     </Grid>
   );
 };
