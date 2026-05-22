@@ -24,25 +24,23 @@ describe('TaskDetails', () => {
     ).toBeInTheDocument();
   });
 
-  it('shows skeleton while loading on the Task tab', () => {
+  it('shows skeleton in the overview while loading', () => {
     const { container } = render(<TaskDetails {...minProps} isLoading />);
     expect(
       container.querySelector('.react-loading-skeleton')
     ).toBeInTheDocument();
   });
 
-  it('renders six tabs with expected labels', () => {
+  it('renders four tabs with expected labels', () => {
     render(<TaskDetails {...minProps} />);
     expect(document.getElementById('task-details-tabs')).toBeInTheDocument();
-    expect(screen.getByRole('tab', { name: /^task$/i })).toBeInTheDocument();
     expect(
-      screen.getByRole('tab', { name: /running steps/i })
+      screen.getByRole('tab', { name: /execution details/i })
     ).toBeInTheDocument();
-    expect(screen.getByRole('tab', { name: /errors/i })).toBeInTheDocument();
-    expect(screen.getByRole('tab', { name: /locks/i })).toBeInTheDocument();
     expect(
       screen.getByRole('tab', { name: /dependencies/i })
     ).toBeInTheDocument();
+    expect(screen.getByRole('tab', { name: /locks/i })).toBeInTheDocument();
     expect(screen.getByRole('tab', { name: /raw/i })).toBeInTheDocument();
   });
 });

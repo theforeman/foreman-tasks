@@ -7,8 +7,9 @@ module ForemanTasks
     before_action :find_dynflow_task, only: [:unlock, :force_unlock, :cancel, :abort, :cancel_step, :resume]
 
     def show
-      @task = resource_base.find(params[:id])
-      render :layout => !request.xhr?
+      @task = resource_scope.find(params[:id])
+
+      render('react/index', :layout => 'layouts/react_application')
     end
 
     def index
