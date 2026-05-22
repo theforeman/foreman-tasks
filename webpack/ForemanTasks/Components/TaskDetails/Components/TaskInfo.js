@@ -1,76 +1,74 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
+  ClipboardCopy,
+  ExpandableSection,
+  ExpandableSectionToggle,
+  Flex,
+  FlexItem,
   Grid,
   GridItem,
   Progress,
   ProgressVariant,
-  Icon,
+  Split,
+  SplitItem,
+  Text,
+  TextVariants,
 } from '@patternfly/react-core';
-import {
-  CheckCircleIcon,
-  ExclamationCircleIcon,
-  ExclamationTriangleIcon,
-  QuestionCircleIcon,
-} from '@patternfly/react-icons';
 import { translate as __ } from 'foremanReact/common/I18n';
 import RelativeDateTime from 'foremanReact/components/common/dates/RelativeDateTime';
 
+import { taskResultIconEl } from '../../common/taskResultIcon';
+
 const isDelayed = ({ startAt, startedAt }) => {
-  if (
-    startAt == null ||
-    startedAt == null ||
-    startAt === '' ||
-    startedAt === ''
-  ) {
-    return false;
-  }
   const a = new Date(startAt);
   const b = new Date(startedAt);
-  if (Number.isNaN(a.getTime()) || Number.isNaN(b.getTime())) {
-    return false;
-  }
   a.setMilliseconds(0);
   b.setMilliseconds(0);
+
   return a.getTime() !== b.getTime();
 };
 
-const resultIconEl = (state, result) => {
-  if (state !== 'stopped')
-    return (
-      <Icon>
-        <QuestionCircleIcon />
-      </Icon>
-    );
-  switch (result) {
-    case 'success':
-      return (
-        <Icon status="success">
-          <CheckCircleIcon />
-        </Icon>
-      );
-    case 'error':
-      return (
-        <Icon status="danger">
-          <ExclamationCircleIcon />
-        </Icon>
-      );
-    case 'warning':
-      return (
-        <Icon status="warning">
-          <ExclamationTriangleIcon />
-        </Icon>
-      );
-    default:
-      return (
-        <Icon>
-          <QuestionCircleIcon />
-        </Icon>
-      );
+const formatResultLabel = result => {
+  if (!result || typeof result !== 'string') {
+    return __('N/A');
   }
+
+  return result.charAt(0).toUpperCase() + result.slice(1).toLowerCase();
 };
 
-const progressVariantForResult = result => {
+const formatDuration = (startedAtStr, endedAtStr, state) => {
+  if (state !== 'stopped' || !startedAtStr || !endedAtStr) {
+    return __('N/A');
+  }
+
+  const startMs = new Date(startedAtStr).getTime();
+  const endMs = new Date(endedAtStr).getTime();
+
+  if (Number.isNaN(startMs) || Number.isNaN(endMs) || endMs < startMs) {
+    return __('N/A');
+  }
+
+  const sec = (endMs - startMs) / 1000;
+
+  if (sec < 60) {
+    return `${sec.toFixed(1)} s`;
+  }
+
+  const m = Math.floor(sec / 60);
+  const s = Math.floor(sec % 60);
+
+  if (sec < 3600) {
+    return `${m} m ${s} s`;
+  }
+
+  const h = Math.floor(sec / 3600);
+  const m2 = Math.floor((sec % 3600) / 60);
+
+  return `${h} h ${m2} m`;
+};
+
+const progressVariant = result => {
   switch (result) {
     case 'error':
       return ProgressVariant.danger;
@@ -83,140 +81,203 @@ const progressVariantForResult = result => {
   }
 };
 
+const MetadataField = ({ title, value, className, labelOuiaId }) => (
+  <GridItem xl={2} lg={4} md={6} sm={12} className={className}>
+    <Flex
+      direction={{ default: 'column' }}
+      spaceItems={{ default: 'spaceItemsXs' }}
+    >
+      <FlexItem>
+        <Text ouiaId={labelOuiaId} component={TextVariants.small}>
+          {title}
+        </Text>
+      </FlexItem>
+      <FlexItem>{value}</FlexItem>
+    </Flex>
+  </GridItem>
+);
+
+MetadataField.propTypes = {
+  title: PropTypes.node.isRequired,
+  value: PropTypes.node.isRequired,
+  className: PropTypes.string,
+  labelOuiaId: PropTypes.string.isRequired,
+};
+
+MetadataField.defaultProps = {
+  className: undefined,
+};
+
+const copyableText = text =>
+  text ? (
+    <ClipboardCopy
+      variant="inline-compact"
+      hoverTip={__('Copy')}
+      clickTip={__('Copied')}
+    >
+      {text}
+    </ClipboardCopy>
+  ) : (
+    __('N/A')
+  );
+
 const TaskInfo = props => {
   const {
     action,
     endedAt,
+    externalId,
+    id,
+    label,
     result,
     startAt,
-    startBefore,
     startedAt,
     state,
-    help,
-    output,
-    errors,
     progress,
     username,
     usernamePath,
   } = props;
 
-  const details = [
-    [
-      {
-        title: 'Name',
-        value: action || __('N/A'),
-        className: 'details-name',
-      },
-      {
-        title: 'Start at',
-        value: <RelativeDateTime defaultValue={__('N/A')} date={startAt} />,
-      },
-    ],
-    [
-      {
-        title: 'Result',
-        value: (
-          <span>
-            {resultIconEl(state, result)} {result}
-          </span>
-        ),
-      },
-      {
-        title: 'Started at',
-        value: <RelativeDateTime defaultValue={__('N/A')} date={startedAt} />,
-      },
-    ],
-    [
-      {
-        title: 'Triggered by',
-        value: (usernamePath || '').includes('href') ? (
-          <a href={usernamePath.split('"')[1]}>{username}</a>
-        ) : (
-          username || ''
-        ),
-      },
-      {
-        title: 'Ended at',
-        value: <RelativeDateTime defaultValue={__('N/A')} date={endedAt} />,
-      },
-    ],
-    [
-      {
-        title: 'Execution type',
-        value: __(isDelayed(props) ? 'Delayed' : 'Immediate'),
-      },
-      {
-        title: 'Start before',
-        value: startBefore ? (
-          <RelativeDateTime defaultValue={__('N/A')} date={startBefore} />
-        ) : (
-          '-'
-        ),
-      },
-    ],
-  ];
+  const [isExpanded, setIsExpanded] = useState(false);
+  const baseId = id || 'task-info';
+  const contentId = `${baseId}-more-details-content`;
+  const toggleId = `${baseId}-more-details-toggle`;
 
-  const progVariant = progressVariantForResult(result);
+  const triggeredBy = (usernamePath || '').includes('href') ? (
+    <a href={usernamePath.split('"')[1]}>{username}</a>
+  ) : (
+    username || ''
+  );
+
+  const progVariant = progressVariant(result);
 
   return (
-    <Grid>
-      <GridItem span={12} className="pf-v5-u-pb-lg" />
-      {details.map((items, key) => (
-        <React.Fragment key={key}>
-          <GridItem md={2} sm={6}>
-            <span className="list-group-item-heading">
-              {__(items[0].title)}:
-            </span>
-          </GridItem>
-          <GridItem md={5} sm={6} className={items[0].className}>
-            <span>{items[0].value}</span>
-          </GridItem>
-          <GridItem md={2} sm={6}>
-            <span className="list-group-item-heading">
-              {__(items[1].title)}:
-            </span>
-          </GridItem>
-          <GridItem md={3} sm={6} className={items[1].className}>
-            {items[1].value}
-          </GridItem>
-        </React.Fragment>
-      ))}
-      <GridItem span={12} className="pf-v5-u-pb-lg" />
-      <GridItem span={6}>
-        <div className="progress-description">
-          <span className="list-group-item-heading">{__('State')}: </span>
-          {state}
-        </div>
-      </GridItem>
-      <GridItem span={6} className="progress-label-top-right">
-        <span>{`${progress}% ${__('Complete')}`}</span>
-      </GridItem>
+    <Grid className="task-details-overview" hasGutter>
+      <MetadataField
+        labelOuiaId="task-info-metadata-result-label"
+        title={__('Result')}
+        value={
+          <>
+            {taskResultIconEl(state, result)}
+            <span> {formatResultLabel(result)}</span>
+          </>
+        }
+      />
+      <MetadataField
+        labelOuiaId="task-info-metadata-state-label"
+        title={__('State')}
+        value={state || __('N/A')}
+      />
+      <MetadataField
+        labelOuiaId="task-info-metadata-started-at-label"
+        title={__('Started at')}
+        value={<RelativeDateTime defaultValue={__('N/A')} date={startedAt} />}
+      />
+      <MetadataField
+        labelOuiaId="task-info-metadata-duration-label"
+        title={__('Duration')}
+        value={formatDuration(startedAt, endedAt, state)}
+      />
+      <MetadataField
+        labelOuiaId="task-info-metadata-triggered-by-label"
+        title={__('Triggered by')}
+        value={triggeredBy}
+      />
+      <MetadataField
+        labelOuiaId="task-info-metadata-id-label"
+        title={__('Id')}
+        value={copyableText(id)}
+      />
+
       <GridItem span={12}>
-        <Progress
-          value={progress}
-          max={100}
-          aria-label={`${progress}% ${__('Complete')}`}
-          measureLocation="outside"
-          {...(progVariant ? { variant: progVariant } : {})}
-        />
+        <ExpandableSectionToggle
+          toggleId={toggleId}
+          contentId={contentId}
+          isExpanded={isExpanded}
+          onToggle={setIsExpanded}
+        >
+          {isExpanded ? __('Show less details') : __('Show more details')}
+        </ExpandableSectionToggle>
       </GridItem>
-      <GridItem span={12} className="pf-v5-u-pb-lg" />
-      {help && (
+
+      <GridItem span={12}>
+        <ExpandableSection
+          isExpanded={isExpanded}
+          isDetached
+          toggleId={toggleId}
+          contentId={contentId}
+        >
+          <Grid hasGutter>
+            <MetadataField
+              labelOuiaId="task-info-metadata-execution-type-label"
+              title={__('Execution type')}
+              value={__(isDelayed(props) ? 'Delayed' : 'Immediate')}
+            />
+            <MetadataField
+              labelOuiaId="task-info-metadata-label-field-label"
+              title={__('Label')}
+              value={label || action || __('N/A')}
+              className="details-name"
+            />
+            <MetadataField
+              labelOuiaId="task-info-metadata-start-at-label"
+              title={__('Start at')}
+              value={
+                <RelativeDateTime defaultValue={__('N/A')} date={startAt} />
+              }
+            />
+            <MetadataField
+              labelOuiaId="task-info-metadata-ended-at-label"
+              title={__('Ended at')}
+              value={
+                <RelativeDateTime defaultValue={__('N/A')} date={endedAt} />
+              }
+            />
+            <MetadataField
+              labelOuiaId="task-info-metadata-external-id-label"
+              title={__('External Id')}
+              value={copyableText(externalId)}
+            />
+          </Grid>
+        </ExpandableSection>
+      </GridItem>
+
+      {state !== 'stopped' && (
         <GridItem span={12}>
-          <b>{__('Troubleshooting')}</b>
-          <p dangerouslySetInnerHTML={{ __html: help }} />
-        </GridItem>
-      )}
-      {output && output.length > 0 && (
-        <GridItem span={12}>
-          <b>{__('Output:')}</b>
-          <pre>{output}</pre>
-        </GridItem>
-      )}
-      {errors && errors.length > 0 && (
-        <GridItem span={12}>
-          <b>{__('Errors:')}</b>
-          <pre>{errors}</pre>
+          <Flex
+            direction={{ default: 'column' }}
+            spaceItems={{ default: 'spaceItemsXs' }}
+          >
+            <FlexItem>
+              <Split hasGutter>
+                <SplitItem isFilled>
+                  <Text
+                    component={TextVariants.p}
+                    ouiaId="task-info-running-state-summary"
+                  >
+                    <strong>{`${__('State')}: `}</strong>
+                    {state}
+                  </Text>
+                </SplitItem>
+                <SplitItem>
+                  <Text
+                    component={TextVariants.p}
+                    ouiaId="task-info-running-progress-complete-text"
+                  >
+                    {`${progress}% ${__('Complete')}`}
+                  </Text>
+                </SplitItem>
+              </Split>
+            </FlexItem>
+            <FlexItem>
+              <Progress
+                value={progress}
+                max={100}
+                aria-label={`${progress}% ${__('Complete')}`}
+                measureLocation="outside"
+                {...(progVariant ? { variant: progVariant } : {})}
+              />
+            </FlexItem>
+          </Flex>
         </GridItem>
       )}
     </Grid>
@@ -226,33 +287,33 @@ const TaskInfo = props => {
 TaskInfo.propTypes = {
   action: PropTypes.string,
   endedAt: PropTypes.string,
+  externalId: PropTypes.string,
+  id: PropTypes.string,
+  label: PropTypes.string,
   result: PropTypes.string,
   startAt: PropTypes.string,
   startBefore: PropTypes.string,
   startedAt: PropTypes.string,
   state: PropTypes.string,
-  help: PropTypes.string,
-  errors: PropTypes.array,
   progress: PropTypes.number,
   username: PropTypes.string,
   usernamePath: PropTypes.string,
-  output: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})]),
 };
 
 TaskInfo.defaultProps = {
   action: '',
   endedAt: '',
+  externalId: '',
+  id: '',
+  label: '',
   result: 'error',
   startAt: '',
   startBefore: '',
   startedAt: '',
   state: '',
-  help: '',
-  errors: [],
   progress: 0,
   username: '',
   usernamePath: '',
-  output: '',
 };
 
 export default TaskInfo;
