@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Tabs,
-  Tab,
-  TabTitleText,
-} from '@patternfly/react-core';
+import { Tabs, Tab, TabTitleText } from '@patternfly/react-core';
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
 import { STATUS } from 'foremanReact/constants';
 import MessageBox from 'foremanReact/components/common/MessageBox';
@@ -83,14 +79,11 @@ const TaskDetails = ({
   return (
     <div className="task-details-react">
       <section className="task-details-overview-section">
-        {isLoading ? (
-          <TaskSkeleton />
-        ) : (
-          <Task {...taskProps} />
-        )}
+        {isLoading ? <TaskSkeleton /> : <Task {...taskProps} />}
       </section>
       <Tabs
         aria-label={__('Task details')}
+        ouiaId="task-details-secondary-tabs"
         id="task-details-tabs"
         className="pf-u-mt-xl"
         activeKey={activeTab}
@@ -100,6 +93,7 @@ const TaskDetails = ({
       >
         <Tab
           eventKey={TASK_DETAILS_TAB_KEYS.EXECUTION}
+          ouiaId="task-details-tab-execution"
           title={<TabTitleText>{__('Execution details')}</TabTitleText>}
           aria-label={__('Execution details')}
         >
@@ -122,11 +116,17 @@ const TaskDetails = ({
             />
           )}
         </Tab>
-        <Tab eventKey={5} disabled={isLoading} title={__('Dependencies')}>
+        <Tab
+          ouiaId="task-details-tab-dependencies"
+          eventKey={5}
+          disabled={isLoading}
+          title={__('Dependencies')}
+        >
           <Dependencies dependsOn={dependsOn} blocks={blocks} />
         </Tab>
         <Tab
           eventKey={TASK_DETAILS_TAB_KEYS.LOCKS}
+          ouiaId="task-details-tab-locks"
           title={<TabTitleText>{__('Locks')}</TabTitleText>}
           isDisabled={isLoading}
           aria-label={__('Locks')}
@@ -135,6 +135,7 @@ const TaskDetails = ({
         </Tab>
         <Tab
           eventKey={TASK_DETAILS_TAB_KEYS.RAW}
+          ouiaId="task-details-tab-raw"
           title={<TabTitleText>{__('Raw')}</TabTitleText>}
           isDisabled={isLoading}
           aria-label={__('Raw')}

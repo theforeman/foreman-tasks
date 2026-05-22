@@ -54,7 +54,6 @@ const TaskInfo = props => {
     state,
     help,
     output,
-    errors,
     progress,
     username,
     usernamePath,

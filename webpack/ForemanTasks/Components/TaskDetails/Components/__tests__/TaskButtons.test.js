@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { STATUS } from 'foremanReact/constants';
 import { TaskButtons } from '../TaskButtons';
@@ -17,29 +17,39 @@ const defaultProps = {
   setForceUnlockModalOpen,
 };
 
+const openTaskActionsMenu = async () => {
+  fireEvent.click(screen.getByRole('button', { name: /^task actions$/i }));
+
+  await waitFor(() => {
+    expect(screen.getByRole('menu')).toBeInTheDocument();
+  });
+};
+
 describe('TaskButtons', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   describe('rendering', () => {
-    it('renders reload button with correct text when taskReload is false', () => {
+    it('shows start auto-reloading in overflow when taskReload is false', async () => {
       render(<TaskButtons {...defaultProps} taskReload={false} />);
+      await openTaskActionsMenu();
       expect(
-        screen.getByRole('button', { name: /start auto-reloading/i })
+        screen.getByRole('menuitem', { name: /start auto-reloading/i })
       ).toBeInTheDocument();
       expect(
-        screen.queryByRole('button', { name: /stop auto-reloading/i })
+        screen.queryByRole('menuitem', { name: /stop auto-reloading/i })
       ).not.toBeInTheDocument();
     });
 
-    it('renders reload button with correct text when taskReload is true', () => {
+    it('shows stop auto-reloading in overflow when taskReload is true', async () => {
       render(<TaskButtons {...defaultProps} taskReload />);
+      await openTaskActionsMenu();
       expect(
-        screen.getByRole('button', { name: /stop auto-reloading/i })
+        screen.getByRole('menuitem', { name: /stop auto-reloading/i })
       ).toBeInTheDocument();
       expect(
-        screen.queryByRole('button', { name: /start auto-reloading/i })
+        screen.queryByRole('menuitem', { name: /start auto-reloading/i })
       ).not.toBeInTheDocument();
     });
 
@@ -55,15 +65,21 @@ describe('TaskButtons', () => {
       expect(dynflowLink).toHaveAttribute('target', '_blank');
     });
 
-    it('disables dynflow console link when dynflowEnableConsole is false', () => {
-      render(<TaskButtons {...defaultProps} dynflowEnableConsole={false} />);
+    it('marks dynflow console link disabled when dynflowEnableConsole is false', () => {
+      render(
+        <TaskButtons
+          {...defaultProps}
+          dynflowEnableConsole={false}
+          externalId="ext-id"
+        />
+      );
       const dynflowLink = screen.getByRole('link', {
         name: /dynflow console/i,
       });
-      expect(dynflowLink).not.toBeDisabled();
+      expect(dynflowLink).toHaveAttribute('aria-disabled', 'true');
     });
 
-    it('enables dynflow console link when dynflowEnableConsole is true', () => {
+    it('does not disable dynflow console link when dynflowEnableConsole is true', () => {
       render(
         <TaskButtons
           {...defaultProps}
@@ -74,18 +90,20 @@ describe('TaskButtons', () => {
       const dynflowLink = screen.getByRole('link', {
         name: /dynflow console/i,
       });
-      expect(dynflowLink).not.toBeDisabled();
+      expect(dynflowLink.getAttribute('aria-disabled')).not.toBe('true');
     });
 
-    it('disables resume and cancel buttons when canEdit is false', () => {
+    it('disables resume overflow item and cancel button when canEdit is false', async () => {
       render(<TaskButtons {...defaultProps} canEdit={false} />);
-      expect(screen.getByRole('button', { name: /resume/i })).toBeDisabled();
       expect(screen.getByRole('button', { name: /cancel/i })).toBeDisabled();
+      await openTaskActionsMenu();
+      expect(screen.getByRole('menuitem', { name: /^resume$/i })).toBeDisabled();
     });
 
-    it('disables resume button when resumable is false', () => {
+    it('disables resume overflow item when resumable is false', async () => {
       render(<TaskButtons {...defaultProps} canEdit resumable={false} />);
-      expect(screen.getByRole('button', { name: /resume/i })).toBeDisabled();
+      await openTaskActionsMenu();
+      expect(screen.getByRole('menuitem', { name: /^resume$/i })).toBeDisabled();
     });
 
     it('disables cancel button when cancellable is false', () => {
@@ -93,66 +111,63 @@ describe('TaskButtons', () => {
       expect(screen.getByRole('button', { name: /cancel/i })).toBeDisabled();
     });
 
-    it('disables unlock button when state is not paused', () => {
+    it('disables unlock overflow item when state is not paused', async () => {
       render(<TaskButtons {...defaultProps} canEdit state="running" />);
-      expect(screen.getByRole('button', { name: /^unlock$/i })).toBeDisabled();
+      await openTaskActionsMenu();
+      expect(screen.getByRole('menuitem', { name: /^unlock$/i })).toBeDisabled();
     });
 
-    it('enables unlock button when state is paused and canEdit is true', () => {
+    it('enables unlock overflow item when state is paused and canEdit is true', async () => {
       render(<TaskButtons {...defaultProps} canEdit state="paused" />);
-      expect(
-        screen.getByRole('button', { name: /^unlock$/i })
-      ).not.toBeDisabled();
+      await openTaskActionsMenu();
+      expect(screen.getByRole('menuitem', { name: /^unlock$/i })).not.toBeDisabled();
     });
 
-    it('disables force unlock button when state is stopped', () => {
+    it('disables force unlock overflow item when state is stopped', async () => {
       render(<TaskButtons {...defaultProps} canEdit state="stopped" />);
-      expect(
-        screen.getByRole('button', { name: /force unlock/i })
-      ).toBeDisabled();
+      await openTaskActionsMenu();
+      expect(screen.getByRole('menuitem', { name: /force unlock/i })).toBeDisabled();
     });
 
-    it('enables force unlock button when state is not stopped and canEdit is true', () => {
+    it('enables force unlock overflow item when state is not stopped and canEdit is true', async () => {
       render(<TaskButtons {...defaultProps} canEdit state="running" />);
-      expect(
-        screen.getByRole('button', { name: /force unlock/i })
-      ).not.toBeDisabled();
+      await openTaskActionsMenu();
+      expect(screen.getByRole('menuitem', { name: /force unlock/i })).not.toBeDisabled();
     });
 
-    it('renders parent task button when parentTask is provided', () => {
+    it('includes parent task overflow item when parentTask is provided', async () => {
       render(<TaskButtons {...defaultProps} parentTask="parent-123" />);
-      const parentButton = screen.getByRole('link', { name: /parent task/i });
-      expect(parentButton).toBeInTheDocument();
-      expect(parentButton).toHaveAttribute(
-        'href',
-        '/foreman_tasks/tasks/parent-123'
-      );
+      await openTaskActionsMenu();
+      expect(
+        screen.getByRole('menuitem', { name: /parent task/i })
+      ).toBeInTheDocument();
     });
 
-    it('does not render parent task button when parentTask is not provided', () => {
+    it('does not include parent overflow item when parentTask is not provided', async () => {
       render(<TaskButtons {...defaultProps} />);
+      await openTaskActionsMenu();
       expect(
-        screen.queryByRole('link', { name: /parent task/i })
+        screen.queryByRole('menuitem', { name: /parent task/i })
       ).not.toBeInTheDocument();
     });
 
-    it('renders sub tasks button when hasSubTasks is true', () => {
+    it('includes sub tasks overflow item when hasSubTasks is true', async () => {
       render(<TaskButtons {...defaultProps} hasSubTasks id="task-123" />);
-      const subTasksButton = screen.getByRole('link', { name: /sub tasks/i });
-      expect(subTasksButton).toBeInTheDocument();
-      expect(subTasksButton).toHaveAttribute(
-        'href',
-        '/foreman_tasks/tasks/task-123/sub_tasks'
-      );
+      await openTaskActionsMenu();
+      expect(
+        screen.getByRole('menuitem', { name: /sub tasks/i })
+      ).toBeInTheDocument();
     });
 
-    it('does not render sub tasks button when hasSubTasks is false', () => {
+    it('does not include sub tasks overflow item when hasSubTasks is false', async () => {
       render(<TaskButtons {...defaultProps} hasSubTasks={false} />);
+      await openTaskActionsMenu();
       expect(
-        screen.queryByRole('link', { name: /sub tasks/i })
+        screen.queryByRole('menuitem', { name: /sub tasks/i })
       ).not.toBeInTheDocument();
     });
   });
+
   describe('user interactions', () => {
     const cancelTaskRequest = jest.fn();
     const resumeTaskRequest = jest.fn();
@@ -176,45 +191,66 @@ describe('TaskButtons', () => {
       state: 'paused',
     };
 
-    it('calls taskProgressToggle when reload button is clicked', () => {
+    it('calls taskProgressToggle when overflow reload item is clicked', async () => {
       render(<TaskButtons {...props} />);
-      const reloadButton = screen.getByRole('button', {
-        name: /start auto-reloading/i,
-      });
-      fireEvent.click(reloadButton);
+      await openTaskActionsMenu();
+      fireEvent.click(
+        screen.getByRole('menuitem', { name: /start auto-reloading/i })
+      );
       expect(taskProgressToggle).toHaveBeenCalled();
     });
 
-    it('calls taskReloadStart and resumeTaskRequest when resume button is clicked', () => {
+    it('calls taskReloadStart and resumeTaskRequest when resume menu item is clicked', async () => {
       render(<TaskButtons {...props} />);
-      const resumeButton = screen.getByRole('button', { name: /resume/i });
-      fireEvent.click(resumeButton);
+      await openTaskActionsMenu();
+      fireEvent.click(screen.getByRole('menuitem', { name: /^resume$/i }));
       expect(taskReloadStart).toHaveBeenCalledWith(id);
       expect(resumeTaskRequest).toHaveBeenCalledWith(id, action);
     });
 
     it('calls taskReloadStart and cancelTaskRequest when cancel button is clicked', () => {
       render(<TaskButtons {...props} />);
-      const cancelButton = screen.getByRole('button', { name: /cancel/i });
-      fireEvent.click(cancelButton);
+      fireEvent.click(screen.getByRole('button', { name: /cancel/i }));
       expect(taskReloadStart).toHaveBeenCalledWith(id);
       expect(cancelTaskRequest).toHaveBeenCalledWith(id, action);
     });
 
-    it('calls setUnlockModalOpen when unlock button is clicked', () => {
+    it('calls setUnlockModalOpen when unlock menu item is clicked', async () => {
       render(<TaskButtons {...props} />);
-      const unlockButton = screen.getByRole('button', { name: /^unlock$/i });
-      fireEvent.click(unlockButton);
+      await openTaskActionsMenu();
+      fireEvent.click(screen.getByRole('menuitem', { name: /^unlock$/i }));
       expect(setUnlockModalOpen).toHaveBeenCalledWith(true);
     });
 
-    it('calls setForceUnlockModalOpen when force unlock button is clicked', () => {
+    it('calls setForceUnlockModalOpen when force unlock menu item is clicked', async () => {
       render(<TaskButtons {...props} />);
-      const forceUnlockButton = screen.getByRole('button', {
-        name: /force unlock/i,
-      });
-      fireEvent.click(forceUnlockButton);
+      await openTaskActionsMenu();
+      fireEvent.click(screen.getByRole('menuitem', { name: /force unlock/i }));
       expect(setForceUnlockModalOpen).toHaveBeenCalledWith(true);
+    });
+
+    it('assigns window location for parent task overflow item', async () => {
+      const assign = jest.fn();
+      delete window.location;
+      window.location = { ...window.location, assign };
+
+      render(<TaskButtons {...props} parentTask="parent-xyz" />);
+      await openTaskActionsMenu();
+      fireEvent.click(screen.getByRole('menuitem', { name: /parent task/i }));
+      expect(assign).toHaveBeenCalledWith('/foreman_tasks/tasks/parent-xyz');
+    });
+
+    it('assigns window location for sub tasks overflow item', async () => {
+      const assign = jest.fn();
+      delete window.location;
+      window.location = { ...window.location, assign };
+
+      render(<TaskButtons {...props} hasSubTasks />);
+      await openTaskActionsMenu();
+      fireEvent.click(screen.getByRole('menuitem', { name: /sub tasks/i }));
+      expect(assign).toHaveBeenCalledWith(
+        `/foreman_tasks/tasks/${id}/sub_tasks`
+      );
     });
   });
 });
