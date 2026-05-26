@@ -27,6 +27,7 @@ const TaskDetails = ({
   taskReloadStart,
   taskReloadStop,
   APIerror,
+  result,
   ...props
 }) => {
   const id = getTaskID();
@@ -96,6 +97,8 @@ const TaskDetails = ({
           ouiaId="task-details-tab-running-steps"
         >
           <RunningSteps
+            executionPlan={executionPlan}
+            result={result}
             runningSteps={runningSteps}
             id={id}
             cancelStep={cancelStep}

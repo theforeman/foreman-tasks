@@ -27,6 +27,45 @@ describe('RunningSteps', () => {
     expect(screen.getByText(/no running steps/i)).toBeInTheDocument();
   });
 
+  it('shows suspended warning when plan is running, result pending, no steps', () => {
+    render(
+      <RunningSteps
+        {...baseProps}
+        runningSteps={[]}
+        executionPlan={{ state: 'running', cancellable: false }}
+        result="pending"
+      />
+    );
+
+    expect(
+      screen.getByRole('heading', {
+        level: 4,
+        name: /temporarily suspended step/i,
+      })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/the task is still being processed/i)
+    ).toBeInTheDocument();
+  });
+
+  it('shows planned empty state when plan is planned, result pending, no steps', () => {
+    render(
+      <RunningSteps
+        {...baseProps}
+        runningSteps={[]}
+        executionPlan={{ state: 'planned', cancellable: false }}
+        result="pending"
+      />
+    );
+
+    expect(
+      screen.getByRole('heading', { level: 2, name: /planned task/i })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/the task has not started yet/i)
+    ).toBeInTheDocument();
+  });
+
   it('renders running step fields and Cancel when step is cancellable', () => {
     const cancelStep = jest.fn();
     render(
