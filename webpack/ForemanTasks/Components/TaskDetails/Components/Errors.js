@@ -22,23 +22,54 @@ import {
 import { CheckCircleIcon } from '@patternfly/react-icons';
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
 
-const TRANSPARENT_CODE_BLOCK_STYLE = {
-  '--pf-v5-c-code-block--BackgroundColor': 'transparent',
+const SPACER_MD = '1rem';
+const SPACER_LG = '1.5rem';
+const SPACER_XS = '0.25rem';
+
+const ERROR_DETAIL_WRAPPER_STYLE = {
+  marginTop: SPACER_MD,
+  marginLeft: SPACER_LG,
+};
+
+const ERROR_DETAIL_LABEL_STYLE = {
+  paddingBottom: SPACER_XS,
+};
+
+const ERROR_DETAIL_SPLIT_ITEM_STYLE = {
+  flex: '0 0 min(33%, 20rem)',
+  minWidth: 0,
+  marginTop: SPACER_MD,
+  borderRight: '1px solid #000000B0',
+};
+
+const STEP_ALERT_STYLE = {
+  boxShadow: 'none',
+  border: '1px solid #8a8d90',
+};
+
+const TASK_ERRORS_CODEBLOCK_STYLE = {
+  backgroundColor: 'transparent',
+};
+
+const TASK_ERRORS_CODEBLOCK_CODE_STYLE = {
+  margin: `-${SPACER_MD}`,
   backgroundColor: 'transparent',
 };
 
 const ErrorDetailSection = ({ label, children }) => (
-  <StackItem>
+  <StackItem style={ERROR_DETAIL_WRAPPER_STYLE}>
     <Flex
       direction={{ default: 'column' }}
       spaceItems={{ default: 'spaceItemsXs' }}
     >
-      <FlexItem>
+      <FlexItem style={ERROR_DETAIL_LABEL_STYLE}>
         <strong>{label}</strong>
       </FlexItem>
       <FlexItem>
-        <CodeBlock style={TRANSPARENT_CODE_BLOCK_STYLE}>
-          <CodeBlockCode>{children}</CodeBlockCode>
+        <CodeBlock style={TASK_ERRORS_CODEBLOCK_STYLE}>
+          <CodeBlockCode style={TASK_ERRORS_CODEBLOCK_CODE_STYLE}>
+            {children}
+          </CodeBlockCode>
         </CodeBlock>
       </FlexItem>
     </Flex>
@@ -56,7 +87,7 @@ const ErrorDetailsPane = ({ step }) => {
   }
 
   return (
-    <Stack hasGutter>
+    <Stack>
       <ErrorDetailSection label={__('Input')}>{step.input}</ErrorDetailSection>
       <ErrorDetailSection label={__('Output')}>
         {step.output}
@@ -148,7 +179,7 @@ const Errors = ({ executionPlan, failedSteps }) => {
 
   return (
     <Split hasGutter>
-      <SplitItem style={{ flex: '0 0 min(33%, 20rem)', minWidth: 0 }}>
+      <SplitItem style={ERROR_DETAIL_SPLIT_ITEM_STYLE}>
         <Flex
           direction={{ default: 'column' }}
           fullWidth={{ default: 'fullWidth' }}
@@ -178,7 +209,7 @@ const Errors = ({ executionPlan, failedSteps }) => {
                     fullWidth={{ default: 'fullWidth' }}
                     role="option"
                     aria-selected={selected}
-                    tabIndex={0}
+                    tabIndex={i}
                     onClick={() => setSelectedIndex(i)}
                     onKeyDown={event => {
                       if (event.key === 'Enter' || event.key === ' ') {
@@ -192,8 +223,8 @@ const Errors = ({ executionPlan, failedSteps }) => {
                   >
                     <Alert
                       variant={variant}
-                      isInline
                       ouiaId={`task-error-${i}`}
+                      style={STEP_ALERT_STYLE}
                       title={sprintf(titleKey, summary)}
                     />
                   </Flex>

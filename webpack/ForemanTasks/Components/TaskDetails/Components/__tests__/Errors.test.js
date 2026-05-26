@@ -51,7 +51,6 @@ describe('Errors', () => {
       '[data-ouia-component-id="task-error-0"]'
     );
     expect(stepAlert).toBeInTheDocument();
-    expect(stepAlert).toHaveClass('pf-m-inline');
     expect(
       screen.getByRole('heading', {
         level: 4,
