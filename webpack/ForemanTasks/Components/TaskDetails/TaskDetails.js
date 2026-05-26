@@ -27,6 +27,7 @@ const TaskDetails = ({
   taskReloadStart,
   taskReloadStop,
   APIerror,
+  result,
   ...props
 }) => {
   const id = getTaskID();
@@ -97,7 +98,7 @@ const TaskDetails = ({
         >
           <RunningSteps
             executionPlan={executionPlan}
-            result={props.result}
+            result={result}
             runningSteps={runningSteps}
             id={id}
             cancelStep={cancelStep}
