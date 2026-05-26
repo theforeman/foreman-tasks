@@ -27,11 +27,10 @@ const TaskDetails = ({
   taskReloadStart,
   taskReloadStop,
   APIerror,
-  result,
   ...props
 }) => {
   const id = getTaskID();
-  const { taskReload, status, isLoading } = props;
+  const { taskReload, status, isLoading, result } = props;
   const [activeTabKey, setActiveTabKey] = useState(1);
 
   useEffect(() => {
