@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Flex, FlexItem, TextContent, Text } from '@patternfly/react-core';
 import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
+import Permitted from 'foremanReact/components/Permitted/Permitted';
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
 import TaskDetails from '../../Components/TaskDetails';
 import {
@@ -41,19 +42,21 @@ const TaskDetailsPage = props => {
   );
 
   return (
-    <PageLayout
-      customHeader={header}
-      header={headerText}
-      searchable={false}
-      breadcrumbOptions={{
-        breadcrumbItems: [
-          { caption: __('Tasks'), url: '/foreman_tasks/tasks' },
-          { caption: action || id },
-        ],
-      }}
-    >
-      <TaskDetails {...props} />
-    </PageLayout>
+    <Permitted requiredPermissions={['view_foreman_tasks']}>
+      <PageLayout
+        customHeader={header}
+        header={headerText}
+        searchable={false}
+        breadcrumbOptions={{
+          breadcrumbItems: [
+            { caption: __('Tasks'), url: '/foreman_tasks/tasks' },
+            { caption: action || id },
+          ],
+        }}
+      >
+        <TaskDetails {...props} />
+      </PageLayout>
+    </Permitted>
   );
 };
 

@@ -36,7 +36,7 @@ module ForemanTasks
              :last     => true
 
         security_block :foreman_tasks do |_map|
-          permission :view_foreman_tasks, { :'foreman_tasks/tasks' => [:auto_complete_search, :sub_tasks, :index, :summary, :summary_sub_tasks, :show],
+          permission :view_foreman_tasks, { :'foreman_tasks/tasks' => [:auto_complete_search, :sub_tasks, :index, :summary, :summary_sub_tasks],
                                             :'foreman_tasks/api/tasks' => [:bulk_search, :show, :index, :summary, :summary_sub_tasks, :details, :sub_tasks] }, :resource_type => 'ForemanTasks::Task'
           permission :edit_foreman_tasks, { :'foreman_tasks/tasks' => [:resume, :unlock, :force_unlock, :cancel_step, :cancel, :abort],
                                             :'foreman_tasks/api/tasks' => [:bulk_resume, :bulk_cancel, :bulk_stop] }, :resource_type => 'ForemanTasks::Task'
