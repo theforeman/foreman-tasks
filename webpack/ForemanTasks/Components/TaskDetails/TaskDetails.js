@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Tabs, Tab, TabTitleText } from '@patternfly/react-core';
-import { translate as __, sprintf } from 'foremanReact/common/I18n';
+import { ExclamationCircleIcon } from '@patternfly/react-icons';
+import { translate as __ } from 'foremanReact/common/I18n';
 import { STATUS } from 'foremanReact/constants';
-import MessageBox from 'foremanReact/components/common/MessageBox';
+import EmptyState from 'foremanReact/components/common/EmptyState';
+import PermissionDenied from 'foremanReact/components/PermissionDenied';
 import Task from './Components/Task';
 import RunningSteps from './Components/RunningSteps';
 import Errors from './Components/Errors';
@@ -26,7 +28,9 @@ const TaskDetails = ({
   cancelStep,
   taskReloadStart,
   taskReloadStop,
-  APIerror,
+  apiStatus,
+  apiErrorMessage,
+  apiErrorCode,
   ...props
 }) => {
   const id = getTaskID();
@@ -48,15 +52,32 @@ const TaskDetails = ({
     }
   };
 
-  if (status === STATUS.ERROR) {
+  if (status === STATUS.ERROR || apiStatus === STATUS.ERROR) {
+    if (apiErrorCode === 403) {
+      return <PermissionDenied missingPermissions={['view_foreman_tasks']} />;
+    }
+
+    if (apiErrorCode === 404) {
+      return (
+        <EmptyState
+          icon={<ExclamationCircleIcon />}
+          header={__('Task not found')}
+          description={
+            apiErrorMessage || __('The requested task could not be found.')
+          }
+        />
+      );
+    }
+
     return (
-      <MessageBox
-        key="task-details-error"
-        icontype="error-circle-o"
-        msg={sprintf(__('Could not receive data: %s'), APIerror?.message)}
+      <EmptyState
+        icon={<ExclamationCircleIcon />}
+        header={__('Error')}
+        description={apiErrorMessage || __('Could not receive task data.')}
       />
     );
   }
+
   const resumable = executionPlan ? executionPlan.state === 'paused' : false;
   const cancellable = executionPlan ? executionPlan.cancellable : false;
   const lockRecords = locks.concat(links);
@@ -160,7 +181,9 @@ TaskDetails.propTypes = {
   cancelStep: PropTypes.func.isRequired,
   taskReload: PropTypes.bool.isRequired,
   status: PropTypes.oneOf(Object.keys(STATUS)),
-  APIerror: PropTypes.object,
+  apiStatus: PropTypes.oneOf(Object.keys(STATUS)),
+  apiErrorMessage: PropTypes.string,
+  apiErrorCode: PropTypes.number,
   taskReloadStop: PropTypes.func.isRequired,
   taskReloadStart: PropTypes.func.isRequired,
   links: PropTypes.array,
@@ -175,7 +198,7 @@ TaskDetails.propTypes = {
 TaskDetails.defaultProps = {
   label: '',
   runningSteps: [],
-  APIerror: null,
+  apiErrorMessage: '',
   status: STATUS.PENDING,
   links: [],
   dependsOn: [],
