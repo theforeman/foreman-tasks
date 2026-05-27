@@ -4,7 +4,6 @@ import {
   selectAPIByKey,
   selectAPIStatus as selectAPIStatusByKey,
   selectAPIError as selectAPIErrorByKey,
-  selectAPIErrorMessage as selectErrorMessageByKey,
 } from 'foremanReact/redux/API/APISelectors';
 import { selectDoesIntervalExist } from 'foremanReact/redux/middlewares/IntervalMiddleware/IntervalSelectors';
 import { STATUS } from 'foremanReact/constants';
@@ -109,11 +108,21 @@ export const selectStatus = state => selectTaskDetailsResponse(state).status;
 export const selectAPIStatus = state =>
   selectAPIStatusByKey(state, FOREMAN_TASK_DETAILS);
 
-export const selectAPIErrorMessage = state =>
-  selectErrorMessageByKey(state, FOREMAN_TASK_DETAILS);
+export const selectAPIError = state =>
+  selectAPIErrorByKey(state, FOREMAN_TASK_DETAILS);
+
+export const selectAPIErrorMessage = state => {
+  const apiError = selectAPIError(state);
+
+  if (apiError?.response?.data?.error) {
+    return apiError.response.data.error.message;
+  }
+
+  return apiError?.message;
+};
 
 export const selectAPIErrorCode = state =>
-  selectAPIErrorByKey(state, FOREMAN_TASK_DETAILS)?.response?.status;
+  selectAPIError(state)?.response?.status;
 
 export const selectIsLoading = state =>
   !!selectAPIByKey(state, FOREMAN_TASK_DETAILS).response &&
