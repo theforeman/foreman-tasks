@@ -72,7 +72,7 @@ const rootReducer = combineReducers({
   foremanTasks: (state = {}, action) => state,
 });
 
-function renderPage(apiPayloadOverrides = {}, propsOverrides = {}) {
+const renderPage = (apiPayloadOverrides = {}, propsOverrides = {}) => {
   const store = configureStore({
     reducer: rootReducer,
     preloadedState: createStoreForTaskPayload(apiPayloadOverrides),
@@ -100,18 +100,17 @@ function renderPage(apiPayloadOverrides = {}, propsOverrides = {}) {
       </IntlProvider>
     </Provider>
   );
-}
+};
 
-function breadcrumbTitleHeadings() {
-  return screen.getAllByRole('heading', { level: 1 }).filter(
+const breadcrumbTitleHeadings = () =>
+  screen.getAllByRole('heading', { level: 1 }).filter(
     heading => heading.getAttribute('data-ouia-component-id') === 'breadcrumb_title'
   );
-}
 
 /**
  * Title row (`customHeader` root `Flex`): same OUIA pattern as `Locks.test.js`.
  */
-function taskDetailsTitleRegion(container) {
+const taskDetailsTitleRegion = container => {
   const el = container.querySelector(
     `[data-ouia-component-id="${TASK_DETAILS_TITLE_ROW_OUIA_ID}"]`
   );
@@ -119,7 +118,7 @@ function taskDetailsTitleRegion(container) {
   expect(el).toBeTruthy();
 
   return el;
-}
+};
 
 describe('TaskDetailsPage', () => {
   afterEach(() => {
