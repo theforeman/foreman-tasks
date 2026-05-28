@@ -17,6 +17,9 @@ import { TaskSkeleton } from './Components/TaskSkeleton';
 
 import './TaskDetails.scss';
 
+const NOT_FOUND_ERR = __('The requested task could not be found.');
+const GENERIC_ERR = __('Could not receive task data.');
+
 const TaskDetails = ({
   executionPlan,
   failedSteps,
@@ -62,9 +65,7 @@ const TaskDetails = ({
         <EmptyState
           icon={<ExclamationCircleIcon />}
           header={__('Task not found')}
-          description={
-            apiErrorMessage || __('The requested task could not be found.')
-          }
+          description={apiErrorMessage || NOT_FOUND_ERR}
         />
       );
     }
@@ -73,7 +74,7 @@ const TaskDetails = ({
       <EmptyState
         icon={<ExclamationCircleIcon />}
         header={__('Error')}
-        description={apiErrorMessage || __('Could not receive task data.')}
+        description={apiErrorMessage || GENERIC_ERR}
       />
     );
   }
