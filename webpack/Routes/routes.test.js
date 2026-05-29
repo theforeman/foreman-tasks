@@ -12,14 +12,6 @@ jest.mock(
     }
 );
 
-jest.mock(
-  '../ForemanTasks/Routes/ShowTask/ShowTask',
-  () =>
-    function ShowTaskStub() {
-      return <div data-testid="show-task-stub" />;
-    }
-);
-
 const routerProps = {
   history: { push: jest.fn(), replace: jest.fn(), go: jest.fn() },
   location: {
@@ -43,7 +35,6 @@ describe('ForemanTasks routes', () => {
     ).toEqual([
       { path: '/foreman_tasks/tasks', exact: true },
       { path: '/foreman_tasks/tasks/:id/sub_tasks', exact: true },
-      { path: '/foreman_tasks/ex_tasks/:id', exact: undefined },
     ]);
   });
 
@@ -65,15 +56,6 @@ describe('ForemanTasks routes', () => {
           params: { id: '7' },
           path: '/foreman_tasks/tasks/:id/sub_tasks',
           url: '/foreman_tasks/tasks/7/sub_tasks',
-        },
-      },
-      {
-        ...routerProps,
-        match: {
-          ...routerProps.match,
-          params: { id: '42' },
-          path: '/foreman_tasks/ex_tasks/:id',
-          url: '/foreman_tasks/ex_tasks/42',
         },
       },
     ];
