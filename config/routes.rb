@@ -36,7 +36,6 @@ Foreman::Application.routes.draw do
 
     match '/tasks', to: '/react#index', via: :get
     match '/tasks/:id/sub_tasks', to: '/react#index', via: :get
-    match '/ex_tasks/:id', to: '/react#index', via: :get
 
     namespace :api do
       resources :recurring_logics, :only => [:index, :show, :update] do
