@@ -1,4 +1,3 @@
-import { testSelectorsSnapshotWithFixtures } from '@theforeman/test';
 import {
   selectTasksDashboard,
   selectTime,
@@ -6,6 +5,7 @@ import {
   selectTasksSummary,
   calcStoppedOther,
 } from '../TasksDashboardSelectors';
+import { TASKS_DASHBOARD_AVAILABLE_TIMES } from '../TasksDashboardConstants';
 
 const stoppedResult = {
   error: {
@@ -55,19 +55,98 @@ const state = {
   },
 };
 
-const fixtures = {
-  'should select tasks-dashboard': () => selectTasksDashboard(state),
-  'should select tasks-dashboard when state is empty': () =>
-    selectTasksDashboard({}),
-  'should select time': () => selectTime(state),
-  'should select time when state is empty': () => selectTime({}),
-  'should select query': () => selectQuery(state),
-  'should select query when state is empty': () => selectQuery({}),
-  'should select tasks-summary': () => selectTasksSummary(state),
-  'should select tasks-summary when state is empty': () =>
-    selectTasksSummary({}),
-  'should calcStoppedOther': () => calcStoppedOther(stoppedResult),
+const emptyTasksSummary = {
+  paused: {
+    last: 0,
+    older: 0,
+  },
+  running: {
+    last: 0,
+    older: 0,
+  },
+  scheduled: 0,
+  stopped: {
+    other: 0,
+    results: {
+      error: {
+        last: 0,
+        total: 0,
+      },
+      success: {
+        last: 0,
+        total: 0,
+      },
+      warning: {
+        last: 0,
+        total: 0,
+      },
+    },
+  },
 };
 
-describe('TasksDashboard - Selectors', () =>
-  testSelectorsSnapshotWithFixtures(fixtures));
+describe('TasksDashboard - Selectors', () => {
+  it('should select tasks-dashboard', () => {
+    expect(selectTasksDashboard(state)).toEqual(
+      state.foremanTasks.tasksDashboard
+    );
+  });
+
+  it('should select tasks-dashboard when state is empty', () => {
+    expect(selectTasksDashboard({})).toEqual({});
+  });
+
+  it('should select time', () => {
+    expect(selectTime(state)).toBe('some-time');
+  });
+
+  it('should select time when state is empty', () => {
+    expect(selectTime({})).toBe(TASKS_DASHBOARD_AVAILABLE_TIMES.H24);
+  });
+
+  it('should select query', () => {
+    expect(selectQuery(state)).toBe('some-query');
+  });
+
+  it('should select query when state is empty', () => {
+    expect(selectQuery({})).toEqual({});
+  });
+
+  it('should select tasks-summary', () => {
+    expect(selectTasksSummary(state)).toEqual({
+      paused: {
+        last: 2,
+        older: 7,
+      },
+      running: {
+        last: 3,
+        older: 5,
+      },
+      scheduled: 6,
+      stopped: {
+        other: 16,
+        results: {
+          error: {
+            last: 1,
+            total: 9,
+          },
+          success: {
+            last: 3,
+            total: 7,
+          },
+          warning: {
+            last: 2,
+            total: 8,
+          },
+        },
+      },
+    });
+  });
+
+  it('should select tasks-summary when state is empty', () => {
+    expect(selectTasksSummary({})).toEqual(emptyTasksSummary);
+  });
+
+  it('should calcStoppedOther', () => {
+    expect(calcStoppedOther(stoppedResult)).toBe(16);
+  });
+});
