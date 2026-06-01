@@ -1,5 +1,3 @@
-import { testReducerSnapshotWithFixtures } from '@theforeman/test';
-
 import {
   FOREMAN_TASKS_DASHBOARD_INIT,
   FOREMAN_TASKS_DASHBOARD_UPDATE_TIME,
@@ -7,52 +5,109 @@ import {
   FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_REQUEST,
   FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_SUCCESS,
   FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_FAILURE,
+  TASKS_DASHBOARD_AVAILABLE_TIMES,
+  TASKS_SUMMARY_ZERO,
 } from '../TasksDashboardConstants';
 import reducer from '../TasksDashboardReducer';
 
-const fixtures = {
-  'should return the initial state': {},
-  'should handle FOREMAN_TASKS_DASHBOARD_INIT': {
-    action: {
-      type: FOREMAN_TASKS_DASHBOARD_INIT,
-    },
-  },
-  'should handle FOREMAN_TASKS_DASHBOARD_INIT with data': {
-    action: {
-      type: FOREMAN_TASKS_DASHBOARD_INIT,
-      payload: { time: 'some-time', query: 'some-query' },
-    },
-  },
-  'should handle FOREMAN_TASKS_DASHBOARD_UPDATE_TIME': {
-    action: {
-      type: FOREMAN_TASKS_DASHBOARD_UPDATE_TIME,
-      payload: 'some-time',
-    },
-  },
-  'should handle FOREMAN_TASKS_DASHBOARD_UPDATE_QUERY': {
-    action: {
-      type: FOREMAN_TASKS_DASHBOARD_UPDATE_QUERY,
-      payload: 'some-query',
-    },
-  },
-  'should handle FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_REQUEST': {
-    action: {
-      type: FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_REQUEST,
-    },
-  },
-  'should handle FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_SUCCESS': {
-    action: {
-      type: FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_SUCCESS,
-      payload: 'some-payload',
-    },
-  },
-  'should handle FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_FAILURE': {
-    action: {
-      type: FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_FAILURE,
-      payload: new Error('some error'),
-    },
-  },
+const initialState = {
+  time: TASKS_DASHBOARD_AVAILABLE_TIMES.H24,
+  isLoadingTasksSummary: false,
+  error: null,
+  tasksSummary: TASKS_SUMMARY_ZERO,
 };
 
-describe('BreadcrumbBar reducer', () =>
-  testReducerSnapshotWithFixtures(reducer, fixtures));
+describe('TasksDashboard reducer', () => {
+  it('should return the initial state', () => {
+    expect(reducer(undefined, {})).toEqual(initialState);
+  });
+
+  it('should handle FOREMAN_TASKS_DASHBOARD_INIT', () => {
+    expect(
+      reducer(undefined, {
+        type: FOREMAN_TASKS_DASHBOARD_INIT,
+      })
+    ).toEqual({
+      ...initialState,
+      query: undefined,
+    });
+  });
+
+  it('should handle FOREMAN_TASKS_DASHBOARD_INIT with data', () => {
+    expect(
+      reducer(undefined, {
+        type: FOREMAN_TASKS_DASHBOARD_INIT,
+        payload: { time: 'some-time', query: 'some-query' },
+      })
+    ).toEqual({
+      ...initialState,
+      time: 'some-time',
+      query: 'some-query',
+    });
+  });
+
+  it('should handle FOREMAN_TASKS_DASHBOARD_UPDATE_TIME', () => {
+    expect(
+      reducer(undefined, {
+        type: FOREMAN_TASKS_DASHBOARD_UPDATE_TIME,
+        payload: 'some-time',
+      })
+    ).toEqual({
+      ...initialState,
+      time: 'some-time',
+    });
+  });
+
+  it('should handle FOREMAN_TASKS_DASHBOARD_UPDATE_QUERY', () => {
+    expect(
+      reducer(undefined, {
+        type: FOREMAN_TASKS_DASHBOARD_UPDATE_QUERY,
+        payload: 'some-query',
+      })
+    ).toEqual({
+      ...initialState,
+      query: 'some-query',
+    });
+  });
+
+  it('should handle FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_REQUEST', () => {
+    expect(
+      reducer(undefined, {
+        type: FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_REQUEST,
+      })
+    ).toEqual({
+      ...initialState,
+      isLoading: true,
+    });
+  });
+
+  it('should handle FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_SUCCESS', () => {
+    expect(
+      reducer(undefined, {
+        type: FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_SUCCESS,
+        payload: 'some-payload',
+      })
+    ).toEqual({
+      ...initialState,
+      tasksSummary: 'some-payload',
+      isLoading: false,
+      error: null,
+    });
+  });
+
+  it('should handle FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_FAILURE', () => {
+    const error = new Error('some error');
+
+    expect(
+      reducer(undefined, {
+        type: FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_FAILURE,
+        payload: error,
+      })
+    ).toEqual({
+      ...initialState,
+      tasksSummary: TASKS_SUMMARY_ZERO,
+      isLoading: false,
+      error,
+    });
+  });
+});
