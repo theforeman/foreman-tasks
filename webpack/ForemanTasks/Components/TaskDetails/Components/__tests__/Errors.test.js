@@ -47,18 +47,17 @@ describe('Errors', () => {
         failedSteps={[failedStepFixture]}
       />
     );
-    const stepAlert = container.querySelector(
+    const errorTab = container.querySelector(
       '[data-ouia-component-id="task-error-0"]'
     );
-    expect(stepAlert).toBeInTheDocument();
+    expect(errorTab).toBeInTheDocument();
     expect(
-      screen.getByRole('heading', {
-        level: 4,
-        name: /failed task: action actions::katello::eventqueue::monitor is already active/i,
+      screen.getByRole('tab', {
+        name: /action actions::katello::eventqueue::monitor is already active/i,
       })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole('listbox', { name: /failed task errors/i })
+      screen.getByLabelText(/failed task errors/i)
     ).toBeInTheDocument();
     expect(screen.getByText('Input')).toBeInTheDocument();
     expect(screen.getByText('Output')).toBeInTheDocument();
@@ -68,7 +67,7 @@ describe('Errors', () => {
     expect(screen.getByText(/singleton_lock/i)).toBeInTheDocument();
   });
 
-  it('switches detail pane when a different error option is clicked', () => {
+  it('switches detail pane when a different error tab is clicked', () => {
     const firstStep = {
       ...failedStepFixture,
       action_class: 'Action::First',
@@ -98,80 +97,17 @@ describe('Errors', () => {
     expect(screen.getByText('INPUT_FROM_FIRST_STEP')).toBeInTheDocument();
     expect(screen.queryByText('INPUT_FROM_SECOND_STEP')).not.toBeInTheDocument();
 
-    const options = screen.getAllByRole('option');
-    expect(options[0]).toHaveAttribute('aria-selected', 'true');
-    expect(options[1]).toHaveAttribute('aria-selected', 'false');
+    const tabs = screen.getAllByRole('tab');
+    expect(tabs[0]).toHaveAttribute('aria-selected', 'true');
+    expect(tabs[1]).toHaveAttribute('aria-selected', 'false');
 
-    fireEvent.click(options[1]);
+    fireEvent.click(tabs[1]);
 
     expect(screen.getByText('INPUT_FROM_SECOND_STEP')).toBeInTheDocument();
     expect(screen.queryByText('INPUT_FROM_FIRST_STEP')).not.toBeInTheDocument();
-    expect(options[0]).toHaveAttribute('aria-selected', 'false');
-    expect(options[1]).toHaveAttribute('aria-selected', 'true');
+    expect(tabs[0]).toHaveAttribute('aria-selected', 'false');
+    expect(tabs[1]).toHaveAttribute('aria-selected', 'true');
     expect(screen.getByText('OUTPUT_SECOND')).toBeInTheDocument();
-  });
-
-  it('selects an error option with Enter', () => {
-    const firstStep = {
-      ...failedStepFixture,
-      action_class: 'Action::First',
-      input: 'ONLY_FIRST',
-      output: '{}',
-    };
-    const secondStep = {
-      ...failedStepFixture,
-      action_class: 'Action::Second',
-      error: {
-        ...failedStepFixture.error,
-        message: 'other',
-      },
-      input: 'ONLY_SECOND',
-      output: '{}',
-      state: 'error',
-    };
-
-    render(
-      <Errors
-        executionPlan={executionPlan}
-        failedSteps={[firstStep, secondStep]}
-      />
-    );
-
-    const options = screen.getAllByRole('option');
-    fireEvent.keyDown(options[1], { key: 'Enter', preventDefault: jest.fn() });
-
-    expect(screen.getByText('ONLY_SECOND')).toBeInTheDocument();
-    expect(screen.queryByText('ONLY_FIRST')).not.toBeInTheDocument();
-  });
-
-  it('selects an error option with Space', () => {
-    const firstStep = {
-      ...failedStepFixture,
-      action_class: 'Action::A',
-      input: 'INPUT_A_UNIQUE',
-      output: '{}',
-    };
-    const secondStep = {
-      ...failedStepFixture,
-      action_class: 'Action::B',
-      input: 'INPUT_B_UNIQUE',
-      output: '{}',
-      state: 'error',
-    };
-
-    render(
-      <Errors
-        executionPlan={executionPlan}
-        failedSteps={[firstStep, secondStep]}
-      />
-    );
-
-    fireEvent.keyDown(screen.getAllByRole('option')[1], {
-      key: ' ',
-      preventDefault: jest.fn(),
-    });
-
-    expect(screen.getByText('INPUT_B_UNIQUE')).toBeInTheDocument();
   });
 
   it('clamps selection when failedSteps shrinks', () => {
@@ -196,18 +132,18 @@ describe('Errors', () => {
       />
     );
 
-    fireEvent.click(screen.getAllByRole('option')[1]);
+    fireEvent.click(screen.getAllByRole('tab')[1]);
     expect(screen.getByText('REMOVED')).toBeInTheDocument();
 
     rerender(
       <Errors executionPlan={executionPlan} failedSteps={[firstStep]} />
     );
 
-    expect(screen.getAllByRole('option')).toHaveLength(1);
+    expect(screen.getAllByRole('tab')).toHaveLength(1);
     expect(screen.getByText('AFTER_CLAMP')).toBeInTheDocument();
   });
 
-  it('uses stopped task title and warning for skipped steps', () => {
+  it('uses warning styling for skipped steps', () => {
     const skippedStep = {
       action_class: 'Actions::Example',
       state: 'skipped',
@@ -220,14 +156,13 @@ describe('Errors', () => {
     );
 
     expect(
-      screen.getByRole('heading', {
-        level: 4,
-        name: /stopped task: actions::example/i,
-      })
+      screen.getByRole('tab', { name: /actions::example/i })
     ).toBeInTheDocument();
 
-    const alert = container.querySelector('[data-ouia-component-id="task-error-0"]');
-    expect(alert).toHaveClass('pf-m-warning');
+    const errorTab = container.querySelector(
+      '[data-ouia-component-id="task-error-0"]'
+    );
+    expect(errorTab.querySelector('.pf-m-warning')).toBeInTheDocument();
   });
 
   it('omits exception and backtrace when step has no error object', () => {

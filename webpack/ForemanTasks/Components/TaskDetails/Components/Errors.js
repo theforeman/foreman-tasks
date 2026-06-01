@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import {
   Alert,
   AlertVariant,
@@ -18,56 +19,71 @@ import {
   SplitItem,
   Stack,
   StackItem,
+  Tab,
+  Tabs,
+  TabTitleIcon,
+  TabTitleText,
 } from '@patternfly/react-core';
-import { CheckCircleIcon } from '@patternfly/react-icons';
-import { translate as __, sprintf } from 'foremanReact/common/I18n';
+import {
+  CheckCircleIcon,
+  ExclamationCircleIcon,
+} from '@patternfly/react-icons';
+import { translate as __ } from 'foremanReact/common/I18n';
 
-const SPACER_MD = '1rem';
-const SPACER_LG = '1.5rem';
-const SPACER_XS = '0.25rem';
+import './Errors.scss';
 
-const ERROR_DETAIL_WRAPPER_STYLE = {
-  marginTop: SPACER_MD,
-  marginLeft: SPACER_LG,
+const isStoppedStep = step =>
+  ['skipped', 'skipping'].includes(String(step.state ?? ''));
+
+const getStepSummary = step =>
+  step.error?.message || step.action_class || __('Unknown error');
+
+const getStepStatus = step => (isStoppedStep(step) ? 'warning' : 'danger');
+
+const ErrorTabTitle = ({ step }) => {
+  const status = getStepStatus(step);
+
+  return (
+    <>
+      <TabTitleIcon>
+        <Icon status={status} size="sm">
+          <ExclamationCircleIcon />
+        </Icon>
+      </TabTitleIcon>{' '}
+      <TabTitleText
+        className={classNames(
+          'task-errors-tab-title',
+          `task-errors-tab-title--${status}`
+        )}
+      >
+        {getStepSummary(step)}
+      </TabTitleText>{' '}
+    </>
+  );
 };
 
-const ERROR_DETAIL_LABEL_STYLE = {
-  paddingBottom: SPACER_XS,
-};
-
-const ERROR_DETAIL_SPLIT_ITEM_STYLE = {
-  flex: '0 0 min(33%, 20rem)',
-  minWidth: 0,
-  marginTop: SPACER_MD,
-  borderRight: '1px solid #000000B0',
-};
-
-const STEP_ALERT_STYLE = {
-  boxShadow: 'none',
-  border: '1px solid #8a8d90',
-};
-
-const TASK_ERRORS_CODEBLOCK_STYLE = {
-  backgroundColor: 'transparent',
-};
-
-const TASK_ERRORS_CODEBLOCK_CODE_STYLE = {
-  margin: `-${SPACER_MD}`,
-  backgroundColor: 'transparent',
+ErrorTabTitle.propTypes = {
+  step: PropTypes.shape({
+    action_class: PropTypes.string,
+    state: PropTypes.string,
+    error: PropTypes.shape({
+      message: PropTypes.string,
+    }),
+  }).isRequired,
 };
 
 const ErrorDetailSection = ({ label, children }) => (
-  <StackItem style={ERROR_DETAIL_WRAPPER_STYLE}>
+  <StackItem className="task-errors-detail-section">
     <Flex
       direction={{ default: 'column' }}
       spaceItems={{ default: 'spaceItemsXs' }}
     >
-      <FlexItem style={ERROR_DETAIL_LABEL_STYLE}>
+      <FlexItem className="task-errors-detail-label">
         <strong>{label}</strong>
       </FlexItem>
       <FlexItem>
-        <CodeBlock style={TASK_ERRORS_CODEBLOCK_STYLE}>
-          <CodeBlockCode style={TASK_ERRORS_CODEBLOCK_CODE_STYLE}>
+        <CodeBlock className="task-errors-codeblock">
+          <CodeBlockCode className="task-errors-codeblock-code">
             {children}
           </CodeBlockCode>
         </CodeBlock>
@@ -88,10 +104,6 @@ const ErrorDetailsPane = ({ step }) => {
 
   return (
     <Stack>
-      <ErrorDetailSection label={__('Input')}>{step.input}</ErrorDetailSection>
-      <ErrorDetailSection label={__('Output')}>
-        {step.output}
-      </ErrorDetailSection>
       {step.error && (
         <>
           <ErrorDetailSection label={`${__('Exception')}:`}>
@@ -102,6 +114,10 @@ const ErrorDetailsPane = ({ step }) => {
           </ErrorDetailSection>
         </>
       )}
+      <ErrorDetailSection label={__('Input')}>{step.input}</ErrorDetailSection>
+      <ErrorDetailSection label={__('Output')}>
+        {step.output}
+      </ErrorDetailSection>
     </Stack>
   );
 };
@@ -179,62 +195,29 @@ const Errors = ({ executionPlan, failedSteps }) => {
 
   return (
     <Split hasGutter>
-      <SplitItem style={ERROR_DETAIL_SPLIT_ITEM_STYLE}>
-        <Flex
-          direction={{ default: 'column' }}
-          fullWidth={{ default: 'fullWidth' }}
-          role="listbox"
+      <SplitItem className="task-errors-tabs-split">
+        <Tabs
+          id="task-errors-tabs"
+          ouiaId="task-errors-tabs"
+          activeKey={selectedIndex}
+          className="task-errors-tabs"
+          onSelect={(_event, tabIndex) => setSelectedIndex(Number(tabIndex))}
+          isVertical
+          isBox
           aria-label={__('Failed task errors')}
-          style={{ minWidth: 0 }}
         >
-          <Stack hasGutter>
-            {failedSteps.map((step, i) => {
-              const summary =
-                step.error?.message || step.action_class || __('Unknown error');
-              const isStoppedStep = ['skipped', 'skipping'].includes(
-                String(step.state ?? '')
-              );
-              const variant = isStoppedStep
-                ? AlertVariant.warning
-                : AlertVariant.danger;
-              const titleKey = isStoppedStep
-                ? __('Stopped task: %s')
-                : __('Failed task: %s');
-              const selected = i === selectedIndex;
-
-              return (
-                <StackItem key={`${step.action_class}-${i}`}>
-                  <Flex
-                    direction={{ default: 'column' }}
-                    fullWidth={{ default: 'fullWidth' }}
-                    role="option"
-                    aria-selected={selected}
-                    tabIndex={i}
-                    onClick={() => setSelectedIndex(i)}
-                    onKeyDown={event => {
-                      if (event.key === 'Enter' || event.key === ' ') {
-                        event.preventDefault();
-                        setSelectedIndex(i);
-                      }
-                    }}
-                    style={{
-                      cursor: 'pointer',
-                    }}
-                  >
-                    <Alert
-                      variant={variant}
-                      ouiaId={`task-error-${i}`}
-                      style={STEP_ALERT_STYLE}
-                      title={sprintf(titleKey, summary)}
-                    />
-                  </Flex>
-                </StackItem>
-              );
-            })}
-          </Stack>
-        </Flex>
+          {failedSteps.map((step, i) => (
+            <Tab
+              key={`${step.action_class}-${i}`}
+              eventKey={i}
+              ouiaId={`task-error-${i}`}
+              title={<ErrorTabTitle step={step} />}
+              aria-label={getStepSummary(step)}
+            />
+          ))}
+        </Tabs>
       </SplitItem>
-      <SplitItem isFilled style={{ minWidth: 0 }}>
+      <SplitItem isFilled>
         <ErrorDetailsPane step={selectedStep} />
       </SplitItem>
     </Split>
