@@ -46,7 +46,7 @@ const ErrorTabTitle = ({ step }) => {
   return (
     <>
       <TabTitleIcon>
-        <Icon status={status} size="sm">
+        <Icon status={status}>
           <ExclamationCircleIcon />
         </Icon>
       </TabTitleIcon>{' '}
@@ -153,9 +153,11 @@ const Errors = ({ executionPlan, failedSteps }) => {
 
   if (!executionPlan) {
     return (
-      <Alert variant={AlertVariant.danger} ouiaId="task-errors-plan-missing">
-        {__('Execution plan data not available ')}
-      </Alert>
+      <Alert
+        title={__('Execution plan data not available ')}
+        variant={AlertVariant.danger}
+        ouiaId="task-errors-plan-missing"
+      />
     );
   }
 
