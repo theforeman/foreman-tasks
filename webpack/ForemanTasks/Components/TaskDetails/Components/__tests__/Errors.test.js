@@ -143,6 +143,28 @@ describe('Errors', () => {
     expect(screen.getByText('AFTER_CLAMP')).toBeInTheDocument();
   });
 
+  it('truncates long tab titles to 120 characters with ellipsis', () => {
+    const longMessage = 'x'.repeat(150);
+    const longStep = {
+      ...failedStepFixture,
+      error: {
+        ...failedStepFixture.error,
+        message: longMessage,
+      },
+    };
+
+    const { container } = render(
+      <Errors executionPlan={executionPlan} failedSteps={[longStep]} />
+    );
+
+    const tabTitle = container.querySelector('.task-errors-tab-title');
+    expect(tabTitle.textContent).toHaveLength(120);
+    expect(tabTitle.textContent.endsWith('...')).toBe(true);
+    expect(
+      screen.getByRole('tab', { name: longMessage })
+    ).toBeInTheDocument();
+  });
+
   it('uses warning styling for skipped steps', () => {
     const skippedStep = {
       action_class: 'Actions::Example',

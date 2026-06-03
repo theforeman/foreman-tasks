@@ -35,8 +35,18 @@ import './Errors.scss';
 const isStoppedStep = step =>
   ['skipped', 'skipping'].includes(String(step.state ?? ''));
 
+const STEP_SUMMARY_MAX_LENGTH = 120;
+
 const getStepSummary = step =>
   step.error?.message || step.action_class || __('Unknown error');
+
+const truncateStepSummary = summary => {
+  if (summary.length <= STEP_SUMMARY_MAX_LENGTH) {
+    return summary;
+  }
+
+  return `${summary.slice(0, STEP_SUMMARY_MAX_LENGTH - 3)}...`;
+};
 
 const getStepStatus = step => (isStoppedStep(step) ? 'warning' : 'danger');
 
@@ -49,15 +59,15 @@ const ErrorTabTitle = ({ step }) => {
         <Icon status={status}>
           <ExclamationCircleIcon />
         </Icon>
-      </TabTitleIcon>{' '}
+      </TabTitleIcon>
       <TabTitleText
         className={classNames(
           'task-errors-tab-title',
           `task-errors-tab-title--${status}`
         )}
       >
-        {getStepSummary(step)}
-      </TabTitleText>{' '}
+        {truncateStepSummary(getStepSummary(step))}
+      </TabTitleText>
     </>
   );
 };
