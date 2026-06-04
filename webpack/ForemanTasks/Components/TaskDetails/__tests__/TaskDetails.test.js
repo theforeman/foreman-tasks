@@ -3,9 +3,16 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
 
 import TaskDetails from '../TaskDetails';
 import { minProps } from './TaskDetails.fixtures';
+
+jest.mock('foremanReact/Root/Context/ForemanContext', () => ({
+  ...jest.requireActual('foremanReact/Root/Context/ForemanContext'),
+  useForemanPermissions: () => new Set(['view_foreman_tasks']),
+}));
 
 delete window.location;
 window.location = new URL(
@@ -15,38 +22,50 @@ window.location = new URL(
 const store = configureStore({ reducer: state => state || {} });
 
 function renderTaskDetails(props = {}) {
+  const history = createMemoryHistory();
+
   return render(
-    <Provider store={store}>
-      <TaskDetails {...minProps} {...props} />
-    </Provider>
+    <Router history={history}>
+      <Provider store={store}>
+        <TaskDetails {...minProps} {...props} />
+      </Provider>
+    </Router>
   );
 }
 
 describe('TaskDetails', () => {
-  it('shows generic EmptyState when status is ERROR', () => {
+  it('shows ResourceLoadFailedEmptyState when status is ERROR', () => {
     renderTaskDetails({
       status: 'ERROR',
       apiErrorMessage: 'some-error',
     });
 
-    expect(screen.getByRole('heading', { name: /^error$/i })).toBeInTheDocument();
-    expect(screen.getByText('some-error')).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: /unable to load task/i })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('Server returned: some-error')
+    ).toBeInTheDocument();
     expect(screen.queryByRole('tab', { name: /^task$/i })).not.toBeInTheDocument();
   });
 
-  it('shows generic EmptyState when apiStatus is ERROR', () => {
+  it('shows ResourceLoadFailedEmptyState when apiStatus is ERROR', () => {
     renderTaskDetails({
       status: 'RESOLVED',
       apiStatus: 'ERROR',
       apiErrorMessage: 'api-error',
     });
 
-    expect(screen.getByRole('heading', { name: /^error$/i })).toBeInTheDocument();
-    expect(screen.getByText('api-error')).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: /unable to load task/i })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('Server returned: api-error')
+    ).toBeInTheDocument();
     expect(screen.queryByRole('tab', { name: /^task$/i })).not.toBeInTheDocument();
   });
 
-  it('shows PermissionDenied when apiErrorCode is 403', () => {
+  it('shows permission denied when apiErrorCode is 403', () => {
     renderTaskDetails({
       status: 'RESOLVED',
       apiStatus: 'ERROR',
@@ -54,15 +73,17 @@ describe('TaskDetails', () => {
       apiErrorMessage: 'Forbidden',
     });
 
-    expect(screen.getByText('Permission Denied')).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: /permission denied/i })
+    ).toBeInTheDocument();
     expect(screen.getByText('view_foreman_tasks')).toBeInTheDocument();
     expect(
-      screen.queryByRole('heading', { name: /^error$/i })
-    ).not.toBeInTheDocument();
+      screen.getByText('Server returned: Forbidden')
+    ).toBeInTheDocument();
     expect(screen.queryByRole('tab', { name: /^task$/i })).not.toBeInTheDocument();
   });
 
-  it('shows EmptyState when apiErrorCode is 404', () => {
+  it('shows not found messaging when apiErrorCode is 404', () => {
     renderTaskDetails({
       status: 'RESOLVED',
       apiStatus: 'ERROR',
@@ -71,12 +92,14 @@ describe('TaskDetails', () => {
     });
 
     expect(
-      screen.getByRole('heading', { name: /task not found/i })
+      screen.getByRole('heading', { name: /unable to load task/i })
     ).toBeInTheDocument();
-    expect(screen.getByText('Task missing')).toBeInTheDocument();
     expect(
-      screen.queryByRole('heading', { name: /^error$/i })
-    ).not.toBeInTheDocument();
+      screen.getByText(/could not be found/i)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('Server returned: Task missing')
+    ).toBeInTheDocument();
     expect(screen.queryByRole('tab', { name: /^task$/i })).not.toBeInTheDocument();
   });
 

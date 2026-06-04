@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Tabs, Tab, TabTitleText } from '@patternfly/react-core';
-import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { STATUS } from 'foremanReact/constants';
-import EmptyState from 'foremanReact/components/common/EmptyState';
-import PermissionDenied from 'foremanReact/components/PermissionDenied';
+import { ResourceLoadFailedEmptyState } from 'foremanReact/components/common/EmptyState';
 import Task from './Components/Task';
 import RunningSteps from './Components/RunningSteps';
 import Errors from './Components/Errors';
@@ -17,8 +15,7 @@ import { TaskSkeleton } from './Components/TaskSkeleton';
 
 import './TaskDetails.scss';
 
-const NOT_FOUND_ERR = __('The requested task could not be found.');
-const GENERIC_ERR = __('Could not receive task data.');
+const TASKS_PATH = '/foreman_tasks/tasks';
 
 const TaskDetails = ({
   executionPlan,
@@ -56,25 +53,20 @@ const TaskDetails = ({
   };
 
   if (status === STATUS.ERROR || apiStatus === STATUS.ERROR) {
-    if (apiErrorCode === 403) {
-      return <PermissionDenied missingPermissions={['view_foreman_tasks']} />;
-    }
-
-    if (apiErrorCode === 404) {
-      return (
-        <EmptyState
-          icon={<ExclamationCircleIcon />}
-          header={__('Task not found')}
-          description={apiErrorMessage || NOT_FOUND_ERR}
-        />
-      );
-    }
-
     return (
-      <EmptyState
-        icon={<ExclamationCircleIcon />}
-        header={__('Error')}
-        description={apiErrorMessage || GENERIC_ERR}
+      <ResourceLoadFailedEmptyState
+        resourceLabel={__('task')}
+        resourceId={id}
+        httpStatus={apiErrorCode}
+        errorMessage={apiErrorMessage}
+        viewPermissions={['view_foreman_tasks']}
+        requiredPermissions={['view_foreman_tasks']}
+        ouiaIdPrefix="task-details-empty-state"
+        primaryAction={{
+          label: __('Back to tasks'),
+          url: TASKS_PATH,
+          ouiaId: 'task-details-empty-state-tasks-list',
+        }}
       />
     );
   }
