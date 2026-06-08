@@ -5,7 +5,7 @@ export const BULK_RESUME_PATH = 'bulk_resume';
 export const BULK_FORCE_CANCEL_PATH = 'bulk_stop';
 
 export const TASKS_SEARCH_PROPS = {
-  ...getControllerSearchProps('tasks'),
+  ...getControllerSearchProps('/foreman_tasks/tasks'),
   controller: 'foreman_tasks_tasks',
 };
 
