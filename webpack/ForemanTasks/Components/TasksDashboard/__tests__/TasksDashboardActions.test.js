@@ -57,13 +57,15 @@ describe('TasksDashboard - Actions', () => {
   it('should update-query', () => {
     const dispatch = jest.fn();
     const getState = jest.fn();
+    const history = { push: jest.fn(), replace: jest.fn() };
+    const query = { state: 'running' };
 
-    updateQuery('some-query')(dispatch, getState);
+    updateQuery(query, history)(dispatch, getState);
 
-    expect(resolveQuery).toHaveBeenCalledWith('some-query', undefined);
+    expect(resolveQuery).toHaveBeenCalledWith(query, history);
     expect(dispatch).toHaveBeenCalledWith({
       type: FOREMAN_TASKS_DASHBOARD_UPDATE_QUERY,
-      payload: 'some-query',
+      payload: query,
     });
   });
 
@@ -109,6 +111,7 @@ describe('TasksDashboard - Actions', () => {
     expect(dispatch.mock.calls[1][0].type).toBe(
       FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_FAILURE
     );
-    expect(dispatch.mock.calls[1][0].payload).toEqual(new Error('wrong time'));
+    expect(dispatch.mock.calls[1][0].payload).toEqual(expect.any(Error));
+    expect(dispatch.mock.calls[1][0].payload.message).toBe('wrong time');
   });
 });
