@@ -5,10 +5,15 @@ import {
   FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_REQUEST,
   FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_SUCCESS,
   FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_FAILURE,
+  TASKS_DASHBOARD_AVAILABLE_QUERY_STATES,
   TASKS_DASHBOARD_AVAILABLE_TIMES,
   TASKS_SUMMARY_ZERO,
 } from '../TasksDashboardConstants';
 import reducer from '../TasksDashboardReducer';
+
+const dashboardQuery = {
+  state: TASKS_DASHBOARD_AVAILABLE_QUERY_STATES.RUNNING,
+};
 
 const initialState = {
   time: TASKS_DASHBOARD_AVAILABLE_TIMES.H24,
@@ -17,14 +22,17 @@ const initialState = {
   tasksSummary: TASKS_SUMMARY_ZERO,
 };
 
+const runReducer = (state, action) =>
+  reducer(state, action).asMutable({ deep: true });
+
 describe('TasksDashboard reducer', () => {
   it('should return the initial state', () => {
-    expect(reducer(undefined, {})).toEqual(initialState);
+    expect(runReducer(undefined, {})).toEqual(initialState);
   });
 
   it('should handle FOREMAN_TASKS_DASHBOARD_INIT', () => {
     expect(
-      reducer(undefined, {
+      runReducer(undefined, {
         type: FOREMAN_TASKS_DASHBOARD_INIT,
       })
     ).toEqual({
@@ -35,44 +43,47 @@ describe('TasksDashboard reducer', () => {
 
   it('should handle FOREMAN_TASKS_DASHBOARD_INIT with data', () => {
     expect(
-      reducer(undefined, {
+      runReducer(undefined, {
         type: FOREMAN_TASKS_DASHBOARD_INIT,
-        payload: { time: 'some-time', query: 'some-query' },
+        payload: {
+          time: TASKS_DASHBOARD_AVAILABLE_TIMES.WEEK,
+          query: dashboardQuery,
+        },
       })
     ).toEqual({
       ...initialState,
-      time: 'some-time',
-      query: 'some-query',
+      time: TASKS_DASHBOARD_AVAILABLE_TIMES.WEEK,
+      query: dashboardQuery,
     });
   });
 
   it('should handle FOREMAN_TASKS_DASHBOARD_UPDATE_TIME', () => {
     expect(
-      reducer(undefined, {
+      runReducer(undefined, {
         type: FOREMAN_TASKS_DASHBOARD_UPDATE_TIME,
-        payload: 'some-time',
+        payload: TASKS_DASHBOARD_AVAILABLE_TIMES.WEEK,
       })
     ).toEqual({
       ...initialState,
-      time: 'some-time',
+      time: TASKS_DASHBOARD_AVAILABLE_TIMES.WEEK,
     });
   });
 
   it('should handle FOREMAN_TASKS_DASHBOARD_UPDATE_QUERY', () => {
     expect(
-      reducer(undefined, {
+      runReducer(undefined, {
         type: FOREMAN_TASKS_DASHBOARD_UPDATE_QUERY,
-        payload: 'some-query',
+        payload: dashboardQuery,
       })
     ).toEqual({
       ...initialState,
-      query: 'some-query',
+      query: dashboardQuery,
     });
   });
 
   it('should handle FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_REQUEST', () => {
     expect(
-      reducer(undefined, {
+      runReducer(undefined, {
         type: FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_REQUEST,
       })
     ).toEqual({
@@ -83,7 +94,7 @@ describe('TasksDashboard reducer', () => {
 
   it('should handle FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_SUCCESS', () => {
     expect(
-      reducer(undefined, {
+      runReducer(undefined, {
         type: FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_SUCCESS,
         payload: 'some-payload',
       })
@@ -99,7 +110,7 @@ describe('TasksDashboard reducer', () => {
     const error = new Error('some error');
 
     expect(
-      reducer(undefined, {
+      runReducer(undefined, {
         type: FOREMAN_TASKS_DASHBOARD_FETCH_TASKS_SUMMARY_FAILURE,
         payload: error,
       })
