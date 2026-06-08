@@ -104,7 +104,16 @@ describe('TasksDashboard - Selectors', () => {
   });
 
   it('should select query', () => {
-    expect(selectQuery(state)).toBe('some-query');
+    const query = { state: 'running' };
+    const stateWithQuery = {
+      ...state,
+      foremanTasks: {
+        ...state.foremanTasks,
+        tasksDashboard: { ...state.foremanTasks.tasksDashboard, query },
+      },
+    };
+
+    expect(selectQuery(stateWithQuery)).toEqual(query);
   });
 
   it('should select query when state is empty', () => {
