@@ -92,9 +92,7 @@ const TaskDetails = ({
       <Tabs
         aria-label={__('Task details')}
         id="task-details-tabs"
-        className="pf-u-mt-xl"
         activeKey={activeTab}
-        variant="secondary"
         mountOnEnter
         onSelect={(_e, tabKey) => setActiveTab(tabKey)}
       >
