@@ -6,11 +6,6 @@ module ForemanTasks
 
     before_action :find_dynflow_task, only: [:unlock, :force_unlock, :cancel, :abort, :cancel_step, :resume]
 
-    def show
-      @task = resource_base.find(params[:id])
-      render :layout => !request.xhr?
-    end
-
     def index
       params[:order] ||= 'started_at DESC'
       respond_with_tasks resource_base
