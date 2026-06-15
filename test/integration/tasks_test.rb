@@ -10,7 +10,6 @@ class TasksIntegrationTest < IntegrationTestWithJavascript
     set_request_user(User.current)
 
     visit "/foreman_tasks/tasks/#{task.id}"
-    wait_for_ajax
 
     assert_selector 'h5', text: /Unable to load task/i
     assert_no_selector '#task-details-tabs'

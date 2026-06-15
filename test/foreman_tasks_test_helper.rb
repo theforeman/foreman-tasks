@@ -9,8 +9,8 @@ require_relative './support/history_tasks_builder'
 require 'dynflow/testing'
 require 'foreman_tasks/test_helpers'
 
-FactoryBot.definition_file_paths = ["#{ForemanTasks::Engine.root}/test/factories"]
-FactoryBot.find_definitions
+FactoryBot.definition_file_paths << "#{ForemanTasks::Engine.root}/test/factories"
+FactoryBot.reload
 
 ForemanTasks.dynflow.require!
 ForemanTasks.dynflow.config.disable_active_record_actions = true
