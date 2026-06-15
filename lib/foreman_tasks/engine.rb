@@ -20,7 +20,7 @@ module ForemanTasks
       require 'foreman/cron'
 
       Foreman::Plugin.register :"foreman-tasks" do
-        requires_foreman '>= 3.19'
+        requires_foreman '>= 5.0'
         register_global_js_file 'global'
         divider :top_menu, :parent => :monitor_menu, :last => true, :caption => N_('Foreman Tasks')
         menu :top_menu, :tasks,
