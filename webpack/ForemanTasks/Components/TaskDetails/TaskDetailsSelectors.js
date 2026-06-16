@@ -1,7 +1,6 @@
 /* eslint-disable camelcase */
 import {
   selectAPIResponse,
-  selectAPIByKey,
   selectAPIStatus as selectAPIStatusByKey,
   selectAPIError as selectAPIErrorByKey,
 } from 'foremanReact/redux/API/APISelectors';
@@ -103,8 +102,6 @@ export const selectDynflowEnableConsole = state =>
 export const selectCanEdit = state =>
   selectTaskDetailsResponse(state).can_edit || false;
 
-export const selectStatus = state => selectTaskDetailsResponse(state).status;
-
 export const selectAPIStatus = state =>
   selectAPIStatusByKey(state, FOREMAN_TASK_DETAILS);
 
@@ -125,8 +122,7 @@ export const selectAPIErrorCode = state =>
   selectAPIError(state)?.response?.status;
 
 export const selectIsLoading = state =>
-  !!selectAPIByKey(state, FOREMAN_TASK_DETAILS).response &&
-  selectStatus(state) === STATUS.PENDING;
+  selectAPIStatus(state) === STATUS.PENDING;
 
 export const selectDependsOn = state =>
   selectTaskDetailsResponse(state).depends_on || [];

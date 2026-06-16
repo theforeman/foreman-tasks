@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { STATUS } from 'foremanReact/constants';
 import { TaskButtons } from '../TaskButtons';
 
 const setUnlockModalOpen = jest.fn();
@@ -169,7 +168,6 @@ describe('TaskButtons', () => {
       resumeTaskRequest,
       taskProgressToggle,
       taskReloadStart,
-      status: STATUS.RESOLVED,
       canEdit: true,
       resumable: true,
       cancellable: true,

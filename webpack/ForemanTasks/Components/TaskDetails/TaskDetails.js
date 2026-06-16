@@ -10,12 +10,11 @@ import Errors from './Components/Errors';
 import Locks from './Components/Locks';
 import Raw from './Components/Raw';
 import Dependencies from './Components/Dependencies';
+import { TASKS_PATH } from './TaskDetailsConstants';
 import { getTaskID } from './TasksDetailsHelper';
 import { TaskSkeleton } from './Components/TaskSkeleton';
 
 import './TaskDetails.scss';
-
-const TASKS_PATH = '/foreman_tasks/tasks';
 
 const TaskDetails = ({
   executionPlan,
@@ -34,7 +33,7 @@ const TaskDetails = ({
   ...props
 }) => {
   const id = getTaskID();
-  const { taskReload, status, isLoading, result } = props;
+  const { taskReload, isLoading, result } = props;
   const [activeTabKey, setActiveTabKey] = useState(1);
 
   useEffect(() => {
@@ -52,7 +51,7 @@ const TaskDetails = ({
     }
   };
 
-  if (status === STATUS.ERROR || apiStatus === STATUS.ERROR) {
+  if (apiStatus === STATUS.ERROR) {
     return (
       <ResourceLoadFailedEmptyState
         resourceLabel={__('task')}
@@ -80,7 +79,6 @@ const TaskDetails = ({
     cancellable,
     resumable,
     id,
-    status,
     taskProgressToggle,
     taskReloadStart,
   };
@@ -173,7 +171,6 @@ TaskDetails.propTypes = {
   runningSteps: PropTypes.array,
   cancelStep: PropTypes.func.isRequired,
   taskReload: PropTypes.bool.isRequired,
-  status: PropTypes.oneOf(Object.keys(STATUS)),
   apiStatus: PropTypes.oneOf(Object.keys(STATUS)),
   apiErrorMessage: PropTypes.string,
   apiErrorCode: PropTypes.number,
@@ -192,7 +189,6 @@ TaskDetails.defaultProps = {
   label: '',
   runningSteps: [],
   apiErrorMessage: '',
-  status: STATUS.PENDING,
   links: [],
   dependsOn: [],
   blocks: [],

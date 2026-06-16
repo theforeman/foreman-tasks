@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { STATUS } from 'foremanReact/constants';
 
 import Task from '../Task';
 
@@ -29,7 +28,6 @@ describe('Task', () => {
         parentTask="parent-id"
         taskReload
         canEdit
-        status={STATUS.RESOLVED}
         taskProgressToggle={jest.fn()}
         taskReloadStart={jest.fn()}
       />

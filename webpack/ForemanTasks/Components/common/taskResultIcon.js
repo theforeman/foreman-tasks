@@ -6,6 +6,7 @@ import {
   ExclamationTriangleIcon,
   QuestionCircleIcon,
 } from '@patternfly/react-icons';
+import { translate as __ } from 'foremanReact/common/I18n';
 
 /**
  * Icon reflecting task state/result (aligned with TaskInfo / tasks table).
@@ -17,7 +18,7 @@ import {
 export const taskResultIconEl = (state, result) => {
   if (state !== 'stopped') {
     return (
-      <Icon>
+      <Icon title={__('Running')}>
         <QuestionCircleIcon />
       </Icon>
     );
@@ -26,25 +27,25 @@ export const taskResultIconEl = (state, result) => {
   switch (result) {
     case 'success':
       return (
-        <Icon status="success">
+        <Icon status="success" title={__('Success')}>
           <CheckCircleIcon />
         </Icon>
       );
     case 'error':
       return (
-        <Icon status="danger">
+        <Icon status="danger" title={__('Error')}>
           <ExclamationCircleIcon />
         </Icon>
       );
     case 'warning':
       return (
-        <Icon status="warning">
+        <Icon status="warning" title={__('Warning')}>
           <ExclamationTriangleIcon />
         </Icon>
       );
     default:
       return (
-        <Icon>
+        <Icon title={__('Unknown')}>
           <QuestionCircleIcon />
         </Icon>
       );

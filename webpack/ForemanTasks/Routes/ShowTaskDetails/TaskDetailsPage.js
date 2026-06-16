@@ -3,14 +3,19 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Flex, FlexItem, TextContent, Text } from '@patternfly/react-core';
 import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
-import Permitted from 'foremanReact/components/Permitted/Permitted';
+import { ResourceLoadFailedEmptyState } from 'foremanReact/components/common/EmptyState';
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
+import { usePermissions } from 'foremanReact/common/hooks/Permissions/permissionHooks';
 import TaskDetails from '../../Components/TaskDetails';
 import {
   selectAction,
   selectResult,
   selectState,
 } from '../../Components/TaskDetails/TaskDetailsSelectors';
+import {
+  TASKS_PATH,
+  VIEW_FOREMAN_TASKS,
+} from '../../Components/TaskDetails/TaskDetailsConstants';
 import { taskResultIconEl } from '../../Components/common/taskResultIcon';
 
 const TaskDetailsPage = props => {
@@ -18,9 +23,10 @@ const TaskDetailsPage = props => {
   const action = useSelector(selectAction);
   const taskState = useSelector(selectState);
   const taskResult = useSelector(selectResult);
+  const hasViewPermission = usePermissions([VIEW_FOREMAN_TASKS]);
   const headerText = action
     ? sprintf(__('Details of %s task'), action)
-    : __('Task details');
+    : __('Task Details');
 
   const header = (
     <Flex
@@ -41,22 +47,43 @@ const TaskDetailsPage = props => {
     </Flex>
   );
 
-  return (
-    <Permitted requiredPermissions={['view_foreman_tasks']}>
-      <PageLayout
-        customHeader={header}
-        header={headerText}
-        searchable={false}
-        breadcrumbOptions={{
-          breadcrumbItems: [
-            { caption: __('Tasks'), url: '/foreman_tasks/tasks' },
-            { caption: action || id },
-          ],
+  if (!hasViewPermission) {
+    return (
+      <ResourceLoadFailedEmptyState
+        resourceLabel={__('task')}
+        resourceId={id}
+        viewPermissions={[VIEW_FOREMAN_TASKS]}
+        requiredPermissions={[VIEW_FOREMAN_TASKS]}
+        ouiaIdPrefix="task-details-page-empty-state"
+        primaryAction={{
+          label: __('Back to tasks'),
+          url: TASKS_PATH,
+          ouiaId: 'task-details-page-empty-state-tasks-list',
         }}
-      >
-        <TaskDetails {...props} />
-      </PageLayout>
-    </Permitted>
+      />
+    );
+  }
+
+  return (
+    <PageLayout
+      customHeader={header}
+      header={headerText}
+      searchable={false}
+      breadcrumbOptions={{
+        breadcrumbItems: [
+          { caption: __('Tasks'), url: '/foreman_tasks/tasks' },
+          { caption: action || id },
+        ],
+        isSwitchable: true,
+        resource: {
+          nameField: 'action',
+          resourceUrl: '/foreman_tasks/api/tasks',
+          switcherItemUrl: '/foreman_tasks/tasks/:id',
+        },
+      }}
+    >
+      <TaskDetails {...props} />
+    </PageLayout>
   );
 };
 

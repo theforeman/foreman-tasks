@@ -2,6 +2,8 @@ import React from 'react';
 import { render, screen, within } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 
@@ -73,6 +75,9 @@ const rootReducer = combineReducers({
 });
 
 const renderPage = (apiPayloadOverrides = {}, propsOverrides = {}) => {
+  const history = createMemoryHistory({
+    initialEntries: [`/foreman_tasks/tasks/${matchDefault.params.id}`],
+  });
   const store = configureStore({
     reducer: rootReducer,
     preloadedState: createStoreForTaskPayload(apiPayloadOverrides),
@@ -90,15 +95,18 @@ const renderPage = (apiPayloadOverrides = {}, propsOverrides = {}) => {
   );
 
   return render(
-    <Provider store={store}>
-      <IntlProvider locale="en">
-        <TaskDetailsPage
-          {...routerPropsBase}
-          match={matchDefault}
-          {...propsOverrides}
-        />
-      </IntlProvider>
-    </Provider>
+    <Router history={history}>
+      <Provider store={store}>
+        <IntlProvider locale="en">
+          <TaskDetailsPage
+            {...routerPropsBase}
+            history={history}
+            match={matchDefault}
+            {...propsOverrides}
+          />
+        </IntlProvider>
+      </Provider>
+    </Router>
   );
 };
 
@@ -149,19 +157,27 @@ describe('TaskDetailsPage', () => {
           name: /Details of Run job task/,
         })
       ).toBeInTheDocument();
-      expect(screen.queryByText('Permission Denied')).not.toBeInTheDocument();
-      expect(screen.queryAllByRole('heading', { name: 'Permission Denied' })).toHaveLength(0);
+      expect(screen.queryByRole('heading', { name: /Permission denied/i })).not.toBeInTheDocument();
       expect(mockUseForemanPermissions).toHaveBeenCalled();
     });
 
-    it(`shows PermissionDenied and lists ${VIEW_PERM} when it is absent`, () => {
+    it(`shows ResourceLoadFailedEmptyState and lists ${VIEW_PERM} when it is absent`, () => {
       mockUseForemanPermissions.mockImplementation(() => new Set());
 
       renderPage({ action: 'Hidden task' });
 
-      expect(screen.getByText('Permission Denied')).toBeInTheDocument();
-      expect(screen.getByRole('heading', { name: /Permission denied/i })).toBeInTheDocument();
+      expect(
+        screen.getByRole('heading', { name: /Permission denied/i })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(
+          /You do not have permission to view the task with id task-route-id/
+        )
+      ).toBeInTheDocument();
       expect(screen.getByText(VIEW_PERM)).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /Back to tasks/i })
+      ).toBeInTheDocument();
       expect(
         screen.queryByRole('navigation', { name: 'Breadcrumb' })
       ).not.toBeInTheDocument();
@@ -175,7 +191,9 @@ describe('TaskDetailsPage', () => {
 
       renderPage({});
 
-      expect(screen.getByText('Permission Denied')).toBeInTheDocument();
+      expect(
+        screen.getByRole('heading', { name: /Permission denied/i })
+      ).toBeInTheDocument();
       expect(screen.getByText(VIEW_PERM)).toBeInTheDocument();
       expect(
         screen.queryByRole('navigation', { name: 'Breadcrumb' })
@@ -196,7 +214,7 @@ describe('TaskDetailsPage', () => {
 
   it('shows generic title and breadcrumb from route id when action is unset', () => {
     const page = renderPage({});
-    expectToolbarHeadingText('Task details');
+    expectToolbarHeadingText('Task Details');
 
     expect(screen.getByRole('navigation', { name: 'Breadcrumb' })).toHaveTextContent(
       'Tasks'

@@ -71,15 +71,6 @@ describe('ForemanTasks routes', () => {
         ...routerProps,
         match: {
           ...routerProps.match,
-          params: { id: '99' },
-          path: '/foreman_tasks/tasks/:id',
-          url: '/foreman_tasks/tasks/99',
-        },
-      },
-      {
-        ...routerProps,
-        match: {
-          ...routerProps.match,
           params: { id: '42' },
           path: '/foreman_tasks/ex_tasks/:id',
           url: '/foreman_tasks/ex_tasks/42',

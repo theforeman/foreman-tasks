@@ -34,9 +34,9 @@ function renderTaskDetails(props = {}) {
 }
 
 describe('TaskDetails', () => {
-  it('shows ResourceLoadFailedEmptyState when status is ERROR', () => {
+  it('shows ResourceLoadFailedEmptyState when apiStatus is ERROR', () => {
     renderTaskDetails({
-      status: 'ERROR',
+      apiStatus: 'ERROR',
       apiErrorMessage: 'some-error',
     });
 
@@ -49,25 +49,8 @@ describe('TaskDetails', () => {
     expect(screen.queryByRole('tab', { name: /^task$/i })).not.toBeInTheDocument();
   });
 
-  it('shows ResourceLoadFailedEmptyState when apiStatus is ERROR', () => {
-    renderTaskDetails({
-      status: 'RESOLVED',
-      apiStatus: 'ERROR',
-      apiErrorMessage: 'api-error',
-    });
-
-    expect(
-      screen.getByRole('heading', { name: /unable to load task/i })
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText('Server returned: api-error')
-    ).toBeInTheDocument();
-    expect(screen.queryByRole('tab', { name: /^task$/i })).not.toBeInTheDocument();
-  });
-
   it('shows permission denied when apiErrorCode is 403', () => {
     renderTaskDetails({
-      status: 'RESOLVED',
       apiStatus: 'ERROR',
       apiErrorCode: 403,
       apiErrorMessage: 'Forbidden',
@@ -85,7 +68,6 @@ describe('TaskDetails', () => {
 
   it('shows not found messaging when apiErrorCode is 404', () => {
     renderTaskDetails({
-      status: 'RESOLVED',
       apiStatus: 'ERROR',
       apiErrorCode: 404,
       apiErrorMessage: 'Task missing',
