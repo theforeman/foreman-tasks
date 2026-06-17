@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import {
   selectAPIResponse,
+  selectAPIByKey,
   selectAPIStatus as selectAPIStatusByKey,
   selectAPIError as selectAPIErrorByKey,
 } from 'foremanReact/redux/API/APISelectors';
@@ -122,6 +123,7 @@ export const selectAPIErrorCode = state =>
   selectAPIError(state)?.response?.status;
 
 export const selectIsLoading = state =>
+  !selectAPIByKey(state, FOREMAN_TASK_DETAILS).response &&
   selectAPIStatus(state) === STATUS.PENDING;
 
 export const selectDependsOn = state =>
