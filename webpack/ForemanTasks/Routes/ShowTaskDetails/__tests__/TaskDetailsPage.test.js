@@ -11,7 +11,7 @@ import breadcrumbBarReducer from 'foremanReact/components/BreadcrumbBar/Breadcru
 import { STATUS } from 'foremanReact/constants';
 import intervalsReducer from 'foremanReact/redux/middlewares/IntervalMiddleware/IntervalReducer';
 
-import { FOREMAN_TASK_DETAILS } from '../../../Components/TaskDetails/TaskDetailsConstants';
+import { FOREMAN_TASK_DETAILS, VIEW_FOREMAN_TASKS } from '../../../Components/TaskDetails/TaskDetailsConstants';
 import TaskDetailsPage from '../TaskDetailsPage';
 
 const mockUseForemanPermissions = jest.fn(
@@ -129,21 +129,14 @@ const taskDetailsTitleRegion = container => {
 };
 
 describe('TaskDetailsPage', () => {
-  afterEach(() => {
-    window.history.pushState({}, '', '/');
-    mockUseForemanPermissions.mockImplementation(() => new Set(['view_foreman_tasks']));
-  });
-
   beforeEach(() => {
     mockUseForemanPermissions.mockImplementation(() => new Set(['view_foreman_tasks']));
   });
 
   describe('permissions', () => {
-    const VIEW_PERM = 'view_foreman_tasks';
-
-    it(`renders the task details chrome when ${VIEW_PERM} is present`, () => {
+    it(`renders the task details chrome when ${VIEW_FOREMAN_TASKS} is present`, () => {
       mockUseForemanPermissions.mockImplementation(
-        () => new Set(['edit_foreman_tasks', VIEW_PERM])
+        () => new Set(['edit_foreman_tasks', VIEW_FOREMAN_TASKS])
       );
 
       renderPage({ action: 'Run job' });
@@ -161,7 +154,7 @@ describe('TaskDetailsPage', () => {
       expect(mockUseForemanPermissions).toHaveBeenCalled();
     });
 
-    it(`shows ResourceLoadFailedEmptyState and lists ${VIEW_PERM} when it is absent`, () => {
+    it(`shows ResourceLoadFailedEmptyState and lists ${VIEW_FOREMAN_TASKS} when it is absent`, () => {
       mockUseForemanPermissions.mockImplementation(() => new Set());
 
       renderPage({ action: 'Hidden task' });
@@ -174,14 +167,14 @@ describe('TaskDetailsPage', () => {
           /You do not have permission to view the task with id task-route-id/
         )
       ).toBeInTheDocument();
-      expect(screen.getByText(VIEW_PERM)).toBeInTheDocument();
+      expect(screen.getByText(VIEW_FOREMAN_TASKS)).toBeInTheDocument();
       expect(
         screen.getByRole('button', { name: /Back to tasks/i })
       ).toBeInTheDocument();
       expect(
-        screen.queryByRole('navigation', { name: 'Breadcrumb' })
-      ).not.toBeInTheDocument();
-      expect(screen.queryAllByRole('heading', { name: /Hidden task/i })).toHaveLength(0);
+        screen.getByRole('navigation', { name: 'Breadcrumb' })
+      ).toBeInTheDocument();
+      expect(screen.queryByRole('tab', { name: /^task$/i })).not.toBeInTheDocument();
     });
 
     it('denies access when user only has edit_foreman_tasks without view', () => {
@@ -194,10 +187,11 @@ describe('TaskDetailsPage', () => {
       expect(
         screen.getByRole('heading', { name: /Permission denied/i })
       ).toBeInTheDocument();
-      expect(screen.getByText(VIEW_PERM)).toBeInTheDocument();
+      expect(screen.getByText(VIEW_FOREMAN_TASKS)).toBeInTheDocument();
       expect(
-        screen.queryByRole('navigation', { name: 'Breadcrumb' })
-      ).not.toBeInTheDocument();
+        screen.getByRole('navigation', { name: 'Breadcrumb' })
+      ).toBeInTheDocument();
+      expect(screen.queryByRole('tab', { name: /^task$/i })).not.toBeInTheDocument();
     });
   });
 

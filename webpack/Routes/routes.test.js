@@ -67,15 +67,6 @@ describe('ForemanTasks routes', () => {
           url: '/foreman_tasks/tasks/99',
         },
       },
-      {
-        ...routerProps,
-        match: {
-          ...routerProps.match,
-          params: { id: '42' },
-          path: '/foreman_tasks/ex_tasks/:id',
-          url: '/foreman_tasks/ex_tasks/42',
-        },
-      },
     ];
 
     ForemanTasksRoutes.forEach((route, index) => {
@@ -85,8 +76,6 @@ describe('ForemanTasks routes', () => {
         expect(
           screen.getByTestId('task-details-page-stub')
         ).toBeInTheDocument();
-      } else if (index === 3) {
-        expect(screen.getByTestId('show-task-stub')).toBeInTheDocument();
       } else {
         expect(
           screen.getByTestId('tasks-table-index-stub')

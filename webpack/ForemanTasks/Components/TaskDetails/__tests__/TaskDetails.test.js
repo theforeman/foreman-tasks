@@ -8,10 +8,15 @@ import { Router } from 'react-router-dom';
 
 import TaskDetails from '../TaskDetails';
 import { minProps } from './TaskDetails.fixtures';
+import { VIEW_FOREMAN_TASKS } from '../TaskDetailsConstants';
+
+const mockUseForemanPermissions = jest.fn(
+  () => new Set(['view_foreman_tasks'])
+);
 
 jest.mock('foremanReact/Root/Context/ForemanContext', () => ({
   ...jest.requireActual('foremanReact/Root/Context/ForemanContext'),
-  useForemanPermissions: () => new Set(['view_foreman_tasks']),
+  useForemanPermissions: (...args) => mockUseForemanPermissions(...args),
 }));
 
 delete window.location;
@@ -34,6 +39,27 @@ function renderTaskDetails(props = {}) {
 }
 
 describe('TaskDetails', () => {
+  beforeEach(() => {
+    mockUseForemanPermissions.mockImplementation(
+      () => new Set(['view_foreman_tasks'])
+    );
+  });
+
+  it(`shows ResourceLoadFailedEmptyState when ${VIEW_FOREMAN_TASKS} is absent`, () => {
+    mockUseForemanPermissions.mockImplementation(() => new Set());
+
+    renderTaskDetails();
+
+    expect(
+      screen.getByRole('heading', { name: /permission denied/i })
+    ).toBeInTheDocument();
+    expect(screen.getByText(VIEW_FOREMAN_TASKS)).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: /back to tasks/i })
+    ).toBeInTheDocument();
+    expect(screen.queryByRole('tab', { name: /^task$/i })).not.toBeInTheDocument();
+  });
+
   it('shows ResourceLoadFailedEmptyState when apiStatus is ERROR', () => {
     renderTaskDetails({
       apiStatus: 'ERROR',

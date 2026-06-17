@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Tabs, Tab, TabTitleText } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
 import { STATUS } from 'foremanReact/constants';
+import { usePermissions } from 'foremanReact/common/hooks/Permissions/permissionHooks';
 import { ResourceLoadFailedEmptyState } from 'foremanReact/components/common/EmptyState';
 import Task from './Components/Task';
 import RunningSteps from './Components/RunningSteps';
@@ -10,7 +11,7 @@ import Errors from './Components/Errors';
 import Locks from './Components/Locks';
 import Raw from './Components/Raw';
 import Dependencies from './Components/Dependencies';
-import { TASKS_PATH } from './TaskDetailsConstants';
+import { TASKS_PATH, VIEW_FOREMAN_TASKS } from './TaskDetailsConstants';
 import { getTaskID } from './TasksDetailsHelper';
 import { TaskSkeleton } from './Components/TaskSkeleton';
 
@@ -35,6 +36,7 @@ const TaskDetails = ({
   const id = getTaskID();
   const { taskReload, isLoading, result } = props;
   const [activeTabKey, setActiveTabKey] = useState(1);
+  const hasViewPermission = usePermissions([VIEW_FOREMAN_TASKS]);
 
   useEffect(() => {
     taskReloadStart(id);
@@ -51,7 +53,7 @@ const TaskDetails = ({
     }
   };
 
-  if (apiStatus === STATUS.ERROR) {
+  if (apiStatus === STATUS.ERROR || !hasViewPermission) {
     return (
       <ResourceLoadFailedEmptyState
         resourceLabel={__('task')}

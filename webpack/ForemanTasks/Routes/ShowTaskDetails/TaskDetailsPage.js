@@ -3,19 +3,13 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Flex, FlexItem, TextContent, Text } from '@patternfly/react-core';
 import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
-import { ResourceLoadFailedEmptyState } from 'foremanReact/components/common/EmptyState';
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
-import { usePermissions } from 'foremanReact/common/hooks/Permissions/permissionHooks';
 import TaskDetails from '../../Components/TaskDetails';
 import {
   selectAction,
   selectResult,
   selectState,
 } from '../../Components/TaskDetails/TaskDetailsSelectors';
-import {
-  TASKS_PATH,
-  VIEW_FOREMAN_TASKS,
-} from '../../Components/TaskDetails/TaskDetailsConstants';
 import { taskResultIconEl } from '../../Components/common/taskResultIcon';
 
 const TaskDetailsPage = props => {
@@ -23,7 +17,6 @@ const TaskDetailsPage = props => {
   const action = useSelector(selectAction);
   const taskState = useSelector(selectState);
   const taskResult = useSelector(selectResult);
-  const hasViewPermission = usePermissions([VIEW_FOREMAN_TASKS]);
   const headerText = action
     ? sprintf(__('Details of %s task'), action)
     : __('Task Details');
@@ -46,23 +39,6 @@ const TaskDetailsPage = props => {
       </FlexItem>
     </Flex>
   );
-
-  if (!hasViewPermission) {
-    return (
-      <ResourceLoadFailedEmptyState
-        resourceLabel={__('task')}
-        resourceId={id}
-        viewPermissions={[VIEW_FOREMAN_TASKS]}
-        requiredPermissions={[VIEW_FOREMAN_TASKS]}
-        ouiaIdPrefix="task-details-page-empty-state"
-        primaryAction={{
-          label: __('Back to tasks'),
-          url: TASKS_PATH,
-          ouiaId: 'task-details-page-empty-state-tasks-list',
-        }}
-      />
-    );
-  }
 
   return (
     <PageLayout
