@@ -16,7 +16,7 @@ import { translate as __ } from 'foremanReact/common/I18n';
  * @returns {React.ReactElement}
  */
 export const taskResultIconEl = (state, result) => {
-  if (state !== 'stopped') {
+  if (state && state !== 'stopped') {
     return (
       <Icon title={__('Running')}>
         <QuestionCircleIcon />
