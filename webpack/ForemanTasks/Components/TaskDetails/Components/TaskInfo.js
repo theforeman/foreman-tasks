@@ -142,14 +142,9 @@ const TaskInfo = props => {
         </React.Fragment>
       ))}
       <GridItem span={12} className="pf-v5-u-pb-lg" />
-      <GridItem span={6}>
-        <div className="progress-description">
-          <span className="list-group-item-heading">{__('State')}: </span>
-          {state}
-        </div>
-      </GridItem>
-      <GridItem span={6} className="progress-label-top-right">
-        <span>{`${progress}% ${__('Complete')}`}</span>
+      <GridItem span={12}>
+        <span className="list-group-item-heading">{__('State')}: </span>
+        {state}
       </GridItem>
       <GridItem span={12}>
         <Progress

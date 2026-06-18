@@ -27,12 +27,7 @@ export const TaskSkeleton = () => {
         </React.Fragment>
       ))}
       <GridItem span={12} className="pf-v5-u-pb-lg" />
-      <GridItem span={6}>
-        <div className="progress-description">
-          <Skeleton />
-        </div>
-      </GridItem>
-      <GridItem span={6} className="progress-label-top-right">
+      <GridItem span={12}>
         <Skeleton />
       </GridItem>
       <GridItem span={12}>
