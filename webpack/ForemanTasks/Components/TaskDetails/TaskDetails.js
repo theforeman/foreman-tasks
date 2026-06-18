@@ -6,16 +6,21 @@ import { STATUS } from 'foremanReact/constants';
 import { usePermissions } from 'foremanReact/common/hooks/Permissions/permissionHooks';
 import { ResourceLoadFailedEmptyState } from 'foremanReact/components/common/EmptyState';
 import Task from './Components/Task';
-import RunningSteps from './Components/RunningSteps';
-import Errors from './Components/Errors';
 import Locks from './Components/Locks';
 import Raw from './Components/Raw';
+import ExecutionDetails from './ExecutionDetails';
 import Dependencies from './Components/Dependencies';
 import { TASKS_PATH, VIEW_FOREMAN_TASKS } from './TaskDetailsConstants';
 import { getTaskID } from './TasksDetailsHelper';
 import { TaskSkeleton } from './Components/TaskSkeleton';
 
 import './TaskDetails.scss';
+
+export const TASK_DETAILS_TAB_KEYS = Object.freeze({
+  EXECUTION: 'execution',
+  LOCKS: 'locks',
+  RAW: 'raw',
+});
 
 const TaskDetails = ({
   executionPlan,
@@ -34,8 +39,8 @@ const TaskDetails = ({
   ...props
 }) => {
   const id = getTaskID();
-  const { taskReload, isLoading, result } = props;
-  const [activeTabKey, setActiveTabKey] = useState(1);
+  const { taskReload, isLoading } = props;
+  const [activeTab, setActiveTab] = useState(TASK_DETAILS_TAB_KEYS.EXECUTION);
   const hasViewPermission = usePermissions([VIEW_FOREMAN_TASKS]);
 
   useEffect(() => {
@@ -76,7 +81,7 @@ const TaskDetails = ({
   const cancellable = executionPlan ? executionPlan.cancellable : false;
   const lockRecords = locks.concat(links);
 
-  const taskComponentProps = {
+  const taskProps = {
     ...props,
     cancellable,
     resumable,
@@ -87,71 +92,65 @@ const TaskDetails = ({
 
   return (
     <div className="task-details-react">
+      <section className="task-details-overview-section">
+        {isLoading ? <TaskSkeleton /> : <Task {...taskProps} />}
+      </section>
       <Tabs
+        aria-label={__('Task details')}
         id="task-details-tabs"
         ouiaId="task-details-tabs"
-        activeKey={activeTabKey}
-        onSelect={(_event, tabKey) => setActiveTabKey(tabKey)}
+        activeKey={activeTab}
         mountOnEnter
+        onSelect={(_e, tabKey) => setActiveTab(tabKey)}
       >
         <Tab
-          eventKey={1}
-          title={<TabTitleText>{__('Task')}</TabTitleText>}
-          aria-label={__('Task')}
-          ouiaId="task-details-tab-task"
+          eventKey={TASK_DETAILS_TAB_KEYS.EXECUTION}
+          title={<TabTitleText>{__('Execution details')}</TabTitleText>}
+          aria-label={__('Execution details')}
+          ouiaId="task-details-tabs-execution"
         >
-          {isLoading ? <TaskSkeleton /> : <Task {...taskComponentProps} />}
-        </Tab>
-        <Tab
-          eventKey={2}
-          title={<TabTitleText>{__('Running Steps')}</TabTitleText>}
-          isDisabled={isLoading}
-          aria-label={__('Running Steps')}
-          ouiaId="task-details-tab-running-steps"
-        >
-          <RunningSteps
-            executionPlan={executionPlan}
-            result={result}
-            runningSteps={runningSteps}
-            id={id}
-            cancelStep={cancelStep}
-            taskReload={taskReload}
-            taskReloadStart={taskReloadStart}
-          />
-        </Tab>
-        <Tab
-          eventKey={3}
-          title={<TabTitleText>{__('Errors')}</TabTitleText>}
-          isDisabled={isLoading}
-          aria-label={__('Errors')}
-          ouiaId="task-details-tab-errors"
-        >
-          <Errors executionPlan={executionPlan} failedSteps={failedSteps} />
-        </Tab>
-        <Tab
-          eventKey={4}
-          title={<TabTitleText>{__('Locks')}</TabTitleText>}
-          isDisabled={isLoading}
-          aria-label={__('Locks')}
-          ouiaId="task-details-tab-locks"
-        >
-          <Locks locks={lockRecords} />
+          {!isLoading && (
+            <ExecutionDetails
+              state={props.state}
+              result={props.result}
+              runningSteps={runningSteps}
+              cancelStep={cancelStep}
+              id={id}
+              taskReload={taskReload}
+              taskReloadStart={taskReloadStart}
+              executionPlan={executionPlan}
+              failedSteps={failedSteps}
+              dependsOn={dependsOn}
+              blocks={blocks}
+              help={props.help}
+              output={props.output}
+              errors={props.errors}
+            />
+          )}
         </Tab>
         <Tab
           eventKey={5}
-          title={<TabTitleText>{__('Dependencies')}</TabTitleText>}
-          isDisabled={isLoading}
-          aria-label={__('Dependencies')}
-          ouiaId="task-details-tab-dependencies"
+          disabled={isLoading}
+          title={__('Dependencies')}
+          ouiaId="task-details-tabs-dependencies"
         >
           <Dependencies dependsOn={dependsOn} blocks={blocks} />
         </Tab>
         <Tab
-          eventKey={6}
+          eventKey={TASK_DETAILS_TAB_KEYS.LOCKS}
+          title={<TabTitleText>{__('Locks')}</TabTitleText>}
+          isDisabled={isLoading}
+          aria-label={__('Locks')}
+          ouiaId="task-details-tabs-locks"
+        >
+          <Locks locks={lockRecords} />
+        </Tab>
+        <Tab
+          eventKey={TASK_DETAILS_TAB_KEYS.RAW}
           title={<TabTitleText>{__('Raw')}</TabTitleText>}
           isDisabled={isLoading}
           aria-label={__('Raw')}
-          ouiaId="task-details-tab-raw"
+          ouiaId="task-details-tabs-raw"
         >
           <Raw
             id={id}
@@ -170,6 +169,7 @@ const TaskDetails = ({
 
 TaskDetails.propTypes = {
   label: PropTypes.string,
+  result: PropTypes.string,
   runningSteps: PropTypes.array,
   cancelStep: PropTypes.func.isRequired,
   taskReload: PropTypes.bool.isRequired,
@@ -181,10 +181,10 @@ TaskDetails.propTypes = {
   links: PropTypes.array,
   dependsOn: PropTypes.array,
   blocks: PropTypes.array,
+  executionPlan: PropTypes.shape({}),
+  failedSteps: PropTypes.array,
   ...Task.propTypes,
-  ...Errors.propTypes,
   ...Locks.propTypes,
-  ...Dependencies.propTypes,
   ...Raw.propTypes,
 };
 TaskDetails.defaultProps = {
@@ -194,11 +194,10 @@ TaskDetails.defaultProps = {
   links: [],
   dependsOn: [],
   blocks: [],
+  failedSteps: [],
+  executionPlan: {},
   ...Task.defaultProps,
-  ...RunningSteps.defaultProps,
-  ...Errors.defaultProps,
   ...Locks.defaultProps,
-  ...Dependencies.defaultProps,
   ...Raw.defaultProps,
 };
 
