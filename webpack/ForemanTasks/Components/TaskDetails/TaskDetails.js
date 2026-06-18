@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Tabs, Tab, TabTitleText } from '@patternfly/react-core';
-import { translate as __, sprintf } from 'foremanReact/common/I18n';
+import { translate as __ } from 'foremanReact/common/I18n';
 import { STATUS } from 'foremanReact/constants';
-import MessageBox from 'foremanReact/components/common/MessageBox';
+import { usePermissions } from 'foremanReact/common/hooks/Permissions/permissionHooks';
+import { ResourceLoadFailedEmptyState } from 'foremanReact/components/common/EmptyState';
 import Task from './Components/Task';
 import RunningSteps from './Components/RunningSteps';
 import Errors from './Components/Errors';
 import Locks from './Components/Locks';
 import Raw from './Components/Raw';
 import Dependencies from './Components/Dependencies';
+import { TASKS_PATH, VIEW_FOREMAN_TASKS } from './TaskDetailsConstants';
 import { getTaskID } from './TasksDetailsHelper';
 import { TaskSkeleton } from './Components/TaskSkeleton';
 
@@ -26,12 +28,15 @@ const TaskDetails = ({
   cancelStep,
   taskReloadStart,
   taskReloadStop,
-  APIerror,
+  apiStatus,
+  apiErrorMessage,
+  apiErrorCode,
   ...props
 }) => {
   const id = getTaskID();
-  const { taskReload, status, isLoading, result } = props;
+  const { taskReload, isLoading, result } = props;
   const [activeTabKey, setActiveTabKey] = useState(1);
+  const hasViewPermission = usePermissions([VIEW_FOREMAN_TASKS]);
 
   useEffect(() => {
     taskReloadStart(id);
@@ -48,15 +53,25 @@ const TaskDetails = ({
     }
   };
 
-  if (status === STATUS.ERROR) {
+  if (apiStatus === STATUS.ERROR || !hasViewPermission) {
     return (
-      <MessageBox
-        key="task-details-error"
-        icontype="error-circle-o"
-        msg={sprintf(__('Could not receive data: %s'), APIerror?.message)}
+      <ResourceLoadFailedEmptyState
+        resourceLabel={__('task')}
+        resourceId={id}
+        httpStatus={apiErrorCode}
+        errorMessage={apiErrorMessage}
+        viewPermissions={['view_foreman_tasks']}
+        requiredPermissions={['view_foreman_tasks']}
+        ouiaIdPrefix="task-details-empty-state"
+        primaryAction={{
+          label: __('Back to tasks'),
+          url: TASKS_PATH,
+          ouiaId: 'task-details-empty-state-tasks-list',
+        }}
       />
     );
   }
+
   const resumable = executionPlan ? executionPlan.state === 'paused' : false;
   const cancellable = executionPlan ? executionPlan.cancellable : false;
   const lockRecords = locks.concat(links);
@@ -66,13 +81,12 @@ const TaskDetails = ({
     cancellable,
     resumable,
     id,
-    status,
     taskProgressToggle,
     taskReloadStart,
   };
 
   return (
-    <div className="task-details-react well">
+    <div className="task-details-react">
       <Tabs
         id="task-details-tabs"
         ouiaId="task-details-tabs"
@@ -159,8 +173,9 @@ TaskDetails.propTypes = {
   runningSteps: PropTypes.array,
   cancelStep: PropTypes.func.isRequired,
   taskReload: PropTypes.bool.isRequired,
-  status: PropTypes.oneOf(Object.keys(STATUS)),
-  APIerror: PropTypes.object,
+  apiStatus: PropTypes.oneOf(Object.keys(STATUS)),
+  apiErrorMessage: PropTypes.string,
+  apiErrorCode: PropTypes.number,
   taskReloadStop: PropTypes.func.isRequired,
   taskReloadStart: PropTypes.func.isRequired,
   links: PropTypes.array,
@@ -175,8 +190,7 @@ TaskDetails.propTypes = {
 TaskDetails.defaultProps = {
   label: '',
   runningSteps: [],
-  APIerror: null,
-  status: STATUS.PENDING,
+  apiErrorMessage: '',
   links: [],
   dependsOn: [],
   blocks: [],

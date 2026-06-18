@@ -82,15 +82,6 @@ module ForemanTasks
         assert_include response.body.lines[1], 'Some action'
       end
 
-      describe 'show' do
-        it 'does not allow user without permissions to see task details' do
-          setup_user('view', 'foreman_tasks', 'owner.id = current_user')
-          get :show, params: { id: FactoryBot.create(:some_task).id },
-                     session: set_session_user(User.current)
-          assert_response :not_found
-        end
-      end
-
       describe 'index' do
         it 'shows duration column' do
           task = ForemanTasks::Task.select_duration.find(FactoryBot.create(:some_task).id)

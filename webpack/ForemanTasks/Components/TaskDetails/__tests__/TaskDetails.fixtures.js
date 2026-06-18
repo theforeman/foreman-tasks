@@ -4,5 +4,5 @@ export const minProps = {
   taskReloadStop: jest.fn(),
   taskReloadStart: jest.fn(),
   taskProgressToggle: jest.fn(),
-  status: 'RESOLVED',
+  apiStatus: 'RESOLVED',
 };

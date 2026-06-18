@@ -12,6 +12,14 @@ jest.mock(
     }
 );
 
+jest.mock(
+  '../ForemanTasks/Routes/ShowTaskDetails/TaskDetailsPage',
+  () =>
+    function TaskDetailsPageStub() {
+      return <div data-testid="task-details-page-stub" />;
+    }
+);
+
 const routerProps = {
   history: { push: jest.fn(), replace: jest.fn(), go: jest.fn() },
   location: {
@@ -34,6 +42,7 @@ describe('ForemanTasks routes', () => {
       ForemanTasksRoutes.map(({ path, exact }) => ({ path, exact }))
     ).toEqual([
       { path: '/foreman_tasks/tasks', exact: true },
+      { path: '/foreman_tasks/tasks/:id', exact: true },
       { path: '/foreman_tasks/tasks/:id/sub_tasks', exact: true },
     ]);
   });
@@ -53,9 +62,9 @@ describe('ForemanTasks routes', () => {
         ...routerProps,
         match: {
           ...routerProps.match,
-          params: { id: '7' },
-          path: '/foreman_tasks/tasks/:id/sub_tasks',
-          url: '/foreman_tasks/tasks/7/sub_tasks',
+          params: { id: '99' },
+          path: '/foreman_tasks/tasks/:id',
+          url: '/foreman_tasks/tasks/99',
         },
       },
     ];
@@ -63,8 +72,10 @@ describe('ForemanTasks routes', () => {
     ForemanTasksRoutes.forEach((route, index) => {
       const { unmount } = render(route.render(propsByIndex[index]));
 
-      if (index === 2) {
-        expect(screen.getByTestId('show-task-stub')).toBeInTheDocument();
+      if (index === 1) {
+        expect(
+          screen.getByTestId('task-details-page-stub')
+        ).toBeInTheDocument();
       } else {
         expect(
           screen.getByTestId('tasks-table-index-stub')
