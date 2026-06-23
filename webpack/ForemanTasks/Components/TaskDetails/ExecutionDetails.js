@@ -15,7 +15,10 @@ const ExecutionDetails = ({
   result,
 }) => {
   const showingRunningSteps =
-    state === 'running' || state === 'pending' || runningSteps.length > 0;
+    state === 'running' ||
+    state === 'pending' ||
+    state === 'paused' ||
+    runningSteps.length > 0;
 
   return (
     <div

@@ -18,6 +18,7 @@ import './TaskDetails.scss';
 
 export const TASK_DETAILS_TAB_KEYS = Object.freeze({
   EXECUTION: 'execution',
+  DEPENDENCIES: 'dependencies',
   LOCKS: 'locks',
   RAW: 'raw',
 });
@@ -104,10 +105,11 @@ const TaskDetails = ({
         onSelect={(_e, tabKey) => setActiveTab(tabKey)}
       >
         <Tab
+          isDisabled={isLoading}
           eventKey={TASK_DETAILS_TAB_KEYS.EXECUTION}
           title={<TabTitleText>{__('Execution details')}</TabTitleText>}
           aria-label={__('Execution details')}
-          ouiaId="task-details-tabs-execution"
+          ouiaId="task-details-tab-execution-details"
         >
           {!isLoading && (
             <ExecutionDetails
@@ -120,19 +122,15 @@ const TaskDetails = ({
               taskReloadStart={taskReloadStart}
               executionPlan={executionPlan}
               failedSteps={failedSteps}
-              dependsOn={dependsOn}
-              blocks={blocks}
-              help={props.help}
-              output={props.output}
-              errors={props.errors}
             />
           )}
         </Tab>
         <Tab
-          eventKey={5}
-          disabled={isLoading}
-          title={__('Dependencies')}
-          ouiaId="task-details-tabs-dependencies"
+          eventKey={TASK_DETAILS_TAB_KEYS.DEPENDENCIES}
+          isDisabled={isLoading}
+          title={<TabTitleText>{__('Dependencies')}</TabTitleText>}
+          aria-label={__('Dependencies')}
+          ouiaId="task-details-tab-dependencies"
         >
           <Dependencies dependsOn={dependsOn} blocks={blocks} />
         </Tab>
@@ -141,7 +139,7 @@ const TaskDetails = ({
           title={<TabTitleText>{__('Locks')}</TabTitleText>}
           isDisabled={isLoading}
           aria-label={__('Locks')}
-          ouiaId="task-details-tabs-locks"
+          ouiaId="task-details-tab-locks"
         >
           <Locks locks={lockRecords} />
         </Tab>
@@ -150,7 +148,7 @@ const TaskDetails = ({
           title={<TabTitleText>{__('Raw')}</TabTitleText>}
           isDisabled={isLoading}
           aria-label={__('Raw')}
-          ouiaId="task-details-tabs-raw"
+          ouiaId="task-details-tab-raw"
         >
           <Raw
             id={id}

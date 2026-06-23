@@ -82,18 +82,16 @@ export const fixtureRunningExecutionDetail = {
   runningSteps: [SAMPLE_RUNNING_STEP],
 };
 
-export const fixtureStoppedWithTaskMessages = {
+export const fixtureWithOverviewMessages = {
   ...taskDetailsWithExecutionTabDefaults,
   help: '<strong>See logs</strong> for more.',
   output: {
     messages: ['partial output'],
     result: 'error',
-    failedModules: {},
   },
-  errors: ['Validation failed'],
 };
 
-export const fixtureWithDependenciesTables = {
+export const fixtureWithDependencies = {
   ...taskDetailsWithExecutionTabDefaults,
   dependsOn: SAMPLE_DEPENDS_ON,
   blocks: [

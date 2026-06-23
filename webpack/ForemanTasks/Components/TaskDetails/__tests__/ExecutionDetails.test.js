@@ -152,4 +152,43 @@ describe('ExecutionDetails', () => {
 
     expect(screen.getByRole('button', { name: /cancel/i })).toBeInTheDocument();
   });
+
+  it('shows RunningSteps when state is paused without running steps', () => {
+    render(
+      <ExecutionDetails
+        {...rtlBaseProps}
+        state="paused"
+        runningSteps={[]}
+        executionPlan={{ state: 'paused', cancellable: false }}
+        failedSteps={[]}
+      />
+    );
+
+    expect(screen.getByText(/no running steps/i)).toBeInTheDocument();
+    expect(
+      screen.queryByRole('heading', { name: /^no errors found$/i })
+    ).not.toBeInTheDocument();
+  });
+
+  it('shows RunningSteps when state is paused with running steps', () => {
+    render(
+      <ExecutionDetails
+        {...rtlBaseProps}
+        state="paused"
+        runningSteps={[
+          {
+            ...fixtureRunningExecutionDetail.runningSteps[0],
+            state: 'paused',
+          },
+        ]}
+        executionPlan={{ state: 'paused', cancellable: false }}
+        failedSteps={[]}
+      />
+    );
+
+    expect(
+      screen.getByRole('heading', { name: 'Warning alert: Running step 1' })
+    ).toBeInTheDocument();
+    expect(screen.getByText('paused')).toBeInTheDocument();
+  });
 });
