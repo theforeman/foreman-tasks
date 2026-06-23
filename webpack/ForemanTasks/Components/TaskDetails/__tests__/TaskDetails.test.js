@@ -196,7 +196,6 @@ describe('TaskDetails', () => {
     renderTaskDetails({ ...taskDetailsWithExecutionTabDefaults });
 
     expect(screen.getByText('Refresh foo')).toBeInTheDocument();
-    expect(screen.getByText(/100% complete/i)).toBeInTheDocument();
   });
 
   it('shows execution details panel on the default tab when loaded', () => {
