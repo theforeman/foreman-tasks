@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Icon } from '@patternfly/react-core';
-import { SyncAltIcon } from '@patternfly/react-icons';
+import { Button, Flex, FlexItem, Icon } from '@patternfly/react-core';
+import { SimpleDropdown } from '@patternfly/react-templates';
+import { EllipsisVIcon, SyncAltIcon } from '@patternfly/react-icons';
 import { translate as __ } from 'foremanReact/common/I18n';
 
 export const TaskButtons = ({
@@ -30,120 +31,127 @@ export const TaskButtons = ({
     ? undefined
     : `dynflow_enable_console ${__('Setting is off')}`;
 
+  const overflowItems = [
+    {
+      value: 'reload',
+      ouiaId: 'task-buttons-reload-button',
+      content: (
+        <>
+          <Icon className={taskReload ? 'spin' : ''}>
+            <SyncAltIcon />
+          </Icon>
+          &nbsp;
+          {taskReload ? __('Stop auto-reloading') : __('Start auto-reloading')}
+        </>
+      ),
+      onClick: taskProgressToggle,
+    },
+    {
+      value: 'resume',
+      ouiaId: 'task-buttons-resume-button',
+      content: __('Resume'),
+      onClick: () => {
+        if (!taskReload) {
+          taskReloadStart(id);
+        }
+
+        resumeTaskRequest(id, action);
+      },
+      isDisabled: !canEdit || !resumable,
+      tooltip: editActionsTitle,
+    },
+    ...(parentTask
+      ? [
+          {
+            value: 'parent',
+            ouiaId: 'task-buttons-parent-button',
+            content: __('Parent task'),
+            to: `/foreman_tasks/tasks/${parentTask}`,
+          },
+        ]
+      : []),
+    ...(hasSubTasks
+      ? [
+          {
+            value: 'subtasks',
+            ouiaId: 'task-buttons-subtask-button',
+            content: __('Sub tasks'),
+            to: `/foreman_tasks/tasks/${id}/sub_tasks`,
+          },
+        ]
+      : []),
+    {
+      value: 'unlock',
+      ouiaId: 'task-buttons-unlock-button',
+      content: __('Unlock'),
+      onClick: () => setUnlockModalOpen(true),
+      isDisabled: !canEdit || state !== 'paused',
+      tooltip: editActionsTitle,
+    },
+    {
+      value: 'force-unlock',
+      ouiaId: 'task-buttons-force-unlock-button',
+      content: __('Force Unlock'),
+      onClick: () => setForceUnlockModalOpen(true),
+      isDisabled: !canEdit || state === 'stopped',
+      tooltip: editActionsTitle,
+    },
+  ];
+
   return (
-    <>
-      <Button
-        variant="secondary"
-        ouiaId="task-buttons-reload-button"
-        className="reload-button"
-        size="sm"
-        onClick={taskProgressToggle}
-      >
-        <Icon className={taskReload ? 'spin' : ''}>
-          <SyncAltIcon />
-        </Icon>
-        {taskReload ? __('Stop auto-reloading') : __('Start auto-reloading')}
-      </Button>
-      <Button
-        variant="secondary"
-        ouiaId="task-buttons-dynflow-button"
-        className="dynflow-button"
-        size="sm"
-        component="a"
-        href={`/foreman_tasks/dynflow/${externalId}`}
-        isDisabled={!dynflowEnableConsole}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <span title={dynflowTitle} data-original-title={dynflowTitle}>
-          {__('Dynflow console')}
-        </span>
-      </Button>
-      <Button
-        variant="secondary"
-        ouiaId="task-buttons-resume-button"
-        className="resume-button"
-        size="sm"
-        title={editActionsTitle}
-        data-original-title={editActionsTitle}
-        isDisabled={!canEdit || !resumable}
-        onClick={() => {
-          if (!taskReload) {
-            taskReloadStart(id);
-          }
-          resumeTaskRequest(id, action);
-        }}
-      >
-        {__('Resume')}
-      </Button>
-      <Button
-        variant="secondary"
-        ouiaId="task-buttons-cancel-button"
-        className="cancel-button"
-        size="sm"
-        title={editActionsTitle}
-        data-original-title={editActionsTitle}
-        isDisabled={!canEdit || !cancellable}
-        onClick={() => {
-          if (!taskReload) {
-            taskReloadStart(id);
-          }
-          cancelTaskRequest(id, action);
-        }}
-      >
-        {__('Cancel')}
-      </Button>
-      {parentTask && (
+    <Flex
+      display={{ default: 'inlineFlex' }}
+      alignItems={{ default: 'alignItemsCenter' }}
+      spaceItems={{ default: 'spaceItemsSm' }}
+    >
+      <FlexItem>
         <Button
           variant="secondary"
-          ouiaId="task-buttons-parent-button"
-          className="parent-button"
+          ouiaId="task-buttons-cancel-button"
+          className="cancel-button"
           size="sm"
-          href={`/foreman_tasks/tasks/${parentTask}`}
-          component="a"
+          title={editActionsTitle}
+          data-original-title={editActionsTitle}
+          isDisabled={!canEdit || !cancellable}
+          onClick={() => {
+            if (!taskReload) {
+              taskReloadStart(id);
+            }
+
+            cancelTaskRequest(id, action);
+          }}
         >
-          {__('Parent task')}
+          {__('Cancel')}
         </Button>
-      )}
-      {hasSubTasks && (
+      </FlexItem>
+      <FlexItem>
         <Button
           variant="secondary"
-          ouiaId="task-buttons-subtask-button"
-          className="subtask-button"
+          ouiaId="task-buttons-dynflow-button"
+          className="dynflow-button"
           size="sm"
-          href={`/foreman_tasks/tasks/${id}/sub_tasks`}
           component="a"
+          href={`/foreman_tasks/dynflow/${externalId}`}
+          isDisabled={!dynflowEnableConsole}
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          {__('Sub tasks')}
+          <span title={dynflowTitle} data-original-title={dynflowTitle}>
+            {__('Dynflow console')}
+          </span>
         </Button>
-      )}
-      <Button
-        variant="secondary"
-        ouiaId="task-buttons-unlock-button"
-        className="unlock-button"
-        size="sm"
-        isDisabled={!canEdit || state !== 'paused'}
-        onClick={() => {
-          setUnlockModalOpen(true);
-        }}
-        title={editActionsTitle}
-        data-original-title={editActionsTitle}
-      >
-        {__('Unlock')}
-      </Button>
-      <Button
-        variant="secondary"
-        ouiaId="task-buttons-force-unlock-button"
-        className="force-unlock-button"
-        size="sm"
-        isDisabled={!canEdit || state === 'stopped'}
-        onClick={() => setForceUnlockModalOpen(true)}
-        title={editActionsTitle}
-        data-original-title={editActionsTitle}
-      >
-        {__('Force Unlock')}
-      </Button>
-    </>
+      </FlexItem>
+      <FlexItem>
+        <SimpleDropdown
+          ouiaId="task-buttons-overflow-dropdown"
+          toggleVariant="plain"
+          toggleContent={<EllipsisVIcon aria-hidden="true" />}
+          popperProps={{ position: 'right' }}
+          initialItems={overflowItems}
+          toggleProps={{ 'aria-label': __('Task actions') }}
+        />
+      </FlexItem>
+    </Flex>
   );
 };
 

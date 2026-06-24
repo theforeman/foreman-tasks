@@ -4,41 +4,67 @@ import '@testing-library/jest-dom';
 
 import Task from '../Task';
 
+jest.mock('foremanReact/components/common/dates/RelativeDateTime', () => {
+  const RelativeDateTime = ({ date, defaultValue }) => (
+    <span>{date || defaultValue}</span>
+  );
+  return RelativeDateTime;
+});
+
+jest.mock('../TaskInfo', () => {
+  const TaskInfo = () => null;
+
+  return TaskInfo;
+});
+
+const baseTaskProps = {
+  id: 'test',
+  taskReloadStart: jest.fn(),
+  taskProgressToggle: jest.fn(),
+  cancelTaskRequest: jest.fn(),
+  resumeTaskRequest: jest.fn(),
+};
+
 describe('Task', () => {
-  it('renders task controls from TaskButtons with minimal props', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('renders action heading and exposes cancel, dynflow link, and task actions toggle', () => {
     render(
       <Task
-        id="test"
-        taskReloadStart={jest.fn()}
-        taskProgressToggle={jest.fn()}
+        {...baseTaskProps}
+        action="Refresh hosts"
+        dynflowEnableConsole
+        externalId="ext-99"
       />
     );
+
     expect(
-      screen.getByRole('button', { name: /start auto-reloading/i })
+      screen.getByRole('heading', { level: 4, name: 'Refresh hosts' })
+    ).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /cancel/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole('link', { name: /dynflow console/i })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: /^task actions$/i })
     ).toBeInTheDocument();
   });
 
-  it('renders parent task and sub tasks links when provided', () => {
+  it('shows running status icon next to the title when task state is running', () => {
     render(
       <Task
-        id="test"
-        state="paused"
-        hasSubTasks
-        dynflowEnableConsole
-        parentTask="parent-id"
-        taskReload
-        canEdit
-        taskProgressToggle={jest.fn()}
-        taskReloadStart={jest.fn()}
+        {...baseTaskProps}
+        action="Running job"
+        state="running"
+        result="pending"
       />
     );
-    expect(screen.getByRole('link', { name: /parent task/i })).toHaveAttribute(
-      'href',
-      '/foreman_tasks/tasks/parent-id'
-    );
-    expect(screen.getByRole('link', { name: /sub tasks/i })).toHaveAttribute(
-      'href',
-      '/foreman_tasks/tasks/test/sub_tasks'
-    );
+
+    expect(
+      screen.getByRole('heading', { level: 4, name: 'Running job' })
+    ).toBeInTheDocument();
+    expect(screen.getByTitle('Running')).toBeInTheDocument();
   });
 });

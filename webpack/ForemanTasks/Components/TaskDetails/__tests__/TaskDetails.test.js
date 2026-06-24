@@ -195,7 +195,9 @@ describe('TaskDetails', () => {
   it('renders task overview with action name when loaded', () => {
     renderTaskDetails({ ...taskDetailsWithExecutionTabDefaults });
 
-    expect(screen.getByText('Refresh foo')).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { level: 4, name: 'Refresh foo' })
+    ).toBeInTheDocument();
   });
 
   it('shows execution details panel on the default tab when loaded', () => {
