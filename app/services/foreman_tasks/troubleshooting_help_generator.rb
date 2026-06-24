@@ -67,7 +67,7 @@ module ForemanTasks
         i.add_line _('A paused task represents a process that has not finished properly. '\
                         'Any task in paused state can lead to potential inconsistency '\
                         'and needs to be resolved.')
-        i.add_line _("The recommended approach is to investigate the error messages below and in 'errors' tab, "\
+        i.add_line _("The recommended approach is to investigate the error messages below and in 'Execution details' tab, "\
                      'address the primary cause of the issue and resume the task.')
         if (link = troubleshooting_link)
           i.add_link(link)

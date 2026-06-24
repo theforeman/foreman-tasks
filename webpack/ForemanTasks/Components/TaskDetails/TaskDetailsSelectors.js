@@ -39,11 +39,6 @@ export const selectResumable = state =>
 export const selectCancellable = state =>
   selectTaskDetailsResponse(state).cancellable || false;
 
-export const selectErrors = state => {
-  const { humanized } = selectTaskDetailsResponse(state);
-  return humanized ? humanized.errors : [];
-};
-
 export const selectProgress = state =>
   selectTaskDetailsResponse(state).progress
     ? Math.trunc(selectTaskDetailsResponse(state).progress * 100)

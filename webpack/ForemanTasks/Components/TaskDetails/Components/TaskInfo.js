@@ -54,7 +54,6 @@ const TaskInfo = props => {
     state,
     help,
     output,
-    errors,
     progress,
     username,
     usernamePath,
@@ -168,12 +167,6 @@ const TaskInfo = props => {
           <pre>{output}</pre>
         </GridItem>
       )}
-      {errors && errors.length > 0 && (
-        <GridItem span={12}>
-          <b>{__('Errors:')}</b>
-          <pre>{errors}</pre>
-        </GridItem>
-      )}
     </Grid>
   );
 };
@@ -187,7 +180,6 @@ TaskInfo.propTypes = {
   startedAt: PropTypes.string,
   state: PropTypes.string,
   help: PropTypes.string,
-  errors: PropTypes.array,
   progress: PropTypes.number,
   username: PropTypes.string,
   usernamePath: PropTypes.string,
@@ -203,7 +195,6 @@ TaskInfo.defaultProps = {
   startedAt: '',
   state: '',
   help: '',
-  errors: [],
   progress: 0,
   username: '',
   usernamePath: '',
