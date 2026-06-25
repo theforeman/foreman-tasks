@@ -13,7 +13,7 @@ jest.mock(
 );
 
 jest.mock(
-  '../ForemanTasks/Routes/ShowTaskDetails/TaskDetailsPage',
+  '../ForemanTasks/Routes/ShowTaskDetails',
   () =>
     function TaskDetailsPageStub() {
       return <div data-testid="task-details-page-stub" />;

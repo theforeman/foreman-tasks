@@ -119,7 +119,6 @@ const TaskInfo = props => {
 
   return (
     <Grid>
-      <GridItem span={12} className="pf-v5-u-pb-lg" />
       {details.map((items, key) => (
         <React.Fragment key={key}>
           <GridItem md={2} sm={6}>

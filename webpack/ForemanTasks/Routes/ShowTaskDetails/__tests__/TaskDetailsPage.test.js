@@ -1,18 +1,35 @@
 import React from 'react';
-import { render, screen, within } from '@testing-library/react';
+import { screen, within } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
-import { Provider } from 'react-redux';
 
-import breadcrumbBarReducer from 'foremanReact/components/BreadcrumbBar/BreadcrumbBarReducer';
+import { rtlHelpers } from 'foremanReact/common/testHelpers';
 import { STATUS } from 'foremanReact/constants';
-import intervalsReducer from 'foremanReact/redux/middlewares/IntervalMiddleware/IntervalReducer';
 
 import { FOREMAN_TASK_DETAILS, VIEW_FOREMAN_TASKS } from '../../../Components/TaskDetails/TaskDetailsConstants';
-import TaskDetailsPage from '../TaskDetailsPage';
+import TaskDetailsPage from '../index';
+
+const { renderWithStore } = rtlHelpers;
+
+const renderWithStoreAndI18n = (component, initialState) =>
+  renderWithStore(
+    <IntlProvider locale="en">{component}</IntlProvider>,
+    initialState
+  );
+
+jest.mock('../../../Components/TaskDetails/TaskDetailsActions', () => {
+  const actual = jest.requireActual(
+    '../../../Components/TaskDetails/TaskDetailsActions'
+  );
+
+  return {
+    ...actual,
+    taskReloadStart: jest.fn(() => () => undefined),
+    taskReloadStop: jest.fn(() => () => undefined),
+  };
+});
 
 const mockUseForemanPermissions = jest.fn(
   () => new Set(['view_foreman_tasks'])
@@ -22,8 +39,6 @@ jest.mock('foremanReact/Root/Context/ForemanContext', () => ({
   ...jest.requireActual('foremanReact/Root/Context/ForemanContext'),
   useForemanPermissions: (...args) => mockUseForemanPermissions(...args),
 }));
-
-const TASK_DETAILS_TITLE_ROW_OUIA_ID = 'foreman-tasks-task-details-title-row';
 
 const routerPropsBase = {
   history: { push: jest.fn(), replace: jest.fn(), go: jest.fn() },
@@ -67,25 +82,9 @@ const createStoreForTaskPayload = overrides => ({
   },
 });
 
-const rootReducer = combineReducers({
-  API: (state = {}, action) => state,
-  intervals: intervalsReducer,
-  breadcrumbBar: breadcrumbBarReducer,
-  foremanTasks: (state = {}, action) => state,
-});
-
 const renderPage = (apiPayloadOverrides = {}, propsOverrides = {}) => {
   const history = createMemoryHistory({
     initialEntries: [`/foreman_tasks/tasks/${matchDefault.params.id}`],
-  });
-  const store = configureStore({
-    reducer: rootReducer,
-    preloadedState: createStoreForTaskPayload(apiPayloadOverrides),
-    middleware: getDefaultMiddleware =>
-      getDefaultMiddleware({
-        immutableCheck: false,
-        serializableCheck: false,
-      }),
   });
 
   window.history.pushState(
@@ -94,43 +93,28 @@ const renderPage = (apiPayloadOverrides = {}, propsOverrides = {}) => {
     `/foreman_tasks/tasks/${matchDefault.params.id}`
   );
 
-  return render(
+  return renderWithStoreAndI18n(
     <Router history={history}>
-      <Provider store={store}>
-        <IntlProvider locale="en">
-          <TaskDetailsPage
-            {...routerPropsBase}
-            history={history}
-            match={matchDefault}
-            {...propsOverrides}
-          />
-        </IntlProvider>
-      </Provider>
-    </Router>
+      <TaskDetailsPage
+        {...routerPropsBase}
+        history={history}
+        match={matchDefault}
+        {...propsOverrides}
+      />
+    </Router>,
+    createStoreForTaskPayload(apiPayloadOverrides)
   );
-};
-
-const breadcrumbTitleHeadings = () =>
-  screen.getAllByRole('heading', { level: 1 }).filter(
-    heading => heading.getAttribute('data-ouia-component-id') === 'breadcrumb_title'
-  );
-
-/**
- * Title row (`customHeader` root `Flex`): same OUIA pattern as `Locks.test.js`.
- */
-const taskDetailsTitleRegion = container => {
-  const el = container.querySelector(
-    `[data-ouia-component-id="${TASK_DETAILS_TITLE_ROW_OUIA_ID}"]`
-  );
-
-  expect(el).toBeTruthy();
-
-  return el;
 };
 
 describe('TaskDetailsPage', () => {
   beforeEach(() => {
-    mockUseForemanPermissions.mockImplementation(() => new Set(['view_foreman_tasks']));
+    mockUseForemanPermissions.mockImplementation(
+      () => new Set(['view_foreman_tasks'])
+    );
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   describe('permissions', () => {
@@ -147,10 +131,12 @@ describe('TaskDetailsPage', () => {
       expect(
         screen.getByRole('heading', {
           level: 1,
-          name: /Details of Run job task/,
+          name: 'Run job',
         })
       ).toBeInTheDocument();
-      expect(screen.queryByRole('heading', { name: /Permission denied/i })).not.toBeInTheDocument();
+      expect(
+        screen.queryByRole('heading', { name: /Permission denied/i })
+      ).not.toBeInTheDocument();
       expect(mockUseForemanPermissions).toHaveBeenCalled();
     });
 
@@ -174,7 +160,9 @@ describe('TaskDetailsPage', () => {
       expect(
         screen.getByRole('navigation', { name: 'Breadcrumb' })
       ).toBeInTheDocument();
-      expect(screen.queryByRole('tab', { name: /^task$/i })).not.toBeInTheDocument();
+      expect(
+        screen.queryByRole('tab', { name: /^task$/i })
+      ).not.toBeInTheDocument();
     });
 
     it('denies access when user only has edit_foreman_tasks without view', () => {
@@ -191,24 +179,18 @@ describe('TaskDetailsPage', () => {
       expect(
         screen.getByRole('navigation', { name: 'Breadcrumb' })
       ).toBeInTheDocument();
-      expect(screen.queryByRole('tab', { name: /^task$/i })).not.toBeInTheDocument();
+      expect(
+        screen.queryByRole('tab', { name: /^task$/i })
+      ).not.toBeInTheDocument();
     });
   });
 
+  it('shows running status icon when action is unset', () => {
+    renderPage({});
 
-  const expectToolbarHeadingText = substring => {
-    const headings = breadcrumbTitleHeadings();
-
-    expect(headings.length).toBeGreaterThan(0);
-
-    headings.forEach(heading => {
-      expect(heading).toHaveTextContent(substring);
-    });
-  };
-
-  it('shows generic title and breadcrumb from route id when action is unset', () => {
-    const page = renderPage({});
-    expectToolbarHeadingText('Task Details');
+    expect(
+      screen.getByRole('heading', { level: 1, name: 'Task Details' })
+    ).toBeInTheDocument();
 
     expect(screen.getByRole('navigation', { name: 'Breadcrumb' })).toHaveTextContent(
       'Tasks'
@@ -219,18 +201,19 @@ describe('TaskDetailsPage', () => {
       )
     ).toBeInTheDocument();
 
-    const titleRegion = taskDetailsTitleRegion(page.container);
-
-    expect(
-      within(titleRegion).getAllByRole('img', { hidden: true }).length
-    ).toBeGreaterThan(0);
-    expect(titleRegion.querySelector('[class*="danger"]')).toBeNull();
+    expect(screen.getAllByTitle('Running').length).toBeGreaterThan(0);
+    expect(screen.queryByTitle('Error')).not.toBeInTheDocument();
   });
 
   it('uses task action for title and breadcrumb when loaded', () => {
     renderPage({ action: 'Refresh hosts' });
 
-    expectToolbarHeadingText('Details of Refresh hosts task');
+    expect(
+      screen.getByRole('heading', { level: 1, name: 'Refresh hosts' })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: /cancel/i })
+    ).toBeInTheDocument();
 
     expect(screen.getByRole('link', { name: /^Tasks$/ })).toHaveAttribute(
       'href',
@@ -243,18 +226,17 @@ describe('TaskDetailsPage', () => {
     ).toBeInTheDocument();
   });
 
-  it('shows error status styling in the heading when task is stopped with error result', () => {
-    const page = renderPage({
+  it('shows error status icon when task is stopped with error result', () => {
+    renderPage({
       action: 'Some action',
       state: 'stopped',
       result: 'error',
     });
 
-    expectToolbarHeadingText('Details of Some action task');
-
     expect(
-      taskDetailsTitleRegion(page.container).querySelector('[class*="danger"]')
-    ).toBeTruthy();
+      screen.getByRole('heading', { level: 1, name: 'Some action' })
+    ).toBeInTheDocument();
+    expect(screen.getAllByTitle('Error').length).toBeGreaterThan(0);
 
     expect(
       within(screen.getByRole('navigation', { name: 'Breadcrumb' })).getByText(

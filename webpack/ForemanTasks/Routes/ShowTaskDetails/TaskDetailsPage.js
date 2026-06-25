@@ -1,48 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
-import { Flex, FlexItem, TextContent, Text } from '@patternfly/react-core';
 import PageLayout from 'foremanReact/routes/common/PageLayout/PageLayout';
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
-import TaskDetails from '../../Components/TaskDetails';
-import {
-  selectAction,
-  selectResult,
-  selectState,
-} from '../../Components/TaskDetails/TaskDetailsSelectors';
-import { taskResultIconEl } from '../../Components/common/taskResultIcon';
+import TaskDetails from '../../Components/TaskDetails/TaskDetails';
+import TaskDetailsHeader from './TaskDetailsHeader';
 
 const TaskDetailsPage = props => {
-  const { id } = props.match.params;
-  const action = useSelector(selectAction);
-  const taskState = useSelector(selectState);
-  const taskResult = useSelector(selectResult);
+  const { match, action } = props;
+  const { id } = match.params;
   const headerText = action
     ? sprintf(__('Details of %s task'), action)
     : __('Task Details');
 
-  const header = (
-    <Flex
-      component="span"
-      data-ouia-component-id="foreman-tasks-task-details-title-row"
-      display={{ default: 'inlineFlex' }}
-      alignItems={{ default: 'alignItemsCenter' }}
-      gap={{ default: 'gapSm' }}
-    >
-      <TextContent>
-        <Text ouiaId="breadcrumb_title" component="h1">
-          {headerText}
-        </Text>
-      </TextContent>
-      <FlexItem component="span">
-        {taskResultIconEl(taskState, taskResult)}
-      </FlexItem>
-    </Flex>
-  );
-
   return (
     <PageLayout
-      customHeader={header}
+      customHeader={<TaskDetailsHeader {...props} />}
       header={headerText}
       searchable={false}
       breadcrumbOptions={{
@@ -69,6 +41,11 @@ TaskDetailsPage.propTypes = {
       id: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
+  action: PropTypes.string,
+};
+
+TaskDetailsPage.defaultProps = {
+  action: '',
 };
 
 export default TaskDetailsPage;
