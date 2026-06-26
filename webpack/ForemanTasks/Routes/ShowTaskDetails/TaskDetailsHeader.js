@@ -8,7 +8,10 @@ import {
   Title,
 } from '@patternfly/react-core';
 import { translate as __ } from 'foremanReact/common/I18n';
+import { STATUS } from 'foremanReact/constants';
+import { usePermissions } from 'foremanReact/common/hooks/Permissions/permissionHooks';
 import { TaskButtons } from '../../Components/TaskDetails/Components/TaskButtons';
+import { VIEW_FOREMAN_TASKS } from '../../Components/TaskDetails/TaskDetailsConstants';
 import {
   ForceUnlockConfirmationModal,
   UnlockConfirmationModal,
@@ -56,7 +59,10 @@ const TaskDetailsHeader = props => {
     taskReloadStart,
     taskReloadStop,
     executionPlan,
+    apiStatus,
   } = props;
+  const hasViewPermission = usePermissions([VIEW_FOREMAN_TASKS]);
+  const showActions = hasViewPermission && apiStatus !== STATUS.ERROR;
   const resumable = executionPlan ? executionPlan.state === 'paused' : false;
   const cancellable = executionPlan ? executionPlan.cancellable : false;
 
@@ -89,16 +95,20 @@ const TaskDetailsHeader = props => {
 
   return (
     <React.Fragment>
-      <UnlockConfirmationModal
-        onClick={unlock}
-        isOpen={unlockModalOpen}
-        setModalClosed={() => setUnlockModalOpen(false)}
-      />
-      <ForceUnlockConfirmationModal
-        onClick={forceUnlock}
-        isOpen={forceUnlockModalOpen}
-        setModalClosed={() => setForceUnlockModalOpen(false)}
-      />
+      {showActions && (
+        <>
+          <UnlockConfirmationModal
+            onClick={unlock}
+            isOpen={unlockModalOpen}
+            setModalClosed={() => setUnlockModalOpen(false)}
+          />
+          <ForceUnlockConfirmationModal
+            onClick={forceUnlock}
+            isOpen={forceUnlockModalOpen}
+            setModalClosed={() => setForceUnlockModalOpen(false)}
+          />
+        </>
+      )}
       <Split
         className="foreman-tasks-task-details-header"
         hasGutter
@@ -112,17 +122,19 @@ const TaskDetailsHeader = props => {
             result={props.result}
           />
         </SplitItem>
-        <SplitItem>
-          <TaskButtons
-            {...props}
-            taskReloadStart={taskReloadStart}
-            taskProgressToggle={taskProgressToggle}
-            setUnlockModalOpen={setUnlockModalOpen}
-            setForceUnlockModalOpen={setForceUnlockModalOpen}
-            resumable={resumable}
-            cancellable={cancellable}
-          />
-        </SplitItem>
+        {showActions && (
+          <SplitItem>
+            <TaskButtons
+              {...props}
+              taskReloadStart={taskReloadStart}
+              taskProgressToggle={taskProgressToggle}
+              setUnlockModalOpen={setUnlockModalOpen}
+              setForceUnlockModalOpen={setForceUnlockModalOpen}
+              resumable={resumable}
+              cancellable={cancellable}
+            />
+          </SplitItem>
+        )}
       </Split>
     </React.Fragment>
   );
@@ -142,6 +154,7 @@ TaskDetailsHeader.propTypes = {
     state: PropTypes.string,
     cancellable: PropTypes.bool,
   }),
+  apiStatus: PropTypes.oneOf(Object.keys(STATUS)),
 };
 
 TaskDetailsHeader.defaultProps = {
@@ -155,6 +168,7 @@ TaskDetailsHeader.defaultProps = {
   taskReloadStart: () => null,
   taskReloadStop: () => null,
   executionPlan: {},
+  apiStatus: STATUS.RESOLVED,
 };
 
 export default TaskDetailsHeader;

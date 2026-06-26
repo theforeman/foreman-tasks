@@ -1,5 +1,6 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
@@ -49,6 +50,10 @@ describe('TaskDetails', () => {
     mockUseForemanPermissions.mockImplementation(
       () => new Set(['view_foreman_tasks'])
     );
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   it(`shows ResourceLoadFailedEmptyState when ${VIEW_FOREMAN_TASKS} is absent`, () => {
@@ -126,7 +131,6 @@ describe('TaskDetails', () => {
 
   it('renders four tabs with expected labels', () => {
     renderTaskDetails();
-    expect(document.getElementById('task-details-tabs')).toBeInTheDocument();
     expect(
       screen.getByRole('tab', { name: /execution details/i })
     ).toBeInTheDocument();
@@ -196,9 +200,6 @@ describe('TaskDetails', () => {
     renderTaskDetails({ ...taskDetailsWithExecutionTabDefaults });
 
     expect(
-      document.getElementById('execution-details-panel')
-    ).toBeInTheDocument();
-    expect(
       screen.getByRole('heading', { name: /^no errors found$/i })
     ).toBeInTheDocument();
   });
@@ -210,7 +211,7 @@ describe('TaskDetails', () => {
     });
 
     expect(
-      document.getElementById('execution-details-panel')
+      screen.queryByRole('heading', { name: /^no errors found$/i })
     ).not.toBeInTheDocument();
     expect(
       screen.getByRole('tab', { name: /execution details/i })
@@ -227,19 +228,19 @@ describe('TaskDetails', () => {
     expect(screen.getByText('See logs')).toBeInTheDocument();
   });
 
-  it('renders raw output when the Raw tab is selected', () => {
+  it('renders raw output when the Raw tab is selected', async () => {
     renderTaskDetails({ ...fixtureWithOverviewMessages });
 
-    fireEvent.click(screen.getByRole('tab', { name: /raw/i }));
+    await userEvent.click(screen.getByRole('tab', { name: /raw/i }));
 
     expect(screen.getByText(/raw output/i)).toBeInTheDocument();
     expect(screen.getByText(/partial output/i)).toBeInTheDocument();
   });
 
-  it('renders dependency tables when the Dependencies tab is selected', () => {
+  it('renders dependency tables when the Dependencies tab is selected', async () => {
     renderTaskDetails({ ...fixtureWithDependencies });
 
-    fireEvent.click(screen.getByRole('tab', { name: /dependencies/i }));
+    await userEvent.click(screen.getByRole('tab', { name: /dependencies/i }));
 
     expect(
       screen.getByRole('link', { name: 'Foo Bar Action' })

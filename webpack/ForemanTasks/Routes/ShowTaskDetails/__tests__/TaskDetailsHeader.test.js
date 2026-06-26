@@ -1,8 +1,19 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { STATUS } from 'foremanReact/constants';
 
 import TaskDetailsHeader from '../TaskDetailsHeader';
+import { VIEW_FOREMAN_TASKS } from '../../../Components/TaskDetails/TaskDetailsConstants';
+
+const mockUseForemanPermissions = jest.fn(
+  () => new Set(['view_foreman_tasks'])
+);
+
+jest.mock('foremanReact/Root/Context/ForemanContext', () => ({
+  ...jest.requireActual('foremanReact/Root/Context/ForemanContext'),
+  useForemanPermissions: (...args) => mockUseForemanPermissions(...args),
+}));
 
 const baseHeaderProps = {
   id: 'test-id',
@@ -20,9 +31,38 @@ const baseHeaderProps = {
   dynflowEnableConsole: true,
   externalId: 'ext-99',
   executionPlan: {},
+  apiStatus: STATUS.RESOLVED,
+};
+
+const expectHeaderActionsVisible = () => {
+  expect(screen.getByRole('button', { name: /cancel/i })).toBeInTheDocument();
+  expect(
+    screen.getByRole('link', { name: /dynflow console/i })
+  ).toBeInTheDocument();
+  expect(
+    screen.getByRole('button', { name: /^task actions$/i })
+  ).toBeInTheDocument();
+};
+
+const expectHeaderActionsHidden = () => {
+  expect(
+    screen.queryByRole('button', { name: /cancel/i })
+  ).not.toBeInTheDocument();
+  expect(
+    screen.queryByRole('link', { name: /dynflow console/i })
+  ).not.toBeInTheDocument();
+  expect(
+    screen.queryByRole('button', { name: /^task actions$/i })
+  ).not.toBeInTheDocument();
 };
 
 describe('TaskDetailsHeader', () => {
+  beforeEach(() => {
+    mockUseForemanPermissions.mockImplementation(
+      () => new Set(['view_foreman_tasks'])
+    );
+  });
+
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -33,13 +73,7 @@ describe('TaskDetailsHeader', () => {
     expect(
       screen.getByRole('heading', { level: 1, name: 'Refresh hosts' })
     ).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /cancel/i })).toBeInTheDocument();
-    expect(
-      screen.getByRole('link', { name: /dynflow console/i })
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole('button', { name: /^task actions$/i })
-    ).toBeInTheDocument();
+    expectHeaderActionsVisible();
   });
 
   it('shows running status icon next to the title when task state is running', () => {
@@ -80,5 +114,29 @@ describe('TaskDetailsHeader', () => {
     expect(
       screen.getByRole('heading', { level: 1, name: 'Task Details' })
     ).toBeInTheDocument();
+  });
+
+  it.each([
+    [
+      `${VIEW_FOREMAN_TASKS} is absent`,
+      () => {
+        mockUseForemanPermissions.mockImplementation(() => new Set());
+      },
+      {},
+    ],
+    [
+      'apiStatus is ERROR',
+      () => {},
+      { apiStatus: STATUS.ERROR },
+    ],
+  ])('hides task actions when %s', (_label, setupPermissions, propOverrides) => {
+    setupPermissions();
+
+    render(<TaskDetailsHeader {...baseHeaderProps} {...propOverrides} />);
+
+    expect(
+      screen.getByRole('heading', { level: 1, name: 'Refresh hosts' })
+    ).toBeInTheDocument();
+    expectHeaderActionsHidden();
   });
 });

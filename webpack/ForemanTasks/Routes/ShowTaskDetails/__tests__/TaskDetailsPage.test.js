@@ -8,16 +8,13 @@ import { IntlProvider } from 'react-intl';
 import { rtlHelpers } from 'foremanReact/common/testHelpers';
 import { STATUS } from 'foremanReact/constants';
 
-import { FOREMAN_TASK_DETAILS, VIEW_FOREMAN_TASKS } from '../../../Components/TaskDetails/TaskDetailsConstants';
+import {
+  FOREMAN_TASK_DETAILS,
+  VIEW_FOREMAN_TASKS,
+} from '../../../Components/TaskDetails/TaskDetailsConstants';
 import TaskDetailsPage from '../index';
 
 const { renderWithStore } = rtlHelpers;
-
-const renderWithStoreAndI18n = (component, initialState) =>
-  renderWithStore(
-    <IntlProvider locale="en">{component}</IntlProvider>,
-    initialState
-  );
 
 jest.mock('../../../Components/TaskDetails/TaskDetailsActions', () => {
   const actual = jest.requireActual(
@@ -72,22 +69,34 @@ const baseTaskPayload = {
   result: '',
 };
 
-const createStoreForTaskPayload = overrides => ({
+const createStoreForTaskPayload = (overrides, apiStatus = STATUS.RESOLVED) => ({
   API: {
     [FOREMAN_TASK_DETAILS]: {
       response: { ...baseTaskPayload, ...overrides },
-      status: STATUS.RESOLVED,
+      status: apiStatus,
       payload: {},
     },
   },
 });
 
-const getTitleRow = () =>
-  document.querySelector(
-    '[data-ouia-component-id="foreman-tasks-task-details-title-row"]'
-  );
+const expectHeaderActionsHidden = () => {
+  expect(
+    screen.queryByRole('button', { name: /cancel/i })
+  ).not.toBeInTheDocument();
+  expect(
+    screen.queryByRole('button', { name: /^task actions$/i })
+  ).not.toBeInTheDocument();
+};
 
-const renderPage = (apiPayloadOverrides = {}, propsOverrides = {}) => {
+const getHeaderTitleArea = title =>
+  screen.getByRole('heading', { level: 1, name: title }).parentElement
+    .parentElement;
+
+const renderPage = (
+  apiPayloadOverrides = {},
+  propsOverrides = {},
+  apiStatus = STATUS.RESOLVED
+) => {
   const history = createMemoryHistory({
     initialEntries: [`/foreman_tasks/tasks/${matchDefault.params.id}`],
   });
@@ -98,16 +107,18 @@ const renderPage = (apiPayloadOverrides = {}, propsOverrides = {}) => {
     `/foreman_tasks/tasks/${matchDefault.params.id}`
   );
 
-  return renderWithStoreAndI18n(
-    <Router history={history}>
-      <TaskDetailsPage
-        {...routerPropsBase}
-        history={history}
-        match={matchDefault}
-        {...propsOverrides}
-      />
-    </Router>,
-    createStoreForTaskPayload(apiPayloadOverrides)
+  return renderWithStore(
+    <IntlProvider locale="en">
+      <Router history={history}>
+        <TaskDetailsPage
+          {...routerPropsBase}
+          history={history}
+          match={matchDefault}
+          {...propsOverrides}
+        />
+      </Router>
+    </IntlProvider>,
+    createStoreForTaskPayload(apiPayloadOverrides, apiStatus)
   );
 };
 
@@ -142,7 +153,6 @@ describe('TaskDetailsPage', () => {
       expect(
         screen.queryByRole('heading', { name: /Permission denied/i })
       ).not.toBeInTheDocument();
-      expect(mockUseForemanPermissions).toHaveBeenCalled();
     });
 
     it(`shows ResourceLoadFailedEmptyState and lists ${VIEW_FOREMAN_TASKS} when it is absent`, () => {
@@ -168,6 +178,7 @@ describe('TaskDetailsPage', () => {
       expect(
         screen.queryByRole('tab', { name: /^task$/i })
       ).not.toBeInTheDocument();
+      expectHeaderActionsHidden();
     });
 
     it('denies access when user only has edit_foreman_tasks without view', () => {
@@ -187,6 +198,16 @@ describe('TaskDetailsPage', () => {
       expect(
         screen.queryByRole('tab', { name: /^task$/i })
       ).not.toBeInTheDocument();
+      expectHeaderActionsHidden();
+    });
+
+    it('hides header actions when the task API returns an error', () => {
+      renderPage({ action: 'Failed load' }, {}, STATUS.ERROR);
+
+      expect(
+        screen.getByRole('heading', { name: /unable to load task/i })
+      ).toBeInTheDocument();
+      expectHeaderActionsHidden();
     });
   });
 
@@ -206,10 +227,10 @@ describe('TaskDetailsPage', () => {
       )
     ).toBeInTheDocument();
 
-    const titleRow = getTitleRow();
+    const titleArea = getHeaderTitleArea('Task Details');
 
-    expect(within(titleRow).getByTitle('Running')).toBeInTheDocument();
-    expect(within(titleRow).queryByTitle('Error')).not.toBeInTheDocument();
+    expect(within(titleArea).getByTitle('Running')).toBeInTheDocument();
+    expect(within(titleArea).queryByTitle('Error')).not.toBeInTheDocument();
   });
 
   it('uses task action for title and breadcrumb when loaded', () => {
@@ -219,7 +240,7 @@ describe('TaskDetailsPage', () => {
       screen.getByRole('heading', { level: 1, name: 'Refresh hosts' })
     ).toBeInTheDocument();
     expect(
-      within(getTitleRow()).getByRole('button', { name: /cancel/i })
+      screen.getByRole('button', { name: /cancel/i })
     ).toBeInTheDocument();
 
     expect(screen.getByRole('link', { name: /^Tasks$/ })).toHaveAttribute(
@@ -243,7 +264,9 @@ describe('TaskDetailsPage', () => {
     expect(
       screen.getByRole('heading', { level: 1, name: 'Some action' })
     ).toBeInTheDocument();
-    expect(within(getTitleRow()).getByTitle('Error')).toBeInTheDocument();
+    expect(
+      within(getHeaderTitleArea('Some action')).getByTitle('Error')
+    ).toBeInTheDocument();
 
     expect(
       within(screen.getByRole('navigation', { name: 'Breadcrumb' })).getByText(
