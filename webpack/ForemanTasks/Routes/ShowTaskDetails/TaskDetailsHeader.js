@@ -114,13 +114,13 @@ const TaskDetailsHeader = props => {
         </SplitItem>
         <SplitItem>
           <TaskButtons
+            {...props}
             taskReloadStart={taskReloadStart}
             taskProgressToggle={taskProgressToggle}
             setUnlockModalOpen={setUnlockModalOpen}
             setForceUnlockModalOpen={setForceUnlockModalOpen}
             resumable={resumable}
             cancellable={cancellable}
-            {...props}
           />
         </SplitItem>
       </Split>

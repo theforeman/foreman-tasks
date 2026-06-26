@@ -82,6 +82,11 @@ const createStoreForTaskPayload = overrides => ({
   },
 });
 
+const getTitleRow = () =>
+  document.querySelector(
+    '[data-ouia-component-id="foreman-tasks-task-details-title-row"]'
+  );
+
 const renderPage = (apiPayloadOverrides = {}, propsOverrides = {}) => {
   const history = createMemoryHistory({
     initialEntries: [`/foreman_tasks/tasks/${matchDefault.params.id}`],
@@ -201,8 +206,10 @@ describe('TaskDetailsPage', () => {
       )
     ).toBeInTheDocument();
 
-    expect(screen.getAllByTitle('Running').length).toBeGreaterThan(0);
-    expect(screen.queryByTitle('Error')).not.toBeInTheDocument();
+    const titleRow = getTitleRow();
+
+    expect(within(titleRow).getByTitle('Running')).toBeInTheDocument();
+    expect(within(titleRow).queryByTitle('Error')).not.toBeInTheDocument();
   });
 
   it('uses task action for title and breadcrumb when loaded', () => {
@@ -212,7 +219,7 @@ describe('TaskDetailsPage', () => {
       screen.getByRole('heading', { level: 1, name: 'Refresh hosts' })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole('button', { name: /cancel/i })
+      within(getTitleRow()).getByRole('button', { name: /cancel/i })
     ).toBeInTheDocument();
 
     expect(screen.getByRole('link', { name: /^Tasks$/ })).toHaveAttribute(
@@ -236,7 +243,7 @@ describe('TaskDetailsPage', () => {
     expect(
       screen.getByRole('heading', { level: 1, name: 'Some action' })
     ).toBeInTheDocument();
-    expect(screen.getAllByTitle('Error').length).toBeGreaterThan(0);
+    expect(within(getTitleRow()).getByTitle('Error')).toBeInTheDocument();
 
     expect(
       within(screen.getByRole('navigation', { name: 'Breadcrumb' })).getByText(

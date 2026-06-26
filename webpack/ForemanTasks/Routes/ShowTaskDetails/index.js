@@ -38,11 +38,10 @@ import {
   selectDependsOn,
   selectBlocks,
 } from '../../Components/TaskDetails/TaskDetailsSelectors';
-import { getTaskID } from '../../Components/TaskDetails/TasksDetailsHelper';
 import TaskDetailsPage from './TaskDetailsPage';
 
-const mapStateToProps = state => ({
-  id: getTaskID(),
+const mapStateToProps = (state, ownProps) => ({
+  id: ownProps.match.params.id,
   startAt: selectStartAt(state),
   startBefore: selectStartBefore(state),
   startedAt: selectStartedAt(state),
