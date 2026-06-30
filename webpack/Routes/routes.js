@@ -1,6 +1,6 @@
 import React from 'react';
 import TasksTableIndexPage from '../ForemanTasks/Components/TasksTable/TasksIndexPage';
-import TaskDetailsPage from '../ForemanTasks/Routes/ShowTaskDetails/TaskDetailsPage';
+import TaskDetailsPage from '../ForemanTasks/Routes/ShowTaskDetails';
 
 const ForemanTasksRoutes = [
   {

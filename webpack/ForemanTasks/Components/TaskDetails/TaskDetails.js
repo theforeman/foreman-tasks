@@ -11,7 +11,6 @@ import Raw from './Components/Raw';
 import ExecutionDetails from './ExecutionDetails';
 import Dependencies from './Components/Dependencies';
 import { TASKS_PATH, VIEW_FOREMAN_TASKS } from './TaskDetailsConstants';
-import { getTaskID } from './TasksDetailsHelper';
 import { TaskSkeleton } from './Components/TaskSkeleton';
 
 import './TaskDetails.scss';
@@ -37,9 +36,9 @@ const TaskDetails = ({
   apiStatus,
   apiErrorMessage,
   apiErrorCode,
+  id,
   ...props
 }) => {
-  const id = getTaskID();
   const { taskReload, isLoading } = props;
   const [activeTab, setActiveTab] = useState(TASK_DETAILS_TAB_KEYS.EXECUTION);
   const hasViewPermission = usePermissions([VIEW_FOREMAN_TASKS]);
@@ -166,6 +165,7 @@ const TaskDetails = ({
 };
 
 TaskDetails.propTypes = {
+  id: PropTypes.string.isRequired,
   label: PropTypes.string,
   result: PropTypes.string,
   runningSteps: PropTypes.array,

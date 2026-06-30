@@ -1,8 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import TaskDetails from './TaskDetails';
-import * as taskDetailsActions from './TaskDetailsActions';
-import * as taskActions from '../TaskActions';
+import * as taskDetailsActions from '../../Components/TaskDetails/TaskDetailsActions';
+import * as taskActions from '../../Components/TaskActions';
 import {
   selectEndedAt,
   selectStartAt,
@@ -38,9 +37,11 @@ import {
   selectIsLoading,
   selectDependsOn,
   selectBlocks,
-} from './TaskDetailsSelectors';
+} from '../../Components/TaskDetails/TaskDetailsSelectors';
+import TaskDetailsPage from './TaskDetailsPage';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
+  id: ownProps.match.params.id,
   startAt: selectStartAt(state),
   startBefore: selectStartBefore(state),
   startedAt: selectStartedAt(state),
@@ -80,4 +81,4 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ ...taskActions, ...taskDetailsActions }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(TaskDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskDetailsPage);

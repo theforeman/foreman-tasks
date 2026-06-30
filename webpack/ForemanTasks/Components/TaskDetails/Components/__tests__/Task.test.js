@@ -4,41 +4,26 @@ import '@testing-library/jest-dom';
 
 import Task from '../Task';
 
-describe('Task', () => {
-  it('renders task controls from TaskButtons with minimal props', () => {
-    render(
-      <Task
-        id="test"
-        taskReloadStart={jest.fn()}
-        taskProgressToggle={jest.fn()}
-      />
-    );
-    expect(
-      screen.getByRole('button', { name: /start auto-reloading/i })
-    ).toBeInTheDocument();
-  });
+jest.mock('foremanReact/components/common/dates/RelativeDateTime', () => {
+  const RelativeDateTime = ({ date, defaultValue }) => (
+    <span>{date || defaultValue}</span>
+  );
 
-  it('renders parent task and sub tasks links when provided', () => {
-    render(
-      <Task
-        id="test"
-        state="paused"
-        hasSubTasks
-        dynflowEnableConsole
-        parentTask="parent-id"
-        taskReload
-        canEdit
-        taskProgressToggle={jest.fn()}
-        taskReloadStart={jest.fn()}
-      />
-    );
-    expect(screen.getByRole('link', { name: /parent task/i })).toHaveAttribute(
-      'href',
-      '/foreman_tasks/tasks/parent-id'
-    );
-    expect(screen.getByRole('link', { name: /sub tasks/i })).toHaveAttribute(
-      'href',
-      '/foreman_tasks/tasks/test/sub_tasks'
-    );
+  return RelativeDateTime;
+});
+
+describe('Task', () => {
+  it('renders task overview metadata via TaskInfo', () => {
+    render(<Task id="test" action="Refresh hosts" />);
+
+    expect(screen.getByText(/name:/i)).toBeInTheDocument();
+    expect(screen.getByText('Refresh hosts')).toBeInTheDocument();
+    expect(screen.getByText(/result:/i)).toBeInTheDocument();
+    expect(
+      screen.queryByRole('button', { name: /cancel/i })
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('button', { name: /^task actions$/i })
+    ).not.toBeInTheDocument();
   });
 });

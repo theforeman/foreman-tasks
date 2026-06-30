@@ -1,4 +1,5 @@
 export const minProps = {
+  id: 'a15dd820-32f1-4ced-9ab7-c0fab8234c47',
   cancelStep: jest.fn(),
   taskReload: false,
   taskReloadStop: jest.fn(),
