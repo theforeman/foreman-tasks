@@ -5,6 +5,8 @@ import { SimpleDropdown } from '@patternfly/react-templates';
 import { EllipsisVIcon, SyncAltIcon } from '@patternfly/react-icons';
 import { translate as __ } from 'foremanReact/common/I18n';
 
+import './TaskButtons.scss';
+
 export const TaskButtons = ({
   canEdit,
   dynflowEnableConsole,
@@ -37,8 +39,8 @@ export const TaskButtons = ({
       ouiaId: 'task-buttons-reload-button',
       content: (
         <>
-          <Icon className={taskReload ? 'spin' : ''}>
-            <SyncAltIcon />
+          <Icon>
+            <SyncAltIcon className={taskReload ? 'spin' : ''} />
           </Icon>
           &nbsp;
           {taskReload ? __('Stop auto-reloading') : __('Start auto-reloading')}
@@ -100,6 +102,7 @@ export const TaskButtons = ({
 
   return (
     <Flex
+      className="task-buttons"
       display={{ default: 'inlineFlex' }}
       alignItems={{ default: 'alignItemsCenter' }}
       spaceItems={{ default: 'spaceItemsSm' }}
