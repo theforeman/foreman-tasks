@@ -221,11 +221,11 @@ describe('TaskDetails', () => {
     expect(screen.getByRole('tab', { name: /raw/i })).toBeDisabled();
   });
 
-  it('renders troubleshooting help in the overview section', () => {
+  it('does not render troubleshooting help in the overview section', () => {
     renderTaskDetails({ ...fixtureWithOverviewMessages });
 
-    expect(screen.getByText(/troubleshooting/i)).toBeInTheDocument();
-    expect(screen.getByText('See logs')).toBeInTheDocument();
+    expect(screen.queryByText(/troubleshooting/i)).not.toBeInTheDocument();
+    expect(screen.queryByText('See logs')).not.toBeInTheDocument();
   });
 
   it('renders raw output when the Raw tab is selected', async () => {
