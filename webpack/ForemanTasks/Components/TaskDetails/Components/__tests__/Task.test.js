@@ -26,7 +26,8 @@ describe('Task', () => {
     );
 
     expect(screen.getByText('Refresh hosts')).toBeInTheDocument();
-    expect(screen.getByText(/result:/i)).toBeInTheDocument();
+    expect(screen.getByText('Label')).toBeInTheDocument();
+    expect(screen.getByText('Execution type')).toBeInTheDocument();
     expect(
       screen.queryByRole('button', { name: /cancel/i })
     ).not.toBeInTheDocument();
