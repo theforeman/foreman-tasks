@@ -156,4 +156,64 @@ describe('TaskInfo', () => {
       screen.getByText(durationInWords(startedAt, endedAt).text)
     ).toBeInTheDocument();
   });
+
+  it('shows start before deadline when startBefore is set', async () => {
+    render(
+      <TaskInfo
+        id="tid"
+        state="stopped"
+        startAt="2020-01-01"
+        startBefore="2020-01-05"
+      />
+    );
+
+    await userEvent.click(
+      screen.getByRole('button', { name: /show more details/i })
+    );
+
+    expect(screen.getByText('2020-01-01')).toBeInTheDocument();
+    expect(screen.getByText(/before/i)).toBeInTheDocument();
+    expect(screen.getByText('2020-01-05')).toBeInTheDocument();
+  });
+
+  it('does not show start before text when startBefore is missing', async () => {
+    render(<TaskInfo id="tid" state="stopped" startAt="2020-01-01" />);
+
+    await userEvent.click(
+      screen.getByRole('button', { name: /show more details/i })
+    );
+
+    expect(screen.getByText('2020-01-01')).toBeInTheDocument();
+    expect(screen.queryByText(/before/i)).not.toBeInTheDocument();
+  });
+
+  it('shows troubleshooting help when expanded and help is provided', async () => {
+    render(
+      <TaskInfo
+        id="tid"
+        state="paused"
+        help="Investigate the error and <a href='/docs'>troubleshooting documentation</a>."
+      />
+    );
+
+    await userEvent.click(
+      screen.getByRole('button', { name: /show more details/i })
+    );
+
+    expect(screen.getByText('Troubleshooting')).toBeInTheDocument();
+    expect(screen.getByText(/Investigate the error/i)).toBeInTheDocument();
+    expect(
+      screen.getByRole('link', { name: 'troubleshooting documentation' })
+    ).toHaveAttribute('href', '/docs');
+  });
+
+  it('does not show troubleshooting help when help is empty', async () => {
+    render(<TaskInfo id="tid" state="paused" help="" />);
+
+    await userEvent.click(
+      screen.getByRole('button', { name: /show more details/i })
+    );
+
+    expect(screen.queryByText('Troubleshooting')).not.toBeInTheDocument();
+  });
 });

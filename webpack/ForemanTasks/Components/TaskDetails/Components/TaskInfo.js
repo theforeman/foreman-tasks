@@ -46,8 +46,11 @@ const progressVariant = result => {
   }
 };
 
-const MetadataField = ({ title, value, className, labelOuiaId }) => (
-  <GridItem xl={2} lg={4} md={6} sm={12} className={className}>
+const MetadataField = ({ title, value, className, labelOuiaId, span }) => (
+  <GridItem
+    {...(span ? { span } : { xl: 2, lg: 4, md: 6, sm: 12 })}
+    className={className}
+  >
     <Flex
       direction={{ default: 'column' }}
       spaceItems={{ default: 'spaceItemsXs' }}
@@ -67,10 +70,12 @@ MetadataField.propTypes = {
   value: PropTypes.node.isRequired,
   className: PropTypes.string,
   labelOuiaId: PropTypes.string.isRequired,
+  span: PropTypes.number,
 };
 
 MetadataField.defaultProps = {
   className: undefined,
+  span: undefined,
 };
 
 const copyableText = text =>
@@ -96,7 +101,9 @@ const TaskInfo = props => {
     result,
     startAt,
     startedAt,
+    startBefore,
     state,
+    help,
     progress,
     username,
     usernamePath,
@@ -188,7 +195,21 @@ const TaskInfo = props => {
               labelOuiaId="task-info-metadata-start-at-label"
               title={__('Start at')}
               value={
-                <RelativeDateTime defaultValue={__('N/A')} date={startAt} />
+                <Flex direction={{ default: 'column' }}>
+                  <FlexItem>
+                    <RelativeDateTime defaultValue={__('N/A')} date={startAt} />
+                  </FlexItem>
+                  {startBefore && (
+                    <FlexItem>
+                      <span>({__('before')} </span>
+                      <RelativeDateTime
+                        defaultValue={__('N/A')}
+                        date={startBefore}
+                      />
+                      <span>)</span>
+                    </FlexItem>
+                  )}
+                </Flex>
               }
             />
             <MetadataField
@@ -203,6 +224,14 @@ const TaskInfo = props => {
               title={__('External Id')}
               value={copyableText(externalId)}
             />
+            {help && (
+              <MetadataField
+                labelOuiaId="task-info-metadata-help-text-label"
+                title={__('Troubleshooting')}
+                span={12}
+                value={<p dangerouslySetInnerHTML={{ __html: help }} />}
+              />
+            )}
           </Grid>
         </ExpandableSection>
       </GridItem>
@@ -261,6 +290,7 @@ TaskInfo.propTypes = {
   startBefore: PropTypes.string,
   startedAt: PropTypes.string,
   state: PropTypes.string,
+  help: PropTypes.string,
   progress: PropTypes.number,
   username: PropTypes.string,
   usernamePath: PropTypes.string,
@@ -277,6 +307,7 @@ TaskInfo.defaultProps = {
   startBefore: '',
   startedAt: '',
   state: '',
+  help: '',
   progress: 0,
   username: '',
   usernamePath: '',
