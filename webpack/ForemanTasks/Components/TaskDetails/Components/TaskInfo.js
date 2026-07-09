@@ -15,6 +15,7 @@ import {
   Text,
   TextVariants,
 } from '@patternfly/react-core';
+import capitalize from 'lodash/capitalize';
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
 import RelativeDateTime from 'foremanReact/components/common/dates/RelativeDateTime';
 
@@ -114,7 +115,9 @@ const TaskInfo = props => {
   const contentId = `${baseId}-more-details-content`;
   const toggleId = `${baseId}-more-details-toggle`;
 
-  const usernameHref = parseUsernameLinkHref(usernamePath);
+  const usernameHref = parseUsernameLinkHref(usernamePath)?.startsWith('/')
+    ? parseUsernameLinkHref(usernamePath)
+    : null;
   const triggeredBy = usernameHref ? (
     <a href={usernameHref}>{username}</a>
   ) : (
@@ -138,7 +141,7 @@ const TaskInfo = props => {
       <MetadataField
         labelOuiaId="task-info-metadata-state-label"
         title={__('State')}
-        value={state || __('N/A')}
+        value={capitalize(state) || __('N/A')}
       />
       <MetadataField
         labelOuiaId="task-info-metadata-started-at-label"
@@ -249,8 +252,7 @@ const TaskInfo = props => {
                     component={TextVariants.p}
                     ouiaId="task-info-running-state-summary"
                   >
-                    <strong>{`${__('State')}: `}</strong>
-                    {state}
+                    {capitalize(state)}
                   </Text>
                 </SplitItem>
                 <SplitItem>
@@ -258,7 +260,7 @@ const TaskInfo = props => {
                     component={TextVariants.p}
                     ouiaId="task-info-running-progress-complete-text"
                   >
-                    {sprintf(__('%s%% %s'), progress, __('Complete'))}
+                    {sprintf(__('%s%% Complete'), progress)}
                   </Text>
                 </SplitItem>
               </Split>
@@ -267,7 +269,7 @@ const TaskInfo = props => {
               <Progress
                 value={progress}
                 max={100}
-                aria-label={sprintf(__('%s%% %s'), progress, __('Complete'))}
+                aria-label={sprintf(__('%s%% Complete'), progress)}
                 measureLocation="outside"
                 {...(progVariant ? { variant: progVariant } : {})}
               />

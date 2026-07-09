@@ -88,7 +88,8 @@ describe('TaskInfo', () => {
     ).toBeInTheDocument();
     expect(screen.getByText('ext-42')).toBeInTheDocument();
     expect(screen.getByText(/^Error$/)).toBeInTheDocument();
-    expect(screen.getAllByText(/^paused$/).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText(/^Paused$/).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText('1% Complete')).toBeInTheDocument();
   });
 
   it('reports delayed execution type when startAt and startedAt differ', async () => {
