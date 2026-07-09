@@ -31,7 +31,7 @@ const formatResultLabel = result => {
     return __('N/A');
   }
 
-  return result.charAt(0).toUpperCase() + result.slice(1).toLowerCase();
+  return capitalize(result);
 };
 
 const progressVariant = result => {
