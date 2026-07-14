@@ -5,7 +5,7 @@ import {
   selectAPIError as selectAPIErrorByKey,
 } from 'foremanReact/redux/API/APISelectors';
 import { selectDoesIntervalExist } from 'foremanReact/redux/middlewares/IntervalMiddleware/IntervalSelectors';
-import { STATUS } from 'foremanReact/constants';
+import { STATUS, PERCENT_MULTIPLIER } from 'foremanReact/constants';
 import { selectForemanTasks } from '../../ForemanTasksSelectors';
 import { FOREMAN_TASK_DETAILS } from './TaskDetailsConstants';
 
@@ -41,7 +41,7 @@ export const selectCancellable = state =>
 
 export const selectProgress = state =>
   selectTaskDetailsResponse(state).progress
-    ? Math.trunc(selectTaskDetailsResponse(state).progress * 100)
+    ? Math.trunc(selectTaskDetailsResponse(state).progress * PERCENT_MULTIPLIER)
     : 0;
 
 export const selectUsername = state =>

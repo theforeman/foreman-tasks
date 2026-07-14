@@ -17,6 +17,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 
+const DESTROY_DELAY_MS = 1000;
+
 let c3;
 
 class C3Chart extends React.Component {
@@ -44,7 +46,7 @@ class C3Chart extends React.Component {
       // Delaying the destroy a bit seems to resolve the issue.
       // The chart API methods are already bind explicitly, therefore we don't need
       // any special handling when passing the function.
-      setTimeout(this.chart.destroy, 1000);
+      setTimeout(this.chart.destroy, DESTROY_DELAY_MS);
       this.chart = null;
     } catch (err) {
       throw new Error('Internal C3 error', err);

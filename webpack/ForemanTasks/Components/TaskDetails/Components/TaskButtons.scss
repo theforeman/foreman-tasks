@@ -9,7 +9,7 @@
     -ms-transform-origin: 50% 50%; /* IE 9 */
   }
 
-  @-moz-keyframes spin {
+  @keyframes spin {
     from {
       -moz-transform: rotate(0deg);
     }
@@ -19,7 +19,7 @@
     }
   }
 
-  @-webkit-keyframes spin {
+  @keyframes spin {
     from {
       -webkit-transform: rotate(0deg);
     }

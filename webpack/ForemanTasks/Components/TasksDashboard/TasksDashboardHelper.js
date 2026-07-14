@@ -1,6 +1,11 @@
 import { getURIQuery } from 'foremanReact/common/helpers';
 
 import {
+  HOURS_PER_HALF_DAY,
+  HOURS_PER_DAY,
+  DAYS_PER_WEEK,
+} from 'foremanReact/constants';
+import {
   TASKS_DASHBOARD_AVAILABLE_TIMES,
   TASKS_DASHBOARD_QUERY_KEYS_TEXT,
   TASKS_DASHBOARD_QUERY_VALUES_TEXT,
@@ -16,13 +21,13 @@ export const getQueryValueText = value =>
 export const timeToHoursNumber = time => {
   switch (time) {
     case TASKS_DASHBOARD_AVAILABLE_TIMES.H12:
-      return 12;
+      return HOURS_PER_HALF_DAY;
     case TASKS_DASHBOARD_AVAILABLE_TIMES.H24:
-      return 24;
+      return HOURS_PER_DAY;
     case TASKS_DASHBOARD_AVAILABLE_TIMES.WEEK:
-      return 24 * 7;
+      return HOURS_PER_DAY * DAYS_PER_WEEK;
     default:
-      return 24;
+      return HOURS_PER_DAY;
   }
 };
 

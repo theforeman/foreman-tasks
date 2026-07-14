@@ -6,7 +6,11 @@ import {
   stopInterval,
 } from 'foremanReact/redux/middlewares/IntervalMiddleware';
 import { foremanTasksApiPath, foremanTasksPath } from '../common/urlHelpers';
-import { TASK_STEP_CANCEL, FOREMAN_TASK_DETAILS } from './TaskDetailsConstants';
+import {
+  TASK_STEP_CANCEL,
+  FOREMAN_TASK_DETAILS,
+  TASK_RELOAD_INTERVAL_MS,
+} from './TaskDetailsConstants';
 import {
   errorToastData,
   infoToastData,
@@ -30,7 +34,7 @@ export const taskReloadStart = id => dispatch => {
           dispatch(stopInterval(FOREMAN_TASK_DETAILS));
         },
       }),
-      5000
+      TASK_RELOAD_INTERVAL_MS
     )
   );
 };
