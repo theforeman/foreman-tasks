@@ -1,6 +1,7 @@
 import { translate as __, documentLocale } from 'foremanReact/common/I18n';
 import { isoCompatibleDate } from 'foremanReact/common/helpers';
 import humanizeDuration from 'humanize-duration';
+import { MILLISECONDS_IN_SECOND } from '../TaskDetailsConstants';
 
 export const durationInWords = (
   start,
@@ -16,7 +17,9 @@ export const durationInWords = (
       language: selectedLocale,
       fallbacks: ['en'],
     }),
-    tooltip: `${numberWithDelimiter((finish - start) / 1000)} ${__('seconds')}`,
+    tooltip: `${numberWithDelimiter(
+      (finish - start) / MILLISECONDS_IN_SECOND
+    )} ${__('seconds')}`,
   };
 };
 

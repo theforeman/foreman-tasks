@@ -18,3 +18,5 @@ export const FORCE_UNLOCK_MODAL = 'force_unlock';
 export const CANCEL_SELECTED_MODAL = 'cancelSelectedConfirmModal';
 export const RESUME_SELECTED_MODAL = 'resumeSelectedConfirmModal';
 export const FORCE_UNLOCK_SELECTED_MODAL = 'forceUnlockSelectedConfirmModal';
+
+export const MILLISECONDS_IN_SECOND = 1000;
