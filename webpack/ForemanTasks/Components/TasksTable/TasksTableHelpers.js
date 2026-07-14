@@ -2,6 +2,7 @@ import URI from 'urijs';
 import { translate as __, documentLocale } from 'foremanReact/common/I18n';
 import humanizeDuration from 'humanize-duration';
 import { isoCompatibleDate } from 'foremanReact/common/helpers';
+import { MS_PER_SECOND } from 'foremanReact/constants';
 import { convertDashboardQuery } from '../TaskActions/TaskActionHelpers';
 
 export const updateURlQuery = (query, history) => {
@@ -51,7 +52,7 @@ export const getDuration = (start, finish) => {
   const duration = finishDate - startDate;
   return {
     text:
-      duration > 0 && duration < 1000
+      duration > 0 && duration < MS_PER_SECOND
         ? __('Less than a second')
         : humanizeDuration(duration, dateOptions),
   };

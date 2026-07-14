@@ -1,6 +1,11 @@
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
 import { addToast } from 'foremanReact/components/ToastsList';
 import { getURIQuery } from 'foremanReact/common/helpers';
+import {
+  MINUTES_PER_HOUR,
+  SECONDS_PER_MINUTE,
+  MS_PER_SECOND,
+} from 'foremanReact/constants';
 import { TASKS_DASHBOARD_JS_QUERY_MODES } from '../TasksDashboard/TasksDashboardConstants';
 import { timeToHoursNumber } from '../TasksDashboard/TasksDashboardHelper';
 import {
@@ -25,7 +30,9 @@ export const convertDashboardQuery = () => {
   } = getTasksQuery();
 
   const hours = timeToHoursNumber(timeHorizon);
-  const timestamp = new Date(new Date() - hours * 60 * 60 * 1000);
+  const timestamp = new Date(
+    new Date() - hours * MINUTES_PER_HOUR * SECONDS_PER_MINUTE * MS_PER_SECOND
+  );
   let dashboardTime = '';
   const stateQuery = state ? `state=${state}` : '';
   let resultQuery = '';
