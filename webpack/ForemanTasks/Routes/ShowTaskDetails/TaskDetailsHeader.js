@@ -33,7 +33,7 @@ const TitleComponent = ({ action, state, result }) => (
         {action || __('Task Details')}
       </Title>
     </FlexItem>
-    <FlexItem>{taskResultIconEl(state, result)}</FlexItem>
+    <FlexItem>{taskResultIconEl(state, result, true)}</FlexItem>
   </Flex>
 );
 
