@@ -14,18 +14,23 @@ const ExecutionDetails = ({
   failedSteps,
   result,
 }) => {
-  const showingRunningSteps =
-    state === 'running' ||
-    state === 'pending' ||
-    state === 'paused' ||
-    runningSteps.length > 0;
+  const hasFailedSteps = failedSteps.length > 0;
+  const hasRunningSteps = runningSteps.length > 0;
+  const isActiveExecutionState =
+    state === 'running' || state === 'pending' || state === 'paused';
+
+  // Prefer Errors when failed steps exist (e.g. paused-after-error). Only fall
+  // back to the RunningSteps empty state for active tasks with no failures.
+  const showRunningSteps =
+    hasRunningSteps || (isActiveExecutionState && !hasFailedSteps);
+  const showErrors = hasFailedSteps || !showRunningSteps;
 
   return (
     <div
       id="execution-details-panel"
       data-ouia-component-id="execution-details-panel"
     >
-      {showingRunningSteps ? (
+      {showRunningSteps && (
         <RunningSteps
           executionPlan={executionPlan}
           result={result}
@@ -35,7 +40,8 @@ const ExecutionDetails = ({
           taskReload={taskReload}
           taskReloadStart={taskReloadStart}
         />
-      ) : (
+      )}
+      {showErrors && (
         <Errors executionPlan={executionPlan} failedSteps={failedSteps} />
       )}
     </div>
