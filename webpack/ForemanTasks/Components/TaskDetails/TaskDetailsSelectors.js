@@ -7,7 +7,10 @@ import {
 import { selectDoesIntervalExist } from 'foremanReact/redux/middlewares/IntervalMiddleware/IntervalSelectors';
 import { STATUS } from 'foremanReact/constants';
 import { selectForemanTasks } from '../../ForemanTasksSelectors';
-import { FOREMAN_TASK_DETAILS } from './TaskDetailsConstants';
+import {
+  FOREMAN_TASK_DETAILS,
+  PERCENTAGE_MULTIPLIER,
+} from './TaskDetailsConstants';
 
 export const selectTaskDetails = state =>
   selectForemanTasks(state).taskDetails || {};
@@ -41,7 +44,9 @@ export const selectCancellable = state =>
 
 export const selectProgress = state =>
   selectTaskDetailsResponse(state).progress
-    ? Math.trunc(selectTaskDetailsResponse(state).progress * 100)
+    ? Math.trunc(
+        selectTaskDetailsResponse(state).progress * PERCENTAGE_MULTIPLIER
+      )
     : 0;
 
 export const selectUsername = state =>

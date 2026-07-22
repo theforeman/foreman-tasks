@@ -8,6 +8,11 @@ import {
   errorToastData,
   warningToastData,
 } from '../common/ToastsHelpers';
+import {
+  MINUTES_IN_HOUR,
+  SECONDS_IN_MINUTE,
+  MILLISECONDS_IN_SECOND,
+} from './TaskActionsConstants';
 
 const getTasksQuery = () => {
   const url = window.location.pathname + window.location.search;
@@ -25,7 +30,10 @@ export const convertDashboardQuery = () => {
   } = getTasksQuery();
 
   const hours = timeToHoursNumber(timeHorizon);
-  const timestamp = new Date(new Date() - hours * 60 * 60 * 1000);
+  const timestamp = new Date(
+    new Date() -
+      hours * MINUTES_IN_HOUR * SECONDS_IN_MINUTE * MILLISECONDS_IN_SECOND
+  );
   let dashboardTime = '';
   const stateQuery = state ? `state=${state}` : '';
   let resultQuery = '';

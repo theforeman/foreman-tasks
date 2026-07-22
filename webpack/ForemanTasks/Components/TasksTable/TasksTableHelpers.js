@@ -3,6 +3,7 @@ import { translate as __, documentLocale } from 'foremanReact/common/I18n';
 import humanizeDuration from 'humanize-duration';
 import { isoCompatibleDate } from 'foremanReact/common/helpers';
 import { convertDashboardQuery } from '../TaskActions/TaskActionHelpers';
+import { MILLISECONDS_IN_SECOND } from './TasksTableConstants';
 
 export const updateURlQuery = (query, history) => {
   const uri = new URI(history.location.pathname + history.location.search);
@@ -51,7 +52,7 @@ export const getDuration = (start, finish) => {
   const duration = finishDate - startDate;
   return {
     text:
-      duration > 0 && duration < 1000
+      duration > 0 && duration < MILLISECONDS_IN_SECOND
         ? __('Less than a second')
         : humanizeDuration(duration, dateOptions),
   };

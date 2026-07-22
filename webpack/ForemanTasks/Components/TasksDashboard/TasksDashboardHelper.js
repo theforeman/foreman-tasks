@@ -5,6 +5,9 @@ import {
   TASKS_DASHBOARD_QUERY_KEYS_TEXT,
   TASKS_DASHBOARD_QUERY_VALUES_TEXT,
   TASKS_DASHBOARD_JS_QUERY_MODES,
+  HOURS_12,
+  HOURS_IN_DAY,
+  DAYS_IN_WEEK,
 } from './TasksDashboardConstants';
 import { updateURlQuery } from '../TasksTable/TasksTableHelpers';
 
@@ -16,13 +19,13 @@ export const getQueryValueText = value =>
 export const timeToHoursNumber = time => {
   switch (time) {
     case TASKS_DASHBOARD_AVAILABLE_TIMES.H12:
-      return 12;
+      return HOURS_12;
     case TASKS_DASHBOARD_AVAILABLE_TIMES.H24:
-      return 24;
+      return HOURS_IN_DAY;
     case TASKS_DASHBOARD_AVAILABLE_TIMES.WEEK:
-      return 24 * 7;
+      return HOURS_IN_DAY * DAYS_IN_WEEK;
     default:
-      return 24;
+      return HOURS_IN_DAY;
   }
 };
 

@@ -30,6 +30,10 @@ export const TASKS_DASHBOARD_AVAILABLE_TIMES = {
   WEEK: 'WEEK',
 };
 
+export const HOURS_12 = 12;
+export const HOURS_IN_DAY = 24;
+export const DAYS_IN_WEEK = 7;
+
 export const TASKS_DASHBOARD_QUERY_KEYS_TEXT = {
   state: __('state'),
   result: __('result'),
