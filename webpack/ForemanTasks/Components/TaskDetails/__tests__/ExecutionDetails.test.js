@@ -28,9 +28,13 @@ describe('ExecutionDetails', () => {
     );
 
     expect(
-      document.querySelector('[data-ouia-component-id="execution-details-panel"]')
+      document.querySelector(
+        '[data-ouia-component-id="execution-details-panel"]'
+      )
     ).toBeInTheDocument();
-    expect(document.getElementById('execution-details-panel')).toBeInTheDocument();
+    expect(
+      document.getElementById('execution-details-panel')
+    ).toBeInTheDocument();
   });
 
   it('shows Errors pane when stopped with no running steps', () => {
@@ -44,7 +48,9 @@ describe('ExecutionDetails', () => {
       />
     );
 
-    expect(screen.getByRole('heading', { name: /^no errors found$/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: /^no errors found$/i })
+    ).toBeInTheDocument();
     expect(
       screen.getByText(/the task finished with no errors or warnings/i)
     ).toBeInTheDocument();
@@ -127,9 +133,7 @@ describe('ExecutionDetails', () => {
         name: /action actions::katello::eventqueue::monitor is already active/i,
       })
     ).toBeInTheDocument();
-    expect(
-      screen.getByLabelText(/failed task errors/i)
-    ).toBeInTheDocument();
+    expect(screen.getByLabelText(/failed task errors/i)).toBeInTheDocument();
     expect(screen.getByText('Exception:')).toBeInTheDocument();
   });
 
@@ -190,5 +194,48 @@ describe('ExecutionDetails', () => {
       screen.getByRole('heading', { name: 'Warning alert: Running step 1' })
     ).toBeInTheDocument();
     expect(screen.getByText('paused')).toBeInTheDocument();
+  });
+
+  it('shows Errors when state is paused with failed steps', () => {
+    render(
+      <ExecutionDetails
+        {...rtlBaseProps}
+        {...fixtureFailedExecutionDetail}
+        state="paused"
+        executionPlan={{ state: 'paused', cancellable: false }}
+        runningSteps={[]}
+      />
+    );
+
+    expect(
+      screen.getByRole('tab', {
+        name: /action actions::katello::eventqueue::monitor is already active/i,
+      })
+    ).toBeInTheDocument();
+    expect(screen.getByLabelText(/failed task errors/i)).toBeInTheDocument();
+    expect(screen.getByText('Exception:')).toBeInTheDocument();
+    expect(screen.queryByText(/no running steps/i)).not.toBeInTheDocument();
+  });
+
+  it('shows Errors and RunningSteps when paused with both failed and running steps', () => {
+    render(
+      <ExecutionDetails
+        {...rtlBaseProps}
+        {...fixtureFailedExecutionDetail}
+        state="paused"
+        executionPlan={{ state: 'paused', cancellable: false }}
+        runningSteps={[
+          {
+            ...fixtureRunningExecutionDetail.runningSteps[0],
+            state: 'suspended',
+          },
+        ]}
+      />
+    );
+
+    expect(
+      screen.getByRole('heading', { name: 'Warning alert: Running step 1' })
+    ).toBeInTheDocument();
+    expect(screen.getByLabelText(/failed task errors/i)).toBeInTheDocument();
   });
 });
