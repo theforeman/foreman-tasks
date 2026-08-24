@@ -79,12 +79,13 @@ MetadataField.defaultProps = {
   span: undefined,
 };
 
-const copyableText = text =>
+const copyableText = (text, ouiaId) =>
   text ? (
     <ClipboardCopy
       variant="inline-compact"
       hoverTip={__('Copy')}
       clickTip={__('Copied')}
+      ouiaId={ouiaId}
     >
       {text}
     </ClipboardCopy>
@@ -161,7 +162,7 @@ const TaskInfo = props => {
       <MetadataField
         labelOuiaId="task-info-metadata-id-label"
         title={__('Id')}
-        value={copyableText(id)}
+        value={copyableText(id, 'task-info-id-copy')}
       />
 
       <GridItem span={12}>
@@ -225,7 +226,7 @@ const TaskInfo = props => {
             <MetadataField
               labelOuiaId="task-info-metadata-external-id-label"
               title={__('External Id')}
-              value={copyableText(externalId)}
+              value={copyableText(externalId, 'task-info-ext-id-copy')}
             />
             {help && (
               <MetadataField
