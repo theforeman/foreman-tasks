@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman-tasks 12.0.0",
+        "Project-Id-Version": "foreman-tasks 13.2.2",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-12 14:04+0000",
         "Last-Translator": "Ettore Atalan <atalanttore@googlemail.com>, 2016-2017,2023",
@@ -25,6 +25,9 @@
       ],
       "%s is not valid format of cron line": [
         "%s ist ungültiges Cron-Zeilen-Format"
+      ],
+      "%s%% Complete": [
+        ""
       ],
       "%{count} tasks are in running or paused state for more than a day": [
         ""
@@ -71,9 +74,6 @@
       "Active or disabled recurring logic with purpose %s already exists": [
         ""
       ],
-      "All %s tasks are selected.": [
-        ""
-      ],
       "All proxies with the required feature are unavailable at the moment": [
         "Alle Proxys mit dem genannten Feature sind nicht verfügbar "
       ],
@@ -94,9 +94,6 @@
       ],
       "Backtrace": [
         "Ablaufverfolgung"
-      ],
-      "Blocks": [
-        ""
       ],
       "Bulk action": [
         "Massenaktion"
@@ -158,17 +155,17 @@
       "Clear Cancelled": [
         "Clear abgebrochen "
       ],
-      "Complete": [
-        "Vollständig"
-      ],
       "Conflicts with tasks:": [
         "Konflikt mit Aufgaben:"
       ],
+      "Copied": [
+        ""
+      ],
+      "Copy": [
+        ""
+      ],
       "Could not cancel step.": [
         "Schritt konnte nicht abgebrochen werden."
-      ],
-      "Could not receive data: %s": [
-        ""
       ],
       "Cron line": [
         "Cron-Zeile"
@@ -198,9 +195,6 @@
         ""
       ],
       "Dependencies": [
-        ""
-      ],
-      "Depends on": [
         ""
       ],
       "Details": [
@@ -233,17 +227,17 @@
       "Enable the dynflow console (/foreman_tasks/dynflow) for debugging": [
         "Dynflow-Konsole (/foreman_tasks/dynflow) für die Fehlerdiagnose aktivieren"
       ],
+      "Ended at": [
+        ""
+      ],
       "Ends": [
         "Ende"
       ],
       "Ends at": [
         "Endet um"
       ],
-      "Errors": [
-        "Fehler"
-      ],
-      "Errors:": [
-        "Fehler:"
+      "Error": [
+        ""
       ],
       "Event delivered by request %{request_id}": [
         "Ereignis geliefert auf Anfrage %{request_id}"
@@ -251,17 +245,29 @@
       "Exception": [
         "Ausnahme"
       ],
+      "Exclusive resources": [
+        ""
+      ],
       "Execute now": [
         "Jetzt ausführen"
       ],
+      "Execution details": [
+        ""
+      ],
       "Execution plan data not available ": [
         "Ausführungsplandaten nicht verfügbar"
+      ],
+      "Execution type": [
+        ""
       ],
       "Export All": [
         "Alle exportieren"
       ],
       "External Id": [
         "Externe-ID"
+      ],
+      "Failed task errors": [
+        ""
       ],
       "Failed to check on tasks on proxy at %{url}: %{exception}": [
         "Fehler bei der Prüfung auf Jobs auf dem Proxy %{url}: %{exception}"
@@ -383,14 +389,17 @@
       "No": [
         "Nein"
       ],
-      "No Tasks": [
-        "Keine Aufgaben"
-      ],
-      "No errors": [
-        "Keine Fehler"
+      "No errors found": [
+        ""
       ],
       "No proxy defined for execution": [
         "Kein Proxy zur Ausführung angegeben"
+      ],
+      "No resources": [
+        ""
+      ],
+      "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes.": [
+        ""
       ],
       "No running steps": [
         "Keine laufenden Schritte"
@@ -403,6 +412,9 @@
       ],
       "No. of Tasks": [
         "Nr. der Aufgaben"
+      ],
+      "Non-exclusive resources": [
+        ""
       ],
       "None": [
         ""
@@ -425,11 +437,14 @@
       "On": [
         "Am"
       ],
-      "Operation": [
-        "Vorgang"
+      "Only this task can access the resource. Other tasks must wait until this process completes.": [
+        ""
       ],
       "Other includes all stopped tasks that are cancelled or pending": [
         "Sonstige umfasst alle angehaltenen Aufgaben, die abgebrochen oder ausstehend sind"
+      ],
+      "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others.": [
+        ""
       ],
       "Other:": [
         "Sonstiges:"
@@ -437,14 +452,14 @@
       "Output": [
         "Ausgabe"
       ],
-      "Output:": [
-        "Ausgabe:"
-      ],
       "Parent task": [
         "Übergeordnete Aufgabe"
       ],
       "Paused": [
         "Pausiert"
+      ],
+      "Planned task": [
+        ""
       ],
       "Please inspect their state, fix their errors and resume them.": [
         "bitte überprüfen Sie den Status, beheben Sie die Fehler und setzen Sie die Aufgaben dann fort."
@@ -551,8 +566,8 @@
       "Running": [
         "Läuft"
       ],
-      "Running Steps": [
-        "Laufende Schritte "
+      "Running step %s": [
+        ""
       ],
       "Sat": [
         "Sa"
@@ -572,12 +587,6 @@
       "See %{link} for more details on how to resolve the issue": [
         "Weitere Informationen zur Behebung des Problems finden Sie unter %{link}."
       ],
-      "Select all {count} tasks": [
-        ""
-      ],
-      "Select row": [
-        "Zeile auswählen"
-      ],
       "Send data to the task from external executor (such as smart_proxy_dynflow)": [
         "Daten von externem Executor (wie smart_proxy_dynflow) an Aufgabe senden"
       ],
@@ -586,6 +595,12 @@
       ],
       "Setting is off": [
         "Einstellung ist aus"
+      ],
+      "Show less details": [
+        ""
+      ],
+      "Show more details": [
+        ""
       ],
       "Show recurring logic details": [
         "Details der Wiederholungslogik anzeigen"
@@ -635,20 +650,17 @@
       "Sub tasks": [
         "Unteraufgabe"
       ],
-      "Sub tasks of %s": [
-        "Unteraufgaben von %s."
-      ],
       "Subscribe": [
         "Abonnieren"
+      ],
+      "Success": [
+        ""
       ],
       "Sun": [
         "So"
       ],
       "Sync task timeout": [
         "Zeitüberschreitung für Synchronisierungsaufgabe"
-      ],
-      "Task": [
-        "Aufgabe"
       ],
       "Task Details": [
         "Aufgabendetails"
@@ -659,13 +671,22 @@
       "Task aborted: the task might be still running on the proxy": [
         "Job abgebrochen: Der Job könnte noch auf dem Proxy laufen"
       ],
+      "Task actions": [
+        ""
+      ],
+      "Task blocks": [
+        ""
+      ],
       "Task cannot be canceled": [
         "Aufgabe kann nicht abgebrochen werden"
       ],
       "Task count": [
         "Anzahl der Aufgaben"
       ],
-      "Task dependencies": [
+      "Task depends on": [
+        ""
+      ],
+      "Task details": [
         ""
       ],
       "Task group common": [
@@ -689,11 +710,14 @@
       "Tasks troubleshooting URL": [
         "URL zur Fehlerbehebung bei Aufgaben"
       ],
+      "Temporarily suspended step(s)": [
+        ""
+      ],
       "The ID of the step inside the execution plan to send the event to": [
         "Die ID des jeweiligen Schrittes im Ausführungsplan, an die das Ereignis gesendet werden soll"
       ],
-      "The recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task.": [
-        "Der empfohlene Ansatz besteht darin, die folgenden Fehlermeldungen und auf der Registerkarte \\\"Fehler\\\" zu untersuchen, die Hauptursache des Problems zu beheben und die Aufgabe fortzusetzen."
+      "The recommended approach is to investigate the error messages below and in 'Execution details' tab, address the primary cause of the issue and resume the task.": [
+        ""
       ],
       "The recurring logic was disabled.": [
         "Die wiederkehrende Logik wurde deaktiviert."
@@ -707,11 +731,17 @@
       "The targets are of different types": [
         "Die Ziele haben verschiedene Typen"
       ],
-      "The task cannot be aborted at the moment.": [
-        "Die Aufgabe kann im Moment nicht abgebrochen werden."
-      ],
       "The task could not be started": [
         "Die Aufgabe konnte nicht gestartet werden."
+      ],
+      "The task finished with no errors or warnings.": [
+        ""
+      ],
+      "The task has not started yet.": [
+        ""
+      ],
+      "The task is still being processed. Please wait.": [
+        ""
       ],
       "There is %{count} paused task in the system that need attention": [
         "",
@@ -719,9 +749,6 @@
       ],
       "This action will delete all cancelled recurring logics. Please note that this action can't be reversed.": [
         "Diese Aktion löscht alle abgebrochenen wiederkehrenden Logiken. Beachten Sie, dass diese Aktion nicht rückgängig gemacht werden kann."
-      ],
-      "This task may have dependencies on other tasks or may be blocking other tasks from executing. Dependencies are established through task chaining relationships.": [
-        ""
       ],
       "This will cancel %(number)s task(s), putting them in the stopped state. Are you sure?": [
         ""
@@ -753,11 +780,11 @@
       "Total": [
         "Gesamt"
       ],
+      "Triggered by": [
+        ""
+      ],
       "Troubleshooting": [
         "Fehlerbehebung"
-      ],
-      "Trying to abort the task": [
-        "Versuch des Abbruchs der Aufgabe"
       ],
       "Trying to cancel step": [
         "Versuch, Schritt abzubrechen"
@@ -777,8 +804,11 @@
       "Unable to enable mail notification to user '%s': %s": [
         ""
       ],
-      "Undo selection": [
-        "Auswahl zurücksetzen"
+      "Unknown": [
+        ""
+      ],
+      "Unknown error": [
+        ""
       ],
       "Unlimited": [
         "Unbegrenzt"
@@ -795,6 +825,9 @@
       "User search_params requires user_id to be specified": [
         "Benutzer-Suchparameter erfordert die Angabe der Benutzer-ID"
       ],
+      "Warning": [
+        ""
+      ],
       "Wed": [
         "Mi"
       ],
@@ -804,14 +837,14 @@
       "Yes": [
         "Ja"
       ],
-      "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource": [
-        ""
-      ],
       "You do not have permission": [
         "Sie haben keine Berechtigung"
       ],
       "activation key": [
         "Aktivierungsschlüssel"
+      ],
+      "before": [
+        ""
       ],
       "cannot be cancelled with force at the moment.": [
         "kann derzeit nicht mit Gewalt storniert werden."
@@ -827,6 +860,9 @@
       ],
       "error": [
         "Error"
+      ],
+      "id: %s": [
+        ""
       ],
       "is day of month (range: 1-31)": [
         "Tag des Monats (im Bereich: 1-31)"
@@ -911,6 +947,9 @@
       ],
       "system": [
         "System"
+      ],
+      "task": [
+        ""
       ],
       "task has to be cancellable": [
         "Aufgabe muss stornierbar sein"

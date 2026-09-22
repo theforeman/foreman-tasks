@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman-tasks 12.0.0",
+        "Project-Id-Version": "foreman-tasks 13.2.2",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-12 14:04+0000",
         "Last-Translator": "Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022",
@@ -25,6 +25,9 @@
       ],
       "%s is not valid format of cron line": [
         "%s cron-ის სწორ ხაზის სწორი ფორმატი არაა"
+      ],
+      "%s%% Complete": [
+        ""
       ],
       "%{count} tasks are in running or paused state for more than a day": [
         "%{count} ამოცანა დღეზე მეტია გაშვებული ან შეჩერებულია"
@@ -66,13 +69,10 @@
         "აქტიური"
       ],
       "Active Filters": [
-        ""
+        "აქტიური ფილტრები"
       ],
       "Active or disabled recurring logic with purpose %s already exists": [
         "აქტიური ან გამრთული განმეორებადი ლოგიკა დანიშნულებით %s უკვე არსებობს"
-      ],
-      "All %s tasks are selected.": [
-        "მონიშნულია ყველა %s ამოცანა."
       ],
       "All proxies with the required feature are unavailable at the moment": [
         "მოთხოვნილი ფუნქციების მქონე ყველა პროქსი ამჟამად მიუწვდომელია"
@@ -95,9 +95,6 @@
       "Backtrace": [
         "შეცდომის მიდევნება"
       ],
-      "Blocks": [
-        ""
-      ],
       "Bulk action": [
         "მასობრივი ქმედება"
       ],
@@ -108,10 +105,10 @@
         "მონიშნულის გაუქმება"
       ],
       "Cancel Selected Tasks": [
-        ""
+        "მონიშნული ამოცანების გაუქმება"
       ],
       "Cancel Task": [
-        ""
+        "ამოცანის გაუქმება"
       ],
       "Cancel enforced: the task might be still running on the proxy": [
         "გაუქმება შესრულებულია: ამოცანა შესაძლოა პროქსიზე ჯერ კიდევ გაშვებული იყოს"
@@ -158,17 +155,17 @@
       "Clear Cancelled": [
         "გაუქმებულების გასუფთავება"
       ],
-      "Complete": [
-        "დასრულებულია"
-      ],
       "Conflicts with tasks:": [
         "კონფლიქტი ამოცანებთან:"
       ],
+      "Copied": [
+        ""
+      ],
+      "Copy": [
+        ""
+      ],
       "Could not cancel step.": [
         "ბიჯის გაუქმების შეცდომა."
-      ],
-      "Could not receive data: %s": [
-        "მონაცემების მიღების შეცდომა: %s"
       ],
       "Cron line": [
         "Cron-ის სტრიქონი"
@@ -198,10 +195,7 @@
         "შეტყობინება დიდხანს გაშვებული ამოცანების შესახებ"
       ],
       "Dependencies": [
-        ""
-      ],
-      "Depends on": [
-        ""
+        "დამოკიდებულებები"
       ],
       "Details": [
         "დეტალები"
@@ -233,17 +227,17 @@
       "Enable the dynflow console (/foreman_tasks/dynflow) for debugging": [
         "გასამართად dynflow-ის კონსოლის (/foreman_tasks/dynflow) ჩართვა"
       ],
+      "Ended at": [
+        ""
+      ],
       "Ends": [
         "საბოლოო"
       ],
       "Ends at": [
         "დასრულების დრო"
       ],
-      "Errors": [
-        "შედომები"
-      ],
-      "Errors:": [
-        "შეცდომები:"
+      "Error": [
+        ""
       ],
       "Event delivered by request %{request_id}": [
         "მოვლენა მოწოდებულია მოთხოვნის მიერ: %{request_id}"
@@ -251,17 +245,29 @@
       "Exception": [
         "გამონაკლისი"
       ],
+      "Exclusive resources": [
+        ""
+      ],
       "Execute now": [
         "ახლა შესრულება"
       ],
+      "Execution details": [
+        ""
+      ],
       "Execution plan data not available ": [
         "გაშვების გეგმის მონაცემები მიუწვდომელია "
+      ],
+      "Execution type": [
+        ""
       ],
       "Export All": [
         "ყველაფრის გატანა"
       ],
       "External Id": [
         "გარე Id"
+      ],
+      "Failed task errors": [
+        ""
       ],
       "Failed to check on tasks on proxy at %{url}: %{exception}": [
         "ვერ მოხერხდა ამოცანების შემოწმება პროქსიზე %{url}: %{exception}"
@@ -285,10 +291,10 @@
         "ძალით განბლოკვა"
       ],
       "Force Unlock Selected Tasks": [
-        ""
+        "მონიშნული ამოცანების ძალით განბლოკვა"
       ],
       "Force Unlock Task": [
-        ""
+        "ამოცანის ძალით განბლოკვა"
       ],
       "Foreman Tasks": [
         "Foreman-ის ამოცანები"
@@ -324,7 +330,7 @@
         "შეყვანა"
       ],
       "Invalid URL": [
-        ""
+        "არასწორი URL"
       ],
       "Iteration limit": [
         "იტერაციის ლიმიტი"
@@ -383,14 +389,17 @@
       "No": [
         "არა"
       ],
-      "No Tasks": [
-        "ამოცანების გარეშე"
-      ],
-      "No errors": [
-        "შეცდომების გარეშე"
+      "No errors found": [
+        ""
       ],
       "No proxy defined for execution": [
         "გასაშვები პროქსი მითითებული არაა"
+      ],
+      "No resources": [
+        ""
+      ],
+      "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes.": [
+        ""
       ],
       "No running steps": [
         "გაშვებული ნაბიჯების გარეე"
@@ -404,8 +413,11 @@
       "No. of Tasks": [
         "ამოცანების რიცხვი"
       ],
-      "None": [
+      "Non-exclusive resources": [
         ""
+      ],
+      "None": [
+        "არცერტი"
       ],
       "Not all the selected tasks can be cancelled": [
         "ყველა მონიშნული ამოცანა არ გაუქმებულა"
@@ -425,11 +437,14 @@
       "On": [
         "დრო"
       ],
-      "Operation": [
-        "ოეპრაცია"
+      "Only this task can access the resource. Other tasks must wait until this process completes.": [
+        ""
       ],
       "Other includes all stopped tasks that are cancelled or pending": [
         "სხვები შეიცავს ყველა გაჩერებულ ამოცანას, რომლებიც გაუქმებულია ან მოლოდინში"
+      ],
+      "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others.": [
+        ""
       ],
       "Other:": [
         "სხვა:"
@@ -437,14 +452,14 @@
       "Output": [
         "გამოტანა"
       ],
-      "Output:": [
-        "გამოტანა:"
-      ],
       "Parent task": [
         "მშობელი ამოცანა"
       ],
       "Paused": [
         "შეჩერებულია"
+      ],
+      "Planned task": [
+        ""
       ],
       "Please inspect their state, fix their errors and resume them.": [
         "გადაამოწმეთ მათი მდგომარეობა, გაასწორეთ მათი შეცდომები და გააგრძელეთ მათი მუშაობა."
@@ -531,10 +546,10 @@
         "მონიშნულების გაუქმება"
       ],
       "Resume Selected Tasks": [
-        ""
+        "მონიშნული ამოცანების გაგრძელება"
       ],
       "Resume Task": [
-        ""
+        "ამოცანის გაგრძელება"
       ],
       "Resume all paused error tasks": [
         "ყველა შეცდომის მდგომარეობაში შეჩერებული ამოცანის გაგრძელება"
@@ -551,8 +566,8 @@
       "Running": [
         "მიმდინარეობს შესრულება"
       ],
-      "Running Steps": [
-        "გაშვებული ნაბიჯები"
+      "Running step %s": [
+        ""
       ],
       "Sat": [
         "შაბ"
@@ -572,12 +587,6 @@
       "See %{link} for more details on how to resolve the issue": [
         "ამ პრობლემის გადასაწყვეტად იხილეთ %{link}"
       ],
-      "Select all {count} tasks": [
-        "{count} ამოცანის მონიშვნა"
-      ],
-      "Select row": [
-        "აირჩიეთ მწკრივი"
-      ],
       "Send data to the task from external executor (such as smart_proxy_dynflow)": [
         "ამოცანის გაგზავნა გარე შემსრულებლიდან (როგორიცაა smart_proxy_dynflow)"
       ],
@@ -586,6 +595,12 @@
       ],
       "Setting is off": [
         "პარამეტრი გამორთულია"
+      ],
+      "Show less details": [
+        ""
+      ],
+      "Show more details": [
+        ""
       ],
       "Show recurring logic details": [
         "განმეორებადი ლოგიკის დეტალების ჩვენება"
@@ -630,25 +645,22 @@
         "გაჩერებულია"
       ],
       "Stopped tasks by result": [
-        ""
+        "შედეგად გაჩერებული ამოცანები"
       ],
       "Sub tasks": [
         "ქვეამოცანები"
       ],
-      "Sub tasks of %s": [
-        "%s-ის ქვეამოცანები"
-      ],
       "Subscribe": [
         "ხელმოწერა"
+      ],
+      "Success": [
+        ""
       ],
       "Sun": [
         "მზე"
       ],
       "Sync task timeout": [
         "ამოცანის სინქის ვადა"
-      ],
-      "Task": [
-        "დავალება"
       ],
       "Task Details": [
         "ამოცანის დეტალები"
@@ -659,13 +671,22 @@
       "Task aborted: the task might be still running on the proxy": [
         "ამოცანა გაუქმდა: ამოცანა პროქსიზე შესაძლოა ჯერ კიდევ გაშვებული იყოს"
       ],
+      "Task actions": [
+        ""
+      ],
+      "Task blocks": [
+        ""
+      ],
       "Task cannot be canceled": [
         "ამოცანის გაუქმება შეუძლებელია"
       ],
       "Task count": [
         "ამოცანების რიცხვი"
       ],
-      "Task dependencies": [
+      "Task depends on": [
+        ""
+      ],
+      "Task details": [
         ""
       ],
       "Task group common": [
@@ -689,11 +710,14 @@
       "Tasks troubleshooting URL": [
         "ამოცანის პრობლემების გადაწყვეტის URL"
       ],
+      "Temporarily suspended step(s)": [
+        ""
+      ],
       "The ID of the step inside the execution plan to send the event to": [
         "მოვლენის გაგზავნის შესრულების გეგმის საფეხურის ID"
       ],
-      "The recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task.": [
-        "რეკომენდირებული მიდგომაა შეცდომის შეტყობინებების გამოკვლევა და „შეცდომების“ ჩანართში, პრობლემის ძირითადი მიზეზის აღმოფხვრა და ამოცანა გაგრძელება."
+      "The recommended approach is to investigate the error messages below and in 'Execution details' tab, address the primary cause of the issue and resume the task.": [
+        ""
       ],
       "The recurring logic was disabled.": [
         "განმეორებადი ლოგიკა გამორთულია."
@@ -707,11 +731,17 @@
       "The targets are of different types": [
         "სამიზნეები სხვადასხვა ტიპისაა"
       ],
-      "The task cannot be aborted at the moment.": [
-        "ამჟამად ამოცანის გაუქმება შეუძლებელია."
-      ],
       "The task could not be started": [
         "ამოცანის გაშვება შეუძლებელია"
+      ],
+      "The task finished with no errors or warnings.": [
+        ""
+      ],
+      "The task has not started yet.": [
+        ""
+      ],
+      "The task is still being processed. Please wait.": [
+        ""
       ],
       "There is %{count} paused task in the system that need attention": [
         "სისტემაში არსებობს %{count} შეჩერებული ამოცანა, რომელსაც ყურადღება სჭირდება",
@@ -720,26 +750,23 @@
       "This action will delete all cancelled recurring logics. Please note that this action can't be reversed.": [
         "ეს ქმედება წაშლის ყველა გაუქმებულ განმეორებად ლოგიკას. გაითვალისწინეთ, რომ ქმედების დაბრუნება შეუძლებელია."
       ],
-      "This task may have dependencies on other tasks or may be blocking other tasks from executing. Dependencies are established through task chaining relationships.": [
-        ""
-      ],
       "This will cancel %(number)s task(s), putting them in the stopped state. Are you sure?": [
-        ""
+        "ეს გააუქმებს %(number)s ამოცანას და მას გააჩერებს. დარწმუნებული ბრძანდებით?"
       ],
       "This will cancel task \\\\\\\"%(taskName)s\\\\\\\", putting it in the stopped state. Are you sure?": [
-        ""
+        "ეს გააუქმებს ამოცანას \\\\\\\"%(taskName)s\\\\\\\" და მას გააჩერებს. დარწმუნებული ბრძანდებით?"
       ],
       "This will force unlock %(number)s task(s). This may cause harm and should be used with caution. Are you sure?": [
-        ""
+        "ეს ძალით განბლოკავს %(number)s ამოცანას. ამან, შეიძლება, ზიანი მოგიტანოთ და ფრთხილად გამოიყენეთ. დარწმუნებული ბრძანდებით?"
       ],
       "This will force unlock task \\\\\\\"%(taskName)s\\\\\\\". This may cause harm and should be used with caution. Are you sure?": [
-        ""
+        "ეს ძალით განბლოკავს ამოცანას \\\\\\\"%(taskName)s\\\\\\\". ამან, შეიძლება, ზიანი მოგიტანოთ და ფრთხილად გამოიყენეთ. დარწმუნებული ბრძანდებით?"
       ],
       "This will resume %(number)s task(s), putting them in the running state. Are you sure?": [
-        ""
+        "ეს გააგრძელებს %(number)s ამოცანას და მას გაუშვებს. დარწმუნებული ბრძანდებით?"
       ],
       "This will resume task \\\\\\\"%(taskName)s\\\\\\\", putting it in the running state. Are you sure?": [
-        ""
+        "ეს გააგრძელებს ამოცანას \\\\\\\"%(taskName)s\\\\\\\" და მას გაუშვებს. დარწმუნებული ბრძანდებით?"
       ],
       "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed.": [
         "ეს განბლოკავს რესურსებს, რომლებზეც ამოცანა მუშაობს. გაითვალისწინეთ, რომ ამან შეიძლება გამოიწვიოს არათანმიმდევრული მდგომარეობა და უნდა იქნას გამოყენებული სიფრთხილით, მას შემდეგ რაც დარწმუნდებით, რომ დავალება ვერ გაგრძელდება."
@@ -753,11 +780,11 @@
       "Total": [
         "ჯამში"
       ],
+      "Triggered by": [
+        ""
+      ],
       "Troubleshooting": [
         "პრობლემების გადაჭრა"
-      ],
-      "Trying to abort the task": [
-        "ამოცანის შეწყვეტის ცდა"
       ],
       "Trying to cancel step": [
         "ბიჯის გაუქმების მცდელობა"
@@ -777,8 +804,11 @@
       "Unable to enable mail notification to user '%s': %s": [
         "შეცდომა ელფოსტის გაფრთხილებების ჩართვისას მომხმარებლისთვის '%s': %s"
       ],
-      "Undo selection": [
-        "მონიშნულის დაბრუნება"
+      "Unknown": [
+        ""
+      ],
+      "Unknown error": [
+        ""
       ],
       "Unlimited": [
         "შეუზღუდავი"
@@ -795,6 +825,9 @@
       "User search_params requires user_id to be specified": [
         "მომხმარებლის search_params მოითხოვს user_id-ის მითითებას"
       ],
+      "Warning": [
+        ""
+      ],
       "Wed": [
         "ოთხ"
       ],
@@ -804,14 +837,14 @@
       "Yes": [
         "დიახ"
       ],
-      "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource": [
-        "ამ გვერდზე შეგიძლიათ იპოვოთ რესურსების ბლოკები. ბლოკის ხატით მონიშნული ექსკლუზიური ბლოკი ნიშნავს, რომ არცერთ სხვა ამოცანას არ შეუძლია გამოიყენოს დაბლოკილი რესურსი ამ ამოცანის შესრულებისას. განბლოკილი ხატულით მონიშნული არაექსკლუზიური ბლოკი ნიშნავს, რომ სხვა ამოცანებს შეუძლიათ რესურსზე თავისუფლად წვდომა, ის გამოიყენება მხოლოდ ამ ამოცანის რესურსთან მიმართების მითითებისთვის"
-      ],
       "You do not have permission": [
         "წვდომა არ გაგაჩნიათ"
       ],
       "activation key": [
         "აქტივაციის გასაღები"
+      ],
+      "before": [
+        ""
       ],
       "cannot be cancelled with force at the moment.": [
         "ამჟამად რესურსების ძალით განბლოკვა შეუძლებელია."
@@ -828,6 +861,9 @@
       "error": [
         "შეცდომა"
       ],
+      "id: %s": [
+        ""
+      ],
       "is day of month (range: 1-31)": [
         "თვის დღე (1-31)"
       ],
@@ -838,7 +874,7 @@
         "საათი (0-23)"
       ],
       "is in the past": [
-        ""
+        "წარსულშია"
       ],
       "is minute (range: 0-59)": [
         "წუთი (0-59)"
@@ -859,7 +895,7 @@
         "რეჟიმი შეიძლება იყოს ერთ ერთი %{allowed_modes} -დან"
       ],
       "must be set": [
-        ""
+        "დაყენებული უნდა იყოს"
       ],
       "older": [
         "ძველი"
@@ -911,6 +947,9 @@
       ],
       "system": [
         "სისტემა"
+      ],
+      "task": [
+        ""
       ],
       "task has to be cancellable": [
         "ამოცანა გაუქმებადი უნდა იყოს"

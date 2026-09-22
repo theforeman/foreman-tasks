@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman-tasks 12.0.0",
+        "Project-Id-Version": "foreman-tasks 13.2.2",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-12 14:04+0000",
         "Last-Translator": "Kazuki Omo <kazuki.omo@gmail.com>, 2019",
@@ -25,6 +25,9 @@
       ],
       "%s is not valid format of cron line": [
         "%s は有効な cron 行の形式ではありません"
+      ],
+      "%s%% Complete": [
+        ""
       ],
       "%{count} tasks are in running or paused state for more than a day": [
         "%{count} 個のタスクが 1 日以上実行中または一時停止状態です"
@@ -66,13 +69,10 @@
         "アクティブ"
       ],
       "Active Filters": [
-        ""
+        "アクティブなフィルター"
       ],
       "Active or disabled recurring logic with purpose %s already exists": [
         "目的が %s のアクティブまたは無効な再帰論理がすでに存在します"
-      ],
-      "All %s tasks are selected.": [
-        "%s の全タスクを選択します。"
       ],
       "All proxies with the required feature are unavailable at the moment": [
         "現在、必要な機能があるすべてのプロキシーが利用できません"
@@ -95,9 +95,6 @@
       "Backtrace": [
         "バックトレース"
       ],
-      "Blocks": [
-        ""
-      ],
       "Bulk action": [
         "一括処理"
       ],
@@ -108,10 +105,10 @@
         "選択項目をキャンセル"
       ],
       "Cancel Selected Tasks": [
-        ""
+        "選択したタスクをキャンセル"
       ],
       "Cancel Task": [
-        ""
+        "タスクの取り消し"
       ],
       "Cancel enforced: the task might be still running on the proxy": [
         "強制的にキャンセル: タスクはプロキシーで引き続き実行されている可能性があります"
@@ -158,17 +155,17 @@
       "Clear Cancelled": [
         "キャンセル済みの項目を消去"
       ],
-      "Complete": [
-        "完了"
-      ],
       "Conflicts with tasks:": [
         "タスクとの競合:"
       ],
+      "Copied": [
+        ""
+      ],
+      "Copy": [
+        ""
+      ],
       "Could not cancel step.": [
         "ステップをキャンセルできませんでした。"
-      ],
-      "Could not receive data: %s": [
-        "データを受信できませんでした: %s"
       ],
       "Cron line": [
         "cron 行"
@@ -198,10 +195,7 @@
         "長時間実行中のタスクに関する通知の配信"
       ],
       "Dependencies": [
-        ""
-      ],
-      "Depends on": [
-        ""
+        "依存関係"
       ],
       "Details": [
         "詳細"
@@ -233,17 +227,17 @@
       "Enable the dynflow console (/foreman_tasks/dynflow) for debugging": [
         "デバッグのために dynflow コンソール (/foreman_tasks/dynflow) を有効にする"
       ],
+      "Ended at": [
+        ""
+      ],
       "Ends": [
         "終了"
       ],
       "Ends at": [
         "終了時間"
       ],
-      "Errors": [
-        "エラー"
-      ],
-      "Errors:": [
-        "エラー:"
+      "Error": [
+        ""
       ],
       "Event delivered by request %{request_id}": [
         "要求 %{request_id} で配信されたイベント"
@@ -251,17 +245,29 @@
       "Exception": [
         "例外"
       ],
+      "Exclusive resources": [
+        ""
+      ],
       "Execute now": [
         "今すぐ実行"
       ],
+      "Execution details": [
+        ""
+      ],
       "Execution plan data not available ": [
         "利用可能な実行プランデータはありません "
+      ],
+      "Execution type": [
+        ""
       ],
       "Export All": [
         "すべてエクスポート"
       ],
       "External Id": [
         "外部 Id"
+      ],
+      "Failed task errors": [
+        ""
       ],
       "Failed to check on tasks on proxy at %{url}: %{exception}": [
         "%{url} でのプロキシータスクをチェックできませんでした: %{exception}"
@@ -285,10 +291,10 @@
         "強制ロック解除"
       ],
       "Force Unlock Selected Tasks": [
-        ""
+        "選択したタスクの強制アンロック"
       ],
       "Force Unlock Task": [
-        ""
+        "タスクの強制アンロック"
       ],
       "Foreman Tasks": [
         "Foreman タスク"
@@ -303,7 +309,7 @@
         "ID"
       ],
       "Id": [
-        "ID"
+        "Id"
       ],
       "Immediate": [
         "即時"
@@ -383,14 +389,17 @@
       "No": [
         "いいえ"
       ],
-      "No Tasks": [
-        "タスクなし"
-      ],
-      "No errors": [
-        "エラーなし"
+      "No errors found": [
+        ""
       ],
       "No proxy defined for execution": [
         "実行用プロキシーが設定されていません"
+      ],
+      "No resources": [
+        ""
+      ],
+      "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes.": [
+        ""
       ],
       "No running steps": [
         "実行中のステップがありません"
@@ -404,8 +413,11 @@
       "No. of Tasks": [
         "タスク数"
       ],
-      "None": [
+      "Non-exclusive resources": [
         ""
+      ],
+      "None": [
+        "なし"
       ],
       "Not all the selected tasks can be cancelled": [
         "選択したすべてのタスクをキャンセルできるわけではありません"
@@ -423,13 +435,16 @@
         "foreman_tasks_proxy_batch_trigger が有効な場合に、1 つの要求で Smart Proxy に送信する必要があるタスクの数"
       ],
       "On": [
-        "次の時刻に開始"
+        "オン"
       ],
-      "Operation": [
-        "操作"
+      "Only this task can access the resource. Other tasks must wait until this process completes.": [
+        ""
       ],
       "Other includes all stopped tasks that are cancelled or pending": [
         "その他のタスクには、キャンセルまたは保留中のすべての停止したタスクが含まれます。"
+      ],
+      "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others.": [
+        ""
       ],
       "Other:": [
         "その他:"
@@ -437,14 +452,14 @@
       "Output": [
         "出力"
       ],
-      "Output:": [
-        "出力:"
-      ],
       "Parent task": [
         "親タスク"
       ],
       "Paused": [
         "一時停止中"
+      ],
+      "Planned task": [
+        ""
       ],
       "Please inspect their state, fix their errors and resume them.": [
         "タスクの状態を確認し、エラーを修正してタスクを再開してください。"
@@ -531,10 +546,10 @@
         "選択項目を再開"
       ],
       "Resume Selected Tasks": [
-        ""
+        "選択したタスクの再開"
       ],
       "Resume Task": [
-        ""
+        "タスクの再開"
       ],
       "Resume all paused error tasks": [
         "一時停止されたすべてのエラータスクを再開"
@@ -551,8 +566,8 @@
       "Running": [
         "実行中"
       ],
-      "Running Steps": [
-        "実行中のステップ"
+      "Running step %s": [
+        ""
       ],
       "Sat": [
         "土"
@@ -572,12 +587,6 @@
       "See %{link} for more details on how to resolve the issue": [
         "問題解決の詳細については、%{link} を参照してください"
       ],
-      "Select all {count} tasks": [
-        "{count} 件のタスクをすべて選択"
-      ],
-      "Select row": [
-        "行の選択"
-      ],
       "Send data to the task from external executor (such as smart_proxy_dynflow)": [
         "外部のエグゼキューター (smart_proxy_dynflow など) からタスクにデータを送信"
       ],
@@ -586,6 +595,12 @@
       ],
       "Setting is off": [
         "設定がオフです"
+      ],
+      "Show less details": [
+        ""
+      ],
+      "Show more details": [
+        ""
       ],
       "Show recurring logic details": [
         "再帰論理の詳細表示"
@@ -630,25 +645,22 @@
         "停止"
       ],
       "Stopped tasks by result": [
-        ""
+        "結果によって停止したタスク"
       ],
       "Sub tasks": [
         "サブタスク"
       ],
-      "Sub tasks of %s": [
-        "%s のサブタスク"
-      ],
       "Subscribe": [
         "サブスクライブ"
+      ],
+      "Success": [
+        ""
       ],
       "Sun": [
         "日"
       ],
       "Sync task timeout": [
         "同期タスクのタイムアウト"
-      ],
-      "Task": [
-        "タスク"
       ],
       "Task Details": [
         "タスクの詳細"
@@ -659,13 +671,22 @@
       "Task aborted: the task might be still running on the proxy": [
         "タスクの中断: タスクはプロキシーで引き続き実行されている可能性があります"
       ],
+      "Task actions": [
+        ""
+      ],
+      "Task blocks": [
+        ""
+      ],
       "Task cannot be canceled": [
         "タスクはキャンセルできません"
       ],
       "Task count": [
         "タスク数"
       ],
-      "Task dependencies": [
+      "Task depends on": [
+        ""
+      ],
+      "Task details": [
         ""
       ],
       "Task group common": [
@@ -689,11 +710,14 @@
       "Tasks troubleshooting URL": [
         "URL のトラブルシューティングタスク"
       ],
+      "Temporarily suspended step(s)": [
+        ""
+      ],
       "The ID of the step inside the execution plan to send the event to": [
         "イベントの送信先の実行プラン内のステップ ID"
       ],
-      "The recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task.": [
-        "推奨のアプローチとして、以下のエラーメッセージを調査して、「エラー」タブで、問題の主な原因に対処して、タスクを再開してください。"
+      "The recommended approach is to investigate the error messages below and in 'Execution details' tab, address the primary cause of the issue and resume the task.": [
+        ""
       ],
       "The recurring logic was disabled.": [
         "再帰論理が無効化されました。"
@@ -707,11 +731,17 @@
       "The targets are of different types": [
         "ターゲットは異なるタイプです"
       ],
-      "The task cannot be aborted at the moment.": [
-        "現在、タスクを中断できません。"
-      ],
       "The task could not be started": [
         "タスクを開始できませんでした"
+      ],
+      "The task finished with no errors or warnings.": [
+        ""
+      ],
+      "The task has not started yet.": [
+        ""
+      ],
+      "The task is still being processed. Please wait.": [
+        ""
       ],
       "There is %{count} paused task in the system that need attention": [
         "システムには、注意が必要な一時停止タスクが %{count} 件あります"
@@ -719,26 +749,23 @@
       "This action will delete all cancelled recurring logics. Please note that this action can't be reversed.": [
         "このアクションは、キャンセル済みの再帰論理をすべて削除します。この操作は元に戻すことはできない点に注意してください。"
       ],
-      "This task may have dependencies on other tasks or may be blocking other tasks from executing. Dependencies are established through task chaining relationships.": [
-        ""
-      ],
       "This will cancel %(number)s task(s), putting them in the stopped state. Are you sure?": [
-        ""
+        "これにより、%(number)s 件のタスクが取り消され、停止状態になります。実行してもよろしいですか?"
       ],
       "This will cancel task \\\\\\\"%(taskName)s\\\\\\\", putting it in the stopped state. Are you sure?": [
-        ""
+        "これによりタスク \\\\\\\"%(taskName)s\\\\\\\" が取り消され、停止状態になります。実行してもよろしいですか?"
       ],
       "This will force unlock %(number)s task(s). This may cause harm and should be used with caution. Are you sure?": [
-        ""
+        "これにより、%(number)s 件のタスクが強制的にアンロックされます。この操作は不具合を引き起こす可能性があるため、注意して実行する必要があります。実行してもよろしいですか?"
       ],
       "This will force unlock task \\\\\\\"%(taskName)s\\\\\\\". This may cause harm and should be used with caution. Are you sure?": [
-        ""
+        "これにより、タスク \\\\\\\"%(taskName)s\\\\\\\" が強制的にアンロックされます。この操作は不具合を引き起こす可能性があるため、注意して実行する必要があります。実行してもよろしいですか?"
       ],
       "This will resume %(number)s task(s), putting them in the running state. Are you sure?": [
-        ""
+        "これにより、%(number)s 件のタスクが再開され、実行状態になります。実行してもよろしいですか?"
       ],
       "This will resume task \\\\\\\"%(taskName)s\\\\\\\", putting it in the running state. Are you sure?": [
-        ""
+        "これにより、タスク \\\\\\\"%(taskName)s\\\\\\\" が再開され、実行状態になります。実行してもよろしいですか?"
       ],
       "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed.": [
         "これにより、タスクが実行している対象のリソースがロック解除されます。状態が不整合になることがあるため、タスクを再開できないことを確認した後に注意して使用してください。"
@@ -752,11 +779,11 @@
       "Total": [
         "合計"
       ],
+      "Triggered by": [
+        ""
+      ],
       "Troubleshooting": [
         "トラブルシューティング"
-      ],
-      "Trying to abort the task": [
-        "タスクを中断しようとしています"
       ],
       "Trying to cancel step": [
         "ステップをキャンセルしようとしています"
@@ -776,8 +803,11 @@
       "Unable to enable mail notification to user '%s': %s": [
         "ユーザー '%s' へのメール通知を有効にできません: %s"
       ],
-      "Undo selection": [
-        "元に戻す"
+      "Unknown": [
+        ""
+      ],
+      "Unknown error": [
+        ""
       ],
       "Unlimited": [
         "無制限"
@@ -794,6 +824,9 @@
       "User search_params requires user_id to be specified": [
         "ユーザー search_params では user_id を指定する必要があります"
       ],
+      "Warning": [
+        ""
+      ],
       "Wed": [
         "水"
       ],
@@ -803,14 +836,14 @@
       "Yes": [
         "はい"
       ],
-      "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource": [
-        "このページでリソースロックを見つけることができます。ロックアイコンで示された排他的ロックは、このタスクの実行中に他のタスクがロック済みリソースを使用できないことを意味します。ロック解除アイコンで示された非排他的ロックは、他のタスクがリソースを自由にアクセスできることを意味します。これは、リソースとこのタスクの関係を示すためにのみ使用されます"
-      ],
       "You do not have permission": [
         "権限がありません"
       ],
       "activation key": [
         "アクティベーションキー"
+      ],
+      "before": [
+        ""
       ],
       "cannot be cancelled with force at the moment.": [
         "現在、強制的にキャンセルできません。"
@@ -826,6 +859,9 @@
       ],
       "error": [
         "エラー"
+      ],
+      "id: %s": [
+        ""
       ],
       "is day of month (range: 1-31)": [
         "日 (範囲: 1 - 31)"
@@ -910,6 +946,9 @@
       ],
       "system": [
         "システム"
+      ],
+      "task": [
+        ""
       ],
       "task has to be cancellable": [
         "タスクはキャンセル可能でなければなりません"

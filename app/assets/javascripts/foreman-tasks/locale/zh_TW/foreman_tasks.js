@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman-tasks 12.0.0",
+        "Project-Id-Version": "foreman-tasks 13.2.2",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-12 14:04+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
@@ -25,6 +25,9 @@
       ],
       "%s is not valid format of cron line": [
         "%s 不是 cron 行的正確格式"
+      ],
+      "%s%% Complete": [
+        ""
       ],
       "%{count} tasks are in running or paused state for more than a day": [
         ""
@@ -71,9 +74,6 @@
       "Active or disabled recurring logic with purpose %s already exists": [
         ""
       ],
-      "All %s tasks are selected.": [
-        ""
-      ],
       "All proxies with the required feature are unavailable at the moment": [
         ""
       ],
@@ -94,9 +94,6 @@
       ],
       "Backtrace": [
         "追蹤"
-      ],
-      "Blocks": [
-        ""
       ],
       "Bulk action": [
         "批次動作"
@@ -158,16 +155,16 @@
       "Clear Cancelled": [
         ""
       ],
-      "Complete": [
-        ""
-      ],
       "Conflicts with tasks:": [
         "和任務有衝突："
       ],
-      "Could not cancel step.": [
+      "Copied": [
         ""
       ],
-      "Could not receive data: %s": [
+      "Copy": [
+        ""
+      ],
+      "Could not cancel step.": [
         ""
       ],
       "Cron line": [
@@ -200,9 +197,6 @@
       "Dependencies": [
         ""
       ],
-      "Depends on": [
-        ""
-      ],
       "Details": [
         "詳細資訊"
       ],
@@ -233,16 +227,16 @@
       "Enable the dynflow console (/foreman_tasks/dynflow) for debugging": [
         "啟用 dynflow 主控台（/foreman_tasks/dynflow）作為偵錯使用"
       ],
+      "Ended at": [
+        ""
+      ],
       "Ends": [
         "結束"
       ],
       "Ends at": [
         "結束於"
       ],
-      "Errors": [
-        "錯誤"
-      ],
-      "Errors:": [
+      "Error": [
         ""
       ],
       "Event delivered by request %{request_id}": [
@@ -251,10 +245,19 @@
       "Exception": [
         "例外"
       ],
+      "Exclusive resources": [
+        ""
+      ],
       "Execute now": [
         "立即執行"
       ],
+      "Execution details": [
+        ""
+      ],
       "Execution plan data not available ": [
+        ""
+      ],
+      "Execution type": [
         ""
       ],
       "Export All": [
@@ -262,6 +265,9 @@
       ],
       "External Id": [
         "外部 ID"
+      ],
+      "Failed task errors": [
+        ""
       ],
       "Failed to check on tasks on proxy at %{url}: %{exception}": [
         ""
@@ -383,13 +389,16 @@
       "No": [
         "否"
       ],
-      "No Tasks": [
+      "No errors found": [
         ""
       ],
-      "No errors": [
-        "無錯誤"
-      ],
       "No proxy defined for execution": [
+        ""
+      ],
+      "No resources": [
+        ""
+      ],
+      "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes.": [
         ""
       ],
       "No running steps": [
@@ -403,6 +412,9 @@
       ],
       "No. of Tasks": [
         "任務編號"
+      ],
+      "Non-exclusive resources": [
+        ""
       ],
       "None": [
         ""
@@ -425,10 +437,13 @@
       "On": [
         "開啟"
       ],
-      "Operation": [
-        "作業"
+      "Only this task can access the resource. Other tasks must wait until this process completes.": [
+        ""
       ],
       "Other includes all stopped tasks that are cancelled or pending": [
+        ""
+      ],
+      "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others.": [
         ""
       ],
       "Other:": [
@@ -437,14 +452,14 @@
       "Output": [
         "輸出"
       ],
-      "Output:": [
-        ""
-      ],
       "Parent task": [
         "父任務"
       ],
       "Paused": [
         "已暫停"
+      ],
+      "Planned task": [
+        ""
       ],
       "Please inspect their state, fix their errors and resume them.": [
         "請檢查它們的狀態，修正錯誤然後繼續。"
@@ -551,8 +566,8 @@
       "Running": [
         "執行中"
       ],
-      "Running Steps": [
-        "執行中的步驟"
+      "Running step %s": [
+        ""
       ],
       "Sat": [
         "週六"
@@ -572,12 +587,6 @@
       "See %{link} for more details on how to resolve the issue": [
         ""
       ],
-      "Select all {count} tasks": [
-        ""
-      ],
-      "Select row": [
-        ""
-      ],
       "Send data to the task from external executor (such as smart_proxy_dynflow)": [
         "從外部執行者（例如 smart_proxy_dynflow）發送資料到任務"
       ],
@@ -585,6 +594,12 @@
         "設定週期執行"
       ],
       "Setting is off": [
+        ""
+      ],
+      "Show less details": [
+        ""
+      ],
+      "Show more details": [
         ""
       ],
       "Show recurring logic details": [
@@ -635,20 +650,17 @@
       "Sub tasks": [
         "子任務"
       ],
-      "Sub tasks of %s": [
-        ""
-      ],
       "Subscribe": [
         "訂閱"
+      ],
+      "Success": [
+        ""
       ],
       "Sun": [
         "週日"
       ],
       "Sync task timeout": [
         ""
-      ],
-      "Task": [
-        "工作"
       ],
       "Task Details": [
         "任務的詳細資訊"
@@ -659,13 +671,22 @@
       "Task aborted: the task might be still running on the proxy": [
         ""
       ],
+      "Task actions": [
+        ""
+      ],
+      "Task blocks": [
+        ""
+      ],
       "Task cannot be canceled": [
         ""
       ],
       "Task count": [
         "工作數量"
       ],
-      "Task dependencies": [
+      "Task depends on": [
+        ""
+      ],
+      "Task details": [
         ""
       ],
       "Task group common": [
@@ -689,10 +710,13 @@
       "Tasks troubleshooting URL": [
         ""
       ],
+      "Temporarily suspended step(s)": [
+        ""
+      ],
       "The ID of the step inside the execution plan to send the event to": [
         "執行計畫中要發送事件的步驟 ID"
       ],
-      "The recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task.": [
+      "The recommended approach is to investigate the error messages below and in 'Execution details' tab, address the primary cause of the issue and resume the task.": [
         ""
       ],
       "The recurring logic was disabled.": [
@@ -707,10 +731,16 @@
       "The targets are of different types": [
         "目標類型不同"
       ],
-      "The task cannot be aborted at the moment.": [
+      "The task could not be started": [
         ""
       ],
-      "The task could not be started": [
+      "The task finished with no errors or warnings.": [
+        ""
+      ],
+      "The task has not started yet.": [
+        ""
+      ],
+      "The task is still being processed. Please wait.": [
         ""
       ],
       "There is %{count} paused task in the system that need attention": [
@@ -718,9 +748,6 @@
         ""
       ],
       "This action will delete all cancelled recurring logics. Please note that this action can't be reversed.": [
-        ""
-      ],
-      "This task may have dependencies on other tasks or may be blocking other tasks from executing. Dependencies are established through task chaining relationships.": [
         ""
       ],
       "This will cancel %(number)s task(s), putting them in the stopped state. Are you sure?": [
@@ -753,11 +780,11 @@
       "Total": [
         "總數"
       ],
+      "Triggered by": [
+        ""
+      ],
       "Troubleshooting": [
         "疑難排解"
-      ],
-      "Trying to abort the task": [
-        ""
       ],
       "Trying to cancel step": [
         ""
@@ -777,7 +804,10 @@
       "Unable to enable mail notification to user '%s': %s": [
         ""
       ],
-      "Undo selection": [
+      "Unknown": [
+        ""
+      ],
+      "Unknown error": [
         ""
       ],
       "Unlimited": [
@@ -795,6 +825,9 @@
       "User search_params requires user_id to be specified": [
         "使用者 search_params 需要指定 user_id"
       ],
+      "Warning": [
+        ""
+      ],
       "Wed": [
         "週三"
       ],
@@ -804,14 +837,14 @@
       "Yes": [
         "是"
       ],
-      "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource": [
-        ""
-      ],
       "You do not have permission": [
         ""
       ],
       "activation key": [
         "啟動金鑰"
+      ],
+      "before": [
+        ""
       ],
       "cannot be cancelled with force at the moment.": [
         ""
@@ -826,6 +859,9 @@
         ""
       ],
       "error": [
+        ""
+      ],
+      "id: %s": [
         ""
       ],
       "is day of month (range: 1-31)": [
@@ -911,6 +947,9 @@
       ],
       "system": [
         "系統"
+      ],
+      "task": [
+        ""
       ],
       "task has to be cancellable": [
         ""

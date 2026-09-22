@@ -6,7 +6,7 @@
 # Yulia <yulia.poyarkova@redhat.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman-tasks 12.0.0\n"
+"Project-Id-Version: foreman-tasks 13.2.2\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-12 14:04+0000\n"
 "Last-Translator: Yulia <yulia.poyarkova@redhat.com>, 2016\n"
@@ -28,6 +28,9 @@ msgstr ""
 
 msgid "%s is not valid format of cron line"
 msgstr "Недопустимый формат cron: %s"
+
+msgid "%s%% Complete"
+msgstr ""
 
 msgid "%{count} tasks are in running or paused state for more than a day"
 msgstr ""
@@ -74,9 +77,6 @@ msgstr ""
 msgid "Active or disabled recurring logic with purpose %s already exists"
 msgstr ""
 
-msgid "All %s tasks are selected."
-msgstr ""
-
 msgid "All proxies with the required feature are unavailable at the moment"
 msgstr ""
 
@@ -98,9 +98,6 @@ msgstr ""
 
 msgid "Backtrace"
 msgstr "Стек вызовов"
-
-msgid "Blocks"
-msgstr ""
 
 msgid "Bulk action"
 msgstr "Групповое действие"
@@ -162,16 +159,16 @@ msgstr ""
 msgid "Clear Cancelled"
 msgstr ""
 
-msgid "Complete"
-msgstr ""
-
 msgid "Conflicts with tasks:"
 msgstr "Конфликт с задачами:"
 
-msgid "Could not cancel step."
+msgid "Copied"
 msgstr ""
 
-msgid "Could not receive data: %s"
+msgid "Copy"
+msgstr ""
+
+msgid "Could not cancel step."
 msgstr ""
 
 msgid "Cron line"
@@ -204,9 +201,6 @@ msgstr ""
 msgid "Dependencies"
 msgstr ""
 
-msgid "Depends on"
-msgstr ""
-
 msgid "Details"
 msgstr "Свойства"
 
@@ -237,16 +231,16 @@ msgstr ""
 msgid "Enable the dynflow console (/foreman_tasks/dynflow) for debugging"
 msgstr "Разрешить отладку в консоли Dynflow (/foreman_tasks/dynflow)"
 
+msgid "Ended at"
+msgstr ""
+
 msgid "Ends"
 msgstr "Заканчивается"
 
 msgid "Ends at"
 msgstr "Время окончания"
 
-msgid "Errors"
-msgstr "Ошибки"
-
-msgid "Errors:"
+msgid "Error"
 msgstr ""
 
 msgid "Event delivered by request %{request_id}"
@@ -255,10 +249,19 @@ msgstr ""
 msgid "Exception"
 msgstr "Исключение"
 
+msgid "Exclusive resources"
+msgstr ""
+
 msgid "Execute now"
 msgstr "Запустить сейчас"
 
+msgid "Execution details"
+msgstr ""
+
 msgid "Execution plan data not available "
+msgstr ""
+
+msgid "Execution type"
 msgstr ""
 
 msgid "Export All"
@@ -266,6 +269,9 @@ msgstr ""
 
 msgid "External Id"
 msgstr "Внешний идентификатор"
+
+msgid "Failed task errors"
+msgstr ""
 
 msgid "Failed to check on tasks on proxy at %{url}: %{exception}"
 msgstr ""
@@ -387,13 +393,16 @@ msgstr "Следующее событие"
 msgid "No"
 msgstr "Нет"
 
-msgid "No Tasks"
+msgid "No errors found"
 msgstr ""
 
-msgid "No errors"
-msgstr "Нет ошибок"
-
 msgid "No proxy defined for execution"
+msgstr ""
+
+msgid "No resources"
+msgstr ""
+
+msgid "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes."
 msgstr ""
 
 msgid "No running steps"
@@ -407,6 +416,9 @@ msgstr ""
 
 msgid "No. of Tasks"
 msgstr "Число задач"
+
+msgid "Non-exclusive resources"
+msgstr ""
 
 msgid "None"
 msgstr ""
@@ -430,10 +442,13 @@ msgstr ""
 msgid "On"
 msgstr "Настроить"
 
-msgid "Operation"
-msgstr "Операция"
+msgid "Only this task can access the resource. Other tasks must wait until this process completes."
+msgstr ""
 
 msgid "Other includes all stopped tasks that are cancelled or pending"
+msgstr ""
+
+msgid "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others."
 msgstr ""
 
 msgid "Other:"
@@ -442,14 +457,14 @@ msgstr ""
 msgid "Output"
 msgstr "Вывод"
 
-msgid "Output:"
-msgstr ""
-
 msgid "Parent task"
 msgstr "Родительская задача"
 
 msgid "Paused"
 msgstr "Приостановлена"
+
+msgid "Planned task"
+msgstr ""
 
 msgid "Please inspect their state, fix their errors and resume them."
 msgstr "Проверьте их состояние, исправьте ошибки и перезапустите еще раз."
@@ -556,8 +571,8 @@ msgstr ""
 msgid "Running"
 msgstr "Работает"
 
-msgid "Running Steps"
-msgstr "Последовательность действий"
+msgid "Running step %s"
+msgstr ""
 
 msgid "Sat"
 msgstr "Сб"
@@ -577,12 +592,6 @@ msgstr "Поисковый запрос"
 msgid "See %{link} for more details on how to resolve the issue"
 msgstr ""
 
-msgid "Select all {count} tasks"
-msgstr ""
-
-msgid "Select row"
-msgstr ""
-
 msgid "Send data to the task from external executor (such as smart_proxy_dynflow)"
 msgstr "Отправить задаче данные от внешнего исполнителя (например, от smart_proxy_dynflow)"
 
@@ -590,6 +599,12 @@ msgid "Set up recurring execution"
 msgstr "Настроить многократное выполнение"
 
 msgid "Setting is off"
+msgstr ""
+
+msgid "Show less details"
+msgstr ""
+
+msgid "Show more details"
 msgstr ""
 
 msgid "Show recurring logic details"
@@ -640,20 +655,17 @@ msgstr ""
 msgid "Sub tasks"
 msgstr "Подзадачи"
 
-msgid "Sub tasks of %s"
-msgstr ""
-
 msgid "Subscribe"
 msgstr "Подписаться"
+
+msgid "Success"
+msgstr ""
 
 msgid "Sun"
 msgstr "Вс"
 
 msgid "Sync task timeout"
 msgstr ""
-
-msgid "Task"
-msgstr "Задача"
 
 msgid "Task Details"
 msgstr "Описание задачи"
@@ -664,13 +676,22 @@ msgstr "Статус задачи"
 msgid "Task aborted: the task might be still running on the proxy"
 msgstr ""
 
+msgid "Task actions"
+msgstr ""
+
+msgid "Task blocks"
+msgstr ""
+
 msgid "Task cannot be canceled"
 msgstr ""
 
 msgid "Task count"
 msgstr "Количество задач"
 
-msgid "Task dependencies"
+msgid "Task depends on"
+msgstr ""
+
+msgid "Task details"
 msgstr ""
 
 msgid "Task group common"
@@ -694,10 +715,13 @@ msgstr ""
 msgid "Tasks troubleshooting URL"
 msgstr ""
 
+msgid "Temporarily suspended step(s)"
+msgstr ""
+
 msgid "The ID of the step inside the execution plan to send the event to"
 msgstr "Идентификатор этапа в плане исполнения, которому будет отправлено событие"
 
-msgid "The recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task."
+msgid "The recommended approach is to investigate the error messages below and in 'Execution details' tab, address the primary cause of the issue and resume the task."
 msgstr ""
 
 msgid "The recurring logic was disabled."
@@ -712,10 +736,16 @@ msgstr "Ошибка выполнения задачи %s на смарт-про
 msgid "The targets are of different types"
 msgstr "Попытка выполнения действия над разными типами объектов"
 
-msgid "The task cannot be aborted at the moment."
+msgid "The task could not be started"
 msgstr ""
 
-msgid "The task could not be started"
+msgid "The task finished with no errors or warnings."
+msgstr ""
+
+msgid "The task has not started yet."
+msgstr ""
+
+msgid "The task is still being processed. Please wait."
 msgstr ""
 
 msgid "There is %{count} paused task in the system that need attention"
@@ -724,9 +754,6 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgid "This action will delete all cancelled recurring logics. Please note that this action can't be reversed."
-msgstr ""
-
-msgid "This task may have dependencies on other tasks or may be blocking other tasks from executing. Dependencies are established through task chaining relationships."
 msgstr ""
 
 msgid "This will cancel %(number)s task(s), putting them in the stopped state. Are you sure?"
@@ -759,11 +786,11 @@ msgstr "Интервал повтора (в секундах)"
 msgid "Total"
 msgstr "Всего"
 
+msgid "Triggered by"
+msgstr ""
+
 msgid "Troubleshooting"
 msgstr "Диагностика"
-
-msgid "Trying to abort the task"
-msgstr ""
 
 msgid "Trying to cancel step"
 msgstr ""
@@ -783,8 +810,11 @@ msgstr ""
 msgid "Unable to enable mail notification to user '%s': %s"
 msgstr ""
 
-msgid "Undo selection"
-msgstr "Отменить выбор"
+msgid "Unknown"
+msgstr ""
+
+msgid "Unknown error"
+msgstr ""
 
 msgid "Unlimited"
 msgstr "∞"
@@ -801,6 +831,9 @@ msgstr ""
 msgid "User search_params requires user_id to be specified"
 msgstr "Для того чтобы настроить search_params для пользователя, необходимо установить user_id"
 
+msgid "Warning"
+msgstr ""
+
 msgid "Wed"
 msgstr "Ср"
 
@@ -810,14 +843,14 @@ msgstr ""
 msgid "Yes"
 msgstr "Да"
 
-msgid "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource"
-msgstr ""
-
 msgid "You do not have permission"
 msgstr ""
 
 msgid "activation key"
 msgstr "ключ активации"
+
+msgid "before"
+msgstr ""
 
 msgid "cannot be cancelled with force at the moment."
 msgstr ""
@@ -832,6 +865,9 @@ msgid "could not be resumed"
 msgstr ""
 
 msgid "error"
+msgstr ""
+
+msgid "id: %s"
 msgstr ""
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
@@ -922,6 +958,9 @@ msgstr "успешно"
 
 msgid "system"
 msgstr "система"
+
+msgid "task"
+msgstr ""
 
 msgid "task has to be cancellable"
 msgstr ""

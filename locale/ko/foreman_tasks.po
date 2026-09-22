@@ -5,7 +5,7 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman-tasks 12.0.0\n"
+"Project-Id-Version: foreman-tasks 13.2.2\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-12 14:04+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -24,6 +24,9 @@ msgstr "%(older)s 이전 %(time)s"
 
 msgid "%s is not valid format of cron line"
 msgstr "%s은(는) 유효한 cron 줄 형식이 아닙니다."
+
+msgid "%s%% Complete"
+msgstr ""
 
 msgid "%{count} tasks are in running or paused state for more than a day"
 msgstr "%{count} 작업이 하루 이상 실행 중이거나 일시 중지 상태입니다."
@@ -65,13 +68,10 @@ msgid "Active"
 msgstr "활성"
 
 msgid "Active Filters"
-msgstr ""
+msgstr "활성 필터"
 
 msgid "Active or disabled recurring logic with purpose %s already exists"
 msgstr "%s 목적이 있는 활성 또는 비활성화된 반복 논리가 이미 존재합니다"
-
-msgid "All %s tasks are selected."
-msgstr "모두%s 작업이 선택되었습니다."
 
 msgid "All proxies with the required feature are unavailable at the moment"
 msgstr "현재 필요한 기능이 있는 모든 프록시를 사용할 수 없습니다."
@@ -95,9 +95,6 @@ msgstr "작업으로 돌아가기"
 msgid "Backtrace"
 msgstr "역추적"
 
-msgid "Blocks"
-msgstr ""
-
 msgid "Bulk action"
 msgstr "대량 작업 "
 
@@ -108,10 +105,10 @@ msgid "Cancel Selected"
 msgstr "선택한 작업 취소"
 
 msgid "Cancel Selected Tasks"
-msgstr ""
+msgstr "선택한 작업 취소"
 
 msgid "Cancel Task"
-msgstr ""
+msgstr "작업 취소"
 
 msgid "Cancel enforced: the task might be still running on the proxy"
 msgstr "강제 취소됨: 프록시에서 태스크가 아직 실행 중일 수 있습니다."
@@ -158,17 +155,17 @@ msgstr "장기 실행 작업 확인"
 msgid "Clear Cancelled"
 msgstr "삭제 취소됨"
 
-msgid "Complete"
-msgstr "완료"
-
 msgid "Conflicts with tasks:"
 msgstr "태스크 충돌:"
 
+msgid "Copied"
+msgstr ""
+
+msgid "Copy"
+msgstr ""
+
 msgid "Could not cancel step."
 msgstr "단계를 취소할 수 없습니다."
-
-msgid "Could not receive data: %s"
-msgstr "데이터를 받을 수 없습니다: %s"
 
 msgid "Cron line"
 msgstr "Cron 줄"
@@ -198,10 +195,7 @@ msgid "Deliver notifications about long running tasks"
 msgstr "장기 실행 작업에 대한 알림 전달"
 
 msgid "Dependencies"
-msgstr ""
-
-msgid "Depends on"
-msgstr ""
+msgstr "종속성 "
 
 msgid "Details"
 msgstr "상세 정보 "
@@ -233,17 +227,17 @@ msgstr "dynflow 콘솔 활성화"
 msgid "Enable the dynflow console (/foreman_tasks/dynflow) for debugging"
 msgstr "디버깅에 dynflow 콘솔(/foreman_tasks/dynflow) 활성화"
 
+msgid "Ended at"
+msgstr ""
+
 msgid "Ends"
 msgstr "종료"
 
 msgid "Ends at"
 msgstr "종료 일시"
 
-msgid "Errors"
-msgstr "오류"
-
-msgid "Errors:"
-msgstr "오류:"
+msgid "Error"
+msgstr ""
 
 msgid "Event delivered by request %{request_id}"
 msgstr "%{request_id} 요청에 따라 이벤트가 제공됩니다."
@@ -251,17 +245,29 @@ msgstr "%{request_id} 요청에 따라 이벤트가 제공됩니다."
 msgid "Exception"
 msgstr "예외"
 
+msgid "Exclusive resources"
+msgstr ""
+
 msgid "Execute now"
 msgstr "지금 실행"
 
+msgid "Execution details"
+msgstr ""
+
 msgid "Execution plan data not available "
 msgstr "실행 계획 데이터를 사용할 수 없습니다. "
+
+msgid "Execution type"
+msgstr ""
 
 msgid "Export All"
 msgstr "모두 내보내기"
 
 msgid "External Id"
 msgstr "외부 IP"
+
+msgid "Failed task errors"
+msgstr ""
 
 msgid "Failed to check on tasks on proxy at %{url}: %{exception}"
 msgstr "%{url}에 있는 프록시에서 작업을 확인하지 못했습니다: %{exception}"
@@ -285,10 +291,10 @@ msgid "Force Unlock"
 msgstr "강제 잠금 해제"
 
 msgid "Force Unlock Selected Tasks"
-msgstr ""
+msgstr "선택한 작업 강제 잠금 해제"
 
 msgid "Force Unlock Task"
-msgstr ""
+msgstr "작업 강제 잠금 해제"
 
 msgid "Foreman Tasks"
 msgstr "Foreman 작업"
@@ -383,14 +389,17 @@ msgstr "다음 반복"
 msgid "No"
 msgstr "아니오  "
 
-msgid "No Tasks"
-msgstr "작업 없음"
-
-msgid "No errors"
-msgstr "오류 없음 "
+msgid "No errors found"
+msgstr ""
 
 msgid "No proxy defined for execution"
 msgstr "실행을 위한 프록시가 정의되지 않았습니다"
+
+msgid "No resources"
+msgstr ""
+
+msgid "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes."
+msgstr ""
 
 msgid "No running steps"
 msgstr "실행 중인 단계가 없습니다."
@@ -404,8 +413,11 @@ msgstr "작업을 시작할 수 없습니다."
 msgid "No. of Tasks"
 msgstr "작업 수"
 
-msgid "None"
+msgid "Non-exclusive resources"
 msgstr ""
+
+msgid "None"
+msgstr "없음 "
 
 msgid "Not all the selected tasks can be cancelled"
 msgstr "선택한 모든 작업을 취소할 수 없습니다."
@@ -426,11 +438,14 @@ msgstr "foreman_tasks_proxy_batch_trigger가 활성화된 경우 한 번의 요�
 msgid "On"
 msgstr "켜기"
 
-msgid "Operation"
-msgstr "작업 "
+msgid "Only this task can access the resource. Other tasks must wait until this process completes."
+msgstr ""
 
 msgid "Other includes all stopped tasks that are cancelled or pending"
 msgstr "기타에는 취소되거나 보류 중인 모든 중지된 작업이 포함됩니다."
+
+msgid "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others."
+msgstr ""
 
 msgid "Other:"
 msgstr "기타:"
@@ -438,14 +453,14 @@ msgstr "기타:"
 msgid "Output"
 msgstr "출력"
 
-msgid "Output:"
-msgstr "출력:"
-
 msgid "Parent task"
 msgstr "부모 태스크"
 
 msgid "Paused"
 msgstr "일시정지 "
+
+msgid "Planned task"
+msgstr ""
 
 msgid "Please inspect their state, fix their errors and resume them."
 msgstr "상태를 확인하고 오류를 수정한 다음 다시 시작하십시오."
@@ -532,10 +547,10 @@ msgid "Resume Selected"
 msgstr "선택한 작업 재개"
 
 msgid "Resume Selected Tasks"
-msgstr ""
+msgstr "선택한 작업 재개"
 
 msgid "Resume Task"
-msgstr ""
+msgstr "작업 재개"
 
 msgid "Resume all paused error tasks"
 msgstr "일시 정지된 모든 오류 태스크 다시 시작"
@@ -552,8 +567,8 @@ msgstr "선택한 작업을 다시 시작하는 데 시간이 걸릴 수 있습�
 msgid "Running"
 msgstr "실행 중"
 
-msgid "Running Steps"
-msgstr "실행 중인 단계"
+msgid "Running step %s"
+msgstr ""
 
 msgid "Sat"
 msgstr "토"
@@ -573,12 +588,6 @@ msgstr "검색 쿼리"
 msgid "See %{link} for more details on how to resolve the issue"
 msgstr "문제를 해결하는 방법에 대한 자세한 내용은 %{link} 참조"
 
-msgid "Select all {count} tasks"
-msgstr "모든 {count} 작업 선택"
-
-msgid "Select row"
-msgstr "행 선택"
-
 msgid "Send data to the task from external executor (such as smart_proxy_dynflow)"
 msgstr "외부 실행자(예: smart_proxy_dynflow)의 태스크에 데이터를 전송합니다."
 
@@ -587,6 +596,12 @@ msgstr "반복 실행 설정"
 
 msgid "Setting is off"
 msgstr "설정이 꺼져있습니다"
+
+msgid "Show less details"
+msgstr ""
+
+msgid "Show more details"
+msgstr ""
 
 msgid "Show recurring logic details"
 msgstr "반복 로직 정보 표시"
@@ -631,25 +646,22 @@ msgid "Stopped"
 msgstr "중단됨"
 
 msgid "Stopped tasks by result"
-msgstr ""
+msgstr "결과에 따라 중단된 작업"
 
 msgid "Sub tasks"
 msgstr "하위 태스크"
 
-msgid "Sub tasks of %s"
-msgstr "%s의 하위 작업"
-
 msgid "Subscribe"
 msgstr "등록 "
+
+msgid "Success"
+msgstr ""
 
 msgid "Sun"
 msgstr "일"
 
 msgid "Sync task timeout"
 msgstr "동기화 작업 시간 초과"
-
-msgid "Task"
-msgstr "작업"
 
 msgid "Task Details"
 msgstr "작업 상세 정보 "
@@ -660,13 +672,22 @@ msgstr "작업 상태"
 msgid "Task aborted: the task might be still running on the proxy"
 msgstr "작업이 중단되었습니다. 작업이 프록시에서 계속 실행 중일 수 있습니다."
 
+msgid "Task actions"
+msgstr ""
+
+msgid "Task blocks"
+msgstr ""
+
 msgid "Task cannot be canceled"
 msgstr "작업을 취소할 수 없습니다."
 
 msgid "Task count"
 msgstr "태스크 수"
 
-msgid "Task dependencies"
+msgid "Task depends on"
+msgstr ""
+
+msgid "Task details"
 msgstr ""
 
 msgid "Task group common"
@@ -690,11 +711,14 @@ msgstr "%s부터 보류 중인 작업 "
 msgid "Tasks troubleshooting URL"
 msgstr "작업 문제 해결 URL"
 
+msgid "Temporarily suspended step(s)"
+msgstr ""
+
 msgid "The ID of the step inside the execution plan to send the event to"
 msgstr "이벤트를 전송할 실행 계획의 단계에 해당하는 ID입니다."
 
-msgid "The recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task."
-msgstr "권장되는 방법은 아래의 오류 메시지를 조사하고 '오류' 탭에서 문제의 근본 원인을 해결하고 작업을 재개하는 것입니다."
+msgid "The recommended approach is to investigate the error messages below and in 'Execution details' tab, address the primary cause of the issue and resume the task."
+msgstr ""
 
 msgid "The recurring logic was disabled."
 msgstr "반복 논리가 비활성화되었습니다."
@@ -708,11 +732,17 @@ msgstr "스마트 프록시 태스크 %s이(가) 실패했습니다."
 msgid "The targets are of different types"
 msgstr "대상의 유형이 서로 다릅니다."
 
-msgid "The task cannot be aborted at the moment."
-msgstr "현재로는 작업을 중단할 수 없습니다."
-
 msgid "The task could not be started"
 msgstr "작업을 시작할 수 없습니다."
+
+msgid "The task finished with no errors or warnings."
+msgstr ""
+
+msgid "The task has not started yet."
+msgstr ""
+
+msgid "The task is still being processed. Please wait."
+msgstr ""
 
 msgid "There is %{count} paused task in the system that need attention"
 msgid_plural "There are %{count} paused tasks in the system that need attention"
@@ -721,26 +751,23 @@ msgstr[0] "시스템에서 주의가 필요한 %{count} 일시 중지된 작업�
 msgid "This action will delete all cancelled recurring logics. Please note that this action can't be reversed."
 msgstr "이 작업은 취소된 모든 반복 로직을 삭제합니다. 이 작업은 되돌릴 수 없습니다."
 
-msgid "This task may have dependencies on other tasks or may be blocking other tasks from executing. Dependencies are established through task chaining relationships."
-msgstr ""
-
 msgid "This will cancel %(number)s task(s), putting them in the stopped state. Are you sure?"
-msgstr ""
+msgstr "이 작업을 취소하면 %(number)s개의 작업이 중지됨 상태가 됩니다. 취소하시겠습니까?"
 
 msgid "This will cancel task \\\"%(taskName)s\\\", putting it in the stopped state. Are you sure?"
-msgstr ""
+msgstr "이 작업을 취소하면 \\\"%(taskName)s\\\"이/가 중지됨 상태가 됩니다. 취소하시겠습니까?"
 
 msgid "This will force unlock %(number)s task(s). This may cause harm and should be used with caution. Are you sure?"
-msgstr ""
+msgstr "%(number)s개의 작업을 강제로 잠금 해제합니다. 문제가 발생할 수 있으므로 주의해서 사용해야 합니다. 계속하시겠습니까?"
 
 msgid "This will force unlock task \\\"%(taskName)s\\\". This may cause harm and should be used with caution. Are you sure?"
-msgstr ""
+msgstr "이 작업을 강제로 잠금 해제하면 \\\"%(taskName)s\\\"의 잠금이 해제됩니다. 문제가 발생할 수 있으므로 주의해서 사용해야 합니다. 계속하시겠습니까?"
 
 msgid "This will resume %(number)s task(s), putting them in the running state. Are you sure?"
-msgstr ""
+msgstr "%(number)s개의 작업을 재개하면 실행 중 상태가 됩니다. 재개하시겠습니까?"
 
 msgid "This will resume task \\\"%(taskName)s\\\", putting it in the running state. Are you sure?"
-msgstr ""
+msgstr "이 작업을 재개하면 \\\"%(taskName)s\\\"이/가 실행 중 상태가 됩니다. 재개하시겠습니까?"
 
 msgid "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed."
 msgstr "현재 태스크를 실행 중인 대상 리소스의 잠금을 해제합니다. 상태의 일관성이 저해될 수 있으므로 태스크가 다시 시작될 수 없는지를 확인한 후 신중하게 사용해야 합니다."
@@ -754,11 +781,11 @@ msgstr "재시도 간격(초)"
 msgid "Total"
 msgstr "전체"
 
+msgid "Triggered by"
+msgstr ""
+
 msgid "Troubleshooting"
 msgstr "문제 해결 "
-
-msgid "Trying to abort the task"
-msgstr "작업을 중단하려고 합니다"
 
 msgid "Trying to cancel step"
 msgstr "단계를 취소하려고 합니다"
@@ -778,8 +805,11 @@ msgstr "메일 알림을 생성할 수 없습니다: %s"
 msgid "Unable to enable mail notification to user '%s': %s"
 msgstr "'%s' 사용자에게 메일 알림을 활성화할 수 없습니다: %s"
 
-msgid "Undo selection"
-msgstr "선택 취소"
+msgid "Unknown"
+msgstr ""
+
+msgid "Unknown error"
+msgstr ""
 
 msgid "Unlimited"
 msgstr "제한 없음 "
@@ -796,6 +826,9 @@ msgstr "작업 문제 해결 문서를 가리키는 URL입니다. 여기에는 %
 msgid "User search_params requires user_id to be specified"
 msgstr "사용자 search_params를 사용하려면 user_id를 지정해야 합니다."
 
+msgid "Warning"
+msgstr ""
+
 msgid "Wed"
 msgstr "수"
 
@@ -805,14 +838,14 @@ msgstr "마지막에 초점을 맞춤"
 msgid "Yes"
 msgstr "예  "
 
-msgid "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource"
-msgstr "이 페이지에서 리소스 잠금을 찾을 수 있습니다. 잠금 아이콘으로 표시된 배타적 잠금은 이 작업이 실행되는 동안 다른 작업이 잠긴 리소스를 사용할 수 없음을 의미합니다. 잠금 해제 아이콘으로 표시된 비배타적 잠금은 다른 작업이 리소스에 자유롭게 액세스할 수 있음을 의미하며, 이 작업과 리소스의 관계를 나타내는 데만 사용됩니다."
-
 msgid "You do not have permission"
 msgstr "권한이 없습니다"
 
 msgid "activation key"
 msgstr "활성키"
+
+msgid "before"
+msgstr ""
 
 msgid "cannot be cancelled with force at the moment."
 msgstr "현재로선 강제로 취소할 수 없습니다."
@@ -828,6 +861,9 @@ msgstr "재개할 수 없음"
 
 msgid "error"
 msgstr "오류"
+
+msgid "id: %s"
+msgstr ""
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is day of month (range: 1-31)"
@@ -917,6 +953,9 @@ msgstr "성공"
 
 msgid "system"
 msgstr "시스템"
+
+msgid "task"
+msgstr ""
 
 msgid "task has to be cancellable"
 msgstr "작업은 취소 가능해야 합니다"
