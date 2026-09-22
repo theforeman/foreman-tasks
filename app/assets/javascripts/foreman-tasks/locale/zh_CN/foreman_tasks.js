@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman-tasks 12.0.0",
+        "Project-Id-Version": "foreman-tasks 13.2.2",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-12 14:04+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
@@ -25,6 +25,9 @@
       ],
       "%s is not valid format of cron line": [
         "%s 不是正确的 cron 行"
+      ],
+      "%s%% Complete": [
+        ""
       ],
       "%{count} tasks are in running or paused state for more than a day": [
         "%{count} 任务处于 running 或 paused 状态，持续超过一天"
@@ -66,13 +69,10 @@
         "活跃"
       ],
       "Active Filters": [
-        ""
+        "活跃的过滤器"
       ],
       "Active or disabled recurring logic with purpose %s already exists": [
         "带有目的 %s 的活跃或禁用的周期性逻辑已存在"
-      ],
-      "All %s tasks are selected.": [
-        "已选择所有%s任务。"
       ],
       "All proxies with the required feature are unavailable at the moment": [
         "具备所需功能的所有代理暂时都不可用"
@@ -95,9 +95,6 @@
       "Backtrace": [
         "回溯"
       ],
-      "Blocks": [
-        ""
-      ],
       "Bulk action": [
         "批量操作"
       ],
@@ -108,10 +105,10 @@
         "取消选择"
       ],
       "Cancel Selected Tasks": [
-        ""
+        "取消选择的任务"
       ],
       "Cancel Task": [
-        ""
+        "取消任务"
       ],
       "Cancel enforced: the task might be still running on the proxy": [
         "强制取消：任务可能仍在代理服务器上运行"
@@ -158,17 +155,17 @@
       "Clear Cancelled": [
         "清除取消"
       ],
-      "Complete": [
-        "完成"
-      ],
       "Conflicts with tasks:": [
         "与任务冲突 :"
       ],
+      "Copied": [
+        ""
+      ],
+      "Copy": [
+        ""
+      ],
       "Could not cancel step.": [
         "无法取消步骤。"
-      ],
-      "Could not receive data: %s": [
-        "无法接收数据：$%s"
       ],
       "Cron line": [
         "Cron 行"
@@ -198,10 +195,7 @@
         "提供有关长时间运行的任务的通知"
       ],
       "Dependencies": [
-        ""
-      ],
-      "Depends on": [
-        ""
+        "依赖关系"
       ],
       "Details": [
         "详情"
@@ -233,17 +227,17 @@
       "Enable the dynflow console (/foreman_tasks/dynflow) for debugging": [
         "启用 dynflow 控制台（/foreman_tasks/dynflow）用于故障排除"
       ],
+      "Ended at": [
+        ""
+      ],
       "Ends": [
         "结束"
       ],
       "Ends at": [
         "结束于"
       ],
-      "Errors": [
-        "错误"
-      ],
-      "Errors:": [
-        "错误："
+      "Error": [
+        ""
       ],
       "Event delivered by request %{request_id}": [
         "由请求 %{request_id} 发送的事件"
@@ -251,17 +245,29 @@
       "Exception": [
         "例外"
       ],
+      "Exclusive resources": [
+        ""
+      ],
       "Execute now": [
         "立即执行"
       ],
+      "Execution details": [
+        ""
+      ],
       "Execution plan data not available ": [
         "未可用执行计划数据"
+      ],
+      "Execution type": [
+        ""
       ],
       "Export All": [
         "导出所有"
       ],
       "External Id": [
         "外部 Id"
+      ],
+      "Failed task errors": [
+        ""
       ],
       "Failed to check on tasks on proxy at %{url}: %{exception}": [
         "无法检查在 %{url} 代理中的任务: %{exception}"
@@ -285,10 +291,10 @@
         "强制解除锁定"
       ],
       "Force Unlock Selected Tasks": [
-        ""
+        "强制解锁所选的任务"
       ],
       "Force Unlock Task": [
-        ""
+        "强制解锁任务"
       ],
       "Foreman Tasks": [
         "Foreman 任务"
@@ -383,14 +389,17 @@
       "No": [
         "否"
       ],
-      "No Tasks": [
-        "没有任务"
-      ],
-      "No errors": [
-        "无错误"
+      "No errors found": [
+        ""
       ],
       "No proxy defined for execution": [
         "没有为执行定义代理"
+      ],
+      "No resources": [
+        ""
+      ],
+      "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes.": [
+        ""
       ],
       "No running steps": [
         "没有运行步骤"
@@ -404,8 +413,11 @@
       "No. of Tasks": [
         "任务号"
       ],
-      "None": [
+      "Non-exclusive resources": [
         ""
+      ],
+      "None": [
+        "没有"
       ],
       "Not all the selected tasks can be cancelled": [
         "并非所有选定的任务都可以取消"
@@ -425,11 +437,14 @@
       "On": [
         "上"
       ],
-      "Operation": [
-        "操作"
+      "Only this task can access the resource. Other tasks must wait until this process completes.": [
+        ""
       ],
       "Other includes all stopped tasks that are cancelled or pending": [
         "其他包括已取消或待处理的所有已停止任务"
+      ],
+      "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others.": [
+        ""
       ],
       "Other:": [
         "其他："
@@ -437,14 +452,14 @@
       "Output": [
         "输出"
       ],
-      "Output:": [
-        "输出："
-      ],
       "Parent task": [
         "父任务"
       ],
       "Paused": [
         "暂停"
+      ],
+      "Planned task": [
+        ""
       ],
       "Please inspect their state, fix their errors and resume them.": [
         "请检查其状态，纠正其错误，然后恢复它们。"
@@ -531,10 +546,10 @@
         "恢复选择"
       ],
       "Resume Selected Tasks": [
-        ""
+        "恢复选择的任务"
       ],
       "Resume Task": [
-        ""
+        "恢复任务"
       ],
       "Resume all paused error tasks": [
         "恢复所有暂停的错误任务"
@@ -551,8 +566,8 @@
       "Running": [
         "執行中"
       ],
-      "Running Steps": [
-        "运行步骤"
+      "Running step %s": [
+        ""
       ],
       "Sat": [
         "周六"
@@ -572,12 +587,6 @@
       "See %{link} for more details on how to resolve the issue": [
         "有关如何解决此问题的更多详细信息，请参见%{link}"
       ],
-      "Select all {count} tasks": [
-        "选择所有 {count} 任务"
-      ],
-      "Select row": [
-        "选择行"
-      ],
       "Send data to the task from external executor (such as smart_proxy_dynflow)": [
         "从外部执行者发送到的任务（例如 smart_proxy_dynflow）"
       ],
@@ -586,6 +595,12 @@
       ],
       "Setting is off": [
         "设置已关闭"
+      ],
+      "Show less details": [
+        ""
+      ],
+      "Show more details": [
+        ""
       ],
       "Show recurring logic details": [
         "显示重复逻辑详情"
@@ -630,25 +645,22 @@
         "停止"
       ],
       "Stopped tasks by result": [
-        ""
+        "按结果停止任务"
       ],
       "Sub tasks": [
         "子任务"
       ],
-      "Sub tasks of %s": [
-        "%s 的子任务"
-      ],
       "Subscribe": [
         "订阅"
+      ],
+      "Success": [
+        ""
       ],
       "Sun": [
         "周日"
       ],
       "Sync task timeout": [
         "同步任务超时"
-      ],
-      "Task": [
-        "任务"
       ],
       "Task Details": [
         "任务详情"
@@ -659,13 +671,22 @@
       "Task aborted: the task might be still running on the proxy": [
         "被中止的任务：该任务可能仍在代理服务器中运行"
       ],
+      "Task actions": [
+        ""
+      ],
+      "Task blocks": [
+        ""
+      ],
       "Task cannot be canceled": [
         "任务无法取消"
       ],
       "Task count": [
         "任务计数"
       ],
-      "Task dependencies": [
+      "Task depends on": [
+        ""
+      ],
+      "Task details": [
         ""
       ],
       "Task group common": [
@@ -689,11 +710,14 @@
       "Tasks troubleshooting URL": [
         "任务故障排除 URL"
       ],
+      "Temporarily suspended step(s)": [
+        ""
+      ],
       "The ID of the step inside the execution plan to send the event to": [
         "执行计划中的步骤 ID 要发送事件到"
       ],
-      "The recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task.": [
-        "推荐的方法是调查下面和“错误”选项卡中的错误消息，解决造成问题的主要原因，然后继续执行任务。"
+      "The recommended approach is to investigate the error messages below and in 'Execution details' tab, address the primary cause of the issue and resume the task.": [
+        ""
       ],
       "The recurring logic was disabled.": [
         "重复逻辑已被禁用。"
@@ -707,11 +731,17 @@
       "The targets are of different types": [
         "目标为不同的类型"
       ],
-      "The task cannot be aborted at the moment.": [
-        "目前无法中止任务。"
-      ],
       "The task could not be started": [
         "无法启动该任务"
+      ],
+      "The task finished with no errors or warnings.": [
+        ""
+      ],
+      "The task has not started yet.": [
+        ""
+      ],
+      "The task is still being processed. Please wait.": [
+        ""
       ],
       "There is %{count} paused task in the system that need attention": [
         "系统中有%{count}个暂停的任务需要注意"
@@ -719,26 +749,23 @@
       "This action will delete all cancelled recurring logics. Please note that this action can't be reversed.": [
         "此操作将删除所有取消的重复逻辑。请注意，此操作无法撤消。"
       ],
-      "This task may have dependencies on other tasks or may be blocking other tasks from executing. Dependencies are established through task chaining relationships.": [
-        ""
-      ],
       "This will cancel %(number)s task(s), putting them in the stopped state. Are you sure?": [
-        ""
+        "这将取消 %(taskName)s 个任务，使其进入停止状态。您确定要继续吗？"
       ],
       "This will cancel task \\\\\\\"%(taskName)s\\\\\\\", putting it in the stopped state. Are you sure?": [
-        ""
+        "这将取消任务 \\\\\\\"%(taskName)s\\\\\\\"，使其进入停止状态。您确定要继续吗？"
       ],
       "This will force unlock %(number)s task(s). This may cause harm and should be used with caution. Are you sure?": [
-        ""
+        "这将强制解锁 %(taskName)s 个任务。这可能会引起损害，应谨慎使用。您确定要继续吗？"
       ],
       "This will force unlock task \\\\\\\"%(taskName)s\\\\\\\". This may cause harm and should be used with caution. Are you sure?": [
-        ""
+        "这将强制解锁任务 \\\\\\\"%(taskName)s\\\\\\\"。这可能会引起损害，应谨慎使用。您确定要继续吗？"
       ],
       "This will resume %(number)s task(s), putting them in the running state. Are you sure?": [
-        ""
+        "这将恢复 %(number)s 任务，使其进入运行状态。您确定要继续吗？"
       ],
       "This will resume task \\\\\\\"%(taskName)s\\\\\\\", putting it in the running state. Are you sure?": [
-        ""
+        "这将恢复任务 \\\\\\\"%(taskName)s\\\\\\\"，使其进入运行状态。您确定要继续吗？"
       ],
       "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed.": [
         "这将解锁任务正在针对其运行的资源。请注意，这可能会导致状态不一致，应该谨慎使用，然后再确保任务无法恢复。"
@@ -752,11 +779,11 @@
       "Total": [
         "总计"
       ],
+      "Triggered by": [
+        ""
+      ],
       "Troubleshooting": [
         "故障排除"
-      ],
-      "Trying to abort the task": [
-        "尝试中止任务"
       ],
       "Trying to cancel step": [
         "试图取消步骤"
@@ -776,8 +803,11 @@
       "Unable to enable mail notification to user '%s': %s": [
         "无法启用发给用户 '%s' 的邮件通知：%s"
       ],
-      "Undo selection": [
-        "撤销选择"
+      "Unknown": [
+        ""
+      ],
+      "Unknown error": [
+        ""
       ],
       "Unlimited": [
         "无限制"
@@ -794,6 +824,9 @@
       "User search_params requires user_id to be specified": [
         "使用者 search_params 需要指定 user_id"
       ],
+      "Warning": [
+        ""
+      ],
       "Wed": [
         "周三"
       ],
@@ -803,14 +836,14 @@
       "Yes": [
         "是"
       ],
-      "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource": [
-        "您可以在本页中找到资源锁。标有已锁图标的独占锁表示此任务运行时其他任务都不能使用已锁定的资源。标有未锁图标的非独占锁表示其他任务可以自由访问该资源，它仅用于指出此任务与该资源的关系"
-      ],
       "You do not have permission": [
         "您没有权限"
       ],
       "activation key": [
         "激活码"
+      ],
+      "before": [
+        ""
       ],
       "cannot be cancelled with force at the moment.": [
         "目前无法强行取消。"
@@ -826,6 +859,9 @@
       ],
       "error": [
         "错误"
+      ],
+      "id: %s": [
+        ""
       ],
       "is day of month (range: 1-31)": [
         "日期（范围：1-31）"
@@ -910,6 +946,9 @@
       ],
       "system": [
         "系統"
+      ],
+      "task": [
+        ""
       ],
       "task has to be cancellable": [
         "任务必须可取消"

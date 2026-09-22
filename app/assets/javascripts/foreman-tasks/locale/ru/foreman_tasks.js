@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman-tasks 12.0.0",
+        "Project-Id-Version": "foreman-tasks 13.2.2",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-12 14:04+0000",
         "Last-Translator": "Yulia <yulia.poyarkova@redhat.com>, 2016",
@@ -25,6 +25,9 @@
       ],
       "%s is not valid format of cron line": [
         "Недопустимый формат cron: %s"
+      ],
+      "%s%% Complete": [
+        ""
       ],
       "%{count} tasks are in running or paused state for more than a day": [
         ""
@@ -71,9 +74,6 @@
       "Active or disabled recurring logic with purpose %s already exists": [
         ""
       ],
-      "All %s tasks are selected.": [
-        ""
-      ],
       "All proxies with the required feature are unavailable at the moment": [
         ""
       ],
@@ -94,9 +94,6 @@
       ],
       "Backtrace": [
         "Стек вызовов"
-      ],
-      "Blocks": [
-        ""
       ],
       "Bulk action": [
         "Групповое действие"
@@ -158,16 +155,16 @@
       "Clear Cancelled": [
         ""
       ],
-      "Complete": [
-        ""
-      ],
       "Conflicts with tasks:": [
         "Конфликт с задачами:"
       ],
-      "Could not cancel step.": [
+      "Copied": [
         ""
       ],
-      "Could not receive data: %s": [
+      "Copy": [
+        ""
+      ],
+      "Could not cancel step.": [
         ""
       ],
       "Cron line": [
@@ -200,9 +197,6 @@
       "Dependencies": [
         ""
       ],
-      "Depends on": [
-        ""
-      ],
       "Details": [
         "Свойства"
       ],
@@ -233,16 +227,16 @@
       "Enable the dynflow console (/foreman_tasks/dynflow) for debugging": [
         "Разрешить отладку в консоли Dynflow (/foreman_tasks/dynflow)"
       ],
+      "Ended at": [
+        ""
+      ],
       "Ends": [
         "Заканчивается"
       ],
       "Ends at": [
         "Время окончания"
       ],
-      "Errors": [
-        "Ошибки"
-      ],
-      "Errors:": [
+      "Error": [
         ""
       ],
       "Event delivered by request %{request_id}": [
@@ -251,10 +245,19 @@
       "Exception": [
         "Исключение"
       ],
+      "Exclusive resources": [
+        ""
+      ],
       "Execute now": [
         "Запустить сейчас"
       ],
+      "Execution details": [
+        ""
+      ],
       "Execution plan data not available ": [
+        ""
+      ],
+      "Execution type": [
         ""
       ],
       "Export All": [
@@ -262,6 +265,9 @@
       ],
       "External Id": [
         "Внешний идентификатор"
+      ],
+      "Failed task errors": [
+        ""
       ],
       "Failed to check on tasks on proxy at %{url}: %{exception}": [
         ""
@@ -383,13 +389,16 @@
       "No": [
         "Нет"
       ],
-      "No Tasks": [
+      "No errors found": [
         ""
       ],
-      "No errors": [
-        "Нет ошибок"
-      ],
       "No proxy defined for execution": [
+        ""
+      ],
+      "No resources": [
+        ""
+      ],
+      "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes.": [
         ""
       ],
       "No running steps": [
@@ -403,6 +412,9 @@
       ],
       "No. of Tasks": [
         "Число задач"
+      ],
+      "Non-exclusive resources": [
+        ""
       ],
       "None": [
         ""
@@ -425,10 +437,13 @@
       "On": [
         "Настроить"
       ],
-      "Operation": [
-        "Операция"
+      "Only this task can access the resource. Other tasks must wait until this process completes.": [
+        ""
       ],
       "Other includes all stopped tasks that are cancelled or pending": [
+        ""
+      ],
+      "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others.": [
         ""
       ],
       "Other:": [
@@ -437,14 +452,14 @@
       "Output": [
         "Вывод"
       ],
-      "Output:": [
-        ""
-      ],
       "Parent task": [
         "Родительская задача"
       ],
       "Paused": [
         "Приостановлена"
+      ],
+      "Planned task": [
+        ""
       ],
       "Please inspect their state, fix their errors and resume them.": [
         "Проверьте их состояние, исправьте ошибки и перезапустите еще раз."
@@ -551,8 +566,8 @@
       "Running": [
         "Работает"
       ],
-      "Running Steps": [
-        "Последовательность действий"
+      "Running step %s": [
+        ""
       ],
       "Sat": [
         "Сб"
@@ -572,12 +587,6 @@
       "See %{link} for more details on how to resolve the issue": [
         ""
       ],
-      "Select all {count} tasks": [
-        ""
-      ],
-      "Select row": [
-        ""
-      ],
       "Send data to the task from external executor (such as smart_proxy_dynflow)": [
         "Отправить задаче данные от внешнего исполнителя (например, от smart_proxy_dynflow)"
       ],
@@ -585,6 +594,12 @@
         "Настроить многократное выполнение"
       ],
       "Setting is off": [
+        ""
+      ],
+      "Show less details": [
+        ""
+      ],
+      "Show more details": [
         ""
       ],
       "Show recurring logic details": [
@@ -635,20 +650,17 @@
       "Sub tasks": [
         "Подзадачи"
       ],
-      "Sub tasks of %s": [
-        ""
-      ],
       "Subscribe": [
         "Подписаться"
+      ],
+      "Success": [
+        ""
       ],
       "Sun": [
         "Вс"
       ],
       "Sync task timeout": [
         ""
-      ],
-      "Task": [
-        "Задача"
       ],
       "Task Details": [
         "Описание задачи"
@@ -659,13 +671,22 @@
       "Task aborted: the task might be still running on the proxy": [
         ""
       ],
+      "Task actions": [
+        ""
+      ],
+      "Task blocks": [
+        ""
+      ],
       "Task cannot be canceled": [
         ""
       ],
       "Task count": [
         "Количество задач"
       ],
-      "Task dependencies": [
+      "Task depends on": [
+        ""
+      ],
+      "Task details": [
         ""
       ],
       "Task group common": [
@@ -689,10 +710,13 @@
       "Tasks troubleshooting URL": [
         ""
       ],
+      "Temporarily suspended step(s)": [
+        ""
+      ],
       "The ID of the step inside the execution plan to send the event to": [
         "Идентификатор этапа в плане исполнения, которому будет отправлено событие"
       ],
-      "The recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task.": [
+      "The recommended approach is to investigate the error messages below and in 'Execution details' tab, address the primary cause of the issue and resume the task.": [
         ""
       ],
       "The recurring logic was disabled.": [
@@ -707,10 +731,16 @@
       "The targets are of different types": [
         "Попытка выполнения действия над разными типами объектов"
       ],
-      "The task cannot be aborted at the moment.": [
+      "The task could not be started": [
         ""
       ],
-      "The task could not be started": [
+      "The task finished with no errors or warnings.": [
+        ""
+      ],
+      "The task has not started yet.": [
+        ""
+      ],
+      "The task is still being processed. Please wait.": [
         ""
       ],
       "There is %{count} paused task in the system that need attention": [
@@ -718,9 +748,6 @@
         ""
       ],
       "This action will delete all cancelled recurring logics. Please note that this action can't be reversed.": [
-        ""
-      ],
-      "This task may have dependencies on other tasks or may be blocking other tasks from executing. Dependencies are established through task chaining relationships.": [
         ""
       ],
       "This will cancel %(number)s task(s), putting them in the stopped state. Are you sure?": [
@@ -753,11 +780,11 @@
       "Total": [
         "Всего"
       ],
+      "Triggered by": [
+        ""
+      ],
       "Troubleshooting": [
         "Диагностика"
-      ],
-      "Trying to abort the task": [
-        ""
       ],
       "Trying to cancel step": [
         ""
@@ -777,8 +804,11 @@
       "Unable to enable mail notification to user '%s': %s": [
         ""
       ],
-      "Undo selection": [
-        "Отменить выбор"
+      "Unknown": [
+        ""
+      ],
+      "Unknown error": [
+        ""
       ],
       "Unlimited": [
         "∞"
@@ -795,6 +825,9 @@
       "User search_params requires user_id to be specified": [
         "Для того чтобы настроить search_params для пользователя, необходимо установить user_id"
       ],
+      "Warning": [
+        ""
+      ],
       "Wed": [
         "Ср"
       ],
@@ -804,14 +837,14 @@
       "Yes": [
         "Да"
       ],
-      "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource": [
-        ""
-      ],
       "You do not have permission": [
         ""
       ],
       "activation key": [
         "ключ активации"
+      ],
+      "before": [
+        ""
       ],
       "cannot be cancelled with force at the moment.": [
         ""
@@ -826,6 +859,9 @@
         ""
       ],
       "error": [
+        ""
+      ],
+      "id: %s": [
         ""
       ],
       "is day of month (range: 1-31)": [
@@ -911,6 +947,9 @@
       ],
       "system": [
         "система"
+      ],
+      "task": [
+        ""
       ],
       "task has to be cancellable": [
         ""

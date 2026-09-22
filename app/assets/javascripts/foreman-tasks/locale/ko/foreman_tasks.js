@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman-tasks 12.0.0",
+        "Project-Id-Version": "foreman-tasks 13.2.2",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2016-02-12 14:04+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
@@ -25,6 +25,9 @@
       ],
       "%s is not valid format of cron line": [
         "%s은(는) 유효한 cron 줄 형식이 아닙니다."
+      ],
+      "%s%% Complete": [
+        ""
       ],
       "%{count} tasks are in running or paused state for more than a day": [
         "%{count} 작업이 하루 이상 실행 중이거나 일시 중지 상태입니다."
@@ -66,13 +69,10 @@
         "활성"
       ],
       "Active Filters": [
-        ""
+        "활성 필터"
       ],
       "Active or disabled recurring logic with purpose %s already exists": [
         "%s 목적이 있는 활성 또는 비활성화된 반복 논리가 이미 존재합니다"
-      ],
-      "All %s tasks are selected.": [
-        "모두%s 작업이 선택되었습니다."
       ],
       "All proxies with the required feature are unavailable at the moment": [
         "현재 필요한 기능이 있는 모든 프록시를 사용할 수 없습니다."
@@ -95,9 +95,6 @@
       "Backtrace": [
         "역추적"
       ],
-      "Blocks": [
-        ""
-      ],
       "Bulk action": [
         "대량 작업 "
       ],
@@ -108,10 +105,10 @@
         "선택한 작업 취소"
       ],
       "Cancel Selected Tasks": [
-        ""
+        "선택한 작업 취소"
       ],
       "Cancel Task": [
-        ""
+        "작업 취소"
       ],
       "Cancel enforced: the task might be still running on the proxy": [
         "강제 취소됨: 프록시에서 태스크가 아직 실행 중일 수 있습니다."
@@ -158,17 +155,17 @@
       "Clear Cancelled": [
         "삭제 취소됨"
       ],
-      "Complete": [
-        "완료"
-      ],
       "Conflicts with tasks:": [
         "태스크 충돌:"
       ],
+      "Copied": [
+        ""
+      ],
+      "Copy": [
+        ""
+      ],
       "Could not cancel step.": [
         "단계를 취소할 수 없습니다."
-      ],
-      "Could not receive data: %s": [
-        "데이터를 받을 수 없습니다: %s"
       ],
       "Cron line": [
         "Cron 줄"
@@ -198,10 +195,7 @@
         "장기 실행 작업에 대한 알림 전달"
       ],
       "Dependencies": [
-        ""
-      ],
-      "Depends on": [
-        ""
+        "종속성 "
       ],
       "Details": [
         "상세 정보 "
@@ -233,17 +227,17 @@
       "Enable the dynflow console (/foreman_tasks/dynflow) for debugging": [
         "디버깅에 dynflow 콘솔(/foreman_tasks/dynflow) 활성화"
       ],
+      "Ended at": [
+        ""
+      ],
       "Ends": [
         "종료"
       ],
       "Ends at": [
         "종료 일시"
       ],
-      "Errors": [
-        "오류"
-      ],
-      "Errors:": [
-        "오류:"
+      "Error": [
+        ""
       ],
       "Event delivered by request %{request_id}": [
         "%{request_id} 요청에 따라 이벤트가 제공됩니다."
@@ -251,17 +245,29 @@
       "Exception": [
         "예외"
       ],
+      "Exclusive resources": [
+        ""
+      ],
       "Execute now": [
         "지금 실행"
       ],
+      "Execution details": [
+        ""
+      ],
       "Execution plan data not available ": [
         "실행 계획 데이터를 사용할 수 없습니다. "
+      ],
+      "Execution type": [
+        ""
       ],
       "Export All": [
         "모두 내보내기"
       ],
       "External Id": [
         "외부 IP"
+      ],
+      "Failed task errors": [
+        ""
       ],
       "Failed to check on tasks on proxy at %{url}: %{exception}": [
         "%{url}에 있는 프록시에서 작업을 확인하지 못했습니다: %{exception}"
@@ -285,10 +291,10 @@
         "강제 잠금 해제"
       ],
       "Force Unlock Selected Tasks": [
-        ""
+        "선택한 작업 강제 잠금 해제"
       ],
       "Force Unlock Task": [
-        ""
+        "작업 강제 잠금 해제"
       ],
       "Foreman Tasks": [
         "Foreman 작업"
@@ -383,14 +389,17 @@
       "No": [
         "아니오  "
       ],
-      "No Tasks": [
-        "작업 없음"
-      ],
-      "No errors": [
-        "오류 없음 "
+      "No errors found": [
+        ""
       ],
       "No proxy defined for execution": [
         "실행을 위한 프록시가 정의되지 않았습니다"
+      ],
+      "No resources": [
+        ""
+      ],
+      "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes.": [
+        ""
       ],
       "No running steps": [
         "실행 중인 단계가 없습니다."
@@ -404,8 +413,11 @@
       "No. of Tasks": [
         "작업 수"
       ],
-      "None": [
+      "Non-exclusive resources": [
         ""
+      ],
+      "None": [
+        "없음 "
       ],
       "Not all the selected tasks can be cancelled": [
         "선택한 모든 작업을 취소할 수 없습니다."
@@ -425,11 +437,14 @@
       "On": [
         "켜기"
       ],
-      "Operation": [
-        "작업 "
+      "Only this task can access the resource. Other tasks must wait until this process completes.": [
+        ""
       ],
       "Other includes all stopped tasks that are cancelled or pending": [
         "기타에는 취소되거나 보류 중인 모든 중지된 작업이 포함됩니다."
+      ],
+      "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others.": [
+        ""
       ],
       "Other:": [
         "기타:"
@@ -437,14 +452,14 @@
       "Output": [
         "출력"
       ],
-      "Output:": [
-        "출력:"
-      ],
       "Parent task": [
         "부모 태스크"
       ],
       "Paused": [
         "일시정지 "
+      ],
+      "Planned task": [
+        ""
       ],
       "Please inspect their state, fix their errors and resume them.": [
         "상태를 확인하고 오류를 수정한 다음 다시 시작하십시오."
@@ -531,10 +546,10 @@
         "선택한 작업 재개"
       ],
       "Resume Selected Tasks": [
-        ""
+        "선택한 작업 재개"
       ],
       "Resume Task": [
-        ""
+        "작업 재개"
       ],
       "Resume all paused error tasks": [
         "일시 정지된 모든 오류 태스크 다시 시작"
@@ -551,8 +566,8 @@
       "Running": [
         "실행 중"
       ],
-      "Running Steps": [
-        "실행 중인 단계"
+      "Running step %s": [
+        ""
       ],
       "Sat": [
         "토"
@@ -572,12 +587,6 @@
       "See %{link} for more details on how to resolve the issue": [
         "문제를 해결하는 방법에 대한 자세한 내용은 %{link} 참조"
       ],
-      "Select all {count} tasks": [
-        "모든 {count} 작업 선택"
-      ],
-      "Select row": [
-        "행 선택"
-      ],
       "Send data to the task from external executor (such as smart_proxy_dynflow)": [
         "외부 실행자(예: smart_proxy_dynflow)의 태스크에 데이터를 전송합니다."
       ],
@@ -586,6 +595,12 @@
       ],
       "Setting is off": [
         "설정이 꺼져있습니다"
+      ],
+      "Show less details": [
+        ""
+      ],
+      "Show more details": [
+        ""
       ],
       "Show recurring logic details": [
         "반복 로직 정보 표시"
@@ -630,25 +645,22 @@
         "중단됨"
       ],
       "Stopped tasks by result": [
-        ""
+        "결과에 따라 중단된 작업"
       ],
       "Sub tasks": [
         "하위 태스크"
       ],
-      "Sub tasks of %s": [
-        "%s의 하위 작업"
-      ],
       "Subscribe": [
         "등록 "
+      ],
+      "Success": [
+        ""
       ],
       "Sun": [
         "일"
       ],
       "Sync task timeout": [
         "동기화 작업 시간 초과"
-      ],
-      "Task": [
-        "작업"
       ],
       "Task Details": [
         "작업 상세 정보 "
@@ -659,13 +671,22 @@
       "Task aborted: the task might be still running on the proxy": [
         "작업이 중단되었습니다. 작업이 프록시에서 계속 실행 중일 수 있습니다."
       ],
+      "Task actions": [
+        ""
+      ],
+      "Task blocks": [
+        ""
+      ],
       "Task cannot be canceled": [
         "작업을 취소할 수 없습니다."
       ],
       "Task count": [
         "태스크 수"
       ],
-      "Task dependencies": [
+      "Task depends on": [
+        ""
+      ],
+      "Task details": [
         ""
       ],
       "Task group common": [
@@ -689,11 +710,14 @@
       "Tasks troubleshooting URL": [
         "작업 문제 해결 URL"
       ],
+      "Temporarily suspended step(s)": [
+        ""
+      ],
       "The ID of the step inside the execution plan to send the event to": [
         "이벤트를 전송할 실행 계획의 단계에 해당하는 ID입니다."
       ],
-      "The recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task.": [
-        "권장되는 방법은 아래의 오류 메시지를 조사하고 '오류' 탭에서 문제의 근본 원인을 해결하고 작업을 재개하는 것입니다."
+      "The recommended approach is to investigate the error messages below and in 'Execution details' tab, address the primary cause of the issue and resume the task.": [
+        ""
       ],
       "The recurring logic was disabled.": [
         "반복 논리가 비활성화되었습니다."
@@ -707,11 +731,17 @@
       "The targets are of different types": [
         "대상의 유형이 서로 다릅니다."
       ],
-      "The task cannot be aborted at the moment.": [
-        "현재로는 작업을 중단할 수 없습니다."
-      ],
       "The task could not be started": [
         "작업을 시작할 수 없습니다."
+      ],
+      "The task finished with no errors or warnings.": [
+        ""
+      ],
+      "The task has not started yet.": [
+        ""
+      ],
+      "The task is still being processed. Please wait.": [
+        ""
       ],
       "There is %{count} paused task in the system that need attention": [
         "시스템에서 주의가 필요한 %{count} 일시 중지된 작업이 있습니다"
@@ -719,26 +749,23 @@
       "This action will delete all cancelled recurring logics. Please note that this action can't be reversed.": [
         "이 작업은 취소된 모든 반복 로직을 삭제합니다. 이 작업은 되돌릴 수 없습니다."
       ],
-      "This task may have dependencies on other tasks or may be blocking other tasks from executing. Dependencies are established through task chaining relationships.": [
-        ""
-      ],
       "This will cancel %(number)s task(s), putting them in the stopped state. Are you sure?": [
-        ""
+        "이 작업을 취소하면 %(number)s개의 작업이 중지됨 상태가 됩니다. 취소하시겠습니까?"
       ],
       "This will cancel task \\\\\\\"%(taskName)s\\\\\\\", putting it in the stopped state. Are you sure?": [
-        ""
+        "이 작업을 취소하면 \\\\\\\"%(taskName)s\\\\\\\"이/가 중지됨 상태가 됩니다. 취소하시겠습니까?"
       ],
       "This will force unlock %(number)s task(s). This may cause harm and should be used with caution. Are you sure?": [
-        ""
+        "%(number)s개의 작업을 강제로 잠금 해제합니다. 문제가 발생할 수 있으므로 주의해서 사용해야 합니다. 계속하시겠습니까?"
       ],
       "This will force unlock task \\\\\\\"%(taskName)s\\\\\\\". This may cause harm and should be used with caution. Are you sure?": [
-        ""
+        "이 작업을 강제로 잠금 해제하면 \\\\\\\"%(taskName)s\\\\\\\"의 잠금이 해제됩니다. 문제가 발생할 수 있으므로 주의해서 사용해야 합니다. 계속하시겠습니까?"
       ],
       "This will resume %(number)s task(s), putting them in the running state. Are you sure?": [
-        ""
+        "%(number)s개의 작업을 재개하면 실행 중 상태가 됩니다. 재개하시겠습니까?"
       ],
       "This will resume task \\\\\\\"%(taskName)s\\\\\\\", putting it in the running state. Are you sure?": [
-        ""
+        "이 작업을 재개하면 \\\\\\\"%(taskName)s\\\\\\\"이/가 실행 중 상태가 됩니다. 재개하시겠습니까?"
       ],
       "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed.": [
         "현재 태스크를 실행 중인 대상 리소스의 잠금을 해제합니다. 상태의 일관성이 저해될 수 있으므로 태스크가 다시 시작될 수 없는지를 확인한 후 신중하게 사용해야 합니다."
@@ -752,11 +779,11 @@
       "Total": [
         "전체"
       ],
+      "Triggered by": [
+        ""
+      ],
       "Troubleshooting": [
         "문제 해결 "
-      ],
-      "Trying to abort the task": [
-        "작업을 중단하려고 합니다"
       ],
       "Trying to cancel step": [
         "단계를 취소하려고 합니다"
@@ -776,8 +803,11 @@
       "Unable to enable mail notification to user '%s': %s": [
         "'%s' 사용자에게 메일 알림을 활성화할 수 없습니다: %s"
       ],
-      "Undo selection": [
-        "선택 취소"
+      "Unknown": [
+        ""
+      ],
+      "Unknown error": [
+        ""
       ],
       "Unlimited": [
         "제한 없음 "
@@ -794,6 +824,9 @@
       "User search_params requires user_id to be specified": [
         "사용자 search_params를 사용하려면 user_id를 지정해야 합니다."
       ],
+      "Warning": [
+        ""
+      ],
       "Wed": [
         "수"
       ],
@@ -803,14 +836,14 @@
       "Yes": [
         "예  "
       ],
-      "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource": [
-        "이 페이지에서 리소스 잠금을 찾을 수 있습니다. 잠금 아이콘으로 표시된 배타적 잠금은 이 작업이 실행되는 동안 다른 작업이 잠긴 리소스를 사용할 수 없음을 의미합니다. 잠금 해제 아이콘으로 표시된 비배타적 잠금은 다른 작업이 리소스에 자유롭게 액세스할 수 있음을 의미하며, 이 작업과 리소스의 관계를 나타내는 데만 사용됩니다."
-      ],
       "You do not have permission": [
         "권한이 없습니다"
       ],
       "activation key": [
         "활성키"
+      ],
+      "before": [
+        ""
       ],
       "cannot be cancelled with force at the moment.": [
         "현재로선 강제로 취소할 수 없습니다."
@@ -826,6 +859,9 @@
       ],
       "error": [
         "오류"
+      ],
+      "id: %s": [
+        ""
       ],
       "is day of month (range: 1-31)": [
         "날짜(범위: 1-31)"
@@ -910,6 +946,9 @@
       ],
       "system": [
         "시스템"
+      ],
+      "task": [
+        ""
       ],
       "task has to be cancellable": [
         "작업은 취소 가능해야 합니다"

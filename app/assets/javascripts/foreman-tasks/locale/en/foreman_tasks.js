@@ -3,9 +3,9 @@
   "locale_data": {
     "foreman_tasks": {
       "": {
-        "Project-Id-Version": "foreman-tasks 12.0.0",
+        "Project-Id-Version": "foreman-tasks 13.2.2",
         "Report-Msgid-Bugs-To": "",
-        "PO-Revision-Date": "2026-03-09 13:09+0000",
+        "PO-Revision-Date": "2026-09-22 12:20+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
         "Language-Team": "LANGUAGE <LL@li.org>",
         "Language": "",
@@ -24,6 +24,9 @@
         ""
       ],
       "%s is not valid format of cron line": [
+        ""
+      ],
+      "%s%% Complete": [
         ""
       ],
       "%{count} tasks are in running or paused state for more than a day": [
@@ -71,9 +74,6 @@
       "Active or disabled recurring logic with purpose %s already exists": [
         ""
       ],
-      "All %s tasks are selected.": [
-        ""
-      ],
       "All proxies with the required feature are unavailable at the moment": [
         ""
       ],
@@ -93,9 +93,6 @@
         ""
       ],
       "Backtrace": [
-        ""
-      ],
-      "Blocks": [
         ""
       ],
       "Bulk action": [
@@ -158,16 +155,16 @@
       "Clear Cancelled": [
         ""
       ],
-      "Complete": [
-        ""
-      ],
       "Conflicts with tasks:": [
         ""
       ],
-      "Could not cancel step.": [
+      "Copied": [
         ""
       ],
-      "Could not receive data: %s": [
+      "Copy": [
+        ""
+      ],
+      "Could not cancel step.": [
         ""
       ],
       "Cron line": [
@@ -200,9 +197,6 @@
       "Dependencies": [
         ""
       ],
-      "Depends on": [
-        ""
-      ],
       "Details": [
         ""
       ],
@@ -233,16 +227,16 @@
       "Enable the dynflow console (/foreman_tasks/dynflow) for debugging": [
         ""
       ],
+      "Ended at": [
+        ""
+      ],
       "Ends": [
         ""
       ],
       "Ends at": [
         ""
       ],
-      "Errors": [
-        ""
-      ],
-      "Errors:": [
+      "Error": [
         ""
       ],
       "Event delivered by request %{request_id}": [
@@ -251,16 +245,28 @@
       "Exception": [
         ""
       ],
+      "Exclusive resources": [
+        ""
+      ],
       "Execute now": [
         ""
       ],
+      "Execution details": [
+        ""
+      ],
       "Execution plan data not available ": [
+        ""
+      ],
+      "Execution type": [
         ""
       ],
       "Export All": [
         ""
       ],
       "External Id": [
+        ""
+      ],
+      "Failed task errors": [
         ""
       ],
       "Failed to check on tasks on proxy at %{url}: %{exception}": [
@@ -383,13 +389,16 @@
       "No": [
         ""
       ],
-      "No Tasks": [
-        ""
-      ],
-      "No errors": [
+      "No errors found": [
         ""
       ],
       "No proxy defined for execution": [
+        ""
+      ],
+      "No resources": [
+        ""
+      ],
+      "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes.": [
         ""
       ],
       "No running steps": [
@@ -402,6 +411,9 @@
         ""
       ],
       "No. of Tasks": [
+        ""
+      ],
+      "Non-exclusive resources": [
         ""
       ],
       "None": [
@@ -425,10 +437,13 @@
       "On": [
         ""
       ],
-      "Operation": [
+      "Only this task can access the resource. Other tasks must wait until this process completes.": [
         ""
       ],
       "Other includes all stopped tasks that are cancelled or pending": [
+        ""
+      ],
+      "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others.": [
         ""
       ],
       "Other:": [
@@ -437,13 +452,13 @@
       "Output": [
         ""
       ],
-      "Output:": [
-        ""
-      ],
       "Parent task": [
         ""
       ],
       "Paused": [
+        ""
+      ],
+      "Planned task": [
         ""
       ],
       "Please inspect their state, fix their errors and resume them.": [
@@ -551,7 +566,7 @@
       "Running": [
         ""
       ],
-      "Running Steps": [
+      "Running step %s": [
         ""
       ],
       "Sat": [
@@ -572,12 +587,6 @@
       "See %{link} for more details on how to resolve the issue": [
         ""
       ],
-      "Select all {count} tasks": [
-        ""
-      ],
-      "Select row": [
-        ""
-      ],
       "Send data to the task from external executor (such as smart_proxy_dynflow)": [
         ""
       ],
@@ -585,6 +594,12 @@
         ""
       ],
       "Setting is off": [
+        ""
+      ],
+      "Show less details": [
+        ""
+      ],
+      "Show more details": [
         ""
       ],
       "Show recurring logic details": [
@@ -635,19 +650,16 @@
       "Sub tasks": [
         ""
       ],
-      "Sub tasks of %s": [
+      "Subscribe": [
         ""
       ],
-      "Subscribe": [
+      "Success": [
         ""
       ],
       "Sun": [
         ""
       ],
       "Sync task timeout": [
-        ""
-      ],
-      "Task": [
         ""
       ],
       "Task Details": [
@@ -659,13 +671,22 @@
       "Task aborted: the task might be still running on the proxy": [
         ""
       ],
+      "Task actions": [
+        ""
+      ],
+      "Task blocks": [
+        ""
+      ],
       "Task cannot be canceled": [
         ""
       ],
       "Task count": [
         ""
       ],
-      "Task dependencies": [
+      "Task depends on": [
+        ""
+      ],
+      "Task details": [
         ""
       ],
       "Task group common": [
@@ -689,10 +710,13 @@
       "Tasks troubleshooting URL": [
         ""
       ],
+      "Temporarily suspended step(s)": [
+        ""
+      ],
       "The ID of the step inside the execution plan to send the event to": [
         ""
       ],
-      "The recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task.": [
+      "The recommended approach is to investigate the error messages below and in 'Execution details' tab, address the primary cause of the issue and resume the task.": [
         ""
       ],
       "The recurring logic was disabled.": [
@@ -707,10 +731,16 @@
       "The targets are of different types": [
         ""
       ],
-      "The task cannot be aborted at the moment.": [
+      "The task could not be started": [
         ""
       ],
-      "The task could not be started": [
+      "The task finished with no errors or warnings.": [
+        ""
+      ],
+      "The task has not started yet.": [
+        ""
+      ],
+      "The task is still being processed. Please wait.": [
         ""
       ],
       "There is %{count} paused task in the system that need attention": [
@@ -718,9 +748,6 @@
         ""
       ],
       "This action will delete all cancelled recurring logics. Please note that this action can't be reversed.": [
-        ""
-      ],
-      "This task may have dependencies on other tasks or may be blocking other tasks from executing. Dependencies are established through task chaining relationships.": [
         ""
       ],
       "This will cancel %(number)s task(s), putting them in the stopped state. Are you sure?": [
@@ -753,10 +780,10 @@
       "Total": [
         ""
       ],
-      "Troubleshooting": [
+      "Triggered by": [
         ""
       ],
-      "Trying to abort the task": [
+      "Troubleshooting": [
         ""
       ],
       "Trying to cancel step": [
@@ -777,7 +804,10 @@
       "Unable to enable mail notification to user '%s': %s": [
         ""
       ],
-      "Undo selection": [
+      "Unknown": [
+        ""
+      ],
+      "Unknown error": [
         ""
       ],
       "Unlimited": [
@@ -795,6 +825,9 @@
       "User search_params requires user_id to be specified": [
         ""
       ],
+      "Warning": [
+        ""
+      ],
       "Wed": [
         ""
       ],
@@ -804,13 +837,13 @@
       "Yes": [
         ""
       ],
-      "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource": [
-        ""
-      ],
       "You do not have permission": [
         ""
       ],
       "activation key": [
+        ""
+      ],
+      "before": [
         ""
       ],
       "cannot be cancelled with force at the moment.": [
@@ -826,6 +859,9 @@
         ""
       ],
       "error": [
+        ""
+      ],
+      "id: %s": [
         ""
       ],
       "is day of month (range: 1-31)": [
@@ -910,6 +946,9 @@
         ""
       ],
       "system": [
+        ""
+      ],
+      "task": [
         ""
       ],
       "task has to be cancellable": [

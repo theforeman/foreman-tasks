@@ -6,7 +6,7 @@
 # Luiz Henrique Vasconcelos <luizvasconceloss@yahoo.com.br>, 2017-2018
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman-tasks 12.0.0\n"
+"Project-Id-Version: foreman-tasks 13.2.2\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-12 14:04+0000\n"
 "Last-Translator: Luiz Henrique Vasconcelos <luizvasconceloss@yahoo.com.br>, 20"
@@ -28,6 +28,9 @@ msgstr "mais antigo"
 
 msgid "%s is not valid format of cron line"
 msgstr "%s não é um formato válido de cron line"
+
+msgid "%s%% Complete"
+msgstr ""
 
 msgid "%{count} tasks are in running or paused state for more than a day"
 msgstr ""
@@ -74,9 +77,6 @@ msgstr ""
 msgid "Active or disabled recurring logic with purpose %s already exists"
 msgstr "Lógica recorrente ativa ou desativada com finalidade %s já existe"
 
-msgid "All %s tasks are selected."
-msgstr ""
-
 msgid "All proxies with the required feature are unavailable at the moment"
 msgstr "Todos os proxies com o recurso exigido estão indisponíveis no momento"
 
@@ -98,9 +98,6 @@ msgstr "Voltar para tarefas"
 
 msgid "Backtrace"
 msgstr "Backtrace"
-
-msgid "Blocks"
-msgstr ""
 
 msgid "Bulk action"
 msgstr "Ação em Massa"
@@ -162,17 +159,17 @@ msgstr ""
 msgid "Clear Cancelled"
 msgstr "Limpar cancelado"
 
-msgid "Complete"
-msgstr "Concluído"
-
 msgid "Conflicts with tasks:"
 msgstr "Conflitos com tarefas:"
 
+msgid "Copied"
+msgstr ""
+
+msgid "Copy"
+msgstr ""
+
 msgid "Could not cancel step."
 msgstr "Não foi possível cancelar a etapa."
-
-msgid "Could not receive data: %s"
-msgstr ""
 
 msgid "Cron line"
 msgstr "Cron line"
@@ -202,9 +199,6 @@ msgid "Deliver notifications about long running tasks"
 msgstr ""
 
 msgid "Dependencies"
-msgstr ""
-
-msgid "Depends on"
 msgstr ""
 
 msgid "Details"
@@ -237,17 +231,17 @@ msgstr "Habilitar o console dynflow"
 msgid "Enable the dynflow console (/foreman_tasks/dynflow) for debugging"
 msgstr "Habilitar o console dynflow (/foreman_tasks/dynflow) para depuração"
 
+msgid "Ended at"
+msgstr ""
+
 msgid "Ends"
 msgstr "Finais"
 
 msgid "Ends at"
 msgstr "Terminar em "
 
-msgid "Errors"
-msgstr "Erros"
-
-msgid "Errors:"
-msgstr "Erros:"
+msgid "Error"
+msgstr ""
 
 msgid "Event delivered by request %{request_id}"
 msgstr "Evento entregue por pedido %{request_id}"
@@ -255,17 +249,29 @@ msgstr "Evento entregue por pedido %{request_id}"
 msgid "Exception"
 msgstr "Exceção"
 
+msgid "Exclusive resources"
+msgstr ""
+
 msgid "Execute now"
 msgstr "Executar agora"
 
+msgid "Execution details"
+msgstr ""
+
 msgid "Execution plan data not available "
 msgstr "Dados do plano de execução não estão disponíveis"
+
+msgid "Execution type"
+msgstr ""
 
 msgid "Export All"
 msgstr "Exportar tudo"
 
 msgid "External Id"
 msgstr "ID Externa"
+
+msgid "Failed task errors"
+msgstr ""
 
 msgid "Failed to check on tasks on proxy at %{url}: %{exception}"
 msgstr "Falha na verificação de tarefas em proxy em %{url}: %{exception}"
@@ -387,14 +393,17 @@ msgstr "Próxima ocorrência"
 msgid "No"
 msgstr "Não"
 
-msgid "No Tasks"
-msgstr "Sem tarefas"
-
-msgid "No errors"
-msgstr "Sem erros "
+msgid "No errors found"
+msgstr ""
 
 msgid "No proxy defined for execution"
 msgstr "Nenhum proxy definido para execução"
+
+msgid "No resources"
+msgstr ""
+
+msgid "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes."
+msgstr ""
 
 msgid "No running steps"
 msgstr "Nenhuma etapa em execução"
@@ -408,8 +417,11 @@ msgstr "Não foi possível iniciar nenhuma tarefa"
 msgid "No. of Tasks"
 msgstr "Número de Tarefas"
 
-msgid "None"
+msgid "Non-exclusive resources"
 msgstr ""
+
+msgid "None"
+msgstr "Nenhum(a)"
 
 msgid "Not all the selected tasks can be cancelled"
 msgstr "Nem todas as tarefas selecionadas podem ser canceladas"
@@ -430,11 +442,14 @@ msgstr "Número de tarefas que devem ser enviadas ao proxy inteligente em uma so
 msgid "On"
 msgstr "Ligado"
 
-msgid "Operation"
-msgstr "Operação"
+msgid "Only this task can access the resource. Other tasks must wait until this process completes."
+msgstr ""
 
 msgid "Other includes all stopped tasks that are cancelled or pending"
 msgstr "Outras incluem todas as tarefas paradas que são canceladas ou pendentes"
+
+msgid "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others."
+msgstr ""
 
 msgid "Other:"
 msgstr "Outros"
@@ -442,14 +457,14 @@ msgstr "Outros"
 msgid "Output"
 msgstr "Saída"
 
-msgid "Output:"
-msgstr "Saída:"
-
 msgid "Parent task"
 msgstr "Tarefa pai"
 
 msgid "Paused"
 msgstr "Pausado"
+
+msgid "Planned task"
+msgstr ""
 
 msgid "Please inspect their state, fix their errors and resume them."
 msgstr "Inspecione o estado, corrija os erros e retome-os."
@@ -556,8 +571,8 @@ msgstr "Retomando tarefas selecionadas, isso pode demorar um pouco"
 msgid "Running"
 msgstr "Executando"
 
-msgid "Running Steps"
-msgstr "Etapas em execução"
+msgid "Running step %s"
+msgstr ""
 
 msgid "Sat"
 msgstr "sab"
@@ -577,12 +592,6 @@ msgstr "Consulta de pesquisa"
 msgid "See %{link} for more details on how to resolve the issue"
 msgstr "Veja %{link} para mais detalhes sobre como resolver a questão"
 
-msgid "Select all {count} tasks"
-msgstr ""
-
-msgid "Select row"
-msgstr "Selecionar linha"
-
 msgid "Send data to the task from external executor (such as smart_proxy_dynflow)"
 msgstr "Enviar dados à tarefa do executor externo (como smart_proxy_dynflow)"
 
@@ -591,6 +600,12 @@ msgstr "Configurar execução recorrente "
 
 msgid "Setting is off"
 msgstr "A partida está desligada"
+
+msgid "Show less details"
+msgstr ""
+
+msgid "Show more details"
+msgstr ""
 
 msgid "Show recurring logic details"
 msgstr "Exibir detalhes de lógica recorrente "
@@ -640,20 +655,17 @@ msgstr ""
 msgid "Sub tasks"
 msgstr "Subtarefas "
 
-msgid "Sub tasks of %s"
-msgstr "Subtarefas de %s"
-
 msgid "Subscribe"
 msgstr "Inscrever-se"
+
+msgid "Success"
+msgstr ""
 
 msgid "Sun"
 msgstr "Dom"
 
 msgid "Sync task timeout"
 msgstr "Tempo limite de sincronização de tarefas"
-
-msgid "Task"
-msgstr "Tarefa"
 
 msgid "Task Details"
 msgstr "Detalhes da tarefa"
@@ -664,13 +676,22 @@ msgstr "Status das Tarefas"
 msgid "Task aborted: the task might be still running on the proxy"
 msgstr "Tarefa anulada: a tarefa pode ainda estar em execução no proxy"
 
+msgid "Task actions"
+msgstr ""
+
+msgid "Task blocks"
+msgstr ""
+
 msgid "Task cannot be canceled"
 msgstr "Não é possível cancelar a tarefa"
 
 msgid "Task count"
 msgstr "Contagem de Tarefas"
 
-msgid "Task dependencies"
+msgid "Task depends on"
+msgstr ""
+
+msgid "Task details"
 msgstr ""
 
 msgid "Task group common"
@@ -694,11 +715,14 @@ msgstr ""
 msgid "Tasks troubleshooting URL"
 msgstr "URL de solução de problemas de tarefas"
 
+msgid "Temporarily suspended step(s)"
+msgstr ""
+
 msgid "The ID of the step inside the execution plan to send the event to"
 msgstr "A ID da etapa dentro do plano de execução para enviar o evento a"
 
-msgid "The recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task."
-msgstr "A abordagem recomendada é investigar as mensagens de erro abaixo e na guia 'erros', solucionar a causa principal do problema e retomar a tarefa."
+msgid "The recommended approach is to investigate the error messages below and in 'Execution details' tab, address the primary cause of the issue and resume the task."
+msgstr ""
 
 msgid "The recurring logic was disabled."
 msgstr "A lógica recorrente foi desativada."
@@ -712,11 +736,17 @@ msgstr "A tarefa de proxy inteligente %s falhou."
 msgid "The targets are of different types"
 msgstr "Os destinos são de tipos diferentes "
 
-msgid "The task cannot be aborted at the moment."
-msgstr "No momento, a tarefa não pode ser anulada."
-
 msgid "The task could not be started"
 msgstr "Não foi possível iniciar a tarefa"
+
+msgid "The task finished with no errors or warnings."
+msgstr ""
+
+msgid "The task has not started yet."
+msgstr ""
+
+msgid "The task is still being processed. Please wait."
+msgstr ""
 
 msgid "There is %{count} paused task in the system that need attention"
 msgid_plural "There are %{count} paused tasks in the system that need attention"
@@ -726,9 +756,6 @@ msgstr[2] "Há %{count} tarefas pausadas no sistema que precisam de atenção"
 
 msgid "This action will delete all cancelled recurring logics. Please note that this action can't be reversed."
 msgstr "Esta ação excluirá todas as lógicas recorrentes canceladas. Observe que não é possível reverter essa ação."
-
-msgid "This task may have dependencies on other tasks or may be blocking other tasks from executing. Dependencies are established through task chaining relationships."
-msgstr ""
 
 msgid "This will cancel %(number)s task(s), putting them in the stopped state. Are you sure?"
 msgstr ""
@@ -760,11 +787,11 @@ msgstr "Tempo em segundos entre as novas tentativas "
 msgid "Total"
 msgstr "Total"
 
+msgid "Triggered by"
+msgstr ""
+
 msgid "Troubleshooting"
 msgstr "Solução de problemas"
-
-msgid "Trying to abort the task"
-msgstr "Tentando anular a tarefa"
 
 msgid "Trying to cancel step"
 msgstr "Tentando cancelar a etapa"
@@ -784,8 +811,11 @@ msgstr "Não é possível criar a notificação de e-mail: %s"
 msgid "Unable to enable mail notification to user '%s': %s"
 msgstr ""
 
-msgid "Undo selection"
-msgstr "Desfazer seleção"
+msgid "Unknown"
+msgstr ""
+
+msgid "Unknown error"
+msgstr ""
 
 msgid "Unlimited"
 msgstr "Ilimitado"
@@ -802,6 +832,9 @@ msgstr "URL que aponta para a documentação de solução de problemas de tarefa
 msgid "User search_params requires user_id to be specified"
 msgstr "Usuário search_params necessita que user_id seja especificado "
 
+msgid "Warning"
+msgstr ""
+
 msgid "Wed"
 msgstr "Qua"
 
@@ -811,14 +844,14 @@ msgstr "Com foco no último"
 msgid "Yes"
 msgstr "Sim"
 
-msgid "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource"
-msgstr "Você pode encontrar bloqueios de recursos nesta página. Um bloqueio exclusivo marcado com o ícone bloqueado significa que nenhuma outra tarefa pode usar o recurso bloqueado enquanto esta tarefa estiver em execução. Um bloqueio não exclusivo marcado com o ícone desbloqueado significa que outras tarefas podem acessar o recurso livremente – ele é usado somente para indicar a relação desta tarefa com o recurso"
-
 msgid "You do not have permission"
 msgstr "Você não tem permissão"
 
 msgid "activation key"
 msgstr "chave de ativação"
+
+msgid "before"
+msgstr ""
 
 msgid "cannot be cancelled with force at the moment."
 msgstr "não pode ser cancelado no momento."
@@ -834,6 +867,9 @@ msgstr "não pôde ser retomado"
 
 msgid "error"
 msgstr "erro"
+
+msgid "id: %s"
+msgstr ""
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is day of month (range: 1-31)"
@@ -923,6 +959,9 @@ msgstr "sucesso"
 
 msgid "system"
 msgstr "sistema"
+
+msgid "task"
+msgstr ""
 
 msgid "task has to be cancellable"
 msgstr "a tarefa tem de ser cancelável"
