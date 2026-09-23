@@ -8,7 +8,7 @@
 # Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman-tasks 12.0.0\n"
+"Project-Id-Version: foreman-tasks 13.2.2\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2016-02-12 14:04+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022\n"
@@ -28,6 +28,9 @@ msgstr "%(older)s %(time)s-ჯერ ძველი"
 
 msgid "%s is not valid format of cron line"
 msgstr "%s cron-ის სწორ ხაზის სწორი ფორმატი არაა"
+
+msgid "%s%% Complete"
+msgstr ""
 
 msgid "%{count} tasks are in running or paused state for more than a day"
 msgstr "%{count} ამოცანა დღეზე მეტია გაშვებული ან შეჩერებულია"
@@ -69,13 +72,10 @@ msgid "Active"
 msgstr "აქტიური"
 
 msgid "Active Filters"
-msgstr ""
+msgstr "აქტიური ფილტრები"
 
 msgid "Active or disabled recurring logic with purpose %s already exists"
 msgstr "აქტიური ან გამრთული განმეორებადი ლოგიკა დანიშნულებით %s უკვე არსებობს"
-
-msgid "All %s tasks are selected."
-msgstr "მონიშნულია ყველა %s ამოცანა."
 
 msgid "All proxies with the required feature are unavailable at the moment"
 msgstr "მოთხოვნილი ფუნქციების მქონე ყველა პროქსი ამჟამად მიუწვდომელია"
@@ -99,9 +99,6 @@ msgstr "ამოცანებზე დაბრუნება"
 msgid "Backtrace"
 msgstr "შეცდომის მიდევნება"
 
-msgid "Blocks"
-msgstr ""
-
 msgid "Bulk action"
 msgstr "მასობრივი ქმედება"
 
@@ -112,10 +109,10 @@ msgid "Cancel Selected"
 msgstr "მონიშნულის გაუქმება"
 
 msgid "Cancel Selected Tasks"
-msgstr ""
+msgstr "მონიშნული ამოცანების გაუქმება"
 
 msgid "Cancel Task"
-msgstr ""
+msgstr "ამოცანის გაუქმება"
 
 msgid "Cancel enforced: the task might be still running on the proxy"
 msgstr "გაუქმება შესრულებულია: ამოცანა შესაძლოა პროქსიზე ჯერ კიდევ გაშვებული იყოს"
@@ -162,17 +159,17 @@ msgstr "დიდხანს გაშვებულ ამოცანებ�
 msgid "Clear Cancelled"
 msgstr "გაუქმებულების გასუფთავება"
 
-msgid "Complete"
-msgstr "დასრულებულია"
-
 msgid "Conflicts with tasks:"
 msgstr "კონფლიქტი ამოცანებთან:"
 
+msgid "Copied"
+msgstr ""
+
+msgid "Copy"
+msgstr ""
+
 msgid "Could not cancel step."
 msgstr "ბიჯის გაუქმების შეცდომა."
-
-msgid "Could not receive data: %s"
-msgstr "მონაცემების მიღების შეცდომა: %s"
 
 msgid "Cron line"
 msgstr "Cron-ის სტრიქონი"
@@ -202,10 +199,7 @@ msgid "Deliver notifications about long running tasks"
 msgstr "შეტყობინება დიდხანს გაშვებული ამოცანების შესახებ"
 
 msgid "Dependencies"
-msgstr ""
-
-msgid "Depends on"
-msgstr ""
+msgstr "დამოკიდებულებები"
 
 msgid "Details"
 msgstr "დეტალები"
@@ -237,17 +231,17 @@ msgstr "Dynflow-ის კონსოლის ჩართვა"
 msgid "Enable the dynflow console (/foreman_tasks/dynflow) for debugging"
 msgstr "გასამართად dynflow-ის კონსოლის (/foreman_tasks/dynflow) ჩართვა"
 
+msgid "Ended at"
+msgstr ""
+
 msgid "Ends"
 msgstr "საბოლოო"
 
 msgid "Ends at"
 msgstr "დასრულების დრო"
 
-msgid "Errors"
-msgstr "შედომები"
-
-msgid "Errors:"
-msgstr "შეცდომები:"
+msgid "Error"
+msgstr ""
 
 msgid "Event delivered by request %{request_id}"
 msgstr "მოვლენა მოწოდებულია მოთხოვნის მიერ: %{request_id}"
@@ -255,17 +249,29 @@ msgstr "მოვლენა მოწოდებულია მოთხო�
 msgid "Exception"
 msgstr "გამონაკლისი"
 
+msgid "Exclusive resources"
+msgstr ""
+
 msgid "Execute now"
 msgstr "ახლა შესრულება"
 
+msgid "Execution details"
+msgstr ""
+
 msgid "Execution plan data not available "
 msgstr "გაშვების გეგმის მონაცემები მიუწვდომელია "
+
+msgid "Execution type"
+msgstr ""
 
 msgid "Export All"
 msgstr "ყველაფრის გატანა"
 
 msgid "External Id"
 msgstr "გარე Id"
+
+msgid "Failed task errors"
+msgstr ""
 
 msgid "Failed to check on tasks on proxy at %{url}: %{exception}"
 msgstr "ვერ მოხერხდა ამოცანების შემოწმება პროქსიზე %{url}: %{exception}"
@@ -289,10 +295,10 @@ msgid "Force Unlock"
 msgstr "ძალით განბლოკვა"
 
 msgid "Force Unlock Selected Tasks"
-msgstr ""
+msgstr "მონიშნული ამოცანების ძალით განბლოკვა"
 
 msgid "Force Unlock Task"
-msgstr ""
+msgstr "ამოცანის ძალით განბლოკვა"
 
 msgid "Foreman Tasks"
 msgstr "Foreman-ის ამოცანები"
@@ -328,7 +334,7 @@ msgid "Input"
 msgstr "შეყვანა"
 
 msgid "Invalid URL"
-msgstr ""
+msgstr "არასწორი URL"
 
 msgid "Iteration limit"
 msgstr "იტერაციის ლიმიტი"
@@ -387,14 +393,17 @@ msgstr "შემდეგი შედეგი"
 msgid "No"
 msgstr "არა"
 
-msgid "No Tasks"
-msgstr "ამოცანების გარეშე"
-
-msgid "No errors"
-msgstr "შეცდომების გარეშე"
+msgid "No errors found"
+msgstr ""
 
 msgid "No proxy defined for execution"
 msgstr "გასაშვები პროქსი მითითებული არაა"
+
+msgid "No resources"
+msgstr ""
+
+msgid "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes."
+msgstr ""
 
 msgid "No running steps"
 msgstr "გაშვებული ნაბიჯების გარეე"
@@ -408,8 +417,11 @@ msgstr "ამოცანის გაშვება შეუძლებე�
 msgid "No. of Tasks"
 msgstr "ამოცანების რიცხვი"
 
-msgid "None"
+msgid "Non-exclusive resources"
 msgstr ""
+
+msgid "None"
+msgstr "არცერტი"
 
 msgid "Not all the selected tasks can be cancelled"
 msgstr "ყველა მონიშნული ამოცანა არ გაუქმებულა"
@@ -430,11 +442,14 @@ msgstr "ამოცანების რიცხვი, რომელიც
 msgid "On"
 msgstr "დრო"
 
-msgid "Operation"
-msgstr "ოეპრაცია"
+msgid "Only this task can access the resource. Other tasks must wait until this process completes."
+msgstr ""
 
 msgid "Other includes all stopped tasks that are cancelled or pending"
 msgstr "სხვები შეიცავს ყველა გაჩერებულ ამოცანას, რომლებიც გაუქმებულია ან მოლოდინში"
+
+msgid "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others."
+msgstr ""
 
 msgid "Other:"
 msgstr "სხვა:"
@@ -442,14 +457,14 @@ msgstr "სხვა:"
 msgid "Output"
 msgstr "გამოტანა"
 
-msgid "Output:"
-msgstr "გამოტანა:"
-
 msgid "Parent task"
 msgstr "მშობელი ამოცანა"
 
 msgid "Paused"
 msgstr "შეჩერებულია"
+
+msgid "Planned task"
+msgstr ""
 
 msgid "Please inspect their state, fix their errors and resume them."
 msgstr "გადაამოწმეთ მათი მდგომარეობა, გაასწორეთ მათი შეცდომები და გააგრძელეთ მათი მუშაობა."
@@ -536,10 +551,10 @@ msgid "Resume Selected"
 msgstr "მონიშნულების გაუქმება"
 
 msgid "Resume Selected Tasks"
-msgstr ""
+msgstr "მონიშნული ამოცანების გაგრძელება"
 
 msgid "Resume Task"
-msgstr ""
+msgstr "ამოცანის გაგრძელება"
 
 msgid "Resume all paused error tasks"
 msgstr "ყველა შეცდომის მდგომარეობაში შეჩერებული ამოცანის გაგრძელება"
@@ -556,8 +571,8 @@ msgstr "მითითებული ამოცანების გაგ�
 msgid "Running"
 msgstr "მიმდინარეობს შესრულება"
 
-msgid "Running Steps"
-msgstr "გაშვებული ნაბიჯები"
+msgid "Running step %s"
+msgstr ""
 
 msgid "Sat"
 msgstr "შაბ"
@@ -577,12 +592,6 @@ msgstr "საძებნი სტრიქონი"
 msgid "See %{link} for more details on how to resolve the issue"
 msgstr "ამ პრობლემის გადასაწყვეტად იხილეთ %{link}"
 
-msgid "Select all {count} tasks"
-msgstr "{count} ამოცანის მონიშვნა"
-
-msgid "Select row"
-msgstr "აირჩიეთ მწკრივი"
-
 msgid "Send data to the task from external executor (such as smart_proxy_dynflow)"
 msgstr "ამოცანის გაგზავნა გარე შემსრულებლიდან (როგორიცაა smart_proxy_dynflow)"
 
@@ -591,6 +600,12 @@ msgstr "განმეორებადი გაშვების მორ�
 
 msgid "Setting is off"
 msgstr "პარამეტრი გამორთულია"
+
+msgid "Show less details"
+msgstr ""
+
+msgid "Show more details"
+msgstr ""
 
 msgid "Show recurring logic details"
 msgstr "განმეორებადი ლოგიკის დეტალების ჩვენება"
@@ -635,25 +650,22 @@ msgid "Stopped"
 msgstr "გაჩერებულია"
 
 msgid "Stopped tasks by result"
-msgstr ""
+msgstr "შედეგად გაჩერებული ამოცანები"
 
 msgid "Sub tasks"
 msgstr "ქვეამოცანები"
 
-msgid "Sub tasks of %s"
-msgstr "%s-ის ქვეამოცანები"
-
 msgid "Subscribe"
 msgstr "ხელმოწერა"
+
+msgid "Success"
+msgstr ""
 
 msgid "Sun"
 msgstr "მზე"
 
 msgid "Sync task timeout"
 msgstr "ამოცანის სინქის ვადა"
-
-msgid "Task"
-msgstr "დავალება"
 
 msgid "Task Details"
 msgstr "ამოცანის დეტალები"
@@ -664,13 +676,22 @@ msgstr "ამოცანის სტატუსი"
 msgid "Task aborted: the task might be still running on the proxy"
 msgstr "ამოცანა გაუქმდა: ამოცანა პროქსიზე შესაძლოა ჯერ კიდევ გაშვებული იყოს"
 
+msgid "Task actions"
+msgstr ""
+
+msgid "Task blocks"
+msgstr ""
+
 msgid "Task cannot be canceled"
 msgstr "ამოცანის გაუქმება შეუძლებელია"
 
 msgid "Task count"
 msgstr "ამოცანების რიცხვი"
 
-msgid "Task dependencies"
+msgid "Task depends on"
+msgstr ""
+
+msgid "Task details"
 msgstr ""
 
 msgid "Task group common"
@@ -694,11 +715,14 @@ msgstr "ამოცანები, რომლებიც რიგშია
 msgid "Tasks troubleshooting URL"
 msgstr "ამოცანის პრობლემების გადაწყვეტის URL"
 
+msgid "Temporarily suspended step(s)"
+msgstr ""
+
 msgid "The ID of the step inside the execution plan to send the event to"
 msgstr "მოვლენის გაგზავნის შესრულების გეგმის საფეხურის ID"
 
-msgid "The recommended approach is to investigate the error messages below and in 'errors' tab, address the primary cause of the issue and resume the task."
-msgstr "რეკომენდირებული მიდგომაა შეცდომის შეტყობინებების გამოკვლევა და „შეცდომების“ ჩანართში, პრობლემის ძირითადი მიზეზის აღმოფხვრა და ამოცანა გაგრძელება."
+msgid "The recommended approach is to investigate the error messages below and in 'Execution details' tab, address the primary cause of the issue and resume the task."
+msgstr ""
 
 msgid "The recurring logic was disabled."
 msgstr "განმეორებადი ლოგიკა გამორთულია."
@@ -712,11 +736,17 @@ msgstr "ჭკვიანი პროქსის ამოცანის შ
 msgid "The targets are of different types"
 msgstr "სამიზნეები სხვადასხვა ტიპისაა"
 
-msgid "The task cannot be aborted at the moment."
-msgstr "ამჟამად ამოცანის გაუქმება შეუძლებელია."
-
 msgid "The task could not be started"
 msgstr "ამოცანის გაშვება შეუძლებელია"
+
+msgid "The task finished with no errors or warnings."
+msgstr ""
+
+msgid "The task has not started yet."
+msgstr ""
+
+msgid "The task is still being processed. Please wait."
+msgstr ""
 
 msgid "There is %{count} paused task in the system that need attention"
 msgid_plural "There are %{count} paused tasks in the system that need attention"
@@ -726,26 +756,23 @@ msgstr[1] "სისტემაში არსებობს %{count} შე�
 msgid "This action will delete all cancelled recurring logics. Please note that this action can't be reversed."
 msgstr "ეს ქმედება წაშლის ყველა გაუქმებულ განმეორებად ლოგიკას. გაითვალისწინეთ, რომ ქმედების დაბრუნება შეუძლებელია."
 
-msgid "This task may have dependencies on other tasks or may be blocking other tasks from executing. Dependencies are established through task chaining relationships."
-msgstr ""
-
 msgid "This will cancel %(number)s task(s), putting them in the stopped state. Are you sure?"
-msgstr ""
+msgstr "ეს გააუქმებს %(number)s ამოცანას და მას გააჩერებს. დარწმუნებული ბრძანდებით?"
 
 msgid "This will cancel task \\\"%(taskName)s\\\", putting it in the stopped state. Are you sure?"
-msgstr ""
+msgstr "ეს გააუქმებს ამოცანას \\\"%(taskName)s\\\" და მას გააჩერებს. დარწმუნებული ბრძანდებით?"
 
 msgid "This will force unlock %(number)s task(s). This may cause harm and should be used with caution. Are you sure?"
-msgstr ""
+msgstr "ეს ძალით განბლოკავს %(number)s ამოცანას. ამან, შეიძლება, ზიანი მოგიტანოთ და ფრთხილად გამოიყენეთ. დარწმუნებული ბრძანდებით?"
 
 msgid "This will force unlock task \\\"%(taskName)s\\\". This may cause harm and should be used with caution. Are you sure?"
-msgstr ""
+msgstr "ეს ძალით განბლოკავს ამოცანას \\\"%(taskName)s\\\". ამან, შეიძლება, ზიანი მოგიტანოთ და ფრთხილად გამოიყენეთ. დარწმუნებული ბრძანდებით?"
 
 msgid "This will resume %(number)s task(s), putting them in the running state. Are you sure?"
-msgstr ""
+msgstr "ეს გააგრძელებს %(number)s ამოცანას და მას გაუშვებს. დარწმუნებული ბრძანდებით?"
 
 msgid "This will resume task \\\"%(taskName)s\\\", putting it in the running state. Are you sure?"
-msgstr ""
+msgstr "ეს გააგრძელებს ამოცანას \\\"%(taskName)s\\\" და მას გაუშვებს. დარწმუნებული ბრძანდებით?"
 
 msgid "This will unlock the resources that the task is running against. Please note that this might lead to inconsistent state and should be used with caution, after making sure that the task can't be resumed."
 msgstr "ეს განბლოკავს რესურსებს, რომლებზეც ამოცანა მუშაობს. გაითვალისწინეთ, რომ ამან შეიძლება გამოიწვიოს არათანმიმდევრული მდგომარეობა და უნდა იქნას გამოყენებული სიფრთხილით, მას შემდეგ რაც დარწმუნდებით, რომ დავალება ვერ გაგრძელდება."
@@ -759,11 +786,11 @@ msgstr "დრო თავიდან ცდებს სორის"
 msgid "Total"
 msgstr "ჯამში"
 
+msgid "Triggered by"
+msgstr ""
+
 msgid "Troubleshooting"
 msgstr "პრობლემების გადაჭრა"
-
-msgid "Trying to abort the task"
-msgstr "ამოცანის შეწყვეტის ცდა"
 
 msgid "Trying to cancel step"
 msgstr "ბიჯის გაუქმების მცდელობა"
@@ -783,8 +810,11 @@ msgstr "ელფოსტის შეტყობინების შექ�
 msgid "Unable to enable mail notification to user '%s': %s"
 msgstr "შეცდომა ელფოსტის გაფრთხილებების ჩართვისას მომხმარებლისთვის '%s': %s"
 
-msgid "Undo selection"
-msgstr "მონიშნულის დაბრუნება"
+msgid "Unknown"
+msgstr ""
+
+msgid "Unknown error"
+msgstr ""
 
 msgid "Unlimited"
 msgstr "შეუზღუდავი"
@@ -801,6 +831,9 @@ msgstr "ამოცანების პრობლემების გა�
 msgid "User search_params requires user_id to be specified"
 msgstr "მომხმარებლის search_params მოითხოვს user_id-ის მითითებას"
 
+msgid "Warning"
+msgstr ""
+
 msgid "Wed"
 msgstr "ოთხ"
 
@@ -810,14 +843,14 @@ msgstr "ფოკუსით ბოლოზე"
 msgid "Yes"
 msgstr "დიახ"
 
-msgid "You can find resource locks on this page. Exclusive lock marked with locked icon means that no other task can use locked resource while this task is running. Non-exclusive lock marked with unlocked icon means other tasks can access the resource freely, it is only used to indicate the relation of this task with the resource"
-msgstr "ამ გვერდზე შეგიძლიათ იპოვოთ რესურსების ბლოკები. ბლოკის ხატით მონიშნული ექსკლუზიური ბლოკი ნიშნავს, რომ არცერთ სხვა ამოცანას არ შეუძლია გამოიყენოს დაბლოკილი რესურსი ამ ამოცანის შესრულებისას. განბლოკილი ხატულით მონიშნული არაექსკლუზიური ბლოკი ნიშნავს, რომ სხვა ამოცანებს შეუძლიათ რესურსზე თავისუფლად წვდომა, ის გამოიყენება მხოლოდ ამ ამოცანის რესურსთან მიმართების მითითებისთვის"
-
 msgid "You do not have permission"
 msgstr "წვდომა არ გაგაჩნიათ"
 
 msgid "activation key"
 msgstr "აქტივაციის გასაღები"
+
+msgid "before"
+msgstr ""
 
 msgid "cannot be cancelled with force at the moment."
 msgstr "ამჟამად რესურსების ძალით განბლოკვა შეუძლებელია."
@@ -834,6 +867,9 @@ msgstr "გაგრძელება შეუძლებელია"
 msgid "error"
 msgstr "შეცდომა"
 
+msgid "id: %s"
+msgstr ""
+
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is day of month (range: 1-31)"
 msgstr "თვის დღე (1-31)"
@@ -847,7 +883,7 @@ msgid "is hour (range: 0-23)"
 msgstr "საათი (0-23)"
 
 msgid "is in the past"
-msgstr ""
+msgstr "წარსულშია"
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is minute (range: 0-59)"
@@ -870,7 +906,7 @@ msgid "mode has to be one of %{allowed_modes}"
 msgstr "რეჟიმი შეიძლება იყოს ერთ ერთი %{allowed_modes} -დან"
 
 msgid "must be set"
-msgstr ""
+msgstr "დაყენებული უნდა იყოს"
 
 msgid "older"
 msgstr "ძველი"
@@ -922,6 +958,9 @@ msgstr "წარმატება"
 
 msgid "system"
 msgstr "სისტემა"
+
+msgid "task"
+msgstr ""
 
 msgid "task has to be cancellable"
 msgstr "ამოცანა გაუქმებადი უნდა იყოს"
