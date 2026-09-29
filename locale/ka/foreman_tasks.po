@@ -30,7 +30,7 @@ msgid "%s is not valid format of cron line"
 msgstr "%s cron-ის სწორ ხაზის სწორი ფორმატი არაა"
 
 msgid "%s%% Complete"
-msgstr ""
+msgstr "%s%% დასრულებულია"
 
 msgid "%{count} tasks are in running or paused state for more than a day"
 msgstr "%{count} ამოცანა დღეზე მეტია გაშვებული ან შეჩერებულია"
@@ -241,7 +241,7 @@ msgid "Ends at"
 msgstr "დასრულების დრო"
 
 msgid "Error"
-msgstr ""
+msgstr "შეცდომა"
 
 msgid "Event delivered by request %{request_id}"
 msgstr "მოვლენა მოწოდებულია მოთხოვნის მიერ: %{request_id}"
@@ -659,7 +659,7 @@ msgid "Subscribe"
 msgstr "ხელმოწერა"
 
 msgid "Success"
-msgstr ""
+msgstr "წარმატება"
 
 msgid "Sun"
 msgstr "მზე"
@@ -811,7 +811,7 @@ msgid "Unable to enable mail notification to user '%s': %s"
 msgstr "შეცდომა ელფოსტის გაფრთხილებების ჩართვისას მომხმარებლისთვის '%s': %s"
 
 msgid "Unknown"
-msgstr ""
+msgstr "უცნობი"
 
 msgid "Unknown error"
 msgstr ""
@@ -832,7 +832,7 @@ msgid "User search_params requires user_id to be specified"
 msgstr "მომხმარებლის search_params მოითხოვს user_id-ის მითითებას"
 
 msgid "Warning"
-msgstr ""
+msgstr "გაფრთხილება"
 
 msgid "Wed"
 msgstr "ოთხ"

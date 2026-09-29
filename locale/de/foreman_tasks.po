@@ -166,7 +166,7 @@ msgid "Copied"
 msgstr ""
 
 msgid "Copy"
-msgstr ""
+msgstr "Kopieren"
 
 msgid "Could not cancel step."
 msgstr "Schritt konnte nicht abgebrochen werden."
@@ -232,7 +232,7 @@ msgid "Enable the dynflow console (/foreman_tasks/dynflow) for debugging"
 msgstr "Dynflow-Konsole (/foreman_tasks/dynflow) für die Fehlerdiagnose aktivieren"
 
 msgid "Ended at"
-msgstr ""
+msgstr "Beendet um"
 
 msgid "Ends"
 msgstr "Ende"
@@ -241,7 +241,7 @@ msgid "Ends at"
 msgstr "Endet um"
 
 msgid "Error"
-msgstr ""
+msgstr "Fehler"
 
 msgid "Event delivered by request %{request_id}"
 msgstr "Ereignis geliefert auf Anfrage %{request_id}"
@@ -262,7 +262,7 @@ msgid "Execution plan data not available "
 msgstr "Ausführungsplandaten nicht verfügbar"
 
 msgid "Execution type"
-msgstr ""
+msgstr "Ausführungstyp"
 
 msgid "Export All"
 msgstr "Alle exportieren"
@@ -659,7 +659,7 @@ msgid "Subscribe"
 msgstr "Abonnieren"
 
 msgid "Success"
-msgstr ""
+msgstr "Erfolg"
 
 msgid "Sun"
 msgstr "So"
@@ -787,7 +787,7 @@ msgid "Total"
 msgstr "Gesamt"
 
 msgid "Triggered by"
-msgstr ""
+msgstr "Ausgelöst durch"
 
 msgid "Troubleshooting"
 msgstr "Fehlerbehebung"
@@ -811,7 +811,7 @@ msgid "Unable to enable mail notification to user '%s': %s"
 msgstr ""
 
 msgid "Unknown"
-msgstr ""
+msgstr "Unbekannt"
 
 msgid "Unknown error"
 msgstr ""
@@ -832,7 +832,7 @@ msgid "User search_params requires user_id to be specified"
 msgstr "Benutzer-Suchparameter erfordert die Angabe der Benutzer-ID"
 
 msgid "Warning"
-msgstr ""
+msgstr "Warnung"
 
 msgid "Wed"
 msgstr "Mi"

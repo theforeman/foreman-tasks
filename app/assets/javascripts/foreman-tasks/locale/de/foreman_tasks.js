@@ -162,7 +162,7 @@
         ""
       ],
       "Copy": [
-        ""
+        "Kopieren"
       ],
       "Could not cancel step.": [
         "Schritt konnte nicht abgebrochen werden."
@@ -228,7 +228,7 @@
         "Dynflow-Konsole (/foreman_tasks/dynflow) für die Fehlerdiagnose aktivieren"
       ],
       "Ended at": [
-        ""
+        "Beendet um"
       ],
       "Ends": [
         "Ende"
@@ -237,7 +237,7 @@
         "Endet um"
       ],
       "Error": [
-        ""
+        "Fehler"
       ],
       "Event delivered by request %{request_id}": [
         "Ereignis geliefert auf Anfrage %{request_id}"
@@ -258,7 +258,7 @@
         "Ausführungsplandaten nicht verfügbar"
       ],
       "Execution type": [
-        ""
+        "Ausführungstyp"
       ],
       "Export All": [
         "Alle exportieren"
@@ -654,7 +654,7 @@
         "Abonnieren"
       ],
       "Success": [
-        ""
+        "Erfolg"
       ],
       "Sun": [
         "So"
@@ -781,7 +781,7 @@
         "Gesamt"
       ],
       "Triggered by": [
-        ""
+        "Ausgelöst durch"
       ],
       "Troubleshooting": [
         "Fehlerbehebung"
@@ -805,7 +805,7 @@
         ""
       ],
       "Unknown": [
-        ""
+        "Unbekannt"
       ],
       "Unknown error": [
         ""
@@ -826,7 +826,7 @@
         "Benutzer-Suchparameter erfordert die Angabe der Benutzer-ID"
       ],
       "Warning": [
-        ""
+        "Warnung"
       ],
       "Wed": [
         "Mi"

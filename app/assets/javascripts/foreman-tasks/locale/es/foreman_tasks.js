@@ -228,7 +228,7 @@
         "Habilitar la consola de flujo dinámico (/foreman_tasks/dynflow) para depurar"
       ],
       "Ended at": [
-        ""
+        "Finalizada el"
       ],
       "Ends": [
         "Finales"
@@ -237,7 +237,7 @@
         "Finaliza a las"
       ],
       "Error": [
-        ""
+        "Error"
       ],
       "Event delivered by request %{request_id}": [
         "Evento entregado a petición %.{request_id}"
@@ -258,7 +258,7 @@
         "Datos del plan de ejecución no disponibles"
       ],
       "Execution type": [
-        ""
+        "Tipo de ejecución"
       ],
       "Export All": [
         "Exportar todo"
@@ -654,7 +654,7 @@
         "Suscribir"
       ],
       "Success": [
-        ""
+        "Éxito"
       ],
       "Sun": [
         "Dom"
@@ -782,7 +782,7 @@
         "Total"
       ],
       "Triggered by": [
-        ""
+        "Activado por"
       ],
       "Troubleshooting": [
         "Resolución de problemas"
@@ -806,7 +806,7 @@
         ""
       ],
       "Unknown": [
-        ""
+        "Desconocido"
       ],
       "Unknown error": [
         ""
@@ -827,7 +827,7 @@
         "search_params del usuario requiere que se especifique el user_id."
       ],
       "Warning": [
-        ""
+        "Advertencia"
       ],
       "Wed": [
         "Mié"

@@ -228,7 +228,7 @@
         "啟用 dynflow 主控台（/foreman_tasks/dynflow）作為偵錯使用"
       ],
       "Ended at": [
-        ""
+        "結束於"
       ],
       "Ends": [
         "結束"
@@ -237,7 +237,7 @@
         "結束於"
       ],
       "Error": [
-        ""
+        "錯誤"
       ],
       "Event delivered by request %{request_id}": [
         ""
@@ -258,7 +258,7 @@
         ""
       ],
       "Execution type": [
-        ""
+        "執行類型"
       ],
       "Export All": [
         ""
@@ -654,7 +654,7 @@
         "訂閱"
       ],
       "Success": [
-        ""
+        "成功"
       ],
       "Sun": [
         "週日"
@@ -805,7 +805,7 @@
         ""
       ],
       "Unknown": [
-        ""
+        "不明"
       ],
       "Unknown error": [
         ""
@@ -826,7 +826,7 @@
         "使用者 search_params 需要指定 user_id"
       ],
       "Warning": [
-        ""
+        "警告"
       ],
       "Wed": [
         "週三"

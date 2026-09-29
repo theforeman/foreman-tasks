@@ -27,7 +27,7 @@ msgid "%s is not valid format of cron line"
 msgstr "%s 不是正确的 cron 行"
 
 msgid "%s%% Complete"
-msgstr ""
+msgstr "%s%% 完成"
 
 msgid "%{count} tasks are in running or paused state for more than a day"
 msgstr "%{count} 任务处于 running 或 paused 状态，持续超过一天"
@@ -160,10 +160,10 @@ msgid "Conflicts with tasks:"
 msgstr "与任务冲突 :"
 
 msgid "Copied"
-msgstr ""
+msgstr "已复制"
 
 msgid "Copy"
-msgstr ""
+msgstr "复制"
 
 msgid "Could not cancel step."
 msgstr "无法取消步骤。"
@@ -229,7 +229,7 @@ msgid "Enable the dynflow console (/foreman_tasks/dynflow) for debugging"
 msgstr "启用 dynflow 控制台（/foreman_tasks/dynflow）用于故障排除"
 
 msgid "Ended at"
-msgstr ""
+msgstr "結束於"
 
 msgid "Ends"
 msgstr "结束"
@@ -238,7 +238,7 @@ msgid "Ends at"
 msgstr "结束于"
 
 msgid "Error"
-msgstr ""
+msgstr "错误"
 
 msgid "Event delivered by request %{request_id}"
 msgstr "由请求 %{request_id} 发送的事件"
@@ -247,19 +247,19 @@ msgid "Exception"
 msgstr "例外"
 
 msgid "Exclusive resources"
-msgstr ""
+msgstr "独占资源"
 
 msgid "Execute now"
 msgstr "立即执行"
 
 msgid "Execution details"
-msgstr ""
+msgstr "执行详情"
 
 msgid "Execution plan data not available "
 msgstr "未可用执行计划数据"
 
 msgid "Execution type"
-msgstr ""
+msgstr "執行類型"
 
 msgid "Export All"
 msgstr "导出所有"
@@ -268,7 +268,7 @@ msgid "External Id"
 msgstr "外部 Id"
 
 msgid "Failed task errors"
-msgstr ""
+msgstr "失败的任务错误"
 
 msgid "Failed to check on tasks on proxy at %{url}: %{exception}"
 msgstr "无法检查在 %{url} 代理中的任务: %{exception}"
@@ -391,16 +391,16 @@ msgid "No"
 msgstr "否"
 
 msgid "No errors found"
-msgstr ""
+msgstr "未找到错误"
 
 msgid "No proxy defined for execution"
 msgstr "没有为执行定义代理"
 
 msgid "No resources"
-msgstr ""
+msgstr "没有资源"
 
 msgid "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes."
-msgstr ""
+msgstr "当前没有与此任务关联的资源。锁定资源可防止同时运行冲突的任务。其他任务必须等待这个过程完成。"
 
 msgid "No running steps"
 msgstr "没有运行步骤"
@@ -415,7 +415,7 @@ msgid "No. of Tasks"
 msgstr "任务号"
 
 msgid "Non-exclusive resources"
-msgstr ""
+msgstr "非独占资源"
 
 msgid "None"
 msgstr "没有"
@@ -440,13 +440,13 @@ msgid "On"
 msgstr "上"
 
 msgid "Only this task can access the resource. Other tasks must wait until this process completes."
-msgstr ""
+msgstr "只有此任务可以访问资源。其他任务必须等到此过程完成为止。"
 
 msgid "Other includes all stopped tasks that are cancelled or pending"
 msgstr "其他包括已取消或待处理的所有已停止任务"
 
 msgid "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others."
-msgstr ""
+msgstr "其他任务可以同时访问资源。此锁定会跟踪任务与资源的关系，而不阻塞其他任务。"
 
 msgid "Other:"
 msgstr "其他："
@@ -461,7 +461,7 @@ msgid "Paused"
 msgstr "暂停"
 
 msgid "Planned task"
-msgstr ""
+msgstr "计划的任务"
 
 msgid "Please inspect their state, fix their errors and resume them."
 msgstr "请检查其状态，纠正其错误，然后恢复它们。"
@@ -569,7 +569,7 @@ msgid "Running"
 msgstr "執行中"
 
 msgid "Running step %s"
-msgstr ""
+msgstr "运行步骤 %s"
 
 msgid "Sat"
 msgstr "周六"
@@ -599,10 +599,10 @@ msgid "Setting is off"
 msgstr "设置已关闭"
 
 msgid "Show less details"
-msgstr ""
+msgstr "隐藏详细信息"
 
 msgid "Show more details"
-msgstr ""
+msgstr "显示更多详细信息"
 
 msgid "Show recurring logic details"
 msgstr "显示重复逻辑详情"
@@ -656,7 +656,7 @@ msgid "Subscribe"
 msgstr "订阅"
 
 msgid "Success"
-msgstr ""
+msgstr "成功"
 
 msgid "Sun"
 msgstr "周日"
@@ -674,10 +674,10 @@ msgid "Task aborted: the task might be still running on the proxy"
 msgstr "被中止的任务：该任务可能仍在代理服务器中运行"
 
 msgid "Task actions"
-msgstr ""
+msgstr "任务操作"
 
 msgid "Task blocks"
-msgstr ""
+msgstr "任务块"
 
 msgid "Task cannot be canceled"
 msgstr "任务无法取消"
@@ -686,10 +686,10 @@ msgid "Task count"
 msgstr "任务计数"
 
 msgid "Task depends on"
-msgstr ""
+msgstr "任务依赖于"
 
 msgid "Task details"
-msgstr ""
+msgstr "任务详情"
 
 msgid "Task group common"
 msgstr "任务组一般事项"
@@ -713,13 +713,13 @@ msgid "Tasks troubleshooting URL"
 msgstr "任务故障排除 URL"
 
 msgid "Temporarily suspended step(s)"
-msgstr ""
+msgstr "临时暂停的步骤"
 
 msgid "The ID of the step inside the execution plan to send the event to"
 msgstr "执行计划中的步骤 ID 要发送事件到"
 
 msgid "The recommended approach is to investigate the error messages below and in 'Execution details' tab, address the primary cause of the issue and resume the task."
-msgstr ""
+msgstr "推荐的方法是调查以下和\"Execution details\"选项卡中的错误消息，解决问题的主要原因并恢复任务。"
 
 msgid "The recurring logic was disabled."
 msgstr "重复逻辑已被禁用。"
@@ -737,13 +737,13 @@ msgid "The task could not be started"
 msgstr "无法启动该任务"
 
 msgid "The task finished with no errors or warnings."
-msgstr ""
+msgstr "任务已完成，无任何错误或警告。"
 
 msgid "The task has not started yet."
-msgstr ""
+msgstr "该任务尚未启动。"
 
 msgid "The task is still being processed. Please wait."
-msgstr ""
+msgstr "该任务仍在被处理。请等待。"
 
 msgid "There is %{count} paused task in the system that need attention"
 msgid_plural "There are %{count} paused tasks in the system that need attention"
@@ -783,7 +783,7 @@ msgid "Total"
 msgstr "总计"
 
 msgid "Triggered by"
-msgstr ""
+msgstr "触发者"
 
 msgid "Troubleshooting"
 msgstr "故障排除"
@@ -807,10 +807,10 @@ msgid "Unable to enable mail notification to user '%s': %s"
 msgstr "无法启用发给用户 '%s' 的邮件通知：%s"
 
 msgid "Unknown"
-msgstr ""
+msgstr "未知"
 
 msgid "Unknown error"
-msgstr ""
+msgstr "未知错误"
 
 msgid "Unlimited"
 msgstr "无限制"
@@ -828,7 +828,7 @@ msgid "User search_params requires user_id to be specified"
 msgstr "使用者 search_params 需要指定 user_id"
 
 msgid "Warning"
-msgstr ""
+msgstr "警告"
 
 msgid "Wed"
 msgstr "周三"
@@ -846,7 +846,7 @@ msgid "activation key"
 msgstr "激活码"
 
 msgid "before"
-msgstr ""
+msgstr "之前"
 
 msgid "cannot be cancelled with force at the moment."
 msgstr "目前无法强行取消。"
@@ -864,7 +864,7 @@ msgid "error"
 msgstr "错误"
 
 msgid "id: %s"
-msgstr ""
+msgstr "id: %s"
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is day of month (range: 1-31)"
@@ -956,7 +956,7 @@ msgid "system"
 msgstr "系統"
 
 msgid "task"
-msgstr ""
+msgstr "任务"
 
 msgid "task has to be cancellable"
 msgstr "任务必须可取消"
