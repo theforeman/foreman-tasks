@@ -29,7 +29,7 @@ msgid "%s is not valid format of cron line"
 msgstr "%s n'est pas un format valide de ligne cron"
 
 msgid "%s%% Complete"
-msgstr ""
+msgstr "%s%% Complet"
 
 msgid "%{count} tasks are in running or paused state for more than a day"
 msgstr "%{count} les tâches sont en cours d'exécution ou en pause depuis plus d'une journée"
@@ -65,7 +65,7 @@ msgid "Action"
 msgstr "Action"
 
 msgid "Action with sub plans"
-msgstr "Action avec des sous-plans"
+msgstr "Action avec sous-plans"
 
 msgid "Active"
 msgstr "Actif"
@@ -162,10 +162,10 @@ msgid "Conflicts with tasks:"
 msgstr "Conflits avec les tâches :"
 
 msgid "Copied"
-msgstr ""
+msgstr "Copié"
 
 msgid "Copy"
-msgstr ""
+msgstr "Copie"
 
 msgid "Could not cancel step."
 msgstr "N’a pas pu annuler l'étape."
@@ -231,7 +231,7 @@ msgid "Enable the dynflow console (/foreman_tasks/dynflow) for debugging"
 msgstr "Active la console dynflow (/foreman_tasks/dynflow) pour le débogage"
 
 msgid "Ended at"
-msgstr ""
+msgstr "Terminé à"
 
 msgid "Ends"
 msgstr "Se termine"
@@ -240,7 +240,7 @@ msgid "Ends at"
 msgstr "Se termine à"
 
 msgid "Error"
-msgstr ""
+msgstr "Erreur"
 
 msgid "Event delivered by request %{request_id}"
 msgstr "Événement livré sur demande %{request_id}"
@@ -249,19 +249,19 @@ msgid "Exception"
 msgstr "Exception"
 
 msgid "Exclusive resources"
-msgstr ""
+msgstr "Ressources exclusives"
 
 msgid "Execute now"
 msgstr "Exécuter maintenant"
 
 msgid "Execution details"
-msgstr ""
+msgstr "Détails d'exécution"
 
 msgid "Execution plan data not available "
 msgstr "Données du plan d'exécution non disponibles"
 
 msgid "Execution type"
-msgstr ""
+msgstr "Type d'exécution"
 
 msgid "Export All"
 msgstr "Tout exporter"
@@ -270,7 +270,7 @@ msgid "External Id"
 msgstr "Id Externe"
 
 msgid "Failed task errors"
-msgstr ""
+msgstr "Erreurs de tâche ayant échoué"
 
 msgid "Failed to check on tasks on proxy at %{url}: %{exception}"
 msgstr "N'a pu vérifier les tâches du proxy à %{url}: %{exception}"
@@ -393,16 +393,16 @@ msgid "No"
 msgstr "Non"
 
 msgid "No errors found"
-msgstr ""
+msgstr "Aucune erreur détectée"
 
 msgid "No proxy defined for execution"
 msgstr "Aucun proxy défini pour l'exécution"
 
 msgid "No resources"
-msgstr ""
+msgstr "Aucune ressource"
 
 msgid "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes."
-msgstr ""
+msgstr "Aucune ressource n'est actuellement associée à cette tâche. Le verrouillage des ressources empêche l'exécution simultanée de tâches conflictuelles. Les autres tâches doivent attendre la fin de ce processus."
 
 msgid "No running steps"
 msgstr "Aucune étape en cours"
@@ -417,10 +417,10 @@ msgid "No. of Tasks"
 msgstr "No. de tâches"
 
 msgid "Non-exclusive resources"
-msgstr ""
+msgstr "Ressources non exclusives"
 
 msgid "None"
-msgstr "Aucun"
+msgstr "Aucun(e)"
 
 msgid "Not all the selected tasks can be cancelled"
 msgstr "Toutes les tâches sélectionnées ne peuvent pas être annulées"
@@ -442,13 +442,13 @@ msgid "On"
 msgstr "Activé"
 
 msgid "Only this task can access the resource. Other tasks must wait until this process completes."
-msgstr ""
+msgstr "Seule cette tâche peut accéder à la ressource. Les autres tâches doivent attendre la fin de ce processus."
 
 msgid "Other includes all stopped tasks that are cancelled or pending"
 msgstr "Autres inclut toutes les tâches arrêtées qui sont annulées ou en attente"
 
 msgid "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others."
-msgstr ""
+msgstr "D'autres tâches peuvent accéder simultanément à la ressource. Ce verrou permet de suivre la relation de la tâche avec la ressource sans bloquer les autres."
 
 msgid "Other:"
 msgstr "Autre :"
@@ -463,7 +463,7 @@ msgid "Paused"
 msgstr "Suspendue"
 
 msgid "Planned task"
-msgstr ""
+msgstr "Tâche planifiée"
 
 msgid "Please inspect their state, fix their errors and resume them."
 msgstr "Veuillez inspecter leur état, corriger leurs erreurs et les reprendre."
@@ -571,7 +571,7 @@ msgid "Running"
 msgstr "Exécution en cours"
 
 msgid "Running step %s"
-msgstr ""
+msgstr "Étape d’exécution %s"
 
 msgid "Sat"
 msgstr "Sam"
@@ -601,10 +601,10 @@ msgid "Setting is off"
 msgstr "Le réglage est désactivé"
 
 msgid "Show less details"
-msgstr ""
+msgstr "Afficher moins de détails"
 
 msgid "Show more details"
-msgstr ""
+msgstr "Afficher plus de détails"
 
 msgid "Show recurring logic details"
 msgstr "Afficher les détails des logiques récurrentes"
@@ -658,7 +658,7 @@ msgid "Subscribe"
 msgstr "S'abonner"
 
 msgid "Success"
-msgstr ""
+msgstr "Réussi"
 
 msgid "Sun"
 msgstr "Dim"
@@ -676,10 +676,10 @@ msgid "Task aborted: the task might be still running on the proxy"
 msgstr "Tâche abandonnée : la tâche peut être encore en cours d'exécution sur le proxy"
 
 msgid "Task actions"
-msgstr ""
+msgstr "Actions de la tâche"
 
 msgid "Task blocks"
-msgstr ""
+msgstr "Blocs de tâches"
 
 msgid "Task cannot be canceled"
 msgstr "La tâche ne peut pas être annulée"
@@ -688,10 +688,10 @@ msgid "Task count"
 msgstr "Nombre de tâches"
 
 msgid "Task depends on"
-msgstr ""
+msgstr "La tâche dépend de"
 
 msgid "Task details"
-msgstr ""
+msgstr "Détails de la tâche"
 
 msgid "Task group common"
 msgstr "Ressources communes du groupe de tâches"
@@ -715,13 +715,13 @@ msgid "Tasks troubleshooting URL"
 msgstr "URL de résolution de problème"
 
 msgid "Temporarily suspended step(s)"
-msgstr ""
+msgstr "Étape(s) temporairement suspendue(s)"
 
 msgid "The ID of the step inside the execution plan to send the event to"
 msgstr "L'ID de l'étape qui se trouve dans le plan d'exécution auquel envoyer l'événement"
 
 msgid "The recommended approach is to investigate the error messages below and in 'Execution details' tab, address the primary cause of the issue and resume the task."
-msgstr ""
+msgstr "La méthode recommandée consiste à examiner les messages d'erreur ci-dessous et, dans l'onglet « Détails d'exécution », à identifier la cause principale du problème et à reprendre la tâche."
 
 msgid "The recurring logic was disabled."
 msgstr "La logique récurrente a été désactivée."
@@ -739,13 +739,13 @@ msgid "The task could not be started"
 msgstr "La tâche n'a pas pu démarrer"
 
 msgid "The task finished with no errors or warnings."
-msgstr ""
+msgstr "La tâche s'est terminée sans erreur ni avertissement."
 
 msgid "The task has not started yet."
-msgstr ""
+msgstr "La tâche n'a pas encore commencé."
 
 msgid "The task is still being processed. Please wait."
-msgstr ""
+msgstr "La tâche est toujours en cours de traitement. Veuillez patienter."
 
 msgid "There is %{count} paused task in the system that need attention"
 msgid_plural "There are %{count} paused tasks in the system that need attention"
@@ -787,7 +787,7 @@ msgid "Total"
 msgstr "Total"
 
 msgid "Triggered by"
-msgstr ""
+msgstr "Déclenché par"
 
 msgid "Troubleshooting"
 msgstr "Résolution de problème"
@@ -811,10 +811,10 @@ msgid "Unable to enable mail notification to user '%s': %s"
 msgstr "Impossible d'activer la notification par courrier électronique à l'utilisateur '%s ' : %s"
 
 msgid "Unknown"
-msgstr ""
+msgstr "Inconnu"
 
 msgid "Unknown error"
-msgstr ""
+msgstr "Erreur inconnue"
 
 msgid "Unlimited"
 msgstr "Illimité"
@@ -832,7 +832,7 @@ msgid "User search_params requires user_id to be specified"
 msgstr "Utilisateur search_params a besoin que user_id soit spécifié"
 
 msgid "Warning"
-msgstr ""
+msgstr "Avertissement"
 
 msgid "Wed"
 msgstr "Mer"
@@ -850,7 +850,7 @@ msgid "activation key"
 msgstr "clé d'activation"
 
 msgid "before"
-msgstr ""
+msgstr "avant"
 
 msgid "cannot be cancelled with force at the moment."
 msgstr "n'a pas pu être annulée en force pour l'instant."
@@ -868,7 +868,7 @@ msgid "error"
 msgstr "erreur"
 
 msgid "id: %s"
-msgstr ""
+msgstr "id: %s"
 
 #. TRANSLATORS: this translation is referring to an option which is a time interval
 msgid "is day of month (range: 1-31)"
@@ -960,7 +960,7 @@ msgid "system"
 msgstr "système"
 
 msgid "task"
-msgstr ""
+msgstr "tâche"
 
 msgid "task has to be cancellable"
 msgstr "la tâche doit pouvoir être annulée"

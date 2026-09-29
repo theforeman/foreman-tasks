@@ -229,7 +229,7 @@ msgid "Enable the dynflow console (/foreman_tasks/dynflow) for debugging"
 msgstr "啟用 dynflow 主控台（/foreman_tasks/dynflow）作為偵錯使用"
 
 msgid "Ended at"
-msgstr ""
+msgstr "結束於"
 
 msgid "Ends"
 msgstr "結束"
@@ -238,7 +238,7 @@ msgid "Ends at"
 msgstr "結束於"
 
 msgid "Error"
-msgstr ""
+msgstr "錯誤"
 
 msgid "Event delivered by request %{request_id}"
 msgstr ""
@@ -259,7 +259,7 @@ msgid "Execution plan data not available "
 msgstr ""
 
 msgid "Execution type"
-msgstr ""
+msgstr "執行類型"
 
 msgid "Export All"
 msgstr ""
@@ -656,7 +656,7 @@ msgid "Subscribe"
 msgstr "訂閱"
 
 msgid "Success"
-msgstr ""
+msgstr "成功"
 
 msgid "Sun"
 msgstr "週日"
@@ -808,7 +808,7 @@ msgid "Unable to enable mail notification to user '%s': %s"
 msgstr ""
 
 msgid "Unknown"
-msgstr ""
+msgstr "不明"
 
 msgid "Unknown error"
 msgstr ""
@@ -829,7 +829,7 @@ msgid "User search_params requires user_id to be specified"
 msgstr "使用者 search_params 需要指定 user_id"
 
 msgid "Warning"
-msgstr ""
+msgstr "警告"
 
 msgid "Wed"
 msgstr "週三"

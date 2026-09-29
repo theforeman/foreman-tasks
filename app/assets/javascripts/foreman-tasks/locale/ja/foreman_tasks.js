@@ -27,7 +27,7 @@
         "%s は有効な cron 行の形式ではありません"
       ],
       "%s%% Complete": [
-        ""
+        "%s%% 完了"
       ],
       "%{count} tasks are in running or paused state for more than a day": [
         "%{count} 個のタスクが 1 日以上実行中または一時停止状態です"
@@ -72,7 +72,7 @@
         "アクティブなフィルター"
       ],
       "Active or disabled recurring logic with purpose %s already exists": [
-        "目的が %s のアクティブまたは無効な再帰論理がすでに存在します"
+        "目的が %s のアクティブまたは無効な繰り返し実行ロジックがすでに存在します"
       ],
       "All proxies with the required feature are unavailable at the moment": [
         "現在、必要な機能があるすべてのプロキシーが利用できません"
@@ -114,7 +114,7 @@
         "強制的にキャンセル: タスクはプロキシーで引き続き実行されている可能性があります"
       ],
       "Cancel recurring logic": [
-        "再帰論理のキャンセル"
+        "繰り返し実行ロジックをキャンセルする"
       ],
       "Cancel selected cancellable tasks": [
         "選択したキャンセル可能なタスクをキャンセル"
@@ -144,7 +144,7 @@
         "現在、タスクを再開できません"
       ],
       "Cannot update a cancelled Recurring Logic.": [
-        "取り消された再帰論理を更新できません"
+        "取り消された繰り返し実行ロジックを更新できません。"
       ],
       "Changing request id %{request_id} to saved id %{saved_id}": [
         "要求 ID %{request_id} を保存済み ID %{saved_id} に変更しています"
@@ -159,10 +159,10 @@
         "タスクとの競合:"
       ],
       "Copied": [
-        ""
+        "コピーしました"
       ],
       "Copy": [
-        ""
+        "コピー"
       ],
       "Could not cancel step.": [
         "ステップをキャンセルできませんでした。"
@@ -189,7 +189,7 @@
         "遅延"
       ],
       "Delete recurring logics by search query": [
-        "検索クエリーでの再帰論理の削除"
+        "検索クエリーで繰り返し実行ロジックを削除する"
       ],
       "Deliver notifications about long running tasks": [
         "長時間実行中のタスクに関する通知の配信"
@@ -228,7 +228,7 @@
         "デバッグのために dynflow コンソール (/foreman_tasks/dynflow) を有効にする"
       ],
       "Ended at": [
-        ""
+        "終了時刻"
       ],
       "Ends": [
         "終了"
@@ -237,7 +237,7 @@
         "終了時間"
       ],
       "Error": [
-        ""
+        "エラー"
       ],
       "Event delivered by request %{request_id}": [
         "要求 %{request_id} で配信されたイベント"
@@ -246,19 +246,19 @@
         "例外"
       ],
       "Exclusive resources": [
-        ""
+        "限定リソース"
       ],
       "Execute now": [
         "今すぐ実行"
       ],
       "Execution details": [
-        ""
+        "実行の詳細"
       ],
       "Execution plan data not available ": [
         "利用可能な実行プランデータはありません "
       ],
       "Execution type": [
-        ""
+        "実行タイプ"
       ],
       "Export All": [
         "すべてエクスポート"
@@ -267,7 +267,7 @@
         "外部 Id"
       ],
       "Failed task errors": [
-        ""
+        "タスク失敗のエラー"
       ],
       "Failed to check on tasks on proxy at %{url}: %{exception}": [
         "%{url} でのプロキシータスクをチェックできませんでした: %{exception}"
@@ -276,7 +276,7 @@
         "初期化に失敗しました"
       ],
       "Failed to trigger task on the smart proxy: ": [
-        "Smart Proxyでタスクのトリガーに失敗しました:"
+        "Smart Proxyでタスクのトリガーに失敗しました: "
       ],
       "Finished": [
         "終了"
@@ -354,7 +354,7 @@
         "タスクの一覧"
       ],
       "List recurring logics": [
-        "再帰論理の一覧表示"
+        "繰り返し実行ロジックをリスト表示する"
       ],
       "List tasks": [
         "タスクを一覧表示する"
@@ -390,16 +390,16 @@
         "いいえ"
       ],
       "No errors found": [
-        ""
+        "エラーは見つかりませんでした"
       ],
       "No proxy defined for execution": [
         "実行用プロキシーが設定されていません"
       ],
       "No resources": [
-        ""
+        "リソースがありません"
       ],
       "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes.": [
-        ""
+        "このタスクには現在、リソースが関連付けられていません。リソースをロックすることで、競合するタスクが同時に実行されるのを防ぎます。他のタスクは、このプロセスが完了するまで待機する必要があります。"
       ],
       "No running steps": [
         "実行中のステップがありません"
@@ -414,7 +414,7 @@
         "タスク数"
       ],
       "Non-exclusive resources": [
-        ""
+        "非排他的リソース"
       ],
       "None": [
         "なし"
@@ -438,13 +438,13 @@
         "オン"
       ],
       "Only this task can access the resource. Other tasks must wait until this process completes.": [
-        ""
+        "このリソースにアクセスできるのはこのタスクのみです。他のタスクは、このプロセスが完了するまで待機する必要があります。"
       ],
       "Other includes all stopped tasks that are cancelled or pending": [
-        "その他のタスクには、キャンセルまたは保留中のすべての停止したタスクが含まれます。"
+        "その他のタスクには、キャンセルまたは保留中のすべての停止したタスクが含まれます"
       ],
       "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others.": [
-        ""
+        "他のタスクが同時にこのリソースにアクセスできます。このロックは、他をブロックすることなくリソースとタスクの関係性を追跡します。"
       ],
       "Other:": [
         "その他:"
@@ -459,16 +459,16 @@
         "一時停止中"
       ],
       "Planned task": [
-        ""
+        "計画されたタスク"
       ],
       "Please inspect their state, fix their errors and resume them.": [
         "タスクの状態を確認し、エラーを修正してタスクを再開してください。"
       ],
       "Please provide a search parameter in the request": [
-        "要求で検索パラメーターを指定してください。"
+        "要求で検索パラメーターを指定してください"
       ],
       "Please provide at least one of search or task_ids parameters in the request": [
-        "要求で検索パラメーターまたは task_ids パラメーターのうち少なくとも 1 つ指定してください。"
+        "要求で検索パラメーターまたは task_ids パラメーターのうち少なくとも 1 つ指定してください"
       ],
       "Polling intervals multiplier": [
         "ポーリングの間隔乗数"
@@ -501,13 +501,13 @@
         "生出力"
       ],
       "Recurring Logics": [
-        "再帰論理"
+        "繰り返し実行ロジック"
       ],
       "Recurring logic": [
-        "再帰論理"
+        "繰り返し実行ロジック"
       ],
       "Recurring logics": [
-        "再帰論理"
+        "繰り返し実行ロジック"
       ],
       "Refresh Data": [
         "データの更新"
@@ -567,7 +567,7 @@
         "実行中"
       ],
       "Running step %s": [
-        ""
+        "ステップ %s の実行中"
       ],
       "Sat": [
         "土"
@@ -597,13 +597,13 @@
         "設定がオフです"
       ],
       "Show less details": [
-        ""
+        "詳細を非表示にする"
       ],
       "Show more details": [
-        ""
+        "詳細をさらに表示する"
       ],
       "Show recurring logic details": [
-        "再帰論理の詳細表示"
+        "繰り返し実行ロジックの詳細を表示する"
       ],
       "Start at": [
         "開始時刻"
@@ -654,7 +654,7 @@
         "サブスクライブ"
       ],
       "Success": [
-        ""
+        "成功"
       ],
       "Sun": [
         "日"
@@ -672,10 +672,10 @@
         "タスクの中断: タスクはプロキシーで引き続き実行されている可能性があります"
       ],
       "Task actions": [
-        ""
+        "タスクアクション"
       ],
       "Task blocks": [
-        ""
+        "タスクブロック"
       ],
       "Task cannot be canceled": [
         "タスクはキャンセルできません"
@@ -684,10 +684,10 @@
         "タスク数"
       ],
       "Task depends on": [
-        ""
+        "タスクの依存先"
       ],
       "Task details": [
-        ""
+        "タスクの詳細"
       ],
       "Task group common": [
         "共通のタスクグループ"
@@ -711,19 +711,19 @@
         "URL のトラブルシューティングタスク"
       ],
       "Temporarily suspended step(s)": [
-        ""
+        "一時的に停止されたステップ"
       ],
       "The ID of the step inside the execution plan to send the event to": [
         "イベントの送信先の実行プラン内のステップ ID"
       ],
       "The recommended approach is to investigate the error messages below and in 'Execution details' tab, address the primary cause of the issue and resume the task.": [
-        ""
+        "推奨されるアプローチは、以下および「実行の詳細」タブのエラーメッセージを調査し、問題の主な原因に対処して、タスクを再開することです。"
       ],
       "The recurring logic was disabled.": [
-        "再帰論理が無効化されました。"
+        "繰り返し実行ロジックが無効化されました。"
       ],
       "The recurring logic was enabled.": [
-        "再帰論理が有効化されました。"
+        "繰り返し実行ロジックが有効化されました。"
       ],
       "The smart proxy task %s failed.": [
         "Smart Proxy タスク %s が失敗しました。"
@@ -735,19 +735,19 @@
         "タスクを開始できませんでした"
       ],
       "The task finished with no errors or warnings.": [
-        ""
+        "タスクはエラーや警告なしに終了しました。"
       ],
       "The task has not started yet.": [
-        ""
+        "タスクはまだ開始されていません。"
       ],
       "The task is still being processed. Please wait.": [
-        ""
+        "タスクは引き続き処理中です。しばらくお待ちください。"
       ],
       "There is %{count} paused task in the system that need attention": [
         "システムには、注意が必要な一時停止タスクが %{count} 件あります"
       ],
       "This action will delete all cancelled recurring logics. Please note that this action can't be reversed.": [
-        "このアクションは、キャンセル済みの再帰論理をすべて削除します。この操作は元に戻すことはできない点に注意してください。"
+        "この操作を行うと、キャンセルされたすべての繰り返し実行ロジックが削除されます。この操作は元に戻すことはできない点に注意してください。"
       ],
       "This will cancel %(number)s task(s), putting them in the stopped state. Are you sure?": [
         "これにより、%(number)s 件のタスクが取り消され、停止状態になります。実行してもよろしいですか?"
@@ -780,7 +780,7 @@
         "合計"
       ],
       "Triggered by": [
-        ""
+        "トリガー元"
       ],
       "Troubleshooting": [
         "トラブルシューティング"
@@ -804,10 +804,10 @@
         "ユーザー '%s' へのメール通知を有効にできません: %s"
       ],
       "Unknown": [
-        ""
+        "不明"
       ],
       "Unknown error": [
-        ""
+        "不明なエラー"
       ],
       "Unlimited": [
         "無制限"
@@ -816,7 +816,7 @@
         "ロック解除"
       ],
       "Update recurring logic": [
-        "再帰論理の更新"
+        "繰り返し実行ロジックを更新する"
       ],
       "Url pointing to the task troubleshooting documentation. It should contain %{label} placeholder, that will be replaced with normalized task label (restricted to only alphanumeric characters)). %{version} placeholder is also available.": [
         "タスクのトラブルシューティングドキュメントを参照する URL。%{label} プレースホルダーを含める必要があります。これは、正規化されたタスクラベル (英数字のみ) に置き換えられます。また、%{version} プレースホルダーも利用できます。"
@@ -825,7 +825,7 @@
         "ユーザー search_params では user_id を指定する必要があります"
       ],
       "Warning": [
-        ""
+        "警告"
       ],
       "Wed": [
         "水"
@@ -843,7 +843,7 @@
         "アクティベーションキー"
       ],
       "before": [
-        ""
+        "前"
       ],
       "cannot be cancelled with force at the moment.": [
         "現在、強制的にキャンセルできません。"
@@ -861,7 +861,7 @@
         "エラー"
       ],
       "id: %s": [
-        ""
+        "id: %s"
       ],
       "is day of month (range: 1-31)": [
         "日 (範囲: 1 - 31)"
@@ -918,7 +918,7 @@
         "現在、リソースのロックを解除できません。"
       ],
       "resources were unlocked ": [
-        "リソースのロックが解除されました。 "
+        "リソースのロックが解除されました "
       ],
       "resources were unlocked with force.": [
         "リソースのロックが強制的に解除されました。"
@@ -948,7 +948,7 @@
         "システム"
       ],
       "task": [
-        ""
+        "タスク"
       ],
       "task has to be cancellable": [
         "タスクはキャンセル可能でなければなりません"
@@ -966,7 +966,7 @@
         "user"
       ],
       "warning": [
-        "警告!"
+        "警告"
       ],
       "was cancelled": [
         "キャンセルされました"

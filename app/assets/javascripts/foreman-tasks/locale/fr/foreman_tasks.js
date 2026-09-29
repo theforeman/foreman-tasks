@@ -27,7 +27,7 @@
         "%s n'est pas un format valide de ligne cron"
       ],
       "%s%% Complete": [
-        ""
+        "%s%% Complet"
       ],
       "%{count} tasks are in running or paused state for more than a day": [
         "%{count} les tâches sont en cours d'exécution ou en pause depuis plus d'une journée"
@@ -63,7 +63,7 @@
         "Action"
       ],
       "Action with sub plans": [
-        "Action avec des sous-plans"
+        "Action avec sous-plans"
       ],
       "Active": [
         "Actif"
@@ -159,10 +159,10 @@
         "Conflits avec les tâches :"
       ],
       "Copied": [
-        ""
+        "Copié"
       ],
       "Copy": [
-        ""
+        "Copie"
       ],
       "Could not cancel step.": [
         "N’a pas pu annuler l'étape."
@@ -228,7 +228,7 @@
         "Active la console dynflow (/foreman_tasks/dynflow) pour le débogage"
       ],
       "Ended at": [
-        ""
+        "Terminé à"
       ],
       "Ends": [
         "Se termine"
@@ -237,7 +237,7 @@
         "Se termine à"
       ],
       "Error": [
-        ""
+        "Erreur"
       ],
       "Event delivered by request %{request_id}": [
         "Événement livré sur demande %{request_id}"
@@ -246,19 +246,19 @@
         "Exception"
       ],
       "Exclusive resources": [
-        ""
+        "Ressources exclusives"
       ],
       "Execute now": [
         "Exécuter maintenant"
       ],
       "Execution details": [
-        ""
+        "Détails d'exécution"
       ],
       "Execution plan data not available ": [
         "Données du plan d'exécution non disponibles"
       ],
       "Execution type": [
-        ""
+        "Type d'exécution"
       ],
       "Export All": [
         "Tout exporter"
@@ -267,7 +267,7 @@
         "Id Externe"
       ],
       "Failed task errors": [
-        ""
+        "Erreurs de tâche ayant échoué"
       ],
       "Failed to check on tasks on proxy at %{url}: %{exception}": [
         "N'a pu vérifier les tâches du proxy à %{url}: %{exception}"
@@ -390,16 +390,16 @@
         "Non"
       ],
       "No errors found": [
-        ""
+        "Aucune erreur détectée"
       ],
       "No proxy defined for execution": [
         "Aucun proxy défini pour l'exécution"
       ],
       "No resources": [
-        ""
+        "Aucune ressource"
       ],
       "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes.": [
-        ""
+        "Aucune ressource n'est actuellement associée à cette tâche. Le verrouillage des ressources empêche l'exécution simultanée de tâches conflictuelles. Les autres tâches doivent attendre la fin de ce processus."
       ],
       "No running steps": [
         "Aucune étape en cours"
@@ -414,10 +414,10 @@
         "No. de tâches"
       ],
       "Non-exclusive resources": [
-        ""
+        "Ressources non exclusives"
       ],
       "None": [
-        "Aucun"
+        "Aucun(e)"
       ],
       "Not all the selected tasks can be cancelled": [
         "Toutes les tâches sélectionnées ne peuvent pas être annulées"
@@ -438,13 +438,13 @@
         "Activé"
       ],
       "Only this task can access the resource. Other tasks must wait until this process completes.": [
-        ""
+        "Seule cette tâche peut accéder à la ressource. Les autres tâches doivent attendre la fin de ce processus."
       ],
       "Other includes all stopped tasks that are cancelled or pending": [
         "Autres inclut toutes les tâches arrêtées qui sont annulées ou en attente"
       ],
       "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others.": [
-        ""
+        "D'autres tâches peuvent accéder simultanément à la ressource. Ce verrou permet de suivre la relation de la tâche avec la ressource sans bloquer les autres."
       ],
       "Other:": [
         "Autre :"
@@ -459,7 +459,7 @@
         "Suspendue"
       ],
       "Planned task": [
-        ""
+        "Tâche planifiée"
       ],
       "Please inspect their state, fix their errors and resume them.": [
         "Veuillez inspecter leur état, corriger leurs erreurs et les reprendre."
@@ -567,7 +567,7 @@
         "Exécution en cours"
       ],
       "Running step %s": [
-        ""
+        "Étape d’exécution %s"
       ],
       "Sat": [
         "Sam"
@@ -597,10 +597,10 @@
         "Le réglage est désactivé"
       ],
       "Show less details": [
-        ""
+        "Afficher moins de détails"
       ],
       "Show more details": [
-        ""
+        "Afficher plus de détails"
       ],
       "Show recurring logic details": [
         "Afficher les détails des logiques récurrentes"
@@ -654,7 +654,7 @@
         "S'abonner"
       ],
       "Success": [
-        ""
+        "Réussi"
       ],
       "Sun": [
         "Dim"
@@ -672,10 +672,10 @@
         "Tâche abandonnée : la tâche peut être encore en cours d'exécution sur le proxy"
       ],
       "Task actions": [
-        ""
+        "Actions de la tâche"
       ],
       "Task blocks": [
-        ""
+        "Blocs de tâches"
       ],
       "Task cannot be canceled": [
         "La tâche ne peut pas être annulée"
@@ -684,10 +684,10 @@
         "Nombre de tâches"
       ],
       "Task depends on": [
-        ""
+        "La tâche dépend de"
       ],
       "Task details": [
-        ""
+        "Détails de la tâche"
       ],
       "Task group common": [
         "Ressources communes du groupe de tâches"
@@ -711,13 +711,13 @@
         "URL de résolution de problème"
       ],
       "Temporarily suspended step(s)": [
-        ""
+        "Étape(s) temporairement suspendue(s)"
       ],
       "The ID of the step inside the execution plan to send the event to": [
         "L'ID de l'étape qui se trouve dans le plan d'exécution auquel envoyer l'événement"
       ],
       "The recommended approach is to investigate the error messages below and in 'Execution details' tab, address the primary cause of the issue and resume the task.": [
-        ""
+        "La méthode recommandée consiste à examiner les messages d'erreur ci-dessous et, dans l'onglet « Détails d'exécution », à identifier la cause principale du problème et à reprendre la tâche."
       ],
       "The recurring logic was disabled.": [
         "La logique récurrente a été désactivée."
@@ -735,13 +735,13 @@
         "La tâche n'a pas pu démarrer"
       ],
       "The task finished with no errors or warnings.": [
-        ""
+        "La tâche s'est terminée sans erreur ni avertissement."
       ],
       "The task has not started yet.": [
-        ""
+        "La tâche n'a pas encore commencé."
       ],
       "The task is still being processed. Please wait.": [
-        ""
+        "La tâche est toujours en cours de traitement. Veuillez patienter."
       ],
       "There is %{count} paused task in the system that need attention": [
         "Il y a %{count} tâches en pause dans le système qui nécessitent une attention",
@@ -782,7 +782,7 @@
         "Total"
       ],
       "Triggered by": [
-        ""
+        "Déclenché par"
       ],
       "Troubleshooting": [
         "Résolution de problème"
@@ -806,10 +806,10 @@
         "Impossible d'activer la notification par courrier électronique à l'utilisateur '%s ' : %s"
       ],
       "Unknown": [
-        ""
+        "Inconnu"
       ],
       "Unknown error": [
-        ""
+        "Erreur inconnue"
       ],
       "Unlimited": [
         "Illimité"
@@ -827,7 +827,7 @@
         "Utilisateur search_params a besoin que user_id soit spécifié"
       ],
       "Warning": [
-        ""
+        "Avertissement"
       ],
       "Wed": [
         "Mer"
@@ -845,7 +845,7 @@
         "clé d'activation"
       ],
       "before": [
-        ""
+        "avant"
       ],
       "cannot be cancelled with force at the moment.": [
         "n'a pas pu être annulée en force pour l'instant."
@@ -863,7 +863,7 @@
         "erreur"
       ],
       "id: %s": [
-        ""
+        "id: %s"
       ],
       "is day of month (range: 1-31)": [
         "est jour du mois (plage: 1-31)"
@@ -950,7 +950,7 @@
         "système"
       ],
       "task": [
-        ""
+        "tâche"
       ],
       "task has to be cancellable": [
         "la tâche doit pouvoir être annulée"

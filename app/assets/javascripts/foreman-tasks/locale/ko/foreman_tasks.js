@@ -27,7 +27,7 @@
         "%s은(는) 유효한 cron 줄 형식이 아닙니다."
       ],
       "%s%% Complete": [
-        ""
+        "%s%% 완료"
       ],
       "%{count} tasks are in running or paused state for more than a day": [
         "%{count} 작업이 하루 이상 실행 중이거나 일시 중지 상태입니다."
@@ -159,10 +159,10 @@
         "태스크 충돌:"
       ],
       "Copied": [
-        ""
+        "복사됨"
       ],
       "Copy": [
-        ""
+        "복사"
       ],
       "Could not cancel step.": [
         "단계를 취소할 수 없습니다."
@@ -198,7 +198,7 @@
         "종속성 "
       ],
       "Details": [
-        "상세 정보 "
+        "상세 정보"
       ],
       "Details of %s task": [
         "%s 작업의 세부 사항"
@@ -228,7 +228,7 @@
         "디버깅에 dynflow 콘솔(/foreman_tasks/dynflow) 활성화"
       ],
       "Ended at": [
-        ""
+        "종료 일시"
       ],
       "Ends": [
         "종료"
@@ -237,7 +237,7 @@
         "종료 일시"
       ],
       "Error": [
-        ""
+        "오류"
       ],
       "Event delivered by request %{request_id}": [
         "%{request_id} 요청에 따라 이벤트가 제공됩니다."
@@ -246,19 +246,19 @@
         "예외"
       ],
       "Exclusive resources": [
-        ""
+        "독점 리소스"
       ],
       "Execute now": [
         "지금 실행"
       ],
       "Execution details": [
-        ""
+        "실행 세부 정보"
       ],
       "Execution plan data not available ": [
         "실행 계획 데이터를 사용할 수 없습니다. "
       ],
       "Execution type": [
-        ""
+        "실행 유형"
       ],
       "Export All": [
         "모두 내보내기"
@@ -267,7 +267,7 @@
         "외부 IP"
       ],
       "Failed task errors": [
-        ""
+        "실패한 작업 오류"
       ],
       "Failed to check on tasks on proxy at %{url}: %{exception}": [
         "%{url}에 있는 프록시에서 작업을 확인하지 못했습니다: %{exception}"
@@ -375,7 +375,7 @@
         "이상"
       ],
       "N/A": [
-        "해당 없음 "
+        "해당 없음"
       ],
       "Name": [
         "이름 "
@@ -390,16 +390,16 @@
         "아니오  "
       ],
       "No errors found": [
-        ""
+        "오류를 찾을 수 없음"
       ],
       "No proxy defined for execution": [
         "실행을 위한 프록시가 정의되지 않았습니다"
       ],
       "No resources": [
-        ""
+        "리소스 없음"
       ],
       "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes.": [
-        ""
+        "현재 이 작업과 연결된 리소스가 없습니다. 리소스를 잠그면 충돌하는 작업이 동시에 실행되는 것을 방지할 수 있습니다. 다른 작업은 이 프로세스가 완료될 때까지 기다려야 합니다."
       ],
       "No running steps": [
         "실행 중인 단계가 없습니다."
@@ -414,7 +414,7 @@
         "작업 수"
       ],
       "Non-exclusive resources": [
-        ""
+        "비독점 리소스"
       ],
       "None": [
         "없음 "
@@ -438,13 +438,13 @@
         "켜기"
       ],
       "Only this task can access the resource. Other tasks must wait until this process completes.": [
-        ""
+        "이 작업만 해당 리소스에 액세스할 수 있습니다. 다른 작업은 이 프로세스가 완료될 때까지 기다려야 합니다."
       ],
       "Other includes all stopped tasks that are cancelled or pending": [
         "기타에는 취소되거나 보류 중인 모든 중지된 작업이 포함됩니다."
       ],
       "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others.": [
-        ""
+        "다른 작업이 해당 리소스에 동시에 액세스할 수 있습니다. 이 잠금은 다른 작업을 차단하지 않고 작업과 리소스 간의 관계를 추적합니다."
       ],
       "Other:": [
         "기타:"
@@ -456,10 +456,10 @@
         "부모 태스크"
       ],
       "Paused": [
-        "일시정지 "
+        "일시정지"
       ],
       "Planned task": [
-        ""
+        "계획된 작업"
       ],
       "Please inspect their state, fix their errors and resume them.": [
         "상태를 확인하고 오류를 수정한 다음 다시 시작하십시오."
@@ -567,7 +567,7 @@
         "실행 중"
       ],
       "Running step %s": [
-        ""
+        "단계 %s 실행 중"
       ],
       "Sat": [
         "토"
@@ -597,10 +597,10 @@
         "설정이 꺼져있습니다"
       ],
       "Show less details": [
-        ""
+        "세부 정보 간략히 표시"
       ],
       "Show more details": [
-        ""
+        "세부 정보 더 보기"
       ],
       "Show recurring logic details": [
         "반복 로직 정보 표시"
@@ -654,7 +654,7 @@
         "등록 "
       ],
       "Success": [
-        ""
+        "성공 "
       ],
       "Sun": [
         "일"
@@ -672,10 +672,10 @@
         "작업이 중단되었습니다. 작업이 프록시에서 계속 실행 중일 수 있습니다."
       ],
       "Task actions": [
-        ""
+        "작업 동작"
       ],
       "Task blocks": [
-        ""
+        "작업 차단 항목"
       ],
       "Task cannot be canceled": [
         "작업을 취소할 수 없습니다."
@@ -684,10 +684,10 @@
         "태스크 수"
       ],
       "Task depends on": [
-        ""
+        "작업 종속 항목"
       ],
       "Task details": [
-        ""
+        "작업 세부 정보"
       ],
       "Task group common": [
         "작업 그룹 일반"
@@ -711,13 +711,13 @@
         "작업 문제 해결 URL"
       ],
       "Temporarily suspended step(s)": [
-        ""
+        "일시 중단된 단계"
       ],
       "The ID of the step inside the execution plan to send the event to": [
         "이벤트를 전송할 실행 계획의 단계에 해당하는 ID입니다."
       ],
       "The recommended approach is to investigate the error messages below and in 'Execution details' tab, address the primary cause of the issue and resume the task.": [
-        ""
+        "권장되는 접근 방식은 아래 오류 메시지와 '실행 세부 정보' 탭의 오류를 확인하여 문제의 근본 원인을 해결한 후 작업을 재개하는 것입니다."
       ],
       "The recurring logic was disabled.": [
         "반복 논리가 비활성화되었습니다."
@@ -735,13 +735,13 @@
         "작업을 시작할 수 없습니다."
       ],
       "The task finished with no errors or warnings.": [
-        ""
+        "작업이 오류나 경고 없이 완료되었습니다."
       ],
       "The task has not started yet.": [
-        ""
+        "작업이 아직 시작되지 않았습니다."
       ],
       "The task is still being processed. Please wait.": [
-        ""
+        "작업이 아직 처리 중입니다. 잠시 기다려 주세요."
       ],
       "There is %{count} paused task in the system that need attention": [
         "시스템에서 주의가 필요한 %{count} 일시 중지된 작업이 있습니다"
@@ -780,7 +780,7 @@
         "전체"
       ],
       "Triggered by": [
-        ""
+        "트리거한 항목"
       ],
       "Troubleshooting": [
         "문제 해결 "
@@ -804,10 +804,10 @@
         "'%s' 사용자에게 메일 알림을 활성화할 수 없습니다: %s"
       ],
       "Unknown": [
-        ""
+        "알 수 없음"
       ],
       "Unknown error": [
-        ""
+        "알 수 없는 오류"
       ],
       "Unlimited": [
         "제한 없음 "
@@ -825,7 +825,7 @@
         "사용자 search_params를 사용하려면 user_id를 지정해야 합니다."
       ],
       "Warning": [
-        ""
+        "경고"
       ],
       "Wed": [
         "수"
@@ -843,7 +843,7 @@
         "활성키"
       ],
       "before": [
-        ""
+        "이전"
       ],
       "cannot be cancelled with force at the moment.": [
         "현재로선 강제로 취소할 수 없습니다."
@@ -861,7 +861,7 @@
         "오류"
       ],
       "id: %s": [
-        ""
+        "ID: %s"
       ],
       "is day of month (range: 1-31)": [
         "날짜(범위: 1-31)"
@@ -948,7 +948,7 @@
         "시스템"
       ],
       "task": [
-        ""
+        "작업"
       ],
       "task has to be cancellable": [
         "작업은 취소 가능해야 합니다"

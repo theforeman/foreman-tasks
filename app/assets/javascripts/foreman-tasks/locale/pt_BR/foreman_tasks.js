@@ -228,7 +228,7 @@
         "Habilitar o console dynflow (/foreman_tasks/dynflow) para depuração"
       ],
       "Ended at": [
-        ""
+        "Finalizado(a) em "
       ],
       "Ends": [
         "Finais"
@@ -237,7 +237,7 @@
         "Terminar em "
       ],
       "Error": [
-        ""
+        "Erro"
       ],
       "Event delivered by request %{request_id}": [
         "Evento entregue por pedido %{request_id}"
@@ -258,7 +258,7 @@
         "Dados do plano de execução não estão disponíveis"
       ],
       "Execution type": [
-        ""
+        "Tipo de execução"
       ],
       "Export All": [
         "Exportar tudo"
@@ -782,7 +782,7 @@
         "Total"
       ],
       "Triggered by": [
-        ""
+        "Disparado por"
       ],
       "Troubleshooting": [
         "Solução de problemas"
@@ -806,7 +806,7 @@
         ""
       ],
       "Unknown": [
-        ""
+        "Desconhecido"
       ],
       "Unknown error": [
         ""
@@ -827,7 +827,7 @@
         "Usuário search_params necessita que user_id seja especificado "
       ],
       "Warning": [
-        ""
+        "Aviso"
       ],
       "Wed": [
         "Qua"

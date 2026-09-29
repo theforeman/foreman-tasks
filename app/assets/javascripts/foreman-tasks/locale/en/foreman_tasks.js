@@ -5,7 +5,7 @@
       "": {
         "Project-Id-Version": "foreman-tasks 13.2.2",
         "Report-Msgid-Bugs-To": "",
-        "PO-Revision-Date": "2026-09-22 16:07+0200",
+        "PO-Revision-Date": "2026-09-22 12:20+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
         "Language-Team": "LANGUAGE <LL@li.org>",
         "Language": "",

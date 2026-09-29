@@ -232,7 +232,7 @@ msgid "Enable the dynflow console (/foreman_tasks/dynflow) for debugging"
 msgstr "Habilitar la consola de flujo dinámico (/foreman_tasks/dynflow) para depurar"
 
 msgid "Ended at"
-msgstr ""
+msgstr "Finalizada el"
 
 msgid "Ends"
 msgstr "Finales"
@@ -241,7 +241,7 @@ msgid "Ends at"
 msgstr "Finaliza a las"
 
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 msgid "Event delivered by request %{request_id}"
 msgstr "Evento entregado a petición %.{request_id}"
@@ -262,7 +262,7 @@ msgid "Execution plan data not available "
 msgstr "Datos del plan de ejecución no disponibles"
 
 msgid "Execution type"
-msgstr ""
+msgstr "Tipo de ejecución"
 
 msgid "Export All"
 msgstr "Exportar todo"
@@ -659,7 +659,7 @@ msgid "Subscribe"
 msgstr "Suscribir"
 
 msgid "Success"
-msgstr ""
+msgstr "Éxito"
 
 msgid "Sun"
 msgstr "Dom"
@@ -788,7 +788,7 @@ msgid "Total"
 msgstr "Total"
 
 msgid "Triggered by"
-msgstr ""
+msgstr "Activado por"
 
 msgid "Troubleshooting"
 msgstr "Resolución de problemas"
@@ -812,7 +812,7 @@ msgid "Unable to enable mail notification to user '%s': %s"
 msgstr ""
 
 msgid "Unknown"
-msgstr ""
+msgstr "Desconocido"
 
 msgid "Unknown error"
 msgstr ""
@@ -833,7 +833,7 @@ msgid "User search_params requires user_id to be specified"
 msgstr "search_params del usuario requiere que se especifique el user_id."
 
 msgid "Warning"
-msgstr ""
+msgstr "Advertencia"
 
 msgid "Wed"
 msgstr "Mié"

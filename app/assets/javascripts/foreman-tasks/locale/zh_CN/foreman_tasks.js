@@ -27,7 +27,7 @@
         "%s 不是正确的 cron 行"
       ],
       "%s%% Complete": [
-        ""
+        "%s%% 完成"
       ],
       "%{count} tasks are in running or paused state for more than a day": [
         "%{count} 任务处于 running 或 paused 状态，持续超过一天"
@@ -159,10 +159,10 @@
         "与任务冲突 :"
       ],
       "Copied": [
-        ""
+        "已复制"
       ],
       "Copy": [
-        ""
+        "复制"
       ],
       "Could not cancel step.": [
         "无法取消步骤。"
@@ -228,7 +228,7 @@
         "启用 dynflow 控制台（/foreman_tasks/dynflow）用于故障排除"
       ],
       "Ended at": [
-        ""
+        "結束於"
       ],
       "Ends": [
         "结束"
@@ -237,7 +237,7 @@
         "结束于"
       ],
       "Error": [
-        ""
+        "错误"
       ],
       "Event delivered by request %{request_id}": [
         "由请求 %{request_id} 发送的事件"
@@ -246,19 +246,19 @@
         "例外"
       ],
       "Exclusive resources": [
-        ""
+        "独占资源"
       ],
       "Execute now": [
         "立即执行"
       ],
       "Execution details": [
-        ""
+        "执行详情"
       ],
       "Execution plan data not available ": [
         "未可用执行计划数据"
       ],
       "Execution type": [
-        ""
+        "執行類型"
       ],
       "Export All": [
         "导出所有"
@@ -267,7 +267,7 @@
         "外部 Id"
       ],
       "Failed task errors": [
-        ""
+        "失败的任务错误"
       ],
       "Failed to check on tasks on proxy at %{url}: %{exception}": [
         "无法检查在 %{url} 代理中的任务: %{exception}"
@@ -390,16 +390,16 @@
         "否"
       ],
       "No errors found": [
-        ""
+        "未找到错误"
       ],
       "No proxy defined for execution": [
         "没有为执行定义代理"
       ],
       "No resources": [
-        ""
+        "没有资源"
       ],
       "No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes.": [
-        ""
+        "当前没有与此任务关联的资源。锁定资源可防止同时运行冲突的任务。其他任务必须等待这个过程完成。"
       ],
       "No running steps": [
         "没有运行步骤"
@@ -414,7 +414,7 @@
         "任务号"
       ],
       "Non-exclusive resources": [
-        ""
+        "非独占资源"
       ],
       "None": [
         "没有"
@@ -438,13 +438,13 @@
         "上"
       ],
       "Only this task can access the resource. Other tasks must wait until this process completes.": [
-        ""
+        "只有此任务可以访问资源。其他任务必须等到此过程完成为止。"
       ],
       "Other includes all stopped tasks that are cancelled or pending": [
         "其他包括已取消或待处理的所有已停止任务"
       ],
       "Other tasks can access the resource simultaneously. This lock tracks the task's relationship to the resource without blocking others.": [
-        ""
+        "其他任务可以同时访问资源。此锁定会跟踪任务与资源的关系，而不阻塞其他任务。"
       ],
       "Other:": [
         "其他："
@@ -459,7 +459,7 @@
         "暂停"
       ],
       "Planned task": [
-        ""
+        "计划的任务"
       ],
       "Please inspect their state, fix their errors and resume them.": [
         "请检查其状态，纠正其错误，然后恢复它们。"
@@ -567,7 +567,7 @@
         "執行中"
       ],
       "Running step %s": [
-        ""
+        "运行步骤 %s"
       ],
       "Sat": [
         "周六"
@@ -597,10 +597,10 @@
         "设置已关闭"
       ],
       "Show less details": [
-        ""
+        "隐藏详细信息"
       ],
       "Show more details": [
-        ""
+        "显示更多详细信息"
       ],
       "Show recurring logic details": [
         "显示重复逻辑详情"
@@ -654,7 +654,7 @@
         "订阅"
       ],
       "Success": [
-        ""
+        "成功"
       ],
       "Sun": [
         "周日"
@@ -672,10 +672,10 @@
         "被中止的任务：该任务可能仍在代理服务器中运行"
       ],
       "Task actions": [
-        ""
+        "任务操作"
       ],
       "Task blocks": [
-        ""
+        "任务块"
       ],
       "Task cannot be canceled": [
         "任务无法取消"
@@ -684,10 +684,10 @@
         "任务计数"
       ],
       "Task depends on": [
-        ""
+        "任务依赖于"
       ],
       "Task details": [
-        ""
+        "任务详情"
       ],
       "Task group common": [
         "任务组一般事项"
@@ -711,13 +711,13 @@
         "任务故障排除 URL"
       ],
       "Temporarily suspended step(s)": [
-        ""
+        "临时暂停的步骤"
       ],
       "The ID of the step inside the execution plan to send the event to": [
         "执行计划中的步骤 ID 要发送事件到"
       ],
       "The recommended approach is to investigate the error messages below and in 'Execution details' tab, address the primary cause of the issue and resume the task.": [
-        ""
+        "推荐的方法是调查以下和\\\"Execution details\\\"选项卡中的错误消息，解决问题的主要原因并恢复任务。"
       ],
       "The recurring logic was disabled.": [
         "重复逻辑已被禁用。"
@@ -735,13 +735,13 @@
         "无法启动该任务"
       ],
       "The task finished with no errors or warnings.": [
-        ""
+        "任务已完成，无任何错误或警告。"
       ],
       "The task has not started yet.": [
-        ""
+        "该任务尚未启动。"
       ],
       "The task is still being processed. Please wait.": [
-        ""
+        "该任务仍在被处理。请等待。"
       ],
       "There is %{count} paused task in the system that need attention": [
         "系统中有%{count}个暂停的任务需要注意"
@@ -780,7 +780,7 @@
         "总计"
       ],
       "Triggered by": [
-        ""
+        "触发者"
       ],
       "Troubleshooting": [
         "故障排除"
@@ -804,10 +804,10 @@
         "无法启用发给用户 '%s' 的邮件通知：%s"
       ],
       "Unknown": [
-        ""
+        "未知"
       ],
       "Unknown error": [
-        ""
+        "未知错误"
       ],
       "Unlimited": [
         "无限制"
@@ -825,7 +825,7 @@
         "使用者 search_params 需要指定 user_id"
       ],
       "Warning": [
-        ""
+        "警告"
       ],
       "Wed": [
         "周三"
@@ -843,7 +843,7 @@
         "激活码"
       ],
       "before": [
-        ""
+        "之前"
       ],
       "cannot be cancelled with force at the moment.": [
         "目前无法强行取消。"
@@ -861,7 +861,7 @@
         "错误"
       ],
       "id: %s": [
-        ""
+        "id: %s"
       ],
       "is day of month (range: 1-31)": [
         "日期（范围：1-31）"
@@ -948,7 +948,7 @@
         "系統"
       ],
       "task": [
-        ""
+        "任务"
       ],
       "task has to be cancellable": [
         "任务必须可取消"
