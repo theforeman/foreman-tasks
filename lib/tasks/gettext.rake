@@ -38,5 +38,7 @@ if gettext_find_task
     end
   end
 
-  gettext_find_task.enhance ['gettext:store_action_names']
+  # gettext:find already depends on gettext:setup, and enhance appends, so
+  # hooking onto find would run this after setup has frozen the file list
+  Rake::Task['gettext:setup'].enhance ['gettext:store_action_names']
 end
