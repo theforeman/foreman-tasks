@@ -38,5 +38,7 @@ if gettext_find_task
     end
   end
 
-  gettext_find_task.enhance ['gettext:store_action_names']
+  # gettext:setup snapshots files_to_translate before gettext:find's own
+  # prerequisites run, so generate action_names.rb before setup discovers files.
+  Rake::Task['gettext:setup'].enhance ['gettext:store_action_names']
 end
