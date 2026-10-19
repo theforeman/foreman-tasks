@@ -225,10 +225,36 @@ Documentation
 
 TBD - dig into the code for now (happy hacking:)
 
-Tests
------
+### JavaScript lint and tests
 
-TBD
+Plugin JavaScript is linted and tested through [Foreman](https://github.com/theforeman/foreman) core (not `tfm-test` / `tfm-lint` in this repository).
+
+From the Foreman application directory (with this plugin linked, e.g. via `bundler.d/foreman-tasks.local.rb`):
+
+```bash
+cd /path/to/foreman
+npm run lint:plugins foreman-tasks
+npm run test:plugins foreman-tasks
+npm run test:plugins foreman-tasks -- --watchAll
+npm run test:plugins foreman-tasks -- path/to/test.js
+```
+
+Optional spellcheck-only ESLint in this plugin:
+
+```bash
+cd /path/to/foreman-tasks
+npm ci --legacy-peer-deps
+npm run lint:spelling
+```
+
+### Ruby tests
+
+From the Foreman application directory:
+
+```bash
+cd /path/to/foreman
+bundle exec rake test:foreman_tasks
+```
 
 License
 -------

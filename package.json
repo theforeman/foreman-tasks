@@ -4,12 +4,7 @@
   "description": "Foreman Tasks =============",
   "main": "index.js",
   "scripts": {
-    "foreman-js:link": "./script/npm_link_foreman_js.sh",
-    "lint": "tfm-lint --plugin -d /webpack",
-    "test": "tfm-test --plugin",
-    "test:watch": "tfm-test --plugin --watchAll",
-    "test:current": "tfm-test --plugin --watch",
-    "publish-coverage": "tfm-publish-coverage"
+    "lint:spelling": "eslint -c eslint.spelling.config.js ./webpack"
   },
   "repository": {
     "type": "git",
@@ -18,24 +13,22 @@
   "bugs": {
     "url": "http://projects.theforeman.org/projects/foreman-tasks/issues"
   },
-  "peerDependencies": {
-    "@theforeman/vendor": ">= 12.1.1"
-  },
   "dependencies": {
     "c3": "^0.4.11"
   },
   "devDependencies": {
     "@babel/core": "^7.7.0",
-    "@theforeman/builder": ">= 12.1.1",
-    "@theforeman/eslint-plugin-foreman": ">= 12.1.1",
-    "@theforeman/test": ">= 12.1.1",
-    "@theforeman/vendor-dev": ">= 12.1.1",
-    "babel-eslint": "^10.0.3",
-    "eslint": "^6.7.2",
-    "jed": "^1.1.1",
-    "prettier": "^1.13.5",
-    "stylelint": "^9.3.0",
-    "stylelint-config-standard": "^18.0.0",
+    "babel-eslint": "~10.0.0",
+    "eslint": "~6.7.2",
+    "eslint-plugin-import": "~2.22.1",
+    "eslint-plugin-jsx-a11y": "~6.4.1",
+    "eslint-plugin-react": "~7.22.0",
+    "eslint-plugin-react-hooks": "~4.2.0",
+    "eslint-plugin-spellcheck": "~0.0.17",
+    "jed": "~1.1.1",
+    "prettier": "~1.19.1",
+    "stylelint": "~9.3.0",
+    "stylelint-config-standard": "~18.0.0",
     "surge": "^0.20.3"
   }
 }

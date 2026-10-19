@@ -1,4 +1,4 @@
-import { testActionSnapshotWithFixtures } from '@theforeman/test';
+import { testActionSnapshotWithFixtures } from 'foremanReact/common/testHelpers';
 import { API } from 'foremanReact/redux/API';
 import {
   bulkCancelById,
