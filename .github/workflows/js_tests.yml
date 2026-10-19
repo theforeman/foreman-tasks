@@ -1,14 +1,18 @@
 name: JavaScript Testing
 
 on:
+  pull_request:
   push:
     branches:
       - master
-  pull_request:
+
+concurrency:
+  group: ${{ github.ref_name }}-${{ github.workflow }}
+  cancel-in-progress: true
 
 jobs:
   test_js:
     name: JavaScript
-    uses: theforeman/actions/.github/workflows/foreman_plugin_js.yml@v0
+    uses: theforeman/actions/.github/workflows/foreman_plugin_js.yml@v1
     with:
       plugin: foreman-tasks

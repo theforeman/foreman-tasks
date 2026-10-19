@@ -20,6 +20,8 @@ actions:
   post-upstream-clone:
     - "wget https://raw.githubusercontent.com/theforeman/foreman-packaging/rpm/develop/packages/plugins/rubygem-foreman-tasks/rubygem-foreman-tasks.spec -O rubygem-foreman-tasks.spec"
     - "wget https://raw.githubusercontent.com/theforeman/foreman-packaging/rpm/develop/packages/plugins/rubygem-foreman-tasks/foreman-tasks.logrotate -O foreman-tasks.logrotate"
+    # Until foreman-packaging drops babel.config.js and excludes eslint.spelling.config.js
+    - "sed -i -e '/babel\\.config\\.js/d' -e 's/\\.eslintrc/eslint.spelling.config.js/' rubygem-foreman-tasks.spec"
   get-current-version:
     - ruby -rrubygems -e 'puts Gem::Specification::load(Dir.glob("*.gemspec").first).version'
   create-archive:
