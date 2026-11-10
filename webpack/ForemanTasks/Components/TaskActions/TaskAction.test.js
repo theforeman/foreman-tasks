@@ -20,10 +20,6 @@ import {
   TASKS_UNLOCK_FAILURE,
 } from './TaskActionsConstants';
 
-jest.mock('foremanReact/components/common/table', () => ({
-  getTableItemsAction: jest.fn(controller => controller),
-}));
-
 jest.mock('foremanReact/redux/API');
 jest.mock('foremanReact/components/ToastsList', () => ({
   addToast: toast => ({
