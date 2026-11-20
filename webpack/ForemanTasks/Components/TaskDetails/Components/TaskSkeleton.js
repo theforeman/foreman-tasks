@@ -6,7 +6,7 @@ export const TaskSkeleton = () => {
   const details = [1, 2, 3, 4];
   return (
     <Grid hasGutter>
-      <GridItem span={12} className="pf-v5-u-pb-lg" />
+      <GridItem span={12} className="pf-v6-u-pb-lg" />
       <GridItem span={12}>
         <Skeleton />
       </GridItem>
@@ -26,14 +26,14 @@ export const TaskSkeleton = () => {
           </GridItem>
         </React.Fragment>
       ))}
-      <GridItem span={12} className="pf-v5-u-pb-lg" />
+      <GridItem span={12} className="pf-v6-u-pb-lg" />
       <GridItem span={12}>
         <Skeleton />
       </GridItem>
       <GridItem span={12}>
         <Skeleton />
       </GridItem>
-      <GridItem span={12} className="pf-v5-u-pb-lg" />
+      <GridItem span={12} className="pf-v6-u-pb-lg" />
     </Grid>
   );
 };

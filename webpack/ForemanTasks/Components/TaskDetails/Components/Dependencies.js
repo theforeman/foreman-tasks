@@ -4,8 +4,8 @@ import { capitalize } from 'lodash';
 import {
   Grid,
   GridItem,
-  Text,
-  TextVariants,
+  Content,
+  ContentVariants,
   Title,
 } from '@patternfly/react-core';
 import { Table, Thead, Tbody, Tr, Th, Td } from '@patternfly/react-table';
@@ -19,9 +19,12 @@ const DependencyTable = ({ title, tasks, ouiaSectionId }) => (
     <Grid hasGutter>
       <GridItem span={12} xl={8}>
         {tasks.length === 0 ? (
-          <Text component={TextVariants.small} ouiaId={`${ouiaSectionId}-none`}>
+          <Content
+            component={ContentVariants.small}
+            ouiaId={`${ouiaSectionId}-none`}
+          >
             {__('None')}
-          </Text>
+          </Content>
         ) : (
           <Table
             aria-label={title}
@@ -42,13 +45,13 @@ const DependencyTable = ({ title, tasks, ouiaSectionId }) => (
                   ouiaId={`${ouiaSectionId}-table-row-${task.id}`}
                 >
                   <Td dataLabel={__('Name')}>
-                    <Text
-                      component={TextVariants.a}
+                    <Content
+                      component={ContentVariants.a}
                       href={`/foreman_tasks/tasks/${task.id}`}
                       ouiaId={`${ouiaSectionId}-task-link-${task.id}`}
                     >
                       {task.humanized || task.action}
-                    </Text>
+                    </Content>
                   </Td>
                   <Td dataLabel={__('State')}>
                     {capitalize(String(task.state || ''))}

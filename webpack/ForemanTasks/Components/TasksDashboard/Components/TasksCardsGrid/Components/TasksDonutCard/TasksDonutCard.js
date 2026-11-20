@@ -44,8 +44,10 @@ const TasksDonutCard = ({
       {...props}
       ouiaId="tasks-donut-card"
     >
-      <CardTitle onClick={onTotalClick}>{title}</CardTitle>
-      <CardBody className="card-pf-body">
+      <CardTitle className="tasks-donut-card__title" onClick={onTotalClick}>
+        {title}
+      </CardTitle>
+      <CardBody className="tasks-donut-card__body">
         <TasksDonutChart
           last={data.last}
           older={data.older}

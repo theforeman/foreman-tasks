@@ -12,8 +12,8 @@ import {
   ProgressVariant,
   Split,
   SplitItem,
-  Text,
-  TextVariants,
+  Content,
+  ContentVariants,
 } from '@patternfly/react-core';
 import capitalize from 'lodash/capitalize';
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
@@ -57,9 +57,9 @@ const MetadataField = ({ title, value, className, labelOuiaId, span }) => (
       spaceItems={{ default: 'spaceItemsXs' }}
     >
       <FlexItem>
-        <Text ouiaId={labelOuiaId} component={TextVariants.small}>
+        <Content ouiaId={labelOuiaId} component={ContentVariants.small}>
           {title}
-        </Text>
+        </Content>
       </FlexItem>
       <FlexItem>{value}</FlexItem>
     </Flex>
@@ -249,20 +249,20 @@ const TaskInfo = props => {
             <FlexItem>
               <Split hasGutter>
                 <SplitItem isFilled>
-                  <Text
-                    component={TextVariants.p}
+                  <Content
+                    component={ContentVariants.p}
                     ouiaId="task-info-running-state-summary"
                   >
                     {capitalize(state)}
-                  </Text>
+                  </Content>
                 </SplitItem>
                 <SplitItem>
-                  <Text
-                    component={TextVariants.p}
+                  <Content
+                    component={ContentVariants.p}
                     ouiaId="task-info-running-progress-complete-text"
                   >
                     {sprintf(__('%s%% Complete'), progress)}
-                  </Text>
+                  </Content>
                 </SplitItem>
               </Split>
             </FlexItem>

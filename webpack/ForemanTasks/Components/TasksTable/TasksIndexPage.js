@@ -153,7 +153,7 @@ const TasksTableIndexPage = ({ match, history }) => {
   const customToolbarItems = (
     <Toolbar ouiaId="tasks-table-toolbar">
       <ToolbarContent>
-        <ToolbarGroup align={{ default: 'alignRight' }}>
+        <ToolbarGroup align={{ default: 'alignEnd' }}>
           <ToolbarItem>
             <Button
               ouiaId="tasks-table-refresh-data"
@@ -221,7 +221,10 @@ const TasksTableIndexPage = ({ match, history }) => {
         header={parentTaskID ? __('Sub tasks') : __('Tasks')}
         beforeToolbarComponent={
           <>
-            <PageSection className="tasks-dashboard-section">
+            <PageSection
+              hasBodyWrapper={false}
+              className="tasks-dashboard-section"
+            >
               <TasksDashboard history={history} parentTaskID={parentTaskID} />
             </PageSection>
             {customToolbarItems}
