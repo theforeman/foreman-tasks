@@ -33,7 +33,6 @@ module Actions
     def deliver(user)
       task = FactoryBot.create(:some_task)
       action = create_and_plan_action(DeliverLongRunningTasksNotification, report_for(user, task))
-      ::UINotifications::Tasks::TasksRunningLong.any_instance.expects(:deliver!).once
       run_action(action)
     end
 
@@ -48,24 +47,27 @@ module Actions
       recipient_ids = CheckLongRunningTasks.notification_recipients.pluck(:id)
 
       assert_includes recipient_ids, enabled.id
-      refute_includes recipient_ids, mail_disabled.id
-      refute_includes recipient_ids, account_disabled.id
+      assert_not_includes recipient_ids, mail_disabled.id
+      assert_not_includes recipient_ids, account_disabled.id
     end
 
-    test 'delivery skips the email when mail is disabled' do
+    test 'delivery skips notifications when mail is disabled' do
       user = FactoryBot.create(:user, :with_mail, :mail_enabled => false)
+      ::UINotifications::Tasks::TasksRunningLong.any_instance.expects(:deliver!).never
       TasksMailer.expects(:long_tasks).never
       deliver(user)
     end
 
-    test 'delivery skips the email when the account is disabled' do
+    test 'delivery skips notifications when the account is disabled' do
       user = FactoryBot.create(:user, :with_mail, :mail_enabled => true, :disabled => true)
+      ::UINotifications::Tasks::TasksRunningLong.any_instance.expects(:deliver!).never
       TasksMailer.expects(:long_tasks).never
       deliver(user)
     end
 
-    test 'delivery sends the email when the user can receive mail' do
+    test 'delivery sends notifications when the user can receive mail' do
       user = FactoryBot.create(:user, :with_mail, :mail_enabled => true)
+      ::UINotifications::Tasks::TasksRunningLong.any_instance.expects(:deliver!).once
       message = mock('message')
       message.expects(:deliver_now).once
       TasksMailer.expects(:long_tasks).once.returns(message)

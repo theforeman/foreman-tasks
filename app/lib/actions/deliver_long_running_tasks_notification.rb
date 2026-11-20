@@ -9,13 +9,11 @@ module Actions
     def run
       report = OpenStruct.new(input[:report])
       user = User.unscoped.find_by(id: report.user_id)
-      return if user.nil?
+      return unless user && User.with_enabled_email.exists?(id: user.id)
 
       report.user = user
       report.tasks = ForemanTasks::Task.where(id: report.task_uuids)
       ::UINotifications::Tasks::TasksRunningLong.new(report).deliver!
-      return unless User.with_enabled_email.exists?(id: user.id)
-
       TasksMailer.long_tasks(report).deliver_now
     end
 
