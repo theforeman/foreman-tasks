@@ -5,13 +5,16 @@ module Actions
     INTERVAL = 2.days
     STATES = ['running', 'paused'].freeze
 
+    def self.notification_recipients
+      User.with_enabled_email
+          .joins(:mail_notifications)
+          .where(mail_notifications: { name: 'long_running_tasks' })
+    end
+
     def plan
       time = Time.now.utc
       cutoff = time - INTERVAL
-      users = User.joins(:mail_notifications)
-                  .where(mail_enabled: true, mail_notifications: { name: 'long_running_tasks' })
-                  .where.not(mail: [nil, ''])
-                  .where(disabled: [nil, false])
+      users = self.class.notification_recipients
 
       query = "state ^ (#{STATES.join(', ')}) AND state_updated_at <= \"#{cutoff}\""
       users.each do |user|
