@@ -8,8 +8,8 @@ module Actions
 
     def run
       report = OpenStruct.new(input[:report])
-      user = User.unscoped.find_by(id: report.user_id)
-      return unless user && User.with_enabled_email.exists?(id: user.id)
+      user = User.unscoped.with_enabled_email.find_by(id: report.user_id)
+      return unless user
 
       report.user = user
       report.tasks = ForemanTasks::Task.where(id: report.task_uuids)
