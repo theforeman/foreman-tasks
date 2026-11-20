@@ -3,17 +3,14 @@ import PropTypes from 'prop-types';
 import {
   EmptyState,
   EmptyStateBody,
-  EmptyStateHeader,
-  EmptyStateIcon,
   EmptyStateVariant,
   Flex,
   FlexItem,
   Grid,
   GridItem,
   Icon,
-  Text,
-  TextContent,
-  TextVariants,
+  Content,
+  ContentVariants,
   Title,
 } from '@patternfly/react-core';
 import { Table, Tbody, Tr, Td } from '@patternfly/react-table';
@@ -49,14 +46,14 @@ const LocksSection = ({
       </Flex>
     </FlexItem>
     <FlexItem>
-      <TextContent>
-        <Text
-          component={TextVariants.p}
+      <Content>
+        <Content
+          component={ContentVariants.p}
           ouiaId={`${ouiaSectionId}-description`}
         >
           {description}
-        </Text>
-      </TextContent>
+        </Content>
+      </Content>
     </FlexItem>
     <FlexItem>
       <Grid>
@@ -122,12 +119,12 @@ const Locks = ({ locks }) => {
 
   if (locks.length === 0) {
     return (
-      <EmptyState variant={EmptyStateVariant.lg}>
-        <EmptyStateHeader
-          headingLevel="h3"
-          titleText={__('No resources')}
-          icon={<EmptyStateIcon icon={LockOpenIcon} />}
-        />
+      <EmptyState
+        headingLevel="h3"
+        icon={LockOpenIcon}
+        titleText={__('No resources')}
+        variant={EmptyStateVariant.lg}
+      >
         <EmptyStateBody>
           {__(
             'No resources currently associated with this task. Locking resources prevents conflicting tasks from running simultaneously. Other tasks must wait until this process completes.'

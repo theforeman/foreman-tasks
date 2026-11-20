@@ -24,18 +24,19 @@
 
   .task-errors-tab-title {
     word-break: break-all;
-    font-weight: var(--pf-v5-global--FontWeight--bold);
+    font-weight: var(--pf-t--global--font--weight--heading--bold);
 
     &--danger {
-      color: var(--pf-v5-global--danger-color--200);
+      color: var(--pf-t--global--text--color--status--danger--default);
     }
 
     &--warning {
-      color: var(--pf-v5-global--warning-color--200);
+      color: var(--pf-t--global--text--color--status--warning--default);
     }
   }
 
   .task-errors-tabs {
-    --pf-v5-c-tabs--m-vertical--MaxWidth: 100%;
+    width: 100%;
+    max-width: 100%;
   }
 }

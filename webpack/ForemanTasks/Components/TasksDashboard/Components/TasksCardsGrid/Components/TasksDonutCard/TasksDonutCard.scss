@@ -1,18 +1,18 @@
 .tasks-donut-card {
   &.not-focused {
-    .pf-v5-c-card__title-text,
-    .card-pf-body {
+    .tasks-donut-card__title,
+    .tasks-donut-card__body {
       opacity: 0.6;
     }
   }
 
-  .pf-v5-c-card__title-text {
+  .tasks-donut-card__title {
     text-align: center;
     cursor: pointer;
   }
 
   &.selected-tasks-card {
-    .pf-v5-c-card__title-text {
+    .tasks-donut-card__title {
       font-weight: bold;
     }
   }
