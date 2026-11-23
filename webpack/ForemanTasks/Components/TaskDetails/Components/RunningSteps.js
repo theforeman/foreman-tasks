@@ -6,8 +6,6 @@ import {
   Button,
   EmptyState,
   EmptyStateBody,
-  EmptyStateHeader,
-  EmptyStateIcon,
   EmptyStateVariant,
   Flex,
   FlexItem,
@@ -75,12 +73,12 @@ const RunningSteps = ({
               fullWidth={{ default: 'fullWidth' }}
             >
               <FlexItem>
-                <EmptyState variant={EmptyStateVariant.full}>
-                  <EmptyStateHeader
-                    titleText={__('Planned task')}
-                    headingLevel="h2"
-                    icon={<EmptyStateIcon icon={HourglassStartIcon} />}
-                  />
+                <EmptyState
+                  headingLevel="h2"
+                  icon={HourglassStartIcon}
+                  titleText={__('Planned task')}
+                  variant={EmptyStateVariant.full}
+                >
                   <EmptyStateBody>
                     {__('The task has not started yet.')}
                   </EmptyStateBody>

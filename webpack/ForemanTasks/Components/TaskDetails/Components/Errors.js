@@ -8,7 +8,6 @@ import {
   CodeBlockCode,
   EmptyState,
   EmptyStateBody,
-  EmptyStateHeader,
   Icon,
   EmptyStateVariant,
   Flex,
@@ -24,10 +23,7 @@ import {
   TabTitleIcon,
   TabTitleText,
 } from '@patternfly/react-core';
-import {
-  CheckCircleIcon,
-  ExclamationCircleIcon,
-} from '@patternfly/react-icons';
+import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { translate as __ } from 'foremanReact/common/I18n';
 
 import './Errors.scss';
@@ -182,16 +178,11 @@ const Errors = ({ executionPlan, failedSteps }) => {
             fullWidth={{ default: 'fullWidth' }}
           >
             <FlexItem>
-              <EmptyState variant={EmptyStateVariant.full}>
-                <EmptyStateHeader
-                  titleText={__('No errors found')}
-                  headingLevel="h2"
-                  icon={
-                    <Icon size="xl" status="success">
-                      <CheckCircleIcon />
-                    </Icon>
-                  }
-                />
+              <EmptyState
+                headingLevel="h2"
+                titleText={__('No errors found')}
+                variant={EmptyStateVariant.full}
+              >
                 <EmptyStateBody>
                   {__('The task finished with no errors or warnings.')}
                 </EmptyStateBody>

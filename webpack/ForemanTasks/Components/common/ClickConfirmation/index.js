@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Button,
-  Modal,
-  ModalVariant,
-  Checkbox,
-  TextContent,
-} from '@patternfly/react-core';
+import { Button, Checkbox, Content } from '@patternfly/react-core';
+import { Modal, ModalVariant } from '@patternfly/react-core/deprecated';
 import { translate as __, sprintf } from 'foremanReact/common/I18n';
 import {
   UNLOCK_MODAL,
@@ -61,7 +56,7 @@ export const ClickConfirmation = ({
         </Button>,
       ]}
     >
-      <TextContent>
+      <Content>
         {body}
         <Checkbox
           ouiaId={`${id}-confirmation-checkbox`}
@@ -70,7 +65,7 @@ export const ClickConfirmation = ({
           isChecked={isConfirmed}
           onChange={(_e, checked) => setConfirm(checked)}
         />
-      </TextContent>
+      </Content>
     </Modal>
   );
 };
